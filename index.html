@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VEDAMRUTA</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=DM+Sans:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+:root {
+  --vm-teal: #0d9488;
+  --vm-teal-dark: #0f766e;
+  --vm-teal-light: #5eead4;
+  --vm-gold: #d4a056;
+  --vm-cream: #f5f0e8;
+  --vm-dark: #1a1a2e;
+  --vm-darker: #111122;
+  --vm-surface: #ffffff;
+  --vm-text: #1e293b;
+  --vm-text-muted: #64748b;
+  --vm-bg: #f8faf9;
+  --vm-card-bg: #ffffff;
+  --vm-border: #e2e8f0;
+  --vm-shadow: 0 4px 24px rgba(13,148,136,0.08);
+  --vm-font-heading: 'Playfair Display', Georgia, serif;
+  --vm-font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+[data-bs-theme="dark"] {
+  --vm-surface: #1e1e30;
+  --vm-text: #e2e8f0;
+  --vm-text-muted: #94a3b8;
+  --vm-bg: #111122;
+  --vm-card-bg: #252540;
+  --vm-border: #334155;
+  --vm-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --vm-cream: #1a1a2e;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; height: 100%; }
+body {
+  font-family: var(--vm-font-body);
+  background: var(--vm-bg);
+  color: var(--vm-text);
+  height: 100%;
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+  .collapse:not(.show) {
+  display: none;
+}
+
+.collapse.show {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+}
+
+/* Loading Spinner */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--vm-bg);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.5s;
+}
+#loader.hide { opacity: 0; pointer-events: none; }
+.lotus-spinner {
+  width: 60px; height: 60px;
+  border: 3px solid var(--vm-teal-light);
+  border-top-color: var(--vm-teal);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Navbar */
+.vm-navbar {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--vm-border);
+  transition: all 0.3s;
+  z-index: 1040;
+}
+[data-bs-theme="dark"] .vm-navbar {
+  background: rgba(30,30,48,0.9);
+}
+.vm-brand {
+  font-family: var(--vm-font-heading);
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.vm-logo {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-teal-light));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 1.2rem; font-weight: 700;
+  font-family: var(--vm-font-heading);
+  box-shadow: 0 2px 12px rgba(13,148,136,0.3);
+}
+
+/* Offcanvas */
+.vm-offcanvas {
+  background: var(--vm-surface);
+  border-right: 1px solid var(--vm-border);
+  max-width: 300px;
+}
+[data-bs-theme="dark"] .vm-offcanvas { background: var(--vm-darker); }
+.vm-menu-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 10px;
+  color: var(--vm-text); text-decoration: none;
+  transition: all 0.25s; font-weight: 500;
+}
+.vm-menu-item:hover, .vm-menu-item.active {
+  background: linear-gradient(135deg, rgba(13,148,136,0.1), rgba(13,148,136,0.05));
+  color: var(--vm-teal); transform: translateX(4px);
+}
+.vm-menu-item i { font-size: 1.2rem; width: 24px; text-align: center; }
+
+/* Hero Carousel */
+.vm-hero { position: relative; overflow: hidden; }
+.vm-hero .carousel-item { height: 520px; position: relative; }
+.vm-hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.vm-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(13,148,136,0.85), rgba(26,26,46,0.7));
+}
+.vm-hero-content {
+  position: relative; z-index: 2; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 2rem; color: white;
+}
+.vm-hero-content h1 {
+  font-family: var(--vm-font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900; margin-bottom: 1rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+}
+.vm-hero-content p {
+  font-size: 1.15rem; opacity: 0.9;
+  max-width: 600px; margin-bottom: 1.5rem;
+}
+.vm-btn-glow {
+  background: linear-gradient(135deg, var(--vm-gold), #c0873a);
+  border: none; color: white; padding: 12px 32px;
+  border-radius: 50px; font-weight: 600;
+  box-shadow: 0 4px 20px rgba(212,160,86,0.4);
+  transition: all 0.3s; text-decoration: none;
+}
+.vm-btn-glow:hover {
+  transform: translateY(-2px); color: white;
+  box-shadow: 0 6px 30px rgba(212,160,86,0.6);
+}
+
+/* Cards */
+.vm-card {
+  background: var(--vm-card-bg);
+  border: 1px solid var(--vm-border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.35s;
+  box-shadow: var(--vm-shadow);
+  height: 100%;
+}
+.vm-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(13,148,136,0.15);
+}
+.vm-card-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-teal-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: white; margin-bottom: 1rem;
+}
+.vm-card h5 {
+  font-family: var(--vm-font-heading);
+  font-weight: 700; margin-bottom: 0.5rem;
+}
+
+/* Section headers */
+.vm-section-title {
+  font-family: var(--vm-font-heading);
+  font-weight: 900; font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.vm-section-subtitle {
+  color: var(--vm-text-muted);
+  font-size: 1.05rem; margin-bottom: 2rem;
+}
+
+/* Badges */
+.vm-badge {
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-teal-dark));
+  color: white; padding: 6px 16px; border-radius: 50px;
+  font-size: 0.85rem; font-weight: 500;
+  text-decoration: none; transition: all 0.3s;
+  display: inline-block; margin: 4px;
+}
+.vm-badge:hover {
+  transform: scale(1.05); color: white;
+  box-shadow: 0 4px 16px rgba(13,148,136,0.3);
+}
+.vm-badge.gold { background: linear-gradient(135deg, var(--vm-gold), #c0873a); }
+
+/* Accordion */
+.vm-accordion .accordion-item {
+  background: var(--vm-card-bg);
+  border: 1px solid var(--vm-border);
+  border-radius: 12px !important;
+  margin-bottom: 8px; overflow: hidden;
+}
+.vm-accordion .accordion-button {
+  background: var(--vm-card-bg);
+  color: var(--vm-text);
+  font-weight: 600; font-family: var(--vm-font-body);
+  box-shadow: none;
+}
+.vm-accordion .accordion-button:not(.collapsed) {
+  background: rgba(13,148,136,0.08);
+  color: var(--vm-teal);
+}
+[data-bs-theme="dark"] .vm-accordion .accordion-button {
+  background: var(--vm-card-bg); color: var(--vm-text);
+}
+[data-bs-theme="dark"] .vm-accordion .accordion-button:not(.collapsed) {
+  background: rgba(13,148,136,0.15); color: var(--vm-teal-light);
+}
+
+/* Stats */
+.vm-stat-card {
+  background: var(--vm-card-bg);
+  border: 1px solid var(--vm-border);
+  border-radius: 16px;
+  padding: 1.5rem; text-align: center;
+  box-shadow: var(--vm-shadow);
+}
+.vm-stat-num {
+  font-family: var(--vm-font-heading);
+  font-size: 2.5rem; font-weight: 900;
+  color: var(--vm-teal);
+}
+
+/* Dashboard card */
+.vm-dash-card {
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-teal-dark));
+  border-radius: 20px; padding: 2rem;
+  color: white; position: relative; overflow: hidden;
+}
+.vm-dash-card::before {
+  content: ''; position: absolute;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  top: -60px; right: -60px;
+}
+
+/* Tabs */
+.vm-tabs .nav-link {
+  color: var(--vm-text-muted);
+  border: none; border-radius: 10px;
+  padding: 10px 20px; font-weight: 600;
+  transition: all 0.3s;
+}
+.vm-tabs .nav-link.active {
+  background: var(--vm-teal); color: white;
+}
+
+/* Newsletter */
+.vm-newsletter {
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-teal-dark));
+  border-radius: 20px; padding: 3rem;
+  color: white; position: relative; overflow: hidden;
+}
+.vm-newsletter::before {
+  content: ''; position: absolute;
+  width: 300px; height: 300px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  bottom: -100px; left: -100px;
+}
+
+/* Footer */
+.vm-footer {
+  background: var(--vm-darker);
+  color: #94a3b8; padding: 2rem 0;
+}
+.vm-footer a {
+  color: var(--vm-teal-light);
+  text-decoration: none; transition: color 0.3s;
+  font-size: 1.3rem; margin: 0 8px;
+}
+.vm-footer a:hover { color: white; }
+
+/* Scroll to top */
+#scrollTopBtn {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px;
+  border-radius: 50%; border: none;
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-teal-dark));
+  color: white; font-size: 1.2rem;
+  box-shadow: 0 4px 20px rgba(13,148,136,0.4);
+  opacity: 0; pointer-events: none;
+  transition: all 0.3s; z-index: 1030;
+  display: flex; align-items: center; justify-content: center;
+}
+#scrollTopBtn.show { opacity: 1; pointer-events: auto; }
+#scrollTopBtn:hover { transform: translateY(-3px); }
+
+/* Progress bar */
+#scrollProgress {
+  position: fixed; top: 0; left: 0;
+  height: 3px; background: linear-gradient(90deg, var(--vm-teal), var(--vm-gold));
+  z-index: 1050; transition: width 0.1s;
+  width: 0;
+}
+
+/* Placeholder skeleton */
+.vm-placeholder-block {
+  background: linear-gradient(90deg, var(--vm-border) 25%, rgba(13,148,136,0.08) 50%, var(--vm-border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Toast */
+.vm-toast {
+  border-left: 4px solid var(--vm-teal);
+  border-radius: 12px;
+}
+
+/* Dark mode toggle */
+.dm-toggle {
+  background: none; border: 2px solid var(--vm-border);
+  border-radius: 50%; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--vm-text); transition: all 0.3s; cursor: pointer;
+}
+.dm-toggle:hover { border-color: var(--vm-teal); color: var(--vm-teal); }
+
+/* Pagination */
+.vm-pagination .page-link {
+  border-radius: 10px !important; margin: 0 3px;
+  border: 1px solid var(--vm-border);
+  color: var(--vm-text); background: var(--vm-card-bg);
+}
+.vm-pagination .page-link:hover, .vm-pagination .active .page-link {
+  background: var(--vm-teal); color: white; border-color: var(--vm-teal);
+}
+
+/* Modal */
+.vm-modal .modal-content {
+  border-radius: 20px; border: none;
+  background: var(--vm-card-bg);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.vm-modal .modal-header {
+  border-bottom: 1px solid var(--vm-border);
+  background: linear-gradient(135deg, var(--vm-teal), var(--vm-teal-dark));
+  color: white; border-radius: 20px 20px 0 0;
+}
+.vm-modal .modal-header .btn-close { filter: brightness(0) invert(1); }
+
+/* Breadcrumb */
+.vm-breadcrumb { background: var(--vm-card-bg); border-radius: 10px; padding: 10px 20px; }
+.vm-breadcrumb .breadcrumb-item a { color: var(--vm-teal); text-decoration: none; }
+
+.vm-alert-tip {
+  background: linear-gradient(135deg, rgba(13,148,136,0.1), rgba(212,160,86,0.1));
+  border: 1px solid var(--vm-teal-light);
+  border-radius: 12px; color: var(--vm-text);
+}
+
+/* Collapse health tips */
+.vm-tip-box {
+  background: var(--vm-card-bg);
+  border: 1px solid var(--vm-border);
+  border-radius: 12px; padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .vm-hero .carousel-item { height: 400px; }
+  .vm-hero-content h1 { font-size: 1.8rem; }
+  .vm-newsletter { padding: 2rem 1.5rem; }
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full" data-bs-theme="light"><!-- Scroll Progress -->
+  <div id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div><!-- Loading Spinner -->
+  <div id="loader" aria-label="Loading">
+   <div class="lotus-spinner"></div>
+  </div><!-- Navbar -->
+  <nav class="navbar navbar-expand vm-navbar fixed-top px-3 py-2" role="navigation" aria-label="Main navigation">
+   <div class="container-fluid d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center gap-2"><button class="btn p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenu" aria-label="Open menu"> <i class="bi bi-list fs-4" style="color:var(--vm-text)"></i> </button> <button class="dm-toggle" id="navDarkToggle" aria-label="Toggle dark mode"> <i class="bi bi-moon-fill"></i> </button>
+    </div><a class="vm-brand text-decoration-none" href="#" id="navBrand">VEDAMRUTA</a>
+    <div class="vm-logo" aria-label="Vedamruta logo">
+     V
+    </div>
+   </div>
+  </nav><!-- Offcanvas Sidebar -->
+  <div class="offcanvas offcanvas-start vm-offcanvas" tabindex="-1" id="sideMenu" aria-labelledby="sideMenuLabel">
+   <div class="offcanvas-header border-bottom" style="border-color:var(--vm-border)!important">
+    <h5 class="offcanvas-title" id="sideMenuLabel" style="font-family:var(--vm-font-heading);font-weight:700">Menu</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+   </div>
+   <div class="offcanvas-body p-3">
+    <div class="mb-3">
+     <div class="input-group"><span class="input-group-text" style="background:var(--vm-card-bg);border-color:var(--vm-border);color:var(--vm-text-muted)"><i class="bi bi-search"></i></span> <input type="search" class="form-control" id="menuSearch" placeholder="Search..." aria-label="Search menu" style="background:var(--vm-card-bg);border-color:var(--vm-border);color:var(--vm-text)">
+     </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between mb-3 px-2"><small style="color:var(--vm-text-muted)">Hello, Seeker 🙏</small> <button class="dm-toggle" id="sidebarDarkToggle" aria-label="Toggle dark mode" style="width:30px;height:30px;font-size:0.8rem"> <i class="bi bi-moon-fill"></i> </button>
+    </div>
+    <nav id="sideNav" aria-label="Sidebar navigation"><a href="#home" class="vm-menu-item active" data-section="home"><i class="bi bi-house-heart"></i>Home</a> <a href="1-mi.html" class="vm-menu-item" data-section="meditation"><i class="bi bi-peace"></i>Guided Meditation</a> <a href="#chakra" class="vm-menu-item" data-section="chakra"><i class="bi bi-bullseye"></i>Chakra Healing</a> <a href="#diet" class="vm-menu-item" data-section="diet"><i class="bi bi-cup-hot"></i>Diet &amp; Ayurveda</a> <a href="#yoga" class="vm-menu-item" data-section="yoga"><i class="bi bi-person-arms-up"></i>Yoga Practices</a> <a href="#wellness" class="vm-menu-item" data-section="wellness"><i class="bi bi-heart-pulse"></i>Mental Wellness</a> <a href="#detox" class="vm-menu-item" data-section="detox"><i class="bi bi-phone-vibrate"></i>Digital Detox</a> <a href="#myths" class="vm-menu-item" data-section="myths"><i class="bi bi-exclamation-diamond"></i>Health Myths</a> <a href="#quiz" class="vm-menu-item" data-section="quiz"><i class="bi bi-mortarboard"></i>Quiz &amp; Learning</a> <a href="#contact" class="vm-menu-item" data-section="contact"><i class="bi bi-envelope-heart"></i>Contact/About</a>
+    </nav>
+   </div>
+  </div><!-- Main Wrapper -->
+  <div id="mainWrapper" style="padding-top:60px;width:100%;overflow-x:hidden"><!-- Health Tip Alert -->
+   <section class="container-fluid px-3 pt-3" id="home">
+    <div class="alert vm-alert-tip alert-dismissible fade show d-flex align-items-center gap-2" role="alert"><i class="bi bi-lightbulb-fill text-warning fs-5"></i> <span><strong>Daily Tip:</strong> Drink warm water with lemon on an empty stomach to boost digestion and immunity.</span> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+   </section><!-- Hero Carousel -->
+   <section class="vm-hero" id="heroSection">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+     <div class="carousel-indicators"><button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button> <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+     </div>
+     <div class="carousel-inner">
+      <div class="carousel-item active">
+       <div class="vm-hero-bg" style="background:linear-gradient(135deg,#0d9488,#134e4a)"></div>
+       <div class="vm-hero-overlay" style="background:linear-gradient(135deg,rgba(13,148,136,0.7),rgba(26,26,46,0.6))"></div>
+       <div class="vm-hero-content">
+        <h1 id="heroH1">Awaken Your Inner Peace</h1>
+        <p>Discover ancient meditation techniques for the modern world. Begin your journey to tranquility today.</p><a href="#meditation" class="vm-btn-glow">Start Meditating</a>
+       </div>
+      </div>
+      <div class="carousel-item">
+       <div class="vm-hero-bg" style="background:linear-gradient(135deg,#1a1a2e,#0f766e)"></div>
+       <div class="vm-hero-overlay" style="background:linear-gradient(135deg,rgba(26,26,46,0.7),rgba(13,148,136,0.6))"></div>
+       <div class="vm-hero-content">
+        <h1 id="heroH2">Ancient Wisdom, Modern Healing</h1>
+        <p>Ayurveda meets science — personalized wellness rooted in 5000 years of knowledge.</p><a href="#diet" class="vm-btn-glow">Explore Ayurveda</a>
+       </div>
+      </div>
+      <div class="carousel-item">
+       <div class="vm-hero-bg" style="background:linear-gradient(135deg,#064e3b,#d4a056)"></div>
+       <div class="vm-hero-overlay" style="background:linear-gradient(135deg,rgba(6,78,59,0.7),rgba(212,160,86,0.5))"></div>
+       <div class="vm-hero-content">
+        <h1 id="heroH3">Nourish Body, Mind &amp; Soul</h1>
+        <p>Yoga, breathwork, and mindful living for a balanced, joyful life.</p><a href="#yoga" class="vm-btn-glow">Begin Yoga</a>
+       </div>
+      </div>
+     </div><button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> </button> <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
+    </div>
+   </section><!-- Badges -->
+   <section class="container py-4">
+    <div class="text-center"><a href="#meditation" class="vm-badge">🧘 Meditation</a> <a href="#diet" class="vm-badge gold">🌿 Ayurveda</a> <a href="#yoga" class="vm-badge">🕉 Yoga</a> <a href="#wellness" class="vm-badge gold">🧠 Mindfulness</a> <a href="#detox" class="vm-badge">📵 Digital Detox</a> <a href="#quiz" class="vm-badge gold">📚 Quizzes</a>
+    </div>
+   </section><!-- Breadcrumb -->
+   <section class="container pb-3">
+    <nav aria-label="breadcrumb">
+     <ol class="breadcrumb vm-breadcrumb mb-0" style="border:1px solid var(--vm-border)">
+      <li class="breadcrumb-item"><a href="#home">Home</a></li>
+      <li class="breadcrumb-item"><a href="#meditation">Wellness</a></li>
+      <li class="breadcrumb-item active" aria-current="page" id="breadcrumbCurrent">Explore</li>
+     </ol>
+    </nav>
+   </section><!-- Mini Dashboard -->
+   <section class="container pb-4">
+    <div class="vm-dash-card">
+     <div class="row align-items-center">
+      <div class="col-md-6 mb-3 mb-md-0">
+       <h4 style="font-family:var(--vm-font-heading);font-weight:700">Your Wellness Dashboard</h4>
+       <p class="mb-2 opacity-75">Track your daily practice and stay consistent</p>
+       <div class="d-flex gap-4 mt-3">
+        <div>
+         <span class="d-block fs-3 fw-bold">7</span><small class="opacity-75">Day Streak 🔥</small>
+        </div>
+        <div>
+         <span class="d-block fs-3 fw-bold">42m</span><small class="opacity-75">Today's Focus</small>
+        </div>
+        <div>
+         <span class="d-block fs-3 fw-bold">3</span><small class="opacity-75">Sessions</small>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-6"><label class="mb-1 small opacity-75">Meditation Progress</label>
+       <div class="progress" style="height:12px;border-radius:20px;background:rgba(255,255,255,0.15)">
+        <div class="progress-bar" role="progressbar" style="width:68%;background:var(--vm-gold);border-radius:20px" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">
+         68%
+        </div>
+       </div><label class="mb-1 mt-2 small opacity-75">Yoga Progress</label>
+       <div class="progress" style="height:12px;border-radius:20px;background:rgba(255,255,255,0.15)">
+        <div class="progress-bar" role="progressbar" style="width:45%;background:var(--vm-teal-light);border-radius:20px" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+         45%
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Feature Cards -->
+   <section class="container py-5" id="meditation">
+    <div class="text-center mb-4">
+     <h2 class="vm-section-title">Explore Your Path</h2>
+     <p class="vm-section-subtitle">Choose a practice that resonates with your soul</p>
+    </div>
+    <div class="row g-4">
+     <div class="col-md-6 col-lg-4">
+      <div class="vm-card text-center">
+       <div class="vm-card-icon mx-auto">
+        <i class="bi bi-peace"></i>
+       </div>
+       <h5>Guided Meditation</h5>
+       <p class="small" style="color:var(--vm-text-muted)">Calm your mind with guided sessions from beginner to advanced.</p>
+      </div>
+     </div>
+     <div class="col-md-6 col-lg-4" id="diet">
+      <div class="vm-card text-center">
+       <div class="vm-card-icon mx-auto" style="background:linear-gradient(135deg,var(--vm-gold),#c0873a)">
+        <i class="bi bi-cup-hot"></i>
+       </div>
+       <h5>Diet &amp; Ayurveda</h5>
+       <p class="small" style="color:var(--vm-text-muted)">Discover your dosha and eat according to ancient Ayurvedic principles.</p>
+      </div>
+     </div>
+     <div class="col-md-6 col-lg-4" id="yoga">
+      <div class="vm-card text-center">
+       <div class="vm-card-icon mx-auto">
+        <i class="bi bi-person-arms-up"></i>
+       </div>
+       <h5>Yoga Practices</h5>
+       <p class="small" style="color:var(--vm-text-muted)">Asanas, pranayama, and flows for every level of practitioner.</p>
+      </div>
+     </div>
+     <div class="col-md-6 col-lg-4" id="quiz">
+      <div class="vm-card text-center">
+       <div class="vm-card-icon mx-auto" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">
+        <i class="bi bi-mortarboard"></i>
+       </div>
+       <h5>Quiz &amp; Learning</h5>
+       <p class="small" style="color:var(--vm-text-muted)">Test your wellness knowledge with interactive quizzes.</p>
+      </div>
+     </div>
+     <div class="col-md-6 col-lg-4" id="detox">
+      <div class="vm-card text-center">
+       <div class="vm-card-icon mx-auto" style="background:linear-gradient(135deg,#e11d48,#fb7185)">
+        <i class="bi bi-phone-vibrate"></i>
+       </div>
+       <h5>Digital Detox</h5>
+       <p class="small" style="color:var(--vm-text-muted)">Reclaim your attention and build healthier screen habits.</p>
+      </div>
+     </div>
+     <div class="col-md-6 col-lg-4" id="wellness">
+      <div class="vm-card text-center">
+       <div class="vm-card-icon mx-auto" style="background:linear-gradient(135deg,#0ea5e9,#67e8f9)">
+        <i class="bi bi-heart-pulse"></i>
+       </div>
+       <h5>Mental Wellness</h5>
+       <p class="small" style="color:var(--vm-text-muted)">Tools and techniques for emotional balance and resilience.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Chakra Section -->
+   <section class="container py-4" id="chakra">
+    <div class="text-center mb-4">
+     <h2 class="vm-section-title">Chakra Healing</h2>
+     <p class="vm-section-subtitle">Balance your energy centers</p>
+    </div>
+   </section><!-- Stats Counter -->
+   <section class="container py-5">
+    <div class="row g-4">
+     <div class="col-6 col-md-3">
+      <div class="vm-stat-card">
+       <div class="vm-stat-num" data-target="12500">
+        0
+       </div><small style="color:var(--vm-text-muted)">Active Users</small>
+      </div>
+     </div>
+     <div class="col-6 col-md-3">
+      <div class="vm-stat-card">
+       <div class="vm-stat-num" data-target="8400">
+        0
+       </div><small style="color:var(--vm-text-muted)">Sessions Done</small>
+      </div>
+     </div>
+     <div class="col-6 col-md-3">
+      <div class="vm-stat-card">
+       <div class="vm-stat-num" data-target="365">
+        0
+       </div><small style="color:var(--vm-text-muted)">Days of Content</small>
+      </div>
+     </div>
+     <div class="col-6 col-md-3">
+      <div class="vm-stat-card">
+       <div class="vm-stat-num" data-target="97">
+        0
+       </div><small style="color:var(--vm-text-muted)">% Satisfaction</small>
+      </div>
+     </div>
+    </div>
+   </section><!-- Tabs Section -->
+   <section class="container py-4">
+    <ul class="nav vm-tabs justify-content-center mb-4" role="tablist">
+     <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabMed" type="button" role="tab">Meditation</button></li>
+     <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabDiet" type="button" role="tab">Diet</button></li>
+     <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabYoga" type="button" role="tab">Yoga</button></li>
+    </ul>
+    <div class="tab-content">
+     <div class="tab-pane fade show active" id="tabMed" role="tabpanel">
+      <div class="vm-card">
+       <h5>Morning Meditation</h5>
+       <p class="small" style="color:var(--vm-text-muted)">Start each day with 10 minutes of breathwork. Focus on your third-eye chakra and visualize golden light filling your body. Studies show morning meditation reduces cortisol by up to 25%.</p>
+      </div>
+     </div>
+     <div class="tab-pane fade" id="tabDiet" role="tabpanel">
+      <div class="vm-card">
+       <h5>Sattvic Eating</h5>
+       <p class="small" style="color:var(--vm-text-muted)">A Sattvic diet emphasizes fresh fruits, vegetables, whole grains, nuts, and dairy. Avoid tamasic foods like processed items and excessive spices. Eat mindfully, chewing each bite 32 times.</p>
+      </div>
+     </div>
+     <div class="tab-pane fade" id="tabYoga" role="tabpanel">
+      <div class="vm-card">
+       <h5>Surya Namaskar</h5>
+       <p class="small" style="color:var(--vm-text-muted)">The Sun Salutation is a complete body workout. Practice 12 rounds each morning to improve flexibility, strengthen muscles, and boost circulation. Synchronize each movement with your breath.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Accordion FAQ -->
+   <section class="container py-5" id="myths">
+    <div class="text-center mb-4">
+     <h2 class="vm-section-title">Frequently Asked Questions</h2>
+     <p class="vm-section-subtitle">Common questions about holistic wellness</p>
+    </div>
+    <div class="accordion vm-accordion" id="faqAccordion">
+     <div class="accordion-item">
+      <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">What is Ayurveda?</button></h3>
+      <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+       <div class="accordion-body small" style="color:var(--vm-text-muted)">
+        Ayurveda is an ancient Indian system of medicine dating back over 5,000 years. It focuses on balancing three doshas (Vata, Pitta, Kapha) through diet, herbs, yoga, and lifestyle practices for optimal health.
+       </div>
+      </div>
+     </div>
+     <div class="accordion-item">
+      <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">How long should I meditate daily?</button></h3>
+      <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+       <div class="accordion-body small" style="color:var(--vm-text-muted)">
+        Beginners can start with just 5 minutes daily. Gradually increase to 20-30 minutes. Consistency matters more than duration — even 10 minutes daily yields significant benefits.
+       </div>
+      </div>
+     </div>
+     <div class="accordion-item">
+      <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">Can yoga replace gym workouts?</button></h3>
+      <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+       <div class="accordion-body small" style="color:var(--vm-text-muted)">
+        Yoga provides flexibility, strength, and mental clarity. While it can be a complete workout (especially power yoga), combining it with cardio or strength training offers a well-rounded fitness approach.
+       </div>
+      </div>
+     </div>
+     <div class="accordion-item">
+      <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">What are chakras?</button></h3>
+      <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+       <div class="accordion-body small" style="color:var(--vm-text-muted)">
+        Chakras are energy centers in the body. There are seven main chakras aligned along the spine, from the root to the crown. Balancing them promotes physical, emotional, and spiritual well-being.
+       </div>
+      </div>
+     </div>
+     <div class="accordion-item">
+      <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">Is digital detox really necessary?</button></h3>
+      <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+       <div class="accordion-body small" style="color:var(--vm-text-muted)">
+        Yes. Excessive screen time increases anxiety, disrupts sleep, and reduces attention span. Even a few hours of daily disconnection can significantly improve mental clarity and emotional balance.
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Collapse Health Tips -->
+   <section class="container py-4">
+    <div class="text-center mb-3"><button class="vm-btn-glow" type="button" data-bs-toggle="collapse" data-bs-target="#healthTips" aria-expanded="false" aria-controls="healthTips"> <i class="bi bi-lightbulb me-2"></i>Reveal Health Tips </button>
+    </div>
+    <div class="collapse" id="healthTips">
+     <div class="vm-tip-box">
+      <div class="row g-3">
+       <div class="col-md-4">
+        <p class="small mb-0"><strong>🌅 Morning:</strong> Wake before sunrise. Drink copper-vessel water. Practice oil pulling for 5 minutes.</p>
+       </div>
+       <div class="col-md-4">
+        <p class="small mb-0"><strong>🌿 Afternoon:</strong> Eat your largest meal at noon when Agni (digestive fire) is strongest. Take a short walk after eating.</p>
+       </div>
+       <div class="col-md-4">
+        <p class="small mb-0"><strong>🌙 Evening:</strong> Dinner before 7 PM. Practice Yoga Nidra. Apply warm sesame oil to feet before sleep.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Modal trigger + Tooltip/Popover area -->
+   <section class="container py-4 text-center">
+    <h2 class="vm-section-title mb-3">Discover More</h2>
+    <div class="d-flex flex-wrap justify-content-center gap-3"><button class="btn px-4 py-2 fw-600" style="background:var(--vm-teal);color:white;border-radius:50px" data-bs-toggle="modal" data-bs-target="#deepDiveModal"> <i class="bi bi-book me-2"></i>Deep Dive Guide </button> <button class="btn px-4 py-2 fw-600" style="background:var(--vm-gold);color:white;border-radius:50px" id="toastTrigger"> <i class="bi bi-bell me-2"></i>Show Notification </button> <button class="btn px-4 py-2" style="border:2px solid var(--vm-teal);color:var(--vm-teal);border-radius:50px" data-bs-toggle="tooltip" data-bs-placement="top" title="Hover for quick wellness tips!"> <i class="bi bi-info-circle me-2"></i>Tooltip Info </button> <button class="btn px-4 py-2" style="border:2px solid var(--vm-gold);color:var(--vm-gold);border-radius:50px" data-bs-toggle="popover" data-bs-title="Wellness Fact" data-bs-content="Turmeric contains curcumin which has powerful anti-inflammatory and antioxidant effects. Add it to warm milk with black pepper for better absorption."> <i class="bi bi-chat-quote me-2"></i>Popover Fact </button>
+    </div>
+   </section><!-- Scrollable Modal -->
+   <div class="modal fade vm-modal" id="deepDiveModal" tabindex="-1" aria-labelledby="deepDiveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" style="max-height:75%">
+     <div class="modal-content">
+      <div class="modal-header">
+       <h5 class="modal-title" id="deepDiveModalLabel"><i class="bi bi-book me-2"></i>The Complete Wellness Guide</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color:var(--vm-text)">
+       <h4 style="font-family:var(--vm-font-heading)">Chapter 1: Understanding Your Body</h4>
+       <p>According to Ayurveda, every individual is a unique combination of three doshas — Vata (air + ether), Pitta (fire + water), and Kapha (earth + water). Understanding your dominant dosha is the first step toward personalized wellness.</p>
+       <h5 class="mt-4" style="font-family:var(--vm-font-heading)">Vata Dosha</h5>
+       <p>Vata types are creative, energetic, and quick-thinking. When imbalanced, they experience anxiety, dry skin, and irregular digestion. Warm, grounding foods and routines help balance Vata.</p>
+       <h5 class="mt-4" style="font-family:var(--vm-font-heading)">Pitta Dosha</h5>
+       <p>Pitta types are ambitious, focused, and strong-willed. Imbalanced Pitta leads to inflammation, anger, and skin issues. Cooling foods and calming practices restore balance.</p>
+       <h5 class="mt-4" style="font-family:var(--vm-font-heading)">Kapha Dosha</h5>
+       <p>Kapha types are calm, nurturing, and steady. Excess Kapha causes lethargy, weight gain, and congestion. Stimulating activities and light foods keep Kapha in check.</p>
+       <h4 class="mt-4" style="font-family:var(--vm-font-heading)">Chapter 2: The Science of Pranayama</h4>
+       <p>Pranayama (breath control) is the bridge between body and mind. Techniques like Nadi Shodhana (alternate nostril breathing) balance the nervous system, while Kapalabhati (skull-shining breath) energizes and detoxifies.</p>
+       <p>Research published in the International Journal of Yoga shows that regular pranayama practice reduces blood pressure, improves lung capacity, and enhances cognitive function.</p>
+       <h4 class="mt-4" style="font-family:var(--vm-font-heading)">Chapter 3: Mindful Living</h4>
+       <p>Mindfulness isn't just meditation — it's a way of being. From mindful eating (savoring each bite) to mindful walking (feeling each step), incorporating awareness into daily activities transforms ordinary moments into healing practices.</p>
+      </div>
+      <div class="modal-footer" style="border-color:var(--vm-border)"><button type="button" class="btn" style="background:var(--vm-teal);color:white;border-radius:50px;padding:8px 24px" data-bs-dismiss="modal">Close Guide</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- Toast -->
+   <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:1090">
+    <div id="vmToast" class="toast vm-toast" role="alert" aria-live="assertive" aria-atomic="true">
+     <div class="toast-header" style="background:var(--vm-card-bg);color:var(--vm-text);border-bottom:1px solid var(--vm-border)"><i class="bi bi-leaf text-success me-2"></i> <strong class="me-auto">Vedamruta</strong> <small>Just now</small> <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+     </div>
+     <div class="toast-body" style="background:var(--vm-card-bg);color:var(--vm-text);border-radius:0 0 12px 12px">
+      🙏 Namaste! Remember to take 3 deep breaths right now. Your body and mind will thank you.
+     </div>
+    </div>
+   </div><!-- Placeholders (Skeleton) -->
+   <section class="container py-4">
+    <h2 class="vm-section-title text-center mb-4">Coming Soon</h2>
+    <div class="row g-4">
+     <div class="col-md-4">
+      <div class="vm-card">
+       <div class="vm-placeholder-block mb-3" style="height:20px;width:60%"></div>
+       <div class="vm-placeholder-block mb-2" style="height:12px;width:100%"></div>
+       <div class="vm-placeholder-block mb-2" style="height:12px;width:85%"></div>
+       <div class="vm-placeholder-block" style="height:12px;width:70%"></div>
+      </div>
+     </div>
+     <div class="col-md-4">
+      <div class="vm-card">
+       <div class="vm-placeholder-block mb-3" style="height:20px;width:50%"></div>
+       <div class="vm-placeholder-block mb-2" style="height:12px;width:90%"></div>
+       <div class="vm-placeholder-block mb-2" style="height:12px;width:100%"></div>
+       <div class="vm-placeholder-block" style="height:12px;width:65%"></div>
+      </div>
+     </div>
+     <div class="col-md-4">
+      <div class="vm-card">
+       <div class="vm-placeholder-block mb-3" style="height:20px;width:55%"></div>
+       <div class="vm-placeholder-block mb-2" style="height:12px;width:95%"></div>
+       <div class="vm-placeholder-block mb-2" style="height:12px;width:80%"></div>
+       <div class="vm-placeholder-block" style="height:12px;width:75%"></div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Pagination -->
+   <section class="container py-4">
+    <nav aria-label="Article pagination">
+     <ul class="pagination vm-pagination justify-content-center mb-0">
+      <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><i class="bi bi-chevron-left"></i></a></li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item"><a class="page-link" href="#" aria-label="Next"><i class="bi bi-chevron-right"></i></a></li>
+     </ul>
+    </nav>
+   </section><!-- Newsletter -->
+   <section class="container py-5" id="contact">
+    <div class="vm-newsletter text-center position-relative">
+     <h2 style="font-family:var(--vm-font-heading);font-weight:900;position:relative;z-index:1" id="newsletterHeading">Stay Connected with Vedamruta</h2>
+     <p class="opacity-75 mb-4 position-relative" style="z-index:1">Weekly wisdom on meditation, Ayurveda, yoga, and mindful living.</p>
+     <form id="newsletterForm" class="d-flex gap-2 justify-content-center flex-wrap position-relative" style="z-index:1">
+      <div class="position-relative"><input type="email" id="nlEmail" class="form-control" placeholder="your@email.com" required aria-label="Email address" style="border-radius:50px;padding:12px 24px;min-width:280px;border:2px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:white">
+       <div id="nlError" class="text-warning small mt-1 text-start" style="display:none;position:absolute"></div>
+      </div><button type="submit" class="btn px-4" style="background:var(--vm-gold);color:white;border-radius:50px;font-weight:600">Subscribe <i class="bi bi-send ms-1"></i></button>
+     </form>
+     <div id="nlSuccess" class="mt-3 position-relative" style="z-index:1;display:none"><span class="badge rounded-pill px-4 py-2" style="background:rgba(255,255,255,0.2);font-size:0.95rem">🎉 Welcome to the Vedamruta family!</span>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="vm-footer text-center" id="vmFooter">
+    <div class="mb-2"><a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a> <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a> <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+    </div><small id="footerCopyright">© 2026 VEDAMRUTA</small>
+   </footer>
+  </div><!-- end mainWrapper --> <!-- Scroll to Top --> <button id="scrollTopBtn" aria-label="Scroll to top"><i class="bi bi-chevron-up"></i></button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+(function() {
+  // Default config
+  const defaultConfig = {
+    brand_name: 'VEDAMRUTA',
+    hero_heading_1: 'Awaken Your Inner Peace',
+    hero_heading_2: 'Ancient Wisdom, Modern Healing',
+    hero_heading_3: 'Nourish Body, Mind & Soul',
+    newsletter_heading: 'Stay Connected with Vedamruta',
+    footer_copyright: '© 2026 VEDAMRUTA',
+    background_color: '#f8faf9',
+    surface_color: '#ffffff',
+    text_color: '#1e293b',
+    primary_action_color: '#0d9488',
+    secondary_action_color: '#d4a056'
+  };
+
+  // Element SDK init
+  if (window.elementSdk) {
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const c = key => config[key] || defaultConfig[key];
+        document.getElementById('navBrand').textContent = c('brand_name');
+        document.getElementById('heroH1').textContent = c('hero_heading_1');
+        document.getElementById('heroH2').textContent = c('hero_heading_2');
+        document.getElementById('heroH3').textContent = c('hero_heading_3');
+        document.getElementById('newsletterHeading').textContent = c('newsletter_heading');
+        document.getElementById('footerCopyright').textContent = c('footer_copyright');
+
+        // Colors
+        document.documentElement.style.setProperty('--vm-bg', c('background_color'));
+        document.documentElement.style.setProperty('--vm-card-bg', c('surface_color'));
+        document.documentElement.style.setProperty('--vm-text', c('text_color'));
+        document.documentElement.style.setProperty('--vm-teal', c('primary_action_color'));
+        document.documentElement.style.setProperty('--vm-gold', c('secondary_action_color'));
+      },
+      mapToCapabilities: (config) => {
+        const c = key => config[key] || defaultConfig[key];
+        const mut = (key) => ({
+          get: () => c(key),
+          set: (v) => { config[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+        });
+        return {
+          recolorables: [mut('background_color'), mut('surface_color'), mut('text_color'), mut('primary_action_color'), mut('secondary_action_color')],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || 'DM Sans',
+            set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || 16,
+            set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+          }
+        };
+      },
+      mapToEditPanelValues: (config) => new Map([
+        ['brand_name', config.brand_name || defaultConfig.brand_name],
+        ['hero_heading_1', config.hero_heading_1 || defaultConfig.hero_heading_1],
+        ['hero_heading_2', config.hero_heading_2 || defaultConfig.hero_heading_2],
+        ['hero_heading_3', config.hero_heading_3 || defaultConfig.hero_heading_3],
+        ['newsletter_heading', config.newsletter_heading || defaultConfig.newsletter_heading],
+        ['footer_copyright', config.footer_copyright || defaultConfig.footer_copyright]
+      ])
+    });
+  }
+
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      loader.classList.add('hide');
+      setTimeout(() => loader.style.display = 'none', 500);
+    }, 800);
+  });
+
+  // Dark mode
+  function setDarkMode(dark) {
+    document.documentElement.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
+    const icon = dark ? 'bi-sun-fill' : 'bi-moon-fill';
+    document.querySelectorAll('#navDarkToggle i, #sidebarDarkToggle i').forEach(i => {
+      i.className = 'bi ' + icon;
+    });
+    try { localStorage.setItem('vm-dark', dark ? '1' : '0'); } catch(e) {}
+  }
+
+  let isDark = false;
+  try { isDark = localStorage.getItem('vm-dark') === '1'; } catch(e) {}
+  setDarkMode(isDark);
+
+  document.getElementById('navDarkToggle').addEventListener('click', () => { isDark = !isDark; setDarkMode(isDark); });
+  document.getElementById('sidebarDarkToggle').addEventListener('click', () => { isDark = !isDark; setDarkMode(isDark); });
+
+  // Tooltips & Popovers
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+  document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new bootstrap.Popover(el));
+
+  // Toast
+  document.getElementById('toastTrigger').addEventListener('click', () => {
+    new bootstrap.Toast(document.getElementById('vmToast')).show();
+  });
+
+  // Scroll to top
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  const scrollProgress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const st = window.scrollY;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    scrollBtn.classList.toggle('show', st > 300);
+    if (h > 0) scrollProgress.style.width = (st / h * 100) + '%';
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Active nav highlight
+  const sections = ['home','meditation','diet','yoga','quiz','detox','wellness','chakra','myths','contact'];
+  const menuItems = document.querySelectorAll('#sideNav .vm-menu-item');
+  window.addEventListener('scroll', () => {
+    let current = 'home';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) current = id;
+    });
+    menuItems.forEach(item => {
+      item.classList.toggle('active', item.getAttribute('data-section') === current);
+    });
+  });
+
+  // Sidebar search filter
+  document.getElementById('menuSearch').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    menuItems.forEach(item => {
+      item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+
+  // Counter animation
+  const counters = document.querySelectorAll('.vm-stat-num[data-target]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = +el.dataset.target;
+        let current = 0;
+        const step = Math.max(1, Math.floor(target / 60));
+        const interval = setInterval(() => {
+          current += step;
+          if (current >= target) { current = target; clearInterval(interval); }
+          el.textContent = current.toLocaleString();
+        }, 20);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // Newsletter validation
+  document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('nlEmail');
+    const error = document.getElementById('nlError');
+    const success = document.getElementById('nlSuccess');
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!re.test(email.value)) {
+      error.textContent = 'Please enter a valid email address';
+      error.style.display = 'block';
+      return;
+    }
+    error.style.display = 'none';
+    this.style.display = 'none';
+    success.style.display = 'block';
+  });
+
+  // Close offcanvas on nav click (mobile)
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('sideMenu'));
+      if (offcanvas) offcanvas.hide();
+    });
+  });
+
+  // Pagination click handler
+  document.querySelectorAll('.vm-pagination .page-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.vm-pagination .page-item').forEach(i => i.classList.remove('active'));
+      if (this.parentElement.querySelector('[aria-label]') === null) {
+        this.parentElement.classList.add('active');
+      }
+    });
+  });
+})();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e9200a7c1207f79',t:'MTc3NTY1ODk2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
