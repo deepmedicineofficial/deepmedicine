@@ -1,638 +1,552 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEEPMEDICINE</title>
+  <title>DEEPMEDICINE - Medical Education Platform</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <script>
 tailwind.config = {
   darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
-        mono: ['Space Mono', 'monospace']
+      colors: {
+        brand: { 50:'#eef7ff',100:'#d9edff',200:'#bce0ff',300:'#8eccff',400:'#53b0ff',500:'#2b8fff',600:'#0d6efd',700:'#0b5ed7',800:'#0a4fb3',900:'#0d3f8a' },
+        surface: { light:'#f8fafc', dark:'#0f172a' },
+        card: { light:'#ffffff', dark:'#1e293b' }
       }
     }
   }
 }
 </script>
   <style>
-html, body { height: 100%; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-body { overflow-x: hidden; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-
-/* Sidebar */
-.sidebar-overlay { opacity: 0; pointer-events: none; transition: opacity .3s; }
-.sidebar-overlay.active { opacity: 1; pointer-events: auto; }
-.sidebar-panel { transform: translateX(-100%); transition: transform .3s cubic-bezier(.4,0,.2,1); }
-.sidebar-panel.active { transform: translateX(0); }
-
-/* Card hover */
-.card-hover { transition: all .3s cubic-bezier(.4,0,.2,1); }
-.card-hover:hover { transform: translateY(-6px); }
-
-/* Hero carousel */
-@keyframes fadeSlide { 0%{opacity:0;transform:translateX(30px)} 100%{opacity:1;transform:translateX(0)} }
-.hero-anim { animation: fadeSlide .7s ease forwards; }
-
-/* Glow */
-.glow-border { position: relative; }
-.glow-border::after { content:''; position:absolute; inset:-1px; border-radius:inherit; background:linear-gradient(135deg,#06b6d4,#8b5cf6,#ec4899); z-index:-1; opacity:0; transition:opacity .3s; }
-.glow-border:hover::after { opacity:.6; }
-
-/* Pulse dot */
-@keyframes pulseDot { 0%,100%{opacity:.4} 50%{opacity:1} }
-.pulse-dot { animation: pulseDot 2s infinite; }
-
-/* Dark mode transitions */
-.dm-transition { transition: background-color .3s, color .3s, border-color .3s; }
-
-/* Scroll to top */
-.scroll-top { opacity:0; transform:translateY(20px); transition:all .3s; pointer-events:none; }
-.scroll-top.visible { opacity:1; transform:translateY(0); pointer-events:auto; }
-
-/* FAQ */
-.faq-answer { max-height:0; overflow:hidden; transition:max-height .3s ease; }
-.faq-answer.open { max-height:500px; }
+html,body{height:100%;margin:0;font-family:'DM Sans',sans-serif}
+.font-display{font-family:'Playfair Display',serif}
+*{scrollbar-width:thin;scrollbar-color:#0d6efd transparent}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(13,110,253,0.3)}50%{box-shadow:0 0 40px rgba(13,110,253,0.6)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.animate-fade-in-up{animation:fadeInUp 0.6s ease forwards}
+.animate-slide-in{animation:slideIn 0.4s ease forwards}
+.animate-float{animation:float 3s ease-in-out infinite}
+.animate-pulse-glow{animation:pulse-glow 2s ease-in-out infinite}
+.carousel-slide{transition:opacity 0.8s ease,transform 0.8s ease}
+.sidebar-link:hover .sidebar-icon{transform:scale(1.1)}
+.sidebar-link:hover{background:rgba(13,110,253,0.1)}
+.dark .sidebar-link:hover{background:rgba(43,143,255,0.15)}
+.card-hover{transition:all 0.3s ease}
+.card-hover:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,0.1)}
+.dark .card-hover:hover{box-shadow:0 20px 40px rgba(0,0,0,0.4)}
+.search-overlay{backdrop-filter:blur(8px)}
+.topic-card{position:relative;overflow:hidden}
+.topic-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#0d6efd,#53b0ff);transform:scaleX(0);transition:transform 0.3s ease;transform-origin:left}
+.topic-card:hover::before{transform:scaleX(1)}
+.mcq-option{transition:all 0.2s ease;cursor:pointer}
+.mcq-option:hover{border-color:#0d6efd;background:rgba(13,110,253,0.05)}
+.mcq-option.selected{border-color:#0d6efd;background:rgba(13,110,253,0.1)}
+.mcq-option.correct{border-color:#10b981;background:rgba(16,185,129,0.1)}
+.mcq-option.wrong{border-color:#ef4444;background:rgba(239,68,68,0.1)}
+.flashcard{perspective:1000px}
+.flashcard-inner{transition:transform 0.6s;transform-style:preserve-3d;position:relative}
+.flashcard-inner.flipped{transform:rotateY(180deg)}
+.flashcard-front,.flashcard-back{backface-visibility:hidden;position:absolute;inset:0}
+.flashcard-back{transform:rotateY(180deg)}
+.quick-access-btn{transition:all 0.2s ease}
+.quick-access-btn:hover{transform:scale(1.05)}
 </style>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full bg-slate-950 text-slate-100 dm-transition">
-  <div id="app" class="h-full w-full overflow-auto relative"><!-- NAVBAR -->
-   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/50 dm-transition">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-     <div class="flex items-center gap-3"><button id="menuBtn" class="p-2 rounded-lg hover:bg-slate-800 transition" aria-label="Open menu"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
+ <body class="h-full bg-surface-light dark:bg-surface-dark text-gray-800 dark:text-gray-100 overflow-x-hidden">
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 overflow-y-auto">
+   <div class="p-5 border-b border-gray-200 dark:border-gray-700 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-brand-400 flex items-center justify-center animate-pulse-glow">
+     <svg width="24" height="24" viewbox="0 0 24 24" fill="none"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke="white" stroke-width="2" /><path d="M12 8a2 2 0 100 4 2 2 0 000-4z" fill="white" /><path d="M8 14c0-2 1.8-3 4-3s4 1 4 3" stroke="white" stroke-width="1.5" />
+     </svg>
+    </div><span id="sidebar-brand" class="font-display text-lg font-bold text-brand-700 dark:text-brand-400">DEEPMEDICINE</span>
+   </div>
+   <nav class="p-3">
+    <ul class="space-y-1" id="sidebar-nav">
+     <li><a href="index.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-400 font-medium"><i data-lucide="home" class="sidebar-icon w-5 h-5"></i>Home</a></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="book-open" class="sidebar-icon w-5 h-5"></i>Subjects</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="anatomy.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Anatomy</a></li>
+       <li><a href="physiology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Physiology</a></li>
+       <li><a href="biochemistry.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Biochemistry</a></li>
+       <li><a href="pharmacology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Pharmacology</a></li>
+       <li><a href="pathology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Pathology</a></li>
+       <li><a href="microbiology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Microbiology</a></li>
+       <li><a href="forensic.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Forensic Medicine</a></li>
+       <li><a href="community-med.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Community Medicine</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="clipboard-list" class="sidebar-icon w-5 h-5"></i>MCQs</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="mcq-anatomy.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Anatomy MCQs</a></li>
+       <li><a href="mcq-physiology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Physiology MCQs</a></li>
+       <li><a href="mcq-pharmacology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Pharmacology MCQs</a></li>
+       <li><a href="mcq-pathology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Pathology MCQs</a></li>
+       <li><a href="mcq-micro.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Microbiology MCQs</a></li>
+       <li><a href="mcq-biochem.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Biochemistry MCQs</a></li>
+       <li><a href="mcq-forensic.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Forensic MCQs</a></li>
+       <li><a href="mcq-mixed.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Mixed Practice</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="layers" class="sidebar-icon w-5 h-5"></i>Flashcards</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="flash-anatomy.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Anatomy Cards</a></li>
+       <li><a href="flash-physiology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Physiology Cards</a></li>
+       <li><a href="flash-pharmacology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Pharmacology Cards</a></li>
+       <li><a href="flash-pathology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Pathology Cards</a></li>
+       <li><a href="flash-micro.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Microbiology Cards</a></li>
+       <li><a href="flash-biochem.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Biochemistry Cards</a></li>
+       <li><a href="flash-forensic.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Forensic Cards</a></li>
+       <li><a href="flash-clinical.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Clinical Cards</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="stethoscope" class="sidebar-icon w-5 h-5"></i>Clinical</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="medicine.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Medicine</a></li>
+       <li><a href="surgery.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Surgery</a></li>
+       <li><a href="obgyn.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">OBG &amp; Gynecology</a></li>
+       <li><a href="pediatrics.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Pediatrics</a></li>
+       <li><a href="ortho.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Orthopedics</a></li>
+       <li><a href="ent.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">ENT</a></li>
+       <li><a href="ophthalmology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Ophthalmology</a></li>
+       <li><a href="dermatology.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Dermatology</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="file-text" class="sidebar-icon w-5 h-5"></i>Notes</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="notes-first.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">1st Year Notes</a></li>
+       <li><a href="notes-second.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">2nd Year Notes</a></li>
+       <li><a href="notes-third.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">3rd Year Notes</a></li>
+       <li><a href="notes-final.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Final Year Notes</a></li>
+       <li><a href="notes-internship.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Internship Notes</a></li>
+       <li><a href="notes-clinical.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Clinical Pearls</a></li>
+       <li><a href="notes-revision.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Revision Sheets</a></li>
+       <li><a href="notes-mnemonics.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Mnemonics</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="target" class="sidebar-icon w-5 h-5"></i>Exam Prep</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="neet-pg.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">NEET PG</a></li>
+       <li><a href="usmle.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">USMLE</a></li>
+       <li><a href="plab.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">PLAB</a></li>
+       <li><a href="fmge.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">FMGE</a></li>
+       <li><a href="inicet.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">INI-CET</a></li>
+       <li><a href="aiims.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">AIIMS</a></li>
+       <li><a href="jipmer.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">JIPMER</a></li>
+       <li><a href="state-pg.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">State PG Exams</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="bar-chart-2" class="sidebar-icon w-5 h-5"></i>Progress</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="progress-overview.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Overview</a></li>
+       <li><a href="progress-subjects.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">By Subject</a></li>
+       <li><a href="progress-mcq.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">MCQ Performance</a></li>
+       <li><a href="progress-streak.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Study Streak</a></li>
+       <li><a href="progress-weak.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Weak Areas</a></li>
+       <li><a href="progress-time.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Time Analytics</a></li>
+       <li><a href="progress-goals.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Goals</a></li>
+       <li><a href="progress-reports.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Reports</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="wrench" class="sidebar-icon w-5 h-5"></i>Tools</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="tools-bmi.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">BMI Calculator</a></li>
+       <li><a href="tools-dose.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Dose Calculator</a></li>
+       <li><a href="tools-timer.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Study Timer</a></li>
+       <li><a href="tools-converter.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Unit Converter</a></li>
+       <li><a href="tools-ecg.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">ECG Interpreter</a></li>
+       <li><a href="tools-abg.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">ABG Analyzer</a></li>
+       <li><a href="tools-drug.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Drug Interactions</a></li>
+       <li><a href="tools-diff.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Differential Dx</a></li>
+      </ul></li>
+     <li class="nav-parent"><button class="sidebar-link flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300" onclick="toggleSubmenu(this)"> <span class="flex items-center gap-3"><i data-lucide="help-circle" class="sidebar-icon w-5 h-5"></i>Resources</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i> </button>
+      <ul class="hidden ml-8 mt-1 space-y-1">
+       <li><a href="resources-books.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Recommended Books</a></li>
+       <li><a href="resources-videos.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Video Lectures</a></li>
+       <li><a href="resources-atlas.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Atlas &amp; Images</a></li>
+       <li><a href="resources-guidelines.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Clinical Guidelines</a></li>
+       <li><a href="resources-research.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Research Papers</a></li>
+       <li><a href="resources-cases.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Case Studies</a></li>
+       <li><a href="resources-qbank.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Question Banks</a></li>
+       <li><a href="resources-community.html" class="block px-3 py-1.5 rounded text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600">Community Forum</a></li>
+      </ul></li>
+    </ul>
+   </nav>
+  </aside><!-- Main Content -->
+  <div id="main-content" class="lg:ml-64 h-full overflow-auto">
+   <!-- Top Bar -->
+   <header class="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between px-4 py-3">
+     <div class="flex items-center gap-3">
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" onclick="toggleSidebar()"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
       <div class="flex items-center gap-2">
-       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center"><i data-lucide="activity" class="w-4 h-4 text-white"></i>
-       </div><span id="navBrand" class="font-bold text-lg tracking-tight font-mono">DEEPMEDICINE</span>
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-600 to-brand-400 flex items-center justify-center">
+        <svg width="18" height="18" viewbox="0 0 24 24" fill="none"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke="white" stroke-width="2" /><path d="M12 8a2 2 0 100 4 2 2 0 000-4z" fill="white" />
+        </svg>
+       </div><span id="topbar-brand" class="font-display text-lg font-bold text-brand-700 dark:text-brand-400 hidden sm:block">DEEPMEDICINE</span>
+      </div>
+     </div><!-- Search Bar -->
+     <div class="flex-1 max-w-md mx-4">
+      <div class="relative">
+       <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i> <input type="text" id="search-input" placeholder="Search topics, MCQs, notes..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 border border-transparent focus:border-brand-500 focus:bg-white dark:focus:bg-gray-700 outline-none text-sm transition-all" oninput="handleSearch(this.value)">
+       <div id="search-results" class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 hidden max-h-64 overflow-y-auto"></div>
+      </div>
+     </div><!-- Dark Mode Toggle --> <button id="dark-toggle" onclick="toggleDarkMode()" class="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle dark mode"> <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i> <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i> </button>
+    </div>
+   </header><!-- Hero Carousel -->
+   <section class="relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 text-white">
+    <div class="absolute inset-0 opacity-10">
+     <div class="absolute top-10 left-10 w-40 h-40 border border-white/30 rounded-full animate-float"></div>
+     <div class="absolute bottom-10 right-20 w-60 h-60 border border-white/20 rounded-full animate-float" style="animation-delay:1s"></div>
+     <div class="absolute top-1/2 left-1/3 w-20 h-20 border border-white/20 rounded-full animate-float" style="animation-delay:2s"></div>
+    </div>
+    <div id="carousel" class="relative min-h-[350px] flex items-center">
+     <div class="carousel-slide absolute inset-0 flex items-center justify-center p-8 text-center opacity-100" data-slide="0">
+      <div class="max-w-2xl animate-fade-in-up">
+       <h1 id="hero-title" class="font-display text-4xl md:text-5xl font-black mb-4">Master Medicine, One Step at a Time</h1>
+       <p class="text-lg text-blue-100 mb-6">Your comprehensive MBBS &amp; MD study companion with MCQs, Flashcards, Notes and Clinical Tools</p><a href="mcq-mixed.html" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-brand-700 font-semibold rounded-xl hover:bg-blue-50 transition-colors"><i data-lucide="play" class="w-5 h-5"></i>Start Practicing</a>
       </div>
      </div>
-     <div class="flex items-center gap-2"><button id="darkToggle" class="p-2 rounded-lg hover:bg-slate-800 transition" aria-label="Toggle dark mode"> <i data-lucide="moon" class="w-5 h-5" id="darkIcon"></i> </button> <button class="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm" aria-label="Profile"> <i data-lucide="user" class="w-4 h-4"></i> </button>
+     <div class="carousel-slide absolute inset-0 flex items-center justify-center p-8 text-center opacity-0" data-slide="1">
+      <div class="max-w-2xl">
+       <h2 class="font-display text-4xl md:text-5xl font-black mb-4">10,000+ MCQs Across All Subjects</h2>
+       <p class="text-lg text-blue-100 mb-6">Practice with detailed explanations, references, and performance tracking</p><a href="mcq-mixed.html" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-brand-700 font-semibold rounded-xl hover:bg-blue-50 transition-colors"><i data-lucide="clipboard-list" class="w-5 h-5"></i>Browse MCQs</a>
+      </div>
+     </div>
+     <div class="carousel-slide absolute inset-0 flex items-center justify-center p-8 text-center opacity-0" data-slide="2">
+      <div class="max-w-2xl">
+       <h2 class="font-display text-4xl md:text-5xl font-black mb-4">Flashcards That Stick</h2>
+       <p class="text-lg text-blue-100 mb-6">Spaced repetition powered flashcards for efficient memorization</p><a href="flash-anatomy.html" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-brand-700 font-semibold rounded-xl hover:bg-blue-50 transition-colors"><i data-lucide="layers" class="w-5 h-5"></i>Try Flashcards</a>
+      </div>
+     </div>
+    </div><!-- Carousel Controls -->
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+     <button class="carousel-dot w-3 h-3 rounded-full bg-white" data-dot="0" onclick="goToSlide(0)"></button> <button class="carousel-dot w-3 h-3 rounded-full bg-white/40" data-dot="1" onclick="goToSlide(1)"></button> <button class="carousel-dot w-3 h-3 rounded-full bg-white/40" data-dot="2" onclick="goToSlide(2)"></button>
+    </div><button class="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/20 hover:bg-white/30 transition" onclick="prevSlide()"><i data-lucide="chevron-left" class="w-5 h-5"></i></button> <button class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/20 hover:bg-white/30 transition" onclick="nextSlide()"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+   </section><!-- Quick Access Bar -->
+   <section class="px-4 py-6 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Quick Access</h2>
+     <div class="flex flex-wrap gap-2">
+      <a href="mcq-mixed.html" class="quick-access-btn inline-flex items-center gap-2 px-4 py-2 bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-400 rounded-lg text-sm font-medium"><i data-lucide="zap" class="w-4 h-4"></i>Quick MCQ</a> <a href="flash-anatomy.html" class="quick-access-btn inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg text-sm font-medium"><i data-lucide="layers" class="w-4 h-4"></i>Flashcards</a> <a href="tools-timer.html" class="quick-access-btn inline-flex items-center gap-2 px-4 py-2 bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-lg text-sm font-medium"><i data-lucide="clock" class="w-4 h-4"></i>Study Timer</a> <a href="notes-revision.html" class="quick-access-btn inline-flex items-center gap-2 px-4 py-2 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg text-sm font-medium"><i data-lucide="file-text" class="w-4 h-4"></i>Revision Notes</a> <a href="tools-dose.html" class="quick-access-btn inline-flex items-center gap-2 px-4 py-2 bg-rose-50 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 rounded-lg text-sm font-medium"><i data-lucide="calculator" class="w-4 h-4"></i>Dose Calc</a> <a href="progress-overview.html" class="quick-access-btn inline-flex items-center gap-2 px-4 py-2 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400 rounded-lg text-sm font-medium"><i data-lucide="bar-chart-2" class="w-4 h-4"></i>My Progress</a>
      </div>
     </div>
-   </nav><!-- SIDEBAR OVERLAY -->
-   <div id="sidebarOverlay" class="sidebar-overlay fixed inset-0 z-50 bg-black/60"></div><!-- SIDEBAR -->
-   <aside id="sidebar" class="sidebar-panel fixed top-0 left-0 bottom-0 w-80 z-50 bg-slate-900 border-r border-slate-800 overflow-auto dm-transition">
-    <div class="p-5">
-     <div class="flex items-center justify-between mb-6">
-      <div class="flex items-center gap-2">
-       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center"><i data-lucide="activity" class="w-4 h-4 text-white"></i>
-       </div><span class="font-bold font-mono tracking-tight">DEEPMEDICINE</span>
-      </div><button id="closeMenu" class="p-2 rounded-lg hover:bg-slate-800 transition" aria-label="Close menu"> <i data-lucide="x" class="w-5 h-5"></i> </button>
-     </div><!-- Search -->
-     <div class="relative mb-6"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500"></i> <input type="text" placeholder="Smart Search..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm focus:outline-none focus:border-cyan-500 transition dm-transition" aria-label="Search">
-     </div><!-- Menu Items -->
-     <nav class="space-y-1" id="sidebarNav">
-     </nav>
-     <div class="mt-6 pt-6 border-t border-slate-800">
-      <div class="flex items-center justify-between px-3 py-2"><span class="text-sm text-slate-400">Dark Mode</span> <button id="darkToggle2" class="w-10 h-6 rounded-full bg-slate-700 relative transition">
-        <div id="darkToggleDot" class="w-4 h-4 rounded-full bg-cyan-400 absolute top-1 left-1 transition-all"></div></button>
+   </section><!-- Topic Cards (8 total) -->
+   <section class="px-4 py-10">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="font-display text-2xl font-bold mb-6">Explore Topics</h2>
+     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <a href="anatomy.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-3"><i data-lucide="heart" class="w-6 h-6 text-red-600 dark:text-red-400"></i>
+       </div><h3 class="font-semibold mb-1">Anatomy</h3><p class="text-sm text-gray-500 dark:text-gray-400">Gross, Neuro &amp; Embryology</p></a> <a href="physiology.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-3"><i data-lucide="activity" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+       </div><h3 class="font-semibold mb-1">Physiology</h3><p class="text-sm text-gray-500 dark:text-gray-400">Systems &amp; Functions</p></a> <a href="pharmacology.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-3"><i data-lucide="pill" class="w-6 h-6 text-green-600 dark:text-green-400"></i>
+       </div><h3 class="font-semibold mb-1">Pharmacology</h3><p class="text-sm text-gray-500 dark:text-gray-400">Drugs &amp; Mechanisms</p></a> <a href="pathology.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-3"><i data-lucide="microscope" class="w-6 h-6 text-purple-600 dark:text-purple-400"></i>
+       </div><h3 class="font-semibold mb-1">Pathology</h3><p class="text-sm text-gray-500 dark:text-gray-400">Disease Mechanisms</p></a> <a href="microbiology.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-3"><i data-lucide="bug" class="w-6 h-6 text-amber-600 dark:text-amber-400"></i>
+       </div><h3 class="font-semibold mb-1">Microbiology</h3><p class="text-sm text-gray-500 dark:text-gray-400">Bacteria, Virus &amp; Fungi</p></a> <a href="biochemistry.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-3"><i data-lucide="flask-conical" class="w-6 h-6 text-cyan-600 dark:text-cyan-400"></i>
+       </div><h3 class="font-semibold mb-1">Biochemistry</h3><p class="text-sm text-gray-500 dark:text-gray-400">Metabolism &amp; Enzymes</p></a> <a href="medicine.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-3"><i data-lucide="stethoscope" class="w-6 h-6 text-indigo-600 dark:text-indigo-400"></i>
+       </div><h3 class="font-semibold mb-1">Medicine</h3><p class="text-sm text-gray-500 dark:text-gray-400">Internal Medicine Cases</p></a> <a href="surgery.html" class="topic-card card-hover bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center mb-3"><i data-lucide="scissors" class="w-6 h-6 text-rose-600 dark:text-rose-400"></i>
+       </div><h3 class="font-semibold mb-1">Surgery</h3><p class="text-sm text-gray-500 dark:text-gray-400">Surgical Principles</p></a>
+     </div>
+    </div>
+   </section><!-- MCQ Practice Section -->
+   <section class="px-4 py-10 bg-gray-50 dark:bg-gray-800/50">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="font-display text-2xl font-bold mb-6 flex items-center gap-2"><i data-lucide="clipboard-list" class="w-6 h-6 text-brand-600"></i>MCQ Practice</h2>
+     <div id="mcq-container" class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+       <span class="text-sm font-medium text-brand-600 dark:text-brand-400" id="mcq-counter">Question 1 of 3</span> <span class="text-sm text-gray-500" id="mcq-subject">Pharmacology</span>
       </div>
-      <div class="px-3 py-2 mt-2"><span class="text-xs text-slate-500">Font Size</span> <input type="range" min="12" max="22" value="16" id="fontSlider" class="w-full mt-1 accent-cyan-500">
+      <p class="text-lg font-medium mb-5" id="mcq-question">Which drug is the first-line treatment for Mycobacterium tuberculosis?</p>
+      <div id="mcq-options" class="space-y-3">
+       <div class="mcq-option border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 flex items-center gap-3" onclick="selectMCQ(this, 0)">
+        <span class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-semibold">A</span> <span>Streptomycin</span>
+       </div>
+       <div class="mcq-option border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 flex items-center gap-3" onclick="selectMCQ(this, 1)">
+        <span class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-semibold">B</span> <span>Isoniazid + Rifampicin</span>
+       </div>
+       <div class="mcq-option border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 flex items-center gap-3" onclick="selectMCQ(this, 2)">
+        <span class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-semibold">C</span> <span>Ciprofloxacin</span>
+       </div>
+       <div class="mcq-option border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 flex items-center gap-3" onclick="selectMCQ(this, 3)">
+        <span class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-semibold">D</span> <span>Amoxicillin</span>
+       </div>
       </div>
-      <div class="px-3 py-3 mt-2 text-xs text-slate-500">
-       <p>📧 contact@deepmedicine.io</p>
-       <p class="mt-1">🔒 Privacy Policy</p>
+      <div id="mcq-explanation" class="hidden mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
+       <p class="text-sm font-semibold text-green-700 dark:text-green-400 mb-1">Explanation:</p>
+       <p class="text-sm text-green-600 dark:text-green-300" id="mcq-explain-text"></p>
+      </div>
+      <div class="flex items-center justify-between mt-6">
+       <button onclick="prevMCQ()" class="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition flex items-center gap-1"><i data-lucide="chevron-left" class="w-4 h-4"></i>Previous</button> <button onclick="nextMCQ()" class="px-4 py-2 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700 transition flex items-center gap-1">Next<i data-lucide="chevron-right" class="w-4 h-4"></i></button>
       </div>
      </div>
     </div>
-   </aside><!-- MAIN CONTENT -->
-   <main class="pt-16"><!-- HERO SECTION -->
-    <section class="relative overflow-hidden">
-     <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
-     <div class="absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
-     <div class="absolute bottom-10 right-10 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl"></div>
-     <div class="relative max-w-7xl mx-auto px-4 py-20"><!-- Carousel -->
-      <div id="heroCarousel" class="text-center">
-       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-medium mb-6"><span class="w-2 h-2 rounded-full bg-cyan-400 pulse-dot"></span> <span>AI-Powered Clinical Education</span>
+   </section><!-- Flashcard Section -->
+   <section class="px-4 py-10">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="font-display text-2xl font-bold mb-6 flex items-center gap-2"><i data-lucide="layers" class="w-6 h-6 text-emerald-600"></i>Flashcard Review</h2>
+     <div class="flashcard mx-auto max-w-lg h-64 cursor-pointer" onclick="flipCard()">
+      <div id="flashcard-inner" class="flashcard-inner w-full h-full">
+       <div class="flashcard-front bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-8 flex flex-col items-center justify-center text-white shadow-lg">
+        <span class="text-xs uppercase tracking-wider opacity-70 mb-3" id="fc-subject">Anatomy</span>
+        <p class="text-xl font-semibold text-center" id="fc-front">What nerve passes through the carpal tunnel?</p><span class="mt-4 text-sm opacity-60">Tap to reveal answer</span>
        </div>
-       <h1 id="heroHeadline" class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent hero-anim">Modern Medicine Deep<br>
-        Clinical Learning Platform</h1>
-       <p id="heroSubtext" class="text-slate-400 text-lg max-w-2xl mx-auto mb-10">Evidence-based clinical education powered by deep learning. Master emergency protocols, ICU management, and critical care with interactive tools.</p><!-- Search -->
-       <div class="max-w-xl mx-auto mb-8 relative"><i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500"></i> <input type="text" placeholder="Search topics, protocols, drugs..." class="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-800/80 border border-slate-700 text-sm focus:outline-none focus:border-cyan-500 transition backdrop-blur dm-transition" aria-label="Search topics">
-       </div><!-- CTA Buttons -->
-       <div class="flex flex-wrap justify-center gap-4"><a href="start-learning.html" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition">Start Learning</a> <a href="clinical-tools.html" class="px-8 py-3.5 rounded-xl bg-slate-800 border border-slate-700 font-semibold hover:border-cyan-500/50 transition">Clinical Tools</a> <a href="case-discussions.html" class="px-8 py-3.5 rounded-xl bg-slate-800 border border-slate-700 font-semibold hover:border-violet-500/50 transition">Case Discussions</a>
-       </div>
-      </div><!-- Carousel dots -->
-      <div class="flex justify-center gap-2 mt-10" id="carouselDots"><button class="w-8 h-1.5 rounded-full bg-cyan-500 transition" data-slide="0"></button> <button class="w-8 h-1.5 rounded-full bg-slate-700 transition" data-slide="1"></button> <button class="w-8 h-1.5 rounded-full bg-slate-700 transition" data-slide="2"></button>
-      </div>
-     </div>
-    </section><!-- SUBJECT CARDS GRID -->
-    <section class="max-w-7xl mx-auto px-4 py-16" id="subjectsSection">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-cyan-500 to-violet-600"></div>
-      <h2 class="text-2xl font-bold">Medical Specialties</h2>
-     </div>
-     <div id="subjectGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"></div>
-    </section><!-- QUICK ACCESS -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-emerald-500 to-cyan-500"></div>
-      <h2 class="text-2xl font-bold">Quick Access</h2>
-     </div>
-     <div id="quickAccess" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-    </section><!-- MCQs -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-amber-500 to-orange-500"></div>
-      <h2 class="text-2xl font-bold">MCQs &amp; Quizzes</h2>
-     </div>
-     <div id="mcqGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-    </section><!-- FLASHCARDS -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-pink-500 to-rose-500"></div>
-      <h2 class="text-2xl font-bold">Flashcards</h2>
-     </div>
-     <div id="flashGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-    </section><!-- CLINICAL TOOLS -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-blue-500 to-indigo-500"></div>
-      <h2 class="text-2xl font-bold">Clinical Tools</h2>
-     </div>
-     <div id="toolsGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-    </section><!-- MEDICINE SECTION -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-red-500 to-pink-500"></div>
-      <h2 class="text-2xl font-bold">Medicine Departments</h2>
-     </div>
-     <div id="medGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-    </section><!-- QUICK TIPS -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-yellow-500 to-amber-500"></div>
-      <h2 class="text-2xl font-bold">Quick Tips</h2>
-     </div>
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-       <p class="text-sm"><span class="text-yellow-400 font-bold">💡 Tip:</span> Always assess ABCs first in any emergency — Airway, Breathing, Circulation.</p>
-      </div>
-      <div class="p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-       <p class="text-sm"><span class="text-yellow-400 font-bold">💡 Tip:</span> The FAST exam uses 4 acoustic windows to detect free fluid in trauma patients.</p>
-      </div>
-      <div class="p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-       <p class="text-sm"><span class="text-yellow-400 font-bold">💡 Tip:</span> Remember MUDPILES for anion gap metabolic acidosis differential diagnosis.</p>
-      </div>
-     </div>
-    </section><!-- BRAIN GAMES -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-fuchsia-500 to-purple-500"></div>
-      <h2 class="text-2xl font-bold">Brain Games</h2>
-     </div>
-     <div id="gamesGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-    </section><!-- DEEP DIVE GUIDE -->
-    <section class="max-w-7xl mx-auto px-4 py-12"><a href="deep-dive-guide.html" class="block group">
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-violet-600/20 via-cyan-600/20 to-emerald-600/20 border border-slate-700/50 p-10 md:p-16 text-center hover:border-cyan-500/30 transition dm-transition">
-       <div class="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-cyan-500/5 group-hover:from-violet-500/10 group-hover:to-cyan-500/10 transition"></div>
-       <div class="relative"><i data-lucide="compass" class="w-12 h-12 mx-auto mb-4 text-cyan-400"></i>
-        <h2 class="text-3xl font-bold mb-3">Deep Dive Guide</h2>
-        <p class="text-slate-400 max-w-lg mx-auto">Comprehensive clinical learning paths with structured modules, assessments, and certification tracking.</p><span class="inline-flex items-center gap-2 mt-6 text-cyan-400 font-medium">Explore Now <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
-       </div>
-      </div></a>
-    </section><!-- FAQs -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-slate-400 to-slate-600"></div>
-      <h2 class="text-2xl font-bold">FAQs</h2>
-     </div>
-     <div id="faqContainer" class="max-w-3xl space-y-3"></div>
-    </section><!-- TESTIMONIALS -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-cyan-400 to-blue-500"></div>
-      <h2 class="text-2xl font-bold">Testimonials</h2>
-     </div>
-     <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="testimonials"></div>
-    </section><!-- LATEST INSIGHTS -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="flex items-center gap-3 mb-8">
-      <div class="w-1 h-8 rounded-full bg-gradient-to-b from-emerald-400 to-teal-500"></div>
-      <h2 class="text-2xl font-bold">Latest Insights</h2>
-     </div>
-     <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="insights"></div>
-    </section><!-- NEWSLETTER -->
-    <section class="max-w-7xl mx-auto px-4 py-12">
-     <div class="rounded-3xl bg-gradient-to-r from-cyan-500/10 to-violet-500/10 border border-slate-700/50 p-10 text-center dm-transition"><i data-lucide="mail" class="w-10 h-10 mx-auto mb-4 text-cyan-400"></i>
-      <h2 id="newsletterHeading" class="text-2xl font-bold mb-2">Stay Updated</h2>
-      <p class="text-slate-400 mb-6">Get weekly clinical pearls, new protocols, and learning resources.</p>
-      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓'; this.querySelector('button').classList.add('bg-emerald-600')" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"><label for="nlEmail" class="sr-only">Email</label> <input id="nlEmail" type="email" placeholder="your@email.com" required class="flex-1 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-sm focus:outline-none focus:border-cyan-500 dm-transition" aria-label="Email address"> <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold transition">Subscribe</button>
-      </form>
-     </div>
-    </section><!-- FOOTER -->
-    <footer class="border-t border-slate-800 mt-12 dm-transition">
-     <div class="max-w-7xl mx-auto px-4 py-12">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
-       <div>
-        <div class="flex items-center gap-2 mb-4">
-         <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center">
-          <i data-lucide="activity" class="w-3.5 h-3.5 text-white"></i>
-         </div><span class="font-bold font-mono text-sm">DEEPMEDICINE</span>
-        </div>
-        <p class="text-xs text-slate-500">AI-powered clinical education platform for modern healthcare professionals.</p>
-       </div>
-       <div>
-        <h4 class="font-semibold text-sm mb-3">LEGAL</h4>
-        <ul class="space-y-2 text-xs text-slate-500">
-         <li><a href="privacy.html" class="hover:text-cyan-400 transition">Privacy Policy</a></li>
-         <li><a href="terms.html" class="hover:text-cyan-400 transition">Terms of Service</a></li>
-         <li><a href="disclaimer.html" class="hover:text-cyan-400 transition">Medical Disclaimer</a></li>
-        </ul>
-       </div>
-       <div>
-        <h4 class="font-semibold text-sm mb-3">PLATFORM</h4>
-        <ul class="space-y-2 text-xs text-slate-500">
-         <li><a href="dashboard.html" class="hover:text-cyan-400 transition">Dashboard</a></li>
-         <li><a href="clinical-tools.html" class="hover:text-cyan-400 transition">Clinical Tools</a></li>
-         <li><a href="mcqs.html" class="hover:text-cyan-400 transition">MCQs</a></li>
-        </ul>
-       </div>
-       <div>
-        <h4 class="font-semibold text-sm mb-3">CONNECT</h4>
-        <ul class="space-y-2 text-xs text-slate-500">
-         <li><a href="mailto:contact@deepmedicine.io" class="hover:text-cyan-400 transition">contact@deepmedicine.io</a></li>
-         <li><a href="about.html" class="hover:text-cyan-400 transition">About Us</a></li>
-        </ul>
+       <div class="flashcard-back bg-gradient-to-br from-teal-600 to-emerald-700 rounded-2xl p-8 flex flex-col items-center justify-center text-white shadow-lg">
+        <span class="text-xs uppercase tracking-wider opacity-70 mb-3">Answer</span>
+        <p class="text-xl font-semibold text-center" id="fc-back">Median Nerve</p>
+        <p class="text-sm mt-3 opacity-80 text-center" id="fc-detail">Along with 4 FDS tendons, 4 FDP tendons, and FPL tendon</p>
        </div>
       </div>
-      <div class="border-t border-slate-800 pt-6 text-center">
-       <p class="text-xs text-slate-600">© 2025 DEEPMEDICINE. All rights reserved.</p>
-       <p class="text-xs text-slate-700 mt-2">⚕️ Medical Disclaimer: Content is for educational purposes only and does not constitute medical advice.</p>
+     </div>
+     <div class="flex items-center justify-center gap-4 mt-6">
+      <button onclick="prevCard()" class="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition flex items-center gap-1"><i data-lucide="chevron-left" class="w-4 h-4"></i>Previous</button> <span class="text-sm text-gray-500" id="fc-counter">1 / 3</span> <button onclick="nextCard()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition flex items-center gap-1">Next<i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+     </div>
+    </div>
+   </section><!-- Study Tools -->
+   <section class="px-4 py-10 bg-gray-50 dark:bg-gray-800/50">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="font-display text-2xl font-bold mb-6">Study Tools</h2>
+     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <a href="tools-bmi.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="calculator" class="w-8 h-8 mx-auto mb-2 text-brand-600"></i><span class="text-sm font-medium">BMI Calculator</span> </a> <a href="tools-dose.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="pill" class="w-8 h-8 mx-auto mb-2 text-green-600"></i><span class="text-sm font-medium">Dose Calculator</span> </a> <a href="tools-timer.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="clock" class="w-8 h-8 mx-auto mb-2 text-amber-600"></i><span class="text-sm font-medium">Study Timer</span> </a> <a href="tools-ecg.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="activity" class="w-8 h-8 mx-auto mb-2 text-red-600"></i><span class="text-sm font-medium">ECG Guide</span> </a> <a href="tools-abg.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="droplets" class="w-8 h-8 mx-auto mb-2 text-purple-600"></i><span class="text-sm font-medium">ABG Analyzer</span> </a> <a href="tools-converter.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="repeat" class="w-8 h-8 mx-auto mb-2 text-cyan-600"></i><span class="text-sm font-medium">Unit Converter</span> </a> <a href="tools-drug.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="alert-triangle" class="w-8 h-8 mx-auto mb-2 text-orange-600"></i><span class="text-sm font-medium">Drug Interactions</span> </a> <a href="tools-diff.html" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center"> <i data-lucide="git-branch" class="w-8 h-8 mx-auto mb-2 text-indigo-600"></i><span class="text-sm font-medium">Differential Dx</span> </a>
+     </div>
+    </div>
+   </section><!-- Testimonials -->
+   <section class="px-4 py-10">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="font-display text-2xl font-bold mb-6">What Students Say</h2>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="flex gap-1 mb-3">
+        ★★★★★
+       </div>
+       <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">"The MCQs with explanations helped me crack NEET PG. The spaced repetition flashcards are a game-changer!"</p>
+       <p class="text-sm font-semibold">Dr. Priya S.</p>
+       <p class="text-xs text-gray-500">MD Resident, AIIMS</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="flex gap-1 mb-3">
+        ★★★★★
+       </div>
+       <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">"Best platform for MBBS students. The clinical tools and dose calculators save time during postings."</p>
+       <p class="text-sm font-semibold">Dr. Rahul M.</p>
+       <p class="text-xs text-gray-500">Final Year MBBS</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+       <div class="flex gap-1 mb-3">
+        ★★★★★
+       </div>
+       <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">"The revision notes and mnemonics section is pure gold. Helped me retain Pharmacology for my exams."</p>
+       <p class="text-sm font-semibold">Dr. Ananya K.</p>
+       <p class="text-xs text-gray-500">USMLE Step 1 Aspirant</p>
       </div>
      </div>
-    </footer>
-   </main><!-- SCROLL TO TOP --> <button id="scrollTop" class="scroll-top fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-cyan-500 text-white shadow-lg shadow-cyan-500/25 flex items-center justify-center hover:bg-cyan-400 transition" aria-label="Scroll to top"> <i data-lucide="chevron-up" class="w-5 h-5"></i> </button>
-  </div>
+    </div>
+   </section><!-- Study Planner & Pomodoro -->
+   <section class="px-4 py-10 bg-gray-50 dark:bg-gray-800/50">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+     <!-- Pomodoro Timer -->
+     <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+      <h3 class="font-semibold text-lg mb-4 flex items-center gap-2"><i data-lucide="timer" class="w-5 h-5 text-amber-600"></i>Pomodoro Timer</h3>
+      <div class="text-center">
+       <div class="text-5xl font-mono font-bold text-brand-700 dark:text-brand-400 mb-4" id="pomodoro-display">
+        25:00
+       </div>
+       <div class="flex justify-center gap-3">
+        <button onclick="startPomodoro()" id="pomo-start" class="px-4 py-2 bg-brand-600 text-white rounded-lg text-sm font-medium hover:bg-brand-700 transition">Start</button> <button onclick="pausePomodoro()" class="px-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition">Pause</button> <button onclick="resetPomodoro()" class="px-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition">Reset</button>
+       </div>
+      </div>
+     </div><!-- Daily Goal Tracker -->
+     <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+      <h3 class="font-semibold text-lg mb-4 flex items-center gap-2"><i data-lucide="target" class="w-5 h-5 text-emerald-600"></i>Today's Goals</h3>
+      <div class="space-y-3">
+       <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"><span class="text-sm">Complete 30 MCQs</span></label> <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"><span class="text-sm">Review 20 Flashcards</span></label> <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"><span class="text-sm">Read 1 Chapter Notes</span></label> <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"><span class="text-sm">2 Pomodoro Sessions</span></label>
+      </div>
+     </div>
+    </div>
+   </section><!-- Bookmark & Notes Section -->
+   <section class="px-4 py-10">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+     <!-- Bookmarks -->
+     <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+      <h3 class="font-semibold text-lg mb-4 flex items-center gap-2"><i data-lucide="bookmark" class="w-5 h-5 text-brand-600"></i>Bookmarked Topics</h3>
+      <div class="space-y-2">
+       <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"><span class="text-sm">Brachial Plexus Anatomy</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i>
+       </div>
+       <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"><span class="text-sm">Anti-hypertensive Drugs</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i>
+       </div>
+       <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"><span class="text-sm">Cardiac Cycle Phases</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i>
+       </div>
+      </div>
+     </div><!-- Quick Notes -->
+     <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+      <h3 class="font-semibold text-lg mb-4 flex items-center gap-2"><i data-lucide="edit" class="w-5 h-5 text-purple-600"></i>Quick Notes</h3><textarea class="w-full h-32 p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-sm resize-none outline-none focus:border-brand-500" placeholder="Jot down important points during study..." id="quick-notes"></textarea> <button onclick="saveNote()" class="mt-2 px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition">Save Note</button>
+     </div>
+    </div>
+   </section><!-- Get In Touch -->
+   <section class="px-4 py-10 bg-gray-50 dark:bg-gray-800/50">
+    <div class="max-w-2xl mx-auto text-center">
+     <h2 class="font-display text-2xl font-bold mb-3">Have Questions?</h2>
+     <p class="text-gray-600 dark:text-gray-400 mb-6">Reach out to us directly for support, suggestions, or feedback</p><a href="mailto:deepmedicineofficial@gmail.com" class="inline-flex items-center gap-2 px-8 py-3 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition shadow-md"><i data-lucide="mail" class="w-5 h-5"></i>deepmedicineofficial@gmail.com</a>
+     <p class="text-xs text-gray-500 dark:text-gray-500 mt-4">We'll respond within 24 hours</p>
+    </div>
+   </section><!-- Footer -->
+   <footer class="px-4 py-8 bg-gray-900 text-gray-400 text-center">
+    <div class="flex items-center justify-center gap-2 mb-3">
+     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-600 to-brand-400 flex items-center justify-center">
+      <svg width="16" height="16" viewbox="0 0 24 24" fill="none"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke="white" stroke-width="2" />
+      </svg>
+     </div><span class="font-display text-lg font-bold text-white">DEEPMEDICINE</span>
+    </div>
+    <p class="text-sm mb-2">Your trusted medical education companion</p>
+    <p class="text-xs">© 2024 DEEPMEDICINE. All rights reserved.</p>
+   </footer>
+  </div><!-- Scroll to Top --> <button id="scroll-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 w-12 h-12 bg-brand-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-brand-700 transition-all opacity-0 pointer-events-none z-50"> <i data-lucide="chevron-up" class="w-5 h-5"></i> </button> <!-- Sidebar Overlay -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="toggleSidebar()"></div>
   <script>
-// ========== DATA ==========
-const menuItems = [
-  { icon: 'layout-dashboard', label: 'Dashboard', href: 'dashboard.html' },
-  { icon: 'user', label: 'Profile', href: 'profile.html' },
-  { icon: 'file-text', label: 'Notes', href: 'notes.html' },
-  { icon: 'help-circle', label: 'Quiz', href: 'quiz.html' },
-  { icon: 'layers', label: 'Flashcards', href: 'flashcards.html' },
-  { icon: 'stethoscope', label: 'Clinical Tools', href: 'clinical-tools.html' },
-  { icon: 'gamepad-2', label: 'Brain Games', href: 'brain-games.html' },
-  { icon: 'settings', label: 'Settings', href: 'settings.html' },
-  { icon: 'info', label: 'About', href: 'about.html' },
-  { icon: 'shield', label: 'Privacy', href: 'privacy.html' },
-];
-
-const subjects = [
-  { icon: 'siren', label: 'Emergency Medicine', color: 'from-red-500 to-rose-600', href: 'emergency.html' },
-  { icon: 'clipboard-list', label: 'Protocols', color: 'from-blue-500 to-indigo-600', href: 'protocols.html' },
-  { icon: 'monitor', label: 'ICU', color: 'from-amber-500 to-orange-600', href: 'icu.html' },
-  { icon: 'heart-pulse', label: 'Critical Care', color: 'from-pink-500 to-red-600', href: 'critical-care.html' },
-  { icon: 'pill', label: 'Pharmacology', color: 'from-emerald-500 to-green-600', href: 'pharmacology.html' },
-  { icon: 'brain', label: 'Neurology', color: 'from-violet-500 to-purple-600', href: 'neurology.html' },
-  { icon: 'heart', label: 'Cardiology', color: 'from-rose-500 to-pink-600', href: 'cardiology.html' },
-  { icon: 'wind', label: 'Pulmonology', color: 'from-sky-500 to-cyan-600', href: 'pulmonology.html' },
-  { icon: 'bone', label: 'Orthopedics', color: 'from-slate-400 to-slate-600', href: 'orthopedics.html' },
-  { icon: 'baby', label: 'Pediatrics', color: 'from-teal-500 to-emerald-600', href: 'pediatrics.html' },
-];
-
-const quickAccess = [
-  { icon: 'zap', label: 'Drug Calculator', href: 'drug-calculator.html', color: 'text-amber-400' },
-  { icon: 'book-open', label: 'Quick Reference', href: 'quick-reference.html', color: 'text-cyan-400' },
-  { icon: 'clipboard', label: 'Case Studies', href: 'case-studies.html', color: 'text-emerald-400' },
-  { icon: 'bar-chart-3', label: 'Progress', href: 'progress.html', color: 'text-violet-400' },
-];
-
-const mcqs = [
-  { title: 'Emergency MCQs', count: '250+', href: 'emergency-mcqs.html', color: 'from-red-500/20 to-rose-500/20', border: 'border-red-500/20' },
-  { title: 'Cardiology MCQs', count: '180+', href: 'cardiology-mcqs.html', color: 'from-pink-500/20 to-rose-500/20', border: 'border-pink-500/20' },
-  { title: 'Pharmacology MCQs', count: '300+', href: 'pharmacology-mcqs.html', color: 'from-emerald-500/20 to-green-500/20', border: 'border-emerald-500/20' },
-];
-
-const flashcards = [
-  { title: 'Drug Dosages', cards: 120, href: 'drug-flashcards.html', icon: 'pill' },
-  { title: 'ECG Patterns', cards: 85, href: 'ecg-flashcards.html', icon: 'activity' },
-  { title: 'Lab Values', cards: 95, href: 'lab-flashcards.html', icon: 'test-tube-2' },
-];
-
-const clinicalTools = [
-  { icon: 'calculator', label: 'GCS Calculator', href: 'gcs-calculator.html' },
-  { icon: 'thermometer', label: 'BMI Calculator', href: 'bmi-calculator.html' },
-  { icon: 'droplets', label: 'IV Drip Rate', href: 'iv-drip.html' },
-  { icon: 'clock', label: 'APGAR Score', href: 'apgar.html' },
-];
-
-const medDepts = [
-  { label: 'Emergency Medicine', href: 'emergency.html', icon: 'siren' },
-  { label: 'Critical Care', href: 'critical-care.html', icon: 'heart-pulse' },
-  { label: 'ICU Management', href: 'icu.html', icon: 'monitor' },
-  { label: 'Protocols', href: 'protocols.html', icon: 'clipboard-list' },
-  { label: 'Internal Medicine', href: 'internal-medicine.html', icon: 'stethoscope' },
-  { label: 'Surgery', href: 'surgery.html', icon: 'scissors' },
-  { label: 'Anesthesia', href: 'anesthesia.html', icon: 'wind' },
-  { label: 'Radiology', href: 'radiology.html', icon: 'scan' },
-];
-
-const brainGames = [
-  { icon: 'puzzle', label: 'Medical Crossword', href: 'crossword.html' },
-  { icon: 'target', label: 'Diagnosis Match', href: 'diagnosis-match.html' },
-  { icon: 'timer', label: 'Speed Round', href: 'speed-round.html' },
-  { icon: 'trophy', label: 'Leaderboard', href: 'leaderboard.html' },
-];
-
-const faqs = [
-  { q: 'How does the AI-powered learning work?', a: 'Our platform uses adaptive algorithms to personalize your learning path based on your performance, identifying weak areas and recommending targeted content.' },
-  { q: 'Is the content peer-reviewed?', a: 'Yes. All clinical content is reviewed by board-certified physicians and updated regularly with the latest evidence-based guidelines.' },
-  { q: 'Can I track my progress?', a: 'Absolutely. Your dashboard shows detailed analytics including quiz scores, study streaks, and competency mapping across all specialties.' },
-];
-
-const testimonials = [
-  { name: 'Dr. Sarah K.', role: 'EM Resident', text: 'DeepMedicine transformed how I prepare for boards. The adaptive MCQs are incredibly targeted.' },
-  { name: 'Dr. James L.', role: 'ICU Attending', text: 'The clinical calculators and protocol references save me time during shifts. Essential tool.' },
-  { name: 'Dr. Priya M.', role: 'Medical Student', text: 'Flashcards and brain games make studying actually enjoyable. My scores improved by 25%.' },
-];
-
-const insightsData = [
-  { title: 'Sepsis Bundle 2025 Update', tag: 'Protocol', href: 'sepsis-update.html' },
-  { title: 'AI in Emergency Triage', tag: 'Research', href: 'ai-triage.html' },
-  { title: 'New ACLS Guidelines', tag: 'Guidelines', href: 'acls-update.html' },
-];
-
-const heroSlides = [
-  { badge: 'AI-Powered Clinical Education', headline: 'Modern Medicine Deep<br>Clinical Learning Platform', sub: 'Evidence-based clinical education powered by deep learning. Master emergency protocols, ICU management, and critical care with interactive tools.' },
-  { badge: 'New: Case-Based Learning', headline: 'Learn Through Real<br>Clinical Scenarios', sub: 'Engage with interactive patient cases, make decisions, and learn from expert feedback in a risk-free environment.' },
-  { badge: 'Updated Protocols 2025', headline: 'Stay Current With<br>Latest Guidelines', sub: 'Access the most up-to-date clinical protocols, drug references, and evidence-based treatment algorithms.' },
-];
-
-// ========== RENDER FUNCTIONS ==========
-function renderSidebar() {
-  const nav = document.getElementById('sidebarNav');
-  nav.innerHTML = menuItems.map(m => `
-    <a href="${m.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition">
-      <i data-lucide="${m.icon}" class="w-4 h-4 text-slate-500"></i>
-      <span>${m.label}</span>
-    </a>
-  `).join('');
+// Dark Mode
+function toggleDarkMode(){
+  document.documentElement.classList.toggle('dark');
 }
 
-function renderSubjects() {
-  document.getElementById('subjectGrid').innerHTML = subjects.map(s => `
-    <a href="${s.href}" class="card-hover glow-border block rounded-2xl bg-slate-800/50 border border-slate-700/50 p-5 text-center dm-transition">
-      <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center">
-        <i data-lucide="${s.icon}" class="w-5 h-5 text-white"></i>
-      </div>
-      <span class="text-sm font-medium">${s.label}</span>
-    </a>
-  `).join('');
+// Sidebar
+function toggleSidebar(){
+  const s=document.getElementById('sidebar'), o=document.getElementById('sidebar-overlay');
+  s.classList.toggle('-translate-x-full');
+  o.classList.toggle('hidden');
+}
+function toggleSubmenu(btn){
+  const ul=btn.nextElementSibling;
+  const icon=btn.querySelector('[data-lucide="chevron-down"]');
+  ul.classList.toggle('hidden');
+  if(icon) icon.style.transform=ul.classList.contains('hidden')?'':'rotate(180deg)';
 }
 
-function renderQuickAccess() {
-  document.getElementById('quickAccess').innerHTML = quickAccess.map(q => `
-    <a href="${q.href}" class="card-hover flex items-center gap-4 p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-      <i data-lucide="${q.icon}" class="w-6 h-6 ${q.color}"></i>
-      <span class="font-medium text-sm">${q.label}</span>
-    </a>
-  `).join('');
+// Carousel
+let currentSlide=0;const totalSlides=3;
+function goToSlide(n){
+  document.querySelectorAll('.carousel-slide').forEach((s,i)=>{s.style.opacity=i===n?'1':'0';s.style.transform=i===n?'scale(1)':'scale(0.95)'});
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>{d.style.background=i===n?'white':'rgba(255,255,255,0.4)'});
+  currentSlide=n;
 }
+function nextSlide(){goToSlide((currentSlide+1)%totalSlides)}
+function prevSlide(){goToSlide((currentSlide-1+totalSlides)%totalSlides)}
+setInterval(nextSlide,5000);
 
-function renderMCQs() {
-  document.getElementById('mcqGrid').innerHTML = mcqs.map(m => `
-    <a href="${m.href}" class="card-hover block p-6 rounded-2xl bg-gradient-to-br ${m.color} border ${m.border} dm-transition">
-      <i data-lucide="help-circle" class="w-8 h-8 mb-3 opacity-60"></i>
-      <h3 class="font-bold mb-1">${m.title}</h3>
-      <p class="text-sm text-slate-400">${m.count} questions</p>
-    </a>
-  `).join('');
-}
-
-function renderFlashcards() {
-  document.getElementById('flashGrid').innerHTML = flashcards.map(f => `
-    <a href="${f.href}" class="card-hover block p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-      <i data-lucide="${f.icon}" class="w-8 h-8 mb-3 text-pink-400"></i>
-      <h3 class="font-bold mb-1">${f.title}</h3>
-      <p class="text-sm text-slate-400">${f.cards} cards</p>
-    </a>
-  `).join('');
-}
-
-function renderTools() {
-  document.getElementById('toolsGrid').innerHTML = clinicalTools.map(t => `
-    <a href="${t.href}" class="card-hover flex flex-col items-center gap-3 p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 text-center dm-transition">
-      <i data-lucide="${t.icon}" class="w-6 h-6 text-blue-400"></i>
-      <span class="text-sm font-medium">${t.label}</span>
-    </a>
-  `).join('');
-}
-
-function renderMedDepts() {
-  document.getElementById('medGrid').innerHTML = medDepts.map(d => `
-    <a href="${d.href}" class="card-hover flex items-center gap-3 p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-      <i data-lucide="${d.icon}" class="w-5 h-5 text-red-400"></i>
-      <span class="text-sm font-medium">${d.label}</span>
-    </a>
-  `).join('');
-}
-
-function renderGames() {
-  document.getElementById('gamesGrid').innerHTML = brainGames.map(g => `
-    <a href="${g.href}" class="card-hover flex flex-col items-center gap-3 p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 text-center dm-transition">
-      <i data-lucide="${g.icon}" class="w-6 h-6 text-fuchsia-400"></i>
-      <span class="text-sm font-medium">${g.label}</span>
-    </a>
-  `).join('');
-}
-
-function renderFAQs() {
-  document.getElementById('faqContainer').innerHTML = faqs.map((f, i) => `
-    <div class="rounded-2xl bg-slate-800/50 border border-slate-700/50 overflow-hidden dm-transition">
-      <button onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('i').style.transform = this.nextElementSibling.classList.contains('open') ? 'rotate(180deg)' : ''" class="w-full flex items-center justify-between p-5 text-left text-sm font-medium">
-        <span>${f.q}</span>
-        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-      </button>
-      <div class="faq-answer">
-        <p class="px-5 pb-5 text-sm text-slate-400">${f.a}</p>
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderTestimonials() {
-  document.getElementById('testimonials').innerHTML = testimonials.map(t => `
-    <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm">${t.name[0]}${t.name.split(' ')[1][0]}</div>
-        <div><p class="font-semibold text-sm">${t.name}</p><p class="text-xs text-slate-500">${t.role}</p></div>
-      </div>
-      <p class="text-sm text-slate-400 italic">"${t.text}"</p>
-    </div>
-  `).join('');
-}
-
-function renderInsights() {
-  document.getElementById('insights').innerHTML = insightsData.map(ins => `
-    <a href="${ins.href}" class="card-hover block p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50 dm-transition">
-      <span class="inline-block px-2 py-1 rounded-md bg-cyan-500/10 text-cyan-400 text-xs font-medium mb-3">${ins.tag}</span>
-      <h3 class="font-bold text-sm">${ins.title}</h3>
-    </a>
-  `).join('');
-}
-
-// ========== SIDEBAR ==========
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('sidebarOverlay');
-function openMenu() { sidebar.classList.add('active'); overlay.classList.add('active'); }
-function closeMenu() { sidebar.classList.remove('active'); overlay.classList.remove('active'); }
-document.getElementById('menuBtn').addEventListener('click', openMenu);
-document.getElementById('closeMenu').addEventListener('click', closeMenu);
-overlay.addEventListener('click', closeMenu);
-
-// ========== DARK MODE ==========
-let isDark = true;
-function setDark(dark) {
-  isDark = dark;
-  document.documentElement.classList.toggle('dark', dark);
-  const dot = document.getElementById('darkToggleDot');
-  if (dark) {
-    document.body.className = 'h-full bg-slate-950 text-slate-100 dm-transition';
-    dot.style.left = '22px';
-    document.getElementById('darkIcon').setAttribute('data-lucide', 'moon');
-  } else {
-    document.body.className = 'h-full bg-white text-slate-900 dm-transition';
-    dot.style.left = '4px';
-    document.getElementById('darkIcon').setAttribute('data-lucide', 'sun');
-    // Light mode adjustments
-  }
-  document.querySelectorAll('.dm-transition').forEach(el => {
-    if (!dark) {
-      if (el.classList.contains('bg-slate-950/80')) { el.classList.remove('bg-slate-950/80'); el.classList.add('bg-white/80'); }
-      if (el.classList.contains('bg-slate-900')) { el.classList.remove('bg-slate-900'); el.classList.add('bg-gray-50'); }
-      if (el.classList.contains('bg-slate-800/50')) { el.classList.remove('bg-slate-800/50'); el.classList.add('bg-gray-100'); }
-      if (el.classList.contains('bg-slate-800')) { el.classList.remove('bg-slate-800'); el.classList.add('bg-gray-100'); }
-      if (el.classList.contains('border-slate-800')) { el.classList.remove('border-slate-800'); el.classList.add('border-gray-200'); }
-      if (el.classList.contains('border-slate-700/50')) { el.classList.remove('border-slate-700/50'); el.classList.add('border-gray-200'); }
-      if (el.classList.contains('border-slate-700')) { el.classList.remove('border-slate-700'); el.classList.add('border-gray-300'); }
-      if (el.classList.contains('border-slate-800/50')) { el.classList.remove('border-slate-800/50'); el.classList.add('border-gray-200'); }
-    } else {
-      if (el.classList.contains('bg-white/80')) { el.classList.remove('bg-white/80'); el.classList.add('bg-slate-950/80'); }
-      if (el.classList.contains('bg-gray-50')) { el.classList.remove('bg-gray-50'); el.classList.add('bg-slate-900'); }
-      if (el.classList.contains('bg-gray-100')) { el.classList.remove('bg-gray-100'); if (el.tagName === 'INPUT') el.classList.add('bg-slate-800'); else el.classList.add('bg-slate-800/50'); }
-      if (el.classList.contains('border-gray-200')) { el.classList.remove('border-gray-200'); el.classList.add('border-slate-700/50'); }
-      if (el.classList.contains('border-gray-300')) { el.classList.remove('border-gray-300'); el.classList.add('border-slate-700'); }
-    }
-  });
+// MCQ System
+const mcqs=[
+  {q:"Which drug is the first-line treatment for Mycobacterium tuberculosis?",opts:["Streptomycin","Isoniazid + Rifampicin","Ciprofloxacin","Amoxicillin"],ans:1,subj:"Pharmacology",exp:"The standard first-line regimen (RIPE) includes Rifampicin, Isoniazid, Pyrazinamide, and Ethambutol. INH+Rifampicin form the backbone."},
+  {q:"The most common type of renal calculus is made of:",opts:["Uric acid","Calcium oxalate","Struvite","Cystine"],ans:1,subj:"Surgery",exp:"Calcium oxalate stones account for ~75% of all renal calculi. They are radiopaque on X-ray."},
+  {q:"Which cranial nerve has the longest intracranial course?",opts:["CN III","CN IV","CN VI","CN VII"],ans:1,subj:"Anatomy",exp:"CN IV (Trochlear nerve) has the longest intracranial course and is the only nerve to exit from the dorsal aspect of the brainstem."}
+];
+let mcqIdx=0,mcqAnswered=false;
+function renderMCQ(){
+  mcqAnswered=false;
+  const m=mcqs[mcqIdx];
+  document.getElementById('mcq-counter').textContent=`Question ${mcqIdx+1} of ${mcqs.length}`;
+  document.getElementById('mcq-subject').textContent=m.subj;
+  document.getElementById('mcq-question').textContent=m.q;
+  document.getElementById('mcq-explanation').classList.add('hidden');
+  const opts=document.getElementById('mcq-options');
+  opts.innerHTML=m.opts.map((o,i)=>`<div class="mcq-option border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 flex items-center gap-3" onclick="selectMCQ(this,${i})"><span class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-semibold">${'ABCD'[i]}</span><span>${o}</span></div>`).join('');
   lucide.createIcons();
 }
-document.getElementById('darkToggle').addEventListener('click', () => setDark(!isDark));
-document.getElementById('darkToggle2').addEventListener('click', () => setDark(!isDark));
-
-// ========== FONT SIZE ==========
-document.getElementById('fontSlider').addEventListener('input', (e) => {
-  document.getElementById('app').style.fontSize = e.target.value + 'px';
-});
-
-// ========== HERO CAROUSEL ==========
-let currentSlide = 0;
-const dots = document.getElementById('carouselDots');
-function showSlide(i) {
-  currentSlide = i;
-  const s = heroSlides[i];
-  const carousel = document.getElementById('heroCarousel');
-  carousel.querySelector('h1').innerHTML = s.headline;
-  carousel.querySelector('p').textContent = s.sub;
-  carousel.querySelector('span:last-of-type').textContent = s.badge;
-  carousel.querySelector('h1').classList.remove('hero-anim');
-  void carousel.querySelector('h1').offsetWidth;
-  carousel.querySelector('h1').classList.add('hero-anim');
-  dots.querySelectorAll('button').forEach((d, idx) => {
-    d.className = idx === i ? 'w-8 h-1.5 rounded-full bg-cyan-500 transition' : 'w-8 h-1.5 rounded-full bg-slate-700 transition';
+function selectMCQ(el,idx){
+  if(mcqAnswered)return;mcqAnswered=true;
+  const m=mcqs[mcqIdx];
+  document.querySelectorAll('.mcq-option').forEach((o,i)=>{
+    if(i===m.ans)o.classList.add('correct');
+    else if(i===idx&&idx!==m.ans)o.classList.add('wrong');
   });
+  document.getElementById('mcq-explanation').classList.remove('hidden');
+  document.getElementById('mcq-explain-text').textContent=m.exp;
 }
-dots.addEventListener('click', (e) => { if (e.target.dataset.slide !== undefined) showSlide(+e.target.dataset.slide); });
-setInterval(() => showSlide((currentSlide + 1) % heroSlides.length), 5000);
+function nextMCQ(){mcqIdx=(mcqIdx+1)%mcqs.length;renderMCQ()}
+function prevMCQ(){mcqIdx=(mcqIdx-1+mcqs.length)%mcqs.length;renderMCQ()}
 
-// ========== SCROLL TO TOP ==========
-const scrollBtn = document.getElementById('scrollTop');
-const appEl = document.getElementById('app');
-appEl.addEventListener('scroll', () => {
-  scrollBtn.classList.toggle('visible', appEl.scrollTop > 400);
+// Flashcards
+const flashcards=[
+  {subj:"Anatomy",front:"What nerve passes through the carpal tunnel?",back:"Median Nerve",detail:"Along with 4 FDS tendons, 4 FDP tendons, and FPL tendon"},
+  {subj:"Physiology",front:"What is the normal cardiac output?",back:"5 L/min",detail:"CO = Heart Rate × Stroke Volume (72 × 70ml)"},
+  {subj:"Pharmacology",front:"Mechanism of action of Metformin?",back:"Activates AMP-kinase",detail:"Reduces hepatic glucose production, increases insulin sensitivity"}
+];
+let fcIdx=0;
+function renderFlashcard(){
+  document.getElementById('flashcard-inner').classList.remove('flipped');
+  const f=flashcards[fcIdx];
+  document.getElementById('fc-subject').textContent=f.subj;
+  document.getElementById('fc-front').textContent=f.front;
+  document.getElementById('fc-back').textContent=f.back;
+  document.getElementById('fc-detail').textContent=f.detail;
+  document.getElementById('fc-counter').textContent=`${fcIdx+1} / ${flashcards.length}`;
+}
+function flipCard(){document.getElementById('flashcard-inner').classList.toggle('flipped')}
+function nextCard(){fcIdx=(fcIdx+1)%flashcards.length;renderFlashcard()}
+function prevCard(){fcIdx=(fcIdx-1+flashcards.length)%flashcards.length;renderFlashcard()}
+
+// Pomodoro
+let pomoTime=1500,pomoInterval=null;
+function updatePomoDisplay(){
+  const m=Math.floor(pomoTime/60),s=pomoTime%60;
+  document.getElementById('pomodoro-display').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function startPomodoro(){if(pomoInterval)return;pomoInterval=setInterval(()=>{if(pomoTime>0){pomoTime--;updatePomoDisplay()}else{clearInterval(pomoInterval);pomoInterval=null}},1000)}
+function pausePomodoro(){clearInterval(pomoInterval);pomoInterval=null}
+function resetPomodoro(){pausePomodoro();pomoTime=1500;updatePomoDisplay()}
+
+// Search
+const searchData=["Anatomy","Physiology","Biochemistry","Pharmacology","Pathology","Microbiology","Medicine","Surgery","Pediatrics","OBG","ENT","Ophthalmology","Dermatology","Orthopedics","Forensic Medicine","Community Medicine","NEET PG","USMLE","PLAB","FMGE","Brachial Plexus","Cardiac Cycle","Anti-hypertensives","ECG Interpretation","ABG Analysis","Drug Interactions","BMI Calculator","Dose Calculator"];
+function handleSearch(val){
+  const r=document.getElementById('search-results');
+  if(!val.trim()){r.classList.add('hidden');return}
+  const matches=searchData.filter(s=>s.toLowerCase().includes(val.toLowerCase()));
+  if(matches.length){
+    r.innerHTML=matches.slice(0,6).map(m=>`<div class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm">${m}</div>`).join('');
+    r.classList.remove('hidden');
+  }else r.classList.add('hidden');
+}
+
+
+
+// Scroll to Top
+const mainContent=document.getElementById('main-content');
+mainContent.addEventListener('scroll',()=>{
+  const btn=document.getElementById('scroll-top');
+  if(mainContent.scrollTop>300){btn.style.opacity='1';btn.style.pointerEvents='auto'}
+  else{btn.style.opacity='0';btn.style.pointerEvents='none'}
 });
-scrollBtn.addEventListener('click', () => appEl.scrollTo({ top: 0, behavior: 'smooth' }));
+function scrollToTop(){mainContent.scrollTo({top:0,behavior:'smooth'})}
 
-// ========== INIT ==========
-renderSidebar();
-renderSubjects();
-renderQuickAccess();
-renderMCQs();
-renderFlashcards();
-renderTools();
-renderMedDepts();
-renderGames();
-renderFAQs();
-renderTestimonials();
-renderInsights();
+// Save Note
+function saveNote(){
+  const n=document.getElementById('quick-notes');
+  if(n.value.trim()){n.value='';/* Toast-like feedback */const btn=event.target;btn.textContent='Saved!';setTimeout(()=>btn.textContent='Save Note',1500)}
+}
+
+// Element SDK
+const defaultConfig={
+  brand_name:'DEEPMEDICINE',
+  hero_title:'Master Medicine, One Step at a Time',
+  contact_email:'deepmedicineofficial@gmail.com',
+  background_color:'#f8fafc',
+  surface_color:'#ffffff',
+  text_color:'#1e293b',
+  primary_action_color:'#0d6efd',
+  secondary_action_color:'#10b981',
+  font_family:'DM Sans',
+  font_size:16
+}; 
+// Init
+renderMCQ();
+renderFlashcard();
 lucide.createIcons();
-
-// ========== ELEMENT SDK ==========
-const defaultConfig = {
-  brand_name: 'DEEPMEDICINE',
-  hero_headline: 'Modern Medicine Deep Clinical Learning Platform',
-  hero_subtext: 'Evidence-based clinical education powered by deep learning. Master emergency protocols, ICU management, and critical care with interactive tools.',
-  newsletter_heading: 'Stay Updated',
-  background_color: '#020617',
-  surface_color: '#1e293b',
-  text_color: '#f1f5f9',
-  primary_action: '#06b6d4',
-  secondary_action: '#8b5cf6',
-  font_family: 'Plus Jakarta Sans',
-  font_size: 16
-};
-
-async function onConfigChange(config) {
-  const c = { ...defaultConfig, ...config };
-  document.getElementById('navBrand').textContent = c.brand_name;
-  document.getElementById('heroHeadline').innerHTML = c.hero_headline.replace(/\n/g, '<br>');
-  document.getElementById('heroSubtext').textContent = c.hero_subtext;
-  document.getElementById('newsletterHeading').textContent = c.newsletter_heading;
-
-  const ff = c.font_family + ', Plus Jakarta Sans, sans-serif';
-  document.getElementById('app').style.fontFamily = ff;
-  const bs = c.font_size || 16;
-  document.querySelectorAll('h1').forEach(el => el.style.fontSize = (bs * 2.5) + 'px');
-  document.querySelectorAll('h2').forEach(el => el.style.fontSize = (bs * 1.5) + 'px');
-
-  document.body.style.backgroundColor = c.background_color;
-  document.body.style.color = c.text_color;
-}
-
-window.elementSdk.init({
-  defaultConfig,
-  onConfigChange,
-  mapToCapabilities: (config) => ({
-    recolorables: [
-      { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
-      { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
-      { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
-      { get: () => config.primary_action || defaultConfig.primary_action, set: (v) => { config.primary_action = v; window.elementSdk.setConfig({ primary_action: v }); } },
-      { get: () => config.secondary_action || defaultConfig.secondary_action, set: (v) => { config.secondary_action = v; window.elementSdk.setConfig({ secondary_action: v }); } },
-    ],
-    borderables: [],
-    fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
-    fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } },
-  }),
-  mapToEditPanelValues: (config) => new Map([
-    ['brand_name', config.brand_name || defaultConfig.brand_name],
-    ['hero_headline', config.hero_headline || defaultConfig.hero_headline],
-    ['hero_subtext', config.hero_subtext || defaultConfig.hero_subtext],
-    ['newsletter_heading', config.newsletter_heading || defaultConfig.newsletter_heading],
-  ])
-});
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f19ebc946b806b0',t:'MTc3NzA4NDE3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
