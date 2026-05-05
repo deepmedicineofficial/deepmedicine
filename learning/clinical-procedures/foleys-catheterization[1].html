@@ -1,0 +1,663 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Foley’s Catheterization | Urinary Catheter Insertion | Deep Medicine</title> <meta name="description" content="Step-by-step Foley’s catheterization including indications, sterile technique, insertion procedure, complications, and catheter care."> <link rel="canonical" href="https://deepmedicine.in/learning/procedures/foleys-catheterization"> <!-- Open Graph --> <meta property="og:title" content="Foley’s Catheterization | Deep Medicine"> <meta property="og:description" content="Urinary catheter insertion with sterile technique, indications, and complications."> <meta property="og:image" content="https://deepmedicine.in/images/foley-catheter.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; }
+  .font-heading { font-family: 'Playfair Display', Georgia, serif; }
+
+  .tab-active { border-bottom: 3px solid var(--primary-action); color: var(--primary-action); font-weight: 600; }
+  .tab-inactive { border-bottom: 3px solid transparent; opacity: 0.6; }
+  .tab-inactive:hover { opacity: 0.85; }
+
+  .step-card { transition: all 0.3s ease; }
+  .step-card:hover { transform: translateY(-2px); }
+
+  .fade-in { animation: fadeIn 0.4s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .pill { display: inline-block; padding: 3px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em; }
+
+  :root {
+    --bg-color: #0f1729;
+    --surface-color: #1a2540;
+    --text-color: #e2e8f0;
+    --primary-action: #38bdf8;
+    --secondary-action: #64748b;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--secondary-action); border-radius: 3px; }
+
+  .catheter-svg { filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.3)); }
+
+  .quiz-option { transition: all 0.2s; cursor: pointer; }
+  .quiz-option:hover { transform: scale(1.01); }
+  .quiz-correct { border-color: #22c55e !important; background: rgba(34, 197, 94, 0.1) !important; }
+  .quiz-wrong { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.1) !important; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full" style="background: var(--bg-color); color: var(--text-color);">
+  <div id="app" class="h-full w-full overflow-auto scrollbar-thin"><!-- Header -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, var(--bg-color) 0%, var(--surface-color) 50%, var(--bg-color) 100%);">
+    <div class="absolute inset-0 opacity-10">
+     <svg width="100%" height="100%">
+      <defs>
+       <pattern id="grid" width="40" height="40" patternunits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" style="color: var(--primary-action)" />
+       </pattern>
+      </defs><rect width="100%" height="100%" fill="url(#grid)" />
+     </svg>
+    </div>
+    <div class="max-w-5xl mx-auto px-6 py-10 relative z-10">
+     <div class="flex items-center gap-3 mb-3"><span class="pill" style="background: var(--primary-action); color: var(--bg-color);">CLINICAL PROCEDURE</span> <span class="pill" style="border: 1px solid var(--secondary-action); color: var(--secondary-action);">UROLOGY</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-4xl md:text-5xl font-bold mb-2" style="color: var(--text-color);"></h1>
+     <p id="subtitle" class="text-lg opacity-70" style="color: var(--text-color);"></p><!-- Catheter Illustration -->
+     <div class="mt-6 flex justify-center">
+      <svg class="catheter-svg" width="320" height="60" viewbox="0 0 320 60"><defs>
+        <lineargradient id="cathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+         <stop offset="0%" style="stop-color: var(--primary-action); stop-opacity:0.8" />
+         <stop offset="100%" style="stop-color: var(--primary-action); stop-opacity:0.3" />
+        </lineargradient>
+       </defs> <!-- Catheter body --> <rect x="10" y="24" width="260" height="12" rx="6" fill="url(#cathGrad)" /> <!-- Balloon tip --> <ellipse cx="285" cy="30" rx="18" ry="16" fill="none" stroke="var(--primary-action)" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7" /> <ellipse cx="285" cy="30" rx="12" ry="10" fill="var(--primary-action)" opacity="0.2" /> <!-- Drainage eye --> <circle cx="295" cy="30" r="2" fill="var(--bg-color)" /> <!-- Bifurcation --> <path d="M10 28 Q0 28 0 20 L0 8" fill="none" stroke="var(--primary-action)" stroke-width="4" stroke-linecap="round" opacity="0.6" /> <path d="M10 32 Q0 32 0 44 L0 54" fill="none" stroke="var(--primary-action)" stroke-width="4" stroke-linecap="round" opacity="0.4" /> <!-- Labels --> <text x="0" y="6" fill="var(--text-color)" font-size="8" opacity="0.6">
+        Inflation port
+       </text> <text x="0" y="60" fill="var(--text-color)" font-size="8" opacity="0.6">
+        Drainage
+       </text> <text x="265" y="56" fill="var(--text-color)" font-size="8" opacity="0.6">
+        Balloon
+       </text> <text x="120" y="18" fill="var(--text-color)" font-size="8" opacity="0.6">
+        Catheter shaft
+       </text>
+      </svg>
+     </div>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="sticky top-0 z-20 border-b" style="background: var(--bg-color); border-color: rgba(255,255,255,0.1);">
+    <div class="max-w-5xl mx-auto px-6 flex gap-1 overflow-x-auto scrollbar-thin" id="tabBar"><button onclick="switchTab('overview')" data-tab="overview" class="tab-active px-4 py-3 text-sm whitespace-nowrap transition-all" style="color: var(--text-color);">Overview</button> <button onclick="switchTab('indications')" data-tab="indications" class="tab-inactive px-4 py-3 text-sm whitespace-nowrap transition-all" style="color: var(--text-color);">Indications</button> <button onclick="switchTab('equipment')" data-tab="equipment" class="tab-inactive px-4 py-3 text-sm whitespace-nowrap transition-all" style="color: var(--text-color);">Equipment</button> <button onclick="switchTab('procedure')" data-tab="procedure" class="tab-inactive px-4 py-3 text-sm whitespace-nowrap transition-all" style="color: var(--text-color);">Procedure</button> <button onclick="switchTab('complications')" data-tab="complications" class="tab-inactive px-4 py-3 text-sm whitespace-nowrap transition-all" style="color: var(--text-color);">Complications</button> <button onclick="switchTab('sizes')" data-tab="sizes" class="tab-inactive px-4 py-3 text-sm whitespace-nowrap transition-all" style="color: var(--text-color);">Sizes &amp; Types</button> <button onclick="switchTab('quiz')" data-tab="quiz" class="tab-inactive px-4 py-3 text-sm whitespace-nowrap transition-all" style="color: var(--text-color);">Quiz</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-5xl mx-auto px-6 py-8" id="content"></main>
+   <footer class="text-center py-6 opacity-40 text-xs" style="color: var(--text-color);">
+    For educational purposes only. Always follow institutional protocols.
+   </footer>
+  </div>
+  <script>
+// ── DATA ──
+const TABS = {
+  overview: {
+    title: "What is Foley's Catheterization?",
+    render: () => `
+      <div class="fade-in space-y-6">
+        <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+          <h2 class="font-heading text-2xl mb-4" style="color: var(--primary-action);">Definition</h2>
+          <p class="leading-relaxed opacity-90">A <strong>Foley catheter</strong> (indwelling urinary catheter) is a flexible tube passed through the urethra into the bladder to drain urine. It is retained in situ by an inflatable balloon at its tip. Named after <em>Dr. Frederic Foley</em> (1891–1966), a surgeon at Ancker Hospital, St. Paul, Minnesota, who designed the original balloon catheter in 1929.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          ${[
+            { icon: 'target', label: 'Primary Purpose', desc: 'Continuous bladder drainage in patients who cannot void voluntarily' },
+            { icon: 'clock', label: 'Duration', desc: 'Short-term (< 30 days) or long-term (> 30 days) depending on indication' },
+            { icon: 'shield', label: 'Key Principle', desc: 'Strict aseptic technique is mandatory to reduce CAUTI risk' }
+          ].map(c => `
+            <div class="rounded-xl p-5 border step-card" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+              <i data-lucide="${c.icon}" style="color: var(--primary-action); width:28px; height:28px;" class="mb-3"></i>
+              <h3 class="font-semibold mb-1">${c.label}</h3>
+              <p class="text-sm opacity-70">${c.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+          <h2 class="font-heading text-2xl mb-4" style="color: var(--primary-action);">Anatomy Refresher</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-semibold mb-2" style="color: var(--primary-action);">♂ Male Urethra (~18–22 cm)</h3>
+              <ul class="space-y-1 text-sm opacity-80">
+                <li>• <strong>Prostatic</strong> (3–4 cm) — through prostate</li>
+                <li>• <strong>Membranous</strong> (1–2 cm) — through urogenital diaphragm (narrowest & least distensible)</li>
+                <li>• <strong>Bulbar/Spongy</strong> (15 cm) — through corpus spongiosum</li>
+                <li>• <strong>Navicular fossa</strong> — within glans penis</li>
+                <li>⚠️ Two curvatures: pre-prostatic & infra-pubic — penis must be held at 60–90° then lowered</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-2" style="color: var(--primary-action);">♀ Female Urethra (~3–5 cm)</h3>
+              <ul class="space-y-1 text-sm opacity-80">
+                <li>• Straight course, shorter length</li>
+                <li>• Urethral meatus anterior to vaginal introitus</li>
+                <li>• Higher CAUTI risk due to proximity to perineum</li>
+                <li>• Landmark: meatus lies between clitoris (above) and vaginal opening (below)</li>
+                <li>💡 If catheter enters vagina by mistake — leave it as a landmark, use a new catheter</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl p-5 border" style="background: rgba(56,189,248,0.05); border-color: var(--primary-action); border-width:1px;">
+          <div class="flex gap-3 items-start">
+            <i data-lucide="info" style="color: var(--primary-action); width:20px; height:20px; flex-shrink:0; margin-top:2px;"></i>
+            <div class="text-sm opacity-90">
+              <strong>Clinical Pearl:</strong> CAUTI (Catheter-Associated Urinary Tract Infection) accounts for ~40% of all hospital-acquired infections. The single most effective prevention strategy is <strong>avoiding unnecessary catheterization</strong> and early removal.
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  indications: {
+    title: "Indications & Contraindications",
+    render: () => `
+      <div class="fade-in space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+            <h2 class="font-heading text-xl mb-4 flex items-center gap-2"><i data-lucide="check-circle" style="color:#22c55e; width:22px; height:22px;"></i> Indications</h2>
+            <div class="space-y-4">
+              ${[
+                { cat: 'Acute Urinary Retention', items: ['BPH (most common in males)', 'Post-operative retention', 'Neurogenic bladder', 'Clot retention (use 3-way catheter)'] },
+                { cat: 'Perioperative', items: ['Prolonged surgeries (> 3 hrs)', 'Pelvic / urological procedures', 'Epidural / spinal anesthesia', 'Need for I/O monitoring'] },
+                { cat: 'Critical Care', items: ['Hemodynamic instability — strict I/O', 'Acute kidney injury monitoring', 'Stage III–IV pressure ulcers on sacrum/perineum', 'Patient on continuous bladder irrigation'] },
+                { cat: 'Other', items: ['Chronic obstruction not amenable to surgery', 'Comfort care in terminal illness (patient preference)', 'Instillation of intravesical medications', 'Urodynamic studies (specialized catheters)'] }
+              ].map(g => `
+                <div>
+                  <h3 class="text-sm font-semibold mb-1" style="color: var(--primary-action);">${g.cat}</h3>
+                  <ul class="text-sm opacity-80 space-y-0.5">${g.items.map(i => `<li class="pl-3">• ${i}</li>`).join('')}</ul>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div>
+            <div class="rounded-xl p-6 border mb-4" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+              <h2 class="font-heading text-xl mb-4 flex items-center gap-2"><i data-lucide="x-circle" style="color:#ef4444; width:22px; height:22px;"></i> Contraindications</h2>
+              <div class="space-y-3">
+                ${[
+                  { type: 'ABSOLUTE', color: '#ef4444', items: ['Known urethral injury / disruption', 'Blood at meatus (suspect urethral trauma)', 'High-riding / non-palpable prostate on DRE', 'Perineal hematoma / butterfly sign', 'Pelvic fracture with suspected urethral injury'] },
+                  { type: 'RELATIVE', color: '#f59e0b', items: ['Recent urethral or bladder surgery', 'Known urethral stricture (use smaller catheter or consult urology)', 'Severe phimosis (may need dorsal slit first)', 'Active urethral infection / periurethral abscess', 'Allergy to latex (use silicone catheter)'] }
+                ].map(g => `
+                  <div>
+                    <span class="pill mb-2" style="background: ${g.color}20; color: ${g.color}; border: 1px solid ${g.color};">${g.type}</span>
+                    <ul class="text-sm opacity-80 space-y-0.5 mt-1">${g.items.map(i => `<li class="pl-3">• ${i}</li>`).join('')}</ul>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="rounded-xl p-5 border" style="background: rgba(239,68,68,0.05); border-color: #ef4444;">
+              <div class="flex gap-3 items-start">
+                <i data-lucide="alert-triangle" style="color:#ef4444; width:20px; height:20px; flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm opacity-90">
+                  <strong>⚠️ Golden Rule:</strong> In trauma — if there is <strong>blood at the meatus, perineal hematoma, or high-riding prostate</strong>, do NOT attempt urethral catheterization. Perform a <strong>retrograde urethrogram (RUG)</strong> first. If urethral injury is confirmed → <strong>suprapubic catheterization</strong>.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+          <h2 class="font-heading text-xl mb-3" style="color: var(--primary-action);">❌ NOT Valid Indications (Common Errors)</h2>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            ${['Nursing convenience / staff request', 'Incontinence management alone (use alternatives)', 'Obtaining urine culture (use in-out if needed)', 'Immobility alone without other criteria', 'Patient request without medical justification', 'Chronic Foley without periodic reassessment'].map(i => `
+              <div class="rounded-lg p-3 border flex items-start gap-2" style="border-color: rgba(255,255,255,0.06); background: rgba(255,255,255,0.02);">
+                <i data-lucide="x" style="color:#ef4444; width:16px; height:16px; flex-shrink:0; margin-top:1px;"></i>
+                <span class="opacity-80">${i}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  equipment: {
+    title: "Equipment & Preparation",
+    render: () => `
+      <div class="fade-in space-y-6">
+        <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+          <h2 class="font-heading text-2xl mb-4" style="color: var(--primary-action);">Catheterization Trolley — Sterile Setup</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-semibold text-sm mb-2 uppercase tracking-wide opacity-60">Essential Equipment</h3>
+              <div class="space-y-2">
+                ${[
+                  { item: 'Foley catheter (appropriate size)', note: 'Check expiry & balloon integrity' },
+                  { item: 'Sterile catheterization pack', note: 'Drapes, gauze, kidney tray, forceps' },
+                  { item: 'Sterile gloves (2 pairs)', note: 'One for cleaning, one for insertion' },
+                  { item: 'Antiseptic solution', note: 'Povidone-iodine 10% or chlorhexidine 0.05%' },
+                  { item: 'Sterile lubricant / Lignocaine 2% gel', note: '10–15 mL for males, 5 mL for females' },
+                  { item: 'Sterile water for injection 10 mL', note: 'For balloon inflation (NOT saline — crystallizes)' },
+                  { item: '10 mL syringe', note: 'Pre-filled with sterile water' },
+                  { item: 'Urine collection bag', note: 'Closed drainage system' },
+                  { item: 'Adhesive tape / catheter strap', note: 'For securing catheter' },
+                ].map(e => `
+                  <div class="flex gap-3 text-sm">
+                    <i data-lucide="check" style="color: var(--primary-action); width:16px; height:16px; flex-shrink:0; margin-top:2px;"></i>
+                    <div><strong>${e.item}</strong><br><span class="opacity-60">${e.note}</span></div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm mb-2 uppercase tracking-wide opacity-60">Pre-Procedure Checklist</h3>
+              <div id="checklist" class="space-y-2">
+                ${[
+                  'Verify indication & physician order',
+                  'Check for contraindications (blood at meatus?)',
+                  'Review allergies (latex, lidocaine, iodine)',
+                  'Explain procedure, obtain verbal consent',
+                  'Ensure adequate lighting & privacy',
+                  'Position patient (supine, frog-leg for female)',
+                  'Perform hand hygiene (WHO 5 moments)',
+                  'Open sterile pack using aseptic technique',
+                  'Test balloon integrity with 10 mL sterile water',
+                  'Arrange equipment on sterile field'
+                ].map((item, i) => `
+                  <label class="flex gap-3 text-sm cursor-pointer items-start group" onclick="toggleCheck(this)">
+                    <span class="w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors" style="border-color: var(--secondary-action);" data-check="false">
+                    </span>
+                    <span class="group-hover:opacity-100 opacity-80 transition-opacity">${item}</span>
+                  </label>
+                `).join('')}
+              </div>
+              <button onclick="resetChecklist()" class="mt-4 text-xs px-3 py-1.5 rounded-lg transition-colors" style="background: var(--secondary-action); color: var(--text-color); opacity:0.7;">Reset Checklist</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl p-5 border" style="background: rgba(56,189,248,0.05); border-color: var(--primary-action);">
+          <div class="flex gap-3 items-start">
+            <i data-lucide="lightbulb" style="color: var(--primary-action); width:20px; height:20px; flex-shrink:0; margin-top:2px;"></i>
+            <div class="text-sm opacity-90">
+              <strong>Why sterile water, not normal saline?</strong> Normal saline can cause salt crystal deposition within the balloon channel over time, making deflation difficult or impossible. Always use <strong>sterile water for injection</strong> for balloon inflation.
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  procedure: {
+    title: "Step-by-Step Procedure",
+    render: () => {
+      const maleSteps = [
+        { step: 1, title: 'Position & Prepare', detail: 'Patient supine. Perform hand hygiene. Open sterile pack. Don sterile gloves. Drape the patient with fenestrated sterile drape exposing penis only.' },
+        { step: 2, title: 'Clean the Meatus', detail: 'With non-dominant hand, retract foreskin (if uncircumcised) and hold penis at 90° to abdomen. Using dominant hand with forceps, clean glans with antiseptic — meatus outward in circular motions. Repeat ×3 with fresh swabs.' },
+        { step: 3, title: 'Instill Anaesthetic Gel', detail: 'Instill 10–15 mL of 2% lignocaine gel into urethra using a pre-filled syringe or gel tube. Gently compress meatus for 3–5 minutes to allow anaesthesia to take effect. This step is ESSENTIAL in males.' },
+        { step: 4, title: 'Insert the Catheter', detail: 'Hold penis at 60–90° (straightens prostatic urethra). With dominant sterile hand, advance catheter gently and steadily. At ~15–17 cm, lower penis to ~45° to negotiate the bulbo-membranous junction. Continue advancing until urine flows + an additional 5 cm (ensures balloon is fully in bladder).' },
+        { step: 5, title: 'Inflate Balloon', detail: 'Inject 10 mL sterile water into the balloon port. If patient reports pain → STOP → deflate → advance further → retry. Never inflate against resistance. Gently retract catheter until resistance is felt (balloon at bladder neck).' },
+        { step: 6, title: 'Secure & Connect', detail: 'Connect catheter to closed drainage bag. Secure catheter to anterior thigh (♂) with tape or strap, allowing slack to prevent traction. Replace foreskin (if retracted) to prevent paraphimosis. Hang bag below bladder level. Document: catheter size, balloon volume, residual urine volume, patient tolerance.' }
+      ];
+      const femaleSteps = [
+        { step: 1, title: 'Position & Prepare', detail: 'Patient supine with knees flexed and abducted (frog-leg position). Ensure good lighting. Perform hand hygiene, open pack, don sterile gloves. Apply sterile drapes.' },
+        { step: 2, title: 'Identify & Clean', detail: 'With non-dominant hand, separate labia minora to expose urethral meatus (between clitoris above and vaginal introitus below). Clean with antiseptic — one downward stroke per swab, anterior to posterior. Use fresh swab each stroke. Repeat ×3. Keep non-dominant hand in place throughout.' },
+        { step: 3, title: 'Lubricate & Insert', detail: 'Apply sterile lubricant (5 mL lignocaine gel optional but recommended) to catheter tip. Insert catheter into urethral meatus 5–7 cm until urine flows, then advance 2–3 cm more. If catheter enters vagina: leave it in place as landmark, use new catheter in the orifice above it.' },
+        { step: 4, title: 'Inflate & Secure', detail: 'Inflate balloon with 10 mL sterile water. Gently retract until resistance felt. Connect to closed drainage. Secure to medial thigh. Document procedure as per male steps.' }
+      ];
+
+      return `
+        <div class="fade-in space-y-6">
+          <div class="flex gap-2 mb-2">
+            <button id="btnMale" onclick="showGender('male')" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all" style="background: var(--primary-action); color: var(--bg-color);">♂ Male Technique</button>
+            <button id="btnFemale" onclick="showGender('female')" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all" style="background: var(--surface-color); color: var(--text-color); border: 1px solid rgba(255,255,255,0.1);">♀ Female Technique</button>
+          </div>
+
+          <div id="maleSteps" class="space-y-4">
+            ${maleSteps.map(s => `
+              <div class="step-card rounded-xl p-5 border flex gap-4" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0" style="background: var(--primary-action); color: var(--bg-color);">${s.step}</div>
+                <div>
+                  <h3 class="font-semibold text-lg mb-1">${s.title}</h3>
+                  <p class="text-sm opacity-80 leading-relaxed">${s.detail}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div id="femaleSteps" class="space-y-4 hidden">
+            ${femaleSteps.map(s => `
+              <div class="step-card rounded-xl p-5 border flex gap-4" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0" style="background: var(--primary-action); color: var(--bg-color);">${s.step}</div>
+                <div>
+                  <h3 class="font-semibold text-lg mb-1">${s.title}</h3>
+                  <p class="text-sm opacity-80 leading-relaxed">${s.detail}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="rounded-xl p-5 border" style="background: rgba(239,68,68,0.05); border-color: #ef4444;">
+            <h3 class="font-semibold mb-2 flex items-center gap-2"><i data-lucide="alert-triangle" style="color:#ef4444; width:18px; height:18px;"></i> Troubleshooting — Cannot Advance</h3>
+            <ol class="text-sm opacity-80 space-y-1 list-decimal pl-5">
+              <li>Never use force — risk of creating a false passage</li>
+              <li>Ensure adequate lubrication / anaesthetic gel</li>
+              <li>Try a smaller catheter size (e.g., 12 Fr)</li>
+              <li>In males: ask patient to cough or take deep breaths (relaxes external sphincter)</li>
+              <li>Try a Coudé tip catheter (curved tip for prostatic obstruction)</li>
+              <li>If still unsuccessful → STOP → call Urology for cystoscopy-guided or suprapubic catheterization</li>
+            </ol>
+          </div>
+
+          <div class="rounded-xl p-5 border" style="background: rgba(56,189,248,0.05); border-color: var(--primary-action);">
+            <h3 class="font-semibold mb-2" style="color: var(--primary-action);">Post-Procedure Care</h3>
+            <ul class="text-sm opacity-80 space-y-1">
+              <li>• Maintain closed drainage system — never disconnect</li>
+              <li>• Keep bag below bladder level at all times</li>
+              <li>• Daily meatal care with soap and water</li>
+              <li>• Assess need for catheter daily — remove ASAP</li>
+              <li>• Monitor for signs of CAUTI: fever, suprapubic tenderness, cloudy/foul urine</li>
+              <li>• If clot retention suspected: switch to 3-way catheter for CBI</li>
+              <li>• <strong>Clamp before removal?</strong> No evidence supports "bladder training" by clamping — remove directly</li>
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+  },
+
+  complications: {
+    title: "Complications",
+    render: () => `
+      <div class="fade-in space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+            <h2 class="font-heading text-xl mb-4 flex items-center gap-2">
+              <span class="pill" style="background: #f59e0b20; color: #f59e0b; border:1px solid #f59e0b;">EARLY</span>
+            </h2>
+            <div class="space-y-3 text-sm">
+              ${[
+                { name: 'Urethral trauma / false passage', mgmt: 'Stop immediately. Do not force. Urology consult.' },
+                { name: 'Haematuria (traumatic)', mgmt: 'Usually self-limiting. Monitor. CBI if significant.' },
+                { name: 'Balloon inflation in urethra', mgmt: 'Severe pain on inflation → deflate → advance → retry.' },
+                { name: 'Paraphimosis', mgmt: 'Foreskin not replaced after insertion. Manual reduction or dorsal slit.' },
+                { name: 'Vaginal insertion (females)', mgmt: 'Leave in place as landmark. Insert new catheter in correct orifice.' },
+                { name: 'Vasovagal response', mgmt: 'Bradycardia, hypotension. Trendelenburg, IV fluids, atropine if needed.' },
+              ].map(c => `
+                <div class="p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <strong style="color: #f59e0b;">${c.name}</strong>
+                  <p class="opacity-70 mt-1">Mx: ${c.mgmt}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+            <h2 class="font-heading text-xl mb-4 flex items-center gap-2">
+              <span class="pill" style="background: #ef444420; color: #ef4444; border:1px solid #ef4444;">LATE</span>
+            </h2>
+            <div class="space-y-3 text-sm">
+              ${[
+                { name: 'CAUTI (most common)', mgmt: 'Remove/replace catheter. Obtain culture from NEW catheter. Treat per sensitivities.' },
+                { name: 'Catheter encrustation / blockage', mgmt: 'Irrigate or replace. Consider acidic bladder washout.' },
+                { name: 'Urethral stricture', mgmt: 'Long-term sequela of repeated catheterization. May need dilatation or urethroplasty.' },
+                { name: 'Bladder spasm', mgmt: 'Anticholinergics (oxybutynin). Check for blockage or over-inflation.' },
+                { name: 'Balloon non-deflation', mgmt: 'Cut the valve. If still stuck: suprapubic needle aspiration or guidewire down inflation channel.' },
+                { name: 'Urethral erosion / necrosis', mgmt: 'Due to traction or oversized catheter. Secure properly. Use smallest effective size.' },
+              ].map(c => `
+                <div class="p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <strong style="color: #ef4444;">${c.name}</strong>
+                  <p class="opacity-70 mt-1">Mx: ${c.mgmt}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+          <h2 class="font-heading text-xl mb-4" style="color: var(--primary-action);">CAUTI Prevention Bundle (CDC / HICPAC)</h2>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            ${[
+              'Insert only when indicated (see Indications tab)',
+              'Use aseptic technique for insertion',
+              'Maintain closed sterile drainage system',
+              'Keep drainage bag below bladder',
+              'Daily assessment: "Does this patient still need the catheter?"',
+              'Remove catheter as soon as possible',
+              'Avoid routine catheter changes (change only when clinically indicated)',
+              'Do NOT use systemic antimicrobial prophylaxis'
+            ].map(i => `
+              <div class="flex gap-2 items-start p-2 rounded" style="background: rgba(255,255,255,0.02);">
+                <i data-lucide="shield-check" style="color:#22c55e; width:16px; height:16px; flex-shrink:0; margin-top:1px;"></i>
+                <span class="opacity-80">${i}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  sizes: {
+    title: "Catheter Sizes & Types",
+    render: () => `
+      <div class="fade-in space-y-6">
+        <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+          <h2 class="font-heading text-2xl mb-2" style="color: var(--primary-action);">French Gauge (Fr / Ch) System</h2>
+          <p class="text-sm opacity-70 mb-4">1 French = ⅓ mm diameter. So a 16 Fr catheter = 5.3 mm external diameter.</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--primary-action);">
+                  <th class="text-left py-2 px-3">Size (Fr)</th>
+                  <th class="text-left py-2 px-3">Diameter</th>
+                  <th class="text-left py-2 px-3">Color Code</th>
+                  <th class="text-left py-2 px-3">Typical Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${[
+                  { size: '8–10', dia: '2.7–3.3 mm', color: '⚫ Black / ⬜ White', use: 'Paediatric' },
+                  { size: '12', dia: '4 mm', color: '⬜ White', use: 'Female with stricture / small urethra' },
+                  { size: '14', dia: '4.7 mm', color: '🟢 Green', use: 'Standard female / small male' },
+                  { size: '16', dia: '5.3 mm', color: '🟠 Orange', use: 'Standard male / female (most common)' },
+                  { size: '18', dia: '6 mm', color: '🔴 Red', use: 'Male with mild prostatic enlargement' },
+                  { size: '20', dia: '6.7 mm', color: '🟡 Yellow', use: 'Haematuria with small clots' },
+                  { size: '22–24', dia: '7.3–8 mm', color: '🔵 Blue / 🟣 Purple', use: '3-way catheter for CBI / significant clot retention' },
+                ].map(r => `
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                    <td class="py-2 px-3 font-semibold">${r.size}</td>
+                    <td class="py-2 px-3 opacity-80">${r.dia}</td>
+                    <td class="py-2 px-3">${r.color}</td>
+                    <td class="py-2 px-3 opacity-80">${r.use}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs opacity-50 mt-3">* Color codes may vary by manufacturer. Always verify size printed on catheter.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+            <h2 class="font-heading text-xl mb-4" style="color: var(--primary-action);">Catheter Types</h2>
+            <div class="space-y-3 text-sm">
+              ${[
+                { name: '2-Way Foley', desc: 'Standard. One lumen for drainage, one for balloon. Most common.' },
+                { name: '3-Way Foley', desc: 'Additional lumen for irrigation. Used for CBI in clot retention / post-TURP.' },
+                { name: 'Coudé Tip', desc: 'Curved tip (15–30°). Navigates enlarged prostate. Mark on tip indicates direction of curve.' },
+                { name: 'Silicone', desc: 'For long-term use (> 30 days) or latex allergy. Less encrustation.' },
+                { name: 'Silver-Coated / Nitrofurazone', desc: 'Antimicrobial. May reduce CAUTI in short-term use (evidence limited).' },
+                { name: 'Nelaton (straight tip)', desc: 'No balloon. For intermittent / in-out catheterization only.' },
+              ].map(t => `
+                <div class="p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <strong style="color: var(--primary-action);">${t.name}</strong>
+                  <p class="opacity-70 mt-1">${t.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="rounded-xl p-6 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+            <h2 class="font-heading text-xl mb-4" style="color: var(--primary-action);">Catheter Material</h2>
+            <div class="space-y-3 text-sm">
+              ${[
+                { mat: 'Latex', dur: 'Short-term (< 14 days)', pros: 'Flexible, inexpensive', cons: 'Allergy risk, encrustation' },
+                { mat: 'Silicone', dur: 'Long-term (up to 12 weeks)', pros: 'Biocompatible, wider lumen', cons: 'Less flexible, higher cost' },
+                { mat: 'PTFE-Coated Latex', dur: 'Medium-term (up to 28 days)', pros: 'Reduced friction & encrustation', cons: 'Still latex core (allergy caution)' },
+                { mat: 'Hydrogel-Coated', dur: 'Medium to long-term', pros: 'Absorbs water, smooth surface, reduced CAUTI', cons: 'More expensive' },
+              ].map(m => `
+                <div class="p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <strong>${m.mat}</strong> <span class="opacity-50">— ${m.dur}</span>
+                  <div class="mt-1 opacity-70">✓ ${m.pros} &nbsp;|&nbsp; ✗ ${m.cons}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  quiz: {
+    title: "Self-Assessment Quiz",
+    render: () => {
+      const questions = [
+        { q: 'What is the MOST COMMON indication for Foley catheterization in males?', opts: ['Chronic kidney disease', 'Acute urinary retention due to BPH', 'Urinary incontinence', 'Routine post-operative monitoring'], ans: 1 },
+        { q: 'You are about to catheterize a trauma patient and notice blood at the urethral meatus. What should you do?', opts: ['Proceed with extra lubrication', 'Use a smaller catheter', 'STOP — obtain retrograde urethrogram first', 'Insert suprapubic catheter immediately'], ans: 2 },
+        { q: 'Why should you use sterile WATER (not normal saline) for balloon inflation?', opts: ['Saline is too expensive', 'Saline crystals can block the inflation channel', 'Saline causes allergic reactions', 'Saline increases infection risk'], ans: 1 },
+        { q: 'In a male patient, at approximately what depth of insertion should you expect to encounter the bulbo-membranous junction?', opts: ['5 cm', '10 cm', '15–17 cm', '25 cm'], ans: 2 },
+        { q: 'Which catheter tip is BEST for a patient with known prostatic enlargement causing difficulty in passing a standard catheter?', opts: ['Nelaton (straight)', 'Coudé (curved tip)', 'Whistle tip', 'Council tip'], ans: 1 },
+        { q: 'What is the single MOST effective strategy to prevent CAUTI?', opts: ['Silver-coated catheters', 'Prophylactic antibiotics', 'Avoiding unnecessary catheterization & early removal', 'Daily bladder irrigation'], ans: 2 },
+        { q: 'After catheterizing a female patient and seeing urine flow, how much further should you advance before inflating the balloon?', opts: ['0 cm — inflate immediately', '2–3 cm further', '10 cm further', '15 cm further'], ans: 1 },
+        { q: 'The catheter accidentally enters the vagina during female catheterization. The correct next step is:', opts: ['Remove it and reinsert in the correct orifice', 'Leave it in as a landmark, use a new sterile catheter', 'Abandon the procedure', 'Force the catheter superiorly'], ans: 1 },
+      ];
+
+      return `
+        <div class="fade-in space-y-4" id="quizContainer">
+          <p class="text-sm opacity-60 mb-2">Test your knowledge — click an answer to check. Score shown at the bottom.</p>
+          ${questions.map((q, qi) => `
+            <div class="rounded-xl p-5 border" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);" id="q${qi}">
+              <p class="font-semibold mb-3"><span style="color: var(--primary-action);">Q${qi+1}.</span> ${q.q}</p>
+              <div class="space-y-2">
+                ${q.opts.map((o, oi) => `
+                  <div class="quiz-option rounded-lg p-3 border text-sm" style="border-color: rgba(255,255,255,0.1);" onclick="checkAnswer(${qi}, ${oi}, ${q.ans})">
+                    <span class="opacity-60 mr-2">${String.fromCharCode(65+oi)}.</span> ${o}
+                  </div>
+                `).join('')}
+              </div>
+              <p class="text-xs mt-2 hidden" id="fb${qi}"></p>
+            </div>
+          `).join('')}
+          <div class="rounded-xl p-5 border text-center" style="background: var(--surface-color); border-color: rgba(255,255,255,0.06);">
+            <p class="text-lg font-semibold">Score: <span id="score">0</span> / ${questions.length}</p>
+            <button onclick="resetQuiz()" class="mt-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors" style="background: var(--primary-action); color: var(--bg-color);">Reset Quiz</button>
+          </div>
+        </div>
+      `;
+    }
+  }
+};
+
+// ── STATE ──
+let currentTab = 'overview';
+let quizScore = 0;
+let answeredQs = new Set();
+
+// ── TAB SWITCHING ──
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('#tabBar button').forEach(b => {
+    b.className = b.dataset.tab === tab
+      ? 'tab-active px-4 py-3 text-sm whitespace-nowrap transition-all'
+      : 'tab-inactive px-4 py-3 text-sm whitespace-nowrap transition-all';
+  });
+  document.getElementById('content').innerHTML = TABS[tab].render();
+  quizScore = 0; answeredQs = new Set();
+  lucide.createIcons();
+}
+
+// ── PROCEDURE GENDER TOGGLE ──
+function showGender(g) {
+  document.getElementById('maleSteps').classList.toggle('hidden', g !== 'male');
+  document.getElementById('femaleSteps').classList.toggle('hidden', g !== 'female');
+  const m = document.getElementById('btnMale');
+  const f = document.getElementById('btnFemale');
+  if (g === 'male') {
+    m.style.background = 'var(--primary-action)'; m.style.color = 'var(--bg-color)'; m.style.border = 'none';
+    f.style.background = 'var(--surface-color)'; f.style.color = 'var(--text-color)'; f.style.border = '1px solid rgba(255,255,255,0.1)';
+  } else {
+    f.style.background = 'var(--primary-action)'; f.style.color = 'var(--bg-color)'; f.style.border = 'none';
+    m.style.background = 'var(--surface-color)'; m.style.color = 'var(--text-color)'; m.style.border = '1px solid rgba(255,255,255,0.1)';
+  }
+}
+
+// ── CHECKLIST ──
+function toggleCheck(label) {
+  const box = label.querySelector('[data-check]');
+  const checked = box.dataset.check === 'true';
+  box.dataset.check = checked ? 'false' : 'true';
+  box.style.background = checked ? 'transparent' : 'var(--primary-action)';
+  box.style.borderColor = checked ? 'var(--secondary-action)' : 'var(--primary-action)';
+  box.innerHTML = checked ? '' : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--bg-color)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>';
+}
+function resetChecklist() {
+  document.querySelectorAll('[data-check]').forEach(b => {
+    b.dataset.check = 'false'; b.style.background = 'transparent'; b.style.borderColor = 'var(--secondary-action)'; b.innerHTML = '';
+  });
+}
+
+// ── QUIZ ──
+function checkAnswer(qi, selected, correct) {
+  if (answeredQs.has(qi)) return;
+  answeredQs.add(qi);
+  const opts = document.querySelectorAll(`#q${qi} .quiz-option`);
+  opts.forEach((o, i) => {
+    o.style.cursor = 'default';
+    if (i === correct) o.classList.add('quiz-correct');
+    else if (i === selected && selected !== correct) o.classList.add('quiz-wrong');
+  });
+  if (selected === correct) quizScore++;
+  document.getElementById('score').textContent = quizScore;
+  const fb = document.getElementById(`fb${qi}`);
+  fb.classList.remove('hidden');
+  fb.style.color = selected === correct ? '#22c55e' : '#ef4444';
+  fb.textContent = selected === correct ? '✓ Correct!' : '✗ Incorrect — the correct answer is highlighted in green.';
+}
+function resetQuiz() { switchTab('quiz'); }
+
+// ── ELEMENTS SDK ──
+const defaultConfig = {
+  main_title: "Foley's Catheterization",
+  subtitle: "Complete Clinical Guide — MBBS / MD Level",
+  background_color: "#0f1729",
+  surface_color: "#1a2540",
+  text_color: "#e2e8f0",
+  primary_action: "#38bdf8",
+  secondary_action: "#64748b",
+  font_family: "Playfair Display",
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const r = document.documentElement.style;
+  r.setProperty('--bg-color', config.background_color || defaultConfig.background_color);
+  r.setProperty('--surface-color', config.surface_color || defaultConfig.surface_color);
+  r.setProperty('--text-color', config.text_color || defaultConfig.text_color);
+  r.setProperty('--primary-action', config.primary_action || defaultConfig.primary_action);
+  r.setProperty('--secondary-action', config.secondary_action || defaultConfig.secondary_action);
+
+  document.body.style.color = config.text_color || defaultConfig.text_color;
+  document.body.style.background = config.background_color || defaultConfig.background_color;
+
+  const title = document.getElementById('mainTitle');
+  const sub = document.getElementById('subtitle');
+  if (title) title.textContent = config.main_title || defaultConfig.main_title;
+  if (sub) sub.textContent = config.subtitle || defaultConfig.subtitle;
+
+  const font = config.font_family || defaultConfig.font_family;
+  document.querySelectorAll('.font-heading').forEach(el => {
+    el.style.fontFamily = `${font}, Georgia, serif`;
+  });
+
+  const base = config.font_size || defaultConfig.font_size;
+  document.body.style.fontSize = `${base}px`;
+}
+
+// ── INIT ──
+switchTab('overview');
+applyConfig(defaultConfig);
+</script>
+</body>
+</html>
