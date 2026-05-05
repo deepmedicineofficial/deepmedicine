@@ -1,0 +1,821 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Chest X-Ray | CXR Interpretation Guide & Imaging Diagnosis | Deep Medicine</title> <meta name="description" content="Comprehensive chest X-ray interpretation guide including lung pathology, cardiac silhouette, pleural diseases, and emergency imaging diagnosis."> <link rel="canonical" href="https://deepmedicine.in/clinical/diagnostics/chest-xray"> <!-- Open Graph --> <meta property="og:title" content="Chest X-Ray | Deep Medicine"> <meta property="og:description" content="Step-by-step chest X-ray interpretation for respiratory and cardiac diagnosis."> <meta property="og:image" content="https://deepmedicine.in/images/chest-xray.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['DM Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .app-wrapper { height: 100%; overflow-y: auto; }
+    .tab-active { background: #1e3a5f; color: #e0f0ff; border-bottom: 3px solid #4fc3f7; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(30,58,95,0.18); }
+    .finding-card { transition: all 0.25s ease; }
+    .finding-card:hover { background: #f0f7ff; }
+    .anatomy-label { animation: fadeIn 0.5s ease forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .pulse-dot { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .gradient-border { background: linear-gradient(135deg, #1e3a5f, #4fc3f7); padding: 2px; border-radius: 12px; }
+    .scroll-section { scroll-margin-top: 80px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper bg-slate-50 font-body text-slate-800"><!-- Header -->
+   <header class="sticky top-0 z-50 bg-gradient-to-r from-[#0d1f3c] to-[#1e3a5f] shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-[#4fc3f7] flex items-center justify-center"><i data-lucide="scan" class="w-6 h-6 text-[#0d1f3c]"></i>
+      </div>
+      <div>
+       <h1 id="main-title" class="font-heading text-lg md:text-xl font-bold text-white leading-tight">Chest X-Ray Interpretation</h1>
+       <p id="subtitle" class="text-xs text-[#4fc3f7] tracking-wide">Clinical Diagnostic Reference</p>
+      </div>
+     </div><button id="mobile-menu-btn" class="md:hidden text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
+    </div><!-- Navigation Tabs -->
+    <nav id="nav-tabs" class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 pb-0 hide-scrollbar"><button data-tab="systematic" class="tab-btn tab-active whitespace-nowrap px-4 py-2 text-sm font-medium rounded-t-lg text-slate-300 hover:text-white transition">Systematic Approach</button> <button data-tab="anatomy" class="tab-btn whitespace-nowrap px-4 py-2 text-sm font-medium rounded-t-lg text-slate-300 hover:text-white transition">Anatomy</button> <button data-tab="findings" class="tab-btn whitespace-nowrap px-4 py-2 text-sm font-medium rounded-t-lg text-slate-300 hover:text-white transition">Pathological Findings</button> <button data-tab="patterns" class="tab-btn whitespace-nowrap px-4 py-2 text-sm font-medium rounded-t-lg text-slate-300 hover:text-white transition">Patterns &amp; Signs</button> <button data-tab="checklist" class="tab-btn whitespace-nowrap px-4 py-2 text-sm font-medium rounded-t-lg text-slate-300 hover:text-white transition">Reporting Checklist</button>
+    </nav>
+   </header>
+   <main class="max-w-7xl mx-auto px-4 py-6"><!-- Systematic Approach Tab -->
+    <section id="tab-systematic" class="tab-content">
+     <div class="mb-6">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">Systematic Approach to CXR Interpretation</h2>
+      <p class="text-slate-600">Follow the <strong>ABCDE-FGHI</strong> mnemonic for comprehensive evaluation.</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"><!-- A -->
+      <div class="finding-card bg-white rounded-xl p-5 border border-slate-200 card-hover cursor-pointer">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-700 font-bold text-lg">
+         A
+        </div>
+        <h3 class="font-semibold text-lg text-[#1e3a5f]">Airway &amp; Adequacy</h3>
+       </div>
+       <ul class="text-sm text-slate-600 space-y-1.5">
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Trachea — midline or deviated?</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Carina — bifurcation at T4-T5</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Main bronchi visible</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Rotation: spinous processes equidistant from clavicle heads</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Inspiration: 5-7 anterior ribs or 9-10 posterior ribs visible</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Exposure: vertebral bodies just visible behind heart</li>
+       </ul>
+      </div><!-- B -->
+      <div class="finding-card bg-white rounded-xl p-5 border border-slate-200 card-hover">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-lg">
+         B
+        </div>
+        <h3 class="font-semibold text-lg text-[#1e3a5f]">Bones &amp; Soft Tissues</h3>
+       </div>
+       <ul class="text-sm text-slate-600 space-y-1.5">
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Ribs: fractures, lytic/sclerotic lesions</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Clavicles: symmetry, fractures</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Spine: alignment, vertebral body height</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Scapulae: projected out in PA film</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Soft tissues: subcutaneous emphysema, masses</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Breast shadows: mastectomy signs</li>
+       </ul>
+      </div><!-- C -->
+      <div class="finding-card bg-white rounded-xl p-5 border border-slate-200 card-hover">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-lg">
+         C
+        </div>
+        <h3 class="font-semibold text-lg text-[#1e3a5f]">Cardiac Silhouette</h3>
+       </div>
+       <ul class="text-sm text-slate-600 space-y-1.5">
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Cardiothoracic ratio &lt; 0.5 on PA film</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Right heart border: RA + SVC</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Left heart border: aortic knob, PA, LAA, LV</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Boot-shaped (RVH), globular (pericardial effusion)</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Retrocardiac space (lateral view)</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Valvular calcifications</li>
+       </ul>
+      </div><!-- D -->
+      <div class="finding-card bg-white rounded-xl p-5 border border-slate-200 card-hover">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-lg">
+         D
+        </div>
+        <h3 class="font-semibold text-lg text-[#1e3a5f]">Diaphragm</h3>
+       </div>
+       <ul class="text-sm text-slate-600 space-y-1.5">
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Right hemidiaphragm ~1-2 cm higher than left</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Smooth dome shape</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Costophrenic angles: sharp (blunting = effusion ~200ml)</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Free gas under diaphragm (pneumoperitoneum)</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Elevated hemidiaphragm: phrenic nerve palsy, subpulmonic effusion</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Eventration vs paralysis</li>
+       </ul>
+      </div><!-- E -->
+      <div class="finding-card bg-white rounded-xl p-5 border border-slate-200 card-hover">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-lg">
+         E
+        </div>
+        <h3 class="font-semibold text-lg text-[#1e3a5f]">Effusion &amp; Extra-thoracic</h3>
+       </div>
+       <ul class="text-sm text-slate-600 space-y-1.5">
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Pleural effusion: meniscus sign</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Loculated vs free-flowing</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Supine: veiling opacity over hemithorax</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Lines &amp; tubes: ETT, CVC, NG tube, chest drain</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Pacemaker/ICD leads positioning</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Surgical clips, sternal wires</li>
+       </ul>
+      </div><!-- F -->
+      <div class="finding-card bg-white rounded-xl p-5 border border-slate-200 card-hover">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-700 font-bold text-lg">
+         F
+        </div>
+        <h3 class="font-semibold text-lg text-[#1e3a5f]">Fields (Lung)</h3>
+       </div>
+       <ul class="text-sm text-slate-600 space-y-1.5">
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Compare zones: upper, mid, lower bilaterally</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Opacities: consolidation, ground-glass, nodules</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Lucency: pneumothorax, bullae, emphysema</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Interstitial vs alveolar pattern</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Pulmonary vasculature: upper lobe diversion</li>
+        <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Hilum: size, density, position (left 2cm higher)</li>
+       </ul>
+      </div>
+     </div><!-- Technical Quality Box -->
+     <div class="mt-6 bg-gradient-to-br from-[#0d1f3c] to-[#1e3a5f] rounded-xl p-6 text-white">
+      <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="settings" class="w-5 h-5 text-[#4fc3f7]"></i> Technical Quality Assessment (RIPE)</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+       <div class="bg-white/10 rounded-lg p-4">
+        <div class="text-[#4fc3f7] font-bold text-lg mb-1">
+         R — Rotation
+        </div>
+        <p class="text-sm text-slate-300">Spinous processes equidistant between medial clavicular ends</p>
+       </div>
+       <div class="bg-white/10 rounded-lg p-4">
+        <div class="text-[#4fc3f7] font-bold text-lg mb-1">
+         I — Inspiration
+        </div>
+        <p class="text-sm text-slate-300">5-7 anterior ribs or 9-10 posterior ribs above diaphragm</p>
+       </div>
+       <div class="bg-white/10 rounded-lg p-4">
+        <div class="text-[#4fc3f7] font-bold text-lg mb-1">
+         P — Projection
+        </div>
+        <p class="text-sm text-slate-300">PA preferred (scapulae rotated out); AP magnifies heart</p>
+       </div>
+       <div class="bg-white/10 rounded-lg p-4">
+        <div class="text-[#4fc3f7] font-bold text-lg mb-1">
+         E — Exposure
+        </div>
+        <p class="text-sm text-slate-300">Lower thoracic vertebrae just visible behind cardiac silhouette</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Anatomy Tab -->
+    <section id="tab-anatomy" class="tab-content hidden">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">Normal CXR Anatomy</h2>
+     <p class="text-slate-600 mb-6">Key anatomical landmarks on a standard PA chest radiograph.</p><!-- SVG Chest Diagram -->
+     <div class="bg-white rounded-xl border border-slate-200 p-4 mb-6 overflow-hidden">
+      <div class="relative max-w-lg mx-auto">
+       <svg viewbox="0 0 400 480" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg"><!-- Chest outline --> <ellipse cx="200" cy="260" rx="150" ry="190" fill="#e8f4fd" stroke="#1e3a5f" stroke-width="2" /> <!-- Lung fields --> <ellipse cx="140" cy="240" rx="60" ry="110" fill="#cce8f7" stroke="#4fc3f7" stroke-width="1.5" opacity="0.8" /> <ellipse cx="260" cy="240" rx="60" ry="110" fill="#cce8f7" stroke="#4fc3f7" stroke-width="1.5" opacity="0.8" /> <!-- Heart --> <ellipse cx="210" cy="300" rx="50" ry="60" fill="#f0d0d0" stroke="#c0392b" stroke-width="1.5" /> <!-- Trachea --> <rect x="193" y="80" width="14" height="80" rx="7" fill="#fff" stroke="#1e3a5f" stroke-width="1.5" /> <!-- Carina --> <path d="M200 160 L170 200 M200 160 L230 200" stroke="#1e3a5f" stroke-width="1.5" fill="none" /> <!-- Aortic knob --> <path d="M200 120 Q240 100 250 140 Q255 160 240 180" stroke="#c0392b" stroke-width="2" fill="none" /> <!-- Diaphragm --> <path d="M60 380 Q140 350 200 370 Q260 350 340 380" stroke="#1e3a5f" stroke-width="2" fill="none" /> <!-- Clavicles --> <path d="M130 130 Q165 120 200 125" stroke="#666" stroke-width="2" fill="none" /> <path d="M270 130 Q235 120 200 125" stroke="#666" stroke-width="2" fill="none" /> <!-- Ribs (simplified) --> <path d="M100 180 Q140 170 180 180" stroke="#999" stroke-width="1" fill="none" opacity="0.5" /> <path d="M100 220 Q140 210 175 220" stroke="#999" stroke-width="1" fill="none" opacity="0.5" /> <path d="M100 260 Q140 250 170 260" stroke="#999" stroke-width="1" fill="none" opacity="0.5" /> <path d="M220 180 Q260 170 300 180" stroke="#999" stroke-width="1" fill="none" opacity="0.5" /> <path d="M225 220 Q260 210 300 220" stroke="#999" stroke-width="1" fill="none" opacity="0.5" /> <path d="M230 260 Q265 250 300 260" stroke="#999" stroke-width="1" fill="none" opacity="0.5" /> <!-- Costophrenic angles --> <circle cx="85" cy="375" r="4" fill="#ff9800" class="pulse-dot" /> <circle cx="315" cy="375" r="4" fill="#ff9800" class="pulse-dot" /> <!-- Labels --> <text x="200" y="70" text-anchor="middle" font-size="10" fill="#1e3a5f" font-weight="600">
+         Trachea
+        </text> <text x="270" y="130" font-size="9" fill="#c0392b" font-weight="500">
+         Aortic Knob
+        </text> <text x="210" y="305" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="600">
+         Heart
+        </text> <text x="140" cy="240" text-anchor="middle" font-size="9" fill="#1e3a5f" font-weight="500" y="200">
+         R Lung
+        </text> <text x="260" text-anchor="middle" font-size="9" fill="#1e3a5f" font-weight="500" y="200">
+         L Lung
+        </text> <text x="200" y="168" text-anchor="middle" font-size="9" fill="#1e3a5f">
+         Carina
+        </text> <text x="55" y="390" font-size="8" fill="#ff9800">
+         CP Angle
+        </text> <text x="290" y="390" font-size="8" fill="#ff9800">
+         CP Angle
+        </text> <text x="200" y="410" text-anchor="middle" font-size="10" fill="#1e3a5f" font-weight="500">
+         Diaphragm
+        </text> <text x="130" y="145" font-size="8" fill="#666">
+         Clavicle
+        </text>
+       </svg>
+      </div>
+     </div><!-- Anatomy Details Grid -->
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+       <h3 class="font-semibold text-[#1e3a5f] mb-3 flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-red-500"></i> Mediastinal Structures</h3>
+       <table class="w-full text-sm">
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-1.5 font-medium">Superior mediastinum</td>
+          <td class="py-1.5 text-slate-600">Trachea, great vessels, esophagus, thoracic duct</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Anterior mediastinum</td>
+          <td class="py-1.5 text-slate-600">Thymus (4 T's: Thymus, Teratoma, Thyroid, Terrible lymphoma)</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Middle mediastinum</td>
+          <td class="py-1.5 text-slate-600">Heart, pericardium, great vessels, trachea bifurcation</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Posterior mediastinum</td>
+          <td class="py-1.5 text-slate-600">Descending aorta, esophagus, vertebral bodies, neurogenic tumors</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+       <h3 class="font-semibold text-[#1e3a5f] mb-3 flex items-center gap-2"><i data-lucide="wind" class="w-4 h-4 text-blue-500"></i> Hilum &amp; Vasculature</h3>
+       <table class="w-full text-sm">
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-1.5 font-medium">Left hilum</td>
+          <td class="py-1.5 text-slate-600">~2 cm higher than right (left PA rides over left main bronchus)</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Hilar density</td>
+          <td class="py-1.5 text-slate-600">Equal bilaterally; increased = lymphadenopathy/mass</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Normal vasculature</td>
+          <td class="py-1.5 text-slate-600">Lower lobe vessels &gt; upper lobe (gravity-dependent)</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Upper lobe diversion</td>
+          <td class="py-1.5 text-slate-600">Indicates pulmonary venous hypertension (&gt;10 mmHg wedge)</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+       <h3 class="font-semibold text-[#1e3a5f] mb-3 flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4 text-purple-500"></i> Lung Zones</h3>
+       <table class="w-full text-sm">
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-1.5 font-medium">Upper zone</td>
+          <td class="py-1.5 text-slate-600">Above 2nd anterior rib (TB, sarcoidosis apical predominance)</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Mid zone</td>
+          <td class="py-1.5 text-slate-600">Between 2nd and 4th anterior ribs</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Lower zone</td>
+          <td class="py-1.5 text-slate-600">Below 4th anterior rib (aspiration, basal fibrosis)</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Fissures</td>
+          <td class="py-1.5 text-slate-600">Horizontal (right only at 4th rib); oblique (bilateral)</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+       <h3 class="font-semibold text-[#1e3a5f] mb-3 flex items-center gap-2"><i data-lucide="maximize-2" class="w-4 h-4 text-amber-500"></i> Normal Measurements</h3>
+       <table class="w-full text-sm">
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-1.5 font-medium">CTR</td>
+          <td class="py-1.5 text-slate-600">&lt; 50% on PA (&lt; 60% on AP is unreliable)</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Tracheal width</td>
+          <td class="py-1.5 text-slate-600">~2 cm (adult)</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">Aortic knob</td>
+          <td class="py-1.5 text-slate-600">&lt; 4 cm width; unfolded in elderly</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 font-medium">PA diameter</td>
+          <td class="py-1.5 text-slate-600">&lt; 29 mm (pulmonary hypertension if enlarged)</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- Pathological Findings Tab -->
+    <section id="tab-findings" class="tab-content hidden">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">Pathological Findings &amp; Differential Diagnoses</h2>
+     <p class="text-slate-600 mb-6">Major radiological findings with clinical significance.</p><!-- Search/Filter -->
+     <div class="mb-4 relative"><i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i> <input id="findings-search" type="text" placeholder="Search findings (e.g., consolidation, pneumothorax...)" class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-300 focus:border-[#4fc3f7] focus:ring-2 focus:ring-[#4fc3f7]/20 outline-none text-sm">
+     </div>
+     <div id="findings-list" class="space-y-4"><!-- Consolidation -->
+      <details class="finding-item bg-white rounded-xl border border-slate-200 overflow-hidden group"><summary class="p-5 cursor-pointer flex items-center justify-between hover:bg-slate-50">
+        <div class="flex items-center gap-3">
+         <div class="w-3 h-3 rounded-full bg-red-500"></div>
+         <h3 class="font-semibold text-[#1e3a5f]">Consolidation (Air-Space Opacification)</h3>
+        </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i> </summary>
+       <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Radiological Features</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• Homogeneous opacification</li>
+           <li>• Air bronchograms (pathognomonic)</li>
+           <li>• Silhouette sign (loss of border)</li>
+           <li>• No volume loss (unlike atelectasis)</li>
+           <li>• Lobar or segmental distribution</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Differential Diagnosis</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• <strong>Infectious:</strong> Bacterial pneumonia, TB, fungal</li>
+           <li>• <strong>Non-infectious:</strong> Pulmonary edema, hemorrhage</li>
+           <li>• <strong>Neoplastic:</strong> Bronchoalveolar carcinoma, lymphoma</li>
+           <li>• <strong>Other:</strong> Organizing pneumonia (COP), eosinophilic pneumonia</li>
+          </ul>
+         </div>
+        </div>
+        <div class="mt-3 p-3 bg-amber-50 rounded-lg border border-amber-200">
+         <p class="text-xs text-amber-800"><strong>Clinical Pearl:</strong> Silhouette sign localizes pathology — right heart border loss = RML; left heart border loss = lingula; left hemidiaphragm loss = LLL.</p>
+        </div>
+       </div>
+      </details><!-- Pneumothorax -->
+      <details class="finding-item bg-white rounded-xl border border-slate-200 overflow-hidden group"><summary class="p-5 cursor-pointer flex items-center justify-between hover:bg-slate-50">
+        <div class="flex items-center gap-3">
+         <div class="w-3 h-3 rounded-full bg-orange-500"></div>
+         <h3 class="font-semibold text-[#1e3a5f]">Pneumothorax</h3>
+        </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i> </summary>
+       <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Radiological Features</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• Visible visceral pleural line</li>
+           <li>• Absent lung markings beyond pleural edge</li>
+           <li>• Best seen at apex on erect film</li>
+           <li>• Deep sulcus sign (supine film)</li>
+           <li>• Tension: mediastinal shift AWAY, flattened diaphragm</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Classification &amp; Management</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• <strong>Small:</strong> &lt; 2cm at hilum level → observe</li>
+           <li>• <strong>Large:</strong> &gt; 2cm → aspiration or chest drain</li>
+           <li>• <strong>Tension:</strong> Emergency needle decompression (2nd ICS MCL)</li>
+           <li>• <strong>Causes:</strong> Trauma, iatrogenic, spontaneous (tall thin males), COPD</li>
+          </ul>
+         </div>
+        </div>
+        <div class="mt-3 p-3 bg-red-50 rounded-lg border border-red-200">
+         <p class="text-xs text-red-800"><strong>⚠️ Emergency:</strong> Tension pneumothorax is a CLINICAL diagnosis. Do not delay treatment for imaging. Signs: tracheal deviation, absent breath sounds, hypotension, distended neck veins.</p>
+        </div>
+       </div>
+      </details><!-- Pleural Effusion -->
+      <details class="finding-item bg-white rounded-xl border border-slate-200 overflow-hidden group"><summary class="p-5 cursor-pointer flex items-center justify-between hover:bg-slate-50">
+        <div class="flex items-center gap-3">
+         <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+         <h3 class="font-semibold text-[#1e3a5f]">Pleural Effusion</h3>
+        </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i> </summary>
+       <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Radiological Features</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• Blunting of costophrenic angle (~200ml minimum)</li>
+           <li>• Meniscus sign (concave upper margin)</li>
+           <li>• Complete whiteout with mediastinal shift = massive</li>
+           <li>• Supine: hazy opacification, apical cap</li>
+           <li>• Lateral decubitus confirms free-flowing</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Differential by Light's Criteria</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• <strong>Transudative:</strong> CCF, cirrhosis, nephrotic syndrome, hypoalbuminemia</li>
+           <li>• <strong>Exudative:</strong> Infection (parapneumonic/empyema), malignancy, TB, PE</li>
+           <li>• <strong>Hemorrhagic:</strong> Trauma, malignancy, PE</li>
+           <li>• <strong>Chylous:</strong> Thoracic duct injury, lymphoma</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </details><!-- Cardiomegaly -->
+      <details class="finding-item bg-white rounded-xl border border-slate-200 overflow-hidden group"><summary class="p-5 cursor-pointer flex items-center justify-between hover:bg-slate-50">
+        <div class="flex items-center gap-3">
+         <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+         <h3 class="font-semibold text-[#1e3a5f]">Cardiomegaly &amp; Heart Failure</h3>
+        </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i> </summary>
+       <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Cardiomegaly Signs</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• CTR &gt; 50% on PA film</li>
+           <li>• Chamber-specific enlargement patterns</li>
+           <li>• LA: double density, splayed carina (&gt;90°), posterior displacement on lateral</li>
+           <li>• LV: elongated apex below diaphragm</li>
+           <li>• RV: boot-shaped heart, filling retrosternal space</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Heart Failure — ABCDE</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• <strong>A</strong>lveolar edema (bat-wing/butterfly pattern)</li>
+           <li>• <strong>B</strong> lines (Kerley B — septal lines at bases)</li>
+           <li>• <strong>C</strong>ardiomegaly</li>
+           <li>• <strong>D</strong>iversion (upper lobe pulmonary venous)</li>
+           <li>• <strong>E</strong>ffusion (bilateral pleural, often R &gt; L)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </details><!-- Lung Mass -->
+      <details class="finding-item bg-white rounded-xl border border-slate-200 overflow-hidden group"><summary class="p-5 cursor-pointer flex items-center justify-between hover:bg-slate-50">
+        <div class="flex items-center gap-3">
+         <div class="w-3 h-3 rounded-full bg-gray-700"></div>
+         <h3 class="font-semibold text-[#1e3a5f]">Pulmonary Nodule / Mass</h3>
+        </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i> </summary>
+       <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Nodule vs Mass</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• Nodule: ≤ 3 cm; Mass: &gt; 3 cm</li>
+           <li>• Solitary vs multiple</li>
+           <li>• Margins: spiculated (malignant) vs smooth (benign)</li>
+           <li>• Calcification: popcorn (hamartoma), central (granuloma)</li>
+           <li>• Cavitation: thick wall (malignant), thin wall (abscess, Wegener's)</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Differential Diagnosis</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• <strong>Malignant:</strong> Primary lung Ca, metastases (cannonball)</li>
+           <li>• <strong>Benign:</strong> Hamartoma, granuloma, AVM</li>
+           <li>• <strong>Infectious:</strong> Abscess, fungal ball (mycetoma), hydatid cyst</li>
+           <li>• <strong>Multiple:</strong> Metastases, septic emboli, Wegener's, rheumatoid nodules</li>
+          </ul>
+         </div>
+        </div>
+        <div class="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+         <p class="text-xs text-blue-800"><strong>Fleischner Criteria:</strong> Solitary pulmonary nodules 6-8mm in low-risk patients: follow-up CT at 6-12 months. &gt; 8mm: consider PET-CT or biopsy.</p>
+        </div>
+       </div>
+      </details><!-- Atelectasis -->
+      <details class="finding-item bg-white rounded-xl border border-slate-200 overflow-hidden group"><summary class="p-5 cursor-pointer flex items-center justify-between hover:bg-slate-50">
+        <div class="flex items-center gap-3">
+         <div class="w-3 h-3 rounded-full bg-teal-500"></div>
+         <h3 class="font-semibold text-[#1e3a5f]">Atelectasis (Collapse)</h3>
+        </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i> </summary>
+       <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Key Signs (Volume Loss)</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• Displacement of fissures TOWARD opacity</li>
+           <li>• Mediastinal shift toward affected side</li>
+           <li>• Elevated hemidiaphragm</li>
+           <li>• Crowding of ribs</li>
+           <li>• Compensatory hyperinflation of adjacent lobes</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Types</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• <strong>Resorptive:</strong> Bronchial obstruction (tumor, mucus plug)</li>
+           <li>• <strong>Compressive:</strong> Pleural effusion, pneumothorax</li>
+           <li>• <strong>Passive:</strong> Loss of surfactant (ARDS)</li>
+           <li>• <strong>Cicatricial:</strong> Fibrosis, TB scarring</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </details><!-- Miliary Pattern -->
+      <details class="finding-item bg-white rounded-xl border border-slate-200 overflow-hidden group"><summary class="p-5 cursor-pointer flex items-center justify-between hover:bg-slate-50">
+        <div class="flex items-center gap-3">
+         <div class="w-3 h-3 rounded-full bg-yellow-600"></div>
+         <h3 class="font-semibold text-[#1e3a5f]">Miliary Pattern</h3>
+        </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i> </summary>
+       <div class="px-5 pb-5 border-t border-slate-100 pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Features</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• Innumerable tiny (1-3mm) nodules</li>
+           <li>• Uniform size and diffuse distribution</li>
+           <li>• "Snowstorm" appearance</li>
+           <li>• All zones affected uniformly</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-sm font-semibold text-slate-700 mb-2">Differential</h4>
+          <ul class="text-sm text-slate-600 space-y-1">
+           <li>• Miliary TB (most common)</li>
+           <li>• Miliary metastases (thyroid, renal)</li>
+           <li>• Sarcoidosis</li>
+           <li>• Pneumoconiosis (silicosis, coal workers)</li>
+           <li>• Fungal: Histoplasmosis, Coccidioidomycosis</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </details>
+     </div>
+    </section><!-- Patterns & Signs Tab -->
+    <section id="tab-patterns" class="tab-content hidden">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">Classic Radiological Signs &amp; Patterns</h2>
+     <p class="text-slate-600 mb-6">Eponymous signs and characteristic patterns in chest radiography.</p>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Silhouette Sign</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Felson's Sign</p>
+       <p class="text-sm text-slate-600">Loss of normal silhouette when adjacent structures have same density. Localizes pathology: lost R heart border = RML; lost L heart border = lingula; lost diaphragm = lower lobe.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Air Bronchogram</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Consolidation Marker</p>
+       <p class="text-sm text-slate-600">Air-filled bronchi visible within opacified lung parenchyma. Indicates alveolar (air-space) filling. Present in pneumonia, pulmonary edema, ARDS. Absent in pleural effusion and atelectasis from obstruction.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Deep Sulcus Sign</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Supine Pneumothorax</p>
+       <p class="text-sm text-slate-600">Abnormally deep costophrenic angle on supine film. Air collects anteriorly and basally in supine position. Critical for ICU patients who cannot sit upright.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Sail Sign</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Thymic Shadow / Pericardial Effusion</p>
+       <p class="text-sm text-slate-600">Triangular opacity: In children = normal thymus; In adults = pericardial fat pad or large pericardial effusion giving "water bottle" configuration.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Golden S Sign</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Central Mass with Collapse</p>
+       <p class="text-sm text-slate-600">Reversed S-shape of minor fissure in RUL collapse. Convex component = hilar mass (typically bronchogenic carcinoma). Concave component = collapsed distal lobe.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Hampton's Hump</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Pulmonary Embolism</p>
+       <p class="text-sm text-slate-600">Wedge-shaped, pleural-based opacity representing pulmonary infarction. Apex points toward hilum. Seen in ~30% of PE cases with infarction.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Westermark Sign</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Pulmonary Embolism</p>
+       <p class="text-sm text-slate-600">Focal oligemia (reduced vascularity) distal to the occluded vessel in PE. Area of increased lucency. Low sensitivity but high specificity.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Kerley B Lines</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Interstitial Edema</p>
+       <p class="text-sm text-slate-600">Short (1-2cm) horizontal lines at lung periphery perpendicular to pleura. Represent thickened interlobular septa. Seen in early CCF, lymphangitis carcinomatosa.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Bat-Wing Pattern</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Pulmonary Edema</p>
+       <p class="text-sm text-slate-600">Bilateral perihilar alveolar opacification sparing periphery. Classic in acute cardiogenic pulmonary edema. Also: uremic lung, Pneumocystis pneumonia.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Air Crescent Sign</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Mycetoma / Aspergilloma</p>
+       <p class="text-sm text-slate-600">Crescent of air between a mass and the cavity wall. Classic for aspergilloma (fungal ball) within pre-existing cavity. Moves with position change.</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Eggshell Calcification</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Silicosis / Sarcoidosis</p>
+       <p class="text-sm text-slate-600">Peripheral ring-like calcification in hilar/mediastinal lymph nodes. Most commonly silicosis. Also sarcoidosis, post-radiation, Hodgkin's lymphoma (treated).</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-slate-200 card-hover finding-card">
+       <h3 class="font-semibold text-[#1e3a5f] mb-1">Continuous Diaphragm Sign</h3>
+       <p class="text-xs text-[#4fc3f7] font-medium mb-2">Pneumomediastinum</p>
+       <p class="text-sm text-slate-600">Visualization of the entire diaphragm from one lateral chest wall to the other, due to air outlining the inferior heart border. Indicates pneumomediastinum.</p>
+      </div>
+     </div>
+    </section><!-- Reporting Checklist Tab -->
+    <section id="tab-checklist" class="tab-content hidden">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">Structured Reporting Checklist</h2>
+     <p class="text-slate-600 mb-6">Comprehensive framework for generating a systematic CXR report.</p>
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><!-- Report Template -->
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+       <h3 class="font-semibold text-[#1e3a5f] mb-4 flex items-center gap-2"><i data-lucide="file-text" class="w-5 h-5 text-[#4fc3f7]"></i> Standard Report Structure</h3>
+       <div class="space-y-4">
+        <div class="border-l-4 border-[#4fc3f7] pl-4">
+         <h4 class="font-medium text-sm text-[#1e3a5f]">1. Clinical Information</h4>
+         <p class="text-xs text-slate-500">Patient demographics, indication, comparison studies</p>
+        </div>
+        <div class="border-l-4 border-[#4fc3f7] pl-4">
+         <h4 class="font-medium text-sm text-[#1e3a5f]">2. Technical Factors</h4>
+         <p class="text-xs text-slate-500">Projection (PA/AP), rotation, inspiration, exposure adequacy</p>
+        </div>
+        <div class="border-l-4 border-[#4fc3f7] pl-4">
+         <h4 class="font-medium text-sm text-[#1e3a5f]">3. Findings</h4>
+         <p class="text-xs text-slate-500">Systematic description: airway, lungs, pleura, heart, mediastinum, bones</p>
+        </div>
+        <div class="border-l-4 border-[#4fc3f7] pl-4">
+         <h4 class="font-medium text-sm text-[#1e3a5f]">4. Lines &amp; Devices</h4>
+         <p class="text-xs text-slate-500">ETT (2-4cm above carina), CVC (SVC/RA junction), chest drains, NG tube</p>
+        </div>
+        <div class="border-l-4 border-amber-400 pl-4">
+         <h4 class="font-medium text-sm text-[#1e3a5f]">5. Impression</h4>
+         <p class="text-xs text-slate-500">Summary diagnosis with differential, urgency level, recommendation</p>
+        </div>
+       </div>
+      </div><!-- Interactive Checklist -->
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+       <h3 class="font-semibold text-[#1e3a5f] mb-4 flex items-center gap-2"><i data-lucide="check-square" class="w-5 h-5 text-[#4fc3f7]"></i> Quick Review Checklist</h3>
+       <div id="checklist-items" class="space-y-2">
+       </div>
+       <div class="mt-4 flex items-center justify-between"><span id="checklist-progress" class="text-xs text-slate-500">0 / 15 checked</span> <button id="reset-checklist" class="text-xs text-[#4fc3f7] hover:underline">Reset All</button>
+       </div>
+      </div><!-- Line Positioning -->
+      <div class="bg-white rounded-xl border border-slate-200 p-6 lg:col-span-2">
+       <h3 class="font-semibold text-[#1e3a5f] mb-4 flex items-center gap-2"><i data-lucide="git-branch" class="w-5 h-5 text-[#4fc3f7]"></i> Lines &amp; Tubes — Ideal Positioning</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-4 bg-slate-50 rounded-lg">
+         <h4 class="font-medium text-sm text-[#1e3a5f] mb-2">ETT (Endotracheal)</h4>
+         <ul class="text-xs text-slate-600 space-y-1">
+          <li>• Tip 2-4 cm above carina</li>
+          <li>• Midline, not in right main bronchus</li>
+          <li>• Carina at T4-T5</li>
+         </ul>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-lg">
+         <h4 class="font-medium text-sm text-[#1e3a5f] mb-2">Central Venous Catheter</h4>
+         <ul class="text-xs text-slate-600 space-y-1">
+          <li>• Tip at SVC/RA junction (T6-T7)</li>
+          <li>• Parallel to vessel wall</li>
+          <li>• Not in right atrium</li>
+         </ul>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-lg">
+         <h4 class="font-medium text-sm text-[#1e3a5f] mb-2">Nasogastric Tube</h4>
+         <ul class="text-xs text-slate-600 space-y-1">
+          <li>• Bisects carina (midline)</li>
+          <li>• Below left hemidiaphragm</li>
+          <li>• Tip in stomach (not bronchus!)</li>
+         </ul>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-lg">
+         <h4 class="font-medium text-sm text-[#1e3a5f] mb-2">Chest Drain</h4>
+         <ul class="text-xs text-slate-600 space-y-1">
+          <li>• Pneumothorax: apex directed</li>
+          <li>• Effusion: base directed</li>
+          <li>• All holes within thorax</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Urgent Findings -->
+      <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl border border-red-200 p-6 lg:col-span-2">
+       <h3 class="font-semibold text-red-800 mb-4 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-5 h-5 text-red-600"></i> Critical / Urgent Findings — Require Immediate Communication</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Tension pneumothorax</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Massive pleural effusion with mediastinal shift</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Widened mediastinum (aortic dissection/rupture)</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Free air under diaphragm (perforated viscus)</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Malpositioned ETT / lines</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">New large pulmonary mass with bone destruction</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Acute pulmonary edema (flash)</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Rib fractures with flail segment</span>
+        </div>
+        <div class="flex items-start gap-2">
+         <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i><span class="text-sm text-red-800">Foreign body in airway</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-[#0d1f3c] text-center py-4 mt-8">
+    <p class="text-xs text-slate-400">Clinical reference only. Always correlate radiological findings with clinical context. Not a substitute for formal radiology reporting.</p>
+   </footer>
+  </div>
+  <script>
+  // Tab Navigation
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('tab-active'));
+      btn.classList.add('tab-active');
+      const target = btn.dataset.tab;
+      tabContents.forEach(tc => tc.classList.add('hidden'));
+      document.getElementById('tab-' + target).classList.remove('hidden');
+    });
+  });
+
+  // Search functionality for findings
+  const searchInput = document.getElementById('findings-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('.finding-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? '' : 'none';
+      });
+    });
+  }
+
+  // Checklist
+  const checklistData = [
+    'Patient identification & clinical details',
+    'Projection: PA or AP noted',
+    'Rotation adequacy assessed',
+    'Inspiration adequacy assessed',
+    'Exposure adequacy assessed',
+    'Trachea & airway evaluated',
+    'Mediastinal contours assessed',
+    'Cardiac silhouette & CTR measured',
+    'Hilar structures evaluated',
+    'Lung fields compared bilaterally',
+    'Costophrenic angles assessed',
+    'Pleural spaces evaluated',
+    'Diaphragm position & contour',
+    'Bones & soft tissues reviewed',
+    'Lines/tubes position confirmed'
+  ];
+
+  const checklistContainer = document.getElementById('checklist-items');
+  const progressEl = document.getElementById('checklist-progress');
+  let checked = new Set();
+
+  function renderChecklist() {
+    checklistContainer.innerHTML = '';
+    checklistData.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer';
+      div.innerHTML = `
+        <div class="w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition ${checked.has(i) ? 'bg-[#4fc3f7] border-[#4fc3f7]' : 'border-slate-300'}">
+          ${checked.has(i) ? '<i data-lucide="check" class="w-3 h-3 text-white"></i>' : ''}
+        </div>
+        <span class="text-sm ${checked.has(i) ? 'text-slate-400 line-through' : 'text-slate-700'}">${item}</span>
+      `;
+      div.addEventListener('click', () => {
+        if (checked.has(i)) checked.delete(i); else checked.add(i);
+        renderChecklist();
+        lucide.createIcons();
+      });
+      checklistContainer.appendChild(div);
+    });
+    progressEl.textContent = `${checked.size} / ${checklistData.length} checked`;
+  }
+  renderChecklist();
+
+  document.getElementById('reset-checklist').addEventListener('click', () => {
+    checked.clear();
+    renderChecklist();
+    lucide.createIcons();
+  });
+
+  // Element SDK
+  const defaultConfig = {
+    main_title: 'Chest X-Ray Interpretation',
+    subtitle: 'Clinical Diagnostic Reference',
+    background_color: '#f8fafc',
+    surface_color: '#ffffff',
+    text_color: '#1e3a5f',
+    primary_action_color: '#4fc3f7',
+    secondary_action_color: '#0d1f3c',
+    font_family: 'DM Sans',
+    font_size: 16
+  };
+
+  function applyConfig(config) {
+    document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+    document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+
+    const bg = config.background_color || defaultConfig.background_color;
+    const surface = config.surface_color || defaultConfig.surface_color;
+    const text = config.text_color || defaultConfig.text_color;
+    const primary = config.primary_action_color || defaultConfig.primary_action_color;
+    const secondary = config.secondary_action_color || defaultConfig.secondary_action_color;
+    const font = config.font_family || defaultConfig.font_family;
+    const size = config.font_size || defaultConfig.font_size;
+
+    document.querySelector('.app-wrapper').style.backgroundColor = bg;
+    document.querySelectorAll('.bg-white').forEach(el => el.style.backgroundColor = surface);
+    document.querySelectorAll('h2, h3').forEach(el => el.style.color = text);
+    document.querySelector('header').style.background = `linear-gradient(to right, ${secondary}, ${text})`;
+    document.querySelectorAll('.tab-active').forEach(el => el.style.borderBottomColor = primary);
+
+    const fontStack = `${font}, DM Sans, sans-serif`;
+    document.body.style.fontFamily = fontStack;
+    document.body.style.fontSize = size + 'px';
+    document.querySelectorAll('.font-heading').forEach(el => el.style.fontFamily = `Playfair Display, ${font}, serif`);
+  }
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
