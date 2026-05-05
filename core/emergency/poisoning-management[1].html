@@ -1,0 +1,1574 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Poisoning Management | Toxicology & Emergency Care | Deep Medicine</title> <meta name="description" content="Comprehensive poisoning management including initial stabilization, decontamination, antidotes, and toxicology-based emergency care."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/poisoning-management"> <!-- Open Graph --> <meta property="og:title" content="Poisoning Management | Deep Medicine"> <meta property="og:description" content="Emergency toxicology and poisoning management with antidotes and decontamination strategies."> <meta property="og:image" content="https://deepmedicine.in/images/poisoning-management.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['Playfair Display', 'serif'],
+        body: ['DM Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace']
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; }
+.app-root { height: 100%; overflow-y: auto; overflow-x: hidden; }
+
+/* Custom scrollbar */
+.app-root::-webkit-scrollbar { width: 6px; }
+.app-root::-webkit-scrollbar-track { background: #0a0f1a; }
+.app-root::-webkit-scrollbar-thumb { background: #2a3a5c; border-radius: 3px; }
+
+/* Animated gradient border */
+@keyframes borderGlow {
+  0%, 100% { border-color: #f43f5e; }
+  33% { border-color: #8b5cf6; }
+  66% { border-color: #06b6d4; }
+}
+.glow-border { animation: borderGlow 6s ease infinite; }
+
+/* Fade in animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.5s ease forwards; opacity: 0; }
+
+/* Pulse dot */
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+}
+.pulse-dot { animation: pulseDot 2s ease infinite; }
+
+/* Tab styling */
+.tab-btn { transition: all 0.3s ease; }
+.tab-btn.active { background: linear-gradient(135deg, #f43f5e, #8b5cf6); color: white; }
+.tab-btn:not(.active):hover { background: rgba(244, 63, 94, 0.15); }
+
+/* Card hover */
+.info-card { transition: all 0.3s ease; border: 1px solid rgba(139, 92, 246, 0.15); }
+.info-card:hover { border-color: rgba(244, 63, 94, 0.5); transform: translateY(-2px); }
+
+/* Accordion */
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.accordion-content.open { max-height: 5000px; }
+.accordion-chevron { transition: transform 0.3s ease; }
+.accordion-chevron.rotated { transform: rotate(180deg); }
+
+/* Search */
+.search-input:focus { box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.3); }
+
+/* Toxidrome badge colors */
+.badge-cholinergic { background: #065f46; color: #6ee7b7; }
+.badge-anticholinergic { background: #7c2d12; color: #fdba74; }
+.badge-sympathomimetic { background: #701a75; color: #f0abfc; }
+.badge-opioid { background: #1e3a5f; color: #7dd3fc; }
+.badge-sedative { background: #3b0764; color: #c4b5fd; }
+.badge-serotonin { background: #713f12; color: #fde047; }
+
+/* Severity indicators */
+.severity-mild { border-left: 4px solid #22c55e; }
+.severity-moderate { border-left: 4px solid #f59e0b; }
+.severity-severe { border-left: 4px solid #ef4444; }
+.severity-lethal { border-left: 4px solid #dc2626; background: rgba(220, 38, 38, 0.05); }
+
+/* Table */
+.tox-table th { background: rgba(139, 92, 246, 0.1); }
+.tox-table tr:hover { background: rgba(244, 63, 94, 0.05); }
+
+/* Nav pill */
+.nav-pill { scroll-snap-align: start; }
+.nav-scroll { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.nav-scroll::-webkit-scrollbar { display: none; }
+
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+  .app-root { height: auto !important; overflow: visible !important; }
+  .info-card { break-inside: avoid; }
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-[#0a0f1a]">
+  <div class="app-root w-full" id="appRoot"><!-- Hero Section -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #0a0f1a 0%, #1a1035 40%, #2d1b4e 70%, #0a0f1a 100%);">
+    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 50%, #f43f5e 0%, transparent 50%), radial-gradient(circle at 80% 20%, #8b5cf6 0%, transparent 50%), radial-gradient(circle at 50% 80%, #06b6d4 0%, transparent 50%);"></div><!-- Floating symbols -->
+    <div class="absolute top-10 left-10 text-4xl opacity-10 select-none">
+     ☠️
+    </div>
+    <div class="absolute top-20 right-16 text-3xl opacity-10 select-none">
+     ⚗️
+    </div>
+    <div class="absolute bottom-10 left-1/4 text-2xl opacity-10 select-none">
+     💊
+    </div>
+    <div class="absolute bottom-16 right-1/3 text-3xl opacity-10 select-none">
+     🧪
+    </div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-12 md:py-20 text-center">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 mb-6"><span class="w-2 h-2 rounded-full bg-rose-500 pulse-dot"></span> <span class="text-rose-400 text-sm font-body font-medium tracking-wide">EMERGENCY MEDICINE REFERENCE</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-4xl md:text-6xl lg:text-7xl font-900 text-white mb-4 leading-tight">Toxicology &amp;<br><span class="bg-gradient-to-r from-rose-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">Poisoning Emergencies</span></h1>
+     <p id="subtitle" class="font-body text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8">Comprehensive Clinical Reference for Emergency Physicians, Intensivists &amp; Critical Care Teams</p>
+     <div class="flex flex-wrap justify-center gap-3 text-sm font-body"><span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-300 border border-white/10"><i data-lucide="book-open" class="inline w-3.5 h-3.5 mr-1"></i>Evidence-Based</span> <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-300 border border-white/10"><i data-lucide="zap" class="inline w-3.5 h-3.5 mr-1"></i>Quick Reference</span> <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-300 border border-white/10"><i data-lucide="shield" class="inline w-3.5 h-3.5 mr-1"></i>ICU Protocols</span>
+     </div>
+    </div>
+   </header><!-- Search & Navigation -->
+   <nav class="sticky top-0 z-50 no-print" style="background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(139, 92, 246, 0.15);">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+     <div class="relative mb-3"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500"></i> <input type="text" id="searchInput" placeholder="Search poisons, antidotes, toxidromes..." class="search-input w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white font-body text-sm placeholder-slate-500 outline-none transition-all">
+     </div>
+     <div class="nav-scroll flex gap-2 overflow-x-auto pb-1" id="navTabs"><button class="nav-pill tab-btn active flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="overview" onclick="switchTab('overview')">Overview</button> <button class="nav-pill tab-btn flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="approach" onclick="switchTab('approach')">General Approach</button> <button class="nav-pill tab-btn flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="toxidromes" onclick="switchTab('toxidromes')">Toxidromes</button> <button class="nav-pill tab-btn flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="specific" onclick="switchTab('specific')">Specific Poisons</button> <button class="nav-pill tab-btn flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="antidotes" onclick="switchTab('antidotes')">Antidotes</button> <button class="nav-pill tab-btn flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="decon" onclick="switchTab('decon')">Decontamination</button> <button class="nav-pill tab-btn flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="labs" onclick="switchTab('labs')">Labs &amp; Workup</button> <button class="nav-pill tab-btn flex-shrink-0 px-4 py-1.5 rounded-lg text-sm font-body font-medium text-slate-300" data-tab="pediatric" onclick="switchTab('pediatric')">Pediatric</button>
+     </div>
+    </div>
+   </nav><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-4 py-8" id="contentArea"><!-- OVERVIEW TAB -->
+    <section id="tab-overview" class="tab-content space-y-8">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+       <div class="info-card rounded-2xl p-5 bg-gradient-to-br from-rose-500/10 to-transparent">
+        <div class="flex items-center gap-3 mb-3">
+         <div class="w-10 h-10 rounded-xl bg-rose-500/20 flex items-center justify-center">
+          <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-400"></i>
+         </div>
+         <h3 class="font-heading text-lg text-white">Epidemiology</h3>
+        </div>
+        <ul class="font-body text-sm text-slate-300 space-y-2">
+         <li>• ~2.2 million poison exposures/year (US - AAPCC)</li>
+         <li>• ~90% occur at home</li>
+         <li>• Children &lt;6 years: ~44% of all exposures</li>
+         <li>• Leading cause: Analgesics, cleaning substances, cosmetics</li>
+         <li>• Mortality: ~1,500 deaths/year from acute poisoning</li>
+         <li>• Intentional exposures: ~20% (suicidal, abuse)</li>
+        </ul>
+       </div>
+       <div class="info-card rounded-2xl p-5 bg-gradient-to-br from-violet-500/10 to-transparent">
+        <div class="flex items-center gap-3 mb-3">
+         <div class="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center">
+          <i data-lucide="list" class="w-5 h-5 text-violet-400"></i>
+         </div>
+         <h3 class="font-heading text-lg text-white">Classification</h3>
+        </div>
+        <ul class="font-body text-sm text-slate-300 space-y-2">
+         <li><strong class="text-violet-300">By Intent:</strong> Accidental, Suicidal, Homicidal, Iatrogenic, Occupational</li>
+         <li><strong class="text-violet-300">By Route:</strong> Oral (most common), Inhalational, Dermal, Parenteral, Ocular, Rectal</li>
+         <li><strong class="text-violet-300">By Agent:</strong> Pharmaceutical, Industrial, Agricultural, Biological, Household</li>
+         <li><strong class="text-violet-300">By Timeline:</strong> Acute, Chronic, Acute-on-chronic</li>
+        </ul>
+       </div>
+       <div class="info-card rounded-2xl p-5 bg-gradient-to-br from-cyan-500/10 to-transparent">
+        <div class="flex items-center gap-3 mb-3">
+         <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center">
+          <i data-lucide="phone" class="w-5 h-5 text-cyan-400"></i>
+         </div>
+         <h3 class="font-heading text-lg text-white">Key Contacts</h3>
+        </div>
+        <ul class="font-body text-sm text-slate-300 space-y-2">
+         <li>🇺🇸 <strong class="text-cyan-300">US Poison Control:</strong> 1-800-222-1222</li>
+         <li>🇬🇧 <strong class="text-cyan-300">UK NPIS:</strong> 0344-892-0111</li>
+         <li>🇮🇳 <strong class="text-cyan-300">India NPIC:</strong> 1800-116-117</li>
+         <li>🌐 <strong class="text-cyan-300">WHO INTOX:</strong> Available globally</li>
+         <li class="pt-2 border-t border-white/10">Always contact Poison Control early — they improve outcomes</li>
+        </ul>
+       </div>
+      </div>
+     </div><!-- Golden Rules -->
+     <div class="fade-up" style="animation-delay:0.2s">
+      <div class="glow-border border-2 rounded-2xl p-6 bg-gradient-to-br from-amber-500/5 to-transparent">
+       <h2 class="font-heading text-2xl text-amber-300 mb-4 flex items-center gap-2">⚡ Golden Rules of Toxicology</h2>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-body text-sm">
+        <div class="flex gap-3 items-start"><span class="flex-shrink-0 w-7 h-7 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">1</span>
+         <div>
+          <strong class="text-white">Treat the Patient, Not the Poison</strong>
+          <p class="text-slate-400 mt-1">Stabilize ABCs first. Resuscitation always takes priority over identification or specific antidotes.</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="flex-shrink-0 w-7 h-7 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">2</span>
+         <div>
+          <strong class="text-white">History May Be Unreliable</strong>
+          <p class="text-slate-400 mt-1">Patients may deny, minimize, or be unable to provide history. Use clinical findings to guide management.</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="flex-shrink-0 w-7 h-7 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">3</span>
+         <div>
+          <strong class="text-white">Time Is Tissue</strong>
+          <p class="text-slate-400 mt-1">Some antidotes (NAC for acetaminophen, fomepizole for toxic alcohols) are time-critical. Don't wait for confirmation.</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="flex-shrink-0 w-7 h-7 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">4</span>
+         <div>
+          <strong class="text-white">Assume the Worst Case</strong>
+          <p class="text-slate-400 mt-1">Always calculate maximum possible dose. Assume co-ingestions until proven otherwise.</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="flex-shrink-0 w-7 h-7 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">5</span>
+         <div>
+          <strong class="text-white">Decontamination Window Is Narrow</strong>
+          <p class="text-slate-400 mt-1">Activated charcoal most effective within 1 hour. Don't delay for imaging or labs.</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="flex-shrink-0 w-7 h-7 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">6</span>
+         <div>
+          <strong class="text-white">Observation Is Therapeutic</strong>
+          <p class="text-slate-400 mt-1">Many poisonings resolve with supportive care. Adequate monitoring may be the best "treatment."</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Quick Reference Cards -->
+     <div class="fade-up" style="animation-delay:0.3s">
+      <h2 class="font-heading text-2xl text-white mb-4">🔬 Top 10 Most Dangerous Ingestions</h2>
+      <div class="overflow-x-auto rounded-xl border border-white/10">
+       <table class="tox-table w-full font-body text-sm">
+        <thead>
+         <tr class="text-left text-slate-300">
+          <th class="px-4 py-3 rounded-tl-xl">Poison</th>
+          <th class="px-4 py-3">Lethal Dose/Danger</th>
+          <th class="px-4 py-3">Key Feature</th>
+          <th class="px-4 py-3 rounded-tr-xl">Antidote</th>
+         </tr>
+        </thead>
+        <tbody class="text-slate-300">
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Organophosphates</td>
+          <td class="px-4 py-3">Variable; highly toxic</td>
+          <td class="px-4 py-3">SLUDGE/DUMBELS + Nicotinic</td>
+          <td class="px-4 py-3 text-emerald-400">Atropine + Pralidoxime</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Paracetamol (APAP)</td>
+          <td class="px-4 py-3">&gt;150 mg/kg toxic</td>
+          <td class="px-4 py-3">Delayed hepatotoxicity (24-72h)</td>
+          <td class="px-4 py-3 text-emerald-400">N-Acetylcysteine (NAC)</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Tricyclic Antidepressants</td>
+          <td class="px-4 py-3">&gt;10 mg/kg toxic</td>
+          <td class="px-4 py-3">Wide QRS, seizures, hypotension</td>
+          <td class="px-4 py-3 text-emerald-400">NaHCO₃ (Sodium Bicarbonate)</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Calcium Channel Blockers</td>
+          <td class="px-4 py-3">1-2 tablets lethal in child</td>
+          <td class="px-4 py-3">Bradycardia, hypotension, hyperglycemia</td>
+          <td class="px-4 py-3 text-emerald-400">High-dose Insulin + Ca²⁺</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Beta-Blockers</td>
+          <td class="px-4 py-3">Variable</td>
+          <td class="px-4 py-3">Bradycardia, hypotension, hypoglycemia</td>
+          <td class="px-4 py-3 text-emerald-400">Glucagon + High-dose Insulin</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Methanol/Ethylene Glycol</td>
+          <td class="px-4 py-3">~1 mL/kg lethal</td>
+          <td class="px-4 py-3">High AG acidosis + Osmol gap</td>
+          <td class="px-4 py-3 text-emerald-400">Fomepizole / Ethanol</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Cyanide</td>
+          <td class="px-4 py-3">1-3 mg/kg lethal</td>
+          <td class="px-4 py-3">Lactic acidosis, cherry red skin</td>
+          <td class="px-4 py-3 text-emerald-400">Hydroxocobalamin / Na thiosulfate</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Iron</td>
+          <td class="px-4 py-3">&gt;60 mg/kg toxic</td>
+          <td class="px-4 py-3">GI hemorrhage → shock → hepatic failure</td>
+          <td class="px-4 py-3 text-emerald-400">Deferoxamine</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Digoxin</td>
+          <td class="px-4 py-3">&gt;10 mg acute</td>
+          <td class="px-4 py-3">Hyperkalemia + Dysrhythmias</td>
+          <td class="px-4 py-3 text-emerald-400">Digibind (DigiFab)</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-rose-400 font-semibold">Paraquat</td>
+          <td class="px-4 py-3">10-15 mL lethal</td>
+          <td class="px-4 py-3">Oral burns → Pulmonary fibrosis</td>
+          <td class="px-4 py-3 text-yellow-400">No specific antidote (Fuller's earth)</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- GENERAL APPROACH TAB -->
+    <section id="tab-approach" class="tab-content hidden space-y-8">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-3xl text-white mb-6">🩺 Systematic Approach to the Poisoned Patient</h2><!-- ABCDE -->
+      <div class="space-y-4 mb-8">
+       <h3 class="font-heading text-xl text-rose-400">Primary Survey: ABCDE</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="info-card severity-severe rounded-xl p-4 bg-white/[0.02]">
+         <h4 class="font-body font-bold text-white text-lg mb-2">A — Airway</h4>
+         <ul class="font-body text-sm text-slate-300 space-y-1">
+          <li>• Assess patency, secretions, vomitus</li>
+          <li>• Protect airway if GCS ≤ 8</li>
+          <li>• RSI with caution (avoid succinylcholine in OP poisoning)</li>
+          <li>• Consider nasogastric tube placement post-intubation</li>
+         </ul>
+        </div>
+        <div class="info-card severity-severe rounded-xl p-4 bg-white/[0.02]">
+         <h4 class="font-body font-bold text-white text-lg mb-2">B — Breathing</h4>
+         <ul class="font-body text-sm text-slate-300 space-y-1">
+          <li>• RR pattern: Kussmaul (acidosis), slow (opioids), rapid (salicylates)</li>
+          <li>• SpO₂ unreliable in CO/MetHb poisoning</li>
+          <li>• Bronchospasm: OP, chlorine gas</li>
+          <li>• ARDS risk: Paraquat, hydrocarbons, opioids</li>
+         </ul>
+        </div>
+        <div class="info-card severity-severe rounded-xl p-4 bg-white/[0.02]">
+         <h4 class="font-body font-bold text-white text-lg mb-2">C — Circulation</h4>
+         <ul class="font-body text-sm text-slate-300 space-y-1">
+          <li>• Hypotension: CCBs, BBs, TCAs, iron</li>
+          <li>• Hypertension: Sympathomimetics, MAOIs</li>
+          <li>• Dysrhythmias: Wide QRS (Na channel), QTc prolongation</li>
+          <li>• 2 large-bore IVs, continuous cardiac monitoring</li>
+         </ul>
+        </div>
+        <div class="info-card severity-moderate rounded-xl p-4 bg-white/[0.02]">
+         <h4 class="font-body font-bold text-white text-lg mb-2">D — Disability</h4>
+         <ul class="font-body text-sm text-slate-300 space-y-1">
+          <li>• GCS assessment + pupils (PEARL)</li>
+          <li>• Miosis: Opioids, OPs, clonidine</li>
+          <li>• Mydriasis: Anticholinergics, sympathomimetics</li>
+          <li>• Seizures: TCAs, isoniazid, tramadol, organochlorines</li>
+          <li>• <strong class="text-amber-400">Coma Cocktail:</strong> Dextrose + Naloxone + Thiamine</li>
+         </ul>
+        </div>
+        <div class="info-card severity-moderate rounded-xl p-4 bg-white/[0.02]">
+         <h4 class="font-body font-bold text-white text-lg mb-2">E — Exposure</h4>
+         <ul class="font-body text-sm text-slate-300 space-y-1">
+          <li>• Full body examination — remove all clothing</li>
+          <li>• Skin: Chemical burns, needle marks, cyanosis</li>
+          <li>• Odor: Garlic (OPs), bitter almonds (cyanide), fruity (DKA/isopropanol)</li>
+          <li>• Temperature: Hyper (serotonin, NMS) vs Hypo (opioids, sedatives)</li>
+          <li>• Decontaminate skin/eyes if topical exposure</li>
+         </ul>
+        </div>
+        <div class="info-card severity-mild rounded-xl p-4 bg-white/[0.02]">
+         <h4 class="font-body font-bold text-white text-lg mb-2">F — Full History</h4>
+         <ul class="font-body text-sm text-slate-300 space-y-1">
+          <li>• <strong class="text-cyan-400">5 W's:</strong> What, When, Where, Why, hoW much</li>
+          <li>• Co-ingestants? Alcohol?</li>
+          <li>• Medication access (entire household)</li>
+          <li>• Psychiatric history &amp; suicidal intent</li>
+          <li>• Bring containers, bottles, blister packs</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Resuscitation Priorities -->
+      <div class="glow-border border-2 rounded-2xl p-6 bg-white/[0.02] mb-8">
+       <h3 class="font-heading text-xl text-amber-300 mb-4">🚨 Toxicology-Specific Resuscitation Priorities</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-body text-sm text-slate-300">
+        <div>
+         <h4 class="text-white font-semibold mb-2">Immediate Actions (0-5 min)</h4>
+         <ol class="space-y-1 list-decimal list-inside">
+          <li>Stabilize airway — intubate if GCS ≤ 8</li>
+          <li>IV access × 2, cardiac monitor, pulse oximetry</li>
+          <li>Stat glucose check — treat hypoglycemia</li>
+          <li>12-lead ECG — look for QRS/QTc abnormalities</li>
+          <li>If seizures → Benzodiazepines first-line</li>
+         </ol>
+        </div>
+        <div>
+         <h4 class="text-white font-semibold mb-2">Early Actions (5-30 min)</h4>
+         <ol class="space-y-1 list-decimal list-inside">
+          <li>Empiric antidotes if indicated (naloxone, NAC, atropine)</li>
+          <li>Consider activated charcoal if within window</li>
+          <li>Labs: BMP, LFTs, lactate, ABG, serum levels</li>
+          <li>Calculate anion gap &amp; osmol gap</li>
+          <li>Contact Poison Control Center</li>
+         </ol>
+        </div>
+       </div>
+      </div><!-- Physical Exam Clues -->
+      <div class="info-card rounded-2xl p-6 bg-white/[0.02]">
+       <h3 class="font-heading text-xl text-cyan-400 mb-4">🔍 Physical Exam Clues — "What the Body Tells You"</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 font-body text-sm">
+        <div>
+         <h4 class="text-violet-400 font-semibold mb-2">Vital Sign Patterns</h4>
+         <ul class="text-slate-300 space-y-1">
+          <li>🔺 HR + 🔺 BP + 🔺 Temp = <span class="text-amber-400">Sympathomimetic</span></li>
+          <li>🔻 HR + 🔻 BP = <span class="text-amber-400">BB/CCB/Digoxin</span></li>
+          <li>🔻 HR + 🔻 RR + 🔻 Temp = <span class="text-amber-400">Opioid/Sedative</span></li>
+          <li>🔺 RR + Metabolic Acidosis = <span class="text-amber-400">Salicylates/Toxic alcohols</span></li>
+         </ul>
+        </div>
+        <div>
+         <h4 class="text-violet-400 font-semibold mb-2">Skin Findings</h4>
+         <ul class="text-slate-300 space-y-1">
+          <li>Dry, flushed, hot = <span class="text-amber-400">Anticholinergic</span></li>
+          <li>Diaphoretic = <span class="text-amber-400">Cholinergic/Sympathomimetic</span></li>
+          <li>Cherry red = <span class="text-amber-400">CO poisoning</span></li>
+          <li>Blue/Chocolate = <span class="text-amber-400">Methemoglobinemia</span></li>
+          <li>Jaundice (delayed) = <span class="text-amber-400">APAP/Mushrooms</span></li>
+         </ul>
+        </div>
+        <div>
+         <h4 class="text-violet-400 font-semibold mb-2">Characteristic Odors</h4>
+         <ul class="text-slate-300 space-y-1">
+          <li>🧄 Garlic = <span class="text-amber-400">Organophosphates, Arsenic</span></li>
+          <li>🍬 Bitter almonds = <span class="text-amber-400">Cyanide</span></li>
+          <li>🍎 Fruity/Acetone = <span class="text-amber-400">Isopropanol, DKA</span></li>
+          <li>⛽ Gasoline-like = <span class="text-amber-400">Hydrocarbons</span></li>
+          <li>🥚 Rotten eggs = <span class="text-amber-400">Hydrogen sulfide</span></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- TOXIDROMES TAB -->
+    <section id="tab-toxidromes" class="tab-content hidden space-y-6">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-3xl text-white mb-2">🧬 Major Toxidromes</h2>
+      <p class="font-body text-slate-400 mb-6">A toxidrome is a constellation of signs and symptoms that suggests a specific class of poisoning. Recognizing toxidromes allows rapid empiric treatment before confirmatory testing.</p>
+      <div class="space-y-4" id="toxidromesAccordion"><!-- Cholinergic -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3"><span class="badge-cholinergic px-3 py-1 rounded-lg text-xs font-body font-semibold">CHOLINERGIC</span> <span class="font-heading text-lg text-white">Cholinergic / SLUDGE-M Toxidrome</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-emerald-400 font-semibold mb-2">SLUDGE-M / DUMBELS Mnemonic</h4>
+            <div class="grid grid-cols-2 gap-2">
+             <div class="bg-emerald-500/10 rounded-lg p-3">
+              <p class="font-mono text-emerald-300 font-bold">SLUDGE-M</p>
+              <ul class="mt-1 space-y-0.5 text-xs">
+               <li><strong>S</strong> — Salivation</li>
+               <li><strong>L</strong> — Lacrimation</li>
+               <li><strong>U</strong> — Urination</li>
+               <li><strong>D</strong> — Defecation/Diarrhea</li>
+               <li><strong>G</strong> — GI cramping</li>
+               <li><strong>E</strong> — Emesis</li>
+               <li><strong>M</strong> — Miosis</li>
+              </ul>
+             </div>
+             <div class="bg-emerald-500/10 rounded-lg p-3">
+              <p class="font-mono text-emerald-300 font-bold">DUMBELS</p>
+              <ul class="mt-1 space-y-0.5 text-xs">
+               <li><strong>D</strong> — Diarrhea</li>
+               <li><strong>U</strong> — Urination</li>
+               <li><strong>M</strong> — Miosis</li>
+               <li><strong>B</strong> — Bradycardia/Bronchospasm</li>
+               <li><strong>E</strong> — Emesis</li>
+               <li><strong>L</strong> — Lacrimation</li>
+               <li><strong>S</strong> — Salivation</li>
+              </ul>
+             </div>
+            </div>
+           </div>
+           <div>
+            <h4 class="text-emerald-400 font-semibold mb-2">Key Clinical Features</h4>
+            <ul class="space-y-1">
+             <li>• <strong class="text-white">Muscarinic:</strong> SLUDGE + bradycardia + bronchospasm + bronchorrhea</li>
+             <li>• <strong class="text-white">Nicotinic:</strong> Fasciculations, weakness, tachycardia, hypertension, paralysis</li>
+             <li>• <strong class="text-white">CNS:</strong> Anxiety, seizures, coma, respiratory depression</li>
+             <li>• Intermediate syndrome (24-96h): Proximal muscle weakness</li>
+             <li>• OPIDN (2-4 weeks): Delayed neuropathy</li>
+            </ul>
+            <h4 class="text-emerald-400 font-semibold mt-3 mb-2">Common Causes</h4>
+            <p>Organophosphates, Carbamates, Nerve agents (Sarin, VX), Pilocarpine, Mushrooms (muscarinic type)</p>
+            <h4 class="text-emerald-400 font-semibold mt-3 mb-2">Treatment</h4>
+            <p><strong class="text-amber-400">Atropine:</strong> 1-2mg IV doubling every 3-5 min until secretions dry. May need massive doses (100+ mg). <strong class="text-amber-400">Pralidoxime (2-PAM):</strong> 1-2g IV over 15-30 min. Most effective within 24-48h before "aging."</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Anticholinergic -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3"><span class="badge-anticholinergic px-3 py-1 rounded-lg text-xs font-body font-semibold">ANTICHOLINERGIC</span> <span class="font-heading text-lg text-white">Anticholinergic Toxidrome</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-3">
+          <div class="bg-orange-500/10 rounded-lg p-4 mb-3">
+           <p class="font-mono text-orange-300 font-bold mb-2">"Hot as a Hare, Blind as a Bat, Dry as a Bone, Red as a Beet, Mad as a Hatter, Full as a Flask"</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-orange-400 font-semibold mb-2">Clinical Features</h4>
+            <ul class="space-y-1">
+             <li>• <strong>Hyperthermia</strong> (Hot as a Hare)</li>
+             <li>• <strong>Mydriasis</strong> (Blind as a Bat)</li>
+             <li>• <strong>Dry skin &amp; mucous membranes</strong> (Dry as a Bone)</li>
+             <li>• <strong>Flushed skin</strong> (Red as a Beet)</li>
+             <li>• <strong>Agitation, delirium, hallucinations</strong> (Mad as a Hatter)</li>
+             <li>• <strong>Urinary retention</strong> (Full as a Flask)</li>
+             <li>• Tachycardia, decreased bowel sounds, seizures</li>
+            </ul>
+           </div>
+           <div>
+            <h4 class="text-orange-400 font-semibold mb-2">Common Causes</h4>
+            <p>Antihistamines (diphenhydramine), TCAs, atropine, scopolamine, Jimson weed (Datura), antipsychotics, cyclobenzaprine</p>
+            <h4 class="text-orange-400 font-semibold mt-3 mb-2">Treatment</h4>
+            <ul class="space-y-1">
+             <li>• Supportive care: Cooling, benzodiazepines for agitation</li>
+             <li>• <strong class="text-amber-400">Physostigmine 1-2mg slow IV</strong> — only for pure anticholinergic toxicity, NOT for TCA</li>
+             <li>• Avoid physostigmine if: Wide QRS, seizures, or cardiac conduction delays</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Sympathomimetic -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3"><span class="badge-sympathomimetic px-3 py-1 rounded-lg text-xs font-body font-semibold">SYMPATHOMIMETIC</span> <span class="font-heading text-lg text-white">Sympathomimetic Toxidrome</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-3">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-fuchsia-400 font-semibold mb-2">Clinical Features</h4>
+            <ul class="space-y-1">
+             <li>• Hypertension, tachycardia</li>
+             <li>• Hyperthermia, diaphoresis</li>
+             <li>• Mydriasis (dilated pupils)</li>
+             <li>• Agitation, psychosis, paranoia</li>
+             <li>• Seizures, rhabdomyolysis</li>
+             <li>• Chest pain (coronary vasospasm)</li>
+             <li>• Differentiator from anticholinergic: <strong class="text-white">DIAPHORESIS present</strong></li>
+            </ul>
+           </div>
+           <div>
+            <h4 class="text-fuchsia-400 font-semibold mb-2">Common Causes</h4>
+            <p>Cocaine, amphetamines, methamphetamine, MDMA, pseudoephedrine, caffeine (massive dose), synthetic cathinones ("bath salts")</p>
+            <h4 class="text-fuchsia-400 font-semibold mt-3 mb-2">Treatment</h4>
+            <ul class="space-y-1">
+             <li>• <strong class="text-amber-400">Benzodiazepines</strong> — first-line for all symptoms</li>
+             <li>• Aggressive cooling for hyperthermia</li>
+             <li>• <strong class="text-red-400">⛔ Avoid beta-blockers</strong> (unopposed alpha stimulation)</li>
+             <li>• Cocaine chest pain: Benzos + nitrates, NOT beta-blockers</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Opioid -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3"><span class="badge-opioid px-3 py-1 rounded-lg text-xs font-body font-semibold">OPIOID</span> <span class="font-heading text-lg text-white">Opioid Toxidrome</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-3">
+          <div class="bg-blue-500/10 rounded-lg p-4 mb-3">
+           <p class="font-mono text-blue-300 font-bold">Classic Triad: CNS Depression + Respiratory Depression + Miosis (Pinpoint Pupils)</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-blue-400 font-semibold mb-2">Clinical Features</h4>
+            <ul class="space-y-1">
+             <li>• Pinpoint pupils (miosis) — absent in meperidine, tramadol</li>
+             <li>• Respiratory depression (RR &lt; 12)</li>
+             <li>• CNS depression → coma</li>
+             <li>• Hypotension, bradycardia</li>
+             <li>• Hypothermia</li>
+             <li>• Decreased bowel sounds, urinary retention</li>
+             <li>• Needle tracks (IV drug use)</li>
+            </ul>
+           </div>
+           <div>
+            <h4 class="text-blue-400 font-semibold mb-2">Common Causes</h4>
+            <p>Morphine, heroin, fentanyl, methadone, oxycodone, hydrocodone, codeine, tramadol, loperamide (high dose)</p>
+            <h4 class="text-blue-400 font-semibold mt-3 mb-2">Treatment</h4>
+            <ul class="space-y-1">
+             <li>• <strong class="text-amber-400">Naloxone (Narcan) 0.04-0.4 mg IV</strong> — titrate to respiratory effort, NOT consciousness</li>
+             <li>• Start low in known opioid-dependent patients (precipitates withdrawal)</li>
+             <li>• May need repeat doses (t½ naloxone 30-90 min vs fentanyl/methadone hours)</li>
+             <li>• Consider naloxone infusion: 2/3 of effective bolus dose per hour</li>
+             <li>• Intubate if no response to naloxone 10mg total</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Sedative-Hypnotic -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3"><span class="badge-sedative px-3 py-1 rounded-lg text-xs font-body font-semibold">SEDATIVE-HYPNOTIC</span> <span class="font-heading text-lg text-white">Sedative-Hypnotic Toxidrome</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-3">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-purple-400 font-semibold mb-2">Clinical Features (similar to opioid but NORMAL pupils)</h4>
+            <ul class="space-y-1">
+             <li>• CNS depression, slurred speech, ataxia</li>
+             <li>• <strong class="text-white">Normal-sized pupils</strong> (distinguishes from opioid)</li>
+             <li>• Respiratory depression (less severe than opioids)</li>
+             <li>• Hypotension, hypothermia</li>
+             <li>• Hyporeflexia</li>
+             <li>• Benzodiazepines: rarely fatal alone, dangerous with ethanol</li>
+            </ul>
+           </div>
+           <div>
+            <h4 class="text-purple-400 font-semibold mb-2">Common Causes</h4>
+            <p>Benzodiazepines, barbiturates, GHB, zolpidem, ethanol, chloral hydrate, baclofen</p>
+            <h4 class="text-purple-400 font-semibold mt-3 mb-2">Treatment</h4>
+            <ul class="space-y-1">
+             <li>• Primarily supportive — protect airway</li>
+             <li>• <strong class="text-amber-400">Flumazenil 0.2mg IV</strong> — ONLY for iatrogenic benzodiazepine oversedation</li>
+             <li>• <strong class="text-red-400">⛔ Do NOT use flumazenil</strong> in chronic benzo users (seizure risk), unknown overdose, or co-ingestion with proconvulsants</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Serotonin Syndrome -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3"><span class="badge-serotonin px-3 py-1 rounded-lg text-xs font-body font-semibold">SEROTONIN</span> <span class="font-heading text-lg text-white">Serotonin Syndrome</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-3">
+          <div class="bg-yellow-500/10 rounded-lg p-4 mb-3">
+           <p class="font-mono text-yellow-300 font-bold">Hunter Criteria: Spontaneous clonus, Inducible clonus + agitation, Ocular clonus + agitation, Tremor + hyperreflexia, Hypertonia + Temp &gt;38°C + clonus</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-yellow-400 font-semibold mb-2">Clinical Triad</h4>
+            <ul class="space-y-1">
+             <li>• <strong class="text-white">Neuromuscular:</strong> Clonus (especially lower limbs), hyperreflexia, rigidity, tremor, myoclonus</li>
+             <li>• <strong class="text-white">Autonomic:</strong> Hyperthermia, diaphoresis, tachycardia, hypertension, mydriasis, diarrhea</li>
+             <li>• <strong class="text-white">Mental Status:</strong> Agitation, confusion, hypomania</li>
+             <li>• Key differentiator from NMS: <strong class="text-white">Clonus + hyperreflexia + rapid onset</strong> (NMS has lead-pipe rigidity + slow onset)</li>
+            </ul>
+           </div>
+           <div>
+            <h4 class="text-yellow-400 font-semibold mb-2">Common Causes</h4>
+            <p>SSRIs + MAOIs, SSRIs + tramadol, SSRIs + linezolid, SSRIs + triptans, MDMA, meperidine + MAOIs, St. John's Wort combinations</p>
+            <h4 class="text-yellow-400 font-semibold mt-3 mb-2">Treatment</h4>
+            <ul class="space-y-1">
+             <li>• Discontinue all serotonergic agents</li>
+             <li>• <strong class="text-amber-400">Cyproheptadine 12mg PO</strong> then 2mg q2h (serotonin antagonist)</li>
+             <li>• Benzodiazepines for agitation and muscle rigidity</li>
+             <li>• Active cooling if temp &gt;41°C</li>
+             <li>• <strong class="text-red-400">⛔ Avoid: Dantrolene</strong> (ineffective), succinylcholine (hyperkalemia risk)</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Toxidrome Comparison -->
+      <div class="mt-6 info-card rounded-2xl p-5 bg-white/[0.02]">
+       <h3 class="font-heading text-xl text-white mb-4">⚡ Quick Toxidrome Comparison</h3>
+       <div class="overflow-x-auto rounded-xl">
+        <table class="tox-table w-full font-body text-xs sm:text-sm min-w-[600px]">
+         <thead>
+          <tr class="text-left text-slate-300">
+           <th class="px-3 py-2">Feature</th>
+           <th class="px-3 py-2">Cholinergic</th>
+           <th class="px-3 py-2">Anticholinergic</th>
+           <th class="px-3 py-2">Sympathomimetic</th>
+           <th class="px-3 py-2">Opioid</th>
+           <th class="px-3 py-2">Sedative</th>
+          </tr>
+         </thead>
+         <tbody class="text-slate-300">
+          <tr class="border-t border-white/5">
+           <td class="px-3 py-2 font-semibold text-white">Pupils</td>
+           <td class="px-3 py-2">Miosis</td>
+           <td class="px-3 py-2">Mydriasis</td>
+           <td class="px-3 py-2">Mydriasis</td>
+           <td class="px-3 py-2">Miosis</td>
+           <td class="px-3 py-2">Normal</td>
+          </tr>
+          <tr class="border-t border-white/5">
+           <td class="px-3 py-2 font-semibold text-white">HR</td>
+           <td class="px-3 py-2">↓ Brady</td>
+           <td class="px-3 py-2">↑ Tachy</td>
+           <td class="px-3 py-2">↑ Tachy</td>
+           <td class="px-3 py-2">↓ Brady</td>
+           <td class="px-3 py-2">↓ or Normal</td>
+          </tr>
+          <tr class="border-t border-white/5">
+           <td class="px-3 py-2 font-semibold text-white">BP</td>
+           <td class="px-3 py-2">↓</td>
+           <td class="px-3 py-2">Variable</td>
+           <td class="px-3 py-2">↑ Hypertension</td>
+           <td class="px-3 py-2">↓</td>
+           <td class="px-3 py-2">↓</td>
+          </tr>
+          <tr class="border-t border-white/5">
+           <td class="px-3 py-2 font-semibold text-white">Temp</td>
+           <td class="px-3 py-2">Normal</td>
+           <td class="px-3 py-2">↑ Hyper</td>
+           <td class="px-3 py-2">↑ Hyper</td>
+           <td class="px-3 py-2">↓ Hypo</td>
+           <td class="px-3 py-2">↓ Hypo</td>
+          </tr>
+          <tr class="border-t border-white/5">
+           <td class="px-3 py-2 font-semibold text-white">Skin</td>
+           <td class="px-3 py-2">Wet</td>
+           <td class="px-3 py-2">Dry, Red</td>
+           <td class="px-3 py-2">Wet</td>
+           <td class="px-3 py-2">Normal</td>
+           <td class="px-3 py-2">Normal</td>
+          </tr>
+          <tr class="border-t border-white/5">
+           <td class="px-3 py-2 font-semibold text-white">Bowel</td>
+           <td class="px-3 py-2">↑ Active</td>
+           <td class="px-3 py-2">↓ Ileus</td>
+           <td class="px-3 py-2">↑ Active</td>
+           <td class="px-3 py-2">↓ Decreased</td>
+           <td class="px-3 py-2">↓ Decreased</td>
+          </tr>
+          <tr class="border-t border-white/5">
+           <td class="px-3 py-2 font-semibold text-white">Mental</td>
+           <td class="px-3 py-2">Confusion</td>
+           <td class="px-3 py-2">Delirium</td>
+           <td class="px-3 py-2">Agitation</td>
+           <td class="px-3 py-2">Sedation</td>
+           <td class="px-3 py-2">Sedation</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </div>
+    </section><!-- SPECIFIC POISONS TAB -->
+    <section id="tab-specific" class="tab-content hidden space-y-6">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-3xl text-white mb-6">💊 Specific Poisons — Detailed Protocols</h2>
+      <div class="space-y-4" id="poisonsAccordion"><!-- Acetaminophen -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3 flex-wrap"><span class="text-2xl">💊</span> <span class="font-heading text-lg text-white">Acetaminophen (Paracetamol) Toxicity</span> <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs font-body">HIGH MORTALITY IF DELAYED</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-rose-400 font-semibold mb-2">Toxic Doses</h4>
+            <ul class="space-y-1">
+             <li>• Acute: &gt;150 mg/kg or &gt;7.5g (whichever is less)</li>
+             <li>• Chronic: &gt;4g/day in adults</li>
+             <li>• High-risk: Alcoholics, malnourished, CYP2E1 inducers</li>
+            </ul>
+            <h4 class="text-rose-400 font-semibold mt-3 mb-2">Phases of Toxicity</h4>
+            <div class="space-y-2">
+             <div class="severity-mild rounded-lg p-2 bg-white/[0.02]">
+              <strong>Phase I (0-24h):</strong> Nausea, vomiting, malaise, normal LFTs — Patients often feel well!
+             </div>
+             <div class="severity-moderate rounded-lg p-2 bg-white/[0.02]">
+              <strong>Phase II (24-72h):</strong> RUQ pain, rising AST/ALT, rising PT/INR, oliguria
+             </div>
+             <div class="severity-severe rounded-lg p-2 bg-white/[0.02]">
+              <strong>Phase III (72-96h):</strong> Peak hepatotoxicity — AST/ALT &gt;10,000, coagulopathy, jaundice, renal failure, encephalopathy, DEATH
+             </div>
+             <div class="severity-mild rounded-lg p-2 bg-white/[0.02]">
+              <strong>Phase IV (4d-2wk):</strong> Recovery phase if patient survives
+             </div>
+            </div>
+           </div>
+           <div>
+            <h4 class="text-rose-400 font-semibold mb-2">Rumack-Matthew Nomogram</h4>
+            <ul class="space-y-1">
+             <li>• Plot serum APAP level at 4h post-ingestion</li>
+             <li>• Treatment line: 150 µg/mL at 4h → 4.7 µg/mL at 24h</li>
+             <li>• Above line → Treat with NAC</li>
+             <li>• <strong class="text-amber-400">If timing unknown or &gt;8h — start NAC immediately, don't wait for levels</strong></li>
+            </ul>
+            <h4 class="text-rose-400 font-semibold mt-3 mb-2">NAC Protocol (IV - Preferred)</h4>
+            <div class="bg-emerald-500/10 rounded-lg p-3">
+             <p class="text-emerald-300 font-semibold">21-hour IV Protocol:</p>
+             <ol class="list-decimal list-inside space-y-1 mt-1">
+              <li>150 mg/kg in 200mL D5W over 1 hour</li>
+              <li>50 mg/kg in 500mL D5W over 4 hours</li>
+              <li>100 mg/kg in 1000mL D5W over 16 hours</li>
+             </ol>
+             <p class="mt-2 text-xs text-slate-400">Continue NAC if ALT rising, APAP detectable, or INR &gt;2</p>
+            </div>
+            <h4 class="text-rose-400 font-semibold mt-3 mb-2">King's College Criteria (Transplant)</h4>
+            <ul class="space-y-1 text-xs">
+             <li>• pH &lt; 7.3 after resuscitation, OR</li>
+             <li>• Grade III/IV encephalopathy + Creatinine &gt;3.4 + INR &gt;6.5</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Organophosphates -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3 flex-wrap"><span class="text-2xl">🧪</span> <span class="font-heading text-lg text-white">Organophosphate &amp; Carbamate Poisoning</span> <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs font-body">LIFE-THREATENING</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-emerald-400 font-semibold mb-2">Mechanism</h4>
+            <p>Irreversible inhibition of acetylcholinesterase (AChE) → Excess acetylcholine at muscarinic, nicotinic, and CNS receptors</p>
+            <h4 class="text-emerald-400 font-semibold mt-3 mb-2">Common Agents</h4>
+            <p>Malathion, Parathion, Chlorpyrifos, Diazinon, Nerve agents (Sarin, VX, Novichok)</p>
+            <h4 class="text-emerald-400 font-semibold mt-3 mb-2">Diagnosis</h4>
+            <ul class="space-y-1">
+             <li>• Clinical (SLUDGE-M + Nicotinic + CNS)</li>
+             <li>• Serum Cholinesterase (Pseudocholinesterase): Low</li>
+             <li>• RBC Cholinesterase: More accurate, slower to return</li>
+             <li>• Garlic-like odor on patient/clothes</li>
+            </ul>
+           </div>
+           <div>
+            <h4 class="text-emerald-400 font-semibold mb-2">Treatment Protocol</h4>
+            <div class="bg-amber-500/10 rounded-lg p-3 mb-3">
+             <p class="text-amber-300 font-semibold">⚠️ Decontaminate FIRST — remove clothes, wash with soap &amp; water. Protect healthcare workers!</p>
+            </div>
+            <div class="space-y-2">
+             <div class="bg-white/5 rounded-lg p-3">
+              <p class="text-amber-400 font-semibold">Atropine (Muscarinic Blockade)</p>
+              <ul class="space-y-0.5 mt-1">
+               <li>• Adult: 2-5 mg IV bolus</li>
+               <li>• Double dose every 3-5 minutes</li>
+               <li>• Endpoint: <strong>Dry secretions</strong> (NOT pupil size or heart rate)</li>
+               <li>• May need 100+ mg in severe cases</li>
+               <li>• Start infusion: 10-20% of loading dose/hour</li>
+              </ul>
+             </div>
+             <div class="bg-white/5 rounded-lg p-3">
+              <p class="text-amber-400 font-semibold">Pralidoxime / 2-PAM (AChE Reactivation)</p>
+              <ul class="space-y-0.5 mt-1">
+               <li>• Adult: 1-2g IV over 15-30 min</li>
+               <li>• Then infusion 500 mg/hr</li>
+               <li>• Most effective before "aging" (24-48h for most OPs)</li>
+               <li>• NOT needed for carbamate poisoning (spontaneous recovery)</li>
+              </ul>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- TCA -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3 flex-wrap"><span class="text-2xl">🫀</span> <span class="font-heading text-lg text-white">Tricyclic Antidepressant (TCA) Toxicity</span> <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs font-body">CARDIAC EMERGENCY</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-violet-400 font-semibold mb-2">Mechanism — Triple Toxicity</h4>
+            <ul class="space-y-1">
+             <li>• <strong class="text-white">Na⁺ Channel Blockade:</strong> Wide QRS, R in aVR, Brugada pattern</li>
+             <li>• <strong class="text-white">Anticholinergic:</strong> Tachycardia, mydriasis, dry skin, urinary retention</li>
+             <li>• <strong class="text-white">Alpha-1 Blockade:</strong> Hypotension</li>
+             <li>• Also: Serotonin/NE reuptake inhibition, GABA antagonism (seizures)</li>
+            </ul>
+            <h4 class="text-violet-400 font-semibold mt-3 mb-2">ECG Findings (CRITICAL)</h4>
+            <div class="bg-violet-500/10 rounded-lg p-3">
+             <ul class="space-y-1">
+              <li>• <strong class="text-white">QRS &gt; 100ms:</strong> Risk of seizures</li>
+              <li>• <strong class="text-white">QRS &gt; 160ms:</strong> Risk of ventricular dysrhythmias</li>
+              <li>• <strong class="text-white">R wave in aVR &gt; 3mm:</strong> Highly specific for TCA</li>
+              <li>• Terminal R in aVR + S in Lead I</li>
+              <li>• Right axis deviation of terminal 40ms of QRS</li>
+             </ul>
+            </div>
+           </div>
+           <div>
+            <h4 class="text-violet-400 font-semibold mb-2">Treatment</h4>
+            <div class="bg-amber-500/10 rounded-lg p-3 mb-3">
+             <p class="text-amber-300 font-semibold">🚨 Sodium Bicarbonate is the ANTIDOTE</p>
+             <ul class="mt-1 space-y-0.5">
+              <li>• 1-2 mEq/kg IV bolus for QRS &gt;100ms</li>
+              <li>• Repeat until QRS narrows or pH 7.50-7.55</li>
+              <li>• Infusion: 150 mEq NaHCO₃ in 1L D5W</li>
+              <li>• Monitor QRS continuously</li>
+             </ul>
+            </div>
+            <ul class="space-y-1">
+             <li>• Seizures: <strong class="text-amber-400">Benzodiazepines ONLY</strong></li>
+             <li>• <strong class="text-red-400">⛔ Avoid:</strong> Phenytoin, Class IA/IC antiarrhythmics, physostigmine</li>
+             <li>• Hypotension: Fluids → NaHCO₃ → Norepinephrine</li>
+             <li>• Intralipid 20% for refractory cardiovascular collapse</li>
+             <li>• Observe minimum 6h even if asymptomatic</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Toxic Alcohols -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3 flex-wrap"><span class="text-2xl">🧴</span> <span class="font-heading text-lg text-white">Toxic Alcohols (Methanol, Ethylene Glycol, Isopropanol)</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="overflow-x-auto rounded-xl">
+           <table class="tox-table w-full min-w-[500px]">
+            <thead>
+             <tr class="text-left text-slate-300">
+              <th class="px-3 py-2">Feature</th>
+              <th class="px-3 py-2">Methanol</th>
+              <th class="px-3 py-2">Ethylene Glycol</th>
+              <th class="px-3 py-2">Isopropanol</th>
+             </tr>
+            </thead>
+            <tbody class="text-slate-300">
+             <tr class="border-t border-white/5">
+              <td class="px-3 py-2 font-semibold text-white">Source</td>
+              <td class="px-3 py-2">Windshield fluid, fuel</td>
+              <td class="px-3 py-2">Antifreeze, coolant</td>
+              <td class="px-3 py-2">Rubbing alcohol</td>
+             </tr>
+             <tr class="border-t border-white/5">
+              <td class="px-3 py-2 font-semibold text-white">Toxic Metabolite</td>
+              <td class="px-3 py-2 text-rose-400">Formic acid</td>
+              <td class="px-3 py-2 text-rose-400">Glycolic/Oxalic acid</td>
+              <td class="px-3 py-2 text-amber-400">Acetone (less toxic)</td>
+             </tr>
+             <tr class="border-t border-white/5">
+              <td class="px-3 py-2 font-semibold text-white">Key Finding</td>
+              <td class="px-3 py-2">Visual disturbance/"snowfield" vision</td>
+              <td class="px-3 py-2">Calcium oxalate crystals in urine, renal failure</td>
+              <td class="px-3 py-2">Ketosis WITHOUT acidosis</td>
+             </tr>
+             <tr class="border-t border-white/5">
+              <td class="px-3 py-2 font-semibold text-white">AG Acidosis</td>
+              <td class="px-3 py-2">Severe (↑AG)</td>
+              <td class="px-3 py-2">Severe (↑AG)</td>
+              <td class="px-3 py-2">Mild or absent</td>
+             </tr>
+             <tr class="border-t border-white/5">
+              <td class="px-3 py-2 font-semibold text-white">Osmol Gap</td>
+              <td class="px-3 py-2">↑ Early</td>
+              <td class="px-3 py-2">↑ Early</td>
+              <td class="px-3 py-2">↑ Early</td>
+             </tr>
+             <tr class="border-t border-white/5">
+              <td class="px-3 py-2 font-semibold text-white">Antidote</td>
+              <td class="px-3 py-2 text-emerald-400">Fomepizole / Ethanol</td>
+              <td class="px-3 py-2 text-emerald-400">Fomepizole / Ethanol</td>
+              <td class="px-3 py-2">Supportive only</td>
+             </tr>
+             <tr class="border-t border-white/5">
+              <td class="px-3 py-2 font-semibold text-white">Dialysis</td>
+              <td class="px-3 py-2">Yes — if acidosis, visual changes, renal failure</td>
+              <td class="px-3 py-2">Yes — if acidosis, renal failure</td>
+              <td class="px-3 py-2">Rarely needed</td>
+             </tr>
+            </tbody>
+           </table>
+          </div>
+          <div class="bg-emerald-500/10 rounded-lg p-4">
+           <p class="text-emerald-300 font-semibold mb-2">Fomepizole Protocol</p>
+           <ul class="space-y-1">
+            <li>• Loading: 15 mg/kg IV</li>
+            <li>• Then: 10 mg/kg q12h × 4 doses</li>
+            <li>• Then: 15 mg/kg q12h until levels undetectable</li>
+            <li>• Mechanism: Inhibits alcohol dehydrogenase → prevents toxic metabolite formation</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div><!-- Corrosives -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3 flex-wrap"><span class="text-2xl">🔥</span> <span class="font-heading text-lg text-white">Corrosive (Acid &amp; Alkali) Ingestion</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-rose-400 font-semibold mb-2">Acid vs Alkali</h4>
+            <div class="space-y-2">
+             <div class="bg-red-500/10 rounded-lg p-3">
+              <p class="font-semibold text-red-400">Acids (pH &lt; 2)</p>
+              <p>Coagulation necrosis → Eschar formation (self-limiting). More gastric injury. Examples: HCl, H₂SO₄, acetic acid</p>
+             </div>
+             <div class="bg-orange-500/10 rounded-lg p-3">
+              <p class="font-semibold text-orange-400">Alkalis (pH &gt; 12)</p>
+              <p>Liquefactive necrosis → Deep penetrating injury (WORSE). More esophageal injury. Examples: NaOH (drain cleaner), bleach, ammonia</p>
+             </div>
+            </div>
+           </div>
+           <div>
+            <h4 class="text-rose-400 font-semibold mb-2">Management</h4>
+            <ul class="space-y-1">
+             <li>• <strong class="text-red-400">⛔ Do NOT induce emesis or give activated charcoal</strong></li>
+             <li>• <strong class="text-red-400">⛔ Do NOT attempt neutralization</strong> (exothermic reaction)</li>
+             <li>• Dilution with water/milk within 30 min ONLY if no perforation suspected</li>
+             <li>• NPO, IV fluids, pain management</li>
+             <li>• Urgent endoscopy within 12-24h (Zargar grading)</li>
+             <li>• CT if perforation suspected</li>
+             <li>• Long-term: Esophageal stricture risk (alkali)</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Snakebite -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3 flex-wrap"><span class="text-2xl">🐍</span> <span class="font-heading text-lg text-white">Snakebite Envenomation</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-amber-400 font-semibold mb-2">Classification by Venom Type</h4>
+            <div class="space-y-2">
+             <div class="bg-red-500/10 rounded-lg p-3">
+              <p class="font-semibold text-red-400">Hemotoxic (Viperidae)</p>
+              <p>Local swelling, ecchymosis, coagulopathy (DIC), hemorrhage, shock. Examples: Russell's Viper, Rattlesnakes</p>
+             </div>
+             <div class="bg-blue-500/10 rounded-lg p-3">
+              <p class="font-semibold text-blue-400">Neurotoxic (Elapidae)</p>
+              <p>Ptosis, diplopia, respiratory paralysis, minimal local signs. Examples: Cobra, Krait, Mamba</p>
+             </div>
+             <div class="bg-purple-500/10 rounded-lg p-3">
+              <p class="font-semibold text-purple-400">Myotoxic</p>
+              <p>Rhabdomyolysis, myoglobinuria, renal failure. Examples: Sea snakes, some Elapids</p>
+             </div>
+            </div>
+           </div>
+           <div>
+            <h4 class="text-amber-400 font-semibold mb-2">Management</h4>
+            <ul class="space-y-1">
+             <li>• Immobilize limb, remove jewelry</li>
+             <li>• <strong class="text-red-400">⛔ Do NOT: Tourniquet, incision, suction, ice</strong></li>
+             <li>• Mark edge of swelling with time</li>
+             <li>• 20WBCT (20-minute whole blood clotting test) for coagulopathy</li>
+             <li>• <strong class="text-emerald-400">Anti-snake venom (ASV)</strong> — polyvalent or monovalent</li>
+             <li>• Indications for ASV: Coagulopathy, neurotoxicity, severe local envenomation, hemodynamic instability</li>
+             <li>• Neostigmine test for neurotoxic envenomation</li>
+             <li>• Fasciotomy only for true compartment syndrome (measure pressures)</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Carbon Monoxide -->
+       <div class="accordion-item rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 text-left">
+         <div class="flex items-center gap-3 flex-wrap"><span class="text-2xl">💨</span> <span class="font-heading text-lg text-white">Carbon Monoxide (CO) Poisoning</span>
+         </div><i data-lucide="chevron-down" class="accordion-chevron w-5 h-5 text-slate-400 flex-shrink-0"></i> </button>
+        <div class="accordion-content">
+         <div class="p-5 pt-0 font-body text-sm text-slate-300 space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+            <h4 class="text-rose-400 font-semibold mb-2">COHb Levels &amp; Symptoms</h4>
+            <div class="space-y-1">
+             <div class="severity-mild rounded-lg p-2 bg-white/[0.02]">
+              <strong>10-20%:</strong> Headache, nausea, dizziness
+             </div>
+             <div class="severity-moderate rounded-lg p-2 bg-white/[0.02]">
+              <strong>20-40%:</strong> Confusion, visual changes, syncope, tachycardia
+             </div>
+             <div class="severity-severe rounded-lg p-2 bg-white/[0.02]">
+              <strong>40-60%:</strong> Seizures, coma, cardiac ischemia
+             </div>
+             <div class="severity-lethal rounded-lg p-2">
+              <strong>&gt;60%:</strong> Cardiopulmonary failure, death
+             </div>
+            </div>
+            <p class="mt-2 text-xs text-amber-400">⚠️ SpO₂ is FALSELY NORMAL — CO absorbs at same wavelength. Use co-oximetry!</p>
+           </div>
+           <div>
+            <h4 class="text-rose-400 font-semibold mb-2">Treatment</h4>
+            <ul class="space-y-1">
+             <li>• Remove from source immediately</li>
+             <li>• <strong class="text-amber-400">100% O₂ via NRB mask</strong> — reduces COHb t½ from 5h to 90 min</li>
+             <li>• <strong class="text-amber-400">Hyperbaric O₂ (HBO)</strong> — reduces t½ to 20 min</li>
+             <li>• HBO Indications: COHb &gt;25%, loss of consciousness, cardiac ischemia, pregnancy, neurological symptoms</li>
+             <li>• Monitor troponin (myocardial injury common)</li>
+             <li>• Delayed neuropsychiatric syndrome (2-40 days): Cognitive impairment, personality changes</li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ANTIDOTES TAB -->
+    <section id="tab-antidotes" class="tab-content hidden space-y-6">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-3xl text-white mb-6">💉 Essential Antidotes — Quick Reference</h2>
+      <div class="overflow-x-auto rounded-xl border border-white/10">
+       <table class="tox-table w-full font-body text-sm min-w-[700px]">
+        <thead>
+         <tr class="text-left text-slate-300">
+          <th class="px-4 py-3">Antidote</th>
+          <th class="px-4 py-3">Poison</th>
+          <th class="px-4 py-3">Dose</th>
+          <th class="px-4 py-3">Notes</th>
+         </tr>
+        </thead>
+        <tbody class="text-slate-300">
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">N-Acetylcysteine (NAC)</td>
+          <td class="px-4 py-3">Acetaminophen</td>
+          <td class="px-4 py-3 font-mono text-xs">150→50→100 mg/kg IV (21h protocol)</td>
+          <td class="px-4 py-3">Best within 8h. Continue if ALT rising</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Atropine</td>
+          <td class="px-4 py-3">Organophosphates, Carbamates</td>
+          <td class="px-4 py-3 font-mono text-xs">2-5mg IV, double q3-5min</td>
+          <td class="px-4 py-3">Endpoint: dry secretions. No max dose</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Pralidoxime (2-PAM)</td>
+          <td class="px-4 py-3">Organophosphates</td>
+          <td class="px-4 py-3 font-mono text-xs">1-2g IV over 15-30min</td>
+          <td class="px-4 py-3">Within 24-48h before "aging"</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Naloxone (Narcan)</td>
+          <td class="px-4 py-3">Opioids</td>
+          <td class="px-4 py-3 font-mono text-xs">0.04-0.4mg IV, titrate</td>
+          <td class="px-4 py-3">Titrate to RR, not consciousness</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Flumazenil</td>
+          <td class="px-4 py-3">Benzodiazepines</td>
+          <td class="px-4 py-3 font-mono text-xs">0.2mg IV q1min (max 3mg)</td>
+          <td class="px-4 py-3">⛔ AVOID in chronic benzo use/seizure risk</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">NaHCO₃</td>
+          <td class="px-4 py-3">TCAs, Na channel blockers</td>
+          <td class="px-4 py-3 font-mono text-xs">1-2 mEq/kg IV bolus</td>
+          <td class="px-4 py-3">Target pH 7.50-7.55, monitor QRS</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Fomepizole</td>
+          <td class="px-4 py-3">Methanol, Ethylene glycol</td>
+          <td class="px-4 py-3 font-mono text-xs">15mg/kg load, then 10mg/kg q12h</td>
+          <td class="px-4 py-3">ADH inhibitor. Start empirically</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Deferoxamine</td>
+          <td class="px-4 py-3">Iron</td>
+          <td class="px-4 py-3 font-mono text-xs">15 mg/kg/hr IV (max 6g/day)</td>
+          <td class="px-4 py-3">"Vin rosé" colored urine = working</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Digibind / DigiFab</td>
+          <td class="px-4 py-3">Digoxin, Oleander</td>
+          <td class="px-4 py-3 font-mono text-xs">Based on level or empiric 10 vials</td>
+          <td class="px-4 py-3">Fab fragments. Monitor K⁺ (drops rapidly)</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Hydroxocobalamin</td>
+          <td class="px-4 py-3">Cyanide</td>
+          <td class="px-4 py-3 font-mono text-xs">5g IV over 15min</td>
+          <td class="px-4 py-3">Red discoloration of skin/urine (harmless)</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Glucagon</td>
+          <td class="px-4 py-3">Beta-blockers, CCBs</td>
+          <td class="px-4 py-3 font-mono text-xs">5-10mg IV bolus → 1-5mg/hr</td>
+          <td class="px-4 py-3">Bypasses beta receptor. Causes vomiting</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Calcium (CaCl₂/Gluconate)</td>
+          <td class="px-4 py-3">CCBs, HF, Hyperkalemia</td>
+          <td class="px-4 py-3 font-mono text-xs">CaCl₂ 1g IV or Ca Gluc 3g IV</td>
+          <td class="px-4 py-3">CaCl₂ via central line only (tissue necrosis)</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">High-Dose Insulin (HIET)</td>
+          <td class="px-4 py-3">CCBs, Beta-blockers</td>
+          <td class="px-4 py-3 font-mono text-xs">1 U/kg bolus → 1-10 U/kg/hr</td>
+          <td class="px-4 py-3">D10W infusion + K⁺ monitoring. Emerging first-line</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Intralipid 20%</td>
+          <td class="px-4 py-3">Local anesthetic toxicity, lipophilic drugs</td>
+          <td class="px-4 py-3 font-mono text-xs">1.5 mL/kg bolus → 0.25 mL/kg/min</td>
+          <td class="px-4 py-3">"Lipid sink" — rescue therapy</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Pyridoxine (B6)</td>
+          <td class="px-4 py-3">Isoniazid (INH)</td>
+          <td class="px-4 py-3 font-mono text-xs">Gram-for-gram of INH ingested (max 5g)</td>
+          <td class="px-4 py-3">First-line for INH seizures (benzo-resistant)</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Methylene Blue</td>
+          <td class="px-4 py-3">Methemoglobinemia</td>
+          <td class="px-4 py-3 font-mono text-xs">1-2 mg/kg IV over 5 min</td>
+          <td class="px-4 py-3">⛔ Avoid in G6PD deficiency. May repeat x1</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Cyproheptadine</td>
+          <td class="px-4 py-3">Serotonin syndrome</td>
+          <td class="px-4 py-3 font-mono text-xs">12mg PO then 2mg q2h</td>
+          <td class="px-4 py-3">Only available PO. Serotonin antagonist</td>
+         </tr>
+         <tr class="border-t border-white/5">
+          <td class="px-4 py-3 text-emerald-400 font-semibold">Octreotide</td>
+          <td class="px-4 py-3">Sulfonylurea hypoglycemia</td>
+          <td class="px-4 py-3 font-mono text-xs">50-100 µg SC q6-8h</td>
+          <td class="px-4 py-3">Prevents rebound hypoglycemia after D50</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- DECONTAMINATION TAB -->
+    <section id="tab-decon" class="tab-content hidden space-y-6">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-3xl text-white mb-6">🧹 Gastrointestinal Decontamination</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><!-- Activated Charcoal -->
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl bg-slate-600 flex items-center justify-center text-xl">
+          ⬛
+         </div>
+         <h3 class="font-heading text-xl text-white">Activated Charcoal (AC)</h3>
+        </div>
+        <div class="font-body text-sm text-slate-300 space-y-3">
+         <div class="bg-emerald-500/10 rounded-lg p-3">
+          <p class="text-emerald-400 font-semibold">Dose: 1 g/kg (max 50g) PO/NG</p>
+          <p class="mt-1 text-xs">Best within 1 hour of ingestion. May consider up to 2h for large ingestions.</p>
+         </div>
+         <div>
+          <h4 class="text-white font-semibold mb-1">Indications</h4>
+          <ul class="space-y-0.5">
+           <li>• Potentially toxic ingestion within 1-2 hours</li>
+           <li>• Protected airway (awake or intubated)</li>
+           <li>• Substance binds to charcoal</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-red-400 font-semibold mb-1">Contraindications</h4>
+          <ul class="space-y-0.5">
+           <li>• Unprotected airway / decreased consciousness</li>
+           <li>• Corrosive ingestion (acids/alkali)</li>
+           <li>• GI perforation or obstruction</li>
+           <li>• Hydrocarbons with aspiration risk</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-amber-400 font-semibold mb-1">Does NOT Bind ("PHAILS")</h4>
+          <p class="font-mono text-xs text-amber-300">P-esticides (some), H-ydrocarbons, A-cids/Alkali, I-ron, L-ithium, S-olvents/alcohols</p>
+         </div>
+         <div>
+          <h4 class="text-violet-400 font-semibold mb-1">Multi-Dose AC (MDAC)</h4>
+          <ul class="space-y-0.5">
+           <li>• 0.5 g/kg q4-6h (without cathartic)</li>
+           <li>• Indications: Carbamazepine, dapsone, phenobarbital, quinine, theophylline ("gut dialysis")</li>
+          </ul>
+         </div>
+        </div>
+       </div><!-- Whole Bowel Irrigation -->
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-xl">
+          🚿
+         </div>
+         <h3 class="font-heading text-xl text-white">Whole Bowel Irrigation (WBI)</h3>
+        </div>
+        <div class="font-body text-sm text-slate-300 space-y-3">
+         <div class="bg-blue-500/10 rounded-lg p-3">
+          <p class="text-blue-400 font-semibold">PEG Solution via NG</p>
+          <p class="mt-1">Adult: 1.5-2 L/hr | Child: 500 mL/hr</p>
+          <p class="text-xs mt-1">Continue until rectal effluent is clear</p>
+         </div>
+         <div>
+          <h4 class="text-white font-semibold mb-1">Indications</h4>
+          <ul class="space-y-0.5">
+           <li>• Iron overdose</li>
+           <li>• Lithium overdose</li>
+           <li>• Sustained-release/enteric-coated medications</li>
+           <li>• Body packers ("drug mules")</li>
+           <li>• Lead paint chips ingestion</li>
+          </ul>
+         </div>
+        </div>
+       </div><!-- Gastric Lavage -->
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-xl">
+          🫧
+         </div>
+         <h3 class="font-heading text-xl text-white">Gastric Lavage</h3>
+        </div>
+        <div class="font-body text-sm text-slate-300 space-y-3">
+         <div class="bg-amber-500/10 rounded-lg p-3">
+          <p class="text-amber-400 font-semibold">⚠️ Rarely Indicated in Modern Practice</p>
+         </div>
+         <ul class="space-y-1">
+          <li>• Only within 1 hour of life-threatening ingestion</li>
+          <li>• Large-bore orogastric tube (36-40Fr adult)</li>
+          <li>• Patient must be intubated for airway protection</li>
+          <li>• 200-300 mL aliquots of NS, repeated until clear</li>
+          <li>• <strong class="text-red-400">⛔ Contraindicated:</strong> Corrosives, hydrocarbons, sharp objects, unprotected airway</li>
+         </ul>
+        </div>
+       </div><!-- Enhanced Elimination -->
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl bg-rose-500/20 flex items-center justify-center text-xl">
+          🔄
+         </div>
+         <h3 class="font-heading text-xl text-white">Enhanced Elimination</h3>
+        </div>
+        <div class="font-body text-sm text-slate-300 space-y-3">
+         <div>
+          <h4 class="text-cyan-400 font-semibold mb-1">Urinary Alkalinization</h4>
+          <ul class="space-y-0.5">
+           <li>• NaHCO₃ infusion → target urine pH 7.5-8.5</li>
+           <li>• Indications: Salicylates, methotrexate, phenobarbital</li>
+           <li>• Monitor K⁺ (hypokalemia prevents alkalinization)</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-cyan-400 font-semibold mb-1">Hemodialysis (EXTRIP Criteria)</h4>
+          <ul class="space-y-0.5">
+           <li>• Methanol, Ethylene glycol</li>
+           <li>• Salicylates (level &gt;100 mg/dL or renal failure)</li>
+           <li>• Lithium (level &gt;4 mEq/L or symptomatic)</li>
+           <li>• Theophylline, Valproic acid, Metformin</li>
+           <li>• Ideal for: Small molecular weight, low protein binding, small Vd, water soluble</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- LABS & WORKUP TAB -->
+    <section id="tab-labs" class="tab-content hidden space-y-6">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-3xl text-white mb-6">🔬 Laboratory Workup &amp; Diagnostic Approach</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><!-- Initial Labs -->
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <h3 class="font-heading text-xl text-cyan-400 mb-4">📋 Standard Tox Workup</h3>
+        <div class="font-body text-sm text-slate-300 space-y-3">
+         <div class="bg-cyan-500/10 rounded-lg p-3">
+          <p class="text-cyan-300 font-semibold mb-2">Order for ALL suspected poisonings:</p>
+          <ul class="space-y-0.5">
+           <li>✅ BMP (Chem-7): Na⁺, K⁺, Cl⁻, HCO₃⁻, BUN, Cr, Glucose</li>
+           <li>✅ ABG/VBG with lactate</li>
+           <li>✅ Serum osmolality (measured)</li>
+           <li>✅ 12-lead ECG</li>
+           <li>✅ Acetaminophen level (always — often co-ingested)</li>
+           <li>✅ Salicylate level</li>
+           <li>✅ Ethanol level</li>
+           <li>✅ CBC, LFTs, Coagulation studies (PT/INR)</li>
+           <li>✅ Urinalysis (crystals, myoglobin)</li>
+           <li>✅ Pregnancy test (all women of childbearing age)</li>
+          </ul>
+         </div>
+        </div>
+       </div><!-- Anion Gap -->
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <h3 class="font-heading text-xl text-amber-400 mb-4">🧮 Anion Gap Calculation</h3>
+        <div class="font-body text-sm text-slate-300 space-y-3">
+         <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="font-mono text-lg text-white">AG = Na⁺ − (Cl⁻ + HCO₃⁻)</p>
+          <p class="text-xs mt-1 text-slate-400">Normal: 8-12 mEq/L (or 10-14 with K⁺)</p>
+         </div>
+         <div>
+          <h4 class="text-amber-400 font-semibold mb-1">↑ AG Metabolic Acidosis — "MUDPILES" / "CAT MUDPILES"</h4>
+          <div class="bg-amber-500/10 rounded-lg p-3 font-mono text-xs">
+           <p><strong>M</strong>ethanol | <strong>U</strong>remia | <strong>D</strong>KA | <strong>P</strong>ropylene glycol | <strong>I</strong>soniazid/Iron | <strong>L</strong>actic acidosis | <strong>E</strong>thylene glycol | <strong>S</strong>alicylates</p>
+           <p class="mt-1"><strong>+C</strong>yanide <strong>A</strong>cetaminophen <strong>T</strong>oluene</p>
+          </div>
+         </div>
+         <div>
+          <h4 class="text-amber-400 font-semibold mb-1">Osmol Gap</h4>
+          <div class="bg-white/5 rounded-lg p-3">
+           <p class="font-mono text-sm text-white">OG = Measured Osm − Calculated Osm</p>
+           <p class="font-mono text-xs text-slate-400 mt-1">Calc Osm = 2(Na⁺) + Glucose/18 + BUN/2.8 + EtOH/4.6</p>
+           <p class="text-xs mt-2"><strong class="text-white">OG &gt; 10:</strong> Think toxic alcohols (methanol, ethylene glycol, isopropanol)</p>
+           <p class="text-xs"><strong class="text-amber-400">Key concept:</strong> Early = ↑OG, normal AG → Late = normal OG, ↑AG (as parent alcohol converted to acid metabolites)</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- ECG in Toxicology -->
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02] lg:col-span-2">
+        <h3 class="font-heading text-xl text-rose-400 mb-4">❤️ ECG in Toxicology — Critical Patterns</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-body text-sm text-slate-300">
+         <div class="bg-white/5 rounded-lg p-3">
+          <h4 class="text-white font-semibold mb-2">Wide QRS (&gt;120ms)</h4>
+          <ul class="space-y-0.5">
+           <li>• TCAs (Na⁺ channel block)</li>
+           <li>• Class IA/IC antiarrhythmics</li>
+           <li>• Cocaine, diphenhydramine</li>
+           <li>• Hyperkalemia</li>
+           <li>→ <span class="text-emerald-400">Treat with NaHCO₃</span></li>
+          </ul>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <h4 class="text-white font-semibold mb-2">Prolonged QTc (&gt;500ms)</h4>
+          <ul class="space-y-0.5">
+           <li>• Antipsychotics (haloperidol, quetiapine)</li>
+           <li>• Antiarrhythmics (sotalol, amiodarone)</li>
+           <li>• Fluoroquinolones, macrolides</li>
+           <li>• Methadone, SSRI overdose</li>
+           <li>→ <span class="text-emerald-400">Risk of Torsades → IV Magnesium</span></li>
+          </ul>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <h4 class="text-white font-semibold mb-2">Bradycardia + Hypotension</h4>
+          <ul class="space-y-0.5">
+           <li>• Beta-blockers</li>
+           <li>• Calcium channel blockers</li>
+           <li>• Digoxin</li>
+           <li>• Clonidine, organophosphates</li>
+           <li>→ <span class="text-emerald-400">Glucagon, Ca²⁺, HIET, pacing</span></li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- PEDIATRIC TAB -->
+    <section id="tab-pediatric" class="tab-content hidden space-y-6">
+     <div class="fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-3xl text-white mb-6">👶 Pediatric Toxicology</h2><!-- One Pill Can Kill -->
+      <div class="glow-border border-2 rounded-2xl p-6 bg-gradient-to-br from-red-500/10 to-transparent mb-6">
+       <h3 class="font-heading text-2xl text-red-400 mb-4">☠️ "One Pill Can Kill" — Fatal in a Toddler</h3>
+       <p class="font-body text-sm text-slate-400 mb-4">These medications can be lethal to a 10kg toddler with just 1-2 tablets/doses:</p>
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-body text-sm">
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Calcium Channel Blockers</strong>
+         <p class="text-slate-400 mt-1">Single sustained-release tablet (verapamil, nifedipine)</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Sulfonylureas</strong>
+         <p class="text-slate-400 mt-1">Glipizide, glyburide → Prolonged hypoglycemia</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Opioids</strong>
+         <p class="text-slate-400 mt-1">Methadone, fentanyl patches, oxycodone</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">TCAs</strong>
+         <p class="text-slate-400 mt-1">Amitriptyline, desipramine — most dangerous TCA</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Camphor</strong>
+         <p class="text-slate-400 mt-1">5 mL of 20% solution → seizures</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Clonidine / Imidazolines</strong>
+         <p class="text-slate-400 mt-1">CNS depression, bradycardia, hypotension</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Antimalarials</strong>
+         <p class="text-slate-400 mt-1">Chloroquine, quinine — cardiotoxic</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Methyl Salicylate</strong>
+         <p class="text-slate-400 mt-1">Oil of wintergreen: 1 tsp = 7g aspirin</p>
+        </div>
+        <div class="severity-lethal rounded-lg p-3 bg-white/[0.02]"><strong class="text-white">Theophylline</strong>
+         <p class="text-slate-400 mt-1">Seizures, dysrhythmias at low doses</p>
+        </div>
+       </div>
+      </div><!-- Pediatric Considerations -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <h3 class="font-heading text-xl text-violet-400 mb-4">📏 Pediatric Dosing Differences</h3>
+        <div class="font-body text-sm text-slate-300 space-y-2">
+         <ul class="space-y-1">
+          <li>• <strong class="text-white">Activated Charcoal:</strong> 1 g/kg (can mix with cola/juice)</li>
+          <li>• <strong class="text-white">NAC:</strong> Same weight-based protocol as adults</li>
+          <li>• <strong class="text-white">Naloxone:</strong> 0.1 mg/kg IV (max 2mg/dose) — can start with 0.01 mg/kg in neonates</li>
+          <li>• <strong class="text-white">Atropine:</strong> 0.02 mg/kg IV (min 0.1mg)</li>
+          <li>• <strong class="text-white">Dextrose:</strong> D10W 5 mL/kg (neonates), D25W 2 mL/kg (children)</li>
+          <li>• Weight-based calculations are critical — use Broselow tape in emergencies</li>
+         </ul>
+        </div>
+       </div>
+       <div class="info-card rounded-2xl p-5 bg-white/[0.02]">
+        <h3 class="font-heading text-xl text-cyan-400 mb-4">🏥 When to Admit Pediatric Patients</h3>
+        <div class="font-body text-sm text-slate-300 space-y-2">
+         <ul class="space-y-1">
+          <li>• ANY intentional ingestion (psychiatric evaluation required)</li>
+          <li>• Ingestion of "one pill can kill" medications</li>
+          <li>• Symptomatic patient (GI, CNS, cardiac)</li>
+          <li>• Sustained-release or delayed-toxicity agents</li>
+          <li>• Unknown ingestion with concerning exam</li>
+          <li>• Social concerns (neglect, abuse, unsafe environment)</li>
+          <li>• <strong class="text-amber-400">Minimum observation:</strong> 6h for immediate-release, 12-24h for sustained-release formulations</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="border-t border-white/10 mt-12">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-center font-body">
+     <p class="text-slate-500 text-sm">⚕️ <strong class="text-slate-400">Clinical Reference Only</strong> — Always consult local protocols, Poison Control, and senior clinicians. This does not replace clinical judgment.</p>
+     <p class="text-slate-600 text-xs mt-2">Compiled from Harrison's, Goldfrank's Toxicologic Emergencies, Tintinalli's EM, UpToDate &amp; AAPCC Guidelines</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// Default config
+const defaultConfig = {
+  main_title: "Toxicology & Poisoning Emergencies",
+  subtitle: "Comprehensive Clinical Reference for Emergency Physicians, Intensivists & Critical Care Teams",
+  background_color: "#0a0f1a",
+  surface_color: "#141b2d",
+  text_color: "#cbd5e1",
+  primary_action_color: "#f43f5e",
+  secondary_action_color: "#8b5cf6",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+// Tab switching
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const target = document.getElementById('tab-' + tabId);
+  if (target) {
+    target.classList.remove('hidden');
+    // Re-trigger animations
+    target.querySelectorAll('.fade-up').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+  }
+  const btn = document.querySelector(`[data-tab="${tabId}"]`);
+  if (btn) btn.classList.add('active');
+  lucide.createIcons();
+}
+
+// Accordion
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const chevron = btn.querySelector('.accordion-chevron');
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open');
+  chevron.classList.toggle('rotated');
+  if (!isOpen) lucide.createIcons();
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) {
+    document.querySelectorAll('.accordion-item, .info-card, .tox-table tbody tr').forEach(el => el.style.display = '');
+    return;
+  }
+  // Search within visible tab
+  const visibleTab = document.querySelector('.tab-content:not(.hidden)');
+  if (!visibleTab) return;
+
+  visibleTab.querySelectorAll('.accordion-item').forEach(item => {
+    item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+  visibleTab.querySelectorAll('.tox-table tbody tr').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+
+// Element SDK
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const titleEl = document.getElementById('mainTitle');
+  if (titleEl) titleEl.innerHTML = c.main_title.replace('&', '&amp;').replace(/Poisoning Emergencies/, '<br><span class="bg-gradient-to-r from-rose-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">Poisoning Emergencies</span>');
+  const subEl = document.getElementById('subtitle');
+  if (subEl) subEl.textContent = c.subtitle;
+
+  const root = document.getElementById('appRoot');
+  if (root) {
+    root.style.backgroundColor = c.background_color;
+    root.style.fontFamily = `${c.font_family}, DM Sans, sans-serif`;
+  }
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>
