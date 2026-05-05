@@ -1,0 +1,516 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Infectious Diseases | Microbiology & Clinical Management | Deep Medicine</title> <meta name="description" content="Comprehensive guide to infectious diseases including bacterial, viral, fungal infections, diagnosis, and clinical management strategies."> <link rel="canonical" href="https://deepmedicine.in/core/icu/infectious-diseases"> <!-- Open Graph --> <meta property="og:title" content="Infectious Diseases | Deep Medicine"> <meta property="og:description" content="Clinical approach to infectious diseases with diagnosis and management strategies."> <meta property="og:image" content="https://deepmedicine.in/images/infectious-diseases.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html,body{margin:0;padding:0;height:100%;font-family:'DM Sans',sans-serif}
+*{box-sizing:border-box}
+:root{--bg:#0b1120;--surface:#131b2e;--text:#e2e8f0;--primary:#38bdf8;--secondary:#64748b}
+.heading-font{font-family:'Playfair Display',serif}
+.card-glow{box-shadow:0 0 0 1px rgba(56,189,248,0.08),0 4px 24px rgba(0,0,0,0.3)}
+.card-glow:hover{box-shadow:0 0 0 1px rgba(56,189,248,0.2),0 8px 32px rgba(0,0,0,0.4)}
+.tab-active{background:linear-gradient(135deg,rgba(56,189,248,0.15),rgba(56,189,248,0.05));border-color:var(--primary);color:var(--primary)}
+.severity-critical{border-left:4px solid #ef4444;background:linear-gradient(90deg,rgba(239,68,68,0.06),transparent)}
+.severity-high{border-left:4px solid #f59e0b;background:linear-gradient(90deg,rgba(245,158,11,0.06),transparent)}
+.severity-moderate{border-left:4px solid #38bdf8;background:linear-gradient(90deg,rgba(56,189,248,0.06),transparent)}
+.badge-critical{background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.badge-high{background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.badge-moderate{background:rgba(56,189,248,0.15);color:#7dd3fc;border:1px solid rgba(56,189,248,0.3)}
+.badge-gram-pos{background:rgba(168,85,247,0.15);color:#c4b5fd;border:1px solid rgba(168,85,247,0.3)}
+.badge-gram-neg{background:rgba(244,63,94,0.15);color:#fda4af;border:1px solid rgba(244,63,94,0.3)}
+.badge-fungal{background:rgba(251,191,36,0.15);color:#fde68a;border:1px solid rgba(251,191,36,0.3)}
+.badge-viral{background:rgba(52,211,153,0.15);color:#6ee7b7;border:1px solid rgba(52,211,153,0.3)}
+.expand-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.expand-content.open{max-height:5000px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.4s ease both}
+.scrollbar-thin::-webkit-scrollbar{width:5px}
+.scrollbar-thin::-webkit-scrollbar-track{background:transparent}
+.scrollbar-thin::-webkit-scrollbar-thumb{background:rgba(56,189,248,0.2);border-radius:10px}
+.drug-dose{background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15);border-radius:8px;padding:8px 12px;margin:4px 0}
+.protocol-step{position:relative;padding-left:28px}
+.protocol-step::before{content:'';position:absolute;left:8px;top:24px;bottom:-8px;width:2px;background:rgba(56,189,248,0.15)}
+.protocol-step:last-child::before{display:none}
+.protocol-step::after{content:'';position:absolute;left:3px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--primary);border:2px solid var(--bg)}
+.search-input{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);transition:all 0.2s}
+.search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(56,189,248,0.1);outline:none}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full" style="background:var(--bg);color:var(--text)">
+  <div id="app" class="h-full overflow-auto scrollbar-thin"><!-- Header -->
+   <header style="background:linear-gradient(180deg,rgba(56,189,248,0.06) 0%,transparent 100%);border-bottom:1px solid rgba(56,189,248,0.1)">
+    <div class="max-w-6xl mx-auto px-4 py-5 sm:py-6">
+     <div class="flex items-center gap-3 mb-1">
+      <div style="background:linear-gradient(135deg,#38bdf8,#818cf8);width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center"><i data-lucide="heart-pulse" style="width:22px;height:22px;color:#fff"></i>
+      </div>
+      <div>
+       <h1 id="mainTitle" class="heading-font text-xl sm:text-2xl font-bold" style="color:var(--primary)">ICU Infections &amp; Management</h1>
+       <p id="subtitleText" class="text-xs sm:text-sm" style="color:var(--secondary)">Evidence-Based Clinical Protocols — From Bedside Experience</p>
+      </div>
+     </div>
+    </div>
+   </header><!-- Search & Filter Bar -->
+   <div class="max-w-6xl mx-auto px-4 pt-4 pb-2">
+    <div class="flex flex-col sm:flex-row gap-3">
+     <div class="relative flex-1"><i data-lucide="search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--secondary)"></i> <input type="text" id="searchInput" placeholder="Search infections, organisms, antibiotics..." class="search-input w-full rounded-lg pl-10 pr-4 py-2.5 text-sm" style="color:var(--text)">
+     </div>
+     <div class="flex gap-2 flex-wrap"><button onclick="filterBy('all')" class="filter-btn tab-active text-xs px-3 py-2 rounded-lg border border-transparent transition-all" data-filter="all">All</button> <button onclick="filterBy('respiratory')" class="filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all" style="color:var(--secondary)" data-filter="respiratory"><i data-lucide="wind" style="width:12px;height:12px;display:inline;vertical-align:middle"></i> Respiratory</button> <button onclick="filterBy('bloodstream')" class="filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all" style="color:var(--secondary)" data-filter="bloodstream"><i data-lucide="droplets" style="width:12px;height:12px;display:inline;vertical-align:middle"></i> Bloodstream</button> <button onclick="filterBy('urinary')" class="filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all" style="color:var(--secondary)" data-filter="urinary"><i data-lucide="flask-round" style="width:12px;height:12px;display:inline;vertical-align:middle"></i> Urinary</button> <button onclick="filterBy('surgical')" class="filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all" style="color:var(--secondary)" data-filter="surgical"><i data-lucide="scissors" style="width:12px;height:12px;display:inline;vertical-align:middle"></i> Surgical</button> <button onclick="filterBy('cns')" class="filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all" style="color:var(--secondary)" data-filter="cns"><i data-lucide="brain" style="width:12px;height:12px;display:inline;vertical-align:middle"></i> CNS</button> <button onclick="filterBy('abdominal')" class="filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all" style="color:var(--secondary)" data-filter="abdominal"><i data-lucide="circle-dot" style="width:12px;height:12px;display:inline;vertical-align:middle"></i> Abdominal</button> <button onclick="filterBy('skin')" class="filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all" style="color:var(--secondary)" data-filter="skin"><i data-lucide="shield" style="width:12px;height:12px;display:inline;vertical-align:middle"></i> Skin/Soft Tissue</button>
+     </div>
+    </div>
+   </div><!-- Quick Stats -->
+   <div class="max-w-6xl mx-auto px-4 py-3">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+     <div class="rounded-xl p-3 card-glow" style="background:var(--surface)">
+      <div class="flex items-center gap-2 mb-1">
+       <i data-lucide="activity" style="width:14px;height:14px;color:#ef4444"></i><span class="text-xs" style="color:var(--secondary)">VAP Mortality</span>
+      </div><span class="text-lg font-bold" style="color:#fca5a5">13–50%</span>
+     </div>
+     <div class="rounded-xl p-3 card-glow" style="background:var(--surface)">
+      <div class="flex items-center gap-2 mb-1">
+       <i data-lucide="droplets" style="width:14px;height:14px;color:#f59e0b"></i><span class="text-xs" style="color:var(--secondary)">CLABSI Rate</span>
+      </div><span class="text-lg font-bold" style="color:#fcd34d">0.8–5.2/1000 line-days</span>
+     </div>
+     <div class="rounded-xl p-3 card-glow" style="background:var(--surface)">
+      <div class="flex items-center gap-2 mb-1">
+       <i data-lucide="flask-round" style="width:14px;height:14px;color:#38bdf8"></i><span class="text-xs" style="color:var(--secondary)">CAUTI Incidence</span>
+      </div><span class="text-lg font-bold" style="color:#7dd3fc">1.7–8.5/1000 cath-days</span>
+     </div>
+     <div class="rounded-xl p-3 card-glow" style="background:var(--surface)">
+      <div class="flex items-center gap-2 mb-1">
+       <i data-lucide="bug" style="width:14px;height:14px;color:#a78bfa"></i><span class="text-xs" style="color:var(--secondary)">MDR Prevalence</span>
+      </div><span class="text-lg font-bold" style="color:#c4b5fd">30–60% of HAIs</span>
+     </div>
+    </div>
+   </div><!-- Infections Content -->
+   <div id="infectionsContainer" class="max-w-6xl mx-auto px-4 pb-8">
+   </div><!-- Footer -->
+   <footer class="max-w-6xl mx-auto px-4 py-6 text-center" style="border-top:1px solid rgba(255,255,255,0.05)">
+    <p class="text-xs" style="color:var(--secondary)">⚕️ Clinical reference only — Always correlate with local antibiograms, patient clinical context &amp; institutional protocols. Not a substitute for clinical judgment.</p>
+   </footer>
+  </div>
+  <script>
+// === INFECTION DATABASE ===
+const infections = [
+{
+  id:'vap', category:'respiratory', severity:'critical',
+  title:'Ventilator-Associated Pneumonia (VAP)',
+  icon:'wind',
+  definition:'Pneumonia developing ≥48 hours after endotracheal intubation. Leading cause of ICU mortality among HAIs.',
+  epidemiology:'Incidence: 5–40% of mechanically ventilated patients. Attributable mortality: 13–50%. Adds 7–11 days to ICU stay. Early-onset (≤4 days): usually susceptible organisms. Late-onset (>4 days): MDR organisms predominate.',
+  riskFactors:['Prolonged mechanical ventilation (>48 hrs)','Supine positioning (0°)','Reintubation / self-extubation','Nasogastric tube (vs orogastric)','Prior antibiotic exposure','Immunosuppression / corticosteroids','ARDS / lung contusion','Aspiration events','Sedation depth (RASS <-3)','Transport out of ICU'],
+  clinicalFeatures:'New or progressive infiltrate on CXR + ≥2 of: Temperature >38.3°C or <36°C, Leukocytosis >12,000/mm³ or leukopenia <4,000/mm³, Purulent tracheal secretions, Worsening oxygenation (PaO₂/FiO₂ decline). CPIS Score ≥6 suggests VAP (sensitivity 65%, specificity 64%).',
+  organisms:[
+    {name:'Early-onset (<4 days)',type:'gram-pos',bugs:'S. pneumoniae, H. influenzae, MSSA, E. coli'},
+    {name:'Late-onset (>4 days)',type:'gram-neg',bugs:'Pseudomonas aeruginosa, Acinetobacter baumannii, MRSA, ESBL-producing Enterobacteriaceae, Stenotrophomonas maltophilia, Klebsiella pneumoniae (CRE)'},
+    {name:'Fungal (immunocompromised)',type:'fungal',bugs:'Aspergillus spp., Candida spp. (usually colonizer)'}
+  ],
+  diagnostics:['Quantitative cultures: BAL ≥10⁴ CFU/mL, PSB ≥10³ CFU/mL, ETA ≥10⁶ CFU/mL','Blood cultures × 2 sets (before antibiotics)','Procalcitonin (PCT) — trend for de-escalation guidance','CXR portable (daily in ventilated patients)','CT chest if diagnostic uncertainty','Galactomannan / β-D-glucan if fungal suspected','Respiratory viral panel (if seasonal/clinical suspicion)'],
+  management:[
+    {step:'Empiric Therapy — Early-onset VAP (no MDR risk)',detail:'Ceftriaxone 2g IV q24h OR Ampicillin-Sulbactam 3g IV q6h OR Levofloxacin 750mg IV q24h. Duration: 7 days (guided by PCT).'},
+    {step:'Empiric Therapy — Late-onset VAP / MDR risk',detail:'Anti-pseudomonal β-lactam: Piperacillin-Tazobactam 4.5g IV q6h (extended infusion over 4h) OR Meropenem 1g IV q8h (extended infusion over 3h) OR Cefepime 2g IV q8h PLUS Anti-MRSA: Vancomycin 15–20 mg/kg IV q8–12h (target trough 15–20 µg/mL) OR Linezolid 600mg IV q12h (preferred for lung penetration). Consider adding Amikacin 15–20mg/kg IV q24h or Colistin IV if XDR Acinetobacter/Pseudomonas. Duration: 7 days (short course per IDSA/ATS 2016).'},
+    {step:'Culture-Directed De-escalation (48–72 hrs)',detail:'Narrow antibiotics based on culture & sensitivity. Stop MRSA coverage if cultures negative for MRSA. Stop double Gram-negative coverage if sensitive to β-lactam alone. Switch IV to PO when clinically improving (afebrile 48h, improving WBC, adequate PO absorption).'},
+    {step:'Adjunctive Measures',detail:'HOB elevation 30–45°. Daily sedation vacation + SBT protocol. Oral care with chlorhexidine 0.12% q6h. Subglottic secretion drainage (SSD) ETT if available. Early mobilization when hemodynamically stable. Stress ulcer prophylaxis (PPI/H2 blocker). DVT prophylaxis.'},
+    {step:'Special Scenarios',detail:'Acinetobacter baumannii XDR: Colistin 9MU loading → 4.5MU IV q12h + Meropenem (high-dose 2g q8h extended infusion) ± Sulbactam 3g IV q8h. Nebulized Colistin 2MU q8h as adjunct. Stenotrophomonas: TMP-SMX 15mg/kg/day (TMP component) IV divided q6–8h.'}
+  ],
+  prevention:['VAP Bundle compliance (target >95%)','HOB 30–45° unless contraindicated','Daily sedation interruption + spontaneous breathing trial','Oral care with CHX 0.12% q6h','Subglottic secretion drainage ETT','Avoid unnecessary reintubation','Cuff pressure monitoring q4h (25–30 cmH₂O)','Peptic ulcer & DVT prophylaxis','Early enteral nutrition (within 24–48h)','Minimize transport outside ICU']
+},
+{
+  id:'clabsi', category:'bloodstream', severity:'critical',
+  title:'Central Line-Associated Bloodstream Infection (CLABSI)',
+  icon:'droplets',
+  definition:'Laboratory-confirmed bloodstream infection in a patient with a central venous catheter (CVC) in place for >2 calendar days, where the line was in place on the date of event or the day before.',
+  epidemiology:'Incidence: 0.8–5.2 per 1000 catheter-days. Mortality: 12–25% attributable. Cost: $16,000–$45,000 per episode. Femoral > IJ > subclavian risk. Accounts for ~28% of all HAIs in ICU.',
+  riskFactors:['Femoral vein catheterization','Prolonged catheter dwell time (>7 days)','Multiple lumens (triple > double > single)','TPN administration','Frequent catheter manipulation','Neutropenia / immunosuppression','Non-tunneled catheters','Poor hand hygiene / break in aseptic technique','Prior CLABSI episode','Burns / large open wounds'],
+  clinicalFeatures:'Fever ≥38.3°C (or hypothermia <36°C) with no other identifiable source. Rigors/chills (especially within 30 min of line flush — highly suggestive). Hemodynamic instability / new-onset sepsis. Local signs: erythema, induration, purulence at insertion site (present in only ~30%). May present as occult bacteremia with no localizing signs.',
+  organisms:[
+    {name:'Gram-positive (most common)',type:'gram-pos',bugs:'Coagulase-negative Staphylococci (CoNS) — 34%, S. aureus (MRSA/MSSA) — 10%, Enterococcus spp. (including VRE) — 16%'},
+    {name:'Gram-negative',type:'gram-neg',bugs:'Klebsiella spp., E. coli, Pseudomonas aeruginosa, Enterobacter spp., Acinetobacter spp.'},
+    {name:'Fungal',type:'fungal',bugs:'Candida spp. — 12% (C. albicans, C. parapsilosis, C. glabrata, C. auris)'}
+  ],
+  diagnostics:['Paired blood cultures: ≥2 sets (1 peripheral + 1 from each lumen) BEFORE antibiotics','Differential time to positivity (DTP): CVC culture positive ≥2 hrs before peripheral = catheter as source (Se 85%, Sp 91%)','Catheter tip culture (semi-quantitative Maki roll method): ≥15 CFU significant','CBC with differential, CRP, Procalcitonin','Lactate level','TTE/TEE if S. aureus or Candida bacteremia (rule out endocarditis)','Ophthalmology consult for Candida (endophthalmitis screening)','Repeat blood cultures q48h until clearance documented'],
+  management:[
+    {step:'Immediate: Catheter Decision',detail:'REMOVE the catheter if: S. aureus, Candida spp., Pseudomonas, Mycobacteria, tunnel infection, port abscess, septic shock, or persistent bacteremia >72h. Consider SALVAGE (antibiotic lock therapy) only for: CoNS with non-complicated infection AND patient has limited venous access AND catheter is functional. If catheter retained: Antibiotic Lock Therapy with Vancomycin 5mg/mL + Heparin 5000U/mL, dwell time 8–12h daily.'},
+    {step:'Empiric Antibiotic Therapy',detail:'Vancomycin 15–20 mg/kg IV q8–12h (target AUC/MIC 400–600 for MRSA) PLUS Anti-Gram-negative coverage: Cefepime 2g IV q8h OR Piperacillin-Tazobactam 4.5g IV q6h OR Meropenem 1g IV q8h (if ESBL/CRE risk). Add Micafungin 100mg IV q24h or Caspofungin 70mg loading → 50mg q24h if: Candida risk (TPN, prior antibiotics, abdominal surgery, colonization).'},
+    {step:'Culture-Directed Therapy & Duration',detail:'CoNS: Vancomycin × 5–7 days (if catheter removed) or 10–14 days (if retained + lock therapy). S. aureus (MSSA): Nafcillin/Oxacillin 2g IV q4h × minimum 14 days (4–6 weeks if complicated: endocarditis, osteomyelitis, septic thrombosis). S. aureus (MRSA): Vancomycin or Daptomycin 6–8mg/kg IV q24h × 14 days minimum. Enterococcus: Ampicillin 2g IV q4h (if susceptible) or Vancomycin or Daptomycin. VRE: Daptomycin 8–12mg/kg or Linezolid 600mg q12h. Gram-negatives: Narrow per sensitivity × 7–14 days. Candida: Echinocandin × 14 days from first negative blood culture (minimum). Remove all CVCs. Transition to Fluconazole 400mg daily if C. albicans & susceptible.'},
+    {step:'Complications Workup',detail:'S. aureus bacteremia: MANDATORY TTE → TEE if TTE negative or high clinical suspicion. Repeat blood cultures q48h. Evaluate for metastatic infection (septic emboli, vertebral osteomyelitis, septic arthritis). Candida: Dilated fundoscopy within 1 week. If persistent candidemia (>5 days): CT abdomen for hepatosplenic candidiasis. Suppurative thrombophlebitis: Duplex USS of catheterized vein. If confirmed: prolonged antibiotics (4–6 weeks) ± anticoagulation.'}
+  ],
+  prevention:['Central Line Insertion Bundle: Hand hygiene, full barrier precautions (cap, mask, sterile gown, sterile gloves, large sterile drape), chlorhexidine 2% skin prep (allow 2 min drying), optimal site selection (subclavian > IJ > femoral), sterile dressing','Maintenance Bundle: Daily assessment of line necessity ("Do we still need this line?"), Chlorhexidine-impregnated dressing or CHG disc, Scrub the hub — 15 seconds with 70% alcohol before each access, Change administration sets per protocol, Replace dressings q7 days (transparent) or q2 days (gauze)','Organizational: CLABSI rate surveillance & feedback, Nurse-driven removal protocols, Checklist compliance auditing, Zero-tolerance policy for insertion bundle breaks']
+},
+{
+  id:'cauti', category:'urinary', severity:'high',
+  title:'Catheter-Associated Urinary Tract Infection (CAUTI)',
+  icon:'flask-round',
+  definition:'UTI occurring in patient with indwelling urinary catheter in place >2 days (with day of insertion = Day 1), with at least 1 sign/symptom AND urine culture ≥10³ CFU/mL with ≤2 species.',
+  epidemiology:'Most common HAI worldwide. Incidence: 1.7–8.5/1000 catheter-days. 70–80% of nosocomial UTIs are catheter-related. Leads to bacteremia in 2–4% (with 13–30% mortality for urosepsis). Accounts for 40% of all HAIs.',
+  riskFactors:['Prolonged catheterization (strongest risk factor)','Female sex','Older age','Diabetes mellitus','Immunosuppression','Poor catheter care / closed system breach','Catheter insertion outside OR','Non-adherence to aseptic insertion','Renal insufficiency'],
+  clinicalFeatures:'IMPORTANT: Asymptomatic bacteriuria (ASB) is COMMON (100% of patients by day 30) and should NOT be treated. True CAUTI requires symptoms: New-onset fever ≥38°C (or hypothermia), suprapubic tenderness, costovertebral angle tenderness, altered mental status (in elderly — a diagnosis of exclusion), new-onset rigors, hemodynamic instability with urinary source. Pyuria alone is NOT diagnostic (reflects catheter-related inflammation).',
+  organisms:[
+    {name:'Gram-negative (most common)',type:'gram-neg',bugs:'E. coli (21–53%), Klebsiella spp., Pseudomonas aeruginosa, Proteus mirabilis (biofilm, encrustation), Enterobacter spp., ESBL producers'},
+    {name:'Gram-positive',type:'gram-pos',bugs:'Enterococcus spp. (including VRE) — 15%, Staphylococcus spp. (rare, consider hematogenous seeding)'},
+    {name:'Fungal',type:'fungal',bugs:'Candida spp. (especially C. albicans, C. glabrata) — very common in ICU; treat only if symptomatic'}
+  ],
+  diagnostics:['Urine culture: Obtain BEFORE antibiotics. Replace catheter first if >2 weeks in situ, then collect from new catheter. ≥10³ CFU/mL with ≤2 organisms = significant.','Urinalysis: Pyuria (>10 WBC/hpf) — supports but does not confirm (poor specificity with catheter)','Blood cultures × 2 if signs of systemic sepsis','Serum lactate, procalcitonin','Renal ultrasound if obstruction suspected or complicated UTI','CT abdomen/pelvis if perinephric abscess or emphysematous pyelonephritis suspected'],
+  management:[
+    {step:'Step 1: Catheter Management (Most Important)',detail:'REMOVE or REPLACE the catheter before starting antibiotics (biofilm makes eradication impossible). If catheter still needed → replace with new catheter. If catheter no longer needed → REMOVE immediately. Consider intermittent catheterization or condom catheter as alternatives.'},
+    {step:'Step 2: Empiric Antibiotic Therapy',detail:'Uncomplicated CAUTI: Ceftriaxone 1g IV q24h OR Ciprofloxacin 400mg IV q12h (if local susceptibility >80%) OR Piperacillin-Tazobactam 4.5g IV q6h (if Pseudomonas risk). Complicated CAUTI / Urosepsis: Meropenem 1g IV q8h OR Piperacillin-Tazobactam 4.5g IV q6h PLUS consider Vancomycin 15–20mg/kg IV q8–12h if Enterococcal risk (recent instrumentation, prior VRE). Candiduria (symptomatic only): Fluconazole 200mg IV/PO daily × 14 days (C. albicans). Echinocandin for C. glabrata.'},
+    {step:'Step 3: Culture-Directed & Duration',detail:'Narrow based on sensitivity. Duration: Uncomplicated CAUTI in women: 3 days. Uncomplicated CAUTI in men: 7 days. Complicated / upper tract involvement: 7–14 days. Candiduria: 14 days. DO NOT treat asymptomatic bacteriuria or asymptomatic candiduria (except: pre-urologic procedure, pregnancy, renal transplant <1 month).'},
+    {step:'Special Considerations',detail:'Emphysematous pyelonephritis: CT diagnosis → Urology/IR consult for drainage. Broad-spectrum antibiotics + surgical management. Catheter encrustation (Proteus): Catheter blockage from struvite crystals. Change catheter. Consider bladder irrigation (citric acid) in recurrent cases. Candiduria with fungal balls: Cystoscopy + antifungals.'}
+  ],
+  prevention:['Avoid catheter insertion unless absolute indication: Acute urinary retention/obstruction, Critical illness requiring accurate UO monitoring, Perioperative use for selected surgeries, Open sacral/perineal wounds in incontinent patients, Patient comfort (end-of-life care)','Daily assessment for removal ("Do we still need this catheter?")','Nurse-driven removal protocol','Aseptic insertion technique','Maintain closed drainage system — NEVER disconnect','Keep drainage bag below bladder level','Peri-urethral cleaning — no antiseptic, routine hygiene sufficient','Secure catheter to prevent traction/urethral erosion','Avoid routine catheter changes (change only if obstructed/malfunctioning)']
+},
+{
+  id:'ssi', category:'surgical', severity:'high',
+  title:'Surgical Site Infection (SSI)',
+  icon:'scissors',
+  definition:'Infection occurring within 30 days of surgery (or within 90 days if prosthetic implant placed), classified as Superficial Incisional, Deep Incisional, or Organ/Space SSI per CDC/NHSN criteria.',
+  epidemiology:'Most common HAI in surgical patients. Incidence: 2–5% of all surgeries. Increases LOS by 7–10 days. Mortality: 3% for superficial, up to 46% for organ/space. Cost: $10,000–$90,000 per episode.',
+  riskFactors:['Contaminated/dirty wound class','Prolonged operative time (>75th percentile)','ASA score ≥3','Obesity (BMI >30)','Diabetes (HbA1c >7%)','Active smoking','Immunosuppression','Emergency surgery','Hypothermia (intraoperative <36°C)','Hyperglycemia (perioperative >180 mg/dL)','Remote site infection','Malnutrition (albumin <3.0 g/dL)'],
+  clinicalFeatures:'Superficial SSI: Purulent drainage from incision, pain/tenderness, localized swelling, erythema, warmth. May be opened by surgeon. Deep SSI: Purulent drainage from deep space, dehiscence (spontaneous or deliberate), fever >38°C, localized deep pain. Abscess found on imaging/re-exploration. Organ/Space SSI: Purulent drainage from drain in organ/space, organism isolated from aseptically obtained fluid, abscess identified by imaging or re-operation.',
+  organisms:[
+    {name:'Clean surgery (cardiac, ortho, neuro)',type:'gram-pos',bugs:'S. aureus (MSSA/MRSA) — most common overall, CoNS (especially with implants), Streptococcus spp.'},
+    {name:'Clean-contaminated / GI surgery',type:'gram-neg',bugs:'E. coli, Klebsiella, Enterobacter, Bacteroides fragilis (anaerobe), Enterococcus spp.'},
+    {name:'Contaminated / dirty',type:'gram-neg',bugs:'Polymicrobial: Gram-negatives + anaerobes + Enterococcus. May include Pseudomonas, Acinetobacter in nosocomial setting'}
+  ],
+  diagnostics:['Wound inspection (daily)','Wound culture: Obtain DEEP tissue/fluid (not superficial swab) — swabs of superficial wound are unreliable','Blood cultures if systemic signs','CT/MRI for deep or organ/space SSI','CBC, CRP, procalcitonin trending','Wound probe-to-bone test (if near bone/implant)','Surgical exploration if clinical concern for deep infection'],
+  management:[
+    {step:'Superficial SSI',detail:'Open and drain: Remove sutures/staples over area of fluctuance. Pack wound, wet-to-dry dressings or negative pressure wound therapy (NPWT). Antibiotics NOT routinely needed for simple superficial SSI. Indications for antibiotics: cellulitis >2cm beyond wound edge, systemic signs (fever, leukocytosis), immunocompromised patient. If antibiotics needed: Cephalexin 500mg PO q6h or Clindamycin 300mg PO q6h (if MRSA risk: TMP-SMX DS 1 tab PO q12h or Doxycycline 100mg PO q12h).'},
+    {step:'Deep / Organ-Space SSI',detail:'SOURCE CONTROL is paramount: Operative drainage/debridement. Percutaneous drainage (IR-guided) if accessible. Remove infected prosthetic material if possible. Empiric antibiotics based on surgery type: Post-cardiac/clean surgery: Vancomycin 15–20mg/kg q8–12h + Cefepime 2g q8h. Post-abdominal/GI surgery: Piperacillin-Tazobactam 4.5g q6h OR Meropenem 1g q8h + Metronidazole 500mg q8h (anaerobic coverage). Duration: 4–7 days if adequate source control; 2–4 weeks if inadequate.'},
+    {step:'Prosthetic Joint / Implant Infection',detail:'Acute (<30 days or <3 weeks symptoms): DAIR (Debridement, Antibiotics, Implant Retention) with poly exchange + IV antibiotics × 2–6 weeks → oral suppressive therapy. Chronic (>30 days): Two-stage exchange (removal → antibiotic spacer → 6 weeks antibiotics → reimplantation). S. aureus: Vancomycin/Daptomycin → Rifampin + companion agent (per ID). Add Rifampin 450mg PO q12h for Staphylococcal implant-associated infection (biofilm penetration).'},
+    {step:'Necrotizing Soft Tissue Infection (Necrotizing Fasciitis)',detail:'SURGICAL EMERGENCY — time to OR is the most important prognostic factor. Aggressive debridement (return to OR q24–48h until margins clear). Empiric: Meropenem 1g q8h + Vancomycin 15–20mg/kg q8–12h + Clindamycin 900mg IV q8h (toxin suppression). LRINEC Score ≥6: high suspicion (WBC, Hb, Na, Glucose, Creatinine, CRP). CT: fascial thickening, gas tracking, fluid collections. Hyperbaric oxygen: adjunctive, not substitute for surgery.'}
+  ],
+  prevention:['Preoperative: Nasal MRSA decolonization (mupirocin 2% × 5 days), CHG bathing night before + morning of surgery, Glycemic optimization (target <180 mg/dL), Smoking cessation ≥30 days prior, Nutritional optimization (albumin >3.0)','Intraoperative: Antibiotic prophylaxis within 60 min of incision (120 min for vancomycin/fluoroquinolones), Redosing intraoperatively (q3–4h for cefazolin), Normothermia maintenance (forced-air warming), Maintaining euvolemia & oxygenation, Minimize OR traffic','Postoperative: Sterile dressing × 24–48h, Glucose control (<180 mg/dL), Early mobilization, Avoid shaving (use clippers if needed), Wound assessment per protocol']
+},
+{
+  id:'cdiff', category:'abdominal', severity:'high',
+  title:'Clostridioides difficile Infection (CDI)',
+  icon:'circle-dot',
+  definition:'Diarrhea (≥3 unformed stools in 24h) with positive C. difficile testing (toxin EIA, NAAT/PCR, or toxigenic culture) OR pseudomembranous colitis on endoscopy/histopathology.',
+  epidemiology:'Most common cause of healthcare-associated infectious diarrhea. Incidence increasing with hypervirulent strain NAP1/BI/027. Recurrence: 15–30% after first episode, 40–60% after second. Mortality 5–10% overall, 20–30% for fulminant colitis. Risk: 7–10× during and 4 weeks after antibiotics.',
+  riskFactors:['Antibiotic exposure (strongest RF) — especially fluoroquinolones, clindamycin, cephalosporins, carbapenems','Age ≥65 years','Prolonged hospitalization','PPI use (controversial but associated)','Prior CDI episode','Immunosuppression / chemotherapy','GI surgery or manipulation','Tube feeding','Inflammatory bowel disease'],
+  clinicalFeatures:'Watery diarrhea (>3 episodes/24h), cramping abdominal pain, low-grade fever. Leukocytosis (WBC often >15,000; may exceed 30,000 in severe/fulminant). Severity Classification (IDSA/SHEA 2021): Non-severe: WBC ≤15,000, Cr <1.5 mg/dL. Severe: WBC >15,000, OR Cr >1.5 mg/dL, OR albumin <3 g/dL. Fulminant: Hypotension/shock, ileus, megacolon, ICU admission, lactate >2.2, WBC >25,000 or <2,000, organ failure.',
+  organisms:[
+    {name:'Causative organism',type:'gram-pos',bugs:'Clostridioides difficile (anaerobic, spore-forming, Gram-positive rod). Toxins A (enterotoxin) and B (cytotoxin). Hypervirulent strain: NAP1/BI/027 (produces binary toxin CDT, increased sporulation, fluoroquinolone resistance)'}
+  ],
+  diagnostics:['Two-step algorithm (recommended): Step 1 — GDH (glutamate dehydrogenase) screening (high sensitivity). Step 2 — Toxin A/B EIA (high specificity). Discordant → NAAT/PCR as tiebreaker.','NAAT/PCR alone: High sensitivity but detects colonization (asymptomatic carriers) — ONLY test formed stool? NO. Only test unformed stool (Bristol 5–7).','DO NOT test: Formed stool, asymptomatic patients, test of cure after treatment','CT abdomen: Colonic wall thickening, pericolonic fat stranding, "accordion sign" (oral contrast trapped in thickened folds), ascites','Plain film / CT: Toxic megacolon (cecal diameter >12cm → surgical emergency)','Lactate, albumin, creatinine for severity staging','Flexible sigmoidoscopy (rarely needed): Pseudomembranes = pathognomonic'],
+  management:[
+    {step:'FIRST: Antibiotic Stewardship',detail:'STOP the offending antibiotic if at all possible. If must continue: switch to agent with lower CDI risk (e.g., avoid fluoroquinolones, clindamycin). Stop PPIs if not strictly indicated. Contact precautions + hand washing with SOAP AND WATER (alcohol gel does NOT kill spores).'},
+    {step:'Non-Severe CDI (Initial Episode)',detail:'Fidaxomicin 200mg PO q12h × 10 days (PREFERRED — lower recurrence rate). OR Vancomycin 125mg PO q6h × 10 days. Metronidazole 500mg PO q8h × 10 days — ONLY if fidaxomicin/vancomycin unavailable (inferior efficacy).'},
+    {step:'Severe CDI',detail:'Vancomycin 125mg PO q6h × 10 days (INCREASE to 500mg PO q6h if poor response). OR Fidaxomicin 200mg PO q12h × 10 days. ADD IV Metronidazole 500mg q8h if ileus or oral medication delivery uncertain.'},
+    {step:'Fulminant CDI (Life-Threatening)',detail:'Vancomycin 500mg PO/NG q6h + Vancomycin 500mg in 100mL NS per rectum q6h (retention enema, if ileus) + Metronidazole 500mg IV q8h. EARLY surgical consultation — subtotal colectomy with end ileostomy if: Toxic megacolon, Perforation, Refractory shock, WBC >25,000 or lactate >5, Multi-organ failure. Diverting loop ileostomy with colonic lavage (vancomycin) is an emerging less-morbid alternative.'},
+    {step:'Recurrent CDI',detail:'1st recurrence: Fidaxomicin 200mg PO q12h × 10 days, OR Vancomycin taper-pulse: 125mg q6h × 14 days → 125mg q12h × 7 days → 125mg daily × 7 days → 125mg q2–3 days × 2–8 weeks. 2nd+ recurrence: Fecal Microbiota Transplantation (FMT) — 85–90% cure rate. Bezlotoxumab 10mg/kg IV single dose (anti-toxin B monoclonal Ab) as adjunct to reduce recurrence.'}
+  ],
+  prevention:['Antimicrobial stewardship: Limit unnecessary antibiotics, minimize fluoroquinolones & clindamycin','Contact precautions: Gown + gloves for ALL patient contact','Hand hygiene: SOAP AND WATER (friction removes spores; alcohol is ineffective)','Environmental cleaning: Bleach-based disinfectant (1:10 sodium hypochlorite) or EPA-registered sporicidal agent','Private room / cohorting','Continue precautions ≥48h after diarrhea resolves (some recommend entire hospitalization)','Probiotics: Saccharomyces boulardii or Lactobacillus may help prevent (evidence moderate, not for immunocompromised)']
+},
+{
+  id:'meningitis', category:'cns', severity:'critical',
+  title:'Healthcare-Associated Meningitis / Ventriculitis',
+  icon:'brain',
+  definition:'Meningitis or ventriculitis developing >48h after admission, or related to neurosurgical procedures, EVD (external ventricular drain), or lumbar drain. Distinct from community-acquired bacterial meningitis.',
+  epidemiology:'EVD-related ventriculitis: 5–20% (varies with drain duration, CSF sampling frequency). Post-neurosurgical meningitis: 1–5%. Attributable mortality: 15–35%. Risk increases ~2% per day of EVD duration. Major diagnostic challenge: distinguishing infection from chemical/aseptic meningitis.',
+  riskFactors:['External ventricular drain (EVD) — strongest risk factor','CSF leak (basilar skull fracture, post-surgical)','Craniotomy / craniectomy','Repeated CSF sampling','Intrathecal drug administration','Prolonged EVD duration (>5–7 days)','CSF drain manipulation / disconnection','Concurrent systemic infection'],
+  clinicalFeatures:'Often SUBTLE in ICU patients (sedated, intubated). Fever (may be only sign), altered consciousness (difficult to assess in sedated patients), meningismus (stiff neck — unreliable post-neurosurgery), new seizures, worsening neurological exam, EVD malfunction. CSF abnormalities: Elevated WBC (>50% PMNs), elevated protein, low glucose (CSF:serum ratio <0.4), positive Gram stain/culture. PITFALL: Bloody CSF post-surgery makes interpretation difficult — use cell index ratio, glucose ratio, and serial trends.',
+  organisms:[
+    {name:'Gram-positive (most common post-surgical)',type:'gram-pos',bugs:'Coagulase-negative Staphylococci (CoNS, S. epidermidis) — #1 in EVD/shunt, S. aureus (MRSA/MSSA), Cutibacterium acnes (indolent, post-craniotomy)'},
+    {name:'Gram-negative (increasing)',type:'gram-neg',bugs:'Acinetobacter baumannii, Pseudomonas aeruginosa, Klebsiella spp., E. coli, Enterobacter spp.'},
+    {name:'Fungal (rare)',type:'fungal',bugs:'Candida spp. (post-neurosurgical, immunocompromised)'}
+  ],
+  diagnostics:['CSF analysis: Cell count with differential (PMN predominance = bacterial), Glucose (CSF:serum ratio <0.4 suggestive), Protein (>50 mg/dL elevated), Gram stain (positive in ~60%), Culture (gold standard)','CSF lactate >4 mmol/L: strong predictor of bacterial meningitis (better than glucose/protein)','Cell index = (CSF WBC/CSF RBC) ÷ (Blood WBC/Blood RBC) — value >1.0 suggests infection beyond traumatic tap contamination','Serial CSF monitoring (daily or q48h for EVD patients): trends more valuable than single values','Blood cultures × 2 sets','Brain MRI with contrast (meningeal enhancement, ventriculitis, abscess)','Serum and CSF procalcitonin (emerging role)','β-D-glucan and CSF culture for fungal if suspected'],
+  management:[
+    {step:'Empiric Therapy (Start Immediately)',detail:'Vancomycin 15–20mg/kg IV q8–12h (target trough 15–20 µg/mL for CNS penetration) + Meropenem 2g IV q8h (preferred for CNS penetration and Gram-negative coverage) OR Cefepime 2g IV q8h. If Acinetobacter suspected: ADD Intrathecal/Intraventricular (IVT) Colistin 10mg (125,000 IU) daily via EVD. Duration: Minimum 10–21 days depending on organism.'},
+    {step:'Intrathecal/Intraventricular (IVT) Antibiotics',detail:'Indicated for: MDR organisms, poor clinical response to IV therapy, difficult-to-treat infections. Vancomycin IVT: 5–20mg/day (most common). Gentamicin/Amikacin IVT: 4–8mg / 5–50mg daily. Colistin IVT: 10mg (125,000 IU) daily. Clamp EVD for 15–60 min after administration to allow drug distribution. Monitor CSF levels if available.'},
+    {step:'Culture-Directed Therapy',detail:'CoNS / S. epidermidis: Vancomycin IV ± IVT × 10–14 days. Remove/replace EVD if possible. S. aureus (MSSA): Nafcillin 2g IV q4h × 14–21 days. S. aureus (MRSA): Vancomycin IV ± IVT × 14–21 days. Consider TMP-SMX 5mg/kg IV q6h (excellent CSF penetration) or Linezolid 600mg q12h (good CSF). Gram-negatives: Meropenem 2g q8h × 21 days. If MDR: add IVT aminoglycoside or colistin. C. acnes: Penicillin G 4MU IV q4h × 14 days. Remove hardware if possible.'},
+    {step:'EVD Management',detail:'Replace EVD (if still needed) if infection confirmed — insert at new site. If EVD not needed → remove. Do NOT routinely exchange EVDs prophylactically (increases infection risk). Transition to ventriculoperitoneal shunt only after CSF is sterilized (negative cultures × ≥48–72h off antibiotics).'}
+  ],
+  prevention:['Bundle approach for EVD insertion: sterile technique (full barrier precautions), tunnel catheter ≥5cm from burr hole, antibiotic-impregnated catheter (rifampin + clindamycin)','Minimize CSF sampling frequency (avoid unnecessary opening)','Maintain closed system — minimize disconnections','Strict hand hygiene before any EVD manipulation','Periprocedural antibiotic prophylaxis (cefazolin 2g IV within 60 min)','Daily assessment of EVD necessity','Monitor CSF routinely per institutional protocol']
+},
+{
+  id:'iai', category:'abdominal', severity:'critical',
+  title:'Intra-Abdominal Infection (IAI) / Peritonitis in ICU',
+  icon:'circle-dot',
+  definition:'Localized or diffuse peritoneal infection. In ICU: often secondary (visceral perforation, anastomotic leak) or tertiary (persistent/recurrent infection despite adequate source control). Healthcare-associated IAI has higher MDR organism rates.',
+  epidemiology:'Second most common source of sepsis in ICU. Tertiary peritonitis: mortality 30–60%. Anastomotic leak: 3–19% of GI surgeries. Acalculous cholecystitis: 0.5–1.5% of ICU patients.',
+  riskFactors:['GI surgery / anastomotic leak','Visceral perforation (ulcer, diverticular, traumatic)','Pancreatitis (infected necrosis)','Liver cirrhosis (SBP)','Peritoneal dialysis','Immunosuppression','Prolonged ICU stay + antibiotics (tertiary peritonitis)','Acalculous cholecystitis risk: shock, TPN, opioids, prolonged fasting'],
+  clinicalFeatures:'Abdominal pain/distension, fever, leukocytosis, new/worsening organ dysfunction. Peritoneal signs may be masked in sedated/paralyzed ICU patients — rely on imaging + biomarkers. Acalculous cholecystitis: fever + RUQ tenderness + GB distension on USS in critically ill patient (Murphy sign unreliable). SBP: Ascites + fever + AMS + abdominal pain (may be subtle). Tertiary peritonitis: persistent sepsis despite "adequate" source control — often low-virulence organisms (Enterococcus, Candida, CoNS).',
+  organisms:[
+    {name:'Community-acquired IAI',type:'gram-neg',bugs:'E. coli, Streptococcus spp., Bacteroides fragilis, Klebsiella, Proteus'},
+    {name:'Healthcare-associated / tertiary',type:'gram-neg',bugs:'Pseudomonas, Acinetobacter, ESBL/CRE Enterobacteriaceae, Enterococcus (including VRE), Candida spp., MRSA'},
+    {name:'SBP (Spontaneous Bacterial Peritonitis)',type:'gram-neg',bugs:'E. coli (most common), Klebsiella, Streptococcus pneumoniae, Enterococcus'}
+  ],
+  diagnostics:['CT abdomen/pelvis with IV contrast (gold standard): free air, fluid collections, abscess, bowel wall thickening, fat stranding, anastomotic leak','Blood cultures × 2 sets','Peritoneal fluid analysis (paracentesis for SBP): Cell count (PMN >250/mm³ = SBP), Gram stain & culture (inoculate into blood culture bottles at bedside), Albumin, glucose, LDH, protein','Lactate, procalcitonin','RUQ ultrasound for cholecystitis','MRCP or HIDA scan if biliary pathology suspected'],
+  management:[
+    {step:'SOURCE CONTROL (Most Critical)',detail:'Surgical: Laparotomy/laparoscopy for perforation repair, anastomotic revision, washout, drainage. Open abdomen (damage control) if contamination severe or hemodynamically unstable. Interventional Radiology: Percutaneous drainage of defined, accessible collections. Preferred when: abscess well-defined, single collection, accessible percutaneous route. Cholecystostomy: Percutaneous for acalculous cholecystitis in patients unfit for surgery. Timing: Within 24 hours if possible — delays in source control increase mortality significantly.'},
+    {step:'Empiric Antibiotics — Community-Acquired IAI',detail:'Mild-moderate (non-ICU): Ceftriaxone 2g q24h + Metronidazole 500mg q8h OR Ertapenem 1g q24h. Severe / ICU patients: Piperacillin-Tazobactam 4.5g IV q6h (extended infusion) OR Meropenem 1g IV q8h (if ESBL risk or critically ill). Always include anaerobic coverage (Metronidazole if using non-BL/BLI).'},
+    {step:'Empiric Antibiotics — Healthcare-Associated IAI',detail:'Meropenem 1g IV q8h (extended infusion) OR Doripenem 500mg q8h + Vancomycin 15–20mg/kg q8–12h (Enterococcus/MRSA coverage) + Micafungin 100mg q24h OR Caspofungin 70mg load → 50mg q24h (Candida coverage in tertiary peritonitis, prior antifungals, TPN). Duration: 4 days with adequate source control (STOP-IT trial). Longer (7–14 days) if inadequate source control.'},
+    {step:'SBP Management',detail:'Empiric: Ceftriaxone 2g IV q24h × 5 days (community-acquired) OR Meropenem if healthcare-associated or recent antibiotic exposure. IV Albumin: 1.5g/kg on day 1, 1g/kg on day 3 (reduces renal failure and mortality — landmarkSort et al. study). Repeat paracentesis at 48h: PMN should decrease by ≥25%. Secondary prophylaxis: Norfloxacin 400mg PO daily or TMP-SMX DS daily (lifelong or until transplant).'},
+    {step:'Infected Pancreatic Necrosis',detail:'Delay intervention if possible (prefer >4 weeks when walled-off necrosis forms). Step-up approach: Percutaneous/endoscopic drainage FIRST. If fails: VARD (video-assisted retroperitoneal debridement) or endoscopic necrosectomy. Antibiotics: Meropenem 1g q8h (good pancreatic penetration) ± Fluconazole 400mg daily. Duration guided by clinical response + imaging.'}
+  ],
+  prevention:['Surgical technique optimization (anastomotic integrity, hemostasis)','Enhanced Recovery After Surgery (ERAS) protocols','Appropriate surgical prophylaxis','Early enteral nutrition','SBP prophylaxis in cirrhosis: GI bleed (Ceftriaxone 1g × 7d), ascites protein <1.5g/dL with renal/liver impairment (daily norfloxacin)','Selective digestive decontamination (SDD) — institution-specific']
+},
+{
+  id:'ssti', category:'skin', severity:'high',
+  title:'ICU Skin & Soft Tissue Infections',
+  icon:'shield',
+  definition:'Spectrum from simple cellulitis to life-threatening necrotizing fasciitis in critically ill patients. Includes pressure ulcer infections, burn wound infections, and device-related skin infections.',
+  epidemiology:'Necrotizing fasciitis mortality: 20–40% (higher with delayed surgery). Burn wound sepsis: leading cause of death in burns >40% TBSA. Pressure injury prevalence in ICU: 10–25%. Decubitus infections increase LOS by 10+ days.',
+  riskFactors:['Diabetes mellitus (neuropathy + vasculopathy)','Peripheral vascular disease','Obesity','Immunosuppression','Burns / trauma','Prolonged immobility (pressure injuries)','Lymphedema','IV drug use','Surgical wounds','Malnutrition'],
+  clinicalFeatures:'Cellulitis: Erythema, warmth, swelling, pain — demarcate margins with marker. Abscess: Fluctuant collection, point tenderness. Necrotizing Fasciitis RED FLAGS: Pain out of proportion to exam, rapidly spreading erythema, crepitus (gas gangrene), hemorrhagic bullae, skin necrosis (dusky/gray), hemodynamic instability, disproportionate systemic toxicity. LRINEC Score: WBC, Hb, Na, Creatinine, Glucose, CRP — score ≥6 suspicious, ≥8 strongly predictive. Fournier Gangrene: Perineal/genital necrotizing infection — surgical emergency.',
+  organisms:[
+    {name:'Simple cellulitis/abscess',type:'gram-pos',bugs:'S. aureus (MSSA/MRSA) — most common, Group A Streptococcus (S. pyogenes), Group B/C/G Streptococci'},
+    {name:'Necrotizing Type I (polymicrobial)',type:'gram-neg',bugs:'Mixed: GAS + Enterobacteriaceae + anaerobes (Clostridium, Bacteroides). Common in: diabetic foot, perineal, post-surgical'},
+    {name:'Necrotizing Type II (monomicrobial)',type:'gram-pos',bugs:'Group A Streptococcus (most common mono-cause), S. aureus, Clostridium perfringens (gas gangrene), Vibrio vulnificus (seawater exposure)'},
+    {name:'Burn wounds',type:'gram-neg',bugs:'Pseudomonas aeruginosa (green discoloration), S. aureus, Acinetobacter, Candida/Aspergillus (late)'}
+  ],
+  diagnostics:['Clinical assessment (most important): Demarcate erythema borders, serial exams q4–6h','Blood cultures × 2 if systemic signs','Wound/tissue culture (deep tissue biopsy > swab)','CT with contrast: fascial thickening, gas tracking, fluid collections (sensitivity ~80% for necrotizing)','MRI (best soft tissue detail but time-consuming — do not delay surgery for MRI)','LRINEC Score calculation','Surgical exploration: definitive diagnosis for necrotizing fasciitis ("dishwater gray" fascia, lack of bleeding, tissue planes separate easily)','Lactate, CK (elevated in myonecrosis)'],
+  management:[
+    {step:'Non-purulent Cellulitis',detail:'Mild (outpatient): Cephalexin 500mg PO q6h × 5–7 days. Moderate (IV therapy): Cefazolin 2g IV q8h. Severe / MRSA risk: Vancomycin 15–20mg/kg q8–12h + Piperacillin-Tazobactam if polymicrobial concern. Elevate affected extremity. Demarcate borders and reassess q12–24h.'},
+    {step:'Abscess',detail:'Incision & Drainage (I&D) — PRIMARY treatment. Antibiotics as adjunct if: >2cm, multiple lesions, extensive cellulitis, systemic signs, immunocompromised. MRSA coverage: TMP-SMX DS 1–2 tabs PO q12h or Doxycycline 100mg PO q12h. Pack wound loosely, follow-up for repacking.'},
+    {step:'Necrotizing Fasciitis — SURGICAL EMERGENCY',detail:'Immediate: Aggressive fluid resuscitation (sepsis protocol, 30mL/kg crystalloid bolus). Vasopressors PRN (norepinephrine first-line). EMERGENT surgical debridement — do NOT delay for imaging. Debride ALL necrotic tissue (wide margins). Plan return to OR q24–48h for re-inspection + further debridement until wound margins viable. Antibiotics: Meropenem 1g IV q8h + Vancomycin 15–20mg/kg q8–12h + Clindamycin 900mg IV q8h (CRITICAL: anti-toxin effect — inhibits toxin/superantigen production, works at ribosomal level even in stationary phase). If confirmed GAS: Penicillin G 4MU IV q4h + Clindamycin 900mg q8h. IVIG 1–2g/kg (consider for streptococcal toxic shock syndrome — evidence mixed but used in severe cases).'},
+    {step:'Burn Wound Infection',detail:'Topical: Silver sulfadiazine 1% (classic but delays epithelialization), Mafenide acetate (penetrates eschar — for ear cartilage, deep burns), Silver-containing dressings. Systemic antibiotics ONLY for invasive infection (not colonization): Pseudomonas coverage: Piperacillin-Tazobactam + Amikacin. MRSA coverage: Vancomycin. Surgical: Early excision and grafting reduces infection risk.'},
+    {step:'Pressure Injury Infections',detail:'Superficial: Topical antiseptic, wound care, offloading. Deep / osteomyelitis: MRI for bone involvement, bone biopsy for culture. Surgical debridement of necrotic tissue. Antibiotics: Guided by deep tissue/bone culture × 4–6 weeks for osteomyelitis. Wound VAC (NPWT) for complex wounds after debridement.'}
+  ],
+  prevention:['Pressure injury prevention: Turn q2h, pressure-redistribution mattress, skin assessment daily, moisture management, nutrition optimization','Burn prevention: Standard precautions, early excision, topical antimicrobials','Surgical wound care: Aseptic technique, appropriate prophylaxis','Glucose control in diabetics','Skin integrity assessment in all ICU patients','Early mobilization when possible']
+},
+{
+  id:'fungal', category:'bloodstream', severity:'critical',
+  title:'Invasive Fungal Infections in ICU',
+  icon:'bug',
+  definition:'Invasive candidiasis (candidemia, deep-seated candidiasis) and invasive aspergillosis. Increasingly recognized in non-neutropenic ICU patients. Candida auris: emerging global threat with multidrug resistance.',
+  epidemiology:'Candidemia: 4th most common BSI in US hospitals. Crude mortality: 40–60% (attributable 15–25%). Invasive Aspergillosis in ICU: increasingly recognized post-influenza, post-COVID ARDS (CAPA). C. auris: pan-resistant strains reported, environmental persistence, outbreak potential.',
+  riskFactors:['Broad-spectrum antibiotics (>7 days)','Central venous catheter','TPN administration','Abdominal surgery (especially repeat laparotomy, anastomotic leak)','Renal replacement therapy','Immunosuppression (steroids ≥20mg/day prednisone equivalent ≥2 weeks)','Candida colonization at multiple sites','ICU stay >7 days','Diabetes mellitus','Severe ARDS / ECMO / post-viral (influenza, COVID-19) — for Aspergillus','Neutropenia (absolute neutrophil count <500)'],
+  clinicalFeatures:'Invasive Candidiasis: Persistent fever unresponsive to broad-spectrum antibiotics, hemodynamic instability, no identifiable bacterial source. Often occult — candidemia may be the only finding. Late complications: Endophthalmitis (5–16%), endocarditis, hepatosplenic candidiasis, osteomyelitis. Invasive Aspergillosis: Refractory fever on broad-spectrum antibiotics, respiratory deterioration, hemoptysis, pleuritic chest pain. CT: nodules, halo sign (early), air-crescent sign (late), wedge-shaped infiltrates.',
+  organisms:[
+    {name:'Candida species',type:'fungal',bugs:'C. albicans (40–60%), C. glabrata (15–25%, often fluconazole-resistant), C. parapsilosis (10–15%, CVC/TPN-associated), C. tropicalis (5–10%, virulent), C. krusei (intrinsic fluconazole resistance), C. auris (emerging, MDR, environmental persistence)'},
+    {name:'Aspergillus species',type:'fungal',bugs:'A. fumigatus (most common), A. flavus, A. niger, A. terreus (amphotericin-resistant)'},
+    {name:'Other molds (rare in ICU)',type:'fungal',bugs:'Mucor/Rhizopus (mucormycosis — diabetic ketoacidosis, iron overload), Fusarium, Scedosporium'}
+  ],
+  diagnostics:['Blood cultures: Gold standard for candidemia BUT sensitivity only 50–70%. Culture may take 24–72h. Automated systems (BACTEC) have improved detection.','β-D-Glucan (BDG): Pan-fungal biomarker (>80 pg/mL positive). Good NPV. False positives: albumin infusion, IVIG, gauze packing, some antibiotics.','Candida Mannan Ag + Anti-Mannan Ab: Combined Se 83%, Sp 86%','T2Candida Panel: Rapid PCR-based (3–5 hours), detects 5 major Candida spp. from whole blood. Sensitivity >90%.','Aspergillus: Galactomannan (serum + BAL — BAL more sensitive in non-neutropenic), CT chest (halo sign, nodules), BAL culture + cytology','C. auris identification: Requires specific lab methods (MALDI-TOF), commonly misidentified by conventional systems','Ophthalmology consult for ALL candidemia (dilated fundoscopy within 1 week)','Echocardiography if persistent candidemia or S. aureus co-infection'],
+  management:[
+    {step:'Candidemia — Empiric / Initial Therapy',detail:'FIRST-LINE: Echinocandin (IDSA/ESCMID guidelines): Micafungin 100mg IV q24h, OR Caspofungin 70mg loading → 50mg IV q24h, OR Anidulafungin 200mg loading → 100mg IV q24h. Remove ALL central venous catheters (source control — reduces mortality by ~40%). Repeat blood cultures DAILY until negative.'},
+    {step:'Candidemia — Species-Directed Therapy',detail:'C. albicans (fluconazole-susceptible): Step-down to Fluconazole 400mg IV/PO daily after: clinically stable, blood cultures negative, species identified + susceptible. C. glabrata: Continue echinocandin (intrinsic reduced fluconazole susceptibility). If susceptible-dose-dependent: high-dose fluconazole 800mg/day or voriconazole. C. krusei: Echinocandin (intrinsic fluconazole resistance). C. parapsilosis: Fluconazole 400–800mg daily preferred (echinocandins have higher MICs). C. auris: Echinocandin first-line. Often resistant to fluconazole AND amphotericin. Check susceptibilities urgently. Infectious disease + infection control consultation MANDATORY. Duration: Minimum 14 days from first NEGATIVE blood culture (not from diagnosis).'},
+    {step:'Invasive Aspergillosis',detail:'First-line: Voriconazole — Loading: 6mg/kg IV q12h × 2 doses → 4mg/kg IV q12h. Target trough: 1–5.5 µg/mL (therapeutic drug monitoring mandatory). Switch to PO when stable: 200–300mg PO q12h. Alternative: Isavuconazole 200mg IV/PO q8h × 6 doses → 200mg daily (fewer drug interactions, no TDM needed). Salvage: Liposomal Amphotericin B 3–5mg/kg IV daily. Combination therapy (voriconazole + echinocandin): Consider in severe/refractory cases. Duration: Minimum 6–12 weeks; until clinical + radiographic resolution + immune reconstitution.'},
+    {step:'Deep-Seated Candidiasis / Complications',detail:'Endophthalmitis: Intravitreal Amphotericin B 5–10µg + systemic antifungals. Ophthalmology for vitrectomy if vitreal involvement. Endocarditis: Echinocandin or liposomal AmB + surgical valve replacement when feasible. Lifelong suppressive fluconazole if surgery not possible. Hepatosplenic candidiasis: Fluconazole 400mg daily × months until calcification of lesions on imaging. CNS candidiasis: Liposomal AmB 5mg/kg + Flucytosine 25mg/kg q6h (step-down to fluconazole 400–800mg). Osteomyelitis: Fluconazole 400mg daily × 6–12 months.'},
+    {step:'C. auris — Special Protocol',detail:'Infection control: Contact precautions + enhanced environmental cleaning (quaternary ammonium compounds ineffective — use EPA List P agents). Daily CHG bathing. Screening of contacts (axilla + groin swabs). Lab notification for proper identification. Treatment: Echinocandin first-line. Check susceptibilities immediately. If pan-resistant: combination therapy (echinocandin + amphotericin or high-dose echinocandin). ID consultation mandatory.'}
+  ],
+  prevention:['Antifungal stewardship','Remove unnecessary CVCs promptly','Minimize broad-spectrum antibiotic duration','Candida colonization surveillance (Candida Score: multifocal colonization + surgery + TPN + severe sepsis — score ≥3 consider empiric)','Prophylaxis: Fluconazole 400mg daily in high-risk surgical ICU patients (recurrent GI perforation, anastomotic leak)','C. auris: Strict contact precautions, enhanced environmental disinfection, admission screening in endemic areas','Aspergillus: HEPA filtration in high-risk units, avoid construction dust exposure in immunocompromised']
+}
+];
+
+// === STATE ===
+let currentFilter = 'all';
+let searchTerm = '';
+let expandedCards = new Set();
+
+// === RENDER ===
+function renderInfections(){
+  const container = document.getElementById('infectionsContainer');
+  let filtered = infections.filter(inf => {
+    if(currentFilter !== 'all' && inf.category !== currentFilter) return false;
+    if(searchTerm){
+      const s = searchTerm.toLowerCase();
+      const searchable = [inf.title, inf.definition, inf.clinicalFeatures,
+        ...inf.riskFactors,
+        ...inf.organisms.map(o=>o.bugs),
+        ...inf.management.map(m=>m.step+' '+m.detail),
+        ...inf.prevention,
+        ...inf.diagnostics
+      ].join(' ').toLowerCase();
+      return searchable.includes(s);
+    }
+    return true;
+  });
+
+  if(filtered.length === 0){
+    container.innerHTML = `<div class="text-center py-16"><i data-lucide="search-x" style="width:48px;height:48px;color:var(--secondary);margin:0 auto;display:block"></i><p class="mt-4" style="color:var(--secondary)">No infections match your search. Try different keywords.</p></div>`;
+    lucide.createIcons();
+    return;
+  }
+
+  container.innerHTML = filtered.map((inf, idx) => {
+    const isOpen = expandedCards.has(inf.id);
+    const sevClass = inf.severity === 'critical' ? 'severity-critical' : inf.severity === 'high' ? 'severity-high' : 'severity-moderate';
+    const sevBadge = inf.severity === 'critical' ? 'badge-critical' : inf.severity === 'high' ? 'badge-high' : 'badge-moderate';
+    return `
+    <div class="mb-4 fade-up" style="animation-delay:${idx*0.06}s">
+      <div class="rounded-xl overflow-hidden card-glow ${sevClass}" style="background:var(--surface)">
+        <!-- Header -->
+        <button onclick="toggleCard('${inf.id}')" class="w-full text-left p-4 sm:p-5 flex items-start gap-3 hover:bg-white/[0.02] transition-colors" aria-expanded="${isOpen}">
+          <div class="flex-shrink-0 mt-0.5" style="width:36px;height:36px;border-radius:8px;background:rgba(56,189,248,0.1);display:flex;align-items:center;justify-content:center">
+            <i data-lucide="${inf.icon}" style="width:18px;height:18px;color:var(--primary)"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <h2 class="heading-font text-base sm:text-lg font-bold" style="color:var(--text)">${inf.title}</h2>
+              <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wider ${sevBadge}">${inf.severity}</span>
+            </div>
+            <p class="text-xs sm:text-sm leading-relaxed" style="color:var(--secondary)">${inf.definition}</p>
+          </div>
+          <i data-lucide="${isOpen?'chevron-up':'chevron-down'}" class="flex-shrink-0 mt-1" style="width:18px;height:18px;color:var(--secondary)"></i>
+        </button>
+
+        <!-- Expandable Content -->
+        <div class="expand-content ${isOpen?'open':''}">
+          <div class="px-4 sm:px-5 pb-5 space-y-5">
+
+            <!-- Epidemiology -->
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:var(--primary)"><i data-lucide="bar-chart-3" style="width:14px;height:14px"></i> Epidemiology</h3>
+              <p class="text-sm leading-relaxed" style="color:var(--text);opacity:0.85">${inf.epidemiology}</p>
+            </div>
+
+            <!-- Risk Factors -->
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:var(--primary)"><i data-lucide="alert-triangle" style="width:14px;height:14px"></i> Risk Factors</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                ${inf.riskFactors.map(rf=>`<div class="flex items-start gap-2 text-sm" style="color:var(--text);opacity:0.85"><span style="color:#f59e0b;flex-shrink:0;margin-top:2px">▸</span>${rf}</div>`).join('')}
+              </div>
+            </div>
+
+            <!-- Clinical Features -->
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:var(--primary)"><i data-lucide="stethoscope" style="width:14px;height:14px"></i> Clinical Features</h3>
+              <p class="text-sm leading-relaxed" style="color:var(--text);opacity:0.85">${inf.clinicalFeatures}</p>
+            </div>
+
+            <!-- Organisms -->
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:var(--primary)"><i data-lucide="bug" style="width:14px;height:14px"></i> Causative Organisms</h3>
+              <div class="space-y-2">
+                ${inf.organisms.map(o=>{
+                  const obadge = o.type==='gram-pos'?'badge-gram-pos':o.type==='gram-neg'?'badge-gram-neg':o.type==='fungal'?'badge-fungal':'badge-viral';
+                  return `<div class="rounded-lg p-3" style="background:rgba(255,255,255,0.02)">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full ${obadge} inline-block mb-1">${o.name}</span>
+                    <p class="text-sm" style="color:var(--text);opacity:0.85">${o.bugs}</p>
+                  </div>`;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Diagnostics -->
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:var(--primary)"><i data-lucide="microscope" style="width:14px;height:14px"></i> Diagnostics</h3>
+              <div class="space-y-1.5">
+                ${inf.diagnostics.map(d=>`<div class="flex items-start gap-2 text-sm" style="color:var(--text);opacity:0.85"><span style="color:var(--primary);flex-shrink:0;margin-top:2px">◆</span>${d}</div>`).join('')}
+              </div>
+            </div>
+
+            <!-- Management Protocol -->
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2" style="color:var(--primary)"><i data-lucide="clipboard-list" style="width:14px;height:14px"></i> Management Protocol</h3>
+              <div class="space-y-4">
+                ${inf.management.map(m=>`
+                  <div class="protocol-step">
+                    <h4 class="text-sm font-bold mb-1.5" style="color:#7dd3fc">${m.step}</h4>
+                    <div class="drug-dose text-sm leading-relaxed" style="color:var(--text);opacity:0.9">${m.detail}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Prevention -->
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:var(--primary)"><i data-lucide="shield-check" style="width:14px;height:14px"></i> Prevention Bundle</h3>
+              <div class="space-y-1.5">
+                ${inf.prevention.map(p=>`<div class="flex items-start gap-2 text-sm" style="color:var(--text);opacity:0.85"><span style="color:#34d399;flex-shrink:0;margin-top:2px">✓</span>${p}</div>`).join('')}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+function toggleCard(id){
+  if(expandedCards.has(id)) expandedCards.delete(id);
+  else expandedCards.add(id);
+  renderInfections();
+}
+
+function filterBy(cat){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    if(b.dataset.filter===cat){b.className='filter-btn tab-active text-xs px-3 py-2 rounded-lg border transition-all';}
+    else{b.className='filter-btn text-xs px-3 py-2 rounded-lg border border-transparent transition-all';b.style.color='var(--secondary)';}
+  });
+  renderInfections();
+}
+
+document.getElementById('searchInput').addEventListener('input',e=>{
+  searchTerm=e.target.value;
+  renderInfections();
+});
+
+// ===== ELEMENT SDK (CLEAN + SAFE) =====
+
+const defaultConfig = {
+  app_title: 'ICU Infections & Management',
+  subtitle_text: 'Evidence-Based Clinical Protocols — From Bedside Experience',
+  background_color: '#0b1120',
+  surface_color: '#131b2e',
+  text_color: '#e2e8f0',
+  primary_color: '#38bdf8',
+  secondary_color: '#64748b',
+  font_family: 'DM Sans',
+  font_size: 14
+};
+
+// ===== APPLY CONFIG =====
+function applyConfig(cfg) {
+  const c = { ...defaultConfig, ...cfg };
+
+  const root = document.documentElement;
+
+  // CSS Variables
+  root.style.setProperty('--bg', c.background_color);
+  root.style.setProperty('--surface', c.surface_color);
+  root.style.setProperty('--text', c.text_color);
+  root.style.setProperty('--primary', c.primary_color);
+  root.style.setProperty('--secondary', c.secondary_color);
+
+  // Body
+  document.body.style.background = c.background_color;
+  document.body.style.color = c.text_color;
+  document.body.style.fontFamily = `${c.font_family}, DM Sans, sans-serif`;
+  document.body.style.fontSize = `${c.font_size}px`;
+
+  // Helper
+  const setText = (id, text, styles = {}) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = text;
+    Object.assign(el.style, styles);
+  };
+
+  // Title
+  setText('mainTitle', c.app_title, {
+    color: c.primary_color,
+    fontFamily: `Playfair Display, ${c.font_family}, serif`,
+    fontSize: `${c.font_size * 1.7}px`
+  });
+
+  // Subtitle
+  setText('subtitleText', c.subtitle_text, {
+    fontSize: `${c.font_size * 0.85}px`
+  });
+}
+
+// ===== INIT SDK =====
+document.addEventListener("DOMContentLoaded", () => {
+  if (!window.elementSdk) {
+    console.error("Element SDK not loaded");
+    return;
+  }
+
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: applyConfig
+  });
+});
+
+// Initial render
+renderInfections();
+lucide.createIcons();
+</script>
+</body>
+</html>
