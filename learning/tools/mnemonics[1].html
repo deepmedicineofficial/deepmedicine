@@ -1,0 +1,474 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Mnemonics | Medical Memory Aids & Tricks | Deep Medicine</title> <meta name="description" content="High-yield medical mnemonics to simplify complex topics and improve memory for exams and clinical practice."> <link rel="canonical" href="https://deepmedicine.in/learning/tools/mnemonics"> <!-- Open Graph --> <meta property="og:title" content="Mnemonics | Deep Medicine"> <meta property="og:description" content="Medical mnemonics and memory tricks for faster recall and better retention."> <meta property="og:image" content="https://deepmedicine.in/images/mnemonics.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+body { font-family: 'Outfit', sans-serif; }
+.heading-font { font-family: 'DM Serif Display', serif; }
+.card-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media(min-width:768px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(min-width:1200px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
+.mnemonic-card { border-radius: 16px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; }
+.mnemonic-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+.letter-badge { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+.tag-pill { padding: 4px 12px; border-radius: 99px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.modal-overlay { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+.modal-content { border-radius: 20px; max-width: 640px; width: 100%; max-height: 85%; overflow-y: auto; transform: scale(0.95); transition: transform 0.25s; }
+.modal-overlay.active .modal-content { transform: scale(1); }
+.search-box { border-radius: 14px; border: 2px solid; transition: border-color 0.2s; }
+.search-box:focus-within { border-color: var(--accent); }
+.filter-btn { padding: 6px 16px; border-radius: 99px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.3); border-radius: 3px; }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.anim-in { animation: fadeInUp 0.4s ease both; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full overflow-auto" style="background:#0f1117; color:#e4e4e7;">
+  <div id="app" class="h-full w-full" style="background:#0f1117;"><!-- Header -->
+   <header class="w-full" style="background: linear-gradient(135deg, #1a1b2e 0%, #16213e 50%, #0f1117 100%); border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div style="max-width:1280px; margin:0 auto; padding:2rem 1.5rem 1.5rem;">
+     <div style="display:flex; align-items:center; gap:12px; margin-bottom:6px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#f43f5e,#e11d48);display:flex;align-items:center;justify-content:center;"><i data-lucide="heart-pulse" style="width:24px;height:24px;color:#fff;"></i>
+      </div>
+      <h1 id="app-title" class="heading-font" style="font-size:28px;color:#f1f1f4;margin:0;"></h1>
+     </div>
+     <p id="app-subtitle" style="color:#9ca3af;font-size:15px;margin:0 0 1.2rem 0;"></p><!-- Search -->
+     <div class="search-box" style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:#1a1d2e;border-color:rgba(255,255,255,0.08);"><i data-lucide="search" style="width:18px;height:18px;color:#6b7280;flex-shrink:0;"></i> <input id="search-input" type="text" placeholder="Search mnemonics, letters, topics..." style="background:transparent;border:none;outline:none;color:#e4e4e7;font-size:15px;width:100%;font-family:inherit;">
+     </div><!-- Filters -->
+     <div id="filter-bar" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;"></div>
+    </div>
+   </header><!-- Cards -->
+   <main style="max-width:1280px;margin:0 auto;padding:1.5rem;">
+    <div id="card-container" class="card-grid"></div>
+    <p id="no-results" style="display:none;text-align:center;color:#6b7280;padding:3rem 1rem;font-size:16px;">No mnemonics found. Try a different search term.</p>
+   </main><!-- Modal -->
+   <div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal-content" style="background:#1a1d2e;border:1px solid rgba(255,255,255,0.08);"></div>
+   </div>
+  </div>
+  <script>
+// ── Mnemonics Data ──
+const mnemonics = [
+  {
+    id: "mudpiles",
+    title: "MUDPILES",
+    subtitle: "Causes of High Anion Gap Metabolic Acidosis",
+    category: "Metabolic",
+    color: "#f43f5e",
+    letters: [
+      { l: "M", word: "Methanol", detail: "Methanol ingestion → formic acid accumulation. Causes blindness & metabolic acidosis. Treat with fomepizole/ethanol + dialysis." },
+      { l: "U", word: "Uremia", detail: "Renal failure → retention of sulfates, phosphates, uric acid. BUN/Cr elevated. May need dialysis." },
+      { l: "D", word: "Diabetic Ketoacidosis", detail: "Insulin deficiency → lipolysis → ketone bodies (β-hydroxybutyrate, acetoacetate). Treat: IV fluids, insulin, K+ monitoring." },
+      { l: "P", word: "Propylene Glycol / Paraldehyde", detail: "Found in IV lorazepam, phenobarbital vehicles. Accumulates in prolonged infusions → lactic acidosis." },
+      { l: "I", word: "Isoniazid / Iron", detail: "INH → seizures + lactic acidosis (pyridoxine deficiency). Iron overdose → hemorrhagic gastroenteritis + metabolic acidosis." },
+      { l: "L", word: "Lactic Acidosis", detail: "Type A: tissue hypoxia (shock, sepsis). Type B: drugs (metformin), liver failure, malignancy. Lactate > 4 mmol/L significant." },
+      { l: "E", word: "Ethylene Glycol", detail: "Antifreeze ingestion → oxalic acid → calcium oxalate crystals in urine. Causes AKI. Treat: fomepizole + dialysis." },
+      { l: "S", word: "Salicylates", detail: "Aspirin OD → mixed resp alkalosis + met acidosis. Tinnitus, hyperthermia. Alkalinize urine; dialysis if severe." }
+    ]
+  },
+  {
+    id: "danish",
+    title: "DANISH",
+    subtitle: "Causes of Acute Pancreatitis",
+    category: "GI",
+    color: "#8b5cf6",
+    letters: [
+      { l: "D", word: "Drugs", detail: "Azathioprine, valproic acid, didanosine, estrogen, thiazides, sulfonamides. Dose-dependent or idiosyncratic." },
+      { l: "A", word: "Alcohol", detail: "2nd most common cause. Chronic heavy use → premature trypsinogen activation within pancreatic acinar cells." },
+      { l: "N", word: "Neoplasm", detail: "Pancreatic ductal adenocarcinoma or ampullary tumors causing obstruction. Consider in unexplained pancreatitis >40y." },
+      { l: "I", word: "Idiopathic", detail: "~20% cases. May be occult microlithiasis or genetic (SPINK1, PRSS1, CFTR mutations). Requires thorough workup." },
+      { l: "S", word: "Stones (Gallstones)", detail: "Most common cause (~40%). Stone impacts ampulla of Vater → bile reflux into pancreatic duct. Cholecystectomy definitive." },
+      { l: "H", word: "Hypertriglyceridemia / Hypercalcemia", detail: "TG >1000 mg/dL → FFA toxicity to acinar cells. Hypercalcemia activates trypsinogen. Also: hypothermia, ERCP." }
+    ]
+  },
+  {
+    id: "socrates",
+    title: "SOCRATES",
+    subtitle: "Pain Assessment Framework",
+    category: "Clinical",
+    color: "#06b6d4",
+    letters: [
+      { l: "S", word: "Site", detail: "Where exactly is the pain? Ask patient to point with one finger. Document anatomical location precisely." },
+      { l: "O", word: "Onset", detail: "When did it start? Sudden vs gradual? What were you doing? Sudden onset → vascular event, perforation, torsion." },
+      { l: "C", word: "Character", detail: "Sharp, dull, burning, tearing, colicky, crushing? Crushing chest → MI. Tearing back pain → aortic dissection." },
+      { l: "R", word: "Radiation", detail: "Does it spread? MI → left arm/jaw. Renal colic → groin. Pancreatitis → straight through to back. Diaphragm → shoulder tip." },
+      { l: "A", word: "Associated Symptoms", detail: "Nausea, vomiting, sweating, SOB, fever, weight loss? These narrow the differential significantly." },
+      { l: "T", word: "Time Course", detail: "Constant vs intermittent? Duration of episodes? Getting better or worse? Biliary colic: episodic 30min–6hrs." },
+      { l: "E", word: "Exacerbating / Relieving", detail: "Worse with movement (peritonitis), food (ulcer/angina), inspiration (pleurisy). Better with sitting forward (pericarditis)." },
+      { l: "S", word: "Severity", detail: "Scale 0–10. Compare to previous pain. 10/10 sudden → consider: dissection, rupture, perforation, ectopic." }
+    ]
+  },
+  {
+    id: "vitamins",
+    title: "VITAMINS",
+    subtitle: "Causes of Delirium / Altered Mental Status",
+    category: "Neuro",
+    color: "#f59e0b",
+    letters: [
+      { l: "V", word: "Vascular", detail: "Stroke (ischemic/hemorrhagic), TIA, hypertensive encephalopathy, vasculitis. CT head urgently if focal signs." },
+      { l: "I", word: "Infections", detail: "Meningitis, encephalitis, UTI (elderly), pneumonia, sepsis, abscess. Fever + AMS = LP if suspected CNS infection." },
+      { l: "T", word: "Trauma", detail: "Subdural/epidural hematoma, concussion, diffuse axonal injury. Elderly: subdural from minor trauma on anticoagulants." },
+      { l: "A", word: "Autoimmune", detail: "Anti-NMDA receptor encephalitis, CNS lupus, CNS vasculitis, MS relapse, sarcoidosis." },
+      { l: "M", word: "Metabolic", detail: "Hypo/hyperglycemia, hyponatremia, hypercalcemia, hepatic encephalopathy, uremia, thyroid storm, myxedema coma." },
+      { l: "I", word: "Iatrogenic / Intoxication", detail: "Opioids, benzos, anticholinergics, alcohol withdrawal, serotonin syndrome, NMS. Always check med list." },
+      { l: "N", word: "Neoplasm", detail: "Primary brain tumor, metastases (lung, breast, melanoma), carcinomatous meningitis, paraneoplastic syndromes." },
+      { l: "S", word: "Seizure / Structural", detail: "Post-ictal state, non-convulsive status epilepticus (check EEG), hydrocephalus, NPH." }
+    ]
+  },
+  {
+    id: "aeiou-tips",
+    title: "AEIOU-TIPS",
+    subtitle: "Causes of Coma / Unconsciousness",
+    category: "Emergency",
+    color: "#ef4444",
+    letters: [
+      { l: "A", word: "Alcohol / Acidosis", detail: "Acute intoxication, methanol, ethylene glycol. DKA, lactic acidosis. Check glucose, ABG, osmolar gap." },
+      { l: "E", word: "Epilepsy / Encephalopathy", detail: "Status epilepticus, post-ictal state. Hepatic, uremic, Wernicke's, hypertensive encephalopathy." },
+      { l: "I", word: "Insulin (Hypo/Hyperglycemia)", detail: "Hypoglycemia: most rapidly reversible cause. Always check fingerstick glucose FIRST in any comatose patient." },
+      { l: "O", word: "Opiates / Overdose", detail: "Opioids → pinpoint pupils + resp depression. Naloxone diagnostic & therapeutic. Also: benzos, barbiturates, TCA." },
+      { l: "U", word: "Uremia", detail: "End-stage renal failure. Asterixis, uremic frost, pericarditis. BUN/Cr markedly elevated. May need emergent dialysis." },
+      { l: "T", word: "Trauma / Temperature", detail: "Head injury (epidural, subdural, SAH). Hypothermia (<32°C) or hyperthermia/heat stroke. CT head + core temp." },
+      { l: "I", word: "Infection", detail: "Meningitis, encephalitis, cerebral malaria, brain abscess, sepsis. Fever + coma = empiric antibiotics STAT." },
+      { l: "P", word: "Psychiatric / Porphyria", detail: "Catatonia, conversion disorder (diagnosis of exclusion). Acute intermittent porphyria: abdominal pain + psych sx + AMS." },
+      { l: "S", word: "Stroke / Space-occupying lesion", detail: "Large vessel occlusion, brainstem stroke, cerebellar hemorrhage with herniation. CT/CTA emergently." }
+    ]
+  },
+  {
+    id: "mchale",
+    title: "MR CHASE",
+    subtitle: "Essential Amino Acids",
+    category: "Biochem",
+    color: "#10b981",
+    letters: [
+      { l: "M", word: "Methionine", detail: "Sulfur-containing. Precursor of S-adenosylmethionine (SAM) — universal methyl donor. Also precursor of cysteine & taurine." },
+      { l: "R", word: "aRginine*", detail: "*Conditionally essential (infants/stress). Precursor of nitric oxide (vasodilation), creatine, polyamines. Urea cycle intermediate." },
+      { l: "C", word: "Cysteine* (Conditionally essential)", detail: "Actually represents: the 'C' can remind you this list has conditionally essential AAs. Some use PVT TIM HALL instead." },
+      { l: "H", word: "Histidine", detail: "Precursor of histamine (mast cells). Contains imidazole ring. Important in hemoglobin buffering (Bohr effect)." },
+      { l: "A", word: "Arginine* (see above)", detail: "Some versions use this slot for another AA. Classic 9 essential: His, Ile, Leu, Lys, Met, Phe, Thr, Trp, Val." },
+      { l: "S", word: "Serine* (Conditionally)", detail: "Alternative mnemonic PVT TIM HALL covers the 10 essential amino acids more precisely." },
+      { l: "E", word: "Essential = 9 total", detail: "Histidine, Isoleucine, Leucine, Lysine, Methionine, Phenylalanine, Threonine, Tryptophan, Valine. BCAAs: Ile, Leu, Val." }
+    ]
+  },
+  {
+    id: "chimpanzees",
+    title: "CHIMPANZEES",
+    subtitle: "Causes of Acute Hepatitis",
+    category: "GI",
+    color: "#a855f7",
+    letters: [
+      { l: "C", word: "Congestive Heart Failure", detail: "Hepatic congestion → 'nutmeg liver'. AST/ALT mildly ↑, markedly ↑ bilirubin. Treat underlying cardiac cause." },
+      { l: "H", word: "Hepatitis A–E", detail: "A & E: fecal-oral (travel). B & C: blood-borne (chronic). D: co-infection with B only. Check viral serologies." },
+      { l: "I", word: "Ischemia", detail: "Shock liver / hypoxic hepatitis. AST/ALT >1000 with acute hypotension. Usually resolves with hemodynamic support." },
+      { l: "M", word: "Medications / Drugs", detail: "Acetaminophen (#1 cause of ALF), NSAIDs, statins, anti-TB drugs (INH, rifampin), anticonvulsants, antibiotics." },
+      { l: "P", word: "Pregnancy", detail: "HELLP syndrome, acute fatty liver of pregnancy (3rd trimester). Delivery is definitive treatment." },
+      { l: "A", word: "Autoimmune Hepatitis", detail: "ANA, anti-SMA (Type 1) or anti-LKM (Type 2). ↑ IgG. Liver biopsy: interface hepatitis. Treat: steroids + azathioprine." },
+      { l: "N", word: "Non-alcoholic / Nutritional", detail: "NAFLD/NASH — most common liver disease globally. Associated with metabolic syndrome. Also: TPN-related hepatitis." },
+      { l: "Z", word: "Zollinger-Ellison / rareZymes", detail: "Wilson's disease (ceruloplasmin ↓, copper ↑), alpha-1 antitrypsin deficiency, hemochromatosis (iron overload)." },
+      { l: "E", word: "Ethanol", detail: "AST:ALT > 2:1 is classic. GGT elevated. Spectrum: fatty liver → hepatitis → cirrhosis. Abstinence is key." },
+      { l: "E", word: "Extra-hepatic obstruction", detail: "Choledocholithiasis, pancreatic head mass, cholangiocarcinoma. ↑ ALP + GGT out of proportion. Ultrasound → MRCP/ERCP." },
+      { l: "S", word: "Sepsis", detail: "Systemic infection → cholestasis of sepsis. Direct bilirubin rises. Hepatic dysfunction component of MODS." }
+    ]
+  },
+  {
+    id: "dr-smith",
+    title: "DR SMITH",
+    subtitle: "ECG Findings in Hyperkalemia",
+    category: "Cardio",
+    color: "#ec4899",
+    letters: [
+      { l: "D", word: "Decreased heart rate", detail: "Bradycardia in severe hyperkalemia (K+ >7). AV blocks may occur. Can progress to asystole." },
+      { l: "R", word: "Raised T waves (Peaked)", detail: "Earliest ECG sign (K+ >5.5). Tall, narrow, symmetric 'tented' T waves, best seen in precordial leads." },
+      { l: "S", word: "Sine wave pattern", detail: "Pre-terminal rhythm. QRS merges with T wave → sinusoidal pattern. K+ usually >8.0. Immediate treatment needed." },
+      { l: "M", word: "Merged ST segment", detail: "ST segment becomes indistinguishable from T wave. Loss of ST baseline as K+ rises >6.5." },
+      { l: "I", word: "Intervals prolonged (PR, QRS)", detail: "PR prolongation → 1st degree AV block. QRS widening → intraventricular conduction delay. Ominous signs." },
+      { l: "T", word: "T waves peaked (reiteration)", detail: "The hallmark finding. If peaked Ts seen → check K+ STAT. Treat: IV calcium gluconate (membrane stabilizer), insulin+dextrose, salbutamol." },
+      { l: "H", word: "Heart block / Loss of P waves", detail: "P waves flatten then disappear as atrial muscle becomes inexcitable. Sinoventricular rhythm. K+ usually >7.5." }
+    ]
+  },
+  {
+    id: "5hs-5ts",
+    title: "5H's & 5T's",
+    subtitle: "Reversible Causes of Cardiac Arrest",
+    category: "Emergency",
+    color: "#ef4444",
+    letters: [
+      { l: "H", word: "Hypovolemia", detail: "Most common treatable cause. Hemorrhage, dehydration. Give IV fluids/blood products. Look for source of bleeding." },
+      { l: "H", word: "Hypoxia", detail: "Ensure adequate oxygenation. Confirm ETT placement. Check for pneumothorax, bronchospasm, mucus plugging." },
+      { l: "H", word: "Hydrogen ions (Acidosis)", detail: "Severe acidosis impairs cardiac contractility. ABG stat. Consider sodium bicarbonate if pH <7.1." },
+      { l: "H", word: "Hypo/Hyperkalemia", detail: "Both cause fatal arrhythmias. ECG changes diagnostic. Hypo: give IV K+. Hyper: calcium, insulin/dextrose, kayexalate." },
+      { l: "H", word: "Hypothermia", detail: "Core temp <30°C → VF refractory to defibrillation. Warm to >30°C before terminating resuscitation. 'Not dead until warm and dead.'" },
+      { l: "T", word: "Tension Pneumothorax", detail: "Tracheal deviation, absent breath sounds, JVD, hypotension. Needle decompression 2nd ICS MCL → chest tube. Don't wait for CXR." },
+      { l: "T", word: "Tamponade (Cardiac)", detail: "Beck's triad: hypotension, JVD, muffled heart sounds. Pulsus paradoxus. Emergent pericardiocentesis. Bedside echo diagnostic." },
+      { l: "T", word: "Toxins", detail: "Drug overdose. Opioids → naloxone. Benzos → flumazenil. TCA → sodium bicarb. Digoxin → Digibind. Beta-blockers → glucagon." },
+      { l: "T", word: "Thrombosis (Coronary)", detail: "Massive MI → cardiac arrest. Consider emergent PCI during CPR (cath lab). Thrombolytics if PCI unavailable." },
+      { l: "T", word: "Thrombosis (Pulmonary)", detail: "Massive PE. Consider tPA 50mg IV push during arrest. Surgical embolectomy or catheter-directed therapy if ROSC achieved." }
+    ]
+  },
+  {
+    id: "sludge-bbm",
+    title: "SLUDGE-BBM",
+    subtitle: "Cholinergic Toxidrome (Organophosphate Poisoning)",
+    category: "Toxicology",
+    color: "#84cc16",
+    letters: [
+      { l: "S", word: "Salivation", detail: "Excessive salivation from stimulation of muscarinic receptors in salivary glands. Drooling, wet patient." },
+      { l: "L", word: "Lacrimation", detail: "Excessive tearing. Part of the 'wet' presentation. Also rhinorrhea." },
+      { l: "U", word: "Urination", detail: "Loss of bladder control. Detrusor muscle contracts via parasympathetic (M3) stimulation." },
+      { l: "D", word: "Defecation / Diarrhea", detail: "Increased GI motility and secretions. Abdominal cramping. GI smooth muscle M3 receptor activation." },
+      { l: "G", word: "GI distress", detail: "Nausea, vomiting, abdominal cramps. Massive parasympathetic activation of entire GI tract." },
+      { l: "E", word: "Emesis", detail: "Vomiting from CTZ stimulation and direct GI effects. Aspiration risk — protect airway." },
+      { l: "B", word: "Bradycardia", detail: "M2 receptors on SA node → ↓ heart rate. Can cause hypotension. Treat with atropine (muscarinic antagonist)." },
+      { l: "B", word: "Bronchorrhea / Bronchospasm", detail: "Most dangerous effect. Airway floods with secretions + bronchospasm. Leading cause of death. Atropine is life-saving." },
+      { l: "M", word: "Miosis", detail: "Pinpoint pupils from sphincter pupillae constriction (M3). Also: treat with atropine + pralidoxime (2-PAM) for nicotinic effects." }
+    ]
+  },
+  {
+    id: "sigecaps",
+    title: "SIG E CAPS",
+    subtitle: "Major Depressive Disorder Criteria",
+    category: "Psych",
+    color: "#6366f1",
+    letters: [
+      { l: "S", word: "Sleep disturbance", detail: "Insomnia (terminal/middle) or hypersomnia. Early morning awakening (3–4 AM) is classic for MDD." },
+      { l: "I", word: "Interest loss (Anhedonia)", detail: "Core symptom. Loss of pleasure in previously enjoyed activities. Must have this OR depressed mood for diagnosis." },
+      { l: "G", word: "Guilt (excessive/inappropriate)", detail: "Rumination, worthlessness, self-blame for minor things. Can reach delusional intensity in psychotic depression." },
+      { l: "E", word: "Energy loss / Fatigue", detail: "Persistent tiredness despite adequate rest. Even small tasks feel exhausting. Present in >90% of MDD patients." },
+      { l: "C", word: "Concentration difficulty", detail: "Poor focus, indecisiveness, 'pseudodementia' in elderly (depression mimicking dementia). Reversible with treatment." },
+      { l: "A", word: "Appetite change", detail: "Decreased (weight loss) or increased (atypical depression — comfort eating, weight gain). ≥5% body weight change/month significant." },
+      { l: "P", word: "Psychomotor changes", detail: "Retardation (slowed speech, movement) or agitation (restlessness, hand-wringing). Observable by others, not just subjective." },
+      { l: "S", word: "Suicidal ideation", detail: "From passive death wish to active planning. Always assess: ideation, plan, intent, means, protective factors. Safety plan essential." }
+    ]
+  },
+  {
+    id: "cage",
+    title: "CAGE",
+    subtitle: "Alcohol Use Disorder Screening",
+    category: "Psych",
+    color: "#0ea5e9",
+    letters: [
+      { l: "C", word: "Cut down", detail: "Have you ever felt you should CUT DOWN on your drinking? Suggests self-awareness of problematic use." },
+      { l: "A", word: "Annoyed", detail: "Have people ANNOYED you by criticizing your drinking? Social consequences and external feedback." },
+      { l: "G", word: "Guilty", detail: "Have you ever felt GUILTY about your drinking? Internal recognition of harmful behavior." },
+      { l: "E", word: "Eye-opener", detail: "Have you ever had a drink first thing in the morning (EYE-OPENER)? Suggests physical dependence / withdrawal. ≥2 'yes' = positive screen." }
+    ]
+  },
+  {
+    id: "dumbbells",
+    title: "DUMBBELLS",
+    subtitle: "Causes of Bilateral Hilar Lymphadenopathy",
+    category: "Pulm",
+    color: "#f97316",
+    letters: [
+      { l: "D", word: "Drug reaction (Phenytoin)", detail: "Pseudolymphoma syndrome. Phenytoin, carbamazepine can cause lymphadenopathy mimicking lymphoma." },
+      { l: "U", word: "Uncommon infections", detail: "Viral (EBV, CMV, HIV), mycobacterial, fungal (histoplasmosis, coccidioidomycosis). Endemic mycoses in travelers." },
+      { l: "M", word: "Metastatic disease", detail: "Lung, breast, renal, melanoma, GI malignancies. Usually asymmetric, but can be bilateral." },
+      { l: "B", word: "Berylliosis", detail: "Occupational exposure (aerospace, electronics). Granulomatous disease mimicking sarcoidosis. BeLPT diagnostic." },
+      { l: "B", word: "Bronchogenic carcinoma", detail: "Especially small cell lung cancer → massive mediastinal/hilar adenopathy. Smoking history key." },
+      { l: "E", word: "Eosinophilic Granulomatosis", detail: "Langerhans cell histiocytosis, eosinophilic granulomatosis with polyangiitis (Churg-Strauss)." },
+      { l: "L", word: "Lymphoma / Leukemia", detail: "Hodgkin lymphoma: bilateral hilar + mediastinal nodes classic in young adults. NHL also common cause." },
+      { l: "L", word: "Löfgren syndrome", detail: "Acute sarcoidosis triad: bilateral hilar adenopathy + erythema nodosum + polyarthralgia. Excellent prognosis." },
+      { l: "S", word: "Sarcoidosis", detail: "Most common cause of bilateral hilar lymphadenopathy. Non-caseating granulomas. ACE level ↑. Stage I = BHL alone." }
+    ]
+  }
+];
+
+const categories = [...new Set(mnemonics.map(m => m.category))];
+
+// ── State ──
+let activeCategory = "All";
+let searchTerm = "";
+let currentData = [];
+
+// ── Config ──
+const defaultConfig = {
+  app_title: "Medical Mnemonics",
+  subtitle_text: "Essential Memory Aids for Clinical Medicine",
+  background_color: "#0f1117",
+  surface_color: "#1a1d2e",
+  text_color: "#e4e4e7",
+  accent_color: "#f43f5e",
+  muted_color: "#6b7280",
+  font_family: "Outfit",
+  font_size: 15
+};
+
+function applyConfig(config) {
+  const bg = config.background_color || defaultConfig.background_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const accent = config.accent_color || defaultConfig.accent_color;
+  const muted = config.muted_color || defaultConfig.muted_color;
+  const font = config.font_family || defaultConfig.font_family;
+  const fontSize = config.font_size || defaultConfig.font_size;
+
+  document.documentElement.style.setProperty('--accent', accent);
+  document.body.style.background = bg;
+  document.body.style.color = text;
+  document.body.style.fontFamily = `${font}, Outfit, sans-serif`;
+  document.body.style.fontSize = `${fontSize}px`;
+
+  const app = document.getElementById('app');
+  app.style.background = bg;
+
+  document.getElementById('app-title').textContent = config.app_title || defaultConfig.app_title;
+  document.getElementById('app-subtitle').textContent = config.subtitle_text || defaultConfig.subtitle_text;
+
+  const header = document.querySelector('header');
+  header.style.background = `linear-gradient(135deg, ${surface} 0%, ${adjustColor(surface, 10)} 50%, ${bg} 100%)`;
+
+  document.querySelectorAll('.mnemonic-card').forEach(card => {
+    card.style.background = surface;
+    card.style.borderColor = 'rgba(255,255,255,0.06)';
+  });
+
+  document.querySelectorAll('.search-box').forEach(el => {
+    el.style.background = surface;
+    el.style.borderColor = 'rgba(255,255,255,0.08)';
+  });
+
+  renderFilters();
+  renderCards();
+}
+
+function adjustColor(hex, amount) {
+  let r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  r = Math.min(255, r + amount); g = Math.min(255, g + amount); b = Math.min(255, b + amount);
+  return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+}
+
+// ── Render ──
+function renderFilters() {
+  const bar = document.getElementById('filter-bar');
+  const config = window.elementSdk?.config || defaultConfig;
+  const accent = config.accent_color || defaultConfig.accent_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+
+  bar.innerHTML = '';
+  ["All", ...categories].forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = cat;
+    const isActive = activeCategory === cat;
+    btn.style.background = isActive ? accent : surface;
+    btn.style.color = isActive ? '#fff' : text;
+    btn.style.borderColor = isActive ? accent : 'rgba(255,255,255,0.1)';
+    btn.onclick = () => { activeCategory = cat; renderFilters(); renderCards(); };
+    bar.appendChild(btn);
+  });
+}
+
+function getFiltered() {
+  return mnemonics.filter(m => {
+    const catMatch = activeCategory === "All" || m.category === activeCategory;
+    if (!searchTerm) return catMatch;
+    const s = searchTerm.toLowerCase();
+    const textMatch = m.title.toLowerCase().includes(s) || m.subtitle.toLowerCase().includes(s) || m.category.toLowerCase().includes(s) ||
+      m.letters.some(l => l.word.toLowerCase().includes(s) || l.detail.toLowerCase().includes(s));
+    return catMatch && textMatch;
+  });
+}
+
+function renderCards() {
+  const container = document.getElementById('card-container');
+  const noResults = document.getElementById('no-results');
+  const config = window.elementSdk?.config || defaultConfig;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const muted = config.muted_color || defaultConfig.muted_color;
+  const filtered = getFiltered();
+
+  container.innerHTML = '';
+  noResults.style.display = filtered.length ? 'none' : 'block';
+
+  filtered.forEach((m, i) => {
+    const card = document.createElement('div');
+    card.className = 'mnemonic-card anim-in';
+    card.style.background = surface;
+    card.style.border = '1px solid rgba(255,255,255,0.06)';
+    card.style.animationDelay = `${i * 0.06}s`;
+    card.onclick = () => openModal(m);
+
+    const tagBg = m.color + '20';
+    card.innerHTML = `
+      <div style="padding:1.25rem;">
+        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
+          <span class="tag-pill" style="background:${tagBg};color:${m.color};">${m.category}</span>
+          <i data-lucide="chevron-right" style="width:18px;height:18px;color:${muted};"></i>
+        </div>
+        <h2 class="heading-font" style="font-size:24px;color:${text};margin:0 0 4px;">${m.title}</h2>
+        <p style="color:${muted};font-size:13px;margin:0 0 16px;line-height:1.4;">${m.subtitle}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          ${m.letters.map(l => `<div class="letter-badge" style="background:${m.color}20;color:${m.color};font-size:14px;width:32px;height:32px;">${l.l}</div>`).join('')}
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  applyConfig(defaultConfig);
+});
+
+function openModal(m) {
+  const config = window.elementSdk?.config || defaultConfig;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const muted = config.muted_color || defaultConfig.muted_color;
+  const bg = config.background_color || defaultConfig.background_color;
+
+  const modal = document.getElementById('modal');
+  const content = modal.querySelector('.modal-content');
+  content.style.background = surface;
+
+  content.innerHTML = `
+    <div style="padding:1.5rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div>
+          <span class="tag-pill" style="background:${m.color}20;color:${m.color};margin-bottom:6px;display:inline-block;">${m.category}</span>
+          <h2 class="heading-font" style="font-size:28px;color:${text};margin:6px 0 2px;">${m.title}</h2>
+          <p style="color:${muted};font-size:14px;margin:0;">${m.subtitle}</p>
+        </div>
+        <button onclick="closeModal()" style="background:${bg};border:none;border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+          <i data-lucide="x" style="width:18px;height:18px;color:${muted};"></i>
+        </button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        ${m.letters.map(l => `
+          <div style="background:${bg};border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.04);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div class="letter-badge" style="background:${m.color};color:#fff;">${l.l}</div>
+              <span style="font-weight:600;font-size:16px;color:${text};">${l.word}</span>
+            </div>
+            <p style="color:${muted};font-size:13px;line-height:1.6;margin:0;padding-left:46px;">${l.detail}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  lucide.createIcons();
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+document.getElementById('search-input').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  renderCards();
+});
+
+renderFilters();
+renderCards();
+lucide.createIcons();
+</script>
+</body>
+</html>
