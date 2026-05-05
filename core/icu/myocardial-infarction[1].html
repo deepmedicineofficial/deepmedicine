@@ -1,0 +1,907 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Myocardial Infarction | Acute MI & ACS Management | Deep Medicine</title> <meta name="description" content="Comprehensive guide to myocardial infarction including acute coronary syndrome, diagnosis, ECG changes, and emergency management."> <link rel="canonical" href="https://deepmedicine.in/core/icu/myocardial-infarction"> <!-- Open Graph --> <meta property="og:title" content="Myocardial Infarction | Deep Medicine"> <meta property="og:description" content="Acute MI and ACS management with rapid diagnosis and treatment protocols."> <meta property="og:image" content="https://deepmedicine.in/images/myocardial-infarction.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; }
+  .font-heading { font-family: 'Playfair Display', Georgia, serif; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+  ::-webkit-scrollbar-thumb { background: rgba(180,40,40,0.3); border-radius: 3px; }
+
+  /* ECG animation */
+  @keyframes ecgTrace {
+    0% { stroke-dashoffset: 1200; }
+    100% { stroke-dashoffset: 0; }
+  }
+  .ecg-line {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: ecgTrace 3s ease-in-out infinite;
+  }
+
+  /* Pulse animation for heart */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+  }
+  .heart-pulse { animation: pulse 1.5s ease-in-out infinite; }
+
+  /* Fade in sections */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease-out forwards; opacity: 0; }
+
+  /* Tab styling */
+  .tab-btn { transition: all 0.3s ease; }
+  .tab-btn.active { border-bottom: 3px solid; }
+
+  /* Card hover */
+  .info-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .info-card:hover { transform: translateY(-2px); }
+
+  /* Accordion */
+  .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .accordion-content.open { max-height: 3000px; }
+
+  /* Timeline */
+  .timeline-dot { width: 14px; height: 14px; border-radius: 50%; position: absolute; left: -7px; top: 6px; }
+  .timeline-line { width: 2px; position: absolute; left: -1px; top: 20px; bottom: 0; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0f1117;"><!-- Hero Section -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #0f1117 0%, #1a1020 40%, #2a1525 70%, #1a0a0a 100%);">
+    <div class="absolute inset-0 opacity-10">
+     <svg width="100%" height="100%" style="position:absolute;top:0;left:0;"><!-- ECG Background Pattern --> <pattern id="ecgPattern" x="0" y="0" width="300" height="60" patternunits="userSpaceOnUse">
+       <polyline points="0,30 30,30 40,30 50,10 55,50 60,20 65,35 70,30 100,30 110,30 120,28 130,32 140,30 200,30 210,30 220,10 225,50 230,20 235,35 240,30 300,30" fill="none" stroke="#b42828" stroke-width="1" />
+      </pattern> <rect width="100%" height="100%" fill="url(#ecgPattern)" />
+     </svg>
+    </div>
+    <div class="relative z-10 px-4 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24 max-w-7xl mx-auto">
+     <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+      <div class="flex-1 text-center lg:text-left">
+       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase mb-6" style="background:rgba(180,40,40,0.2);color:#e85555;border:1px solid rgba(180,40,40,0.3);"><i data-lucide="stethoscope" style="width:14px;height:14px;"></i> Clinical Experience Guide
+       </div>
+       <h1 id="mainTitle" class="font-heading text-4xl sm:text-5xl lg:text-6xl font-800 leading-tight mb-4" style="color:#f0e6e6;">Myocardial Infarction<br><span style="color:#e85555;">&amp; Arrhythmias</span></h1>
+       <p id="subtitle" class="text-lg sm:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0" style="color:#a09090;">A comprehensive clinical reference from bedside experience — covering pathophysiology, ECG interpretation, acute management, and critical arrhythmia protocols in the ICU/ER setting.</p>
+       <div class="flex flex-wrap gap-3 mt-8 justify-center lg:justify-start"><span class="px-3 py-1 rounded text-xs font-semibold" style="background:rgba(180,40,40,0.15);color:#e88;border:1px solid rgba(180,40,40,0.25);">STEMI</span> <span class="px-3 py-1 rounded text-xs font-semibold" style="background:rgba(180,40,40,0.15);color:#e88;border:1px solid rgba(180,40,40,0.25);">NSTEMI</span> <span class="px-3 py-1 rounded text-xs font-semibold" style="background:rgba(60,130,180,0.15);color:#6bc;border:1px solid rgba(60,130,180,0.25);">VT/VF</span> <span class="px-3 py-1 rounded text-xs font-semibold" style="background:rgba(60,130,180,0.15);color:#6bc;border:1px solid rgba(60,130,180,0.25);">AF/Flutter</span> <span class="px-3 py-1 rounded text-xs font-semibold" style="background:rgba(180,150,40,0.15);color:#dc6;border:1px solid rgba(180,150,40,0.25);">AV Blocks</span>
+       </div>
+      </div>
+      <div class="flex-shrink-0"><!-- Animated Heart SVG -->
+       <div class="heart-pulse" style="width:180px;height:180px;">
+        <svg viewbox="0 0 200 200" width="180" height="180"><defs>
+          <radialgradient id="heartGlow" cx="50%" cy="40%" r="50%">
+           <stop offset="0%" style="stop-color:#e85555;stop-opacity:0.8" />
+           <stop offset="100%" style="stop-color:#8a1a1a;stop-opacity:0.3" />
+          </radialgradient>
+         </defs> <path d="M100 170 C60 130 10 100 10 65 C10 30 40 15 65 15 C80 15 92 25 100 38 C108 25 120 15 135 15 C160 15 190 30 190 65 C190 100 140 130 100 170Z" fill="url(#heartGlow)" stroke="#e85555" stroke-width="2" /> <!-- Coronary arteries --> <path d="M100 40 C95 55 80 70 70 90 C65 100 60 115 65 130" fill="none" stroke="#ff6666" stroke-width="2" opacity="0.6" /> <path d="M100 40 C105 55 115 65 125 80 C135 95 140 110 135 130" fill="none" stroke="#ff6666" stroke-width="2" opacity="0.6" /> <path d="M100 40 L100 100" fill="none" stroke="#ff6666" stroke-width="1.5" opacity="0.4" /> <!-- Occlusion marker --> <circle cx="78" cy="82" r="5" fill="#ff0" opacity="0.7" stroke="#f80" stroke-width="1.5" /> <text x="78" y="85" text-anchor="middle" font-size="6" fill="#800" font-weight="bold">
+          X
+         </text>
+        </svg>
+       </div>
+      </div>
+     </div><!-- ECG Strip -->
+     <div class="mt-10 rounded-xl p-4 overflow-hidden" style="background:rgba(0,0,0,0.3);border:1px solid rgba(180,40,40,0.2);">
+      <div class="flex items-center gap-2 mb-2"><i data-lucide="activity" style="width:16px;height:16px;color:#e85555;"></i> <span class="text-xs font-semibold tracking-wider uppercase" style="color:#e85555;">Live ECG Trace — Lead II</span>
+      </div>
+      <svg viewbox="0 0 800 80" width="100%" height="60" preserveaspectratio="none"><!-- Grid --> <defs>
+        <pattern id="ecgGrid" width="20" height="20" patternunits="userSpaceOnUse">
+         <rect width="20" height="20" fill="none" stroke="rgba(180,40,40,0.1)" stroke-width="0.5" />
+        </pattern>
+       </defs> <rect width="800" height="80" fill="url(#ecgGrid)" /> <!-- Normal sinus then ST elevation pattern --> <polyline class="ecg-line" points="0,40 40,40 60,40 70,38 80,40 90,40 100,42 105,15 110,60 115,35 120,40 140,40 160,25 200,25 220,40 260,40 280,40 290,38 300,40 310,40 320,42 325,12 330,65 335,32 340,40 360,40 380,22 420,22 440,40 480,40 500,40 510,38 520,40 530,40 540,42 545,10 550,68 555,30 560,40 580,40 600,20 640,20 660,40 700,40 720,40 730,38 740,40 760,42 765,14 770,62 775,34 780,40 800,40" fill="none" stroke="#e85555" stroke-width="2" />
+      </svg>
+      <p class="text-xs mt-1" style="color:#885555;">Note ST elevation in leads II, III, aVF — suggestive of Inferior STEMI (RCA territory)</p>
+     </div>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="sticky top-0 z-50 border-b" style="background:#13151e;border-color:rgba(180,40,40,0.2);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 overflow-x-auto">
+     <div class="flex gap-1 min-w-max"><button class="tab-btn active px-4 py-3 text-sm font-semibold transition-colors" style="color:#e85555;border-color:#e85555;" data-tab="mi" onclick="switchTab('mi')"> <span class="hidden sm:inline">Myocardial </span>Infarction </button> <button class="tab-btn px-4 py-3 text-sm font-semibold" style="color:#777;" data-tab="arrhythmia" onclick="switchTab('arrhythmia')"> Arrhythmias </button> <button class="tab-btn px-4 py-3 text-sm font-semibold" style="color:#777;" data-tab="ecg" onclick="switchTab('ecg')"> ECG Atlas </button> <button class="tab-btn px-4 py-3 text-sm font-semibold" style="color:#777;" data-tab="protocols" onclick="switchTab('protocols')"> Protocols </button> <button class="tab-btn px-4 py-3 text-sm font-semibold" style="color:#777;" data-tab="drugs" onclick="switchTab('drugs')"> Drug<span class="hidden sm:inline"> Reference</span> </button>
+     </div>
+    </div>
+   </nav><!-- Content Sections -->
+   <main class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-8 sm:py-12"><!-- ========== MI SECTION ========== -->
+    <section id="tab-mi" class="tab-content"><!-- Quick Stats -->
+     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
+      <div class="rounded-xl p-4 text-center" style="background:rgba(180,40,40,0.1);border:1px solid rgba(180,40,40,0.2);">
+       <div class="font-heading text-2xl sm:text-3xl font-bold" style="color:#e85555;">
+        90 min
+       </div>
+       <div class="text-xs mt-1" style="color:#a08080;">
+        Door-to-Balloon Target
+       </div>
+      </div>
+      <div class="rounded-xl p-4 text-center" style="background:rgba(60,130,180,0.1);border:1px solid rgba(60,130,180,0.2);">
+       <div class="font-heading text-2xl sm:text-3xl font-bold" style="color:#6bc;">
+        30 min
+       </div>
+       <div class="text-xs mt-1" style="color:#80a0a0;">
+        Door-to-Needle Target
+       </div>
+      </div>
+      <div class="rounded-xl p-4 text-center" style="background:rgba(180,150,40,0.1);border:1px solid rgba(180,150,40,0.2);">
+       <div class="font-heading text-2xl sm:text-3xl font-bold" style="color:#dc6;">
+        6 hrs
+       </div>
+       <div class="text-xs mt-1" style="color:#a0a080;">
+        Golden Window (Thrombolysis)
+       </div>
+      </div>
+      <div class="rounded-xl p-4 text-center" style="background:rgba(80,180,80,0.1);border:1px solid rgba(80,180,80,0.2);">
+       <div class="font-heading text-2xl sm:text-3xl font-bold" style="color:#6c6;">
+        12 hrs
+       </div>
+       <div class="text-xs mt-1" style="color:#80a080;">
+        Max PCI Window
+       </div>
+      </div>
+     </div><!-- Definition & Pathophysiology -->
+     <div class="fade-up mb-8">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold mb-6" style="color:#f0e6e6;"><i data-lucide="book-open" style="width:28px;height:28px;display:inline;vertical-align:middle;color:#e85555;" class="mr-2"></i> Myocardial Infarction — Clinical Deep Dive</h2><!-- Accordion: Definition -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold text-base sm:text-lg" style="color:#e8d8d8;">Definition &amp; Universal Classification (4th Universal Definition)</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <div class="rounded-lg p-4 mb-4" style="background:rgba(180,40,40,0.08);border-left:3px solid #e85555;">
+          <p class="text-sm leading-relaxed" style="color:#c8b8b8;"><strong style="color:#e85555;">Myocardial Infarction</strong> is defined as myocardial cell death due to prolonged ischaemia. Clinically, it is diagnosed when there is a <strong>rise and/or fall of cardiac troponin (cTn)</strong> with at least one value above the 99th percentile upper reference limit (URL) AND at least one of:</p>
+          <ul class="mt-3 space-y-2 text-sm" style="color:#b0a0a0;">
+           <li class="flex items-start gap-2"><span style="color:#e85555;">①</span> Symptoms of acute myocardial ischaemia</li>
+           <li class="flex items-start gap-2"><span style="color:#e85555;">②</span> New ischaemic ECG changes</li>
+           <li class="flex items-start gap-2"><span style="color:#e85555;">③</span> Development of pathological Q waves</li>
+           <li class="flex items-start gap-2"><span style="color:#e85555;">④</span> Imaging evidence of new loss of viable myocardium or new RWMA</li>
+           <li class="flex items-start gap-2"><span style="color:#e85555;">⑤</span> Identification of coronary thrombus by angiography or autopsy</li>
+          </ul>
+         </div>
+         <h4 class="font-semibold text-sm mb-2" style="color:#e8d8d8;">MI Classification Types:</h4>
+         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div class="rounded-lg p-3" style="background:rgba(180,40,40,0.06);border:1px solid rgba(180,40,40,0.15);">
+           <div class="font-bold text-sm mb-1" style="color:#e85555;">
+            Type 1
+           </div>
+           <p class="text-xs" style="color:#a09090;">Spontaneous MI due to atherosclerotic plaque rupture, erosion, fissuring, or dissection causing intraluminal thrombus → myocardial ischaemia → necrosis. This is the "classic heart attack."</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(60,130,180,0.06);border:1px solid rgba(60,130,180,0.15);">
+           <div class="font-bold text-sm mb-1" style="color:#6bc;">
+            Type 2
+           </div>
+           <p class="text-xs" style="color:#a09090;">MI secondary to oxygen supply-demand mismatch — NOT due to acute coronary plaque disruption. Causes: tachyarrhythmia, hypotension, severe anaemia, coronary spasm, coronary embolism, respiratory failure.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(180,150,40,0.06);border:1px solid rgba(180,150,40,0.15);">
+           <div class="font-bold text-sm mb-1" style="color:#dc6;">
+            Type 3
+           </div>
+           <p class="text-xs" style="color:#a09090;">MI resulting in death when biomarker values are unavailable. Sudden cardiac death with symptoms suggestive of ischaemia + presumed new ECG changes or VF, but death occurs before blood samples or troponin rise.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(80,180,80,0.06);border:1px solid rgba(80,180,80,0.15);">
+           <div class="font-bold text-sm mb-1" style="color:#6c6;">
+            Type 4a
+           </div>
+           <p class="text-xs" style="color:#a09090;">MI related to PCI (≤48 hrs). Troponin &gt;5× URL with normal baseline OR &gt;20% rise if elevated baseline + ischaemic symptoms/ECG/angiographic findings/imaging.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(80,180,80,0.06);border:1px solid rgba(80,180,80,0.15);">
+           <div class="font-bold text-sm mb-1" style="color:#6c6;">
+            Type 4b
+           </div>
+           <p class="text-xs" style="color:#a09090;">MI related to stent thrombosis — documented by angiography or autopsy using Academic Research Consortium criteria.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(160,80,180,0.06);border:1px solid rgba(160,80,180,0.15);">
+           <div class="font-bold text-sm mb-1" style="color:#c8a;">
+            Type 5
+           </div>
+           <p class="text-xs" style="color:#a09090;">MI related to CABG. Troponin &gt;10× URL within 48 hours + new pathological Q waves OR angiographic graft/native artery occlusion OR new RWMA.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Accordion: Pathophysiology -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold text-base sm:text-lg" style="color:#e8d8d8;">Pathophysiology — The Ischaemic Cascade</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <p class="text-sm mb-4" style="color:#b0a0a0;">The ischaemic cascade is the sequential pathophysiological response to myocardial oxygen deprivation. From my ICU experience, understanding this cascade is critical for timing interventions:</p>
+         <div class="relative pl-6">
+          <div class="absolute left-0 top-0 bottom-0" style="width:2px;background:linear-gradient(to bottom,#e85555,#6bc,#dc6,#c66);"></div>
+          <div class="relative mb-6">
+           <div class="timeline-dot" style="background:#e85555;"></div>
+           <div class="ml-4">
+            <div class="font-bold text-sm" style="color:#e85555;">
+             0–10 seconds — Metabolic Switch
+            </div>
+            <p class="text-xs mt-1" style="color:#a09090;">Aerobic metabolism ceases. Shift to anaerobic glycolysis → lactate accumulation → intracellular acidosis. ATP production drops from 36 to 2 molecules per glucose. Creatine phosphate reserves depleted within seconds.</p>
+           </div>
+          </div>
+          <div class="relative mb-6">
+           <div class="timeline-dot" style="background:#e87040;"></div>
+           <div class="ml-4">
+            <div class="font-bold text-sm" style="color:#e87040;">
+             10–30 seconds — Diastolic Dysfunction
+            </div>
+            <p class="text-xs mt-1" style="color:#a09090;">ATP depletion impairs calcium reuptake into sarcoplasmic reticulum → diastolic relaxation failure → ↑ LVEDP. This is detectable by Doppler echo (E/A reversal) BEFORE any systolic impairment. Clinically: dyspnoea, pulmonary congestion onset.</p>
+           </div>
+          </div>
+          <div class="relative mb-6">
+           <div class="timeline-dot" style="background:#dc6;"></div>
+           <div class="ml-4">
+            <div class="font-bold text-sm" style="color:#dc6;">
+             Seconds to Minutes — Systolic Dysfunction (RWMA)
+            </div>
+            <p class="text-xs mt-1" style="color:#a09090;">Regional wall motion abnormalities appear. Hypokinesis → akinesis → dyskinesis. If &gt;40% of LV wall involved → cardiogenic shock. The LVEF begins to decline. This is the "stunned" myocardium phase — potentially reversible with reperfusion.</p>
+           </div>
+          </div>
+          <div class="relative mb-6">
+           <div class="timeline-dot" style="background:#6bc;"></div>
+           <div class="ml-4">
+            <div class="font-bold text-sm" style="color:#6bc;">
+             Minutes — ECG Changes
+            </div>
+            <p class="text-xs mt-1" style="color:#a09090;">ECG changes follow functional impairment. Sequence: Tall hyperacute T waves → ST elevation → Q wave development. In the ER, I've seen hyperacute T waves precede ST elevation by 15–30 minutes — this is the window where early recognition saves lives.</p>
+           </div>
+          </div>
+          <div class="relative mb-6">
+           <div class="timeline-dot" style="background:#c8a;"></div>
+           <div class="ml-4">
+            <div class="font-bold text-sm" style="color:#c8a;">
+             Minutes to Hours — Chest Pain &amp; Autonomic Response
+            </div>
+            <p class="text-xs mt-1" style="color:#a09090;">Adenosine, bradykinin, &amp; lactate stimulate cardiac nociceptors (C-fibres via sympathetic afferents → T1–T5 dorsal root ganglia). Referred pain: left arm, jaw, epigastrium. Inferior MI → vagal activation (Bezold-Jarisch reflex) → bradycardia + hypotension. Anterior MI → sympathetic surge → tachycardia + hypertension.</p>
+           </div>
+          </div>
+          <div class="relative">
+           <div class="timeline-dot" style="background:#c66;"></div>
+           <div class="ml-4">
+            <div class="font-bold text-sm" style="color:#c66;">
+             20–40 Minutes — Irreversible Necrosis (Wavefront Phenomenon)
+            </div>
+            <p class="text-xs mt-1" style="color:#a09090;">Necrosis begins subendocardially and progresses transmurally over hours (Reimer &amp; Jennings "wavefront of necrosis"). Subendocardium is most vulnerable due to: highest metabolic demand, highest wall tension (Laplace's law), compression during systole, furthest from epicardial coronary supply. This is WHY "time is muscle" — every minute of delay = more transmural extension.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Accordion: Coronary Anatomy -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold text-base sm:text-lg" style="color:#e8d8d8;">Coronary Anatomy &amp; ECG Territory Correlation</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <p class="text-sm mb-4" style="color:#b0a0a0;">Correlating ECG leads with coronary territory is the single most important skill in acute MI management. From my experience, getting this right in the first 5 minutes dictates the entire treatment pathway:</p>
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm" style="color:#c8b8b8;">
+           <thead>
+            <tr style="border-bottom:1px solid rgba(180,40,40,0.3);">
+             <th class="text-left py-2 px-3 font-semibold" style="color:#e85555;">ECG Leads</th>
+             <th class="text-left py-2 px-3 font-semibold" style="color:#e85555;">Territory</th>
+             <th class="text-left py-2 px-3 font-semibold" style="color:#e85555;">Artery</th>
+             <th class="text-left py-2 px-3 font-semibold" style="color:#e85555;">Clinical Pearl</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-3 font-mono">V1–V4</td>
+             <td class="py-2 px-3">Anterior</td>
+             <td class="py-2 px-3">LAD</td>
+             <td class="py-2 px-3" style="color:#a09090;">Highest mortality. Pump failure, cardiogenic shock. "Widow maker" if proximal LAD.</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-3 font-mono">II, III, aVF</td>
+             <td class="py-2 px-3">Inferior</td>
+             <td class="py-2 px-3">RCA (85%) / LCx (15%)</td>
+             <td class="py-2 px-3" style="color:#a09090;">Always check V4R for RV infarct. Avoid nitrates + diuretics if RV involved → volume dependent.</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-3 font-mono">I, aVL, V5–V6</td>
+             <td class="py-2 px-3">Lateral</td>
+             <td class="py-2 px-3">LCx / Diagonal</td>
+             <td class="py-2 px-3" style="color:#a09090;">Often "electrically silent" — LCx occlusion may show only subtle changes. High index of suspicion needed.</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-3 font-mono">V1–V3 (reciprocal ST↓)</td>
+             <td class="py-2 px-3">Posterior</td>
+             <td class="py-2 px-3">LCx / PDA</td>
+             <td class="py-2 px-3" style="color:#a09090;">Check V7–V9 (posterior leads). Tall R in V1 + ST depression V1-V3 = posterior MI until proven otherwise.</td>
+            </tr>
+            <tr>
+             <td class="py-2 px-3 font-mono">V3R, V4R</td>
+             <td class="py-2 px-3">Right Ventricle</td>
+             <td class="py-2 px-3">Proximal RCA</td>
+             <td class="py-2 px-3" style="color:#a09090;">Hypotension + clear lungs + elevated JVP = RV MI triad. Fluid challenge, NOT diuretics. Avoid morphine &amp; nitrates.</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div><!-- Accordion: STEMI vs NSTEMI -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold text-base sm:text-lg" style="color:#e8d8d8;">STEMI vs NSTEMI — Clinical Distinction &amp; Management</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <div class="grid sm:grid-cols-2 gap-4">
+          <div class="rounded-xl p-4" style="background:rgba(180,40,40,0.08);border:1px solid rgba(180,40,40,0.2);">
+           <h4 class="font-heading text-lg font-bold mb-3" style="color:#e85555;">STEMI</h4>
+           <ul class="space-y-2 text-xs" style="color:#b0a0a0;">
+            <li><strong style="color:#e8d8d8;">Pathology:</strong> Complete thrombotic coronary occlusion → transmural ischaemia</li>
+            <li><strong style="color:#e8d8d8;">ECG:</strong> ST elevation ≥1mm in ≥2 contiguous leads (≥2mm in V1-V3 for men ≥40, ≥2.5mm in V1-V3 for men &lt;40, ≥1.5mm in V1-V3 for women)</li>
+            <li><strong style="color:#e8d8d8;">Troponin:</strong> Markedly elevated — but DO NOT wait for troponin to initiate reperfusion</li>
+            <li><strong style="color:#e8d8d8;">Management:</strong> Emergent reperfusion — Primary PCI (preferred) within 90 min OR Thrombolysis within 30 min if PCI not available within 120 min</li>
+            <li><strong style="color:#e8d8d8;">STEMI Equivalents:</strong> New LBBB (Sgarbossa criteria), de Winter T waves, Wellens syndrome (LAD), posterior MI pattern, isolated ST elevation in aVR (left main / 3-vessel)</li>
+           </ul>
+          </div>
+          <div class="rounded-xl p-4" style="background:rgba(60,130,180,0.08);border:1px solid rgba(60,130,180,0.2);">
+           <h4 class="font-heading text-lg font-bold mb-3" style="color:#6bc;">NSTEMI / Unstable Angina</h4>
+           <ul class="space-y-2 text-xs" style="color:#b0a0a0;">
+            <li><strong style="color:#e8d8d8;">Pathology:</strong> Partial/subtotal occlusion OR complete occlusion with collateral supply → subendocardial ischaemia</li>
+            <li><strong style="color:#e8d8d8;">ECG:</strong> ST depression ≥0.5mm, T-wave inversion, or transient ST elevation, or even normal ECG</li>
+            <li><strong style="color:#e8d8d8;">Troponin:</strong> Elevated in NSTEMI; normal in Unstable Angina (UA). High-sensitivity troponin (hs-cTn) with serial measurements at 0h/1h or 0h/3h protocol</li>
+            <li><strong style="color:#e8d8d8;">Risk Stratification:</strong> GRACE score determines timing of angiography: Very high risk → &lt;2h, High risk → &lt;24h, Intermediate → &lt;72h, Low risk → non-invasive testing first</li>
+            <li><strong style="color:#e8d8d8;">Very High Risk Criteria:</strong> Haemodynamic instability, recurrent/ongoing chest pain refractory to medical Rx, life-threatening arrhythmias, mechanical complications, acute HF, recurrent dynamic ST/T changes</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Accordion: Acute Management -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold text-base sm:text-lg" style="color:#e8d8d8;">Acute MI Management — ER/ICU Protocol (MONA-B + Reperfusion)</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <div class="rounded-lg p-4 mb-4" style="background:rgba(180,150,40,0.08);border:1px solid rgba(180,150,40,0.2);">
+          <p class="text-xs font-semibold mb-1" style="color:#dc6;">⚡ CLINICAL PEARL FROM ICU EXPERIENCE</p>
+          <p class="text-xs" style="color:#b0a0a0;">"In my years in the CCU, I've learned that the first 10 minutes are about RECOGNITION, the next 20 are about STABILIZATION, and everything after is about REPERFUSION. The biggest killer isn't the MI itself — it's delay."</p>
+         </div>
+         <div class="space-y-3">
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(180,40,40,0.05);">
+           <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(180,40,40,0.2);color:#e85555;">
+            M
+           </div>
+           <div>
+            <div class="font-semibold text-sm" style="color:#e8d8d8;">
+             Morphine (with caution)
+            </div>
+            <p class="text-xs" style="color:#a09090;">2-4mg IV q5-15min PRN. Reserve for pain refractory to nitrates. ⚠️ AVOID in RV infarct, hypotension, respiratory depression. Modern guidelines de-emphasize morphine — may mask ongoing ischaemia and delay recognition of complications. Fentanyl 25-50mcg IV is an alternative.</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(60,130,180,0.05);">
+           <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(60,130,180,0.2);color:#6bc;">
+            O
+           </div>
+           <div>
+            <div class="font-semibold text-sm" style="color:#e8d8d8;">
+             Oxygen
+            </div>
+            <p class="text-xs" style="color:#a09090;">Only if SpO₂ &lt;90% or respiratory distress. AVOID routine O₂ in normoxic patients — DETO₂X trial showed potential harm with hyperoxia (coronary vasoconstriction, increased ROS). Target SpO₂ 94-98%.</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(80,180,80,0.05);">
+           <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(80,180,80,0.2);color:#6c6;">
+            N
+           </div>
+           <div>
+            <div class="font-semibold text-sm" style="color:#e8d8d8;">
+             Nitrates
+            </div>
+            <p class="text-xs" style="color:#a09090;">GTN 0.4mg SL q5min ×3, then IV infusion (5-200 mcg/min) titrate to pain relief and BP. <strong>CONTRAINDICATIONS:</strong> SBP &lt;90, HR &lt;50 or &gt;100, RV infarct, PDE5 inhibitor use within 24-48 hrs, severe aortic stenosis. Mechanism: venodilation → ↓ preload → ↓ MVO₂, plus coronary vasodilation.</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(180,150,40,0.05);">
+           <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(180,150,40,0.2);color:#dc6;">
+            A
+           </div>
+           <div>
+            <div class="font-semibold text-sm" style="color:#e8d8d8;">
+             Antiplatelet Therapy (Dual — DAPT)
+            </div>
+            <p class="text-xs" style="color:#a09090;"><strong>Aspirin:</strong> 325mg chewable (NOT enteric-coated) stat → 81mg daily thereafter. Irreversible COX-1 inhibition → blocks TXA₂ synthesis → ↓ platelet aggregation.<br><strong>P2Y12 Inhibitor (load ASAP):</strong><br>
+              • Ticagrelor 180mg load → 90mg BID (preferred per ESC/AHA — faster onset, reversible, superior to Clopidogrel per PLATO trial)<br>
+              • Prasugrel 60mg load → 10mg daily (contraindicated if prior stroke/TIA, age ≥75, weight &lt;60kg)<br>
+              • Clopidogrel 600mg load → 75mg daily (if ticagrelor/prasugrel contraindicated or unavailable, or with thrombolysis)</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(160,80,180,0.05);">
+           <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(160,80,180,0.2);color:#c8a;">
+            B
+           </div>
+           <div>
+            <div class="font-semibold text-sm" style="color:#e8d8d8;">
+             Beta-Blockers &amp; Anticoagulation
+            </div>
+            <p class="text-xs" style="color:#a09090;"><strong>Beta-Blockers:</strong> Metoprolol 5mg IV q5min ×3 (if haemodynamically stable, no HF, no AV block) → then oral 25-50mg q6-12h. ↓ HR, ↓ contractility, ↓ MVO₂, ↓ arrhythmia risk. AVOID if: Killip III-IV, SBP &lt;120, HR &lt;60, PR &gt;0.24s, 2nd/3rd degree AV block, active wheeze.<br><strong>Anticoagulation:</strong> UFH 60 U/kg bolus (max 4000U) → 12 U/kg/hr (max 1000U/hr) for PCI pathway. Enoxaparin 0.5mg/kg IV for thrombolysis pathway.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Accordion: Complications -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold text-base sm:text-lg" style="color:#e8d8d8;">Mechanical &amp; Electrical Complications of MI</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="rounded-lg p-3" style="background:rgba(180,40,40,0.06);border:1px solid rgba(180,40,40,0.15);">
+           <div class="font-bold text-sm mb-2" style="color:#e85555;">
+            Cardiogenic Shock (Killip IV)
+           </div>
+           <p class="text-xs" style="color:#a09090;">SBP &lt;90 for &gt;30min, CI &lt;2.2, PCWP &gt;18. Usually &gt;40% LV mass infarcted. Mortality 50-80%. Management: Emergent PCI, IABP/Impella, vasopressors (norepinephrine first-line), dobutamine for inotropy.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(180,40,40,0.06);border:1px solid rgba(180,40,40,0.15);">
+           <div class="font-bold text-sm mb-2" style="color:#e85555;">
+            Free Wall Rupture
+           </div>
+           <p class="text-xs" style="color:#a09090;">Day 3-5 post-MI (or Day 1 with thrombolysis). Sudden haemodynamic collapse + PEA. Pericardial tamponade → beck's triad. Almost universally fatal without emergent surgery. Risk factors: first MI, anterior, female, age &gt;70.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(60,130,180,0.06);border:1px solid rgba(60,130,180,0.15);">
+           <div class="font-bold text-sm mb-2" style="color:#6bc;">
+            VSD (Ventricular Septal Rupture)
+           </div>
+           <p class="text-xs" style="color:#a09090;">Day 3-5. New harsh pansystolic murmur + thrill at left sternal border. Acute L→R shunt → biventricular failure. Confirm by echo with colour Doppler + step-up in O₂ sat from RA→RV. Surgical repair; Impella or IABP as bridge.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(60,130,180,0.06);border:1px solid rgba(60,130,180,0.15);">
+           <div class="font-bold text-sm mb-2" style="color:#6bc;">
+            Acute Mitral Regurgitation
+           </div>
+           <p class="text-xs" style="color:#a09090;">Papillary muscle rupture (posteromedial &gt; anterolateral, because posteromedial has single blood supply from PDA). Acute severe MR → flash pulmonary oedema. New systolic murmur (may be soft due to equalization of pressures). Emergent surgery.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(180,150,40,0.06);border:1px solid rgba(180,150,40,0.15);">
+           <div class="font-bold text-sm mb-2" style="color:#dc6;">
+            LV Aneurysm
+           </div>
+           <p class="text-xs" style="color:#a09090;">Weeks to months post-MI. Persistent ST elevation on ECG (&gt;6 weeks). Thin dyskinetic wall → thrombus formation risk → systemic embolism. Anticoagulation needed. May cause refractory HF or VT.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(180,150,40,0.06);border:1px solid rgba(180,150,40,0.15);">
+           <div class="font-bold text-sm mb-2" style="color:#dc6;">
+            Dressler Syndrome
+           </div>
+           <p class="text-xs" style="color:#a09090;">2-10 weeks post-MI. Autoimmune pericarditis: fever, pleuritic chest pain, pericardial friction rub, pericardial effusion. ESR/CRP elevated. Treatment: Aspirin high-dose + Colchicine. Avoid anticoagulation (haemorrhagic pericarditis risk).</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ========== ARRHYTHMIA SECTION ========== -->
+    <section id="tab-arrhythmia" class="tab-content hidden">
+     <div class="fade-up">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold mb-6" style="color:#f0e6e6;"><i data-lucide="zap" style="width:28px;height:28px;display:inline;vertical-align:middle;color:#6bc;" class="mr-2"></i> Cardiac Arrhythmias — Complete Clinical Reference</h2>
+      <div class="rounded-xl p-4 mb-6" style="background:rgba(60,130,180,0.08);border:1px solid rgba(60,130,180,0.2);">
+       <p class="text-sm" style="color:#b0c0c8;">Arrhythmias in the context of MI are the leading cause of pre-hospital cardiac death. In the CCU, I've managed everything from benign PVCs to pulseless VT within the same shift. The key clinical principle: <strong style="color:#6bc;">treat the patient, not the monitor.</strong></p>
+      </div><!-- Tachyarrhythmias -->
+      <h3 class="font-heading text-xl font-bold mb-4 mt-8" style="color:#e85555;">Tachyarrhythmias (HR &gt;100 bpm)</h3><!-- VF/VT -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold" style="color:#e8d8d8;"> <span class="inline-block px-2 py-0.5 rounded text-xs font-bold mr-2" style="background:rgba(220,40,40,0.3);color:#f88;">LIFE-THREATENING</span> Ventricular Fibrillation (VF) &amp; Ventricular Tachycardia (VT) </span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div class="rounded-lg p-3" style="background:rgba(220,40,40,0.08);border:1px solid rgba(220,40,40,0.2);">
+           <h5 class="font-bold text-sm mb-2" style="color:#f66;">Ventricular Fibrillation</h5>
+           <p class="text-xs" style="color:#a09090;"><strong>Mechanism:</strong> Chaotic, disorganized ventricular electrical activity. Multiple re-entrant wavelets. No coordinated contraction → NO cardiac output → cardiac arrest.</p>
+           <p class="text-xs mt-2" style="color:#a09090;"><strong>ECG:</strong> Bizarre, irregular, no discernible P/QRS/T. "Coarse VF" (higher amplitude, more recently arrested, better prognosis) vs "Fine VF" (low amplitude, may mimic asystole — check gain).</p>
+           <p class="text-xs mt-2" style="color:#a09090;"><strong>In MI context:</strong> Occurs in 5-10% of STEMI, usually within first hour. Primary VF (first 48h) does NOT worsen long-term prognosis if survived. Late VF (&gt;48h) = poor prognosis, consider ICD.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(180,40,40,0.08);border:1px solid rgba(180,40,40,0.2);">
+           <h5 class="font-bold text-sm mb-2" style="color:#e85555;">Ventricular Tachycardia</h5>
+           <p class="text-xs" style="color:#a09090;"><strong>Monomorphic VT:</strong> Single re-entrant circuit around infarct scar. Broad complex (QRS &gt;120ms), regular, rate 150-250. Concordance across precordial leads, AV dissociation, capture/fusion beats → confirms VT (Brugada algorithm).</p>
+           <p class="text-xs mt-2" style="color:#a09090;"><strong>Polymorphic VT:</strong> Changing QRS morphology. If QTc normal → ischaemia-driven (treat the ischaemia). If QTc prolonged → Torsades de Pointes (IV Magnesium 2g, overdrive pacing, Isoproterenol).</p>
+           <p class="text-xs mt-2" style="color:#a09090;"><strong>Clinical pearl:</strong> "All wide-complex tachycardia is VT until proven otherwise." — if in doubt, treat as VT. Misdiagnosing VT as SVT with aberrancy and giving Verapamil → haemodynamic collapse &amp; death.</p>
+          </div>
+         </div>
+         <div class="rounded-lg p-3" style="background:rgba(180,150,40,0.08);border:1px solid rgba(180,150,40,0.2);">
+          <h5 class="font-bold text-sm mb-2" style="color:#dc6;">⚡ Management (AHA/ERC Guidelines)</h5>
+          <ul class="space-y-1 text-xs" style="color:#b0a0a0;">
+           <li><strong style="color:#f66;">Pulseless VT/VF:</strong> Immediate CPR + Defibrillation (biphasic 120-200J, mono 360J) → Epinephrine 1mg IV q3-5min → Amiodarone 300mg IV bolus (then 150mg) → Repeat shocks. Address reversible causes (4H's &amp; 4T's).</li>
+           <li><strong style="color:#e85555;">Pulsed VT (stable):</strong> Amiodarone 150mg IV over 10min → infusion 1mg/min ×6h → 0.5mg/min ×18h. OR Lidocaine 1-1.5mg/kg bolus → 1-4mg/min infusion. Procainamide 20mg/min up to 17mg/kg.</li>
+           <li><strong style="color:#e85555;">Pulsed VT (unstable — hypotension, altered consciousness, chest pain, HF):</strong> Synchronized cardioversion 100-200J. Sedate first if time permits (midazolam/propofol).</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div><!-- AF -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold" style="color:#e8d8d8;">Atrial Fibrillation (AF) &amp; Atrial Flutter</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <div class="grid sm:grid-cols-2 gap-4 mb-3">
+          <div class="rounded-lg p-3" style="background:rgba(60,130,180,0.06);border:1px solid rgba(60,130,180,0.15);">
+           <h5 class="font-bold text-sm mb-2" style="color:#6bc;">Atrial Fibrillation</h5>
+           <p class="text-xs" style="color:#a09090;"><strong>Mechanism:</strong> Multiple re-entrant wavelets in atrial myocardium OR focal triggers (commonly from pulmonary veins).</p>
+           <p class="text-xs mt-1" style="color:#a09090;"><strong>ECG:</strong> Irregularly irregular rhythm, absent P waves, fibrillatory baseline, variable ventricular rate (typically 100-160 if untreated).</p>
+           <p class="text-xs mt-1" style="color:#a09090;"><strong>In MI:</strong> Occurs in 10-20% of acute MI. Signifies extensive atrial ischaemia, ↑ atrial pressure (LV failure), or pericarditis. Worsens prognosis due to loss of atrial kick (↓ CO by ~25%) and ↑ MVO₂ from tachycardia.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(60,130,180,0.06);border:1px solid rgba(60,130,180,0.15);">
+           <h5 class="font-bold text-sm mb-2" style="color:#6bc;">Atrial Flutter</h5>
+           <p class="text-xs" style="color:#a09090;"><strong>Mechanism:</strong> Macro re-entrant circuit in right atrium (typical = counterclockwise around tricuspid annulus through cavotricuspid isthmus).</p>
+           <p class="text-xs mt-1" style="color:#a09090;"><strong>ECG:</strong> "Sawtooth" flutter waves best seen in II, III, aVF, V1. Atrial rate ~300bpm with 2:1 block → ventricular rate ~150. If patient has "SVT at 150" → always consider flutter with 2:1 block (carotid sinus massage may unmask flutter waves).</p>
+           <p class="text-xs mt-1" style="color:#a09090;"><strong>Management:</strong> Rate control similar to AF. Cardioversion at lower energy (50-100J). Highly amenable to catheter ablation (CTI ablation, &gt;95% success).</p>
+          </div>
+         </div>
+         <div class="rounded-lg p-3" style="background:rgba(180,150,40,0.08);border:1px solid rgba(180,150,40,0.2);">
+          <h5 class="font-bold text-sm mb-2" style="color:#dc6;">AF Management in Acute MI</h5>
+          <p class="text-xs" style="color:#b0a0a0;"><strong>Rate control (first-line in MI):</strong> Beta-blockers (Metoprolol 5mg IV) if no HF/hypotension. Diltiazem 0.25mg/kg IV if beta-blocker contraindicated (BUT avoid in systolic HF). Digoxin 0.5mg IV if HF present (slow onset — 2h). Amiodarone 300mg IV over 1h for rate + rhythm control in haemodynamically unstable HF.<br><br><strong>Anticoagulation:</strong> Heparin acutely (already on it for MI). Long-term: CHA₂DS₂-VASc score. Post-MI with AF + PCI = "triple therapy" dilemma (DAPT + OAC) → use shortest duration possible, prefer DOACs over warfarin (PIONEER AF-PCI, RE-DUAL PCI, AUGUSTUS trials).</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- SVT -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold" style="color:#e8d8d8;">Supraventricular Tachycardias (SVT) — AVNRT &amp; AVRT</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <p class="text-xs mb-3" style="color:#a09090;"><strong>AVNRT (60-70% of SVTs):</strong> Dual AV nodal pathways (fast &amp; slow). Typical AVNRT: antegrade via slow pathway, retrograde via fast pathway → pseudo-R' in V1, pseudo-S in II/III/aVF. Rate 150-250, regular, narrow complex.</p>
+         <p class="text-xs mb-3" style="color:#a09090;"><strong>AVRT (30%):</strong> Accessory pathway (Bundle of Kent in WPW). Orthodromic (narrow complex, ~95%) vs Antidromic (wide complex, ~5%). WPW pattern at rest: short PR, delta wave, wide QRS.</p>
+         <div class="rounded-lg p-3" style="background:rgba(80,180,80,0.06);border:1px solid rgba(80,180,80,0.15);">
+          <h5 class="font-bold text-sm mb-2" style="color:#6c6;">Management Stepladder</h5>
+          <ol class="space-y-1 text-xs" style="color:#a09090;">
+           <li>1. Vagal manoeuvres — modified Valsalva (blow into 10ml syringe for 15s → immediately recline to supine with legs elevated 45° for 15s). Success rate ~40-50%.</li>
+           <li>2. Adenosine — 6mg rapid IV push (followed by 20ml NS flush via antecubital or above) → if no response in 1-2min → 12mg → 12mg. Warn patient: "You'll feel chest tightness and sense of doom for 10-20 seconds." CONTRAINDICATED in asthma, WPW with pre-excited AF.</li>
+           <li>3. Verapamil 2.5-5mg IV over 2min (if no HF, no beta-blocker use, not WPW) or Diltiazem.</li>
+           <li>4. If unstable → synchronized cardioversion 50-100J.</li>
+          </ol>
+         </div>
+        </div>
+       </div>
+      </div><!-- Bradyarrhythmias -->
+      <h3 class="font-heading text-xl font-bold mb-4 mt-8" style="color:#6bc;">Bradyarrhythmias (HR &lt;60 bpm)</h3><!-- AV Blocks -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold" style="color:#e8d8d8;">AV Conduction Blocks — 1st, 2nd, 3rd Degree</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <div class="space-y-3">
+          <div class="rounded-lg p-3" style="background:rgba(80,180,80,0.06);border:1px solid rgba(80,180,80,0.15);">
+           <h5 class="font-bold text-sm mb-2" style="color:#6c6;">1st Degree AV Block</h5>
+           <p class="text-xs" style="color:#a09090;">PR interval &gt;200ms (&gt;1 large box), consistent. Every P wave conducted. Benign, no treatment needed. Common in inferior MI (AV node supplied by RCA). Monitor only.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(180,150,40,0.06);border:1px solid rgba(180,150,40,0.15);">
+           <h5 class="font-bold text-sm mb-2" style="color:#dc6;">2nd Degree — Mobitz Type I (Wenckebach)</h5>
+           <p class="text-xs" style="color:#a09090;">Progressive PR prolongation until a dropped beat (P without QRS). "Grouped beating" pattern. Block at AV node level. Common in inferior MI. Usually transient, resolves in days. Treatment: Atropine 0.5mg IV if symptomatic. Pacing rarely needed.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(180,40,40,0.06);border:1px solid rgba(180,40,40,0.15);">
+           <h5 class="font-bold text-sm mb-2" style="color:#e85555;">2nd Degree — Mobitz Type II</h5>
+           <p class="text-xs" style="color:#a09090;"><strong>⚠️ DANGEROUS.</strong> Fixed PR interval with intermittent dropped QRS (sudden, without progressive prolongation). Block is infra-nodal (His-Purkinje). Common in anterior MI (septal necrosis). QRS often wide. HIGH risk of progression to complete heart block. <strong>Transcutaneous pacing pads ON immediately. Transvenous pacing indicated.</strong> Atropine often INEFFECTIVE (infranodal block).</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(220,40,40,0.06);border:1px solid rgba(220,40,40,0.2);">
+           <h5 class="font-bold text-sm mb-2" style="color:#f66;">3rd Degree (Complete) Heart Block</h5>
+           <p class="text-xs" style="color:#a09090;">Complete AV dissociation — P waves and QRS complexes march independently. No relationship between P and QRS. Escape rhythm: Junctional (narrow QRS, 40-60bpm, more stable) vs Ventricular (wide QRS, 20-40bpm, unreliable). <br><br><strong>In inferior MI:</strong> Junctional escape, narrow QRS, rate 40-60, often transient (days to weeks), may respond to atropine. Often resolves. <br><strong>In anterior MI:</strong> Ventricular escape, wide QRS, rate 20-40, sudden onset, very high mortality (~80%), indicates massive septal necrosis. Requires immediate transvenous pacing. Often permanent → PPM needed.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Sinus node dysfunction -->
+      <div class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)"> <span class="font-semibold" style="color:#e8d8d8;">Sinus Node Dysfunction &amp; Other Bradyarrhythmias in MI</span> <i data-lucide="chevron-down" style="width:20px;height:20px;color:#e85555;transition:transform 0.3s;" class="acc-icon"></i> </button>
+       <div class="accordion-content">
+        <div class="px-5 pb-5">
+         <p class="text-xs mb-3" style="color:#a09090;"><strong>Sinus Bradycardia:</strong> Most common arrhythmia in inferior MI (due to RCA supplying SA node in 60% of people). Often a vagal response (Bezold-Jarisch reflex). Usually benign if asymptomatic &amp; SBP adequate. Atropine 0.5mg IV if symptomatic.</p>
+         <p class="text-xs mb-3" style="color:#a09090;"><strong>Sinus Arrest / SA Block:</strong> Pause &gt;3 seconds. If recurrent or symptomatic → Atropine, Isoproterenol infusion, transcutaneous pacing.</p>
+         <div class="rounded-lg p-3" style="background:rgba(180,40,40,0.08);border:1px solid rgba(180,40,40,0.15);">
+          <h5 class="font-bold text-sm mb-2" style="color:#e85555;">Bradycardia Algorithm (AHA)</h5>
+          <ol class="text-xs space-y-1" style="color:#b0a0a0;">
+           <li>1. Assess: Is the bradycardia causing symptoms? (Hypotension, altered mental status, chest pain, acute HF)</li>
+           <li>2. If symptomatic → Atropine 0.5mg IV q3-5min (max 3mg). Warning: Atropine is INEFFECTIVE for infranodal block (Mobitz II, CHB with wide QRS) and in transplanted hearts.</li>
+           <li>3. If atropine ineffective → Transcutaneous pacing (sedation + analgesia first) OR Dopamine 5-20mcg/kg/min OR Epinephrine 2-10mcg/min.</li>
+           <li>4. Transvenous pacing if: Mobitz II, CHB, symptomatic bradycardia refractory to drugs, new bifascicular block in anterior MI.</li>
+          </ol>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ========== ECG ATLAS SECTION ========== -->
+    <section id="tab-ecg" class="tab-content hidden">
+     <div class="fade-up">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold mb-6" style="color:#f0e6e6;"><i data-lucide="activity" style="width:28px;height:28px;display:inline;vertical-align:middle;color:#dc6;" class="mr-2"></i> ECG Pattern Atlas — MI &amp; Arrhythmia Recognition</h2>
+      <div class="grid sm:grid-cols-2 gap-4"><!-- Normal Sinus -->
+       <div class="rounded-xl p-4" style="background:rgba(80,180,80,0.05);border:1px solid rgba(80,180,80,0.15);">
+        <h4 class="font-bold text-sm mb-2" style="color:#6c6;">Normal Sinus Rhythm (Reference)</h4>
+        <svg viewbox="0 0 300 60" width="100%" height="50">
+         <rect width="300" height="60" fill="rgba(0,0,0,0.2)" rx="4" /> <polyline points="0,30 30,30 40,28 45,32 50,30 60,30 65,30 70,10 75,50 80,25 85,30 100,30 110,26 130,26 140,30 150,30 170,30 180,28 185,32 190,30 200,30 205,30 210,10 215,50 220,25 225,30 240,30 250,26 270,26 280,30 300,30" fill="none" stroke="#6c6" stroke-width="1.5" />
+        </svg>
+        <p class="text-xs mt-2" style="color:#a09090;">Rate 60-100, regular. P before every QRS, QRS &lt;120ms. PR 120-200ms. QTc &lt;440ms (M) / &lt;460ms (F).</p>
+       </div><!-- STEMI -->
+       <div class="rounded-xl p-4" style="background:rgba(180,40,40,0.05);border:1px solid rgba(180,40,40,0.15);">
+        <h4 class="font-bold text-sm mb-2" style="color:#e85555;">STEMI — ST Elevation</h4>
+        <svg viewbox="0 0 300 60" width="100%" height="50">
+         <rect width="300" height="60" fill="rgba(0,0,0,0.2)" rx="4" /> <polyline points="0,35 30,35 40,33 50,35 60,35 65,8 70,55 75,30 80,35 90,20 130,18 150,35 180,35 190,33 200,35 210,35 215,8 220,55 225,30 230,35 240,20 280,18 300,35" fill="none" stroke="#e85555" stroke-width="1.5" />
+        </svg>
+        <p class="text-xs mt-2" style="color:#a09090;">Convex ST elevation ("tombstone" or "frowny face") with reciprocal ST depression in contralateral leads. Hyperacute T waves may precede ST elevation.</p>
+       </div><!-- VF -->
+       <div class="rounded-xl p-4" style="background:rgba(220,40,40,0.05);border:1px solid rgba(220,40,40,0.15);">
+        <h4 class="font-bold text-sm mb-2" style="color:#f66;">Ventricular Fibrillation</h4>
+        <svg viewbox="0 0 300 60" width="100%" height="50">
+         <rect width="300" height="60" fill="rgba(0,0,0,0.2)" rx="4" /> <polyline points="0,30 5,15 10,45 15,20 20,40 25,10 30,50 35,25 40,35 45,12 50,48 55,20 60,42 65,8 70,52 75,22 80,38 85,15 90,45 95,28 100,35 105,18 110,42 115,25 120,38 125,12 130,48 135,22 140,40 145,15 150,50 155,20 160,45 165,28 170,38 175,10 180,52 185,25 190,35 195,18 200,42 205,28 210,38 215,15 220,48 225,22 230,40 235,12 240,50 245,25 250,38 255,18 260,42 265,28 270,35 275,15 280,48 285,22 290,40 295,30 300,35" fill="none" stroke="#f66" stroke-width="1.5" />
+        </svg>
+        <p class="text-xs mt-2" style="color:#a09090;">Chaotic, irregular, no identifiable P/QRS/T. No cardiac output. Immediate defibrillation required.</p>
+       </div><!-- VT -->
+       <div class="rounded-xl p-4" style="background:rgba(180,40,40,0.05);border:1px solid rgba(180,40,40,0.15);">
+        <h4 class="font-bold text-sm mb-2" style="color:#e85555;">Monomorphic VT</h4>
+        <svg viewbox="0 0 300 60" width="100%" height="50">
+         <rect width="300" height="60" fill="rgba(0,0,0,0.2)" rx="4" /> <polyline points="0,30 10,30 15,8 25,52 35,8 45,52 55,8 65,52 75,8 85,52 95,8 105,52 115,8 125,52 135,8 145,52 155,8 165,52 175,8 185,52 195,8 205,52 215,8 225,52 235,8 245,52 255,8 265,52 275,8 285,52 290,30 300,30" fill="none" stroke="#e85555" stroke-width="1.5" />
+        </svg>
+        <p class="text-xs mt-2" style="color:#a09090;">Wide QRS (&gt;120ms), regular, rate 150-250. Uniform morphology. AV dissociation = diagnostic. If in doubt → it's VT.</p>
+       </div><!-- AF -->
+       <div class="rounded-xl p-4" style="background:rgba(60,130,180,0.05);border:1px solid rgba(60,130,180,0.15);">
+        <h4 class="font-bold text-sm mb-2" style="color:#6bc;">Atrial Fibrillation</h4>
+        <svg viewbox="0 0 300 60" width="100%" height="50">
+         <rect width="300" height="60" fill="rgba(0,0,0,0.2)" rx="4" /> <polyline points="0,32 5,30 10,33 15,29 20,31 25,10 30,50 35,28 40,32 50,31 55,28 60,33 65,30 75,32 80,29 85,33 95,11 100,48 105,30 110,32 120,29 125,32 130,30 135,33 140,29 155,30 160,9 165,52 170,28 175,32 185,30 190,33 195,29 200,31 210,30 215,33 220,29 230,11 235,50 240,28 250,32 255,29 260,33 265,30 275,32 280,10 285,50 290,28 300,31" fill="none" stroke="#6bc" stroke-width="1.5" />
+        </svg>
+        <p class="text-xs mt-2" style="color:#a09090;">Irregularly irregular. No P waves — fibrillatory baseline. Variable R-R intervals. Narrow QRS unless aberrant conduction.</p>
+       </div><!-- CHB -->
+       <div class="rounded-xl p-4" style="background:rgba(180,150,40,0.05);border:1px solid rgba(180,150,40,0.15);">
+        <h4 class="font-bold text-sm mb-2" style="color:#dc6;">Complete Heart Block (3rd Degree)</h4>
+        <svg viewbox="0 0 300 60" width="100%" height="50">
+         <rect width="300" height="60" fill="rgba(0,0,0,0.2)" rx="4" /> <!-- P waves (faster) --> <polyline points="20,26 25,22 30,26 70,26 75,22 80,26 120,26 125,22 130,26 170,26 175,22 180,26 220,26 225,22 230,26 270,26 275,22 280,26" fill="none" stroke="#dc6" stroke-width="1" opacity="0.6" /> <!-- QRS (slower, independent) --> <polyline points="0,35 40,35 45,12 50,55 55,30 60,35 110,35 115,12 120,55 125,30 130,35 190,35 195,12 200,55 205,30 210,35 260,35 265,12 270,55 275,30 280,35 300,35" fill="none" stroke="#dc6" stroke-width="1.5" />
+        </svg>
+        <p class="text-xs mt-2" style="color:#a09090;">P waves and QRS march independently. P-P regular, R-R regular, but NO relationship. Wide QRS escape = ventricular origin (dangerous).</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- ========== PROTOCOLS SECTION ========== -->
+    <section id="tab-protocols" class="tab-content hidden">
+     <div class="fade-up">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold mb-6" style="color:#f0e6e6;"><i data-lucide="clipboard-list" style="width:28px;height:28px;display:inline;vertical-align:middle;color:#6c6;" class="mr-2"></i> ICU/ER Protocols &amp; Algorithms</h2><!-- STEMI Protocol -->
+      <div class="mb-6 rounded-xl p-5" style="background:rgba(180,40,40,0.06);border:1px solid rgba(180,40,40,0.15);">
+       <h3 class="font-heading text-lg font-bold mb-4" style="color:#e85555;">🚨 STEMI Protocol — Door-to-Balloon</h3>
+       <div class="space-y-2">
+        <div class="flex items-center gap-3 p-2 rounded" style="background:rgba(255,255,255,0.03);"><span class="flex-shrink-0 w-16 text-right text-xs font-mono font-bold" style="color:#e85555;">0 min</span>
+         <div class="w-3 h-3 rounded-full flex-shrink-0" style="background:#e85555;"></div><span class="text-xs" style="color:#c8b8b8;">Patient arrival → 12-lead ECG within 10 minutes. Activate cath lab if STEMI confirmed.</span>
+        </div>
+        <div class="flex items-center gap-3 p-2 rounded" style="background:rgba(255,255,255,0.03);"><span class="flex-shrink-0 w-16 text-right text-xs font-mono font-bold" style="color:#e87040;">5 min</span>
+         <div class="w-3 h-3 rounded-full flex-shrink-0" style="background:#e87040;"></div><span class="text-xs" style="color:#c8b8b8;">ASA 325mg chew + P2Y12 inhibitor load + IV access × 2 + Bloods (troponin, CBC, BMP, coags, lipids) + Portable CXR</span>
+        </div>
+        <div class="flex items-center gap-3 p-2 rounded" style="background:rgba(255,255,255,0.03);"><span class="flex-shrink-0 w-16 text-right text-xs font-mono font-bold" style="color:#dc6;">10 min</span>
+         <div class="w-3 h-3 rounded-full flex-shrink-0" style="background:#dc6;"></div><span class="text-xs" style="color:#c8b8b8;">GTN SL (if no contraindication) + UFH bolus + Beta-blocker (if stable) + Morphine PRN + Statin loading (Atorvastatin 80mg)</span>
+        </div>
+        <div class="flex items-center gap-3 p-2 rounded" style="background:rgba(255,255,255,0.03);"><span class="flex-shrink-0 w-16 text-right text-xs font-mono font-bold" style="color:#6bc;">30 min</span>
+         <div class="w-3 h-3 rounded-full flex-shrink-0" style="background:#6bc;"></div><span class="text-xs" style="color:#c8b8b8;">If PCI not available within 120 min → Thrombolysis (Tenecteplase weight-based + Enoxaparin). If PCI available → patient in cath lab.</span>
+        </div>
+        <div class="flex items-center gap-3 p-2 rounded" style="background:rgba(255,255,255,0.03);"><span class="flex-shrink-0 w-16 text-right text-xs font-mono font-bold" style="color:#6c6;">90 min</span>
+         <div class="w-3 h-3 rounded-full flex-shrink-0" style="background:#6c6;"></div><span class="text-xs" style="color:#c8b8b8;">TARGET: Balloon inflation / First device time. TIMI 3 flow achieved. Transfer to CCU with continuous monitoring.</span>
+        </div>
+       </div>
+      </div><!-- Killip Classification -->
+      <div class="mb-6 rounded-xl p-5" style="background:rgba(60,130,180,0.06);border:1px solid rgba(60,130,180,0.15);">
+       <h3 class="font-heading text-lg font-bold mb-4" style="color:#6bc;">Killip Classification — Bedside Haemodynamic Assessment</h3>
+       <div class="grid sm:grid-cols-2 gap-3">
+        <div class="rounded-lg p-3" style="background:rgba(80,180,80,0.05);">
+         <div class="font-bold text-sm" style="color:#6c6;">
+          Killip I — No Heart Failure
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">No clinical signs of HF. Clear lungs, no S3. Mortality ~6%.</p>
+        </div>
+        <div class="rounded-lg p-3" style="background:rgba(180,150,40,0.05);">
+         <div class="font-bold text-sm" style="color:#dc6;">
+          Killip II — Mild HF
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">Bibasilar crackles (≤50% lung fields), S3 gallop, elevated JVP. Mortality ~17%.</p>
+        </div>
+        <div class="rounded-lg p-3" style="background:rgba(180,100,40,0.05);">
+         <div class="font-bold text-sm" style="color:#e87040;">
+          Killip III — Pulmonary Oedema
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">Crackles &gt;50% lung fields. Frank pulmonary oedema. CXR: bilateral alveolar infiltrates, Kerley B lines, pleural effusions. Mortality ~38%.</p>
+        </div>
+        <div class="rounded-lg p-3" style="background:rgba(220,40,40,0.05);">
+         <div class="font-bold text-sm" style="color:#f66;">
+          Killip IV — Cardiogenic Shock
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">SBP &lt;90 for &gt;30min, CI &lt;2.2, PCWP &gt;18. Cold, clammy, oliguric, confused. Mortality ~60-80%. Emergent PCI + mechanical support.</p>
+        </div>
+       </div>
+      </div><!-- ACLS Cardiac Arrest -->
+      <div class="mb-6 rounded-xl p-5" style="background:rgba(220,40,40,0.06);border:1px solid rgba(220,40,40,0.15);">
+       <h3 class="font-heading text-lg font-bold mb-4" style="color:#f66;">🔴 ACLS Cardiac Arrest Algorithm (VF/pVT)</h3>
+       <div class="text-xs space-y-2" style="color:#b0a0a0;">
+        <p><strong style="color:#f66;">1.</strong> Confirm cardiac arrest → Begin CPR (100-120/min, 2" depth, full recoil) → Attach defibrillator</p>
+        <p><strong style="color:#f66;">2.</strong> VF/pVT identified → <strong>SHOCK</strong> (Biphasic 120-200J) → Resume CPR immediately ×2 min</p>
+        <p><strong style="color:#f66;">3.</strong> Rhythm check → Still VF/pVT → <strong>SHOCK</strong> → Resume CPR → <strong>Epinephrine 1mg IV/IO</strong> (repeat q3-5min)</p>
+        <p><strong style="color:#f66;">4.</strong> Rhythm check → Still VF/pVT → <strong>SHOCK</strong> → Resume CPR → <strong>Amiodarone 300mg IV</strong> bolus</p>
+        <p><strong style="color:#f66;">5.</strong> Continue cycle. Second dose Amiodarone 150mg. Address reversible causes:</p>
+        <div class="grid grid-cols-2 gap-2 mt-2 ml-4">
+         <div><strong style="color:#dc6;">4 H's:</strong>
+          <ul class="ml-2 space-y-0.5">
+           <li>Hypovolemia</li>
+           <li>Hypoxia</li>
+           <li>Hydrogen ion (acidosis)</li>
+           <li>Hypo/Hyperkalemia</li>
+          </ul>
+         </div>
+         <div><strong style="color:#dc6;">4 T's:</strong>
+          <ul class="ml-2 space-y-0.5">
+           <li>Tension pneumothorax</li>
+           <li>Tamponade (cardiac)</li>
+           <li>Toxins</li>
+           <li>Thrombosis (coronary/pulmonary)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ========== DRUGS SECTION ========== -->
+    <section id="tab-drugs" class="tab-content hidden">
+     <div class="fade-up">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold mb-6" style="color:#f0e6e6;"><i data-lucide="pill" style="width:28px;height:28px;display:inline;vertical-align:middle;color:#c8a;" class="mr-2"></i> Drug Reference — Cardiac Emergency Pharmacology</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-xs" style="color:#c8b8b8;">
+        <thead>
+         <tr style="border-bottom:2px solid rgba(180,40,40,0.3);">
+          <th class="text-left py-3 px-3 font-semibold" style="color:#e85555;">Drug</th>
+          <th class="text-left py-3 px-3 font-semibold" style="color:#e85555;">Dose</th>
+          <th class="text-left py-3 px-3 font-semibold" style="color:#e85555;">Indication</th>
+          <th class="text-left py-3 px-3 font-semibold hidden sm:table-cell" style="color:#e85555;">Key Points</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Amiodarone</td>
+          <td class="py-2 px-3 font-mono">300mg IV bolus (arrest)<br>
+           150mg IV over 10min (stable VT)<br>
+           → 1mg/min ×6h → 0.5mg/min ×18h</td>
+          <td class="py-2 px-3">VF/pVT, stable VT, rate control in AF with HF</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">Class III antiarrhythmic. Prolongs QT. Hypotension with rapid IV. Long half-life (40-55 days). Thyroid, pulmonary, hepatic, ocular toxicity with chronic use.</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Adenosine</td>
+          <td class="py-2 px-3 font-mono">6mg rapid IV push → 12mg → 12mg</td>
+          <td class="py-2 px-3">SVT (AVNRT/AVRT) — diagnostic &amp; therapeutic</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">Ultra-short T½ (6-10s). Must be rapid push + saline flush via large vein. CI: asthma, WPW+AF, 2nd/3rd AVB, transplant heart (reduce dose).</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Atropine</td>
+          <td class="py-2 px-3 font-mono">0.5mg IV q3-5min<br>
+           Max 3mg</td>
+          <td class="py-2 px-3">Symptomatic bradycardia, organophosphate poisoning</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">Parasympatholytic. INEFFECTIVE for infranodal block (Mobitz II, CHB with wide QRS). Doses &lt;0.5mg may cause paradoxical bradycardia.</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Epinephrine</td>
+          <td class="py-2 px-3 font-mono">1mg IV q3-5min (arrest)<br>
+           2-10 mcg/min (bradycardia/shock)</td>
+          <td class="py-2 px-3">Cardiac arrest, anaphylaxis, refractory bradycardia, vasopressor</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">α₁ + β₁ + β₂ agonist. In arrest: vasoconstriction → ↑ coronary perfusion pressure. In shock: inotropy + chronotropy + vasoconstriction.</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Lidocaine</td>
+          <td class="py-2 px-3 font-mono">1-1.5mg/kg IV bolus<br>
+           → 1-4mg/min infusion</td>
+          <td class="py-2 px-3">VT/VF (alternative to amiodarone)</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">Class Ib. Na⁺ channel blocker. Reduce dose in liver disease, HF, elderly. CNS toxicity: perioral numbness → seizures → coma.</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Norepinephrine</td>
+          <td class="py-2 px-3 font-mono">0.1-0.5 mcg/kg/min<br>
+           Titrate to MAP ≥65</td>
+          <td class="py-2 px-3">Cardiogenic shock (first-line vasopressor)</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">α₁ predominant + β₁. Potent vasoconstriction → ↑ SVR + ↑ MAP. Less tachycardia than dopamine. Central line preferred (extravasation → necrosis).</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Dobutamine</td>
+          <td class="py-2 px-3 font-mono">2-20 mcg/kg/min</td>
+          <td class="py-2 px-3">Cardiogenic shock (inotrope), low CO states</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">Synthetic catecholamine. β₁ agonist → ↑ contractility, ↑ HR. May drop BP (β₂ vasodilation). Often combined with norepinephrine.</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">Tenecteplase</td>
+          <td class="py-2 px-3 font-mono">Weight-based single IV bolus<br>
+           (&lt;60kg: 30mg, 60-69: 35mg, 70-79: 40mg, 80-89: 45mg, ≥90: 50mg)</td>
+          <td class="py-2 px-3">STEMI thrombolysis (when PCI &gt;120min away)</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">Fibrin-specific. Single bolus advantage. Check contraindications: active bleeding, prior ICH, ischaemic stroke &lt;3mo, suspected aortic dissection, known intracranial neoplasm.</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-semibold" style="color:#e8d8d8;">MgSO₄</td>
+          <td class="py-2 px-3 font-mono">2g IV over 5-20min<br>
+           (may repeat)</td>
+          <td class="py-2 px-3">Torsades de Pointes, hypomagnesaemia, refractory VF</td>
+          <td class="py-2 px-3 hidden sm:table-cell" style="color:#a09090;">First-line for TdP regardless of Mg²⁺ level. Stabilizes membrane potential. Monitor for hypotension, respiratory depression. Check reflexes.</td>
+         </tr>
+        </tbody>
+       </table>
+      </div><!-- Discharge Medications -->
+      <div class="mt-8 rounded-xl p-5" style="background:rgba(80,180,80,0.06);border:1px solid rgba(80,180,80,0.15);">
+       <h3 class="font-heading text-lg font-bold mb-3" style="color:#6c6;">Post-MI Discharge — "ABCDE" of Secondary Prevention</h3>
+       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="p-3 rounded-lg" style="background:rgba(0,0,0,0.2);">
+         <div class="font-bold text-sm" style="color:#6c6;">
+          A — ACEi/ARB
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">Ramipril 2.5-10mg or Enalapril. Start within 24h if stable. ↓ Remodelling, ↓ mortality. ARB (Valsartan) if ACEi intolerant. Add Eplerenone (MRA) if EF ≤40% + HF/DM (EPHESUS trial).</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background:rgba(0,0,0,0.2);">
+         <div class="font-bold text-sm" style="color:#6c6;">
+          B — Beta-Blocker
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">Metoprolol succinate, Bisoprolol, or Carvedilol. Proven mortality benefit (especially if EF ↓). Titrate to HR 55-65. Continue indefinitely unless contraindicated.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background:rgba(0,0,0,0.2);">
+         <div class="font-bold text-sm" style="color:#6c6;">
+          C — Cholesterol (Statin) + Cessation
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">High-intensity statin: Atorvastatin 80mg or Rosuvastatin 40mg. Target LDL &lt;55mg/dL (ESC) or &lt;70mg/dL. Add Ezetimibe if target not met. PCSK9i (Evolocumab) for refractory. Smoking cessation absolutely mandatory.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background:rgba(0,0,0,0.2);">
+         <div class="font-bold text-sm" style="color:#6c6;">
+          D — DAPT + Diabetes Control
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">ASA 81mg + Ticagrelor 90mg BID (or Clopidogrel 75mg) for 12 months. Consider extended DAPT (Ticagrelor 60mg BID) if high ischaemic / low bleeding risk. HbA1c &lt;7%. SGLT2i (Empagliflozin) if HF/DM.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background:rgba(0,0,0,0.2);">
+         <div class="font-bold text-sm" style="color:#6c6;">
+          E — Exercise + Education
+         </div>
+         <p class="text-xs mt-1" style="color:#a09090;">Cardiac rehabilitation (Phase I-III). 150 min/week moderate exercise. Mediterranean diet. BP &lt;130/80. BMI &lt;25. Annual flu vaccine. Psychosocial assessment (depression screening — common post-MI).</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="px-4 sm:px-8 py-8 text-center" style="border-top:1px solid rgba(255,255,255,0.05);">
+    <p class="text-xs" style="color:#555;">This clinical guide is for educational reference only. Always follow institutional protocols and current guideline updates (ESC/AHA/ACC). Clinical decisions should be individualized.</p>
+    <p class="text-xs mt-2" style="color:#444;">Compiled from clinical experience in Cardiology, Internal Medicine, ICU &amp; Emergency Medicine</p>
+   </footer>
+  </div>
+  <script>
+// Tab switching
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.color = '#777';
+    b.style.borderColor = 'transparent';
+  });
+  const section = document.getElementById('tab-' + tabId);
+  if (section) {
+    section.classList.remove('hidden');
+    section.querySelector('.fade-up')?.offsetHeight; // trigger reflow
+  }
+  const btn = document.querySelector(`[data-tab="${tabId}"]`);
+  if (btn) {
+    btn.classList.add('active');
+    btn.style.color = '#e85555';
+    btn.style.borderColor = '#e85555';
+  }
+}
+
+// Accordion
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const icon = btn.querySelector('.acc-icon');
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open');
+  if (icon) icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+// Initialize Lucide icons
+lucide.createIcons();
+
+// Element SDK
+const defaultConfig = {
+  main_title: 'Myocardial Infarction & Arrhythmias',
+  subtitle: 'A comprehensive clinical reference from bedside experience — covering pathophysiology, ECG interpretation, acute management, and critical arrhythmia protocols in the ICU/ER setting.',
+  background_color: '#0f1117',
+  surface_color: '#1a1a24',
+  text_color: '#f0e6e6',
+  primary_action_color: '#e85555',
+  secondary_action_color: '#6bc'
+};
+
+function applyConfig(config) {
+  const title = document.getElementById('mainTitle');
+  const sub = document.getElementById('subtitle');
+  if (title) title.innerHTML = (config.main_title || defaultConfig.main_title).replace('&', '&amp;');
+  if (sub) sub.textContent = config.subtitle || defaultConfig.subtitle;
+
+  const app = document.getElementById('app');
+  if (app) app.style.background = config.background_color || defaultConfig.background_color;
+
+  document.querySelectorAll('.font-heading').forEach(el => {
+    if (config.font_family) el.style.fontFamily = `${config.font_family}, Playfair Display, Georgia, serif`;
+  });
+  if (config.font_size) {
+    const base = config.font_size;
+    document.querySelectorAll('h1').forEach(e => e.style.fontSize = `${base * 2.5}px`);
+    document.querySelectorAll('h2').forEach(e => e.style.fontSize = `${base * 1.8}px`);
+    document.querySelectorAll('h3').forEach(e => e.style.fontSize = `${base * 1.4}px`);
+    document.querySelectorAll('p, li, td, th').forEach(e => {
+      if (!e.closest('h1,h2,h3,h4')) e.style.fontSize = `${base * 0.85}px`;
+    });
+  }
+}
+
+</script>
+</body>
+</html>
