@@ -1,0 +1,668 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Clinical Emergencies | Deep Medicine</title> <meta name="description" content="Comprehensive guide to clinical emergencies with rapid assessment, diagnosis, and life-saving management strategies."> <link rel="canonical" href="https://deepmedicine.in/learning/study/clinical-emergencies"> <!-- Open Graph --> <meta property="og:title" content="Clinical Emergencies | Deep Medicine"> <meta property="og:description" content="Rapid approach to managing clinical emergencies with practical protocols and decision-making strategies."> <meta property="og:image" content="https://deepmedicine.in/images/clinical-emergencies.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+.font-display { font-family: 'Playfair Display', serif; }
+
+.app-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Animated gradient hero */
+.hero-bg {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #0c4a6e 60%, #0f172a 100%);
+  background-size: 300% 300%;
+  animation: heroShift 12s ease-in-out infinite;
+  position: relative;
+}
+@keyframes heroShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(220,38,38,0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(14,165,233,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Pulse ring for emergency icon */
+.pulse-ring {
+  animation: pulseRing 2s ease-out infinite;
+}
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Staggered reveal */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Section cards */
+.section-card {
+  background: rgba(15,23,42,0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(148,163,184,0.1);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.section-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(220,38,38,0.4);
+  box-shadow: 0 12px 40px rgba(220,38,38,0.08);
+}
+
+/* Timeline */
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #dc2626, #0ea5e9, #dc2626);
+}
+.timeline-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid #dc2626;
+  background: #0f172a;
+  position: absolute;
+  left: 14px;
+  z-index: 2;
+}
+
+/* Flowchart node */
+.flow-node {
+  position: relative;
+  padding: 14px 18px;
+  border-radius: 10px;
+  transition: transform 0.25s ease;
+}
+.flow-node:hover { transform: scale(1.03); }
+.flow-arrow {
+  width: 2px; height: 28px;
+  margin: 0 auto;
+}
+
+/* Tabs */
+.tab-btn {
+  transition: all 0.3s ease;
+  position: relative;
+}
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  border-radius: 2px;
+}
+
+/* Accordion */
+.acc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.acc-body.open { max-height: 2000px; }
+
+/* Stat counter */
+@keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.stat-num { animation: countUp 0.8s ease forwards; }
+
+/* Nav */
+.nav-bar {
+  backdrop-filter: blur(16px);
+  transition: background 0.3s ease;
+}
+
+/* Scrollbar */
+.app-wrapper::-webkit-scrollbar { width: 6px; }
+.app-wrapper::-webkit-scrollbar-track { background: #0f172a; }
+.app-wrapper::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper" id="appWrapper"><!-- NAV -->
+   <nav class="nav-bar fixed top-0 left-0 w-full z-50 px-4 py-3" id="mainNav" style="background:rgba(15,23,42,0.85);">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center" id="navIcon" style="background:#dc2626;"><i data-lucide="activity" style="width:18px;height:18px;color:#ffffff;"></i>
+      </div><span class="text-sm font-semibold tracking-wide" id="navTitle" style="color:#f1f5f9;">EDM</span>
+     </div><!-- Mobile menu toggle --> <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg" style="color:#94a3b8;" aria-label="Toggle menu"> <i data-lucide="menu" style="width:22px;height:22px;"></i> </button>
+     <div class="hidden md:flex items-center gap-6 text-sm" id="desktopNav"><a href="#overview" class="hover:opacity-100 transition-opacity" style="color:#94a3b8;opacity:0.8;">Overview</a> <a href="#framework" class="hover:opacity-100 transition-opacity" style="color:#94a3b8;opacity:0.8;">Framework</a> <a href="#scenarios" class="hover:opacity-100 transition-opacity" style="color:#94a3b8;opacity:0.8;">Scenarios</a> <a href="#principles" class="hover:opacity-100 transition-opacity" style="color:#94a3b8;opacity:0.8;">Principles</a> <a href="#timeline" class="hover:opacity-100 transition-opacity" style="color:#94a3b8;opacity:0.8;">Golden Hour</a>
+     </div>
+    </div><!-- Mobile menu -->
+    <div class="md:hidden hidden flex-col gap-3 mt-3 pb-2 text-sm" id="mobileMenu"><a href="#overview" class="block py-2 px-3 rounded-lg" style="color:#94a3b8;">Overview</a> <a href="#framework" class="block py-2 px-3 rounded-lg" style="color:#94a3b8;">Framework</a> <a href="#scenarios" class="block py-2 px-3 rounded-lg" style="color:#94a3b8;">Scenarios</a> <a href="#principles" class="block py-2 px-3 rounded-lg" style="color:#94a3b8;">Principles</a> <a href="#timeline" class="block py-2 px-3 rounded-lg" style="color:#94a3b8;">Golden Hour</a>
+    </div>
+   </nav><!-- HERO -->
+   <header class="hero-bg relative pt-28 pb-20 px-4 text-center" style="min-height:520px;display:flex;align-items:center;justify-content:center;">
+    <div class="relative z-10 max-w-3xl mx-auto"><!-- Emergency pulse icon -->
+     <div class="relative w-20 h-20 mx-auto mb-8">
+      <div class="absolute inset-0 rounded-full pulse-ring" style="background:rgba(220,38,38,0.25);"></div>
+      <div class="absolute inset-0 rounded-full pulse-ring" style="background:rgba(220,38,38,0.15);animation-delay:0.6s;"></div>
+      <div class="w-20 h-20 rounded-full flex items-center justify-center relative z-10" style="background:linear-gradient(135deg,#dc2626,#991b1b);"><i data-lucide="heart-pulse" style="width:36px;height:36px;color:#ffffff;"></i>
+      </div>
+     </div>
+     <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-800 leading-tight mb-4" id="heroTitle" style="color:#f8fafc;">Emergency Decision Making</h1>
+     <p class="text-lg sm:text-xl md:text-2xl font-display font-600 mb-3" id="heroSubtitle" style="color:#dc2626;">From Clinical Experience</p>
+     <p class="text-sm sm:text-base max-w-xl mx-auto mb-8" id="heroAuthor" style="color:#94a3b8;">MBBS (MD) • Professor of Medicine • ICU Intensivist • Emergency Medicine Specialist</p>
+     <div class="flex flex-wrap justify-center gap-3"><a href="#overview" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-600 transition-all hover:scale-105" style="background:#dc2626;color:#ffffff;"> <i data-lucide="arrow-down" style="width:16px;height:16px;"></i> Explore Guide </a> <a href="#scenarios" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-600 border transition-all hover:scale-105" style="border-color:rgba(148,163,184,0.3);color:#e2e8f0;"> <i data-lucide="zap" style="width:16px;height:16px;"></i> Clinical Scenarios </a>
+     </div>
+    </div>
+   </header><!-- STATS BAR -->
+   <section class="px-4 py-10" style="background:#0f172a;">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+     <div class="text-center p-4 rounded-xl section-card">
+      <div class="stat-num text-3xl font-700 font-display" style="color:#dc2626;">
+       4 min
+      </div>
+      <div class="text-xs mt-1" style="color:#94a3b8;">
+       Brain Ischemia Threshold
+      </div>
+     </div>
+     <div class="text-center p-4 rounded-xl section-card">
+      <div class="stat-num text-3xl font-700 font-display" style="color:#0ea5e9;animation-delay:0.2s;">
+       60 min
+      </div>
+      <div class="text-xs mt-1" style="color:#94a3b8;">
+       Golden Hour Window
+      </div>
+     </div>
+     <div class="text-center p-4 rounded-xl section-card">
+      <div class="stat-num text-3xl font-700 font-display" style="color:#dc2626;animation-delay:0.4s;">
+       90 sec
+      </div>
+      <div class="text-xs mt-1" style="color:#94a3b8;">
+       Rapid Assessment Target
+      </div>
+     </div>
+     <div class="text-center p-4 rounded-xl section-card">
+      <div class="stat-num text-3xl font-700 font-display" style="color:#0ea5e9;animation-delay:0.6s;">
+       10 sec
+      </div>
+      <div class="text-xs mt-1" style="color:#94a3b8;">
+       Pulse Check Duration
+      </div>
+     </div>
+    </div>
+   </section><!-- OVERVIEW -->
+   <section id="overview" class="px-4 py-16" style="background:#0f172a;">
+    <div class="max-w-5xl mx-auto">
+     <div class="reveal text-center mb-12"><span class="inline-block px-3 py-1 rounded-full text-xs font-600 tracking-wider uppercase mb-4" style="background:rgba(220,38,38,0.15);color:#dc2626;">Foundation</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-700 mb-4" style="color:#f8fafc;">What Is Emergency Decision Making?</h2>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base leading-relaxed" style="color:#94a3b8;">Emergency Decision Making (EDM) is the rapid, systematic cognitive process a clinician uses to evaluate, prioritize, and act upon life-threatening conditions — where <strong style="color:#dc2626;">every second directly impacts survival</strong>. It is forged not in textbooks alone, but at the bedside, in resuscitation bays, and during the chaos of multi-organ failures.</p>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="reveal section-card rounded-2xl p-6" style="transition-delay:0.1s;">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:rgba(220,38,38,0.15);"><i data-lucide="brain" style="width:24px;height:24px;color:#dc2626;"></i>
+       </div>
+       <h3 class="font-600 text-lg mb-2" style="color:#f1f5f9;">Pattern Recognition</h3>
+       <p class="text-sm leading-relaxed" style="color:#94a3b8;">Years of clinical exposure build neural pathways that allow instantaneous recognition of critical presentations — septic shock facies, the "silent chest" of severe asthma, or the diaphoresis of acute MI.</p>
+      </div>
+      <div class="reveal section-card rounded-2xl p-6" style="transition-delay:0.2s;">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:rgba(14,165,233,0.15);"><i data-lucide="gauge" style="width:24px;height:24px;color:#0ea5e9;"></i>
+       </div>
+       <h3 class="font-600 text-lg mb-2" style="color:#f1f5f9;">Time-Pressure Cognition</h3>
+       <p class="text-sm leading-relaxed" style="color:#94a3b8;">Unlike outpatient medicine, ED &amp; ICU decisions happen under extreme temporal pressure. Cognitive load management — triaging mental resources — is as vital as triaging patients themselves.</p>
+      </div>
+      <div class="reveal section-card rounded-2xl p-6" style="transition-delay:0.3s;">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:rgba(220,38,38,0.15);"><i data-lucide="shield-check" style="width:24px;height:24px;color:#dc2626;"></i>
+       </div>
+       <h3 class="font-600 text-lg mb-2" style="color:#f1f5f9;">Risk Stratification</h3>
+       <p class="text-sm leading-relaxed" style="color:#94a3b8;">Every emergency patient sits on a mortality probability curve. Clinical experience calibrates your internal "risk barometer" — knowing when a stable-appearing patient is minutes from crashing.</p>
+      </div>
+      <div class="reveal section-card rounded-2xl p-6" style="transition-delay:0.4s;">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:rgba(14,165,233,0.15);"><i data-lucide="users" style="width:24px;height:24px;color:#0ea5e9;"></i>
+       </div>
+       <h3 class="font-600 text-lg mb-2" style="color:#f1f5f9;">Team-Based Execution</h3>
+       <p class="text-sm leading-relaxed" style="color:#94a3b8;">Closed-loop communication, role assignment, and shared mental models ensure that the decision made by the team leader translates into coordinated action at the bedside.</p>
+      </div>
+      <div class="reveal section-card rounded-2xl p-6" style="transition-delay:0.5s;">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:rgba(220,38,38,0.15);"><i data-lucide="refresh-cw" style="width:24px;height:24px;color:#dc2626;"></i>
+       </div>
+       <h3 class="font-600 text-lg mb-2" style="color:#f1f5f9;">Iterative Reassessment</h3>
+       <p class="text-sm leading-relaxed" style="color:#94a3b8;">Emergency decisions are never "set and forget." Continuous reassessment loops — response to fluids, vasopressor titration, airway dynamics — refine the diagnosis and treatment trajectory.</p>
+      </div>
+      <div class="reveal section-card rounded-2xl p-6" style="transition-delay:0.6s;">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:rgba(14,165,233,0.15);"><i data-lucide="scale" style="width:24px;height:24px;color:#0ea5e9;"></i>
+       </div>
+       <h3 class="font-600 text-lg mb-2" style="color:#f1f5f9;">Ethical Triage</h3>
+       <p class="text-sm leading-relaxed" style="color:#94a3b8;">Resource-limited settings demand utilitarian calculus — allocating ventilators, ICU beds, and blood products where they yield maximum survival benefit, while honoring patient autonomy.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- DECISION FRAMEWORK FLOWCHART -->
+   <section id="framework" class="px-4 py-16" style="background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);">
+    <div class="max-w-3xl mx-auto">
+     <div class="reveal text-center mb-12"><span class="inline-block px-3 py-1 rounded-full text-xs font-600 tracking-wider uppercase mb-4" style="background:rgba(14,165,233,0.15);color:#0ea5e9;">Framework</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-700 mb-4" style="color:#f8fafc;">The ABCDE → Decide → Act Loop</h2>
+      <p class="text-sm" style="color:#94a3b8;">The clinical decision flowchart every emergency physician internalizes</p>
+     </div><!-- Flowchart -->
+     <div class="reveal flex flex-col items-center"><!-- Node 1 -->
+      <div class="flow-node w-full max-w-md text-center" style="background:linear-gradient(135deg,#dc2626,#991b1b);color:#ffffff;border-radius:14px;">
+       <div class="flex items-center justify-center gap-2"><i data-lucide="siren" style="width:20px;height:20px;"></i> <span class="font-700 text-base">PATIENT ARRIVAL / TRIGGER</span>
+       </div>
+       <div class="text-xs mt-1 opacity-80">
+        EMS handover • Walk-in • In-hospital deterioration
+       </div>
+      </div>
+      <div class="flow-arrow" style="background:linear-gradient(to bottom,#dc2626,#0ea5e9);"></div><!-- Node 2 -->
+      <div class="flow-node w-full max-w-md" style="background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.3);">
+       <div class="flex items-center gap-2 mb-2"><i data-lucide="scan" style="width:18px;height:18px;color:#0ea5e9;"></i> <span class="font-700 text-sm" style="color:#0ea5e9;">PRIMARY SURVEY (≤ 90 seconds)</span>
+       </div>
+       <div class="grid grid-cols-5 gap-2 text-center text-xs">
+        <div class="rounded-lg py-2 px-1" style="background:rgba(220,38,38,0.15);color:#fca5a5;">
+         <strong>A</strong><br>
+         Airway
+        </div>
+        <div class="rounded-lg py-2 px-1" style="background:rgba(220,38,38,0.15);color:#fca5a5;">
+         <strong>B</strong><br>
+         Breathing
+        </div>
+        <div class="rounded-lg py-2 px-1" style="background:rgba(220,38,38,0.15);color:#fca5a5;">
+         <strong>C</strong><br>
+         Circulation
+        </div>
+        <div class="rounded-lg py-2 px-1" style="background:rgba(220,38,38,0.15);color:#fca5a5;">
+         <strong>D</strong><br>
+         Disability
+        </div>
+        <div class="rounded-lg py-2 px-1" style="background:rgba(220,38,38,0.15);color:#fca5a5;">
+         <strong>E</strong><br>
+         Exposure
+        </div>
+       </div>
+      </div>
+      <div class="flow-arrow" style="background:linear-gradient(to bottom,#0ea5e9,#dc2626);"></div><!-- Node 3 -->
+      <div class="flow-node w-full max-w-md text-center" style="background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3);">
+       <div class="flex items-center justify-center gap-2"><i data-lucide="alert-triangle" style="width:18px;height:18px;color:#dc2626;"></i> <span class="font-700 text-sm" style="color:#dc2626;">LIFE THREAT IDENTIFIED?</span>
+       </div>
+       <div class="flex justify-center gap-6 mt-3 text-xs font-600"><span class="px-4 py-1.5 rounded-full" style="background:rgba(220,38,38,0.25);color:#fca5a5;">YES → Intervene Immediately</span> <span class="px-4 py-1.5 rounded-full" style="background:rgba(14,165,233,0.2);color:#7dd3fc;">NO → Secondary Survey</span>
+       </div>
+      </div>
+      <div class="flow-arrow" style="background:linear-gradient(to bottom,#dc2626,#0ea5e9);"></div><!-- Node 4 -->
+      <div class="flow-node w-full max-w-md" style="background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.3);">
+       <div class="flex items-center gap-2 mb-2"><i data-lucide="stethoscope" style="width:18px;height:18px;color:#0ea5e9;"></i> <span class="font-700 text-sm" style="color:#0ea5e9;">CLINICAL DECISION NODE</span>
+       </div>
+       <ul class="text-xs space-y-1.5" style="color:#cbd5e1;">
+        <li>• <strong>Hypothesis generation</strong> — 2–3 most likely diagnoses</li>
+        <li>• <strong>Bayesian reasoning</strong> — pre-test probability × clinical findings</li>
+        <li>• <strong>Rule-out worst first</strong> — exclude the lethal before the likely</li>
+        <li>• <strong>Decision aids</strong> — HEART score, Wells criteria, CURB-65</li>
+       </ul>
+      </div>
+      <div class="flow-arrow" style="background:linear-gradient(to bottom,#0ea5e9,#dc2626);"></div><!-- Node 5 -->
+      <div class="flow-node w-full max-w-md" style="background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3);">
+       <div class="flex items-center gap-2 mb-2"><i data-lucide="syringe" style="width:18px;height:18px;color:#dc2626;"></i> <span class="font-700 text-sm" style="color:#dc2626;">EXECUTE INTERVENTIONS</span>
+       </div>
+       <ul class="text-xs space-y-1.5" style="color:#cbd5e1;">
+        <li>• Airway management (RSI / Surgical airway)</li>
+        <li>• IV access, fluid resuscitation, blood products</li>
+        <li>• Vasopressors, antiarrhythmics, thrombolytics</li>
+        <li>• Procedural interventions (chest tube, central line)</li>
+       </ul>
+      </div>
+      <div class="flow-arrow" style="background:linear-gradient(to bottom,#dc2626,#22c55e);"></div><!-- Node 6 -->
+      <div class="flow-node w-full max-w-md text-center" style="background:linear-gradient(135deg,#166534,#15803d);color:#ffffff;border-radius:14px;">
+       <div class="flex items-center justify-center gap-2"><i data-lucide="repeat" style="width:18px;height:18px;"></i> <span class="font-700 text-sm">REASSESS → LOOP BACK</span>
+       </div>
+       <div class="text-xs mt-1 opacity-80">
+        Continuous monitoring • Titrate therapy • Disposition decision
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- CLINICAL SCENARIOS (Tabbed) -->
+   <section id="scenarios" class="px-4 py-16" style="background:#0f172a;">
+    <div class="max-w-5xl mx-auto">
+     <div class="reveal text-center mb-10"><span class="inline-block px-3 py-1 rounded-full text-xs font-600 tracking-wider uppercase mb-4" style="background:rgba(220,38,38,0.15);color:#dc2626;">Clinical Scenarios</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-700 mb-3" style="color:#f8fafc;">Experience-Based Decision Trees</h2>
+      <p class="text-sm" style="color:#94a3b8;">Real scenarios demonstrating how clinical experience shapes split-second decisions</p>
+     </div><!-- Tabs -->
+     <div class="reveal flex flex-wrap justify-center gap-2 mb-8" id="scenarioTabs"><button class="tab-btn active px-4 py-2 rounded-xl text-sm font-600" data-tab="cardiac" style="background:#dc2626;color:#fff;"> <i data-lucide="heart" style="width:14px;height:14px;display:inline;vertical-align:-2px;"></i> Cardiac Arrest </button> <button class="tab-btn px-4 py-2 rounded-xl text-sm font-600" data-tab="sepsis" style="background:rgba(148,163,184,0.12);color:#94a3b8;"> <i data-lucide="thermometer" style="width:14px;height:14px;display:inline;vertical-align:-2px;"></i> Septic Shock </button> <button class="tab-btn px-4 py-2 rounded-xl text-sm font-600" data-tab="trauma" style="background:rgba(148,163,184,0.12);color:#94a3b8;"> <i data-lucide="alert-circle" style="width:14px;height:14px;display:inline;vertical-align:-2px;"></i> Polytrauma </button> <button class="tab-btn px-4 py-2 rounded-xl text-sm font-600" data-tab="stroke" style="background:rgba(148,163,184,0.12);color:#94a3b8;"> <i data-lucide="zap" style="width:14px;height:14px;display:inline;vertical-align:-2px;"></i> Acute Stroke </button>
+     </div><!-- Tab content -->
+     <div id="scenarioContent"><!-- Cardiac -->
+      <div class="tab-panel" data-panel="cardiac">
+       <div class="section-card rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.2);"><i data-lucide="heart" style="width:20px;height:20px;color:#dc2626;"></i>
+         </div>
+         <div>
+          <h3 class="font-700 text-lg" style="color:#f1f5f9;">Cardiac Arrest — Witnessed VF/pVT</h3><span class="text-xs" style="color:#dc2626;">TIME-CRITICAL • Survival drops 10% per minute without CPR</span>
+         </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#0ea5e9;">⚡ Immediate Actions (0–2 min)</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li class="flex gap-2"><span style="color:#dc2626;">①</span> Confirm unresponsiveness + no pulse (≤10 sec)</li>
+           <li class="flex gap-2"><span style="color:#dc2626;">②</span> Activate code team, request defibrillator</li>
+           <li class="flex gap-2"><span style="color:#dc2626;">③</span> Begin high-quality CPR (100–120/min, 2-inch depth)</li>
+           <li class="flex gap-2"><span style="color:#dc2626;">④</span> Attach pads → Analyze rhythm → Shock VF/pVT</li>
+           <li class="flex gap-2"><span style="color:#dc2626;">⑤</span> Resume CPR immediately post-shock × 2 min cycle</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#0ea5e9;">🧠 Experience-Driven Decisions</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li><strong style="color:#fca5a5;">Refractory VF?</strong> Consider double sequential defibrillation, esmolol 500mcg/kg, or eCPR if available</li>
+           <li><strong style="color:#fca5a5;">Reversible causes:</strong> Run through H's &amp; T's — Hypovolemia, Hypoxia, Hydrogen ion, Hypo/Hyperkalemia, Hypothermia, Tension pneumo, Tamponade, Toxins, Thrombosis (PE/MI)</li>
+           <li><strong style="color:#fca5a5;">POCUS in arrest:</strong> Subxiphoid view during pulse check — RV dilation → PE, effusion → tamponade, empty ventricle → hypovolemia</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div><!-- Sepsis -->
+      <div class="tab-panel hidden" data-panel="sepsis">
+       <div class="section-card rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(14,165,233,0.2);"><i data-lucide="thermometer" style="width:20px;height:20px;color:#0ea5e9;"></i>
+         </div>
+         <div>
+          <h3 class="font-700 text-lg" style="color:#f1f5f9;">Septic Shock — Hour-1 Bundle</h3><span class="text-xs" style="color:#0ea5e9;">MORTALITY 40–60% • Each hour of delayed antibiotics ↑ mortality 7.6%</span>
+         </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#dc2626;">🩺 Recognition (The Experienced Eye)</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li>• <strong>qSOFA ≥ 2:</strong> Altered mentation + RR ≥ 22 + SBP ≤ 100</li>
+           <li>• <strong>The "sick look":</strong> Mottled skin, delayed capillary refill, cold peripheries despite fever</li>
+           <li>• <strong>Lactate ≥ 4 mmol/L</strong> = tissue hypoperfusion even if BP "normal"</li>
+           <li>• <strong>Experience cue:</strong> "The patient who looks too comfortable for their vitals is the one about to crash"</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#dc2626;">💉 Immediate Interventions</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li><strong style="color:#7dd3fc;">Cultures before antibiotics</strong> — but never delay antibiotics &gt; 15 min for cultures</li>
+           <li><strong style="color:#7dd3fc;">30 mL/kg crystalloid</strong> within first 3 hours</li>
+           <li><strong style="color:#7dd3fc;">Norepinephrine first-line</strong> if MAP &lt; 65 after fluids</li>
+           <li><strong style="color:#7dd3fc;">Source control:</strong> CT abdomen, drain abscess, remove infected device</li>
+           <li><strong style="color:#7dd3fc;">Steroid consideration:</strong> Hydrocortisone 200mg/day if vasopressor-refractory</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div><!-- Trauma -->
+      <div class="tab-panel hidden" data-panel="trauma">
+       <div class="section-card rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.2);"><i data-lucide="alert-circle" style="width:20px;height:20px;color:#dc2626;"></i>
+         </div>
+         <div>
+          <h3 class="font-700 text-lg" style="color:#f1f5f9;">Polytrauma — The Lethal Triad</h3><span class="text-xs" style="color:#dc2626;">HYPOTHERMIA + ACIDOSIS + COAGULOPATHY = Death Spiral</span>
+         </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#0ea5e9;">🔍 Rapid Trauma Assessment</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li>• <strong>C-ABCDE approach:</strong> Catastrophic hemorrhage first (tourniquet/pressure)</li>
+           <li>• <strong>FAST ultrasound:</strong> Free fluid in Morrison's pouch, splenorenal, pelvis</li>
+           <li>• <strong>Pelvic binder</strong> if unstable pelvis on exam</li>
+           <li>• <strong>Clinical experience:</strong> "The quiet trauma patient is bleeding somewhere — find it"</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#0ea5e9;">🩸 Damage Control Resuscitation</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li><strong style="color:#fca5a5;">Massive Transfusion Protocol:</strong> 1:1:1 ratio (PRBC:FFP:Platelets)</li>
+           <li><strong style="color:#fca5a5;">TXA within 3 hours</strong> — 1g IV bolus, then 1g over 8 hrs</li>
+           <li><strong style="color:#fca5a5;">Permissive hypotension:</strong> Target SBP 80–90 until surgical control</li>
+           <li><strong style="color:#fca5a5;">Damage control surgery:</strong> Pack, close, ICU stabilize, return for definitive repair</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div><!-- Stroke -->
+      <div class="tab-panel hidden" data-panel="stroke">
+       <div class="section-card rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(14,165,233,0.2);"><i data-lucide="zap" style="width:20px;height:20px;color:#0ea5e9;"></i>
+         </div>
+         <div>
+          <h3 class="font-700 text-lg" style="color:#f1f5f9;">Acute Ischemic Stroke — Time Is Brain</h3><span class="text-xs" style="color:#0ea5e9;">1.9 MILLION NEURONS LOST PER MINUTE of ischemia</span>
+         </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#dc2626;">⏱ Door-to-Needle Target: 30 min</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li>• <strong>FAST screen:</strong> Face droop, Arm drift, Speech slurring, Time stamp</li>
+           <li>• <strong>NIHSS score</strong> within 10 minutes of arrival</li>
+           <li>• <strong>CT head STAT</strong> — rule out hemorrhage before thrombolysis</li>
+           <li>• <strong>Experience cue:</strong> "An acute NIHSS ≥ 6 with LVO pattern on CT-A = call interventional neuro immediately, don't wait for MRI"</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="font-600 text-sm mb-3" style="color:#dc2626;">💊 Treatment Windows</h4>
+          <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+           <li><strong style="color:#7dd3fc;">IV Alteplase (tPA):</strong> 0.9 mg/kg (max 90mg) within 4.5 hours</li>
+           <li><strong style="color:#7dd3fc;">Mechanical thrombectomy:</strong> Up to 24 hours in select patients (DAWN/DEFUSE-3 criteria)</li>
+           <li><strong style="color:#7dd3fc;">BP management:</strong> Allow up to 220/120 pre-lysis; &lt;185/110 for tPA eligibility</li>
+           <li><strong style="color:#7dd3fc;">ICU monitoring:</strong> Neuro checks q15min × 2hr post-tPA, then q30min × 6hr</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- PRINCIPLES (Accordion) -->
+   <section id="principles" class="px-4 py-16" style="background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%);">
+    <div class="max-w-4xl mx-auto">
+     <div class="reveal text-center mb-10"><span class="inline-block px-3 py-1 rounded-full text-xs font-600 tracking-wider uppercase mb-4" style="background:rgba(14,165,233,0.15);color:#0ea5e9;">Core Principles</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-700 mb-3" style="color:#f8fafc;">10 Principles of Emergency Decision Making</h2>
+      <p class="text-sm" style="color:#94a3b8;">Distilled from decades of ICU, ED, and teaching experience</p>
+     </div>
+     <div class="reveal space-y-3" id="accordion"><!-- Accordion items generated by JS -->
+     </div>
+    </div>
+   </section><!-- GOLDEN HOUR TIMELINE -->
+   <section id="timeline" class="px-4 py-16" style="background:#0f172a;">
+    <div class="max-w-3xl mx-auto">
+     <div class="reveal text-center mb-12"><span class="inline-block px-3 py-1 rounded-full text-xs font-600 tracking-wider uppercase mb-4" style="background:rgba(220,38,38,0.15);color:#dc2626;">Timeline</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-700 mb-3" style="color:#f8fafc;">The Golden Hour — Minute by Minute</h2>
+      <p class="text-sm" style="color:#94a3b8;">What happens in the first 60 minutes determines patient outcome</p>
+     </div>
+     <div class="reveal relative pl-12" id="timelineContainer">
+      <div class="timeline-line"></div><!-- Timeline items generated by JS -->
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="px-4 py-10 text-center" style="background:#0f172a;border-top:1px solid rgba(148,163,184,0.1);">
+    <div class="flex items-center justify-center gap-2 mb-3">
+     <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#dc2626;"><i data-lucide="activity" style="width:16px;height:16px;color:#fff;"></i>
+     </div><span class="font-display font-700 text-lg" style="color:#f1f5f9;">Emergency Decision Making</span>
+    </div>
+    <p class="text-xs mb-1" style="color:#64748b;">From Clinical Experience — A Professor's Guide to Saving Lives Under Pressure</p>
+    <p class="text-xs" style="color:#475569;">For educational purposes. Always follow your institution's protocols and guidelines.</p>
+   </footer>
+  </div><!-- end app-wrapper -->
+  <script>
+// --- DATA ---
+const principles = [
+  { title: "Treat the Patient, Not the Monitor", icon: "user", desc: "Monitors lie. Artifact, lead displacement, and technical failure are common. Your clinical assessment — mental status, skin color, respiratory effort, pulse quality — always supersedes numbers on a screen. An experienced clinician knows when to trust their hands over the waveform." },
+  { title: "Worst First — Rule Out the Lethal", icon: "alert-triangle", desc: "In emergency medicine, we don't chase the most likely diagnosis first — we exclude the most dangerous. Chest pain? Rule out MI, PE, aortic dissection, and tension pneumothorax BEFORE considering GERD. This cognitive discipline saves lives." },
+  { title: "The 'Gut Feeling' Is Pattern Recognition", icon: "brain", desc: "When a seasoned clinician says 'something doesn't feel right,' they're activating System 1 thinking — rapid, subconscious pattern matching built from thousands of patient encounters. This intuition should trigger further investigation, never be dismissed." },
+  { title: "Communicate in Closed Loops", icon: "message-circle", desc: "In a resuscitation: Leader gives order → Team member repeats order → Team member confirms completion. 'Push 1mg epi' → 'Pushing 1mg epi' → '1mg epi is in.' Miscommunication kills; closed-loop communication prevents it." },
+  { title: "Time-Box Your Decisions", icon: "clock", desc: "Give yourself explicit decision windows. 'I will reassess in 5 minutes.' 'If no improvement after 2 liters, we start vasopressors.' Time-boxing prevents both premature action and dangerous delays in escalation." },
+  { title: "Cognitive Offloading Saves Lives", icon: "clipboard-list", desc: "Checklists, protocols, and cognitive aids (RSI checklist, massive transfusion protocol, code blue algorithm) exist because human working memory fails under stress. The best clinicians use them; the dangerous ones think they don't need them." },
+  { title: "Dynamic Diagnosis — Stay Flexible", icon: "git-branch", desc: "Your initial diagnosis is a hypothesis, not a commitment. When the patient doesn't respond as expected, pivot. Anchoring bias — fixating on the first diagnosis — is the most lethal cognitive error in emergency medicine." },
+  { title: "Resource Awareness Is Clinical Skill", icon: "layout", desc: "Knowing your hospital's capabilities — CT availability, OR readiness, blood bank supply, specialist on-call — is as important as clinical knowledge. The best plan fails without the resources to execute it. Transfer early if you can't provide definitive care." },
+  { title: "Debrief Every Critical Case", icon: "refresh-cw", desc: "Post-resuscitation debriefing isn't optional — it's where clinical experience is forged. What went well? What delayed care? What would we do differently? This reflective practice converts individual cases into collective wisdom." },
+  { title: "Self-Awareness Under Stress", icon: "shield", desc: "Recognize your own cognitive degradation under stress — tunnel vision, task fixation, loss of situational awareness. Call it out. 'I'm getting tunnel-focused, someone give me a 10,000-foot view.' The safest clinician is the one who knows their limits." }
+];
+
+const timelineData = [
+  { time: "0:00", label: "Patient Contact", detail: "Scene safety, initial impression, AVPU assessment", color: "#dc2626" },
+  { time: "0:30", label: "Primary Survey Complete", detail: "ABCDE assessed, life threats identified and addressed", color: "#dc2626" },
+  { time: "2:00", label: "IV Access + Labs Drawn", detail: "Large bore IV × 2, CBC, BMP, lactate, coags, type & cross", color: "#0ea5e9" },
+  { time: "5:00", label: "First Interventions", detail: "Fluids running, empiric antibiotics or medications given", color: "#dc2626" },
+  { time: "10:00", label: "Imaging Ordered", detail: "FAST, chest X-ray, CT as indicated by clinical picture", color: "#0ea5e9" },
+  { time: "15:00", label: "Reassessment #1", detail: "Vitals trend, response to interventions, adjust plan", color: "#dc2626" },
+  { time: "30:00", label: "Results & Disposition", detail: "Lab results, imaging reads, specialist consultation, ICU vs OR", color: "#0ea5e9" },
+  { time: "60:00", label: "Golden Hour Complete", detail: "Definitive care initiated, patient stabilized or in OR/ICU", color: "#22c55e" }
+];
+
+// --- ACCORDION ---
+function buildAccordion() {
+  const container = document.getElementById('accordion');
+  container.innerHTML = '';
+  principles.forEach((p, i) => {
+    const item = document.createElement('div');
+    item.className = 'section-card rounded-xl overflow-hidden';
+    item.innerHTML = `
+      <button class="acc-toggle w-full flex items-center gap-3 p-4 text-left" aria-expanded="false">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:${i%2===0?'rgba(220,38,38,0.15)':'rgba(14,165,233,0.15)'};">
+          <i data-lucide="${p.icon}" style="width:18px;height:18px;color:${i%2===0?'#dc2626':'#0ea5e9'};"></i>
+        </div>
+        <span class="font-600 text-sm flex-1" style="color:#f1f5f9;">${i+1}. ${p.title}</span>
+        <i data-lucide="chevron-down" class="acc-chevron transition-transform duration-300" style="width:18px;height:18px;color:#64748b;"></i>
+      </button>
+      <div class="acc-body">
+        <div class="px-4 pb-4 pl-16 text-sm leading-relaxed" style="color:#94a3b8;">${p.desc}</div>
+      </div>`;
+    container.appendChild(item);
+  });
+  lucide.createIcons();
+
+  container.querySelectorAll('.acc-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const chevron = btn.querySelector('.acc-chevron');
+      const isOpen = body.classList.contains('open');
+      // Close all
+      container.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+      container.querySelectorAll('.acc-chevron').forEach(c => c.style.transform = 'rotate(0deg)');
+      container.querySelectorAll('.acc-toggle').forEach(t => t.setAttribute('aria-expanded','false'));
+      if (!isOpen) {
+        body.classList.add('open');
+        chevron.style.transform = 'rotate(180deg)';
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+}
+
+// --- TIMELINE ---
+function buildTimeline() {
+  const container = document.getElementById('timelineContainer');
+  const line = container.querySelector('.timeline-line');
+  // keep line, clear rest
+  while(container.children.length > 1) container.removeChild(container.lastChild);
+
+  timelineData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'relative mb-8 last:mb-0';
+    el.innerHTML = `
+      <div class="timeline-dot" style="top:6px;border-color:${item.color};"></div>
+      <div class="ml-6">
+        <span class="inline-block px-2 py-0.5 rounded text-xs font-700 mb-1" style="background:${item.color}22;color:${item.color};">${item.time}</span>
+        <h4 class="font-600 text-sm mb-1" style="color:#f1f5f9;">${item.label}</h4>
+        <p class="text-xs" style="color:#94a3b8;">${item.detail}</p>
+      </div>`;
+    container.appendChild(el);
+  });
+}
+
+// --- TABS ---
+document.getElementById('scenarioTabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  const tab = btn.dataset.tab;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = 'rgba(148,163,184,0.12)';
+    b.style.color = '#94a3b8';
+  });
+  btn.classList.add('active');
+  btn.style.background = '#dc2626';
+  btn.style.color = '#fff';
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+  document.querySelector(`[data-panel="${tab}"]`).classList.remove('hidden');
+});
+
+// --- MOBILE MENU ---
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('hidden');
+  menu.classList.toggle('flex');
+});
+document.getElementById('mobileMenu').addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') {
+    document.getElementById('mobileMenu').classList.add('hidden');
+    document.getElementById('mobileMenu').classList.remove('flex');
+  }
+});
+
+// --- SCROLL REVEAL ---
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// --- ELEMENT SDK ---
+const defaultConfig = {
+  main_title: 'Emergency Decision Making',
+  subtitle: 'From Clinical Experience',
+  author_name: 'MBBS (MD) • Professor of Medicine • ICU Intensivist • Emergency Medicine Specialist',
+  background_color: '#0f172a',
+  surface_color: '#1e293b',
+  text_color: '#f8fafc',
+  primary_action: '#dc2626',
+  secondary_action: '#0ea5e9',
+  font_family: 'Playfair Display',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const t = (k) => config[k] || defaultConfig[k];
+  document.getElementById('heroTitle').textContent = t('main_title');
+  document.getElementById('heroSubtitle').textContent = t('subtitle');
+  document.getElementById('heroAuthor').textContent = t('author_name');
+
+  const bg = t('background_color');
+  const surface = t('surface_color');
+  const text = t('text_color');
+  const primary = t('primary_action');
+  const secondary = t('secondary_action');
+  const font = t('font_family');
+  const size = t('font_size');
+
+  document.body.style.background = bg;
+  document.querySelectorAll('.section-card').forEach(c => {
+    c.style.background = surface + '99';
+    c.style.borderColor = surface;
+  });
+  document.getElementById('heroTitle').style.color = text;
+  document.getElementById('heroSubtitle').style.color = primary;
+  document.getElementById('navIcon').style.background = primary;
+
+  // Font
+  const fontStack = `${font}, serif`;
+  document.querySelectorAll('.font-display').forEach(el => el.style.fontFamily = fontStack);
+  document.getElementById('heroTitle').style.fontFamily = fontStack;
+  document.getElementById('heroSubtitle').style.fontFamily = fontStack;
+
+  // Font size
+  const baseSize = size || 16;
+  document.getElementById('heroTitle').style.fontSize = `${baseSize * 2.8}px`;
+  document.getElementById('heroSubtitle').style.fontSize = `${baseSize * 1.4}px`;
+}
+
+// --- INIT ---
+buildAccordion();
+buildTimeline();
+lucide.createIcons();
+applyConfig(defaultConfig);
+</script>
+</body>
+</html>
