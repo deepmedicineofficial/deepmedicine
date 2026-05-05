@@ -1,0 +1,722 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>MCQs | Medical Practice Questions & Exams | Deep Medicine</title> <meta name="description" content="Practice medical MCQs with explanations covering clinical concepts, emergencies, ICU, and exam-focused topics."> <link rel="canonical" href="https://deepmedicine.in/learning/tools/mcqs"> <!-- Open Graph --> <meta property="og:title" content="MCQs | Deep Medicine"> <meta property="og:description" content="Medical multiple-choice questions with explanations for exams and clinical learning."> <meta property="og:image" content="https://deepmedicine.in/images/mcqs.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+.font-heading { font-family: 'Playfair Display', Georgia, serif; }
+.fade-in { animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.option-btn { transition: all 0.2s ease; }
+.option-btn:hover:not(.selected):not(.correct-answer):not(.wrong-answer) { transform: translateY(-1px); }
+.correct-answer { background: #065f46 !important; border-color: #059669 !important; color: #fff !important; }
+.wrong-answer { background: #7f1d1d !important; border-color: #dc2626 !important; color: #fff !important; }
+.correct-highlight { border-color: #059669 !important; box-shadow: 0 0 0 2px #059669; }
+.progress-fill { transition: width 0.4s ease; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: #0c0f1a;"><!-- HOME SCREEN -->
+   <div id="homeScreen" class="min-h-full w-full flex flex-col">
+    <header class="pt-8 pb-6 px-4 text-center">
+     <div class="flex items-center justify-center gap-3 mb-3">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #c084fc, #7c3aed);"><i data-lucide="stethoscope" style="width:22px;height:22px;color:#fff;"></i>
+      </div>
+      <h1 id="appTitle" class="font-heading text-2xl md:text-3xl font-bold text-white">Medical MCQ Pro</h1>
+     </div>
+     <p id="appSubtitle" class="text-gray-400 text-sm md:text-base">MBBS &amp; MD Exam Preparation</p>
+    </header><!-- Stats Bar -->
+    <div class="px-4 max-w-2xl mx-auto w-full mb-6">
+     <div class="grid grid-cols-3 gap-3">
+      <div class="rounded-xl p-3 text-center" style="background:#1a1d2e;">
+       <div class="text-xl font-bold text-purple-400" id="statTotal">
+        0
+       </div>
+       <div class="text-xs text-gray-500">
+        Questions
+       </div>
+      </div>
+      <div class="rounded-xl p-3 text-center" style="background:#1a1d2e;">
+       <div class="text-xl font-bold text-emerald-400" id="statCorrect">
+        0
+       </div>
+       <div class="text-xs text-gray-500">
+        Correct
+       </div>
+      </div>
+      <div class="rounded-xl p-3 text-center" style="background:#1a1d2e;">
+       <div class="text-xl font-bold text-amber-400" id="statAccuracy">
+        —
+       </div>
+       <div class="text-xs text-gray-500">
+        Accuracy
+       </div>
+      </div>
+     </div>
+    </div><!-- Subject Cards -->
+    <div class="px-4 pb-8 max-w-2xl mx-auto w-full flex-1">
+     <h2 class="text-gray-300 font-semibold text-sm uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="layout-grid" style="width:15px;height:15px;"></i> Choose a Subject</h2>
+     <div id="subjectGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+    </div>
+   </div><!-- QUIZ SCREEN -->
+   <div id="quizScreen" class="min-h-full w-full flex-col hidden"><!-- Quiz Header -->
+    <div class="sticky top-0 z-10 px-4 py-3" style="background:#0c0f1a; border-bottom: 1px solid #1e2235;">
+     <div class="max-w-2xl mx-auto flex items-center justify-between mb-2"><button id="backBtn" class="flex items-center gap-1 text-gray-400 hover:text-white transition text-sm"> <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back </button> <span id="quizSubjectLabel" class="text-purple-400 font-semibold text-sm"></span> <span id="quizProgress" class="text-gray-500 text-sm"></span>
+     </div>
+     <div class="max-w-2xl mx-auto h-1.5 rounded-full overflow-hidden" style="background:#1e2235;">
+      <div id="progressBar" class="h-full rounded-full progress-fill" style="background:linear-gradient(90deg,#7c3aed,#c084fc);width:0%;"></div>
+     </div>
+    </div><!-- Question Area -->
+    <div class="px-4 py-6 max-w-2xl mx-auto w-full flex-1 fade-in" id="questionArea">
+     <div class="mb-6"><span id="qNumber" class="text-xs font-semibold text-purple-400 uppercase tracking-wider"></span>
+      <h2 id="qText" class="text-white text-lg md:text-xl font-semibold mt-2 leading-relaxed"></h2>
+     </div>
+     <div id="optionsContainer" class="space-y-3 mb-6"></div><!-- Explanation -->
+     <div id="explanationBox" class="hidden rounded-xl p-5 mb-6 fade-in" style="background:#111827; border:1px solid #1e2235;">
+      <div class="flex items-center gap-2 mb-3"><i data-lucide="book-open" style="width:18px;height:18px;color:#c084fc;"></i> <span class="font-semibold text-purple-300 text-sm">Detailed Explanation</span>
+      </div>
+      <div id="explanationText" class="text-gray-300 text-sm leading-relaxed"></div>
+     </div>
+    </div><!-- Navigation -->
+    <div class="sticky bottom-0 px-4 py-4" style="background:#0c0f1a; border-top:1px solid #1e2235;">
+     <div class="max-w-2xl mx-auto flex items-center justify-between gap-3"><button id="prevBtn" class="flex items-center gap-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-400 transition hover:text-white" style="background:#1a1d2e;"> <i data-lucide="chevron-left" style="width:16px;height:16px;"></i> Prev </button> <button id="shuffleBtn" class="flex items-center gap-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-400 transition hover:text-white" style="background:#1a1d2e;"> <i data-lucide="shuffle" style="width:16px;height:16px;"></i> Shuffle </button> <button id="nextBtn" class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition" style="background:linear-gradient(135deg,#7c3aed,#9333ea);"> Next <i data-lucide="chevron-right" style="width:16px;height:16px;"></i> </button>
+     </div>
+    </div>
+   </div><!-- RESULT SCREEN -->
+   <div id="resultScreen" class="min-h-full w-full flex-col items-center justify-center hidden">
+    <div class="px-4 py-12 max-w-md mx-auto w-full text-center fade-in">
+     <div class="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style="background:linear-gradient(135deg,#7c3aed,#c084fc);"><i data-lucide="trophy" style="width:36px;height:36px;color:#fff;"></i>
+     </div>
+     <h2 class="font-heading text-3xl text-white font-bold mb-2">Quiz Complete!</h2>
+     <p id="resultSubject" class="text-purple-400 font-semibold mb-6"></p>
+     <div class="grid grid-cols-3 gap-3 mb-8">
+      <div class="rounded-xl p-4" style="background:#1a1d2e;">
+       <div id="resCorrect" class="text-2xl font-bold text-emerald-400"></div>
+       <div class="text-xs text-gray-500">
+        Correct
+       </div>
+      </div>
+      <div class="rounded-xl p-4" style="background:#1a1d2e;">
+       <div id="resWrong" class="text-2xl font-bold text-red-400"></div>
+       <div class="text-xs text-gray-500">
+        Wrong
+       </div>
+      </div>
+      <div class="rounded-xl p-4" style="background:#1a1d2e;">
+       <div id="resPercent" class="text-2xl font-bold text-purple-400"></div>
+       <div class="text-xs text-gray-500">
+        Score
+       </div>
+      </div>
+     </div><button id="retryBtn" class="w-full py-3 rounded-xl text-white font-bold text-sm mb-3" style="background:linear-gradient(135deg,#7c3aed,#9333ea);"> Retry This Subject </button> <button id="homeBtn" class="w-full py-3 rounded-xl text-gray-400 font-semibold text-sm hover:text-white transition" style="background:#1a1d2e;"> Back to Subjects </button>
+    </div>
+   </div>
+  </div>
+  <script>
+// ─── QUESTION BANK ───
+const subjects = {
+  cardiology: {
+    icon: "heart-pulse",
+    color: "#ef4444",
+    questions: [
+      {
+        q: "A 55-year-old male presents with acute substernal chest pain radiating to the left arm, diaphoresis, and ST-elevation in leads II, III, and aVF. Which coronary artery is most likely occluded?",
+        options: ["Left anterior descending (LAD)", "Right coronary artery (RCA)", "Left circumflex artery (LCx)", "Left main coronary artery"],
+        correct: 1,
+        explanation: "<b>Answer: Right Coronary Artery (RCA)</b><br><br>ST-elevation in leads II, III, and aVF indicates an <b>inferior myocardial infarction</b>. The inferior wall of the left ventricle is supplied predominantly by the RCA (~85% of people — right-dominant circulation).<br><br><b>Key anatomy:</b><br>• <b>LAD</b> → supplies anterior wall (V1–V4 changes)<br>• <b>RCA</b> → supplies inferior wall (II, III, aVF changes) and often the AV node<br>• <b>LCx</b> → supplies lateral wall (I, aVL, V5–V6 changes)<br>• <b>Left main</b> → massive ischemia with widespread ST changes and hemodynamic collapse<br><br><b>Clinical Pearl:</b> Always check right-sided leads (V4R) in inferior STEMI to rule out right ventricular infarction — avoid nitrates and aggressive diuresis in such cases."
+      },
+      {
+        q: "Which of the following is the most common cause of heart failure with preserved ejection fraction (HFpEF)?",
+        options: ["Dilated cardiomyopathy", "Hypertensive heart disease", "Valvular regurgitation", "Viral myocarditis"],
+        correct: 1,
+        explanation: "<b>Answer: Hypertensive Heart Disease</b><br><br>HFpEF (EF ≥ 50%) is characterized by <b>diastolic dysfunction</b> — the left ventricle is stiff and cannot relax properly, leading to elevated filling pressures.<br><br><b>Pathophysiology:</b> Chronic hypertension → concentric LV hypertrophy → impaired relaxation → elevated LA pressure → pulmonary congestion → symptoms of heart failure despite normal systolic function.<br><br><b>Risk factors:</b> Age, HTN, diabetes, obesity, female sex, AF<br><br><b>Differentiators:</b><br>• Dilated cardiomyopathy → HFrEF (reduced EF)<br>• Viral myocarditis → usually HFrEF with acute presentation<br>• Valvular regurgitation → volume overload, eventual systolic failure<br><br><b>Treatment:</b> No proven mortality benefit drug yet. Focus on controlling HTN, fluid management with diuretics, and managing comorbidities. SGLT2 inhibitors (empagliflozin) showed promise in EMPEROR-Preserved trial."
+      },
+      {
+        q: "A patient on digoxin therapy develops nausea, visual disturbances (yellow-green halos), and a new arrhythmia. ECG shows atrial tachycardia with block. What is the most important initial step?",
+        options: ["Administer IV calcium", "Check serum potassium level", "Immediate cardioversion", "Increase digoxin dose"],
+        correct: 1,
+        explanation: "<b>Answer: Check Serum Potassium Level</b><br><br>This presentation is classic <b>digoxin toxicity</b>. Hypokalemia is the single most important precipitant because digoxin and K+ compete for the same binding site on Na+/K+-ATPase.<br><br><b>Classic triad of digoxin toxicity:</b><br>1. GI symptoms (nausea, vomiting, anorexia)<br>2. Visual disturbances (xanthopsia — yellow-green halos, blurred vision)<br>3. Cardiac arrhythmias (PAT with block is pathognomonic; also bidirectional VT)<br><br><b>Why K+ first?</b><br>• Low K+ → increased digoxin binding → worsened toxicity<br>• Correcting hypokalemia may resolve the arrhythmia<br>• Even if digoxin levels are therapeutic, hypokalemia can precipitate toxicity<br><br><b>Management:</b><br>• Correct K+ and Mg2+ levels<br>• Stop digoxin<br>• For life-threatening arrhythmias → Digibind (digoxin-specific Fab antibodies)<br>• <b>AVOID</b> cardioversion (risk of refractory VF) and IV calcium"
+      },
+      {
+        q: "Which murmur is classically described as a 'machinery' or continuous murmur best heard at the left infraclavicular area?",
+        options: ["Aortic stenosis", "Mitral regurgitation", "Patent ductus arteriosus (PDA)", "Ventricular septal defect (VSD)"],
+        correct: 2,
+        explanation: "<b>Answer: Patent Ductus Arteriosus (PDA)</b><br><br>PDA produces a <b>continuous 'machinery' murmur</b> because the pressure gradient between aorta and pulmonary artery persists throughout both systole and diastole.<br><br><b>Key features:</b><br>• Best heard at left infraclavicular area (2nd left intercostal space)<br>• Continuous — crescendo in systole, decrescendo in diastole, enveloping S2<br>• Wide pulse pressure and bounding pulses due to aortic runoff<br><br><b>Associations:</b><br>• Prematurity (most common)<br>• Maternal rubella infection<br>• High-altitude births<br><br><b>Treatment:</b><br>• Premature infants: Indomethacin or Ibuprofen (inhibits prostaglandins that keep ductus open)<br>• Term infants/older: Surgical ligation or transcatheter closure<br>• <b>Prostaglandin E1 (alprostadil)</b> keeps PDA OPEN — used in ductus-dependent congenital heart lesions<br><br><b>Mnemonic:</b> PDA = Put Down (close) with indomethacin, Prop open with PGE1"
+      },
+      {
+        q: "A 68-year-old woman with atrial fibrillation has a CHA₂DS₂-VASc score of 4. What is the most appropriate long-term antithrombotic therapy?",
+        options: ["Aspirin alone", "Aspirin plus clopidogrel", "Direct oral anticoagulant (DOAC)", "No anticoagulation needed"],
+        correct: 2,
+        explanation: "<b>Answer: Direct Oral Anticoagulant (DOAC)</b><br><br>The CHA₂DS₂-VASc score guides stroke prevention in non-valvular AF. A score ≥2 in men or ≥3 in women is a strong indication for oral anticoagulation.<br><br><b>CHA₂DS₂-VASc breakdown:</b><br>• <b>C</b> – CHF (1 pt)<br>• <b>H</b> – Hypertension (1 pt)<br>• <b>A₂</b> – Age ≥75 (2 pts)<br>• <b>D</b> – Diabetes (1 pt)<br>• <b>S₂</b> – Prior Stroke/TIA (2 pts)<br>• <b>V</b> – Vascular disease (1 pt)<br>• <b>A</b> – Age 65–74 (1 pt)<br>• <b>Sc</b> – Sex category (female = 1 pt)<br><br><b>Why DOACs preferred over warfarin?</b><br>• No routine INR monitoring<br>• Fewer drug/food interactions<br>• Lower risk of intracranial hemorrhage<br>• Non-inferior or superior to warfarin in landmark trials (RE-LY, ROCKET-AF, ARISTOTLE, ENGAGE AF)<br><br><b>Options:</b> Apixaban, rivaroxaban, dabigatran, edoxaban<br><br><b>Note:</b> Aspirin alone is insufficient for stroke prevention in AF with elevated CHA₂DS₂-VASc scores."
+      }
+    ]
+  },
+  pulmonology: {
+    icon: "wind",
+    color: "#3b82f6",
+    questions: [
+      {
+        q: "A 60-year-old smoker presents with progressive dyspnea. PFTs show FEV1/FVC ratio of 0.55 with minimal bronchodilator reversibility. What is the most likely diagnosis?",
+        options: ["Asthma", "COPD", "Pulmonary fibrosis", "Sarcoidosis"],
+        correct: 1,
+        explanation: "<b>Answer: COPD</b><br><br>An FEV1/FVC ratio <0.70 post-bronchodilator confirms <b>airflow obstruction</b>. In a long-term smoker with minimal reversibility, COPD is the diagnosis.<br><br><b>Key distinctions:</b><br>• <b>Asthma</b> → reversible obstruction (≥12% and 200mL improvement with bronchodilator)<br>• <b>COPD</b> → fixed/minimally reversible obstruction<br>• <b>Pulmonary fibrosis</b> → restrictive pattern (reduced FVC with normal/high FEV1/FVC ratio)<br>• <b>Sarcoidosis</b> → can be restrictive or obstructive; usually younger, non-smoker<br><br><b>GOLD Classification (by FEV1 % predicted post-BD):</b><br>• GOLD 1 (Mild): ≥80%<br>• GOLD 2 (Moderate): 50–79%<br>• GOLD 3 (Severe): 30–49%<br>• GOLD 4 (Very severe): <30%<br><br><b>Management ladder:</b> Smoking cessation (ONLY intervention reducing mortality), LAMA/LABA inhalers, ICS if frequent exacerbations, pulmonary rehabilitation, O₂ therapy if PaO₂ ≤55mmHg."
+      },
+      {
+        q: "Which of the following findings on chest X-ray is most characteristic of tension pneumothorax?",
+        options: ["Bilateral hilar lymphadenopathy", "Kerley B lines", "Mediastinal shift to the contralateral side", "Reticulonodular pattern"],
+        correct: 2,
+        explanation: "<b>Answer: Mediastinal Shift to the Contralateral Side</b><br><br>Tension pneumothorax is a <b>clinical diagnosis</b> — don't delay treatment for imaging! When seen on CXR:<br><br><b>Classic CXR findings:</b><br>• Absent lung markings on affected side<br>• Mediastinal shift AWAY from the affected side<br>• Tracheal deviation away from affected side<br>• Flattened hemidiaphragm on affected side<br>• Widened intercostal spaces<br><br><b>Pathophysiology:</b> One-way valve mechanism → air enters pleural space during inspiration but cannot escape → progressive pressure buildup → compresses contralateral lung, great vessels, and heart → obstructive shock.<br><br><b>Clinical presentation:</b> Severe dyspnea, hypotension, JVD, absent breath sounds, tracheal deviation, tachycardia.<br><br><b>Emergency treatment:</b><br>• <b>Needle decompression</b>: 14–16G needle at 2nd intercostal space, midclavicular line (or 4th/5th ICS anterior axillary line)<br>• Followed by chest tube insertion (tube thoracostomy)"
+      },
+      {
+        q: "A 30-year-old African American woman presents with bilateral hilar lymphadenopathy, erythema nodosum, and elevated ACE levels. What is the most likely diagnosis?",
+        options: ["Lymphoma", "Sarcoidosis", "Tuberculosis", "Lung adenocarcinoma"],
+        correct: 1,
+        explanation: "<b>Answer: Sarcoidosis</b><br><br>This is a classic presentation: young African American female + bilateral hilar lymphadenopathy (BHL) + erythema nodosum + elevated ACE = <b>sarcoidosis</b> until proven otherwise.<br><br><b>Key features of sarcoidosis:</b><br>• Non-caseating granulomas (vs. TB which has caseating granulomas)<br>• Bilateral hilar lymphadenopathy (most common radiographic finding — 50–80%)<br>• Elevated serum ACE (produced by granulomas, but not specific)<br>• Hypercalcemia (granulomas produce 1,25-dihydroxyvitamin D)<br><br><b>Multisystem involvement:</b><br>• Lungs (90%): BHL, pulmonary infiltrates, fibrosis<br>• Skin: Erythema nodosum, lupus pernio<br>• Eyes: Anterior uveitis (screen all sarcoidosis patients!)<br>• Heart: AV block, cardiomyopathy<br>• CNS: Cranial nerve palsies (Bell's palsy), diabetes insipidus<br><br><b>Löfgren syndrome</b> (acute, good prognosis): BHL + erythema nodosum + polyarthralgia + fever<br><br><b>Diagnosis:</b> Biopsy showing non-caseating granulomas + exclusion of other causes<br><b>Treatment:</b> Observation for mild disease; systemic corticosteroids for symptomatic/progressive disease."
+      },
+      {
+        q: "In a patient with massive pulmonary embolism causing hemodynamic instability (systolic BP < 90 mmHg), what is the first-line treatment?",
+        options: ["Heparin infusion alone", "Inferior vena cava (IVC) filter", "Systemic thrombolysis (tPA)", "Oral rivaroxaban"],
+        correct: 2,
+        explanation: "<b>Answer: Systemic Thrombolysis (tPA)</b><br><br><b>Massive PE</b> = PE + hemodynamic instability (SBP <90 for >15 min, need for vasopressors, or cardiac arrest). This is a <b>life-threatening emergency</b>.<br><br><b>Treatment hierarchy for massive PE:</b><br>1. <b>Systemic thrombolysis</b> (alteplase/tPA) — first-line for massive PE<br>   • 100mg IV over 2 hours (or accelerated protocols)<br>   • Rapidly dissolves clot and restores hemodynamics<br>2. Surgical embolectomy — if thrombolysis contraindicated/failed<br>3. Catheter-directed therapy — alternative option<br><br><b>Why not heparin alone?</b> Heparin prevents clot propagation but does NOT dissolve existing clot. In massive PE with hemodynamic compromise, you need clot lysis NOW.<br><br><b>Contraindications to thrombolysis:</b> Active bleeding, recent surgery (<3 weeks), hemorrhagic stroke, intracranial neoplasm.<br><br><b>Wells Score for PE probability:</b> Clinical signs of DVT (3), PE most likely diagnosis (3), HR >100 (1.5), immobilization/surgery (1.5), prior DVT/PE (1.5), hemoptysis (1), malignancy (1)."
+      },
+      {
+        q: "A patient on mechanical ventilation develops sudden high airway pressures with equal bilateral breath sounds. What is the most likely cause?",
+        options: ["Right mainstem intubation", "Tension pneumothorax", "Mucus plugging or kinked ET tube", "Massive pleural effusion"],
+        correct: 2,
+        explanation: "<b>Answer: Mucus Plugging or Kinked ET Tube</b><br><br>The key clue is <b>high airway pressures + bilateral equal breath sounds</b>. This points to a proximal/mechanical obstruction rather than a unilateral lung problem.<br><br><b>Systematic approach to sudden high airway pressures (DOPES):</b><br>• <b>D</b>isplacement — tube displaced/dislodged<br>• <b>O</b>bstruction — mucus plug, kink, biting on tube (most common!)<br>• <b>P</b>neumothorax — but this causes ABSENT breath sounds on one side<br>• <b>E</b>quipment failure — ventilator malfunction<br>• <b>S</b>tacking — auto-PEEP/breath stacking<br><br><b>Why not the other choices?</b><br>• Tension pneumothorax → absent breath sounds on ONE side + tracheal deviation<br>• Right mainstem intubation → absent/decreased LEFT breath sounds<br>• Massive pleural effusion → decreased breath sounds on affected side + dullness<br><br><b>Immediate management:</b><br>1. Disconnect from vent, bag manually<br>2. Pass suction catheter to check for/clear obstruction<br>3. If still high pressures → check tube position, auscultate, get CXR"
+      }
+    ]
+  },
+  gastroenterology: {
+    icon: "pill",
+    color: "#f59e0b",
+    questions: [
+      {
+        q: "A 45-year-old male with chronic alcoholism presents with hematemesis. Endoscopy reveals dilated submucosal veins at the gastroesophageal junction. What is the underlying pathophysiology?",
+        options: ["Peptic ulcer disease", "Portal hypertension", "Mallory-Weiss tear", "Boerhaave syndrome"],
+        correct: 1,
+        explanation: "<b>Answer: Portal Hypertension</b><br><br>Dilated submucosal veins at the GEJ = <b>esophageal varices</b>, caused by portal hypertension secondary to hepatic cirrhosis (alcohol-related liver disease in this case).<br><br><b>Pathophysiology chain:</b><br>Chronic alcohol → cirrhosis → increased intrahepatic resistance → portal hypertension (portal pressure >10 mmHg) → portosystemic collaterals develop → esophageal varices (left gastric vein → esophageal veins).<br><br><b>Important portosystemic anastomoses:</b><br>• Esophageal varices (left gastric ↔ esophageal veins)<br>• Caput medusae (paraumbilical ↔ superficial epigastric veins)<br>• Hemorrhoids (superior ↔ middle/inferior rectal veins)<br>• Retroperitoneal (splenic/renal/gonadal veins)<br><br><b>Acute management of variceal bleed:</b><br>1. Resuscitation (restrictive transfusion, target Hb 7-8)<br>2. IV octreotide (splanchnic vasoconstriction)<br>3. IV antibiotics (ceftriaxone — reduces mortality!)<br>4. Urgent endoscopy with band ligation<br>5. Balloon tamponade (Sengstaken-Blakemore) if uncontrolled<br>6. TIPS if refractory<br><br><b>Prophylaxis:</b> Non-selective beta-blockers (propranolol/nadolol) or endoscopic band ligation."
+      },
+      {
+        q: "A 35-year-old woman presents with recurrent episodes of right upper quadrant pain after fatty meals, with a positive Murphy's sign. Ultrasound shows gallstones with a thickened gallbladder wall. What is the most appropriate treatment?",
+        options: ["Ursodeoxycholic acid", "ERCP with sphincterotomy", "Laparoscopic cholecystectomy", "Observation and low-fat diet"],
+        correct: 2,
+        explanation: "<b>Answer: Laparoscopic Cholecystectomy</b><br><br>This is <b>acute cholecystitis</b> — gallstones + RUQ pain + positive Murphy's sign + thickened GB wall. Laparoscopic cholecystectomy is the definitive treatment.<br><br><b>Diagnostic criteria (Tokyo Guidelines):</b><br>• Local signs: Murphy's sign, RUQ mass/pain/tenderness<br>• Systemic signs: Fever, elevated CRP, leukocytosis<br>• Imaging: Gallstones, GB wall thickening (>4mm), pericholecystic fluid<br><br><b>Why not the other options?</b><br>• Ursodeoxycholic acid — dissolves cholesterol stones but takes months, high recurrence, only for those unfit for surgery<br>• ERCP — for choledocholithiasis (CBD stones), not cholecystitis<br>• Observation — appropriate for asymptomatic gallstones, not acute cholecystitis<br><br><b>Timing:</b> Early cholecystectomy (within 72 hours) preferred over delayed (reduces total hospital stay, comparable complication rates).<br><br><b>Complications of gallstones:</b> Cholecystitis → choledocholithiasis → cholangitis → gallstone pancreatitis → gallstone ileus (rare)."
+      },
+      {
+        q: "A patient with Crohn's disease develops perianal fistulas and oral aphthous ulcers. Which biologic agent is first-line for inducing and maintaining remission in moderate-to-severe Crohn's disease?",
+        options: ["Rituximab", "Infliximab", "Natalizumab", "Adalimumab"],
+        correct: 1,
+        explanation: "<b>Answer: Infliximab</b><br><br>Infliximab (anti-TNF-α monoclonal antibody) is the best-studied and first-line biologic for <b>moderate-to-severe Crohn's disease</b>, especially with fistulizing disease.<br><br><b>Why infliximab for fistulizing Crohn's?</b><br>• Only biologic with robust RCT evidence for fistula closure (ACCENT II trial)<br>• Both induces and maintains remission<br>• Effective for both luminal and fistulizing disease<br><br><b>Crohn's vs Ulcerative Colitis:</b><br>• Crohn's: mouth to anus, skip lesions, transmural (→ fistulas, strictures), non-caseating granulomas, cobblestone mucosa, string sign<br>• UC: Rectum to colon (continuous), mucosal/submucosal, lead pipe colon, pseudopolyps, bloody diarrhea<br><br><b>Step-up therapy for Crohn's:</b><br>1. Mild: Budesonide, 5-ASA (limited benefit in Crohn's)<br>2. Moderate: Immunomodulators (azathioprine, 6-MP, methotrexate)<br>3. Moderate-severe: Biologics (infliximab, adalimumab, vedolizumab, ustekinumab)<br><br><b>Perianal disease management:</b> Antibiotics (metronidazole, ciprofloxacin) + infliximab + surgical drainage of abscesses + seton placement for complex fistulas."
+      },
+      {
+        q: "Which hepatitis virus is most commonly associated with hepatocellular carcinoma (HCC) worldwide?",
+        options: ["Hepatitis A", "Hepatitis B", "Hepatitis C", "Hepatitis E"],
+        correct: 1,
+        explanation: "<b>Answer: Hepatitis B</b><br><br>Globally, <b>Hepatitis B (HBV)</b> is the #1 cause of HCC, responsible for ~50% of cases worldwide, particularly in endemic areas (East Asia, Sub-Saharan Africa).<br><br><b>HBV and HCC — unique mechanism:</b><br>• HBV is a DNA virus that <b>integrates into host genome</b><br>• Can cause HCC even WITHOUT cirrhosis (direct oncogenic mechanism via HBx protein)<br>• HBx protein → activates oncogenes, inactivates p53<br>• Chronic inflammation → cirrhosis → HCC (additional pathway)<br><br><b>HCC Surveillance:</b><br>• All HBV carriers with cirrhosis<br>• HBV carriers without cirrhosis: Asian males >40, Asian females >50, Africans >20, family history of HCC<br>• Surveillance: Ultrasound ± AFP every 6 months<br><br><b>Key distinction:</b><br>• In Western countries, HCV and alcohol are leading causes of HCC (HCV → cirrhosis → HCC; HCV almost always requires cirrhosis first)<br>• In Asia/Africa, HBV predominates<br><br><b>Other risk factors for HCC:</b> Aflatoxin B1 exposure, NAFLD/NASH, hemochromatosis, alpha-1 antitrypsin deficiency, Wilson's disease."
+      }
+    ]
+  },
+  neurology: {
+    icon: "brain",
+    color: "#8b5cf6",
+    questions: [
+      {
+        q: "A 70-year-old hypertensive male suddenly develops right-sided hemiplegia, global aphasia, and left gaze deviation. CT head is normal. What is the most likely diagnosis and appropriate next step?",
+        options: ["Hemorrhagic stroke — emergent surgery", "Ischemic stroke — IV alteplase if within window", "Brain tumor — MRI with contrast", "Transient ischemic attack — observation"],
+        correct: 1,
+        explanation: "<b>Answer: Ischemic Stroke — IV Alteplase if Within Window</b><br><br>Sudden onset focal neurological deficit + normal CT = <b>acute ischemic stroke</b> until proven otherwise. CT is done primarily to EXCLUDE hemorrhage.<br><br><b>Localization:</b><br>• Right hemiplegia + global aphasia + left gaze deviation = LEFT MCA territory (dominant hemisphere)<br>• Eyes look TOWARD the lesion in cortical strokes ('eyes look at the lesion')<br><br><b>IV Alteplase (tPA) criteria:</b><br>• Within 4.5 hours of symptom onset (3 hours for >80yo or other relative exclusions)<br>• No contraindications (active bleeding, recent surgery, BP >185/110, platelets <100k, INR >1.7)<br>• CT excluding hemorrhage<br><br><b>Extended window treatments:</b><br>• Mechanical thrombectomy: Up to 24 hours for large vessel occlusion (LVO) with salvageable tissue on perfusion imaging<br>• Based on DAWN and DEFUSE 3 trials<br><br><b>Why not the others?</b><br>• Normal CT rules out hemorrhage<br>• Sudden onset argues against tumor<br>• TIA resolves completely (this patient has persistent deficits)<br><br><b>NIHSS score</b> guides severity and treatment decisions."
+      },
+      {
+        q: "A 25-year-old woman presents with optic neuritis followed by weakness in her legs weeks later. MRI brain shows periventricular white matter lesions (Dawson's fingers). What is the most likely diagnosis?",
+        options: ["Neuromyelitis optica (NMO)", "Multiple sclerosis (MS)", "Acute disseminated encephalomyelitis", "CNS lymphoma"],
+        correct: 1,
+        explanation: "<b>Answer: Multiple Sclerosis (MS)</b><br><br>Young woman + relapsing neurological episodes (optic neuritis → leg weakness) + Dawson's fingers on MRI = classic <b>relapsing-remitting MS (RRMS)</b>.<br><br><b>McDonald Criteria (simplified):</b><br>• Dissemination in SPACE (≥2 CNS locations) — optic nerve + spinal cord ✓<br>• Dissemination in TIME (≥2 attacks separated in time) — weeks apart ✓<br><br><b>Dawson's fingers:</b> Periventricular white matter lesions oriented perpendicular to the lateral ventricles — highly characteristic of MS.<br><br><b>Classic MS presentations:</b><br>• Optic neuritis (painful vision loss, afferent pupillary defect)<br>• Transverse myelitis (weakness, sensory level, bladder dysfunction)<br>• Internuclear ophthalmoplegia (INO — pathognomonic!)<br>• Lhermitte's sign (electric shock down spine with neck flexion)<br>• Uhthoff phenomenon (symptoms worsen with heat)<br><br><b>CSF findings:</b> Oligoclonal bands (present in 85-90%), elevated IgG index<br><br><b>Treatment:</b><br>• Acute relapse: IV methylprednisolone<br>• Disease-modifying: Interferon-β, glatiramer, natalizumab, ocrelizumab, fingolimod<br><br><b>NMO distinction:</b> Anti-aquaporin-4 antibodies, longitudinally extensive transverse myelitis (≥3 segments), area postrema syndrome."
+      },
+      {
+        q: "A patient presents with resting tremor, bradykinesia, rigidity, and postural instability. Which neurotransmitter deficiency is primarily responsible?",
+        options: ["Serotonin", "Acetylcholine", "Dopamine", "GABA"],
+        correct: 2,
+        explanation: "<b>Answer: Dopamine</b><br><br>This is the cardinal presentation of <b>Parkinson's disease</b> — caused by loss of dopaminergic neurons in the <b>substantia nigra pars compacta</b>.<br><br><b>Cardinal features (TRAP):</b><br>• <b>T</b>remor — resting, pill-rolling (4-6 Hz), decreases with movement<br>• <b>R</b>igidity — cogwheel rigidity (ratchety resistance)<br>• <b>A</b>kinesia/Bradykinesia — slowness of movement, micrographia, masked facies<br>• <b>P</b>ostural instability — late feature, pull test positive<br><br><b>Pathology:</b><br>• Loss of dopaminergic neurons in substantia nigra<br>• Lewy bodies (α-synuclein inclusions) — histologic hallmark<br>• Dopamine-acetylcholine imbalance → relative acetylcholine excess<br><br><b>Pharmacotherapy:</b><br>• <b>Levodopa/Carbidopa</b> — most effective, gold standard (carbidopa prevents peripheral conversion)<br>• Dopamine agonists (pramipexole, ropinirole) — younger patients to delay levodopa<br>• MAO-B inhibitors (selegiline, rasagiline)<br>• COMT inhibitors (entacapone) — extend levodopa effect<br>• Anticholinergics (trihexyphenidyl) — mainly for tremor in young patients<br>• Amantadine — for dyskinesias<br><br><b>Complications of long-term levodopa:</b> Wearing-off, on-off phenomena, dyskinesias."
+      },
+      {
+        q: "A 55-year-old diabetic presents with a painless foot drop. On examination, there is weakness of dorsiflexion and eversion with sensory loss over the lateral leg and dorsum of foot. Which nerve is affected?",
+        options: ["Tibial nerve", "Femoral nerve", "Common peroneal nerve", "Sciatic nerve"],
+        correct: 2,
+        explanation: "<b>Answer: Common Peroneal Nerve</b><br><br>Foot drop + weakness of dorsiflexion and eversion + lateral leg/dorsal foot sensory loss = <b>common peroneal (fibular) nerve palsy</b> — the most common mononeuropathy of the lower limb.<br><br><b>Anatomy:</b><br>• Common peroneal nerve wraps around the fibular neck — superficial and vulnerable<br>• Divides into deep and superficial branches<br>• <b>Deep peroneal</b>: dorsiflexion (tibialis anterior), toe extension, small sensory area (1st web space)<br>• <b>Superficial peroneal</b>: eversion (peroneus longus/brevis), lateral leg/dorsal foot sensation<br><br><b>Common causes:</b><br>• Compression at fibular head (leg crossing, casts, prolonged bed rest)<br>• Diabetes (mononeuropathy)<br>• Trauma to lateral knee<br>• Weight loss (loss of protective fat pad)<br><br><b>Key differentials:</b><br>• <b>L5 radiculopathy</b>: Also causes foot drop BUT includes hip abduction weakness + inversion weakness (tibialis posterior — tibial nerve), back pain<br>• <b>Sciatic nerve</b>: Would affect BOTH peroneal AND tibial distributions<br>• <b>Tibial nerve</b>: Plantar flexion/inversion weakness, sole sensation<br><br><b>Management:</b> Remove compressive cause, ankle-foot orthosis (AFO), physiotherapy."
+      }
+    ]
+  },
+  nephrology: {
+    icon: "droplets",
+    color: "#06b6d4",
+    questions: [
+      {
+        q: "A 6-year-old child develops periorbital edema and frothy urine 2 weeks after a sore throat. Urinalysis shows proteinuria (3.5g/day), hypoalbuminemia, and lipiduria. What is the most likely diagnosis?",
+        options: ["Post-streptococcal glomerulonephritis", "Minimal change disease", "IgA nephropathy", "Membranous nephropathy"],
+        correct: 1,
+        explanation: "<b>Answer: Minimal Change Disease</b><br><br>Child + <b>nephrotic syndrome</b> (proteinuria >3.5g/day, hypoalbuminemia, edema, hyperlipidemia, lipiduria) = <b>Minimal Change Disease (MCD)</b> — the #1 cause of nephrotic syndrome in children.<br><br><b>Key features of MCD:</b><br>• Most common in ages 2-6 years<br>• Often preceded by URI or immunization<br>• Light microscopy: NORMAL (hence 'minimal change')<br>• Electron microscopy: Podocyte foot process effacement (diagnostic hallmark)<br>• Immunofluorescence: Negative (no immune deposits)<br>• Highly selective proteinuria (mainly albumin)<br><br><b>Treatment:</b> Excellent response to corticosteroids (>90% respond within 8 weeks) — this steroid responsiveness is essentially diagnostic and biopsy is NOT needed initially in children.<br><br><b>Why not PSGN?</b> PSGN is NEPHRITIC (hematuria, RBC casts, hypertension, oliguria), not nephrotic. Also occurs 1-3 weeks post-strep but has different presentation.<br><br><b>Nephrotic vs Nephritic:</b><br>• <b>Nephrotic:</b> >3.5g proteinuria, edema, hypoalbuminemia, hyperlipidemia<br>• <b>Nephritic:</b> Hematuria, RBC casts, hypertension, oliguria, mild proteinuria<br><br><b>Adult nephrotic syndrome:</b> Most common cause is membranous nephropathy (or diabetic nephropathy in diabetics)."
+      },
+      {
+        q: "A patient with chronic kidney disease has the following labs: Ca²⁺ = 7.2 mg/dL, PO₄³⁻ = 7.8 mg/dL, PTH = 450 pg/mL. What is this condition called?",
+        options: ["Primary hyperparathyroidism", "Secondary hyperparathyroidism", "Tertiary hyperparathyroidism", "Hypoparathyroidism"],
+        correct: 1,
+        explanation: "<b>Answer: Secondary Hyperparathyroidism</b><br><br>CKD + hypocalcemia + hyperphosphatemia + elevated PTH = <b>secondary hyperparathyroidism</b> — an appropriate physiological response to CKD.<br><br><b>Pathophysiology (CKD-MBD):</b><br>1. Failing kidneys → ↓ phosphate excretion → hyperphosphatemia<br>2. Failing kidneys → ↓ 1,25-(OH)₂ vitamin D production (↓ 1α-hydroxylase)<br>3. ↓ Vitamin D → ↓ calcium absorption from gut → hypocalcemia<br>4. Hyperphosphatemia also directly binds calcium → worsens hypocalcemia<br>5. Hypocalcemia + ↓ vitamin D + hyperphosphatemia → stimulate PTH secretion<br>6. Chronically elevated PTH → parathyroid gland hyperplasia<br><br><b>Distinguishing the types:</b><br>• <b>Primary</b>: ↑Ca, ↓PO₄, ↑PTH (autonomous PTH, usually adenoma)<br>• <b>Secondary</b>: ↓Ca, ↑PO₄, ↑PTH (appropriate response to CKD)<br>• <b>Tertiary</b>: ↑Ca, varies PO₄, ↑↑PTH (autonomous after prolonged secondary — glands no longer suppressible, often post-transplant)<br><br><b>Treatment:</b><br>• Phosphate binders (calcium carbonate, sevelamer, lanthanum)<br>• Active vitamin D (calcitriol) or analogs<br>• Calcimimetics (cinacalcet) — directly suppresses PTH<br>• Parathyroidectomy for refractory cases"
+      },
+      {
+        q: "A 28-year-old male presents with episodic gross hematuria coinciding with upper respiratory infections. Serum complement levels are normal. What is the most likely diagnosis?",
+        options: ["IgA nephropathy (Berger's disease)", "Post-streptococcal glomerulonephritis", "Membranoproliferative GN", "Alport syndrome"],
+        correct: 0,
+        explanation: "<b>Answer: IgA Nephropathy (Berger's Disease)</b><br><br>Young male + <b>synpharyngitic hematuria</b> (hematuria occurring simultaneously with URI, NOT 1-3 weeks later) + normal complement = <b>IgA nephropathy</b> — the most common glomerulonephritis worldwide.<br><br><b>Key distinguishing features:</b><br>• Hematuria occurs DURING or within 1-2 days of URI (synpharyngitic)<br>• PSGN: hematuria occurs 1-3 WEEKS after pharyngitis (latent period for immune complex formation)<br>• Complement: NORMAL in IgA nephropathy, LOW (C3) in PSGN<br><br><b>Pathology:</b><br>• Immunofluorescence: Mesangial IgA deposits (diagnostic gold standard)<br>• Light microscopy: Mesangial proliferation<br>• Electron microscopy: Mesangial electron-dense deposits<br><br><b>Clinical spectrum:</b><br>• Episodes of gross hematuria with infections (most common presentation)<br>• Persistent microscopic hematuria<br>• Nephrotic syndrome (rare, poor prognosis)<br>• Rapidly progressive GN (rare)<br><br><b>Treatment:</b><br>• Mild: ACE inhibitor/ARB (renoprotective), fish oil (some evidence)<br>• Moderate-severe: Immunosuppression (corticosteroids, per TESTING/STOP-IgAN trials)<br>• New: Sparsentan, targeted-release budesonide (Nefecon)<br><br><b>Prognosis:</b> ~30-40% progress to ESRD over 20 years. Poor prognostic factors: proteinuria >1g/day, hypertension, elevated creatinine, severe histology."
+      }
+    ]
+  },
+  endocrinology: {
+    icon: "activity",
+    color: "#ec4899",
+    questions: [
+      {
+        q: "A patient presents with polyuria, polydipsia, and a random blood glucose of 350 mg/dL. ABG shows pH 7.18, bicarbonate 8 mEq/L, and serum ketones are positive. What is the most critical initial treatment?",
+        options: ["IV insulin bolus", "IV normal saline", "IV sodium bicarbonate", "Oral hypoglycemics"],
+        correct: 1,
+        explanation: "<b>Answer: IV Normal Saline</b><br><br>This is <b>diabetic ketoacidosis (DKA)</b>. Despite the intuition to give insulin first, the MOST CRITICAL initial step is <b>aggressive IV fluid resuscitation</b>.<br><br><b>DKA Diagnostic Criteria:</b><br>• Blood glucose >250 mg/dL<br>• pH <7.30, bicarbonate <18 mEq/L<br>• Positive serum/urine ketones<br>• Elevated anion gap (AG = Na - Cl - HCO₃ >12)<br><br><b>Why fluids FIRST?</b><br>• DKA patients are severely dehydrated (average deficit 5-7L)<br>• Osmotic diuresis from glycosuria → massive fluid loss<br>• Volume depletion → poor tissue perfusion → lactic acidosis (worsens ketoacidosis)<br>• Fluids alone reduce glucose by 35-70 mg/dL/hour via dilution and improved renal perfusion<br>• Insulin given to dehydrated patient → rapid fluid shifts → cardiovascular collapse<br><br><b>DKA Management Protocol:</b><br>1. <b>IV NS 1-1.5 L/hr first 1-2 hours</b><br>2. Check K+ BEFORE insulin (if K+ <3.3 → replace K+ first, do NOT give insulin)<br>3. IV insulin drip 0.1-0.14 units/kg/hr (after fluids and K+ checked)<br>4. When glucose <200 → switch to D5 ½NS, reduce insulin<br>5. Monitor K+ q1-2h, replace aggressively (insulin drives K+ intracellularly)<br>6. Bicarb only if pH <6.9<br><br><b>Resolution criteria:</b> pH >7.3, bicarb >15, AG <12, glucose <200"
+      },
+      {
+        q: "A patient with Graves' disease develops thyroid storm. Which of the following medications should be administered FIRST?",
+        options: ["Radioactive iodine", "Propylthiouracil (PTU)", "Lugol's iodine solution", "Propranolol"],
+        correct: 3,
+        explanation: "<b>Answer: Propranolol</b><br><br><b>Thyroid storm</b> is a life-threatening exacerbation of hyperthyroidism with mortality up to 20-30%. The immediate priority is controlling the <b>adrenergic symptoms</b> that cause hemodynamic instability.<br><br><b>Why propranolol FIRST?</b><br>• Controls tachycardia, hypertension, tremor, agitation immediately<br>• Propranolol uniquely also inhibits peripheral T4→T3 conversion<br>• Prevents fatal arrhythmias and cardiovascular collapse<br>• Acts within minutes IV, hours PO<br><br><b>Thyroid storm management (ORDER MATTERS!):</b><br>1. <b>Beta-blocker</b> (propranolol) — immediate symptom control<br>2. <b>Thionamide</b> (PTU preferred over methimazole — PTU also blocks T4→T3 conversion)<br>3. <b>Lugol's iodine</b> — MUST give ≥1 hour AFTER thionamide (Wolff-Chaikoff effect blocks new hormone synthesis, but if given before thionamide, provides substrate for MORE hormone production)<br>4. <b>Hydrocortisone</b> — blocks T4→T3 conversion, treats relative adrenal insufficiency<br>5. Supportive: cooling (avoid aspirin — displaces T4 from TBG), fluids, ICU care<br><br><b>Burch-Wartofsky Score:</b> >45 = thyroid storm (considers temp, CNS, GI, CV, heart failure, AF, precipitant)<br><br><b>Never give RAI in storm</b> — it can worsen storm by releasing stored hormone from damaged thyroid tissue."
+      },
+      {
+        q: "A 40-year-old woman presents with weight gain, moon facies, buffalo hump, abdominal striae, and hypertension. 24-hour urinary free cortisol is elevated. What is the best initial test to determine the source?",
+        options: ["Serum ACTH level", "Adrenal CT scan", "Pituitary MRI", "Inferior petrosal sinus sampling"],
+        correct: 0,
+        explanation: "<b>Answer: Serum ACTH Level</b><br><br>Once Cushing's syndrome is confirmed (elevated 24-hr UFC, abnormal dexamethasone suppression, or elevated late-night salivary cortisol), the <b>first step in determining the SOURCE</b> is measuring <b>serum ACTH</b>.<br><br><b>ACTH-dependent vs ACTH-independent:</b><br><br>• <b>ACTH elevated/normal</b> (ACTH-dependent, ~80% of cases):<br>  → Cushing's DISEASE (pituitary adenoma, 70%) — most common cause<br>  → Ectopic ACTH (small cell lung cancer, carcinoid — 10%)<br><br>• <b>ACTH suppressed</b> (<5 pg/mL, ACTH-independent, ~20%):<br>  → Adrenal adenoma<br>  → Adrenal carcinoma<br>  → Exogenous steroids (most common cause of Cushing's syndrome overall!)<br><br><b>Diagnostic algorithm after ACTH:</b><br>1. If ACTH-independent → Adrenal CT<br>2. If ACTH-dependent → High-dose dexamethasone suppression test<br>   • Suppresses >50% → Pituitary (Cushing's disease)<br>   • No suppression → Ectopic ACTH<br>3. If equivocal → Inferior petrosal sinus sampling (gold standard for distinguishing pituitary vs ectopic)<br>4. Pituitary MRI if pituitary source confirmed<br><br><b>Treatment:</b><br>• Pituitary: Transsphenoidal surgery<br>• Ectopic: Treat underlying tumor<br>• Adrenal: Adrenalectomy"
+      },
+      {
+        q: "A 58-year-old diabetic with poor glycemic control develops recurrent respiratory infections and chronic cough. HbA1c is 11.2%. What is the primary mechanism linking hyperglycemia to increased infection risk?",
+        options: ["Increased insulin resistance", "Impaired neutrophil function and complement activation", "Reduced T-cell production", "Decreased immunoglobulin synthesis"],
+        correct: 1,
+        explanation: "<b>Answer: Impaired Neutrophil Function and Complement Activation</b><br><br>Hyperglycemia impairs innate immunity through multiple mechanisms:<br><br><b>Mechanisms of infection susceptibility in diabetes:</b><br>1. <b>Neutrophil dysfunction:</b> Hyperglycemia impairs chemotaxis, phagocytosis, oxidative burst → blunted inflammatory response<br>2. <b>Complement activation:</b> Glycation of complement proteins → reduced opsonization<br>3. <b>Elevated glucose in secretions:</b> Urine, respiratory secretions → favors bacterial growth<br>4. <b>Endothelial dysfunction:</b> Poor vascularity → reduced leukocyte recruitment<br>5. <b>Hyperglycemic hyperosmolarity:</b> Osmotic stress on immune cells<br><br><b>Common infections in diabetics:</b><br>• Skin: Staphylococcal infections, diabetic foot ulcers<br>• UTI: Glycosuria provides substrate for bacterial growth<br>• Respiratory: S. pneumoniae, H. influenzae, TB reactivation<br>• Fungal: Candidiasis (oral, vaginal, esophageal)<br>• Atypical: Mucormycosis (aggressive, requires urgent treatment)<br><br><b>Vaccination recommendations:</b><br>• Influenza: Annually<br>• Pneumococcal: PCV20 or PCV15 + PPSV23<br>• COVID-19: Booster doses recommended<br>• Tdap/Td<br><br><b>Management:</b> Tight glycemic control (target HbA1c <7%), infection prevention, appropriate vaccinations"
+      },
+      {
+        q: "A 65-year-old presents with progressive polydipsia, polyuria, weight loss despite normal appetite, and laboratory findings of fasting glucose 85 mg/dL, but serum osmolality 315 mOsm/kg. What is the most likely diagnosis?",
+        options: ["Type 1 diabetes", "Type 2 diabetes", "Central diabetes insipidus", "SIADH"],
+        correct: 2,
+        explanation: "<b>Answer: Central Diabetes Insipidus</b><br><br>Normal fasting glucose + HIGH serum osmolality + polyuria/polydipsia = <b>Diabetes Insipidus (DI)</b>, not diabetes mellitus.<br><br><b>Key distinction:</b><br>• Diabetes MELLITUS (DM) → hyperglycemia, glycosuria, osmotic diuresis<br>• Diabetes INSIPIDUS (DI) → normal glucose, inability to concentrate urine → hyperosmolality<br><br><b>Central DI pathophysiology:</b><br>• Insufficient ADH (vasopressin) production from posterior pituitary<br>• Causes: Pituitary surgery, trauma, tumors (craniopharyngioma), sarcoidosis, lymphocytic hypophysitis, idiopathic<br>• Results in: Inability to reabsorb water in collecting duct<br><br><b>Nephrogenic DI:</b> Kidneys unresponsive to ADH (lithium, hypercalcemia, chronic renal disease)<br><br><b>Diagnostic approach:</b><br>1. High osmolality (>295 mOsm/kg) + low urine osmolality (<300 mOsm/kg) = DI<br>2. Water deprivation test:<br>   • Central DI: Urine osmolality increases >50% with desmopressin<br>   • Nephrogenic: Urine osmolality does NOT increase with desmopressin<br>3. Check serum sodium (often elevated in DI — hypernatremia)<br><br><b>Treatment:</b><br>• Central DI: Desmopressin (DDAVP) — intranasal, oral, or SC<br>• Nephrogenic DI: NSAIDs, thiazide diuretics, adequate hydration"
+      }
+    ]
+  },
+  infectiousdisease: {
+    icon: "dna",
+    color: "#f97316",
+    questions: [
+      {
+        q: "A 32-year-old returns from a rural area in West Africa with fever, headache, myalgia, and a characteristic rash on the trunk spreading to palms/soles. After 3 days, pustular lesions appear. What is the most likely diagnosis?",
+        options: ["Measles", "Monkeypox", "Varicella-zoster", "Smallpox"],
+        correct: 1,
+        explanation: "<b>Answer: Monkeypox</b><br><br>Classic presentation of <b>mpox (monkeypox)</b>: prodrome (fever, headache, myalgia) → rash starting on trunk → characteristic spread to palms/soles → rapid progression to pustules (NOT characteristic of other viral exanthems).<br><br><b>Key distinguishing features of mpox:</b><br>• Prodromes often MORE severe than varicella<br>• Rash → centrifugal spread (trunk first, then extremities including palms/soles — unique!)<br>• Uniform stage progression (all lesions at similar stage, unlike varicella which is polymorphic)<br>• Lymphadenopathy (commonly seen, rare in varicella)<br>• Lesions deeper in dermis (more painful than varicella)<br><br><b>Differentiation from varicella:</b><br>• VZV: Random distribution, 'crops', polymorphic (vesicles/crusts/scabs all together)<br>• mpox: Centrifugal, uniform stage, includes palms/soles, severe prodromes<br><br><b>Transmission:</b><br>• Contact with bodily fluids, lesion exudate, respiratory droplets<br>• Incubation: 5-13 days (up to 21)<br><br><b>Diagnosis:</b> PCR from lesion swab (most sensitive)<br><br><b>Treatment:</b><br>• Supportive care (antihistamines, analgesia, wound care)<br>• Tecovirimat (TPOXX) — most effective antiretroviral, especially if immunocompromised<br>• Isolation precautions until all lesions crusted<br><br><b>Epidemiology update:</b> Major outbreaks 2022-2023, now endemic in multiple African countries"
+      },
+      {
+        q: "A 28-year-old with HIV (CD4+ 150/μL) presents with progressive dyspnea, nonproductive cough, and chest tightness. CXR shows bilateral perihilar infiltrates with ground-glass appearance. What is the most likely diagnosis?",
+        options: ["Pulmonary tuberculosis", "Pneumocystis pneumonia (PCP)", "Cytomegalovirus pneumonitis", "Aspergillus fumigatus infection"],
+        correct: 1,
+        explanation: "<b>Answer: Pneumocystis Pneumonia (PCP)</b><br><br>HIV with CD4 <200 + progressive dyspnea + nonproductive cough + bilateral ground-glass infiltrates = <b>PCP</b> — the most common opportunistic infection in advanced HIV.<br><br><b>PCP epidemiology & risk:</b><br>• CD4 <200 cells/μL: Incidence ~75% if untreated<br>• More common in resource-limited settings without ART<br>• Prophylaxis with TMP-SMX dramatically reduces incidence<br><br><b>Clinical presentation:</b><br>• Subacute (weeks): Fever, dyspnea, nonproductive cough<br>• Chest discomfort common<br>• May have NO pulmonary findings on auscultation initially<br>• CXR: Ground-glass appearance, bilateral interstitial infiltrates<br>• May appear normal early (only 25% sensitivity initially)<br><br><b>Diagnosis:</b><br>• Gold standard: Induced sputum or bronchoalveolar lavage (BAL) with special stains (Grocott's, DFA)<br>• High LDH (often >300) — marker of severity<br>• Elevated A-a gradient on ABG<br><br><b>Treatment:</b><br>• <b>First-line:</b> TMP-SMX (15-20 mg/kg/day of TMP) × 14-21 days<br>• Corticosteroids if PaO2 <70 or A-a gradient >35 mmHg (improves outcomes dramatically!)<br>• Adjunctive: Reduce rebound inflammation<br><br><b>Prophylaxis (when CD4 <200):</b><br>• Daily TMP-SMX (most effective)<br>• Alternatives: Dapsone + pyrimethamine, pentamidine<br>• Discontinue when CD4 >200 for ≥3 months on ART"
+      },
+      {
+        q: "A 45-year-old male with history of IVDU and hepatitis C develops fever, a new systolic murmur at the left sternal border, and septic emboli on retinal exam. Blood cultures show Gram-positive cocci in clusters. What is the most likely infecting organism?",
+        options: ["Streptococcus pneumoniae", "Staphylococcus aureus", "Viridans group streptococci", "Enterococcus faecalis"],
+        correct: 1,
+        explanation: "<b>Answer: Staphylococcus Aureus</b><br><br>IVDU + tricuspid endocarditis (left sternal border murmur indicates tricuspid) + septic emboli + Gram-positive cocci in clusters = <b>S. aureus infective endocarditis (IE)</b>.<br><br><b>Epidemiology of IE by risk factor:</b><br>• <b>IVDU:</b> S. aureus (70-80%), often tricuspid valve<br>• <b>Prosthetic valve:</b> S. aureus, S. epidermidis, Streptococcus, Enterococcus<br>• <b>Congenital heart disease:</b> Viridans streptococci<br>• <b>Rheumatic valve disease:</b> Viridans streptococci<br>• <b>Native valve (community):</b> Viridans streptococci, S. bovis<br><br><b>S. aureus IE features:</b><br>• Aggressive course → early valve destruction<br>• Septic emboli common → stroke, splenic/renal infarction, septic arthritis<br>• High mortality (25-40%) even with treatment<br>• Right-sided (tricuspid) more common in IVDU than left-sided<br><br><b>Modified Duke Criteria for IE diagnosis:</b> Requires major + minor criteria or 3 minor criteria<br>• <b>Major:</b> Positive blood cultures, new regurgitation<br>• <b>Minor:</b> Fever, vascular phenomena, immunological phenomena, predisposing condition, microbiological evidence<br><br><b>Treatment:</b><br>• S. aureus (MSSA): Nafcillin/oxacillin + gentamicin<br>• S. aureus (MRSA): Vancomycin + gentamicin<br>• 4-6 weeks IV therapy<br>• Surgery if: Large vegetations (>10mm), heart failure, conduction abnormalities<br><br><b>Prevention:</b> Harm reduction (clean needle programs), endocarditis prophylaxis in at-risk with procedures"
+      },
+      {
+        q: "A 52-year-old with hepatitis C cirrhosis develops persistent fever, abdominal pain, and worsening coagulopathy. Ascitic fluid shows WBC 550/μL (90% polymorphs), protein 0.8 g/dL, glucose 40 mg/dL. What is the most likely diagnosis?",
+        options: ["Spontaneous bacterial peritonitis", "Secondary bacterial peritonitis", "Peritoneal tuberculosis", "Fungal peritonitis"],
+        correct: 1,
+        explanation: "<b>Answer: Secondary Bacterial Peritonitis</b><br><br>Low ascitic protein (0.8 g/dL) + LOW glucose (40 mg/dL) + high PMN (90%) = <b>Secondary bacterial peritonitis (SBP with complications or secondary peritonitis)</b>.<br><br><b>Spontaneous Bacterial Peritonitis (SBP) vs Secondary:</b><br><br><b>SBP (spontaneous):</b><br>• Single organism (E. coli, S. pneumoniae)<br>• Ascitic protein usually >1.0 g/dL (portal hypertensive ascites)<br>• Ascitic glucose NORMAL or slightly low<br>• Blood cultures positive 50% of time<br>• No peritoneal source (no perforation, surgery)<br>• Treatment: 3rd gen cephalosporin (cefotaxime) ± albumin<br><br><b>Secondary bacterial peritonitis:</b><br>• Multiple organisms (anaerobes + aerobes)<br>• LOW protein (<0.5 g/dL) — indicates spontaneity<br>• LOW glucose (<50 mg/dL) — bacterial consumption<br>• HIGH LDH, acidosis — marker of severity<br>• Peritoneal perforation source (peptic ulcer, appendicitis, perforation)<br>• High mortality despite antibiotics if not surgically addressed<br>• Requires operative intervention!<br><br><b>Red flags for secondary peritonitis:</b><br>• Multiple organisms on culture<br>• Low glucose + low protein<br>• Signs of perforation (free air on imaging)<br>• Inadequate response to antibiotics<br><br><b>Diagnosis:</b><br>• Paracentesis: Cell count, culture, glucose, protein, LDH<br>• Imaging: CT to look for perforation source<br><br><b>Management:</b><br>• SBP: IV cephalosporin (cefotaxime 1g IV q8h) × 10 days<br>• Secondary: Immediate surgery + broad-spectrum antibiotics<br>• Consider prophylaxis with norfloxacin for recurrent SBP"
+      },
+      {
+        q: "A 64-year-old with COPD develops fever, productive cough with rusty sputum, pleuritic chest pain, and right lower lobe consolidation on CXR. Blood cultures pending. What is the empiric antibiotic choice for community-acquired pneumonia (CAP) in this patient?",
+        options: ["Amoxicillin alone", "Respiratory fluoroquinolone monotherapy", "Beta-lactam + macrolide (or fluoroquinolone)", "Clindamycin"],
+        correct: 2,
+        explanation: "<b>Answer: Beta-lactam + Macrolide (or Fluoroquinolone)</b><br><br>Elderly with comorbidity (COPD) + classic pneumococcal CAP + consolidation = requires <b>combination therapy</b> to cover atypical organisms AND typical pathogens.<br><br><b>CAP antibiotic approach by risk stratification:</b><br><br><b>Outpatient (low risk):</b><br>• Amoxicillin (if no risk factors)<br>• OR respiratory fluoroquinolone (levofloxacin, moxifloxacin)<br><br><b>Inpatient (hospitalized):</b><br>• Beta-lactam (ampicillin-sulbactam, amoxicillin-clavulanate, cefotaxime, ceftriaxone)<br>• PLUS macrolide (azithromycin) OR respiratory fluoroquinolone<br>• Covers: S. pneumoniae, H. influenzae, atypicals (Mycoplasma, Chlamydia, Legionella)<br><br><b>ICU/Severe CAP:</b><br>• 3rd gen cephalosporin (ceftriaxone, cefotaxime)<br>• PLUS fluoroquinolone or macrolide<br>• Consider coverage for Pseudomonas if risk factors (recent hospitalization, antibiotics)<br><br><b>Risk factors for drug-resistant S. pneumoniae (DRSP):</b><br>• Age >65 (this patient)<br>• Comorbidities (COPD, diabetes, heart disease)<br>• Recent antibiotics<br>• Alcoholism<br><br><b>Why combination therapy?</b><br>• Betters outcomes compared to monotherapy<br>• Covers broader spectrum including atypicals<br>• Reduces mortality in severe CAP<br><br><b>Duration:</b> 5-7 days total (shorter duration if clinical improvement by day 3)<br><br><b>De-escalation:</b> If susceptible pneumococcus identified, can switch to amoxicillin monotherapy"
+      }
+    ]
+  },
+  rheumatology: {
+    icon: "sparkles",
+    color: "#06b6d4",
+    questions: [
+      {
+        q: "A 35-year-old woman with rheumatoid arthritis (RA) has been on methotrexate monotherapy for 2 years with persistent moderate disease activity. DAS28 score is 4.8. What is the recommended next step?",
+        options: ["Increase methotrexate dose", "Add a second DMARD (e.g., sulfasalazine)", "Add a biologic agent (TNF inhibitor)", "Switch to corticosteroids"],
+        correct: 2,
+        explanation: "<b>Answer: Add a Biologic Agent (TNF Inhibitor)</b><br><br>Inadequate response to monotherapy DMARD after ≥3 months at therapeutic dose = <b>treat-to-target with biologic addition</b>. This follows the \"Tight control and treat-to-target\" strategy.<br><br><b>RA treatment escalation (by ACR/EULAR guidelines):</b><br><br><b>Step 1 (Conventional DMARD):</b><br>• Methotrexate monotherapy (first-line)<br>• Target: Low disease activity (DAS28 <3.2) or remission (DAS28 <2.6)<br>• Time to assess: 3 months<br><br><b>Step 2 (Inadequate response after 3-6 months):</b><br>• <b>Add biologic (TNF inhibitor preferred)</b> to methotrexate<br>• Options: Infliximab, adalimumab, etanercept, certolizumab, golimumab<br>• 60-70% achieve remission with combo therapy<br><br><b>Step 3 (Still inadequate after 3 months):</b><br>• Switch to different class of biologic:<br>  → Non-TNF inhibitor (IL-6 inhibitor: tocilizumab; B-cell: rituximab; JAK inhibitor: tofacitinib)<br><br><b>Why NOT increase methotrexate?</b><br>• Already on therapy for 2 years<br>• Response plateau usually evident within 3-6 months<br>• Toxicity increases with dose (hepatotoxicity, myelosuppression)<br><br><b>DAS28 Remission Target:</b> <2.6 (or SDAI <3.3, CRP-based remission preferred)<br><br><b>Benefits of early biologic therapy:</b><br>• Prevents joint damage progression<br>• Better functional outcomes<br>• Lower long-term disability<br>• Cost-effective despite higher initial cost"
+      },
+      {
+        q: "A 42-year-old female with new-onset symmetric polyarthritis of hands, wrists, and knees, along with fatigue and morning stiffness >2 hours, has positive RF and anti-CCP antibodies. What is the most appropriate initial therapy?",
+        options: ["NSAIDs and patient education only", "Corticosteroids (20mg/day) long-term", "Methotrexate (DMARDs) early", "Gold salts"],
+        correct: 2,
+        explanation: "<b>Answer: Methotrexate (DMARDs) Early</b><br><br>Seropositive RA (RF+ and anti-CCP+) with poor prognostic factors (symmetric polyarthritis, morning stiffness >2 hours) = <b>initiate DMARD immediately</b>. Early DMARD therapy prevents joint damage and disability.<br><br><b>RA Diagnosis (ACR/EULAR 2015):</b><br>• Joint involvement (0-4 points)<br>• Serology: RF or anti-CCP (0-3 points)<br>• Inflammatory markers: ESR or CRP (0-1 points)<br>• Duration ≥6 weeks<br>• Score ≥6 = RA<br><br><b>Anti-CCP significance:</b><br>• Most specific for RA (95-99%)<br>• Predicts radiographic progression<br>• Present early, even in seronegative cases<br>• Better predictor than RF alone<br><br><b>First-line DMARD:</b><br>• <b>Methotrexate</b> — most studied, most effective<br>• Starting dose: 15 mg/week, titrate up to 20-25 mg/week<br>• Add folic acid 1mg daily (prophylaxis for toxicity)<br>• Monitor: CBC, LFTs, creatinine baseline and q8-12 weeks<br>• Onset: 6-12 weeks<br><br><b>NSAIDs for symptom relief ONLY:</b> Don't prevent disease progression<br><b>Low-dose corticosteroids: </b>Adjunctive (prednisone <7.5mg/day) for flares, not long-term monotherapy<br><br><b>Window of opportunity:</b> Early treatment in first 3 months achieves best long-term remission rates<br><br><b>Benefits of DMARD therapy:</b><br>• Prevents joint erosions<br>• Improves function and QOL<br>• Reduces mortality (RA mortality increased 1.5-2x vs general population)"
+      },
+      {
+        q: "A 28-year-old presents with photosensitive rash on cheeks and nose (malar rash), mouth ulcers, arthralgias, and positive ANA (1:640, homogeneous). What is the most likely diagnosis?",
+        options: ["Sjögren's syndrome", "Systemic lupus erythematosus (SLE)", "Mixed connective tissue disease", "Discoid lupus"],
+        correct: 1,
+        explanation: "<b>Answer: Systemic Lupus Erythematosus (SLE)</b><br><br>Photosensitive malar rash + oral ulcers + arthralgias + high-titer ANA = <b>SLE</b> — a prototypical autoimmune disorder with diverse manifestations.<br><br><b>SLE Diagnosis (EULAR/ACR 2019):</b><br>• Entry criterion: ANA ≥1:80 or positive anti-dsDNA/anti-Smith<br>• Clinical + immunological criteria with additive weighted score ≥10 = SLE<br><br><b>Clinical manifestations (mnemonic: SOAP BRAIN MD):</b><br>• <b>S</b> – Serositis (pleuritis, pericarditis)<br>• <b>O</b> – Oral/nasal ulcers<br>• <b>A</b> – Arthritis (non-erosive, hands)<br>• <b>P</b> – Photosensitivity<br>• <b>B</b> – Blood abnormalities (cytopenias, hemolytic anemia)<br>• <b>R</b> – Rash (malar, discoid, photosensitive)<br>• <b>A</b> – ANA positivity<br>• <b>I</b> – Immune complex (anti-dsDNA, anti-Smith)<br>• <b>N</b> – Nephritis (lupus nephritis)<br>• <b>M</b> – Mucocutaneous (discoid, photosensitivity)<br>• <b>D</b> – Drug-induced considerations<br><br><b>Key antibodies:</b><br>• <b>Anti-dsDNA:</b> Highly specific (98%), associated with nephritis<br>• <b>Anti-Smith:</b> Highly specific (99%), found in ~20% of SLE<br>• <b>Anti-Ro/La:</b> Associated with neonatal LE, Sjögren's overlap<br><br><b>Lupus nephritis:</b> Most serious manifestation<br>• Class I-V (Class IV is most common and severe)<br>• Requires renal biopsy for staging<br>• Treatment: Corticosteroids + cyclophosphamide or mycophenolate<br><br><b>Treatment of SLE:</b><br>• Mild: NSAIDs, hydroxychloroquine (200-400mg/day) — 'anchor drug'<br>• Moderate: Add corticosteroids (prednisone <10-15mg/day)\n• Severe/renal: Immunosuppression (cyclophosphamide, mycophenolate, belimumab)<br><br><b>Prognosis:</b> 10-year survival now >90% with modern immunosuppression"
+      },
+      {
+        q: "A 58-year-old male presents with acute severe attack of gout (first MTP joint). He is on HCTZ for hypertension. Serum uric acid is 8.2 mg/dL. What is the most appropriate immediate management?",
+        options: ["Start allopurinol immediately", "Start febuxostat", "IV indomethacin", "Intra-articular corticosteroid injection"],
+        correct: 3,
+        explanation: "<b>Answer: Intra-articular Corticosteroid Injection</b><br><br>Acute gout attack = <b>treat inflammation, NOT uric acid levels</b>. Lowering uric acid acutely can worsen symptoms (urate crystal shedding). Joint injection provides rapid relief with minimal systemic side effects.<br><br><b>Acute gout management:</b><br><br><b>Anti-inflammatory options:</b><br>1. <b>NSAIDs</b> (indomethacin 50mg q8h, naproxen 500mg q12h)<br>   • Most commonly used<br>   • Contraindicated: Renal impairment, GI ulcer, CHF<br><br>2. <b>Colchicine</b> (low-dose: 1.2mg initially, then 0.6mg 1 hour later)<br>   • Most effective within 36 hours of onset<br>   • GI side effects common<br>   • Contraindicated: Severe renal/hepatic disease<br><br>3. <b>Intra-articular corticosteroid</b> (triamcinolone 20-40mg)<br>   • Excellent for monoarticular attacks<br>   • Rapid onset (1-2 hours)<br>   • Minimal systemic side effects<br>   • Can combine with NSAIDs or colchicine for polyarticular attacks<br><br>4. <b>Systemic corticosteroids</b> (prednisone 30-40mg × 5-7 days)\n   • When NSAIDs/colchicine contraindicated<br>   • Less effective than other options<br><br><b>Why NOT start urate-lowering therapy (ULT) acutely?</b><br>• Rapidly lowering uric acid mobilizes crystals → worsens attack<br>• Wait 2-4 weeks after attack resolves to start ULT<br>• Start ULT WITH prophylaxis (NSAID/colchicine/low-dose corticosteroid)<br><br><b>Chronic gout management (target uric acid <6 mg/dL):</b><br>• <b>Allopurinol</b> (xanthine oxidase inhibitor) — first-line<br>  → Contraindicated: Acute attack, HLA-B*5801+ (risk of severe reactions)\n  → Requires slow titration (100mg q2-4 weeks, max 800mg/day)\n• <b>Febuxostat</b> (alternative to allopurinol)\n• <b>Uricosuric agents</b> (probenecid, lesinurad) — if allopurinol intolerant<br>• <b>Pegloticase</b> (uricase) — refractory hyperuricemia<br><br><b>Triggers in this patient:</b><br>• HCTZ worsens hyperuricemia (reduces renal clearance)<br>• Consider switching to alternative antihypertensive (calcium channel blocker, ACE inhibitor)"
+      },
+      {
+        q: "A 65-year-old woman with scleroderma (diffuse cutaneous systemic sclerosis) develops acute severe dyspnea and new-onset hypertension (BP 170/100). Serum creatinine increased from 1.0 to 2.8 mg/dL in 1 week. What is the most likely diagnosis?",
+        options: ["Acute interstitial pneumonia", "Pulmonary hypertension", "Scleroderma renal crisis", "Myocardial infarction"],
+        correct: 2,
+        explanation: "<b>Answer: Scleroderma Renal Crisis</b><br><br>Diffuse SSc + acute hypertension + rapid renal deterioration = <b>Scleroderma Renal Crisis (SRC)</b> — a medical emergency with high mortality if untreated.<br><br><b>Scleroderma Renal Crisis pathophysiology:</b><br>• Intimal proliferation of renal arterioles → narrowing\n• Renin-angiotensin system activation → severe hypertension<br>• Acute kidney injury (often requiring dialysis initially)<br>• Microangiopathic hemolytic anemia<br>• Thrombocytopenia<br>• Pulmonary edema (from hypertension + fluid retention)<br><br><b>SRC Risk factors:</b><br>• Diffuse cutaneous SSc (vs limited) — highest risk<br>• Early disease (<4 years)<br>• Rapidly progressive skin thickening<br>• Recent corticosteroid use (controversial, higher doses increase risk)<br>• Male sex, African American, older age<br><br><b>Clinical presentation:</b><br>• New/worsening hypertension (often severe, >180 mmHg)<br>• Acute renal failure (can progress to ESRD in days)\n• Microangiopathic hemolytic anemia (schistocytes on blood smear)<br>• Dyspnea (from pulmonary edema + fluid overload)<br>• Headache, confusion (hypertensive encephalopathy)<br><br><b>Diagnosis:</b><br>• Rising creatinine with hypertension in SSc patient<br>• Peripheral blood smear: Schistocytes<br>• Renal biopsy: Intimal proliferation with 'onion-skinning' (acute tubular injury also seen)<br><br><b>CRITICAL Treatment: ACE Inhibitors</b><br>• <b>Enalapril</b> (start 2.5mg q6h, titrate) or other ACE-I<br>• Dramatically improved outcomes (before ACE-I: 90% mortality; now ~10% with early treatment)<br>• Start immediately upon suspicion — don't wait for renal biopsy<br>• May need aggressive doses (enalapril 10-20mg q6h)<br>• Continue despite initial worsening of renal function<br><br><b>Additional management:</b><br>• Dialysis if needed for hyperkalemia, fluid overload, uremia<br>• Many recover some renal function after ACE-I treatment<br>• Avoid other antihypertensives initially (less effective for SRC)<br>• NSAIDs and diuretics should be avoided (worsen renal perfusion)<br><br><b>Prognosis:</b> With early ACE-I therapy, many patients recover renal function. Without treatment, SRC is rapidly fatal."
+      }
+    ]
+  },
+  hematology: {
+    icon: "droplet",
+    color: "#ef4444",
+    questions: [
+      {
+        q: "A 45-year-old with a 20-year history of iron-deficiency anemia refractory to oral iron supplementation and colonoscopy findings of a gastric ulcer. Which of the following would most likely explain the etiology?",
+        options: ["Occult GI bleeding from the ulcer alone", "Hereditary angioedema with GI bleeding", "Henoch-Schönlein purpura", "Hereditary iron-refractory iron deficiency anemia (IRIDA)"],
+        correct: 3,
+        explanation: "<b>Answer: Hereditary Iron-Refractory Iron Deficiency Anemia (IRIDA)</b><br><br>20 YEARS of iron deficiency REFRACTORY to oral iron therapy + colonoscopy-proven GI lesion = suggests underlying genetic hepcidin dysregulation. This is <b>IRIDA</b>, NOT simple GI bleeding.<br><br><b>Why not just GI bleeding?</b><br>• Simple GI bleeding responds to iron supplementation<br>• This patient has ongoing iron malabsorption despite oral therapy<br>• Refractory nature over 20 years suggests genetic cause<br><br><b>IRIDA pathophysiology:</b><br>• Mutations in <b>TMPRSS6 gene</b> (encodes matriptase-2)<br>• Matriptase-2 normally inhibits hepcidin<br>• Loss of function → high hepcidin → iron sequestration in enterocytes<br>• Result: Poor iron absorption despite adequate intake<br><br><b>Clinical features of IRIDA:</b><br>• Microcytic, hypochromic anemia from childhood/adolescence<br>• POOR response to oral iron (absorbed <10% normally)<br>• Refractory despite iron therapy<br>• May respond to IV iron or parenteral therapy<br>• Secondary hematologic findings may be present<br><br><b>Diagnosis:</b><br>• Clinical: Iron deficiency refractory to oral therapy<br>• Lab: High hepcidin level (distinguishes IRIDA from iron-deficiency anemia)<br>• Genetic: TMPRSS6 mutation testing<br><br><b>Management:</b><br>• <b>IV iron</b> — bypasses absorption defect<br>  → Iron dextran, iron sucrose, ferric carboxymaltose<br>• Parenteral routes more effective<br>• Transfusion as needed for severe anemia<br>• Experimental: Hepcidin antagonists (early stage)<br><br><b>Distinguish from other causes of iron-refractory anemia:</b><br>• Anemia of chronic disease: Normal hepcidin (appropriate for iron stores)<br>• Celiac disease: Responds to gluten-free diet + iron<br>• H. pylori: Responds to eradication + iron<br>• IRIDA: High hepcidin despite low iron"
+      },
+      {
+        q: "A 62-year-old with newly diagnosed CLL (CD5+, CD19+, CD20+) has minimal symptoms and Rai stage I disease. What is the most appropriate initial management?",
+        options: ["Immediate chemotherapy (FCR regimen)", "Allogeneic stem cell transplant", "Observation ('watch and wait')", "Imatinib"],
+        correct: 2,
+        explanation: "<b>Answer: Observation ('Watch and Wait')</b><br><br>Early-stage, asymptomatic CLL with favorable prognostic factors = <b>defer treatment</b>. Immediate treatment does NOT improve survival and exposes patients to toxicity unnecessarily.<br><br><b>CLL Staging (Rai system):</b><br>• <b>Stage I:</b> Lymphocytosis + lymphadenopathy (this patient)<br>• <b>Stage II:</b> + Splenomegaly/hepatomegaly<br>• <b>Stage III:</b> + Anemia (Hb <11 g/dL)<br>• <b>Stage IV:</b> + Thrombocytopenia (<100K)<br><br><b>Prognostic factors:</b><br>• Good: CD19+, CD5+, surface Ig + (this patient has all) — typical CLL immunophenotype<br>• Additional good: Mutated IGHV status, deletion 13q<br>• Poor: Unmutated IGHV, deletion 17p, TP53 mutation, complex karyotype<br><br><b>'Watch and Wait' strategy:</b><br>• Observation without treatment for early-stage CLL<br>• Multiple randomized trials (CLL4, HOVON) showed NO survival advantage with early treatment<br>• Quality of life better without immediate therapy toxicity<br>• Delay chemo until patient develops: Massive lymphadenopathy, autoimmune hemolytic anemia/thrombocytopenia, rapid progression, symptoms<br><br><b>Indications to START treatment:</b><br>• Rai stage II-IV (progressing disease)<br>• Progressive lymphocytosis (>50% increase in 6 months)<br>• Massive lymphadenopathy/organomegaly<br>• Autoimmune cytopenias (unresponsive to corticosteroids)<br>• Constitutional symptoms (fever, night sweats, weight loss)<br><br><b>Treatment options when needed:</b><br>• <b>Chemoimmunotherapy:</b> FCR (fludarabine/cyclophosphamide/rituximab) — older patients/fit patients<br>• <b>Targeted agents:</b><br>  → Ibrutinib (BTK inhibitor) — first-line now, especially for del17p/TP53 mutations<br>  → Venetoclax (BCL2 inhibitor) — excellent outcomes, especially with obinutuzumab<br>  → Acalabrutinib, zanubrutinib (BTK inhibitors)<br>• <b>Allogeneic transplant:</b> High-risk disease, younger patients, only after exhausting other options<br><br><b>Never give imatinib</b> — that's for CML/GIST, not CLL"
+      },
+      {
+        q: "A 28-year-old with newly diagnosed acute myeloid leukemia (AML) has a t(15;17) translocation on cytogenetics. Which is the preferred initial treatment?",
+        options: ["Standard chemotherapy (daunorubicin + cytarabine)", "All-trans retinoic acid (ATRA) + arsenic trioxide", "High-dose methotrexate", "Imatinib"],
+        correct: 1,
+        explanation: "<b>Answer: All-Trans Retinoic Acid (ATRA) + Arsenic Trioxide</b><br><br>t(15;17) translocation = <b>Acute Promyelocytic Leukemia (APL)</b> — a distinct entity requiring specific targeted therapy, NOT standard chemotherapy.<br><br><b>APL (M3 AML) pathophysiology:</b><br>• t(15;17) produces PML-RARA fusion protein<br>• Abnormal transcriptional repressor → blocked differentiation<br>• ATRA binds RARA → promotes differentiation of leukemic cells → maturation → apoptosis<br>• Arsenic trioxide targets PML protein → further disrupts fusion complex<br><br><b>ATRA + ATO regimen:</b><br>• <b>ATRA:</b> 45 mg/m² daily (divided doses) until complete remission or 90 days<br>• <b>Arsenic trioxide (ATO):</b> 0.15 mg/kg daily<br>• Combination achieves CR in >95% of cases<br>• Significantly superior to chemotherapy alone<br>• 5-year survival now >85% with this approach<br><br><b>Key advantages of ATRA + ATO vs standard chemo:</b><br>• Lower toxicity<br>• Better cure rates<br>• Less myelosuppression initially<br>• Prevents APL differentiation syndrome (hyperleukocytosis)<br><br><b>APL Differentiation Syndrome:</b><br>• Occurs after ATRA/ATO therapy — leukemic cells differentiate → massive cytokine release<br>• Symptoms: Fever, respiratory distress, pulmonary infiltrates, renal failure, coagulopathy<br>• Management: High-dose dexamethasone (10-20mg IV q12h), interrupt ATRA if severe<br>• Prevents/reduces mortality from this complication<br><br><b>Laboratory findings in APL:</b><br>• Abnormal coagulopathy (low PT, elevated D-dimer, low fibrinogen)<br>• Severe thrombocytopenia (platelet transfusions until ATRA effective)<br>• Microangiopathic hemolytic anemia<br><br><b>Outcomes:</b><br>• CR (complete remission) >95%<br>• 5-year disease-free survival >85% (one of best prognoses in AML)<br><br><b>Standard chemo</b> appropriate for other AML subtypes but NOT for APL"
+      },
+      {
+        q: "A 55-year-old male with polycythemia vera (JAK2 V617F positive) develops progressive dyspnea, lower extremity edema, and hepatomegaly. Ultrasound shows thrombosis of the hepatic vein. What is the long-term management focus?",
+        options: ["Immediate phlebotomy", "Imatinib therapy", "Anticoagulation + cytoreductive therapy", "Liver transplantation"],
+        correct: 2,
+        explanation: "<b>Answer: Anticoagulation + Cytoreductive Therapy</b><br><br>PV with Budd-Chiari syndrome (hepatic vein thrombosis) = major thrombotic complication requiring dual management: prevent clot propagation AND reduce erythrocyte mass.<br><br><b>Polycythemia Vera pathophysiology:</b><br>• JAK2 V617F mutation (>95% of PV cases)<br>• Constitutive JAK-STAT activation → unchecked erythropoiesis<br>• Results: High hematocrit, high blood viscosity → thrombosis risk<br>• Thrombotic complications (stroke, MI, DVT) are major causes of morbidity/mortality<br><br><b>Budd-Chiari Syndrome (BCS):</b><br>• Thrombosis of hepatic veins and/or IVC<br>• Associated with PV in ~40% of cases<br>• Presents with: Hepatomegaly, RUQ pain, ascites, lower extremity edema<br>• Progressive → cirrhosis if untreated<br><br><b>Management of PV with BCS:</b><br><br>1. <b>Immediate:</b><br>   • Aggressive phlebotomy to target hematocrit <45%<br>   • IV heparin (transition to warfarin or DOAC)<br>   • Hydroxyurea for cytoreduction if needed urgently<br><br>2. <b>Long-term anticoagulation:</b><br>   • Warfarin (INR 2-3) indefinitely<br>   • OR DOAC (apixaban, rivaroxaban) — increasingly preferred<br>   • Continue despite anticoagulation benefits (residual thrombotic risk remains)<br><br>3. <b>Cytoreductive therapy:</b><br>   • Hydroxyurea — most common (prevents cellular proliferation)<br>   • JAK2 inhibitors (ruxolitinib) — newer, may provide superior control<br>   • Interferon-α — alternative, especially if pregnancy planned<br>   • Goal: Maintain hematocrit <45%, platelets <400K<br><br><b>Risk stratification for thrombosis in PV:</b><br>• <b>High-risk:</b> Age >60 OR prior thrombotic event → requires cytoreduction + aspirin<br>• <b>Low-risk:</b> Age <60, no thrombotic history → phlebotomy + aspirin alone initially<br><br><b>Why NOT imatinib?</b><br>• Imatinib is for BCR-ABL CML, not JAK2+ PV<br>• JAK2 inhibitors (like ruxolitinib) are appropriate for refractory PV<br><br><b>Liver transplantation:</b> Considered only for end-stage cirrhosis unresponsive to anticoagulation/cytoreduction"
+      }
+    ]
+  },
+  psychiatry: {
+    icon: "brain",
+    color: "#a855f7",
+    questions: [
+      {
+        q: "A 32-year-old male with 5-day history of elevated mood, grandiosity, decreased need for sleep (3 hours), rapid flight of ideas, and increased goal-directed activity. No prior episodes of depression. What is the most likely diagnosis?",
+        options: ["Major depressive disorder", "Bipolar I disorder, current manic episode", "Bipolar II disorder", "Cyclothymia"],
+        correct: 1,
+        explanation: "<b>Answer: Bipolar I Disorder, Current Manic Episode</b><br><br>Distinct manic episode (≥7 days) with elevated mood, grandiosity, decreased sleep need, flight of ideas, increased goal-directed activity = <b>Bipolar I Disorder</b> — defined by the presence of at least ONE manic episode.<br><br><b>Bipolar Disorder classification:</b><br><br><b>Bipolar I:</b><br>• ≥1 manic episode (full criteria below)<br>• May or may not have depressive episodes<br>• Diagnosis confirmed by single manic episode<br><br><b>Bipolar II:</b><br>• ≥1 hypomanic episode (not full manic criteria — duration only 4 days)\n• ≥1 major depressive episode<br>• Never had full manic episode<br><br><b>Cyclothymia:</b><br>• Chronic (≥2 years) alternating hypomanic + depressed mood<br>• Neither full manic nor depressive episodes<br>• Milder, subsyndromal presentations<br><br><b>Manic Episode Criteria (DSM-5):</b><br>• Abnormally elevated, expansive, or irritable mood × 7 consecutive days (or hospitalization)<br>• ≥3 of following symptoms (or 4 if mood irritable only):<br>  1. Increased self-esteem/grandiosity<br>  2. Decreased need for sleep<br>  3. Pressure of speech<br>  4. Flight of ideas/racing thoughts<br>  5. Increased distractibility<br>  6. Increased goal-directed activity (social, occupational, sexual)<br>  7. Excessive involvement in risky behaviors<br>• Functional impairment or hospitalization required<br><br><b>Hypomanic Episode (Bipolar II):</b><br>• Similar criteria BUT only 4 consecutive days<br>• Observable by others but no marked functional impairment<br>• No hospitalization required<br><br><b>Treatment of acute mania:</b><br>1. <b>Antipsychotics</b> (first-line for acute mania):<br>   • Olanzapine, risperidone, quetiapine, aripiprazole<br>   • Rapid onset (hours-days)<br>   • Most effective for acute agitation, psychotic features<br><br>2. <b>Mood stabilizers</b> (maintenance + sometimes acute):<br>   • Lithium — gold standard, neuroprotective<br>     → Narrow therapeutic index (0.6-1.2 mEq/L)<br>     → Monitor renal/thyroid regularly<br>   • Valproate (divalproex)<br>   • Lamotrigine<br>   • Carbamazepine<br><br>3. <b>Benzodiazepines:</b> Lorazepam for acute agitation/insomnia<br><br><b>Long-term management:</b><br>• Mood stabilizer ± antipsychotic combination<br>• Psychoeducation, sleep hygiene, stress management<br>• Regular monitoring for depressive episodes (50% will have depression)<br><br><b>Prognosis:</b> With appropriate treatment, many achieve good functional recovery. Untreated bipolar disorder has poor long-term outcomes."
+      },
+      {
+        q: "A 34-year-old female with major depressive disorder has tried sertraline, fluoxetine, and bupropion without response over 6 weeks each. What is the most appropriate next step?",
+        options: ["Increase the current dose of bupropion", "Start augmentation with aripiprazole or bupropion", "Administer electroconvulsive therapy (ECT)", "Combination of two SSRIs"],
+        correct: 1,
+        explanation: "<b>Answer: Start Augmentation with Aripiprazole or Bupropion</b><br><br>Failure of trial of ≥2 antidepressants at adequate doses/duration = <b>treatment-resistant depression (TRD)</b>. Next step is augmentation, NOT monotherapy switching or ECT (though both may be considered).<br><br><b>Treatment-Resistant Depression definition:</b><br>• Failure to achieve remission after ≥2 adequate trials of different antidepressants<br>• Each trial: adequate dose × 4-6 weeks minimum<br>• ~30% of depressed patients have TRD<br><br><b>Management hierarchy for TRD:</b><br><br><b>Step 1: Optimize current therapy</b><br>• Ensure adequate dose (not subtherapeutic)<br>• Ensure adequate duration (6-8 weeks minimum)<br>• Address adherence, substance use, medical comorbidities<br><br><b>Step 2: Switch to different antidepressant class</b><br>• Tried 2 SSRIs → try different class (SNRI, bupropion, TCA)<br>• Each new trial: 4-6 weeks duration<br><br><b>Step 3: AUGMENTATION (preferred for TRD)</b><br>• Add to current antidepressant (don't switch):<br>  → <b>Aripiprazole</b> (atypical antipsychotic) — FDA-approved augmentation for depression<br>  → <b>Bupropion</b> (if on SSRI/SNRI) — complementary mechanism<br>  → Lithium — augmentation at subtherapeutic doses<br>  → T3 thyroid hormone (even if euthyroid)<br>  → Mirtazapine<br><br><b>Step 4: Combination antidepressants</b><br>• SSRI + bupropion (complimentary mechanisms)<br>• SSRI + mirtazapine<br>• Other combinations (less common)<br><br><b>Step 5: Advanced treatments</b><br>• <b>Electroconvulsive therapy (ECT):</b> Gold standard for severe/psychotic depression, high suicide risk, or TRD<br>  → Most rapid response (days-weeks)<br>  → Temporary cognitive impairment common<br>• Transcranial magnetic stimulation (TMS)<br>• Ketamine/esketamine — FDA-approved for treatment-resistant depression (rapid onset)<br>• Psychotherapy (CBT + pharmacotherapy synergistic)<br><br><b>Why NOT increase bupropion?</b><br>• Already at max dose likely (450 mg/day)\n• Dose optimization alone insufficient for TRD<br>• Need different mechanism<br><br><b>Augmentation with aripiprazole specifics:</b><br>• Start 2-5 mg daily, titrate to 5-15 mg/day<br>• Response seen within 1-2 weeks\n• Monotherapy depression + anxiety → aripiprazole-SSRI particularly effective<br>• Monitor for akathisia (especially early)"
+      },
+      {
+        q: "A 42-year-old female with generalized anxiety disorder has been on sertraline 150 mg/day for 3 months with partial response. She reports persistent worry, muscle tension, and sleep disturbance. What is the most appropriate medication to add?",
+        options: ["Increase sertraline to 200 mg", "Add buspirone", "Add benzodiazepine (alprazolam)", "Add hydroxyzine"],
+        correct: 1,
+        explanation: "<b>Answer: Add Buspiron</b><br><br>Partial response to SSRI in GAD + symptomatic anxiety = augment with <b>buspirone</b> (azapirone) — a non-addictive, non-sedating anxiolytic with synergistic effects when combined with SSRIs.<br><br><b>Generalized Anxiety Disorder (GAD):</b><br>• Persistent worry >6 months + ≥3 symptoms:<br>  → Restlessness, fatigue, concentration difficulty, irritability, muscle tension, sleep disturbance<br>• Functional impairment in social/occupational domains<br><br><b>First-line pharmacotherapy for GAD:</b><br>1. <b>SSRIs</b> (paroxetine, sertraline) — most evidence\n2. <b>SNRIs</b> (venlafaxine, duloxetine) — also very effective<br>3. Tricyclic antidepressants (imipramine) — older option<br>4. Pregabalin — FDA-approved<br><br><b>Partial response management:</b><br>• Adequate dose reached (sertraline 150 = therapeutic)\n• Allow 3-6 weeks before concluding inadequate response ✓ (given 3 months)\n• Next step: AUGMENTATION (not dose increase)\n<br><b>Augmentation options for GAD on SSRI:</b><br><br>1. <b>Buspirone</b> (best choice here)<br>   • Azapirone anxiolytic<br>   • Non-addictive, non-sedating<br>   • No dependence potential<br>   • Start 15 mg/day (divided), titrate to 30-60 mg/day<br>   • Takes 2-4 weeks for full effect<br>   • Synergistic with SSRIs<br>   • Safe for long-term use<br><br>2. <b>Hydroxyzine</b><br>   • Antihistamine with anxiolytic properties<br>   • Sedating (good for sleep component)<br>   • Can use short-term or long-term<br>   • 25-100 mg/day divided<br>   • Less evidence than buspirone for augmentation<br><br>3. <b>Benzodiazepines</b> (NOT first-line for augmentation)<br>   • Alprazolam, lorazepam, clonazepam<br>   • Effective but:<br>     → High dependence/abuse potential<br>     → Cognitive impairment, falls, overdose risk<br>     → Tolerance develops<br>   • Reserve for acute anxiety, short-term (2-4 weeks), NOT long-term augmentation<br>   • Avoid with depression (suicide risk)\n<br><b>Why NOT increase sertraline?</b><br>• Already at therapeutic dose<br>• Dose response plateau reached<br>• Additional increments unlikely to provide benefit<br>• Risks increasing side effects (sexual dysfunction, SIADH)<br><br><b>Psychotherapy:</b><br>• Cognitive-behavioral therapy (CBT) — first-line, synergistic with pharmacotherapy<br>• Acceptance and commitment therapy (ACT)<br>• Mindfulness-based interventions<br><br><b>Prognosis with combined pharmacotherapy + psychotherapy:</b> >70% achieve significant anxiety reduction"
+      },
+      {
+        q: "A 19-year-old college student with recent-onset paranoid ideation, disorganized speech, and social withdrawal is brought to the ED by concerned roommates. This is his first psychotic episode. What is the initial management priority?",
+        options: ["Immediate antipsychotic medication", "Comprehensive medical/psychiatric evaluation", "Long-term hospitalization", "Psychotherapy alone"],
+        correct: 1,
+        explanation: "<b>Answer: Comprehensive Medical/Psychiatric Evaluation</b><br><br>First-episode psychosis (FEP) requires thorough assessment BEFORE antipsychotics to rule out medical/organic causes. Medical mimics of psychosis are critical to exclude first.<br><br><b>First-Episode Psychosis (FEP) definition:</b><br>• First appearance of psychotic symptoms<br>• May represent: Schizophrenia, bipolar disorder, major depression with psychosis, substance-induced, medical illness<br>• Early intervention improves long-term outcomes<br><br><b>Differential diagnosis in psychosis:</b><br><br><b>Primary psychiatric:</b><br>• Schizophrenia — hallucinations, delusions, disorganized speech, negative symptoms<br>• Bipolar disorder (manic psychosis) — psychosis + elevated/irritable mood<br>• Major depression with psychotic features — mood-congruent delusions<br>• Brief psychotic disorder — <1 month duration<br>• Schizoaffective disorder — psychosis + prominent mood symptoms<br><br><b>Substance-induced:</b><br>• Stimulants (cocaine, amphetamine, MDMA)<br>• Cannabis (especially high-potency THC)<br>• Hallucinogens (LSD, psilocybin)<br>• Alcohol withdrawal (visual hallucinations, tremor)<br><br><b>Medical causes (MUST EXCLUDE):</b><br>• Infections: Meningitis, encephalitis (HSV, West Nile), HIV, syphilis, TB<br>• Metabolic: Hypercalcemia, hyponatremia, hypoglycemia, thiamine deficiency<br>• Neurological: Temporal lobe epilepsy, stroke, tumor, TBI<br>• Autoimmune: NMDA receptor encephalitis, anti-GABA-B encephalitis, lupus cerebritis<br>• Toxins: Heavy metal exposure, carbon monoxide<br>• Medications: Steroids, stimulants, anticholinergics<br><br><b>Comprehensive evaluation includes:</b><br><br>1. <b>History:</b><br>   • Onset, progression, timeline<br>   • Substance use (cannabis most associated with FEP)<br>   • Family history of psychiatric illness<br>   • Medical/neurological history, medications<br>   • Recent stressors<br><br>2. <b>Mental status exam:</b><br>   • Appearance, behavior, affect<br>   • Speech (disorganized/coherent?)<br>   • Thought process, content (hallucinations, delusions)<br>   • Insight, judgment<br><br>3. <b>Physical examination:</b><br>   • Vital signs (fever suggests infection)<br>   • Neurological exam (focal deficits?)<br>   • Signs of substance use<br><br>4. <b>Laboratory workup:</b><br>   • CBC, CMP (glucose, calcium, sodium)<br>   • Liver/kidney function<br>   • Thyroid function (TSH)<br>   • RPR/FTA-ABS (syphilis)<br>   • HIV, TB testing (in endemic areas)<br>   • Urine drug screen<br>   • Ceruloplasmin (if age <40 — Wilson's disease)<br><br>5. <b>Neuroimaging:</b><br>   • MRI brain if:<br>     → Age <15 or >50 (unusual age for FEP)<br>     → Focal neurological signs<br>     → Atypical features (rapid onset, medical illness)\n     → Suspected organic cause<br><br>6. <b>EEG:</b><br>   • If suspected seizures, encephalitis, or atypical features<br><br><b>Management after exclusion of medical causes:</b><br><br>1. <b>Antipsychotics:</b><br>   • First-generation (typical): Haloperidol — high EPS risk<br>   • Second-generation (atypical): Risperidone, olanzapine, quetiapine, aripiprazole<br>   • Lower doses needed initially in FEP (more sensitive)<br>   • Gradual titration preferred<br><br>2. <b>Psychosocial interventions:</b><br>   • Cognitive-behavioral therapy for psychosis (CBTp)<br>   • Family psychoeducation<br>   • Substance abuse treatment if indicated<br>   • Social support/occupational rehabilitation<br><br>3. <b>Hospitalization:</b><br>   • Indicated if: Acute danger to self/others, unable to care for self, rapid deterioration<br>   • Short-term stabilization preferred (crisis vs extended)<br><br><b>Prognosis with early intervention:</b><br>• Functional recovery possible in 50% of FEP cases<br>• Earlier treatment onset → better outcomes<br>• Psychosocial support → improved long-term trajectories"
+      }
+    ]
+  },
+  dermatology: {
+    icon: "square",
+    color: "#ec4899",
+    questions: [
+      {
+        q: "A 45-year-old presents with a 3-month history of well-demarcated erythematous plaques with silvery scale on elbows, knees, and lower back. Lesions worsen in winter and improve in summer. What is the most likely diagnosis?",
+        options: ["Lichen planus", "Psoriasis", "Pityriasis rosea", "Seborrheic keratosis"],
+        correct: 1,
+        explanation: "<b>Answer: Psoriasis</b><br><br>Well-demarcated plaques with silvery scale + extensor surface involvement (elbows, knees) + seasonal variation (winter worse) = <b>Plaque psoriasis</b> — the most common form of psoriasis (85-90%).<br><br><b>Psoriasis epidemiology:</b><br>• Affects 2-3% of population worldwide<br>• Typically onset 20-40 years (bimodal: also peaks 50-60)<br>• Genetic predisposition + environmental triggers<br>• Triggers: Stress, infections (streptococcal), medications (beta-blockers, NSAIDs, lithium), trauma (Koebner phenomenon)<br><br><b>Clinical variants:</b><br><br>1. <b>Plaque psoriasis</b> (most common — this patient)<br>   • Well-demarcated erythematous plaques<br>   • Silvery-white scale (stratum corneum hyperkeratosis)<br>   • Auspitz sign: Scale removal → pinpoint bleeding<br>   • Commonly on extensor surfaces, scalp, nails<br><br>2. <b>Guttate psoriasis</b><br>   • Small tear-drop shaped papules<br>   • Often post-streptococcal infection<br>   • Better prognosis than plaque<br><br>3. <b>Inverse psoriasis</b><br>   • Intertriginous areas (axillae, groin, under breasts)<br>   • Less scale (maceration effect)<br>   • Difficult to treat<br><br>4. <b>Erythrodermic psoriasis</b><br>   • >75% body surface area involvement<br>   • Life-threatening (fluid loss, temperature regulation)<br>   • Medical emergency<br><br>5. <b>Pustular psoriasis</b><br>   • Localized (hands/feet) or generalized<br>   • Generalized = severe, requires hospitalization<br><br><b>Nail involvement (psoriatic nails):</b><br>• Onycholysis (separation from nail bed)<br>• Pitting (small depressions)<br>• Dystrophy, discoloration<br>• Occurs in ~50% of psoriasis patients<br><br><b>Associated conditions:</b><br>• <b>Psoriatic arthritis:</b> ~30% of patients<br>  → Asymmetric arthritis, dactylitis, spondylitis<br>  → Joint involvement may precede skin involvement<br>• Metabolic syndrome (obesity, DM, HTN)<br>• Cardiovascular disease (increased CV mortality)<br>• Depression/anxiety<br><br><b>Pathophysiology:</b><br>• T-cell mediated autoimmunity (not just hyperkeratosis)<br>• Th17 cells → IL-17, IL-23 production<br>• Keratinocyte hyperproliferation (epidermal turnover ↑ 28-fold)<br>• Dermal inflammation<br><br><b>Treatment ladder:</b><br><br><b>Mild-moderate (localized):</b><br>• Topical corticosteroids (clobetasol propionate 0.05%)<br>• Topical calcineurin inhibitors (tacrolimus, pimecrolimus) — for face/intertriginous areas<br>• Vitamin D analogs (calcipotriene)<br>• Tar preparations\n• Salicylic acid<br><br><b>Moderate-severe (extensive):</b><br>• Systemic corticosteroids (short-term only — rebound worse)<br>• Methotrexate — first-line systemic DMARD<br>• Acitretin (retinoid) — effective but teratogenic<br>• Cyclosporine — rapid response, used for severe flares<br><br><b>Biologic agents (TNF inhibitors, IL-17/IL-23 inhibitors):</b><br>• Infliximab, adalimumab (TNF inhibitors)<br>• Secukinumab, ixekizumab (IL-17 inhibitors) — excellent efficacy\n• Guselkumab (IL-23 inhibitor) — increasingly preferred\n• Reserve for moderate-severe disease unresponsive to conventional therapy<br><br><b>Photootherapy:</b><br>• UVB narrow-band (most effective)\n• PUVA (psoralen + UVA)\n• Especially for extensive disease<br><br><b>Prognosis:</b> Chronic relapsing course, usually controllable with appropriate therapy"
+      },
+      {
+        q: "A 28-year-old presents with violaceous papules and plaques on wrists, ankles, and lower legs with a lacy white pattern on the buccal mucosa. What is the most likely diagnosis?",
+        options: ["Pemphigus vulgaris", "Lichen planus", "Erythema multiforme", "Discoid lupus"],
+        correct: 1,
+        explanation: "<b>Answer: Lichen Planus</b><br><br>Violaceous papules + flexural distribution (wrists, ankles) + pathognomonic buccal mucosa findings (Wickham striae — lacy white pattern) = <b>Lichen Planus</b> — an autoimmune disorder of skin and mucosa.<br><br><b>Lichen Planus pathophysiology:</b><br>• CD8+ T-cell mediated attack on basal keratinocytes<br>• Interface dermatitis pattern<br>• Exact trigger unknown (associated with HCV in some populations)<br>• Also associated with: Medications (beta-blockers, NSAIDs, ACE inhibitors, antimalarials)<br><br><b>Cutaneous Lichen Planus:</b><br><b>Classic presentation (6 P's):</b><br>• <b>Purple</b> — violaceous/purple color<br>• <b>Papules/Plaques</b><br>• <b>Planar</b> — flat-topped<br>• <b>Pruritic</b> — intensely itchy<br>• <b>Polygonal</b> — angular borders<br>• <b>Planar</b> — at flexural sites (wrists, ankles, shins)<br><br><b>Distribution:</b><br>• Flexor wrists, inner forearms<br>• Anterior shins, ankles<br>• Genital area (can be severe)<br>• Lower back, abdomen<br><br><b>Histology (diagnostic):</b><br>• Band-like infiltrate of lymphocytes<br>• Basal cell damage/apoptosis<br>• Saw-tooth pattern of rete ridges (acanthosis)<br>• Direct immunofluorescence: Linear IgG + fibrin at basement membrane zone<br><br><b>Mucosal Lichen Planus:</b><br>• Buccal mucosa (most common) — Wickham striae (white lacy pattern)<br>• Erosive form painful, can affect eating<br>• Increased risk of oral squamous cell carcinoma (1-2%)<br>• Requires monitoring/biopsy if erosive<br><br><b>Lichen Planus Variants:</b><br><br>1. <b>Hypertrophic LP</b><br>   • Thick, warty plaques especially on shins<br>   • Most refractory to treatment<br><br>2. <b>Atrophic/Erosive LP</b><br>   • Loss of skin/mucosal surface<br>   • Painful, difficult to heal<br><br>3. <b>Bullous LP</b><br>   • Rare, blisters on LP lesions<br>   • Often severe<br><br>4. <b>Annular LP</b><br>   • Ring-shaped lesions<br>   • Often genital involvement<br><br>5. <b>Linear LP</b><br>   • Koebner phenomenon — lesions along lines of trauma<br><br><b>Associated conditions:</b><br>• Hepatitis C (especially in Mediterranean populations)<br>• Oral LP → malignant transformation risk 0.5-1%<br>• Scalp LP (lichen planopilaris) → scarring alopecia<br>• Nail LP → onychodystrophy, pterygium formation<br><br><b>Diagnosis:</b><br>• Clinical + skin biopsy (when diagnosis unclear)\br>• DIF (direct immunofluorescence) optional<br><br><b>Treatment:<br><br><b>Topical:</b><br>• Potent corticosteroids (clobetasol, fluocinonide) for cutaneous<br>• Intralesional corticosteroids for thick plaques<br>• Steroid-sparing: Tacrolimus, pimecrolimus for mucosa<br><br><b>Systemic:</b><br>• Oral corticosteroids (prednisone 0.5-1mg/kg × 6-12 weeks, then taper)<br>• Retinoids (acitretin, isotretinoin) — for severe refractory disease<br>• Immunosuppressants: Methotrexate, cyclosporine<br>• Mycophenolate mofetil<br><br><b>Adjuncts:</b><br>• Antihistamines for pruritus (hydroxyzine)<br>• UV light avoidance (can exacerbate)<br>• Careful oral care for erosive LP (soft toothbrush)<br>• Screening for oral malignancy if erosive\n<br><b>Prognosis:</b><br>• Cutaneous: Self-limited, ~50% resolve within 2 years<br>• Oral: More chronic, may persist years<br>• Relapses common<br>• With treatment, most achieve control"
+      },
+      {
+        q: "A 35-year-old presents with multiple painful fluid-filled vesicles in a dermatomal distribution on the left chest wall. He reports 3 days of severe burning pain preceding the rash. What is the treatment priority?",
+        options: ["Topical antibiotics to prevent infection", "Early antiviral therapy (acyclovir/valacyclovir)", "Supportive care with analgesics only", "Intramuscular corticosteroids"],
+        correct: 1,
+        explanation: "<b>Answer: Early Antiviral Therapy (Acyclovir/Valacyclovir)</b><br><br>Dermatomal vesicular rash + prodromal pain = <b>Herpes Zoster (Shingles)</b>. Early antiviral therapy (within 72 hours of rash onset) is critical to reduce severity, duration, and risk of post-herpetic neuralgia (PHN).<br><br><b>Herpes Zoster (HZ) epidemiology:</b><br>• Reactivation of latent varicella-zoster virus (VZV)<br>• Lifetime risk ~20-30%<br>• Risk increases with age (>50 years), immunosuppression<br>• More common: Thoracic (55%), trigeminal (20%), lumbosacral (15%)<br><br><b>Prodrome:</b><br>• Burning pain, paresthesia, pruritus (2-3 days before rash)<br>• Often mistaken for cardiac/abdominal/other pathology initially<br>• Dermatomal distribution is diagnostic clue<br><br><b>Acute HZ presentation:</b><br>• Clustered vesicles on erythematous base<br>• Dermatomal distribution (does NOT cross midline — key!)<br>• Severe pain (often worse than rash appearance suggests)<br>• Constitutional symptoms: Fever, malaise (usually mild)<br><br><b>Antiviral therapy (first-line):</b><br><br><b>First 72 hours (most critical window):</b><br>• <b>Acyclovir:</b> 800 mg 5× daily × 7-10 days<br>• <b>Valacyclovir:</b> 1000 mg 3× daily × 7 days (preferred — better bioavailability)<br>• <b>Famciclovir:</b> 500 mg 3× daily × 7 days (alternative)<br><br><b>Benefits of early antiviral therapy:</b><br>• Reduced rash severity<br>• Faster rash healing (by ~1 week)<br>• Reduced acute pain<br>• Decreased post-herpetic neuralgia (PHN) risk<br>  → Without treatment: 50% develop PHN<br>  → With antiviral: PHN risk halved<br>• Reduced viral dissemination<br>• Prevents complications (bacterial superinfection, meningitis)<br><br><b>Why delay is problematic:</b><br>• After 72 hours: Benefit diminishes rapidly<br>• Delay → higher PHN risk (can persist months-years)<br>• PHN significantly impacts quality of life<br><br><b>Post-Herpetic Neuralgia (PHN):</b><br>• Chronic neuropathic pain persisting >3 months after rash heals<br>• Risk factors: Age >50, severe acute pain, immunosuppression<br>• Management: Gabapentin, pregabalin, tricyclic antidepressants (amitriptyline), topical lidocaine<br>• Often difficult to treat, can persist years<br><br><b>Special considerations:</b><br><br><b>HZ ophthalmicus (trigeminal V1):</b><br>• High risk of ocular complications (keratitis, scleritis)<br>• Requires ophthalmology referral<br>• Aggressive antiviral therapy essential<br><br><b>HZ oticus (Ramsay Hunt syndrome):</b><br>• HZ involving facial nerve + external ear<br>• Facial paralysis, vesicles in ear canal<br>• Antiviral + corticosteroids recommended<br><br><b>Adjunctive therapy:</b><br>• Analgesics: NSAIDs, acetaminophen, opioids for severe pain<br>• Gabapentin (start 300 mg TID, titrate) — neuropathic pain relief<br>• Topical lidocaine patches for localized pain<br>• Avoid NSAIDs if signs of severe viral infection<br><br><b>Why NOT corticosteroids as primary therapy:</b><br>• Controversial — may reduce inflammation-related pain<br>• Evidence mixed, generally NOT recommended as sole therapy<br>• Only considered with antivirals in severe cases (especially age >50)<br>• Associated with higher dissemination risk without antivirals<br><br><b>Prevention:</b><br>• Zoster vaccine (Shingrix — recombinant) — recommended age ≥50<br>• ~90% effective at preventing HZ and PHN<br>• Safe for immunocompromised (unlike live vaccine, Zostavax)<br><br><b>Complications of untreated HZ:</b><br>• Post-herpetic neuralgia<br>• Secondary bacterial infection<br>• Meningitis/encephalitis (rare)<br>• Vision loss (if ophthalmicus)<br>• Facial paralysis (Ramsay Hunt)<br><br><b>Prognosis:</b> With early antiviral therapy, most recover well. Older patients at higher risk for PHN complications."
+      },
+      {
+        q: "A 52-year-old presents with a painless, non-mobile, irregularly shaped brown lesion on his back with 6mm diameter. The lesion has asymmetric borders, variable pigmentation (brown, black, tan), and surface irregularity. What is the most appropriate next step?",
+        options: ["Observation with monthly photography", "Dermoscopy and possible biopsy", "Topical corticosteroid", "Reassure patient it's benign"],
+        correct: 1,
+        explanation: "<b>Answer: Dermoscopy and Possible Biopsy</b><br><br>This lesion has ABCDE criteria concerning for <b>melanoma</b>: Asymmetry, Borders irregular, Color varied, Diameter >6mm. Early recognition and biopsy are critical for survival.<br><br><b>ABCDE Criteria for Melanoma Risk:</b><br><br>• <b>A – Asymmetry:</b> One half doesn't match the other ✓ (irregular shape)<br>• <b>B – Borders:</b> Irregular, notched, poorly defined ✓ (irregular borders)<br>• <b>C – Color:</b> Variation (brown, black, tan, red, blue) ✓ (variable pigmentation)<br>• <b>D – Diameter:</b> >6mm ✓ (6mm)<br>• <b>E – Evolution:</b> Changing size, shape, or color ⚠ (need to assess history)<br><br><b>Additional concerning features:</b><br>• Non-mobile (fixed) — suggests deep invasion<br>• Painless (most melanomas are)<br>• Surface irregularity (not smooth/uniform)<br><br><b>Epidemiology of melanoma:</b><br>• Most deadly skin cancer<br>• Incidence increasing (~3% annually)\n• Median age at diagnosis: 65 years<br>• Risk factors: UV exposure, fair skin, family history, atypical nevi syndrome<br><br><b>Melanoma subtypes:</b><br><br>1. <b>Superficial Spreading Melanoma (SSM)</b> — 70% of cases<br>   • Irregular, varied color, >1cm<br>   • Horizontal growth phase before vertical invasion<br>   • Better prognosis if caught early<br><br>2. <b>Nodular Melanoma</b> — 20%<br>   • Darker, more uniform color<br>   • Rapid vertical growth<br>   • Worst prognosis (usually thicker at diagnosis)<br><br>3. <b>Lentigo Maligna Melanoma</b> — 5%<br>   • Sun-exposed areas (face, ears)<br>   • Slow growth phase<br>   • Better prognosis than nodular<br><br>4. <b>Acral Lentiginous Melanoma (ALM)</b> — 5%<br>   • Palms, soles, nail beds<br>   • Most common in dark-skinned populations<br>   • Often diagnosed late (worse prognosis)<br><br><b>Diagnostic approach:</b><br><br>1. <b>Dermoscopy:</b><br>   • Non-invasive magnified examination<br>   • Can visualize subtle features not visible to naked eye<br>   • Feathered edges, pigmented networks, regression areas suggest melanoma<br>   • Increases diagnostic accuracy to ~90%<br><br>2. <b>Excisional biopsy (gold standard):</b><br>   • Complete removal with 1-2mm margins<br>   • Allows histopathologic examination<br>   • Staging of primary tumor<br>   • Provides complete histologic information<br><br>3. <b>Alternative: Punch or shave biopsy</b><br>   • If lesion very large or problematic location<br>   • Less ideal (may not capture full thickness)\n   • Not recommended for suspected melanoma if possible<br><br><b>Histologic staging (Breslow thickness):</b><br>• <b>In situ:</b> Confined to epidermis — 99% 5-year survival<br>• <b>≤1.0mm:</b> Thin, Stage IA — ~95% survival<br>• <b>1.0-2.0mm:</b> Intermediate, Stage IB-IIA — 80-90% survival<br>• <b>2.0-4.0mm:</b> Thick, Stage IIB-IIC — 60-75% survival<br>• <b>>4.0mm:</b> Very thick, Stage III-IV — 40% survival, high recurrence<br><br><b>Management after diagnosis:</b><br><br>• <b>Stage I-II (localized):</b><br>  → Wide excision (margins based on thickness: 1cm for <2mm, 2cm for >2mm)<br>  → Sentinel lymph node biopsy for ≥1mm thickness<br>  → Follow-up surveillance (every 3 months initially)<br><br>• <b>Stage III (regional lymph node involvement):</b><br>  → Complete lymphadenectomy<br>  → Adjuvant immunotherapy (nivolumab, pembrolizumab)\br>  → Interferon-α or B-RAF inhibitors if specific mutations<br><br>• <b>Stage IV (metastatic):</b><br>  → Immunotherapy (anti-PD-1: pembrolizumab, nivolumab)<br>  → Targeted therapy if B-RAF V600E mutation (vemurafenib, dabrafenib)<br>  → Combination approaches increasingly effective<br>  → 5-year survival still ~20%<br><br><b>Prevention:</b><br>• UV protection: Sunscreen SPF ≥30, protective clothing<br>• Avoid tanning beds<br>• Self-examination monthly (skin self-awareness)<br>• Dermatology screening annually for high-risk individuals<br><br><b>Prognosis factors:</b><br>• Thickness (Breslow) — most important<br>• Ulceration (worse prognosis)<br>• Mitotic rate (more mitoses = worse)<br>• Lymphocyte infiltration (good prognostic sign)<br>• Mutation status (B-RAF, NRAS, KIT)\n<br><b>Why NOT reassurance?</b><br>• Multiple ABCDE criteria present<br>• Early diagnosis dramatically improves survival (>95% for thin melanomas)<br>• Delayed diagnosis → worse outcomes<br>• Biopsy is relatively simple, can be done in office"
+      }
+    ]
+  }
+};
+
+// ─── APP STATE ───
+let currentSubject = null;
+let currentQuestions = [];
+let currentIndex = 0;
+let selectedAnswer = null;
+let answered = false;
+let sessionStats = { total: 0, correct: 0 };
+let questionStates = [];
+
+const defaultConfig = {
+  app_title: "Medical MCQ Pro",
+  subtitle_text: "MBBS & MD Exam Preparation",
+  background_color: "#0c0f1a",
+  surface_color: "#1a1d2e",
+  text_color: "#f3f4f6",
+  primary_color: "#7c3aed",
+  accent_color: "#c084fc",
+  font_family: "DM Sans",
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const app = document.getElementById('app');
+  app.style.background = c.background_color;
+
+  const t = document.getElementById('appTitle');
+  const s = document.getElementById('appSubtitle');
+  if (t) t.textContent = c.app_title;
+  if (s) s.textContent = c.subtitle_text;
+
+  document.querySelectorAll('[data-surface]').forEach(el => el.style.background = c.surface_color);
+
+  const font = `${c.font_family}, DM Sans, sans-serif`;
+  document.body.style.fontFamily = font;
+
+  document.querySelectorAll('[data-text]').forEach(el => el.style.color = c.text_color);
+}
+
+// ─── SHUFFLE ───
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function shuffleQuestionsAndOptions() {
+  currentQuestions = currentQuestions.map(q => {
+    const correctOption = q.options[q.correct];
+    const shuffled = shuffle(q.options);
+    return { ...q, options: shuffled, correct: shuffled.indexOf(correctOption) };
+  });
+  currentQuestions = shuffle(currentQuestions);
+  questionStates = currentQuestions.map(() => ({ selected: null, answered: false }));
+  currentIndex = 0;
+  renderQuestion();
+}
+
+// ─── RENDER ───
+function renderSubjects() {
+  const grid = document.getElementById('subjectGrid');
+  grid.innerHTML = '';
+  let total = 0;
+  Object.entries(subjects).forEach(([key, sub]) => {
+    total += sub.questions.length;
+    const card = document.createElement('button');
+    card.className = 'option-btn flex items-center gap-4 p-4 rounded-xl text-left w-full';
+    card.style.cssText = `background:#1a1d2e; border:1px solid #252a3a;`;
+    card.innerHTML = `
+      <div class="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0" style="background:${sub.color}20;">
+        <i data-lucide="${sub.icon}" style="width:22px;height:22px;color:${sub.color};"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="text-white font-semibold text-sm capitalize">${key}</div>
+        <div class="text-gray-500 text-xs">${sub.questions.length} questions</div>
+      </div>
+      <i data-lucide="chevron-right" style="width:18px;height:18px;color:#4b5563;"></i>
+    `;
+    card.onclick = () => startQuiz(key);
+    grid.appendChild(card);
+  });
+  document.getElementById('statTotal').textContent = total;
+  lucide.createIcons();
+}
+
+function startQuiz(subjectKey) {
+  currentSubject = subjectKey;
+  const sub = subjects[subjectKey];
+  currentQuestions = sub.questions.map(q => {
+    const correctOpt = q.options[q.correct];
+    const shuffled = shuffle(q.options);
+    return { ...q, options: shuffled, correct: shuffled.indexOf(correctOpt) };
+  });
+  currentQuestions = shuffle(currentQuestions);
+  questionStates = currentQuestions.map(() => ({ selected: null, answered: false }));
+  currentIndex = 0;
+
+  document.getElementById('homeScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+  document.getElementById('quizScreen').style.display = 'flex';
+  document.getElementById('quizSubjectLabel').textContent = subjectKey.charAt(0).toUpperCase() + subjectKey.slice(1);
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = currentQuestions[currentIndex];
+  const state = questionStates[currentIndex];
+
+  document.getElementById('qNumber').textContent = `Question ${currentIndex + 1} of ${currentQuestions.length}`;
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('quizProgress').textContent = `${currentIndex + 1}/${currentQuestions.length}`;
+  document.getElementById('progressBar').style.width = `${((currentIndex + 1) / currentQuestions.length) * 100}%`;
+
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+
+  const letters = ['A', 'B', 'C', 'D'];
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn w-full flex items-center gap-3 p-4 rounded-xl text-left text-sm';
+    let bg = '#1a1d2e'; let border = '#252a3a'; let textColor = '#e5e7eb';
+
+    if (state.answered) {
+      if (i === q.correct) { btn.classList.add('correct-answer'); bg = '#065f46'; border = '#059669'; textColor = '#fff'; }
+      else if (i === state.selected && i !== q.correct) { btn.classList.add('wrong-answer'); bg = '#7f1d1d'; border = '#dc2626'; textColor = '#fff'; }
+    } else if (state.selected === i) {
+      bg = '#2d1f5e'; border = '#7c3aed'; textColor = '#fff';
+    }
+
+    btn.style.cssText = `background:${bg}; border:1px solid ${border}; color:${textColor};`;
+    btn.innerHTML = `<span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:${state.answered && i === q.correct ? '#059669' : state.answered && i === state.selected ? '#dc2626' : '#252a3a'}; color:#fff;">${letters[i]}</span><span class="flex-1">${opt}</span>`;
+
+    if (!state.answered) {
+      btn.onclick = () => selectOption(i);
+    }
+    container.appendChild(btn);
+  });
+
+  const expBox = document.getElementById('explanationBox');
+  if (state.answered) {
+    expBox.classList.remove('hidden');
+    document.getElementById('explanationText').innerHTML = q.explanation;
+  } else {
+    expBox.classList.add('hidden');
+  }
+
+  document.getElementById('prevBtn').style.opacity = currentIndex === 0 ? '0.4' : '1';
+  document.getElementById('prevBtn').style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+
+  const nextBtn = document.getElementById('nextBtn');
+  if (currentIndex === currentQuestions.length - 1 && state.answered) {
+    nextBtn.innerHTML = 'Finish <i data-lucide="flag" style="width:16px;height:16px;"></i>';
+  } else {
+    nextBtn.innerHTML = 'Next <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>';
+  }
+
+  document.getElementById('questionArea').classList.remove('fade-in');
+  void document.getElementById('questionArea').offsetWidth;
+  document.getElementById('questionArea').classList.add('fade-in');
+  lucide.createIcons();
+}
+
+function selectOption(i) {
+  const state = questionStates[currentIndex];
+  if (state.answered) return;
+
+  state.selected = i;
+  state.answered = true;
+
+  sessionStats.total++;
+  if (i === currentQuestions[currentIndex].correct) sessionStats.correct++;
+
+  document.getElementById('statTotal').textContent = sessionStats.total;
+  document.getElementById('statCorrect').textContent = sessionStats.correct;
+  document.getElementById('statAccuracy').textContent = sessionStats.total > 0 ? Math.round((sessionStats.correct / sessionStats.total) * 100) + '%' : '—';
+
+  renderQuestion();
+}
+
+function goNext() {
+  const state = questionStates[currentIndex];
+  if (!state.answered) {
+    // flash hint
+    document.getElementById('optionsContainer').style.outline = '2px solid #7c3aed';
+    setTimeout(() => document.getElementById('optionsContainer').style.outline = 'none', 600);
+    return;
+  }
+  if (currentIndex < currentQuestions.length - 1) {
+    currentIndex++;
+    renderQuestion();
+    document.getElementById('quizScreen').scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    showResults();
+  }
+}
+
+function goPrev() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderQuestion();
+    document.getElementById('quizScreen').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function showResults() {
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  document.getElementById('resultScreen').style.display = 'flex';
+
+  const correct = questionStates.filter((s, i) => s.selected === currentQuestions[i].correct).length;
+  const wrong = currentQuestions.length - correct;
+  const pct = Math.round((correct / currentQuestions.length) * 100);
+
+  document.getElementById('resultSubject').textContent = currentSubject.charAt(0).toUpperCase() + currentSubject.slice(1);
+  document.getElementById('resCorrect').textContent = correct;
+  document.getElementById('resWrong').textContent = wrong;
+  document.getElementById('resPercent').textContent = pct + '%';
+  lucide.createIcons();
+}
+
+function goHome() {
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('quizScreen').style.display = '';
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('resultScreen').style.display = '';
+  document.getElementById('homeScreen').classList.remove('hidden');
+  renderSubjects();
+}
+
+// ─── EVENTS ───
+document.getElementById('backBtn').onclick = goHome;
+document.getElementById('prevBtn').onclick = goPrev;
+document.getElementById('nextBtn').onclick = goNext;
+document.getElementById('shuffleBtn').onclick = shuffleQuestionsAndOptions;
+document.getElementById('retryBtn').onclick = () => { goHome(); startQuiz(currentSubject); };
+document.getElementById('homeBtn').onclick = goHome;
+
+// ─── INIT ───
+renderSubjects();
+
+</script>
+</body>
+</html>
