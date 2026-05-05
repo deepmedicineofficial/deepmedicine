@@ -1,0 +1,691 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Nephrology | Kidney Diseases & Renal Care | Deep Medicine</title> <meta name="description" content="Comprehensive nephrology guide covering kidney diseases, acute kidney injury, chronic kidney disease, electrolyte disorders, and renal management."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/nephrology"> <!-- Open Graph --> <meta property="og:title" content="Nephrology | Deep Medicine"> <meta property="og:description" content="Kidney diseases, electrolyte imbalance, and renal clinical management guide."> <meta property="og:image" content="https://deepmedicine.in/images/nephrology.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['Source Sans 3', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .app-shell { height: 100%; overflow: auto; }
+    .disease-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .disease-card:hover { transform: translateY(-2px); }
+    .tab-btn.active { border-bottom: 3px solid currentColor; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .accordion-content.open { max-height: 8000px; }
+    .fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .sidebar-open { transform: translateX(0); }
+    .sidebar-closed { transform: translateX(-100%); }
+    .overlay { background: rgba(0,0,0,0.5); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-shell bg-gray-950 text-gray-100 font-body" id="app"><!-- Mobile Nav Toggle --> <button id="menuToggle" class="fixed top-4 left-4 z-50 lg:hidden bg-gray-800 p-2 rounded-lg border border-gray-700" onclick="toggleSidebar()"> <i data-lucide="menu" class="w-5 h-5"></i> </button> <!-- Mobile Overlay -->
+   <div id="overlay" class="fixed inset-0 z-30 overlay hidden lg:hidden" onclick="toggleSidebar()"></div>
+   <div class="flex h-full"><!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed lg:static z-40 w-72 h-full bg-gray-900 border-r border-gray-800 overflow-y-auto sidebar-closed lg:transform-none transition-transform duration-300 flex-shrink-0">
+     <div class="p-6">
+      <div class="flex items-center gap-3 mb-2">
+       <div class="w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center"><i data-lucide="activity" class="w-5 h-5 text-white"></i>
+       </div>
+       <div>
+        <h1 id="sidebarTitle" class="font-heading text-lg text-emerald-400">Nephrology</h1>
+        <p class="text-xs text-gray-500">Clinical Reference</p>
+       </div>
+      </div>
+     </div>
+     <nav class="px-4 pb-6">
+      <p class="text-[11px] uppercase tracking-wider text-gray-500 px-3 mb-2 font-semibold">Disease Categories</p>
+      <ul id="navList" class="space-y-1"></ul>
+     </nav>
+    </aside><!-- Main Content -->
+    <main class="flex-1 overflow-y-auto" id="mainContent"><!-- Hero -->
+     <header class="relative px-6 md:px-12 pt-16 pb-12 lg:pt-12 border-b border-gray-800 bg-gradient-to-br from-gray-950 via-gray-900 to-emerald-950">
+      <div class="max-w-4xl">
+       <h1 id="mainTitle" class="font-heading text-3xl md:text-4xl lg:text-5xl text-white mb-3">Nephrology Diseases</h1>
+       <p id="mainSubtitle" class="text-gray-400 text-lg md:text-xl font-light">Evidence-Based Clinical Compendium for MBBS/MD Practice</p>
+       <div class="flex flex-wrap gap-3 mt-6"><span class="text-xs bg-emerald-900/50 text-emerald-300 px-3 py-1 rounded-full border border-emerald-800">Harrison's Principles</span> <span class="text-xs bg-emerald-900/50 text-emerald-300 px-3 py-1 rounded-full border border-emerald-800">KDIGO Guidelines</span> <span class="text-xs bg-emerald-900/50 text-emerald-300 px-3 py-1 rounded-full border border-emerald-800">Brenner &amp; Rector's</span>
+       </div>
+      </div>
+     </header><!-- Search -->
+     <div class="px-6 md:px-12 py-4 border-b border-gray-800 bg-gray-900/50 sticky top-0 z-20">
+      <div class="relative max-w-md"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"></i> <input type="text" id="searchInput" placeholder="Search diseases, symptoms, investigations..." class="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600" oninput="filterDiseases(this.value)">
+      </div>
+     </div><!-- Disease Content -->
+     <div id="diseaseContent" class="px-6 md:px-12 py-8 max-w-5xl"></div>
+    </main>
+   </div>
+  </div>
+  <script>
+// Disease Database - Clinically Accurate Nephrology Reference
+const diseases = [
+  {
+    category: "Glomerular Diseases",
+    icon: "circle-dot",
+    items: [
+      {
+        name: "Nephrotic Syndrome",
+        definition: "Clinical syndrome characterized by heavy proteinuria (>3.5 g/day in adults, >40 mg/m²/hr in children), hypoalbuminemia (<3 g/dL), generalized edema, hyperlipidemia, and lipiduria.",
+        etiology: [
+          "<strong>Primary (Idiopathic):</strong> Minimal Change Disease (most common in children), Focal Segmental Glomerulosclerosis (FSGS – most common in adults/African Americans), Membranous Nephropathy (most common cause in Caucasian adults), Membranoproliferative GN (MPGN)",
+          "<strong>Secondary:</strong> Diabetic nephropathy, SLE (Class V), Amyloidosis (AL/AA), Infections (HIV – collapsing FSGS, HBV – membranous, HCV – MPGN), Drugs (NSAIDs – MCD, Gold/Penicillamine – membranous), Malignancy (solid tumors – membranous, lymphoma – MCD)"
+        ],
+        pathophysiology: "Loss of glomerular charge barrier (polyanion loss) and/or size barrier → massive proteinuria → hypoalbuminemia → decreased oncotic pressure → edema (underfill theory). Also primary Na⁺ retention in collecting duct (overfill theory). Liver compensatory lipoprotein synthesis → hyperlipidemia. Loss of antithrombin III, protein C/S → hypercoagulable state. Loss of immunoglobulins → infection susceptibility.",
+        clinical: [
+          "Periorbital edema (morning, dependent), anasarca, ascites, pleural effusion",
+          "Frothy urine (lipiduria – Maltese cross under polarized light)",
+          "Xanthelasma, tendon xanthomas (chronic hyperlipidemia)",
+          "Complications: DVT/renal vein thrombosis (especially membranous), spontaneous bacterial peritonitis (children – S. pneumoniae), acute kidney injury, accelerated atherosclerosis"
+        ],
+        investigations: [
+          "Urine: 24hr protein >3.5g/day or spot PCR >3.5; oval fat bodies, fatty casts, Maltese crosses",
+          "Blood: Hypoalbuminemia, hyperlipidemia (↑ cholesterol, ↑ LDL, ↑ triglycerides), ↑ ESR",
+          "Serology: ANA, anti-dsDNA, C3/C4, HBsAg, anti-HCV, HIV, SPEP/UPEP",
+          "Renal biopsy: Indicated in adults; children – empirical steroid trial first (MCD presumed)",
+          "Renal vein Doppler: If suspected renal vein thrombosis"
+        ],
+        treatment: [
+          "<strong>General:</strong> Salt restriction (<2g/day), fluid restriction if severe hyponatremia, ACEi/ARB (reduce proteinuria), statins, diuretics (loop ± thiazide for resistant edema), anticoagulation if albumin <2g/dL or documented thrombosis",
+          "<strong>MCD:</strong> Prednisolone 1mg/kg/day × 4-8 weeks then taper (>90% remission in children). Relapsers → cyclophosphamide, calcineurin inhibitors, rituximab",
+          "<strong>FSGS:</strong> Prolonged steroids (16 weeks), calcineurin inhibitors (cyclosporine/tacrolimus) for steroid-resistant. High recurrence post-transplant (collapsing variant worst prognosis)",
+          "<strong>Membranous:</strong> Observe if low-risk. Moderate/high-risk → Rituximab (first-line per KDIGO 2021) or cyclophosphamide + steroids (Ponticelli regimen). Monitor anti-PLA2R antibodies",
+          "<strong>MPGN:</strong> Treat underlying cause. C3 glomerulopathy → complement-targeted therapy (eculizumab)"
+        ],
+        prognosis: "MCD: Excellent (rarely progresses to ESRD). FSGS: 50% progress to ESRD within 10 years if untreated. Membranous: Rule of thirds (⅓ spontaneous remission, ⅓ persistent proteinuria, ⅓ progress to ESRD). MPGN: Generally poor without treatment."
+      },
+      {
+        name: "Nephritic Syndrome",
+        definition: "Inflammatory glomerular disease presenting with hematuria (RBC casts – pathognomonic), sub-nephrotic proteinuria (<3.5g/day), hypertension, oliguria, and azotemia (elevated creatinine/BUN). Represents glomerular basement membrane disruption.",
+        etiology: [
+          "<strong>Post-Infectious GN (PIGN):</strong> Post-streptococcal (Group A β-hemolytic, nephritogenic strains M types 1,2,4,12,49). Latent period: 1-3 weeks (pharyngitis) or 3-6 weeks (skin). Also post-staphylococcal, endocarditis-associated",
+          "<strong>IgA Nephropathy (Berger's Disease):</strong> Most common GN worldwide. Synpharyngitic hematuria (within 1-2 days of URTI – no latent period). Mesangial IgA deposits",
+          "<strong>Rapidly Progressive GN (RPGN/Crescentic):</strong> Type I – Anti-GBM (Goodpasture's if pulmonary involvement); Type II – Immune complex (SLE, IgA, PIGN); Type III – Pauci-immune (ANCA-associated: GPA, MPA, EGPA)",
+          "<strong>Lupus Nephritis:</strong> Class III (focal), Class IV (diffuse – most common/severe), Class V (membranous)",
+          "<strong>Others:</strong> Alport syndrome (hereditary, COL4A3/4/5 mutations), Thin basement membrane disease, C3 glomerulopathy"
+        ],
+        pathophysiology: "Inflammatory cell infiltration of glomerulus → GBM disruption → RBC leakage into Bowman's space (dysmorphic RBCs, RBC casts). Reduced GFR → oliguria, azotemia. Salt/water retention → hypertension, edema. In RPGN: epithelial cell proliferation + monocyte infiltration → crescent formation (>50% glomeruli = rapidly progressive).",
+        clinical: [
+          "Gross/microscopic hematuria (tea/cola-colored urine), RBC casts on microscopy",
+          "Hypertension (volume-dependent), periorbital/pedal edema",
+          "Oliguria, rising creatinine (days to weeks in RPGN)",
+          "PSGN: 1-3 week latent period after pharyngitis; 3-6 weeks after impetigo",
+          "IgA nephropathy: Episodic gross hematuria concurrent with URTI (synpharyngitic)",
+          "Goodpasture's: Hemoptysis + hematuria (pulmonary-renal syndrome)",
+          "ANCA vasculitis: Constitutional symptoms, purpura, sinusitis, mononeuritis multiplex"
+        ],
+        investigations: [
+          "Urine: Dysmorphic RBCs, RBC casts (pathognomonic), mild-moderate proteinuria, ↑ urine specific gravity",
+          "Blood: ↑ Creatinine, ↑ BUN, ↓ GFR, ± anemia",
+          "PSGN: ↑ ASO titer (pharyngitis), ↑ anti-DNase B (skin), ↓ C3 (returns normal 6-8 weeks), normal C4",
+          "IgA: ↑ Serum IgA (50%), normal complement. Biopsy: mesangial IgA on IF",
+          "RPGN workup: Anti-GBM Ab, ANCA (c-ANCA/PR3 for GPA, p-ANCA/MPO for MPA), ANA, anti-dsDNA, C3/C4",
+          "Renal biopsy: Essential for RPGN. Light microscopy: crescents. IF pattern diagnostic",
+          "Imaging: Renal ultrasound (normal-sized kidneys in acute GN)"
+        ],
+        treatment: [
+          "<strong>PSGN:</strong> Supportive (self-limiting in children). Salt/fluid restriction, loop diuretics, antihypertensives. Antibiotics do NOT prevent but eradicate nephritogenic strain. Adults may have incomplete recovery",
+          "<strong>IgA Nephropathy:</strong> ACEi/ARB (proteinuria <1g target). If proteinuria >1g despite RAS blockade → corticosteroids (TESTING/STOP-IgAN trials support targeted-release budesonide – Nefecon). Omega-3 fatty acids. Tonsillectomy in Japan",
+          "<strong>RPGN – Anti-GBM:</strong> Plasmapheresis + cyclophosphamide + steroids. Emergent treatment (irreversible after 2 weeks of anuria)",
+          "<strong>RPGN – ANCA:</strong> Induction: Rituximab or cyclophosphamide + steroids + plasmapheresis (if severe/DAH). Maintenance: Rituximab (superior to azathioprine per MAINRITSAN). Avacopan (complement C5a inhibitor) as steroid-sparing",
+          "<strong>Lupus Nephritis (III/IV):</strong> Induction: Mycophenolate or cyclophosphamide + steroids ± belimumab/voclosporin. Maintenance: Mycophenolate + low-dose steroids"
+        ],
+        prognosis: "PSGN: >95% children recover fully; adults 60% full recovery. IgA: 20-40% progress to ESRD over 20 years (Oxford MEST-C score predicts). Anti-GBM: Prognosis depends on creatinine at presentation (>5.7 mg/dL or dialysis-dependent = poor renal survival). ANCA: 80% respond to induction; 50% relapse within 5 years."
+      },
+      {
+        name: "Diabetic Nephropathy",
+        definition: "Progressive kidney disease in diabetes mellitus characterized by persistent albuminuria (UACR ≥30 mg/g on ≥2 of 3 specimens over 3-6 months), declining GFR, and hypertension. Leading cause of ESRD worldwide.",
+        etiology: [
+          "<strong>Type 1 DM:</strong> Develops 10-15 years after onset. Rarely before 5 years of diabetes. Histological changes present by 2 years",
+          "<strong>Type 2 DM:</strong> May be present at diagnosis (due to unrecognized disease duration). Most common cause of ESRD in developed countries",
+          "<strong>Risk factors:</strong> Poor glycemic control, hypertension, smoking, dyslipidemia, genetic susceptibility, high dietary protein, obesity, male sex, family history of nephropathy"
+        ],
+        pathophysiology: "Hyperglycemia → advanced glycation end-products (AGEs), PKC activation, polyol pathway, oxidative stress → mesangial expansion, GBM thickening, podocyte injury. Early: Glomerular hyperfiltration (↑ GFR >140) due to afferent arteriolar dilation. Progressive: Kimmelstiel-Wilson nodular glomerulosclerosis (pathognomonic), diffuse mesangial sclerosis, arteriolar hyalinosis (afferent AND efferent – characteristic of DM). Tubulointerstitial fibrosis in advanced disease.",
+        clinical: [
+          "Stage 1: Hyperfiltration (GFR >140), renal hypertrophy – clinically silent",
+          "Stage 2: Silent phase – GBM thickening, mesangial expansion, normoalbuminuria",
+          "Stage 3: Incipient nephropathy – microalbuminuria (UACR 30-300 mg/g), rising BP",
+          "Stage 4: Overt nephropathy – macroalbuminuria (UACR >300), hypertension, declining GFR",
+          "Stage 5: ESRD – GFR <15, uremic symptoms, need for RRT",
+          "Associated findings: Diabetic retinopathy (almost always concurrent in Type 1 – absence suggests alternate diagnosis), peripheral neuropathy, peripheral vascular disease"
+        ],
+        investigations: [
+          "Urine: UACR (spot morning sample preferred). Moderately increased: 30-300 mg/g; Severely increased: >300 mg/g. Confirm on 2/3 samples over 3-6 months",
+          "Blood: HbA1c, eGFR (CKD-EPI equation), lipid profile, serum creatinine",
+          "Exclude other causes: Urine sediment (should be bland – no RBC casts), fundoscopy (retinopathy expected), renal ultrasound (kidneys initially large, then normal/small)",
+          "Renal biopsy indications: Atypical features (active sediment, rapid GFR decline without proportionate proteinuria, absence of retinopathy in Type 1, <5 years diabetes duration in Type 1, systemic disease features)"
+        ],
+        treatment: [
+          "<strong>Glycemic control:</strong> HbA1c <7% (individualized). SGLT2 inhibitors (dapagliflozin, empagliflozin, canagliflozin) – FIRST-LINE regardless of HbA1c for renal protection (DAPA-CKD, CREDENCE, EMPA-KIDNEY trials). Reduce ESRD risk 30-40%",
+          "<strong>BP control:</strong> Target <130/80. ACEi or ARB first-line (reduce proteinuria, slow progression). Do NOT combine ACEi + ARB (ONTARGET). Titrate to maximum tolerated dose",
+          "<strong>Finerenone:</strong> Non-steroidal MRA. FIDELIO-DKD/FIGARO-DKD trials – additional 18% reduction in kidney outcomes on top of RAS blockade. Indicated for T2DM with albuminuria on max ACEi/ARB",
+          "<strong>GLP-1 receptor agonists:</strong> Semaglutide, liraglutide – cardiovascular and renal benefits (FLOW trial for semaglutide)",
+          "<strong>Lipid management:</strong> Statin for all diabetics with CKD (high CV risk)",
+          "<strong>Lifestyle:</strong> Dietary protein 0.8 g/kg/day if GFR <60, sodium <2g/day, smoking cessation, weight management",
+          "<strong>Monitoring:</strong> Annual UACR + eGFR screening from diagnosis (Type 2) or after 5 years (Type 1)"
+        ],
+        prognosis: "Without treatment: ~80% with microalbuminuria progress to overt nephropathy within 10-15 years, then ESRD within 5-7 years. With modern therapy (SGLT2i + RAS blockade + finerenone): Progression significantly slowed. SGLT2i reduce dialysis/transplant/renal death by 30-40%."
+      }
+    ]
+  },
+  {
+    category: "Tubular & Interstitial",
+    icon: "git-branch",
+    items: [
+      {
+        name: "Acute Kidney Injury (AKI)",
+        definition: "Abrupt decline in kidney function defined by KDIGO criteria: Rise in serum creatinine ≥0.3 mg/dL within 48 hours, OR ≥1.5× baseline within 7 days, OR urine output <0.5 mL/kg/h for ≥6 hours. Staged 1-3 by severity.",
+        etiology: [
+          "<strong>Pre-renal (60-70%):</strong> Hypovolemia (hemorrhage, dehydration, burns), decreased cardiac output (CHF, cardiogenic shock), systemic vasodilation (sepsis, anaphylaxis), renal vasoconstriction (NSAIDs – afferent; ACEi/ARB – efferent; hepatorenal syndrome), abdominal compartment syndrome",
+          "<strong>Intrinsic Renal (25-30%):</strong> ATN (ischemic – prolonged pre-renal; nephrotoxic – aminoglycosides, contrast, cisplatin, myoglobin/rhabdomyolysis), AIN (drugs – NSAIDs, PPIs, antibiotics; infections; autoimmune), Glomerular (RPGN, TMA/HUS/TTP), Vascular (renal artery thrombosis/embolism, cholesterol crystal embolization)",
+          "<strong>Post-renal (5-10%):</strong> Obstruction – BPH (most common in elderly males), nephrolithiasis (bilateral or solitary kidney), pelvic malignancy, retroperitoneal fibrosis, neurogenic bladder"
+        ],
+        pathophysiology: "Pre-renal: ↓ renal perfusion → ↓ GFR with intact tubular function (avid Na/water reabsorption: FENa <1%, urine Na <20). ATN: Tubular epithelial injury → cellular necrosis, cast formation (muddy brown casts), backleak of filtrate, tubuloglomerular feedback → ↓ GFR. Recovery possible as tubular epithelium regenerates. AIN: Immune-mediated tubulointerstitial inflammation (eosinophils, lymphocytes). Post-renal: Increased intratubular pressure → ↓ net filtration pressure → ↓ GFR.",
+        clinical: [
+          "Oliguria (<400 mL/day) or anuria (<100 mL/day) – non-oliguric AKI possible with nephrotoxins",
+          "Volume overload: Pulmonary edema, peripheral edema, hypertension",
+          "Uremia: Nausea, vomiting, encephalopathy, pericarditis, asterixis",
+          "Electrolyte derangements: Hyperkalemia (ECG changes – peaked T → wide QRS → sine wave), metabolic acidosis, hyperphosphatemia, hypocalcemia",
+          "Pre-renal clues: Thirst, orthostatic hypotension, tachycardia, dry mucous membranes",
+          "AIN clues: Rash, fever, eosinophilia (classic triad – present in <30%); temporal drug exposure",
+          "Post-renal: Suprapubic distension, flank pain, anuria alternating with polyuria"
+        ],
+        investigations: [
+          "Serum: Creatinine trend (rate of rise), BUN (BUN:Cr >20:1 in pre-renal), electrolytes (K⁺, Ca²⁺, PO₄³⁻), ABG (metabolic acidosis)",
+          "Urine indices: FENa (<1% pre-renal, >2% ATN – unreliable with diuretics; use FEUrea <35% instead), urine Na, urine osmolality (>500 pre-renal, <350 ATN)",
+          "Urine microscopy: Bland (pre-renal/post-renal), muddy brown granular casts (ATN), WBC casts + eosinophils (AIN), RBC casts (GN), crystals (ethylene glycol – oxalate; uric acid – tumor lysis)",
+          "Imaging: Renal US (hydronephrosis for post-renal, kidney size). Bladder scan for residual volume",
+          "Novel biomarkers: NGAL, KIM-1, TIMP-2×IGFBP7 (NephroCheck) – early tubular injury detection",
+          "Renal biopsy: When cause unclear, suspected GN/vasculitis, AIN not responding to drug withdrawal"
+        ],
+        treatment: [
+          "<strong>Pre-renal:</strong> Volume resuscitation (balanced crystalloids – Ringer's lactate preferred over NS per SMART trial). Treat underlying cause. Hold nephrotoxins (ACEi/ARB, NSAIDs, aminoglycosides). Vasopressors for septic shock (norepinephrine first-line)",
+          "<strong>ATN:</strong> Supportive care. Maintain euvolemia. Avoid nephrotoxins. No proven pharmacological treatment. Recovery expected 1-3 weeks if insult removed",
+          "<strong>AIN:</strong> Remove offending drug. Short course steroids if no improvement in 5-7 days after withdrawal (benefit controversial but commonly used)",
+          "<strong>Post-renal:</strong> Urgent decompression – Foley catheter (bladder outlet obstruction), percutaneous nephrostomy or ureteral stent (ureteral obstruction). Monitor post-obstructive diuresis",
+          "<strong>Dialysis indications (emergent – AEIOU):</strong> Acidosis (pH <7.1 refractory), Electrolytes (K⁺ >6.5 refractory), Intoxication (methanol, ethylene glycol, lithium, salicylate), Overload (pulmonary edema refractory to diuretics), Uremia (encephalopathy, pericarditis, bleeding)",
+          "<strong>General:</strong> Avoid contrast, dose-adjust medications, daily weights, strict I/O charting, nutritional support"
+        ],
+        prognosis: "Pre-renal: Excellent if rapidly treated. ATN: Hospital mortality 30-50% (ICU); survivors recover renal function in 60-70% but ↑ risk of CKD. AIN: Good if drug removed early. Post-renal: Good if obstruction relieved <1 week; prolonged obstruction → irreversible fibrosis. AKI is an independent risk factor for future CKD and cardiovascular events."
+      },
+      {
+        name: "Chronic Kidney Disease (CKD)",
+        definition: "Abnormalities of kidney structure or function present for >3 months with health implications. Defined by GFR <60 mL/min/1.73m² and/or markers of kidney damage (albuminuria UACR ≥30 mg/g, urine sediment abnormalities, electrolyte/histologic/imaging abnormalities, or kidney transplant history). Staged G1-G5 by GFR and A1-A3 by albuminuria (KDIGO 2012 Heat Map).",
+        etiology: [
+          "<strong>Most common causes:</strong> Diabetes mellitus (40-50% of ESRD – #1 worldwide), Hypertension/renovascular disease (25-30% – #2), Chronic glomerulonephritis (IgA most common GN cause of ESRD globally)",
+          "<strong>Hereditary:</strong> ADPKD (most common genetic cause), Alport syndrome, Fabry disease",
+          "<strong>Tubulointerstitial:</strong> Reflux nephropathy, chronic pyelonephritis, analgesic nephropathy, lithium nephrotoxicity, lead nephropathy",
+          "<strong>Obstructive:</strong> BPH, nephrolithiasis, retroperitoneal fibrosis",
+          "<strong>Others:</strong> Myeloma kidney, sickle cell nephropathy, chronic transplant rejection"
+        ],
+        pathophysiology: "Initial insult → nephron loss → compensatory hyperfiltration in remaining nephrons (maladaptive) → glomerular hypertension/hypertrophy → progressive sclerosis → further nephron loss (vicious cycle). RAAS activation → efferent vasoconstriction → intraglomerular hypertension + aldosterone-mediated fibrosis. Proteinuria itself is toxic to tubular cells (tubulointerstitial fibrosis). Final common pathway regardless of etiology: Glomerulosclerosis + tubulointerstitial fibrosis + vascular sclerosis.",
+        clinical: [
+          "<strong>Early (G1-3a):</strong> Often asymptomatic. Nocturia, mild hypertension, mild anemia",
+          "<strong>Moderate (G3b-4):</strong> Fatigue, anorexia, pruritus, restless legs, nocturia, edema, uncontrolled HTN",
+          "<strong>Advanced (G5/Uremia):</strong> Uremic frost, asterixis, pericardial friction rub, Kussmaul breathing, peripheral neuropathy, uremic encephalopathy, platelet dysfunction (bleeding)",
+          "<strong>CKD-Mineral Bone Disorder (CKD-MBD):</strong> Secondary/tertiary hyperparathyroidism, renal osteodystrophy (osteitis fibrosa cystica, osteomalacia, adynamic bone disease), vascular calcification ('rugger jersey spine' on X-ray)",
+          "<strong>Anemia:</strong> Normocytic normochromic (EPO deficiency). Inadequate EPO production by failing kidneys. Also: iron deficiency (reduced absorption, blood loss), uremic inhibitors of erythropoiesis",
+          "<strong>Cardiovascular:</strong> Leading cause of death in CKD. LVH, accelerated atherosclerosis, pericarditis, heart failure"
+        ],
+        investigations: [
+          "eGFR: CKD-EPI 2021 equation (race-free). Cystatin C for confirmation if muscle mass issues",
+          "Albuminuria: Spot UACR (A1 <30, A2 30-300, A3 >300 mg/g). Confirm over 3 months",
+          "Blood: CBC (anemia), electrolytes (↑K⁺, ↑PO₄³⁻, ↓Ca²⁺, ↑Mg²⁺), bicarbonate (metabolic acidosis), PTH (secondary hyperparathyroidism), 25-OH vitamin D, albumin",
+          "Iron studies: Ferritin, TSAT (target ferritin >200, TSAT >20% before ESA)",
+          "Lipid profile: Dyslipidemia common",
+          "Imaging: Renal US (small echogenic kidneys = chronic; exceptions – ADPKD, diabetic nephropathy, amyloidosis, HIV nephropathy = normal/large kidneys)",
+          "Renal biopsy: If cause unclear and kidneys not already shrunken",
+          "DEXA scan: Bone mineral density (if GFR <60 with CKD-MBD)"
+        ],
+        treatment: [
+          "<strong>Slow progression:</strong> ACEi/ARB (first-line for proteinuric CKD, target UACR reduction >30%). SGLT2 inhibitors (dapagliflozin for ALL CKD with GFR ≥20 regardless of diabetes – DAPA-CKD). Finerenone (T2DM with albuminuria). BP target <130/80",
+          "<strong>CKD-MBD:</strong> Phosphate binders (calcium-based if early; sevelamer/lanthanum preferred to avoid vite calcification). Calcitriol or active vitamin D analogs. Calcimimetics (cinacalcet) for secondary hyperparathyroidism on dialysis. PTH target 2-9× ULN for G5D",
+          "<strong>Anemia:</strong> Iron repletion first (IV iron preferred in dialysis). ESAs (epoetin, darbepoetin) – target Hb 10-11.5 g/dL (avoid >13 – TREAT/CHOIR trials showed harm). HIF-PHIs (roxadustat) – newer oral option",
+          "<strong>Metabolic acidosis:</strong> Oral sodium bicarbonate if HCO₃⁻ <22 mEq/L (slows CKD progression – BICAR-ICU extrapolation)",
+          "<strong>Cardiovascular:</strong> Statins (SHARP trial – atorvastatin/ezetimibe reduces CV events in CKD). Avoid initiating statins on dialysis (no benefit per 4D, AURORA). Aspirin for secondary prevention",
+          "<strong>Preparation for RRT (GFR approaching 15-20):</strong> Vascular access planning (AV fistula preferred – create 6 months before anticipated dialysis), PD catheter, transplant workup (pre-emptive transplant ideal)",
+          "<strong>Dialysis indications:</strong> GFR <5-10 with symptoms, refractory hyperkalemia/acidosis/volume overload, uremic complications (pericarditis, encephalopathy, neuropathy). Start based on symptoms, not GFR threshold alone (IDEAL trial)"
+        ],
+        prognosis: "Progression rate varies: 2-5 mL/min/year GFR decline if uncontrolled. Modern therapy can reduce to <1 mL/min/year. KDIGO Heat Map guides referral/monitoring. CKD G5: 5-year survival on dialysis ~40% (worse than many cancers). Transplant survival superior to dialysis. Leading cause of death: cardiovascular disease (50% of CKD deaths)."
+      },
+      {
+        name: "Acute Interstitial Nephritis (AIN)",
+        definition: "Immune-mediated inflammatory disease of the renal interstitium and tubules, most commonly drug-induced, presenting as acute kidney injury. Accounts for 15-20% of AKI cases requiring biopsy.",
+        etiology: [
+          "<strong>Drugs (>70% of cases):</strong> Antibiotics (methicillin – historical; penicillins, cephalosporins, rifampin, sulfonamides, quinolones, vancomycin), NSAIDs (may present with nephrotic syndrome – MCD + AIN), PPIs (increasingly recognized – omeprazole, pantoprazole; often insidious onset over months), Allopurinol, 5-ASA compounds",
+          "<strong>Infections (15%):</strong> Pyelonephritis (ascending bacterial), Legionella, Leptospirosis, CMV, EBV, Hantavirus, TB",
+          "<strong>Autoimmune (10-15%):</strong> Tubulointerstitial nephritis with uveitis (TINU syndrome), Sarcoidosis, Sjögren's, SLE, IgG4-related disease",
+          "<strong>Others:</strong> Idiopathic, malignancy-associated"
+        ],
+        pathophysiology: "Drug acts as hapten → binds to tubular basement membrane proteins → cell-mediated (Type IV) hypersensitivity → T lymphocyte and macrophage infiltration of interstitium. Eosinophils present in drug-induced AIN. Granulomas in sarcoidosis/TB. NSAIDs: inhibition of prostaglandin-mediated immunosuppression. PPIs: delayed immune response (onset weeks to months). Outcome: Interstitial edema → tubular dysfunction → AKI. Chronic → fibrosis.",
+        clinical: [
+          "Classic triad (present in <30% of drug-induced): Fever, maculopapular rash, eosinophilia",
+          "Non-specific: AKI (rising creatinine), flank pain, arthralgias",
+          "Timing: 7-14 days after drug exposure (antibiotics); weeks-months (NSAIDs, PPIs)",
+          "NSAIDs: May present with nephrotic syndrome (minimal change + AIN) without rash/fever",
+          "Tubular dysfunction: Fanconi syndrome (glycosuria, aminoaciduria, phosphaturia, RTA type 2)",
+          "TINU syndrome: Bilateral anterior uveitis + AIN (young females, may precede or follow AIN)"
+        ],
+        investigations: [
+          "Urine: Sterile pyuria (WBCs without bacteria), WBC casts (hallmark), eosinophiluria (>1% on Hansel stain – sensitivity only 67%, specificity 83%), mild proteinuria (<1g/day typically), hematuria",
+          "Blood: Rising creatinine, eosinophilia (30-50%), ↑ IgE, ↑ ESR/CRP",
+          "FENa: Variable (may be >1% due to tubular dysfunction even with pre-renal physiology)",
+          "Renal biopsy (gold standard): Interstitial edema with inflammatory infiltrate (lymphocytes, plasma cells, eosinophils), tubulitis, granulomas (sarcoid, TB). Glomeruli and vessels typically normal",
+          "Gallium-67 scan or FDG-PET: Bilateral diffuse uptake (less specific, sometimes used when biopsy contraindicated)",
+          "Additional: IgG4 levels (IgG4-RD), ACE level + chest CT (sarcoidosis)"
+        ],
+        treatment: [
+          "<strong>Remove offending agent:</strong> Most important step. Renal function improves in 60-70% within 1-2 weeks of drug withdrawal alone",
+          "<strong>Corticosteroids:</strong> Indicated if no improvement after 5-7 days of drug withdrawal, or if biopsy shows active inflammation without fibrosis. Prednisolone 1 mg/kg/day (max 60 mg) × 2-4 weeks then taper over 4-8 weeks. Benefit strongest if started within 2 weeks of AIN onset",
+          "<strong>Steroid-resistant/dependent:</strong> Mycophenolate mofetil, azathioprine, or cyclophosphamide",
+          "<strong>Supportive:</strong> Hold nephrotoxins, manage AKI (electrolytes, fluid balance), RRT if indicated",
+          "<strong>Special cases:</strong> Sarcoidosis – prolonged steroids. IgG4-RD – excellent steroid response. TINU – topical steroids for uveitis ± systemic steroids"
+        ],
+        prognosis: "Generally good if drug removed early. 60-70% recover baseline function. Delayed diagnosis (>3 weeks of AIN before treatment) → increased risk of chronic tubulointerstitial fibrosis and CKD. Predictors of poor outcome: Prolonged AKI duration, interstitial fibrosis on biopsy, granulomatous AIN, NSAID-related (often diagnosed late). PPI-related AIN: Often insidious and diagnosed late → higher rates of incomplete recovery."
+      }
+    ]
+  },
+  {
+    category: "Electrolyte Disorders",
+    icon: "zap",
+    items: [
+      {
+        name: "Hyponatremia",
+        definition: "Serum sodium <135 mEq/L. Most common electrolyte disorder in hospitalized patients (prevalence 15-30%). Classified by severity: mild (130-135), moderate (125-130), severe (<125). Life-threatening when acute and severe due to cerebral edema.",
+        etiology: [
+          "<strong>Hypotonic Hyponatremia (true hyponatremia – most common):</strong>",
+          "• Hypovolemic: Renal losses (diuretics – thiazides most common, salt-wasting nephropathy, mineralocorticoid deficiency, cerebral salt wasting) vs Extrarenal losses (vomiting, diarrhea, burns, third-spacing)",
+          "• Euvolemic: SIADH (most common cause of euvolemic hyponatremia – CNS disease, lung disease, drugs, pain, nausea), hypothyroidism (severe), adrenal insufficiency (glucocorticoid deficiency), primary polydipsia, beer potomania, tea-and-toast diet, exercise-associated hyponatremia",
+          "• Hypervolemic: CHF, cirrhosis, nephrotic syndrome (effective circulating volume ↓ → ADH release), advanced CKD",
+          "<strong>Non-hypotonic:</strong> Hyperglycemia (pseudohyponatremia – corrected Na rises 1.6 mEq/L per 100 mg/dL glucose >100), mannitol, hyperlipidemia/hyperproteinemia (lab artifact with flame photometry – not with ion-selective electrodes)"
+        ],
+        pathophysiology: "Water excess relative to sodium. ADH (vasopressin) is the key regulator. Hypotonic hyponatremia = excess free water. Acute (<48h): Brain cells swell (cerebral edema) → herniation risk. Chronic (>48h): Brain adapts by losing organic osmolytes → if corrected too rapidly → osmotic demyelination syndrome (ODS/central pontine myelinolysis). SIADH: Inappropriate ADH secretion → water retention → dilutional hyponatremia with concentrated urine (>100 mOsm/kg) and natriuresis (UNa >40) in euvolemic state.",
+        clinical: [
+          "Mild (130-135): Often asymptomatic or subtle – gait instability, attention deficits, ↑ falls in elderly",
+          "Moderate (125-130): Nausea, headache, confusion, lethargy, muscle cramps",
+          "Severe (<125 or symptomatic): Seizures, obtundation, respiratory arrest, cerebral herniation (especially if acute onset)",
+          "Chronic hyponatremia: ↑ Falls, ↑ fracture risk, ↑ osteoporosis, cognitive impairment",
+          "ODS (from overly rapid correction): Pseudobulbar palsy, quadriparesis, 'locked-in syndrome', dysarthria – onset 2-6 days after correction. MRI: Central pontine/extrapontine myelinolysis"
+        ],
+        investigations: [
+          "Step 1 – Confirm hypotonic: Serum osmolality (<280 mOsm/kg = true hypotonic hyponatremia)",
+          "Step 2 – Volume status: Clinical assessment (vitals, JVP, edema, mucous membranes, skin turgor)",
+          "Step 3 – Urine studies: Urine osmolality (>100 = ADH-mediated; <100 = primary polydipsia/beer potomania), Urine Na (<20 = hypovolemic extrarenal or hypervolemic; >40 = SIADH, renal losses, adrenal insufficiency)",
+          "Additional: TSH, morning cortisol/ACTH (exclude hypothyroidism, adrenal insufficiency before diagnosing SIADH)",
+          "SIADH diagnostic criteria: Serum osm <275, urine osm >100, euvolemic, UNa >40, normal thyroid/adrenal function, no diuretics",
+          "If SIADH confirmed: Investigate cause – CT chest (lung cancer – small cell), MRI brain (CNS pathology), medication review (SSRIs, carbamazepine, cyclophosphamide, oxytocin, desmopressin)"
+        ],
+        treatment: [
+          "<strong>Acute symptomatic (seizures/severe symptoms):</strong> 3% hypertonic saline 100-150 mL bolus over 10-20 min, repeat ×2 if needed (goal: ↑ Na 4-6 mEq/L in first 1-2 hours to stop symptoms). ICU monitoring",
+          "<strong>Correction limits:</strong> Maximum 8 mEq/L in 24 hours (some experts: 6 mEq/L if high ODS risk – alcoholism, malnutrition, hypokalemia, liver disease). If overcorrected: D5W infusion ± desmopressin 2mcg IV to re-lower sodium",
+          "<strong>Hypovolemic:</strong> Normal saline (0.9% NaCl) – volume repletion suppresses ADH → free water excretion. Monitor closely (rapid autocorrection risk once ADH suppressed)",
+          "<strong>SIADH (chronic):</strong> Fluid restriction (800-1000 mL/day – first-line), salt tablets + loop diuretic (increase solute load), urea (oral 15-60g/day – effective in Europe), tolvaptan (vasopressin V2 receptor antagonist – effective but hepatotoxicity risk, avoid in liver disease, start in-hospital)",
+          "<strong>Hypervolemic:</strong> Fluid and salt restriction, loop diuretics, treat underlying cause (CHF optimization, paracentesis for cirrhosis). Tolvaptan for short-term use"
+        ],
+        prognosis: "Acute severe hyponatremia: Untreated mortality 50% from herniation. With treatment: good if corrected appropriately. ODS: Devastating if occurs – partially reversible in some cases. Chronic mild hyponatremia: Independent risk factor for osteoporosis, falls, fractures, and mortality (even Na 130-135 associated with increased mortality in hospitalized patients)."
+      },
+      {
+        name: "Hyperkalemia",
+        definition: "Serum potassium >5.0 mEq/L (some define >5.5). Life-threatening emergency when >6.5 mEq/L or with ECG changes due to risk of fatal cardiac arrhythmias. Prevalence 2-3% in general population; up to 10% in CKD patients.",
+        etiology: [
+          "<strong>Decreased excretion (most common):</strong> CKD/AKI (GFR <20 – impaired K⁺ secretion), Drugs (ACEi, ARBs, K⁺-sparing diuretics – spironolactone/amiloride, trimethoprim, calcineurin inhibitors, heparin), Hypoaldosteronism (Type 4 RTA – diabetic, Addison's disease), Heart failure",
+          "<strong>Transcellular shift (redistribution):</strong> Acidosis (metabolic – mineral acids; each 0.1 ↓ pH → ↑ K⁺ ~0.6), insulin deficiency/DKA, β₂-blocker overdose, succinylcholine, digoxin toxicity, massive cell lysis (tumor lysis, rhabdomyolysis, burns, massive transfusion)",
+          "<strong>Increased intake:</strong> Rarely sole cause – salt substitutes (KCl), excessive supplementation, massive transfusion (stored RBC hemolysis)",
+          "<strong>Pseudohyperkalemia:</strong> Hemolyzed sample (most common lab artifact), prolonged tourniquet, fist clenching, thrombocytosis (>500,000), leukocytosis (>100,000). Always repeat if unexpected"
+        ],
+        pathophysiology: "K⁺ is the major intracellular cation (98% intracellular). Extracellular K⁺ determines resting membrane potential. Hyperkalemia → less negative resting potential → partial depolarization → initially increased excitability then decreased excitability (depolarization block). Cardiac effects: Accelerated repolarization (peaked T waves) → delayed conduction (wide QRS) → loss of P waves → sine wave → VF/asystole. Risk amplified by hyponatremia, hypocalcemia, acidosis, and rapid onset.",
+        clinical: [
+          "Often asymptomatic until cardiac toxicity occurs",
+          "Neuromuscular: Weakness (ascending – can mimic Guillain-Barré), paresthesias, reduced DTRs, rarely respiratory muscle paralysis",
+          "Cardiac (ECG progression): Peaked T waves (earliest) → PR prolongation → loss of P waves → widened QRS → sine wave pattern → VF/asystole",
+          "GI: Nausea, vomiting, diarrhea (ileus in severe cases)",
+          "ECG changes do NOT reliably correlate with K⁺ level – patients can develop VF without classic progression"
+        ],
+        investigations: [
+          "Confirm: Repeat level (exclude pseudohyperkalemia – check sample for hemolysis)",
+          "ECG: Immediate 12-lead (essential regardless of K⁺ level). Peaked T waves, short QT, wide QRS, absent P waves, sine wave",
+          "Blood: BMP (creatinine, BUN, glucose, bicarbonate), venous blood gas, serum osmolality (if DKA suspected), CK (rhabdomyolysis), LDH/uric acid (tumor lysis), digoxin level if applicable",
+          "Urine: Spot K⁺, TTKG (transtubular K gradient – if >7, appropriate renal excretion; <5, renal cause of hyperkalemia). Note: TTKG has limitations",
+          "Calculate: TTKG = (Urine K / Plasma K) × (Plasma Osm / Urine Osm)",
+          "Additional: Renin, aldosterone (if suspected hypoaldosteronism), cortisol (Addison's)"
+        ],
+        treatment: [
+          "<strong>EMERGENT (K⁺ >6.5 or ECG changes):</strong>",
+          "1. Cardiac membrane stabilization: Calcium gluconate 10% – 10-20 mL IV over 2-5 min (onset 1-3 min, duration 30-60 min). Repeat if ECG unchanged in 5 min. Use calcium chloride via central line if pulseless",
+          "2. Shift K⁺ intracellularly: Insulin 10 units regular IV + Dextrose 50% 50mL (onset 15-30 min, duration 4-6h – most reliable). Salbutamol 10-20mg nebulized (onset 15-30 min). Sodium bicarbonate 50-100 mEq IV ONLY if concurrent acidosis (ineffective alone)",
+          "3. Remove K⁺ from body: Furosemide 40-80mg IV (if urine output present). Sodium polystyrene sulfonate (Kayexalate) 15-30g PO – slow onset (hours), GI side effects. Patiromer (Veltassa) or SZC (sodium zirconium cyclosilicate – Lokelma) – newer binders, faster onset, better tolerated. Hemodialysis (definitive – removes 25-50 mEq/hr)",
+          "<strong>Correct underlying cause:</strong> Stop offending drugs, treat acidosis, volume resuscitate (AKI), fludrocortisone (hypoaldosteronism)",
+          "<strong>Monitoring:</strong> Continuous cardiac monitoring, repeat K⁺ every 1-2 hours until stable, serial ECGs",
+          "<strong>Chronic management:</strong> Low-K⁺ diet (<2g/day), avoid dietary salt substitutes, adjust medications, SZC/patiromer for chronic hyperkalemia enabling RAAS blocker continuation"
+        ],
+        prognosis: "Cardiac arrest risk increases significantly with K⁺ >6.5 mEq/L. Treated hyperkalemia: Excellent short-term prognosis if caught before cardiac arrest. In-hospital cardiac arrest from hyperkalemia: Survival rate lower than other causes. Chronic mild hyperkalemia: Associated with increased mortality in CKD patients. Long-term RAAS blockade discontinuation due to hyperkalemia worsens CKD/CV outcomes – newer K⁺ binders enable safer RAAS continuation."
+      }
+    ]
+  },
+  {
+    category: "Renal Vascular & Cystic",
+    icon: "git-merge",
+    items: [
+      {
+        name: "Renal Artery Stenosis (RAS)",
+        definition: "Narrowing of one or both renal arteries (>60% stenosis hemodynamically significant) causing renovascular hypertension and/or ischemic nephropathy. Accounts for 1-5% of all hypertension cases; higher prevalence in resistant hypertension (15-30%).",
+        etiology: [
+          "<strong>Atherosclerotic RAS (85-90%):</strong> Older patients (>55), affects proximal ⅓ of renal artery and ostium. Risk factors: smoking, diabetes, hyperlipidemia, peripheral vascular disease, coronary artery disease, aortic atherosclerosis",
+          "<strong>Fibromuscular Dysplasia (FMD) (10-15%):</strong> Young women (15-50 years), affects middle and distal ⅔ of renal artery. 'String of beads' appearance on angiography (medial fibroplasia – most common subtype). Often bilateral. Associated with intracranial aneurysms"
+        ],
+        pathophysiology: "Renal artery stenosis → ↓ renal perfusion pressure → juxtaglomerular apparatus activation → RAAS activation → angiotensin II (vasoconstriction, aldosterone secretion) + Na/water retention → systemic hypertension. In stenotic kidney: GFR maintained by angiotensin II-mediated efferent vasoconstriction. ACEi/ARB → removes efferent tone → GFR collapse (important clinical clue). Bilateral RAS or stenosis of solitary kidney → volume-dependent hypertension + progressive ischemic nephropathy. Goldblatt models: 2-kidney 1-clip (renin-dependent); 1-kidney 1-clip (volume-dependent).",
+        clinical: [
+          "Resistant hypertension (uncontrolled on ≥3 drugs including diuretic)",
+          "Hypertension onset before age 30 (FMD) or severe/accelerated onset after 55 (atherosclerotic)",
+          "Flash pulmonary edema (bilateral RAS – Pickering syndrome – acute volume overload)",
+          "Abdominal bruit (systolic-diastolic – more specific than systolic alone)",
+          "Asymmetric kidney size (>1.5 cm difference on imaging)",
+          "AKI after ACEi/ARB initiation (>30% creatinine rise)",
+          "Unexplained progressive CKD with minimal proteinuria",
+          "Hypokalemia (secondary hyperaldosteronism) in unilateral RAS",
+          "Atherosclerotic RAS: Often concurrent coronary/peripheral/cerebrovascular disease"
+        ],
+        investigations: [
+          "Screening tests: Duplex ultrasound (first-line – sensitivity 85-90%; peak systolic velocity >200 cm/s, renal-aortic ratio >3.5, resistive index), CT angiography (95% sensitivity/specificity – gadolinium-free, but radiation/contrast), MR angiography (95% sensitivity – avoid in GFR <30 due to NSF risk with gadolinium)",
+          "Gold standard: Digital subtraction angiography (DSA) – invasive, reserved for intervention. Trans-lesional pressure gradient measurement",
+          "Functional tests: Captopril renography (asymmetric uptake after ACEi – less used now), plasma renin activity (elevated in unilateral – lateralization on renal vein sampling)",
+          "Blood: Creatinine (may worsen on ACEi), electrolytes (hypokalemia), urinalysis (bland sediment, minimal proteinuria differentiates from glomerular disease)",
+          "FMD workup: Screen other vascular beds (carotid duplex, brain MRA for intracranial aneurysms)"
+        ],
+        treatment: [
+          "<strong>Medical therapy (first-line for atherosclerotic RAS per ASTRAL/CORAL trials):</strong> Antihypertensives (ACEi/ARB if tolerated with monitoring – avoid in bilateral RAS/solitary kidney with stenosis), CCB, diuretics. Statin + antiplatelet. Smoking cessation. Risk factor modification",
+          "<strong>Revascularization (angioplasty ± stenting):</strong> CORAL trial (2014): No benefit of stenting over medical therapy alone for atherosclerotic RAS in most patients",
+          "<strong>Indications for revascularization:</strong> FMD (angioplasty alone – 85-90% cure rate of hypertension; stenting rarely needed), Flash pulmonary edema (Pickering syndrome), Progressive renal insufficiency despite optimal medical therapy, Refractory heart failure, Failure of optimal medical therapy (truly resistant HTN)",
+          "<strong>Surgical revascularization:</strong> Aortorenal bypass – reserved for complex anatomy, concurrent aortic surgery, failed endovascular approaches",
+          "<strong>FMD-specific:</strong> Balloon angioplasty without stenting (first-line – excellent results). Long-term antihypertensive often still needed"
+        ],
+        prognosis: "FMD: Excellent – angioplasty cures hypertension in 50-60%, improves in 30%. Atherosclerotic RAS: Medical therapy controls BP in most; renal function stabilizes in 70%. Natural history of untreated atherosclerotic RAS: Progressive stenosis in 40-50% over 5 years, 10-15% progress to occlusion. Ischemic nephropathy accounts for 10-15% of ESRD in elderly."
+      },
+      {
+        name: "Autosomal Dominant Polycystic Kidney Disease (ADPKD)",
+        definition: "Most common hereditary kidney disease (prevalence 1:400-1:1000). Progressive bilateral renal cyst formation leading to massively enlarged kidneys and ESRD. Also a systemic disease with extrarenal manifestations.",
+        etiology: [
+          "<strong>PKD1 gene (85%):</strong> Chromosome 16p13.3, encodes polycystin-1. Earlier onset, more aggressive, ESRD by mean age 54",
+          "<strong>PKD2 gene (15%):</strong> Chromosome 4q22, encodes polycystin-2. Milder phenotype, ESRD by mean age 74",
+          "<strong>Rare:</strong> GANAB, DNAJB11 mutations (atypical/mild ADPKD). De novo mutations in 5-10%",
+          "<strong>Inheritance:</strong> Autosomal dominant (50% offspring affected). Disease requires 'two-hit hypothesis' – germline mutation + somatic second hit → cyst initiation"
+        ],
+        pathophysiology: "Polycystin-1/2 are mechanosensory proteins on primary cilia of tubular epithelial cells. Loss of function → dysregulated intracellular calcium → ↑ cAMP → cell proliferation + fluid secretion (CFTR-mediated chloride/water secretion into cyst lumen) → progressive cyst growth. Cysts arise from all nephron segments but disconnect from tubule early. Cyst expansion → compression of adjacent nephrons → ischemia, inflammation, fibrosis → progressive renal failure. Total kidney volume (TKV) correlates with GFR decline.",
+        clinical: [
+          "Often asymptomatic until 3rd-4th decade",
+          "Flank/abdominal pain (cyst hemorrhage, infection, mass effect), early satiety",
+          "Gross hematuria (cyst rupture – common, usually self-limiting)",
+          "Hypertension (earliest and most common – 60% before GFR decline, RAAS activation from cyst compression of intrarenal vasculature)",
+          "Palpable bilateral flank masses (advanced)",
+          "Nephrolithiasis (20-30% – uric acid and calcium oxalate)",
+          "UTI/cyst infection (fever, flank pain, ↑ WBC – CT may show rim-enhancing cyst; treat with lipophilic antibiotics – fluoroquinolones, TMP-SMX)",
+          "<strong>Extrarenal manifestations:</strong> Hepatic cysts (most common extrarenal – 80% by age 60, rarely cause liver failure), Intracranial aneurysms (8-12% vs 2% general population – screen if family history of SAH or before major surgery), Mitral valve prolapse (25%), Colonic diverticula, Abdominal wall/inguinal hernias, Seminal vesicle cysts"
+        ],
+        investigations: [
+          "Ultrasound (diagnostic criteria – Pei-Ravine/modified):",
+          "• Age 15-39: ≥3 cysts (unilateral or bilateral)",
+          "• Age 40-59: ≥2 cysts in each kidney",
+          "• Age ≥60: ≥4 cysts in each kidney",
+          "• Exclusion: <2 cysts if age ≥40 with at-risk family member",
+          "MRI: Total kidney volume (TKV) measurement – best prognostic tool. Mayo Imaging Classification (1A-1E) predicts rate of GFR decline. Height-adjusted TKV (htTKV) >600 mL/m predicts rapid progression",
+          "Genetic testing: Confirmatory (PKD1 vs PKD2 – prognosis differs), pre-implantation genetic diagnosis, atypical presentations, potential living-related donors from affected families",
+          "Blood: Renal function, electrolytes. Urinalysis (hematuria, mild proteinuria)",
+          "Screening for complications: Brain MRA (intracranial aneurysms – screen if FHx of SAH, all before neurosurgery; some screen all ADPKD patients), echocardiography (valvular disease)"
+        ],
+        treatment: [
+          "<strong>Tolvaptan (vasopressin V2 receptor antagonist):</strong> First disease-modifying therapy (TEMPO 3:4, REPRISE trials). Slows TKV growth by 50% and GFR decline. Indicated for rapidly progressive ADPKD (Mayo class 1C-1E, or PROPKD score ≥6). Requires monthly LFTs (3-5% hepatotoxicity). Polyuria/polydipsia side effects (up to 6L urine/day)",
+          "<strong>Blood pressure:</strong> Target <110/75 in young patients (HALT-PKD trial showed benefit for TKV progression with aggressive BP control age 15-49). ACEi/ARB first-line",
+          "<strong>High water intake:</strong> 3-4L/day to suppress vasopressin (reduce cAMP) – adjunctive",
+          "<strong>Pain management:</strong> Avoid NSAIDs (nephrotoxic). Cyst decompression (aspiration + sclerotherapy), laparoscopic cyst fenestration, renal denervation for chronic pain",
+          "<strong>Cyst infection:</strong> Lipophilic antibiotics (ciprofloxacin, TMP-SMX) for 4-6 weeks. Drainage if >5cm or non-responsive",
+          "<strong>ESRD management:</strong> Dialysis or transplantation. Bilateral nephrectomy may be needed pre-transplant (space/infection). Transplant outcomes excellent",
+          "<strong>Emerging therapies:</strong> mTOR inhibitors (disappointing in trials), octreotide (liver cysts), CFTR inhibitors, ongoing clinical trials"
+        ],
+        prognosis: "PKD1: ESRD by median age 54. PKD2: ESRD by median age 74. Risk factors for rapid progression: PKD1 truncating mutation, early-onset hypertension, early-onset gross hematuria, large TKV for age, male sex. Mayo 1E: 50% reach ESRD by age 55. ADPKD accounts for 5-10% of ESRD. Life expectancy is reduced but improving with tolvaptan and better CKD management."
+      }
+    ]
+  },
+  {
+    category: "Acid-Base & RTA",
+    icon: "flask-conical",
+    items: [
+      {
+        name: "Renal Tubular Acidosis (RTA)",
+        definition: "Group of disorders characterized by non-anion gap metabolic acidosis (NAGMA/hyperchloremic metabolic acidosis) due to impaired renal tubular acid-base handling, despite relatively preserved GFR. Normal AG (8-12 mEq/L). Urine AG helps differentiate (UAG = Na + K - Cl).",
+        etiology: [
+          "<strong>Type 1 (Distal RTA – impaired H⁺ secretion):</strong> Cannot acidify urine below pH 5.3. Causes: Autoimmune (Sjögren's – most common secondary cause, SLE, RA), amphotericin B, lithium, toluene inhalation, nephrocalcinosis, sickle cell, obstructive uropathy, genetic (autosomal dominant – adults; recessive – children with sensorineural deafness)",
+          "<strong>Type 2 (Proximal RTA – impaired HCO₃⁻ reabsorption):</strong> Reduced PCT bicarbonate reabsorption threshold. Isolated or part of Fanconi syndrome. Causes: Multiple myeloma (light chain toxicity), carbonic anhydrase inhibitors (acetazolamide, topiramate), heavy metals (lead, cadmium), Wilson's disease, cystinosis, tenofovir, ifosfamide",
+          "<strong>Type 4 (Hyperkalemic RTA – aldosterone deficiency/resistance):</strong> Most common RTA. Causes: Diabetic nephropathy (hyporeninemic hypoaldosteronism – #1), ACEi/ARBs, K⁺-sparing diuretics, NSAIDs, heparin, trimethoprim, calcineurin inhibitors, adrenal insufficiency, obstructive uropathy"
+        ],
+        pathophysiology: "Type 1: α-intercalated cells in collecting duct cannot secrete H⁺ (defective H⁺-ATPase or H⁺/K⁺-ATPase) → inability to generate pH gradient → alkaline urine (pH >5.3). Chronic: Bone buffering → hypercalciuria → nephrocalcinosis/stones. Hypokalemia from compensatory K⁺ secretion. Type 2: PCT cannot reabsorb filtered HCO₃⁻ (normally 85% reabsorbed in PCT). HCO₃⁻ escapes into urine until serum HCO₃⁻ falls below reduced threshold (~15 mEq/L), then urine can be acidified (<5.3). Bicarbonaturia → obligate Na⁺/K⁺ losses → hypokalemia. Type 4: Aldosterone deficiency/resistance → ↓ ENaC activity → ↓ Na⁺ reabsorption → ↓ lumen electronegativity → ↓ K⁺ and H⁺ secretion → hyperkalemia + mild acidosis (HCO₃⁻ usually 15-22).",
+        clinical: [
+          "<strong>Type 1:</strong> Nephrolithiasis (calcium phosphate stones – alkaline urine favors CaPO₄ precipitation), nephrocalcinosis (medullary), growth retardation (children), osteomalacia/rickets (bone mineral loss), hypokalemia (weakness, paralysis), polyuria (concentrating defect from medullary calcium deposits)",
+          "<strong>Type 2:</strong> Isolated: mild acidosis, usually well-tolerated. Fanconi syndrome: glucosuria, aminoaciduria, phosphaturia (rickets/osteomalacia), uricosuria, low-molecular-weight proteinuria, polyuria. Hypokalemia",
+          "<strong>Type 4:</strong> Usually mild acidosis (HCO₃⁻ 15-22). Hyperkalemia is the dominant clinical problem (ECG changes, weakness). No nephrocalcinosis. Often in elderly diabetics with mild CKD"
+        ],
+        investigations: [
+          "Blood: ABG/VBG (metabolic acidosis), electrolytes (AG normal, Cl⁻ elevated = NAGMA), K⁺ (low in Type 1/2, high in Type 4)",
+          "Urine: pH (>5.3 in Type 1 despite systemic acidosis; <5.3 in Type 2 when below threshold and in Type 4), urine anion gap (UAG = UNa + UK - UCl)",
+          "• UAG positive: Impaired NH₄⁺ excretion (Type 1 and Type 4 RTA)",
+          "• UAG negative: Appropriate NH₄⁺ excretion (GI bicarbonate loss – diarrhea)",
+          "Urine osmolar gap: More accurate than UAG for NH₄⁺ estimation",
+          "Type 2 specific: Fractional excretion of HCO₃⁻ >15% when serum HCO₃⁻ normalized (NaHCO₃ loading test). Screen for Fanconi: urine glucose, amino acids, phosphate, uric acid",
+          "Type 4 specific: Plasma renin, aldosterone (↓ both in hyporeninemic hypoaldosteronism; ↓ aldo only in adrenal causes). Cortisol, ACTH",
+          "Imaging: KUB/CT – nephrocalcinosis in Type 1 (medullary), renal stones"
+        ],
+        treatment: [
+          "<strong>Type 1 (Distal):</strong> Oral alkali replacement (sodium/potassium citrate 1-2 mEq/kg/day). Potassium citrate preferred (corrects hypokalemia and provides alkali, also inhibits calcium stone formation). Target serum HCO₃⁻ >22. Monitor calcium/citrate excretion. Relatively low alkali requirement (1-2 mEq/kg) because no urinary bicarbonate wasting once serum level normalized",
+          "<strong>Type 2 (Proximal):</strong> Very large alkali doses needed (10-15 mEq/kg/day) because administered HCO₃⁻ is immediately excreted. Potassium supplementation (alkali worsens hypokalemia). Thiazide diuretics (volume contraction → ↑ proximal reabsorption of HCO₃⁻ – paradoxical benefit). Treat underlying cause. If Fanconi: phosphate supplementation, calcitriol (active vitamin D)",
+          "<strong>Type 4:</strong> Treat hyperkalemia first. Low-K⁺ diet, loop diuretics (kaliuresis + mild volume contraction). Fludrocortisone 0.1-0.2 mg/day (if true aldosterone deficiency – watch for HTN/edema). Oral NaHCO₃ if acidosis severe. Newer K⁺ binders (patiromer, SZC) enable RAAS blocker continuation. Stop offending drugs if possible"
+        ],
+        prognosis: "Type 1: Good with treatment. Nephrocalcinosis may be irreversible but progression halted. Children catch up in growth. Stones preventable with citrate. Type 2: Depends on underlying cause. Myeloma-associated has poor prognosis. Drug-induced reversible on withdrawal. Fanconi from cystinosis requires specific treatment (cysteamine). Type 4: Usually mild, excellent prognosis with treatment. Main concern is hyperkalemia management and enabling cardio/renoprotective medications."
+      }
+    ]
+  }
+];
+
+// Application State
+let currentCategory = 0;
+let allDiseaseItems = [];
+let filteredItems = [];
+
+// Build flat item list
+diseases.forEach((cat, ci) => {
+  cat.items.forEach((item, ii) => {
+    allDiseaseItems.push({ ...item, categoryIndex: ci, itemIndex: ii, category: cat.category });
+  });
+});
+filteredItems = [...allDiseaseItems];
+
+// Render Navigation
+function renderNav() {
+  const navList = document.getElementById('navList');
+  navList.innerHTML = diseases.map((cat, i) => `
+    <li>
+      <button onclick="selectCategory(${i})" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${i === currentCategory ? 'bg-emerald-900/40 text-emerald-300 font-medium' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'}">
+        <i data-lucide="${cat.icon}" class="w-4 h-4 flex-shrink-0"></i>
+        <span class="truncate">${cat.category}</span>
+        <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-500">${cat.items.length}</span>
+      </button>
+    </li>
+  `).join('');
+  lucide.createIcons();
+}
+
+// Render Disease Content
+function renderContent(items) {
+  const container = document.getElementById('diseaseContent');
+  if (items.length === 0) {
+    container.innerHTML = `<div class="text-center py-16 text-gray-500"><i data-lucide="search-x" class="w-12 h-12 mx-auto mb-4 opacity-50"></i><p class="text-lg">No diseases match your search</p></div>`;
+    lucide.createIcons();
+    return;
+  }
+
+  container.innerHTML = items.map((item, idx) => `
+    <div class="disease-card mb-4 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden fade-in" style="animation-delay: ${idx * 80}ms">
+      <button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-5 md:p-6 text-left hover:bg-gray-800/50 transition-colors">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-900/50 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="stethoscope" class="w-4 h-4 text-emerald-400"></i>
+          </div>
+          <div>
+            <h3 class="font-heading text-lg md:text-xl text-white">${item.name}</h3>
+            <span class="text-xs text-gray-500">${item.category}</span>
+          </div>
+        </div>
+        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transition-transform accordion-arrow flex-shrink-0"></i>
+      </button>
+      <div class="accordion-content">
+        <div class="px-5 md:px-6 pb-6 space-y-5 border-t border-gray-800 pt-5">
+          ${renderSection('Definition', item.definition)}
+          ${renderListSection('Etiology & Causes', item.etiology)}
+          ${renderSection('Pathophysiology', item.pathophysiology)}
+          ${renderListSection('Clinical Features', item.clinical)}
+          ${renderListSection('Investigations', item.investigations)}
+          ${renderListSection('Treatment', item.treatment)}
+          ${renderSection('Prognosis', item.prognosis)}
+        </div>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function renderSection(title, content) {
+  if (!content) return '';
+  return `
+    <div>
+      <h4 class="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>${title}
+      </h4>
+      <p class="text-gray-300 text-sm leading-relaxed">${content}</p>
+    </div>`;
+}
+
+function renderListSection(title, items) {
+  if (!items || items.length === 0) return '';
+  return `
+    <div>
+      <h4 class="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>${title}
+      </h4>
+      <ul class="space-y-1.5">
+        ${items.map(i => `<li class="text-gray-300 text-sm leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[10px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-gray-600">${i}</li>`).join('')}
+      </ul>
+    </div>`;
+}
+
+// Interactions
+function selectCategory(index) {
+  currentCategory = index;
+  filteredItems = diseases[index].items.map((item, ii) => ({ ...item, categoryIndex: index, itemIndex: ii, category: diseases[index].category }));
+  renderNav();
+  renderContent(filteredItems);
+  document.getElementById('searchInput').value = '';
+  closeSidebar();
+}
+
+function filterDiseases(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) {
+    selectCategory(currentCategory);
+    return;
+  }
+  filteredItems = allDiseaseItems.filter(item => {
+    const searchable = [item.name, item.definition, item.pathophysiology, item.prognosis, ...(item.etiology || []), ...(item.clinical || []), ...(item.investigations || []), ...(item.treatment || [])].join(' ').toLowerCase();
+    return searchable.includes(q);
+  });
+  renderContent(filteredItems);
+}
+
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const arrow = btn.querySelector('.accordion-arrow');
+  const isOpen = content.classList.contains('open');
+  // Close all others
+  document.querySelectorAll('.accordion-content.open').forEach(el => {
+    el.classList.remove('open');
+    el.previousElementSibling.querySelector('.accordion-arrow').style.transform = '';
+  });
+  if (!isOpen) {
+    content.classList.add('open');
+    arrow.style.transform = 'rotate(180deg)';
+  }
+}
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  sidebar.classList.toggle('sidebar-closed');
+  sidebar.classList.toggle('sidebar-open');
+  overlay.classList.toggle('hidden');
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  if (sidebar.classList.contains('sidebar-open')) {
+    sidebar.classList.add('sidebar-closed');
+    sidebar.classList.remove('sidebar-open');
+    overlay.classList.add('hidden');
+  }
+}
+
+// Element SDK
+const defaultConfig = {
+  main_title: 'Nephrology Diseases',
+  subtitle: 'Evidence-Based Clinical Compendium for MBBS/MD Practice',
+  background_color: '#030712',
+  surface_color: '#111827',
+  text_color: '#d1d5db',
+  primary_action: '#059669',
+  secondary_action: '#6b7280',
+  font_family: 'Source Sans 3',
+  font_size: 14
+};
+
+function applyConfig(config) {
+  const bg = config.background_color || defaultConfig.background_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const primary = config.primary_action || defaultConfig.primary_action;
+  const secondary = config.secondary_action || defaultConfig.secondary_action;
+  const font = config.font_family || defaultConfig.font_family;
+  const size = config.font_size || defaultConfig.font_size;
+
+  const app = document.getElementById('app');
+  app.style.backgroundColor = bg;
+  app.style.color = text;
+  app.style.fontFamily = `${font}, Source Sans 3, sans-serif`;
+  app.style.fontSize = `${size}px`;
+
+  document.getElementById('mainTitle').textContent = config.main_title || defaultConfig.main_title;
+  document.getElementById('mainSubtitle').textContent = config.subtitle || defaultConfig.subtitle;
+
+  document.querySelectorAll('.disease-card').forEach(el => {
+    el.style.backgroundColor = surface;
+    el.style.borderColor = secondary + '33';
+  });
+
+  document.getElementById('sidebar').style.backgroundColor = surface;
+  document.querySelectorAll('.font-heading').forEach(el => {
+    el.style.fontFamily = `Playfair Display, ${font}, serif`;
+    if (el.id === 'mainTitle') el.style.fontSize = `${size * 2.5}px`;
+  });
+}
+
+// Init
+renderNav();
+selectCategory(0);
+</script>
+</body>
+</html>
