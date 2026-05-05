@@ -1,0 +1,386 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Cardiology | Cardiovascular Diseases & Clinical Care | Deep Medicine</title> <meta name="description" content="Comprehensive cardiology guide covering cardiovascular diseases, diagnosis, ECG interpretation, and clinical management strategies."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/cardiology"> <!-- Open Graph --> <meta property="og:title" content="Cardiology | Deep Medicine"> <meta property="og:description" content="Cardiovascular diseases, ECG, and clinical cardiology management guide."> <meta property="og:image" content="https://deepmedicine.in/images/cardiology.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+.font-heading { font-family: 'Literata', serif; }
+.card-glow { box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 4px 24px rgba(0,0,0,0.25); }
+.tab-active { background: var(--clr-primary); color: #fff; }
+.tab-inactive { background: transparent; color: var(--clr-text); border: 1px solid var(--clr-surface); }
+.tab-inactive:hover { background: var(--clr-surface); }
+.disease-card { transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+.disease-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+.fade-in { animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.pulse-dot { animation: pulse-dot 1.5s infinite; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+.detail-section { border-left: 3px solid var(--clr-primary); padding-left: 16px; margin-bottom: 20px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full overflow-auto" style="background: var(--clr-bg); color: var(--clr-text);">
+  <div id="app" class="w-full h-full flex flex-col"><!-- Header -->
+   <header class="w-full px-4 sm:px-6 lg:px-8 py-5 flex-shrink-0" style="background: var(--clr-surface);">
+    <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-3">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: var(--clr-primary);">
+       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+       </svg>
+      </div>
+      <div>
+       <h1 id="app-title" class="font-heading text-lg sm:text-xl font-700 leading-tight">Cardiology Disease Reference</h1>
+       <p id="app-subtitle" class="text-xs opacity-60">Evidence-Based Clinical Guide</p>
+      </div>
+     </div>
+     <div class="relative flex-1 min-w-[180px] max-w-xs"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 opacity-50"></i> <input id="search-input" type="text" placeholder="Search diseases..." class="w-full pl-9 pr-3 py-2 rounded-lg text-sm outline-none focus:ring-2" style="background: var(--clr-bg); color: var(--clr-text); border: 1px solid rgba(255,255,255,0.1);" aria-label="Search diseases">
+     </div>
+    </div>
+   </header><!-- Category Tabs -->
+   <nav class="w-full px-4 sm:px-6 lg:px-8 py-3 flex-shrink-0 overflow-x-auto" role="tablist" aria-label="Disease categories">
+    <div id="category-tabs" class="max-w-7xl mx-auto flex gap-2 flex-nowrap"></div>
+   </nav><!-- Main Content -->
+   <main class="flex-1 overflow-auto px-4 sm:px-6 lg:px-8 pb-8">
+    <div class="max-w-7xl mx-auto"><!-- Disease Grid -->
+     <div id="disease-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div><!-- Disease Detail View -->
+     <div id="disease-detail" class="hidden fade-in"></div>
+    </div>
+   </main>
+  </div>
+  <script>
+// ── Clinical Data ──
+const DISEASES = [
+  {
+    id: "cad", cat: "Ischemic", name: "Coronary Artery Disease", icon: "heart", urgency: "chronic",
+    aka: "Atherosclerotic Heart Disease, IHD",
+    epidemiology: "Leading cause of death worldwide. Prevalence increases with age; affects ~7% of adults globally. Male predominance until menopause, then equalizes.",
+    pathophysiology: "Atherosclerotic plaque formation in coronary arteries → progressive luminal narrowing → myocardial ischemia. Endothelial dysfunction, lipid deposition, inflammatory cell infiltration, smooth muscle proliferation, and fibrous cap formation. Plaque rupture/erosion → acute thrombosis → ACS.",
+    risk_factors: ["Hypertension", "Dyslipidemia (↑LDL, ↓HDL)", "Diabetes Mellitus", "Smoking", "Family Hx of premature CAD", "Obesity / Metabolic Syndrome", "Sedentary lifestyle", "Age (M>45, F>55)", "Chronic kidney disease"],
+    clinical_features: "Stable angina: exertional chest pain relieved by rest/nitrates (< 20 min). Atypical presentations common in women, elderly, diabetics (dyspnea, fatigue, epigastric pain). May present as ACS — STEMI, NSTEMI, or unstable angina.",
+    diagnosis: ["ECG (ST changes, Q waves)", "Troponin I/T (serial)", "Exercise Stress Test (TMT)", "Stress Echocardiography", "CT Coronary Angiography (CTCA)", "Invasive Coronary Angiography (gold standard)", "Lipid profile, HbA1c, CRP", "Calcium scoring (Agatston)"],
+    treatment: "Lifestyle: smoking cessation, DASH diet, 150 min/wk exercise. Medical: Aspirin 75mg + Statin (high-intensity) + Beta-blocker ± ACEi/ARB. Sublingual NTG for acute angina. Dual antiplatelet (DAPT) post-ACS/PCI. Revascularization: PCI with DES for 1-2 vessel disease; CABG for left main/3-vessel disease (SYNTAX score guided).",
+    complications: ["Acute MI / ACS", "Heart Failure (ischemic cardiomyopathy)", "Arrhythmias (VT/VF)", "Mitral regurgitation (papillary muscle dysfunction)", "Ventricular aneurysm", "Sudden cardiac death"],
+    prognosis: "Depends on LV function, vessel involvement, and comorbidities. 5-year mortality: stable CAD 2-5%; post-MI with preserved EF ~5%; post-MI with reduced EF 15-20%."
+  },
+  {
+    id: "ami", cat: "Ischemic", name: "Acute Myocardial Infarction", icon: "zap", urgency: "emergency",
+    aka: "Heart Attack, STEMI / NSTEMI",
+    epidemiology: "~800,000 events/year in the US. Peak incidence 65-74 years. STEMI accounts for ~30-40% of MI presentations. In-hospital mortality 5-8% (STEMI).",
+    pathophysiology: "Acute coronary plaque rupture or erosion → platelet aggregation → thrombus formation → coronary occlusion → transmural ischemia (STEMI: complete occlusion; NSTEMI: subtotal/intermittent). Myocardial necrosis begins within 20-30 min, progresses wavefront from endocardium to epicardium.",
+    risk_factors: ["All CAD risk factors", "Cocaine/amphetamine use", "Vasculitis (Kawasaki, Takayasu)", "Spontaneous coronary artery dissection (SCAD)", "Coronary embolism", "Hypercoagulable states"],
+    clinical_features: "Severe retrosternal crushing/squeezing chest pain >20 min, radiating to left arm/jaw/back. Associated diaphoresis, nausea, dyspnea, sense of doom. Levine's sign. Killip classification for severity. Atypical: epigastric pain, syncope, isolated dyspnea. Silent MI in diabetics.",
+    diagnosis: ["12-lead ECG within 10 min (ST elevation ≥1mm in 2 contiguous leads, or new LBBB)", "Serial high-sensitivity Troponin (0h, 3h; 0/1h rapid rule-out)", "STEMI: no delay for labs → cath lab", "Echo: regional wall motion abnormality", "GRACE / TIMI risk scores", "CBC, BMP, coagulation, BNP"],
+    treatment: "STEMI: Primary PCI within 90 min (door-to-balloon) — gold standard. If PCI unavailable <120 min: fibrinolysis (tPA/TNK) within 30 min. NSTEMI: Early invasive strategy (angiography within 24h) for high-risk; conservative for low-risk. All: MONA (Morphine if pain, O₂ if SpO₂<90%, NTG, Aspirin 325mg loading). DAPT: Aspirin + Ticagrelor/Prasugrel (12 months). Heparin (UFH/enoxaparin). Beta-blocker within 24h (if stable). ACEi/ARB, high-intensity statin. Cardiac rehab.",
+    complications: ["Cardiogenic shock (Killip IV)", "Ventricular arrhythmias (VT/VF)", "Mechanical: free wall rupture, VSD, papillary muscle rupture", "Pericarditis (Dressler syndrome)", "LV thrombus → embolism", "Heart failure"],
+    prognosis: "Primary PCI: in-hospital mortality 3-5%. Fibrinolysis: 6-8%. Cardiogenic shock: 40-50% mortality. Long-term: depends on EF, completeness of revascularization."
+  },
+  {
+    id: "hf", cat: "Heart Failure", name: "Congestive Heart Failure", icon: "droplets", urgency: "chronic",
+    aka: "CHF, HFrEF, HFpEF, HFmrEF",
+    epidemiology: "~64 million affected worldwide. Lifetime risk ~20% at age 40. Prevalence increases exponentially with age. HFpEF now accounts for ~50% of HF cases. 5-year mortality ~50%.",
+    pathophysiology: "HFrEF (EF ≤40%): myocardial injury → reduced contractility → neurohormonal activation (RAAS, SNS) → maladaptive remodeling → progressive dilation. HFpEF (EF ≥50%): diastolic dysfunction from fibrosis, hypertrophy, stiffness → impaired relaxation/filling → elevated filling pressures. HFmrEF (EF 41-49%): intermediate phenotype.",
+    risk_factors: ["CAD / prior MI (most common cause HFrEF)", "Hypertension (most common cause HFpEF)", "Valvular heart disease", "Diabetes", "Obesity", "Cardiomyopathies", "Cardiotoxic drugs (doxorubicin)", "Alcohol abuse", "Thyroid disease", "Tachycardia-mediated"],
+    clinical_features: "Left-sided: dyspnea (exertional → orthopnea → PND), fatigue, cough, pulmonary crackles, S3 gallop. Right-sided: JVP elevation, hepatomegaly, peripheral edema, ascites, hepatojugular reflux. NYHA Classification: I (no limitation) → IV (symptoms at rest). Acute decompensation: flash pulmonary edema, respiratory distress.",
+    diagnosis: ["BNP >100 pg/mL or NT-proBNP >300 pg/mL", "Echocardiography (EF, diastolic function, valves, wall motion)", "Chest X-ray (cardiomegaly, Kerley B lines, cephalization, pleural effusion)", "ECG (LVH, prior MI, arrhythmias, LBBB)", "CBC, BMP (renal function, electrolytes), LFTs, TSH, iron studies, HbA1c", "Cardiac MRI (etiology, viability)", "Coronary angiography if ischemic etiology suspected", "Right heart catheterization (hemodynamics)"],
+    treatment: "HFrEF (Guideline-Directed Medical Therapy - GDMT): 4 pillars — (1) ACEi/ARB/ARNI (sacubitril-valsartan), (2) Beta-blocker (carvedilol, metoprolol succinate, bisoprolol), (3) MRA (spironolactone/eplerenone), (4) SGLT2i (dapagliflozin/empagliflozin). Diuretics (furosemide) for congestion. Hydralazine + isosorbide dinitrate (A-HeFT) in Black patients. Ivabradine if HR >70. Device therapy: ICD (primary prevention if EF ≤35%), CRT if LBBB + QRS ≥150ms. Advanced: LVAD, transplant. HFpEF: SGLT2i (EMPEROR-Preserved, DELIVER), diuretics, treat comorbidities.",
+    complications: ["Acute decompensation", "Cardiogenic shock", "Atrial fibrillation", "Ventricular arrhythmias / SCD", "Renal failure (cardiorenal syndrome)", "Cardiac cachexia", "Thromboembolism"],
+    prognosis: "HFrEF with GDMT: significant mortality reduction (ARNI 20%, BB 35%, MRA 30%). Without treatment: median survival 1.7-3.2 years. HFpEF: annual mortality 5-8%. Frequent rehospitalization (25% at 30 days)."
+  },
+  {
+    id: "af", cat: "Arrhythmia", name: "Atrial Fibrillation", icon: "activity", urgency: "urgent",
+    aka: "AFib, AF",
+    epidemiology: "Most common sustained arrhythmia. Prevalence 2-4% in adults, rising to 10-17% in those >80 years. Lifetime risk ~37%. Associated with 5x increased stroke risk.",
+    pathophysiology: "Multiple wavelet re-entry and/or focal triggers (primarily from pulmonary veins) → chaotic atrial electrical activity → loss of organized atrial contraction → irregular ventricular response. Atrial remodeling: electrical (shortened refractory period), structural (fibrosis), and contractile. 'AF begets AF' — progressive substrate.",
+    risk_factors: ["Hypertension", "Heart failure", "Valvular disease (esp. mitral)", "Obesity", "OSA", "Thyroid disease", "Alcohol (holiday heart)", "Diabetes", "COPD", "Age", "Post-cardiac surgery"],
+    clinical_features: "Palpitations, irregular pulse, dyspnea, fatigue, dizziness, exercise intolerance. May be asymptomatic (detected incidentally). EHRA symptom score I-IV. Classification: paroxysmal (<7 days, self-terminating), persistent (>7 days), long-standing persistent (>12 months), permanent (accepted). Acute: rapid ventricular rate → hemodynamic compromise possible.",
+    diagnosis: ["ECG: absent P waves, irregularly irregular RR intervals, fibrillatory baseline", "Holter monitor / event recorder (paroxysmal AF)", "Echocardiography (LA size, LV function, valves)", "TSH (exclude thyrotoxicosis)", "CHA₂DS₂-VASc score (stroke risk)", "HAS-BLED score (bleeding risk)", "TEE (LA appendage thrombus pre-cardioversion)", "Implantable loop recorder (occult AF in cryptogenic stroke)"],
+    treatment: "Rate control: Beta-blocker (metoprolol, bisoprolol) or non-DHP CCB (diltiazem, verapamil); digoxin as add-on. Target resting HR <110 (lenient) or <80 (strict — RACE II). Rhythm control: Cardioversion (electrical or pharmacological — flecainide, amiodarone). Long-term: flecainide/propafenone (no structural HD), sotalol, amiodarone, dronedarone. Catheter ablation (PVI) — first-line in symptomatic paroxysmal AF (EARLY-AF, STOP-AF). Anticoagulation: CHA₂DS₂-VASc ≥2 (men) or ≥3 (women) → DOAC (apixaban, rivaroxaban, edoxaban, dabigatran) preferred over warfarin. LAA occlusion (Watchman) if anticoagulation contraindicated.",
+    complications: ["Ischemic stroke / TIA / systemic embolism", "Heart failure (tachycardia-mediated cardiomyopathy)", "Cognitive decline / dementia", "Reduced quality of life", "Bleeding from anticoagulation"],
+    prognosis: "AF independently doubles mortality. Stroke risk reduced ~65% with anticoagulation. Catheter ablation: 70-80% freedom from AF at 1 year (paroxysmal). Rate vs rhythm: similar mortality (AFFIRM), but early rhythm control beneficial (EAST-AFNET 4)."
+  },
+  {
+    id: "as", cat: "Valvular", name: "Aortic Stenosis", icon: "shield", urgency: "chronic",
+    aka: "AS, Calcific Aortic Valve Disease",
+    epidemiology: "Most common valvular disease requiring intervention. Prevalence 2-5% in >65 years. Degenerative calcific AS is the predominant etiology in developed countries. Bicuspid aortic valve (1-2% population) presents earlier.",
+    pathophysiology: "Progressive calcification and fibrosis of aortic valve cusps → reduced leaflet mobility → obstruction to LV outflow → pressure overload → concentric LVH → diastolic dysfunction → eventually systolic failure. Angina (↑O₂ demand, ↓coronary perfusion), syncope (fixed output + vasodilation), and heart failure represent the classic symptom triad.",
+    risk_factors: ["Age (degenerative)", "Bicuspid aortic valve (congenital)", "Rheumatic heart disease", "Chronic kidney disease / dialysis", "Radiation exposure", "Hyperlipidemia", "Hypertension"],
+    clinical_features: "Classic triad (onset = poor prognosis): Angina (5-yr survival), Syncope (3-yr), Dyspnea/HF (2-yr). Systolic crescendo-decrescendo murmur at RUSB → carotids. Pulsus parvus et tardus. Narrow pulse pressure. Soft/absent A2. S4 gallop (LVH). Heyde syndrome (AS + GI angiodysplasia bleeding). Gallavardin phenomenon (musical murmur at apex mimicking MR).",
+    diagnosis: ["Echocardiography (gold standard): valve area (severe <1.0 cm²), mean gradient (severe >40 mmHg), peak velocity (severe >4.0 m/s)", "Dobutamine stress echo (low-flow, low-gradient AS)", "CT calcium scoring (Agatston: severe >2000 men, >1200 women)", "Cardiac catheterization (invasive hemodynamics)", "BNP (prognostic marker)", "ECG: LVH, LAE"],
+    treatment: "No effective medical therapy to slow progression. Symptom management: cautious diuretics for HF (avoid over-diuresis). Surgical aortic valve replacement (SAVR): gold standard for low-surgical-risk symptomatic severe AS. Transcatheter aortic valve replacement (TAVR): intermediate/high-risk or inoperable (PARTNER, CoreValve trials). Now expanding to low-risk (PARTNER 3, Evolut Low Risk). Balloon aortic valvuloplasty: bridge to definitive therapy only. Timing: intervene at symptom onset or when asymptomatic with EF <50%, very severe AS (Vmax >5.5), or rapid progression.",
+    complications: ["Sudden cardiac death (1-2%/year in severe symptomatic)", "Heart failure", "Atrial fibrillation", "Infective endocarditis", "AV block (calcification extending to conduction system)", "GI bleeding (Heyde syndrome)"],
+    prognosis: "Asymptomatic severe AS: event-free survival ~80% at 2 years. After symptom onset without intervention: average survival 2-3 years. Post-SAVR/TAVR: excellent outcomes, 1-year mortality 1-3% (low risk)."
+  },
+  {
+    id: "hcm", cat: "Cardiomyopathy", name: "Hypertrophic Cardiomyopathy", icon: "maximize", urgency: "chronic",
+    aka: "HCM, HOCM, IHSS, ASH",
+    epidemiology: "Most common inherited cardiac disease: 1 in 500. Leading cause of sudden cardiac death in young athletes. Autosomal dominant with variable penetrance. >1500 mutations identified.",
+    pathophysiology: "Sarcomeric protein mutations (most common: β-myosin heavy chain, myosin-binding protein C) → disorganized myocyte hypertrophy → asymmetric septal hypertrophy (most common). LVOT obstruction (SAM of mitral valve) in ~70% (obstructive HCM). Diastolic dysfunction, microvascular ischemia, myocardial fibrosis. Dynamic obstruction worsens with ↓preload, ↓afterload, ↑contractility.",
+    risk_factors: ["Family history of HCM or sudden death", "Sarcomeric gene mutations", "Intense athletic training (unmasking phenotype)"],
+    clinical_features: "Often asymptomatic. Dyspnea (diastolic dysfunction), angina (microvascular), syncope/presyncope (LVOTO, arrhythmia), palpitations. Sudden death may be first presentation. Harsh systolic murmur at LLSB — increases with Valsalva, standing, exercise; decreases with squatting, leg elevation. Bisferiens pulse. S4. MR from SAM.",
+    diagnosis: ["Echocardiography: LV wall thickness ≥15mm (unexplained), SAM, LVOT gradient ≥30 mmHg (provoked ≥50), MR", "Cardiac MRI: extent/pattern of hypertrophy, LGE (fibrosis = SCD risk)", "Genetic testing (cascade family screening)", "ECG: LVH, deep T-wave inversions (apical HCM = giant TWI), Q waves (septal)", "Holter: NSVT (SCD risk factor)", "Exercise stress testing (BP response, provocable gradient)", "HCM Risk-SCD calculator (ESC)"],
+    treatment: "Avoid dehydration, strenuous exercise (competitive sports restriction — nuanced per AHA 2024). Medical: Beta-blockers (first-line) or verapamil (if BB contraindicated) for symptoms/obstruction. Disopyramide (add to BB for refractory obstruction). Mavacamten (EXPLORER-HCM): cardiac myosin inhibitor — first targeted therapy, reduces gradient and symptoms. Septal reduction: surgical myectomy (gold standard, experienced centers) or alcohol septal ablation. ICD: primary prevention if estimated 5-yr SCD risk ≥6% (ESC) or ≥1 major risk factor (AHA). Avoid: vasodilators, diuretics (cautious), digoxin, high-dose ACEi.",
+    complications: ["Sudden cardiac death", "Atrial fibrillation (stroke risk — anticoagulate regardless of CHA₂DS₂-VASc)", "Heart failure (burned-out phase → HFrEF)", "LVOT obstruction", "Infective endocarditis", "Ventricular arrhythmias"],
+    prognosis: "Annual mortality 0.5-1% (general HCM population). SCD risk stratification is critical. Most patients live normal lifespan with appropriate management. Mavacamten represents paradigm shift in treatment."
+  },
+  {
+    id: "dcm", cat: "Cardiomyopathy", name: "Dilated Cardiomyopathy", icon: "circle", urgency: "chronic",
+    aka: "DCM",
+    epidemiology: "Most common cardiomyopathy. Prevalence ~1 in 2500. Leading indication for heart transplantation. Male > Female (3:1). Genetic basis in 20-35% of cases.",
+    pathophysiology: "LV (± RV) dilation with impaired systolic function. Etiologies: idiopathic (most common), genetic (titin, lamin A/C mutations), viral myocarditis, alcohol, peripartum, tachycardia-mediated, drug-induced (doxorubicin), thyroid, autoimmune. Progressive ventricular remodeling, neurohormonal activation, myocyte apoptosis.",
+    risk_factors: ["Family history", "Alcohol abuse (>90g/day for >5 years)", "Viral infections (Coxsackie B, Parvovirus B19)", "Peripartum (last month to 5 months postpartum)", "Chemotherapy", "Cocaine", "Autoimmune disease"],
+    clinical_features: "Progressive heart failure symptoms: dyspnea, orthopnea, PND, fatigue, edema. Displaced PMI (laterally). S3 gallop. Functional MR/TR. May present with arrhythmia, thromboembolism, or sudden death.",
+    diagnosis: ["Echo: LV dilation (LVEDD >55mm), reduced EF (<40%), global hypokinesis", "Cardiac MRI: mid-wall LGE pattern, edema (myocarditis)", "Genetic testing (family screening, risk stratification — lamin A/C → high arrhythmia risk)", "Endomyocardial biopsy (selected cases: giant cell myocarditis, sarcoid)", "Labs: BNP, iron studies (hemochromatosis), TSH, HIV, ANA", "Coronary angiography (exclude ischemic etiology)"],
+    treatment: "Standard HFrEF GDMT: ARNI/ACEi/ARB + BB + MRA + SGLT2i. Diuretics for congestion. Anticoagulation if EF <30% with AF or LV thrombus. ICD if EF ≤35% after ≥3 months GDMT. CRT if LBBB + QRS ≥150ms. Treat underlying cause (alcohol abstinence, immunosuppression for myocarditis, thyroid correction). LVAD → transplant for end-stage. Peripartum: bromocriptine may be considered.",
+    complications: ["Progressive heart failure", "Sudden cardiac death", "Thromboembolism", "Atrial/ventricular arrhythmias", "Functional MR"],
+    prognosis: "Variable. With modern GDMT: 5-year survival ~80%. Lamin A/C mutations: worse prognosis (arrhythmia risk). Alcohol-related: may improve significantly with abstinence. Peripartum: ~50% recover LV function."
+  },
+  {
+    id: "ie", cat: "Infectious", name: "Infective Endocarditis", icon: "bug", urgency: "emergency",
+    aka: "IE, Bacterial Endocarditis, SBE/ABE",
+    epidemiology: "Incidence 3-10 per 100,000/year, increasing. In-hospital mortality 15-20%. Staphylococcus aureus now the most common cause (surpassing Streptococci). Increasing in IVDU and prosthetic valve patients.",
+    pathophysiology: "Endothelial damage → sterile thrombus (NBTE) → bacteremia → microbial colonization → vegetation formation (platelets, fibrin, organisms, inflammatory cells). Vegetations cause local tissue destruction (valvular regurgitation, abscess, fistula) and distal embolization (stroke, mycotic aneurysm, splenic/renal infarcts).",
+    risk_factors: ["Prosthetic heart valves", "Prior IE", "IVDU (tricuspid valve)", "Congenital heart disease", "Mitral valve prolapse with MR", "Rheumatic heart disease", "Degenerative valve disease", "Indwelling catheters / devices", "Poor dental hygiene", "Immunosuppression"],
+    clinical_features: "Fever (most common, 90%), new/changing murmur, constitutional symptoms (malaise, weight loss, night sweats). Embolic phenomena: Janeway lesions (painless, palms/soles), Osler nodes (painful, fingertips — immune complex), splinter hemorrhages, Roth spots (retinal), conjunctival petechiae. Stroke, mycotic aneurysm, glomerulonephritis, splenomegaly. Acute (S. aureus): rapid, fulminant. Subacute (Streptococci): indolent over weeks.",
+    diagnosis: ["Modified Duke Criteria (2 major, or 1 major + 3 minor, or 5 minor)", "Blood cultures × 3 sets from separate sites before antibiotics (positive = major criterion)", "Echocardiography: TTE first; TEE if prosthetic valve, TTE negative but high suspicion, or complications", "CRP, ESR, CBC (anemia, leukocytosis), urinalysis (hematuria)", "PET-CT (prosthetic valve IE, cardiac device infections)", "CT/MRI for embolic complications (brain, spleen, kidneys)"],
+    treatment: "Empiric IV antibiotics after blood cultures: native valve — vancomycin + gentamicin ± rifampin; prosthetic — vancomycin + gentamicin + rifampin. Targeted therapy based on cultures: Strep viridans (penicillin/ceftriaxone 4 wk); MSSA (nafcillin/oxacillin 6 wk); MRSA (vancomycin/daptomycin). Surgical indications: HF from valvular dysfunction, uncontrolled infection, abscess/fistula, recurrent embolism, large mobile vegetations (>10mm), prosthetic valve dehiscence, fungal IE. Early surgery improves outcomes in selected patients.",
+    complications: ["Heart failure (most common cause of death)", "Stroke / cerebral mycotic aneurysm", "Septic emboli (pulmonary in right-sided IE)", "Perivalvular abscess", "AV block (aortic root abscess)", "Glomerulonephritis", "Splenic abscess/infarction"],
+    prognosis: "Native valve: in-hospital mortality 15-20%; S. aureus 25-40%. Prosthetic valve: 20-40%. Right-sided (IVDU): lower mortality 5-10%. 5-year survival ~60-70%. Recurrence rate 2-6%."
+  },
+  {
+    id: "pe", cat: "Vascular", name: "Pulmonary Embolism", icon: "wind", urgency: "emergency",
+    aka: "PE, Pulmonary Thromboembolism",
+    epidemiology: "Third most common CV cause of death. Incidence ~100-200 per 100,000/year. 30-day mortality: massive PE 25-50%, submassive 3-15%, low-risk <1%. Often underdiagnosed.",
+    pathophysiology: "Thrombus from deep veins (DVT, typically lower extremities/pelvis) → embolizes to pulmonary arterial circulation → mechanical obstruction + humoral mediators → increased pulmonary vascular resistance → RV pressure overload → RV dilation/dysfunction → decreased LV filling (septal bowing) → hemodynamic compromise. V/Q mismatch → hypoxemia.",
+    risk_factors: ["Recent surgery/immobilization", "DVT history", "Malignancy", "Pregnancy/postpartum", "OCP/HRT", "Thrombophilia (Factor V Leiden, prothrombin mutation, antiphospholipid syndrome)", "Long-haul travel", "Obesity", "Heart failure", "Central venous catheters"],
+    clinical_features: "Acute dyspnea (most common), pleuritic chest pain, tachycardia, tachypnea, hemoptysis, syncope, hypotension (massive PE). Signs: RV heave, loud P2, JVD, tricuspid regurgitation murmur, leg swelling (concomitant DVT). Can present as PEA arrest. Massive PE: hypotension/shock. Submassive: normotensive + RV dysfunction.",
+    diagnosis: ["CTPA (CT Pulmonary Angiography): gold standard, sensitivity >95%", "D-dimer (age-adjusted: age × 10 if >50 yrs) — rule out if low/intermediate pre-test probability", "Wells Score / Geneva Score (pre-test probability)", "Echo: RV dilation, McConnell's sign (RV free wall akinesis with apical sparing), D-shaped septum", "Troponin, BNP (risk stratification)", "V/Q scan (if CT contraindicated)", "CTA: saddle embolus = bilateral proximal PA", "Lower extremity duplex ultrasound"],
+    treatment: "Anticoagulation (all confirmed PE): DOAC (rivaroxaban or apixaban preferred) or LMWH → warfarin. Duration: provoked 3 months; unprovoked ≥3 months (consider indefinite). Massive PE: systemic thrombolysis (alteplase 100mg/2hr), or catheter-directed therapy, or surgical embolectomy. Submassive PE: anticoagulation ± escalation (close monitoring, CDT if deteriorating). IVC filter: only if absolute anticoagulation contraindication. Supportive: O₂, IV fluids (cautious 250-500ml boluses), vasopressors if shock.",
+    complications: ["Death (massive PE)", "Chronic thromboembolic pulmonary hypertension (CTEPH) — 2-4%", "Recurrent VTE", "Post-PE syndrome (persistent dyspnea, exercise intolerance)", "Right heart failure", "Anticoagulant-related bleeding"],
+    prognosis: "Low-risk (PESI I-II): mortality <1%. Submassive: 3-15%. Massive: 25-50%. CTEPH develops in 2-4%, requires evaluation if persistent symptoms. DOAC era: recurrence rate ~2%/year on treatment."
+  },
+  {
+    id: "ao_dissect", cat: "Vascular", name: "Aortic Dissection", icon: "split", urgency: "emergency",
+    aka: "Acute Aortic Syndrome",
+    epidemiology: "Incidence 3-5 per 100,000/year. Male predominance (65%). Peak age 60-70 years. Type A more common (60-65%). Untreated Type A mortality: 1-2% per hour in first 48 hours.",
+    pathophysiology: "Intimal tear → blood enters media → creates false lumen propagating antegrade/retrograde. Stanford: Type A (involves ascending aorta ± arch — surgical emergency), Type B (descending aorta only — medical management unless complicated). DeBakey: I (ascending + descending), II (ascending only), III (descending only). Can cause malperfusion of branch vessels.",
+    risk_factors: ["Hypertension (most important, 70%)", "Connective tissue disorders (Marfan, Ehlers-Danlos type IV, Loeys-Dietz)", "Bicuspid aortic valve", "Turner syndrome", "Aortic coarctation", "Prior cardiac surgery", "Fluoroquinolone use", "Cocaine/amphetamine", "Pregnancy (3rd trimester)", "Giant cell arteritis"],
+    clinical_features: "Sudden-onset severe 'tearing/ripping' chest/back pain — classically migratory (following dissection path). Type A: anterior chest; Type B: interscapular. Pulse deficits, blood pressure differential between arms (>20 mmHg). Aortic regurgitation (Type A). Malperfusion syndromes: stroke (carotid), MI (coronary ostia), paraplegia (spinal arteries), mesenteric ischemia, renal failure, limb ischemia.",
+    diagnosis: ["CT Angiography (CTA): gold standard — intimal flap, true and false lumens, extent. Sensitivity/specificity >95%", "TEE: excellent for Type A (intraoperative); intimal flap visualization", "D-dimer: elevated (>500 ng/mL); useful to rule out if low probability", "CXR: widened mediastinum (62%), abnormal aortic contour, left pleural effusion", "MRA: excellent but time-consuming, for stable chronic dissection", "ECG: may show LVH, ischemic changes (beware: coronary involvement may mimic STEMI)"],
+    treatment: "Type A: emergent surgical repair (ascending aorta replacement ± arch, ± valve). Type B uncomplicated: medical management — IV beta-blocker first (esmolol, labetalol) to HR <60 and SBP 100-120. Then add vasodilators if needed (nicardipine, nitroprusside — never before BB). Type B complicated (malperfusion, rupture, rapid expansion): TEVAR (thoracic endovascular aortic repair). Long-term: aggressive BP control (BB + ACEi/ARB), serial imaging (CTA/MRA at 1, 3, 6, 12 months then annually), genetic testing if connective tissue disorder suspected.",
+    complications: ["Death (rupture, tamponade, malperfusion)", "Aortic regurgitation", "Cardiac tamponade (Type A)", "Stroke", "MI", "Mesenteric ischemia", "Renal failure", "Limb ischemia", "Aortic aneurysm formation"],
+    prognosis: "Type A surgical repair: in-hospital mortality 10-25%. Type A without surgery: >50% mortality at 48 hours. Type B uncomplicated: 10% in-hospital mortality. Type B with TEVAR: improved outcomes for complicated cases. Long-term surveillance essential."
+  },
+  {
+    id: "htn", cat: "Vascular", name: "Hypertension", icon: "gauge", urgency: "chronic",
+    aka: "HTN, High Blood Pressure",
+    epidemiology: "~1.3 billion adults globally. Leading modifiable risk factor for cardiovascular disease. Prevalence ~30-45% in adults. Only ~50% are aware, and <20% adequately controlled globally.",
+    pathophysiology: "Essential (primary) HTN (90-95%): multifactorial — genetic predisposition + environmental factors → increased peripheral vascular resistance ± increased cardiac output. Involves RAAS activation, sympathetic overactivity, endothelial dysfunction, oxidative stress, renal sodium handling impairment. Secondary HTN (5-10%): renal artery stenosis, primary aldosteronism, pheochromocytoma, Cushing's, coarctation, OSA, thyroid/parathyroid disease.",
+    risk_factors: ["Age", "Family history", "Obesity", "High sodium intake", "Physical inactivity", "Alcohol excess", "Smoking", "Chronic kidney disease", "Sleep apnea", "Diabetes", "African descent"],
+    clinical_features: "Usually asymptomatic ('silent killer'). Severe/crisis: headache (occipital, morning), visual disturbances, epistaxis, chest pain, dyspnea. Hypertensive emergency (>180/120 with organ damage): encephalopathy, papilledema, AKI, aortic dissection, acute HF/pulmonary edema, eclampsia. Target organ damage: LVH, retinopathy (Keith-Wagener-Barker grades), nephropathy (albuminuria), cerebrovascular disease.",
+    diagnosis: ["Office BP (≥140/90 mmHg — ESC; ≥130/80 — ACC/AHA 2017)", "Ambulatory BP monitoring (ABPM) — gold standard for diagnosis, white coat HTN, masked HTN", "Home BP monitoring (≥135/85)", "Basic evaluation: BMP (creatinine, potassium, glucose), urinalysis, lipid panel, ECG", "Secondary screening if suspected: renal artery duplex, aldosterone/renin ratio, 24-hr urine catecholamines/metanephrines, TSH, cortisol, sleep study", "Assess total CV risk: SCORE2, ASCVD risk"],
+    treatment: "Lifestyle (all patients): DASH diet, sodium <2g/day, regular exercise (150 min/wk), weight loss, moderate alcohol, smoking cessation. Pharmacologic: ACEi/ARB (first-line, especially with DM, CKD, HF), CCB (amlodipine — especially in elderly, Black patients), Thiazide/thiazide-like diuretics (chlorthalidone, indapamide). Most patients need ≥2 drugs. Single-pill combinations improve adherence. Resistant HTN (≥3 drugs including diuretic): add spironolactone (PATHWAY-2). Hypertensive emergency: IV labetalol, nicardipine, nitroprusside — reduce MAP by 25% in first hour. Target: <130/80 for most; <140/90 in elderly >65.",
+    complications: ["Stroke (ischemic/hemorrhagic)", "Coronary artery disease / MI", "Heart failure (HFpEF, HFrEF)", "Chronic kidney disease", "Peripheral arterial disease", "Aortic aneurysm/dissection", "Retinopathy", "Vascular dementia"],
+    prognosis: "10 mmHg SBP reduction → ~20% reduction in major CV events, 27% stroke reduction, 28% HF reduction. Adequate control reduces all-cause mortality significantly. Resistant HTN: evaluate for secondary causes and medication adherence."
+  },
+  {
+    id: "pericarditis", cat: "Pericardial", name: "Acute Pericarditis", icon: "layers", urgency: "urgent",
+    aka: "Pericarditis",
+    epidemiology: "~5% of non-ischemic chest pain ED presentations. Male > Female (3:1). Peak incidence 20-50 years. Recurrence rate 15-30% after first episode.",
+    pathophysiology: "Inflammation of pericardium. Etiologies: idiopathic/viral (most common — Coxsackie, EBV, CMV), post-MI (early: peri-infarction pericarditis; late: Dressler syndrome 2-10 weeks), autoimmune (SLE, RA), uremic, neoplastic, tuberculous (common in endemic areas), post-cardiac surgery (postpericardiotomy syndrome), radiation, drug-induced.",
+    risk_factors: ["Recent viral illness", "Post-MI", "Post-cardiac surgery", "Autoimmune disease", "Uremia/ESRD", "Malignancy", "Tuberculosis (endemic regions)", "Radiation therapy"],
+    clinical_features: "Sharp, pleuritic chest pain — worse lying flat, improved sitting forward (pathognomonic position). May radiate to trapezius ridge (phrenic nerve irritation — highly specific). Pericardial friction rub (scratchy, 3-component: atrial systole, ventricular systole, early diastole — best at LLSB, end-expiration, leaning forward). Fever, malaise. Tamponade: Beck's triad (hypotension, JVD, muffled heart sounds), pulsus paradoxus >10 mmHg.",
+    diagnosis: ["ECG: diffuse concave-up ST elevation + PR depression (stage I); ST normalization (II); T-wave inversions (III); normalization (IV). PR elevation in aVR. No reciprocal changes (differentiates from STEMI)", "Echocardiography: pericardial effusion, tamponade physiology (RA/RV diastolic collapse, IVC plethora, respiratory variation)", "Inflammatory markers: CRP (elevated, guides treatment duration), ESR", "Troponin (elevated in myopericarditis)", "CXR: enlarged cardiac silhouette if large effusion (>250ml = 'water bottle heart')", "CT/MRI: pericardial thickening, enhancement (inflammation), effusion quantification"],
+    treatment: "First-line: Aspirin (750-1000mg TID) or Ibuprofen (600mg TID) × 1-2 weeks, tapered over weeks. PLUS Colchicine 0.5mg BID (if >70kg) or 0.5mg daily (if ≤70kg) × 3 months — reduces recurrence by 50% (COPE, ICAP trials). If refractory or autoimmune: low-dose corticosteroids (prednisone 0.2-0.5 mg/kg), slow taper. Avoid steroids in first episode (increases recurrence). Anakinra (IL-1 receptor antagonist) for colchicine-resistant recurrent pericarditis (AIRTRIP trial). Pericardiocentesis: for tamponade or diagnostic (TB, neoplastic). Pericardiectomy: constrictive pericarditis. Activity restriction until symptoms resolved and CRP normalized.",
+    complications: ["Cardiac tamponade", "Constrictive pericarditis (1-2% idiopathic; higher with TB, bacterial)", "Recurrent pericarditis (15-30%)", "Myopericarditis (if troponin elevated / wall motion abnormality)", "Chronic pericardial effusion"],
+    prognosis: "Idiopathic/viral: excellent, >90% resolve completely. Colchicine reduces recurrence from 30% to 15%. Predictors of poor outcome: fever >38°C, large effusion, tamponade, failure to respond to NSAIDs within 1 week, immunosuppression, trauma, oral anticoagulation. TB/purulent pericarditis: higher mortality without treatment."
+  }
+];
+
+const CATEGORIES = ["All", ...new Set(DISEASES.map(d => d.cat))];
+const URGENCY_COLORS = { emergency: "#ef4444", urgent: "#f59e0b", chronic: "#22c55e" };
+const URGENCY_LABELS = { emergency: "Emergency", urgent: "Urgent", chronic: "Chronic" };
+
+// ── State ──
+let currentCategory = "All";
+let currentSearch = "";
+let currentDiseaseId = null;
+let allData = [];
+
+// ── Default Config ──
+const defaultConfig = {
+  background_color: "#0f1117",
+  surface_color: "#1a1d2e",
+  text_color: "#e2e4ed",
+  primary_color: "#e05555",
+  secondary_color: "#6c7293",
+  font_family: "DM Sans",
+  font_size: 15,
+  app_title: "Cardiology Disease Reference",
+  subtitle_text: "Evidence-Based Clinical Guide"
+};
+
+function applyColors(config) {
+  const r = document.documentElement;
+  r.style.setProperty('--clr-bg', config.background_color || defaultConfig.background_color);
+  r.style.setProperty('--clr-surface', config.surface_color || defaultConfig.surface_color);
+  r.style.setProperty('--clr-text', config.text_color || defaultConfig.text_color);
+  r.style.setProperty('--clr-primary', config.primary_color || defaultConfig.primary_color);
+  r.style.setProperty('--clr-secondary', config.secondary_color || defaultConfig.secondary_color);
+  document.body.style.background = config.background_color || defaultConfig.background_color;
+  document.body.style.color = config.text_color || defaultConfig.text_color;
+}
+
+function applyFonts(config) {
+  const ff = config.font_family || defaultConfig.font_family;
+  const fs = config.font_size || defaultConfig.font_size;
+  document.body.style.fontFamily = `${ff}, DM Sans, sans-serif`;
+  document.body.style.fontSize = `${fs}px`;
+  document.querySelectorAll('.font-heading').forEach(el => {
+    el.style.fontFamily = `${ff}, Literata, serif`;
+  });
+}
+
+function applyText(config) {
+  document.getElementById('app-title').textContent = config.app_title || defaultConfig.app_title;
+  document.getElementById('app-subtitle').textContent = config.subtitle_text || defaultConfig.subtitle_text;
+}
+
+// ── Rendering ──
+function renderTabs() {
+  const container = document.getElementById('category-tabs');
+  container.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.textContent = cat;
+    btn.className = `px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${currentCategory === cat ? 'tab-active' : 'tab-inactive'}`;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', currentCategory === cat);
+    btn.onclick = () => { currentCategory = cat; currentDiseaseId = null; renderTabs(); renderContent(); };
+    container.appendChild(btn);
+  });
+}
+
+function getFiltered() {
+  let list = DISEASES;
+  if (currentCategory !== "All") list = list.filter(d => d.cat === currentCategory);
+  if (currentSearch.trim()) {
+    const q = currentSearch.toLowerCase();
+    list = list.filter(d => d.name.toLowerCase().includes(q) || d.aka.toLowerCase().includes(q) || d.cat.toLowerCase().includes(q));
+  }
+  return list;
+}
+
+function renderContent() {
+  const grid = document.getElementById('disease-grid');
+  const detail = document.getElementById('disease-detail');
+  if (currentDiseaseId) {
+    grid.classList.add('hidden');
+    detail.classList.remove('hidden');
+    renderDetail(DISEASES.find(d => d.id === currentDiseaseId));
+  } else {
+    grid.classList.remove('hidden');
+    detail.classList.add('hidden');
+    renderGrid(getFiltered());
+  }
+}
+
+function renderGrid(diseases) {
+  const grid = document.getElementById('disease-grid');
+  grid.innerHTML = '';
+  if (!diseases.length) {
+    grid.innerHTML = `<div class="col-span-full text-center py-16 opacity-50"><i data-lucide="search-x" class="mx-auto mb-3 w-10 h-10"></i><p>No diseases found</p></div>`;
+    lucide.createIcons();
+    return;
+  }
+  diseases.forEach((d, i) => {
+    const card = document.createElement('div');
+    card.className = 'disease-card rounded-xl p-5 fade-in';
+    card.style.background = 'var(--clr-surface)';
+    card.style.animationDelay = `${i * 50}ms`;
+    card.style.animationFillMode = 'both';
+    card.innerHTML = `
+      <div class="flex items-start justify-between mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:${URGENCY_COLORS[d.urgency]}22;">
+          <i data-lucide="${d.icon}" style="color:${URGENCY_COLORS[d.urgency]}; width:20px; height:20px;"></i>
+        </div>
+        <span class="text-xs font-semibold px-2.5 py-1 rounded-full" style="background:${URGENCY_COLORS[d.urgency]}22; color:${URGENCY_COLORS[d.urgency]}">${URGENCY_LABELS[d.urgency]}</span>
+      </div>
+      <h3 class="font-heading font-semibold text-base mb-1">${d.name}</h3>
+      <p class="text-xs opacity-50 mb-3">${d.aka}</p>
+      <p class="text-xs opacity-70 leading-relaxed line-clamp-2" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${d.clinical_features.substring(0, 120)}...</p>
+      <div class="flex items-center gap-2 mt-4 pt-3" style="border-top:1px solid rgba(255,255,255,0.06)">
+        <span class="text-xs px-2 py-0.5 rounded" style="background:var(--clr-bg)">${d.cat}</span>
+        <span class="text-xs opacity-40 ml-auto">Tap to view →</span>
+      </div>`;
+    card.onclick = () => { currentDiseaseId = d.id; renderContent(); window.scrollTo(0, 0); };
+    grid.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+function renderDetail(d) {
+  const detail = document.getElementById('disease-detail');
+  const sections = [
+    { title: "Epidemiology", icon: "bar-chart-3", content: `<p>${d.epidemiology}</p>` },
+    { title: "Pathophysiology", icon: "git-branch", content: `<p>${d.pathophysiology}</p>` },
+    { title: "Risk Factors", icon: "alert-triangle", content: `<ul class="list-disc list-inside space-y-1">${d.risk_factors.map(r => `<li>${r}</li>`).join('')}</ul>` },
+    { title: "Clinical Features", icon: "stethoscope", content: `<p>${d.clinical_features}</p>` },
+    { title: "Diagnosis", icon: "clipboard-list", content: `<ul class="space-y-1.5">${d.diagnosis.map(x => `<li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 pulse-dot" style="background:var(--clr-primary)"></span><span>${x}</span></li>`).join('')}</ul>` },
+    { title: "Treatment", icon: "pill", content: `<p>${d.treatment}</p>` },
+    { title: "Complications", icon: "alert-circle", content: `<ul class="list-disc list-inside space-y-1">${d.complications.map(c => `<li>${c}</li>`).join('')}</ul>` },
+    { title: "Prognosis", icon: "trending-up", content: `<p>${d.prognosis}</p>` }
+  ];
+
+  detail.innerHTML = `
+    <div class="fade-in">
+      <button id="back-btn" class="flex items-center gap-2 mb-5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors hover:opacity-80" style="background:var(--clr-surface)">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> All Diseases
+      </button>
+      <div class="rounded-xl p-5 sm:p-7 mb-5" style="background:var(--clr-surface)">
+        <div class="flex items-center gap-3 mb-1 flex-wrap">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:${URGENCY_COLORS[d.urgency]}22;">
+            <i data-lucide="${d.icon}" style="color:${URGENCY_COLORS[d.urgency]}; width:22px; height:22px;"></i>
+          </div>
+          <div>
+            <h2 class="font-heading text-xl sm:text-2xl font-bold">${d.name}</h2>
+            <p class="text-xs opacity-50">${d.aka}</p>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full ml-auto" style="background:${URGENCY_COLORS[d.urgency]}22; color:${URGENCY_COLORS[d.urgency]}">${URGENCY_LABELS[d.urgency]}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        ${sections.map(s => `
+          <div class="rounded-xl p-5" style="background:var(--clr-surface)">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="${s.icon}" class="w-4 h-4" style="color:var(--clr-primary)"></i>
+              <h3 class="font-heading font-semibold text-sm" style="color:var(--clr-primary)">${s.title}</h3>
+            </div>
+            <div class="text-sm leading-relaxed opacity-85">${s.content}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+
+  document.getElementById('back-btn').onclick = () => { currentDiseaseId = null; renderContent(); };
+  lucide.createIcons();
+}
+
+// ── Search ──
+document.getElementById('search-input').addEventListener('input', (e) => {
+  currentSearch = e.target.value;
+  currentDiseaseId = null;
+  renderContent();
+});
+
+// ── Init ──
+applyColors(defaultConfig);
+applyFonts(defaultConfig);
+renderTabs();
+renderContent();
+lucide.createIcons();
+</script>
+</body>
+</html>
