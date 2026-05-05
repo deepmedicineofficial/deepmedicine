@@ -1,0 +1,719 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Concept Maps | Visual Learning & Clinical Connections | Deep Medicine</title> <meta name="description" content="Concept maps for visual learning, linking medical concepts, clinical pathways, and structured understanding for better retention."> <link rel="canonical" href="https://deepmedicine.in/learning/tools/concept-maps"> <!-- Open Graph --> <meta property="og:title" content="Concept Maps | Deep Medicine"> <meta property="og:description" content="Visual concept maps to connect medical knowledge and improve understanding."> <meta property="og:image" content="https://deepmedicine.in/images/concept-maps.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { font-family: 'Source Sans 3', sans-serif; }
+    .heading-font { font-family: 'Crimson Pro', serif; }
+    .category-btn.active { transform: scale(1.02); }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 3px; }
+    .badge { font-size: 0.65rem; padding: 2px 6px; border-radius: 9999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    /* Tree Diagram Styles */
+    .tree-container { overflow-x: auto; padding: 20px 0; }
+    .tree-diagram { display: flex; justify-content: center; gap: 20px; padding: 40px 20px; position: relative; min-height: 600px; }
+    .tree-column { display: flex; flex-direction: column; gap: 16px; position: relative; }
+    .tree-node { background: rgba(30,41,59,0.8); border: 1px solid rgba(148,163,184,0.3); border-radius: 8px; padding: 12px; min-width: 140px; text-align: center; transition: all 0.3s ease; cursor: pointer; }
+    .tree-node:hover { border-color: rgba(148,163,184,0.8); box-shadow: 0 0 20px rgba(251,191,36,0.2); transform: scale(1.05); }
+    .tree-node.root { border: 2px solid; font-weight: bold; padding: 14px; min-width: 180px; }
+    .tree-node.section { border-left: 3px solid; min-width: 160px; }
+    .tree-node.detail { font-size: 0.8rem; min-width: 130px; opacity: 0.9; }
+    .tree-connector { position: absolute; background: rgba(148,163,184,0.3); }
+    .tree-connector.h { height: 2px; }
+    .tree-connector.v { width: 2px; }
+    .tree-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 4px; }
+    .expand-btn { font-size: 0.8rem; margin-top: 6px; padding: 4px 8px; border-radius: 4px; border: 1px solid; background: transparent; cursor: pointer; transition: all 0.2s; }
+    .expand-btn:hover { background: rgba(251,191,36,0.1); }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slate900: '#0f172a',
+            slate800: '#1e293b',
+            slate700: '#334155',
+            amber400: '#fbbf24',
+            emerald400: '#34d399'
+          }
+        }
+      }
+    }
+  </script>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #0f172a 100%);">
+   <!-- Header -->
+   <header class="sticky top-0 z-50 backdrop-blur-md border-b border-slate-700/50" style="background: rgba(15,23,42,0.9);">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:py-5">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+       <i data-lucide="activity" style="width:22px;height:22px;color:#0f172a;"></i>
+      </div>
+      <div>
+       <h1 id="main-title" class="heading-font text-xl sm:text-2xl font-bold text-white">Medical Disease Concept Maps</h1>
+       <p id="subtitle" class="text-xs sm:text-sm text-slate-400">Clinically Accurate Reference</p>
+      </div>
+     </div>
+    </div>
+   </header><!-- Category Navigation -->
+   <nav class="sticky top-[73px] z-40 backdrop-blur-md border-b border-slate-700/30" style="background: rgba(15,23,42,0.85);">
+    <div class="max-w-7xl mx-auto px-4 py-3 overflow-x-auto">
+     <div id="category-nav" class="flex gap-2 min-w-max"></div>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-7xl mx-auto px-4 py-6">
+    <!-- Category Title -->
+    <div id="category-header" class="mb-6 fade-in">
+     <h2 id="cat-title" class="heading-font text-2xl sm:text-3xl font-bold text-white"></h2>
+     <p id="cat-desc" class="text-slate-400 mt-1 text-sm"></p>
+    </div><!-- Tree Diagram Container -->
+    <div id="disease-container" class="space-y-8"></div>
+   </main><!-- Footer -->
+   <footer class="border-t border-slate-700/30 mt-8">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-center">
+     <p class="text-slate-500 text-xs">For educational reference only. Always consult clinical guidelines for patient care.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// Medical Data
+const medicalData = {
+  cardiovascular: {
+    name: "Cardiovascular",
+    icon: "heart",
+    color: "#ef4444",
+    desc: "Diseases of the heart and blood vessels",
+    diseases: [
+      {
+        name: "Acute Myocardial Infarction (STEMI/NSTEMI)",
+        etiology: ["Atherosclerotic plaque rupture", "Coronary artery thrombosis", "Risk: HTN, DM, Smoking, Dyslipidemia"],
+        pathophysiology: ["Plaque erosion/rupture → Platelet aggregation → Thrombus formation → Myocardial ischemia → Necrosis (coagulative)"],
+        clinical: ["Crushing substernal chest pain >20min", "Radiation to left arm/jaw", "Diaphoresis, nausea, dyspnea", "Levine sign", "Silent MI in diabetics/elderly"],
+        diagnosis: ["ECG: ST elevation ≥1mm (limb) / ≥2mm (precordial)", "Troponin I/T (rises 3-6h, peaks 24h)", "CK-MB (rises 4-6h)", "Echo: Regional wall motion abnormality"],
+        treatment: ["MONA: Morphine, O2, Nitrates, Aspirin", "Dual antiplatelet: Aspirin + Clopidogrel/Ticagrelor", "PCI within 90min (door-to-balloon)", "Thrombolytics if PCI unavailable (<12h): Tenecteplase", "Beta-blockers, ACEi, Statins post-MI"],
+        complications: ["Cardiogenic shock", "Ventricular free wall rupture (3-5 days)", "Papillary muscle rupture → Acute MR", "Dressler syndrome (2-10 weeks)", "Ventricular aneurysm"]
+      },
+      {
+        name: "Congestive Heart Failure",
+        etiology: ["Ischemic heart disease (#1 cause)", "Hypertension", "Valvular disease", "Cardiomyopathy (DCM, HCM, RCM)", "High-output: Thyrotoxicosis, Anemia, AV fistula"],
+        pathophysiology: ["↓ Cardiac output → Neurohormonal activation (RAAS, SNS) → Na/H2O retention → Preload ↑ → Ventricular remodeling → Progressive dysfunction"],
+        clinical: ["Left HF: Dyspnea, orthopnea, PND, S3 gallop, bilateral crackles", "Right HF: JVD, hepatomegaly, peripheral edema, ascites", "NYHA Class I-IV functional classification"],
+        diagnosis: ["BNP >100 pg/mL or NT-proBNP >300 pg/mL", "Echo: EF <40% (HFrEF) or ≥50% (HFpEF)", "CXR: Cardiomegaly, cephalization, Kerley B lines, pleural effusion"],
+        treatment: ["HFrEF: ACEi/ARB/ARNI + Beta-blocker + MRA + SGLT2i (Quadruple therapy)", "Diuretics for volume overload (Furosemide)", "Hydralazine-Nitrate in African Americans", "ICD if EF ≤35%", "CRT if LBBB + QRS ≥150ms"],
+        complications: ["Acute decompensation", "Cardiorenal syndrome", "Cardiac cachexia", "Arrhythmias (AF, VT)"]
+      },
+      {
+        name: "Hypertension",
+        etiology: ["Essential/Primary (90-95%): Multifactorial", "Secondary: Renal artery stenosis, Pheochromocytoma, Conn syndrome, Cushing, Coarctation of aorta, OSA"],
+        pathophysiology: ["↑ Peripheral vascular resistance → Endothelial dysfunction → Vascular remodeling → End-organ damage"],
+        clinical: ["Usually asymptomatic ('Silent Killer')", "Headache (occipital, morning)", "Hypertensive emergency: Encephalopathy, Papilledema, AKI, Aortic dissection"],
+        diagnosis: ["Office BP ≥140/90 mmHg (ESC) or ≥130/80 (ACC/AHA)", "ABPM: Daytime ≥135/85", "Staging: Grade 1 (140-159/90-99), Grade 2 (160-179/100-109), Grade 3 (≥180/≥110)"],
+        treatment: ["Lifestyle: DASH diet, Na <2g/d, Exercise, Weight loss", "First-line: ACEi/ARB, CCB, Thiazide", "Compelling indications: DM→ACEi; HF→BB+ACEi+MRA; CKD→ACEi/ARB", "Resistant HTN: Add spironolactone"],
+        complications: ["LVH → Heart failure", "Hypertensive nephropathy → CKD", "Stroke (hemorrhagic/ischemic)", "Retinopathy (Keith-Wagener-Barker grading)", "Aortic dissection"]
+      },
+      {
+        name: "Atrial Fibrillation",
+        etiology: ["Hypertension (#1)", "Valvular (Mitral stenosis)", "Thyrotoxicosis", "Alcohol ('Holiday Heart')", "PE, Post-cardiac surgery"],
+        pathophysiology: ["Multiple re-entrant wavelets in atria → Disorganized atrial activity → Loss of atrial kick (↓CO 15-25%) → Blood stasis → Thrombus (LAA)"],
+        clinical: ["Palpitations, irregular pulse", "Fatigue, dyspnea, dizziness", "Irregularly irregular rhythm", "Absent 'a' wave in JVP"],
+        diagnosis: ["ECG: Absent P waves, irregular R-R intervals, fibrillatory baseline", "Classification: Paroxysmal (<7d), Persistent (>7d), Permanent", "Echo: LA enlargement, LAA thrombus (TEE)"],
+        treatment: ["Rate control: Beta-blockers, Diltiazem/Verapamil (target HR <110)", "Rhythm control: Flecainide, Amiodarone, Cardioversion", "Anticoagulation: CHA₂DS₂-VASc ≥2 (men), ≥3 (women) → DOAC", "Catheter ablation (PVI) for symptomatic/refractory"],
+        complications: ["Stroke/TIA (5x risk)", "Tachycardia-mediated cardiomyopathy", "Heart failure"]
+      }
+    ]
+  },
+  respiratory: {
+    name: "Respiratory",
+    icon: "wind",
+    color: "#3b82f6",
+    desc: "Diseases of the lungs and airways",
+    diseases: [
+      {
+        name: "Community-Acquired Pneumonia (CAP)",
+        etiology: ["Typical: S. pneumoniae (#1), H. influenzae, M. catarrhalis", "Atypical: Mycoplasma, Chlamydophila, Legionella", "Viral: Influenza, SARS-CoV-2, RSV", "Aspiration: Anaerobes (Bacteroides, Peptostreptococcus)"],
+        pathophysiology: ["Pathogen inhalation/aspiration → Alveolar inflammation → Exudative fluid → Consolidation → V/Q mismatch → Hypoxemia"],
+        clinical: ["Typical: Acute fever, productive cough (rusty sputum), pleuritic pain, tachypnea", "Atypical: Gradual onset, dry cough, extrapulmonary Sx (headache, myalgia)", "Elderly: Confusion, hypothermia (atypical presentation)"],
+        diagnosis: ["CXR: Lobar consolidation, air bronchograms", "CURB-65 severity score (Confusion, Urea>7, RR≥30, BP<90/60, Age≥65)", "Sputum culture, Blood cultures (if severe)", "Urinary antigen: Pneumococcal, Legionella"],
+        treatment: ["Outpatient: Amoxicillin OR Macrolide (Azithromycin)", "Inpatient: Beta-lactam + Macrolide OR Respiratory fluoroquinolone", "Severe/ICU: Beta-lactam + Macrolide ± Oseltamivir", "Duration: 5-7 days (minimum 5, afebrile ≥48h)"],
+        complications: ["Parapneumonic effusion/Empyema", "Lung abscess", "ARDS", "Sepsis/Septic shock"]
+      },
+      {
+        name: "Chronic Obstructive Pulmonary Disease (COPD)",
+        etiology: ["Smoking (#1, 80-90%)", "Alpha-1 antitrypsin deficiency (young, lower lobe)", "Occupational: Coal, Silica", "Biomass fuel exposure"],
+        pathophysiology: ["Chronic inflammation → Airway remodeling (chronic bronchitis) + Alveolar destruction (emphysema) → Air trapping → Hyperinflation → V/Q mismatch"],
+        clinical: ["Chronic productive cough (chronic bronchitis)", "Progressive dyspnea", "Barrel chest, pursed-lip breathing", "Pink Puffer (Emphysema) vs Blue Bloater (Chronic Bronchitis)", "Exacerbation: ↑Dyspnea, ↑Sputum purulence/volume"],
+        diagnosis: ["Spirometry: FEV1/FVC <0.70 (post-bronchodilator)", "GOLD staging by FEV1: I(≥80%), II(50-79%), III(30-49%), IV(<30%)", "CXR: Hyperinflation, flat diaphragms", "ABG: Hypoxemia ± Hypercapnia"],
+        treatment: ["Smoking cessation (single most effective)", "GOLD A: SABA PRN", "GOLD B: LABA or LAMA", "GOLD E: LABA+LAMA ± ICS (if Eos ≥300)", "Exacerbation: SABA + Systemic steroids + Antibiotics (if purulent)", "O2 therapy if PaO2 ≤55 mmHg (LTOT >15h/day)"],
+        complications: ["Acute exacerbation", "Cor pulmonale", "Pneumothorax", "Polycythemia", "Lung cancer"]
+      },
+      {
+        name: "Bronchial Asthma",
+        etiology: ["Atopic/Allergic (IgE-mediated): Dust mites, pollen, molds", "Non-allergic: Exercise, Cold air, GERD, Aspirin (Samter triad)", "Occupational: Isocyanates, Flour", "Genetic: Atopy, Family history"],
+        pathophysiology: ["Allergen → IgE cross-linking on mast cells → Degranulation → Early phase (bronchoconstriction) + Late phase (eosinophilic inflammation) → Airway remodeling"],
+        clinical: ["Episodic wheeze, cough, chest tightness, dyspnea", "Worse at night/early morning", "Triggers: Allergens, exercise, cold, infections", "Status asthmaticus: Silent chest = imminent respiratory failure"],
+        diagnosis: ["Spirometry: Obstructive pattern + Reversibility (FEV1 ↑≥12% and ≥200mL post-SABA)", "Peak flow variability >10%", "FeNO >40 ppb (eosinophilic)", "Methacholine challenge (if normal spirometry)"],
+        treatment: ["Step 1: Low-dose ICS-formoterol PRN", "Step 2: Low-dose ICS + SABA PRN", "Step 3: Low-dose ICS-LABA", "Step 4: Medium-dose ICS-LABA", "Step 5: High-dose ICS-LABA + Add-on (Tiotropium, Anti-IgE Omalizumab, Anti-IL5)", "Acute: SABA nebs + Ipratropium + Systemic steroids + O2 + MgSO4 (severe)"],
+        complications: ["Status asthmaticus", "Pneumothorax", "Airway remodeling (fixed obstruction)", "Growth retardation (chronic steroids in children)"]
+      },
+      {
+        name: "Pulmonary Embolism",
+        etiology: ["DVT (90% from lower extremities)", "Virchow's triad: Stasis, Endothelial injury, Hypercoagulability", "Risk: Surgery, Immobilization, Malignancy, OCP, Thrombophilia (Factor V Leiden)"],
+        pathophysiology: ["Thrombus embolization → Pulmonary artery occlusion → Dead space ↑ → V/Q mismatch → Hypoxemia → RV pressure overload → RV dilation/failure"],
+        clinical: ["Sudden dyspnea, pleuritic chest pain, tachycardia", "Hemoptysis, syncope (massive PE)", "Signs: Tachypnea, RV heave, Loud P2, JVD", "Massive PE: Hypotension, Obstructive shock"],
+        diagnosis: ["Wells score → D-dimer (if low probability, <500 rules out)", "CTPA (Gold standard): Filling defect in pulmonary arteries", "V/Q scan if CT contraindicated", "Echo: RV dilation, McConnell sign", "Troponin, BNP (risk stratification)"],
+        treatment: ["Anticoagulation: LMWH → DOAC (Rivaroxaban/Apixaban) for 3-6 months", "Massive PE (hemodynamically unstable): Systemic thrombolysis (Alteplase)", "Surgical embolectomy / Catheter-directed therapy if thrombolysis fails/contraindicated", "IVC filter if anticoagulation contraindicated"],
+        complications: ["RV failure", "Chronic thromboembolic pulmonary hypertension (CTEPH)", "Recurrent PE", "Death (massive PE mortality 25-50%)"]
+      }
+    ]
+  },
+  gastrointestinal: {
+    name: "Gastrointestinal",
+    icon: "circle-dot",
+    color: "#f59e0b",
+    desc: "Diseases of the digestive system",
+    diseases: [
+      {
+        name: "Peptic Ulcer Disease",
+        etiology: ["H. pylori infection (most common)", "NSAIDs (COX-1 inhibition → ↓Prostaglandins)", "Zollinger-Ellison syndrome (Gastrinoma)", "Stress ulcers (Curling-burns, Cushing-CNS)"],
+        pathophysiology: ["Imbalance: Aggressive factors (HCl, Pepsin, H.pylori) > Protective factors (Mucus, HCO3, PG) → Mucosal erosion → Ulceration"],
+        clinical: ["Gastric ulcer: Pain with eating (weight loss)", "Duodenal ulcer: Pain 2-3h after meals, relieved by food/antacids (weight gain)", "Epigastric tenderness", "Alarm features: Weight loss, anemia, dysphagia, melena"],
+        diagnosis: ["EGD (Gold standard): Direct visualization + Biopsy", "H. pylori: Urea breath test, Stool antigen, Biopsy (CLO test)", "Gastric ulcers MUST be biopsied (r/o malignancy)"],
+        treatment: ["H. pylori: Triple therapy (PPI + Clarithromycin + Amoxicillin) × 14 days", "PPI: Omeprazole 20mg BD × 4-8 weeks", "Stop NSAIDs; if required → COX-2 selective + PPI", "Surgery (rare): Perforation, Refractory bleeding, Obstruction"],
+        complications: ["Hemorrhage (most common)", "Perforation → Peritonitis (free air on erect CXR)", "Gastric outlet obstruction", "Malignant transformation (gastric ulcers)"]
+      },
+      {
+        name: "Inflammatory Bowel Disease",
+        etiology: ["Genetic: NOD2/CARD15 (Crohn's), HLA-DRB1 (UC)", "Environmental: Smoking (worsens CD, protects UC)", "Immune dysregulation: Th1/Th17 (CD), Th2 (UC)", "Bimodal: 15-30 years, 50-70 years"],
+        pathophysiology: ["CD: Transmural inflammation, granulomas, skip lesions, any GI tract (mouth to anus, favors terminal ileum)", "UC: Mucosal/submucosal inflammation, continuous, starts at rectum, extends proximally"],
+        clinical: ["CD: RLQ pain, non-bloody diarrhea, fistulae, strictures, perianal disease, cobblestone mucosa", "UC: Bloody diarrhea with mucus, tenesmus, urgency, pseudopolyps", "Extraintestinal: Erythema nodosum (CD), Pyoderma gangrenosum (UC), Uveitis, PSC (UC), Sacroiliitis"],
+        diagnosis: ["Colonoscopy + Biopsy (Gold standard)", "CD: Skip lesions, transmural, non-caseating granulomas, string sign on barium", "UC: Continuous inflammation, crypt abscesses, lead-pipe colon", "Labs: ↑ESR/CRP, Anemia, p-ANCA (UC), ASCA (CD)", "MR Enterography for small bowel CD"],
+        treatment: ["UC mild: 5-ASA (Mesalazine) oral + rectal", "UC moderate-severe: Steroids → Azathioprine → Biologics (Infliximab, Vedolizumab)", "CD: Steroids for flare → Azathioprine/MTX → Anti-TNF (Infliximab/Adalimumab)", "Surgery: UC - Proctocolectomy (curative); CD - Strictureplasty, Resection (not curative)"],
+        complications: ["Toxic megacolon (UC)", "Colorectal cancer (↑ with duration, pancolitis)", "Fistulae, Abscess (CD)", "Malabsorption, B12 deficiency (CD terminal ileum)"]
+      },
+      {
+        name: "Cirrhosis & Chronic Liver Disease",
+        etiology: ["Alcohol (most common in West)", "Chronic Hepatitis B/C", "NAFLD/NASH (rising)", "Autoimmune hepatitis", "Wilson, Hemochromatosis, Alpha-1 AT deficiency", "PBC, PSC"],
+        pathophysiology: ["Chronic hepatocyte injury → Stellate cell activation → Fibrosis → Architectural distortion → Regenerative nodules → Portal hypertension → Decompensation"],
+        clinical: ["Compensated: Fatigue, spider angiomata, palmar erythema, gynecomastia", "Decompensated: Ascites, Variceal bleeding, Hepatic encephalopathy, Jaundice", "Signs: Caput medusae, Hepatosplenomegaly, Asterixis (flapping tremor)"],
+        diagnosis: ["LFTs: ↑AST/ALT (AST:ALT >2 in alcoholic), ↑Bilirubin, ↓Albumin, ↑INR", "FibroScan (Transient Elastography) or FIB-4 score", "Ultrasound: Nodular liver, ascites, splenomegaly", "Child-Pugh score (A/B/C) & MELD score (transplant listing)"],
+        treatment: ["Treat underlying cause (Abstinence, Antivirals)", "Ascites: Na restriction + Spironolactone ± Furosemide; Paracentesis if tense", "Varices: Propranolol prophylaxis; Acute bleed → Octreotide + EVL + Abx", "HE: Lactulose + Rifaximin", "Liver transplant for decompensated/MELD ≥15"],
+        complications: ["Spontaneous bacterial peritonitis (SBP)", "Hepatorenal syndrome", "Hepatocellular carcinoma (screen q6m USS + AFP)", "Hepatopulmonary syndrome"]
+      }
+    ]
+  },
+  neurology: {
+    name: "Neurology",
+    icon: "brain",
+    color: "#8b5cf6",
+    desc: "Diseases of the nervous system",
+    diseases: [
+      {
+        name: "Ischemic Stroke (CVA)",
+        etiology: ["Large vessel atherosclerosis (ICA, MCA)", "Cardioembolism (AF, Valvular, LV thrombus)", "Small vessel (Lacunar): Lipohyalinosis", "Other: Dissection, Vasculitis, Hypercoagulable"],
+        pathophysiology: ["Arterial occlusion → Ischemic core (irreversible) + Penumbra (salvageable) → Excitotoxicity (Glutamate) → Ca²⁺ influx → Cell death"],
+        clinical: ["MCA: Contralateral hemiparesis/sensory loss (face+arm>leg), Aphasia (dominant), Neglect (non-dominant)", "ACA: Contralateral leg weakness", "PCA: Homonymous hemianopia", "Posterior circulation: Vertigo, ataxia, diplopia, crossed signs"],
+        diagnosis: ["Non-contrast CT (rule out hemorrhage - first step)", "CT Angiography: Large vessel occlusion", "MRI DWI: Acute ischemia (within minutes)", "NIHSS for severity scoring", "Work-up: Echo, Carotid Doppler, Holter, Lipids, HbA1c"],
+        treatment: ["IV Alteplase (tPA) within 4.5 hours of onset", "Mechanical thrombectomy: LVO within 24h (with perfusion imaging)", "Aspirin 325mg within 24-48h (if no tPA)", "Secondary prevention: Antiplatelet (Aspirin/Clopidogrel), Statin, BP control", "AF: Anticoagulation (DOAC)", "Carotid endarterectomy if symptomatic stenosis ≥70%"],
+        complications: ["Hemorrhagic transformation", "Cerebral edema (malignant MCA)", "Seizures", "Depression", "DVT/PE"]
+      },
+      {
+        name: "Epilepsy & Seizure Disorders",
+        etiology: ["Idiopathic/Genetic (most common in young)", "Structural: Tumor, Stroke, TBI, Cortical dysplasia", "Metabolic: Hypoglycemia, Hyponatremia, Uremia", "Infectious: Encephalitis, Neurocysticercosis", "Provoked: Alcohol withdrawal, Drug toxicity, Sleep deprivation"],
+        pathophysiology: ["Imbalance: ↑Excitation (Glutamate) / ↓Inhibition (GABA) → Hypersynchronous neuronal discharge → Seizure propagation"],
+        clinical: ["Focal: Motor/Sensory/Autonomic ± awareness", "Generalized Tonic-Clonic: Aura → Loss of consciousness → Tonic (stiffening) → Clonic (jerking) → Postictal confusion", "Absence (Petit Mal): Brief staring, 3Hz spike-wave, children", "Status Epilepticus: Seizure >5min or recurrent without recovery"],
+        diagnosis: ["EEG: Interictal epileptiform discharges (spikes, sharp waves)", "MRI Brain: Structural lesion (mesial temporal sclerosis, tumor)", "Prolactin level (↑ in GTCS/focal, normal in PNES)", "Video-EEG monitoring for classification"],
+        treatment: ["Focal: Carbamazepine, Lamotrigine, Levetiracetam", "Generalized: Valproate (first-line), Lamotrigine, Levetiracetam", "Absence: Ethosuximide, Valproate", "Status Epilepticus: Lorazepam → Phenytoin/Levetiracetam → Midazolam infusion", "Surgery: Temporal lobectomy for refractory mesial temporal epilepsy", "Avoid: Carbamazepine in absence/myoclonic (can worsen)"],
+        complications: ["SUDEP (Sudden Unexpected Death in Epilepsy)", "Status epilepticus → Brain injury", "Cognitive decline", "Drug side effects: Valproate-teratogenicity, Phenytoin-gingival hyperplasia"]
+      },
+      {
+        name: "Parkinson's Disease",
+        etiology: ["Idiopathic (most common)", "Loss of dopaminergic neurons in Substantia Nigra pars compacta", "Lewy bodies (α-synuclein aggregates)", "Risk: Age, Pesticides, Head injury", "Protective: Smoking, Caffeine (epidemiologic)"],
+        pathophysiology: ["↓Dopamine in nigrostriatal pathway → ↑Indirect pathway activity → ↓Thalamocortical excitation → Hypokinesia; Symptoms manifest when >60-80% neurons lost"],
+        clinical: ["Cardinal features (TRAP): Tremor (resting, pill-rolling, 4-6Hz), Rigidity (cogwheel), Akinesia/Bradykinesia, Postural instability", "Asymmetric onset", "Non-motor: Anosmia, REM sleep behavior disorder, Constipation, Depression, Dementia (late)"],
+        diagnosis: ["Clinical diagnosis (UK Brain Bank criteria)", "DaTSCAN (SPECT): ↓Dopamine transporter uptake", "MRI: Normal (to exclude other causes)", "Response to Levodopa supports diagnosis"],
+        treatment: ["Levodopa + Carbidopa (most effective, start when functional impairment)", "Dopamine agonists: Pramipexole, Ropinirole (younger patients)", "MAO-B inhibitors: Rasagiline, Selegiline (early/adjunct)", "COMT inhibitors: Entacapone (for wearing-off)", "Deep Brain Stimulation (STN/GPi) for motor fluctuations", "Manage complications: On-off, Dyskinesias → Fractionated doses, Amantadine"],
+        complications: ["Motor fluctuations (wearing-off, on-off)", "Levodopa-induced dyskinesia", "Psychosis/Hallucinations (reduce meds, add Clozapine/Quetiapine)", "Dementia (PDD)", "Falls, Dysphagia, Aspiration pneumonia"]
+      }
+    ]
+  },
+  endocrine: {
+    name: "Endocrine",
+    icon: "flask-round",
+    color: "#10b981",
+    desc: "Hormonal and metabolic disorders",
+    diseases: [
+      {
+        name: "Diabetes Mellitus",
+        etiology: ["Type 1: Autoimmune β-cell destruction (anti-GAD, anti-IA2, anti-insulin Ab)", "Type 2: Insulin resistance + Progressive β-cell failure; Obesity, Genetics", "Others: MODY, Gestational, Drug-induced (Steroids), Pancreatogenic"],
+        pathophysiology: ["T1DM: Absolute insulin deficiency → Hyperglycemia + Ketogenesis", "T2DM: Peripheral insulin resistance → Compensatory hyperinsulinemia → β-cell exhaustion → Relative insulin deficiency"],
+        clinical: ["Classic triad: Polyuria, Polydipsia, Polyphagia + Weight loss (T1)", "T2: Often asymptomatic, Acanthosis nigricans, Recurrent infections", "DKA (T1): Kussmaul breathing, Fruity breath, Abdominal pain, AMS", "HHS (T2): Severe dehydration, Hyperosmolarity, No significant ketosis"],
+        diagnosis: ["FPG ≥126 mg/dL (×2)", "HbA1c ≥6.5%", "OGTT: 2h glucose ≥200 mg/dL", "Random glucose ≥200 + symptoms", "DKA: pH<7.3, HCO3<18, Ketones+, AG↑"],
+        treatment: ["T1: Basal-Bolus insulin (Glargine + Lispro), CSII pump, CGM", "T2 Step-wise: Metformin (first-line) → Add SGLT2i/GLP1-RA (if CVD/CKD/HF) → Add SU/DPP4i/TZD → Insulin", "HbA1c target: <7% (individualized)", "DKA: IV fluids + IV Insulin + K⁺ replacement + Monitor AG", "Lifestyle: Diet, Exercise, Weight loss (T2)"],
+        complications: ["Microvascular: Retinopathy (nonproliferative→proliferative), Nephropathy (microalbuminuria→ESRD), Neuropathy (distal symmetric polyneuropathy, autonomic)", "Macrovascular: CAD, Stroke, PAD", "Diabetic foot: Neuropathy + PVD → Ulceration → Infection → Amputation"]
+      },
+      {
+        name: "Thyroid Disorders",
+        etiology: ["Hypothyroidism: Hashimoto (anti-TPO, anti-Tg), Iodine deficiency, Post-RAI/Surgery, Drugs (Lithium, Amiodarone)", "Hyperthyroidism: Graves disease (TSI/TRAb), Toxic MNG, Toxic adenoma, Thyroiditis (subacute, postpartum)"],
+        pathophysiology: ["Hypo: ↓T3/T4 → ↑TSH → ↓Metabolic rate → Myxedema", "Hyper: ↑T3/T4 → ↓TSH → ↑Metabolic rate → Hypermetabolic state", "Graves: TSI activates TSH receptor → Diffuse thyroid stimulation"],
+        clinical: ["Hypothyroid: Fatigue, Cold intolerance, Weight gain, Constipation, Bradycardia, Dry skin, Myxedema, Delayed relaxation of DTR", "Hyperthyroid: Anxiety, Heat intolerance, Weight loss, Diarrhea, Tachycardia/AF, Tremor, Lid lag", "Graves-specific: Diffuse goiter, Exophthalmos, Pretibial myxedema, Thyroid acropachy", "Thyroid storm: Fever >40°C, Tachycardia, AMS, Multi-organ failure"],
+        diagnosis: ["TSH (best screening test)", "Hypothyroid: ↑TSH, ↓Free T4; Anti-TPO antibodies", "Hyperthyroid: ↓TSH, ↑Free T4/T3", "Radioiodine uptake scan: Diffuse (Graves) vs Hot nodule vs Low uptake (thyroiditis)"],
+        treatment: ["Hypothyroid: Levothyroxine (1.6 mcg/kg/day), Monitor TSH q6-8 weeks", "Graves: Methimazole (first-line) or PTU (pregnancy 1st trimester), Beta-blocker for symptoms", "Definitive: Radioactive iodine ablation OR Thyroidectomy", "Thyroid storm: PTU + Iodine (1h after PTU) + Beta-blocker + Hydrocortisone + Cooling"],
+        complications: ["Myxedema coma (Hypothyroid emergency): Hypothermia, AMS, Hypoventilation", "Thyroid storm mortality 20-30%", "Graves ophthalmopathy → Vision loss", "Post-thyroidectomy: Hypoparathyroidism, RLN injury"]
+      },
+      {
+        name: "Adrenal Disorders",
+        etiology: ["Cushing Syndrome: Exogenous steroids (#1), Pituitary adenoma (Cushing Disease), Ectopic ACTH (SCLC), Adrenal adenoma/carcinoma", "Addison Disease: Autoimmune (#1 in developed), TB (#1 worldwide), Adrenal hemorrhage (Waterhouse-Friderichsen)", "Pheochromocytoma: Adrenal medulla chromaffin cell tumor, Rule of 10s"],
+        pathophysiology: ["Cushing: ↑Cortisol → Hyperglycemia, Protein catabolism, Fat redistribution, Immunosuppression", "Addison: ↓Cortisol + ↓Aldosterone → Hypotension, Hyperkalemia, ↑ACTH → Hyperpigmentation", "Pheo: ↑Catecholamines → Episodic HTN, Tachycardia, Hypermetabolism"],
+        clinical: ["Cushing: Moon face, Buffalo hump, Central obesity, Purple striae, Proximal myopathy, Easy bruising, HTN, DM, Osteoporosis", "Addison: Fatigue, Weight loss, Hyperpigmentation (palmar creases, buccal), Hypotension, Salt craving, Adrenal crisis (shock)", "Pheo: Episodic Headache + Palpitations + Sweating + HTN (Paroxysmal/Sustained)"],
+        diagnosis: ["Cushing: 1) 24h Urine cortisol / Overnight Dexamethasone suppression / Late-night salivary cortisol → 2) ACTH level → 3) High-dose Dex / Petrosal sinus sampling / Imaging", "Addison: AM Cortisol <3 (diagnostic), Synacthen (ACTH stimulation) test - No rise in cortisol; ↑ACTH, ↑Renin, ↓Na, ↑K", "Pheo: 24h Urine metanephrines/catecholamines OR Plasma free metanephrines → CT/MRI adrenals → MIBG scan"],
+        treatment: ["Cushing: Taper exogenous steroids; Transsphenoidal surgery (pituitary); Adrenalectomy (adrenal tumor); Ketoconazole/Metyrapone (medical)", "Addison: Hydrocortisone (15-25mg/day, 2/3 AM + 1/3 PM) + Fludrocortisone (0.1mg); Stress dosing (2-3× during illness); Medic-Alert bracelet", "Pheo: Alpha-blockade FIRST (Phenoxybenzamine) → Then Beta-blocker → Surgical resection; Never beta-block first (unopposed alpha → hypertensive crisis)"],
+        complications: ["Adrenal crisis: Cardiovascular collapse (treat with IV Hydrocortisone 100mg stat + IV NS)", "Cushing: Opportunistic infections, Avascular necrosis, Psychosis", "Pheo: Hypertensive crisis, Cardiomyopathy, Stroke"]
+      }
+    ]
+  },
+  renal: {
+    name: "Renal",
+    icon: "droplets",
+    color: "#06b6d4",
+    desc: "Diseases of the kidneys and urinary system",
+    diseases: [
+      {
+        name: "Acute Kidney Injury (AKI)",
+        etiology: ["Pre-renal (60-70%): Hypovolemia, Heart failure, Sepsis, Renal artery stenosis", "Intrinsic (25-30%): ATN (ischemic/nephrotoxic), Glomerulonephritis, Interstitial nephritis", "Post-renal (5-10%): BPH, Stones, Tumor, Retroperitoneal fibrosis"],
+        pathophysiology: ["Pre-renal: ↓Renal perfusion → ↓GFR (reversible if treated early)", "ATN: Tubular cell injury → Cast formation → Obstruction + Back-leak → ↓GFR", "Post-renal: Obstruction → ↑Intratubular pressure → ↓Net filtration"],
+        clinical: ["Oliguria (<400mL/day) or Anuria", "Uremia: Nausea, Encephalopathy, Pericarditis", "Volume overload: Edema, Pulmonary edema", "Hyperkalemia → Cardiac arrhythmias"],
+        diagnosis: ["KDIGO: ↑Cr ≥0.3mg/dL in 48h OR ↑Cr ≥1.5× baseline in 7d OR UO <0.5mL/kg/h ×6h", "Pre-renal: FENa <1%, BUN:Cr >20:1, Concentrated urine", "Intrinsic (ATN): FENa >2%, Muddy brown casts", "Post-renal: Hydronephrosis on USS", "Urine microscopy: RBC casts (GN), WBC casts (Pyelonephritis), Eosinophils (AIN)"],
+        treatment: ["Pre-renal: Volume resuscitation, Treat underlying cause, Hold nephrotoxins", "Intrinsic: Supportive, Stop offending agent, Steroids for GN/AIN", "Post-renal: Relieve obstruction (Catheter, Nephrostomy, Stent)", "Dialysis indications (AEIOU): Acidosis, Electrolytes (K⁺>6.5), Intoxication, Overload (fluid), Uremia (encephalopathy/pericarditis)"],
+        complications: ["Hyperkalemia → VF/Cardiac arrest", "Metabolic acidosis", "Pulmonary edema", "CKD progression", "Death (ICU mortality 50-80%)"]
+      },
+      {
+        name: "Chronic Kidney Disease",
+        etiology: ["Diabetes mellitus (#1 cause of ESRD)", "Hypertension (#2)", "Glomerulonephritis (IgA nephropathy most common GN worldwide)", "Polycystic kidney disease (ADPKD)", "Obstructive uropathy"],
+        pathophysiology: ["Progressive nephron loss → Hyperfiltration of remaining nephrons → Glomerular hypertension → Further injury → Fibrosis → ↓GFR → Uremia"],
+        clinical: ["Early: Asymptomatic, Nocturia (loss of concentrating ability)", "Advanced: Fatigue, Anorexia, Nausea, Pruritus, Restless legs", "Late/Uremic: Pericarditis, Encephalopathy, Peripheral neuropathy, Uremic frost", "Renal osteodystrophy: Bone pain, Fractures"],
+        diagnosis: ["eGFR <60 mL/min/1.73m² for ≥3 months", "Staging: G1(≥90)-G5(<15); Albuminuria: A1(<30)-A3(>300)", "Labs: ↑Cr, ↑BUN, ↑K⁺, ↑Phosphate, ↓Ca²⁺, ↓Bicarb, ↑PTH, ↓Hb", "Renal USS: Small kidneys (except DM, Amyloid, ADPKD, Myeloma)", "Kidney biopsy if cause unclear"],
+        treatment: ["BP control: Target <130/80 (ACEi/ARB first-line - renoprotective)", "SGLT2 inhibitors: Dapagliflozin (renoprotective regardless of DM)", "Glycemic control: HbA1c <7%", "Anemia: EPO (Darbepoetin) + Iron (target Hb 10-11.5)", "CKD-MBD: Phosphate binders + Vitamin D (Calcitriol) + Cinacalcet", "Dialysis: GFR <10-15 or symptoms; HD or PD", "Transplant: Best long-term option for ESRD"],
+        complications: ["Cardiovascular disease (#1 cause of death in CKD)", "Anemia of CKD (↓EPO)", "Secondary hyperparathyroidism → Renal osteodystrophy", "Metabolic acidosis", "Uremic pericarditis/encephalopathy"]
+      }
+    ]
+  },
+  infectious: {
+    name: "Infectious Diseases",
+    icon: "bug",
+    color: "#f43f5e",
+    desc: "Bacterial, viral, fungal, and parasitic infections",
+    diseases: [
+      {
+        name: "Sepsis & Septic Shock",
+        etiology: ["Gram-negative: E.coli, Klebsiella, Pseudomonas (UTI, Pneumonia, Intra-abdominal)", "Gram-positive: S.aureus, Streptococci (Skin, Line infections)", "Fungi: Candida (Immunocompromised, TPN, Broad-spectrum Abx)", "Sources: Lung>Abdomen>UTI>Skin/Soft tissue"],
+        pathophysiology: ["Infection → PAMP recognition by PRRs → Cytokine storm (TNF-α, IL-1, IL-6) → Vasodilation + Capillary leak + Microvascular thrombosis → Tissue hypoperfusion → Multi-organ dysfunction"],
+        clinical: ["Sepsis (SOFA ≥2): Fever/Hypothermia, Tachycardia, Tachypnea, AMS, Oliguria", "Septic Shock: Sepsis + Vasopressors needed (MAP <65 despite fluids) + Lactate >2 mmol/L", "qSOFA (screening): RR≥22, AMS, SBP≤100", "Warm shock (early) → Cold shock (late)"],
+        diagnosis: ["Blood cultures (×2 sets, before antibiotics)", "Lactate level (>2 = tissue hypoperfusion, >4 = severe)", "Source identification: CXR, UA, CT abdomen", "SOFA score: PaO2/FiO2, Platelets, Bilirubin, MAP, GCS, Creatinine"],
+        treatment: ["Hour-1 Bundle: Measure lactate, Blood cultures, Broad-spectrum Abx, 30mL/kg crystalloid (if hypotensive/Lactate≥4), Vasopressors (if MAP<65 post-fluids)", "Norepinephrine (first-line vasopressor)", "Add Vasopressin if NE insufficient, then Epinephrine", "Hydrocortisone 200mg/day if refractory shock", "Source control: Drainage, Debridement, Device removal", "De-escalate antibiotics based on cultures"],
+        complications: ["Multi-organ failure (MODS)", "DIC", "ARDS", "AKI", "Mortality: Sepsis 10-20%, Septic shock 40-60%"]
+      },
+      {
+        name: "HIV/AIDS",
+        etiology: ["HIV-1 (pandemic), HIV-2 (West Africa, less virulent)", "Transmission: Sexual (#1), Parenteral (IVDU, Transfusion), Vertical (MTCT)", "Risk: Unprotected sex, Multiple partners, MSM, IVDU, Needlestick"],
+        pathophysiology: ["HIV (Retrovirus) → gp120 binds CD4 + CCR5/CXCR4 → Reverse transcription → Integration → CD4 T-cell depletion → Immune deficiency → Opportunistic infections"],
+        clinical: ["Acute retroviral syndrome (2-4 weeks): Fever, Pharyngitis, Rash, Lymphadenopathy (Mono-like)", "Clinical latency: Asymptomatic (years), Persistent generalized lymphadenopathy", "AIDS (CD4 <200): Opportunistic infections, AIDS-defining malignancies", "OIs by CD4: <200→PCP, <100→Toxoplasma/Crypto, <50→MAC/CMV"],
+        diagnosis: ["4th-gen Ag/Ab test (p24 Ag + HIV-1/2 Ab) - screening", "Confirmatory: HIV-1/2 differentiation immunoassay + NAT (RNA PCR)", "CD4 count & Viral load (RNA copies/mL) for staging/monitoring", "Window period: 4th gen detects at ~2 weeks"],
+        treatment: ["ART for ALL HIV+ (regardless of CD4) - Treat immediately", "Preferred regimens: 2 NRTIs + INSTI (Bictegravir/TAF/FTC or Dolutegravir + TAF/FTC)", "OI Prophylaxis: CD4<200→TMP-SMX (PCP); CD4<100→TMP-SMX (Toxo); CD4<50→Azithromycin (MAC)", "PrEP: Emtricitabine/Tenofovir for high-risk HIV-negative individuals", "PEP: Within 72 hours of exposure × 28 days", "Goal: Viral suppression (<50 copies/mL) = Undetectable = Untransmittable (U=U)"],
+        complications: ["Opportunistic infections: PCP (ground-glass on CT), Toxoplasmosis (ring-enhancing lesions), Cryptococcal meningitis (India ink), CMV retinitis, MAC", "Malignancies: Kaposi sarcoma (HHV-8), Primary CNS lymphoma (EBV), Cervical cancer (HPV)", "IRIS (Immune Reconstitution Inflammatory Syndrome) after starting ART", "HIV-associated nephropathy, Neurocognitive disorder"]
+      },
+      {
+        name: "Tuberculosis",
+        etiology: ["Mycobacterium tuberculosis (Acid-fast bacillus)", "Transmission: Airborne droplet nuclei", "Risk: HIV (#1), Immunosuppression, Close contacts, Overcrowding, Malnutrition, Silicosis"],
+        pathophysiology: ["Inhalation → Alveolar macrophage phagocytosis → Granuloma formation (caseating) → Ghon focus (primary) → Latent TB (90%) OR Active TB (10% lifetime risk, higher with HIV)"],
+        clinical: ["Pulmonary: Chronic cough >2-3 weeks, Hemoptysis, Night sweats, Weight loss, Low-grade fever", "Extrapulmonary: Lymph nodes (scrofula), Pleural, Skeletal (Pott disease-spine), Renal, Meningeal (cranial nerve palsies, hydrocephalus), Miliary (disseminated)", "HIV co-infection: Atypical presentation, Lower lobe, No cavitation, Smear-negative"],
+        diagnosis: ["Sputum AFB smear (×3, early morning) + Culture (Gold standard, 2-8 weeks)", "GeneXpert MTB/RIF: Rapid molecular (2 hours), Detects rifampicin resistance", "CXR: Upper lobe cavitation (reactivation), Ghon complex (primary), Miliary pattern", "Tuberculin Skin Test (Mantoux) / IGRA (QuantiFERON): Latent TB diagnosis", "Biopsy: Caseating granulomas with Langhans giant cells"],
+        treatment: ["Active TB: Intensive phase (2 months) - RIPE: Rifampicin + Isoniazid + Pyrazinamide + Ethambutol → Continuation (4 months): Rifampicin + Isoniazid", "Latent TB: Isoniazid × 9 months OR Rifampicin × 4 months OR Isoniazid+Rifapentine × 3 months (3HP)", "MDR-TB: Resistance to INH + RIF → Individualized regimen (Fluoroquinolone + Injectable + Linezolid, 9-20 months)", "Always give Pyridoxine (B6) with INH (prevent peripheral neuropathy)", "DOT (Directly Observed Therapy) recommended"],
+        complications: ["Drug toxicity: INH→Hepatitis/Neuropathy, RIF→Hepatitis/Drug interactions (Orange secretions), PZA→Hyperuricemia/Hepatitis, EMB→Optic neuritis", "MDR/XDR-TB", "Miliary TB (immunocompromised)", "TB meningitis (mortality 20-50%)", "Hemoptysis (Rasmussen aneurysm)"]
+      }
+    ]
+  },
+  hematology: {
+    name: "Hematology",
+    icon: "droplet",
+    color: "#dc2626",
+    desc: "Blood and bone marrow disorders",
+    diseases: [
+      {
+        name: "Anemia - Classification & Approach",
+        etiology: ["Microcytic (MCV<80): Iron deficiency (#1 worldwide), Thalassemia, Anemia of chronic disease, Sideroblastic, Lead poisoning", "Normocytic (MCV 80-100): Acute blood loss, ACD, CKD, Aplastic anemia, Hemolytic anemias", "Macrocytic (MCV>100): B12/Folate deficiency (Megaloblastic), Liver disease, Hypothyroidism, MDS, Drugs (MTX, AZT)"],
+        pathophysiology: ["Iron deficiency: ↓Iron → ↓Heme synthesis → Microcytic hypochromic RBCs", "B12 deficiency: Impaired DNA synthesis → Megaloblastic erythropoiesis → Macrocytic anemia + Neurological damage", "Hemolytic: ↑RBC destruction → ↑Reticulocytes, ↑LDH, ↑Indirect bilirubin, ↓Haptoglobin"],
+        clinical: ["General: Fatigue, Pallor, Dyspnea, Tachycardia, Pica (IDA)", "Iron deficiency: Koilonychia, Angular cheilitis, Plummer-Vinson (esophageal web)", "B12: Subacute combined degeneration (dorsal columns + corticospinal), Glossitis, Neuropsychiatric", "Hemolytic: Jaundice, Splenomegaly, Dark urine (intravascular)"],
+        diagnosis: ["CBC + Reticulocyte count + Peripheral smear → MCV-based approach", "Iron studies: ↓Ferritin (best test for IDA), ↓Iron, ↑TIBC, ↓Transferrin sat", "B12/Folate levels, Methylmalonic acid (↑ in B12 def), Homocysteine (↑ in both)", "Hemolysis workup: LDH↑, Haptoglobin↓, Indirect bilirubin↑, Reticulocytes↑, Coombs test", "Peripheral smear: Target cells (Thalassemia), Hypersegmented neutrophils (B12/Folate), Spherocytes (HS/AIHA), Schistocytes (MAHA)"],
+        treatment: ["IDA: Oral ferrous sulfate 325mg TID (with Vitamin C), IV iron if intolerant/severe", "B12: IM Cyanocobalamin (if malabsorption/pernicious anemia) or Oral high-dose", "Folate: Oral folic acid 1-5mg/day", "Thalassemia major: Regular transfusions + Iron chelation (Deferasirox)", "AIHA: Corticosteroids → Rituximab → Splenectomy", "Treat underlying cause (GI blood loss, Celiac, Pernicious anemia)"],
+        complications: ["Severe anemia: High-output heart failure", "Iron deficiency: Esophageal web, Restless legs", "B12: Irreversible neurological damage if delayed", "Chronic transfusion: Iron overload → Hemochromatosis", "Pernicious anemia: ↑Gastric cancer risk"]
+      },
+      {
+        name: "Leukemia",
+        etiology: ["ALL: Peak 2-5 years, Radiation, Down syndrome, Philadelphia chromosome (Ph+ worse prognosis)", "AML: Adults >65, Prior chemo/radiation, MDS, Down syndrome, Auer rods pathognomonic", "CML: Philadelphia chromosome t(9;22) BCR-ABL, Peak 40-60 years", "CLL: Most common leukemia in adults (Western), >70 years, Smudge cells"],
+        pathophysiology: ["Acute: Maturation arrest → Accumulation of blasts (>20%) → Bone marrow failure → Cytopenias", "CML: BCR-ABL tyrosine kinase → Uncontrolled myeloid proliferation → Chronic → Accelerated → Blast crisis", "CLL: Accumulation of mature-appearing but functionally incompetent B-lymphocytes"],
+        clinical: ["Acute (ALL/AML): Pancytopenia symptoms - Anemia (fatigue), Neutropenia (infections), Thrombocytopenia (bleeding), Bone pain, Hepatosplenomegaly", "ALL specific: Lymphadenopathy, CNS involvement, Testicular involvement (sanctuary sites)", "AML specific: Gum hypertrophy, DIC (APL-M3), Chloroma", "CML: Massive splenomegaly, Fatigue, Weight loss, Night sweats", "CLL: Lymphadenopathy, Splenomegaly, Autoimmune hemolytic anemia, Recurrent infections"],
+        diagnosis: ["CBC: ↑WBC (very high in CML >100K), Blasts on peripheral smear", "Bone marrow biopsy: >20% blasts (Acute), Hypercellular", "Flow cytometry: Immunophenotyping (TdT+ in ALL, CD markers)", "Cytogenetics/FISH: t(9;22) Ph chromosome (CML, ALL), t(15;17) PML-RARA (APL)", "CLL: Smudge cells on smear, Flow: CD5+CD23+CD19+"],
+        treatment: ["ALL: Induction (Vincristine+Prednisone+Asparaginase+Anthracycline) → CNS prophylaxis → Consolidation → Maintenance (2-3 years); Ph+→Add TKI", "AML: 7+3 (Cytarabine 7d + Daunorubicin 3d) → Consolidation (HiDAC); APL (M3): ATRA + Arsenic trioxide (90% cure)", "CML: Imatinib (TKI) - first-line, Monitor BCR-ABL by PCR; 2nd gen: Dasatinib, Nilotinib", "CLL: Watch & Wait (early stage); Treat: BTK inhibitor (Ibrutinib) or Venetoclax + Obinutuzumab", "Allo-HSCT for high-risk/refractory cases"],
+        complications: ["Tumor Lysis Syndrome: ↑K, ↑PO4, ↑Uric acid, ↓Ca → AKI (Prevention: Allopurinol/Rasburicase + Hydration)", "Neutropenic fever: Empiric Piperacillin-Tazobactam", "DIC (APL)", "Blast crisis (CML)", "Richter transformation (CLL → DLBCL)"]
+      }
+    ]
+  },
+  musculoskeletal: {
+    name: "Musculoskeletal",
+    icon: "bone",
+    color: "#a855f7",
+    desc: "Bone, joint, and connective tissue disorders",
+    diseases: [
+      {
+        name: "Rheumatoid Arthritis",
+        etiology: ["Autoimmune (HLA-DR4 associated)", "Female:Male = 3:1, Peak 30-50 years", "Risk: Smoking, Family history, EBV", "RF+ and/or Anti-CCP antibodies"],
+        pathophysiology: ["Immune activation → Synovial inflammation (pannus formation) → Cytokines (TNF-α, IL-6, IL-1) → Cartilage/bone destruction → Joint deformity"],
+        clinical: ["Symmetric polyarthritis: MCP, PIP, Wrists (SPARES DIP)", "Morning stiffness >1 hour (improves with activity)", "Deformities: Swan-neck, Boutonniere, Ulnar deviation, Z-thumb", "Extra-articular: Rheumatoid nodules, Interstitial lung disease, Felty syndrome (RA+Splenomegaly+Neutropenia), Vasculitis, Atlanto-axial subluxation"],
+        diagnosis: ["RF (Sensitivity 70%, not specific)", "Anti-CCP (Sensitivity 70%, Specificity >95%)", "ESR/CRP elevated", "X-ray: Periarticular osteopenia → Joint space narrowing → Erosions", "Ultrasound/MRI: Early synovitis detection", "2010 ACR/EULAR criteria (≥6 points)"],
+        treatment: ["Early aggressive DMARD therapy (Treat-to-Target: remission/low disease activity)", "First-line DMARD: Methotrexate (anchor drug) + Folic acid", "Combination: MTX + Hydroxychloroquine + Sulfasalazine (Triple therapy)", "Biologics (if inadequate response): Anti-TNF (Adalimumab, Etanercept), IL-6 inhibitor (Tocilizumab), B-cell depletion (Rituximab), JAK inhibitors (Tofacitinib)", "Bridge: Low-dose Prednisone (short-term)", "NSAIDs for symptom relief only"],
+        complications: ["Joint destruction and disability", "Cardiovascular disease (accelerated atherosclerosis)", "Cervical myelopathy (C1-C2 instability)", "Drug toxicity: MTX→Hepatotoxicity/Pneumonitis; Biologics→Infections/TB reactivation"]
+      },
+      {
+        name: "Systemic Lupus Erythematosus",
+        etiology: ["Autoimmune: Loss of tolerance → Anti-nuclear antibodies (ANA)", "Female:Male = 9:1, Peak 15-45 years", "Risk: African American, Asian descent, UV light, Estrogen, Drugs (Hydralazine, Procainamide, INH)"],
+        pathophysiology: ["Defective apoptotic cell clearance → Autoantigens exposure → B-cell hyperactivity → Autoantibody production (Anti-dsDNA, Anti-Smith) → Immune complex deposition → Complement activation → Multi-organ inflammation"],
+        clinical: ["Constitutional: Fever, Fatigue, Weight loss", "Malar (butterfly) rash (spares nasolabial folds)", "Photosensitivity, Discoid lupus, Oral ulcers (painless)", "Arthritis (non-erosive, Jaccoud arthropathy)", "Serositis: Pleuritis, Pericarditis", "Renal: Lupus nephritis (Class III-V most serious)", "Hematologic: Cytopenias (Coombs+ hemolytic anemia, Leukopenia, Thrombocytopenia)", "Neuro: Seizures, Psychosis, Cerebritis", "Antiphospholipid syndrome (secondary): Thrombosis, Recurrent miscarriages"],
+        diagnosis: ["ANA: Highly sensitive (>95%), NOT specific", "Anti-dsDNA: Specific, correlates with disease activity (nephritis)", "Anti-Smith: Most specific for SLE", "Complement: ↓C3, ↓C4 (consumption) = active disease", "CBC: Cytopenias; Urinalysis: Proteinuria, RBC casts", "2019 EULAR/ACR criteria (≥10 points + ANA≥1:80)", "Renal biopsy for lupus nephritis classification (ISN/RPS Class I-VI)"],
+        treatment: ["All patients: Hydroxychloroquine (reduces flares, improves survival)", "Mild (skin/joints): NSAIDs + HCQ ± Low-dose Prednisone", "Moderate: Azathioprine, Mycophenolate", "Severe (nephritis/cerebritis): Pulse IV Methylprednisolone → Mycophenolate or Cyclophosphamide (induction) → Mycophenolate/Azathioprine (maintenance)", "Belimumab (anti-BLyS) or Voclosporin (add-on for nephritis)", "Antiphospholipid: Lifelong anticoagulation (Warfarin)"],
+        complications: ["Lupus nephritis → ESRD (leading cause of morbidity/mortality)", "Accelerated atherosclerosis", "Avascular necrosis (steroids)", "Neonatal lupus (anti-Ro/La): Congenital heart block", "Increased infection risk (disease + immunosuppression)"]
+      }
+    ]
+  },
+  psychiatry: {
+    name: "Psychiatry",
+    icon: "smile",
+    color: "#ec4899",
+    desc: "Mental health and behavioral disorders",
+    diseases: [
+      {
+        name: "Major Depressive Disorder",
+        etiology: ["Biopsychosocial model", "Monoamine hypothesis: ↓Serotonin, ↓Norepinephrine, ↓Dopamine", "Genetic: 40-50% heritability", "Risk: Female, Family history, Trauma, Chronic illness, Substance abuse, Social isolation"],
+        pathophysiology: ["↓Monoamines (5-HT, NE, DA) in synaptic cleft → Dysregulated limbic-cortical circuits → ↓Prefrontal cortex activity + ↑Amygdala reactivity → HPA axis hyperactivation → ↑Cortisol → Hippocampal atrophy"],
+        clinical: ["DSM-5: ≥5 symptoms ×2 weeks (must include depressed mood OR anhedonia):", "SIG E CAPS: Sleep (insomnia/hypersomnia), Interest↓, Guilt/Worthlessness, Energy↓, Concentration↓, Appetite change, Psychomotor change, Suicidal ideation", "Atypical features: Hypersomnia, Hyperphagia, Leaden paralysis, Rejection sensitivity", "Psychotic features: Mood-congruent delusions (guilt, nihilism)"],
+        diagnosis: ["Clinical diagnosis (DSM-5 criteria)", "PHQ-9 screening tool (severity assessment)", "Rule out: Hypothyroidism (TSH), Anemia, B12 deficiency, Substance use", "Assess suicide risk: SAD PERSONS scale, Columbia Protocol"],
+        treatment: ["Mild-Moderate: CBT (equivalent to medication)", "First-line: SSRI (Sertraline, Escitalopram) - 4-6 weeks for full effect", "Second-line: SNRI (Venlafaxine, Duloxetine), Bupropion, Mirtazapine", "Treatment-resistant: Augmentation (Lithium, Atypical antipsychotic), Ketamine/Esketamine", "Severe/Psychotic: ECT (most effective acute treatment)", "Duration: First episode 6-12 months; Recurrent ≥2 years; ≥3 episodes consider lifelong", "ALWAYS assess suicidality"],
+        complications: ["Suicide (15% lifetime risk if untreated)", "Functional impairment", "Cardiovascular disease (independent risk factor)", "Substance abuse comorbidity", "SSRI side effects: Sexual dysfunction, GI, Serotonin syndrome (with MAOIs), Hyponatremia (elderly)"]
+      },
+      {
+        name: "Schizophrenia",
+        etiology: ["Neurodevelopmental disorder", "Genetics: ~80% heritability, Multiple risk loci", "Dopamine hypothesis: ↑Mesolimbic DA (positive Sx), ↓Mesocortical DA (negative Sx)", "Risk: Cannabis use (adolescence), Urban birth, Migration, Obstetric complications, Paternal age", "Peak onset: Males 18-25, Females 25-35"],
+        pathophysiology: ["Dopaminergic dysregulation: ↑D2 in mesolimbic pathway → Positive symptoms; ↓D1 in prefrontal cortex → Negative/Cognitive symptoms", "Glutamate (NMDA) hypofunction: Contributes to all symptom domains", "Structural: ↓Gray matter, Enlarged ventricles, ↓Hippocampal volume"],
+        clinical: ["Positive symptoms: Hallucinations (auditory #1, 3rd person commentary), Delusions (persecutory #1), Disorganized speech (tangentiality, word salad), Disorganized/Catatonic behavior", "Negative symptoms (5 A's): Affective flattening, Alogia, Anhedonia, Avolition, Asociality", "Cognitive: ↓Working memory, ↓Executive function, ↓Attention", "DSM-5: ≥2 symptoms (one must be hallucinations, delusions, or disorganized speech) × ≥6 months with ≥1 month active"],
+        diagnosis: ["Clinical diagnosis (DSM-5 criteria)", "Rule out: Substance-induced psychosis, Medical (Temporal lobe epilepsy, Brain tumor, Wilson, SLE, Anti-NMDAR encephalitis)", "Investigations: Drug screen, TFTs, MRI brain (rule out organic), Copper/Ceruloplasmin if young"],
+        treatment: ["Second-generation antipsychotics (first-line): Risperidone, Olanzapine, Aripiprazole, Paliperidone", "First-generation: Haloperidol (acute psychosis, IM), Chlorpromazine", "Treatment-resistant (failed ≥2 antipsychotics): Clozapine (Gold standard - monitor ANC weekly×18wks for agranulocytosis)", "LAI (Long-acting injectables) for adherence: Paliperidone palmitate, Aripiprazole lauroxil", "Psychosocial: CBT for psychosis, Family intervention, Vocational rehabilitation, Social skills training", "Negative symptoms: Limited pharmacological options (Cariprazine, Clozapine partial benefit)"],
+        complications: ["Metabolic syndrome (SGAs: Olanzapine, Clozapine → Weight gain, DM, Dyslipidemia)", "Tardive dyskinesia (FGAs > SGAs)", "Neuroleptic Malignant Syndrome: Rigidity + Hyperthermia + AMS + Autonomic instability → Stop antipsychotic, Dantrolene/Bromocriptine", "Clozapine: Agranulocytosis (1%), Myocarditis, Seizures", "Suicide (5-10% lifetime)", "Reduced life expectancy (15-20 years)"]
+      }
+    ]
+  }
+};
+
+let currentCategory = 'cardiovascular';
+let allData = [];
+
+function renderNav() {
+  const nav = document.getElementById('category-nav');
+  nav.innerHTML = '';
+  Object.entries(medicalData).forEach(([key, cat]) => {
+    const btn = document.createElement('button');
+    btn.className = `category-btn flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${key === currentCategory ? 'active text-white' : 'text-slate-400 hover:text-white'}`;
+    btn.style.background = key === currentCategory ? cat.color + '22' : 'transparent';
+    btn.style.border = key === currentCategory ? `1px solid ${cat.color}55` : '1px solid transparent';
+    btn.innerHTML = `<i data-lucide="${cat.icon}" style="width:16px;height:16px;color:${cat.color};"></i><span>${cat.name}</span>`;
+    btn.onclick = () => { currentCategory = key; renderAll(); };
+    nav.appendChild(btn);
+  });
+}
+
+function renderDiseases() {
+  const cat = medicalData[currentCategory];
+  document.getElementById('cat-title').textContent = cat.name + ' Diseases';
+  document.getElementById('cat-desc').textContent = cat.desc;
+  document.getElementById('category-header').className = 'mb-6 fade-in';
+
+  const container = document.getElementById('disease-container');
+  container.innerHTML = '';
+
+  cat.diseases.forEach((disease, idx) => {
+    const diseaseDiv = document.createElement('div');
+    diseaseDiv.className = 'fade-in';
+    diseaseDiv.style.animationDelay = `${idx * 0.1}s`;
+
+    // Disease title
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mb-4';
+    titleDiv.innerHTML = `
+      <div class="flex items-center gap-3 mb-3">
+        <div class="badge" style="background:${cat.color}22;color:${cat.color};border:1px solid ${cat.color}44;">${cat.name}</div>
+      </div>
+      <h3 class="heading-font text-xl font-bold text-white">${disease.name}</h3>
+    `;
+    diseaseDiv.appendChild(titleDiv);
+
+    // Tree diagram
+    const treeContainer = document.createElement('div');
+    treeContainer.className = 'tree-container';
+    treeContainer.style.borderRadius = '8px';
+    treeContainer.style.background = 'rgba(15,23,42,0.5)';
+    treeContainer.style.border = '1px solid rgba(148,163,184,0.2)';
+
+    const treeDiagram = document.createElement('div');
+    treeDiagram.className = 'tree-diagram';
+
+    // Column 1: Disease (Root)
+    const col1 = document.createElement('div');
+    col1.className = 'tree-column';
+    const rootNode = document.createElement('div');
+    rootNode.className = 'tree-node root fade-in';
+    rootNode.style.borderColor = cat.color;
+    rootNode.style.color = cat.color;
+    rootNode.innerHTML = `
+      <div style="font-size:0.7rem;opacity:0.7;">DISEASE</div>
+      <div style="word-break:break-word;margin-top:4px;font-size:0.9rem;">${disease.name}</div>
+    `;
+    col1.appendChild(rootNode);
+    treeDiagram.appendChild(col1);
+
+    // Column 2: Etiology
+    const col2 = document.createElement('div');
+    col2.className = 'tree-column';
+    const etiologyLabel = document.createElement('div');
+    etiologyLabel.className = 'tree-label';
+    etiologyLabel.style.color = '#fbbf24';
+    etiologyLabel.textContent = 'Etiology';
+    col2.appendChild(etiologyLabel);
+    disease.etiology.slice(0, 3).forEach(item => {
+      const node = document.createElement('div');
+      node.className = 'tree-node section fade-in';
+      node.style.borderColor = '#fbbf2433';
+      node.style.color = '#fbbf24';
+      node.textContent = item.substring(0, 40) + (item.length > 40 ? '...' : '');
+      node.title = item;
+      col2.appendChild(node);
+    });
+    treeDiagram.appendChild(col2);
+
+    // Column 3: Pathophysiology
+    const col3 = document.createElement('div');
+    col3.className = 'tree-column';
+    const pathLabel = document.createElement('div');
+    pathLabel.className = 'tree-label';
+    pathLabel.style.color = '#a78bfa';
+    pathLabel.textContent = 'Pathophysiology';
+    col3.appendChild(pathLabel);
+    disease.pathophysiology.slice(0, 2).forEach(item => {
+      const node = document.createElement('div');
+      node.className = 'tree-node section fade-in';
+      node.style.borderColor = '#a78bfa33';
+      node.style.color = '#a78bfa';
+      node.textContent = item.substring(0, 40) + (item.length > 40 ? '...' : '');
+      node.title = item;
+      col3.appendChild(node);
+    });
+    treeDiagram.appendChild(col3);
+
+    // Column 4: Clinical Features
+    const col4 = document.createElement('div');
+    col4.className = 'tree-column';
+    const clinLabel = document.createElement('div');
+    clinLabel.className = 'tree-label';
+    clinLabel.style.color = '#34d399';
+    clinLabel.textContent = 'Clinical';
+    col4.appendChild(clinLabel);
+    disease.clinical.slice(0, 3).forEach(item => {
+      const node = document.createElement('div');
+      node.className = 'tree-node detail fade-in';
+      node.style.borderColor = '#34d39933';
+      node.style.color = '#34d399';
+      node.textContent = item.substring(0, 35) + (item.length > 35 ? '...' : '');
+      node.title = item;
+      col4.appendChild(node);
+    });
+    treeDiagram.appendChild(col4);
+
+    // Column 5: Diagnosis
+    const col5 = document.createElement('div');
+    col5.className = 'tree-column';
+    const diagLabel = document.createElement('div');
+    diagLabel.className = 'tree-label';
+    diagLabel.style.color = '#60a5fa';
+    diagLabel.textContent = 'Diagnosis';
+    col5.appendChild(diagLabel);
+    disease.diagnosis.slice(0, 3).forEach(item => {
+      const node = document.createElement('div');
+      node.className = 'tree-node detail fade-in';
+      node.style.borderColor = '#60a5fa33';
+      node.style.color = '#60a5fa';
+      node.textContent = item.substring(0, 35) + (item.length > 35 ? '...' : '');
+      node.title = item;
+      col5.appendChild(node);
+    });
+    treeDiagram.appendChild(col5);
+
+    // Column 6: Treatment
+    const col6 = document.createElement('div');
+    col6.className = 'tree-column';
+    const treatLabel = document.createElement('div');
+    treatLabel.className = 'tree-label';
+    treatLabel.style.color = '#f472b6';
+    treatLabel.textContent = 'Treatment';
+    col6.appendChild(treatLabel);
+    disease.treatment.slice(0, 3).forEach(item => {
+      const node = document.createElement('div');
+      node.className = 'tree-node detail fade-in';
+      node.style.borderColor = '#f472b633';
+      node.style.color = '#f472b6';
+      node.textContent = item.substring(0, 35) + (item.length > 35 ? '...' : '');
+      node.title = item;
+      col6.appendChild(node);
+    });
+    treeDiagram.appendChild(col6);
+
+    // Column 7: Complications
+    const col7 = document.createElement('div');
+    col7.className = 'tree-column';
+    const compLabel = document.createElement('div');
+    compLabel.className = 'tree-label';
+    compLabel.style.color = '#fb923c';
+    compLabel.textContent = 'Complications';
+    col7.appendChild(compLabel);
+    disease.complications.slice(0, 3).forEach(item => {
+      const node = document.createElement('div');
+      node.className = 'tree-node detail fade-in';
+      node.style.borderColor = '#fb923c33';
+      node.style.color = '#fb923c';
+      node.textContent = item.substring(0, 35) + (item.length > 35 ? '...' : '');
+      node.title = item;
+      col7.appendChild(node);
+    });
+    treeDiagram.appendChild(col7);
+
+    treeContainer.appendChild(treeDiagram);
+    diseaseDiv.appendChild(treeContainer);
+
+    // Full details button
+    const detailsBtn = document.createElement('button');
+    detailsBtn.className = 'mt-3 px-4 py-2 rounded-lg text-sm font-medium transition-all';
+    detailsBtn.style.background = cat.color + '22';
+    detailsBtn.style.color = cat.color;
+    detailsBtn.style.border = `1px solid ${cat.color}55`;
+    detailsBtn.textContent = '📋 View Full Clinical Details';
+    detailsBtn.onclick = () => showFullDetails(disease, cat);
+    diseaseDiv.appendChild(detailsBtn);
+
+    container.appendChild(diseaseDiv);
+  });
+
+  lucide.createIcons();
+}
+
+function showFullDetails(disease, category) {
+  const modal = document.createElement('div');
+  modal.style.position = 'fixed';
+  modal.style.top = '0';
+  modal.style.left = '0';
+  modal.style.right = '0';
+  modal.style.bottom = '0';
+  modal.style.background = 'rgba(0,0,0,0.7)';
+  modal.style.display = 'flex';
+  modal.style.alignItems = 'center';
+  modal.style.justifyContent = 'center';
+  modal.style.zIndex = '1000';
+  modal.style.padding = '20px';
+  modal.onclick = (e) => e.target === modal && modal.remove();
+
+  const content = document.createElement('div');
+  content.style.background = '#1e293b';
+  content.style.borderRadius = '12px';
+  content.style.maxWidth = '900px';
+  content.style.maxHeight = '90vh';
+  content.style.overflow = 'auto';
+  content.style.padding = '30px';
+  content.style.border = `2px solid ${category.color}`;
+
+  const sections = [
+    { label: 'Etiology', data: disease.etiology, color: '#fbbf24', icon: 'alert-circle' },
+    { label: 'Pathophysiology', data: disease.pathophysiology, color: '#a78bfa', icon: 'git-branch' },
+    { label: 'Clinical Features', data: disease.clinical, color: '#34d399', icon: 'stethoscope' },
+    { label: 'Diagnosis', data: disease.diagnosis, color: '#60a5fa', icon: 'search' },
+    { label: 'Treatment', data: disease.treatment, color: '#f472b6', icon: 'pill' },
+    { label: 'Complications', data: disease.complications, color: '#fb923c', icon: 'alert-triangle' }
+  ];
+
+  let html = `
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h2 class="heading-font text-3xl font-bold text-white">${disease.name}</h2>
+        <p class="text-slate-400 mt-1">${category.name} Specialty</p>
+      </div>
+      <button onclick="this.closest('div').parentElement.remove()" style="background:transparent;border:none;color:#fff;font-size:24px;cursor:pointer;padding:0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+  `;
+
+  sections.forEach(s => {
+    html += `
+      <div style="margin-bottom:24px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <i data-lucide="${s.icon}" style="width:18px;height:18px;color:${s.color};"></i>
+          <h3 style="color:${s.color};font-weight:bold;margin:0;font-size:1.1rem;text-transform:uppercase;letter-spacing:0.5px;">${s.label}</h3>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-left:8px;">
+          ${s.data.map(item => `
+            <div style="background:rgba(${parseInt(s.color.slice(1,3),16)},${parseInt(s.color.slice(3,5),16)},${parseInt(s.color.slice(5,7),16)},0.1);border-left:3px solid ${s.color};padding:10px 12px;border-radius:4px;color:#e2e8f0;line-height:1.6;font-size:0.95rem;">
+              ${item}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  content.innerHTML = html;
+  modal.appendChild(content);
+  document.body.appendChild(modal);
+  lucide.createIcons();
+}
+
+function renderAll() {
+  renderNav();
+  renderDiseases();
+  lucide.createIcons();
+}
+
+// Element SDK
+const defaultConfig = {
+  main_title: 'Medical Disease Concept Maps',
+  subtitle: 'Clinically Accurate Reference',
+  background_color: '#0f172a',
+  surface_color: '#1e293b',
+  text_color: '#e2e8f0',
+  primary_color: '#fbbf24',
+  secondary_color: '#64748b',
+  font_family: 'Crimson Pro',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+  document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+
+  const app = document.getElementById('app');
+  app.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, ${config.surface_color || defaultConfig.surface_color} 50%, ${config.background_color || defaultConfig.background_color} 100%)`;
+
+  const font = config.font_family || defaultConfig.font_family;
+  const size = config.font_size || defaultConfig.font_size;
+  document.querySelectorAll('.heading-font').forEach(el => { el.style.fontFamily = `${font}, serif`; el.style.fontSize = `${size * 1.5}px`; });
+  document.getElementById('main-title').style.fontSize = `${size * 1.5}px`;
+}
+
+renderAll();
+</script>
+</body>
+</html>
