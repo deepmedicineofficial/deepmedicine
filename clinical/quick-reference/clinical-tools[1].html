@@ -1,0 +1,530 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Clinical Tools | Medical Instruments & Diagnostic Aids | Deep Medicine</title> <meta name="description" content="Comprehensive guide to clinical tools and medical instruments used in diagnosis, emergency care, ICU monitoring, and procedures."> <link rel="canonical" href="https://deepmedicine.in/clinical/quick-reference/clinical-tools"> <!-- Open Graph --> <meta property="og:title" content="Clinical Tools | Deep Medicine"> <meta property="og:description" content="Medical instruments and clinical tools for diagnosis, monitoring, and emergency care."> <meta property="og:image" content="https://deepmedicine.in/images/clinical-tools.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html,body{height:100%;margin:0;font-family:'DM Sans',sans-serif}
+*{box-sizing:border-box}
+.mono{font-family:'Space Mono',monospace}
+.tool-card{transition:all .2s ease}
+.tool-card:hover{transform:translateY(-2px)}
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{opacity:1}
+.result-box{border-left:4px solid}
+.toast{animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0f172a"><!-- NAV -->
+   <header class="sticky top-0 z-50 border-b" style="background:#1e293b;border-color:#334155">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:#22d3ee">
+       <i data-lucide="activity" style="width:20px;height:20px;color:#0f172a"></i>
+      </div>
+      <h1 id="appTitle" class="text-lg font-bold" style="color:#f1f5f9">Clinical Tools Suite</h1>
+     </div><button id="backBtn" class="hidden items-center gap-1 text-sm font-medium px-3 py-1.5 rounded-lg" style="color:#22d3ee;background:#0f172a" onclick="showHome()"> <i data-lucide="arrow-left" style="width:16px;height:16px"></i> All Tools </button>
+    </div>
+   </header><!-- HOME GRID -->
+   <div id="homeView" class="max-w-7xl mx-auto px-4 py-6">
+    <p class="text-sm mb-5 font-medium" style="color:#94a3b8">Select a clinical tool to begin</p>
+    <div id="toolGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+    <p class="text-center text-xs mt-8" style="color:#475569">For clinical decision support only. Always correlate clinically.</p>
+   </div><!-- TOOL VIEW -->
+   <div id="toolView" class="hidden max-w-3xl mx-auto px-4 py-6 fade-in"></div>
+  </div>
+  <script>
+// ===== TOOL DEFINITIONS =====
+const TOOLS = [
+  {id:'abg',name:'ABG Analyzer',icon:'wind',color:'#22d3ee',desc:'Arterial Blood Gas interpretation'},
+  {id:'gfr',name:'eGFR (CKD-EPI)',icon:'droplets',color:'#a78bfa',desc:'Estimated glomerular filtration rate'},
+  {id:'bmi',name:'BMI Calculator',icon:'scale',color:'#34d399',desc:'Body Mass Index with classification'},
+  {id:'wells',name:'Wells Score (PE)',icon:'heart-pulse',color:'#f87171',desc:'Pulmonary embolism probability'},
+  {id:'chadsvasc',name:'CHA₂DS₂-VASc',icon:'zap',color:'#fbbf24',desc:'Stroke risk in atrial fibrillation'},
+  {id:'sofa',name:'SOFA Score',icon:'thermometer',color:'#fb923c',desc:'Sequential Organ Failure Assessment'},
+  {id:'meld',name:'MELD Score',icon:'flask-conical',color:'#e879f9',desc:'Model for End-Stage Liver Disease'},
+  {id:'corrca',name:'Corrected Calcium',icon:'bone',color:'#38bdf8',desc:'Calcium corrected for albumin'},
+  {id:'anion',name:'Anion Gap',icon:'beaker',color:'#4ade80',desc:'Serum anion gap calculation'},
+  {id:'crclr',name:'CrCl (Cockcroft)',icon:'pill',color:'#f472b6',desc:'Creatinine clearance estimation'},
+  {id:'na_deficit',name:'Sodium Deficit',icon:'flask-round',color:'#c084fc',desc:'Free water deficit in hyponatremia'},
+  {id:'map',name:'MAP Calculator',icon:'gauge',color:'#fb7185',desc:'Mean arterial pressure'},
+  {id:'a_a',name:'A-a Gradient',icon:'cloud',color:'#2dd4bf',desc:'Alveolar-arterial oxygen gradient'},
+  {id:'curb65',name:'CURB-65',icon:'stethoscope',color:'#fcd34d',desc:'Pneumonia severity score'},
+];
+
+// ===== RENDER HOME =====
+function renderHome(){
+  const g=document.getElementById('toolGrid');
+  g.innerHTML=TOOLS.map(t=>`
+    <button onclick="openTool('${t.id}')" class="tool-card text-left p-4 rounded-xl border" style="background:#1e293b;border-color:#334155">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background:${t.color}20">
+        <i data-lucide="${t.icon}" style="width:20px;height:20px;color:${t.color}"></i>
+      </div>
+      <div class="font-semibold text-sm" style="color:#f1f5f9">${t.name}</div>
+      <div class="text-xs mt-1" style="color:#64748b">${t.desc}</div>
+    </button>
+  `).join('');
+  lucide.createIcons();
+}
+
+function showHome(){
+  document.getElementById('homeView').classList.remove('hidden');
+  document.getElementById('toolView').classList.add('hidden');
+  document.getElementById('backBtn').classList.add('hidden');
+  document.getElementById('backBtn').classList.remove('flex');
+}
+
+function openTool(id){
+  document.getElementById('homeView').classList.add('hidden');
+  const tv=document.getElementById('toolView');
+  tv.classList.remove('hidden');
+  tv.innerHTML='';
+  document.getElementById('backBtn').classList.remove('hidden');
+  document.getElementById('backBtn').classList.add('flex');
+  const builder=toolBuilders[id];
+  if(builder) builder(tv);
+  lucide.createIcons();
+}
+
+// ===== HELPERS =====
+function inp(label,id,unit='',placeholder='',step='any'){
+  return `<div class="flex flex-col gap-1">
+    <label for="${id}" class="text-xs font-medium" style="color:#94a3b8">${label}${unit?' ('+unit+')':''}</label>
+    <input type="number" id="${id}" step="${step}" placeholder="${placeholder}" class="rounded-lg px-3 py-2 text-sm border outline-none focus:ring-2" style="background:#0f172a;border-color:#334155;color:#f1f5f9;--tw-ring-color:#22d3ee">
+  </div>`;
+}
+function sel(label,id,options){
+  return `<div class="flex flex-col gap-1">
+    <label for="${id}" class="text-xs font-medium" style="color:#94a3b8">${label}</label>
+    <select id="${id}" class="rounded-lg px-3 py-2 text-sm border outline-none" style="background:#0f172a;border-color:#334155;color:#f1f5f9">
+      ${options.map(o=>`<option value="${o.v}">${o.l}</option>`).join('')}
+    </select>
+  </div>`;
+}
+function chk(label,id){
+  return `<label class="flex items-center gap-2 cursor-pointer">
+    <input type="checkbox" id="${id}" class="w-4 h-4 rounded accent-cyan-400">
+    <span class="text-sm" style="color:#cbd5e1">${label}</span>
+  </label>`;
+}
+function btn(text,onclick){
+  return `<button onclick="${onclick}" class="w-full py-2.5 rounded-lg font-semibold text-sm transition" style="background:#22d3ee;color:#0f172a">${text}</button>`;
+}
+function resultBox(id){
+  return `<div id="${id}" class="hidden result-box rounded-lg p-4 mt-4 fade-in" style="background:#1e293b;border-color:#22d3ee"></div>`;
+}
+function toolWrap(title,icon,color,body){
+  return `<div class="fade-in">
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:${color}20"><i data-lucide="${icon}" style="width:22px;height:22px;color:${color}"></i></div>
+      <div><h2 class="font-bold text-lg" style="color:#f1f5f9">${title}</h2></div>
+    </div>
+    <div class="rounded-xl border p-5" style="background:#1e293b;border-color:#334155">${body}</div>
+  </div>`;
+}
+function v(id){return parseFloat(document.getElementById(id).value)}
+function c(id){return document.getElementById(id).checked}
+
+// ===== TOOL BUILDERS =====
+const toolBuilders={};
+
+// 1. ABG ANALYZER
+toolBuilders.abg=el=>{
+  el.innerHTML=toolWrap('ABG Analyzer','wind','#22d3ee',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('pH','abg_ph','','7.40','0.01')}
+      ${inp('PaCO₂','abg_pco2','mmHg','40')}
+      ${inp('HCO₃⁻','abg_hco3','mEq/L','24')}
+      ${inp('PaO₂','abg_pao2','mmHg','95')}
+      ${inp('Na⁺','abg_na','mEq/L','140')}
+      ${inp('Cl⁻','abg_cl','mEq/L','104')}
+    </div>
+    <div class="mt-4">${btn('Analyze ABG','calcABG()')}</div>
+    ${resultBox('abg_result')}
+  `);
+};
+window.calcABG=()=>{
+  const ph=v('abg_ph'),pco2=v('abg_pco2'),hco3=v('abg_hco3'),pao2=v('abg_pao2'),na=v('abg_na'),cl=v('abg_cl');
+  if([ph,pco2,hco3].some(isNaN))return;
+  let findings=[];
+  // Primary disorder
+  if(ph<7.35){
+    findings.push(hco3<22?'<b>Primary Metabolic Acidosis</b>':'');
+    findings.push(pco2>45?'<b>Primary Respiratory Acidosis</b>':'');
+  }else if(ph>7.45){
+    findings.push(hco3>26?'<b>Primary Metabolic Alkalosis</b>':'');
+    findings.push(pco2<35?'<b>Primary Respiratory Alkalosis</b>':'');
+  }else{
+    findings.push('pH within normal range');
+  }
+  // Compensation
+  if(hco3<22&&pco2<35) findings.push('Respiratory compensation present');
+  if(hco3>26&&pco2>45) findings.push('Respiratory compensation present');
+  // Anion gap
+  if(!isNaN(na)&&!isNaN(cl)){
+    const ag=na-cl-hco3;
+    findings.push(`Anion Gap: <b>${ag.toFixed(1)} mEq/L</b> ${ag>12?'(Elevated — HAGMA)':'(Normal)'}`);
+    if(ag>12){
+      const delta=ag-12, ratio=delta/(24-hco3);
+      findings.push(`Delta-Delta Ratio: <b>${isFinite(ratio)?ratio.toFixed(2):'N/A'}</b> ${ratio>2?'(concurrent metabolic alkalosis)':ratio<1?'(concurrent NAGMA)':'(pure HAGMA)'}`);
+    }
+  }
+  if(!isNaN(pao2)) findings.push(`PaO₂: ${pao2<60?'<b style="color:#f87171">Hypoxemia</b>':'Normal'}`);
+  // Winters
+  if(hco3<22){const expPco2=1.5*hco3+8; findings.push(`Expected PaCO₂ (Winters): <b>${expPco2.toFixed(0)}±2 mmHg</b> — Actual: ${pco2}`);}
+  findings=findings.filter(Boolean);
+  const r=document.getElementById('abg_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<h3 class="font-bold text-sm mb-2" style="color:#22d3ee">Analysis</h3><ul class="space-y-1 text-sm" style="color:#cbd5e1">${findings.map(f=>'<li>• '+f+'</li>').join('')}</ul>`;
+};
+
+// 2. eGFR
+toolBuilders.gfr=el=>{
+  el.innerHTML=toolWrap('eGFR (CKD-EPI 2021)','droplets','#a78bfa',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Serum Creatinine','gfr_cr','mg/dL','1.0','0.01')}
+      ${inp('Age','gfr_age','years','50','1')}
+      ${sel('Sex','gfr_sex',[{v:'F',l:'Female'},{v:'M',l:'Male'}])}
+    </div>
+    <div class="mt-4">${btn('Calculate eGFR','calcGFR()')}</div>
+    ${resultBox('gfr_result')}
+  `);
+};
+window.calcGFR=()=>{
+  const cr=v('gfr_cr'),age=v('gfr_age'),sex=document.getElementById('gfr_sex').value;
+  if([cr,age].some(isNaN)||cr<=0)return;
+  // CKD-EPI 2021 (race-free)
+  let A,B;
+  if(sex==='F'){A=0.7;B=-0.241;}else{A=0.9;B=-0.302;}
+  const min_=Math.min(cr/A,1),max_=Math.max(cr/A,1);
+  let gfr=142*Math.pow(min_,B)*Math.pow(max_,-1.200)*Math.pow(0.9938,age);
+  if(sex==='F') gfr*=1.012;
+  let stage='';
+  if(gfr>=90)stage='G1 — Normal';else if(gfr>=60)stage='G2 — Mild ↓';else if(gfr>=45)stage='G3a — Mild-Moderate ↓';else if(gfr>=30)stage='G3b — Moderate-Severe ↓';else if(gfr>=15)stage='G4 — Severe ↓';else stage='G5 — Kidney Failure';
+  const r=document.getElementById('gfr_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#a78bfa">${gfr.toFixed(1)} <span class="text-sm font-normal" style="color:#94a3b8">mL/min/1.73m²</span></div><div class="text-sm mt-2" style="color:#cbd5e1">CKD Stage: <b>${stage}</b></div>`;
+};
+
+// 3. BMI
+toolBuilders.bmi=el=>{
+  el.innerHTML=toolWrap('BMI Calculator','scale','#34d399',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Weight','bmi_wt','kg','70','0.1')}
+      ${inp('Height','bmi_ht','cm','170','1')}
+    </div>
+    <div class="mt-4">${btn('Calculate BMI','calcBMI()')}</div>
+    ${resultBox('bmi_result')}
+  `);
+};
+window.calcBMI=()=>{
+  const wt=v('bmi_wt'),ht=v('bmi_ht');
+  if([wt,ht].some(isNaN)||ht<=0)return;
+  const bmi=wt/((ht/100)**2);
+  let cat='',col='';
+  if(bmi<18.5){cat='Underweight';col='#38bdf8';}else if(bmi<25){cat='Normal';col='#34d399';}else if(bmi<30){cat='Overweight';col='#fbbf24';}else if(bmi<35){cat='Obese Class I';col='#fb923c';}else if(bmi<40){cat='Obese Class II';col='#f87171';}else{cat='Obese Class III';col='#ef4444';}
+  const ibw_m=50+0.91*(ht-152.4), ibw_f=45.5+0.91*(ht-152.4);
+  const r=document.getElementById('bmi_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:${col}">${bmi.toFixed(1)} <span class="text-sm">kg/m²</span></div><div class="text-sm mt-1" style="color:#cbd5e1"><b>${cat}</b></div><div class="text-xs mt-2" style="color:#64748b">IBW ♂ ${ibw_m.toFixed(1)} kg | ♀ ${ibw_f.toFixed(1)} kg</div>`;
+};
+
+// 4. Wells PE
+toolBuilders.wells=el=>{
+  el.innerHTML=toolWrap('Wells Score for PE','heart-pulse','#f87171',`
+    <div class="space-y-2">
+      ${chk('Clinical signs/symptoms of DVT (+3)','w_dvt')}
+      ${chk('PE is #1 diagnosis OR equally likely (+3)','w_likely')}
+      ${chk('Heart rate > 100 bpm (+1.5)','w_hr')}
+      ${chk('Immobilization ≥3 days or surgery in prior 4 weeks (+1.5)','w_immob')}
+      ${chk('Previous PE or DVT (+1.5)','w_prev')}
+      ${chk('Hemoptysis (+1)','w_hemo')}
+      ${chk('Malignancy (treatment within 6 months or palliative) (+1)','w_mal')}
+    </div>
+    <div class="mt-4">${btn('Calculate Score','calcWells()')}</div>
+    ${resultBox('wells_result')}
+  `);
+};
+window.calcWells=()=>{
+  const s=(c('w_dvt')?3:0)+(c('w_likely')?3:0)+(c('w_hr')?1.5:0)+(c('w_immob')?1.5:0)+(c('w_prev')?1.5:0)+(c('w_hemo')?1:0)+(c('w_mal')?1:0);
+  let risk='',col='';
+  if(s<=1){risk='Low risk (~1.3%)';col='#34d399';}else if(s<=4){risk='Moderate risk (~16.2%)';col='#fbbf24';}else{risk='High risk (~40.6%)';col='#f87171';}
+  const r=document.getElementById('wells_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:${col}">${s} points</div><div class="text-sm mt-1" style="color:#cbd5e1">${risk}</div><div class="text-xs mt-2" style="color:#64748b">${s<=4?'Consider D-dimer to rule out':'CTPA recommended'}</div>`;
+};
+
+// 5. CHA2DS2-VASc
+toolBuilders.chadsvasc=el=>{
+  el.innerHTML=toolWrap('CHA₂DS₂-VASc Score','zap','#fbbf24',`
+    <div class="space-y-2">
+      ${chk('CHF / LV dysfunction (+1)','cv_chf')}
+      ${chk('Hypertension (+1)','cv_htn')}
+      ${chk('Age ≥75 (+2)','cv_age75')}
+      ${chk('Diabetes (+1)','cv_dm')}
+      ${chk('Stroke/TIA/thromboembolism (+2)','cv_stroke')}
+      ${chk('Vascular disease (+1)','cv_vasc')}
+      ${chk('Age 65-74 (+1)','cv_age65')}
+      ${chk('Female sex (+1)','cv_fem')}
+    </div>
+    <div class="mt-4">${btn('Calculate Score','calcCHADS()')}</div>
+    ${resultBox('chads_result')}
+  `);
+};
+window.calcCHADS=()=>{
+  const s=(c('cv_chf')?1:0)+(c('cv_htn')?1:0)+(c('cv_age75')?2:0)+(c('cv_dm')?1:0)+(c('cv_stroke')?2:0)+(c('cv_vasc')?1:0)+(c('cv_age65')?1:0)+(c('cv_fem')?1:0);
+  const rates=[0,1.3,2.2,3.2,4.0,6.7,9.8,9.6,6.7,15.2];
+  const rate=rates[Math.min(s,9)];
+  let rec='';
+  if(s===0)rec='No anticoagulation needed';else if(s===1)rec='Consider anticoagulation (OAC preferred over aspirin)';else rec='Oral anticoagulation recommended';
+  const r=document.getElementById('chads_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#fbbf24">${s} points</div><div class="text-sm mt-1" style="color:#cbd5e1">Annual stroke risk: ~${rate}%</div><div class="text-sm mt-1" style="color:#cbd5e1">${rec}</div>`;
+};
+
+// 6. SOFA
+toolBuilders.sofa=el=>{
+  el.innerHTML=toolWrap('SOFA Score','thermometer','#fb923c',`
+    <div class="grid grid-cols-2 gap-3">
+      ${sel('PaO₂/FiO₂','sofa_resp',[{v:0,l:'≥400 (0)'},{v:1,l:'300-399 (1)'},{v:2,l:'200-299 (2)'},{v:3,l:'100-199 + ventilated (3)'},{v:4,l:'<100 + ventilated (4)'}])}
+      ${sel('Platelets (×10³/µL)','sofa_plt',[{v:0,l:'≥150 (0)'},{v:1,l:'100-149 (1)'},{v:2,l:'50-99 (2)'},{v:3,l:'20-49 (3)'},{v:4,l:'<20 (4)'}])}
+      ${sel('Bilirubin (mg/dL)','sofa_bil',[{v:0,l:'<1.2 (0)'},{v:1,l:'1.2-1.9 (1)'},{v:2,l:'2.0-5.9 (2)'},{v:3,l:'6.0-11.9 (3)'},{v:4,l:'≥12.0 (4)'}])}
+      ${sel('Cardiovascular','sofa_cv',[{v:0,l:'MAP ≥70 (0)'},{v:1,l:'MAP <70 (1)'},{v:2,l:'Dopa ≤5 (2)'},{v:3,l:'Dopa >5 or Epi ≤0.1 (3)'},{v:4,l:'Dopa >15 or Epi >0.1 (4)'}])}
+      ${sel('GCS','sofa_cns',[{v:0,l:'15 (0)'},{v:1,l:'13-14 (1)'},{v:2,l:'10-12 (2)'},{v:3,l:'6-9 (3)'},{v:4,l:'<6 (4)'}])}
+      ${sel('Creatinine (mg/dL)','sofa_renal',[{v:0,l:'<1.2 (0)'},{v:1,l:'1.2-1.9 (1)'},{v:2,l:'2.0-3.4 (2)'},{v:3,l:'3.5-4.9 (3)'},{v:4,l:'≥5.0 (4)'}])}
+    </div>
+    <div class="mt-4">${btn('Calculate SOFA','calcSOFA()')}</div>
+    ${resultBox('sofa_result')}
+  `);
+};
+window.calcSOFA=()=>{
+  const ids=['sofa_resp','sofa_plt','sofa_bil','sofa_cv','sofa_cns','sofa_renal'];
+  const s=ids.reduce((a,id)=>a+parseInt(document.getElementById(id).value),0);
+  let mort='';
+  if(s<=1)mort='<1.5%';else if(s<=3)mort='~2%';else if(s<=5)mort='~2-3%';else if(s<=7)mort='~15-20%';else if(s<=9)mort='~30-40%';else if(s<=11)mort='~50%';else mort='>80%';
+  const r=document.getElementById('sofa_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#fb923c">${s} / 24</div><div class="text-sm mt-1" style="color:#cbd5e1">Estimated ICU mortality: <b>${mort}</b></div><div class="text-xs mt-2" style="color:#64748b">≥2 point increase = organ dysfunction (Sepsis-3)</div>`;
+};
+
+// 7. MELD
+toolBuilders.meld=el=>{
+  el.innerHTML=toolWrap('MELD Score','flask-conical','#e879f9',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Bilirubin','meld_bil','mg/dL','1.0','0.1')}
+      ${inp('Creatinine','meld_cr','mg/dL','1.0','0.1')}
+      ${inp('INR','meld_inr','','1.0','0.1')}
+      ${inp('Sodium','meld_na','mEq/L','140','1')}
+    </div>
+    <div class="mt-4">${btn('Calculate MELD-Na','calcMELD()')}</div>
+    ${resultBox('meld_result')}
+  `);
+};
+window.calcMELD=()=>{
+  let bil=v('meld_bil'),cr=v('meld_cr'),inr=v('meld_inr'),na=v('meld_na');
+  if([bil,cr,inr].some(isNaN))return;
+  bil=Math.max(bil,1);cr=Math.min(Math.max(cr,1),4);inr=Math.max(inr,1);
+  let meld=10*(0.957*Math.log(cr)+0.378*Math.log(bil)+1.120*Math.log(inr)+0.643);
+  meld=Math.round(meld);
+  let meldNa=meld;
+  if(!isNaN(na)){na=Math.min(Math.max(na,125),137);meldNa=meld+1.32*(137-na)-(0.033*meld*(137-na));meldNa=Math.round(meldNa);}
+  let mort3='';
+  if(meldNa<=9)mort3='~2%';else if(meldNa<=19)mort3='~6%';else if(meldNa<=29)mort3='~20%';else if(meldNa<=39)mort3='~50%';else mort3='>70%';
+  const r=document.getElementById('meld_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#e879f9">MELD-Na: ${meldNa}</div><div class="text-sm mt-1" style="color:#94a3b8">MELD: ${meld}</div><div class="text-sm mt-1" style="color:#cbd5e1">3-month mortality: <b>${mort3}</b></div>`;
+};
+
+// 8. Corrected Calcium
+toolBuilders.corrca=el=>{
+  el.innerHTML=toolWrap('Corrected Calcium','bone','#38bdf8',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Serum Calcium','cc_ca','mg/dL','9.0','0.1')}
+      ${inp('Serum Albumin','cc_alb','g/dL','4.0','0.1')}
+    </div>
+    <div class="mt-4">${btn('Calculate','calcCorrCa()')}</div>
+    ${resultBox('cc_result')}
+  `);
+};
+window.calcCorrCa=()=>{
+  const ca=v('cc_ca'),alb=v('cc_alb');
+  if([ca,alb].some(isNaN))return;
+  const corrected=ca+0.8*(4.0-alb);
+  let status='',col='';
+  if(corrected<8.5){status='Hypocalcemia';col='#38bdf8';}else if(corrected<=10.5){status='Normal';col='#34d399';}else{status='Hypercalcemia';col='#f87171';}
+  const r=document.getElementById('cc_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:${col}">${corrected.toFixed(1)} mg/dL</div><div class="text-sm mt-1" style="color:#cbd5e1">${status}</div><div class="text-xs mt-2" style="color:#64748b">Formula: Ca + 0.8 × (4.0 − Albumin)</div>`;
+};
+
+// 9. Anion Gap
+toolBuilders.anion=el=>{
+  el.innerHTML=toolWrap('Anion Gap','beaker','#4ade80',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Na⁺','ag_na','mEq/L','140','1')}
+      ${inp('Cl⁻','ag_cl','mEq/L','104','1')}
+      ${inp('HCO₃⁻','ag_hco3','mEq/L','24','1')}
+      ${inp('Albumin','ag_alb','g/dL','4.0','0.1')}
+    </div>
+    <div class="mt-4">${btn('Calculate','calcAG()')}</div>
+    ${resultBox('ag_result')}
+  `);
+};
+window.calcAG=()=>{
+  const na=v('ag_na'),cl=v('ag_cl'),hco3=v('ag_hco3'),alb=v('ag_alb');
+  if([na,cl,hco3].some(isNaN))return;
+  const ag=na-cl-hco3;
+  let corrAG=ag;
+  if(!isNaN(alb)) corrAG=ag+2.5*(4.0-alb);
+  const r=document.getElementById('ag_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#4ade80">${ag.toFixed(1)} mEq/L</div>
+    ${!isNaN(alb)?`<div class="text-sm mt-1" style="color:#94a3b8">Albumin-corrected: <b>${corrAG.toFixed(1)} mEq/L</b></div>`:''}
+    <div class="text-sm mt-1" style="color:#cbd5e1">${corrAG>12?'Elevated — consider HAGMA causes (MUDPILES)':'Normal anion gap'}</div>`;
+};
+
+// 10. Creatinine Clearance
+toolBuilders.crclr=el=>{
+  el.innerHTML=toolWrap('CrCl (Cockcroft-Gault)','pill','#f472b6',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Age','cg_age','years','50','1')}
+      ${inp('Weight','cg_wt','kg','70','0.1')}
+      ${inp('Serum Creatinine','cg_cr','mg/dL','1.0','0.01')}
+      ${sel('Sex','cg_sex',[{v:'M',l:'Male'},{v:'F',l:'Female'}])}
+    </div>
+    <div class="mt-4">${btn('Calculate CrCl','calcCrCl()')}</div>
+    ${resultBox('cg_result')}
+  `);
+};
+window.calcCrCl=()=>{
+  const age=v('cg_age'),wt=v('cg_wt'),cr=v('cg_cr'),sex=document.getElementById('cg_sex').value;
+  if([age,wt,cr].some(isNaN)||cr<=0)return;
+  let crcl=((140-age)*wt)/(72*cr);
+  if(sex==='F') crcl*=0.85;
+  const r=document.getElementById('cg_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#f472b6">${crcl.toFixed(1)} <span class="text-sm font-normal" style="color:#94a3b8">mL/min</span></div><div class="text-xs mt-2" style="color:#64748b">Use actual body weight. Adjust for obesity if needed.</div>`;
+};
+
+// 11. Sodium Deficit
+toolBuilders.na_deficit=el=>{
+  el.innerHTML=toolWrap('Sodium Deficit / Free Water Deficit','flask-round','#c084fc',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Current Na⁺','nad_na','mEq/L','128','1')}
+      ${inp('Target Na⁺','nad_target','mEq/L','140','1')}
+      ${inp('Weight','nad_wt','kg','70','0.1')}
+      ${sel('Sex','nad_sex',[{v:'M',l:'Male (TBW 0.6)'},{v:'F',l:'Female (TBW 0.5)'}])}
+    </div>
+    <div class="mt-4">${btn('Calculate','calcNaDef()')}</div>
+    ${resultBox('nad_result')}
+  `);
+};
+window.calcNaDef=()=>{
+  const na=v('nad_na'),target=v('nad_target'),wt=v('nad_wt'),sex=document.getElementById('nad_sex').value;
+  if([na,wt,target].some(isNaN))return;
+  const tbw=wt*(sex==='M'?0.6:0.5);
+  const deficit=tbw*(target-na);
+  const fwd=tbw*((na/140)-1);
+  const r=document.getElementById('nad_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-xl font-bold" style="color:#c084fc">Na⁺ Deficit: ${deficit.toFixed(0)} mEq</div>
+    <div class="mono text-lg mt-2" style="color:#94a3b8">Free Water Deficit: ${Math.abs(fwd).toFixed(1)} L</div>
+    <div class="text-xs mt-3 p-2 rounded" style="background:#0f172a;color:#fbbf24">⚠ Correct Na⁺ no faster than 8-10 mEq/L per 24h to avoid osmotic demyelination.</div>`;
+};
+
+// 12. MAP
+toolBuilders.map=el=>{
+  el.innerHTML=toolWrap('Mean Arterial Pressure','gauge','#fb7185',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Systolic BP','map_sbp','mmHg','120','1')}
+      ${inp('Diastolic BP','map_dbp','mmHg','80','1')}
+    </div>
+    <div class="mt-4">${btn('Calculate MAP','calcMAP()')}</div>
+    ${resultBox('map_result')}
+  `);
+};
+window.calcMAP=()=>{
+  const sbp=v('map_sbp'),dbp=v('map_dbp');
+  if([sbp,dbp].some(isNaN))return;
+  const map_val=dbp+(sbp-dbp)/3;
+  const pp=sbp-dbp;
+  let status='';
+  if(map_val<65)status='<b style="color:#f87171">Below perfusion threshold (< 65)</b>';else if(map_val<=105)status='Normal range';else status='Elevated';
+  const r=document.getElementById('map_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#fb7185">${map_val.toFixed(0)} mmHg</div><div class="text-sm mt-1" style="color:#cbd5e1">${status}</div><div class="text-sm mt-1" style="color:#94a3b8">Pulse Pressure: ${pp} mmHg</div>`;
+};
+
+// 13. A-a Gradient
+toolBuilders.a_a=el=>{
+  el.innerHTML=toolWrap('A-a Gradient','cloud','#2dd4bf',`
+    <div class="grid grid-cols-2 gap-3">
+      ${inp('Age','aa_age','years','50','1')}
+      ${inp('PaO₂','aa_pao2','mmHg','95')}
+      ${inp('PaCO₂','aa_paco2','mmHg','40')}
+      ${inp('FiO₂','aa_fio2','(0-1)','0.21','0.01')}
+    </div>
+    <div class="mt-4">${btn('Calculate A-a Gradient','calcAA()')}</div>
+    ${resultBox('aa_result')}
+  `);
+};
+window.calcAA=()=>{
+  const age=v('aa_age'),pao2=v('aa_pao2'),paco2=v('aa_paco2'),fio2=v('aa_fio2');
+  if([age,pao2,paco2,fio2].some(isNaN))return;
+  const pAO2=fio2*(760-47)-(paco2/0.8);
+  const aa=pAO2-pao2;
+  const expected=(age/4)+4;
+  const r=document.getElementById('aa_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:#2dd4bf">${aa.toFixed(1)} mmHg</div>
+    <div class="text-sm mt-1" style="color:#94a3b8">Expected for age: ≤${expected.toFixed(0)} mmHg</div>
+    <div class="text-sm mt-1" style="color:#cbd5e1">${aa>expected?'<b style="color:#fbbf24">Elevated</b> — consider V/Q mismatch, shunt, diffusion impairment':'Normal A-a gradient'}</div>`;
+};
+
+// 14. CURB-65
+toolBuilders.curb65=el=>{
+  el.innerHTML=toolWrap('CURB-65 Score','stethoscope','#fcd34d',`
+    <div class="space-y-2">
+      ${chk('Confusion (new onset) (+1)','curb_c')}
+      ${chk('BUN > 19 mg/dL (Urea > 7 mmol/L) (+1)','curb_u')}
+      ${chk('Respiratory rate ≥ 30/min (+1)','curb_r')}
+      ${chk('SBP < 90 or DBP ≤ 60 mmHg (+1)','curb_b')}
+      ${chk('Age ≥ 65 (+1)','curb_65')}
+    </div>
+    <div class="mt-4">${btn('Calculate Score','calcCURB()')}</div>
+    ${resultBox('curb_result')}
+  `);
+};
+window.calcCURB=()=>{
+  const s=(c('curb_c')?1:0)+(c('curb_u')?1:0)+(c('curb_r')?1:0)+(c('curb_b')?1:0)+(c('curb_65')?1:0);
+  let risk='',rec='',col='';
+  if(s<=1){risk='Low (1.5% mortality)';rec='Consider outpatient treatment';col='#34d399';}
+  else if(s===2){risk='Moderate (9.2% mortality)';rec='Consider short inpatient or supervised outpatient';col='#fbbf24';}
+  else{risk='High (22% mortality)';rec='Hospitalize; consider ICU if score 4-5';col='#f87171';}
+  const r=document.getElementById('curb_result');
+  r.classList.remove('hidden');
+  r.innerHTML=`<div class="mono text-2xl font-bold" style="color:${col}">${s} / 5</div><div class="text-sm mt-1" style="color:#cbd5e1">${risk}</div><div class="text-sm mt-1" style="color:#94a3b8">${rec}</div>`;
+};
+
+// ===== INIT =====
+const defaultConfig={
+  app_title:'Clinical Tools Suite',
+  background_color:'#0f172a',
+  surface_color:'#1e293b',
+  text_color:'#f1f5f9',
+  primary_action:'#22d3ee',
+  secondary_action:'#94a3b8',
+  font_family:'DM Sans',
+  font_size:14
+};
+
+function applyConfig(cfg){
+  document.getElementById('appTitle').textContent=cfg.app_title||defaultConfig.app_title;
+  document.getElementById('app').style.background=cfg.background_color||defaultConfig.background_color;
+  document.querySelector('header').style.background=cfg.surface_color||defaultConfig.surface_color;
+}
+
+renderHome();
+</script>
+</body>
+</html>
