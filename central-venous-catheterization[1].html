@@ -1,0 +1,744 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Central Venous Catheterization | Line Insertion Technique | Deep Medicine</title> <meta name="description" content="Step-by-step central venous catheterization including indications, site selection, sterile technique, complications, and line care."> <link rel="canonical" href="https://deepmedicine.in/learning/procedures/central-venous-catheterization"> <!-- Open Graph --> <meta property="og:title" content="Central Venous Catheterization | Deep Medicine"> <meta property="og:description" content="Central line insertion technique with indications, site selection, and complications."> <meta property="og:image" content="https://deepmedicine.in/images/central-line.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['"Source Sans 3"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; }
+.app-root { height: 100%; overflow-y: auto; overflow-x: hidden; }
+.gradient-hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0c4a6e 70%, #164e63 100%); }
+.card-surface { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(12px); }
+.card-surface:hover { border-color: rgba(96,165,250,0.25); background: rgba(255,255,255,0.055); }
+.section-divider { height: 2px; background: linear-gradient(90deg, transparent, rgba(96,165,250,0.4), transparent); }
+.tab-btn { transition: all 0.25s ease; }
+.tab-btn.active { background: rgba(96,165,250,0.15); border-color: rgba(96,165,250,0.5); color: #93c5fd; }
+.pulse-dot { animation: pulse-glow 2s ease-in-out infinite; }
+@keyframes pulse-glow { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:1; transform:scale(1.3); } }
+.fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.step-line { position: absolute; left: 19px; top: 40px; bottom: 0; width: 2px; background: linear-gradient(to bottom, rgba(96,165,250,0.4), transparent); }
+.danger-badge { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+.warning-badge { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+.success-badge { background: rgba(34,197,94,0.15); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+.info-badge { background: rgba(96,165,250,0.15); color: #93c5fd; border: 1px solid rgba(96,165,250,0.3); }
+details summary { cursor: pointer; list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details[open] .chevron-icon { transform: rotate(180deg); }
+.chevron-icon { transition: transform 0.25s ease; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-thumb { background: rgba(96,165,250,0.3); border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-slate-950 text-slate-200 font-body">
+  <div class="app-root" id="appRoot"><!-- HERO -->
+   <header class="gradient-hero relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, rgba(96,165,250,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(20,184,166,0.2) 0%, transparent 50%);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
+     <div class="flex items-center gap-2 mb-4"><span class="pulse-dot inline-block w-2.5 h-2.5 rounded-full bg-blue-400"></span> <span class="text-blue-300 font-mono text-xs sm:text-sm tracking-widest uppercase">Evidence-Based Clinical Reference</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-800 text-white leading-tight mb-3">Central Venous<br>
+      Catheterization</h1>
+     <p id="subtitle" class="text-lg sm:text-xl lg:text-2xl text-blue-200/80 font-light max-w-2xl mb-6">Complete Clinical Guide &amp; Complications Management</p>
+     <div class="flex flex-wrap gap-2 text-xs sm:text-sm"><span class="info-badge px-3 py-1 rounded-full font-mono">ICU / Critical Care</span> <span class="info-badge px-3 py-1 rounded-full font-mono">Emergency Medicine</span> <span class="info-badge px-3 py-1 rounded-full font-mono">Cardiology</span> <span class="info-badge px-3 py-1 rounded-full font-mono">Anesthesiology</span>
+     </div>
+    </div>
+   </header><!-- NAV TABS -->
+   <nav class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/60" id="tabNav">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 overflow-x-auto">
+     <div class="flex gap-1 py-2 min-w-max"><button class="tab-btn active px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-transparent whitespace-nowrap" data-tab="overview" onclick="switchTab('overview')"> <i data-lucide="book-open" class="inline w-3.5 h-3.5 mr-1 align-text-bottom"></i>Overview </button> <button class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-slate-400 whitespace-nowrap" data-tab="indications" onclick="switchTab('indications')"> <i data-lucide="clipboard-list" class="inline w-3.5 h-3.5 mr-1 align-text-bottom"></i>Indications </button> <button class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-slate-400 whitespace-nowrap" data-tab="sites" onclick="switchTab('sites')"> <i data-lucide="map-pin" class="inline w-3.5 h-3.5 mr-1 align-text-bottom"></i>Access Sites </button> <button class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-slate-400 whitespace-nowrap" data-tab="procedure" onclick="switchTab('procedure')"> <i data-lucide="activity" class="inline w-3.5 h-3.5 mr-1 align-text-bottom"></i>Procedure </button> <button class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-slate-400 whitespace-nowrap" data-tab="complications" onclick="switchTab('complications')"> <i data-lucide="alert-triangle" class="inline w-3.5 h-3.5 mr-1 align-text-bottom"></i>Complications </button> <button class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-slate-400 whitespace-nowrap" data-tab="management" onclick="switchTab('management')"> <i data-lucide="shield" class="inline w-3.5 h-3.5 mr-1 align-text-bottom"></i>Management </button> <button class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-transparent text-slate-400 whitespace-nowrap" data-tab="tips" onclick="switchTab('tips')"> <i data-lucide="lightbulb" class="inline w-3.5 h-3.5 mr-1 align-text-bottom"></i>Clinical Pearls </button>
+     </div>
+    </div>
+   </nav><!-- CONTENT -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8"><!-- OVERVIEW TAB -->
+    <section id="tab-overview" class="tab-content fade-in">
+     <h2 class="font-heading text-2xl sm:text-3xl text-white mb-2">What is Central Venous Catheterization?</h2>
+     <div class="section-divider mb-6"></div>
+     <div class="card-surface rounded-2xl p-5 sm:p-7 mb-6 transition-all duration-300">
+      <p class="text-slate-300 leading-relaxed text-base sm:text-lg mb-5">Central Venous Catheterization (CVC) is the placement of a catheter tip into a <strong class="text-blue-300">large central vein</strong> — typically the <strong class="text-blue-300">Superior Vena Cava (SVC)</strong>, <strong class="text-blue-300">Inferior Vena Cava (IVC)</strong>, or the <strong class="text-blue-300">right atrium junction</strong>. It is one of the most commonly performed invasive procedures in critical care medicine.</p>
+      <p class="text-slate-300 leading-relaxed text-base sm:text-lg mb-5">The <strong class="text-blue-300">Seldinger technique</strong> (1953) revolutionized vascular access: a needle is used to puncture the vein, a guidewire is threaded through the needle, the needle is removed, a dilator is passed over the wire, and finally the catheter is advanced into position.</p>
+      <div class="grid sm:grid-cols-3 gap-4 mt-6">
+       <div class="bg-slate-800/40 rounded-xl p-4 text-center">
+        <div class="text-3xl font-heading text-blue-400 mb-1">
+         5M+
+        </div>
+        <div class="text-sm text-slate-400">
+         CVCs placed annually in the US
+        </div>
+       </div>
+       <div class="bg-slate-800/40 rounded-xl p-4 text-center">
+        <div class="text-3xl font-heading text-teal-400 mb-1">
+         15%
+        </div>
+        <div class="text-sm text-slate-400">
+         Mechanical complication rate (landmark)
+        </div>
+       </div>
+       <div class="bg-slate-800/40 rounded-xl p-4 text-center">
+        <div class="text-3xl font-heading text-amber-400 mb-1">
+         &lt;1%
+        </div>
+        <div class="text-sm text-slate-400">
+         Complication rate with US guidance
+        </div>
+       </div>
+      </div>
+     </div>
+     <h3 class="font-heading text-xl text-white mb-3">Types of Central Venous Catheters</h3>
+     <div class="grid sm:grid-cols-2 gap-4">
+      <div class="card-surface rounded-xl p-5 transition-all duration-300">
+       <h4 class="text-blue-300 font-semibold mb-2">Non-Tunneled CVC</h4>
+       <ul class="space-y-1 text-sm text-slate-400">
+        <li>• Most common in ICU/ED settings</li>
+        <li>• Triple-lumen (7 Fr) most frequently used</li>
+        <li>• Short-term use (&lt; 14 days typically)</li>
+        <li>• Percutaneous, Seldinger technique</li>
+       </ul>
+      </div>
+      <div class="card-surface rounded-xl p-5 transition-all duration-300">
+       <h4 class="text-teal-300 font-semibold mb-2">Tunneled CVC (Hickman/Broviac)</h4>
+       <ul class="space-y-1 text-sm text-slate-400">
+        <li>• Long-term venous access (&gt; 14 days)</li>
+        <li>• Dacron cuff provides infection barrier</li>
+        <li>• Subcutaneous tunnel reduces CLABSI</li>
+        <li>• Chemo, TPN, hemodialysis</li>
+       </ul>
+      </div>
+      <div class="card-surface rounded-xl p-5 transition-all duration-300">
+       <h4 class="text-amber-300 font-semibold mb-2">PICC Line</h4>
+       <ul class="space-y-1 text-sm text-slate-400">
+        <li>• Inserted via basilic/cephalic vein</li>
+        <li>• Tip in SVC junction</li>
+        <li>• Lower mechanical complication risk</li>
+        <li>• Weeks to months of use</li>
+       </ul>
+      </div>
+      <div class="card-surface rounded-xl p-5 transition-all duration-300">
+       <h4 class="text-rose-300 font-semibold mb-2">Implanted Port (Port-a-Cath)</h4>
+       <ul class="space-y-1 text-sm text-slate-400">
+        <li>• Completely subcutaneous reservoir</li>
+        <li>• Accessed with Huber needle</li>
+        <li>• Lowest infection rate of all CVCs</li>
+        <li>• Ideal for intermittent long-term access</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- INDICATIONS TAB -->
+    <section id="tab-indications" class="tab-content hidden fade-in">
+     <h2 class="font-heading text-2xl sm:text-3xl text-white mb-2">Indications &amp; Contraindications</h2>
+     <div class="section-divider mb-6"></div>
+     <div class="grid lg:grid-cols-2 gap-6">
+      <div>
+       <h3 class="text-lg text-emerald-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> Indications</h3>
+       <div class="space-y-3">
+        <div class="card-surface rounded-xl p-4 transition-all duration-300">
+         <h4 class="text-white font-medium mb-1">Hemodynamic Monitoring</h4>
+         <p class="text-sm text-slate-400">CVP measurement, ScvO₂ monitoring, PA catheter insertion, continuous cardiac output monitoring (PiCCO/EV1000)</p>
+        </div>
+        <div class="card-surface rounded-xl p-4 transition-all duration-300">
+         <h4 class="text-white font-medium mb-1">Drug Administration</h4>
+         <p class="text-sm text-slate-400">Vasopressors (Norepinephrine, Vasopressin, Dopamine), concentrated KCl, Amiodarone infusions, chemotherapy, hyperosmolar solutions (TPN &gt; 900 mOsm/L)</p>
+        </div>
+        <div class="card-surface rounded-xl p-4 transition-all duration-300">
+         <h4 class="text-white font-medium mb-1">Inadequate Peripheral Access</h4>
+         <p class="text-sm text-slate-400">Severe burns, obesity, IV drug use with sclerosed veins, profound shock with collapsed peripheral veins, prolonged resuscitation</p>
+        </div>
+        <div class="card-surface rounded-xl p-4 transition-all duration-300">
+         <h4 class="text-white font-medium mb-1">Specialized Therapies</h4>
+         <p class="text-sm text-slate-400">Hemodialysis/CRRT (large bore dialysis catheter), plasmapheresis, transvenous pacing, rapid volume resuscitation, frequent blood sampling</p>
+        </div>
+        <div class="card-surface rounded-xl p-4 transition-all duration-300">
+         <h4 class="text-white font-medium mb-1">Air Embolism Aspiration</h4>
+         <p class="text-sm text-slate-400">Multi-orifice catheter placed at SVC–RA junction for aspiration of air in venous air embolism emergencies</p>
+        </div>
+       </div>
+      </div>
+      <div>
+       <h3 class="text-lg text-red-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="x-circle" class="w-5 h-5"></i> Contraindications</h3>
+       <div class="mb-4">
+        <h4 class="text-amber-300 text-sm font-semibold mb-2 uppercase tracking-wider">Absolute</h4>
+        <div class="space-y-2">
+         <div class="card-surface rounded-xl p-4 border-red-900/30 transition-all duration-300">
+          <p class="text-sm text-slate-300">• Infection/cellulitis at insertion site</p>
+          <p class="text-sm text-slate-300">• Known complete thrombosis of target vein</p>
+          <p class="text-sm text-slate-300">• Patient refusal (competent patient)</p>
+          <p class="text-sm text-slate-300">• Distorted anatomy post-surgery/trauma at site</p>
+         </div>
+        </div>
+       </div>
+       <div>
+        <h4 class="text-amber-300 text-sm font-semibold mb-2 uppercase tracking-wider">Relative</h4>
+        <div class="space-y-2">
+         <div class="card-surface rounded-xl p-4 transition-all duration-300">
+          <p class="text-sm text-slate-300">• <strong>Coagulopathy</strong>: INR &gt; 1.5, Platelets &lt; 50,000 — prefer compressible site (IJ, femoral). Consider platelet/FFP transfusion</p>
+          <p class="text-sm text-slate-300 mt-1">• <strong>Contralateral pneumothorax</strong>: Avoid subclavian/IJ on functioning side</p>
+          <p class="text-sm text-slate-300 mt-1">• <strong>AICD/Pacemaker leads</strong>: Risk of lead dislodgement</p>
+          <p class="text-sm text-slate-300 mt-1">• <strong>Morbid obesity</strong>: Landmarks obscured — US mandatory</p>
+          <p class="text-sm text-slate-300 mt-1">• <strong>Uncooperative patient</strong>: Sedation or alternative site</p>
+          <p class="text-sm text-slate-300 mt-1">• <strong>Hyperinflated lungs (COPD/asthma)</strong>: Increased pneumothorax risk with subclavian approach</p>
+         </div>
+        </div>
+       </div>
+       <div class="mt-4 p-4 rounded-xl bg-amber-950/30 border border-amber-800/30">
+        <p class="text-amber-200 text-sm font-medium"><i data-lucide="alert-triangle" class="inline w-4 h-4 mr-1 align-text-bottom"></i> Clinical Pearl: No absolute contraindication exists if the CVC is lifesaving. In emergencies, the benefit-risk ratio favors insertion even in coagulopathic patients — choose a compressible site and use ultrasound.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- ACCESS SITES TAB -->
+    <section id="tab-sites" class="tab-content hidden fade-in">
+     <h2 class="font-heading text-2xl sm:text-3xl text-white mb-2">Central Venous Access Sites</h2>
+     <div class="section-divider mb-6"></div><!-- IJ -->
+     <details class="card-surface rounded-2xl mb-4 transition-all duration-300" open><summary class="p-5 flex items-center justify-between">
+       <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 font-heading font-bold text-lg">IJ</span>
+        <div>
+         <h3 class="text-white font-semibold text-lg">Internal Jugular Vein</h3><span class="text-xs text-blue-300 font-mono">PREFERRED SITE — 1st Line in ICU</span>
+        </div>
+       </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 chevron-icon"></i> </summary>
+      <div class="px-5 pb-5">
+       <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+         <h4 class="text-blue-300 text-sm font-semibold mb-2">Anatomy</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• Runs within carotid sheath lateral to carotid artery</li>
+          <li>• Between the two heads of SCM (sternal &amp; clavicular)</li>
+          <li>• Superficial: 1–2 cm depth in most patients</li>
+          <li>• Joins subclavian → brachiocephalic → SVC</li>
+          <li>• Right IJ preferred: straight path to SVC, no thoracic duct risk</li>
+         </ul>
+         <h4 class="text-blue-300 text-sm font-semibold mt-3 mb-2">Three Approaches</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• <strong>Central (Dailey)</strong>: Apex of triangle between SCM heads, 30° needle angle toward ipsilateral nipple</li>
+          <li>• <strong>Anterior</strong>: Midpoint of sternal head of SCM, lateral to carotid pulsation</li>
+          <li>• <strong>Posterior</strong>: EJV crossing posterior border of SCM, direct toward sternal notch</li>
+         </ul>
+        </div>
+        <div>
+         <h4 class="text-emerald-300 text-sm font-semibold mb-2">Advantages</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• Highest US-guided success rate (&gt;98%)</li>
+          <li>• Low pneumothorax risk (&lt;0.1% with US)</li>
+          <li>• Compressible site — safer in coagulopathy</li>
+          <li>• Reliable landmarks even in obese patients</li>
+         </ul>
+         <h4 class="text-red-300 text-sm font-semibold mt-3 mb-2">Disadvantages</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• Carotid artery puncture risk (6–9% landmark)</li>
+          <li>• Patient discomfort &amp; difficult dressing</li>
+          <li>• Interferes with tracheostomy care</li>
+          <li>• Left IJ: thoracic duct injury risk, longer/curved path to SVC</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </details><!-- Subclavian -->
+     <details class="card-surface rounded-2xl mb-4 transition-all duration-300"><summary class="p-5 flex items-center justify-between">
+       <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-teal-500/20 flex items-center justify-center text-teal-400 font-heading font-bold text-lg">SC</span>
+        <div>
+         <h3 class="text-white font-semibold text-lg">Subclavian Vein</h3><span class="text-xs text-teal-300 font-mono">LOWEST INFECTION RATE</span>
+        </div>
+       </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 chevron-icon"></i> </summary>
+      <div class="px-5 pb-5">
+       <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+         <h4 class="text-teal-300 text-sm font-semibold mb-2">Anatomy</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• Continuation of axillary vein at lateral border of 1st rib</li>
+          <li>• Runs between clavicle (anterior) and 1st rib (posterior)</li>
+          <li>• Separated from subclavian artery by anterior scalene muscle</li>
+          <li>• Lung apex lies posteriorly — pneumothorax risk</li>
+         </ul>
+         <h4 class="text-teal-300 text-sm font-semibold mt-3 mb-2">Infraclavicular Approach</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• Insertion: junction of medial 1/3 and lateral 2/3 of clavicle</li>
+          <li>• Aim toward sternal notch (finger in notch as target)</li>
+          <li>• Needle walks under clavicle, bevel up</li>
+          <li>• Keep needle parallel to floor (avoid lung)</li>
+         </ul>
+        </div>
+        <div>
+         <h4 class="text-emerald-300 text-sm font-semibold mb-2">Advantages</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• <strong>Lowest CLABSI rate</strong> (per CDC/SHEA guidelines)</li>
+          <li>• Comfortable for patient, easy to dress</li>
+          <li>• Catheter well-anchored (less migration)</li>
+          <li>• Preferred for long-term access &amp; TPN</li>
+         </ul>
+         <h4 class="text-red-300 text-sm font-semibold mt-3 mb-2">Disadvantages</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• <strong>Highest pneumothorax rate</strong> (1.5–3% landmark)</li>
+          <li>• Non-compressible site — avoid in coagulopathy</li>
+          <li>• Pinch-off syndrome (catheter compressed)</li>
+          <li>• US guidance technically more difficult (clavicle shadow)</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </details><!-- Femoral -->
+     <details class="card-surface rounded-2xl mb-4 transition-all duration-300"><summary class="p-5 flex items-center justify-between">
+       <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 font-heading font-bold text-lg">FV</span>
+        <div>
+         <h3 class="text-white font-semibold text-lg">Femoral Vein</h3><span class="text-xs text-amber-300 font-mono">EMERGENCY / RESUSCITATION ACCESS</span>
+        </div>
+       </div><i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 chevron-icon"></i> </summary>
+      <div class="px-5 pb-5">
+       <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+         <h4 class="text-amber-300 text-sm font-semibold mb-2">Anatomy — "NAVEL" Mnemonic</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• <strong>N</strong>erve – <strong>A</strong>rtery – <strong>V</strong>ein – <strong>E</strong>mpty space – <strong>L</strong>ymphatics</li>
+          <li>• Femoral vein is MEDIAL to femoral artery</li>
+          <li>• Below inguinal ligament (midpoint between ASIS and pubic symphysis)</li>
+          <li>• Insert 1–2 cm below inguinal ligament to avoid retroperitoneal space</li>
+         </ul>
+        </div>
+        <div>
+         <h4 class="text-emerald-300 text-sm font-semibold mb-2">Advantages</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• No pneumothorax risk</li>
+          <li>• Compressible (bleeding control easy)</li>
+          <li>• Can be placed during CPR (no interruption)</li>
+          <li>• Easiest landmarks for beginners</li>
+         </ul>
+         <h4 class="text-red-300 text-sm font-semibold mt-3 mb-2">Disadvantages</h4>
+         <ul class="text-sm text-slate-400 space-y-1">
+          <li>• <strong>Highest infection rate</strong> (groin flora)</li>
+          <li>• Higher DVT risk</li>
+          <li>• Inaccurate CVP (abdominal pressure effect)</li>
+          <li>• Limits patient mobility</li>
+          <li>• Not suitable for CVP-guided resuscitation</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </details><!-- Comparison Table -->
+     <div class="card-surface rounded-2xl p-5 mt-6 overflow-x-auto transition-all duration-300">
+      <h3 class="text-white font-semibold mb-4">Site Comparison Matrix</h3>
+      <table class="w-full text-sm min-w-[500px]">
+       <thead>
+        <tr class="text-left text-slate-400 border-b border-slate-700/50">
+         <th class="pb-2 pr-4">Parameter</th>
+         <th class="pb-2 pr-4">IJ</th>
+         <th class="pb-2 pr-4">Subclavian</th>
+         <th class="pb-2">Femoral</th>
+        </tr>
+       </thead>
+       <tbody class="text-slate-300">
+        <tr class="border-b border-slate-800/30">
+         <td class="py-2 pr-4 text-slate-400">Pneumothorax</td>
+         <td class="py-2 pr-4"><span class="success-badge text-xs px-2 py-0.5 rounded">Low</span></td>
+         <td class="py-2 pr-4"><span class="danger-badge text-xs px-2 py-0.5 rounded">High</span></td>
+         <td class="py-2"><span class="success-badge text-xs px-2 py-0.5 rounded">None</span></td>
+        </tr>
+        <tr class="border-b border-slate-800/30">
+         <td class="py-2 pr-4 text-slate-400">Infection Risk</td>
+         <td class="py-2 pr-4"><span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span></td>
+         <td class="py-2 pr-4"><span class="success-badge text-xs px-2 py-0.5 rounded">Lowest</span></td>
+         <td class="py-2"><span class="danger-badge text-xs px-2 py-0.5 rounded">Highest</span></td>
+        </tr>
+        <tr class="border-b border-slate-800/30">
+         <td class="py-2 pr-4 text-slate-400">Arterial Puncture</td>
+         <td class="py-2 pr-4"><span class="warning-badge text-xs px-2 py-0.5 rounded">Carotid</span></td>
+         <td class="py-2 pr-4"><span class="warning-badge text-xs px-2 py-0.5 rounded">Subclavian A</span></td>
+         <td class="py-2"><span class="warning-badge text-xs px-2 py-0.5 rounded">Femoral A</span></td>
+        </tr>
+        <tr class="border-b border-slate-800/30">
+         <td class="py-2 pr-4 text-slate-400">Compressible</td>
+         <td class="py-2 pr-4">✅ Yes</td>
+         <td class="py-2 pr-4">❌ No</td>
+         <td class="py-2">✅ Yes</td>
+        </tr>
+        <tr class="border-b border-slate-800/30">
+         <td class="py-2 pr-4 text-slate-400">CVP Accuracy</td>
+         <td class="py-2 pr-4">✅ Excellent</td>
+         <td class="py-2 pr-4">✅ Excellent</td>
+         <td class="py-2">⚠️ Unreliable</td>
+        </tr>
+        <tr>
+         <td class="py-2 pr-4 text-slate-400">US Guidance</td>
+         <td class="py-2 pr-4">Easy</td>
+         <td class="py-2 pr-4">Moderate</td>
+         <td class="py-2">Easy</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </section><!-- PROCEDURE TAB -->
+    <section id="tab-procedure" class="tab-content hidden fade-in">
+     <h2 class="font-heading text-2xl sm:text-3xl text-white mb-2">Step-by-Step Procedure</h2>
+     <div class="section-divider mb-6"></div>
+     <div class="card-surface rounded-2xl p-5 mb-6 transition-all duration-300">
+      <h3 class="text-blue-300 font-semibold mb-3">Pre-Procedure Checklist</h3>
+      <div class="grid sm:grid-cols-2 gap-3 text-sm"><label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> Informed consent obtained (or emergency waiver documented)</label> <label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> Coagulation profile reviewed (INR, PTT, Platelets)</label> <label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> Ultrasound machine at bedside, probe prepped</label> <label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> CVC kit opened, equipment verified</label> <label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> Full barrier precautions (cap, mask, gown, sterile gloves, full drape)</label> <label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> Patient positioned (Trendelenburg for IJ/SC)</label> <label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> Monitoring: continuous ECG, SpO₂, BP</label> <label class="flex items-start gap-2 text-slate-300 cursor-pointer"><input type="checkbox" class="mt-1 accent-blue-500"> Time-out performed (correct patient, site, side)</label>
+      </div>
+     </div><!-- Seldinger Steps -->
+     <h3 class="font-heading text-xl text-white mb-4">Modified Seldinger Technique</h3>
+     <div class="relative space-y-0">
+      <div class="relative pl-12 pb-6">
+       <div class="step-line"></div>
+       <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center text-blue-400 font-bold text-sm z-10">
+        1
+       </div>
+       <div class="card-surface rounded-xl p-4 transition-all duration-300">
+        <h4 class="text-white font-medium">Preparation &amp; Positioning</h4>
+        <p class="text-sm text-slate-400 mt-1">Patient supine, 15° Trendelenburg (IJ/SC) to distend veins and reduce air embolism risk. Head turned 30° to contralateral side (IJ). Chlorhexidine 2% + 70% alcohol skin prep — allow 30 seconds drying. Apply full-body sterile drape.</p>
+       </div>
+      </div>
+      <div class="relative pl-12 pb-6">
+       <div class="step-line"></div>
+       <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center text-blue-400 font-bold text-sm z-10">
+        2
+       </div>
+       <div class="card-surface rounded-xl p-4 transition-all duration-300">
+        <h4 class="text-white font-medium">Ultrasound Survey &amp; Local Anesthesia</h4>
+        <p class="text-sm text-slate-400 mt-1">Identify vein with linear probe (5–10 MHz). Confirm: compressibility, non-pulsatile, augments with Valsalva. Mark trajectory. Infiltrate 1–2% Lidocaine (3–5 mL) along the planned needle track, aspirating before each injection.</p>
+       </div>
+      </div>
+      <div class="relative pl-12 pb-6">
+       <div class="step-line"></div>
+       <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center text-blue-400 font-bold text-sm z-10">
+        3
+       </div>
+       <div class="card-surface rounded-xl p-4 transition-all duration-300">
+        <h4 class="text-white font-medium">Venipuncture Under Real-Time US</h4>
+        <p class="text-sm text-slate-400 mt-1">18G introducer needle, attached to syringe, advance under real-time US guidance at 30–45° angle. Maintain negative pressure. Dark, non-pulsatile blood return confirms venous access. If bright red pulsatile blood → arterial puncture → remove immediately, hold pressure 10 min.</p>
+       </div>
+      </div>
+      <div class="relative pl-12 pb-6">
+       <div class="step-line"></div>
+       <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center text-blue-400 font-bold text-sm z-10">
+        4
+       </div>
+       <div class="card-surface rounded-xl p-4 transition-all duration-300">
+        <h4 class="text-white font-medium">Guidewire Insertion</h4>
+        <p class="text-sm text-slate-400 mt-1">J-tip guidewire advanced through needle — should pass without resistance. Insert to 20 cm mark. <strong class="text-amber-300">Watch ECG for arrhythmias</strong> (ectopics/VT if wire touches RA/RV wall). Never lose grip of the guidewire. Confirm intravascular position with US.</p>
+       </div>
+      </div>
+      <div class="relative pl-12 pb-6">
+       <div class="step-line"></div>
+       <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center text-blue-400 font-bold text-sm z-10">
+        5
+       </div>
+       <div class="card-surface rounded-xl p-4 transition-all duration-300">
+        <h4 class="text-white font-medium">Dilation &amp; Catheter Advancement</h4>
+        <p class="text-sm text-slate-400 mt-1">Nick skin at wire entry with scalpel. Pass dilator over wire with gentle rotational motion — only 2–3 cm into vein (avoid deep insertion → vessel perforation). Remove dilator. Thread catheter over wire to appropriate depth: Right IJ 12–15 cm, Left IJ 15–18 cm, Subclavian 15–17 cm.</p>
+       </div>
+      </div>
+      <div class="relative pl-12 pb-6">
+       <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 font-bold text-sm z-10">
+        6
+       </div>
+       <div class="card-surface rounded-xl p-4 transition-all duration-300">
+        <h4 class="text-white font-medium">Confirmation &amp; Securing</h4>
+        <p class="text-sm text-slate-400 mt-1">Aspirate all ports (blood return confirms intravascular position). Flush with saline. Suture catheter in place (2-0 silk). Apply chlorhexidine-impregnated dressing. <strong class="text-blue-300">Obtain CXR</strong> for tip position (carina level ≈ SVC–RA junction T4–T5) and pneumothorax exclusion. Document: site, side, catheter type, # of attempts, complications.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- COMPLICATIONS TAB -->
+    <section id="tab-complications" class="tab-content hidden fade-in">
+     <h2 class="font-heading text-2xl sm:text-3xl text-white mb-2">Complications</h2>
+     <div class="section-divider mb-6"></div><!-- Mechanical -->
+     <h3 class="text-lg text-red-400 font-semibold mb-3">Mechanical Complications (Immediate)</h3>
+     <div class="space-y-3 mb-8">
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="danger-badge text-xs px-2 py-0.5 rounded">Critical</span><span class="text-white font-medium">Pneumothorax</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p><strong class="text-slate-200">Incidence:</strong> 1.5–3% subclavian (landmark), 0.1–0.5% IJ, &lt;0.1% with US guidance</p>
+        <p class="mt-1"><strong class="text-slate-200">Mechanism:</strong> Needle punctures visceral pleura → air enters pleural space</p>
+        <p class="mt-1"><strong class="text-slate-200">Presentation:</strong> Dyspnea, pleuritic chest pain, decreased breath sounds, hypoxia. May be delayed 24–48 hrs (occult pneumothorax)</p>
+        <p class="mt-1"><strong class="text-slate-200">Diagnosis:</strong> CXR (upright, expiratory film more sensitive), bedside US (absent lung sliding, absent comet tails, presence of lung point)</p>
+        <p class="mt-1"><strong class="text-red-300">⚠ Tension pneumothorax:</strong> Hypotension, tracheal deviation, JVD, cardiovascular collapse → IMMEDIATE needle decompression (2nd ICS MCL with 14G) → chest tube</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="danger-badge text-xs px-2 py-0.5 rounded">Critical</span><span class="text-white font-medium">Arterial Puncture / Cannulation</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p><strong class="text-slate-200">Incidence:</strong> Carotid 6–9% (IJ landmark), 3–4% subclavian artery</p>
+        <p class="mt-1"><strong class="text-slate-200">Recognition:</strong> Bright red pulsatile blood, high-pressure backflow, arterial waveform on transduction. <strong class="text-amber-300">If any doubt → transduce before dilating</strong></p>
+        <p class="mt-1"><strong class="text-slate-200">Catastrophic scenario:</strong> Unrecognized large-bore arterial cannulation → hemorrhage, stroke (carotid), hemothorax (subclavian), pseudoaneurysm, AV fistula</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="danger-badge text-xs px-2 py-0.5 rounded">Critical</span><span class="text-white font-medium">Air Embolism</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p><strong class="text-slate-200">Incidence:</strong> Rare but potentially fatal (lethal volume 3–5 mL/kg)</p>
+        <p class="mt-1"><strong class="text-slate-200">Mechanism:</strong> Negative intrathoracic pressure draws air through open catheter hub or unsecured port, especially during inspiration in upright/hypovolemic patients</p>
+        <p class="mt-1"><strong class="text-slate-200">Presentation:</strong> Sudden dyspnea, cardiovascular collapse, "mill wheel" murmur, churning sound on precordial auscultation, decreased ETCO₂</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Arrhythmias</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p><strong class="text-slate-200">Incidence:</strong> Atrial ectopics 20–40%, sustained VT/VF rare</p>
+        <p class="mt-1"><strong class="text-slate-200">Mechanism:</strong> Guidewire or catheter tip stimulates endocardium of RA/RV</p>
+        <p class="mt-1"><strong class="text-slate-200">Management:</strong> Withdraw wire/catheter until arrhythmia resolves. If persistent VT → standard ACLS. ECG-guided positioning can prevent.</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Hemothorax / Hemomediastinum</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p>Arterial or SVC perforation → bleeding into pleural/mediastinal space. Presents with hypotension, widened mediastinum on CXR, large pleural effusion. May require emergent thoracotomy/sternotomy.</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Nerve Injury &amp; Thoracic Duct Injury</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p><strong>Brachial plexus:</strong> Paresthesia, motor weakness (subclavian approach). <strong>Phrenic nerve:</strong> Diaphragmatic paralysis. <strong>Recurrent laryngeal:</strong> Hoarseness (IJ). <strong>Thoracic duct:</strong> Chylothorax — left IJ/SC approach. Milky pleural fluid with high triglycerides (&gt; 110 mg/dL).</p>
+       </div>
+      </details>
+     </div><!-- Infectious -->
+     <h3 class="text-lg text-amber-400 font-semibold mb-3">Infectious Complications</h3>
+     <div class="space-y-3 mb-8">
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="danger-badge text-xs px-2 py-0.5 rounded">Critical</span><span class="text-white font-medium">CLABSI (Central Line-Associated Bloodstream Infection)</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p><strong class="text-slate-200">Incidence:</strong> 0.8–5.2 per 1000 catheter-days (varies by ICU type)</p>
+        <p class="mt-1"><strong class="text-slate-200">Pathogens:</strong> Coagulase-negative Staph (30–40%), S. aureus (10–20%), Enterococcus (10%), Candida spp. (10–15%), Gram-negatives (20–25%)</p>
+        <p class="mt-1"><strong class="text-slate-200">Risk Factors:</strong> Duration &gt; 7 days, femoral site, frequent manipulation, TPN infusion, immunosuppression, poor insertion technique, break in sterile protocol</p>
+        <p class="mt-1"><strong class="text-slate-200">Diagnosis:</strong> ≥2 blood cultures (1 peripheral + 1 through CVC), differential time to positivity (&gt;2 hrs earlier from CVC suggests CLABSI)</p>
+        <p class="mt-1"><strong class="text-slate-200">Mortality:</strong> 12–25% attributable mortality; $45,000 additional cost per episode</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Exit Site / Tunnel Infection</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p>Erythema, induration, tenderness, or purulent discharge within 2 cm of catheter exit. Tunnel infection extends &gt;2 cm along subcutaneous tract. Requires catheter removal + systemic antibiotics.</p>
+       </div>
+      </details>
+     </div><!-- Thrombotic -->
+     <h3 class="text-lg text-purple-400 font-semibold mb-3">Thrombotic Complications</h3>
+     <div class="space-y-3 mb-8">
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Catheter-Related DVT</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p><strong class="text-slate-200">Incidence:</strong> Symptomatic 2–5%, subclinical by US/venography up to 33–67%</p>
+        <p class="mt-1"><strong class="text-slate-200">Risk Factors:</strong> Femoral &gt; subclavian &gt; IJ, larger catheter bore, malposition, hypercoagulable states, cancer, prior DVT</p>
+        <p class="mt-1"><strong class="text-slate-200">Presentation:</strong> Limb swelling, pain, collateral vein distension. Upper extremity DVT may → PE (6%), post-thrombotic syndrome</p>
+        <p class="mt-1"><strong class="text-slate-200">Diagnosis:</strong> Doppler US (loss of compressibility, absent flow augmentation), CT venography</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Fibrin Sheath / Catheter Occlusion</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p>Fibrin sleeve forms within 24 hrs on virtually all CVCs. Causes: inability to aspirate (withdrawal occlusion), sluggish flow, total occlusion. Treat with tPA/Alteplase intraluminal dwell (2 mg in 2 mL, dwell 30–120 min).</p>
+       </div>
+      </details>
+     </div><!-- Late/Other -->
+     <h3 class="text-lg text-teal-400 font-semibold mb-3">Late &amp; Other Complications</h3>
+     <div class="space-y-3">
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="danger-badge text-xs px-2 py-0.5 rounded">Critical</span><span class="text-white font-medium">Cardiac Tamponade / Vessel Erosion</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p>Catheter tip erodes through SVC/RA wall → pericardial effusion → tamponade. Often delayed (days-weeks). Presents with Beck's triad: hypotension, JVD, muffled heart sounds. Echocardiography confirms. Requires emergent pericardiocentesis. Prevention: tip at SVC–RA junction (not deep in RA).</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Catheter Malposition / Migration</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p>Tip in IJ (from subclavian), contralateral brachiocephalic, azygos vein, or RV. Malpositioned catheter → inaccurate CVP, risk of perforation, arrhythmias, extravasation of infusate. Always confirm on CXR. Reposition under fluoroscopy if needed.</p>
+       </div>
+      </details>
+      <details class="card-surface rounded-xl transition-all duration-300"><summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+         <span class="warning-badge text-xs px-2 py-0.5 rounded">Moderate</span><span class="text-white font-medium">Catheter Fracture / Embolization</span>
+        </div><i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 chevron-icon"></i></summary>
+       <div class="px-4 pb-4 text-sm text-slate-400">
+        <p>Catheter shears between clavicle and first rib (pinch-off syndrome — subclavian). Fragment embolizes to RA/RV/PA. Requires interventional radiology retrieval with snare catheter. Prevention: avoid medial subclavian insertion, monitor for positional dysfunction.</p>
+       </div>
+      </details>
+     </div>
+    </section><!-- MANAGEMENT TAB -->
+    <section id="tab-management" class="tab-content hidden fade-in">
+     <h2 class="font-heading text-2xl sm:text-3xl text-white mb-2">Complications Management</h2>
+     <div class="section-divider mb-6"></div><!-- Pneumothorax Mgmt -->
+     <div class="card-surface rounded-2xl p-5 mb-5 transition-all duration-300">
+      <h3 class="text-red-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-5 h-5"></i> Pneumothorax Management</h3>
+      <div class="space-y-2 text-sm text-slate-300">
+       <div class="flex gap-3">
+        <span class="success-badge text-xs px-2 py-0.5 rounded whitespace-nowrap h-fit mt-0.5">Small &lt;20%</span>
+        <p>Observation + serial CXR every 6–12 hrs. High-flow O₂ (accelerates reabsorption by 4x). Asymptomatic → conservative.</p>
+       </div>
+       <div class="flex gap-3">
+        <span class="warning-badge text-xs px-2 py-0.5 rounded whitespace-nowrap h-fit mt-0.5">Large &gt;20%</span>
+        <p>Chest tube (small bore 14–16 Fr pigtail preferred, or 24–28 Fr if hemothorax suspected). Connect to -20 cmH₂O suction. Serial CXR. Remove when air leak resolves and lung re-expanded.</p>
+       </div>
+       <div class="flex gap-3">
+        <span class="danger-badge text-xs px-2 py-0.5 rounded whitespace-nowrap h-fit mt-0.5">Tension</span>
+        <p><strong class="text-red-300">EMERGENCY:</strong> Immediate needle decompression → 14G needle, 2nd ICS midclavicular line or 5th ICS anterior axillary line → hissing air confirms diagnosis → immediate chest tube insertion. Do NOT wait for CXR.</p>
+       </div>
+      </div>
+     </div><!-- Arterial Puncture Mgmt -->
+     <div class="card-surface rounded-2xl p-5 mb-5 transition-all duration-300">
+      <h3 class="text-red-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-5 h-5"></i> Arterial Puncture Management</h3>
+      <div class="space-y-2 text-sm text-slate-300">
+       <div class="flex gap-3">
+        <span class="success-badge text-xs px-2 py-0.5 rounded whitespace-nowrap h-fit mt-0.5">Small needle</span>
+        <p>Remove needle immediately. Apply firm direct pressure for 10–15 minutes (carotid/femoral) or until hemostasis. Avoid IJ/SC on the same side for future attempts. No heparin for 24 hrs.</p>
+       </div>
+       <div class="flex gap-3">
+        <span class="danger-badge text-xs px-2 py-0.5 rounded whitespace-nowrap h-fit mt-0.5">Large bore (dilated)</span>
+        <p><strong class="text-red-300">Do NOT remove.</strong> Leave catheter in place. Emergent vascular surgery or IR consultation. CTA to assess damage. Removal under direct surgical repair or covered stent. Risk: massive hemorrhage, stroke (carotid), pseudoaneurysm, AV fistula.</p>
+       </div>
+      </div>
+     </div><!-- Air Embolism Mgmt -->
+     <div class="card-surface rounded-2xl p-5 mb-5 transition-all duration-300">
+      <h3 class="text-red-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-5 h-5"></i> Air Embolism Management</h3>
+      <ol class="space-y-2 text-sm text-slate-300 list-decimal list-inside">
+       <li>Immediately <strong class="text-blue-300">clamp/occlude</strong> the open port</li>
+       <li>Position patient in <strong class="text-blue-300">left lateral decubitus + Trendelenburg (Durant's maneuver)</strong> — traps air in RV apex away from RVOT</li>
+       <li>100% FiO₂ via high-flow — accelerates nitrogen reabsorption</li>
+       <li>If CVC in situ → attempt aspiration of air from distal port</li>
+       <li>Hemodynamic support: IV fluids, vasopressors as needed</li>
+       <li>CPR if cardiac arrest</li>
+       <li>Consider hyperbaric oxygen if available and massive embolism</li>
+       <li>TEE to quantify residual air if hemodynamically significant</li>
+      </ol>
+     </div><!-- CLABSI Bundle -->
+     <div class="card-surface rounded-2xl p-5 mb-5 transition-all duration-300">
+      <h3 class="text-amber-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="shield" class="w-5 h-5"></i> CLABSI Prevention Bundle (IHI/CDC)</h3>
+      <div class="grid sm:grid-cols-2 gap-3 text-sm">
+       <div class="bg-slate-800/40 rounded-lg p-3">
+        <h4 class="text-emerald-300 font-medium mb-1">Insertion Bundle</h4>
+        <ul class="text-slate-400 space-y-1">
+         <li>✅ Hand hygiene before &amp; after</li>
+         <li>✅ Maximum sterile barrier precautions</li>
+         <li>✅ Chlorhexidine 2% skin antisepsis</li>
+         <li>✅ Optimal catheter site selection (avoid femoral)</li>
+         <li>✅ Trained/supervised operator</li>
+         <li>✅ Procedure checklist with empowered observer</li>
+        </ul>
+       </div>
+       <div class="bg-slate-800/40 rounded-lg p-3">
+        <h4 class="text-emerald-300 font-medium mb-1">Maintenance Bundle</h4>
+        <ul class="text-slate-400 space-y-1">
+         <li>✅ Daily necessity review — remove ASAP</li>
+         <li>✅ Chlorhexidine-impregnated dressing</li>
+         <li>✅ Dressing changes Q7 days (transparent) or Q2 days (gauze)</li>
+         <li>✅ Hub scrub 15 sec with alcohol before access</li>
+         <li>✅ Dedicated line for TPN</li>
+         <li>✅ Minimize line breaks/disconnections</li>
+        </ul>
+       </div>
+      </div>
+      <div class="mt-4 p-3 rounded-lg bg-emerald-950/30 border border-emerald-800/30">
+       <p class="text-emerald-200 text-sm">📊 <strong>Impact:</strong> Full bundle compliance reduces CLABSI by up to 66–70%. "Zero CLABSI" initiatives in ICUs have proven feasible with sustained compliance.</p>
+      </div>
+     </div><!-- DVT Management -->
+     <div class="card-surface rounded-2xl p-5 mb-5 transition-all duration-300">
+      <h3 class="text-purple-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="activity" class="w-5 h-5"></i> Catheter-Related DVT Management</h3>
+      <div class="text-sm text-slate-300 space-y-2">
+       <p>• <strong>Anticoagulation:</strong> LMWH (Enoxaparin 1 mg/kg BID) or UFH infusion → transition to warfarin (INR 2–3) or DOAC. Minimum 3 months if catheter removed; as long as catheter remains + 3 months after removal.</p>
+       <p>• <strong>Catheter removal:</strong> Not always necessary if still needed and functioning. Remove if: infected, no longer needed, anticoagulation contraindicated, or worsening despite treatment.</p>
+       <p>• <strong>Thrombolysis:</strong> Consider catheter-directed tPA for massive symptomatic upper extremity DVT with limb threat.</p>
+       <p>• <strong>Prevention:</strong> Smallest catheter possible, avoid femoral, daily assessment for ongoing need, consider prophylactic anticoagulation in high-risk patients.</p>
+      </div>
+     </div><!-- Arrhythmia -->
+     <div class="card-surface rounded-2xl p-5 transition-all duration-300">
+      <h3 class="text-teal-400 font-semibold mb-3 flex items-center gap-2"><i data-lucide="heart" class="w-5 h-5"></i> Arrhythmia Management</h3>
+      <div class="text-sm text-slate-300 space-y-2">
+       <p>• <strong>Atrial/ventricular ectopics during insertion:</strong> Withdraw guidewire/catheter 2–3 cm → ectopics resolve. Never advance further.</p>
+       <p>• <strong>Sustained VT:</strong> Withdraw wire immediately. If VT persists → Amiodarone 150 mg IV over 10 min or synchronized cardioversion per ACLS. Check K⁺, Mg²⁺.</p>
+       <p>• <strong>Prevention:</strong> Limit guidewire insertion to 20 cm. Use intracavitary ECG (large P wave amplitude indicates RA → withdraw). Never leave wire unattended in patient.</p>
+      </div>
+     </div>
+    </section><!-- CLINICAL PEARLS TAB -->
+    <section id="tab-tips" class="tab-content hidden fade-in">
+     <h2 class="font-heading text-2xl sm:text-3xl text-white mb-2">Clinical Pearls &amp; Expert Tips</h2>
+     <div class="section-divider mb-6"></div>
+     <div class="space-y-4">
+      <div class="card-surface rounded-2xl p-5 border-l-4 border-blue-500 transition-all duration-300">
+       <h4 class="text-blue-300 font-semibold mb-2">🔵 Ultrasound is Non-Negotiable</h4>
+       <p class="text-sm text-slate-400">Real-time US guidance reduces mechanical complications by 57–71% (Cochrane 2015). It is the standard of care for IJ access and strongly recommended for all sites. Use short-axis (out-of-plane) for initial puncture, then confirm with long-axis. <strong class="text-blue-300">Always perform a pre-procedure survey</strong> to identify vessel patency, anatomy variants, and adjacent structures.</p>
+      </div>
+      <div class="card-surface rounded-2xl p-5 border-l-4 border-amber-500 transition-all duration-300">
+       <h4 class="text-amber-300 font-semibold mb-2">🟡 The "5-Finger Rule" for Tip Position</h4>
+       <p class="text-sm text-slate-400">On CXR, ideal catheter tip position is at or just above the carina (T4–T5 level), which corresponds to the SVC–RA junction. Right-sided catheters should be parallel to SVC wall. A catheter abutting the wall at an angle risks erosion → tamponade. If the catheter tip crosses the midline on AP CXR, suspect malposition.</p>
+      </div>
+      <div class="card-surface rounded-2xl p-5 border-l-4 border-emerald-500 transition-all duration-300">
+       <h4 class="text-emerald-300 font-semibold mb-2">🟢 Transduction Before Dilation</h4>
+       <p class="text-sm text-slate-400">If there is ANY doubt about venous vs arterial placement, <strong>always transduce pressure through the introducer needle before dilating</strong>. Venous pressure: low, non-pulsatile (0–8 mmHg). Arterial: pulsatile, high pressure. This simple step prevents catastrophic large-bore arterial cannulation. Alternatively, run a blood gas — PaO₂ &gt;60 or oxygen saturation &gt;95% = arterial.</p>
+      </div>
+      <div class="card-surface rounded-2xl p-5 border-l-4 border-rose-500 transition-all duration-300">
+       <h4 class="text-rose-300 font-semibold mb-2">🔴 Never Lose the Wire</h4>
+       <p class="text-sm text-slate-400">Retained guidewire is a never event. <strong>One hand on the wire at ALL times.</strong> Count wire in, count wire out. Confirm wire is out before discarding kit. If wire is lost → STOP → urgent fluoroscopy → IR or surgical retrieval. Some institutions use wires with external safety markers/flags.</p>
+      </div>
+      <div class="card-surface rounded-2xl p-5 border-l-4 border-purple-500 transition-all duration-300">
+       <h4 class="text-purple-300 font-semibold mb-2">🟣 Trendelenburg &amp; Air Embolism Prevention</h4>
+       <p class="text-sm text-slate-400">Always place patient in Trendelenburg (15–30°) for IJ and subclavian insertion. This distends the target vein AND creates positive venous pressure to prevent air entrainment. During catheter exchanges, ask the patient to hum or perform Valsalva to maintain positive intrathoracic pressure during the moment the hub is open.</p>
+      </div>
+      <div class="card-surface rounded-2xl p-5 border-l-4 border-teal-500 transition-all duration-300">
+       <h4 class="text-teal-300 font-semibold mb-2">🩺 Daily Assessment: "Does This Line Still Need to Be Here?"</h4>
+       <p class="text-sm text-slate-400">Every ICU rounds should include the question: <strong>"Can this central line come out today?"</strong> The single most effective intervention to reduce CLABSI is prompt removal. Document daily necessity. Consider de-escalation to PICC or peripheral access as patient improves. Target: remove within 72 hours if possible.</p>
+      </div>
+      <div class="card-surface rounded-2xl p-5 border-l-4 border-cyan-500 transition-all duration-300">
+       <h4 class="text-cyan-300 font-semibold mb-2">📋 Documentation Essentials</h4>
+       <p class="text-sm text-slate-400">Always document: indication, consent, site/side, catheter type and size, number of lumens, number of attempts, use of ultrasound, skin prep used, confirmation of venous blood return in all ports, catheter depth at skin, complications encountered, CXR tip position. This is medicolegally critical and an institutional quality metric.</p>
+      </div>
+     </div>
+     <div class="mt-8 p-5 rounded-2xl bg-slate-900/80 border border-slate-700/50">
+      <h3 class="text-white font-semibold mb-2">Key References</h3>
+      <ul class="text-sm text-slate-400 space-y-1">
+       <li>• Seldinger SI. Catheter replacement of the needle in percutaneous arteriography. Acta Radiologica. 1953.</li>
+       <li>• Lamperti M, et al. International evidence-based recommendations on US-guided vascular access. Intensive Care Med. 2012.</li>
+       <li>• Marschall J, et al. Strategies to prevent CLABSI in acute care hospitals (SHEA/IDSA). Infection Control. 2014.</li>
+       <li>• Parienti JJ, et al. Intravascular complications of CVCs by insertion site. NEJM. 2015.</li>
+       <li>• Brass P, et al. US guidance for vascular access — Cochrane Review. 2015.</li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-3 italic">This guide is for educational purposes. Always follow your institutional protocols and guidelines.</p>
+     </div>
+    </section>
+   </main>
+   <footer class="border-t border-slate-800/40 py-6 text-center">
+    <p class="text-xs text-slate-500">Central Venous Catheterization — Evidence-Based Clinical Reference</p>
+    <p class="text-xs text-slate-600 mt-1">For medical education purposes only. Not a substitute for clinical judgment.</p>
+   </footer>
+  </div>
+  <script>
+// Tab switching
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(btn => { btn.classList.remove('active'); btn.classList.add('text-slate-400'); });
+  const target = document.getElementById('tab-' + tabId);
+  if (target) { target.classList.remove('hidden'); target.classList.add('fade-in'); }
+  const btn = document.querySelector(`[data-tab="${tabId}"]`);
+  if (btn) { btn.classList.add('active'); btn.classList.remove('text-slate-400'); }
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>
