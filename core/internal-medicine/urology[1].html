@@ -1,0 +1,503 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Urology | Urinary System Diseases & Clinical Care | Deep Medicine</title> <meta name="description" content="Comprehensive urology guide covering urinary tract diseases, kidney stones, infections, prostate disorders, and surgical urology care."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/urology"> <!-- Open Graph --> <meta property="og:title" content="Urology | Deep Medicine"> <meta property="og:description" content="Urinary system diseases, prostate disorders, stones, and urological emergencies."> <meta property="og:image" content="https://deepmedicine.in/images/urology.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+:root{--bg:#0a0f1a;--surface:#111827;--text:#e2e8f0;--primary:#3b82f6;--secondary:#6366f1}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text)}
+.font-heading{font-family:'DM Serif Display',serif}
+.card-glow{box-shadow:0 0 0 1px rgba(59,130,246,.15),0 4px 24px rgba(0,0,0,.4)}
+.card-glow:hover{box-shadow:0 0 0 1px rgba(59,130,246,.35),0 8px 32px rgba(59,130,246,.12)}
+.tab-active{background:var(--primary);color:#fff}
+.fade-in{animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.scrollbar-thin::-webkit-scrollbar{width:5px}
+.scrollbar-thin::-webkit-scrollbar-track{background:transparent}
+.scrollbar-thin::-webkit-scrollbar-thumb{background:rgba(99,102,241,.3);border-radius:99px}
+.severity-high{border-left:3px solid #ef4444}
+.severity-mod{border-left:3px solid #f59e0b}
+.severity-low{border-left:3px solid #22c55e}
+.detail-section h3{font-family:'DM Serif Display',serif;font-size:1.15rem;margin-bottom:.5rem;color:var(--primary)}
+.detail-section ul{list-style:none;padding:0}
+.detail-section li{position:relative;padding-left:1.25rem;margin-bottom:.35rem;font-size:.92rem;line-height:1.5}
+.detail-section li::before{content:'';position:absolute;left:0;top:.55rem;width:6px;height:6px;border-radius:50%;background:var(--secondary)}
+.search-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.65rem 1rem .65rem 2.5rem;width:100%;color:#e2e8f0;font-size:.95rem;outline:none;transition:border .2s}
+.search-box:focus{border-color:var(--primary)}
+.category-pill{padding:.35rem .85rem;border-radius:99px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.category-pill.active,.category-pill:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+.back-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:rgba(255,255,255,.5);cursor:pointer;transition:color .2s;background:none;border:none}
+.back-btn:hover{color:#fff}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(99,102,241,.3);padding:.6rem 1.2rem;border-radius:10px;font-size:.85rem;z-index:999;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto scrollbar-thin" style="background:var(--bg)"><!-- HERO -->
+   <header id="hero" class="relative overflow-hidden" style="background:linear-gradient(135deg,#0a0f1a 0%,#1a1040 50%,#0f172a 100%)">
+    <div class="absolute inset-0 opacity-10" style="background:radial-gradient(circle at 30% 20%,#6366f1,transparent 50%),radial-gradient(circle at 70% 80%,#3b82f6,transparent 50%)"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-12 md:py-20 text-center">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5" style="background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)"><i data-lucide="stethoscope" style="width:14px;height:14px"></i> Evidence-Based Clinical Reference
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-3" style="color:#f1f5f9">Urology Disease Compendium</h1>
+     <p id="subtitle" class="text-base md:text-lg max-w-2xl mx-auto" style="color:rgba(255,255,255,.5)">Clinical Reference Guide</p>
+     <div class="flex justify-center gap-3 mt-6 flex-wrap text-xs" style="color:rgba(255,255,255,.35)"><span class="flex items-center gap-1"><i data-lucide="book-open" style="width:13px;height:13px"></i> 30+ Conditions</span> <span>•</span> <span class="flex items-center gap-1"><i data-lucide="clipboard-list" style="width:13px;height:13px"></i> Diagnosis &amp; Management</span> <span>•</span> <span class="flex items-center gap-1"><i data-lucide="shield-check" style="width:13px;height:13px"></i> Clinically Accurate</span>
+     </div>
+    </div>
+   </header><!-- SEARCH + FILTER -->
+   <div class="max-w-6xl mx-auto px-4 -mt-6 relative z-10">
+    <div class="rounded-2xl p-4 md:p-5" style="background:rgba(17,24,39,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06)">
+     <div class="relative mb-3"><i data-lucide="search" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);width:16px;height:16px;color:rgba(255,255,255,.3)"></i> <input type="text" id="searchInput" class="search-box" placeholder="Search conditions, symptoms, treatments…" aria-label="Search conditions">
+     </div>
+     <div id="categoryBar" class="flex flex-wrap gap-2"></div>
+    </div>
+   </div><!-- CONTENT -->
+   <main class="max-w-6xl mx-auto px-4 py-8">
+    <div id="listView">
+     <div id="resultsInfo" class="text-xs mb-4" style="color:rgba(255,255,255,.35)"></div>
+     <div id="diseaseGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+    <div id="detailView" class="hidden fade-in"></div>
+   </main>
+   <footer class="text-center py-8 text-xs" style="color:rgba(255,255,255,.2)">
+    <p>For educational &amp; clinical reference only. Always correlate clinically.</p>
+   </footer>
+  </div>
+  <script>
+// ========== DISEASE DATA ==========
+const diseases=[
+// --- KIDNEY ---
+{id:"rcc",name:"Renal Cell Carcinoma",category:"Kidney",severity:"high",
+brief:"Most common primary renal malignancy (85-90%). Clear cell subtype predominates.",
+epidemiology:"Incidence 2-3% of adult malignancies. M:F = 2:1. Peak 60-70 yrs. Risk factors: smoking, obesity, VHL syndrome, acquired cystic kidney disease, long-term dialysis.",
+pathophysiology:"Arises from proximal convoluted tubule epithelium. Clear cell (75-80%) linked to VHL gene mutation (3p25) → HIF pathway activation → VEGF/PDGF overexpression. Papillary (10-15%): Type 1 (MET) & Type 2 (FH). Chromophobe (5%): KIT+.",
+clinical:"Classic triad (only 10%): flank pain, hematuria, palpable mass. Paraneoplastic: erythrocytosis (EPO), hypercalcemia (PTHrP), Stauffer syndrome (hepatic dysfunction), hypertension (renin). Left-sided varicocele (left renal vein invasion). Cannonball lung mets.",
+diagnosis:"CT abdomen with contrast (enhancement >15 HU). Bosniak classification for cystic lesions. MRI for IVC thrombus staging. Chest CT for staging. Renal biopsy only for indeterminate masses or metastatic workup.",
+staging:"TNM: T1a ≤4cm, T1b 4-7cm, T2a 7-10cm, T2b >10cm, T3a perinephric/renal vein, T3b IVC below diaphragm, T3c IVC above diaphragm, T4 beyond Gerota's.",
+management:"T1a: partial nephrectomy (nephron-sparing) or active surveillance if comorbid. T1b-T2: partial vs radical nephrectomy. T3-T4: radical nephrectomy ± IVC thrombectomy. Metastatic: TKIs (sunitinib, pazopanib, cabozantinib), checkpoint inhibitors (nivolumab + ipilimumab), mTOR inhibitors. Cytoreductive nephrectomy in select cases.",
+prognosis:"5-year survival: Stage I 81%, Stage II 74%, Stage III 53%, Stage IV 8%. Sarcomatoid features → poor prognosis. IMDC risk model for metastatic disease."},
+
+{id:"uti",name:"Urinary Tract Infection",category:"Kidney",severity:"mod",
+brief:"Bacterial infection of urinary tract. Most common bacterial infection in women.",
+epidemiology:"50-60% of women will have ≥1 UTI in lifetime. F:M = 8:1 in young adults. Risk factors: female sex, sexual intercourse, spermicides, diabetes, urinary stasis, catheterization, pregnancy, menopause.",
+pathophysiology:"Ascending route most common. E. coli (75-95% uncomplicated). Other: Klebsiella, Proteus (struvite stones), Staphylococcus saprophyticus (young women), Enterococcus. Virulence factors: P-fimbriae, type 1 pili, hemolysin, aerobactin. Complicated UTI: structural/functional abnormality.",
+clinical:"Lower (cystitis): dysuria, frequency, urgency, suprapubic pain, hematuria. Upper (pyelonephritis): fever, rigors, flank pain, CVA tenderness, nausea/vomiting. Elderly: confusion, falls may be only presentation.",
+diagnosis:"Urinalysis: pyuria (>10 WBC/hpf), bacteriuria, nitrites (Gram-negative), leukocyte esterase. Urine culture: ≥10⁵ CFU/mL (≥10² in catheterized). Imaging: CT/US if complicated UTI, suspected abscess, or no response in 72h.",
+staging:"Classification: Uncomplicated (lower tract, normal anatomy), Complicated (structural/functional abnormality, male, catheter, immunosuppressed), Recurrent (≥3/year or ≥2 in 6 months).",
+management:"Uncomplicated cystitis: nitrofurantoin 100mg BD 5d, or TMP-SMX 160/800 BD 3d, or fosfomycin 3g single dose. Pyelonephritis: ciprofloxacin 500mg BD 7d or ceftriaxone IV. Complicated: IV antibiotics, treat underlying cause. Recurrent: low-dose prophylaxis, post-coital prophylaxis, cranberry products, vaginal estrogen in postmenopausal.",
+prognosis:"Uncomplicated: excellent with treatment. Pyelonephritis: risk of sepsis, renal abscess, emphysematous pyelonephritis (emergency). Recurrence rate 27% within 6 months."},
+
+{id:"stones",name:"Urolithiasis (Kidney Stones)",category:"Kidney",severity:"mod",
+brief:"Crystalline mineral deposits in urinary tract. Lifetime prevalence 10-15%.",
+epidemiology:"M:F = 2-3:1. Peak 20-50 yrs. Recurrence 50% within 5-10 years. Risk: dehydration, high sodium/protein diet, obesity, metabolic syndrome, family history, hot climates.",
+pathophysiology:"Supersaturation → nucleation → crystal growth → aggregation. Calcium oxalate (75%): hypercalciuria, hyperoxaluria, hypocitraturia. Calcium phosphate (15%): RTA type 1, hyperparathyroidism. Uric acid (10%): low urine pH <5.5, gout, myeloproliferative. Struvite (5%): urease-producing organisms (Proteus). Cystine (1%): autosomal recessive cystinuria.",
+clinical:"Acute renal colic: sudden severe flank → groin pain (loin-to-groin). Restlessness (unlike peritonitis). Hematuria (85%). Nausea/vomiting. Pain location indicates level: upper ureter → flank, mid-ureter → lower abdomen, VUJ → testicular/labial pain, bladder → suprapubic + strangury.",
+diagnosis:"Non-contrast CT KUB (gold standard, 97% sensitivity). Uric acid stones radiolucent on X-ray but visible on CT. US first in pregnancy/children. 24-hour urine: calcium, oxalate, citrate, uric acid, cystine, pH, volume. Serum: calcium, PTH, uric acid, creatinine.",
+staging:"Size/location determines management. <5mm: 68% spontaneous passage. 5-10mm: 47% passage. >10mm: unlikely spontaneous passage.",
+management:"Acute: NSAIDs (ketorolac/diclofenac) first-line, opioids if refractory. MET: tamsulosin 0.4mg for distal stones 5-10mm. Interventional: ESWL (stones <2cm, non-lower pole), URS + laser lithotripsy (ureteric/lower pole), PCNL (>2cm, staghorn). Metabolic: increase fluids >2.5L/d, low sodium, normal calcium, citrate supplementation. Uric acid: potassium citrate (target pH 6.5-7). Cystine: tiopronin, high fluid >3L/d.",
+prognosis:"Recurrence 50% at 5 years without prevention. Metabolic workup reduces recurrence by 50%. Staghorn calculi → renal failure if untreated."},
+
+{id:"pkd",name:"Polycystic Kidney Disease",category:"Kidney",severity:"high",
+brief:"Genetic disorder with bilateral renal cysts. ADPKD is most common inherited renal disease.",
+epidemiology:"ADPKD: 1:400-1000 prevalence. Accounts for 5-10% of ESRD. PKD1 (85%): chromosome 16, earlier onset. PKD2 (15%): chromosome 4, milder course.",
+pathophysiology:"Mutations in polycystin-1 (PKD1) or polycystin-2 (PKD2) → disrupted calcium signaling → increased cAMP → cyst epithelial proliferation and fluid secretion. Two-hit hypothesis: germline mutation + somatic mutation → cyst formation. Progressive cyst growth → renal parenchymal compression → GFR decline.",
+clinical:"Flank/abdominal pain, hematuria, hypertension (60% before renal impairment), palpable kidneys. Complications: cyst infection, cyst hemorrhage, nephrolithiasis (20-30%). Extrarenal: hepatic cysts (80%), intracranial aneurysms (8%, screen if family history), mitral valve prolapse (25%), colonic diverticula.",
+diagnosis:"Ultrasound diagnostic criteria (Ravine): age 15-39 → ≥3 cysts total, age 40-59 → ≥2 cysts per kidney, age ≥60 → ≥4 cysts per kidney. MRI for precise volume measurement (htTKV). Genetic testing if uncertain. MRA for intracranial aneurysm screening.",
+staging:"Mayo classification by htTKV (height-adjusted total kidney volume): Class 1A-1E based on growth rate. Predicts progression to ESRD.",
+management:"Tolvaptan (V2 receptor antagonist): slows cyst growth and GFR decline in rapidly progressive disease (Mayo class 1C-1E). BP control: target <110/75, ACEi/ARB first-line. Pain: avoid NSAIDs, cyst aspiration/sclerotherapy or surgical decortication. ESRD: dialysis, transplantation (preferred, native nephrectomy if massive). Screen for aneurysms: MRA if family history of SAH.",
+prognosis:"PKD1: ESRD by median age 54. PKD2: ESRD by median age 74. htTKV >600mL/m predicts faster progression."},
+
+// --- PROSTATE ---
+{id:"bph",name:"Benign Prostatic Hyperplasia",category:"Prostate",severity:"mod",
+brief:"Non-malignant prostate enlargement causing LUTS. Affects >50% of men over 60.",
+epidemiology:"Histological BPH in 50% at age 50, 80% at age 80. Clinical LUTS in 25% of men in 50s, 50% in 80s. Risk factors: age, androgens (DHT), family history, metabolic syndrome.",
+pathophysiology:"DHT-driven stromal and glandular hyperplasia in transition zone. 5α-reductase converts testosterone → DHT → stromal proliferation. Static component: mechanical obstruction by enlarged gland. Dynamic component: smooth muscle tone (α1-adrenoreceptors). Detrusor response: hypertrophy → decompensation → atony.",
+clinical:"Storage (irritative): frequency, urgency, nocturia, urge incontinence. Voiding (obstructive): hesitancy, weak stream, intermittency, straining, incomplete emptying, terminal dribbling. Complications: acute urinary retention, chronic retention with overflow, UTIs, bladder stones, hydronephrosis, renal failure.",
+diagnosis:"IPSS (International Prostate Symptom Score): mild 0-7, moderate 8-19, severe 20-35. DRE: smooth, firm, enlarged. PSA (excludes cancer). Uroflowmetry: Qmax <10mL/s suggests obstruction. PVR (post-void residual): >200mL significant. Urodynamics if diagnosis unclear. TRUS for volume.",
+staging:"Prostate volume: <30mL mild, 30-80mL moderate, >80mL large. Combined with IPSS and Qmax for treatment decisions.",
+management:"Watchful waiting: mild IPSS ≤7. Medical: α-blockers (tamsulosin, alfuzosin) — rapid symptom relief. 5α-reductase inhibitors (finasteride, dutasteride) — reduce volume 25% over 6-12mo, best if >40mL. Combination therapy (MTOPS/CombAT trials): superior for large prostates. PDE5i (tadalafil 5mg daily) for concurrent ED. Surgical: TURP (gold standard 30-80mL), HoLEP (any size), simple prostatectomy (>80mL), Rezum (water vapor), UroLift (no ejaculatory dysfunction).",
+prognosis:"Progressive without treatment. AUR risk 1-2%/year. Medical therapy reduces AUR and surgery need by 50% (combination). TURP: 85% symptom improvement."},
+
+{id:"prostate_ca",name:"Prostate Cancer",category:"Prostate",severity:"high",
+brief:"Most common cancer in men. Adenocarcinoma (95%) arising from peripheral zone.",
+epidemiology:"Lifetime risk 1 in 8. Incidence increases with age (rare <40). Risk factors: age, African descent (2x risk), family history (BRCA2, HOXB13), high-fat diet. Autopsy studies: 70% of men >80 have occult prostate cancer.",
+pathophysiology:"Androgen-dependent adenocarcinoma arising from peripheral zone (70%). Key molecular: TMPRSS2-ERG fusion (50%), PTEN loss, PI3K/AKT activation, AR amplification. Spreads: local (seminal vesicles, bladder), lymphatic (obturator, iliac nodes), hematogenous (osteoblastic bone metastases — axial skeleton).",
+clinical:"Early: asymptomatic (PSA screening). Locally advanced: LUTS, hematuria, hemospermia, perineal pain. Metastatic: bone pain (lower back, pelvis), pathological fractures, spinal cord compression, anemia, weight loss. DRE: hard, irregular nodule in peripheral zone.",
+diagnosis:"PSA: >4ng/mL (age-adjusted cutoffs). PSA density, velocity, free:total ratio. mpMRI (PI-RADS scoring 1-5). Transperineal/TRUS biopsy: Gleason scoring. Grade groups: 1 (3+3), 2 (3+4), 3 (4+3), 4 (4+4/3+5/5+3), 5 (4+5/5+4/5+5). Staging: bone scan, PSMA PET-CT.",
+staging:"TNM: T1 incidental, T2a ≤half one lobe, T2b >half one lobe, T2c both lobes, T3a extracapsular, T3b seminal vesicle, T4 adjacent structures. Risk groups: Low (T1-T2a, GG1, PSA<10), Intermediate (T2b-T2c or GG2-3 or PSA 10-20), High (≥T3a or GG4-5 or PSA>20).",
+management:"Low risk: active surveillance (PSA q3-6mo, mpMRI, repeat biopsy). Intermediate: radical prostatectomy (RP) or radiotherapy (EBRT ± brachytherapy) + short-term ADT (4-6mo). High risk: RP + extended PLND, or EBRT + long-term ADT (2-3yr) ± abiraterone. mHSPC: ADT + docetaxel or abiraterone or enzalutamide or darolutamide + docetaxel (ARASENS/PEACE-1). mCRPC: enzalutamide, abiraterone + prednisone, docetaxel, cabazitaxel, Radium-223 (bone mets), Lu-177 PSMA (TheraP/VISION). BRCA2+: olaparib.",
+prognosis:"5-year survival: localized 99%, regional 99%, distant 31%. GG1: indolent. GG5: aggressive. CRPC median survival 2-3 years with modern treatments."},
+
+{id:"prostatitis",name:"Prostatitis",category:"Prostate",severity:"mod",
+brief:"Inflammation of prostate. Category III (CPPS) is most common (90-95%).",
+epidemiology:"Affects 10-15% of men. NIH classification: I (acute bacterial), II (chronic bacterial), IIIA (inflammatory CPPS), IIIB (non-inflammatory CPPS), IV (asymptomatic inflammatory).",
+pathophysiology:"Acute bacterial: ascending urethral infection or intraprostatic reflux. E. coli (80%), Pseudomonas, Enterococcus. Chronic bacterial: biofilm formation, intraprostatic calculi as nidus. CPPS: multifactorial — neurogenic inflammation, pelvic floor dysfunction, central sensitization, autoimmune, psychological.",
+clinical:"Acute (Cat I): fever, rigors, perineal/suprapubic pain, dysuria, frequency, cloudy urine. DRE: exquisitely tender, boggy (avoid vigorous massage → bacteremia). Chronic bacterial (Cat II): recurrent UTIs with same organism, pelvic pain, ejaculatory pain. CPPS (Cat III): chronic pelvic pain ≥3 months, voiding symptoms, sexual dysfunction, no proven infection.",
+diagnosis:"Urinalysis/culture. 4-glass test (Meares-Stamey): VB1 (urethral), VB2 (bladder), EPS (prostatic), VB3 (post-massage). Simplified 2-glass: pre/post massage. Acute: avoid prostatic massage. PSA elevated in acute (normalize 6-8wk). Imaging if abscess suspected (TRUS/MRI).",
+staging:"NIH-CPSI (Chronic Prostatitis Symptom Index): pain (0-21), urinary (0-10), quality of life (0-12). Total 0-43.",
+management:"Cat I: IV fluoroquinolone or 3rd-gen cephalosporin → oral for 4-6 weeks total. Abscess: transrectal/transperineal drainage. Cat II: fluoroquinolone 4-6 weeks (prostatic penetration), TMP-SMX alternative. Cat III: multimodal — α-blockers (tamsulosin), pelvic floor physiotherapy, amitriptyline/gabapentin for neuropathic pain, NSAIDs, cognitive behavioral therapy, phytotherapy (quercetin). Cat IV: no treatment unless elevated PSA.",
+prognosis:"Acute: excellent if treated, abscess rare. Chronic bacterial: relapse common. CPPS: chronic relapsing course, 60% improve with multimodal approach."},
+
+// --- BLADDER ---
+{id:"bladder_ca",name:"Bladder Cancer",category:"Bladder",severity:"high",
+brief:"Most common malignancy of urinary tract. Urothelial (transitional cell) carcinoma 90%.",
+epidemiology:"4th most common cancer in men. M:F = 3:1. Peak 65-85 yrs. Risk: smoking (4x, 50% attributable), occupational carcinogens (aromatic amines — rubber, dye, paint), chronic cystitis, Schistosoma haematobium (SCC type), cyclophosphamide, pelvic radiation.",
+pathophysiology:"Urothelial carcinoma: two pathways. Low-grade papillary (FGFR3 mutations) — 70%, recurrent but rarely progressive. High-grade (TP53/RB mutations) — CIS and muscle-invasive, aggressive. SCC (5%): keratinizing, associated with chronic irritation/schistosomiasis. Adenocarcinoma (2%): urachal or non-urachal.",
+clinical:"Painless macroscopic hematuria (85%) — most important sign. Irritative LUTS (frequency, urgency, dysuria) suggest CIS. Advanced: pelvic pain, flank pain (ureteral obstruction), lower limb edema, bone pain.",
+diagnosis:"Cystoscopy with biopsy (gold standard). Urine cytology (high sensitivity for high-grade/CIS). CT urogram (upper tract evaluation, staging). Blue-light cystoscopy (hexaminolevulinate) improves CIS detection. NMP22, UroVysion FISH as adjuncts. Bimanual examination under anesthesia for staging.",
+staging:"TNM: Ta (non-invasive papillary), Tis (CIS), T1 (lamina propria), T2a (inner muscle), T2b (outer muscle), T3 (perivesical fat), T4a (prostate/uterus/vagina), T4b (pelvic/abdominal wall). NMIBC: Ta/T1/Tis. MIBC: ≥T2.",
+management:"NMIBC: TURBT + single immediate intravesical mitomycin C. Low risk: surveillance. Intermediate: intravesical mitomycin C or BCG. High risk (T1HG, CIS, recurrent): BCG induction (6 weekly) + maintenance (3 years). BCG-unresponsive: radical cystectomy, pembrolizumab, nadofaragene firadenovec. MIBC (T2-T4a): neoadjuvant cisplatin-based chemo (MVAC/GC) + radical cystectomy + pelvic lymphadenectomy. Urinary diversion: ileal conduit, orthotopic neobladder, continent cutaneous. Unfit for cystectomy: trimodal therapy (maximal TURBT + chemo + RT). Metastatic: GC/MVAC → checkpoint inhibitors (pembrolizumab/avelumab maintenance). Erdafitinib for FGFR3+ tumors. Enfortumab vedotin + pembrolizumab (EV-302).",
+prognosis:"NMIBC: 5-year survival 90%, but 50-70% recurrence. CIS → MIBC progression 54% without BCG. MIBC: 5-year survival 50% with RC. Metastatic: median survival 14-15 months with modern regimens."},
+
+{id:"oab",name:"Overactive Bladder",category:"Bladder",severity:"low",
+brief:"Urgency ± urge incontinence, usually with frequency and nocturia, without UTI or other pathology.",
+epidemiology:"Prevalence 12-17% in adults. Increases with age. OAB-wet (with incontinence) more common in women. Significant impact on quality of life, depression, falls (nocturia).",
+pathophysiology:"Multifactorial: detrusor overactivity (involuntary contractions), myogenic (altered gap junctions, spontaneous contractility), neurogenic (reduced central inhibition), urothelial (increased ATP/acetylcholine release, altered sensory signaling). Afferent C-fiber sensitization. Metabolic syndrome association.",
+clinical:"Urgency (key symptom), frequency (≥8 voids/day), nocturia (≥2 episodes), urge incontinence. OAB-dry vs OAB-wet. Frequency-volume chart essential (bladder diary 3 days minimum).",
+diagnosis:"Bladder diary (3-day minimum). Urinalysis (exclude UTI). PVR (exclude retention). ICIQ-OAB questionnaire. Urodynamics: not routine, reserved for refractory/surgical planning — demonstrates detrusor overactivity. Cystoscopy only if hematuria or suspected pathology.",
+staging:"Severity by impact: mild (frequency/urgency without incontinence), moderate (incontinence <1/day), severe (multiple incontinence episodes/day, lifestyle restriction).",
+management:"First-line: behavioral — bladder training (timed voiding, urge suppression), pelvic floor exercises, fluid management, caffeine reduction, weight loss. Second-line: antimuscarinics (solifenacin, mirabegron [β3-agonist] — preferred in elderly due to lower cognitive effects, oxybutynin, tolterodine). Third-line: botulinum toxin A (100U intradetrusor), sacral neuromodulation (SNM/InterStim), percutaneous tibial nerve stimulation (PTNS). Combination mirabegron + solifenacin if monotherapy insufficient.",
+prognosis:"Chronic condition requiring long-term management. Behavioral therapy: 50-80% improvement. Antimuscarinics: 60-70% response. Botox: 70% response, repeat q6-9 months. SNM: 70% sustained response at 5 years."},
+
+{id:"ic_bps",name:"Interstitial Cystitis / Bladder Pain Syndrome",category:"Bladder",severity:"mod",
+brief:"Chronic bladder pain with urinary frequency/urgency in absence of identifiable causes.",
+epidemiology:"Prevalence 2-7% in women. F:M = 5:1. Mean age onset 40. Associated with fibromyalgia, IBS, chronic fatigue, vulvodynia, endometriosis. Significant diagnostic delay (average 4-7 years).",
+pathophysiology:"Multifactorial: urothelial dysfunction (defective GAG layer → increased permeability), mast cell activation, neurogenic inflammation, central sensitization, pelvic floor dysfunction. Hunner lesions (10-15%): distinct inflammatory subtype with lymphoplasmacytic infiltration. Anti-proliferative factor (APF) inhibits urothelial growth.",
+clinical:"Suprapubic/pelvic pain worsening with bladder filling, relieved by voiding. Frequency (up to 60x/day in severe cases). Urgency. Dyspareunia. Symptom flares with stress, certain foods (acidic, spicy, caffeine, alcohol), menstruation. Hunner lesion subtype: older onset, smaller capacity.",
+diagnosis:"Clinical diagnosis of exclusion. ≥6 weeks symptoms. O'Leary-Sant IC Symptom/Problem Index. PUF questionnaire. Urinalysis (negative). Cystoscopy with hydrodistension under anesthesia: glomerulations (petechial hemorrhages), Hunner lesions. Potassium sensitivity test (historical, less used). Bladder biopsy if Hunner lesion suspected.",
+staging:"ESSIC classification: Type 1 (normal cystoscopy), Type 2 (glomerulations grade II-III), Type 3 (Hunner lesions). Combined with biopsy findings (A: normal, B: inconclusive, C: inflammatory infiltrate).",
+management:"Multimodal, stepwise approach. First-line: patient education, dietary modification (IC diet — avoid 4 Cs: caffeinated, carbonated, citrus, concentrated), stress management, pelvic floor PT. Second-line: oral amitriptyline (10-75mg), hydroxyzine, cimetidine, pentosan polysulfate (FDA-approved but retinal toxicity concern). Intravesical: DMSO, heparin + lidocaine cocktail, hyaluronic acid/chondroitin sulfate. Third-line: hydrodistension (short-term), fulguration/injection of Hunner lesions (triamcinolone), sacral neuromodulation. Fourth-line: cyclosporine A, botulinum toxin (limited evidence). Last resort: urinary diversion ± cystectomy.",
+prognosis:"Chronic fluctuating course. No cure. 50% improve over time. Hunner lesion subtype responds better to targeted treatment. Multidisciplinary approach improves QoL."},
+
+// --- MALE REPRODUCTIVE ---
+{id:"varicocele",name:"Varicocele",category:"Male Reproductive",severity:"low",
+brief:"Abnormal dilation of pampiniform venous plexus. Most common correctable cause of male infertility.",
+epidemiology:"Present in 15% of general male population, 35-40% of primary infertility, 75-80% of secondary infertility. 90% left-sided (left gonadal vein drains into left renal vein at 90°). Bilateral 10%. Isolated right-sided rare → exclude retroperitoneal pathology.",
+pathophysiology:"Incompetent/absent valves in internal spermatic vein → retrograde venous flow → venous stasis → scrotal hyperthermia (1-2°C increase). Mechanisms of infertility: heat stress → impaired spermatogenesis, increased ROS, Leydig cell dysfunction, reduced testosterone. Countercurrent heat exchange impaired.",
+clinical:"Often asymptomatic. Dragging sensation/dull ache in scrotum, worse standing/exertion, relieved lying down. 'Bag of worms' on palpation. Grade I: palpable with Valsalva only. Grade II: palpable without Valsalva. Grade III: visible. Testicular atrophy (>20% volume difference) in adolescents.",
+diagnosis:"Physical examination with patient standing + Valsalva. Scrotal Doppler ultrasound: reflux >2 seconds, vein diameter >3mm. Semen analysis: oligozoospermia, asthenozoospermia, increased abnormal morphology (stress pattern). Hormonal: FSH, LH, testosterone.",
+staging:"Clinical grading I-III (above). Subclinical: detected only on imaging (treatment not recommended).",
+management:"Observation: if asymptomatic and no fertility concerns. Surgical indications: palpable varicocele + abnormal semen + infertility, OR testicular atrophy in adolescents, OR symptomatic. Microsurgical subinguinal varicocelectomy (gold standard): recurrence 1%, hydrocele 0.5%. Laparoscopic: higher recurrence (5%). Percutaneous embolization: alternative, 10-15% recurrence. Post-repair: semen improvement in 60-70%, pregnancy rate 30-50%.",
+prognosis:"Untreated: progressive testicular damage. After repair: 60-70% semen improvement, 30-50% natural pregnancy rate. Earlier repair → better outcomes."},
+
+{id:"ed",name:"Erectile Dysfunction",category:"Male Reproductive",severity:"low",
+brief:"Persistent inability to achieve/maintain erection sufficient for satisfactory sexual performance.",
+epidemiology:"Affects 20-40% of men 60-69, >50% of men >70. Shared risk factors with CVD: diabetes (35-75% prevalence), hypertension, dyslipidemia, smoking, obesity. ED may precede coronary events by 3-5 years (sentinel symptom).",
+pathophysiology:"Normal erection: sexual stimulation → parasympathetic S2-S4 → NO release from NANC nerves/endothelium → guanylate cyclase → cGMP → smooth muscle relaxation → sinusoidal filling → venous occlusion. ED causes: vasculogenic (70%, endothelial dysfunction), neurogenic (diabetes, spinal injury, radical prostatectomy), hormonal (hypogonadism, hyperprolactinemia), psychogenic (performance anxiety, depression), drug-induced (antihypertensives, SSRIs, antiandrogens), structural (Peyronie's disease).",
+clinical:"Graded severity: mild (occasional), moderate (intermittent), complete. Assess: onset (gradual=organic, sudden=psychogenic), presence of nocturnal/morning erections (preserved=psychogenic). Associated: reduced libido (hypogonadism), premature ejaculation, Peyronie's plaque. CVD risk assessment essential.",
+diagnosis:"IIEF-5 (SHIM) questionnaire. Fasting glucose/HbA1c, lipid profile, testosterone (morning, total + free), TSH, prolactin. Nocturnal penile tumescence (NPT) if psychogenic suspected. Penile Doppler US: PSV >25cm/s normal, <25 arterial insufficiency, EDV >5cm/s venous leak. Cavernosometry/cavernosography (rarely). CVD risk stratification (Princeton Consensus).",
+staging:"IIEF-5: mild (17-21), mild-moderate (12-16), moderate (8-11), severe (5-7).",
+management:"Lifestyle: weight loss, exercise (150min/week), smoking cessation, alcohol moderation, treat underlying conditions. First-line: PDE5 inhibitors (sildenafil 50-100mg, tadalafil 10-20mg or 5mg daily, vardenafil, avanafil). Contraindicated with nitrates. Second-line: intracavernosal injection (alprostadil/trimix — PGE1+phentolamine+papaverine), vacuum erection device, intraurethral alprostadil (MUSE). Third-line: penile prosthesis (inflatable 3-piece — gold standard for refractory). Hormonal: testosterone replacement if hypogonadal (gel, injection). Low-intensity shockwave therapy: emerging evidence for vasculogenic ED.",
+prognosis:"PDE5i effective in 60-70% overall (36% in post-prostatectomy, 50% in diabetes). Prosthesis: 85-95% satisfaction. CVD risk: evaluate all ED patients for cardiovascular disease."},
+
+{id:"testicular_ca",name:"Testicular Cancer",category:"Male Reproductive",severity:"high",
+brief:"Most common solid malignancy in men aged 15-35. Highly curable even in advanced stages.",
+epidemiology:"Peak 15-35 years. Incidence rising globally. Risk: cryptorchidism (4-8x), family history (8-10x in brothers), prior testicular cancer, DSD, infertility. Seminoma peak 35-45, NSGCT peak 20-30.",
+pathophysiology:"Germ cell tumors (95%): Seminoma (40%) — uniform sheets of cells, good prognosis. Non-seminomatous (NSGCT, 60%): embryonal carcinoma (aggressive, marker AFP/hCG), yolk sac tumor (AFP), choriocarcinoma (hCG, hematogenous spread), teratoma (mature/immature, chemoresistant), mixed. Isochromosome 12p in >80%. GCNIS (germ cell neoplasia in situ) = precursor. Sex cord-stromal (5%): Leydig, Sertoli.",
+clinical:"Painless testicular lump/swelling (most common). Heaviness in scrotum. Dull ache. 10% present with acute pain (hemorrhage/torsion). Metastatic: back pain (retroperitoneal nodes), dyspnea/hemoptysis (lung mets), gynecomastia (hCG). Examine for lymphadenopathy, abdominal mass.",
+diagnosis:"Scrotal ultrasound (first-line): hypoechoic intratesticular mass. Tumor markers: AFP (yolk sac/embryonal, NOT seminoma), β-hCG (choriocarcinoma, some seminoma), LDH (bulk/prognosis). CT chest/abdomen/pelvis staging. Brain MRI if choriocarcinoma or symptoms. Inguinal exploration — NEVER transscrotal biopsy (seeding risk).",
+staging:"TNM + S (serum markers). Stage I: testis only. Stage II: retroperitoneal nodes (IIA <2cm, IIB 2-5cm, IIC >5cm). Stage III: distant mets. IGCCCG risk: good/intermediate/poor based on markers and met sites.",
+management:"All: radical inguinal orchidectomy. Sperm banking pre-treatment. Stage I seminoma: surveillance (preferred, 85% cure), single-agent carboplatin (AUC7 x1), or para-aortic RT (20Gy). Stage I NSGCT: surveillance if low risk (no LVI), 1 cycle BEP if high risk. Advanced seminoma: BEP x3 (good risk) or x4 (intermediate). Advanced NSGCT: BEP x3-4 based on IGCCCG risk. Post-chemo residual mass: RPLND if NSGCT >1cm (40% teratoma, 10% viable). Salvage: TIP, VeIP, high-dose chemo + ASCT.",
+prognosis:"Stage I: >99% cure. Good risk metastatic: 92% cure. Intermediate: 80%. Poor: 48% (NSGCT only). Seminoma never classified as poor risk. Late relapse (>2 years): rare, surgery preferred. Long-term: CVD risk, metabolic syndrome, secondary malignancies from chemo/RT."},
+
+{id:"peyronie",name:"Peyronie's Disease",category:"Male Reproductive",severity:"low",
+brief:"Fibrous plaque in tunica albuginea causing penile curvature, pain, and ED.",
+epidemiology:"Prevalence 3-9% (likely underreported). Peak 50-60 years. Associated: Dupuytren's contracture (20%), Ledderhose disease, diabetes, hypertension, penile trauma.",
+pathophysiology:"Aberrant wound healing after tunica albuginea microtrauma → TGF-β driven fibroblast proliferation → myofibroblast differentiation → excessive collagen deposition → fibrous plaque ± calcification. Active phase (6-18 months): pain, evolving curvature. Stable phase: painless, fixed curvature.",
+clinical:"Penile curvature (dorsal most common), palpable plaque, pain during erection (active phase), ED (30-50%), shortening, narrowing/hourglass deformity. Functional: inability to penetrate, psychological distress, relationship impact.",
+diagnosis:"History and physical (palpate plaque). Penile Doppler US: plaque characterization, calcification, vascular assessment. Photograph of erect penis for curvature documentation (self-photo). PDQ (Peyronie's Disease Questionnaire).",
+staging:"Active phase: pain, changing curvature (<12-18 months). Stable phase: no pain, stable curvature >3 months. Curvature: mild <30°, moderate 30-60°, severe >60°.",
+management:"Active phase: collagenase clostridium histolyticum (Xiaflex) — FDA-approved for >30° curvature, intralesional injection + modeling. Oral: limited evidence — pentoxifylline, L-carnitine, CoQ10. Traction therapy (RestoreX) 30-90min/day. Stable phase: surgical if curvature >30° and functional impairment. Plication (Nesbit/16-dot): simpler, shortening. Plaque incision + grafting: complex curvature >60°, maintains length. Penile prosthesis: if concurrent refractory ED. Avoid: vitamin E (no evidence), extracorporeal shockwave.",
+prognosis:"Natural history: 12% resolve, 40% stable, 48% worsen without treatment. Xiaflex: mean 34% curvature reduction. Surgery: 85-95% straightening. Significant psychological impact — address early."},
+
+// --- PEDIATRIC ---
+{id:"hypospadias",name:"Hypospadias",category:"Pediatric Urology",severity:"mod",
+brief:"Congenital ventral displacement of urethral meatus. Most common penile anomaly.",
+epidemiology:"1 in 200-300 live male births. Increasing incidence. Risk: endocrine disruptors, low birth weight, ART (assisted reproductive technology), family history (7% if father affected). Associated: undescended testis, inguinal hernia.",
+pathophysiology:"Incomplete fusion of urethral folds between 8-14 weeks gestation. Insufficient androgen stimulation (DHT) or receptor deficiency → incomplete urethral tubularization. Proximal defects → consider DSD evaluation (karyotype, endocrine). Associated with deficient ventral foreskin (dorsal hooded prepuce) and chordee (ventral curvature).",
+clinical:"Classification by meatal position: distal (70%) — glanular, coronal, subcoronal. Middle (15%) — penile shaft. Proximal (15%) — penoscrotal, scrotal, perineal. Features: abnormal meatal position, dorsal hooded foreskin, ventral chordee, splayed urinary stream. Proximal + undescended testis → DSD evaluation mandatory.",
+diagnosis:"Clinical diagnosis at birth. Do NOT circumcise (foreskin used for repair). Document: meatal position, degree of chordee, penile size, testicular position, scrotal anatomy. Proximal hypospadias: karyotype, US (Mullerian structures), endocrine evaluation.",
+staging:"Severity by location: distal (mild), midshaft (moderate), proximal (severe). Chordee: mild <15°, moderate 15-45°, severe >45°.",
+management:"Surgical repair at 6-18 months (optimal). Distal: TIP (tubularized incised plate — Snodgrass) — most common, MAGPI, meatal advancement. Proximal: staged repair (Bracka — first stage buccal mucosal graft, second stage tubularization 6 months later). Severe chordee: degloving ± dorsal plication, ventral corporotomy if >30°. Pre-operative: testosterone cream or parenteral testosterone to increase penile size if small. Complications: urethrocutaneous fistula (5-15%), meatal stenosis, urethral stricture, diverticulum, residual chordee.",
+prognosis:"Success rate: distal TIP 95%. Proximal: 70-85% (higher complication rate). Fistula rate increases with severity. Long-term: good cosmetic/functional outcomes. Sexual function generally preserved. Psychological support important."},
+
+{id:"cryptorchidism",name:"Cryptorchidism (Undescended Testis)",category:"Pediatric Urology",severity:"mod",
+brief:"Failure of testis to descend into scrotum. Most common genital anomaly in boys.",
+epidemiology:"3% of full-term, 30% of preterm boys at birth. Spontaneous descent by 6 months in 70% → 1% prevalence at 1 year. Unilateral:bilateral = 2:1. Right > left (later descent of right). Risk: prematurity, low birth weight, SGA, family history.",
+pathophysiology:"Two-phase descent: transabdominal (INSL3/GREAT receptor, 8-15 weeks) and inguinoscrotal (androgens/CGRP, 25-35 weeks). Failure at either phase. Undescended testis exposed to higher temperature → progressive germ cell loss from 6 months. Bilateral → consider DSD. Risk: infertility, malignancy (5-10x, seminoma most common), torsion, inguinal hernia.",
+clinical:"Types: palpable (80%) — inguinal canal, prescrotal. Non-palpable (20%) — intra-abdominal, absent (vanishing testis), ectopic. Retractile testis: reaches scrotum, stays temporarily → observation. Examination: warm hands, frog-leg position, sweep from ASIS downward.",
+diagnosis:"Clinical examination (no imaging for palpable). Non-palpable bilateral: karyotype, hormonal (FSH, LH, AMH, inhibin B, testosterone ± hCG stimulation test). MRI/US: limited sensitivity for intra-abdominal testis. Diagnostic laparoscopy: gold standard for non-palpable testis.",
+staging:"Position: high scrotal, inguinal (superficial/deep), intra-abdominal (near ring, high). Classification: congenital vs acquired (ascending testis).",
+management:"Timing: surgery by 6-12 months (latest 18 months). Hormonal therapy: hCG or GnRH — limited role, 20% success, mainly for bilateral/retractile. Palpable: inguinal orchidopexy (dartos pouch fixation). Non-palpable: diagnostic laparoscopy → if vessels enter ring: inguinal exploration. If vessels end blindly: absent testis (nothing further). If intra-abdominal: single-stage or Fowler-Stephens orchidopexy (2-stage for high). If atrophic nubbin: excision. Orchidectomy: post-pubertal non-viable testis, consider prosthesis.",
+prognosis:"Fertility: unilateral treated early → near-normal paternity. Bilateral → 62% paternity (vs 93% normal). Cancer risk: 5-10x general population, reduced (not eliminated) by early orchidopexy. Self-examination education from puberty."},
+
+{id:"vur",name:"Vesicoureteral Reflux",category:"Pediatric Urology",severity:"mod",
+brief:"Retrograde flow of urine from bladder to upper urinary tract. Most common urological anomaly in children.",
+epidemiology:"1% of general pediatric population. 30-40% of children presenting with UTI. F:M = 4:1 in detected cases. Familial: 30-50% in siblings, 66% in offspring. Primary more common; secondary due to bladder outlet obstruction or neuropathic bladder.",
+pathophysiology:"Primary: short intramural ureteric tunnel (normal 5:1 length:diameter ratio reduced) → inadequate valve mechanism. Normal maturation with growth resolves many cases. Secondary: elevated intravesical pressure (PUV, neurogenic bladder, BBD) → overwhelms valve mechanism. Reflux → renal scarring (reflux nephropathy) via intrarenal reflux + infection → focal tubulointerstitial fibrosis → HTN, proteinuria, CKD.",
+clinical:"Usually diagnosed after febrile UTI. Prenatal hydronephrosis (15% have VUR). Recurrent UTIs. Failure to thrive. Hypertension (reflux nephropathy). Voiding dysfunction (BBD — bladder bowel dysfunction) worsens reflux and must be treated concurrently.",
+diagnosis:"VCUG (voiding cystourethrogram): gold standard, grades reflux, evaluates urethra (PUV). Radionuclide cystogram (RNC): lower radiation for follow-up/screening. DMSA scan: cortical scarring (gold standard for scarring). Renal US: hydronephrosis, renal size asymmetry, cortical thinning.",
+staging:"International grading: I (ureter only), II (ureter + pelvis, no dilation), III (mild ureteric dilation, mild pelvic dilation), IV (moderate dilation, blunting of fornices), V (gross dilation, tortuous ureter, loss of papillary impressions, intrarenal reflux).",
+management:"Conservative (majority): CAP (continuous antibiotic prophylaxis — TMP-SMX or nitrofurantoin), treat BBD aggressively (timed voiding, constipation management, biofeedback), surveillance VCUG/DMSA. Resolution rates: Grade I-II: 80-90%, Grade III: 50%, Grade IV-V: 10-20%. Surgical indications: breakthrough febrile UTIs on prophylaxis, new renal scarring, high-grade persistent reflux, non-compliance, parental preference. Endoscopic: STING/HIT with dextranomer/hyaluronic acid (Deflux) — 70-85% success (lower for grade V). Open: ureteral reimplantation (Cohen cross-trigonal, Lich-Gregoir) — 95-98% success. Robotic-assisted reimplantation: emerging.",
+prognosis:"Low-grade: 80-90% spontaneous resolution by age 5-6. High-grade: higher scarring risk, lower resolution. Reflux nephropathy: 5-12% of ESRD in children. Long-term: BP monitoring, urinalysis, renal function even after resolution."},
+
+// --- TRAUMA ---
+{id:"renal_trauma",name:"Renal Trauma",category:"Trauma",severity:"high",
+brief:"Kidney is most commonly injured genitourinary organ. 80-90% from blunt mechanism.",
+epidemiology:"5% of all trauma patients. Blunt (80-90%): MVA, falls, sports. Penetrating (10-20%): GSW, stab. Children more susceptible (less perirenal fat, relatively larger kidneys). Pre-existing pathology (hydronephrosis, tumor) increases injury risk.",
+pathophysiology:"Blunt: rapid deceleration → vascular pedicle injury, direct compression → parenchymal laceration. Penetrating: direct organ disruption. Types: contusion (bruise), laceration (cortical/medullary), vascular (pedicle injury, segmental artery). Urine extravasation: collecting system disruption.",
+clinical:"Flank pain/tenderness, hematuria (gross or microscopic — absent in 25-30% of pedicle injuries), flank ecchymosis (Grey Turner's), fractured lower ribs. Hemodynamic instability suggests major injury. Mechanism + hematuria + hemodynamic status guide workup.",
+diagnosis:"CT abdomen/pelvis with IV contrast + delayed images (10min — for urine extravasation): gold standard. Indications: gross hematuria, microscopic hematuria + hemodynamic instability or deceleration mechanism. Grading by imaging. IVP: limited, only if CT unavailable (OR setting). Angiography: therapeutic for active bleeding.",
+staging:"AAST Grade: I (contusion/subcapsular hematoma), II (laceration <1cm, non-expanding perirenal hematoma), III (laceration >1cm without collecting system), IV (laceration into collecting system or segmental vessel injury), V (shattered kidney or renal pedicle avulsion/thrombosis).",
+management:"Non-operative (>90% of blunt): bed rest, monitoring, serial Hb, IV antibiotics if indicated. Grade I-III: observation (success >95%). Grade IV: observation with selective angioembolization for active bleeding, ureteral stent for urine leak. Grade V: attempt selective angioembolization; nephrectomy if hemodynamically unstable or failed embolization. Penetrating: exploration for GSW (most), selective management for stab wounds. Indications for exploration: expanding/pulsatile perirenal hematoma, hemodynamic instability despite resuscitation, Grade V pedicle injury. Delayed complications: urinoma (drain), AV fistula (embolize), pseudoaneurysm (embolize), Page kidney (HTN from subcapsular hematoma).",
+prognosis:"Renal salvage rate >90% with conservative management. Nephrectomy rate: 5-10% for blunt, 25% for penetrating. Follow-up: imaging at 48-72h if high-grade, BP monitoring for renovascular HTN."},
+
+{id:"urethral_injury",name:"Urethral Injury",category:"Trauma",severity:"high",
+brief:"Classified as anterior (bulbar) or posterior (membranous/prostatic). Different mechanisms and management.",
+epidemiology:"Posterior: 10% of pelvic fractures (straddle-type). Anterior: straddle injuries, instrumentation, penile fracture. M >> F (male urethra longer). Associated injuries: bladder (10-20% with posterior), pelvic vascular, rectal.",
+pathophysiology:"Posterior: pelvic fracture disrupts membranous urethra at prostatomembranous junction (fixed point at urogenital diaphragm). Complete vs partial. Anterior: straddle injury compresses bulbar urethra against inferior pubic ramus. Penetrating: direct transection. Iatrogenic: catheterization, instrumentation. Penile fracture: associated urethral injury in 10-20%.",
+clinical:"Posterior: blood at urethral meatus (most reliable sign), inability to void, high-riding prostate on DRE (unreliable), perineal/scrotal hematuria, pelvic fracture. Anterior: perineal swelling ('butterfly hematoma' — Buck's fascia rupture → Colles' fascia distribution), blood at meatus, inability to void. DO NOT attempt catheterization if urethral injury suspected.",
+diagnosis:"Retrograde urethrogram (RUG): gold standard. 60% oblique angle, inject 20-30mL water-soluble contrast via catheter tip in fossa navicularis. Extravasation confirms disruption. Complete: no contrast reaches bladder. Partial: contrast extravasation but some reaches bladder. CT cystogram: concurrent bladder injury. MRI: for complex posterior injuries (displacement, gap).",
+staging:"Anterior: contusion (stretching), partial disruption, complete disruption. Posterior (Goldman classification): Type 1 (stretched), Type 2 (partial disruption above UG diaphragm), Type 3 (complete disruption above UG diaphragm), Type 4 (bladder neck involvement), Type 5 (extends below UG diaphragm).",
+management:"Immediate: suprapubic catheter (SPC) — avoid urethral catheterization in complete injuries. Partial anterior: urethral catheter (gentle attempt, 16Fr) or SPC + voiding trial in 2-3 weeks. Complete anterior: SPC → delayed repair at 3 months. Posterior — acute: SPC placement. Early realignment (within 7 days): endoscopic, reduces stricture severity, not always possible. Delayed urethroplasty (3-6 months): definitive — progressive perineal anastomotic urethroplasty (Webster technique), success 90-97%. Anterior stricture: excision and primary anastomosis (EPA) if <2cm, buccal mucosal graft (BMG) urethroplasty if longer. Penile fracture with urethral injury: surgical exploration + urethral repair.",
+prognosis:"EPA/anastomotic: 90-97% success. BMG urethroplasty: 85-90% success. Posterior realignment: 50-60% may avoid urethroplasty. Complications: stricture recurrence (5-15%), ED (up to 35% with posterior), incontinence (2-5% with posterior)."},
+
+// --- FUNCTIONAL ---
+{id:"neurogenic_bladder",name:"Neurogenic Bladder",category:"Functional Urology",severity:"high",
+brief:"Bladder dysfunction due to neurological disease. Management depends on lesion level.",
+epidemiology:"SCI: 250,000 in US, 80% develop neurogenic bladder. MS: 50-90% develop urinary symptoms. Stroke: 40-60%. Parkinson's: 40-70%. Spina bifida: nearly 100%. Diabetic cystopathy: up to 50% of long-standing diabetics.",
+pathophysiology:"Suprapontine (stroke, Parkinson's, MS): detrusor overactivity, preserved synergy, urge incontinence. Suprasacral SCI (above T12): detrusor overactivity + detrusor-sphincter dyssynergia (DSD) → high intravesical pressure → upper tract damage. Sacral/infrasacral (conus/cauda): areflexic/acontractile detrusor, stress incontinence, overflow. Autonomic dysreflexia: lesion above T6, bladder distension triggers sympathetic storm (HTN, bradycardia, headache, flushing — MEDICAL EMERGENCY).",
+clinical:"Storage: urgency, frequency, incontinence (urge or stress). Voiding: hesitancy, straining, retention, overflow incontinence. DSD: high-pressure voiding, UTIs. Upper tract: hydronephrosis, renal deterioration. AD: pounding headache, hypertension (SBP >200), bradycardia, flushing above lesion, piloerection — EMERGENCY.",
+diagnosis:"Video-urodynamics (gold standard): detrusor pressure, compliance, DSD, capacity, leak point pressure. Detrusor pressure >40cmH2O during storage → upper tract risk. Renal US: hydronephrosis. DMSA: scarring. Serum creatinine. Voiding diary. EMG: sphincter activity.",
+staging:"Functional classification: failure to store (overactive detrusor, incompetent outlet), failure to empty (underactive detrusor, overactive outlet), combined.",
+management:"Goals: preserve upper tract, achieve continence, prevent complications. CIC (clean intermittent catheterization): cornerstone, 4-6 hourly. Overactive detrusor: antimuscarinics (oxybutynin, tolterodine), mirabegron, intradetrusor botulinum toxin 200U. DSD: α-blockers, botulinum toxin to external sphincter, sphincterotomy (men with indwelling). Low compliance: augmentation cystoplasty (ileocystoplasty) + CIC. Incompetent outlet: artificial urinary sphincter (AUS), fascial sling, bulking agents. Areflexic: CIC ± Valsalva/Credé (caution if sphincter competent). Continent diversion: Mitrofanoff (appendicovesicostomy). AD management: sit upright, remove tight clothing, catheterize immediately, nifedipine/GTN if severe.",
+prognosis:"CIC + antimuscarinics: upper tract preservation in >90%. Without management: 50% develop upper tract deterioration within 5 years. Renal failure was leading cause of death in SCI before CIC era. Lifelong surveillance essential: annual US + creatinine, urodynamics every 1-2 years."},
+
+{id:"sui",name:"Stress Urinary Incontinence",category:"Functional Urology",severity:"low",
+brief:"Involuntary urine leakage on effort, exertion, sneezing, or coughing.",
+epidemiology:"Affects 15-35% of adult women. Most common type of incontinence in women <60. Risk factors: vaginal delivery, obesity, aging, menopause, chronic cough, prior pelvic surgery, connective tissue disorders. Male SUI: primarily post-prostatectomy (5-30%).",
+pathophysiology:"Female: urethral hypermobility (loss of support from pubourethral ligaments and endopelvic fascia) and/or intrinsic sphincter deficiency (ISD). DeLancey hammock theory: urethra requires stable suburethral support for compression during abdominal pressure increases. Pudendal nerve damage during childbirth. Male: sphincter damage during RP — ISD predominant mechanism.",
+clinical:"Leakage with cough, sneeze, laugh, lift, exercise. No urgency preceding leak. Stress test: observe for leakage with cough at comfortable volume. Pad test: 1-hour (>1g) or 24-hour (>4g). Severity: mild (leakage with vigorous activity), moderate (walking, standing), severe (minimal activity/position change).",
+diagnosis:"History + voiding diary (3-day). Cough stress test. Urinalysis (exclude UTI). PVR (exclude overflow). Urodynamics: Valsalva leak point pressure (VLPP) — <60cmH2O suggests ISD, 60-90 equivocal, >90 hypermobility. Abdominal leak point pressure. Cystoscopy if prior surgery or hematuria. Q-tip test (historical): >30° deflection = hypermobility.",
+staging:"Severity: mild (pad weight <10g/24h), moderate (10-50g/24h), severe (>50g/24h). Stamey classification: Grade 0 (no leak), Grade 1 (cough/sneeze), Grade 2 (walking/standing), Grade 3 (bed rest).",
+management:"Female — Conservative (first-line): PFMT (pelvic floor muscle training/Kegel) — supervised, 3 months minimum, 50-75% improvement. Weight loss (5-10% → 50% reduction). Vaginal pessary (mechanical support). Duloxetine (SNRI — not FDA-approved in US for SUI, used in Europe). Surgical: midurethral sling (TVT retropubic or TOT transobturator — gold standard, 80-90% cure), Burch colposuspension (laparoscopic/open), autologous fascial sling (ISD), urethral bulking agents (Bulkamid — office procedure, 50-60% improvement). Male — PFMT post-RP (essential). Mild: urethral bulking, adjustable sling (ATOMS). Moderate-severe: artificial urinary sphincter (AUS, AMS 800) — gold standard for male SUI, 75-90% dry rate.",
+prognosis:"PFMT: sustained benefit if continued. MUS: 80-90% cure at 5 years (TVT=TOT for non-ISD). AUS: 75% dry at 10 years, 25% revision rate. Post-RP SUI: 70% improve by 12 months, 5-10% persist beyond 1 year."},
+
+// --- INFECTIONS ---
+{id:"epididymitis",name:"Epididymitis / Epididymo-orchitis",category:"Infections",severity:"mod",
+brief:"Inflammation of epididymis ± testis. Most common cause of acute scrotum in adults.",
+epidemiology:"Most common in 19-35 years (STI) and >35 years (UTI pathogens). STI-related: Chlamydia trachomatis, Neisseria gonorrhoeae. Non-STI: E. coli (most common in >35), Pseudomonas. Pediatric: usually post-viral or structural anomaly.",
+pathophysiology:"Ascending infection from urethra/prostate → vas deferens → epididymis (tail → body → head). Rarely hematogenous (TB). Reflux of infected urine (bladder outlet obstruction, straining). Chemical epididymitis: reflux of sterile urine (amiodarone). Granulomatous: TB (beading of vas, 'cold abscess').",
+clinical:"Gradual onset scrotal pain (unlike torsion: sudden). Swollen, tender epididymis (initially tail). Positive Prehn's sign (pain relief with scrotal elevation — unreliable). Reactive hydrocele. Fever, dysuria, urethral discharge (STI). Progression to epididymo-orchitis: entire hemiscrotum involved. Fournier's gangrene: rare severe complication.",
+diagnosis:"Urinalysis/culture, urethral swab (GC/CT NAAT), urine NAAT. Scrotal Doppler US: enlarged hypoechoic epididymis, increased blood flow (vs torsion: absent flow), reactive hydrocele, abscess. CBC: leukocytosis. Exclude torsion: if any doubt, surgical exploration. TB: AFB, PCR, early morning urine x3.",
+staging:"Mild: localized tenderness, no systemic symptoms. Moderate: significant swelling, systemic symptoms. Severe: abscess formation, Fournier's, sepsis.",
+management:"STI-related (<35 years): ceftriaxone 500mg IM single dose + doxycycline 100mg BD 10-14 days. Non-STI (>35 or enteric organisms): levofloxacin 500mg daily 10-14 days or ofloxacin. Supportive: scrotal elevation, NSAIDs, ice packs. Abscess: percutaneous or surgical drainage. Refractory: IV antibiotics. Chronic epididymitis (>6 weeks): extended antibiotics, NSAIDs, scrotal support, epididymectomy if refractory. TB: RIPE regimen (rifampin, isoniazid, pyrazinamide, ethambutol). Partner notification and treatment if STI.",
+prognosis:"Most resolve with appropriate antibiotics. Complications: abscess (3-7%), chronic pain (15%), infertility (bilateral — rare). Recurrence suggests underlying structural abnormality → investigate."},
+
+{id:"fournier",name:"Fournier's Gangrene",category:"Infections",severity:"high",
+brief:"Necrotizing fasciitis of perineum/external genitalia. Urological emergency with high mortality.",
+epidemiology:"Incidence 1.6/100,000. M:F = 10:1. Mean age 50-60. Risk: diabetes (40-60%), alcoholism, immunosuppression, obesity, perianal disease, recent surgery/instrumentation, chronic renal failure.",
+pathophysiology:"Polymicrobial synergistic infection (Type I necrotizing fasciitis). Aerobic: E. coli, Klebsiella, Streptococcus, Staphylococcus. Anaerobic: Bacteroides, Clostridium, Peptostreptococcus. Source: anorectal (30-50%), urogenital (20-40%), cutaneous (20%). Infection spreads along fascial planes (Colles' → Dartos → Scarpa's) → endarteritis obliterans → thrombosis → tissue necrosis → crepitus (gas production).",
+clinical:"Rapidly progressive. Initial: scrotal/perineal pain, erythema, swelling (disproportionate pain to physical findings). Progression: dusky skin, crepitus (subcutaneous emphysema), purulent discharge, eschar formation. Systemic: fever, tachycardia, sepsis, multi-organ failure. Can progress to abdominal wall. LRINEC score >6 suggests necrotizing fasciitis.",
+diagnosis:"Clinical diagnosis — do NOT delay for imaging. CT: subcutaneous gas, fascial thickening, fluid collections (confirmatory if diagnosis uncertain). Lab: leukocytosis, elevated CRP/lactate, metabolic acidosis, coagulopathy. Blood cultures. LRINEC score: CRP, WBC, hemoglobin, sodium, creatinine, glucose.",
+staging:"FGSI (Fournier's Gangrene Severity Index): temperature, HR, RR, sodium, potassium, creatinine, hematocrit, WBC, bicarbonate. Score >9: 75% mortality. Score ≤9: 78% survival.",
+management:"EMERGENCY — time to surgery is key determinant of survival. Aggressive surgical debridement: all necrotic tissue, repeat debridement every 24-48h until clean margins. Broad-spectrum IV antibiotics: piperacillin-tazobactam + vancomycin + clindamycin (anti-toxin effect), or meropenem + vancomycin. Supportive: ICU, fluid resuscitation, nutritional support, pain management. Diverting colostomy if anorectal source/extensive perineal wound. Suprapubic catheter if urethral involvement. Wound management: VAC (negative pressure wound therapy) → secondary closure/skin grafting. Hyperbaric oxygen: adjunctive, evidence limited but may reduce mortality.",
+prognosis:"Mortality 20-40% (up to 75% if delayed). Prognostic factors: delay in surgery (>24h increases mortality), FGSI >9, extensive disease, age >60, renal failure, sepsis. Survivors: long reconstructive course, significant morbidity, sexual dysfunction. Mean hospital stay 4-6 weeks."},
+
+// --- ENDOUROLOGY ---
+{id:"ureteral_stricture",name:"Ureteral Stricture",category:"Endourology",severity:"mod",
+brief:"Narrowing of ureter causing obstruction. Iatrogenic causes most common in developed countries.",
+epidemiology:"Iatrogenic (75%): gynecological surgery (most common), ureteroscopy, open/laparoscopic surgery, radiation. Non-iatrogenic: stones (inflammation/impaction), TB, retroperitoneal fibrosis, endometriosis, schistosomiasis, congenital (UPJ obstruction).",
+pathophysiology:"Injury → inflammation → fibrosis → luminal narrowing → obstruction. Ureteral blood supply: upper third from renal artery, middle from gonadal/aortic, lower from vesical arteries — medial approach above iliac vessels, lateral below. Devascularization → ischemic stricture. Radiation: obliterative endarteritis → progressive fibrosis.",
+clinical:"Flank pain, recurrent UTIs, hydronephrosis on imaging. May be asymptomatic (silent obstruction). Post-surgical: urine leak (early), progressive hydronephrosis (late). Symptoms depend on degree and chronicity of obstruction.",
+diagnosis:"CT urogram: hydronephrosis, delayed excretion, ureteral dilation proximal to stricture, contrast transition point. Retrograde pyelogram (RPG): gold standard for stricture delineation (length, location). Antegrade nephrostogram: if RPG not possible. MAG3 renogram: differential renal function, obstructive pattern (T½ >20min). Nuclear split function: guide salvage vs nephrectomy decision.",
+staging:"Location: upper (UPJ to iliac vessels), middle (over iliac), lower (iliac to bladder). Length: short (<2cm), long (>2cm). Severity: partial vs complete obstruction. Function: viable (>15% split function) vs non-viable kidney.",
+management:"Endoscopic (short strictures <2cm): balloon dilation, endoureterotomy (holmium laser), ureteral stent. Success: 50-70% for short strictures. Surgical — based on location: UPJ obstruction: dismembered pyeloplasty (Anderson-Hynes) — 95% success. Upper/mid ureter: ureteroureterostomy (end-to-end), transureteroureterostomy. Distal ureter: ureteral reimplantation (Boari flap for longer defects, psoas hitch). Long/complex: ileal ureter interposition, autotransplantation, buccal mucosal graft ureteroplasty (emerging). Appendiceal interposition (right side). Non-functioning kidney (<15% function): nephrectomy.",
+prognosis:"Pyeloplasty: 95% success. Ureteral reimplantation: 90-95%. Endoureterotomy: 50-70% (higher recurrence). Early recognition and repair → better outcomes. Delayed: progressive renal deterioration."},
+
+{id:"upj",name:"UPJ Obstruction",category:"Endourology",severity:"mod",
+brief:"Obstruction at ureteropelvic junction. Most common cause of antenatal hydronephrosis.",
+epidemiology:"Incidence 1:500-1500. M:F = 2:1. Left > right. 10-15% bilateral. Most common congenital cause of hydronephrosis. Adults: may present late as incidental finding or Dietl's crisis.",
+pathophysiology:"Intrinsic (most common): aperistaltic segment with smooth muscle cell abnormalities → functional obstruction. Histology: excess collagen, abnormal smooth muscle orientation. Crossing vessel (lower pole renal artery) in 20-30% — especially adult presentation. Extrinsic compression: rare. High insertion of ureter on renal pelvis. Secondary: stones impacted at UPJ, post-inflammatory.",
+clinical:"Neonatal: prenatal hydronephrosis on maternal US. Older children/adults: intermittent flank pain (especially with fluid loading — Dietl's crisis), UTIs, hematuria after minimal trauma, hypertension (rare), palpable mass (neonates). Incidental finding on imaging increasingly common.",
+diagnosis:"Prenatal US → postnatal confirmation at 4-6 weeks (avoid first 48h — physiological dehydration). Renal US: hydronephrosis (SFU grading). MAG3 diuretic renogram: obstructive pattern (T½ >20min), split function (>40% normal). CT urogram: adults, delineates anatomy and crossing vessels. Retrograde pyelogram: if equivocal. Whitaker test: rarely used, percutaneous pressure-flow study.",
+staging:"SFU hydronephrosis grade: 0 (none), 1 (mild pelvic dilation), 2 (moderate pelvic dilation), 3 (pelvic + calyceal dilation), 4 (cortical thinning). Function: well-preserved (>40%), impaired (15-40%), poor (<15%).",
+management:"Observation: asymptomatic neonates with SFU 1-2 and preserved function → serial US at 3, 6, 12 months then annually. Function >40% and stable → continue observation. Surgical indications: SFU 3-4, declining function, symptoms, recurrent UTIs, stones. Anderson-Hynes dismembered pyeloplasty: gold standard (open, laparoscopic, or robotic — 95% success). Reduction pyeloplasty if massively dilated pelvis. Endopyelotomy: 70-80% success, not for crossing vessels. Neonates with poor function: attempt pyeloplasty before nephrectomy (neonatal kidneys can recover). Crossing vessel: pyeloplasty with vascular transposition.",
+prognosis:"Pyeloplasty: 95% success (open = laparoscopic = robotic). Spontaneous resolution: up to 80% of antenatally detected SFU grade 1-2. Poor function (<15%): may still improve after repair in young children. Long-term surveillance: annual US until stable for 2 years."}
+];
+
+// ========== CATEGORIES ==========
+const categories=["All",...[...new Set(diseases.map(d=>d.category))]];
+
+// ========== STATE ==========
+let currentCategory="All";
+let searchTerm="";
+let selectedDisease=null;
+
+// ========== CONFIG ==========
+const defaultConfig={
+  main_title:"Urology Disease Compendium",
+  subtitle:"Clinical Reference Guide",
+  background_color:"#0a0f1a",
+  surface_color:"#111827",
+  text_color:"#e2e8f0",
+  primary_color:"#3b82f6",
+  secondary_color:"#6366f1",
+  font_family:"DM Serif Display",
+  font_size:16
+};
+
+// ========== INIT SDK ==========
+
+// ========== RENDER ==========
+function getFiltered(){
+  let list=diseases;
+  if(currentCategory!=="All")list=list.filter(d=>d.category===currentCategory);
+  if(searchTerm){
+    const s=searchTerm.toLowerCase();
+    list=list.filter(d=>d.name.toLowerCase().includes(s)||d.brief.toLowerCase().includes(s)||d.category.toLowerCase().includes(s)||d.clinical.toLowerCase().includes(s)||d.management.toLowerCase().includes(s));
+  }
+  return list;
+}
+
+function renderCategories(){
+  const bar=document.getElementById('categoryBar');
+  bar.innerHTML='';
+  categories.forEach(c=>{
+    const pill=document.createElement('button');
+    pill.className='category-pill'+(c===currentCategory?' active':'');
+    pill.textContent=c;
+    pill.setAttribute('aria-pressed',c===currentCategory);
+    if(c===currentCategory){pill.style.background='var(--primary)';pill.style.borderColor='var(--primary)'}
+    pill.onclick=()=>{currentCategory=c;renderCategories();renderList()};
+    bar.appendChild(pill);
+  });
+}
+
+function severityClass(s){return s==='high'?'severity-high':s==='mod'?'severity-mod':'severity-low'}
+function severityLabel(s){return s==='high'?'High Severity':s==='mod'?'Moderate':'Low Severity'}
+function severityColor(s){return s==='high'?'#ef4444':s==='mod'?'#f59e0b':'#22c55e'}
+function categoryIcon(c){
+  const m={'Kidney':'activity','Prostate':'shield','Bladder':'droplet','Male Reproductive':'heart','Pediatric Urology':'baby','Trauma':'alert-triangle','Functional Urology':'zap','Infections':'bug','Endourology':'scissors'};
+  return m[c]||'circle';
+}
+
+function renderList(){
+  const filtered=getFiltered();
+  document.getElementById('resultsInfo').textContent=`Showing ${filtered.length} of ${diseases.length} conditions`;
+  const grid=document.getElementById('diseaseGrid');
+  grid.innerHTML='';
+  if(filtered.length===0){
+    grid.innerHTML='<div class="col-span-full text-center py-16" style="color:rgba(255,255,255,.3)"><i data-lucide="search-x" style="width:48px;height:48px;margin:0 auto 1rem;display:block"></i><p>No conditions found matching your search.</p></div>';
+    lucide.createIcons();return;
+  }
+  filtered.forEach(d=>{
+    const card=document.createElement('div');
+    card.className=`rounded-xl p-5 cursor-pointer card-glow transition-all duration-300 ${severityClass(d.severity)}`;
+    card.style.background='var(--surface)';
+    card.setAttribute('role','button');
+    card.setAttribute('tabindex','0');
+    card.setAttribute('aria-label',d.name);
+    card.innerHTML=`
+      <div class="flex items-start justify-between mb-3">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12);color:var(--secondary)">
+          <i data-lucide="${categoryIcon(d.category)}" style="width:12px;height:12px"></i>${d.category}
+        </span>
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:${severityColor(d.severity)}20;color:${severityColor(d.severity)}">${severityLabel(d.severity)}</span>
+      </div>
+      <h3 class="disease-card-title font-heading text-lg font-bold mb-2" style="color:var(--text)">${d.name}</h3>
+      <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.45)">${d.brief}</p>
+      <div class="mt-4 flex items-center gap-1.5 text-xs font-medium" style="color:var(--primary)">
+        View full details <i data-lucide="arrow-right" style="width:13px;height:13px"></i>
+      </div>`;
+    card.onclick=()=>showDetail(d);
+    card.onkeydown=e=>{if(e.key==='Enter')showDetail(d)};
+    grid.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+function showDetail(d){
+  selectedDisease=d;
+  document.getElementById('listView').classList.add('hidden');
+  const dv=document.getElementById('detailView');
+  dv.classList.remove('hidden');
+  dv.className='fade-in';
+
+  const sections=[
+    {title:'Epidemiology',icon:'bar-chart-2',content:d.epidemiology},
+    {title:'Pathophysiology',icon:'microscope',content:d.pathophysiology},
+    {title:'Clinical Presentation',icon:'stethoscope',content:d.clinical},
+    {title:'Diagnosis & Investigations',icon:'scan',content:d.diagnosis},
+    {title:'Staging / Classification',icon:'layers',content:d.staging},
+    {title:'Management',icon:'pill',content:d.management},
+    {title:'Prognosis',icon:'trending-up',content:d.prognosis}
+  ];
+
+  const tabNames=['Overview','Diagnosis','Management'];
+  const tabSections=[[0,1,2],[3,4],[5,6]];
+
+  dv.innerHTML=`
+    <button class="back-btn mb-6" onclick="hideDetail()" aria-label="Back to list">
+      <i data-lucide="arrow-left" style="width:16px;height:16px"></i> Back to all conditions
+    </button>
+    <div class="rounded-2xl overflow-hidden" style="background:var(--surface);border:1px solid rgba(255,255,255,.06)">
+      <div class="p-6 md:p-8" style="border-bottom:1px solid rgba(255,255,255,.06)">
+        <div class="flex flex-wrap items-center gap-3 mb-3">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12);color:var(--secondary)">
+            <i data-lucide="${categoryIcon(d.category)}" style="width:12px;height:12px"></i>${d.category}
+          </span>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full" style="background:${severityColor(d.severity)}20;color:${severityColor(d.severity)}">${severityLabel(d.severity)}</span>
+        </div>
+        <h2 class="font-heading text-2xl md:text-3xl mb-2" style="color:var(--text)">${d.name}</h2>
+        <p class="text-sm md:text-base leading-relaxed" style="color:rgba(255,255,255,.5)">${d.brief}</p>
+      </div>
+      <div class="flex border-b" style="border-color:rgba(255,255,255,.06)" id="detailTabs">
+        ${tabNames.map((t,i)=>`<button class="px-5 py-3 text-sm font-medium transition-colors ${i===0?'tab-active':'hover:bg-white/5'}" style="border-radius:0;${i===0?'background:var(--primary);color:#fff':'color:rgba(255,255,255,.4)'}" data-tab="${i}" onclick="switchTab(${i})">${t}</button>`).join('')}
+      </div>
+      <div class="p-6 md:p-8" id="detailContent"></div>
+    </div>`;
+
+  window._tabSections=tabSections;
+  window._sections=sections;
+  switchTab(0);
+  lucide.createIcons();
+}
+
+function switchTab(idx){
+  document.querySelectorAll('#detailTabs button').forEach((b,i)=>{
+    if(i===idx){b.className='px-5 py-3 text-sm font-medium tab-active';b.style.background='var(--primary)';b.style.color='#fff'}
+    else{b.className='px-5 py-3 text-sm font-medium hover:bg-white/5 transition-colors';b.style.background='transparent';b.style.color='rgba(255,255,255,.4)'}
+  });
+  const content=document.getElementById('detailContent');
+  const secs=window._tabSections[idx].map(i=>window._sections[i]);
+  content.innerHTML=secs.map(s=>`
+    <div class="detail-section mb-8 last:mb-0">
+      <div class="flex items-center gap-2 mb-3">
+        <i data-lucide="${s.icon}" style="width:18px;height:18px;color:var(--primary)"></i>
+        <h3 style="color:var(--primary)">${s.title}</h3>
+      </div>
+      <ul>${s.content.split('. ').filter(x=>x.trim()).map(x=>`<li>${x.trim().replace(/\.$/,'')}.</li>`).join('')}</ul>
+    </div>`).join('<hr style="border:0;border-top:1px solid rgba(255,255,255,.06);margin:2rem 0">');
+  lucide.createIcons();
+}
+
+function hideDetail(){
+  document.getElementById('detailView').classList.add('hidden');
+  document.getElementById('listView').classList.remove('hidden');
+  selectedDisease=null;
+}
+
+// ========== SEARCH ==========
+document.getElementById('searchInput').addEventListener('input',e=>{
+  searchTerm=e.target.value;
+  if(selectedDisease){hideDetail()}
+  renderList();
+});
+
+// ========== INIT ==========
+renderCategories();
+renderList();
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f34878df1c87fbf',t:'MTc3NzM2MzE4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
