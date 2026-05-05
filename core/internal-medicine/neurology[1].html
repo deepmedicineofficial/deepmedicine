@@ -1,0 +1,846 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Neurology | Brain & Nervous System Disorders | Deep Medicine</title> <meta name="description" content="Comprehensive neurology guide covering brain, spinal cord, and nervous system disorders including stroke, seizures, infections, and neurodegeneration."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/neurology"> <!-- Open Graph --> <meta property="og:title" content="Neurology | Deep Medicine"> <meta property="og:description" content="Neurological diseases, diagnosis, and clinical management of brain and nervous system disorders."> <meta property="og:image" content="https://deepmedicine.in/images/neurology.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['Source Sans 3', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .neuro-app { height: 100%; overflow-y: auto; }
+    .disease-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .disease-card:hover { transform: translateY(-2px); }
+    .tab-active { border-bottom: 3px solid; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .accordion-content.open { max-height: 5000px; }
+    .fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .category-btn.active { transform: scale(1.02); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1a1a2e; }
+    ::-webkit-scrollbar-thumb { background: #4a4a6a; border-radius: 4px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="neuro-app" id="app" style="background: #0f0f23;"><!-- Header -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b4e 100%);">
+    <div class="absolute inset-0 opacity-10">
+     <svg width="100%" height="100%">
+      <defs>
+       <pattern id="neural" patternunits="userSpaceOnUse" width="60" height="60">
+        <circle cx="30" cy="30" r="1.5" fill="#8b5cf6" />
+        <line x1="30" y1="30" x2="60" y2="0" stroke="#8b5cf6" stroke-width="0.3" />
+        <line x1="30" y1="30" x2="0" y2="60" stroke="#8b5cf6" stroke-width="0.3" />
+       </pattern>
+      </defs><rect width="100%" height="100%" fill="url(#neural)" />
+     </svg>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-center">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-body font-semibold tracking-wider uppercase mb-6" style="background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3);"><i data-lucide="brain" style="width:14px;height:14px;"></i> MBBS MD Clinical Reference
+     </div>
+     <h1 id="page-title" class="font-heading text-4xl md:text-6xl lg:text-7xl font-800 mb-4" style="color: #f1f0ff; text-shadow: 0 0 40px rgba(139,92,246,0.3);">Neurology</h1>
+     <p id="subtitle" class="font-body text-lg md:text-xl max-w-2xl mx-auto" style="color: #a5a3c8;">Comprehensive Disease Guide — Etiology, Pathophysiology, Clinical Features, Diagnosis &amp; Management</p>
+    </div>
+   </header><!-- Category Navigation -->
+   <nav class="sticky top-0 z-50 border-b" style="background: rgba(15,15,35,0.95); backdrop-filter: blur(12px); border-color: #2a2a4a;">
+    <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
+     <div class="flex gap-1 py-3" id="category-nav">
+     </div>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div id="disease-content"></div>
+   </main><!-- Footer -->
+   <footer class="border-t py-8 text-center font-body" style="border-color: #2a2a4a; color: #6a6a8a;">
+    <p class="text-sm">⚠️ For educational reference only. Not a substitute for clinical judgment. Always correlate clinically.</p>
+   </footer>
+  </div>
+  <script>
+const diseases = {
+  "Cerebrovascular": [
+    {
+      name: "Ischemic Stroke",
+      icon: "zap",
+      severity: "Emergency",
+      definition: "Acute focal neurological deficit due to cerebral infarction from arterial occlusion, lasting >24 hours or with imaging evidence of infarction.",
+      epidemiology: "Most common type of stroke (85%). Incidence increases with age. Male predominance. Risk factors: HTN, DM, AF, dyslipidemia, smoking, carotid stenosis.",
+      etiology: [
+        "Large artery atherosclerosis (ICA, MCA, vertebrobasilar)",
+        "Cardioembolism (AF, valvular heart disease, LV thrombus, PFO)",
+        "Small vessel occlusion (lacunar infarcts — lipohyalinosis)",
+        "Other: arterial dissection, hypercoagulable states, vasculitis, moyamoya",
+        "TOAST Classification used for subtyping"
+      ],
+      pathophysiology: "Arterial occlusion → ischemic core (irreversible necrosis within minutes) surrounded by ischemic penumbra (electrically silent but viable tissue). Penumbra is the therapeutic target. Excitotoxicity (glutamate release), oxidative stress, inflammation, and apoptosis contribute to infarct expansion.",
+      clinical: [
+        "MCA: Contralateral hemiparesis/hemianesthesia (face & arm > leg), homonymous hemianopia, aphasia (dominant) or neglect (non-dominant)",
+        "ACA: Contralateral leg weakness > arm, abulia, urinary incontinence",
+        "PCA: Homonymous hemianopia with macular sparing, alexia without agraphia (dominant), prosopagnosia",
+        "Basilar: Locked-in syndrome, cranial nerve palsies, bilateral motor/sensory deficits, decreased consciousness",
+        "Lacunar: Pure motor hemiparesis, pure sensory stroke, ataxic hemiparesis, dysarthria-clumsy hand"
+      ],
+      diagnosis: [
+        "Non-contrast CT head (STAT): Rule out hemorrhage; may be normal in first 6-12 hours",
+        "CT Angiography (CTA): Identify large vessel occlusion (LVO)",
+        "CT Perfusion: Identify salvageable penumbra (mismatch)",
+        "MRI DWI: Gold standard for acute infarct detection (restricts within minutes)",
+        "ECG, Echo, Carotid Doppler, Lipid panel, HbA1c, Coagulation studies"
+      ],
+      management: [
+        "IV Alteplase (tPA): Within 4.5 hours of symptom onset (0.9 mg/kg, max 90mg; 10% bolus, 90% over 1 hour)",
+        "Mechanical Thrombectomy: LVO with favorable imaging up to 24 hours (DAWN/DEFUSE-3 criteria)",
+        "Aspirin 325mg within 24-48 hours (not within 24h of tPA)",
+        "BP management: Permissive HTN unless >220/120 (or >185/110 if thrombolysis candidate)",
+        "Secondary prevention: Antiplatelets (DAPT 21 days for minor stroke), statins, anticoagulation if AF, carotid endarterectomy if ≥70% symptomatic stenosis"
+      ],
+      prognosis: "30-day mortality ~10-15%. Modified Rankin Scale for functional outcome. Early rehabilitation improves outcomes."
+    },
+    {
+      name: "Hemorrhagic Stroke (ICH)",
+      icon: "droplets",
+      severity: "Emergency",
+      definition: "Spontaneous (non-traumatic) bleeding into brain parenchyma ± extension into ventricles.",
+      epidemiology: "15% of all strokes. Higher mortality than ischemic stroke (40% at 1 month). More common in Asians. Peak age 55-75 years.",
+      etiology: [
+        "Hypertension (most common — 60-70%): basal ganglia, thalamus, pons, cerebellum",
+        "Cerebral Amyloid Angiopathy (CAA): lobar hemorrhages in elderly, recurrent",
+        "Vascular malformations: AVM, cavernoma, dural AV fistula",
+        "Anticoagulant/antiplatelet use, coagulopathy",
+        "Hemorrhagic transformation of ischemic stroke, tumors, vasculitis, sympathomimetic drugs"
+      ],
+      pathophysiology: "Rupture of small penetrating arteries (Charcot-Bouchard microaneurysms in HTN) → hematoma formation → mass effect, raised ICP, perilesional edema, secondary ischemia. Hematoma expansion occurs in ~30% within first hours.",
+      clinical: [
+        "Sudden severe headache, vomiting, decreased consciousness",
+        "Focal deficits based on location (similar to ischemic but often more severe/progressive)",
+        "Putaminal: Contralateral hemiplegia, hemisensory loss, eyes deviate toward lesion",
+        "Thalamic: Contralateral sensory loss, upgaze palsy, small reactive pupils",
+        "Cerebellar: Occipital headache, ataxia, vertigo, can rapidly deteriorate (hydrocephalus/herniation)",
+        "Pontine: Coma, quadriplegia, pinpoint pupils, hyperthermia — often fatal"
+      ],
+      diagnosis: [
+        "Non-contrast CT: Hyperdense lesion (immediately positive, unlike ischemic stroke)",
+        "CTA 'spot sign': Active contrast extravasation predicts hematoma expansion",
+        "MRI GRE/SWI: Microbleeds suggesting CAA or chronic HTN",
+        "CT Angiography/DSA: If secondary cause suspected (young patient, lobar location, no HTN)"
+      ],
+      management: [
+        "ABCs, airway protection if GCS ≤8",
+        "BP reduction: Target <140 mmHg SBP within 1 hour (INTERACT2/ATACH-2 trials)",
+        "Reversal of anticoagulation: Vitamin K + PCC for warfarin; Idarucizumab for dabigatran; Andexanet alfa for Xa inhibitors",
+        "Surgical evacuation: Consider if cerebellar hemorrhage >3cm, superficial lobar ICH with deterioration",
+        "EVD (External Ventricular Drain): If hydrocephalus/IVH with deterioration",
+        "ICP management: Head elevation 30°, osmotherapy (mannitol/hypertonic saline), avoid hyperthermia",
+        "DVT prophylaxis: Pneumatic compression immediately; SC heparin after 24-48h if stable"
+      ],
+      prognosis: "ICH Score predicts 30-day mortality (GCS, volume, IVH, infratentorial, age). Overall mortality 40%. Survivors often have significant disability."
+    },
+    {
+      name: "Subarachnoid Hemorrhage (SAH)",
+      icon: "alert-triangle",
+      severity: "Emergency",
+      definition: "Bleeding into the subarachnoid space, most commonly from ruptured intracranial aneurysm.",
+      epidemiology: "5% of all strokes. Peak age 40-60 years. Female predominance (1.6:1). Risk factors: smoking, HTN, family history, connective tissue disorders (Ehlers-Danlos, ADPKD), excessive alcohol.",
+      etiology: [
+        "Ruptured saccular (berry) aneurysm: 85% (most common sites: ACoA > PCoA > MCA bifurcation)",
+        "Perimesencephalic (non-aneurysmal): 10% — benign prognosis",
+        "AVM, dural AVF, mycotic aneurysm, coagulopathy, vasculitis"
+      ],
+      pathophysiology: "Aneurysm rupture → blood in subarachnoid space → meningeal irritation, raised ICP (acute). Subsequent: vasospasm (days 3-14, peaks day 7-10) due to blood breakdown products → delayed cerebral ischemia (DCI). Also: hydrocephalus (acute or chronic), rebleeding (highest risk in first 24h).",
+      clinical: [
+        "'Thunderclap headache' — worst headache of life, maximal at onset (<1 second)",
+        "Meningismus (neck stiffness, photophobia) — develops over hours",
+        "Loss of consciousness at ictus (45%)",
+        "CN III palsy (posterior communicating artery aneurysm — pupil-involving)",
+        "Sentinel headache (warning leak) in 20-50% preceding major rupture",
+        "Hunt & Hess Grade / WFNS Scale for clinical grading"
+      ],
+      diagnosis: [
+        "Non-contrast CT: Sensitivity 95-100% within 6 hours (blood in basal cisterns, Sylvian fissures)",
+        "If CT negative but clinical suspicion high → Lumbar Puncture: Xanthochromia (spectrophotometry), RBC count not clearing",
+        "CT Angiography: Identify aneurysm location and morphology",
+        "Digital Subtraction Angiography (DSA): Gold standard for aneurysm detection",
+        "Transcranial Doppler (TCD): Monitor for vasospasm (MCA velocity >120 cm/s)"
+      ],
+      management: [
+        "Secure the aneurysm within 24-72h: Endovascular coiling (preferred — ISAT trial) or surgical clipping",
+        "Nimodipine 60mg q4h PO for 21 days (reduces poor outcome from vasospasm/DCI)",
+        "Triple-H therapy (Hypertension-Hypervolemia-Hemodilution) — now mainly induced hypertension for symptomatic vasospasm",
+        "EVD if acute hydrocephalus; VP shunt if chronic",
+        "Seizure prophylaxis: Short-term (levetiracetam preferred); avoid phenytoin (worse outcomes)",
+        "Strict BP control prior to aneurysm securing (SBP <160); avoid straining, bed rest",
+        "Monitor for DCI: Daily neuro checks, TCD, CT perfusion if deterioration"
+      ],
+      prognosis: "Overall mortality ~35%. 1/3 die before reaching hospital. Among survivors treated: 50% have persistent neuropsychological deficits. Rebleeding without treatment: 4% day 1, then ~1.5%/day for 14 days."
+    }
+  ],
+  "Demyelinating": [
+    {
+      name: "Multiple Sclerosis (MS)",
+      icon: "layers",
+      severity: "Chronic",
+      definition: "Chronic autoimmune inflammatory demyelinating disease of the CNS characterized by dissemination in time and space.",
+      epidemiology: "Prevalence: 2.8 million worldwide. Female:Male = 3:1. Onset: 20-40 years. Higher prevalence with increasing latitude. Associated with HLA-DRB1*15:01, low vitamin D, EBV infection, smoking.",
+      etiology: [
+        "Autoimmune: T-cell mediated attack on myelin/oligodendrocytes",
+        "Genetic susceptibility: HLA-DRB1*15:01 (strongest association), polygenic",
+        "Environmental triggers: EBV (near 100% seropositivity in MS), low vitamin D, smoking, adolescent obesity",
+        "Molecular mimicry and bystander activation hypotheses"
+      ],
+      pathophysiology: "Autoreactive CD4+ T cells cross BBB → recruit macrophages/microglia → perivenular inflammation → demyelination with relative axonal sparing (early). Progressive axonal loss and neurodegeneration occur over time. Plaques: active (inflammatory edge), chronic active (smoldering), chronic inactive. Remyelination (shadow plaques) is incomplete.",
+      clinical: [
+        "Optic neuritis: Unilateral painful vision loss, RAPD, dyschromatopsia (red desaturation)",
+        "Transverse myelitis: Incomplete, asymmetric; Lhermitte's sign (electric shock with neck flexion)",
+        "Internuclear ophthalmoplegia (INO): MLF lesion — impaired adduction ipsilateral, nystagmus contralateral eye",
+        "Cerebellar: Intention tremor, scanning speech, nystagmus, ataxia (Charcot's triad)",
+        "Uhthoff phenomenon: Worsening symptoms with heat/exercise",
+        "Fatigue (most common symptom — 80%), cognitive impairment, bladder dysfunction, spasticity",
+        "Patterns: Relapsing-Remitting (85%) → Secondary Progressive; Primary Progressive (10-15%)"
+      ],
+      diagnosis: [
+        "McDonald Criteria 2017: Dissemination in Space (DIS) + Dissemination in Time (DIT)",
+        "MRI Brain & Spine (with gadolinium): Periventricular, juxtacortical, infratentorial, spinal cord lesions; Dawson's fingers",
+        "DIS: ≥1 T2 lesion in ≥2 of 4 typical areas",
+        "DIT: Simultaneous enhancing + non-enhancing lesions; OR new T2/enhancing lesion on follow-up",
+        "CSF: Oligoclonal bands (OCBs) present in >95% — can substitute for DIT",
+        "Visual Evoked Potentials (VEP): Prolonged P100 latency",
+        "Serum: NMO-IgG/AQP4-Ab, MOG-Ab to exclude mimics"
+      ],
+      management: [
+        "Acute relapse: IV Methylprednisolone 1g/day × 3-5 days ± oral taper; PLEX if steroid-refractory",
+        "Disease-Modifying Therapies (DMTs):",
+        "  Platform: Interferons (β-1a, β-1b), Glatiramer acetate — ~30% relapse reduction",
+        "  Oral: Dimethyl fumarate, Teriflunomide, Fingolimod, Siponimod, Cladribine",
+        "  High-efficacy: Natalizumab (anti-VLA4, risk of PML), Ocrelizumab (anti-CD20, also for PPMS), Alemtuzumab",
+        "  Treat-to-target: NEDA (No Evidence of Disease Activity) — no relapses, no disability progression, no MRI activity",
+        "Symptomatic: Baclofen/tizanidine (spasticity), amantadine (fatigue), gabapentin (neuropathic pain), intermittent self-catheterization"
+      ],
+      prognosis: "Highly variable. Median time to SPMS: 15-20 years. Poor prognostic factors: male sex, older onset, motor/cerebellar/sphincter involvement at onset, incomplete recovery, high lesion load. Life expectancy reduced by ~7 years."
+    },
+    {
+      name: "Neuromyelitis Optica Spectrum Disorder (NMOSD)",
+      icon: "eye",
+      severity: "Severe",
+      definition: "Autoimmune astrocytopathy characterized by severe attacks of optic neuritis and longitudinally extensive transverse myelitis (LETM), distinct from MS.",
+      epidemiology: "Prevalence 1-5/100,000. Female:Male = 9:1. More common in non-Caucasians (African, Asian). Mean onset: 40 years. Often associated with other autoimmune conditions (SLE, Sjögren's, myasthenia).",
+      etiology: [
+        "AQP4-IgG antibodies (70-80%): Target aquaporin-4 on astrocyte foot processes",
+        "MOG-IgG antibodies (10-25%): Distinct entity (MOGAD), often monophasic in children",
+        "Seronegative NMOSD: ~10%"
+      ],
+      pathophysiology: "AQP4-IgG binds aquaporin-4 on astrocytes → complement-dependent cytotoxicity (CDC) → astrocyte death → secondary oligodendrocyte injury and demyelination → necrotic lesions (unlike MS plaques). Predilection for AQP4-rich areas: optic nerves, periventricular regions (area postrema), spinal cord (central gray matter).",
+      clinical: [
+        "Optic neuritis: Often bilateral, severe, poor recovery (unlike MS)",
+        "LETM: ≥3 vertebral segments, central cord, severe — complete paraplegia, sensory level",
+        "Area Postrema Syndrome: Intractable hiccups, nausea, vomiting (highly specific)",
+        "Brain syndromes: Diencephalic (narcolepsy, SIADH), brainstem, cerebral (rare)",
+        "Attacks are typically severe with poor recovery; disability is attack-related (not progressive)"
+      ],
+      diagnosis: [
+        "Serum AQP4-IgG (cell-based assay — sensitivity 76%, specificity 99%)",
+        "MRI Spine: LETM (≥3 segments), central cord involvement, T1 hypointensity (necrosis)",
+        "MRI Brain: Often normal early; periependymal, hypothalamic, area postrema lesions",
+        "MRI Orbits: Long-segment optic nerve enhancement, often bilateral/chiasmal",
+        "CSF: Pleocytosis (often >50 cells, neutrophils), OCBs usually absent (unlike MS)",
+        "2015 IPND Criteria: Core clinical characteristics + AQP4-IgG status"
+      ],
+      management: [
+        "Acute: IV Methylprednisolone 1g × 5 days → PLEX early if poor response (5-7 exchanges)",
+        "Prevention of relapses (CRITICAL — attacks cause stepwise disability):",
+        "  First-line: Rituximab (anti-CD20), Eculizumab (anti-C5 complement), Inebilizumab (anti-CD19), Satralizumab (anti-IL6R)",
+        "  Alternatives: Azathioprine + low-dose prednisolone, Mycophenolate mofetil",
+        "  AVOID: Interferons, fingolimod, natalizumab (can worsen NMOSD)",
+        "Pain management: Neuropathic pain is common and severe"
+      ],
+      prognosis: "Without treatment: 50% are wheelchair-bound or blind within 5-10 years. 5-year relapse rate ~90% (AQP4+). With modern immunotherapy, relapse rates reduced by >70-90%. Mortality significantly reduced with early treatment."
+    }
+  ],
+  "Movement Disorders": [
+    {
+      name: "Parkinson's Disease",
+      icon: "move",
+      severity: "Progressive",
+      definition: "Chronic progressive neurodegenerative disorder characterized by motor (bradykinesia + rest tremor and/or rigidity) and non-motor symptoms due to loss of dopaminergic neurons in the substantia nigra pars compacta.",
+      epidemiology: "Second most common neurodegenerative disease. Prevalence: 1-2/1000 (1% over age 60). Mean onset: 60 years. Male:Female = 1.5:1. Risk factors: age, family history, pesticide exposure, head trauma. Protective: smoking, caffeine (epidemiological).",
+      etiology: [
+        "Sporadic (idiopathic): 85-90% — multifactorial (genetic susceptibility + environment)",
+        "Genetic (monogenic): 10-15% — LRRK2 (AD, most common), GBA (risk factor), PINK1/Parkin/DJ-1 (AR, early-onset)",
+        "α-Synuclein (SNCA): Point mutations or multiplication → early-onset PD",
+        "Environmental: MPTP, pesticides (rotenone, paraquat), well-water, rural living"
+      ],
+      pathophysiology: "Progressive loss of dopaminergic neurons in SNpc → striatal dopamine depletion → imbalance in basal ganglia circuitry (overactivity of indirect pathway, underactivity of direct pathway) → motor symptoms. Lewy bodies (α-synuclein aggregates) are pathological hallmark. Braak staging: pathology begins in olfactory bulb/dorsal motor nucleus of vagus → spreads rostrally (explains prodromal non-motor symptoms). Non-dopaminergic systems affected: serotonergic, noradrenergic, cholinergic.",
+      clinical: [
+        "Cardinal motor features (asymmetric onset):",
+        "  Bradykinesia (MANDATORY for diagnosis): Slowness + progressive decrement in amplitude",
+        "  Rest tremor (4-6 Hz): 'Pill-rolling', re-emergent, suppressed by action",
+        "  Rigidity: Lead-pipe; cogwheel when tremor superimposed",
+        "  Postural instability (later feature): Pull test positive",
+        "Gait: Shuffling, reduced arm swing, festination, freezing of gait",
+        "Non-motor (often precede motor by years):",
+        "  Prodromal: Hyposmia/anosmia, REM sleep behavior disorder (RBD), constipation, depression",
+        "  Autonomic: Orthostatic hypotension, urinary urgency, erectile dysfunction",
+        "  Neuropsychiatric: Depression, anxiety, apathy, hallucinations (later), dementia (PDD — 80% at 20 years)",
+        "  Other: Pain, fatigue, seborrheic dermatitis"
+      ],
+      diagnosis: [
+        "Clinical diagnosis (MDS Clinical Diagnostic Criteria 2015):",
+        "  Essential: Bradykinesia + rest tremor OR rigidity",
+        "  Supportive: Unilateral onset, clear dramatic response to dopaminergic therapy, rest tremor, olfactory loss, cardiac sympathetic denervation",
+        "  Absolute exclusion criteria: Cerebellar signs, supranuclear gaze palsy, frontotemporal dementia within 5 years",
+        "DaTSCAN (SPECT): Reduced dopamine transporter uptake in striatum (distinguishes from essential tremor, drug-induced parkinsonism)",
+        "Cardiac MIBG: Reduced uptake (postganglionic sympathetic denervation)",
+        "MRI Brain: Rule out structural causes; normal in PD (may show subtle SN changes on 7T)",
+        "Genetic testing: Consider if onset <50 or strong family history"
+      ],
+      management: [
+        "Pharmacological:",
+        "  Levodopa (+ carbidopa/benserazide): Gold standard, most effective; start when functionally impaired",
+        "  Dopamine agonists (pramipexole, ropinirole, rotigotine): Younger patients, delay dyskinesia; risk of ICDs",
+        "  MAO-B inhibitors (rasagiline, selegiline, safinamide): Mild benefit, possible neuroprotection",
+        "  COMT inhibitors (entacapone, opicapone): Adjunct to levodopa, reduce OFF time",
+        "  Amantadine: For levodopa-induced dyskinesia",
+        "  Anticholinergics (trihexyphenidyl): Only for young patients with prominent tremor; avoid in elderly",
+        "Motor complications (after 5-10 years):",
+        "  Wearing OFF: Shorten dosing interval, add COMT-I/MAO-B-I, use extended-release levodopa",
+        "  Dyskinesia: Reduce individual levodopa doses, add amantadine",
+        "Advanced therapies: Deep Brain Stimulation (STN or GPi), Levodopa-Carbidopa intestinal gel (LCIG), subcutaneous apomorphine pump",
+        "Non-pharmacological: Physiotherapy, speech therapy (LSVT LOUD), occupational therapy, exercise (neuroprotective evidence)"
+      ],
+      prognosis: "Progressive over decades. Life expectancy reduced by 2-5 years. Quality of life significantly impacted by motor complications, falls, dementia, and dysautonomia in advanced stages. No disease-modifying therapy proven yet."
+    },
+    {
+      name: "Essential Tremor",
+      icon: "activity",
+      severity: "Chronic",
+      definition: "Most common movement disorder. Bilateral action tremor (postural and/or kinetic) of the upper limbs, lasting >3 years, without other neurological signs.",
+      epidemiology: "Prevalence: 0.9-5% (up to 20% in >65 years). Bimodal onset: peaks at 20s and 60s. Autosomal dominant with variable penetrance. No definitive gene identified.",
+      etiology: [
+        "Genetic: Positive family history in 50-70%; polygenic/complex inheritance",
+        "LINGO1, SLC1A2 variants associated but not causative",
+        "Cerebellar pathology: Purkinje cell loss, torpedoes (axonal swellings)"
+      ],
+      pathophysiology: "Cerebello-thalamo-cortical circuit dysfunction. Central oscillatory network involving inferior olive, cerebellum, and thalamus (VIM nucleus). Purkinje cell loss and GABAergic dysfunction in cerebellum.",
+      clinical: [
+        "Bilateral postural and kinetic tremor (4-12 Hz), arms > head > voice > legs",
+        "Improves with alcohol (60-70% patients — useful diagnostic clue)",
+        "No bradykinesia, rigidity, or rest tremor (distinguishes from PD)",
+        "Progresses slowly: amplitude increases, frequency decreases over decades",
+        "Can cause significant functional impairment (writing, eating, drinking)",
+        "Associated: Mild cerebellar signs (tandem gait difficulty), hearing loss"
+      ],
+      diagnosis: [
+        "Clinical diagnosis (Consensus Statement criteria):",
+        "  Bilateral upper limb action tremor ≥3 years duration",
+        "  Absence of other neurological signs (except cogwheeling)",
+        "  May have head tremor without dystonia",
+        "DaTSCAN: Normal (distinguishes from PD if uncertain)",
+        "Tremor analysis: Accelerometry showing postural/kinetic > rest component",
+        "Exclude: Enhanced physiological tremor, drug-induced, Wilson's disease (in young), thyroid dysfunction"
+      ],
+      management: [
+        "Pharmacological first-line:",
+        "  Propranolol (non-selective β-blocker): 60-320mg/day; best evidence",
+        "  Primidone (anticonvulsant): 25-750mg/day; start low (transient ataxia/sedation)",
+        "Second-line: Topiramate, Gabapentin, Alprazolam (short-term)",
+        "Botulinum toxin: For head/voice tremor or limb tremor refractory to oral meds",
+        "Surgical (refractory):",
+        "  Deep Brain Stimulation (VIM thalamus): Excellent efficacy, adjustable, reversible",
+        "  MRI-guided Focused Ultrasound (MRgFUS): Thalamotomy; unilateral, non-invasive",
+        "Non-pharmacological: Weighted utensils, adaptive devices, wrist weights"
+      ],
+      prognosis: "Slowly progressive. Not life-threatening but can cause significant disability and social embarrassment. ~25% of patients retire early or modify career due to tremor."
+    }
+  ],
+  "Epilepsy": [
+    {
+      name: "Epilepsy & Seizure Disorders",
+      icon: "zap-off",
+      severity: "Chronic",
+      definition: "Epilepsy: Enduring predisposition to generate epileptic seizures (≥2 unprovoked seizures >24h apart; OR 1 unprovoked seizure + high recurrence risk ≥60%; OR epilepsy syndrome diagnosis). Seizure: Transient signs/symptoms due to abnormal excessive synchronous neuronal activity.",
+      epidemiology: "Prevalence: 0.5-1% (50 million worldwide). Bimodal incidence: children <5 and elderly >65. Higher in low/middle-income countries. 70% achieve seizure freedom with appropriate AEDs.",
+      etiology: [
+        "Structural: Stroke, tumor, hippocampal sclerosis (MTS), cortical dysplasia, vascular malformations, TBI",
+        "Genetic: SCN1A (Dravet), KCNQ2/3 (BFNS), DEPDC5, familial epilepsy syndromes",
+        "Infectious: Neurocysticercosis (most common worldwide), meningitis, encephalitis, HIV, malaria",
+        "Metabolic: Hypoglycemia, electrolyte disturbances, inborn errors of metabolism",
+        "Immune: Autoimmune encephalitis (anti-NMDAR, anti-LGI1, anti-CASPR2)",
+        "Unknown: ~50% of cases"
+      ],
+      pathophysiology: "Imbalance between excitation (glutamate) and inhibition (GABA). Focal seizures: Abnormal hypersynchronous discharge from a localized cortical network. Generalized: Bilateral thalamocortical network involvement from onset. Epileptogenesis: Process by which normal brain becomes epileptic (involves neuronal loss, gliosis, mossy fiber sprouting, altered receptor expression).",
+      clinical: [
+        "ILAE 2017 Classification:",
+        "Focal onset: Aware or impaired awareness; motor (automatisms, clonic, tonic) or non-motor (cognitive, emotional, sensory) onset; may evolve to bilateral tonic-clonic",
+        "Generalized onset: Motor (tonic-clonic, tonic, clonic, myoclonic, atonic) or Non-motor (absence — typical/atypical)",
+        "Specific syndromes:",
+        "  Temporal Lobe Epilepsy: Aura (déjà vu, epigastric rising, fear) → behavioral arrest → oroalimentary automatisms → postictal confusion/aphasia",
+        "  Juvenile Myoclonic Epilepsy (JME): Myoclonic jerks (morning), GTC seizures, absence; onset 12-18 years; photosensitive; lifelong treatment",
+        "  Childhood Absence Epilepsy: 3Hz spike-wave; blank stare; hyperventilation provoked; 70% remit",
+        "  West Syndrome: Infantile spasms + hypsarrhythmia + developmental regression",
+        "  Lennox-Gastaut: Multiple seizure types + slow spike-wave + intellectual disability"
+      ],
+      diagnosis: [
+        "EEG: Interictal epileptiform discharges (spikes, sharp waves, spike-wave complexes); may be normal (40% first EEG)",
+        "Video-EEG monitoring: Gold standard for seizure characterization and pre-surgical evaluation",
+        "MRI Brain (epilepsy protocol): 3T, thin coronal FLAIR/T2 through hippocampi; identify hippocampal sclerosis, FCD, tumors",
+        "PET/SPECT: Ictal SPECT, interictal FDG-PET for surgical localization",
+        "Neuropsychological testing: Lateralize language/memory for surgical planning",
+        "Genetic testing: Epilepsy gene panels for suspected genetic epilepsies",
+        "Exclude provoked seizures: Blood glucose, electrolytes, toxicology, LP if infection suspected"
+      ],
+      management: [
+        "Anti-Seizure Medications (ASMs) — choice depends on seizure type:",
+        "  Focal: Levetiracetam, Lamotrigine, Carbamazepine/Oxcarbazepine (first-line)",
+        "  Generalized tonic-clonic: Valproate (most effective but teratogenic), Levetiracetam, Lamotrigine",
+        "  Absence: Ethosuximide (first-line), Valproate",
+        "  Myoclonic: Valproate, Levetiracetam; AVOID: Carbamazepine, phenytoin (worsen)",
+        "  JME: Valproate (men), Levetiracetam/Lamotrigine (women); lifelong treatment",
+        "Principles: Monotherapy first → optimize dose → second monotherapy → rational polytherapy",
+        "Women of childbearing age: Avoid valproate; folic acid 5mg/day; pre-conception counseling",
+        "Drug-resistant epilepsy (30%): Failed ≥2 appropriate ASMs at adequate doses",
+        "Surgery: Temporal lobectomy for MTS (60-70% seizure-free); lesionectomy; VNS, RNS, DBS for non-surgical candidates",
+        "Status Epilepticus: IV lorazepam → IV levetiracetam/valproate/fosphenytoin → RSE protocol (midazolam/propofol/thiopental infusion)"
+      ],
+      prognosis: "70% achieve seizure freedom with appropriate ASMs. Drug-resistant: 30%. Post-surgical outcomes depend on pathology (MTS best). SUDEP risk: 1/1000/year (higher in drug-resistant, nocturnal GTC). Seizure freedom >2 years: Consider medication withdrawal (50% remain seizure-free)."
+    }
+  ],
+  "Neuromuscular": [
+    {
+      name: "Myasthenia Gravis",
+      icon: "battery-low",
+      severity: "Variable",
+      definition: "Autoimmune disorder of the neuromuscular junction characterized by fluctuating fatigable weakness of skeletal muscles due to antibodies against postsynaptic acetylcholine receptors (AChR) or related proteins.",
+      epidemiology: "Prevalence: 15-25/100,000. Bimodal: Young women (20-30) and older men (60-70). Associated with thymoma (10-15%) and thymic hyperplasia (65%). Associations: Other autoimmune diseases (thyroid, RA, SLE).",
+      etiology: [
+        "AChR antibodies: 85% of generalized MG (complement-mediated, accelerated receptor degradation, functional blockade)",
+        "Anti-MuSK antibodies: 5-8% (predominantly female, bulbar/respiratory predominance, no thymic pathology)",
+        "Anti-LRP4 antibodies: 1-3%",
+        "Seronegative: 5-10% (may have low-affinity AChR-Ab detected by cell-based assay)",
+        "Thymoma-associated: 10-15%; more severe, multiple antibodies"
+      ],
+      pathophysiology: "AChR-Ab → complement activation (MAC) → destruction of postsynaptic folds → reduced AChR density → reduced safety factor for neuromuscular transmission → failure at high-frequency stimulation → fatigable weakness. MuSK-Ab: Disrupts AChR clustering at NMJ, doesn't activate complement.",
+      clinical: [
+        "Hallmark: Fluctuating, fatigable weakness — worse with activity, better with rest",
+        "Ocular (50% present, 85% eventually): Ptosis (asymmetric, shifting), diplopia; pure ocular MG in 15%",
+        "Bulbar: Dysarthria, dysphagia, nasal speech, jaw fatigue while chewing",
+        "Limb: Proximal > distal; arms > legs (early); neck flexor/extensor weakness",
+        "Respiratory: Dyspnea, orthopnea → myasthenic crisis (requires intubation)",
+        "Myasthenic crisis: Life-threatening respiratory failure; triggered by infection, surgery, medication changes, non-compliance",
+        "MGFA Classification: I (ocular) → V (intubation required)",
+        "MuSK-MG: Prominent bulbar, facial, neck, and respiratory weakness; less ocular; muscle atrophy"
+      ],
+      diagnosis: [
+        "Serological:",
+        "  AChR binding antibodies: Positive in 85% generalized, 50% ocular MG",
+        "  Anti-MuSK: If AChR-negative with generalized weakness",
+        "  Anti-LRP4, cell-based AChR assay: For double-seronegative",
+        "Electrophysiology:",
+        "  Repetitive Nerve Stimulation (RNS): Decremental response >10% at 3Hz (most specific)",
+        "  Single-fiber EMG (SFEMG): Most sensitive (95-99%); increased jitter ± blocking",
+        "Pharmacological: Edrophonium (Tensilon) test — rarely used now due to cardiac risk; ice pack test for ptosis",
+        "Imaging: CT/MRI chest for thymoma; CT chest before thymectomy",
+        "Pulmonary: FVC monitoring (crisis if <1L or <15-20 mL/kg); NIF <-20 cmH2O"
+      ],
+      management: [
+        "Symptomatic: Pyridostigmine 60mg TID-QID (AChE inhibitor); avoid in MuSK-MG (often ineffective)",
+        "Immunosuppression:",
+        "  First-line: Prednisolone (start low, increase slowly — can cause transient worsening)",
+        "  Steroid-sparing: Azathioprine (onset 6-12 months), Mycophenolate",
+        "  Refractory: Rituximab (excellent in MuSK-MG), Cyclosporine, Tacrolimus",
+        "  Newer: Eculizumab (anti-C5), Efgartigimod (FcRn blocker — reduces IgG), Zilucoplan",
+        "Thymectomy: Indicated for thymoma (any age) and non-thymoma AChR+ generalized MG age 18-65 (MGTX trial)",
+        "Crisis management: ICU, intubation if FVC <15mL/kg; PLEX (5 exchanges) or IVIg (2g/kg over 5 days); identify and treat trigger",
+        "Medications to AVOID: Aminoglycosides, fluoroquinolones, magnesium, β-blockers, D-penicillamine, botulinum toxin, telithromycin"
+      ],
+      prognosis: "Most achieve good control with treatment. Remission in 10-20%. Thymectomy improves outcomes. Crisis mortality now <5% with modern ICU care. MuSK-MG: Often more severe but excellent response to rituximab."
+    },
+    {
+      name: "Guillain-Barré Syndrome (GBS)",
+      icon: "trending-down",
+      severity: "Acute Emergency",
+      definition: "Acute immune-mediated polyradiculoneuropathy characterized by rapidly progressive, ascending, areflexic weakness with albuminocytological dissociation in CSF.",
+      epidemiology: "Incidence: 1-2/100,000/year. All ages; slightly more common in males. Most common cause of acute flaccid paralysis worldwide. 2/3 preceded by infection (Campylobacter jejuni most common; also CMV, EBV, Zika, influenza, COVID-19).",
+      etiology: [
+        "Post-infectious molecular mimicry: Antibodies against microbial antigens cross-react with gangliosides on peripheral nerves",
+        "Campylobacter jejuni → anti-GM1, GD1a → AMAN variant",
+        "CMV → anti-GM2 → demyelinating variant",
+        "Haemophilus → anti-GT1a → pharyngeal-cervical-brachial variant",
+        "Post-vaccination (rare): Influenza vaccine (1/million doses)"
+      ],
+      pathophysiology: "AIDP (most common in West): Macrophage-mediated demyelination of Schwann cells; complement activation, antibody-dependent. AMAN: Anti-ganglioside antibodies target axolemma at nodes of Ranvier; complement-mediated axonal damage (more common in Asia/Latin America, associated with C. jejuni). AMSAN: Severe axonal variant affecting motor and sensory fibers.",
+      clinical: [
+        "Prodrome: Upper respiratory or GI infection 1-4 weeks prior (60-70%)",
+        "Progressive: Symmetric ascending weakness (legs → arms → bulbar → respiratory) over hours to 4 weeks (nadir by 4 weeks; if >8 weeks = CIDP)",
+        "Areflexia/hyporeflexia: Universal (or at least absent ankle jerks)",
+        "Sensory: Paresthesias, pain (common — 50-80%), mild sensory loss",
+        "Autonomic: Tachycardia, BP fluctuations, arrhythmias, urinary retention, ileus (20-30%)",
+        "Cranial nerves: Facial diplegia (50%), bulbar weakness, ophthalmoplegia",
+        "Respiratory failure requiring ventilation: 20-30%",
+        "Variants:",
+        "  Miller Fisher Syndrome: Ophthalmoplegia + ataxia + areflexia; anti-GQ1b antibodies (90%)",
+        "  Pharyngeal-Cervical-Brachial: Oropharyngeal weakness + arm weakness + areflexia",
+        "  AMAN: Pure motor axonal; rapid progression; better recovery in young",
+        "  Bickerstaff Encephalitis: Overlap with MFS + altered consciousness"
+      ],
+      diagnosis: [
+        "Clinical: Progressive bilateral limb weakness + areflexia (Brighton criteria for case definition)",
+        "CSF (after first week): Albuminocytological dissociation — elevated protein (>0.45 g/L) with normal WCC (<10 cells/μL); may be normal early",
+        "Nerve Conduction Studies (NCS):",
+        "  AIDP: Prolonged distal latencies, conduction block, temporal dispersion, slowed conduction velocity, prolonged F-waves",
+        "  AMAN: Reduced CMAP amplitude with normal conduction velocity; reversible conduction failure",
+        "Anti-ganglioside antibodies: GM1 (AMAN), GQ1b (MFS), GT1a (pharyngeal variant)",
+        "MRI Spine: Enhancement of cauda equina nerve roots (supportive)",
+        "Pulmonary function: FVC monitoring q4-6h (intubate if <20 mL/kg or declining rapidly, or NIF <-30)",
+        "Exclude mimics: Spinal cord compression, transverse myelitis, poliomyelitis, tick paralysis, botulism, critical illness polyneuropathy"
+      ],
+      management: [
+        "Immunotherapy (start early — within 2 weeks of onset):",
+        "  IVIg: 0.4 g/kg/day × 5 days (preferred — easier to administer, equally effective)",
+        "  Plasmapheresis (PLEX): 5 exchanges over 2 weeks; particularly effective if started within 7 days",
+        "  NOT effective: Corticosteroids (no benefit in GBS, unlike CIDP)",
+        "  Combined IVIg + PLEX: No additional benefit",
+        "Supportive (CRITICAL — main cause of mortality):",
+        "  ICU monitoring: Respiratory function (FVC, NIF), cardiac monitoring, BP",
+        "  Ventilation: 20-30% require intubation; 20/30/40 rule (FVC <20, NIF >-30, >40% decline)",
+        "  DVT prophylaxis: LMWH + compression stockings",
+        "  Pain management: Gabapentin, opioids (pain is common and often undertreated)",
+        "  Nutrition: NG tube if bulbar weakness",
+        "  Rehabilitation: Early physiotherapy; prevent contractures",
+        "Monitoring: Erasmus GBS Respiratory Insufficiency Score (EGRIS) predicts ventilation need"
+      ],
+      prognosis: "80% walk independently at 6 months. 5% mortality (respiratory failure, autonomic dysfunction, PE). 20% remain unable to walk at 6 months. Residual fatigue in 60-80%. Recovery: weeks to months (AIDP better than AMAN in adults). Poor prognostic factors: Age >60, preceding diarrheal illness, rapid progression, low CMAP amplitudes, ventilation requirement."
+    }
+  ],
+  "Headache": [
+    {
+      name: "Migraine",
+      icon: "cloud-lightning",
+      severity: "Chronic/Episodic",
+      definition: "Primary headache disorder characterized by recurrent episodes of moderate-severe unilateral pulsating headache with nausea/vomiting and/or photophobia/phonophobia, lasting 4-72 hours.",
+      epidemiology: "Prevalence: 15% (1 billion globally). Female:Male = 3:1 (after puberty). Peak prevalence: 25-55 years. #2 cause of years lived with disability globally. Strong genetic component (polygenic).",
+      etiology: [
+        "Genetic predisposition: Polygenic (>120 loci identified in GWAS); Familial Hemiplegic Migraine: CACNA1A, ATP1A2, SCN1A",
+        "Triggers: Stress, sleep disruption, hormonal changes (menstruation), alcohol (red wine), certain foods (tyramine, nitrates), sensory stimuli, weather changes"
+      ],
+      pathophysiology: "Trigeminovascular activation theory: Cortical spreading depression (CSD) — wave of neuronal/glial depolarization spreading across cortex → triggers aura. CSD activates trigeminal afferents → release of CGRP, substance P, nitric oxide at meningeal vessels → neurogenic inflammation, vasodilation → pain. Central sensitization: Allodynia, throbbing quality. Brainstem nuclei (PAG, locus coeruleus, raphe nuclei) involved in migraine generation. CGRP is the key neuropeptide.",
+      clinical: [
+        "Phases:",
+        "  Prodrome (hours-days before): Yawning, food cravings, mood changes, neck stiffness, polyuria",
+        "  Aura (20-30% of migraineurs): Visual (scintillating scotoma, fortification spectra), sensory (spreading paresthesias), speech/language; develops over 5-60 min, lasts <60 min",
+        "  Headache: Unilateral (60%), pulsating, moderate-severe, aggravated by physical activity, 4-72 hours",
+        "  Associated symptoms: Nausea (80%), vomiting (30%), photophobia, phonophobia, osmophobia",
+        "  Postdrome: Fatigue, difficulty concentrating, mood changes, food cravings",
+        "Chronic migraine: ≥15 headache days/month for ≥3 months, of which ≥8 have migraine features",
+        "Medication overuse headache: Triptans/opioids ≥10 days/month or simple analgesics ≥15 days/month for >3 months"
+      ],
+      diagnosis: [
+        "Clinical (ICHD-3 criteria): ≥5 attacks fulfilling: Duration 4-72h; ≥2 of (unilateral/pulsating/moderate-severe/aggravated by activity); ≥1 of (nausea-vomiting/photo+phonophobia)",
+        "Migraine with aura: ≥2 attacks with: ≥1 fully reversible aura symptom; ≥1 spreads gradually over ≥5 min; each symptom lasts 5-60 min; ≥1 unilateral; headache accompanies or follows within 60 min",
+        "Red flags (SNOOP): Systemic symptoms, Neurological signs, Onset sudden, Older onset (>50), Pattern change → require imaging",
+        "Imaging: Not routine; MRI if atypical features, red flags, or first severe headache",
+        "Headache diary: Essential for diagnosis, trigger identification, and treatment monitoring"
+      ],
+      management: [
+        "Acute treatment:",
+        "  Mild-moderate: NSAIDs (ibuprofen 400-600mg, naproxen 500mg) + metoclopramide; aspirin 900mg",
+        "  Moderate-severe: Triptans (sumatriptan 50-100mg PO, 6mg SC; rizatriptan, zolmitriptan); treat early",
+        "  Refractory: Gepants (ubrogepant, rimegepant — CGRP receptor antagonists); Ditans (lasmiditan — 5-HT1F)",
+        "  Severe/ED: IV metoclopramide/prochlorperazine, SC sumatriptan, IV ketorolac, dexamethasone (reduce recurrence)",
+        "Preventive (≥4 migraine days/month OR significant disability):",
+        "  First-line oral: Propranolol/Metoprolol, Topiramate, Amitriptyline, Candesartan, Valproate (not in women of childbearing age)",
+        "  CGRP monoclonal antibodies: Erenumab, Fremanezumab, Galcanezumab, Eptinezumab — 50% responder rate ~50%; well-tolerated",
+        "  OnabotulinumtoxinA: For chronic migraine (31 injection sites q12 weeks — PREEMPT protocol)",
+        "  Neuromodulation: sTMS, eNVS (gammaCore), Cefaly (eTNS)",
+        "Lifestyle: Regular sleep, exercise, hydration, stress management, trigger avoidance, headache diary"
+      ],
+      prognosis: "Chronic condition with variable course. Frequency often decreases after 50-60 years. Chronic migraine develops in 2.5%/year. Risk factors for chronification: Medication overuse, obesity, depression, high attack frequency, allodynia. CGRP therapies have transformed management of refractory cases."
+    }
+  ],
+  "Neurodegenerative": [
+    {
+      name: "Alzheimer's Disease",
+      icon: "brain",
+      severity: "Progressive",
+      definition: "Most common cause of dementia. Progressive neurodegenerative disorder characterized by insidious onset of episodic memory loss followed by progressive cognitive decline with neuropathological hallmarks of amyloid-β plaques and neurofibrillary tangles (hyperphosphorylated tau).",
+      epidemiology: "Prevalence: 10% over age 65; 50% over age 85. 60-70% of all dementia cases. 55 million people with dementia worldwide. Female predominance (2:1 over age 85). Risk factors: Age (strongest), APOE ε4 (3x heterozygous, 12x homozygous), family history, cardiovascular risk factors, low education, TBI.",
+      etiology: [
+        "Sporadic (late-onset, >95%): Multifactorial — age, APOE ε4, cardiovascular risk, lifestyle",
+        "Familial (early-onset, <5%): APP (chromosome 21), PSEN1 (chromosome 14 — most common familial), PSEN2 (chromosome 1); Autosomal dominant, complete penetrance",
+        "Down syndrome (Trisomy 21): APP gene triplication → virtually all develop AD pathology by age 40",
+        "Protective: APOE ε2, Christchurch PSEN1 variant, education (cognitive reserve)"
+      ],
+      pathophysiology: "Amyloid cascade hypothesis: Imbalanced production/clearance of Aβ42 → amyloid plaques (extracellular) → trigger tau hyperphosphorylation → neurofibrillary tangles (intracellular) → neuronal death → synaptic loss → neurodegeneration. Braak staging (tau): Transentorhinal (I-II) → Limbic (III-IV) → Neocortical (V-VI). Neuroinflammation (microglia, astrocytes), vascular dysfunction, cholinergic deficit (nucleus basalis of Meynert degeneration) contribute. ATN biomarker framework: A(myloid)T(au)N(eurodegeneration).",
+      clinical: [
+        "Preclinical: Biomarker positive, cognitively normal (may last 15-20 years)",
+        "MCI due to AD: Subjective + objective memory impairment; preserved ADLs",
+        "Dementia — progressive stages:",
+        "  Early: Episodic memory loss (anterograde — hippocampal), word-finding difficulty, spatial disorientation, loss of IADLs",
+        "  Moderate: Anomia, apraxia, agnosia; behavioral symptoms (apathy, depression, agitation); getting lost; need supervision",
+        "  Severe: Loss of all ADLs, incontinence, dysphagia, mutism; bedbound; death from aspiration/infection",
+        "Atypical presentations: Posterior Cortical Atrophy (visuospatial — younger onset), Logopenic Primary Progressive Aphasia, Frontal variant",
+        "Neuropsychiatric: Apathy (most common), depression, anxiety, agitation, psychosis, sleep disturbance, wandering"
+      ],
+      diagnosis: [
+        "Clinical: NIA-AA 2018 Research Framework (ATN); Clinical criteria: insidious onset, progressive amnestic or non-amnestic cognitive decline",
+        "Cognitive testing: MMSE, MoCA (screening); Detailed neuropsychological battery (memory, language, visuospatial, executive)",
+        "Biomarkers — Amyloid (A):",
+        "  CSF: Low Aβ42, low Aβ42/40 ratio",
+        "  PET: Amyloid-PET (florbetapir, flutemetamol, florbetaben) — positive",
+        "  Blood: Plasma p-tau217, p-tau181, Aβ42/40 ratio (emerging — high accuracy)",
+        "Biomarkers — Tau (T):",
+        "  CSF: Elevated p-tau181, p-tau217",
+        "  PET: Tau-PET (flortaucipir) — correlates with clinical severity",
+        "Neurodegeneration (N):",
+        "  MRI: Medial temporal lobe atrophy (hippocampus — Scheltens score), posterior parietal atrophy",
+        "  FDG-PET: Temporoparietal hypometabolism",
+        "  CSF: Elevated t-tau, neurofilament light chain (NfL)",
+        "Exclude: Vascular dementia, DLB, FTD, NPH, B12 deficiency, hypothyroidism, depression"
+      ],
+      management: [
+        "Cholinesterase inhibitors (mild-moderate AD):",
+        "  Donepezil 5-10mg/day (most prescribed)",
+        "  Rivastigmine (patch preferred — fewer GI side effects)",
+        "  Galantamine",
+        "  Benefit: Modest symptomatic improvement in cognition and function (6-12 months stabilization)",
+        "NMDA receptor antagonist: Memantine 10mg BID (moderate-severe AD); can combine with ChEIs",
+        "Anti-amyloid immunotherapy (disease-modifying — NEW):",
+        "  Lecanemab (anti-protofibril Aβ): FDA approved 2023; 27% slowing of decline at 18 months (CLARITY-AD); ARIA monitoring with MRI",
+        "  Donanemab (anti-plaque Aβ): 35% slowing; treatment stopped when amyloid cleared; FDA approved 2024",
+        "  ARIA (Amyloid-Related Imaging Abnormalities): Edema (ARIA-E) and hemorrhage (ARIA-H); more common with APOE ε4",
+        "Neuropsychiatric symptoms:",
+        "  Non-pharmacological FIRST: Environmental modification, caregiver education, structured routines, music therapy, exercise",
+        "  Agitation: Brexpiprazole (FDA approved for AD agitation), low-dose risperidone (short-term), avoid benzodiazepines",
+        "  Depression: SSRIs (sertraline, citalopram); avoid TCAs (anticholinergic)",
+        "  Sleep: Sleep hygiene, melatonin, trazodone; avoid benzodiazepines",
+        "Supportive: Occupational therapy, speech therapy, advance care planning, caregiver support, cognitive stimulation"
+      ],
+      prognosis: "Average survival 8-10 years from symptom onset; 3-5 years from diagnosis. Anti-amyloid therapies may slow trajectory but do not halt progression. Death usually from pneumonia, other infections, or comorbidities. Caregiver burden is substantial. Cost: $350 billion/year in US alone."
+    },
+    {
+      name: "Motor Neuron Disease (ALS)",
+      icon: "arrow-down-right",
+      severity: "Fatal",
+      definition: "Progressive neurodegenerative disease affecting upper motor neurons (UMN) and lower motor neurons (LMN), leading to progressive weakness, wasting, spasticity, and death from respiratory failure. Also known as Amyotrophic Lateral Sclerosis (ALS) or Lou Gehrig's disease.",
+      epidemiology: "Incidence: 2-3/100,000/year. Prevalence: 6-8/100,000. Mean onset: 55-65 years. Male:Female = 1.5:1. Familial: 5-10%. Risk factors: Age, family history, military service, smoking, strenuous physical activity (controversial).",
+      etiology: [
+        "Sporadic ALS (90-95%): Multifactorial — genetic susceptibility + environment; C9orf72 expansion in 5-10% of 'sporadic' cases",
+        "Familial ALS (5-10%): C9orf72 hexanucleotide repeat expansion (40% of fALS — also causes FTD), SOD1 (20% of fALS — copper/zinc superoxide dismutase), TARDBP (TDP-43), FUS, and >30 other genes",
+        "Gene-environment interaction: 6-step model of ALS causation"
+      ],
+      pathophysiology: "TDP-43 proteinopathy (97% of ALS): Mislocalization of TDP-43 from nucleus to cytoplasmic aggregates → RNA processing dysfunction → motor neuron degeneration. Multiple mechanisms: Glutamate excitotoxicity, oxidative stress, mitochondrial dysfunction, impaired axonal transport, protein aggregation, neuroinflammation (microglia/astrocytes), oligodendrocyte dysfunction. Contiguous spread: Disease spreads along neuroanatomical connections (prion-like propagation hypothesis).",
+      clinical: [
+        "UMN signs: Spasticity, hyperreflexia, pathological reflexes (Babinski, Hoffman), pseudobulbar affect (emotional lability), slow spastic speech",
+        "LMN signs: Weakness, wasting, fasciculations, hyporeflexia (in affected segments)",
+        "Limb-onset (70%): Asymmetric distal weakness (foot drop or hand grip weakness), progressive",
+        "Bulbar-onset (25%): Dysarthria (mixed spastic-flaccid), dysphagia, tongue wasting/fasciculations; worse prognosis",
+        "Respiratory-onset (5%): Dyspnea, orthopnea, morning headaches; worst prognosis",
+        "Cognitive/Behavioral: 50% have some frontal dysfunction; 15% meet criteria for FTD (ALS-FTD, especially C9orf72)",
+        "Split hand sign: APB/FDI wasting with relative hypothenar sparing (specific for ALS)",
+        "What is ABSENT: No sensory loss, no eye movement abnormalities, no sphincter disturbance (early)"
+      ],
+      diagnosis: [
+        "Clinical diagnosis (Gold Coast Criteria 2019 / Revised El Escorial):",
+        "  Progressive UMN + LMN dysfunction in ≥1 body region; OR LMN dysfunction in ≥2 regions with UMN dysfunction above LMN level",
+        "  Absence of alternative explanation",
+        "EMG/NCS (essential):",
+        "  Active denervation (fibrillation potentials, positive sharp waves) + chronic reinnervation (large MUAPs, reduced recruitment) in ≥3 body regions",
+        "  Fasciculation potentials (with complex morphology)",
+        "  Normal sensory NCS (distinguishes from neuropathy)",
+        "MRI Brain/Spine: Exclude structural mimics (cervical myelopathy, syringomyelia); may show corticospinal tract hyperintensity on T2",
+        "Genetic testing: C9orf72, SOD1 (if family history or young onset; therapeutic implications for SOD1)",
+        "Blood: CK (mildly elevated in 50%), rule out other causes",
+        "Exclude mimics: Cervical myelopathy, multifocal motor neuropathy (MMN — treatable!), Kennedy's disease, myasthenia, inclusion body myositis"
+      ],
+      management: [
+        "Disease-modifying (modest benefit):",
+        "  Riluzole 50mg BID: Glutamate antagonist; extends survival by 2-3 months; only universally approved agent",
+        "  Edaravone: Free radical scavenger; modest slowing in selected patients (early ALS, FVC >80%)",
+        "  Sodium phenylbutyrate-taurursodiol (AMX0035/Relyvrio): Combined cellular stress reduction; subsequently withdrawn from market",
+        "  Tofersen (antisense oligonucleotide): For SOD1-ALS specifically; reduces NfL; FDA approved 2023",
+        "Symptomatic & palliative (CRITICAL — improves quality of life and survival):",
+        "  Respiratory: Non-invasive ventilation (NIV/BiPAP) — extends survival by 7-12 months AND improves QOL; monitor FVC q3 months; start when FVC <80% or symptoms",
+        "  Nutrition: PEG tube when dysphagia compromises nutrition/hydration or weight loss >10%; extends survival",
+        "  Sialorrhea: Glycopyrrolate, amitriptyline, botulinum toxin to salivary glands",
+        "  Spasticity: Baclofen, tizanidine, stretching",
+        "  Pseudobulbar affect: Dextromethorphan-quinidine (Nuedexta)",
+        "  Communication: Augmentative devices, eye-tracking technology",
+        "Multidisciplinary clinic: Neurologist, respiratory, dietitian, SLT, OT, PT, palliative care, psychology — shown to extend survival by 7-10 months",
+        "Advance care planning: Early discussion; palliative care integration; most patients choose against invasive ventilation"
+      ],
+      prognosis: "Median survival: 3-5 years from symptom onset (2-3 years from diagnosis). Bulbar onset: 2-3 years. Respiratory onset: 1-2 years. Limb onset: 3-5 years. 10% survive >10 years. SOD1-ALS: variable (A4V very aggressive, D90A slow). C9orf72: faster progression, ALS-FTD overlap. NIV and PEG are the most impactful interventions for survival."
+    }
+  ],
+  "CNS Infections": [
+    {
+      name: "Bacterial Meningitis",
+      icon: "shield-alert",
+      severity: "Emergency",
+      definition: "Acute inflammation of the meninges due to bacterial infection, constituting a neurological emergency with high mortality and morbidity if untreated.",
+      epidemiology: "Incidence: 2-5/100,000/year in developed countries (much higher in developing). Leading organisms vary by age: Neonates (GBS, E. coli, Listeria), Children (N. meningitidis, S. pneumoniae), Adults (S. pneumoniae > N. meningitidis), Elderly/Immunocompromised (S. pneumoniae, Listeria, Gram-negatives).",
+      etiology: [
+        "Streptococcus pneumoniae: Most common in adults; associated with pneumonia, sinusitis, otitis media, CSF leak, alcoholism, asplenia",
+        "Neisseria meningitidis: Adolescents/young adults; epidemic potential; serogroups B, C, W, Y; petechial rash (meningococcemia)",
+        "Listeria monocytogenes: Extremes of age, pregnancy, immunosuppressed; contaminated food (soft cheese, cold cuts)",
+        "Group B Streptococcus (GBS) & E. coli: Neonates",
+        "Haemophilus influenzae type b: Reduced with vaccination; still seen in unvaccinated",
+        "Post-neurosurgical/shunt: Staphylococci (S. aureus, coagulase-negative), Gram-negatives"
+      ],
+      pathophysiology: "Nasopharyngeal colonization → bacteremia → crossing BBB (receptor-mediated transcytosis, paracellular, or within phagocytes) → subarachnoid space multiplication → inflammatory cascade (TLR activation, cytokines: TNF-α, IL-1β, IL-6) → BBB disruption, cerebral edema (vasogenic + cytotoxic + interstitial), raised ICP, vasculitis, thrombosis → neuronal injury. CSF has limited immune defense (low complement, low immunoglobulin).",
+      clinical: [
+        "Classic triad (present in only 44%): Fever + neck stiffness + altered mental status",
+        "Headache (severe, generalized): Most common symptom (87%)",
+        "Signs of meningeal irritation: Kernig's sign, Brudzinski's sign (poor sensitivity ~5%, but specific)",
+        "Altered consciousness: Confusion → obtundation → coma",
+        "Seizures: 20-30% (more common with pneumococcal)",
+        "Petechial/purpuric rash: Highly suggestive of meningococcal disease (may indicate DIC)",
+        "Cranial nerve palsies: III, VI, VII, VIII (hearing loss — pneumococcal)",
+        "Focal neurological deficits: Suggest complications (abscess, infarction, venous thrombosis)",
+        "Neonates: Nonspecific — irritability, poor feeding, bulging fontanelle, seizures, hypothermia/fever",
+        "Waterhouse-Friderichsen syndrome: Meningococcal sepsis + adrenal hemorrhage + DIC + shock"
+      ],
+      diagnosis: [
+        "LUMBAR PUNCTURE (urgent — do NOT delay antibiotics if LP will be delayed):",
+        "  Opening pressure: Elevated (>20 cmH2O)",
+        "  CSF: Turbid/purulent; WCC >1000/μL (neutrophilic predominance); Protein elevated (>1 g/L); Glucose LOW (<40% of serum or <2.2 mmol/L)",
+        "  Gram stain: Positive in 60-90% of untreated cases",
+        "  CSF culture: Gold standard (positive in 80-90% if pre-antibiotics not given)",
+        "  CSF PCR: Meningococcal, pneumococcal PCR (useful if antibiotics already given)",
+        "  CSF lactate >3.5 mmol/L: Supports bacterial etiology",
+        "CT before LP ONLY if: Immunocompromised, CNS disease history, new-onset seizures, papilledema, focal neurological deficits, GCS <12",
+        "Blood cultures: Positive in 50-80% (ALWAYS before antibiotics)",
+        "Procalcitonin/CRP: Elevated; PCT >0.5 ng/mL favors bacterial over viral",
+        "Complications imaging: MRI/CT with contrast if not improving (empyema, abscess, infarction, hydrocephalus)"
+      ],
+      management: [
+        "EMPIRICAL ANTIBIOTICS IMMEDIATELY (within 1 hour of presentation — every hour of delay increases mortality):",
+        "  Adults: Ceftriaxone 2g IV q12h + Vancomycin 15-20mg/kg q8-12h (±Ampicillin 2g q4h if >50y or immunosuppressed for Listeria coverage)",
+        "  Neonates: Ampicillin + Cefotaxime (or Gentamicin)",
+        "  Post-neurosurgical: Vancomycin + Ceftazidime/Meropenem",
+        "Dexamethasone 0.15 mg/kg q6h × 4 days: Give BEFORE or WITH first antibiotic dose (reduces mortality and hearing loss in pneumococcal meningitis — PROVEN in adults); uncertain benefit for meningococcal",
+        "Duration: S. pneumoniae 10-14 days; N. meningitidis 7 days; Listeria 21 days; GBS 14-21 days",
+        "Supportive: ICU if severe; ICP management; seizure management; fluid resuscitation (avoid hyponatremia); monitor for SIADH",
+        "Chemoprophylaxis (meningococcal): Close contacts — Ciprofloxacin 500mg single dose OR Rifampicin 600mg BD × 2 days OR Ceftriaxone 250mg IM single dose",
+        "Vaccination: Pneumococcal (PCV13/PPSV23), Meningococcal (ACWY + B), Hib — prevention is key"
+      ],
+      prognosis: "Mortality: S. pneumoniae 20-30%, N. meningitidis 5-10%, Listeria 20-30%. Overall mortality with treatment: 15-25%. Neurological sequelae in 30-50% of survivors: Hearing loss (most common — 14%), cognitive impairment, seizures, focal deficits, hydrocephalus. Meningococcal sepsis mortality: 40% with DIC/shock."
+    }
+  ]
+};
+
+let activeCategory = Object.keys(diseases)[0];
+let openAccordions = new Set();
+
+const defaultConfig = {
+  page_title: "Neurology",
+  subtitle: "Comprehensive Disease Guide — Etiology, Pathophysiology, Clinical Features, Diagnosis & Management",
+  primary_color: "#8b5cf6",
+  surface_color: "#1e1e3a",
+  text_color: "#e8e6f0",
+  accent_color: "#06b6d4",
+  secondary_color: "#2a2a4a",
+  font_family: "Source Sans 3",
+  font_size: 16
+};
+
+function renderNav() {
+  const nav = document.getElementById('category-nav');
+  nav.innerHTML = Object.keys(diseases).map(cat => `
+    <button onclick="setCategory('${cat}')" class="category-btn px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap transition-all ${cat === activeCategory ? 'active' : ''}" style="background: ${cat === activeCategory ? window.elementSdk?.config?.primary_color || defaultConfig.primary_color : 'transparent'}; color: ${cat === activeCategory ? '#fff' : window.elementSdk?.config?.text_color || defaultConfig.text_color}; border: 1px solid ${cat === activeCategory ? 'transparent' : window.elementSdk?.config?.secondary_color || defaultConfig.secondary_color};">
+      ${cat}
+    </button>
+  `).join('');
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  openAccordions.clear();
+  renderNav();
+  renderDiseases();
+}
+
+function toggleAccordion(id) {
+  const el = document.getElementById(`acc-${id}`);
+  const icon = document.getElementById(`icon-${id}`);
+  if (openAccordions.has(id)) {
+    openAccordions.delete(id);
+    el.classList.remove('open');
+    icon.style.transform = 'rotate(0deg)';
+  } else {
+    openAccordions.add(id);
+    el.classList.add('open');
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+
+function getSeverityColor(severity) {
+  const colors = { 'Emergency': '#ef4444', 'Severe': '#f97316', 'Acute Emergency': '#ef4444', 'Fatal': '#dc2626', 'Chronic': '#06b6d4', 'Chronic/Episodic': '#06b6d4', 'Progressive': '#eab308', 'Variable': '#a78bfa' };
+  return colors[severity] || '#6b7280';
+}
+
+function renderDiseases() {
+  const config = window.elementSdk?.config || defaultConfig;
+  const container = document.getElementById('disease-content');
+  const categoryDiseases = diseases[activeCategory] || [];
+
+  container.innerHTML = categoryDiseases.map((d, i) => `
+    <div class="disease-card mb-6 rounded-2xl overflow-hidden fade-in" style="background: ${config.surface_color || defaultConfig.surface_color}; border: 1px solid ${config.secondary_color || defaultConfig.secondary_color}; animation-delay: ${i * 0.1}s;">
+      <div class="p-5 md:p-7">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: ${config.primary_color || defaultConfig.primary_color}20;">
+            <i data-lucide="${d.icon}" style="width:20px;height:20px;color:${config.primary_color || defaultConfig.primary_color};"></i>
+          </div>
+          <h2 class="font-heading text-xl md:text-2xl font-700" style="color: ${config.text_color || defaultConfig.text_color};">${d.name}</h2>
+          <span class="px-3 py-1 rounded-full text-xs font-bold uppercase" style="background: ${getSeverityColor(d.severity)}20; color: ${getSeverityColor(d.severity)}; border: 1px solid ${getSeverityColor(d.severity)}40;">${d.severity}</span>
+        </div>
+        <p class="font-body text-sm md:text-base leading-relaxed mb-5" style="color: ${config.text_color || defaultConfig.text_color}aa;">${d.definition}</p>
+
+        ${renderSection(d, i, 'epidemiology', 'Epidemiology', config)}
+        ${renderSection(d, i, 'etiology', 'Etiology & Risk Factors', config)}
+        ${renderSection(d, i, 'pathophysiology', 'Pathophysiology', config)}
+        ${renderSection(d, i, 'clinical', 'Clinical Features', config)}
+        ${renderSection(d, i, 'diagnosis', 'Diagnosis & Investigations', config)}
+        ${renderSection(d, i, 'management', 'Management', config)}
+        ${d.prognosis ? renderSection(d, i, 'prognosis', 'Prognosis', config) : ''}
+      </div>
+    </div>
+  `).join('');
+
+  lucide.createIcons();
+}
+
+function renderSection(d, diseaseIdx, key, title, config) {
+  const id = `${diseaseIdx}-${key}`;
+  const content = d[key];
+  if (!content) return '';
+  const isOpen = openAccordions.has(id);
+
+  let body;
+  if (Array.isArray(content)) {
+    body = `<ul class="space-y-2 font-body text-sm md:text-base">${content.map(item => `<li class="flex gap-2 leading-relaxed" style="color: ${config.text_color || defaultConfig.text_color}cc;"><span style="color: ${config.accent_color || defaultConfig.accent_color}; flex-shrink:0;">•</span><span>${item}</span></li>`).join('')}</ul>`;
+  } else {
+    body = `<p class="font-body text-sm md:text-base leading-relaxed" style="color: ${config.text_color || defaultConfig.text_color}cc;">${content}</p>`;
+  }
+
+  return `
+    <div class="mb-2 rounded-xl overflow-hidden" style="border: 1px solid ${config.secondary_color || defaultConfig.secondary_color};">
+      <button onclick="toggleAccordion('${id}')" class="w-full flex items-center justify-between px-4 py-3 text-left transition-colors hover:opacity-80" style="background: ${config.secondary_color || defaultConfig.secondary_color};">
+        <span class="font-body font-600 text-sm md:text-base" style="color: ${config.text_color || defaultConfig.text_color};">${title}</span>
+        <i data-lucide="chevron-down" id="icon-${id}" style="width:16px;height:16px;color:${config.primary_color || defaultConfig.primary_color};transition:transform 0.3s;${isOpen ? 'transform:rotate(180deg);' : ''}"></i>
+      </button>
+      <div id="acc-${id}" class="accordion-content ${isOpen ? 'open' : ''}">
+        <div class="px-4 py-4">${body}</div>
+      </div>
+    </div>
+  `;
+}
+
+renderNav();
+renderDiseases();
+</script>
+</body>
+</html>
