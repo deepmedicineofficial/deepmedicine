@@ -1,0 +1,895 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>DKA Protocols | Diabetic Ketoacidosis Management | Deep Medicine</title> <meta name="description" content="Step-by-step DKA management protocol including fluid resuscitation, insulin therapy, electrolyte correction, and ICU care."> <link rel="canonical" href="https://deepmedicine.in/clinical/protocols/dka-protocols"> <!-- Open Graph --> <meta property="og:title" content="DKA Protocols | Deep Medicine"> <meta property="og:description" content="Evidence-based diabetic ketoacidosis (DKA) management and ICU protocols."> <meta property="og:image" content="https://deepmedicine.in/images/dka-protocols.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            body: ['IBM Plex Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .protocol-wrapper { height: 100%; overflow-y: auto; }
+    .tab-active { border-bottom: 3px solid #dc2626; color: #dc2626; font-weight: 600; }
+    .severity-mild { border-left: 4px solid #f59e0b; }
+    .severity-moderate { border-left: 4px solid #f97316; }
+    .severity-severe { border-left: 4px solid #dc2626; }
+    .dose-box { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+    .phase-card { transition: all 0.2s ease; }
+    .phase-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .alert-critical { background: #fef2f2; border: 1px solid #fecaca; }
+    .alert-warning { background: #fffbeb; border: 1px solid #fde68a; }
+    .alert-info { background: #eff6ff; border: 1px solid #bfdbfe; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .pulse-dot { animation: pulse-dot 2s infinite; }
+    .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body">
+  <div class="protocol-wrapper bg-slate-50 scrollbar-thin" id="app"><!-- Header -->
+   <header class="bg-gradient-to-r from-slate-900 to-slate-800 text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 sm:py-4">
+     <div class="flex items-center justify-between">
+      <div>
+       <h1 id="main-title" class="text-lg sm:text-2xl font-bold tracking-tight">DKA Management Protocol</h1>
+       <p id="institution-name" class="text-slate-300 text-xs sm:text-sm mt-0.5">ICU/Emergency Department</p>
+      </div>
+      <div class="flex items-center gap-2"><span class="hidden sm:inline-flex items-center gap-1.5 bg-red-600/20 text-red-300 text-xs px-2.5 py-1 rounded-full border border-red-500/30"> <span class="w-2 h-2 bg-red-400 rounded-full pulse-dot"></span> Critical Care </span> <span class="text-xs text-slate-400 hidden md:block">ADA/ISPAD 2024</span>
+      </div>
+     </div>
+    </div><!-- Tabs -->
+    <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 -mb-px" id="tab-nav"><button onclick="switchTab('overview')" class="tab-btn tab-active px-3 py-2.5 text-sm whitespace-nowrap transition-colors" data-tab="overview">Overview</button> <button onclick="switchTab('fluids')" class="tab-btn px-3 py-2.5 text-sm whitespace-nowrap text-slate-300 hover:text-white transition-colors" data-tab="fluids">Fluids</button> <button onclick="switchTab('insulin')" class="tab-btn px-3 py-2.5 text-sm whitespace-nowrap text-slate-300 hover:text-white transition-colors" data-tab="insulin">Insulin</button> <button onclick="switchTab('electrolytes')" class="tab-btn px-3 py-2.5 text-sm whitespace-nowrap text-slate-300 hover:text-white transition-colors" data-tab="electrolytes">K⁺/Lytes</button> <button onclick="switchTab('monitoring')" class="tab-btn px-3 py-2.5 text-sm whitespace-nowrap text-slate-300 hover:text-white transition-colors" data-tab="monitoring">Monitoring</button> <button onclick="switchTab('complications')" class="tab-btn px-3 py-2.5 text-sm whitespace-nowrap text-slate-300 hover:text-white transition-colors" data-tab="complications">Complications</button> <button onclick="switchTab('calculator')" class="tab-btn px-3 py-2.5 text-sm whitespace-nowrap text-slate-300 hover:text-white transition-colors" data-tab="calculator">Calculator</button>
+    </nav>
+   </header>
+   <main class="max-w-7xl mx-auto px-4 py-6"><!-- OVERVIEW TAB -->
+    <section id="tab-overview" class="tab-content space-y-6"><!-- Diagnostic Criteria -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="clipboard-check" class="w-5 h-5 text-red-400"></i>
+       <h2 class="text-white font-semibold">Diagnostic Criteria — DKA Triad</h2>
+      </div>
+      <div class="p-5">
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+         <div class="text-3xl font-bold text-red-700 font-mono">
+          D
+         </div>
+         <div class="font-semibold text-slate-800 mt-1">
+          Hyperglycemia
+         </div>
+         <div class="text-sm text-slate-600 mt-1">
+          Blood Glucose &gt;250 mg/dL<br>
+          (13.9 mmol/L)
+         </div>
+         <div class="text-xs text-slate-500 mt-2 italic">
+          *Euglycemic DKA: BG &lt;250 with SGLT2i use
+         </div>
+        </div>
+        <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+         <div class="text-3xl font-bold text-orange-700 font-mono">
+          K
+         </div>
+         <div class="font-semibold text-slate-800 mt-1">
+          Ketosis
+         </div>
+         <div class="text-sm text-slate-600 mt-1">
+          Serum ketones &gt;3 mmol/L<br>
+          or Urine ketones ≥2+
+         </div>
+         <div class="text-xs text-slate-500 mt-2 italic">
+          β-hydroxybutyrate &gt;3.0 mmol/L preferred
+         </div>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-center">
+         <div class="text-3xl font-bold text-amber-700 font-mono">
+          A
+         </div>
+         <div class="font-semibold text-slate-800 mt-1">
+          Acidosis
+         </div>
+         <div class="text-sm text-slate-600 mt-1">
+          pH &lt;7.3 or HCO₃ &lt;18 mEq/L<br>
+          AG &gt;12
+         </div>
+         <div class="text-xs text-slate-500 mt-2 italic">
+          Anion Gap = Na⁺ - (Cl⁻ + HCO₃⁻)
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Severity Classification -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400"></i>
+       <h2 class="text-white font-semibold">Severity Classification (ADA 2024)</h2>
+      </div>
+      <div class="p-5 overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr class="border-b-2 border-slate-200">
+          <th class="text-left py-2 px-3 font-semibold text-slate-700">Parameter</th>
+          <th class="text-center py-2 px-3 font-semibold text-amber-600">Mild</th>
+          <th class="text-center py-2 px-3 font-semibold text-orange-600">Moderate</th>
+          <th class="text-center py-2 px-3 font-semibold text-red-600">Severe</th>
+         </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-2 px-3 font-medium">Arterial pH</td>
+          <td class="text-center py-2 px-3">7.25–7.30</td>
+          <td class="text-center py-2 px-3">7.00–7.24</td>
+          <td class="text-center py-2 px-3 font-semibold text-red-700">&lt;7.00</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Serum HCO₃ (mEq/L)</td>
+          <td class="text-center py-2 px-3">15–18</td>
+          <td class="text-center py-2 px-3">10–14.9</td>
+          <td class="text-center py-2 px-3 font-semibold text-red-700">&lt;10</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Anion Gap</td>
+          <td class="text-center py-2 px-3">&gt;10</td>
+          <td class="text-center py-2 px-3">&gt;12</td>
+          <td class="text-center py-2 px-3 font-semibold text-red-700">&gt;12</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Mental Status</td>
+          <td class="text-center py-2 px-3">Alert</td>
+          <td class="text-center py-2 px-3">Alert/Drowsy</td>
+          <td class="text-center py-2 px-3 font-semibold text-red-700">Stupor/Coma</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Urine Ketones</td>
+          <td class="text-center py-2 px-3">Positive</td>
+          <td class="text-center py-2 px-3">Positive</td>
+          <td class="text-center py-2 px-3">Positive</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Serum Osmolality</td>
+          <td class="text-center py-2 px-3">Variable</td>
+          <td class="text-center py-2 px-3">Variable</td>
+          <td class="text-center py-2 px-3">&gt;320 mOsm/kg</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div><!-- Precipitating Factors -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="search" class="w-5 h-5 text-blue-400"></i>
+       <h2 class="text-white font-semibold">Precipitating Factors — "The 5 I's"</h2>
+      </div>
+      <div class="p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+       <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 text-center">
+        <div class="font-bold text-blue-800">
+         Infection
+        </div>
+        <div class="text-xs text-slate-600 mt-1">
+         UTI, Pneumonia, Sepsis, COVID-19
+        </div>
+       </div>
+       <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 text-center">
+        <div class="font-bold text-blue-800">
+         Insulin
+        </div>
+        <div class="text-xs text-slate-600 mt-1">
+         Non-compliance, Pump failure, New-onset T1DM
+        </div>
+       </div>
+       <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 text-center">
+        <div class="font-bold text-blue-800">
+         Infarction
+        </div>
+        <div class="text-xs text-slate-600 mt-1">
+         MI, CVA, Mesenteric ischemia
+        </div>
+       </div>
+       <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 text-center">
+        <div class="font-bold text-blue-800">
+         Intoxication
+        </div>
+        <div class="text-xs text-slate-600 mt-1">
+         Alcohol, Cocaine, SGLT2 inhibitors
+        </div>
+       </div>
+       <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 text-center">
+        <div class="font-bold text-blue-800">
+         Iatrogenic
+        </div>
+        <div class="text-xs text-slate-600 mt-1">
+         Steroids, Thiazides, Atypical antipsychotics
+        </div>
+       </div>
+      </div>
+     </div><!-- Initial Workup -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="test-tube" class="w-5 h-5 text-green-400"></i>
+       <h2 class="text-white font-semibold">Initial Workup (Time 0)</h2>
+      </div>
+      <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div>
+        <h3 class="font-semibold text-slate-800 mb-2">Laboratory</h3>
+        <ul class="space-y-1 text-sm text-slate-700">
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>ABG/VBG (pH, pCO₂, HCO₃)</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>BMP (Na⁺, K⁺, Cl⁻, BUN, Cr, Glucose)</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Serum ketones (β-hydroxybutyrate)</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Serum osmolality (calculated + measured)</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>CBC with differential</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Phosphate, Magnesium, Calcium</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Lactate, LFTs, Lipase</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>HbA1c (if new diagnosis)</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Urinalysis + Culture, Blood cultures</li>
+        </ul>
+       </div>
+       <div>
+        <h3 class="font-semibold text-slate-800 mb-2">Calculated Values</h3>
+        <div class="space-y-2 text-sm">
+         <div class="bg-slate-50 rounded p-2.5 font-mono text-xs">
+          <div class="font-semibold text-slate-700 mb-1">
+           Corrected Na⁺:
+          </div> Na⁺ + 1.6 × [(Glucose - 100) / 100]
+         </div>
+         <div class="bg-slate-50 rounded p-2.5 font-mono text-xs">
+          <div class="font-semibold text-slate-700 mb-1">
+           Anion Gap:
+          </div> Na⁺ - (Cl⁻ + HCO₃⁻) → Normal: 8–12
+         </div>
+         <div class="bg-slate-50 rounded p-2.5 font-mono text-xs">
+          <div class="font-semibold text-slate-700 mb-1">
+           Effective Osmolality:
+          </div> 2×Na⁺ + Glucose/18 → Normal: 275–295
+         </div>
+         <div class="bg-slate-50 rounded p-2.5 font-mono text-xs">
+          <div class="font-semibold text-slate-700 mb-1">
+           Delta-Delta (Δ/Δ):
+          </div> ΔAG / ΔHCO₃ → Mixed disorder if &lt;1 or &gt;2
+         </div>
+        </div>
+        <h3 class="font-semibold text-slate-800 mt-4 mb-2">Imaging &amp; Other</h3>
+        <ul class="space-y-1 text-sm text-slate-700">
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>ECG (hyperkalemia, MI)</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>CXR (infection, pulmonary edema)</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5 shrink-0"></i>Foley catheter (strict I/O)</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- FLUIDS TAB -->
+    <section id="tab-fluids" class="tab-content hidden space-y-6">
+     <div class="alert-critical rounded-xl p-4 flex items-start gap-3"><i data-lucide="alert-circle" class="w-5 h-5 text-red-600 mt-0.5 shrink-0"></i>
+      <div>
+       <div class="font-semibold text-red-800">
+        Priority #1: Volume Resuscitation
+       </div>
+       <p class="text-sm text-red-700 mt-1">Average fluid deficit in DKA: 5–9 L (100 mL/kg). Begin fluid resuscitation BEFORE insulin. Aggressive early hydration alone can reduce glucose by 35–70 mg/dL/hr.</p>
+      </div>
+     </div><!-- Phase 1 -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden phase-card">
+      <div class="bg-red-700 px-5 py-3">
+       <h2 class="text-white font-semibold">Phase 1: Initial Resuscitation (Hour 0–1)</h2>
+      </div>
+      <div class="p-5">
+       <div class="dose-box rounded-lg p-4 mb-4">
+        <div class="text-white">
+         <div class="text-2xl font-bold font-mono">
+          0.9% NaCl — 15–20 mL/kg/hr
+         </div>
+         <div class="text-slate-300 text-sm mt-1">
+          ≈ 1–1.5 L in first hour (for 70 kg adult)
+         </div>
+         <div class="text-amber-300 text-xs mt-2">
+          ⚠️ Max 50 mL/kg in first 4 hours; caution in CHF/CKD/elderly
+         </div>
+        </div>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+        <div class="bg-slate-50 rounded-lg p-3"><span class="font-semibold text-slate-700">If hemodynamically unstable:</span>
+         <p class="text-slate-600 mt-1">Bolus 1L NS over 15–30 min, repeat as needed. Consider vasopressors if no response after 2–3L.</p>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-3"><span class="font-semibold text-slate-700">If cardiogenic shock/volume overload:</span>
+         <p class="text-slate-600 mt-1">Use cautious 250–500 mL boluses. Early hemodynamic monitoring. Consider bedside echo.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Phase 2 -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden phase-card">
+      <div class="bg-orange-600 px-5 py-3">
+       <h2 class="text-white font-semibold">Phase 2: Continued Replacement (Hours 1–24)</h2>
+      </div>
+      <div class="p-5">
+       <div class="dose-box rounded-lg p-4 mb-4">
+        <div class="text-white">
+         <div class="text-xl font-bold font-mono">
+          0.9% NaCl or 0.45% NaCl — 250–500 mL/hr
+         </div>
+         <div class="text-slate-300 text-sm mt-1">
+          Rate based on hydration status, UOP, and corrected Na⁺
+         </div>
+        </div>
+       </div>
+       <div class="space-y-3">
+        <div class="flex items-start gap-3 bg-slate-50 rounded-lg p-3"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded shrink-0">Na⁺ CHECK</span>
+         <div class="text-sm">
+          <p><strong>Corrected Na⁺ HIGH or normal:</strong> Switch to 0.45% NaCl at 250–500 mL/hr</p>
+          <p class="mt-1"><strong>Corrected Na⁺ LOW:</strong> Continue 0.9% NaCl at 250–500 mL/hr</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-3 bg-amber-50 rounded-lg p-3 border border-amber-200"><span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded shrink-0">BG ≤200</span>
+         <div class="text-sm">
+          <p><strong>When BG reaches 200–250 mg/dL:</strong> Add D5 to IV fluids (D5-0.45% NaCl) at 150–250 mL/hr</p>
+          <p class="text-slate-600 mt-1">Target glucose: 150–200 mg/dL until DKA resolves. May use D10 if glucose drops too fast.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Fluid Goals -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3">
+       <h2 class="text-white font-semibold">Fluid Therapy Goals &amp; Targets</h2>
+      </div>
+      <div class="p-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+       <div class="text-center bg-green-50 rounded-lg p-4 border border-green-200">
+        <div class="text-2xl font-bold text-green-700">
+         ≥0.5
+        </div>
+        <div class="text-slate-700 font-medium">
+         mL/kg/hr UOP
+        </div>
+        <div class="text-xs text-slate-500 mt-1">
+         Target urine output
+        </div>
+       </div>
+       <div class="text-center bg-blue-50 rounded-lg p-4 border border-blue-200">
+        <div class="text-2xl font-bold text-blue-700">
+         50–75
+        </div>
+        <div class="text-slate-700 font-medium">
+         mg/dL/hr glucose drop
+        </div>
+        <div class="text-xs text-slate-500 mt-1">
+         Target rate of BG decline
+        </div>
+       </div>
+       <div class="text-center bg-purple-50 rounded-lg p-4 border border-purple-200">
+        <div class="text-2xl font-bold text-purple-700">
+         50%
+        </div>
+        <div class="text-slate-700 font-medium">
+         deficit in 12–24 hrs
+        </div>
+        <div class="text-xs text-slate-500 mt-1">
+         Replace remaining over 24–48h
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- INSULIN TAB -->
+    <section id="tab-insulin" class="tab-content hidden space-y-6">
+     <div class="alert-warning rounded-xl p-4 flex items-start gap-3"><i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 mt-0.5 shrink-0"></i>
+      <div>
+       <div class="font-semibold text-amber-800">
+        ⚠️ Critical Safety Check
+       </div>
+       <p class="text-sm text-amber-700 mt-1"><strong>DO NOT start insulin if K⁺ &lt; 3.3 mEq/L.</strong> Replace potassium first. Insulin drives K⁺ intracellularly → fatal hypokalemia → cardiac arrest.</p>
+      </div>
+     </div><!-- IV Insulin Protocol -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="activity" class="w-5 h-5 text-red-400"></i>
+       <h2 class="text-white font-semibold">IV Regular Insulin Protocol (Preferred for Moderate-Severe)</h2>
+      </div>
+      <div class="p-5 space-y-4">
+       <div class="dose-box rounded-lg p-4">
+        <div class="text-white space-y-2">
+         <div class="flex flex-col sm:flex-row sm:items-center gap-2"><span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">BOLUS</span> <span class="text-lg font-bold font-mono">0.1 U/kg IV push</span> <span class="text-slate-400 text-sm">(optional per ADA 2024)</span>
+         </div>
+         <div class="flex flex-col sm:flex-row sm:items-center gap-2"><span class="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">DRIP</span> <span class="text-lg font-bold font-mono">0.1 U/kg/hr continuous infusion</span>
+         </div>
+         <div class="text-slate-400 text-xs mt-1">
+          Alternative: 0.14 U/kg/hr WITHOUT bolus (equally effective per ADA)
+         </div>
+        </div>
+       </div>
+       <h3 class="font-semibold text-slate-800">Titration Protocol:</h3>
+       <div class="space-y-2">
+        <div class="severity-severe bg-slate-50 rounded-r-lg p-3 text-sm"><strong>If BG not falling ≥50–75 mg/dL/hr:</strong> Double insulin infusion rate every hour until steady decline
+        </div>
+        <div class="severity-moderate bg-slate-50 rounded-r-lg p-3 text-sm"><strong>When BG reaches 200–250 mg/dL:</strong> Reduce infusion to 0.02–0.05 U/kg/hr AND add D5 to IV fluids
+        </div>
+        <div class="severity-mild bg-slate-50 rounded-r-lg p-3 text-sm"><strong>Target maintenance:</strong> Keep BG 150–200 mg/dL until DKA resolution criteria met
+        </div>
+       </div>
+       <div class="alert-info rounded-lg p-4 mt-4">
+        <div class="font-semibold text-blue-800 text-sm">
+         💡 Key Principle: Do NOT stop insulin drip based on glucose alone
+        </div>
+        <p class="text-xs text-blue-700 mt-1">Insulin is treating KETOACIDOSIS, not hyperglycemia. Add dextrose to maintain glucose while continuing insulin until anion gap closes.</p>
+       </div>
+      </div>
+     </div><!-- SubQ Protocol -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="syringe" class="w-5 h-5 text-green-400"></i>
+       <h2 class="text-white font-semibold">SubQ Rapid-Acting Insulin (Mild DKA Only)</h2>
+      </div>
+      <div class="p-5">
+       <div class="dose-box rounded-lg p-4 mb-4">
+        <div class="text-white">
+         <div class="text-lg font-bold font-mono">
+          Lispro/Aspart: 0.2 U/kg initially, then 0.1 U/kg q1–2h
+         </div>
+         <div class="text-slate-300 text-sm mt-2">
+          Evidence: Non-inferior to IV in MILD DKA (Umpierrez et al.)
+         </div>
+        </div>
+       </div>
+       <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm"><strong class="text-amber-800">Eligible only if:</strong> <span class="text-slate-700"> pH &gt;7.25, HCO₃ &gt;15, alert, hemodynamically stable, no ICU requirement, reliable absorption (no shock/edema)</span>
+       </div>
+      </div>
+     </div><!-- Transition to SubQ -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="arrow-right-circle" class="w-5 h-5 text-purple-400"></i>
+       <h2 class="text-white font-semibold">Transition: IV → SubQ Insulin</h2>
+      </div>
+      <div class="p-5">
+       <h3 class="font-semibold text-slate-800 mb-3">DKA Resolution Criteria (ALL must be met):</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center text-sm">
+         <div class="font-bold text-green-800">
+          pH &gt; 7.30
+         </div>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center text-sm">
+         <div class="font-bold text-green-800">
+          HCO₃ ≥ 18
+         </div>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center text-sm">
+         <div class="font-bold text-green-800">
+          AG ≤ 12
+         </div>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center text-sm">
+         <div class="font-bold text-green-800">
+          Patient eating
+         </div>
+        </div>
+       </div>
+       <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-sm">
+        <p><strong>Overlap Rule:</strong> Give first dose of long-acting SubQ insulin (Glargine/Detemir) <strong>2 hours BEFORE</strong> discontinuing IV insulin drip to prevent rebound ketoacidosis.</p>
+        <p class="mt-2"><strong>Dose:</strong> 0.5–0.8 U/kg/day total (basal-bolus split: 50% basal + 50% bolus). If insulin-naïve: start 0.4–0.5 U/kg/day.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- ELECTROLYTES TAB -->
+    <section id="tab-electrolytes" class="tab-content hidden space-y-6"><!-- Potassium -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i>
+       <h2 class="text-white font-semibold">Potassium Replacement — CRITICAL</h2>
+      </div>
+      <div class="p-5">
+       <div class="alert-critical rounded-lg p-3 mb-4 text-sm"><strong class="text-red-800">⚡ #1 Cause of Death in DKA Management:</strong> <span class="text-red-700"> Hypokalemia from insulin without adequate K⁺ replacement. Total body K⁺ depleted 3–5 mEq/kg despite normal/high serum K⁺.</span>
+       </div>
+       <div class="space-y-3">
+        <div class="bg-red-50 border-2 border-red-300 rounded-lg p-4">
+         <div class="flex items-center gap-2 mb-2"><span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">K⁺ &lt; 3.3</span> <span class="font-bold text-red-800">HOLD INSULIN</span>
+         </div>
+         <div class="font-mono text-sm text-slate-800">
+          KCl 20–40 mEq/hr IV until K⁺ ≥ 3.3 mEq/L
+         </div>
+         <div class="text-xs text-slate-600 mt-1">
+          Max peripheral: 10 mEq/hr per line. Central line required for &gt;20 mEq/hr. Continuous cardiac monitoring mandatory.
+         </div>
+        </div>
+        <div class="bg-amber-50 border-2 border-amber-300 rounded-lg p-4">
+         <div class="flex items-center gap-2 mb-2"><span class="bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded">K⁺ 3.3–5.3</span> <span class="font-bold text-amber-800">REPLACE + START INSULIN</span>
+         </div>
+         <div class="font-mono text-sm text-slate-800">
+          20–30 mEq KCl per liter of IV fluid
+         </div>
+         <div class="text-xs text-slate-600 mt-1">
+          Goal: maintain K⁺ 4.0–5.0 mEq/L. Check q2h. Use KCl:KPhos 2:1 ratio if phos also low.
+         </div>
+        </div>
+        <div class="bg-green-50 border-2 border-green-300 rounded-lg p-4">
+         <div class="flex items-center gap-2 mb-2"><span class="bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">K⁺ &gt; 5.3</span> <span class="font-bold text-green-800">HOLD K⁺, RECHECK q2h</span>
+         </div>
+         <div class="font-mono text-sm text-slate-800">
+          Do not supplement. Start insulin (will lower K⁺).
+         </div>
+         <div class="text-xs text-slate-600 mt-1">
+          ECG for peaked T-waves. Will drop rapidly with insulin + fluids. Recheck in 2 hours.
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Bicarbonate -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="beaker" class="w-5 h-5 text-cyan-400"></i>
+       <h2 class="text-white font-semibold">Bicarbonate — Very Limited Indications</h2>
+      </div>
+      <div class="p-5">
+       <div class="alert-warning rounded-lg p-3 mb-4 text-sm"><strong class="text-amber-800">⚠️ Routine use NOT recommended</strong> — may worsen hypokalemia, paradoxical CNS acidosis, delay ketone clearance, cerebral edema risk in pediatrics.
+       </div>
+       <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+        <p class="font-semibold text-red-800 mb-2">ONLY if pH &lt; 6.9 (ADA 2024):</p>
+        <div class="font-mono text-sm text-slate-800">
+         NaHCO₃ 100 mEq in 400 mL sterile H₂O + 20 mEq KCl at 200 mL/hr × 2 hours
+        </div>
+        <p class="text-xs text-slate-600 mt-2">Repeat q2h until pH &gt; 7.0. Some guidelines also consider for pH 6.9–7.0 with hemodynamic instability or life-threatening hyperkalemia.</p>
+       </div>
+      </div>
+     </div><!-- Phosphate -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="droplet" class="w-5 h-5 text-indigo-400"></i>
+       <h2 class="text-white font-semibold">Phosphate Replacement</h2>
+      </div>
+      <div class="p-5 text-sm space-y-3">
+       <p><strong>Routine replacement NOT recommended</strong> (no proven benefit in RCTs).</p>
+       <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-3">
+        <p class="font-semibold text-indigo-800">Replace if PO₄ &lt; 1.0 mg/dL OR symptomatic:</p>
+        <div class="font-mono text-slate-800 mt-1">
+         KPhos 20–30 mEq/L in IV fluids (replaces part of KCl)
+        </div>
+        <p class="text-xs text-slate-600 mt-1">Symptoms: cardiac dysfunction, respiratory muscle weakness, hemolytic anemia. Monitor calcium (risk of hypocalcemia).</p>
+       </div>
+      </div>
+     </div><!-- Magnesium -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3">
+       <h2 class="text-white font-semibold">Magnesium</h2>
+      </div>
+      <div class="p-5 text-sm">
+       <p>Often depleted in DKA. Replace if <strong>Mg²⁺ &lt; 1.8 mg/dL</strong> or refractory hypokalemia.</p>
+       <div class="font-mono bg-slate-50 rounded p-2 mt-2">
+        MgSO₄ 1–2 g IV over 1–2 hours
+       </div>
+      </div>
+     </div>
+    </section><!-- MONITORING TAB -->
+    <section id="tab-monitoring" class="tab-content hidden space-y-6">
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="monitor" class="w-5 h-5 text-green-400"></i>
+       <h2 class="text-white font-semibold">Monitoring Protocol</h2>
+      </div>
+      <div class="p-5 overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr class="border-b-2 border-slate-200">
+          <th class="text-left py-2 px-3 font-semibold">Parameter</th>
+          <th class="text-left py-2 px-3 font-semibold">Frequency</th>
+          <th class="text-left py-2 px-3 font-semibold">Target/Action</th>
+         </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-2 px-3 font-medium">Capillary BG</td>
+          <td class="py-2 px-3">q1h</td>
+          <td class="py-2 px-3">Drop 50–75 mg/dL/hr; add D5 at 200–250</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">BMP (Na⁺, K⁺, Cl⁻, HCO₃, BUN, Cr)</td>
+          <td class="py-2 px-3">q2–4h</td>
+          <td class="py-2 px-3">K⁺ 4.0–5.0; Corrected Na⁺ rising</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">VBG/ABG</td>
+          <td class="py-2 px-3">q2–4h</td>
+          <td class="py-2 px-3">pH trending &gt;7.3; pCO₂ appropriate</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Anion Gap</td>
+          <td class="py-2 px-3">q2–4h (calculated)</td>
+          <td class="py-2 px-3">Closing AG = resolving ketoacidosis</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">β-hydroxybutyrate</td>
+          <td class="py-2 px-3">q2–4h if available</td>
+          <td class="py-2 px-3">&lt;0.6 mmol/L = resolution</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Vital Signs</td>
+          <td class="py-2 px-3">q1h initially</td>
+          <td class="py-2 px-3">HR, BP, RR, SpO₂, Temp, GCS</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Fluid I/O</td>
+          <td class="py-2 px-3">q1h</td>
+          <td class="py-2 px-3">UOP ≥0.5 mL/kg/hr</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Mental Status</td>
+          <td class="py-2 px-3">q1–2h</td>
+          <td class="py-2 px-3">Watch for cerebral edema signs</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium">Serum Osmolality</td>
+          <td class="py-2 px-3">q4–6h</td>
+          <td class="py-2 px-3">Should gradually normalize</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div><!-- DKA Flowsheet -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3">
+       <h2 class="text-white font-semibold">DKA Resolution Markers (Stop Drip Criteria)</h2>
+      </div>
+      <div class="p-5">
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-green-50 border border-green-300 rounded-lg p-4 text-center"><i data-lucide="check-circle" class="w-6 h-6 text-green-600 mx-auto"></i>
+         <div class="font-bold text-green-800 mt-2">
+          pH &gt; 7.30
+         </div>
+         <div class="text-xs text-slate-600 mt-1">
+          Venous or Arterial
+         </div>
+        </div>
+        <div class="bg-green-50 border border-green-300 rounded-lg p-4 text-center"><i data-lucide="check-circle" class="w-6 h-6 text-green-600 mx-auto"></i>
+         <div class="font-bold text-green-800 mt-2">
+          HCO₃ ≥ 18
+         </div>
+         <div class="text-xs text-slate-600 mt-1">
+          mEq/L
+         </div>
+        </div>
+        <div class="bg-green-50 border border-green-300 rounded-lg p-4 text-center"><i data-lucide="check-circle" class="w-6 h-6 text-green-600 mx-auto"></i>
+         <div class="font-bold text-green-800 mt-2">
+          AG ≤ 12
+         </div>
+         <div class="text-xs text-slate-600 mt-1">
+          Anion Gap closed
+         </div>
+        </div>
+        <div class="bg-green-50 border border-green-300 rounded-lg p-4 text-center"><i data-lucide="check-circle" class="w-6 h-6 text-green-600 mx-auto"></i>
+         <div class="font-bold text-green-800 mt-2">
+          BG &lt; 200
+         </div>
+         <div class="text-xs text-slate-600 mt-1">
+          + tolerating PO
+         </div>
+        </div>
+       </div>
+       <div class="mt-4 bg-purple-50 border border-purple-200 rounded-lg p-3 text-sm"><strong class="text-purple-800">β-OHB preferred if available:</strong> Resolution = β-hydroxybutyrate &lt; 0.6 mmol/L (more accurate than AG in hyperchloremic acidosis from NS resuscitation).
+       </div>
+      </div>
+     </div>
+    </section><!-- COMPLICATIONS TAB -->
+    <section id="tab-complications" class="tab-content hidden space-y-6"><!-- Cerebral Edema -->
+     <div class="bg-white rounded-xl shadow-sm border-2 border-red-300 overflow-hidden">
+      <div class="bg-red-700 px-5 py-3 flex items-center gap-2"><i data-lucide="brain" class="w-5 h-5 text-white"></i>
+       <h2 class="text-white font-semibold">Cerebral Edema — Most Feared Complication</h2>
+      </div>
+      <div class="p-5 space-y-4">
+       <div class="alert-critical rounded-lg p-3 text-sm"><strong>Mortality 20–25%.</strong> More common in pediatric DKA but can occur in adults. Risk factors: new-onset DM, young age, severe acidosis, rapid osmolality correction, excessive free water, bicarbonate use.
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+         <h3 class="font-semibold text-slate-800 mb-2">Warning Signs:</h3>
+         <ul class="space-y-1 text-sm text-slate-700">
+          <li>• Headache, vomiting (after initial improvement)</li>
+          <li>• Altered mental status, irritability</li>
+          <li>• Cushing's triad (↑BP, ↓HR, irregular breathing)</li>
+          <li>• Papilledema, pupil changes</li>
+          <li>• Posturing, seizures</li>
+          <li>• Paradoxical decline in GCS during treatment</li>
+         </ul>
+        </div>
+        <div>
+         <h3 class="font-semibold text-slate-800 mb-2">Immediate Management:</h3>
+         <div class="space-y-2 text-sm">
+          <div class="bg-red-50 rounded p-2 font-mono">
+           Mannitol 0.5–1 g/kg IV over 20 min
+          </div>
+          <div class="bg-red-50 rounded p-2 font-mono">
+           OR Hypertonic saline (3%) 5–10 mL/kg over 30 min
+          </div>
+          <div class="text-slate-600 mt-2">
+           <p>• Elevate HOB 30°</p>
+           <p>• Reduce IV fluids by 1/3</p>
+           <p>• Intubation if GCS ≤8 (avoid hyperventilation)</p>
+           <p>• Urgent CT head, neurosurgery consult</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Other Complications -->
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3">
+       <h2 class="text-white font-semibold">Other Complications</h2>
+      </div>
+      <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+       <div class="border border-slate-200 rounded-lg p-4">
+        <h3 class="font-bold text-red-700 mb-2">Hypokalemia</h3>
+        <p>Most common lethal complication of treatment. Insulin + fluids drive K⁺ into cells. Monitor q2h. ECG changes: U-waves, flattened T-waves, ST depression.</p>
+       </div>
+       <div class="border border-slate-200 rounded-lg p-4">
+        <h3 class="font-bold text-orange-700 mb-2">Hypoglycemia</h3>
+        <p>From excessive insulin without dextrose. Add D5/D10 when BG &lt;250. Never stop insulin drip for glucose alone — treat the ketoacidosis.</p>
+       </div>
+       <div class="border border-slate-200 rounded-lg p-4">
+        <h3 class="font-bold text-purple-700 mb-2">ARDS / Pulmonary Edema</h3>
+        <p>From aggressive fluid resuscitation. Risk: elderly, CKD, CHF. Monitor SpO₂, CXR. Use balanced crystalloids if concerned.</p>
+       </div>
+       <div class="border border-slate-200 rounded-lg p-4">
+        <h3 class="font-bold text-blue-700 mb-2">Hyperchloremic NAGMA</h3>
+        <p>From large-volume NS. AG closes but pH stays low (non-gap acidosis). Use 0.45% NaCl or balanced solutions. Self-resolves in 24–48h.</p>
+       </div>
+       <div class="border border-slate-200 rounded-lg p-4">
+        <h3 class="font-bold text-teal-700 mb-2">VTE / Thromboembolism</h3>
+        <p>DKA is prothrombotic (dehydration, immobility, inflammation). Consider prophylactic LMWH in adults unless contraindicated.</p>
+       </div>
+       <div class="border border-slate-200 rounded-lg p-4">
+        <h3 class="font-bold text-pink-700 mb-2">Rhabdomyolysis</h3>
+        <p>From severe dehydration + hypophosphatemia. Check CK if oliguric/dark urine. Aggressive hydration, avoid nephrotoxins.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- CALCULATOR TAB -->
+    <section id="tab-calculator" class="tab-content hidden space-y-6">
+     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-slate-800 px-5 py-3 flex items-center gap-2"><i data-lucide="calculator" class="w-5 h-5 text-green-400"></i>
+       <h2 class="text-white font-semibold">DKA Clinical Calculator</h2>
+      </div>
+      <div class="p-5">
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div><label for="calc-na" class="block text-sm font-medium text-slate-700 mb-1">Measured Na⁺ (mEq/L)</label> <input type="number" id="calc-na" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="140" oninput="calculate()">
+        </div>
+        <div><label for="calc-glucose" class="block text-sm font-medium text-slate-700 mb-1">Glucose (mg/dL)</label> <input type="number" id="calc-glucose" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="450" oninput="calculate()">
+        </div>
+        <div><label for="calc-cl" class="block text-sm font-medium text-slate-700 mb-1">Cl⁻ (mEq/L)</label> <input type="number" id="calc-cl" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="100" oninput="calculate()">
+        </div>
+        <div><label for="calc-hco3" class="block text-sm font-medium text-slate-700 mb-1">HCO₃⁻ (mEq/L)</label> <input type="number" id="calc-hco3" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="10" oninput="calculate()">
+        </div>
+        <div><label for="calc-weight" class="block text-sm font-medium text-slate-700 mb-1">Weight (kg)</label> <input type="number" id="calc-weight" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="70" oninput="calculate()">
+        </div>
+        <div><label for="calc-bun" class="block text-sm font-medium text-slate-700 mb-1">BUN (mg/dL)</label> <input type="number" id="calc-bun" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="25" oninput="calculate()">
+        </div>
+       </div>
+       <div id="calc-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="bg-slate-100 rounded-lg p-4">
+         <div class="text-xs text-slate-500 uppercase tracking-wide">
+          Corrected Na⁺
+         </div>
+         <div class="text-xl font-bold font-mono text-slate-800 mt-1" id="res-corrna">
+          —
+         </div>
+         <div class="text-xs text-slate-500 mt-1">
+          Na + 1.6 × [(Glu-100)/100]
+         </div>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-4">
+         <div class="text-xs text-slate-500 uppercase tracking-wide">
+          Anion Gap
+         </div>
+         <div class="text-xl font-bold font-mono text-slate-800 mt-1" id="res-ag">
+          —
+         </div>
+         <div class="text-xs text-slate-500 mt-1">
+          Na - (Cl + HCO₃)
+         </div>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-4">
+         <div class="text-xs text-slate-500 uppercase tracking-wide">
+          Effective Osm
+         </div>
+         <div class="text-xl font-bold font-mono text-slate-800 mt-1" id="res-osm">
+          —
+         </div>
+         <div class="text-xs text-slate-500 mt-1">
+          2×Na + Glu/18
+         </div>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-4">
+         <div class="text-xs text-slate-500 uppercase tracking-wide">
+          Insulin Bolus
+         </div>
+         <div class="text-xl font-bold font-mono text-slate-800 mt-1" id="res-bolus">
+          —
+         </div>
+         <div class="text-xs text-slate-500 mt-1">
+          0.1 U/kg IV
+         </div>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-4">
+         <div class="text-xs text-slate-500 uppercase tracking-wide">
+          Insulin Drip
+         </div>
+         <div class="text-xl font-bold font-mono text-slate-800 mt-1" id="res-drip">
+          —
+         </div>
+         <div class="text-xs text-slate-500 mt-1">
+          0.1 U/kg/hr
+         </div>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-4">
+         <div class="text-xs text-slate-500 uppercase tracking-wide">
+          Initial Fluid Bolus
+         </div>
+         <div class="text-xl font-bold font-mono text-slate-800 mt-1" id="res-fluid">
+          —
+         </div>
+         <div class="text-xs text-slate-500 mt-1">
+          15–20 mL/kg 1st hr
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-slate-800 text-slate-400 text-xs text-center py-4 px-4 mt-6">
+    <p>Based on ADA Standards of Care 2024, ISPAD 2022, JBDS-IP Guidelines. For clinical decision support only — always apply clinical judgment.</p>
+    <p class="mt-1">Last updated: 2024 | Not a substitute for institutional protocols</p>
+   </footer>
+  </div>
+  <script>
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(el => {
+      el.classList.remove('tab-active');
+      el.classList.add('text-slate-300');
+    });
+    document.getElementById('tab-' + tab).classList.remove('hidden');
+    const btn = document.querySelector(`[data-tab="${tab}"]`);
+    btn.classList.add('tab-active');
+    btn.classList.remove('text-slate-300');
+  }
+
+  // Calculator
+  function calculate() {
+    const na = parseFloat(document.getElementById('calc-na').value);
+    const glu = parseFloat(document.getElementById('calc-glucose').value);
+    const cl = parseFloat(document.getElementById('calc-cl').value);
+    const hco3 = parseFloat(document.getElementById('calc-hco3').value);
+    const wt = parseFloat(document.getElementById('calc-weight').value);
+    const bun = parseFloat(document.getElementById('calc-bun').value);
+
+    if (!isNaN(na) && !isNaN(glu)) {
+      const corrNa = (na + 1.6 * ((glu - 100) / 100)).toFixed(1);
+      document.getElementById('res-corrna').textContent = corrNa + ' mEq/L';
+      const osm = (2 * na + glu / 18).toFixed(0);
+      document.getElementById('res-osm').textContent = osm + ' mOsm/kg';
+    }
+    if (!isNaN(na) && !isNaN(cl) && !isNaN(hco3)) {
+      const ag = (na - (cl + hco3)).toFixed(0);
+      document.getElementById('res-ag').textContent = ag + ' mEq/L';
+    }
+    if (!isNaN(wt)) {
+      document.getElementById('res-bolus').textContent = (0.1 * wt).toFixed(1) + ' Units';
+      document.getElementById('res-drip').textContent = (0.1 * wt).toFixed(1) + ' U/hr';
+      const fluidLow = (15 * wt / 1000).toFixed(1);
+      const fluidHigh = (20 * wt / 1000).toFixed(1);
+      document.getElementById('res-fluid').textContent = fluidLow + '–' + fluidHigh + ' L';
+    }
+  }
+
+  // Element SDK
+  const defaultConfig = {
+    main_title: 'DKA Management Protocol',
+    institution_name: 'ICU/Emergency Department',
+    background_color: '#f8fafc',
+    header_color: '#1e293b',
+    text_color: '#1e293b',
+    accent_color: '#dc2626',
+    surface_color: '#ffffff',
+    font_family: 'IBM Plex Sans',
+    font_size: 16
+  };
+
+  function applyConfig(config) {
+    document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+    document.getElementById('institution-name').textContent = config.institution_name || defaultConfig.institution_name;
+    
+    const app = document.getElementById('app');
+    app.style.backgroundColor = config.background_color || defaultConfig.background_color;
+    app.style.fontFamily = `${config.font_family || defaultConfig.font_family}, sans-serif`;
+  }
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
