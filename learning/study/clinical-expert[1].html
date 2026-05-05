@@ -1,0 +1,702 @@
+<!doctype html> 
+<html lang="en" class="h-full"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Clinical Expert Learning | Deep Medicine</title> 
+        <meta name="description" content="Develop clinical expertise with structured reasoning, decision-making frameworks, and advanced medical learning strategies."> 
+        <link rel="canonical" href="https://deepmedicine.in/learning/study/clinical-expert"> 
+        <!-- Open Graph --> 
+        <meta property="og:title" content="Clinical Expert Learning | Deep Medicine"> 
+        <meta property="og:description" content="Build clinical reasoning, decision-making skills, and expert-level medical thinking."> 
+        <meta property="og:image" content="https://deepmedicine.in/images/clinical-expert.jpg"> 
+        <!-- Styles --> 
+        <script src="https://cdn.tailwindcss.com/3.4.17"></script> 
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+        <!-- Icons --> 
+        <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+
+.glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+.card-glow:hover { box-shadow: 0 0 30px rgba(56,189,248,0.08); }
+.tab-active { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: #fff; box-shadow: 0 4px 20px rgba(14,165,233,0.3); }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation: fadeUp 0.5s ease-out both; }
+
+.protocol-card { transition: all 0.3s ease; }
+.protocol-card:hover { transform: translateY(-2px); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+
+.body-diagram { position: relative; }
+.position-dot { width: 10px; height: 10px; border-radius: 50%; position: absolute; animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(56,189,248,0.5); } 50% { box-shadow: 0 0 0 8px rgba(56,189,248,0); } }
+
+.severity-critical { border-left: 3px solid #ef4444; }
+.severity-urgent { border-left: 3px solid #f59e0b; }
+.severity-routine { border-left: 3px solid #22c55e; }
+
+.step-line { position: relative; padding-left: 28px; }
+.step-line::before { content:''; position:absolute; left:9px; top:24px; bottom:0; width:2px; background: rgba(255,255,255,0.1); }
+.step-line:last-child::before { display:none; }
+.step-dot { width:20px; height:20px; border-radius:50%; position:absolute; left:0; top:2px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(145deg, #0a0e1a 0%, #0f172a 40%, #0c1220 100%);"><!-- Header -->
+   <header class="w-full px-4 sm:px-6 lg:px-8 pt-6 pb-4 fade-up">
+    <div class="max-w-6xl mx-auto">
+     <div class="glass rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);"><i data-lucide="stethoscope" style="width:28px;height:28px;color:#fff;"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+       <h1 id="doc-name" class="text-xl sm:text-2xl font-bold text-white" style="font-family:'Playfair Display',serif;">Dr. Clinical Expert</h1>
+       <p id="doc-designation" class="text-sky-400 text-sm mt-0.5">MBBS, MD Medicine | Professor of Medicine | ICU Intensivist | Emergency Medicine Specialist</p>
+       <p id="doc-institution" class="text-slate-500 text-xs mt-1">Teaching Hospital &amp; Medical University</p>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 text-xs text-slate-500"><span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> Evidence-Based Protocols
+      </div>
+     </div>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="w-full px-4 sm:px-6 lg:px-8 pb-4 fade-up" style="animation-delay:0.1s;">
+    <div class="max-w-6xl mx-auto flex gap-2 overflow-x-auto pb-1" id="main-tabs"><button onclick="switchTab('positions')" data-tab="positions" class="tab-active whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold transition-all"> <span class="flex items-center gap-2"><i data-lucide="move" style="width:15px;height:15px;"></i> Positioning</span> </button> <button onclick="switchTab('emergency')" data-tab="emergency" class="whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all glass"> <span class="flex items-center gap-2"><i data-lucide="zap" style="width:15px;height:15px;"></i> Emergency</span> </button> <button onclick="switchTab('icu')" data-tab="icu" class="whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all glass"> <span class="flex items-center gap-2"><i data-lucide="activity" style="width:15px;height:15px;"></i> ICU Protocols</span> </button> <button onclick="switchTab('drugs')" data-tab="drugs" class="whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all glass"> <span class="flex items-center gap-2"><i data-lucide="pill" style="width:15px;height:15px;"></i> Drug Protocols</span> </button> <button onclick="switchTab('procedures')" data-tab="procedures" class="whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all glass"> <span class="flex items-center gap-2"><i data-lucide="scissors" style="width:15px;height:15px;"></i> Procedures</span> </button>
+    </div>
+   </nav><!-- Content -->
+   <main class="w-full px-4 sm:px-6 lg:px-8 pb-8" id="content-area">
+   </main>
+  </div>
+  <script>
+// ===================== DATA =====================
+const POSITIONS = [
+  {
+    name: "Recovery Position (Left Lateral)",
+    severity: "critical",
+    icon: "rotate-ccw",
+    indication: "Unconscious breathing patient, post-ictal state, drug overdose with intact airway, GCS 3-8 with adequate breathing",
+    contraindications: "Suspected spinal injury (use log-roll), unstable pelvic fractures, severe chest trauma with flail segment",
+    technique: [
+      "Kneel beside patient; ensure airway is clear with head-tilt chin-lift",
+      "Place arm nearest to you at right angle to body, elbow bent with palm facing up",
+      "Bring far arm across chest and hold back of hand against patient's nearest cheek",
+      "Grasp far knee and pull it up — foot flat on ground",
+      "Keeping hand pressed against cheek, pull on far knee to roll patient toward you",
+      "Adjust upper leg so hip and knee are at right angles (stabilization)",
+      "Tilt head back to maintain airway patency — mouth pointing downward for drainage",
+      "Monitor breathing and pulse every 2 minutes; switch sides every 30 minutes to prevent compartment syndrome"
+    ],
+    clinicalPearl: "In pregnancy (>20 weeks), ALWAYS use LEFT lateral position to prevent aortocaval compression by the gravid uterus. The IVC lies to the right of the spine — left lateral displaces the uterus off the great vessels, improving venous return by up to 25%.",
+    monitoring: "SpO₂, RR, HR, level of consciousness (AVPU/GCS), pupil response q5min"
+  },
+  {
+    name: "Trendelenburg Position",
+    severity: "urgent",
+    icon: "trending-down",
+    indication: "Neurogenic shock, hypovolemic shock (initial resuscitation), air embolism, central venous catheter insertion (subclavian/IJ), pelvic surgery",
+    contraindications: "Raised ICP, acute pulmonary edema, aortic regurgitation, uncontrolled hypertension, recent eye/brain surgery, diaphragmatic hernia",
+    technique: [
+      "Place patient supine on bed/trolley with intact side-rails",
+      "Tilt the entire bed 15-30° head-down using bed controls or manual tilt",
+      "For shock: 15° is sufficient — aggressive angles (>30°) impair diaphragmatic excursion and increase ICP",
+      "For CVC insertion: 15° Trendelenburg distends neck veins, reducing pneumothorax risk",
+      "Secure patient with straps across thighs to prevent sliding",
+      "Monitor respiratory effort closely — position increases venous return to thorax"
+    ],
+    clinicalPearl: "Modified Trendelenburg (passive leg raise at 45°) is now PREFERRED over full Trendelenburg in shock. It's a reversible 'auto-transfusion' of ~300mL blood equivalent, and serves as a dynamic preload challenge — if SV increases >10% with PLR, the patient is fluid-responsive.",
+    monitoring: "MAP, CVP, SpO₂, RR, urine output, lactate clearance q2h"
+  },
+  {
+    name: "Fowler's / Semi-Fowler's Position",
+    severity: "urgent",
+    icon: "arrow-up-right",
+    indication: "Acute pulmonary edema, COPD exacerbation, pneumonia with respiratory distress, post-operative thoracic/abdominal surgery, GERD, NG tube feeding, raised ICP (30° HOB elevation)",
+    contraindications: "Hypotension/shock (until resuscitated), spinal cord injury below assessment, hip fractures (modified positioning needed)",
+    technique: [
+      "High Fowler's (60-90°): Acute pulmonary edema — sit upright, legs dangling over bed edge if possible",
+      "Semi-Fowler's (30-45°): Standard for most respiratory patients and post-op care",
+      "Low Fowler's (15-30°): Head of bed elevation for ICP management and VAP prevention",
+      "Support lumbar spine with pillow; ensure no sliding — sacral pressure ulcer risk",
+      "Pillows under forearms reduce accessory muscle fatigue in dyspneic patients",
+      "For ICP: Maintain head midline, avoid neck flexion (impedes jugular venous drainage)"
+    ],
+    clinicalPearl: "In ventilated ICU patients, 30-45° HOB elevation reduces VAP incidence by 34% (NNT=7). This is a core VAP bundle element. Combined with subglottic suctioning and oral chlorhexidine, VAP rates can drop by >50%. Always verify angle with inclinometer — visual estimation is wrong 62% of the time.",
+    monitoring: "SpO₂, RR, WOB (accessory muscle use, paradoxical breathing), ABG, ICP if monitored"
+  },
+  {
+    name: "Prone Position (Proning)",
+    severity: "critical",
+    icon: "flip-vertical",
+    indication: "Moderate-severe ARDS (P/F ratio <150), refractory hypoxemia on mechanical ventilation, post-cardiac arrest with pulmonary injury",
+    contraindications: "Unstable spine/pelvic fractures, open abdominal wounds, raised ICP (>30mmHg), hemodynamic instability (MAP <60 despite vasopressors), anterior chest burns, pregnancy (relative — can be done with abdominal free support)",
+    technique: [
+      "TEAM: Minimum 5 personnel — 1 airway lead (RT/anesthetist), 2 per side, 1 coordinating",
+      "Pre-prone checklist: Secure ETT (tape + tie), verify cuff pressure (25-30 cmH₂O), pause enteral feeds 1hr before, eye protection (lubricant + taped shut), ECG electrodes to back",
+      "Position flat supine → tuck arm on turning side under body (swimmer's position prep)",
+      "On count of 3: Log-roll to lateral → complete turn to prone in one smooth motion",
+      "Place gel pads: forehead, chest (bilateral), pelvis — FREE ABDOMEN to optimize diaphragmatic excursion",
+      "Swimmer's position: One arm up beside head, opposite arm down — alternate every 2 hours to prevent brachial plexus injury",
+      "ETT should exit mouth inferiorly — ensure no kinking, verify ETCO₂ immediately post-turn",
+      "Prone for ≥16 hours/day per PROSEVA protocol; supinate if PF >150 for 4 consecutive hours"
+    ],
+    clinicalPearl: "PROSEVA trial (2013): Proning <36hrs after intubation in severe ARDS reduced 28-day mortality from 32.8% to 16% (NNT=6). Mechanism: Recruits dorsal lung (60% of lung volume), improves V/Q matching, reduces ventral over-distension, promotes secretion drainage, and decreases right ventricular afterload. Early proning is KEY — waiting >48hrs loses most survival benefit.",
+    monitoring: "P/F ratio q4h, ETCO₂ continuous, airway pressures, facial/corneal assessment, abdominal pressure"
+  },
+  {
+    name: "Left Lateral Decubitus (Durant's Maneuver)",
+    severity: "critical",
+    icon: "rotate-cw",
+    indication: "Venous air embolism (primary rescue position), right-sided pleural effusion drainage, cardiac procedures (pericardiocentesis approach), colonoscopy starting position",
+    contraindications: "Left-sided rib fractures, left pneumothorax, left hip arthroplasty",
+    technique: [
+      "For AIR EMBOLISM (Durant's Maneuver): This is an emergency intervention",
+      "Immediately position patient in LEFT lateral decubitus with 15° head-down (Trendelenburg)",
+      "This traps air in the RIGHT atrial apex, preventing outflow tract obstruction",
+      "Aspirate air via central venous catheter if present — advance to RA/RV junction",
+      "Simultaneously: high-flow O₂ (100% FiO₂), IV fluid bolus, consider hyperbaric if available",
+      "For pleural procedures: Right lateral for left-sided effusions and vice versa"
+    ],
+    clinicalPearl: "In venous air embolism, the lethal volume is ~3-5 mL/kg (~200-350mL in adults). Air lock occurs at the RV outflow tract. Durant's maneuver allows buoyant air to float to the RA apex (anteriorly in left lateral position), away from the RVOT. Mill-wheel murmur on precordial auscultation is pathognomonic but a LATE sign — precordial Doppler detects as little as 0.25mL of air.",
+    monitoring: "Precordial Doppler, ETCO₂ (sudden drop is earliest sign), SpO₂, hemodynamics, TEE if available"
+  },
+  {
+    name: "Lithotomy Position",
+    severity: "routine",
+    icon: "git-merge",
+    indication: "Vaginal delivery, perineal/rectal surgery, urological procedures, Foley catheterization in difficult cases, hemorrhoid surgery",
+    contraindications: "Hip joint prosthesis (restricted ROM), severe arthritis, lower extremity DVT, ankle/knee injuries, morbid obesity (modified needed)",
+    technique: [
+      "Position patient supine on table with buttocks at table edge",
+      "Both legs raised simultaneously to prevent sacroiliac strain",
+      "Place calves/feet in padded stirrups — avoid pressure on peroneal nerve (lateral fibular head)",
+      "Hip flexion 80-100°, abduction 30-45°, slight external rotation",
+      "Ensure no contact between leg and metal stirrup — pad all pressure points",
+      "Arms secured on armboards at <90° abduction to prevent brachial plexus injury",
+      "At end: Lower BOTH legs simultaneously and slowly to prevent acute hypotension (blood pooling redistribution)"
+    ],
+    clinicalPearl: "Compartment syndrome of the lower leg is a serious complication with prolonged lithotomy (>4hrs). Calf perfusion pressure drops by 27mmHg in lithotomy. The well-leg compartment syndrome incidence is 1:3500. Intermittent lowering of legs every 2 hours and maintaining MAP >80 significantly reduces risk. Always document neurovascular status post-procedure.",
+    monitoring: "Peripheral pulses (DP, PT), sensation in L4-S1 dermatome, compartment firmness, HR/BP (watch for drop when lowering legs)"
+  }
+];
+
+const EMERGENCY = [
+  {
+    name: "Cardiac Arrest — ACLS Protocol",
+    severity: "critical",
+    icon: "heart",
+    steps: [
+      { label: "Confirm arrest", detail: "Check responsiveness → Call for help → Activate code blue. Check carotid pulse ≤10 sec. No pulse = START CPR immediately." },
+      { label: "High-quality CPR", detail: "Rate 100-120/min, depth 5-6cm (2-2.4in), full chest recoil, minimize interruptions <10sec. Compression fraction >80%. Rotate compressor q2min." },
+      { label: "Rhythm analysis", detail: "Shockable (VF/pVT): Defibrillate 200J biphasic → Resume CPR 2min → Recheck. Non-shockable (PEA/Asystole): CPR + seek reversible cause (H's & T's)." },
+      { label: "Epinephrine", detail: "1mg IV/IO q3-5min. For shockable: give AFTER 2nd shock. For non-shockable: give ASAP. Flush with 20mL NS + elevate extremity." },
+      { label: "Amiodarone", detail: "For refractory VF/pVT: 300mg IV bolus after 3rd shock → 150mg after 5th shock. Alternative: Lidocaine 1-1.5mg/kg." },
+      { label: "Advanced airway", detail: "Supraglottic airway or ETT (do NOT interrupt CPR >10sec for intubation). Once placed: continuous compressions + ventilations 10/min (1 breath q6sec)." },
+      { label: "Reversible causes", detail: "H's: Hypovolemia, Hypoxia, Hydrogen ion (acidosis), Hypo/Hyperkalemia, Hypothermia. T's: Tension pneumothorax, Tamponade, Toxins, Thrombosis (PE/MI)." },
+      { label: "Post-ROSC", detail: "12-lead ECG → Cath lab if STEMI. TTM 32-36°C for 24hrs. MAP >65, SpO₂ 92-98%, PaCO₂ 35-45, glucose 144-180. Neuroprognostication ≥72hrs." }
+    ],
+    pearl: "Pit-crew model CPR: Assign roles BEFORE arrests. Position 1: Compressions. Position 2: Airway/ventilation. Position 3: Defibrillator/monitor. Position 4: IV access/drugs. Position 5: Documentation/time-keeping. Practice makes reflex."
+  },
+  {
+    name: "Anaphylaxis — Rapid Management",
+    severity: "critical",
+    icon: "alert-triangle",
+    steps: [
+      { label: "Recognize", detail: "Acute onset (minutes to hours): Skin (urticaria/angioedema) + Respiratory (stridor/wheeze/dyspnea) + Cardiovascular (hypotension/syncope) + GI (vomiting/cramping). Any 2 systems = anaphylaxis." },
+      { label: "REMOVE trigger", detail: "Stop IV infusion, remove stinger (scrape don't squeeze), note agent for documentation. Call for help." },
+      { label: "EPINEPHRINE IM", detail: "Adrenaline 0.3-0.5mg (1:1000) IM MID-ANTEROLATERAL THIGH. Pediatric: 0.01mg/kg (max 0.3mg). Repeat q5-15min if no improvement. THIS IS THE ONLY FIRST-LINE DRUG." },
+      { label: "Position", detail: "SUPINE with legs elevated (Trendelenburg) to maximize venous return. If dyspneic: semi-recumbent. If vomiting: recovery position. NEVER sit or stand up — can cause 'empty ventricle syndrome' → PEA arrest." },
+      { label: "Adjuncts", detail: "High-flow O₂ (15L NRB mask). Large-bore IV x2 → NS 20mL/kg bolus (may need 2-4L). Salbutamol neb 5mg for bronchospasm. H1-blocker: Diphenhydramine 50mg IV. H2-blocker: Ranitidine 50mg IV. Hydrocortisone 200mg IV (prevents biphasic reaction — onset 4-6hrs)." },
+      { label: "Refractory", detail: "IV epinephrine infusion: 1mg in 250mL NS (4mcg/mL) at 0.1mcg/kg/min titrate to MAP. Glucagon 1-5mg IV over 5min if on β-blockers (bypasses β-receptor blockade via cAMP). Vasopressin 2-10 units IV for refractory hypotension." },
+      { label: "Disposition", detail: "Observe 6-8 hrs minimum (biphasic reaction in 5-20%, typically 8-10hrs). Prescribe EpiPen + action plan. Allergy/immunology referral. Serum tryptase (within 1-2hrs, peak at 1hr)." }
+    ],
+    pearl: "The SINGLE most common error in anaphylaxis is DELAYED EPINEPHRINE. Every minute without IM adrenaline increases mortality. Antihistamines and steroids are NOT first-line — they have zero effect on bronchospasm or hypotension acutely. Thigh IM injection achieves peak plasma concentration in 8 minutes vs 34 minutes for subcutaneous."
+  },
+  {
+    name: "Status Epilepticus Management",
+    severity: "critical",
+    icon: "zap",
+    steps: [
+      { label: "0-5 min: Stabilize", detail: "ABCs — protect airway (recovery position, suction, NPA). High-flow O₂. Do NOT insert anything in mouth. Note seizure time. Check glucose (BGL) — if <60mg/dL: Dextrose 50% 50mL IV or Glucagon 1mg IM." },
+      { label: "5-20 min: 1st line Benzos", detail: "IV access present: Lorazepam 0.1mg/kg IV (max 4mg) at 2mg/min — repeat once at 5min. No IV: Midazolam 10mg IM (single dose) OR Diazepam 10-20mg PR. Benzodiazepines work on GABA-A — efficacy drops from 80% to 30% after 30min of seizure." },
+      { label: "20-40 min: 2nd line AEDs", detail: "If seizures continue → Established Status Epilepticus. Options (choose ONE): Levetiracetam 60mg/kg IV (max 4500mg) over 15min — fewest drug interactions, safe in hepatic/renal disease. Phenytoin/Fosphenytoin 20mg/kg IV at 50mg/min (150mg/min for fosphenytoin) — monitor ECG for QTc, avoid in heart block. Valproate 40mg/kg IV (max 3000mg) over 10min — avoid in pregnancy, liver disease, mitochondrial disorders." },
+      { label: ">40 min: Refractory SE", detail: "INTUBATE for airway protection. Transfer to ICU. Start continuous infusion: Midazolam 0.2mg/kg bolus → 0.1-2mg/kg/hr OR Propofol 2mg/kg bolus → 1-5mg/kg/hr (watch propofol infusion syndrome >48hrs) OR Ketamine 1.5mg/kg bolus → 1-5mg/kg/hr (NMDA antagonist — works on different receptor, useful when GABAergic agents fail)." },
+      { label: "Continuous EEG", detail: "Target: Burst suppression or seizure suppression on cEEG. Maintain infusion 24-48hrs → slow taper (reduce by 1mg/hr of midazolam q6h). If seizures return on taper = super-refractory SE — consider immunotherapy (IVIG, plasmapheresis), ketogenic diet, or hypothermia." },
+      { label: "Workup", detail: "Bloods: CBC, CMP, Mg²⁺, Ca²⁺, phosphate, AED levels, toxicology screen, ammonia, lactate. LP if infection suspected (after CT). MRI brain within 24hrs. Autoimmune panel (NMDA-R, LGI1, CASPR2 antibodies) if no clear cause." }
+    ],
+    pearl: "Time is neurons. Every minute of convulsive SE causes approximately 1 million neurons to die (extrapolated from animal models). The ESETT trial (2019) showed Levetiracetam, Fosphenytoin, and Valproate are equally effective as 2nd-line agents (~45-50% success). Choose based on comorbidities, not preference. GABA-A receptors are internalized during prolonged seizures — that's why benzodiazepines become less effective after 30 minutes."
+  },
+  {
+    name: "Acute STEMI — Door to Balloon",
+    severity: "critical",
+    icon: "clock",
+    steps: [
+      { label: "Recognition", detail: "Chest pain + ST elevation ≥1mm in 2 contiguous leads (≥2mm in V1-V3 for men, ≥1.5mm in V1-V3 for women). Or new LBBB with clinical suspicion. Posterior MI: ST depression V1-V3 → get V7-V9 (ST elevation ≥0.5mm)." },
+      { label: "Immediate (within 10 min)", detail: "12-lead ECG within 10 min of first medical contact. MONA is outdated — evidence-based approach: Aspirin 325mg chewed (NOT enteric coated). Sublingual NTG 0.4mg q5min x3 (avoid if RV infarct: STE in III > II + V4R elevation, or if SBP <90, or if PDE5 inhibitor <48hrs). Morphine ONLY if pain refractory to NTG (may increase mortality per CRUSADE registry)." },
+      { label: "Anticoagulation", detail: "Heparin: UFH 60 units/kg bolus (max 4000u) + 12 units/kg/hr (max 1000u/hr) — target aPTT 50-70s. P2Y12 inhibitor (choose based on strategy): PCI → Ticagrelor 180mg load OR Prasugrel 60mg load (NOT if >75yrs, <60kg, prior stroke/TIA). Fibrinolysis → Clopidogrel 300mg load." },
+      { label: "Reperfusion", detail: "Primary PCI (PREFERRED if door-to-balloon <90min or FMC-to-device <120min). Activate cath lab immediately — goal: single call activation. If PCI not available within timeframe → Fibrinolysis (door-to-needle <30min): Tenecteplase weight-based single IV bolus (half-dose if >75 yrs). Transfer for angiography within 3-24hrs post-lysis (pharmacoinvasive strategy)." },
+      { label: "Complications", detail: "Cardiogenic shock: Dobutamine 2-20mcg/kg/min ± Norepinephrine. Impella/IABP for mechanical support. RV infarct: Volume (NS 1-2L) NOT diuretics/NTG. Arrhythmia: VF/VT → defibrillate per ACLS. Bradycardia (inferior MI) → Atropine/transcutaneous pacing." },
+      { label: "Post-PCI care", detail: "DAPT: Aspirin 81mg daily indefinitely + Ticagrelor 90mg BID for 12 months. High-intensity statin: Atorvastatin 80mg. ACEi/ARB if EF <40% or anterior MI. Beta-blocker within 24hrs (oral, NOT IV in first 24hrs — COMMIT trial). Cardiac rehab referral. EF assessment at 40 days." }
+    ],
+    pearl: "Every 30-minute delay in reperfusion increases 1-year mortality by 7.5%. The 'golden hour' of STEMI is real — total ischemic time (symptom onset to reperfusion) of <120 minutes has the highest myocardial salvage. In the prehospital setting, a single-call cath lab activation by the paramedic (bypassing ED) reduces D2B time by 15-20 minutes. Posterior STEMI is the most commonly missed — ALWAYS get posterior leads if clinical suspicion with anterior ST depression."
+  }
+];
+
+const ICU_PROTOCOLS = [
+  {
+    name: "Mechanical Ventilation — ARDS Network",
+    severity: "critical",
+    icon: "wind",
+    settings: [
+      { param: "Mode", value: "Volume Assist-Control (AC/VC)", note: "Guarantees delivered Vt; switch to Pressure-Support for weaning" },
+      { param: "Tidal Volume", value: "4-6 mL/kg IBW", note: "IBW (Male): 50 + 2.3×(height in inches - 60). IBW (Female): 45.5 + 2.3×(height in inches - 60). Start at 6 → reduce to 4 if Pplat >30" },
+      { param: "Plateau Pressure", value: "≤30 cmH₂O", note: "Measured with 0.5s inspiratory hold. Driving pressure (Pplat - PEEP) ≤15 is the strongest mortality predictor (Amato 2015)" },
+      { param: "PEEP", value: "Per ARDSNet PEEP/FiO₂ table", note: "Higher PEEP in moderate-severe ARDS. Start: FiO₂ 0.5 → PEEP 10. Recruitment maneuvers with caution (ART trial: harm with aggressive RM)" },
+      { param: "Respiratory Rate", value: "14-35/min", note: "Titrate to pH >7.25. Permissive hypercapnia is acceptable if pH >7.20" },
+      { param: "FiO₂ Target", value: "SpO₂ 88-95%", note: "Conservative O₂ (LOCO2 trial). Hyperoxia (SpO₂ 100%) increases mortality in ICU patients" },
+      { param: "I:E Ratio", value: "1:2 to 1:3", note: "Inverse ratio (2:1) in refractory hypoxemia with caution — increases mean airway pressure and auto-PEEP risk" }
+    ],
+    escalation: "If P/F <150 on optimized settings: Prone positioning ≥16hrs → Neuromuscular blockade (Cisatracurium 15mg bolus + 37.5mg/hr x48hrs per ACURASYS) → iNO 5-40ppm → ECMO referral (EOLIA criteria: P/F <80 for >6hrs or pH <7.25 + PaCO₂ >60)",
+    pearl: "The ARDSNet ARMA trial (2000) is the single most impactful ventilation study: 6 mL/kg IBW vs 12 mL/kg reduced mortality from 40% to 31%. But the real target is driving pressure (ΔP = Pplat - PEEP). In Amato's 2015 meta-analysis of 3562 patients, driving pressure was the variable most strongly associated with survival — each 7cmH₂O increase in ΔP increased mortality risk by ~41%."
+  },
+  {
+    name: "Sepsis — Hour-1 Bundle (SSC 2021)",
+    severity: "critical",
+    icon: "thermometer",
+    settings: [
+      { param: "Lactate", value: "Measure within 1hr", note: "If lactate >2 mmol/L → remeasure within 2-4hrs to guide resuscitation. Lactate clearance >10%/2hrs associated with improved outcomes" },
+      { param: "Blood Cultures", value: "Before antibiotics", note: "2 sets (aerobic + anaerobic) from 2 sites. Do NOT delay antibiotics >45min for cultures" },
+      { param: "Antibiotics", value: "Within 1 hour", note: "Each hour delay in appropriate antibiotics increases mortality by 7.6% (Kumar 2006). Broad-spectrum → de-escalate by 48-72hrs based on culture/sensitivity" },
+      { param: "Fluids", value: "30 mL/kg crystalloid", note: "Balanced crystalloid (LR/Plasmalyte) preferred over NS (SMART trial: reduced MAKE30). Begin within 3hrs. Use dynamic assessment for further fluids" },
+      { param: "Vasopressors", value: "MAP ≥65 mmHg", note: "Norepinephrine FIRST-LINE (start via peripheral IV if needed — safe for <24hrs). Add Vasopressin 0.03 units/min as second agent (NOT dose-titrated). Consider Epinephrine if cardiac dysfunction suspected" },
+      { param: "Fluid Responsiveness", value: "Dynamic assessment", note: "Passive leg raise + CO monitoring (SV change >10% = fluid responsive). Pulse pressure variation >13% in mechanically ventilated. STOP fluids if not responsive — fluid overload increases mortality" }
+    ],
+    escalation: "Refractory shock (NE >0.5 mcg/kg/min): Add Vasopressin 0.03 u/min → Stress-dose Hydrocortisone 200mg/day (50mg IV q6h) per ADRENAL/APROCCHSS trials → Angiotensin II (ATHOS-3 trial) for vasodilatory shock. Consider bedside ECHO for cardiac assessment (new LV/RV dysfunction → inotrope).",
+    pearl: "The ANDROMEDA-SHOCK trial showed that perfusion-guided resuscitation (capillary refill time ≤3 sec target) led to less organ dysfunction than lactate-guided strategy at 72hrs. CRT is measured by pressing the ventral fingertip for 10 seconds at the sternum — normal is ≤3 seconds. This simple bedside test may be superior to serial lactates for guiding resuscitation in the first 8 hours."
+  },
+  {
+    name: "Sedation — PADIS Guidelines",
+    severity: "urgent",
+    icon: "moon",
+    settings: [
+      { param: "Assessment", value: "RASS + CAM-ICU q4h", note: "Target RASS 0 to -1 (light sedation). CAM-ICU positive = delirium (present in 60-80% of ventilated patients)" },
+      { param: "Analgesia First", value: "A1C approach", note: "Treat PAIN before sedation. CPOT scale for non-communicative patients. Fentanyl 25-100mcg/hr or Morphine 2-4mg IV q2-4hrs. Multimodal: Paracetamol 1g IV q6h + Low-dose Ketamine 0.1-0.3mg/kg/hr" },
+      { param: "Sedation", value: "Propofol or Dexmedetomidine", note: "Propofol: 5-80mcg/kg/min — monitor triglycerides q48h, watch propofol infusion syndrome (PRIS) if >5mg/kg/hr for >48hrs. Dexmedetomidine: 0.2-1.5mcg/kg/hr — cooperative sedation, maintains respiratory drive, reduces delirium duration" },
+      { param: "Delirium Rx", value: "Non-pharmacologic first", note: "ABCDEF bundle: Awakening trials + Breathing trials + Choice of sedation + Delirium monitoring + Early mobility + Family engagement. Haloperidol 1-2mg IV q6h PRN for agitation (NO evidence for prevention — AID-ICU trial). Avoid benzodiazepines (independent risk factor for delirium)" },
+      { param: "SAT + SBT", value: "Daily paired trials", note: "Spontaneous Awakening Trial (stop sedation) paired with Spontaneous Breathing Trial (PS 5-7/PEEP 5 for 30-120min). ABC trial: Paired SAT+SBT increased ventilator-free days by 3.1 days and reduced 1-year mortality" }
+    ],
+    escalation: "Refractory agitation: Exclude pain, full bladder, constipation, ETT malposition first. Add Quetiapine 50mg BID (MIND-USA trial: no mortality benefit but reduces agitation). For alcohol withdrawal: Phenobarbital 130-260mg IV q15-20min. For ICU delirium lasting >5 days: Neurology consult for cEEG to exclude non-convulsive status epilepticus (present in 8-10% of altered ICU patients).",
+    pearl: "The ABCDEF bundle implementation reduces ICU delirium by 25%, increases early mobilization by 50%, and reduces next-day discharge likelihood by 68% for each additional bundle element NOT performed. Light sedation (RASS 0 to -1) compared to deep sedation (RASS -4 to -5) reduces ICU mortality by ~30% (Shehabi, SPICE-III). The MOST impactful single intervention is daily paired SAT+SBT — it should be considered a 'vital sign'."
+  }
+];
+
+const DRUG_PROTOCOLS = [
+  {
+    name: "Vasopressor & Inotrope Quick Reference",
+    severity: "critical",
+    icon: "syringe",
+    drugs: [
+      { drug: "Norepinephrine", dose: "0.01-3 mcg/kg/min", mix: "4mg in 250mL D5W (16mcg/mL) or 8mg in 250mL for fluid restriction", action: "α1 >> β1. First-line vasopressor in septic shock. Increases MAP via vasoconstriction with modest inotropic effect. Minimal tachycardia compared to dopamine.", monitor: "MAP, HR, lactate, peripheral perfusion, urine output" },
+      { drug: "Vasopressin", dose: "0.03-0.04 units/min (FIXED)", mix: "20 units in 100mL NS (0.2 u/mL). Run at 9mL/hr = 0.03 u/min", action: "V1 receptors on vascular smooth muscle. NOT dose-titrated — add at fixed dose as 2nd agent to reduce NE requirement. VASST trial: Mortality benefit in less severe sepsis (NE 5-14mcg/min).", monitor: "MAP, Na⁺ (hyponatremia), digital/mesenteric ischemia, urine output (V2 effect)" },
+      { drug: "Dobutamine", dose: "2-20 mcg/kg/min", mix: "250mg in 250mL D5W (1000mcg/mL)", action: "β1 > β2. Pure inotrope — increases contractility and CO. May DECREASE BP via β2 vasodilation. Use in cardiogenic shock or sepsis with myocardial depression (low CO on echo). ", monitor: "MAP, HR (dose-limiting tachycardia), CO/CI if PAC or PiCCO, mixed venous O₂" },
+      { drug: "Epinephrine", dose: "0.01-0.5 mcg/kg/min", mix: "1mg in 250mL NS (4mcg/mL)", action: "Low dose (<0.1): β1/β2 dominant → inotrope/chronotrope + bronchodilation. High dose (>0.1): α1 dominant → vasoconstriction. 2nd-line for septic shock if NE+vasopressin insufficient. Raises lactate (aerobic glycolysis — NOT perfusion failure).", monitor: "MAP, HR, lactate (interpret with caution), glucose, arrhythmia" },
+      { drug: "Phenylephrine", dose: "0.5-9 mcg/kg/min", mix: "10mg in 250mL NS (40mcg/mL)", action: "Pure α1 agonist. Use in SVT with hypotension, neurogenic shock, post-spinal hypotension. AVOID in cardiogenic shock (increases afterload without inotropic support). May cause reflex bradycardia.", monitor: "MAP, HR (reflex bradycardia), organ perfusion" },
+      { drug: "Milrinone", dose: "0.125-0.75 mcg/kg/min", mix: "20mg in 100mL NS (200mcg/mL). Optional load: 50mcg/kg over 10min", action: "PDE3 inhibitor — 'inodilator'. Increases contractility + vasodilation (reduces afterload AND preload). Ideal for RV failure, pulmonary hypertension, post-cardiac surgery low-output. Renally cleared — reduce dose if CrCl <50.", monitor: "MAP (hypotension common), HR, platelets (thrombocytopenia rare), renal function" }
+    ]
+  },
+  {
+    name: "Rapid Sequence Intubation (RSI) Drugs",
+    severity: "critical",
+    icon: "circle-dot",
+    drugs: [
+      { drug: "Ketamine", dose: "1.5-2 mg/kg IV push", mix: "Direct from 50mg/mL vial (500mg/10mL)", action: "NMDA antagonist. Dissociative agent. PREFERRED in hemodynamically unstable patients — maintains sympathetic tone and BP. Bronchodilator (ideal for asthma). Maintains airway reflexes partially. Onset: 30-60 sec. Duration: 10-15 min.", monitor: "HR (tachycardia), emergence reactions (rare in emergency — give midazolam 0.02mg/kg if needed), secretions (consider glycopyrrolate 0.2mg)" },
+      { drug: "Etomidate", dose: "0.3 mg/kg IV push", mix: "Direct from 2mg/mL vial (20mg/10mL)", action: "GABA-A agonist. Most hemodynamically neutral induction agent. Onset: 15-30 sec. Duration: 5-10 min. Concern: Single dose causes 24-hr adrenal suppression — AVOID in septic shock (CORTICUS sub-analysis showed increased mortality). Use in trauma/non-septic emergencies.", monitor: "Cortisol (if sepsis concern), myoclonus (not seizure), BP" },
+      { drug: "Propofol", dose: "1.5-2 mg/kg IV", mix: "Direct from 10mg/mL (200mg/20mL)", action: "GABA-A agonist. Rapid onset (15-30sec), ultra-short duration (5-10min). SIGNIFICANT hypotension via vasodilation + myocardial depression. Reduce dose to 0.5-1mg/kg in elderly/hemodynamically compromised. Avoid in egg/soy allergy (debated but package insert warning).", monitor: "BP (profound hypotension), HR, apnea, SpO₂, triglycerides if prolonged use" },
+      { drug: "Succinylcholine", dose: "1.5 mg/kg IV (2 mg/kg IM)", mix: "Direct from 20mg/mL vial", action: "Depolarizing NMJ blocker. FASTEST onset: 30-45 sec. Duration: 6-10 min. Fasciculations → paralysis. CONTRAINDICATED in: Hyperkalemia (K⁺ rises ~0.5mEq/L), burns >24hrs old, crush injury >24hrs, spinal cord injury >24hrs, neuromuscular disease, malignant hyperthermia history.", monitor: "K⁺, ECG (peaked T waves), temp (malignant hyperthermia), masseter spasm, return of TOF" },
+      { drug: "Rocuronium", dose: "1.2 mg/kg IV (RSI dose)", mix: "Direct from 10mg/mL vial", action: "Non-depolarizing NMJ blocker. Onset at RSI dose: 45-60 sec (comparable to succinylcholine). Duration: 45-70 min. NOW preferred over succinylcholine in most centers because Sugammadex provides IMMEDIATE reversal (16mg/kg for immediate reversal). No hyperkalemia risk.", monitor: "TOF (train of four) monitoring, return of spontaneous breathing, sugammadex availability" },
+      { drug: "Fentanyl (pre-treatment)", dose: "1-3 mcg/kg IV", mix: "Direct from 50mcg/mL vial", action: "Given 3 min before induction to blunt sympathetic surge of laryngoscopy. Especially in: Elevated ICP (prevents ICP spike), aortic dissection (prevents hypertensive surge), ischemic heart disease. Slow push to avoid chest wall rigidity (wooden chest syndrome >5mcg/kg rapid push).", monitor: "RR, SpO₂ (apnea risk), BP, chest wall rigidity" }
+    ]
+  }
+];
+
+const PROCEDURES = [
+  {
+    name: "Central Venous Catheterization — IJ Approach",
+    severity: "urgent",
+    icon: "navigation",
+    steps: [
+      { label: "Indication assessment", detail: "Vasopressor administration, inadequate peripheral access, CVP monitoring, hemodialysis access, TPN, transvenous pacing. RIGHT IJ preferred: Straight path to SVC, lower pneumothorax risk than subclavian, compressible if arterial puncture." },
+      { label: "Preparation", detail: "Full barrier precautions (cap, mask, sterile gown, gloves, full-body drape) — reduces CLABSI by 66% (Pronovost 2006). Position: 15° Trendelenburg, head turned slightly left. Chlorhexidine 2% skin prep — let dry 2 full minutes." },
+      { label: "Ultrasound guidance", detail: "LINEAR probe in sterile sheath. Identify IJ vein (lateral, compressible, non-pulsatile) vs carotid artery (medial, pulsatile, non-compressible). Use SHORT-AXIS view for access (confirmed by NICE, ASA guidelines). Confirm vein compression and non-pulsatile flow with augmentation on Valsalva." },
+      { label: "Access technique", detail: "22G finder needle under US guidance → aspiration of dark venous blood → 18G introducer needle same trajectory → Seldinger technique: J-tip guidewire (advance with ECG if available — p-wave changes at RA junction). NEVER lose control of the wire. Nick skin with scalpel → dilator over wire → catheter over wire → remove wire → confirm blood return from all ports." },
+      { label: "Confirmation", detail: "Immediate: Transduced waveform (venous vs arterial), blood gas from distal port (venous PO₂ <40 = venous), US visualization of wire in vein. Post-procedure CXR: Tip at cavoatrial junction (approximately at the carina on AP film). Rule out pneumothorax." },
+      { label: "CLABSI prevention", detail: "Chlorhexidine-impregnated dressing. Daily line necessity review. Scrub the hub 15 sec before access. Remove ASAP when no longer needed. Hand hygiene before/after. These 5 interventions (Pronovost's checklist) reduced CLABSI from 11.3 to 0 per 1000 catheter-days at Johns Hopkins." }
+    ],
+    pearl: "The single highest-yield intervention in CVC placement is REAL-TIME ULTRASOUND GUIDANCE. A landmark-based IJ approach has a 10-19% complication rate — US guidance reduces this to 1-4% and increases first-pass success from 54% to 90%. The 2024 ASA guidelines make US guidance a STANDARD OF CARE, not just a recommendation."
+  },
+  {
+    name: "Lumbar Puncture — Diagnostic/Therapeutic",
+    severity: "urgent",
+    icon: "droplets",
+    steps: [
+      { label: "Indications & CT first?", detail: "Meningitis, SAH (after negative CT), MS workup, normal pressure hydrocephalus, intrathecal chemotherapy. CT BEFORE LP if: Immunocompromised, CNS disease history, new seizure, papilledema, altered consciousness, focal neurological deficit — Hasbun criteria. If bacterial meningitis suspected: Antibiotics FIRST, LP second (do NOT delay antibiotics for imaging)." },
+      { label: "Contraindications", detail: "ABSOLUTE: Skin infection at puncture site, uncorrected coagulopathy (INR >1.5, Platelets <50k — correct first). RELATIVE: Raised ICP with mass lesion (herniation risk), spinal epidural abscess, anticoagulation (hold: Warfarin → INR <1.5; Enoxaparin → 12hrs after prophylactic, 24hrs after therapeutic; DOACs → 24-72hrs depending on agent and renal function)." },
+      { label: "Position", detail: "LATERAL DECUBITUS (preferred for opening pressure measurement): Fetal position with maximal lumbar flexion — 'curl around a beach ball'. Ensure shoulders and hips perfectly perpendicular to bed. Assistant maintains positioning. Alternative: SEATED position (widens interspace by 1.5cm — better for obese patients, but cannot measure opening pressure)." },
+      { label: "Landmark & technique", detail: "Palpate iliac crests → Tuffier's line crosses L3-L4 or L4-L5 interspace (spinal cord ends at L1-L2 in adults). Sterile prep + drape. Lidocaine 1% local anesthesia: skin wheal → deep infiltration toward ligamentum flavum. 20-22G atraumatic (Sprotte/Whitacre) needle — reduces PDPH from 36% to 12% vs cutting Quincke needle." },
+      { label: "Needle advancement", detail: "Bevel orientation: PARALLEL to longitudinal dural fibers (for cutting needles). Advance through: Skin → subcutaneous → supraspinous ligament → interspinous ligament → ligamentum flavum (distinct 'pop' or resistance change) → dura (second 'pop'). Remove stylet — CSF should flow. If bone contact: Withdraw to subcutaneous, redirect 15° cephalad." },
+      { label: "Measurements & collection", detail: "Opening pressure: Measured in lateral decubitus with legs slowly extended (flexion falsely elevates). Normal: 6-25 cmH₂O. Elevated: >25 cmH₂O (infection, IIH, venous sinus thrombosis). Collect in 4 tubes: Tube 1: Cell count + differential. Tube 2: Protein + glucose (+ serum glucose simultaneously). Tube 3: Microbiology (Gram stain, culture, consider PCR panel). Tube 4: Cell count (compare tube 1 vs 4 — traumatic tap: decreasing RBCs; true SAH: consistent RBCs + xanthochromia)." },
+      { label: "Post-LP care", detail: "Post-dural puncture headache (PDPH): 10-30% with cutting needles, 2-12% with atraumatic. Positional: Worse upright, better supine. Management: Bed rest NOT proven to prevent (can mobilize). Caffeine 300-500mg PO (NNT 5 for temporary relief). Definitive: Epidural blood patch — 90% effective for severe PDPH (inject 15-20mL autologous blood into epidural space at LP level)." }
+    ],
+    pearl: "The MOST commonly missed diagnosis on LP is the 'normal' CSF in early bacterial meningitis. In the first 12 hours, up to 10% of bacterial meningitis cases can have normal cell counts. If clinical suspicion is high, TREAT EMPIRICALLY regardless of initial CSF results and repeat LP in 12-24hrs. CSF lactate >3.5 mmol/L has 93% sensitivity and 96% specificity for bacterial vs viral meningitis — more reliable than protein or glucose alone."
+  }
+];
+
+// ===================== STATE =====================
+let currentTab = 'positions';
+let expandedCards = new Set();
+
+// ===================== RENDER FUNCTIONS =====================
+function switchTab(tab) {
+  currentTab = tab;
+  expandedCards.clear();
+  document.querySelectorAll('#main-tabs button').forEach(b => {
+    if (b.dataset.tab === tab) {
+      b.className = 'tab-active whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold transition-all';
+    } else {
+      b.className = 'whitespace-nowrap px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all glass';
+    }
+  });
+  renderContent();
+  lucide.createIcons();
+}
+
+function toggleCard(id) {
+  if (expandedCards.has(id)) expandedCards.delete(id);
+  else expandedCards.add(id);
+  renderContent();
+  lucide.createIcons();
+}
+
+function severityBadge(s) {
+  const map = { critical:'bg-red-500/20 text-red-400 border border-red-500/30', urgent:'bg-amber-500/20 text-amber-400 border border-amber-500/30', routine:'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' };
+  return `<span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full ${map[s]}">${s}</span>`;
+}
+
+function severityClass(s) {
+  return { critical:'severity-critical', urgent:'severity-urgent', routine:'severity-routine' }[s] || '';
+}
+
+function renderPositions() {
+  return POSITIONS.map((p,i) => {
+    const open = expandedCards.has('pos-'+i);
+    return `
+    <div class="protocol-card glass rounded-xl ${severityClass(p.severity)} card-glow fade-up" style="animation-delay:${i*0.06}s;">
+      <button onclick="toggleCard('pos-${i}')" class="w-full text-left p-4 sm:p-5 flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(14,165,233,0.15);">
+          <i data-lucide="${p.icon}" style="width:18px;height:18px;color:#38bdf8;"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="text-white font-semibold text-sm sm:text-base">${p.name}</h3>
+            ${severityBadge(p.severity)}
+          </div>
+          <p class="text-slate-400 text-xs line-clamp-2">${p.indication}</p>
+        </div>
+        <i data-lucide="${open?'chevron-up':'chevron-down'}" style="width:18px;height:18px;color:#64748b;flex-shrink:0;margin-top:4px;"></i>
+      </button>
+      ${open ? `
+      <div class="px-4 sm:px-5 pb-5 space-y-4">
+        <div class="h-px bg-white/5"></div>
+
+        <div>
+          <h4 class="text-sky-400 text-xs font-bold uppercase tracking-wider mb-2">Indications</h4>
+          <p class="text-slate-300 text-sm leading-relaxed">${p.indication}</p>
+        </div>
+
+        <div>
+          <h4 class="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">Contraindications</h4>
+          <p class="text-slate-300 text-sm leading-relaxed">${p.contraindications}</p>
+        </div>
+
+        <div>
+          <h4 class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">Step-by-Step Technique</h4>
+          <div class="space-y-2">
+            ${p.technique.map((t,j) => `
+              <div class="step-line">
+                <div class="step-dot bg-sky-500/30 text-sky-400">${j+1}</div>
+                <p class="text-slate-300 text-sm leading-relaxed">${t}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="rounded-lg p-3 sm:p-4" style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.15);">
+          <div class="flex items-start gap-2">
+            <i data-lucide="lightbulb" style="width:16px;height:16px;color:#f59e0b;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">Clinical Pearl</h4>
+              <p class="text-amber-200/80 text-sm leading-relaxed">${p.clinicalPearl}</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-violet-400 text-xs font-bold uppercase tracking-wider mb-1">Monitoring</h4>
+          <p class="text-slate-400 text-sm">${p.monitoring}</p>
+        </div>
+      </div>
+      ` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderEmergency() {
+  return EMERGENCY.map((e,i) => {
+    const open = expandedCards.has('em-'+i);
+    return `
+    <div class="protocol-card glass rounded-xl ${severityClass(e.severity)} card-glow fade-up" style="animation-delay:${i*0.06}s;">
+      <button onclick="toggleCard('em-${i}')" class="w-full text-left p-4 sm:p-5 flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.15);">
+          <i data-lucide="${e.icon}" style="width:18px;height:18px;color:#f87171;"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="text-white font-semibold text-sm sm:text-base">${e.name}</h3>
+            ${severityBadge(e.severity)}
+          </div>
+          <p class="text-slate-400 text-xs">${e.steps.length} critical steps</p>
+        </div>
+        <i data-lucide="${open?'chevron-up':'chevron-down'}" style="width:18px;height:18px;color:#64748b;flex-shrink:0;margin-top:4px;"></i>
+      </button>
+      ${open ? `
+      <div class="px-4 sm:px-5 pb-5 space-y-3">
+        <div class="h-px bg-white/5"></div>
+        ${e.steps.map((s,j) => `
+          <div class="step-line">
+            <div class="step-dot ${j===0?'bg-red-500/40 text-red-300':'bg-sky-500/30 text-sky-400'}">${j+1}</div>
+            <div>
+              <h5 class="text-white text-sm font-semibold mb-0.5">${s.label}</h5>
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${s.detail}</p>
+            </div>
+          </div>
+        `).join('')}
+        <div class="rounded-lg p-3 sm:p-4 mt-2" style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.15);">
+          <div class="flex items-start gap-2">
+            <i data-lucide="lightbulb" style="width:16px;height:16px;color:#f59e0b;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">Clinical Pearl</h4>
+              <p class="text-amber-200/80 text-sm leading-relaxed">${e.pearl}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      ` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderICU() {
+  return ICU_PROTOCOLS.map((p,i) => {
+    const open = expandedCards.has('icu-'+i);
+    return `
+    <div class="protocol-card glass rounded-xl ${severityClass(p.severity)} card-glow fade-up" style="animation-delay:${i*0.06}s;">
+      <button onclick="toggleCard('icu-${i}')" class="w-full text-left p-4 sm:p-5 flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(168,85,247,0.15);">
+          <i data-lucide="${p.icon}" style="width:18px;height:18px;color:#a78bfa;"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="text-white font-semibold text-sm sm:text-base">${p.name}</h3>
+            ${severityBadge(p.severity)}
+          </div>
+          <p class="text-slate-400 text-xs">${p.settings.length} parameters</p>
+        </div>
+        <i data-lucide="${open?'chevron-up':'chevron-down'}" style="width:18px;height:18px;color:#64748b;flex-shrink:0;margin-top:4px;"></i>
+      </button>
+      ${open ? `
+      <div class="px-4 sm:px-5 pb-5 space-y-3">
+        <div class="h-px bg-white/5"></div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-left">
+                <th class="text-slate-500 text-xs font-semibold uppercase py-2 pr-3">Parameter</th>
+                <th class="text-slate-500 text-xs font-semibold uppercase py-2 pr-3">Target/Value</th>
+                <th class="text-slate-500 text-xs font-semibold uppercase py-2 hidden sm:table-cell">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${p.settings.map(s => `
+              <tr class="border-t border-white/5">
+                <td class="py-2 pr-3 text-sky-300 font-medium text-xs sm:text-sm whitespace-nowrap">${s.param}</td>
+                <td class="py-2 pr-3 text-emerald-300 font-semibold text-xs sm:text-sm">${s.value}</td>
+                <td class="py-2 text-slate-400 text-xs hidden sm:table-cell">${s.note}</td>
+              </tr>
+              <tr class="sm:hidden border-t border-white/5">
+                <td colspan="2" class="py-1 pb-2 text-slate-500 text-xs">${s.note}</td>
+              </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h4 class="text-orange-400 text-xs font-bold uppercase tracking-wider mb-1">Escalation Pathway</h4>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${p.escalation}</p>
+        </div>
+        <div class="rounded-lg p-3 sm:p-4" style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.15);">
+          <div class="flex items-start gap-2">
+            <i data-lucide="lightbulb" style="width:16px;height:16px;color:#f59e0b;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">Clinical Pearl</h4>
+              <p class="text-amber-200/80 text-sm leading-relaxed">${p.pearl}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      ` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderDrugs() {
+  return DRUG_PROTOCOLS.map((p,i) => {
+    const open = expandedCards.has('drug-'+i);
+    return `
+    <div class="protocol-card glass rounded-xl ${severityClass(p.severity)} card-glow fade-up" style="animation-delay:${i*0.06}s;">
+      <button onclick="toggleCard('drug-${i}')" class="w-full text-left p-4 sm:p-5 flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(236,72,153,0.15);">
+          <i data-lucide="${p.icon}" style="width:18px;height:18px;color:#f472b6;"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-white font-semibold text-sm sm:text-base">${p.name}</h3>
+          <p class="text-slate-400 text-xs">${p.drugs.length} agents</p>
+        </div>
+        <i data-lucide="${open?'chevron-up':'chevron-down'}" style="width:18px;height:18px;color:#64748b;flex-shrink:0;margin-top:4px;"></i>
+      </button>
+      ${open ? `
+      <div class="px-4 sm:px-5 pb-5 space-y-3">
+        <div class="h-px bg-white/5"></div>
+        ${p.drugs.map(d => `
+        <div class="glass rounded-lg p-3 sm:p-4 space-y-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <h5 class="text-pink-300 font-bold text-sm">${d.drug}</h5>
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-mono">${d.dose}</span>
+          </div>
+          <p class="text-slate-500 text-xs"><span class="text-slate-400 font-medium">Mixing:</span> ${d.mix}</p>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${d.action}</p>
+          <p class="text-violet-400 text-xs"><span class="font-medium">Monitor:</span> ${d.monitor}</p>
+        </div>
+        `).join('')}
+      </div>
+      ` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderProcedures() {
+  return PROCEDURES.map((p,i) => {
+    const open = expandedCards.has('proc-'+i);
+    return `
+    <div class="protocol-card glass rounded-xl ${severityClass(p.severity)} card-glow fade-up" style="animation-delay:${i*0.06}s;">
+      <button onclick="toggleCard('proc-${i}')" class="w-full text-left p-4 sm:p-5 flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(34,197,94,0.15);">
+          <i data-lucide="${p.icon}" style="width:18px;height:18px;color:#4ade80;"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="text-white font-semibold text-sm sm:text-base">${p.name}</h3>
+            ${severityBadge(p.severity)}
+          </div>
+          <p class="text-slate-400 text-xs">${p.steps.length} steps</p>
+        </div>
+        <i data-lucide="${open?'chevron-up':'chevron-down'}" style="width:18px;height:18px;color:#64748b;flex-shrink:0;margin-top:4px;"></i>
+      </button>
+      ${open ? `
+      <div class="px-4 sm:px-5 pb-5 space-y-3">
+        <div class="h-px bg-white/5"></div>
+        ${p.steps.map((s,j) => `
+          <div class="step-line">
+            <div class="step-dot bg-emerald-500/30 text-emerald-400">${j+1}</div>
+            <div>
+              <h5 class="text-white text-sm font-semibold mb-0.5">${s.label}</h5>
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${s.detail}</p>
+            </div>
+          </div>
+        `).join('')}
+        <div class="rounded-lg p-3 sm:p-4 mt-2" style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.15);">
+          <div class="flex items-start gap-2">
+            <i data-lucide="lightbulb" style="width:16px;height:16px;color:#f59e0b;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">Clinical Pearl</h4>
+              <p class="text-amber-200/80 text-sm leading-relaxed">${p.pearl}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      ` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderContent() {
+  const area = document.getElementById('content-area');
+  const renderers = { positions: renderPositions, emergency: renderEmergency, icu: renderICU, drugs: renderDrugs, procedures: renderProcedures };
+  area.innerHTML = `<div class="max-w-6xl mx-auto space-y-3">${renderers[currentTab]()}</div>`;
+}
+
+// ===================== ELEMENT SDK =====================
+const defaultConfig = {
+  doctor_name: 'Dr. Clinical Expert',
+  designation: 'MBBS, MD Medicine | Professor of Medicine | ICU Intensivist | Emergency Medicine Specialist',
+  institution: 'Teaching Hospital & Medical University',
+  background_color: '#0a0e1a',
+  surface_color: '#1319278a',
+  text_color: '#e2e8f0',
+  primary_action: '#0ea5e9',
+  secondary_action: '#f59e0b',
+  font_family: 'DM Sans',
+  font_size: 14
+};
+
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const name = document.getElementById('doc-name');
+  const desg = document.getElementById('doc-designation');
+  const inst = document.getElementById('doc-institution');
+  if (name) name.textContent = c.doctor_name;
+  if (desg) desg.textContent = c.designation;
+  if (inst) inst.textContent = c.institution;
+
+  // Colors
+  const app = document.getElementById('app');
+  if (app) app.style.background = `linear-gradient(145deg, ${c.background_color} 0%, ${adjustColor(c.background_color,10)} 40%, ${c.background_color} 100%)`;
+
+  // Font
+  const fontStack = `${c.font_family}, 'DM Sans', sans-serif`;
+  document.body.style.fontFamily = fontStack;
+
+  // Font size
+  const base = c.font_size;
+  document.querySelectorAll('p, td, span:not(.step-dot)').forEach(el => {
+    if (el.classList.contains('text-xs')) el.style.fontSize = `${base * 0.85}px`;
+    else if (el.classList.contains('text-sm')) el.style.fontSize = `${base}px`;
+  });
+}
+
+function adjustColor(hex, amt) {
+  let r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  r = Math.min(255, r+amt); g = Math.min(255, g+amt); b = Math.min(255, b+amt);
+  return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+}
+
+// Initial render
+renderContent();
+lucide.createIcons();
+</script>
+</body>
+</html>
