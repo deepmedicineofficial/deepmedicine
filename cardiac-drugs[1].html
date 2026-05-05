@@ -1,0 +1,488 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Cardiac Drugs | Cardiovascular Pharmacology & Emergency Use | Deep Medicine</title> <meta name="description" content="Comprehensive guide to cardiac drugs including antianginals, antiarrhythmics, inotropes, vasopressors, and emergency cardiac medications."> <link rel="canonical" href="https://deepmedicine.in/core/icu/cardiac-drugs"> <!-- Open Graph --> <meta property="og:title" content="Cardiac Drugs | Deep Medicine"> <meta property="og:description" content="Essential cardiac medications used in ICU, emergency, and cardiovascular care."> <meta property="og:image" content="https://deepmedicine.in/images/cardiac-drugs.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html,body{margin:0;padding:0;height:100%;font-family:'DM Sans',sans-serif}
+.app-wrap{height:100%;overflow-y:auto;overflow-x:hidden}
+.drug-card{transition:all .3s cubic-bezier(.4,0,.2,1)}
+.drug-card:hover{transform:translateY(-2px)}
+.category-btn.active{box-shadow:inset 0 -3px 0 0 var(--accent)}
+.fade-in{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.dosage-row:nth-child(odd){background:rgba(0,0,0,.02)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+.search-glow:focus{box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
+.expand-content{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.expand-content.open{max-height:4000px}
+.pill{display:inline-block;padding:2px 10px;border-radius:9999px;font-size:11px;font-weight:600;letter-spacing:.3px}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-wrap" id="app" style="background:#f8f7f4"><!-- Header -->
+   <header style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)" class="px-4 py-6 md:py-10 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><circle cx=%2230%22 cy=%2230%22 r=%221%22 fill=%22white%22/></svg>');background-size:60px 60px"></div>
+    <div class="max-w-5xl mx-auto relative z-10">
+     <div class="flex items-center gap-3 mb-2">
+      <div style="background:#e94560;width:40px;height:40px" class="rounded-xl flex items-center justify-center shadow-lg">
+       <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+       </svg>
+      </div>
+      <h1 id="appTitle" style="font-family:'Playfair Display',serif;font-size:26px" class="font-bold">Cardiac Drug Reference</h1>
+     </div>
+     <p class="text-white/60 text-sm ml-1">Comprehensive clinical dosage protocols &amp; management guide</p>
+     <div class="mt-5 relative"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" style="width:18px;height:18px"></i> <input id="searchInput" type="text" placeholder="Search drugs, classes, indications..." class="search-glow w-full bg-white/10 backdrop-blur border border-white/15 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-white/40 outline-none">
+     </div>
+    </div>
+   </header><!-- Categories -->
+   <nav class="sticky top-0 z-20 border-b" style="background:#f8f7f4;border-color:#e5e2db">
+    <div class="max-w-5xl mx-auto px-4 flex gap-1 overflow-x-auto py-2 no-scrollbar" id="categoryNav"></div>
+   </nav><!-- Drug disclaimer -->
+   <div class="max-w-5xl mx-auto px-4 mt-4">
+    <div class="rounded-xl p-3 text-xs flex items-start gap-2" style="background:#fff3cd;color:#856404;border:1px solid #ffeaa7"><i data-lucide="alert-triangle" style="width:16px;height:16px;min-width:16px;margin-top:1px"></i> <span><strong>Clinical Reference Only.</strong> Always verify dosages against current formulary. Adjust for renal/hepatic function, patient weight, and comorbidities. This is not a substitute for clinical judgment.</span>
+    </div>
+   </div><!-- Drug Cards -->
+   <main class="max-w-5xl mx-auto px-4 py-4 pb-12" id="drugContainer"></main>
+  </div>
+  <script>
+const defaultConfig = {
+  app_title: "Cardiac Drug Reference",
+  background_color: "#f8f7f4",
+  surface_color: "#ffffff",
+  text_color: "#1a1a2e",
+  primary_color: "#e94560",
+  secondary_color: "#0f3460",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+const DRUGS = [
+  // ANTI-ANGINALS
+  {
+    category:"Anti-Anginals",catIcon:"heart",name:"Nitroglycerin (GTN)",class:"Organic Nitrate",
+    mechanism:"Releases NO → activates guanylyl cyclase → ↑cGMP → smooth muscle relaxation → venodilation (↓preload) & coronary vasodilation",
+    indications:["Acute angina pectoris","Unstable angina / ACS","Acute decompensated HF","Controlled hypotension in surgery"],
+    contraindications:["Concomitant PDE-5 inhibitors (sildenafil)","Severe aortic stenosis","HOCM","Right ventricular infarction","Hypotension (SBP <90)"],
+    dosages:[
+      {route:"Sublingual",dose:"0.3–0.6 mg",freq:"q5min × 3 doses",notes:"Onset 1–3 min. Sit patient down before administration."},
+      {route:"IV Infusion",dose:"5–200 µg/min",freq:"Titrate q3–5 min",notes:"Start 5 µg/min, ↑ by 5–10 µg/min. Use non-PVC tubing."},
+      {route:"Transdermal Patch",dose:"0.2–0.8 mg/hr",freq:"12h on / 12h off",notes:"Nitrate-free interval to prevent tolerance."},
+      {route:"Oral SR",dose:"2.5–9 mg",freq:"BID–TID",notes:"Isosorbide dinitrate. Eccentric dosing (8AM, 1PM)."}
+    ],
+    monitoring:["BP (risk of hypotension)","Heart rate (reflex tachycardia)","Headache (most common SE)","Methemoglobin levels with prolonged IV use"],
+    pearls:"Always ask about PDE-5 inhibitor use (24h for sildenafil, 48h for tadalafil). Tolerance develops with continuous use—ensure nitrate-free window."
+  },
+  {
+    category:"Anti-Anginals",catIcon:"heart",name:"Metoprolol",class:"β1-Selective Beta-Blocker",
+    mechanism:"Competitive β1-adrenergic antagonism → ↓HR, ↓contractility, ↓myocardial O₂ demand, ↓renin release",
+    indications:["Stable angina","ACS / Post-MI","Heart failure (HFrEF)","Hypertension","Rate control in AF/AFL","SVT"],
+    contraindications:["Severe bradycardia (HR <45)","2nd/3rd degree AV block","Decompensated HF","Cardiogenic shock","Severe peripheral arterial disease","Pheochromocytoma (without alpha blockade)"],
+    dosages:[
+      {route:"IV (Acute)",dose:"5 mg",freq:"q5min × 3 doses",notes:"For ACS/tachyarrhythmia. Monitor ECG continuously."},
+      {route:"Oral (Tartrate)",dose:"25–100 mg",freq:"BID",notes:"Short-acting. Used for acute settings and angina."},
+      {route:"Oral (Succinate XL)",dose:"25–200 mg",freq:"Once daily",notes:"HF: start 12.5–25 mg, uptitrate q2 weeks. Target 200 mg/day."}
+    ],
+    monitoring:["Heart rate (target 55–60 bpm in angina)","Blood pressure","ECG (PR interval)","Signs of HF decompensation","Blood glucose (may mask hypoglycemia)"],
+    pearls:"Never abruptly discontinue—risk of rebound angina/MI. In HFrEF, start low and go slow. β1-selectivity lost at higher doses."
+  },
+  {
+    category:"Anti-Anginals",catIcon:"heart",name:"Amlodipine",class:"Dihydropyridine CCB",
+    mechanism:"Blocks L-type Ca²⁺ channels in vascular smooth muscle → arterial vasodilation → ↓afterload & coronary vasodilation",
+    indications:["Stable angina","Vasospastic (Prinzmetal) angina","Hypertension","Raynaud phenomenon"],
+    contraindications:["Severe aortic stenosis","Cardiogenic shock","Unstable angina (caution without beta-blocker)"],
+    dosages:[
+      {route:"Oral",dose:"2.5–10 mg",freq:"Once daily",notes:"Start 5 mg. Elderly/hepatic impairment: start 2.5 mg. Peak effect 6–12h."}
+    ],
+    monitoring:["BP","Heart rate","Peripheral edema (dose-dependent, up to 10%)","Gingival hyperplasia"],
+    pearls:"Long half-life (30–50h) allows once-daily dosing. Peripheral edema is NOT due to fluid overload—it's arteriolar vasodilation. Adding ACEi/ARB can reduce edema."
+  },
+  // ACE INHIBITORS / ARBs
+  {
+    category:"ACEi / ARBs",catIcon:"shield",name:"Enalapril / Ramipril",class:"ACE Inhibitor",
+    mechanism:"Inhibits ACE → ↓Angiotensin II → vasodilation, ↓aldosterone, ↓cardiac remodeling, ↑bradykinin",
+    indications:["Hypertension","HFrEF (cornerstone therapy)","Post-MI (esp. anterior MI)","Diabetic nephropathy","CKD with proteinuria","CV risk reduction"],
+    contraindications:["Bilateral renal artery stenosis","History of ACEi-induced angioedema","Pregnancy (Cat D—teratogenic)","Hyperkalemia (K⁺ >5.5)","Severe aortic stenosis"],
+    dosages:[
+      {route:"Enalapril PO",dose:"2.5–20 mg",freq:"BID",notes:"HF: start 2.5 mg BID, target 10–20 mg BID."},
+      {route:"Ramipril PO",dose:"1.25–10 mg",freq:"Once daily or BID",notes:"Post-MI: start 1.25–2.5 mg BID, target 5 mg BID. HOPE trial dose: 10 mg/day."},
+      {route:"Enalaprilat IV",dose:"0.625–1.25 mg",freq:"q6h",notes:"For hypertensive urgency when PO not possible. Onset 15 min."}
+    ],
+    monitoring:["Serum creatinine & K⁺ at baseline, 1 week, then periodically","BP (first-dose hypotension risk)","Dry cough (10–15%, due to bradykinin)","Angioedema (0.1–0.7%, higher in African Americans)"],
+    pearls:"Cr rise up to 30% is acceptable and expected—do NOT stop. Cough → switch to ARB. Angioedema → contraindicate ALL ACEi, consider ARB with caution. Dual ACEi+ARB is NOT recommended (ONTARGET)."
+  },
+  {
+    category:"ACEi / ARBs",catIcon:"shield",name:"Losartan / Valsartan",class:"Angiotensin II Receptor Blocker",
+    mechanism:"Selectively blocks AT1 receptor → similar effects to ACEi but WITHOUT bradykinin accumulation",
+    indications:["Hypertension","HFrEF (if ACEi intolerant)","Post-MI with LV dysfunction","Diabetic nephropathy (losartan, irbesartan)","Stroke prevention in LVH (losartan)"],
+    contraindications:["Pregnancy","Bilateral renal artery stenosis","Hyperkalemia","Previous angioedema with ARBs"],
+    dosages:[
+      {route:"Losartan PO",dose:"25–100 mg",freq:"Once daily or BID",notes:"Start 50 mg/day. 25 mg if volume depleted. Uricosuric effect unique to losartan."},
+      {route:"Valsartan PO",dose:"40–320 mg",freq:"BID",notes:"HF: start 40 mg BID, target 160 mg BID (Val-HeFT). Post-MI: start 20 mg BID, target 160 mg BID (VALIANT)."}
+    ],
+    monitoring:["Serum creatinine & K⁺ (same as ACEi)","BP","Renal function in CKD"],
+    pearls:"No cough advantage over ACEi. Angioedema risk exists but much lower. Losartan has shortest half-life—may need BID. Do NOT combine with ACEi (no benefit, more harm)."
+  },
+  {
+    category:"ACEi / ARBs",catIcon:"shield",name:"Sacubitril/Valsartan (Entresto)",class:"ARNI (Neprilysin Inhibitor + ARB)",
+    mechanism:"Sacubitril inhibits neprilysin → ↑natriuretic peptides (ANP, BNP) → vasodilation, natriuresis + Valsartan blocks AT1",
+    indications:["HFrEF (NYHA II–IV) — replaces ACEi/ARB","HFpEF (emerging evidence, PARAGON-HF)"],
+    contraindications:["Concomitant ACEi (36h washout required)","History of angioedema","Pregnancy","Severe hepatic impairment"],
+    dosages:[
+      {route:"Oral",dose:"24/26 mg to 97/103 mg",freq:"BID",notes:"Start 24/26 mg BID (or 49/51 mg if tolerating ACEi/ARB). Target 97/103 mg BID. Uptitrate q2–4 weeks."}
+    ],
+    monitoring:["BP (hypotension most common)","K⁺ and renal function","Angioedema symptoms","BNP unreliable (inhibited by drug)—use NT-proBNP instead"],
+    pearls:"PARADIGM-HF: 20% ↓CV death/HF hospitalization vs enalapril. MUST stop ACEi 36h before starting. Symptomatic hypotension managed by separating doses from other antihypertensives."
+  },
+  // ANTIARRHYTHMICS
+  {
+    category:"Antiarrhythmics",catIcon:"activity",name:"Amiodarone",class:"Class III (multichannel blocker)",
+    mechanism:"Blocks K⁺, Na⁺, Ca²⁺ channels + non-competitive β-blockade → ↑APD, ↑ERP in all cardiac tissue. Iodine-containing.",
+    indications:["VT / VF (refractory)","AF rate/rhythm control","SVT","Cardiac arrest (pulseless VT/VF)","WPW with AF"],
+    contraindications:["Severe sinus node dysfunction","2nd/3rd degree AV block","Thyroid dysfunction (relative)","Pulmonary fibrosis","QT prolongation","Iodine hypersensitivity","Pregnancy (Category D)"],
+    dosages:[
+      {route:"IV (Cardiac Arrest)",dose:"300 mg bolus",freq:"Then 150 mg once",notes:"ACLS: 300 mg push in pulseless VT/VF, then 150 mg if recurrent."},
+      {route:"IV (Stable VT/AF)",dose:"150 mg over 10 min",freq:"Then 1 mg/min × 6h, then 0.5 mg/min × 18h",notes:"Total ~1050 mg in first 24h. Use central line preferred."},
+      {route:"Oral Loading",dose:"400–800 mg/day",freq:"Divided doses × 1–3 weeks",notes:"Total loading 8–10 g. Then maintenance 100–200 mg/day."},
+      {route:"Oral Maintenance",dose:"100–200 mg",freq:"Once daily",notes:"Lowest effective dose. Half-life 40–55 DAYS."}
+    ],
+    monitoring:["TFTs (q6 months—hypo/hyperthyroidism)","PFTs + CXR (pulmonary toxicity)","LFTs (hepatotoxicity)","Eye exam (corneal microdeposits, optic neuropathy)","ECG (QT interval, HR)","Skin (photosensitivity, blue-gray discoloration)"],
+    pearls:"Extremely long half-life means effects persist weeks after stopping. Interacts with EVERYTHING—↑warfarin effect (halve warfarin dose), ↑digoxin levels. Pulmonary toxicity is the most feared SE (1–5%). Despite toxicity profile, it's the most effective antiarrhythmic."
+  },
+  {
+    category:"Antiarrhythmics",catIcon:"activity",name:"Adenosine",class:"Purinergic Agonist",
+    mechanism:"Activates A1 receptors → ↑K⁺ conductance in AV node → transient AV block. Ultra-short acting (half-life <10 seconds).",
+    indications:["SVT (diagnostic and therapeutic)","Narrow complex tachycardia (diagnosis)","Differentiate SVT vs VT"],
+    contraindications:["2nd/3rd degree AV block","Sick sinus syndrome","Severe asthma/COPD (bronchospasm)","WPW with pre-excited AF","Heart transplant (hypersensitive)"],
+    dosages:[
+      {route:"IV Rapid Push",dose:"6 mg → 12 mg → 12 mg",freq:"q1–2 min if no response",notes:"MUST be rapid push followed by 20 mL NS flush. Use proximal/antecubital IV. Heart transplant: start 3 mg."},
+    ],
+    monitoring:["Continuous ECG (record rhythm strip!)","Transient asystole (expected, warn patient)","Chest tightness, flushing, dyspnea (brief)"],
+    pearls:"Theophylline/caffeine antagonize effect (may need higher dose). Dipyridamole/carbamazepine potentiate (use lower dose 3 mg). Always have transcutaneous pacing available. Warn patient about 'impending doom' sensation—it lasts seconds."
+  },
+  {
+    category:"Antiarrhythmics",catIcon:"activity",name:"Lidocaine",class:"Class IB (Na⁺ Channel Blocker)",
+    mechanism:"Blocks fast Na⁺ channels preferentially in ischemic/depolarized tissue → ↓automaticity, ↓conduction in damaged myocardium",
+    indications:["Ventricular tachycardia","VF refractory to amiodarone","Post-MI ventricular ectopy","Local anesthetic toxicity-related VT"],
+    contraindications:["Severe hepatic dysfunction","2nd/3rd degree AV block","Adams-Stokes syndrome","WPW","Allergy to amide local anesthetics"],
+    dosages:[
+      {route:"IV Bolus",dose:"1–1.5 mg/kg",freq:"Repeat 0.5–0.75 mg/kg q5–10 min",notes:"Max 3 mg/kg. For pulseless VT/VF alternative to amiodarone."},
+      {route:"IV Infusion",dose:"1–4 mg/min",freq:"Continuous",notes:"Reduce to 1–2 mg/min after 24h. Reduce by 50% in hepatic impairment/elderly/HF."}
+    ],
+    monitoring:["ECG continuously","CNS toxicity (circumoral numbness, tinnitus, tremor, seizures)","Serum levels (therapeutic 1.5–5 µg/mL)","Hepatic function"],
+    pearls:"Does NOT prolong QT (advantage over amiodarone). CNS toxicity precedes cardiac toxicity—if patient reports metallic taste or perioral tingling, reduce rate immediately. Eliminated by hepatic metabolism—adjust in liver disease and low-output states."
+  },
+  // ANTICOAGULANTS
+  {
+    category:"Anticoagulants",catIcon:"droplet",name:"Heparin (UFH)",class:"Indirect Thrombin Inhibitor",
+    mechanism:"Binds antithrombin III → 1000-fold ↑ inactivation of thrombin (IIa) and Factor Xa. Also inhibits IXa, XIa, XIIa.",
+    indications:["ACS (STEMI, NSTEMI, UA)","PCI (periprocedural)","DVT/PE treatment","AF (bridging)","Mechanical valve (perioperative)","ECMO / cardiopulmonary bypass"],
+    contraindications:["Active bleeding","HIT (heparin-induced thrombocytopenia)","Severe thrombocytopenia","Recent CNS surgery/trauma","Uncontrolled severe HTN"],
+    dosages:[
+      {route:"IV Bolus (ACS)",dose:"60 U/kg (max 4000 U)",freq:"Once",notes:"Followed by infusion. With GP IIb/IIIa: 50–60 U/kg bolus."},
+      {route:"IV Infusion (ACS)",dose:"12 U/kg/hr (max 1000 U/hr)",freq:"Titrate to aPTT",notes:"Target aPTT 1.5–2.5× control (50–70 sec). Check aPTT q6h."},
+      {route:"IV (PCI)",dose:"70–100 U/kg bolus",freq:"Once",notes:"Target ACT 250–300 sec (or 200–250 with GP IIb/IIIa)."},
+      {route:"SC (DVT prophylaxis)",dose:"5000 U",freq:"q8–12h",notes:"No monitoring needed for prophylactic dose."}
+    ],
+    monitoring:["aPTT q6h until stable, then daily","Platelet count (baseline, then q2–3 days for HIT)","Signs of bleeding","Hgb/Hct"],
+    pearls:"Antidote: Protamine sulfate (1 mg per 100 U heparin). HIT: platelets drop >50% on days 5–10 → stop ALL heparin, start argatroban/bivalirudin. Short half-life (60–90 min) is advantageous in unstable patients."
+  },
+  {
+    category:"Anticoagulants",catIcon:"droplet",name:"Enoxaparin (LMWH)",class:"Low Molecular Weight Heparin",
+    mechanism:"Primarily inhibits Factor Xa (anti-Xa:anti-IIa ratio 3:1) via antithrombin III. More predictable pharmacokinetics than UFH.",
+    indications:["NSTEMI/UA","STEMI (with fibrinolysis)","DVT/PE treatment & prophylaxis","Bridging anticoagulation","Cancer-associated VTE"],
+    contraindications:["Active bleeding","HIT","CrCl <15 mL/min (relative)","Prosthetic valve (insufficient evidence)","Epidural catheter in situ"],
+    dosages:[
+      {route:"SC (ACS/Treatment)",dose:"1 mg/kg",freq:"q12h",notes:"Duration per ACS protocol (typically 2–8 days). Max 100 mg per dose for first 2 doses in STEMI."},
+      {route:"SC (STEMI with lysis)",dose:"30 mg IV bolus + 1 mg/kg SC",freq:"Then 1 mg/kg q12h",notes:"Age >75: no bolus, 0.75 mg/kg q12h. Duration until revascularization or 8 days."},
+      {route:"SC (VTE Treatment)",dose:"1 mg/kg q12h OR 1.5 mg/kg daily",freq:"See notes",notes:"Once-daily dosing for DVT without PE in some protocols."},
+      {route:"SC (Prophylaxis)",dose:"40 mg",freq:"Once daily",notes:"30 mg q12h for high-risk (orthopedic surgery). Renal dose: 30 mg daily if CrCl 15–30."}
+    ],
+    monitoring:["Anti-Xa levels (if obese, renal impairment, pregnancy)—target 0.5–1.0 IU/mL for treatment","Platelets (HIT surveillance)","Renal function","Signs of bleeding"],
+    pearls:"Protamine only partially reverses enoxaparin (~60%). Dose-adjust for CrCl <30 (1 mg/kg ONCE daily for treatment). Avoid in dialysis patients—use UFH. No routine monitoring needed in normal patients—that's the advantage."
+  },
+  {
+    category:"Anticoagulants",catIcon:"droplet",name:"Warfarin",class:"Vitamin K Antagonist",
+    mechanism:"Inhibits vitamin K epoxide reductase → ↓synthesis of factors II, VII, IX, X and proteins C & S. Onset delayed 3–5 days.",
+    indications:["AF (CHA₂DS₂-VASc ≥2)","Mechanical heart valves (ONLY oral anticoagulant approved)","DVT/PE treatment","LV thrombus","Antiphospholipid syndrome"],
+    contraindications:["Active bleeding","Pregnancy (teratogenic—warfarin embryopathy)","Severe hepatic disease","Non-adherent patients","Hemorrhagic stroke"],
+    dosages:[
+      {route:"Oral",dose:"2–10 mg",freq:"Once daily",notes:"Typical start 5 mg/day (2–3 mg in elderly, malnourished, liver disease). Adjust to INR."},
+      {route:"INR Targets",dose:"2.0–3.0 (most indications)",freq:"—",notes:"Mechanical mitral valve: 2.5–3.5. Check INR daily during initiation, then weekly → monthly when stable."}
+    ],
+    monitoring:["INR (target 2.0–3.0 or 2.5–3.5)","Signs of bleeding","Diet (vitamin K intake consistency)","Drug interactions (EXTENSIVE—CYP2C9, 3A4, 1A2)"],
+    pearls:"Bridge with heparin for first 5 days (proteins C&S deplete first → transient hypercoagulability). MASSIVE drug interactions: antibiotics, amiodarone (halve dose!), NSAIDs, azole antifungals. Reversal: Vitamin K (slow, 12–24h), FFP (immediate, 4-factor PCC preferred for major bleeding). Genetic testing (CYP2C9, VKORC1) can guide dosing."
+  },
+  {
+    category:"Anticoagulants",catIcon:"droplet",name:"Rivaroxaban / Apixaban",class:"Direct Oral Anticoagulant (DOAC) — Factor Xa Inhibitor",
+    mechanism:"Direct, selective, reversible inhibition of Factor Xa (free and clot-bound). Predictable PK, no routine monitoring.",
+    indications:["Non-valvular AF","DVT/PE treatment & prevention","Post-hip/knee replacement VTE prophylaxis","ACS (rivaroxaban 2.5 mg low-dose)","Cancer-associated VTE"],
+    contraindications:["Mechanical heart valves (RE-ALIGN trial showed harm)","Active pathological bleeding","Severe hepatic disease (Child-Pugh C)","CrCl <15 mL/min (rivaroxaban); <25 mL/min (apixaban, relative)","Concomitant strong CYP3A4 + P-gp inhibitors/inducers"],
+    dosages:[
+      {route:"Rivaroxaban (AF)",dose:"20 mg",freq:"Once daily with food",notes:"CrCl 15–50: 15 mg daily. MUST take with evening meal (↑absorption 39%)."},
+      {route:"Apixaban (AF)",dose:"5 mg",freq:"BID",notes:"Reduce to 2.5 mg BID if ≥2 of: age ≥80, weight ≤60 kg, Cr ≥1.5 mg/dL."},
+      {route:"Rivaroxaban (VTE Tx)",dose:"15 mg BID × 21 days",freq:"Then 20 mg daily",notes:"Extended: 10 mg daily after 6 months if continued prophylaxis needed."},
+      {route:"Apixaban (VTE Tx)",dose:"10 mg BID × 7 days",freq:"Then 5 mg BID",notes:"Extended: 2.5 mg BID after 6 months."},
+    ],
+    monitoring:["Renal function (at least annually, more frequently if CrCl <60)","Hepatic function","Hemoglobin (occult bleeding)","Drug interactions (CYP3A4/P-gp)","Anti-Xa assay (only if needed—not routine)"],
+    pearls:"Reversal agent: Andexanet alfa (for apixaban/rivaroxaban). No reliable INR/aPTT monitoring. Apixaban has least renal elimination (27%)—preferred in CKD. ARISTOTLE trial: apixaban superior to warfarin in AF. Rivaroxaban MUST be taken with food. Do not crush apixaban for NG tubes (data limited)."
+  },
+  // ANTIPLATELETS
+  {
+    category:"Antiplatelets",catIcon:"circle",name:"Aspirin (ASA)",class:"Irreversible COX-1 Inhibitor",
+    mechanism:"Irreversibly acetylates COX-1 → blocks TXA₂ synthesis → ↓platelet aggregation for platelet lifespan (7–10 days)",
+    indications:["ACS (STEMI, NSTEMI, UA)","Secondary prevention post-MI/stroke","PCI (with P2Y12 inhibitor)","Stable CAD","Primary prevention (limited, ASCVD risk ≥20% per some guidelines)"],
+    contraindications:["Active GI bleeding","Aspirin-exacerbated respiratory disease (AERD)","Severe allergy","Children with viral illness (Reye syndrome)","Active peptic ulcer disease"],
+    dosages:[
+      {route:"Oral (ACS Loading)",dose:"162–325 mg",freq:"Once (chew non-enteric coated)",notes:"Chew for rapid absorption. Onset 15–30 min."},
+      {route:"Oral (Maintenance)",dose:"75–100 mg",freq:"Once daily",notes:"81 mg most common in US. Low-dose equally effective with less bleeding."},
+      {route:"Oral (PCI)",dose:"325 mg",freq:"Loading, then 81 mg daily",notes:"With P2Y12 inhibitor as DAPT."}
+    ],
+    monitoring:["Signs of GI bleeding","Bruising/bleeding tendency","Platelet function (rarely, for resistance)","Renal function with chronic use"],
+    pearls:"DAPT (ASA + P2Y12) is standard post-ACS/PCI. Duration: 12 months post-ACS, 6 months post-elective PCI (can be shortened). PPI co-prescription recommended with DAPT to reduce GI bleeding. Enteric coating does NOT reduce GI risk—it's a systemic effect."
+  },
+  {
+    category:"Antiplatelets",catIcon:"circle",name:"Clopidogrel / Ticagrelor / Prasugrel",class:"P2Y12 Receptor Inhibitors",
+    mechanism:"Block ADP-mediated platelet activation via P2Y12 receptor. Clopidogrel: irreversible prodrug. Ticagrelor: reversible direct. Prasugrel: irreversible prodrug (faster onset).",
+    indications:["ACS (with aspirin as DAPT)","PCI (periprocedural & maintenance)","Stroke/TIA secondary prevention (clopidogrel)","PAD (clopidogrel)"],
+    contraindications:["Active bleeding","Ticagrelor: hepatic impairment, concurrent strong CYP3A4 inhibitors, history of ICH","Prasugrel: prior stroke/TIA, age ≥75 (relative), weight <60 kg (relative)"],
+    dosages:[
+      {route:"Clopidogrel Loading",dose:"300–600 mg",freq:"Once",notes:"600 mg preferred for PCI (faster onset). Prodrug—requires CYP2C19 metabolism."},
+      {route:"Clopidogrel Maintenance",dose:"75 mg",freq:"Once daily",notes:"Duration: 12 months post-ACS, 6 months post-elective PCI."},
+      {route:"Ticagrelor Loading",dose:"180 mg",freq:"Once",notes:"Can crush tablet. ASA dose MUST be ≤100 mg with ticagrelor."},
+      {route:"Ticagrelor Maintenance",dose:"90 mg",freq:"BID",notes:"For 12 months, then consider 60 mg BID for extended (PEGASUS-TIMI 54)."},
+      {route:"Prasugrel Loading",dose:"60 mg",freq:"Once",notes:"NOT recommended if coronary anatomy unknown (wait for angiography)."},
+      {route:"Prasugrel Maintenance",dose:"10 mg",freq:"Once daily",notes:"5 mg daily if weight <60 kg. Duration 12 months."}
+    ],
+    monitoring:["Bleeding signs","CBC","CYP2C19 genotyping (clopidogrel—poor metabolizers get no benefit)","Dyspnea with ticagrelor (occurs in 14%, usually mild, self-resolving)"],
+    pearls:"Ticagrelor/prasugrel superior to clopidogrel in ACS (PLATO, TRITON). Clopidogrel has genetic resistance (CYP2C19 poor metabolizers ~2–15%)—consider alternatives. Ticagrelor unique SEs: dyspnea, ventricular pauses. Hold 5 days (clopidogrel/ticagrelor) or 7 days (prasugrel) before surgery."
+  },
+  // DIURETICS
+  {
+    category:"Diuretics",catIcon:"droplets",name:"Furosemide",class:"Loop Diuretic",
+    mechanism:"Inhibits Na⁺/K⁺/2Cl⁻ cotransporter in thick ascending limb of Henle → massive natriuresis, kaliuresis, calciuresis",
+    indications:["Acute decompensated HF","Pulmonary edema","Volume overload / edema","Resistant hypertension (adjunct)","Acute kidney injury (oliguric, controversial)","Hypercalcemia (with NS)"],
+    contraindications:["Anuria (unresponsive to fluid challenge)","Severe hyponatremia","Hepatic coma/pre-coma","Sulfonamide allergy (cross-reactivity debated)","Severe hypokalemia"],
+    dosages:[
+      {route:"IV (Acute HF)",dose:"20–80 mg",freq:"Initial bolus, then reassess",notes:"Rule of thumb: IV dose = 1–2.5× home PO dose. Double dose if no response in 2h."},
+      {route:"IV Infusion",dose:"5–40 mg/hr",freq:"Continuous",notes:"Consider if bolus-resistant. Bolus 40 mg first. More consistent diuresis, ? less ototoxicity."},
+      {route:"Oral",dose:"20–80 mg",freq:"Once or twice daily",notes:"Bioavailability variable (10–100%). Take AM ± early PM to avoid nocturia."},
+      {route:"Oral (Refractory)",dose:"Up to 600 mg/day",freq:"Divided doses",notes:"Add metolazone 2.5–5 mg 30 min before furosemide for sequential nephron blockade."}
+    ],
+    monitoring:["Daily weight (target 0.5–1 kg/day loss)","I&O strictly","Electrolytes (K⁺, Mg²⁺, Na⁺, Ca²⁺)","Renal function (Cr, BUN)","BP","Signs of over-diuresis (hypotension, AKI)","Hearing (high-dose IV—ototoxicity)"],
+    pearls:"Oral bioavailability is only ~50% (use IV in acute HF). Sequential nephron blockade with metolazone is powerful—monitor closely. Furosemide has a ceiling dose (no more effect above it, only toxicity). Repleting K⁺ and Mg²⁺ is CRITICAL. Bumetanide 1 mg ≈ furosemide 40 mg with better PO bioavailability (80%)."
+  },
+  {
+    category:"Diuretics",catIcon:"droplets",name:"Spironolactone / Eplerenone",class:"Mineralocorticoid Receptor Antagonist (MRA)",
+    mechanism:"Competitive aldosterone antagonism at collecting duct → K⁺-sparing natriuresis + anti-fibrotic/anti-remodeling effects on heart",
+    indications:["HFrEF NYHA II–IV (RALES, EMPHASIS-HF)","Resistant hypertension","Primary hyperaldosteronism","Cirrhotic ascites (spironolactone)","Post-MI with LV dysfunction"],
+    contraindications:["K⁺ >5.0 mEq/L","CrCl <30 mL/min (use with extreme caution)","Concomitant K⁺ supplements + ACEi + ARB (triple whammy)","Addison disease"],
+    dosages:[
+      {route:"Spironolactone (HF)",dose:"12.5–50 mg",freq:"Once daily",notes:"Start 12.5–25 mg. Target 25–50 mg. RALES: 25 mg → 26% ↓mortality."},
+      {route:"Eplerenone (HF/Post-MI)",dose:"25–50 mg",freq:"Once daily",notes:"Start 25 mg, target 50 mg. EPHESUS: started 3–14 days post-MI. More selective—less gynecomastia."},
+      {route:"Spironolactone (HTN)",dose:"25–100 mg",freq:"Once daily",notes:"Particularly effective in resistant HTN (PATHWAY-2 trial)."}
+    ],
+    monitoring:["K⁺ at baseline, 3 days, 1 week, monthly × 3, then q3 months","Renal function","Gynecomastia/breast tenderness (spironolactone—10%)","Menstrual irregularities"],
+    pearls:"CRITICAL: Hyperkalemia kills. Don't start if K⁺ >5.0 or CrCl <30. If K⁺ rises >5.5, STOP immediately. Eplerenone is 40× more selective for mineralocorticoid receptor—less anti-androgen effects but more expensive. Life-saving in HFrEF—one of the 'four pillars' (ACEi/ARNI, BB, MRA, SGLT2i)."
+  },
+  // INOTROPES & VASOPRESSORS
+  {
+    category:"Inotropes & Vasopressors",catIcon:"zap",name:"Dobutamine",class:"β1-Selective Agonist (Synthetic Catecholamine)",
+    mechanism:"Stimulates β1 > β2 receptors → ↑contractility (inotropy), mild ↑HR, mild ↓SVR (β2 vasodilation)",
+    indications:["Acute decompensated HF (cardiogenic shock)","Low cardiac output syndrome post-cardiac surgery","Stress echocardiography (pharmacologic)","Bridge to transplant/LVAD"],
+    contraindications:["HOCM (↑obstruction)","Severe aortic stenosis","Tachyarrhythmias","Pheochromocytoma"],
+    dosages:[
+      {route:"IV Infusion",dose:"2–20 µg/kg/min",freq:"Titrate to clinical response",notes:"Start 2–5 µg/kg/min. No loading dose needed. Onset 1–2 min, peak 10 min. Tachyphylaxis after 72h."}
+    ],
+    monitoring:["Continuous ECG + telemetry","Arterial BP (invasive preferred)","Heart rate (↑HR = dose too high)","Urine output","Cardiac output (PA catheter or echo if available)","Serum lactate"],
+    pearls:"Unlike dopamine, dobutamine decreases PCWP (preload reduction through improved forward flow). Tachyphylaxis develops after 48–72h due to β1-receptor downregulation. Can worsen hypotension in hypovolemic patients—ensure adequate filling pressures first. Often combined with low-dose vasopressor (norepinephrine) if BP marginal."
+  },
+  {
+    category:"Inotropes & Vasopressors",catIcon:"zap",name:"Norepinephrine",class:"α1 > β1 Agonist (Catecholamine Vasopressor)",
+    mechanism:"Potent α1 agonism → vasoconstriction → ↑SVR & MAP. Moderate β1 → ↑contractility. Minimal β2 effect.",
+    indications:["Septic shock (first-line vasopressor)","Cardiogenic shock (with inotrope)","Distributive shock","Severe hypotension refractory to fluids"],
+    contraindications:["Hypovolemia (correct first!)","Mesenteric/peripheral vascular thrombosis (relative)","Extravasation (tissue necrosis)"],
+    dosages:[
+      {route:"IV Infusion",dose:"0.02–3 µg/kg/min",freq:"Titrate to MAP ≥65 mmHg",notes:"Start 0.05–0.1 µg/kg/min. Central line preferred (extravasation → necrosis). Standard concentration: 4 mg/250 mL (16 µg/mL)."}
+    ],
+    monitoring:["Arterial line BP (mandatory for vasopressor titration)","Heart rate and rhythm","Urine output (target ≥0.5 mL/kg/hr)","Lactate clearance","Extremity perfusion (skin mottling)","IV site (extravasation risk)"],
+    pearls:"Surviving Sepsis: norepinephrine is first-line vasopressor. Unlike pure vasopressors, it maintains cardiac output via β1. Extravasation antidote: phentolamine 5–10 mg in 10 mL NS injected locally. Taper slowly to avoid rebound hypotension. Target MAP ≥65 mmHg (higher targets not shown beneficial in SEPSISPAM trial)."
+  },
+  // STATINS & LIPID THERAPY
+  {
+    category:"Statins & Lipid Therapy",catIcon:"trending-down",name:"Atorvastatin / Rosuvastatin",class:"HMG-CoA Reductase Inhibitor (Statin)",
+    mechanism:"Competitively inhibits HMG-CoA reductase (rate-limiting step in cholesterol synthesis) → ↓intracellular cholesterol → ↑LDL receptor expression → ↑LDL clearance. Pleiotropic effects: ↓inflammation, ↑endothelial function, plaque stabilization.",
+    indications:["Primary/secondary CV prevention","ACS (high-intensity statin within 24h)","Hypercholesterolemia","Diabetic dyslipidemia","Familial hypercholesterolemia"],
+    contraindications:["Active liver disease / unexplained persistent ↑transaminases","Pregnancy and lactation","Concomitant strong CYP3A4 inhibitors (atorvastatin)","Rhabdomyolysis history with statin"],
+    dosages:[
+      {route:"Atorvastatin (High-intensity)",dose:"40–80 mg",freq:"Once daily",notes:"ACS/high-risk ASCVD: 80 mg. ↓LDL by ≥50%. Any time of day (long half-life 14h)."},
+      {route:"Atorvastatin (Moderate)",dose:"10–20 mg",freq:"Once daily",notes:"↓LDL by 30–49%. Primary prevention moderate-risk."},
+      {route:"Rosuvastatin (High-intensity)",dose:"20–40 mg",freq:"Once daily",notes:"Most potent statin per mg. ↓LDL by ≥50% at 20 mg. JUPITER trial."},
+      {route:"Rosuvastatin (Moderate)",dose:"5–10 mg",freq:"Once daily",notes:"Asian patients: start 5 mg (↑bioavailability). CrCl <30: max 10 mg."}
+    ],
+    monitoring:["Lipid panel (baseline, 4–12 weeks, then annually)","LFTs (baseline, then if symptomatic)","CK (only if symptomatic—routine monitoring not recommended)","Symptoms: myalgia (5–10%), diabetes risk (↑9–12% with high-intensity)","HbA1c (new-onset DM risk, especially high-intensity)"],
+    pearls:"Post-ACS: high-intensity statin within 24h regardless of baseline LDL. Statin myopathy is real but over-reported—nocebo effect is significant. Atorvastatin & rosuvastatin are the heavy hitters (most LDL lowering). Rosuvastatin is not metabolized by CYP3A4—fewer drug interactions. If intolerant: try alternate statin, lower dose, every-other-day rosuvastatin, or add ezetimibe."
+  },
+  // SGLT2 INHIBITORS
+  {
+    category:"SGLT2 Inhibitors",catIcon:"star",name:"Empagliflozin / Dapagliflozin",class:"SGLT2 Inhibitor",
+    mechanism:"Inhibits SGLT2 in proximal tubule → glycosuria → osmotic diuresis + natriuresis. CV benefits: ↓preload, ↓afterload, improved cardiac energetics (ketone metabolism), ↓inflammation, ↓fibrosis.",
+    indications:["HFrEF (regardless of diabetes—DAPA-HF, EMPEROR-Reduced)","HFpEF (EMPEROR-Preserved, DELIVER)","Type 2 DM with CV disease","CKD (DAPA-CKD, EMPA-KIDNEY)","Acute decompensated HF (EMPULSE)"],
+    contraindications:["Type 1 diabetes (DKA risk)","eGFR <20 mL/min (limited data, emerging use)","Recurrent UTIs/genital mycotic infections","Pregnancy/lactation"],
+    dosages:[
+      {route:"Empagliflozin (HF)",dose:"10 mg",freq:"Once daily",notes:"No titration needed. Can initiate in hospital. EMPEROR trials: 10 mg only."},
+      {route:"Dapagliflozin (HF)",dose:"10 mg",freq:"Once daily",notes:"DAPA-HF: 26% ↓CV death/HF hospitalization. Can start at any eGFR for HF indication."},
+      {route:"Empagliflozin (DM)",dose:"10–25 mg",freq:"Once daily",notes:"EMPA-REG: 38% ↓CV death with 10 mg in T2DM with CVD."},
+      {route:"Dapagliflozin (CKD)",dose:"10 mg",freq:"Once daily",notes:"DAPA-CKD: 39% ↓renal composite endpoint. Benefit in CKD without diabetes too."}
+    ],
+    monitoring:["Renal function (eGFR—initial dip is expected and NOT reason to stop)","Volume status (orthostatic hypotension, esp. with loop diuretics)","Genital infections (candidiasis—10%)","DKA symptoms (even with normal glucose—'euglycemic DKA')","Blood pressure","HbA1c (if diabetic)"],
+    pearls:"Now a PILLAR of HF therapy alongside ACEi/ARNI, beta-blocker, and MRA—the 'Fantastic Four'. Start early, even in hospital. Initial eGFR decline of 3–5 mL/min is expected (hemodynamic, not structural)—continue the drug. Reduce loop diuretic dose if volume depleted. Counsel patients to maintain hydration, genital hygiene, and sick-day rules (hold during acute illness to prevent DKA)."
+  },
+  // CARDIAC GLYCOSIDES
+  {
+    category:"Cardiac Glycosides",catIcon:"target",name:"Digoxin",class:"Cardiac Glycoside",
+    mechanism:"Inhibits Na⁺/K⁺-ATPase → ↑intracellular Na⁺ → ↑intracellular Ca²⁺ (via Na⁺/Ca²⁺ exchanger) → ↑contractility. Also: ↑vagal tone → ↓AV conduction.",
+    indications:["HFrEF (symptom improvement, ↓hospitalization—DIG trial)","AF rate control (adjunct, not first-line)","Atrial flutter"],
+    contraindications:["Hypokalemia (↑toxicity risk)","Hypercalcemia","HOCM","WPW with AF","VT/VF","AV block (2nd/3rd degree)","Renal failure (dose adjust)"],
+    dosages:[
+      {route:"Oral (HF)",dose:"0.125–0.25 mg",freq:"Once daily",notes:"Target serum level 0.5–0.9 ng/mL (NOT 1–2!). Elderly/renal: 0.0625–0.125 mg. No loading dose for HF."},
+      {route:"IV/Oral (AF rate control loading)",dose:"0.25–0.5 mg",freq:"Then 0.25 mg q6h × 2",notes:"Total loading 0.75–1.5 mg over 24h. Then maintenance 0.125–0.25 mg/day."},
+    ],
+    monitoring:["Serum digoxin level (target 0.5–0.9 ng/mL for HF)","K⁺, Mg²⁺, Ca²⁺ (hypokalemia potentiates toxicity)","Renal function (primarily renally eliminated)","ECG: 'Salvador Dalí mustache' ST changes (normal effect), bradycardia, AV block, accelerated junctional rhythm (toxicity)","Visual symptoms (xanthopsia—yellow vision)"],
+    pearls:"Narrow therapeutic index—toxicity is common and dangerous. EVERY arrhythmia can be caused by digoxin toxicity EXCEPT rapid atrial conduction. Hypokalemia is the #1 precipitant of toxicity. DIG trial: ↓hospitalization but NO mortality benefit. Toxicity antidote: Digibind (Digoxin-specific Fab antibodies). Amiodarone, verapamil, quinidine all ↑digoxin levels."
+  }
+];
+
+const CATEGORIES = [...new Set(DRUGS.map(d=>d.category))];
+let activeCategory = "All";
+let searchTerm = "";
+let allData = DRUGS;
+
+function getIcon(name){
+  const m={heart:'❤️',shield:'🛡️',activity:'⚡',droplet:'💧',droplets:'💦',circle:'🔴',zap:'⚡',star:'⭐',"trending-down":'📉',target:'🎯'};
+  return m[name]||'💊';
+}
+
+function renderCategories(){
+  const nav=document.getElementById('categoryNav');
+  nav.innerHTML='';
+  const allBtn=document.createElement('button');
+  allBtn.className=`category-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold transition-all ${activeCategory==='All'?'active text-[#1a1a2e] bg-white shadow-sm':'text-gray-500 hover:text-gray-800'}`;
+  allBtn.textContent=`All (${DRUGS.length})`;
+  allBtn.style.cssText='--accent:#e94560';
+  allBtn.onclick=()=>{activeCategory='All';renderCategories();renderDrugs()};
+  nav.appendChild(allBtn);
+  CATEGORIES.forEach(c=>{
+    const count=DRUGS.filter(d=>d.category===c).length;
+    const btn=document.createElement('button');
+    btn.className=`category-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold transition-all ${activeCategory===c?'active text-[#1a1a2e] bg-white shadow-sm':'text-gray-500 hover:text-gray-800'}`;
+    btn.textContent=`${c} (${count})`;
+    btn.style.cssText='--accent:#e94560';
+    btn.onclick=()=>{activeCategory=c;renderCategories();renderDrugs()};
+    nav.appendChild(btn);
+  });
+}
+
+function renderDrugs(){
+  const container=document.getElementById('drugContainer');
+  container.innerHTML='';
+  let filtered=activeCategory==='All'?[...DRUGS]:DRUGS.filter(d=>d.category===activeCategory);
+  if(searchTerm){
+    const s=searchTerm.toLowerCase();
+    filtered=filtered.filter(d=>
+      d.name.toLowerCase().includes(s)||d.class.toLowerCase().includes(s)||
+      d.category.toLowerCase().includes(s)||d.mechanism.toLowerCase().includes(s)||
+      d.indications.some(i=>i.toLowerCase().includes(s))
+    );
+  }
+  if(!filtered.length){
+    container.innerHTML=`<div class="text-center py-16 text-gray-400"><div class="text-4xl mb-3">🔍</div><p class="font-medium">No drugs found</p><p class="text-sm mt-1">Try adjusting your search or category filter</p></div>`;
+    return;
+  }
+  filtered.forEach((drug,idx)=>{
+    const card=document.createElement('div');
+    card.className='drug-card fade-in rounded-2xl shadow-sm border mb-4 overflow-hidden';
+    card.style.cssText=`background:#fff;border-color:#e8e5df;animation-delay:${idx*50}ms`;
+    const id=`drug-${drug.name.replace(/[^a-z0-9]/gi,'')}`;
+    card.innerHTML=`
+      <button class="w-full text-left px-5 py-4 flex items-start gap-3 hover:bg-gray-50/50 transition" onclick="toggleDrug('${id}')">
+        <span class="text-xl mt-0.5">${getIcon(drug.catIcon)}</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 style="font-family:'Playfair Display',serif" class="font-bold text-lg text-gray-900">${drug.name}</h2>
+            <span class="pill" style="background:#eef2ff;color:#4338ca">${drug.class}</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-0.5">${drug.category}</p>
+        </div>
+        <i data-lucide="chevron-down" class="text-gray-400 transition-transform duration-300" style="width:20px;height:20px" id="${id}-chevron"></i>
+      </button>
+      <div class="expand-content" id="${id}">
+        <div class="px-5 pb-5 border-t" style="border-color:#f0ede8">
+          <!-- Mechanism -->
+          <div class="mt-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color:#e94560">Mechanism of Action</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">${drug.mechanism}</p>
+          </div>
+          <!-- Indications -->
+          <div class="mt-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color:#0f3460">Indications</h3>
+            <div class="flex flex-wrap gap-1.5">${drug.indications.map(i=>`<span class="pill" style="background:#e8f5e9;color:#2e7d32">${i}</span>`).join('')}</div>
+          </div>
+          <!-- Contraindications -->
+          <div class="mt-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider mb-2 text-red-600">Contraindications</h3>
+            <div class="flex flex-wrap gap-1.5">${drug.contraindications.map(c=>`<span class="pill" style="background:#ffebee;color:#c62828">${c}</span>`).join('')}</div>
+          </div>
+          <!-- Dosages -->
+          <div class="mt-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color:#6a1b9a">Dosage Protocols</h3>
+            <div class="rounded-xl overflow-hidden border" style="border-color:#e8e5df">
+              <div class="hidden md:grid grid-cols-4 gap-0 text-xs font-bold uppercase tracking-wider p-3" style="background:#f5f3ef;color:#666">
+                <span>Route</span><span>Dose</span><span>Frequency</span><span>Notes</span>
+              </div>
+              ${drug.dosages.map(d=>`
+                <div class="dosage-row p-3 border-t text-sm" style="border-color:#f0ede8">
+                  <div class="md:grid md:grid-cols-4 md:gap-4 space-y-1 md:space-y-0">
+                    <div><span class="md:hidden text-xs font-bold text-gray-400 block">ROUTE</span><span class="font-semibold text-gray-900">${d.route}</span></div>
+                    <div><span class="md:hidden text-xs font-bold text-gray-400 block">DOSE</span><span style="color:#4338ca" class="font-mono font-bold">${d.dose}</span></div>
+                    <div><span class="md:hidden text-xs font-bold text-gray-400 block">FREQUENCY</span><span class="text-gray-700">${d.freq}</span></div>
+                    <div><span class="md:hidden text-xs font-bold text-gray-400 block">NOTES</span><span class="text-gray-500 text-xs leading-relaxed">${d.notes}</span></div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <!-- Monitoring -->
+          <div class="mt-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color:#e65100">Monitoring Parameters</h3>
+            <ul class="space-y-1">${drug.monitoring.map(m=>`<li class="text-sm text-gray-700 flex items-start gap-2"><span style="color:#e65100" class="mt-1">•</span>${m}</li>`).join('')}</ul>
+          </div>
+          <!-- Clinical Pearls -->
+          <div class="mt-4 rounded-xl p-4" style="background:linear-gradient(135deg,#fff8e1,#fff3e0);border:1px solid #ffe0b2">
+            <h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color:#e65100">💡 Clinical Pearls</h3>
+            <p class="text-sm text-gray-800 leading-relaxed">${drug.pearls}</p>
+          </div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+window.toggleDrug=function(id){
+  const el=document.getElementById(id);
+  const chev=document.getElementById(id+'-chevron');
+  el.classList.toggle('open');
+  if(chev)chev.style.transform=el.classList.contains('open')?'rotate(180deg)':'';
+};
+
+document.getElementById('searchInput').addEventListener('input',e=>{
+  searchTerm=e.target.value;
+  renderDrugs();
+});
+
+renderCategories();
+renderDrugs();
+</script>
+</body>
+</html>
