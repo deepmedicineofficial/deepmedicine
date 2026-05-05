@@ -1,0 +1,1015 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Airway & Ventilation | Respiratory Support & Airway Management | Deep Medicine</title> <meta name="description" content="Comprehensive guide to airway management and ventilation including oxygen therapy, bag-mask ventilation, airway adjuncts, and advanced airway support."> <link rel="canonical" href="https://deepmedicine.in/core/icu/airway-ventilation"> <!-- Open Graph --> <meta property="og:title" content="Airway & Ventilation | Deep Medicine"> <meta property="og:description" content="Airway management and ventilation strategies for emergency and ICU care."> <meta property="og:image" content="https://deepmedicine.in/images/airway-ventilation.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { font-family: 'DM Sans', sans-serif; }
+  .font-heading { font-family: 'Playfair Display', serif; }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0c4a6e 70%, #164e63 100%);
+  }
+
+  .card-glass {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+  }
+
+  .card-light {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+  }
+
+  .tab-active {
+    background: #0ea5e9;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(14,165,233,0.4);
+  }
+
+  .tab-inactive {
+    background: rgba(255,255,255,0.06);
+    color: #94a3b8;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .tab-inactive:hover {
+    background: rgba(255,255,255,0.1);
+    color: #e2e8f0;
+  }
+
+  .step-connector {
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    bottom: -8px;
+    width: 2px;
+    background: linear-gradient(to bottom, #0ea5e9, rgba(14,165,233,0.1));
+  }
+
+  .pulse-dot {
+    animation: pulse-ring 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(14,165,233,0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(14,165,233,0); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  .vent-param {
+    background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(6,182,212,0.05));
+    border: 1px solid rgba(14,165,233,0.2);
+  }
+
+  .emergency-badge {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    animation: pulse-ring 2s ease-in-out infinite;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(14,165,233,0.3), transparent);
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+  ::-webkit-scrollbar-thumb { background: rgba(14,165,233,0.4); border-radius: 3px; }
+
+  .mode-card { transition: all 0.3s ease; }
+  .mode-card:hover { transform: translateY(-2px); }
+
+  .waveform-svg { overflow: visible; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto gradient-hero text-white"><!-- Hero Section -->
+   <header class="relative px-4 pt-10 pb-8 sm:px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
+    <div class="flex items-center gap-3 mb-3">
+     <div class="w-10 h-10 rounded-xl bg-sky-500/20 flex items-center justify-center"><i data-lucide="activity" class="w-5 h-5 text-sky-400"></i>
+     </div><span class="text-xs font-semibold uppercase tracking-[0.2em] text-sky-400">ICU / Emergency Medicine</span>
+    </div>
+    <h1 id="mainTitle" class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-800 leading-tight mb-3">Airway &amp; Ventilator<br><span class="text-sky-400">Management</span></h1>
+    <p id="subtitle" class="text-base sm:text-lg text-slate-400 max-w-2xl mb-6">A comprehensive clinical experience guide — from bedside assessment to advanced ventilator strategies. Written from years of ICU, EM, and teaching practice.</p>
+    <div class="flex flex-wrap gap-3 text-xs"><span class="px-3 py-1.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/20"><i data-lucide="stethoscope" class="w-3 h-3 inline mr-1"></i>MBBS / MD Perspective</span> <span class="px-3 py-1.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20"><i data-lucide="shield" class="w-3 h-3 inline mr-1"></i>Evidence-Based</span> <span class="px-3 py-1.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/20"><i data-lucide="zap" class="w-3 h-3 inline mr-1"></i>Emergency Ready</span>
+    </div>
+   </header><!-- Tab Navigation -->
+   <nav class="sticky top-0 z-50 px-4 sm:px-8 md:px-16 lg:px-24 py-3 bg-slate-900/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex gap-2 overflow-x-auto pb-1 scrollbar-hide" id="tabNav"><button onclick="switchTab('airway')" data-tab="airway" class="tab-active whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all"> <i data-lucide="wind" class="w-4 h-4 inline mr-1.5"></i>Airway </button> <button onclick="switchTab('intubation')" data-tab="intubation" class="tab-inactive whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all"> <i data-lucide="target" class="w-4 h-4 inline mr-1.5"></i>Intubation </button> <button onclick="switchTab('ventilator')" data-tab="ventilator" class="tab-inactive whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all"> <i data-lucide="monitor" class="w-4 h-4 inline mr-1.5"></i>Ventilator </button> <button onclick="switchTab('modes')" data-tab="modes" class="tab-inactive whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all"> <i data-lucide="settings" class="w-4 h-4 inline mr-1.5"></i>Modes </button> <button onclick="switchTab('abg')" data-tab="abg" class="tab-inactive whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all"> <i data-lucide="test-tube" class="w-4 h-4 inline mr-1.5"></i>ABG </button> <button onclick="switchTab('emergency')" data-tab="emergency" class="tab-inactive whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all"> <i data-lucide="alert-triangle" class="w-4 h-4 inline mr-1.5"></i>Emergencies </button> <button onclick="switchTab('weaning')" data-tab="weaning" class="tab-inactive whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all"> <i data-lucide="arrow-up-right" class="w-4 h-4 inline mr-1.5"></i>Weaning </button>
+    </div>
+   </nav><!-- Content Area -->
+   <main class="px-4 sm:px-8 md:px-16 lg:px-24 py-8 max-w-7xl mx-auto" id="contentArea"><!-- AIRWAY TAB -->
+    <section id="tab-airway" class="tab-content">
+     <div class="animate-fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2">Airway Assessment &amp; Management</h2>
+      <p class="text-slate-400 mb-8 text-sm">The cornerstone of resuscitation — "A" before B and C. Every critically ill patient encounter begins here.</p>
+     </div><!-- Airway Anatomy -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6" style="animation-delay:0.15s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-sky-500/20 flex items-center justify-center">
+        <i data-lucide="scan" class="w-4 h-4 text-sky-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Clinical Airway Anatomy</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="space-y-3">
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="text-sky-300 font-semibold text-sm mb-1">Upper Airway</h4>
+         <ul class="text-slate-300 text-xs space-y-1">
+          <li>• <strong>Nose &amp; Nasopharynx</strong> — warms, humidifies, filters air. NPA placed here.</li>
+          <li>• <strong>Oropharynx</strong> — tongue is the #1 cause of obstruction in unconscious patients.</li>
+          <li>• <strong>Epiglottis</strong> — landmark for direct &amp; video laryngoscopy. Vallecula above, arytenoids below.</li>
+          <li>• <strong>Hypopharynx</strong> — piriform fossae on either side. Foreign body lodgement site.</li>
+         </ul>
+        </div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="text-sky-300 font-semibold text-sm mb-1">Lower Airway</h4>
+         <ul class="text-slate-300 text-xs space-y-1">
+          <li>• <strong>Larynx</strong> — vocal cords (true &amp; false), subglottic space. Narrowest in children &lt; 8y.</li>
+          <li>• <strong>Trachea</strong> — 10–12 cm long, C-shaped cartilage rings. Cricothyroid membrane at C5-6.</li>
+          <li>• <strong>Carina</strong> — at T4-5 (sternal angle). Right main bronchus shorter, wider, more vertical.</li>
+          <li>• <strong>Bronchial Tree</strong> — right mainstem intubation is the most common ETT malposition.</li>
+         </ul>
+        </div>
+       </div>
+       <div class="space-y-3">
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="text-emerald-300 font-semibold text-sm mb-1">Difficult Airway Predictors — <span class="text-slate-400">LEMON</span></h4>
+         <ul class="text-slate-300 text-xs space-y-1.5">
+          <li><strong class="text-white">L</strong> — Look externally: facial trauma, large tongue, short neck, obesity, beard</li>
+          <li><strong class="text-white">E</strong> — Evaluate 3-3-2: ≥3 fingers mouth opening, ≥3 fingers hyomental, ≥2 fingers thyro-hyoid</li>
+          <li><strong class="text-white">M</strong> — Mallampati: Class III/IV predict difficulty. Assess sitting, tongue out, no phonation</li>
+          <li><strong class="text-white">O</strong> — Obstruction: epiglottitis, peritonsillar abscess, angioedema, Ludwig's angina, tumor</li>
+          <li><strong class="text-white">N</strong> — Neck mobility: C-spine injury, ankylosing spondylitis, RA with C1-2 instability</li>
+         </ul>
+        </div>
+        <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
+         <h4 class="text-amber-300 font-semibold text-sm mb-1">⚡ Clinical Pearl</h4>
+         <p class="text-slate-300 text-xs">In my experience, <strong>the single most reliable predictor</strong> of a difficult airway is <em>restricted mouth opening</em> (&lt; 3 cm). Mallampati alone has poor sensitivity (~50%). Always do a composite assessment. The airway that kills you is the one you didn't anticipate.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Basic Airway Maneuvers -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6" style="animation-delay:0.2s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+        <i data-lucide="hand" class="w-4 h-4 text-emerald-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Basic Airway Maneuvers &amp; Adjuncts</h3>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+       <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+        <h4 class="font-bold text-sm mb-2 text-sky-300">Head Tilt – Chin Lift</h4>
+        <p class="text-xs text-slate-300 mb-2">Gold standard for non-trauma. Extends atlanto-occipital joint, lifts tongue off posterior pharyngeal wall.</p>
+        <p class="text-xs text-amber-300">⚠ Contraindicated in suspected C-spine injury.</p>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+        <h4 class="font-bold text-sm mb-2 text-sky-300">Jaw Thrust</h4>
+        <p class="text-xs text-slate-300 mb-2">Trauma-safe maneuver. Bilateral mandibular angles pushed anteriorly. Maintains neutral C-spine alignment.</p>
+        <p class="text-xs text-emerald-300">✓ Use with in-line C-spine stabilization.</p>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+        <h4 class="font-bold text-sm mb-2 text-sky-300">OPA (Guedel Airway)</h4>
+        <p class="text-xs text-slate-300 mb-2">Size: corner of mouth to angle of mandible. Insert inverted, rotate 180°. Only in unconscious patients — triggers gag.</p>
+        <p class="text-xs text-red-300">✗ Never in conscious/semi-conscious → vomiting + aspiration.</p>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+        <h4 class="font-bold text-sm mb-2 text-sky-300">NPA (Nasopharyngeal)</h4>
+        <p class="text-xs text-slate-300 mb-2">Size: tip of nose to tragus. Lubricate well. Insert perpendicular to face (not upward). Tolerated in semi-conscious.</p>
+        <p class="text-xs text-red-300">✗ Relative CI: basal skull fracture (Battle's sign, raccoon eyes, CSF rhinorrhoea).</p>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+        <h4 class="font-bold text-sm mb-2 text-sky-300">BVM (Bag-Valve-Mask)</h4>
+        <p class="text-xs text-slate-300 mb-2">C-E grip technique. Two-person preferred. Ensure seal before squeezing. Deliver over 1 second. Watch for chest rise.</p>
+        <p class="text-xs text-amber-300">⚡ Stomach inflation = poor seal or excessive pressure. Reposition.</p>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+        <h4 class="font-bold text-sm mb-2 text-sky-300">Supraglottic Devices</h4>
+        <p class="text-xs text-slate-300 mb-2"><strong>LMA / i-gel</strong> — rescue device, intubation conduit. i-gel preferred (no cuff inflation). Size by weight.</p>
+        <p class="text-xs text-emerald-300">✓ First-line rescue when intubation fails. Can ventilate while planning next step.</p>
+       </div>
+      </div>
+     </div><!-- Preoxygenation -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7" style="animation-delay:0.25s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+        <i data-lucide="cloud" class="w-4 h-4 text-cyan-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Preoxygenation — The Safety Net</h3>
+      </div>
+      <p class="text-sm text-slate-300 mb-4">Preoxygenation replaces nitrogen in the FRC with O₂, buying 6–8 min of apnea time in a healthy adult (as little as 90 seconds in obese/pregnant patients).</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div>
+        <h4 class="text-sm font-bold text-cyan-300 mb-2">Techniques</h4>
+        <ul class="text-xs text-slate-300 space-y-2">
+         <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">1</span>NRB mask at 15 L/min × 3 min (8 vital-capacity breaths if emergent)</li>
+         <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">2</span>HFNC at 60–70 L/min — provides apneic oxygenation during laryngoscopy</li>
+         <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">3</span>NIV (CPAP/BiPAP) — best for obese patients, recruits atelectatic lung</li>
+         <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">4</span>BVM with PEEP valve (5–10 cmH₂O) — prevents derecruitment</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
+        <h4 class="text-amber-300 font-semibold text-sm mb-2">⚡ From the ICU</h4>
+        <p class="text-xs text-slate-300 mb-2"><strong>Head-up 20–30°</strong> during preoxygenation improves FRC and safe apnea time. In obese patients, use <strong>ramped position</strong> (ear-to-sternal-notch alignment).</p>
+        <p class="text-xs text-slate-300"><strong>Apneic oxygenation:</strong> Keep nasal cannula at 15 L/min or HFNC running during intubation attempt. This alone extends safe apnea time by 2–3 minutes. I do this for every RSI.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- INTUBATION TAB -->
+    <section id="tab-intubation" class="tab-content hidden">
+     <div class="animate-fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2">Endotracheal Intubation</h2>
+      <p class="text-slate-400 mb-8 text-sm">RSI, DSI, awake intubation — the definitive airway. A systematic approach saves lives.</p>
+     </div><!-- RSI Steps -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6" style="animation-delay:0.15s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-red-500/20 flex items-center justify-center">
+        <i data-lucide="syringe" class="w-4 h-4 text-red-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Rapid Sequence Intubation (RSI)</h3><span class="emergency-badge text-[10px] font-bold px-2 py-0.5 rounded-full text-white">CRITICAL</span>
+      </div>
+      <div class="space-y-4 relative"><!-- 7 P's -->
+       <div class="relative pl-12">
+        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-sky-500/20 border-2 border-sky-500 flex items-center justify-center text-sky-300 font-bold text-sm pulse-dot">
+         P1
+        </div>
+        <div class="step-connector"></div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="font-bold text-sm text-sky-300">Preparation</h4>
+         <p class="text-xs text-slate-300 mt-1">Equipment check: ETT (7.0–7.5♀, 8.0–8.5♂), stylet, laryngoscope (Mac 3/4 or VL), bougie, suction (Yankauer), BVM, ETCO₂, backup SGA. Two IV lines. Monitoring: SpO₂, ECG, BP (q1 min).</p>
+        </div>
+       </div>
+       <div class="relative pl-12">
+        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-sky-500/20 border-2 border-sky-500 flex items-center justify-center text-sky-300 font-bold text-sm">
+         P2
+        </div>
+        <div class="step-connector"></div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="font-bold text-sm text-sky-300">Preoxygenation</h4>
+         <p class="text-xs text-slate-300 mt-1">Target EtO₂ &gt; 85% or 3 min NRB/HFNC. Apneic oxygenation via NC at 15 L/min. Position: sniffing (ear-to-sternal notch). Head up 20-30°.</p>
+        </div>
+       </div>
+       <div class="relative pl-12">
+        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-sky-500/20 border-2 border-sky-500 flex items-center justify-center text-sky-300 font-bold text-sm">
+         P3
+        </div>
+        <div class="step-connector"></div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="font-bold text-sm text-sky-300">Pretreatment <span class="text-slate-500">(Selective)</span></h4>
+         <p class="text-xs text-slate-300 mt-1">Fentanyl 1–3 mcg/kg (↑ICP/reactive airway), Lidocaine 1.5 mg/kg IV (↑ICP, asthma — debatable), Atropine 0.02 mg/kg in peds &lt; 1 year (prevent bradycardia from succinylcholine).</p>
+        </div>
+       </div>
+       <div class="relative pl-12">
+        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-amber-500/20 border-2 border-amber-500 flex items-center justify-center text-amber-300 font-bold text-sm">
+         P4
+        </div>
+        <div class="step-connector"></div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="font-bold text-sm text-amber-300">Paralysis with Induction</h4>
+         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+          <div class="p-2 rounded-lg bg-white/5 text-xs">
+           <p class="font-bold text-white mb-1">Induction Agents</p>
+           <ul class="text-slate-300 space-y-1">
+            <li>• <strong>Ketamine</strong> 1.5–2 mg/kg — hemodynamically stable, bronchodilator. My go-to in EM.</li>
+            <li>• <strong>Propofol</strong> 1.5–2 mg/kg — avoid in hypotension. Good for ↑ICP.</li>
+            <li>• <strong>Etomidate</strong> 0.3 mg/kg — hemodynamically neutral. Adrenal suppression concern (single dose likely OK).</li>
+            <li>• <strong>Midazolam</strong> 0.1–0.3 mg/kg — slow onset, unpredictable. Last resort.</li>
+           </ul>
+          </div>
+          <div class="p-2 rounded-lg bg-white/5 text-xs">
+           <p class="font-bold text-white mb-1">Paralytics</p>
+           <ul class="text-slate-300 space-y-1">
+            <li>• <strong>Succinylcholine</strong> 1.5 mg/kg — onset 45s, duration 6–10 min. Fastest. CI: hyperK, burns &gt; 72h, crush, denervation, malignant hyperthermia hx.</li>
+            <li>• <strong>Rocuronium</strong> 1.2 mg/kg — onset 60s, duration 45 min. Sugammadex reversal available (16 mg/kg). Increasingly preferred.</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="relative pl-12">
+        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-sky-500/20 border-2 border-sky-500 flex items-center justify-center text-sky-300 font-bold text-sm">
+         P5
+        </div>
+        <div class="step-connector"></div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="font-bold text-sm text-sky-300">Positioning &amp; Placement</h4>
+         <p class="text-xs text-slate-300 mt-1">Sniffing position. Direct laryngoscopy: Mac blade in vallecula, lift at 45° (don't lever on teeth). Video laryngoscopy: follow the curve. Cormack-Lehane Grade I/II = good view. Pass tube through cords under direct vision. ETT depth: 21 cm♀, 23 cm♂ at lip. Inflate cuff 5-10 mL.</p>
+        </div>
+       </div>
+       <div class="relative pl-12">
+        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-300 font-bold text-sm">
+         P6
+        </div>
+        <div class="step-connector"></div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="font-bold text-sm text-emerald-300">Proof of Placement</h4>
+         <p class="text-xs text-slate-300 mt-1"><strong>Gold standard: Waveform capnography (ETCO₂).</strong> Sustained waveform for 6 breaths confirms tracheal placement. Also: bilateral chest rise, 5-point auscultation (epigastric → L axilla → R axilla → L apex → R apex), misting of tube, SpO₂ trend. CXR to confirm depth (tip 2-4 cm above carina).</p>
+        </div>
+       </div>
+       <div class="relative pl-12">
+        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-sky-500/20 border-2 border-sky-500 flex items-center justify-center text-sky-300 font-bold text-sm">
+         P7
+        </div>
+        <div class="p-3 rounded-xl bg-white/5">
+         <h4 class="font-bold text-sm text-sky-300">Post-Intubation Management</h4>
+         <p class="text-xs text-slate-300 mt-1">Secure tube (tape/commercial holder). Start sedation (propofol + fentanyl or ketamine infusion). Start ventilator with lung-protective settings. Arterial line if not already placed. NGT/OGT. CXR. Post-intubation ABG at 30 min.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Video Laryngoscopy -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7" style="animation-delay:0.2s">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-9 h-9 rounded-lg bg-violet-500/20 flex items-center justify-center">
+        <i data-lucide="camera" class="w-4 h-4 text-violet-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Video Laryngoscopy vs Direct</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="p-4 rounded-xl bg-white/5">
+        <h4 class="text-sm font-bold text-violet-300 mb-2">Video Laryngoscopy (VL)</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li>✓ Superior glottic view (especially Cormack-Lehane III/IV)</li>
+         <li>✓ First-pass success rate &gt; 95% in experienced hands</li>
+         <li>✓ Better for C-spine immobilization, obesity, anterior larynx</li>
+         <li>✓ Teaching tool — everyone sees the same view</li>
+         <li>✗ Requires practice for tube delivery (look at screen, not mouth)</li>
+         <li>✗ Blood/secretions obscure camera → always suction first</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5">
+        <h4 class="text-sm font-bold text-sky-300 mb-2">Direct Laryngoscopy (DL)</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li>✓ No technology dependency — works when VL fails/unavailable</li>
+         <li>✓ Better in massive emesis/blood (direct sightline)</li>
+         <li>✓ Faster in experienced hands for straightforward airways</li>
+         <li>✗ Higher first-attempt failure in difficult airways</li>
+         <li>✗ Requires sniffing position (may not be possible in trauma)</li>
+        </ul>
+        <p class="text-xs text-amber-300 mt-2">⚡ My practice: VL as first-line for ALL intubations. DL skill must be maintained as backup.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- VENTILATOR TAB -->
+    <section id="tab-ventilator" class="tab-content hidden">
+     <div class="animate-fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2">Mechanical Ventilation Fundamentals</h2>
+      <p class="text-slate-400 mb-8 text-sm">Understanding the machine that breathes for your patient. Settings, physiology, and clinical reasoning.</p>
+     </div><!-- Initial Settings -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6" style="animation-delay:0.15s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-sky-500/20 flex items-center justify-center">
+        <i data-lucide="sliders" class="w-4 h-4 text-sky-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Initial Ventilator Settings</h3>
+      </div><!-- Interactive Calculator -->
+      <div class="p-4 rounded-xl bg-white/5 border border-sky-500/20 mb-5">
+       <h4 class="text-sm font-bold text-sky-300 mb-3">📊 Quick IBW &amp; Tidal Volume Calculator</h4>
+       <div class="flex flex-wrap gap-3 items-end mb-3">
+        <div><label class="text-xs text-slate-400 block mb-1">Sex</label> <select id="calcSex" onchange="calcTV()" class="bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:border-sky-500"> <option value="male">Male</option> <option value="female">Female</option> </select>
+        </div>
+        <div><label class="text-xs text-slate-400 block mb-1" for="calcHeight">Height (cm)</label> <input id="calcHeight" type="number" value="170" min="100" max="220" oninput="calcTV()" class="bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-white/10 w-24 focus:outline-none focus:border-sky-500">
+        </div>
+        <div id="calcResult" class="text-sm font-bold text-emerald-300">
+         IBW: 66 kg → TV: 396–528 mL
+        </div>
+       </div>
+       <p class="text-[10px] text-slate-500">IBW (Male) = 50 + 0.91×(height cm − 152.4) | IBW (Female) = 45.5 + 0.91×(height cm − 152.4). TV = 6–8 mL/kg IBW.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+       <div class="vent-param rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+         <h4 class="text-sm font-bold text-sky-300">Tidal Volume (Vt)</h4><span class="text-xs bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full">6-8 mL/kg IBW</span>
+        </div>
+        <p class="text-xs text-slate-300">Always use <strong>ideal body weight</strong>. Lungs don't grow with obesity. 6 mL/kg in ARDS. Never exceed 8 mL/kg.</p>
+       </div>
+       <div class="vent-param rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+         <h4 class="text-sm font-bold text-sky-300">Respiratory Rate (RR)</h4><span class="text-xs bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full">14-20 /min</span>
+        </div>
+        <p class="text-xs text-slate-300">Start 14-16. Adjust for pH/PaCO₂. In ARDS, up to 35 if needed (watch for auto-PEEP). Match minute ventilation to pre-intubation state.</p>
+       </div>
+       <div class="vent-param rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+         <h4 class="text-sm font-bold text-sky-300">PEEP</h4><span class="text-xs bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full">5-20 cmH₂O</span>
+        </div>
+        <p class="text-xs text-slate-300">Start 5 cmH₂O. ARDS: titrate by FiO₂/PEEP table or driving pressure. Higher PEEP recruits atelectatic lung but may reduce venous return.</p>
+       </div>
+       <div class="vent-param rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+         <h4 class="text-sm font-bold text-sky-300">FiO₂</h4><span class="text-xs bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full">21-100%</span>
+        </div>
+        <p class="text-xs text-slate-300">Start 100% post-intubation, then wean rapidly. Target SpO₂ 92-96% (88-92% in COPD). Prolonged FiO₂ &gt;60% → oxygen toxicity.</p>
+       </div>
+       <div class="vent-param rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+         <h4 class="text-sm font-bold text-sky-300">I:E Ratio</h4><span class="text-xs bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full">1:2 to 1:4</span>
+        </div>
+        <p class="text-xs text-slate-300">Normal 1:2. Obstructive disease (COPD/asthma): extend to 1:3 or 1:4 for complete exhalation. Inverse ratio (2:1) rarely used in severe ARDS.</p>
+       </div>
+       <div class="vent-param rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+         <h4 class="text-sm font-bold text-emerald-300">Plateau Pressure</h4><span class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">≤ 30 cmH₂O</span>
+        </div>
+        <p class="text-xs text-slate-300"><strong>NEVER exceed 30.</strong> Reflects alveolar pressure. If high: reduce Vt, rule out pneumothorax, check for circuit/ETT obstruction. Driving pressure (Pplat − PEEP) &lt; 15 is the goal.</p>
+       </div>
+      </div>
+     </div><!-- Key Equations -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7" style="animation-delay:0.2s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+        <i data-lucide="calculator" class="w-4 h-4 text-emerald-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Essential Equations</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="p-4 rounded-xl bg-slate-800/50 font-mono text-sm">
+        <p class="text-emerald-300 mb-1">Minute Ventilation</p>
+        <p class="text-white">V̇E = Vt × RR</p>
+        <p class="text-xs text-slate-400 mt-1">Normal ~6 L/min. ↑ to blow off CO₂.</p>
+       </div>
+       <div class="p-4 rounded-xl bg-slate-800/50 font-mono text-sm">
+        <p class="text-emerald-300 mb-1">Static Compliance</p>
+        <p class="text-white">Cst = Vt / (Pplat − PEEP)</p>
+        <p class="text-xs text-slate-400 mt-1">Normal 50–80 mL/cmH₂O. Low in ARDS, fibrosis.</p>
+       </div>
+       <div class="p-4 rounded-xl bg-slate-800/50 font-mono text-sm">
+        <p class="text-emerald-300 mb-1">Driving Pressure</p>
+        <p class="text-white">ΔP = Pplat − PEEP</p>
+        <p class="text-xs text-slate-400 mt-1"><strong>Best predictor of ARDS mortality.</strong> Keep &lt; 15.</p>
+       </div>
+       <div class="p-4 rounded-xl bg-slate-800/50 font-mono text-sm">
+        <p class="text-emerald-300 mb-1">P/F Ratio</p>
+        <p class="text-white">PaO₂ / FiO₂</p>
+        <p class="text-xs text-slate-400 mt-1">Normal &gt; 400. Mild ARDS: 200–300. Moderate: 100–200. Severe: &lt; 100.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- MODES TAB -->
+    <section id="tab-modes" class="tab-content hidden">
+     <div class="animate-fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2">Ventilator Modes</h2>
+      <p class="text-slate-400 mb-8 text-sm">Understanding when and why to use each mode. The mode is the conversation between patient and machine.</p>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5"><!-- AC/VC -->
+      <div class="animate-fade-up mode-card card-glass rounded-2xl p-5" style="animation-delay:0.15s">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-400 font-bold text-xs">
+         AC
+        </div>
+        <div>
+         <h3 class="font-bold text-base">Volume Control (AC/VC)</h3>
+         <p class="text-[10px] text-slate-400">Assist-Control / Volume-Cycled</p>
+        </div>
+       </div>
+       <div class="mb-3">
+        <svg class="waveform-svg w-full h-16" viewbox="0 0 300 60"><path d="M0,50 L20,50 L20,15 L60,15 L60,50 L80,50 L80,15 L120,15 L120,50 L140,50 L140,15 L180,15 L180,50 L200,50 L200,15 L240,15 L240,50 L260,50 L260,15 L300,15" fill="none" stroke="#0ea5e9" stroke-width="2" /> <text x="150" y="8" fill="#64748b" font-size="8" text-anchor="middle">
+          Pressure Waveform — Square Flow
+         </text>
+        </svg>
+       </div>
+       <ul class="text-xs text-slate-300 space-y-1.5 mb-3">
+        <li><strong class="text-white">Set:</strong> Vt, RR, PEEP, FiO₂, Flow rate</li>
+        <li><strong class="text-white">Variable:</strong> Pressure (depends on compliance &amp; resistance)</li>
+        <li><strong class="text-white">Trigger:</strong> Patient or time. Every triggered breath = full Vt.</li>
+        <li><strong class="text-white">Use:</strong> Initial mode for most patients. Guarantees volume delivery.</li>
+       </ul>
+       <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/15">
+        <p class="text-[11px] text-amber-300">⚡ Watch for: breath-stacking if RR set too high, patient-vent dyssynchrony, auto-PEEP in obstructive disease.</p>
+       </div>
+      </div><!-- AC/PC -->
+      <div class="animate-fade-up mode-card card-glass rounded-2xl p-5" style="animation-delay:0.2s">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-xs">
+         PC
+        </div>
+        <div>
+         <h3 class="font-bold text-base">Pressure Control (AC/PC)</h3>
+         <p class="text-[10px] text-slate-400">Pressure-Cycled</p>
+        </div>
+       </div>
+       <div class="mb-3">
+        <svg class="waveform-svg w-full h-16" viewbox="0 0 300 60"><path d="M0,50 L20,50 L22,15 L58,15 L60,50 L80,50 L82,15 L118,15 L120,50 L140,50 L142,15 L178,15 L180,50 L200,50 L202,15 L238,15 L240,50 L260,50 L262,15 L298,15" fill="none" stroke="#10b981" stroke-width="2" /> <text x="150" y="8" fill="#64748b" font-size="8" text-anchor="middle">
+          Pressure Waveform — Decelerating Flow
+         </text>
+        </svg>
+       </div>
+       <ul class="text-xs text-slate-300 space-y-1.5 mb-3">
+        <li><strong class="text-white">Set:</strong> Inspiratory Pressure, RR, PEEP, FiO₂, I-time</li>
+        <li><strong class="text-white">Variable:</strong> Vt (depends on compliance &amp; set pressure)</li>
+        <li><strong class="text-white">Advantage:</strong> Limits peak airway pressure. Decelerating flow → better gas distribution.</li>
+        <li><strong class="text-white">Use:</strong> ARDS (strict pressure control), high peak pressures on VC.</li>
+       </ul>
+       <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/15">
+        <p class="text-[11px] text-amber-300">⚡ Danger: Vt NOT guaranteed. If compliance drops (mucus plug, pneumothorax), Vt drops silently. Set Vt alarms!</p>
+       </div>
+      </div><!-- SIMV -->
+      <div class="animate-fade-up mode-card card-glass rounded-2xl p-5" style="animation-delay:0.25s">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-400 font-bold text-xs">
+         SIMV
+        </div>
+        <div>
+         <h3 class="font-bold text-base">SIMV (+PS)</h3>
+         <p class="text-[10px] text-slate-400">Synchronized Intermittent Mandatory Ventilation</p>
+        </div>
+       </div>
+       <ul class="text-xs text-slate-300 space-y-1.5 mb-3">
+        <li><strong class="text-white">Set:</strong> Mandatory RR (guaranteed breaths) + PS level for spontaneous breaths</li>
+        <li><strong class="text-white">Behavior:</strong> Set number of mandatory breaths (VC or PC). Between mandatories, patient breathes spontaneously with PS support.</li>
+        <li><strong class="text-white">Historical use:</strong> Weaning mode — gradually reduce mandatory rate.</li>
+       </ul>
+       <div class="p-2 rounded-lg bg-red-500/10 border border-red-500/15">
+        <p class="text-[11px] text-red-300">⚠ Largely fallen out of favor for weaning. Studies (Brochard 1994, Esteban 1995) showed PS/T-piece superior. Can cause resp muscle fatigue due to variable work of breathing between mandatory and spontaneous breaths.</p>
+       </div>
+      </div><!-- PSV -->
+      <div class="animate-fade-up mode-card card-glass rounded-2xl p-5" style="animation-delay:0.3s">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-xs">
+         PSV
+        </div>
+        <div>
+         <h3 class="font-bold text-base">Pressure Support (PSV)</h3>
+         <p class="text-[10px] text-slate-400">Patient-Triggered, Pressure-Limited</p>
+        </div>
+       </div>
+       <ul class="text-xs text-slate-300 space-y-1.5 mb-3">
+        <li><strong class="text-white">Set:</strong> PS level (above PEEP), PEEP, FiO₂</li>
+        <li><strong class="text-white">Patient controls:</strong> RR, Vt, I-time, flow</li>
+        <li><strong class="text-white">Use:</strong> Weaning mode, SBT. Most comfortable for awake patients.</li>
+        <li><strong class="text-white">PS 5-8:</strong> Overcomes ETT resistance (used for SBT).</li>
+       </ul>
+       <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/15">
+        <p class="text-[11px] text-emerald-300">✓ My preferred weaning mode. PS 10-15 → wean by 2-4 q4-6h → SBT when PS 5-8 + PEEP 5 + FiO₂ ≤ 40%. Patient must have intact respiratory drive.</p>
+       </div>
+      </div><!-- PRVC -->
+      <div class="animate-fade-up mode-card card-glass rounded-2xl p-5" style="animation-delay:0.35s">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-xs">
+         PRVC
+        </div>
+        <div>
+         <h3 class="font-bold text-base">PRVC</h3>
+         <p class="text-[10px] text-slate-400">Pressure-Regulated Volume Control</p>
+        </div>
+       </div>
+       <ul class="text-xs text-slate-300 space-y-1.5 mb-3">
+        <li><strong class="text-white">Hybrid:</strong> Set target Vt, machine auto-adjusts pressure breath-by-breath.</li>
+        <li><strong class="text-white">Advantage:</strong> Guaranteed Vt with lowest possible pressure.</li>
+        <li><strong class="text-white">Use:</strong> Post-op, changing compliance (resolving ARDS).</li>
+       </ul>
+       <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/15">
+        <p class="text-[11px] text-amber-300">⚡ Beware: if compliance improves suddenly, machine drops pressure → patient may auto-cycle. If compliance worsens, pressure rises to a set max.</p>
+       </div>
+      </div><!-- APRV -->
+      <div class="animate-fade-up mode-card card-glass rounded-2xl p-5" style="animation-delay:0.4s">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center text-red-400 font-bold text-xs">
+         APRV
+        </div>
+        <div>
+         <h3 class="font-bold text-base">APRV</h3>
+         <p class="text-[10px] text-slate-400">Airway Pressure Release Ventilation</p>
+        </div>
+       </div>
+       <ul class="text-xs text-slate-300 space-y-1.5 mb-3">
+        <li><strong class="text-white">Concept:</strong> Sustained high CPAP (P-high) with brief releases (P-low) for CO₂ clearance.</li>
+        <li><strong class="text-white">Set:</strong> P-high (20-30), T-high (4-6s), P-low (0), T-low (0.5-0.8s)</li>
+        <li><strong class="text-white">T-low:</strong> Set to 75% of peak expiratory flow. This is the KEY setting.</li>
+        <li><strong class="text-white">Use:</strong> Severe ARDS, open-lung strategy. Patient can breathe spontaneously at P-high.</li>
+       </ul>
+       <div class="p-2 rounded-lg bg-red-500/10 border border-red-500/15">
+        <p class="text-[11px] text-red-300">⚠ Expert mode. Requires understanding of time constants. Controversial — no mortality benefit proven over low-Vt ventilation. I use it as rescue in refractory ARDS when conventional fails.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- ABG TAB -->
+    <section id="tab-abg" class="tab-content hidden">
+     <div class="animate-fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2">ABG Interpretation &amp; Ventilator Adjustment</h2>
+      <p class="text-slate-400 mb-8 text-sm">The ABG is the ventilator's report card. Systematic interpretation guides every adjustment.</p>
+     </div><!-- ABG Interpreter -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6" style="animation-delay:0.15s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-sky-500/20 flex items-center justify-center">
+        <i data-lucide="test-tube" class="w-4 h-4 text-sky-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Interactive ABG Interpreter</h3>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+       <div><label class="text-xs text-slate-400 block mb-1" for="abgPH">pH</label> <input id="abgPH" type="number" step="0.01" value="7.40" min="6.8" max="7.8" class="bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-white/10 w-full focus:outline-none focus:border-sky-500">
+       </div>
+       <div><label class="text-xs text-slate-400 block mb-1" for="abgPCO2">PaCO₂ (mmHg)</label> <input id="abgPCO2" type="number" step="1" value="40" min="10" max="120" class="bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-white/10 w-full focus:outline-none focus:border-sky-500">
+       </div>
+       <div><label class="text-xs text-slate-400 block mb-1" for="abgHCO3">HCO₃⁻ (mEq/L)</label> <input id="abgHCO3" type="number" step="1" value="24" min="5" max="50" class="bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-white/10 w-full focus:outline-none focus:border-sky-500">
+       </div>
+       <div><label class="text-xs text-slate-400 block mb-1" for="abgPO2">PaO₂ (mmHg)</label> <input id="abgPO2" type="number" step="1" value="95" min="20" max="600" class="bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-white/10 w-full focus:outline-none focus:border-sky-500">
+       </div>
+      </div><button onclick="interpretABG()" class="bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors mb-4"> <i data-lucide="zap" class="w-4 h-4 inline mr-1"></i>Interpret </button>
+      <div id="abgResult" class="p-4 rounded-xl bg-white/5 text-sm text-slate-300">
+       <p class="text-slate-500 text-xs">Enter ABG values and click Interpret to see the analysis.</p>
+      </div>
+     </div><!-- Ventilator Adjustments -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7" style="animation-delay:0.2s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+        <i data-lucide="wrench" class="w-4 h-4 text-emerald-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Ventilator Adjustments Based on ABG</h3>
+      </div>
+      <div class="space-y-3">
+       <div class="p-4 rounded-xl bg-white/5 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div>
+         <h4 class="text-red-300 font-bold text-sm">↑ PaCO₂ (Respiratory Acidosis)</h4>
+         <p class="text-xs text-slate-400 mt-1">Patient not ventilating enough</p>
+        </div>
+        <div class="text-xs text-slate-300">
+         <p><strong>Action:</strong> ↑ Minute ventilation</p>
+         <p>• ↑ RR (first choice, up to 35)</p>
+         <p>• ↑ Vt (if Pplat allows, stay ≤ 30)</p>
+        </div>
+        <div class="text-xs text-amber-300">
+         ⚡ In ARDS: accept permissive hypercapnia (pH &gt; 7.20) rather than injure lungs with high Vt.
+        </div>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div>
+         <h4 class="text-sky-300 font-bold text-sm">↓ PaCO₂ (Respiratory Alkalosis)</h4>
+         <p class="text-xs text-slate-400 mt-1">Over-ventilation</p>
+        </div>
+        <div class="text-xs text-slate-300">
+         <p><strong>Action:</strong> ↓ Minute ventilation</p>
+         <p>• ↓ RR first</p>
+         <p>• ↓ Vt if appropriate</p>
+        </div>
+        <div class="text-xs text-amber-300">
+         ⚡ Exception: therapeutic hyperventilation for ↑ICP (target PaCO₂ 30-35, short-term bridge only).
+        </div>
+       </div>
+       <div class="p-4 rounded-xl bg-white/5 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div>
+         <h4 class="text-red-300 font-bold text-sm">↓ PaO₂ (Hypoxemia)</h4>
+         <p class="text-xs text-slate-400 mt-1">Oxygenation failure</p>
+        </div>
+        <div class="text-xs text-slate-300">
+         <p><strong>Action:</strong> Improve oxygenation</p>
+         <p>• ↑ FiO₂ (rapid fix)</p>
+         <p>• ↑ PEEP (recruits alveoli)</p>
+         <p>• ↑ I-time / mean airway pressure</p>
+        </div>
+        <div class="text-xs text-amber-300">
+         ⚡ Remember: CO₂ = ventilation problem (RR/Vt). O₂ = oxygenation problem (FiO₂/PEEP). Different knobs!
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- EMERGENCY TAB -->
+    <section id="tab-emergency" class="tab-content hidden">
+     <div class="animate-fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2">Ventilator Emergencies</h2>
+      <p class="text-slate-400 mb-8 text-sm">When the alarms scream — systematic approach to the crashing ventilated patient.</p>
+     </div><!-- DOPES -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6 border border-red-500/20" style="animation-delay:0.15s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="emergency-badge w-9 h-9 rounded-lg flex items-center justify-center">
+        <i data-lucide="alert-triangle" class="w-4 h-4 text-white"></i>
+       </div>
+       <h3 class="text-lg font-bold">DOPES Mnemonic — Acute Desaturation</h3><span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/30">MEMORIZE THIS</span>
+      </div>
+      <p class="text-xs text-slate-300 mb-4"><strong>Step 1:</strong> Disconnect from ventilator. Bag with 100% O₂. If patient improves → machine problem. If not → patient problem.</p>
+      <div class="space-y-3">
+       <div class="p-4 rounded-xl bg-red-500/5 border border-red-500/15 flex gap-4 items-start">
+        <div class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-red-300 font-bold text-xl shrink-0">
+         D
+        </div>
+        <div>
+         <h4 class="font-bold text-red-300">Displacement</h4>
+         <p class="text-xs text-slate-300">ETT dislodged (extubation), right mainstem, or esophageal. Check ETCO₂ waveform, tube depth at lip, bilateral breath sounds. If in doubt → direct laryngoscopy to confirm tube in trachea.</p>
+        </div>
+       </div>
+       <div class="p-4 rounded-xl bg-orange-500/5 border border-orange-500/15 flex gap-4 items-start">
+        <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-300 font-bold text-xl shrink-0">
+         O
+        </div>
+        <div>
+         <h4 class="font-bold text-orange-300">Obstruction</h4>
+         <p class="text-xs text-slate-300">Mucus plug, blood clot, patient biting tube. Pass suction catheter. If catheter won't pass → kinked tube or impacted plug. Consider bronchoscopy or reintubation. Use bite block.</p>
+        </div>
+       </div>
+       <div class="p-4 rounded-xl bg-amber-500/5 border border-amber-500/15 flex gap-4 items-start">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-300 font-bold text-xl shrink-0">
+         P
+        </div>
+        <div>
+         <h4 class="font-bold text-amber-300">Pneumothorax</h4>
+         <p class="text-xs text-slate-300"><strong>Tension pneumothorax</strong> — the killer. Absent breath sounds unilaterally, tracheal deviation, hypotension, distended neck veins, ↑ peak pressures. <strong>Don't wait for CXR.</strong> Needle decompression 2nd ICS MCL → then chest tube. Clinical diagnosis, clinical treatment.</p>
+        </div>
+       </div>
+       <div class="p-4 rounded-xl bg-sky-500/5 border border-sky-500/15 flex gap-4 items-start">
+        <div class="w-12 h-12 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-300 font-bold text-xl shrink-0">
+         E
+        </div>
+        <div>
+         <h4 class="font-bold text-sky-300">Equipment</h4>
+         <p class="text-xs text-slate-300">Circuit disconnect, O₂ supply failure, ventilator malfunction, cuff leak. Check all connections. Listen for air leak. Check cuff pressure (20-30 cmH₂O). If ventilator suspect → switch to backup or manual bag.</p>
+        </div>
+       </div>
+       <div class="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/15 flex gap-4 items-start">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-300 font-bold text-xl shrink-0">
+         S
+        </div>
+        <div>
+         <h4 class="font-bold text-emerald-300">Stacking (Breath) / Special</h4>
+         <p class="text-xs text-slate-300"><strong>Auto-PEEP / breath stacking</strong> — especially asthma/COPD. Disconnect, allow full exhalation (6-10 seconds). Also consider: bronchospasm (albuterol), PE (heparin), MI (ECG/troponin), anaphylaxis, abdominal compartment syndrome.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- High Pressure Alarm -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7" style="animation-delay:0.2s">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-9 h-9 rounded-lg bg-amber-500/20 flex items-center justify-center">
+        <i data-lucide="bell" class="w-4 h-4 text-amber-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Common Alarm Troubleshooting</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="p-3 rounded-xl bg-white/5">
+        <h4 class="text-red-300 font-bold text-sm mb-2">High Peak Pressure</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li>→ If Pplat also high: ↓ compliance (pneumothorax, atelectasis, pulmonary edema, ARDS, abdominal distension)</li>
+         <li>→ If Pplat normal but Peak high: ↑ resistance (bronchospasm, mucus plug, kinked tube, biting, small ETT)</li>
+         <li>→ Check Peak-Pplat gradient. &gt; 5-10 = resistance problem.</li>
+        </ul>
+       </div>
+       <div class="p-3 rounded-xl bg-white/5">
+        <h4 class="text-amber-300 font-bold text-sm mb-2">Low Minute Ventilation</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li>→ Circuit leak (check connections, cuff pressure)</li>
+         <li>→ ↓ patient effort (over-sedation, fatigue, neurologic event)</li>
+         <li>→ Chest tube with large air leak (bronchopleural fistula)</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- WEANING TAB -->
+    <section id="tab-weaning" class="tab-content hidden">
+     <div class="animate-fade-up" style="animation-delay:0.1s">
+      <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2">Liberation &amp; Weaning</h2>
+      <p class="text-slate-400 mb-8 text-sm">Getting the patient off the ventilator — the goal from day one. "The best ventilator setting is OFF."</p>
+     </div><!-- Readiness -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6" style="animation-delay:0.15s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Readiness Criteria for SBT</h3>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+       <div class="p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
+        <h4 class="text-emerald-300 font-bold text-sm mb-2">✓ Must Meet ALL</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li>• Cause of respiratory failure improving/resolved</li>
+         <li>• FiO₂ ≤ 40%, PEEP ≤ 5-8 cmH₂O</li>
+         <li>• P/F ratio &gt; 150-200</li>
+         <li>• Hemodynamically stable (no/low vasopressors)</li>
+         <li>• Adequate mental status (follows commands or baseline)</li>
+         <li>• Cough reflex present</li>
+         <li>• Manageable secretions</li>
+         <li>• No planned surgery/procedures</li>
+        </ul>
+       </div>
+       <div class="p-3 rounded-xl bg-sky-500/5 border border-sky-500/15">
+        <h4 class="text-sky-300 font-bold text-sm mb-2">📊 Weaning Predictors</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li><strong>RSBI (f/Vt):</strong> &lt; 105 predicts success. RR/Vt in liters during 1-min spontaneous breathing. Best single predictor.</li>
+         <li><strong>NIF (MIP):</strong> ≤ −20 to −25 cmH₂O (adequate diaphragm strength)</li>
+         <li><strong>Vt:</strong> &gt; 5 mL/kg spontaneous</li>
+         <li><strong>Vital Capacity:</strong> &gt; 10 mL/kg</li>
+         <li><strong>Minute Ventilation:</strong> &lt; 10 L/min</li>
+        </ul>
+       </div>
+      </div>
+     </div><!-- SBT Protocol -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7 mb-6" style="animation-delay:0.2s">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-9 h-9 rounded-lg bg-sky-500/20 flex items-center justify-center">
+        <i data-lucide="timer" class="w-4 h-4 text-sky-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Spontaneous Breathing Trial (SBT)</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div>
+        <h4 class="text-sm font-bold text-sky-300 mb-2">Methods</h4>
+        <ul class="text-xs text-slate-300 space-y-2">
+         <li class="p-2 rounded-lg bg-white/5"><strong>PS 5-8 + PEEP 5</strong> — most common. PS overcomes ETT resistance. My standard approach.</li>
+         <li class="p-2 rounded-lg bg-white/5"><strong>T-piece</strong> — complete disconnect. No support. More demanding. If passes → very likely to succeed extubation.</li>
+         <li class="p-2 rounded-lg bg-white/5"><strong>CPAP 5</strong> — minimal support. Similar to T-piece but with alarms.</li>
+        </ul>
+        <p class="text-xs text-slate-400 mt-2"><strong>Duration:</strong> 30 minutes is sufficient (ATS/ACCP 2017). 120 min adds no predictive value.</p>
+       </div>
+       <div>
+        <h4 class="text-sm font-bold text-red-300 mb-2">SBT Failure Criteria — Stop if:</h4>
+        <ul class="text-xs text-slate-300 space-y-1.5">
+         <li class="flex items-start gap-2"><span class="text-red-400">✗</span> RR &gt; 35 for &gt; 5 minutes</li>
+         <li class="flex items-start gap-2"><span class="text-red-400">✗</span> SpO₂ &lt; 90%</li>
+         <li class="flex items-start gap-2"><span class="text-red-400">✗</span> HR &gt; 140 or Δ &gt; 20% from baseline</li>
+         <li class="flex items-start gap-2"><span class="text-red-400">✗</span> SBP &gt; 180 or &lt; 90 mmHg</li>
+         <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Diaphoresis, agitation, anxiety</li>
+         <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Accessory muscle use, paradoxical breathing</li>
+         <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Arrhythmia</li>
+        </ul>
+        <div class="p-2 mt-3 rounded-lg bg-amber-500/10 border border-amber-500/15">
+         <p class="text-[11px] text-amber-300">⚡ Failed SBT? Rest 24h on comfortable settings, investigate cause (fluid overload, delirium, weakness, unresolved pathology), then retry.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Post-Extubation -->
+     <div class="animate-fade-up card-glass rounded-2xl p-5 sm:p-7" style="animation-delay:0.25s">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-9 h-9 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+        <i data-lucide="check-check" class="w-4 h-4 text-cyan-400"></i>
+       </div>
+       <h3 class="text-lg font-bold">Extubation &amp; Post-Extubation Care</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="p-3 rounded-xl bg-white/5">
+        <h4 class="text-cyan-300 font-bold text-sm mb-2">Pre-Extubation Checklist</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li>☐ Cuff leak test (if concern for laryngeal edema: female, prolonged intubation &gt; 6 days, traumatic intubation, repeat intubation)</li>
+         <li>☐ Head up 30-45°</li>
+         <li>☐ Suction oral and subglottic secretions</li>
+         <li>☐ Equipment at bedside (reintubation kit, NIPPV, HFNC)</li>
+         <li>☐ IV dexamethasone 8 mg if failed cuff leak (give 4-12h before extubation)</li>
+         <li>☐ Patient NPO or minimal PO</li>
+        </ul>
+       </div>
+       <div class="p-3 rounded-xl bg-white/5">
+        <h4 class="text-emerald-300 font-bold text-sm mb-2">Post-Extubation Support</h4>
+        <ul class="text-xs text-slate-300 space-y-1">
+         <li>• <strong>Low risk:</strong> Standard O₂ (NC, Venturi)</li>
+         <li>• <strong>High risk of failure:</strong> Prophylactic NIV (COPD, CHF, obesity, age &gt; 65) — reduces reintubation by 50%</li>
+         <li>• <strong>HFNC:</strong> 40-60 L/min. Non-inferior to NIV for preventing reintubation. Better tolerated.</li>
+         <li>• Monitor for 24-48h. Reintubation rate ~15%. Most failures in first 48h.</li>
+        </ul>
+        <div class="p-2 mt-2 rounded-lg bg-emerald-500/10 border border-emerald-500/15">
+         <p class="text-[11px] text-emerald-300">✓ My practice: HFNC post-extubation for all ICU patients. Prophylactic NIV for COPD/CHF. Daily SAT + SBT protocol (Wake Up &amp; Breathe).</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="px-4 sm:px-8 md:px-16 lg:px-24 py-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+     <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-sky-500/20 flex items-center justify-center">
+       <i data-lucide="heart-pulse" class="w-3.5 h-3.5 text-sky-400"></i>
+      </div><span class="text-xs text-slate-500">Clinical Airway &amp; Ventilator Guide</span>
+     </div>
+     <p class="text-[10px] text-slate-600 text-center">For educational purposes. Always correlate with clinical context. Evidence-based medicine is the foundation; clinical judgment is the art.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+  // Tab switching
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+    document.querySelectorAll('#tabNav button').forEach(b => {
+      b.className = b.className.replace('tab-active', 'tab-inactive');
+    });
+    const target = document.getElementById('tab-' + tabId);
+    if (target) target.classList.remove('hidden');
+    const btn = document.querySelector(`[data-tab="${tabId}"]`);
+    if (btn) btn.className = btn.className.replace('tab-inactive', 'tab-active');
+    // Re-trigger animations
+    target.querySelectorAll('.animate-fade-up').forEach((el, i) => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = `fade-up 0.5s ease-out ${i * 0.05}s forwards`;
+    });
+    lucide.createIcons();
+  }
+
+  // TV Calculator
+  function calcTV() {
+    const sex = document.getElementById('calcSex').value;
+    const height = parseFloat(document.getElementById('calcHeight').value) || 170;
+    const ibw = sex === 'male' ? 50 + 0.91 * (height - 152.4) : 45.5 + 0.91 * (height - 152.4);
+    const ibwR = Math.round(ibw);
+    const tvLow = Math.round(ibw * 6);
+    const tvHigh = Math.round(ibw * 8);
+    document.getElementById('calcResult').textContent = `IBW: ${ibwR} kg → TV: ${tvLow}–${tvHigh} mL`;
+  }
+
+  // ABG Interpreter
+  function interpretABG() {
+    const pH = parseFloat(document.getElementById('abgPH').value);
+    const pco2 = parseFloat(document.getElementById('abgPCO2').value);
+    const hco3 = parseFloat(document.getElementById('abgHCO3').value);
+    const po2 = parseFloat(document.getElementById('abgPO2').value);
+
+    let lines = [];
+    let ventAction = [];
+
+    // Primary disorder
+    if (pH < 7.35) {
+      if (pco2 > 45) {
+        lines.push('<strong class="text-red-300">Primary: Respiratory Acidosis</strong> (pH ↓, PaCO₂ ↑)');
+        // Check compensation
+        const expectedHCO3Acute = 24 + (pco2 - 40) * 0.1;
+        const expectedHCO3Chronic = 24 + (pco2 - 40) * 0.35;
+        if (hco3 > expectedHCO3Chronic + 2) lines.push('→ Concurrent metabolic alkalosis');
+        else if (hco3 < expectedHCO3Acute - 2) lines.push('→ Concurrent metabolic acidosis');
+        else if (hco3 > expectedHCO3Acute + 2) lines.push('→ Chronic compensation (renal bicarbonate retention)');
+        else lines.push('→ Acute, minimal compensation');
+        ventAction.push('↑ RR and/or Vt to increase minute ventilation (if Pplat allows)');
+      } else if (hco3 < 22) {
+        lines.push('<strong class="text-red-300">Primary: Metabolic Acidosis</strong> (pH ↓, HCO₃⁻ ↓)');
+        const expectedPCO2 = 1.5 * hco3 + 8;
+        if (pco2 > expectedPCO2 + 2) lines.push('→ Inadequate respiratory compensation (concurrent respiratory acidosis)');
+        else if (pco2 < expectedPCO2 - 2) lines.push('→ Concurrent respiratory alkalosis');
+        else lines.push('→ Appropriate respiratory compensation (Winter\'s formula satisfied)');
+        const ag = 140 - 101 - hco3;
+        lines.push(`Anion Gap (est): ${Math.round(ag)} ${ag > 12 ? '— ELEVATED (HAGMA: consider MUDPILES)' : '— Normal (NAGMA: consider diarrhea, RTA, saline)'}`);
+        ventAction.push('Ensure ventilator matches or exceeds pre-intubation minute ventilation. Do NOT under-ventilate metabolic acidosis patients!');
+      }
+    } else if (pH > 7.45) {
+      if (pco2 < 35) {
+        lines.push('<strong class="text-sky-300">Primary: Respiratory Alkalosis</strong> (pH ↑, PaCO₂ ↓)');
+        ventAction.push('↓ RR. Consider sedation if patient-driven hyperventilation. Rule out pain, anxiety, PE, CNS pathology.');
+      } else if (hco3 > 26) {
+        lines.push('<strong class="text-sky-300">Primary: Metabolic Alkalosis</strong> (pH ↑, HCO₃⁻ ↑)');
+        ventAction.push('Do NOT compensate with hypoventilation on vent — causes hypoxia. Treat underlying cause (NG suction, diuretics, volume depletion).');
+      }
+    } else {
+      if (pco2 >= 35 && pco2 <= 45 && hco3 >= 22 && hco3 <= 26) {
+        lines.push('<strong class="text-emerald-300">Normal ABG</strong> — No acid-base disturbance');
+      } else {
+        lines.push('<strong class="text-amber-300">Mixed Disorder</strong> — pH normal but PaCO₂ and/or HCO₃ abnormal. Opposing processes are canceling each other.');
+        if (pco2 > 45) ventAction.push('Consider ↑ minute ventilation if clinical picture warrants');
+      }
+    }
+
+    // Oxygenation
+    if (po2 < 60) {
+      lines.push(`<br><strong class="text-red-300">Severe Hypoxemia</strong> — PaO₂ ${po2} mmHg (SpO₂ ~${po2 < 40 ? '< 75%' : po2 < 50 ? '~80-85%' : '~88-90%'})`);
+      ventAction.push('↑ FiO₂ immediately. ↑ PEEP. Consider recruitment maneuver. Rule out pneumothorax.');
+    } else if (po2 < 80) {
+      lines.push(`<br><span class="text-amber-300">Mild Hypoxemia</span> — PaO₂ ${po2} mmHg`);
+      ventAction.push('↑ FiO₂ and/or ↑ PEEP to target PaO₂ > 80 (SpO₂ > 94%)');
+    } else {
+      lines.push(`<br><span class="text-emerald-300">Oxygenation adequate</span> — PaO₂ ${po2} mmHg`);
+      if (po2 > 150) ventAction.push('↓ FiO₂ — hyperoxia is harmful. Target SpO₂ 92-96%.');
+    }
+
+    let html = '<div class="space-y-2 text-xs">';
+    html += '<div class="p-3 rounded-lg bg-white/5">' + lines.join('<br>') + '</div>';
+    if (ventAction.length) {
+      html += '<div class="p-3 rounded-lg bg-sky-500/10 border border-sky-500/20"><p class="font-bold text-sky-300 mb-1">🔧 Ventilator Actions:</p>';
+      ventAction.forEach(a => html += '<p class="text-slate-300">• ' + a + '</p>');
+      html += '</div>';
+    }
+    html += '</div>';
+    document.getElementById('abgResult').innerHTML = html;
+  }
+
+  // Element SDK
+  const defaultConfig = {
+    main_title: 'Airway & Ventilator Management',
+    subtitle: 'A comprehensive clinical experience guide — from bedside assessment to advanced ventilator strategies.',
+    background_color: '#0f172a',
+    surface_color: '#1e293b',
+    text_color: '#e2e8f0',
+    primary_action_color: '#0ea5e9',
+    secondary_action_color: '#10b981',
+    font_family: 'DM Sans',
+    font_size: 14
+  };
+
+  function applyConfig(config) {
+    const c = { ...defaultConfig, ...config };
+    const font = c.font_family || defaultConfig.font_family;
+    const baseSize = c.font_size || defaultConfig.font_size;
+
+    document.getElementById('mainTitle').innerHTML = (c.main_title || defaultConfig.main_title).replace('&', '&amp;').replace(/Ventilator/, '<br><span style="color:' + c.primary_action_color + '">Ventilator</span>').replace(/Management/, '<span style="color:' + c.primary_action_color + '">Management</span>');
+    document.getElementById('subtitle').textContent = c.subtitle || defaultConfig.subtitle;
+
+    document.body.querySelector('#app').style.background = `linear-gradient(135deg, ${c.background_color} 0%, ${c.surface_color} 100%)`;
+    document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+    document.querySelectorAll('.font-heading').forEach(el => el.style.fontFamily = `Playfair Display, ${font}, serif`);
+    document.body.style.fontSize = baseSize + 'px';
+  }
+
+  // Init
+  calcTV();
+  lucide.createIcons();
+</script>
+</body>
+</html>
