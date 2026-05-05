@@ -1,0 +1,802 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Trauma Primary Survey | Trauma Management (ABCDE) | Deep Medicine</title> <meta name="description" content="Structured trauma primary survey using ABCDE approach with rapid assessment, life-saving interventions, and trauma management principles."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/trauma-primary-survey"> <!-- Open Graph --> <meta property="og:title" content="Trauma Primary Survey | Deep Medicine"> <meta property="og:description" content="ABCDE-based trauma primary survey and emergency trauma management guide."> <meta property="og:image" content="https://deepmedicine.in/images/trauma-primary-survey.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+
+.app-scroll { height: 100%; overflow-y: auto; overflow-x: hidden; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(220,38,38,0.3); }
+  50% { box-shadow: 0 0 20px rgba(220,38,38,0.6); }
+}
+.anim-fade { animation: fadeUp 0.6s ease both; }
+.anim-d1 { animation-delay: 0.1s; }
+.anim-d2 { animation-delay: 0.2s; }
+.anim-d3 { animation-delay: 0.3s; }
+.anim-d4 { animation-delay: 0.4s; }
+.anim-d5 { animation-delay: 0.5s; }
+.anim-d6 { animation-delay: 0.6s; }
+.pulse-border { animation: pulse-glow 2s ease-in-out infinite; }
+
+.nav-btn { transition: all 0.25s ease; }
+.nav-btn:hover { transform: translateY(-1px); }
+.nav-btn.active-nav { border-bottom: 3px solid; }
+
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+
+.section-panel { display: none; }
+.section-panel.active-section { display: block; }
+
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.accordion-body.open { max-height: 3000px; }
+
+.step-line { position: absolute; left: 19px; top: 40px; bottom: 0; width: 2px; }
+
+.triage-red { border-left: 4px solid #dc2626; }
+.triage-yellow { border-left: 4px solid #f59e0b; }
+.triage-green { border-left: 4px solid #16a34a; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.4); border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="app-scroll w-full" style="background:#0b0f1a;"><!-- HERO -->
+   <header id="hero-section" class="relative w-full overflow-hidden" style="background: linear-gradient(135deg, #0b0f1a 0%, #1a1025 40%, #2d0a1e 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, rgba(220,38,38,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.2) 0%, transparent 50%);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+     <div class="anim-fade inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background:rgba(220,38,38,0.15); border:1px solid rgba(220,38,38,0.3);"><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> <span class="text-red-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">Critical Care Reference</span>
+     </div>
+     <h1 id="main-title" class="anim-fade anim-d1 text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Trauma &amp; Surgical<br><span style="background:linear-gradient(90deg,#dc2626,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">ICU Emergencies</span></h1>
+     <p id="subtitle" class="anim-fade anim-d2 text-base sm:text-lg max-w-2xl mx-auto mb-8" style="color:#94a3b8;">A Comprehensive Clinical Reference for MBBS, MD Physicians, ICU Intensivists &amp; Emergency Medicine Specialists</p>
+     <div class="anim-fade anim-d3 flex flex-wrap justify-center gap-3 text-xs sm:text-sm" style="color:#64748b;"><span class="flex items-center gap-1"><i data-lucide="shield-check" style="width:16px;height:16px;color:#dc2626;"></i> Evidence-Based</span> <span class="flex items-center gap-1"><i data-lucide="clock" style="width:16px;height:16px;color:#f59e0b;"></i> Time-Critical Protocols</span> <span class="flex items-center gap-1"><i data-lucide="activity" style="width:16px;height:16px;color:#22c55e;"></i> ICU Focused</span>
+     </div>
+    </div>
+   </header><!-- NAV -->
+   <nav class="sticky top-0 z-50 w-full border-b" style="background:rgba(11,15,26,0.95); backdrop-filter:blur(12px); border-color:rgba(255,255,255,0.06);">
+    <div class="max-w-6xl mx-auto px-2 sm:px-6 flex overflow-x-auto gap-0 sm:gap-1 hide-scrollbar" style="scrollbar-width:none;"><button onclick="showSection('overview')" class="nav-btn active-nav px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#f1f5f9; border-color:#dc2626;" data-nav="overview">Overview</button> <button onclick="showSection('primary')" class="nav-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b; border-color:transparent;" data-nav="primary">Primary Survey</button> <button onclick="showSection('trauma')" class="nav-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b; border-color:transparent;" data-nav="trauma">Trauma Types</button> <button onclick="showSection('surgical')" class="nav-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b; border-color:transparent;" data-nav="surgical">Surgical ICU</button> <button onclick="showSection('protocols')" class="nav-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b; border-color:transparent;" data-nav="protocols">Protocols</button> <button onclick="showSection('drugs')" class="nav-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b; border-color:transparent;" data-nav="drugs">Drugs &amp; Doses</button> <button onclick="showSection('scores')" class="nav-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b; border-color:transparent;" data-nav="scores">Scoring</button>
+    </div>
+   </nav><!-- CONTENT -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8"><!-- OVERVIEW -->
+    <div id="sec-overview" class="section-panel active-section">
+     <div class="mb-8 anim-fade">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Clinical Overview</h2>
+      <div class="w-16 h-1 rounded mb-6" style="background:linear-gradient(90deg,#dc2626,#f59e0b);"></div>
+     </div><!-- Stats -->
+     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
+      <div class="card-hover rounded-xl p-4 sm:p-5 text-center anim-fade anim-d1" style="background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.2);">
+       <div class="text-2xl sm:text-3xl font-extrabold" style="color:#dc2626;">
+        4.4M
+       </div>
+       <div class="text-xs sm:text-sm mt-1" style="color:#94a3b8;">
+        Annual Trauma Deaths Worldwide
+       </div>
+      </div>
+      <div class="card-hover rounded-xl p-4 sm:p-5 text-center anim-fade anim-d2" style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2);">
+       <div class="text-2xl sm:text-3xl font-extrabold" style="color:#f59e0b;">
+        &lt;60min
+       </div>
+       <div class="text-xs sm:text-sm mt-1" style="color:#94a3b8;">
+        Golden Hour Window
+       </div>
+      </div>
+      <div class="card-hover rounded-xl p-4 sm:p-5 text-center anim-fade anim-d3" style="background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.2);">
+       <div class="text-2xl sm:text-3xl font-extrabold" style="color:#22c55e;">
+        30%
+       </div>
+       <div class="text-xs sm:text-sm mt-1" style="color:#94a3b8;">
+        Preventable Trauma Mortality
+       </div>
+      </div>
+      <div class="card-hover rounded-xl p-4 sm:p-5 text-center anim-fade anim-d4" style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2);">
+       <div class="text-2xl sm:text-3xl font-extrabold" style="color:#3b82f6;">
+        #1
+       </div>
+       <div class="text-xs sm:text-sm mt-1" style="color:#94a3b8;">
+        Cause of Death Age 1-44
+       </div>
+      </div>
+     </div><!-- Trimodal Death -->
+     <div class="rounded-xl p-5 sm:p-8 mb-8 anim-fade anim-d3" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="text-lg sm:text-xl font-bold mb-5" style="color:#f1f5f9;"><i data-lucide="trending-up" style="width:20px;height:20px;display:inline;color:#dc2626;" class="mr-2"></i>Trimodal Distribution of Trauma Deaths</h3>
+      <div class="grid sm:grid-cols-3 gap-4">
+       <div class="triage-red rounded-lg p-4" style="background:rgba(220,38,38,0.06);">
+        <div class="font-bold text-sm mb-1" style="color:#dc2626;">
+         Immediate (0–1 hr)
+        </div>
+        <div class="text-xs leading-relaxed" style="color:#94a3b8;">
+         ~50% deaths. Massive hemorrhage, severe TBI, high spinal cord injury, cardiac/great vessel rupture. Prevention = injury prevention programs.
+        </div>
+       </div>
+       <div class="triage-yellow rounded-lg p-4" style="background:rgba(245,158,11,0.06);">
+        <div class="font-bold text-sm mb-1" style="color:#f59e0b;">
+         Early (1–4 hrs)
+        </div>
+        <div class="text-xs leading-relaxed" style="color:#94a3b8;">
+         ~30% deaths. Epidural/subdural hematoma, hemopneumothorax, splenic/liver laceration, pelvic fractures. This is the <strong style="color:#f59e0b;">Golden Hour</strong> — maximum impact of surgical ICU intervention.
+        </div>
+       </div>
+       <div class="triage-green rounded-lg p-4" style="background:rgba(34,197,94,0.06);">
+        <div class="font-bold text-sm mb-1" style="color:#22c55e;">
+         Late (Days–Weeks)
+        </div>
+        <div class="text-xs leading-relaxed" style="color:#94a3b8;">
+         ~20% deaths. Sepsis, MODS (Multi-Organ Dysfunction Syndrome), ARDS, PE, DIC. ICU-level care, monitoring &amp; early intervention are critical.
+        </div>
+       </div>
+      </div>
+     </div><!-- Key Principles -->
+     <div class="rounded-xl p-5 sm:p-8 anim-fade anim-d4" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="text-lg sm:text-xl font-bold mb-5" style="color:#f1f5f9;"><i data-lucide="target" style="width:20px;height:20px;display:inline;color:#f59e0b;" class="mr-2"></i>Fundamental Principles</h3>
+      <div class="grid sm:grid-cols-2 gap-3">
+       <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.02);"><span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(220,38,38,0.2); color:#dc2626;">1</span>
+        <div>
+         <div class="text-sm font-semibold" style="color:#e2e8f0;">
+          Treat the Greatest Threat to Life First
+         </div>
+         <div class="text-xs mt-1" style="color:#64748b;">
+          ABCDE approach — systematic, repeatable, prioritized
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.02);"><span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(245,158,11,0.2); color:#f59e0b;">2</span>
+        <div>
+         <div class="text-sm font-semibold" style="color:#e2e8f0;">
+          Damage Control Resuscitation
+         </div>
+         <div class="text-xs mt-1" style="color:#64748b;">
+          Permissive hypotension, hemostatic resuscitation, early surgery
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.02);"><span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(34,197,94,0.2); color:#22c55e;">3</span>
+        <div>
+         <div class="text-sm font-semibold" style="color:#e2e8f0;">
+          Lethal Triad Prevention
+         </div>
+         <div class="text-xs mt-1" style="color:#64748b;">
+          Hypothermia + Acidosis + Coagulopathy → must be interrupted early
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.02);"><span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:rgba(59,130,246,0.2); color:#3b82f6;">4</span>
+        <div>
+         <div class="text-sm font-semibold" style="color:#e2e8f0;">
+          Massive Transfusion Protocol
+         </div>
+         <div class="text-xs mt-1" style="color:#64748b;">
+          1:1:1 ratio pRBC:FFP:Platelets, early TXA within 3 hours
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- PRIMARY SURVEY -->
+    <div id="sec-primary" class="section-panel">
+     <div class="mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Primary Survey — ABCDE</h2>
+      <div class="w-16 h-1 rounded mb-4" style="background:linear-gradient(90deg,#dc2626,#f59e0b);"></div>
+      <p class="text-sm" style="color:#94a3b8;">The ATLS® Primary Survey is completed in <strong style="color:#f59e0b;">&lt;2 minutes</strong>. Identify and treat life-threatening conditions simultaneously.</p>
+     </div>
+     <div class="space-y-4" id="abcde-steps"><!-- Each step rendered via JS for cleanliness -->
+     </div><!-- Adjuncts -->
+     <div class="mt-8 rounded-xl p-5 sm:p-8" style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15);">
+      <h3 class="text-lg font-bold mb-4" style="color:#3b82f6;"><i data-lucide="plus-circle" style="width:18px;height:18px;display:inline;" class="mr-2"></i>Adjuncts to Primary Survey</h3>
+      <div class="grid sm:grid-cols-2 gap-3 text-xs" style="color:#94a3b8;">
+       <div class="p-3 rounded-lg" style="background:rgba(255,255,255,0.03);">
+        <div class="font-semibold mb-1" style="color:#e2e8f0;">
+         Monitoring
+        </div> ECG, Pulse oximetry, ETCO₂, Arterial BP, Urinary catheter (if no contraindication), NG/OG tube, Temperature probe
+       </div>
+       <div class="p-3 rounded-lg" style="background:rgba(255,255,255,0.03);">
+        <div class="font-semibold mb-1" style="color:#e2e8f0;">
+         Investigations
+        </div> Chest &amp; Pelvis X-ray, FAST/eFAST ultrasound, ABG, Lactate, CBC, Coagulation panel, Type &amp; Crossmatch, Blood glucose
+       </div>
+      </div>
+     </div>
+    </div><!-- TRAUMA TYPES -->
+    <div id="sec-trauma" class="section-panel">
+     <div class="mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Trauma Types &amp; Management</h2>
+      <div class="w-16 h-1 rounded mb-4" style="background:linear-gradient(90deg,#dc2626,#f59e0b);"></div>
+     </div>
+     <div class="space-y-3" id="trauma-accordions"></div>
+    </div><!-- SURGICAL ICU -->
+    <div id="sec-surgical" class="section-panel">
+     <div class="mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Surgical ICU Emergencies</h2>
+      <div class="w-16 h-1 rounded mb-4" style="background:linear-gradient(90deg,#dc2626,#f59e0b);"></div>
+     </div>
+     <div class="space-y-3" id="sicu-accordions"></div>
+    </div><!-- PROTOCOLS -->
+    <div id="sec-protocols" class="section-panel">
+     <div class="mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Critical Protocols &amp; Algorithms</h2>
+      <div class="w-16 h-1 rounded mb-4" style="background:linear-gradient(90deg,#dc2626,#f59e0b);"></div>
+     </div>
+     <div class="space-y-3" id="protocol-accordions"></div>
+    </div><!-- DRUGS -->
+    <div id="sec-drugs" class="section-panel">
+     <div class="mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Emergency Drugs &amp; Dosages</h2>
+      <div class="w-16 h-1 rounded mb-4" style="background:linear-gradient(90deg,#dc2626,#f59e0b);"></div>
+      <p class="text-xs" style="color:#64748b;">⚠ Always verify doses per institutional protocols and patient-specific factors.</p>
+     </div>
+     <div class="overflow-x-auto rounded-xl" style="border:1px solid rgba(255,255,255,0.06);">
+      <table class="w-full text-xs sm:text-sm" style="min-width:600px;">
+       <thead>
+        <tr style="background:rgba(220,38,38,0.1);">
+         <th class="text-left px-4 py-3 font-semibold" style="color:#dc2626;">Drug</th>
+         <th class="text-left px-4 py-3 font-semibold" style="color:#dc2626;">Indication</th>
+         <th class="text-left px-4 py-3 font-semibold" style="color:#dc2626;">Dose (Adult)</th>
+         <th class="text-left px-4 py-3 font-semibold" style="color:#dc2626;">Route</th>
+         <th class="text-left px-4 py-3 font-semibold" style="color:#dc2626;">Key Notes</th>
+        </tr>
+       </thead>
+       <tbody id="drug-table-body"></tbody>
+      </table>
+     </div>
+    </div><!-- SCORING -->
+    <div id="sec-scores" class="section-panel">
+     <div class="mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#f1f5f9;">Trauma &amp; ICU Scoring Systems</h2>
+      <div class="w-16 h-1 rounded mb-4" style="background:linear-gradient(90deg,#dc2626,#f59e0b);"></div>
+     </div><!-- GCS Calculator -->
+     <div class="rounded-xl p-5 sm:p-8 mb-6 pulse-border" style="background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2);">
+      <h3 class="text-lg font-bold mb-4" style="color:#dc2626;"><i data-lucide="brain" style="width:18px;height:18px;display:inline;" class="mr-2"></i>Glasgow Coma Scale (GCS) Calculator</h3>
+      <div class="grid sm:grid-cols-3 gap-4 mb-4">
+       <div><label class="block text-xs font-semibold mb-2" style="color:#94a3b8;">Eye Opening (E)</label> <select id="gcs-eye" onchange="calcGCS()" class="w-full rounded-lg px-3 py-2 text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#e2e8f0;"> <option value="4">4 — Spontaneous</option> <option value="3">3 — To Voice</option> <option value="2">2 — To Pain</option> <option value="1">1 — None</option> </select>
+       </div>
+       <div><label class="block text-xs font-semibold mb-2" style="color:#94a3b8;">Verbal Response (V)</label> <select id="gcs-verbal" onchange="calcGCS()" class="w-full rounded-lg px-3 py-2 text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#e2e8f0;"> <option value="5">5 — Oriented</option> <option value="4">4 — Confused</option> <option value="3">3 — Inappropriate Words</option> <option value="2">2 — Incomprehensible</option> <option value="1">1 — None</option> </select>
+       </div>
+       <div><label class="block text-xs font-semibold mb-2" style="color:#94a3b8;">Motor Response (M)</label> <select id="gcs-motor" onchange="calcGCS()" class="w-full rounded-lg px-3 py-2 text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#e2e8f0;"> <option value="6">6 — Obeys Commands</option> <option value="5">5 — Localizes Pain</option> <option value="4">4 — Withdrawal</option> <option value="3">3 — Abnormal Flexion</option> <option value="2">2 — Extension</option> <option value="1">1 — None</option> </select>
+       </div>
+      </div>
+      <div class="flex items-center gap-4 p-4 rounded-lg" style="background:rgba(255,255,255,0.03);">
+       <div class="text-3xl font-extrabold" id="gcs-total" style="color:#dc2626;">
+        15
+       </div>
+       <div>
+        <div class="text-sm font-semibold" id="gcs-label" style="color:#e2e8f0;">
+         Mild TBI (13–15)
+        </div>
+        <div class="text-xs" id="gcs-action" style="color:#64748b;">
+         Observation, CT if indicated
+        </div>
+       </div>
+      </div>
+     </div><!-- Shock Index Calculator -->
+     <div class="rounded-xl p-5 sm:p-8 mb-6" style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.2);">
+      <h3 class="text-lg font-bold mb-4" style="color:#f59e0b;"><i data-lucide="heart" style="width:18px;height:18px;display:inline;" class="mr-2"></i>Shock Index Calculator</h3>
+      <div class="grid grid-cols-2 gap-4 mb-4">
+       <div><label class="block text-xs font-semibold mb-2" style="color:#94a3b8;" for="si-hr">Heart Rate (bpm)</label> <input id="si-hr" type="number" value="80" min="20" max="250" oninput="calcSI()" class="w-full rounded-lg px-3 py-2 text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#e2e8f0;">
+       </div>
+       <div><label class="block text-xs font-semibold mb-2" style="color:#94a3b8;" for="si-sbp">Systolic BP (mmHg)</label> <input id="si-sbp" type="number" value="120" min="30" max="300" oninput="calcSI()" class="w-full rounded-lg px-3 py-2 text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#e2e8f0;">
+       </div>
+      </div>
+      <div class="flex items-center gap-4 p-4 rounded-lg" style="background:rgba(255,255,255,0.03);">
+       <div class="text-3xl font-extrabold" id="si-value" style="color:#f59e0b;">
+        0.67
+       </div>
+       <div>
+        <div class="text-sm font-semibold" id="si-label" style="color:#e2e8f0;">
+         Normal
+        </div>
+        <div class="text-xs" id="si-action" style="color:#64748b;">
+         SI &lt; 0.7 = hemodynamically stable
+        </div>
+       </div>
+      </div>
+     </div><!-- Other Scores Reference -->
+     <div class="rounded-xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="text-lg font-bold mb-4" style="color:#f1f5f9;">Quick Reference Scores</h3>
+      <div class="grid sm:grid-cols-2 gap-3" id="scores-grid"></div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="w-full py-6 text-center border-t" style="border-color:rgba(255,255,255,0.06);">
+    <p class="text-xs" style="color:#475569;">⚕ For educational reference only. Always follow institutional protocols and clinical judgment.</p>
+    <p class="text-xs mt-1" style="color:#334155;">Based on ATLS® 10th Edition, EAST Guidelines, SCCM &amp; WHO Recommendations</p>
+   </footer>
+  </div>
+  <script>
+// ===== DATA =====
+const ABCDE = [
+  { letter: 'A', title: 'Airway with C-Spine Protection', color: '#dc2626',
+    content: `<div class="space-y-2">
+      <div class="font-semibold" style="color:#e2e8f0;">Assessment:</div>
+      <ul class="list-disc pl-5 space-y-1" style="color:#94a3b8;"><li>Look: facial/neck trauma, tracheal deviation, accessory muscle use</li><li>Listen: stridor, gurgling, hoarseness, abnormal phonation</li><li>Feel: air movement, subcutaneous emphysema</li></ul>
+      <div class="font-semibold mt-3" style="color:#e2e8f0;">Interventions (escalating):</div>
+      <ul class="list-disc pl-5 space-y-1" style="color:#94a3b8;"><li>Chin lift / Jaw thrust (maintain C-spine inline)</li><li>Suction & clear debris</li><li>Oropharyngeal (OPA) / Nasopharyngeal (NPA) airway</li><li>Supraglottic airway (LMA, i-gel)</li><li>Endotracheal intubation (RSI preferred) — Video laryngoscopy if available</li><li>Surgical airway: Cricothyroidotomy (emergency) / Tracheostomy</li></ul>
+      <div class="p-3 rounded-lg mt-3" style="background:rgba(220,38,38,0.1);"><strong style="color:#dc2626;">⚠ C-Spine:</strong> <span style="color:#94a3b8;">Manual In-Line Stabilization (MILS) until cleared. Hard collar. Log-roll only. Assume injury in all blunt trauma with altered sensorium.</span></div>
+    </div>` },
+  { letter: 'B', title: 'Breathing & Ventilation', color: '#f59e0b',
+    content: `<div class="space-y-2">
+      <div class="font-semibold" style="color:#e2e8f0;">Life-Threatening Diagnoses (diagnose & treat immediately):</div>
+      <div class="grid sm:grid-cols-2 gap-2 mt-2">
+        <div class="p-2 rounded" style="background:rgba(255,255,255,0.03);"><strong style="color:#f59e0b;">Tension Pneumothorax</strong><br><span style="color:#94a3b8;">Tracheal deviation, absent breath sounds, hypotension, distended neck veins → Needle decompression 2nd ICS MCL → Chest tube</span></div>
+        <div class="p-2 rounded" style="background:rgba(255,255,255,0.03);"><strong style="color:#f59e0b;">Open Pneumothorax</strong><br><span style="color:#94a3b8;">Sucking chest wound → 3-sided occlusive dressing → Chest tube</span></div>
+        <div class="p-2 rounded" style="background:rgba(255,255,255,0.03);"><strong style="color:#f59e0b;">Massive Hemothorax</strong><br><span style="color:#94a3b8;">>1500ml or >200ml/hr → Large bore chest tube (28-32Fr) → Consider thoracotomy</span></div>
+        <div class="p-2 rounded" style="background:rgba(255,255,255,0.03);"><strong style="color:#f59e0b;">Flail Chest</strong><br><span style="color:#94a3b8;">≥3 ribs fractured in ≥2 places → Paradoxical movement → Intubation if respiratory failure; regional analgesia</span></div>
+      </div>
+      <div class="p-3 rounded-lg mt-3" style="background:rgba(245,158,11,0.1);"><strong style="color:#f59e0b;">Targets:</strong> <span style="color:#94a3b8;">SpO₂ 94-98%, ETCO₂ 35-45 mmHg, RR 12-20. In TBI: avoid hypoxia (SpO₂ <90%) — single episode doubles mortality.</span></div>
+    </div>` },
+  { letter: 'C', title: 'Circulation with Hemorrhage Control', color: '#dc2626',
+    content: `<div class="space-y-2">
+      <div class="font-semibold" style="color:#e2e8f0;">Hemorrhage Classification (ATLS):</div>
+      <div class="overflow-x-auto mt-2"><table class="w-full text-xs" style="min-width:400px;">
+        <tr style="background:rgba(220,38,38,0.1);"><th class="px-2 py-1 text-left" style="color:#dc2626;">Class</th><th class="px-2 py-1 text-left" style="color:#dc2626;">Blood Loss</th><th class="px-2 py-1 text-left" style="color:#dc2626;">HR</th><th class="px-2 py-1 text-left" style="color:#dc2626;">BP</th><th class="px-2 py-1 text-left" style="color:#dc2626;">Mental Status</th></tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td class="px-2 py-1" style="color:#94a3b8;">I</td><td class="px-2 py-1" style="color:#94a3b8;">&lt;750ml (15%)</td><td class="px-2 py-1" style="color:#94a3b8;">&lt;100</td><td class="px-2 py-1" style="color:#94a3b8;">Normal</td><td class="px-2 py-1" style="color:#94a3b8;">Slightly anxious</td></tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td class="px-2 py-1" style="color:#94a3b8;">II</td><td class="px-2 py-1" style="color:#94a3b8;">750-1500ml (15-30%)</td><td class="px-2 py-1" style="color:#94a3b8;">100-120</td><td class="px-2 py-1" style="color:#94a3b8;">Normal</td><td class="px-2 py-1" style="color:#94a3b8;">Anxious</td></tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td class="px-2 py-1" style="color:#f59e0b;">III</td><td class="px-2 py-1" style="color:#f59e0b;">1500-2000ml (30-40%)</td><td class="px-2 py-1" style="color:#f59e0b;">>120</td><td class="px-2 py-1" style="color:#f59e0b;">Decreased</td><td class="px-2 py-1" style="color:#f59e0b;">Confused</td></tr>
+        <tr><td class="px-2 py-1" style="color:#dc2626;">IV</td><td class="px-2 py-1" style="color:#dc2626;">>2000ml (>40%)</td><td class="px-2 py-1" style="color:#dc2626;">>140</td><td class="px-2 py-1" style="color:#dc2626;">Very low</td><td class="px-2 py-1" style="color:#dc2626;">Lethargic</td></tr>
+      </table></div>
+      <div class="font-semibold mt-3" style="color:#e2e8f0;">Management:</div>
+      <ul class="list-disc pl-5 space-y-1" style="color:#94a3b8;">
+        <li>Direct pressure / tourniquet for external hemorrhage</li>
+        <li>2× large bore IV (14-16G) antecubital; consider IO access</li>
+        <li><strong>Damage Control Resuscitation:</strong> Permissive hypotension (SBP 80-90 mmHg) unless TBI</li>
+        <li><strong>MTP 1:1:1</strong> — pRBC : FFP : Platelets</li>
+        <li><strong>TXA 1g IV over 10 min</strong> within 3 hours of injury, then 1g over 8 hrs</li>
+        <li>Warm all fluids — prevent hypothermia</li>
+        <li>FAST scan → OR if positive with instability</li>
+        <li>Pelvic binder if suspected pelvic fracture</li>
+        <li>REBOA for non-compressible torso hemorrhage (Zone 1 or 3)</li>
+      </ul>
+    </div>` },
+  { letter: 'D', title: 'Disability (Neurological)', color: '#3b82f6',
+    content: `<div class="space-y-2">
+      <div class="font-semibold" style="color:#e2e8f0;">Rapid Neurological Assessment:</div>
+      <ul class="list-disc pl-5 space-y-1" style="color:#94a3b8;">
+        <li><strong>GCS</strong> (E+V+M) — document each component separately</li>
+        <li><strong>Pupils:</strong> Size, equality, reactivity (PERRL)</li>
+        <li><strong>Lateralizing signs:</strong> unilateral weakness, extensor posturing</li>
+        <li>Check blood glucose (hypoglycemia mimics TBI)</li>
+      </ul>
+      <div class="font-semibold mt-3" style="color:#e2e8f0;">TBI Management Targets:</div>
+      <div class="grid grid-cols-2 gap-2 mt-2 text-xs">
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.1);"><strong style="color:#3b82f6;">ICP</strong><br><span style="color:#94a3b8;">&lt;22 mmHg</span></div>
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.1);"><strong style="color:#3b82f6;">CPP</strong><br><span style="color:#94a3b8;">60-70 mmHg</span></div>
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.1);"><strong style="color:#3b82f6;">SBP</strong><br><span style="color:#94a3b8;">>100 mmHg (avoid hypotension)</span></div>
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.1);"><strong style="color:#3b82f6;">SpO₂</strong><br><span style="color:#94a3b8;">>94%, PaO₂ >60</span></div>
+      </div>
+      <div class="p-3 rounded-lg mt-3" style="background:rgba(59,130,246,0.1);"><strong style="color:#3b82f6;">Herniation Signs:</strong> <span style="color:#94a3b8;">Dilated unreactive pupil, Cushing's triad (HTN + bradycardia + irregular breathing), posturing → Emergent: Mannitol 1g/kg or Hypertonic saline 3% 250ml IV, elevate HOB 30°, emergent neurosurgery consult</span></div>
+    </div>` },
+  { letter: 'E', title: 'Exposure & Environment', color: '#22c55e',
+    content: `<div class="space-y-2">
+      <ul class="list-disc pl-5 space-y-1" style="color:#94a3b8;">
+        <li>Completely undress patient — full head-to-toe examination</li>
+        <li><strong>Log-roll</strong> to examine back, spine, perineum, buttocks</li>
+        <li>Maintain <strong>normothermia</strong> (≥36°C) — warm blankets, Bair Hugger, warm IV fluids</li>
+        <li>Document all injuries, wounds, deformities</li>
+        <li>Prevent iatrogenic hypothermia (part of lethal triad)</li>
+      </ul>
+      <div class="p-3 rounded-lg mt-3" style="background:rgba(34,197,94,0.1);"><strong style="color:#22c55e;">Remember:</strong> <span style="color:#94a3b8;">Reassess ABCDE after every intervention and at regular intervals. The primary survey is iterative, not linear.</span></div>
+    </div>` }
+];
+
+const TRAUMA_TYPES = [
+  { title: 'Head & Traumatic Brain Injury (TBI)', icon: 'brain', color: '#3b82f6',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Classification:</strong> Mild (GCS 13-15), Moderate (GCS 9-12), Severe (GCS 3-8)</p>
+      <div class="grid sm:grid-cols-2 gap-2">
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.06);"><strong style="color:#3b82f6;">Epidural Hematoma</strong><br>Middle meningeal artery tear. "Lucid interval." Lens-shaped on CT. Emergency craniotomy.</div>
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.06);"><strong style="color:#3b82f6;">Subdural Hematoma</strong><br>Bridging vein tear. Crescent on CT. Acute (<3d) = surgical. Elderly/anticoagulants at high risk.</div>
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.06);"><strong style="color:#3b82f6;">Diffuse Axonal Injury</strong><br>Shearing forces. CT may be normal. MRI shows punctate hemorrhages at grey-white junction.</div>
+        <div class="p-2 rounded" style="background:rgba(59,130,246,0.06);"><strong style="color:#3b82f6;">Contusion/ICH</strong><br>Coup-contrecoup mechanism. Monitor for expansion. ICP monitoring if GCS ≤8.</div>
+      </div>
+      <p><strong style="color:#e2e8f0;">ICU Management:</strong> HOB 30°, normocapnia (PaCO₂ 35-45), avoid hypotension (SBP >100), seizure prophylaxis (Levetiracetam 7 days), ICP monitoring (EVD preferred), CPP 60-70 mmHg, avoid hyperthermia, DVT prophylaxis (timing per neurosurgery), nutrition within 72h.</p>
+    </div>` },
+  { title: 'Chest Trauma', icon: 'wind', color: '#f59e0b',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Life-Threatening (Primary Survey):</strong> Tension pneumothorax, Open pneumothorax, Massive hemothorax, Flail chest with pulmonary contusion, Cardiac tamponade</p>
+      <p><strong style="color:#e2e8f0;">Potentially Lethal (Secondary Survey):</strong> Aortic disruption, Tracheobronchial injury, Esophageal perforation, Diaphragmatic rupture, Myocardial contusion</p>
+      <div class="p-2 rounded" style="background:rgba(245,158,11,0.06);"><strong style="color:#f59e0b;">Cardiac Tamponade:</strong> Beck's Triad (muffled heart sounds + JVD + hypotension). FAST shows pericardial effusion. → Pericardiocentesis or ED thoracotomy.</div>
+      <div class="p-2 rounded" style="background:rgba(245,158,11,0.06);"><strong style="color:#f59e0b;">Aortic Injury:</strong> Widened mediastinum on CXR. CT angiography confirms. Most at isthmus (ligamentum arteriosum). Endovascular repair preferred. SBP &lt;100, HR &lt;100 while awaiting repair.</div>
+      <p><strong style="color:#e2e8f0;">Chest Tube Indications:</strong> Pneumothorax >20%, hemothorax, mechanical ventilation with pneumothorax, tension pneumothorax (after needle decompression).</p>
+    </div>` },
+  { title: 'Abdominal & Pelvic Trauma', icon: 'activity', color: '#dc2626',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Assessment:</strong> FAST (Focused Assessment with Sonography for Trauma) — Morison's pouch, splenorenal, suprapubic, subxiphoid (pericardial).</p>
+      <div class="grid sm:grid-cols-2 gap-2">
+        <div class="p-2 rounded" style="background:rgba(220,38,38,0.06);"><strong style="color:#dc2626;">Splenic Injury</strong><br>Most common blunt abdominal organ injured. AAST Grade I-V. Non-operative management (NOM) if stable Grade I-III. Angioembolization for Grade IV/V or active blush. Splenectomy if hemodynamically unstable.</div>
+        <div class="p-2 rounded" style="background:rgba(220,38,38,0.06);"><strong style="color:#dc2626;">Liver Injury</strong><br>Most common in penetrating trauma. NOM successful in 80%+ of blunt. Grade IV-V may need packing (damage control). Pringle maneuver for portal triad control.</div>
+        <div class="p-2 rounded" style="background:rgba(220,38,38,0.06);"><strong style="color:#dc2626;">Pelvic Fracture</strong><br>Life-threatening hemorrhage from venous plexus/branches of internal iliac. Pelvic binder immediately. Angioembolization. External fixation. Preperitoneal packing if needed.</div>
+        <div class="p-2 rounded" style="background:rgba(220,38,38,0.06);"><strong style="color:#dc2626;">Hollow Viscus Injury</strong><br>Duodenal hematoma (NOM) vs perforation (surgery). Small bowel most common in penetrating. Free air on CT = operative. Rectal injury → diverting colostomy.</div>
+      </div>
+      <p><strong style="color:#e2e8f0;">Indications for Laparotomy:</strong> Hemodynamic instability + positive FAST, peritonitis, evisceration, diaphragmatic injury, free air, penetrating injury with hemodynamic instability or peritonitis.</p>
+    </div>` },
+  { title: 'Spinal Cord Injury', icon: 'arrow-down', color: '#8b5cf6',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Types:</strong> Complete (no motor/sensory below level) vs Incomplete (some preservation). ASIA Impairment Scale A-E.</p>
+      <div class="grid sm:grid-cols-2 gap-2">
+        <div class="p-2 rounded" style="background:rgba(139,92,246,0.06);"><strong style="color:#8b5cf6;">Neurogenic Shock</strong><br>Hypotension + Bradycardia + Warm peripheries (loss of sympathetic tone). Tx: Volume → Vasopressors (Norepinephrine preferred). MAP ≥85-90 mmHg × 7 days.</div>
+        <div class="p-2 rounded" style="background:rgba(139,92,246,0.06);"><strong style="color:#8b5cf6;">Spinal Shock</strong><br>Transient loss of all reflex activity below level. Areflexia, flaccid paralysis, urinary retention. Resolves in 24-72h (return of bulbocavernosus reflex).</div>
+        <div class="p-2 rounded" style="background:rgba(139,92,246,0.06);"><strong style="color:#8b5cf6;">Central Cord Syndrome</strong><br>Upper extremity > lower extremity weakness. Hyperextension in elderly with stenosis. Best prognosis of incomplete syndromes.</div>
+        <div class="p-2 rounded" style="background:rgba(139,92,246,0.06);"><strong style="color:#8b5cf6;">Anterior Cord Syndrome</strong><br>Loss of motor, pain, temperature. Preserved proprioception/vibration (dorsal columns). Worst prognosis.</div>
+      </div>
+      <p><strong style="color:#e2e8f0;">ICU:</strong> Respiratory monitoring (C3-5 = diaphragm), DVT prophylaxis, stress ulcer prophylaxis, bowel/bladder protocol, temperature regulation, early surgical decompression if indicated.</p>
+    </div>` },
+  { title: 'Musculoskeletal & Vascular Trauma', icon: 'bone', color: '#22c55e',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <div class="grid sm:grid-cols-2 gap-2">
+        <div class="p-2 rounded" style="background:rgba(34,197,94,0.06);"><strong style="color:#22c55e;">Compartment Syndrome</strong><br>Pain out of proportion, pain with passive stretch, paresthesias. Pressure >30 mmHg or within 30 of diastolic → Emergency fasciotomy. Do NOT wait for 5 P's (late signs).</div>
+        <div class="p-2 rounded" style="background:rgba(34,197,94,0.06);"><strong style="color:#22c55e;">Open Fractures</strong><br>Gustilo-Anderson I-IIIC. Antibiotics within 1 hour (Cefazolin ± Gentamicin for Grade III). Tetanus. Irrigation & Debridement within 6-24h. External fixation for damage control.</div>
+        <div class="p-2 rounded" style="background:rgba(34,197,94,0.06);"><strong style="color:#22c55e;">Vascular Injury</strong><br>Hard signs: pulseless, expanding hematoma, bruit/thrill, active hemorrhage → OR. Soft signs: diminished pulses, nerve deficit → CTA. Warm ischemia time &lt;6h.</div>
+        <div class="p-2 rounded" style="background:rgba(34,197,94,0.06);"><strong style="color:#22c55e;">Fat Embolism Syndrome</strong><br>24-72h post long bone fracture. Triad: hypoxia + petechiae + confusion. Supportive care + ventilation. Prevention: early fixation of fractures.</div>
+      </div>
+      <p><strong style="color:#e2e8f0;">Damage Control Orthopedics:</strong> Temporary external fixation in polytrauma. Definitive fixation when patient stabilized (usually 5-10 days). Reduces "second hit" of surgery.</p>
+    </div>` },
+  { title: 'Burns & Thermal Injury', icon: 'flame', color: '#f97316',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Assessment:</strong> Rule of 9's (adults) or Lund-Browder chart (children). Depth: Superficial, Partial-thickness (superficial/deep), Full-thickness.</p>
+      <p><strong style="color:#e2e8f0;">Parkland Formula (first 24h):</strong> <span class="font-mono p-1 rounded" style="background:rgba(249,115,22,0.1); color:#f97316;">4 ml × %TBSA × kg = Total LR</span><br>Give 50% in first 8h, 50% in next 16h. Titrate to urine output 0.5-1 ml/kg/hr (adults).</p>
+      <div class="grid sm:grid-cols-2 gap-2">
+        <div class="p-2 rounded" style="background:rgba(249,115,22,0.06);"><strong style="color:#f97316;">Inhalation Injury</strong><br>Singed nasal hair, soot in airway, stridor, hoarseness → Early intubation (airway swelling peaks at 24-48h). Bronchoscopy. CO poisoning: 100% O₂, check carboxyhemoglobin.</div>
+        <div class="p-2 rounded" style="background:rgba(249,115,22,0.06);"><strong style="color:#f97316;">Circumferential Burns</strong><br>Escharotomy for chest (breathing) or extremity (perfusion) compromise. Full-thickness circumferential → high risk for compartment syndrome.</div>
+      </div>
+      <p><strong style="color:#e2e8f0;">Transfer Criteria:</strong> >20% TBSA (adults), >10% (children), full-thickness >5%, burns to face/hands/feet/genitalia/major joints, inhalation injury, electrical/chemical burns, associated trauma.</p>
+    </div>` }
+];
+
+const SICU_EMERGENCIES = [
+  { title: 'Sepsis & Septic Shock in Surgical Patients', icon: 'thermometer', color: '#dc2626',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Surviving Sepsis 2021 (Hour-1 Bundle):</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Measure lactate (re-measure if >2 mmol/L)</li>
+        <li>Blood cultures before antibiotics</li>
+        <li>Broad-spectrum antibiotics within 1 hour</li>
+        <li>30 ml/kg crystalloid for hypotension or lactate ≥4</li>
+        <li>Vasopressors (Norepinephrine first-line) if MAP <65 during/after fluid resuscitation</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Surgical Sources:</strong> Anastomotic leak, intra-abdominal abscess, wound infection/necrotizing fasciitis, empyema, prosthetic infection, C. difficile colitis, acalculous cholecystitis.</p>
+      <p><strong style="color:#e2e8f0;">Source Control:</strong> CT-guided drainage, re-laparotomy, debridement within 6-12 hours of identification. <strong style="color:#dc2626;">Source control is paramount in surgical sepsis.</strong></p>
+      <p><strong style="color:#e2e8f0;">Vasopressor Ladder:</strong> Norepinephrine → + Vasopressin 0.04 U/min → + Epinephrine → Consider Angiotensin II. Target MAP ≥65 mmHg. Hydrocortisone 200mg/day if refractory shock.</p>
+    </div>` },
+  { title: 'Post-Operative Hemorrhage', icon: 'droplets', color: '#dc2626',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Signs:</strong> Tachycardia (earliest), hypotension, ↓urine output, increasing drain output, abdominal distension, falling Hb, rising lactate.</p>
+      <p><strong style="color:#e2e8f0;">Classification:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Reactionary (within 24h):</strong> Slipped ligature, dislodged clot as BP normalizes</li>
+        <li><strong>Secondary (5-10 days):</strong> Infection eroding vessel, anastomotic breakdown</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Management:</strong> Activate MTP, correct coagulopathy (FFP, Cryoprecipitate if fibrinogen <1.5, Platelets if <50), TXA, reversal agents if anticoagulated. Angioembolization (interventional radiology) vs re-exploration (surgical).</p>
+    </div>` },
+  { title: 'Anastomotic Leak', icon: 'alert-triangle', color: '#f59e0b',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Incidence:</strong> Colorectal 3-19%, Esophageal 5-30%, Gastric 1-6%. Peak: POD 5-7.</p>
+      <p><strong style="color:#e2e8f0;">Signs:</strong> Fever, tachycardia, leucocytosis, peritonitis, feculent/bilious/purulent drain output, ileus, rising CRP/Procalcitonin, organ dysfunction.</p>
+      <p><strong style="color:#e2e8f0;">Diagnosis:</strong> CT with oral contrast (sensitivity ~90%), water-soluble contrast study, drain fluid analysis (amylase for pancreatic, bilirubin for biliary).</p>
+      <p><strong style="color:#e2e8f0;">Management:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Contained leak:</strong> IV antibiotics, NPO, TPN, percutaneous drainage</li>
+        <li><strong>Uncontained/generalized peritonitis:</strong> Re-laparotomy, washout, ± diversion (stoma), ± damage control (open abdomen)</li>
+        <li>Endoscopic stenting for selected upper GI leaks</li>
+        <li>Endoscopic vacuum therapy (E-VAC) emerging evidence</li>
+      </ul>
+    </div>` },
+  { title: 'Acute Respiratory Failure / ARDS', icon: 'wind', color: '#3b82f6',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Berlin Definition of ARDS:</strong> Acute onset (within 1 week), bilateral opacities on CXR (not fully explained by effusion/atelectasis), PaO₂/FiO₂ ratio: Mild 200-300, Moderate 100-200, Severe &lt;100.</p>
+      <p><strong style="color:#e2e8f0;">Surgical Causes:</strong> Aspiration, pneumonia, pulmonary contusion, fat embolism, transfusion-related (TRALI), pancreatitis, sepsis.</p>
+      <p><strong style="color:#e2e8f0;">Ventilation Strategy (ARDSNet):</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Low Tidal Volume: 6 ml/kg IBW (4-8 ml/kg range)</li>
+        <li>Plateau Pressure ≤30 cmH₂O</li>
+        <li>Driving Pressure ≤15 cmH₂O (Pplat - PEEP)</li>
+        <li>PEEP per FiO₂-PEEP table (higher PEEP strategy if P/F &lt;150)</li>
+        <li>Permissive hypercapnia (pH >7.20)</li>
+        <li>Target SpO₂ 88-95%, PaO₂ 55-80 mmHg</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Rescue Therapies:</strong> Prone positioning 16+ h/day (P/F &lt;150), Neuromuscular blockade (cisatracurium 48h), Recruitment maneuvers, Inhaled NO/Epoprostenol, ECMO for refractory cases.</p>
+    </div>` },
+  { title: 'Acute Kidney Injury (AKI)', icon: 'droplet', color: '#8b5cf6',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">KDIGO Staging:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Stage 1: Cr ↑ 1.5-1.9× or ↑ ≥0.3 mg/dL or UO &lt;0.5 ml/kg/h × 6-12h</li>
+        <li>Stage 2: Cr ↑ 2-2.9× or UO &lt;0.5 ml/kg/h × ≥12h</li>
+        <li>Stage 3: Cr ↑ 3× or ≥4 mg/dL or RRT initiation or UO &lt;0.3 ml/kg/h × ≥24h or anuria ≥12h</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Surgical Causes:</strong> Hypovolemia/hemorrhage, abdominal compartment syndrome (IAP >20 + organ dysfunction), nephrotoxins (contrast, aminoglycosides, NSAIDs), rhabdomyolysis (CK >5000), post-obstructive (ureteral injury).</p>
+      <p><strong style="color:#e2e8f0;">Management:</strong> Volume optimization (CVP, dynamic assessment), avoid nephrotoxins, treat underlying cause, monitor IAP if at risk, RRT if: refractory hyperkalemia, severe acidosis, fluid overload unresponsive to diuretics, uremic complications. CRRT preferred in hemodynamically unstable.</p>
+    </div>` },
+  { title: 'Abdominal Compartment Syndrome', icon: 'maximize-2', color: '#f97316',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Definition:</strong> Sustained IAP >20 mmHg + new organ dysfunction. Measure via bladder pressure (indwelling catheter, 25ml instillation, supine).</p>
+      <p><strong style="color:#e2e8f0;">Grading:</strong> Grade I: 12-15 mmHg | Grade II: 16-20 | Grade III: 21-25 | Grade IV: >25 mmHg</p>
+      <p><strong style="color:#e2e8f0;">Effects:</strong> ↓Cardiac output, ↓Renal perfusion (oliguria), ↓Splanchnic flow (ischemia), ↓Lung compliance (↑PIP), ↑ICP.</p>
+      <p><strong style="color:#e2e8f0;">Risk Factors:</strong> Massive resuscitation, damage control surgery, ileus, abdominal packing, peritonitis, pancreatitis.</p>
+      <p><strong style="color:#e2e8f0;">Management:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Medical:</strong> NG decompression, rectal decompression, neuromuscular blockade, fluid restriction, diuretics/RRT</li>
+        <li><strong>Surgical (decompressive laparotomy):</strong> If medical measures fail and IAP >20 with organ dysfunction. Open abdomen with temporary closure (Bogota bag, VAC system). Gradual closure over days.</li>
+      </ul>
+    </div>` },
+  { title: 'DIC & Coagulopathy of Trauma', icon: 'zap', color: '#dc2626',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Acute Traumatic Coagulopathy (ATC):</strong> Present in 25% of severely injured patients on arrival. Driven by tissue injury + hypoperfusion → activated Protein C pathway → fibrinolysis + coagulation factor consumption.</p>
+      <p><strong style="color:#e2e8f0;">Lethal Triad:</strong> Hypothermia (&lt;35°C) + Acidosis (pH &lt;7.2) + Coagulopathy → self-perpetuating cycle → death if not interrupted.</p>
+      <p><strong style="color:#e2e8f0;">DIC Labs:</strong> ↓Platelets, ↓Fibrinogen, ↑PT/INR, ↑D-dimer, ↑FDP, schistocytes on smear. ISTH DIC score ≥5 = overt DIC.</p>
+      <p><strong style="color:#e2e8f0;">Management:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Treat underlying cause (hemorrhage control, sepsis source control)</li>
+        <li>MTP 1:1:1 (pRBC:FFP:Platelets)</li>
+        <li>Cryoprecipitate if Fibrinogen &lt;1.5 g/L (target >2 in massive hemorrhage)</li>
+        <li>TXA 1g IV (within 3h of injury)</li>
+        <li>Warm patient aggressively (target >36°C)</li>
+        <li>Correct acidosis (resuscitation, bicarb if pH &lt;7.1)</li>
+        <li>Consider TEG/ROTEM-guided resuscitation for targeted therapy</li>
+      </ul>
+    </div>` }
+];
+
+const PROTOCOLS = [
+  { title: 'Massive Transfusion Protocol (MTP)', icon: 'droplets', color: '#dc2626',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Activation Criteria:</strong> ABC Score ≥2 (penetrating mechanism, SBP ≤90, HR ≥120, FAST positive), anticipated need for >10 units pRBC in 24h, or clinical judgment.</p>
+      <p><strong style="color:#e2e8f0;">Protocol:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Ratio 1:1:1</strong> — pRBC : FFP : Platelets (each "pack" = 6 units pRBC + 6 units FFP + 1 apheresis platelet)</li>
+        <li>Type O-neg (women) / O-pos (men) until crossmatch available</li>
+        <li><strong>TXA</strong> 1g IV over 10 min → 1g over 8h (within 3h of injury)</li>
+        <li>Cryoprecipitate 10 units if Fibrinogen &lt;1.5 g/L</li>
+        <li>Calcium Gluconate 1g IV per 4 units pRBC (citrate chelation)</li>
+        <li>Warm all products</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Targets:</strong> Hb 7-9, Platelets >50 (>100 in TBI), INR &lt;1.5, Fibrinogen >1.5-2, pH >7.2, Temp >35°C, Ca²⁺ >1.1 mmol/L, Lactate trending down.</p>
+      <p><strong style="color:#e2e8f0;">TEG/ROTEM-Guided:</strong> R-time/CT prolonged → FFP. MA/MCF low → Platelets. LY30/ML elevated → TXA. K-time/CFT prolonged → Cryoprecipitate.</p>
+    </div>` },
+  { title: 'Damage Control Surgery (DCS)', icon: 'shield', color: '#f59e0b',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Indications:</strong> Lethal triad developing, ISS >25, pH &lt;7.2, Temp &lt;35°C, base deficit >-6, lactate >5, estimated blood loss >4L, coagulopathy (INR >1.6), operative time >90 min with ongoing bleeding.</p>
+      <p><strong style="color:#e2e8f0;">Three Phases:</strong></p>
+      <div class="space-y-2">
+        <div class="p-2 rounded" style="background:rgba(245,158,11,0.06);"><strong style="color:#f59e0b;">Phase 1: Abbreviated Surgery (OR)</strong><br>Hemorrhage control (packing, ligation, shunting), contamination control (staple/tie off bowel, no anastomosis), temporary abdominal closure. Target time &lt;60-90 min.</div>
+        <div class="p-2 rounded" style="background:rgba(245,158,11,0.06);"><strong style="color:#f59e0b;">Phase 2: ICU Resuscitation (24-72h)</strong><br>Correct lethal triad: rewarm, correct acidosis, correct coagulopathy. Optimize hemodynamics, ventilation, organ support.</div>
+        <div class="p-2 rounded" style="background:rgba(245,158,11,0.06);"><strong style="color:#f59e0b;">Phase 3: Definitive Surgery</strong><br>When physiologically optimized (pH >7.25, Temp >36°C, coagulopathy corrected). Definitive repairs, anastomoses, stoma creation, fascial closure.</div>
+      </div>
+    </div>` },
+  { title: 'Rapid Sequence Intubation (RSI)', icon: 'zap', color: '#3b82f6',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">7 P's:</strong> Preparation → Preoxygenation → Pretreatment → Paralysis with Induction → Placement → Post-intubation → Proof of placement.</p>
+      <p><strong style="color:#e2e8f0;">Induction Agents:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Ketamine</strong> 1-2 mg/kg IV — preferred in trauma/shock (hemodynamic stability)</li>
+        <li><strong>Etomidate</strong> 0.3 mg/kg IV — hemodynamically neutral (caution: adrenal suppression)</li>
+        <li><strong>Propofol</strong> 1-2 mg/kg IV — avoid in shock (vasodilation)</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Paralytics:</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Succinylcholine</strong> 1.5 mg/kg IV — onset 45-60s, duration 6-10 min. Avoid in burns >24h, crush >24h, hyperkalemia, neuromuscular disease</li>
+        <li><strong>Rocuronium</strong> 1.2 mg/kg IV — onset 60s, duration 45-60 min. Reversible with Sugammadex</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Confirmation:</strong> ETCO₂ waveform (gold standard), bilateral breath sounds, SpO₂, CXR, tube depth (3× tube size at lip in adults, typically 21-23 cm at teeth).</p>
+    </div>` },
+  { title: 'Targeted Temperature Management (TTM)', icon: 'thermometer', color: '#22c55e',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Indications:</strong> Post-cardiac arrest (ROSC achieved), refractory ICP in TBI (as rescue therapy).</p>
+      <p><strong style="color:#e2e8f0;">TTM2 Trial (2021):</strong> Target normothermia (37.5°C) with active prevention of fever vs hypothermia at 33°C showed no significant difference. Current focus: <strong style="color:#22c55e;">Strict fever prevention &lt;37.8°C</strong> for at least 72h post-arrest.</p>
+      <p><strong style="color:#e2e8f0;">Methods:</strong> Surface cooling (Arctic Sun), intravascular cooling (CoolGard), cold IV saline (NOT for induction during CPR). Rewarm slowly (0.25°C/hr).</p>
+      <p><strong style="color:#e2e8f0;">Monitoring:</strong> Continuous temperature (esophageal/bladder preferred), continuous EEG, serial neurology exams after 72h off sedation.</p>
+    </div>` },
+  { title: 'Ventilator Management Protocols', icon: 'wind', color: '#8b5cf6',
+    content: `<div class="space-y-3 text-xs" style="color:#94a3b8;">
+      <p><strong style="color:#e2e8f0;">Initial Settings (Trauma):</strong> Volume Control AC, TV 6-8 ml/kg IBW, RR 14-18, PEEP 5-8, FiO₂ 100% → titrate to SpO₂ 94-98%.</p>
+      <p><strong style="color:#e2e8f0;">Ventilator Bundle (VAP Prevention):</strong></p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>HOB elevation 30-45°</li>
+        <li>Daily sedation vacation + SAT/SBT protocol</li>
+        <li>DVT prophylaxis</li>
+        <li>Stress ulcer prophylaxis (if high risk)</li>
+        <li>Oral care with chlorhexidine q6h</li>
+        <li>Subglottic secretion drainage ETT</li>
+        <li>Early mobility</li>
+      </ul>
+      <p><strong style="color:#e2e8f0;">Liberation from MV (SBT):</strong> FiO₂ ≤40%, PEEP ≤8, hemodynamically stable, no high-dose vasopressors, adequate cough, manageable secretions → PS 5-8/PEEP 5 or T-piece × 30-120 min → Extubate if RSBI &lt;105, adequate ABG, no distress.</p>
+    </div>` }
+];
+
+const DRUGS = [
+  ['Norepinephrine','Septic/Vasodilatory Shock','0.01-3 mcg/kg/min','IV infusion','First-line vasopressor. Titrate to MAP ≥65'],
+  ['Epinephrine','Cardiac arrest, Anaphylaxis, Refractory shock','1mg q3-5min (arrest); 0.01-0.5 mcg/kg/min (infusion)','IV','Second-line vasopressor. IM 0.3-0.5mg for anaphylaxis'],
+  ['Vasopressin','Septic shock adjunct','0.04 U/min (fixed)','IV infusion','Add to norepinephrine. Do NOT titrate'],
+  ['TXA (Tranexamic Acid)','Trauma hemorrhage','1g IV over 10 min → 1g over 8h','IV','Must give within 3h of injury. CRASH-2 trial'],
+  ['Ketamine','RSI, Procedural sedation','1-2 mg/kg (induction); 0.1-0.5 mg/kg (analgesia)','IV','Preferred in trauma (maintains hemodynamics)'],
+  ['Rocuronium','RSI paralysis','1.2 mg/kg','IV','Onset 60s. Reverse with Sugammadex 16 mg/kg'],
+  ['Mannitol','Raised ICP / Herniation','0.25-1 g/kg','IV bolus','Over 15-20 min. Monitor serum osmolality (<320)'],
+  ['Hypertonic Saline 3%','Raised ICP / Herniation','250 ml (or 2-5 ml/kg)','IV bolus','Alternative to mannitol. Can repeat. Target Na 145-155'],
+  ['Fentanyl','Analgesia','25-100 mcg bolus; 25-200 mcg/h infusion','IV','Short-acting. Less hemodynamic effect than morphine'],
+  ['Propofol','Sedation','5-50 mcg/kg/min','IV infusion','Monitor for PRIS (>48h, >5mg/kg/h). Check triglycerides'],
+  ['Calcium Gluconate','Hypocalcemia (MTP), Hyperkalemia','1-3 g IV (10-30 ml of 10%)','IV slow push','1g per 4 units pRBC in MTP. Membrane stabilizer in hyperK'],
+  ['Hydrocortisone','Refractory septic shock','50mg IV q6h (200mg/day)','IV','Start if vasopressor requirements increasing despite fluids'],
+  ['Levetiracetam','Seizure prophylaxis (TBI)','500-1000 mg q12h','IV/PO','7-day prophylaxis post TBI. No need to monitor levels'],
+  ['Pantoprazole','Stress ulcer prophylaxis','40 mg IV q12-24h','IV','If risk factors: coagulopathy, MV >48h, TBI, burns, prior GI bleed']
+];
+
+const SCORES = [
+  { name: 'Injury Severity Score (ISS)', desc: 'Sum of squares of top 3 AIS body regions. Range 1-75. >15 = major trauma. >25 = critical.', color: '#dc2626' },
+  { name: 'Revised Trauma Score (RTS)', desc: 'GCS + SBP + RR (coded 0-4 each, weighted sum). Used in triage. RTS <11 = high mortality.', color: '#f59e0b' },
+  { name: 'APACHE II', desc: 'ICU mortality prediction. 12 physiologic variables + age + chronic health. Score 0-71. >25 = ~50% mortality.', color: '#3b82f6' },
+  { name: 'SOFA Score', desc: 'Sequential Organ Failure Assessment. 6 organ systems scored 0-4. ≥2 point increase = sepsis. Tracks trajectory.', color: '#22c55e' },
+  { name: 'qSOFA', desc: 'Quick SOFA: RR ≥22, SBP ≤100, altered mentation. ≥2 = suspect sepsis (screening only, not diagnostic).', color: '#8b5cf6' },
+  { name: 'ABC Score', desc: 'Assessment of Blood Consumption: penetrating mechanism, SBP ≤90, HR ≥120, FAST+. ≥2 = activate MTP.', color: '#dc2626' },
+  { name: 'TRISS', desc: 'Trauma & Injury Severity Score. Combines ISS + RTS + age + mechanism. Predicts probability of survival.', color: '#f59e0b' },
+  { name: 'RASS', desc: 'Richmond Agitation-Sedation Scale. -5 (unarousable) to +4 (combative). Target -2 to 0 in most ICU patients.', color: '#3b82f6' }
+];
+
+// ===== RENDER FUNCTIONS =====
+function renderABCDE() {
+  const c = document.getElementById('abcde-steps');
+  c.innerHTML = ABCDE.map((s, i) => `
+    <div class="relative pl-12 sm:pl-14 pb-6 anim-fade anim-d${i+1}">
+      ${i < ABCDE.length -1 ? `<div class="step-line" style="background:rgba(255,255,255,0.06);"></div>` : ''}
+      <div class="absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center text-lg font-extrabold z-10" style="background:${s.color}20; color:${s.color}; border:2px solid ${s.color}40;">${s.letter}</div>
+      <div class="rounded-xl p-4 sm:p-5" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+        <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center text-left">
+          <span class="font-bold text-sm sm:text-base" style="color:${s.color};">${s.title}</span>
+          <i data-lucide="chevron-down" style="width:18px;height:18px;color:#64748b;transition:transform 0.3s;"></i>
+        </button>
+        <div class="accordion-body mt-3 text-xs leading-relaxed">${s.content}</div>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function renderAccordions(containerId, data) {
+  const c = document.getElementById(containerId);
+  c.innerHTML = data.map((item, i) => `
+    <div class="rounded-xl overflow-hidden card-hover anim-fade anim-d${Math.min(i+1,6)}" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+      <button onclick="toggleAccordion(this)" class="w-full flex items-center gap-3 p-4 sm:p-5 text-left">
+        <div class="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center" style="background:${item.color}15;">
+          <i data-lucide="${item.icon}" style="width:18px;height:18px;color:${item.color};"></i>
+        </div>
+        <span class="font-bold text-sm sm:text-base flex-1" style="color:#e2e8f0;">${item.title}</span>
+        <i data-lucide="chevron-down" style="width:18px;height:18px;color:#64748b;transition:transform 0.3s;flex-shrink:0;"></i>
+      </button>
+      <div class="accordion-body px-4 sm:px-5 pb-4 sm:pb-5">${item.content}</div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function renderDrugs() {
+  const b = document.getElementById('drug-table-body');
+  b.innerHTML = DRUGS.map((d, i) => `
+    <tr style="border-bottom:1px solid rgba(255,255,255,0.04); ${i%2===0?'background:rgba(255,255,255,0.01);':''}">
+      <td class="px-4 py-3 font-semibold" style="color:#e2e8f0;">${d[0]}</td>
+      <td class="px-4 py-3" style="color:#94a3b8;">${d[1]}</td>
+      <td class="px-4 py-3 font-mono" style="color:#f59e0b; font-size:11px;">${d[2]}</td>
+      <td class="px-4 py-3" style="color:#94a3b8;">${d[3]}</td>
+      <td class="px-4 py-3" style="color:#64748b;">${d[4]}</td>
+    </tr>
+  `).join('');
+}
+
+function renderScores() {
+  const g = document.getElementById('scores-grid');
+  g.innerHTML = SCORES.map(s => `
+    <div class="p-3 rounded-lg" style="background:rgba(255,255,255,0.02); border-left:3px solid ${s.color};">
+      <div class="font-semibold text-sm mb-1" style="color:${s.color};">${s.name}</div>
+      <div class="text-xs" style="color:#94a3b8;">${s.desc}</div>
+    </div>
+  `).join('');
+}
+
+// ===== NAVIGATION =====
+function showSection(id) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active-section'));
+  document.getElementById('sec-' + id).classList.add('active-section');
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    if (b.dataset.nav === id) {
+      b.style.color = '#f1f5f9';
+      b.style.borderColor = '#dc2626';
+      b.classList.add('active-nav');
+    } else {
+      b.style.color = '#64748b';
+      b.style.borderColor = 'transparent';
+      b.classList.remove('active-nav');
+    }
+  });
+  document.getElementById('app').scrollTop = 0;
+}
+
+function toggleAccordion(btn) {
+  const body = btn.parentElement.querySelector('.accordion-body') || btn.nextElementSibling;
+  const icon = btn.querySelector('[data-lucide="chevron-down"]');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  if (icon) icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+// ===== CALCULATORS =====
+function calcGCS() {
+  const e = +document.getElementById('gcs-eye').value;
+  const v = +document.getElementById('gcs-verbal').value;
+  const m = +document.getElementById('gcs-motor').value;
+  const t = e + v + m;
+  document.getElementById('gcs-total').textContent = t;
+  let label, action, color;
+  if (t >= 13) { label = 'Mild TBI (13–15)'; action = 'Observation, CT if indicated'; color = '#22c55e'; }
+  else if (t >= 9) { label = 'Moderate TBI (9–12)'; action = 'CT scan, admission, close monitoring, consider ICP monitor'; color = '#f59e0b'; }
+  else { label = 'Severe TBI (3–8)'; action = 'Intubate, CT, ICP monitoring, neurosurgery consult, ICU'; color = '#dc2626'; }
+  document.getElementById('gcs-total').style.color = color;
+  document.getElementById('gcs-label').textContent = label;
+  document.getElementById('gcs-action').textContent = action;
+}
+
+function calcSI() {
+  const hr = +document.getElementById('si-hr').value || 80;
+  const sbp = +document.getElementById('si-sbp').value || 120;
+  const si = sbp > 0 ? (hr / sbp).toFixed(2) : '—';
+  document.getElementById('si-value').textContent = si;
+  let label, action, color;
+  const v = parseFloat(si);
+  if (isNaN(v)) { label='—'; action='—'; color='#64748b'; }
+  else if (v < 0.7) { label='Normal'; action='SI < 0.7 = hemodynamically stable'; color='#22c55e'; }
+  else if (v < 1.0) { label='Mild Shock'; action='SI 0.7-1.0 = early shock, monitor closely'; color='#f59e0b'; }
+  else if (v < 1.4) { label='Moderate Shock'; action='SI 1.0-1.4 = significant hemorrhage, activate MTP if clinical concern'; color='#f97316'; }
+  else { label='Severe Shock'; action='SI ≥ 1.4 = critical hemorrhage, immediate MTP + surgical intervention'; color='#dc2626'; }
+  document.getElementById('si-value').style.color = color;
+  document.getElementById('si-label').textContent = label;
+  document.getElementById('si-action').textContent = action;
+}
+
+// ===== ELEMENT SDK =====
+const defaultConfig = {
+  main_title: 'Trauma & Surgical ICU Emergencies',
+  subtitle: 'A Comprehensive Clinical Reference for MBBS, MD Physicians, ICU Intensivists & Emergency Medicine Specialists',
+  background_color: '#0b0f1a',
+  surface_color: '#151a2b',
+  text_color: '#f1f5f9',
+  accent_color: '#dc2626',
+  secondary_accent: '#f59e0b',
+  font_family: 'DM Sans',
+  font_size: 14
+};
+
+function applyConfig(config) {
+  const t = document.getElementById('main-title');
+  if (t) {
+    const parts = (config.main_title || defaultConfig.main_title).split(' ');
+    const mid = Math.ceil(parts.length / 2);
+    t.innerHTML = parts.slice(0, mid).join(' ') + '<br><span style="background:linear-gradient(90deg,' + (config.accent_color||defaultConfig.accent_color) + ',' + (config.secondary_accent||defaultConfig.secondary_accent) + ');-webkit-background-clip:text;-webkit-text-fill-color:transparent;">' + parts.slice(mid).join(' ') + '</span>';
+  }
+  const s = document.getElementById('subtitle');
+  if (s) s.textContent = config.subtitle || defaultConfig.subtitle;
+
+  const app = document.getElementById('app');
+  if (app) app.style.background = config.background_color || defaultConfig.background_color;
+
+  const font = config.font_family || defaultConfig.font_family;
+  const baseSize = config.font_size || defaultConfig.font_size;
+  document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+  document.body.style.fontSize = baseSize + 'px';
+}
+
+// ===== INIT =====
+renderABCDE();
+renderAccordions('trauma-accordions', TRAUMA_TYPES);
+renderAccordions('sicu-accordions', SICU_EMERGENCIES);
+renderAccordions('protocol-accordions', PROTOCOLS);
+renderDrugs();
+renderScores();
+calcGCS();
+calcSI();
+lucide.createIcons();
+</script>
+</body>
+</html>
