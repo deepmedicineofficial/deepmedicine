@@ -1,0 +1,268 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Sepsis Protocols | Sepsis Bundle & Septic Shock Management | Deep Medicine</title> <meta name="description" content="Evidence-based sepsis protocols including early recognition, 1-hour sepsis bundle, fluid resuscitation, vasopressors, and ICU management of septic shock."> <link rel="canonical" href="https://deepmedicine.in/clinical/protocols/sepsis-protocols"> <!-- Open Graph --> <meta property="og:title" content="Sepsis Protocols | Deep Medicine"> <meta property="og:description" content="Standard sepsis bundle and septic shock management protocols for emergency and ICU care."> <meta property="og:image" content="https://deepmedicine.in/images/sepsis-protocols.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+        html, body { height: 100%; margin: 0; }
+        * { font-family: 'DM Sans', sans-serif; }
+        .heading-font { font-family: 'Playfair Display', serif; }
+        .bundle-card { transition: all 0.3s ease; }
+        .bundle-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+        .fade-in { animation: fadeIn 0.6s ease forwards; opacity: 0; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        .timeline-line { position: absolute; left: 20px; top: 40px; bottom: 0; width: 2px; }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full overflow-auto" style="background: #0f1923;">
+  <div class="w-full min-h-full" style="background: linear-gradient(135deg, #0f1923 0%, #1a2a3a 50%, #0f1923 100%);"><!-- Header -->
+   <header class="w-full px-4 py-8 md:py-12 text-center fade-in">
+    <div class="max-w-4xl mx-auto">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style="background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);"><i data-lucide="alert-triangle" style="width:16px;height:16px;color:#ef4444;"></i> <span class="text-xs font-semibold tracking-wider uppercase" style="color:#ef4444;">TIME-CRITICAL PROTOCOL</span>
+     </div>
+     <h1 id="main-title" class="heading-font text-3xl md:text-5xl font-bold mb-3" style="color:#f1f5f9;">Sepsis Bundle</h1>
+     <p id="subtitle" class="text-lg md:text-xl" style="color:#94a3b8;">Surviving Sepsis Campaign 2021 — Evidence-Based Protocol</p>
+     <div class="mt-4 flex flex-wrap justify-center gap-3 text-sm" style="color:#64748b;"><span class="flex items-center gap-1"><i data-lucide="clock" style="width:14px;height:14px;"></i> Hour-1 Bundle</span> <span>•</span> <span class="flex items-center gap-1"><i data-lucide="activity" style="width:14px;height:14px;"></i> qSOFA / SOFA Criteria</span> <span>•</span> <span class="flex items-center gap-1"><i data-lucide="droplet" style="width:14px;height:14px;"></i> Lactate-Guided Resuscitation</span>
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <main class="w-full px-4 pb-12 max-w-6xl mx-auto"><!-- Definition Section -->
+    <section class="mb-10 fade-in stagger-1">
+     <div class="rounded-xl p-6 md:p-8" style="background: rgba(30,41,59,0.8); border: 1px solid rgba(148,163,184,0.1);">
+      <h2 class="heading-font text-xl md:text-2xl font-bold mb-4" style="color:#f1f5f9;"><span class="inline-flex items-center gap-2"><i data-lucide="info" style="width:22px;height:22px;color:#3b82f6;"></i> Sepsis-3 Definition</span></h2>
+      <p class="leading-relaxed mb-4" style="color:#cbd5e1;"><strong style="color:#f1f5f9;">Sepsis</strong> is defined as life-threatening organ dysfunction caused by a dysregulated host response to infection, identified by an acute increase of <strong style="color:#f1f5f9;">≥2 SOFA points</strong> from baseline.</p>
+      <p class="leading-relaxed mb-4" style="color:#cbd5e1;"><strong style="color:#f1f5f9;">Septic Shock</strong> is a subset of sepsis with persisting hypotension requiring vasopressors to maintain <strong style="color:#f1f5f9;">MAP ≥65 mmHg</strong> AND serum <strong style="color:#f1f5f9;">lactate &gt;2 mmol/L</strong> despite adequate volume resuscitation. Mortality exceeds 40%.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+       <div class="rounded-lg p-4" style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.2);">
+        <h3 class="font-bold text-sm mb-2" style="color:#60a5fa;">qSOFA (Bedside Screening)</h3>
+        <ul class="text-sm space-y-1" style="color:#94a3b8;">
+         <li>• Respiratory rate ≥22/min</li>
+         <li>• Altered mentation (GCS &lt;15)</li>
+         <li>• Systolic BP ≤100 mmHg</li>
+        </ul>
+        <p class="text-xs mt-2" style="color:#64748b;">≥2 criteria → suspect sepsis, assess for organ dysfunction</p>
+       </div>
+       <div class="rounded-lg p-4" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2);">
+        <h3 class="font-bold text-sm mb-2" style="color:#f87171;">SOFA Score Components</h3>
+        <ul class="text-sm space-y-1" style="color:#94a3b8;">
+         <li>• PaO₂/FiO₂ (Respiration)</li>
+         <li>• Platelets (Coagulation)</li>
+         <li>• Bilirubin (Liver)</li>
+         <li>• MAP / Vasopressors (Cardiovascular)</li>
+         <li>• GCS (Neurological)</li>
+         <li>• Creatinine / UOP (Renal)</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- Hour-1 Bundle -->
+    <section class="mb-10 fade-in stagger-2">
+     <div class="flex items-center gap-3 mb-6">
+      <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(239,68,68,0.2);"><i data-lucide="zap" style="width:20px;height:20px;color:#ef4444;"></i>
+      </div>
+      <div>
+       <h2 class="heading-font text-xl md:text-2xl font-bold" style="color:#f1f5f9;">Hour-1 Bundle (SSC 2021)</h2>
+       <p class="text-sm" style="color:#64748b;">Initiate ALL within 1 hour of sepsis recognition</p>
+      </div>
+     </div>
+     <div class="space-y-4"><!-- Bundle Item 1 -->
+      <div class="bundle-card rounded-xl p-5 md:p-6" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:#ef4444;"><span class="text-white font-bold text-sm">1</span>
+        </div>
+        <div class="flex-1">
+         <h3 class="font-bold text-lg mb-1" style="color:#f1f5f9;">Measure Lactate</h3>
+         <p class="text-sm mb-3" style="color:#94a3b8;">Obtain serum lactate level. If initial lactate is &gt;2 mmol/L, remeasure within 2-4 hours to guide resuscitation.</p>
+         <div class="flex flex-wrap gap-2"><span class="px-2 py-1 rounded text-xs font-medium" style="background:rgba(234,179,8,0.15); color:#fbbf24;">Target: Lactate normalization</span> <span class="px-2 py-1 rounded text-xs font-medium" style="background:rgba(34,197,94,0.15); color:#4ade80;">Aim ≥10% clearance per 2h</span>
+         </div>
+         <p class="text-xs mt-2" style="color:#64748b;"><strong>Rationale:</strong> Lactate reflects tissue hypoperfusion and anaerobic metabolism. Serial levels guide adequacy of resuscitation. Lactate clearance &gt;10% in 6h associated with reduced mortality.</p>
+        </div>
+       </div>
+      </div><!-- Bundle Item 2 -->
+      <div class="bundle-card rounded-xl p-5 md:p-6" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:#ef4444;"><span class="text-white font-bold text-sm">2</span>
+        </div>
+        <div class="flex-1">
+         <h3 class="font-bold text-lg mb-1" style="color:#f1f5f9;">Obtain Blood Cultures Before Antibiotics</h3>
+         <p class="text-sm mb-3" style="color:#94a3b8;">Draw at least <strong>2 sets</strong> (aerobic + anaerobic) from 2 different sites before antimicrobial administration. Do NOT delay antibiotics if cultures cannot be obtained promptly.</p>
+         <div class="flex flex-wrap gap-2"><span class="px-2 py-1 rounded text-xs font-medium" style="background:rgba(168,85,247,0.15); color:#c084fc;">2 sets minimum</span> <span class="px-2 py-1 rounded text-xs font-medium" style="background:rgba(239,68,68,0.15); color:#f87171;">Do NOT delay abx &gt;45 min</span>
+         </div>
+         <p class="text-xs mt-2" style="color:#64748b;"><strong>Rationale:</strong> Cultures before antibiotics increase pathogen identification by 50%. Directed therapy reduces resistance and cost. However, antibiotic delay increases mortality 7.6% per hour in septic shock.</p>
+        </div>
+       </div>
+      </div><!-- Bundle Item 3 -->
+      <div class="bundle-card rounded-xl p-5 md:p-6" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:#ef4444;"><span class="text-white font-bold text-sm">3</span>
+        </div>
+        <div class="flex-1">
+         <h3 class="font-bold text-lg mb-1" style="color:#f1f5f9;">Administer Broad-Spectrum Antibiotics</h3>
+         <p class="text-sm mb-3" style="color:#94a3b8;">Empiric IV antibiotics within <strong>1 hour</strong> of sepsis recognition. Cover all likely pathogens based on suspected source, local antibiogram, and patient risk factors (MRSA, Pseudomonas, fungal).</p>
+         <div class="rounded-lg p-3 mt-2" style="background:rgba(30,41,59,0.5);">
+          <p class="text-xs font-semibold mb-2" style="color:#60a5fa;">Common Empiric Regimens:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs" style="color:#94a3b8;">
+           <div>
+            <strong style="color:#cbd5e1;">Community-acquired:</strong> Piperacillin-Tazobactam OR Meropenem ± Vancomycin
+           </div>
+           <div>
+            <strong style="color:#cbd5e1;">Healthcare-associated:</strong> Meropenem + Vancomycin ± Antifungal
+           </div>
+           <div>
+            <strong style="color:#cbd5e1;">Abdominal source:</strong> Meropenem OR Pip-Tazo + Metronidazole
+           </div>
+           <div>
+            <strong style="color:#cbd5e1;">Urosepsis:</strong> Ceftriaxone OR Pip-Tazo (adjust per local resistance)
+           </div>
+          </div>
+         </div>
+         <p class="text-xs mt-2" style="color:#64748b;"><strong>Key:</strong> De-escalate within 48-72h based on culture sensitivity. Daily reassessment. Typical duration 7-10 days. Procalcitonin can guide discontinuation.</p>
+        </div>
+       </div>
+      </div><!-- Bundle Item 4 -->
+      <div class="bundle-card rounded-xl p-5 md:p-6" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:#ef4444;"><span class="text-white font-bold text-sm">4</span>
+        </div>
+        <div class="flex-1">
+         <h3 class="font-bold text-lg mb-1" style="color:#f1f5f9;">Rapid IV Fluid Resuscitation</h3>
+         <p class="text-sm mb-3" style="color:#94a3b8;">Administer <strong>30 mL/kg crystalloid</strong> (Ringer's Lactate preferred over NS) for hypotension or lactate ≥4 mmol/L. Begin within 1 hour; complete within 3 hours. Reassess fluid responsiveness frequently.</p>
+         <div class="flex flex-wrap gap-2 mb-2"><span class="px-2 py-1 rounded text-xs font-medium" style="background:rgba(59,130,246,0.15); color:#60a5fa;">30 mL/kg crystalloid</span> <span class="px-2 py-1 rounded text-xs font-medium" style="background:rgba(34,197,94,0.15); color:#4ade80;">RL &gt; NS (less hyperchloremic acidosis)</span>
+         </div>
+         <p class="text-xs" style="color:#64748b;"><strong>Fluid Responsiveness Assessment:</strong> Passive leg raise, pulse pressure variation (&gt;13%), stroke volume variation, IVC variability on POCUS. Avoid fluid overload — dynamic assessment after initial bolus. Albumin may be used if substantial crystalloid volumes required.</p>
+        </div>
+       </div>
+      </div><!-- Bundle Item 5 -->
+      <div class="bundle-card rounded-xl p-5 md:p-6" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:#ef4444;"><span class="text-white font-bold text-sm">5</span>
+        </div>
+        <div class="flex-1">
+         <h3 class="font-bold text-lg mb-1" style="color:#f1f5f9;">Vasopressors for Refractory Hypotension</h3>
+         <p class="text-sm mb-3" style="color:#94a3b8;">If MAP remains &lt;65 mmHg during or after fluid resuscitation, initiate vasopressors. Do NOT wait for fluid completion if hemodynamically unstable. Central line preferred but peripheral OK initially.</p>
+         <div class="rounded-lg p-3 mt-2" style="background:rgba(30,41,59,0.5);">
+          <p class="text-xs font-semibold mb-2" style="color:#f87171;">Vasopressor Hierarchy:</p>
+          <div class="space-y-1.5 text-xs" style="color:#94a3b8;">
+           <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-white font-bold" style="background:#ef4444; font-size:10px;">1</span> <strong style="color:#cbd5e1;">Norepinephrine</strong> — First-line (0.1-2 µg/kg/min). Target MAP ≥65 mmHg
+           </div>
+           <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-white font-bold" style="background:#f97316; font-size:10px;">2</span> <strong style="color:#cbd5e1;">Vasopressin</strong> — Second-line (0.03 U/min fixed). Add when NE ≥0.25-0.5 µg/kg/min
+           </div>
+           <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-white font-bold" style="background:#eab308; font-size:10px;">3</span> <strong style="color:#cbd5e1;">Epinephrine</strong> — Third-line. If cardiac dysfunction suspected
+           </div>
+          </div>
+         </div>
+         <p class="text-xs mt-2" style="color:#64748b;"><strong>Note:</strong> Dopamine NOT recommended (higher arrhythmia risk). Consider IV hydrocortisone 200mg/day if vasopressor-refractory shock (NE ≥0.25 µg/kg/min for ≥4h).</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Additional Considerations -->
+    <section class="mb-10 fade-in stagger-3">
+     <h2 class="heading-font text-xl md:text-2xl font-bold mb-6" style="color:#f1f5f9;"><span class="inline-flex items-center gap-2"><i data-lucide="clipboard-list" style="width:22px;height:22px;color:#3b82f6;"></i> Additional ICU Considerations</span></h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="rounded-xl p-5" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <h3 class="font-bold text-sm mb-2 flex items-center gap-2" style="color:#fbbf24;"><i data-lucide="thermometer" style="width:16px;height:16px;"></i> Source Control</h3>
+       <p class="text-xs" style="color:#94a3b8;">Identify and control source within 6-12h. Drain abscesses, debride necrotic tissue, remove infected devices. Imaging (CT/US) as needed.</p>
+      </div>
+      <div class="rounded-xl p-5" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <h3 class="font-bold text-sm mb-2 flex items-center gap-2" style="color:#4ade80;"><i data-lucide="heart" style="width:16px;height:16px;"></i> Corticosteroids</h3>
+       <p class="text-xs" style="color:#94a3b8;">IV Hydrocortisone 50mg q6h if vasopressor-refractory shock. Taper when vasopressors discontinued. No need for ACTH stim test.</p>
+      </div>
+      <div class="rounded-xl p-5" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <h3 class="font-bold text-sm mb-2 flex items-center gap-2" style="color:#60a5fa;"><i data-lucide="droplet" style="width:16px;height:16px;"></i> Blood Products</h3>
+       <p class="text-xs" style="color:#94a3b8;">Transfuse pRBC if Hb &lt;7 g/dL (restrictive strategy). Platelets if &lt;10K (or &lt;20K with bleeding risk). FFP only for active bleeding or procedures.</p>
+      </div>
+      <div class="rounded-xl p-5" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <h3 class="font-bold text-sm mb-2 flex items-center gap-2" style="color:#c084fc;"><i data-lucide="wind" style="width:16px;height:16px;"></i> Mechanical Ventilation</h3>
+       <p class="text-xs" style="color:#94a3b8;">If ARDS develops: low tidal volume 6 mL/kg IBW, plateau pressure &lt;30 cmH₂O, PEEP per ARDSNet table, prone positioning if P/F &lt;150.</p>
+      </div>
+      <div class="rounded-xl p-5" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <h3 class="font-bold text-sm mb-2 flex items-center gap-2" style="color:#fb923c;"><i data-lucide="beaker" style="width:16px;height:16px;"></i> Glucose Control</h3>
+       <p class="text-xs" style="color:#94a3b8;">Target blood glucose ≤180 mg/dL. Insulin infusion protocol if &gt;180. Avoid hypoglycemia (&lt;70 mg/dL). Monitor q1-2h during infusion.</p>
+      </div>
+      <div class="rounded-xl p-5" style="background:rgba(30,41,59,0.8); border:1px solid rgba(148,163,184,0.1);">
+       <h3 class="font-bold text-sm mb-2 flex items-center gap-2" style="color:#f87171;"><i data-lucide="shield" style="width:16px;height:16px;"></i> DVT Prophylaxis</h3>
+       <p class="text-xs" style="color:#94a3b8;">LMWH preferred over UFH. Mechanical prophylaxis (SCDs) if pharmacologic contraindicated. Initiate within 24-48h of ICU admission.</p>
+      </div>
+     </div>
+    </section><!-- Monitoring Targets -->
+    <section class="mb-10 fade-in stagger-4">
+     <div class="rounded-xl p-6 md:p-8" style="background:rgba(30,41,59,0.8); border:1px solid rgba(59,130,246,0.2);">
+      <h2 class="heading-font text-xl font-bold mb-4 flex items-center gap-2" style="color:#f1f5f9;"><i data-lucide="target" style="width:22px;height:22px;color:#3b82f6;"></i> Resuscitation Targets</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+       <div class="text-center p-3 rounded-lg" style="background:rgba(15,25,35,0.5);">
+        <div class="text-2xl font-bold" style="color:#60a5fa;">
+         ≥65
+        </div>
+        <div class="text-xs mt-1" style="color:#94a3b8;">
+         MAP (mmHg)
+        </div>
+       </div>
+       <div class="text-center p-3 rounded-lg" style="background:rgba(15,25,35,0.5);">
+        <div class="text-2xl font-bold" style="color:#4ade80;">
+         ≥0.5
+        </div>
+        <div class="text-xs mt-1" style="color:#94a3b8;">
+         UOP (mL/kg/h)
+        </div>
+       </div>
+       <div class="text-center p-3 rounded-lg" style="background:rgba(15,25,35,0.5);">
+        <div class="text-2xl font-bold" style="color:#fbbf24;">
+         &lt;2
+        </div>
+        <div class="text-xs mt-1" style="color:#94a3b8;">
+         Lactate (mmol/L)
+        </div>
+       </div>
+       <div class="text-center p-3 rounded-lg" style="background:rgba(15,25,35,0.5);">
+        <div class="text-2xl font-bold" style="color:#c084fc;">
+         ≥70%
+        </div>
+        <div class="text-xs mt-1" style="color:#94a3b8;">
+         ScvO₂
+        </div>
+       </div>
+      </div>
+      <p class="text-xs mt-4 text-center" style="color:#64748b;">Capillary refill time &lt;3 sec | Skin mottling score improvement | Mental status normalization</p>
+     </div>
+    </section><!-- Key Evidence -->
+    <section class="fade-in stagger-5 mb-8">
+     <div class="rounded-xl p-6" style="background:rgba(30,41,59,0.6); border:1px solid rgba(148,163,184,0.08);">
+      <h2 class="font-bold text-sm mb-3 flex items-center gap-2" style="color:#64748b;"><i data-lucide="book-open" style="width:14px;height:14px;"></i> KEY REFERENCES</h2>
+      <div class="space-y-1 text-xs" style="color:#475569;">
+       <p>• Evans L, et al. Surviving Sepsis Campaign 2021 Guidelines. <em>Crit Care Med.</em> 2021;49(11):e1063-e1143.</p>
+       <p>• Singer M, et al. Third International Consensus Definitions for Sepsis (Sepsis-3). <em>JAMA.</em> 2016;315(8):801-810.</p>
+       <p>• Rivers E, et al. Early Goal-Directed Therapy. <em>NEJM.</em> 2001;345:1368-1377.</p>
+       <p>• Seymour CW, et al. Time to Treatment and Mortality in Sepsis. <em>NEJM.</em> 2017;376:2235-2244.</p>
+      </div>
+     </div>
+    </section>
+    <footer class="text-center pb-8 fade-in stagger-6">
+     <p class="text-xs" style="color:#475569;">For clinical decision-making only. Always apply clinical judgment. Protocol adherence reduces mortality by up to 25%.</p>
+    </footer>
+   </main>
+  </div>
+  <script>
+        // Element SDK
+        const defaultConfig = {
+            main_title: 'Sepsis Bundle',
+            subtitle: 'Surviving Sepsis Campaign 2021 — Evidence-Based Protocol',
+            background_color: '#0f1923',
+            surface_color: '#1e293b',
+            text_color: '#f1f5f9',
+            primary_action_color: '#ef4444',
+            secondary_action_color: '#3b82f6',
+            font_family: 'DM Sans',
+            font_size: 16
+        };
+
+        lucide.createIcons();
+    </script>
+  </body>
+</html>
