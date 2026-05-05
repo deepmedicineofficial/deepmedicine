@@ -1,0 +1,1174 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Microbiology | Infectious Agents & Diagnostic Microbiology | Deep Medicine</title> <meta name="description" content="Comprehensive microbiology guide including bacteria, viruses, fungi, parasites, lab diagnosis, culture techniques, and clinical correlation."> <link rel="canonical" href="https://deepmedicine.in/clinical/diagnostics/microbiology"> <!-- Open Graph --> <meta property="og:title" content="Microbiology | Deep Medicine"> <meta property="og:description" content="Study of pathogens, lab diagnosis, and infection mechanisms in clinical microbiology."> <meta property="og:image" content="https://deepmedicine.in/images/microbiology.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            body: ['IBM Plex Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .app-shell { height: 100%; overflow-y: auto; }
+    .tab-active { border-bottom: 3px solid #0ea5e9; color: #0ea5e9; background: rgba(14,165,233,0.05); }
+    .card-hover { transition: all 0.2s ease; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .fade-in { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .gradient-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+    .sensitivity-s { background: #065f46; color: #6ee7b7; }
+    .sensitivity-i { background: #92400e; color: #fde68a; }
+    .sensitivity-r { background: #991b1b; color: #fca5a5; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    .zone-table th, .zone-table td { padding: 6px 10px; text-align: center; border: 1px solid #334155; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full bg-slate-950 text-slate-200 font-body">
+  <div class="app-shell"><!-- Header -->
+   <header class="gradient-header sticky top-0 z-50 border-b border-slate-700/50 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-sky-500/20 flex items-center justify-center"><i data-lucide="microscope" class="w-5 h-5 text-sky-400"></i>
+      </div>
+      <div>
+       <h1 id="mainTitle" class="text-xl md:text-2xl font-bold text-white">🧪 Microbiology &amp; Cultures</h1>
+       <p id="subtitle" class="text-xs text-slate-400">Clinical Reference Guide — Specimens, Cultures, Sensitivity &amp; Antibiograms</p>
+      </div>
+     </div>
+    </div><!-- Tabs -->
+    <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 text-sm font-medium" id="tabNav"><button onclick="showTab('specimens')" data-tab="specimens" class="tab-active px-4 py-2 whitespace-nowrap rounded-t">Specimens</button> <button onclick="showTab('cultures')" data-tab="cultures" class="px-4 py-2 whitespace-nowrap rounded-t text-slate-400 hover:text-white">Culture Methods</button> <button onclick="showTab('organisms')" data-tab="organisms" class="px-4 py-2 whitespace-nowrap rounded-t text-slate-400 hover:text-white">Organisms</button> <button onclick="showTab('sensitivity')" data-tab="sensitivity" class="px-4 py-2 whitespace-nowrap rounded-t text-slate-400 hover:text-white">Sensitivity &amp; AST</button> <button onclick="showTab('antibiogram')" data-tab="antibiogram" class="px-4 py-2 whitespace-nowrap rounded-t text-slate-400 hover:text-white">Antibiograms</button> <button onclick="showTab('rapid')" data-tab="rapid" class="px-4 py-2 whitespace-nowrap rounded-t text-slate-400 hover:text-white">Rapid Tests</button> <button onclick="showTab('resistance')" data-tab="resistance" class="px-4 py-2 whitespace-nowrap rounded-t text-slate-400 hover:text-white">Resistance</button>
+    </nav>
+   </header><!-- Content -->
+   <main class="max-w-7xl mx-auto px-4 py-6" id="mainContent">
+   </main>
+  </div>
+  <script>
+const tabData = {
+specimens: `
+<div class="fade-in space-y-6">
+  <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+    <h2 class="text-lg font-bold text-sky-400 mb-3 flex items-center gap-2"><i data-lucide="droplets" class="w-5 h-5"></i> Clinical Specimens for Culture</h2>
+    <p class="text-slate-300 text-sm mb-4">Proper specimen collection is critical for accurate microbiological diagnosis. Contamination, improper transport, and delays reduce culture sensitivity dramatically.</p>
+  </div>
+
+  <!-- Blood Cultures -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-red-400 text-base mb-2">🩸 Blood Cultures</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Indications:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Suspected bacteremia/septicemia/fungemia</li>
+          <li>Fever of unknown origin (FUO)</li>
+          <li>Infective endocarditis (Modified Duke's criteria)</li>
+          <li>Pyrexia with rigors, hypotension, altered sensorium</li>
+          <li>Neonatal sepsis, neutropenic fever</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Collection Protocol:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Volume:</strong> Adults: 20-30 mL/set (10mL per bottle); Pediatric: 1-3 mL; Neonates: 0.5-1 mL</li>
+          <li><strong>Sets:</strong> Minimum 2 sets from 2 different venepuncture sites</li>
+          <li><strong>Timing:</strong> Ideally before antibiotics; 30 min apart (or simultaneously if urgent)</li>
+          <li><strong>Site prep:</strong> Chlorhexidine 2% in 70% isopropyl alcohol; 30-sec scrub, 30-sec dry</li>
+          <li><strong>Bottles:</strong> Aerobic + Anaerobic (BacT/ALERT, BACTEC systems)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-3 p-3 bg-slate-800 rounded-lg text-xs text-slate-400">
+      <strong class="text-yellow-400">⚠️ Critical Points:</strong> Never draw from existing IV lines unless paired with peripheral sample. Contamination rate should be &lt;3%. Common contaminants: Coagulase-negative Staphylococci (CoNS), Corynebacterium spp., Propionibacterium acnes. Single positive bottle with CoNS = likely contaminant; ≥2 positive bottles = true bacteremia.
+    </div>
+  </div>
+
+  <!-- Urine Cultures -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-yellow-400 text-base mb-2">🧫 Urine Cultures</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Collection Methods:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Clean-catch midstream (MSU):</strong> Gold standard for uncomplicated UTI</li>
+          <li><strong>Catheter specimen (CSU):</strong> From sampling port, NOT drainage bag</li>
+          <li><strong>Suprapubic aspiration (SPA):</strong> Gold standard in neonates/infants; any growth = significant</li>
+          <li><strong>In-out catheterization:</strong> When MSU unreliable</li>
+          <li><strong>Bag specimen:</strong> High contamination; only for screening (negative = rules out UTI)</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Interpretation (Kass Criteria Modified):</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>≥10<sup>5</sup> CFU/mL (MSU):</strong> Significant bacteriuria</li>
+          <li><strong>10<sup>3</sup>-10<sup>5</sup> CFU/mL:</strong> Equivocal; correlate clinically</li>
+          <li><strong>&lt;10<sup>3</sup> CFU/mL:</strong> Likely contamination/colonization</li>
+          <li><strong>SPA:</strong> Any count significant (≥1 CFU/mL)</li>
+          <li><strong>Catheter:</strong> ≥10<sup>3</sup> CFU/mL = significant</li>
+          <li><strong>Symptomatic females:</strong> ≥10<sup>2</sup> CFU/mL with pyuria = significant</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-3 p-3 bg-slate-800 rounded-lg text-xs">
+      <strong class="text-sky-400">Media Used:</strong> CLED agar (Cystine Lactose Electrolyte Deficient) — prevents swarming of Proteus; MacConkey agar; Blood agar. Semi-quantitative method using calibrated loop (0.001 mL).
+    </div>
+  </div>
+
+  <!-- Sputum -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-green-400 text-base mb-2">🫁 Sputum / Respiratory Cultures</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Specimen Types:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Expectorated sputum (early morning, deep cough)</li>
+          <li>Induced sputum (hypertonic saline nebulization)</li>
+          <li>Bronchoalveolar lavage (BAL) — quantitative ≥10<sup>4</sup> CFU/mL</li>
+          <li>Protected specimen brush (PSB) — ≥10<sup>3</sup> CFU/mL</li>
+          <li>Tracheal aspirate — ≥10<sup>5</sup>-10<sup>6</sup> CFU/mL</li>
+          <li>Pleural fluid (for empyema)</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Quality Assessment (Bartlett's Criteria):</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Grade based on squamous epithelial cells (SEC) & WBCs per LPF</li>
+          <li><strong>Acceptable:</strong> &lt;10 SEC/LPF AND &gt;25 WBC/LPF</li>
+          <li><strong>Reject if:</strong> &gt;25 SEC/LPF (=oropharyngeal contamination)</li>
+          <li>Murray-Washington classification (Groups 1-6)</li>
+          <li>Group ≥4 acceptable for culture</li>
+        </ul>
+        <p class="font-semibold text-white mt-2 mb-1">For TB:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>3 early morning samples on consecutive days</li>
+          <li>ZN stain / Auramine-rhodamine fluorescent stain</li>
+          <li>LJ media (6-8 weeks) / MGIT BACTEC (1-2 weeks)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CSF -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-purple-400 text-base mb-2">🧠 CSF Cultures (Cerebrospinal Fluid)</h3>
+    <div class="text-sm text-slate-300">
+      <div class="grid md:grid-cols-3 gap-4 mb-3">
+        <div>
+          <p class="font-semibold text-white mb-1">Collection:</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+            <li>Lumbar puncture (L3-L4/L4-L5)</li>
+            <li>Minimum 3 tubes (cell count, biochemistry, microbiology)</li>
+            <li>Process IMMEDIATELY (pneumococcus autolyzes)</li>
+            <li>Never refrigerate if meningococcus suspected</li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white mb-1">Processing:</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+            <li>Gram stain (sensitivity: 60-90% for bacterial meningitis)</li>
+            <li>India ink (Cryptococcus — budding yeast)</li>
+            <li>Latex agglutination / CrAg</li>
+            <li>Culture on BA, CA, supplemented BA</li>
+            <li>Multiplex PCR (FilmArray Meningitis Panel)</li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white mb-1">CSF Patterns:</p>
+          <table class="text-xs w-full">
+            <tr class="border-b border-slate-700"><td class="py-1 font-medium text-white">Bacterial</td><td>↑WBC(PMN), ↑Protein, ↓↓Glucose</td></tr>
+            <tr class="border-b border-slate-700"><td class="py-1 font-medium text-white">Viral</td><td>↑WBC(Lymph), ±Protein, Normal Glucose</td></tr>
+            <tr class="border-b border-slate-700"><td class="py-1 font-medium text-white">TB</td><td>↑WBC(Lymph), ↑↑Protein, ↓Glucose</td></tr>
+            <tr><td class="py-1 font-medium text-white">Fungal</td><td>↑WBC(Lymph), ↑Protein, ↓Glucose</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other Specimens -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-orange-400 text-base mb-2">📋 Other Critical Specimens</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Wound / Pus:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Aspirate preferred over swab</li>
+          <li>Deep tissue > superficial swab</li>
+          <li>Anaerobic transport if deep/foul</li>
+          <li>Gram stain + Culture (BA, MacConkey, anaerobic BA)</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Stool Culture:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Selective media: XLD, SS, MacConkey, TCBS (Vibrio)</li>
+          <li>Enrichment: Selenite-F / Alkaline peptone water</li>
+          <li>C. difficile: GDH screen → Toxin A/B EIA → NAAT</li>
+          <li>Ova & parasites: 3 specimens, different days</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Body Fluids:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Peritoneal/Ascitic: SBP if PMN &gt;250/mm³</li>
+          <li>Synovial: Septic arthritis; inoculate into blood culture bottles</li>
+          <li>Pericardial, pleural: Same principle</li>
+          <li>BAL quantitative for VAP diagnosis</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transport -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-cyan-400 text-base mb-2">🚚 Specimen Transport & Handling</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Transport Media:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Stuart's / Amies:</strong> General purpose (swabs)</li>
+          <li><strong>Cary-Blair:</strong> Stool (enteric pathogens)</li>
+          <li><strong>Viral transport media (VTM):</strong> Viruses, Chlamydia</li>
+          <li><strong>MYCO/F Lytic:</strong> Mycobacteria from blood</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Critical Rules:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Process within 2 hours (most specimens)</li>
+          <li>CSF & genital: NEVER refrigerate</li>
+          <li>Anaerobic: Transport in anaerobic pouch/vial</li>
+          <li>Blood cultures: Room temp, to lab immediately</li>
+          <li>Urine: Refrigerate at 4°C if delay &gt;2 hrs (or use boric acid)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`,
+
+cultures: `
+<div class="fade-in space-y-6">
+  <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+    <h2 class="text-lg font-bold text-sky-400 mb-2 flex items-center gap-2"><i data-lucide="flask-conical" class="w-5 h-5"></i> Culture Methods & Media</h2>
+    <p class="text-slate-300 text-sm">Culture remains the gold standard for definitive microbiological diagnosis, allowing organism identification, quantification, and antimicrobial susceptibility testing.</p>
+  </div>
+
+  <!-- Media Classification -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-emerald-400 text-base mb-3">🧫 Culture Media Classification</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-2">By Function:</p>
+        <table class="w-full text-xs">
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-emerald-300">Basic/Simple</td><td>Nutrient agar, Peptone water</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-emerald-300">Enriched</td><td>Blood agar, Chocolate agar, BHI</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-emerald-300">Selective</td><td>MacConkey, MSA, TCBS, XLD</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-emerald-300">Differential</td><td>MacConkey (LF/NLF), CLED, Blood agar (hemolysis)</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-emerald-300">Enrichment</td><td>Selenite-F broth, Alkaline peptone water, GN broth</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-emerald-300">Indicator</td><td>Wilson-Blair (Salmonella typhi), TCBS</td></tr>
+          <tr><td class="py-1.5 font-medium text-emerald-300">Transport</td><td>Stuart's, Amies, Cary-Blair, VTM</td></tr>
+        </table>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">Key Media & Their Targets:</p>
+        <table class="w-full text-xs">
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-yellow-300">Blood Agar (5% sheep)</td><td>General purpose; hemolysis patterns</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-yellow-300">Chocolate Agar</td><td>Haemophilus, Neisseria, Moraxella</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-yellow-300">MacConkey Agar</td><td>GNB; Lactose fermenters (pink) vs non-fermenters</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-yellow-300">Mannitol Salt Agar</td><td>Staphylococci (7.5% NaCl selective)</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-yellow-300">Thayer-Martin</td><td>Pathogenic Neisseria (VCN antibiotics)</td></tr>
+          <tr class="border-b border-slate-700"><td class="py-1.5 font-medium text-yellow-300">Sabouraud Dextrose Agar</td><td>Fungi (pH 5.6, chloramphenicol)</td></tr>
+          <tr><td class="py-1.5 font-medium text-yellow-300">Löwenstein-Jensen</td><td>Mycobacterium tuberculosis (egg-based)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Incubation -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-orange-400 text-base mb-3">🌡️ Incubation Conditions & Atmosphere</h3>
+    <div class="grid md:grid-cols-3 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Temperature:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>37°C:</strong> Most human pathogens</li>
+          <li><strong>25-30°C:</strong> Fungi (dimorphic at both)</li>
+          <li><strong>42°C:</strong> Campylobacter jejuni</li>
+          <li><strong>22°C:</strong> Yersinia (cold enrichment)</li>
+          <li><strong>35°C:</strong> Neisseria gonorrhoeae</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Atmosphere:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Aerobic:</strong> Most routine cultures</li>
+          <li><strong>5-10% CO₂:</strong> Neisseria, Haemophilus, Streptococci, Helicobacter</li>
+          <li><strong>Anaerobic:</strong> GasPak/anaerobic chamber (Bacteroides, Clostridium)</li>
+          <li><strong>Microaerophilic:</strong> Campylobacter (5% O₂, 10% CO₂)</li>
+          <li><strong>Candle jar:</strong> ~3% CO₂ (improvised)</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Duration:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>24-48 hrs:</strong> Routine bacteria</li>
+          <li><strong>5-7 days:</strong> Blood cultures (automated)</li>
+          <li><strong>2-4 weeks:</strong> Fungi (SDA)</li>
+          <li><strong>6-8 weeks:</strong> M. tuberculosis (LJ)</li>
+          <li><strong>1-2 weeks:</strong> MGIT/BACTEC (liquid)</li>
+          <li><strong>14-21 days:</strong> Brucella, Nocardia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Automated Systems -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-violet-400 text-base mb-3">🖥️ Automated Culture & Identification Systems</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Blood Culture Systems:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>BACTEC FX (BD):</strong> Fluorescent detection of CO₂</li>
+          <li><strong>BacT/ALERT (bioMérieux):</strong> Colorimetric CO₂ sensor</li>
+          <li><strong>VersaTREK:</strong> Pressure-based detection</li>
+          <li>Continuous monitoring q10 min; mean time to positivity (TTP) ~12-14 hrs for significant bacteremia</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Identification Systems:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>MALDI-TOF MS:</strong> Gold standard rapid ID (&lt;1 hr from colony); protein fingerprinting</li>
+          <li><strong>VITEK 2 (bioMérieux):</strong> Automated ID + AST (4-8 hrs)</li>
+          <li><strong>Phoenix (BD):</strong> ID + AST panels</li>
+          <li><strong>MicroScan:</strong> Overnight panels</li>
+          <li><strong>16S rRNA sequencing:</strong> Definitive for unusual organisms</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hemolysis Patterns -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-red-400 text-base mb-3">🔴 Hemolysis Patterns on Blood Agar</h3>
+    <div class="grid md:grid-cols-3 gap-4 text-sm text-slate-300">
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <p class="font-bold text-green-400 mb-1">α-Hemolysis (Green zone)</p>
+        <p class="text-xs">Partial RBC lysis → greenish discoloration</p>
+        <ul class="list-disc ml-4 mt-1 text-xs space-y-0.5">
+          <li>Streptococcus pneumoniae</li>
+          <li>Viridans streptococci</li>
+          <li>Enterococcus (variable)</li>
+        </ul>
+      </div>
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <p class="font-bold text-red-400 mb-1">β-Hemolysis (Clear zone)</p>
+        <p class="text-xs">Complete RBC lysis → clear transparent zone</p>
+        <ul class="list-disc ml-4 mt-1 text-xs space-y-0.5">
+          <li>Strep. pyogenes (GAS)</li>
+          <li>Strep. agalactiae (GBS)</li>
+          <li>Staph. aureus</li>
+          <li>Clostridium perfringens (double zone)</li>
+          <li>Listeria monocytogenes</li>
+        </ul>
+      </div>
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <p class="font-bold text-slate-400 mb-1">γ-Hemolysis (No hemolysis)</p>
+        <p class="text-xs">No change in surrounding media</p>
+        <ul class="list-disc ml-4 mt-1 text-xs space-y-0.5">
+          <li>Enterococcus faecalis</li>
+          <li>Staphylococcus epidermidis</li>
+          <li>Non-hemolytic streptococci</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Biochemical Tests -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-teal-400 text-base mb-3">⚗️ Key Biochemical Identification Tests</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Gram-Positive Algorithms:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Catalase:</strong> Staphylococci (+) vs Streptococci (-)</li>
+          <li><strong>Coagulase:</strong> S. aureus (+) vs CoNS (-)</li>
+          <li><strong>Optochin:</strong> S. pneumoniae (sensitive) vs Viridans (resistant)</li>
+          <li><strong>Bacitracin:</strong> GAS (sensitive) vs others</li>
+          <li><strong>CAMP test:</strong> GBS (+) — arrowhead hemolysis</li>
+          <li><strong>Bile esculin:</strong> Enterococcus / Group D Strep (+)</li>
+          <li><strong>6.5% NaCl growth:</strong> Enterococcus (+)</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Gram-Negative Algorithms:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Oxidase:</strong> Pseudomonas (+), Enterobacteriaceae (-)</li>
+          <li><strong>IMViC:</strong> E. coli (++--), Klebsiella (--++), Enterobacter (-+-+)</li>
+          <li><strong>Triple Sugar Iron (TSI):</strong> Fermentation patterns</li>
+          <li><strong>Urease:</strong> Proteus, Klebsiella, H. pylori (+)</li>
+          <li><strong>Citrate:</strong> Klebsiella (+), E. coli (-)</li>
+          <li><strong>Motility:</strong> E. coli (+), Klebsiella (-)</li>
+          <li><strong>H₂S production:</strong> Salmonella (+), Shigella (-)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`,
+
+organisms: `
+<div class="fade-in space-y-6">
+  <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+    <h2 class="text-lg font-bold text-sky-400 mb-2 flex items-center gap-2"><i data-lucide="bug" class="w-5 h-5"></i> Common Pathogenic Organisms</h2>
+    <p class="text-slate-300 text-sm">Clinically significant organisms organized by Gram stain morphology and clinical relevance.</p>
+  </div>
+
+  <!-- GPC -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-violet-400 text-base mb-3">🟣 Gram-Positive Cocci (GPC)</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">GPC in Clusters:</p>
+        <div class="ml-2 space-y-2">
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-yellow-300">Staphylococcus aureus</p>
+            <p class="text-xs">Coagulase +, Catalase +, Mannitol fermenter, DNase +</p>
+            <p class="text-xs text-slate-400">Causes: SSI, bacteremia, endocarditis, osteomyelitis, pneumonia, toxic shock</p>
+            <p class="text-xs text-red-300">MRSA: mecA gene → PBP2a; Vancomycin MIC: ≤2 (VSSA), 4-8 (VISA), ≥16 (VRSA)</p>
+          </div>
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-yellow-300">Coagulase-Negative Staph (CoNS)</p>
+            <p class="text-xs">S. epidermidis (prosthetic infections, biofilm), S. saprophyticus (UTI in young women), S. haemolyticus, S. lugdunensis (aggressive, like S. aureus)</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">GPC in Chains/Pairs:</p>
+        <div class="ml-2 space-y-2">
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-green-300">Streptococcus pneumoniae</p>
+            <p class="text-xs">Lancet-shaped diplococci, α-hemolytic, Optochin sensitive, Bile soluble, Quellung +</p>
+            <p class="text-xs text-slate-400">Causes: CAP, meningitis, otitis media, sinusitis</p>
+          </div>
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-green-300">Streptococcus pyogenes (GAS)</p>
+            <p class="text-xs">β-hemolytic, Bacitracin sensitive, PYR +, Lancefield Group A</p>
+            <p class="text-xs text-slate-400">Causes: Pharyngitis, cellulitis, necrotizing fasciitis, RHD, PSGN</p>
+          </div>
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-green-300">Enterococcus (faecalis/faecium)</p>
+            <p class="text-xs">Bile esculin +, 6.5% NaCl +, PYR +, γ-hemolytic (usually)</p>
+            <p class="text-xs text-red-300">VRE: vanA (high-level, transferable), vanB (variable)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GNB -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-red-400 text-base mb-3">🔴 Gram-Negative Bacilli (GNB)</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Enterobacteriaceae (Oxidase -):</p>
+        <div class="ml-2 space-y-1.5">
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-pink-300">Escherichia coli</p>
+            <p class="text-xs">Most common cause: UTI, neonatal meningitis (K1), traveler's diarrhea (ETEC), HUS (EHEC O157:H7)</p>
+            <p class="text-xs text-red-300">ESBL-producers: CTX-M most common globally</p>
+          </div>
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-pink-300">Klebsiella pneumoniae</p>
+            <p class="text-xs">"Currant jelly" sputum, Lobar pneumonia (alcoholics), UTI, BSI. Mucoid colonies</p>
+            <p class="text-xs text-red-300">Carbapenem-resistant (CR-KP): KPC, NDM, OXA-48 enzymes</p>
+          </div>
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-pink-300">Salmonella / Shigella</p>
+            <p class="text-xs">S. typhi: Enteric fever, Widal test, blood culture 1st week. Shigella: Bloody diarrhea, low inoculum</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Non-Fermenters (Oxidase +):</p>
+        <div class="ml-2 space-y-1.5">
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-cyan-300">Pseudomonas aeruginosa</p>
+            <p class="text-xs">Oxidase +, Blue-green pigment (pyocyanin), Grape-like odor, Growth at 42°C</p>
+            <p class="text-xs text-slate-400">Causes: VAP, burns, CF exacerbations, otitis externa, UTI (catheter)</p>
+            <p class="text-xs text-red-300">Intrinsic resistance to many antibiotics; MDR/XDR common in ICU</p>
+          </div>
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-cyan-300">Acinetobacter baumannii</p>
+            <p class="text-xs">Coccobacillary, Oxidase -, non-motile. ICU pathogen, desiccation-resistant</p>
+            <p class="text-xs text-red-300">Pan-drug resistant (PDR) strains emerging; OXA carbapenemases</p>
+          </div>
+          <div class="p-2 bg-slate-800 rounded">
+            <p class="font-medium text-cyan-300">Stenotrophomonas maltophilia</p>
+            <p class="text-xs">Intrinsic carbapenem resistance. Tx: TMP-SMX first line</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Anaerobes -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-amber-400 text-base mb-3">🟡 Anaerobes & Special Organisms</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Clinically Important Anaerobes:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Bacteroides fragilis:</strong> Most common anaerobe in blood; intra-abdominal infections</li>
+          <li><strong>Clostridium difficile:</strong> AAD, pseudomembranous colitis (Toxins A & B)</li>
+          <li><strong>C. perfringens:</strong> Gas gangrene, double-zone hemolysis, Nagler reaction</li>
+          <li><strong>C. tetani:</strong> Tetanus (tetanospasmin); drumstick spores</li>
+          <li><strong>C. botulinum:</strong> Flaccid paralysis; most potent toxin known</li>
+          <li><strong>Fusobacterium:</strong> Lemierre's syndrome (jugular vein thrombophlebitis)</li>
+          <li><strong>Prevotella/Peptostreptococcus:</strong> Dental/pelvic infections</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Fungi:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Candida albicans:</strong> Germ tube +, Chlamydospores on cornmeal agar</li>
+          <li><strong>C. auris:</strong> MDR, misidentified by API; MALDI-TOF required</li>
+          <li><strong>Aspergillus:</strong> Septate, acute-angle branching; Galactomannan antigen</li>
+          <li><strong>Mucor/Rhizopus:</strong> Ribbon-like, aseptate; rhinocerebral in DKA</li>
+          <li><strong>Cryptococcus:</strong> India ink +, CrAg latex, urease +</li>
+        </ul>
+        <p class="font-semibold text-white mt-2 mb-1">Atypicals:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Mycobacterium tuberculosis:</strong> AFB+, LJ media, MGIT, GeneXpert</li>
+          <li><strong>Nocardia:</strong> Modified AFB+, filamentous, soil organism</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`,
+
+sensitivity: `
+<div class="fade-in space-y-6">
+  <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+    <h2 class="text-lg font-bold text-sky-400 mb-2 flex items-center gap-2"><i data-lucide="target" class="w-5 h-5"></i> Antimicrobial Susceptibility Testing (AST)</h2>
+    <p class="text-slate-300 text-sm">AST determines the in-vitro susceptibility of isolates to guide targeted antimicrobial therapy. Standardized by CLSI (USA) and EUCAST (Europe).</p>
+  </div>
+
+  <!-- Methods -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-emerald-400 text-base mb-3">📐 AST Methods</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-2">1. Disk Diffusion (Kirby-Bauer):</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Mueller-Hinton Agar (MHA); depth 4mm</li>
+          <li>Inoculum: 0.5 McFarland standard (~1.5×10⁸ CFU/mL)</li>
+          <li>Lawn culture → Apply antibiotic disks</li>
+          <li>Incubate 35±2°C, 16-18 hrs (20-24 hrs for MRSA screen)</li>
+          <li>Measure zone of inhibition (mm) from edge to edge</li>
+          <li>Compare with CLSI/EUCAST breakpoints → S, I, R</li>
+          <li>MHA + 5% sheep blood: Streptococci, Haemophilus (HTM)</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">2. Minimum Inhibitory Concentration (MIC):</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Broth microdilution:</strong> Gold standard; serial 2-fold dilutions</li>
+          <li><strong>Agar dilution:</strong> Reference method for anaerobes</li>
+          <li><strong>E-test (Epsilometer):</strong> Gradient strip on MHA; MIC where ellipse intersects</li>
+          <li><strong>Automated:</strong> VITEK 2, Phoenix, MicroScan</li>
+          <li>MIC = lowest concentration inhibiting visible growth</li>
+          <li>Reported in µg/mL (or mg/L)</li>
+        </ul>
+        <p class="font-semibold text-white mt-2 mb-1">3. Additional Methods:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>MBC:</strong> Minimum Bactericidal Concentration (subculture from clear wells)</li>
+          <li><strong>Time-kill curves:</strong> Bactericidal vs bacteriostatic kinetics</li>
+          <li><strong>Synergy testing:</strong> Checkerboard, time-kill for combinations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interpretation -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-yellow-400 text-base mb-3">📊 Interpreting Sensitivity Reports</h3>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+      <div class="p-3 bg-slate-800 rounded-lg text-center">
+        <div class="sensitivity-s rounded px-3 py-2 mb-2 font-bold text-lg">S</div>
+        <p class="font-semibold text-green-400">Susceptible</p>
+        <p class="text-xs text-slate-300 mt-1">High likelihood of therapeutic success using standard dosing regimen. MIC ≤ susceptible breakpoint.</p>
+      </div>
+      <div class="p-3 bg-slate-800 rounded-lg text-center">
+        <div class="sensitivity-i rounded px-3 py-2 mb-2 font-bold text-lg">I</div>
+        <p class="font-semibold text-yellow-400">Intermediate / Susceptible, Increased Exposure (EUCAST)</p>
+        <p class="text-xs text-slate-300 mt-1">Therapeutic effect uncertain. May respond to increased dosing/concentrated sites (urine). EUCAST redefined as "SIE" — susceptible with increased exposure.</p>
+      </div>
+      <div class="p-3 bg-slate-800 rounded-lg text-center">
+        <div class="sensitivity-r rounded px-3 py-2 mb-2 font-bold text-lg">R</div>
+        <p class="font-semibold text-red-400">Resistant</p>
+        <p class="text-xs text-slate-300 mt-1">High likelihood of therapeutic failure regardless of dose. MIC > resistant breakpoint. Do not use clinically.</p>
+      </div>
+    </div>
+    <div class="mt-4 p-3 bg-slate-800 rounded-lg text-xs text-slate-300">
+      <strong class="text-sky-400">CLSI vs EUCAST:</strong> CLSI uses S/I/R with zone diameter tables. EUCAST uses S/I(SIE)/R with lower breakpoints generally. EUCAST "I" means treatable at higher dose or concentrated body site — a key clinical distinction. Always check which standard your lab uses.
+    </div>
+  </div>
+
+  <!-- Sample Report -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-cyan-400 text-base mb-3">📋 Sample Sensitivity Report</h3>
+    <div class="p-3 bg-slate-800 rounded-lg mb-3">
+      <p class="text-xs text-slate-400 mb-1">Specimen: Blood Culture | Organism: <strong class="text-white">Escherichia coli</strong> (ESBL-producing)</p>
+      <p class="text-xs text-slate-400">Method: VITEK 2 + E-test confirmation | Standard: CLSI M100 (2024)</p>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs zone-table">
+        <thead class="bg-slate-800">
+          <tr>
+            <th class="text-left text-slate-300">Antibiotic</th>
+            <th>MIC (µg/mL)</th>
+            <th>Interpretation</th>
+            <th class="text-left text-slate-300">Clinical Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="text-left font-medium">Ampicillin</td><td>≥32</td><td><span class="sensitivity-r px-2 py-0.5 rounded text-xs font-bold">R</span></td><td class="text-left text-slate-400">Intrinsic in ESBL</td></tr>
+          <tr><td class="text-left font-medium">Amoxicillin-Clavulanate</td><td>16</td><td><span class="sensitivity-i px-2 py-0.5 rounded text-xs font-bold">I</span></td><td class="text-left text-slate-400">Not reliable for ESBL</td></tr>
+          <tr><td class="text-left font-medium">Piperacillin-Tazobactam</td><td>8</td><td><span class="sensitivity-s px-2 py-0.5 rounded text-xs font-bold">S</span></td><td class="text-left text-slate-400">Use with caution in severe sepsis (inoculum effect)</td></tr>
+          <tr><td class="text-left font-medium">Ceftriaxone</td><td>≥64</td><td><span class="sensitivity-r px-2 py-0.5 rounded text-xs font-bold">R</span></td><td class="text-left text-slate-400">ESBL hydrolyzes 3rd gen cephalosporins</td></tr>
+          <tr><td class="text-left font-medium">Cefepime</td><td>16</td><td><span class="sensitivity-r px-2 py-0.5 rounded text-xs font-bold">R</span></td><td class="text-left text-slate-400">Report R for ESBL (CLSI)</td></tr>
+          <tr><td class="text-left font-medium">Meropenem</td><td>≤0.25</td><td><span class="sensitivity-s px-2 py-0.5 rounded text-xs font-bold">S</span></td><td class="text-left text-slate-400 text-green-300">Drug of choice for ESBL BSI</td></tr>
+          <tr><td class="text-left font-medium">Ertapenem</td><td>≤0.5</td><td><span class="sensitivity-s px-2 py-0.5 rounded text-xs font-bold">S</span></td><td class="text-left text-slate-400">Preferred carbapenem for step-down (no Pseudomonas cover)</td></tr>
+          <tr><td class="text-left font-medium">Gentamicin</td><td>≤1</td><td><span class="sensitivity-s px-2 py-0.5 rounded text-xs font-bold">S</span></td><td class="text-left text-slate-400">UTI only; not for BSI monotherapy</td></tr>
+          <tr><td class="text-left font-medium">Ciprofloxacin</td><td>≥4</td><td><span class="sensitivity-r px-2 py-0.5 rounded text-xs font-bold">R</span></td><td class="text-left text-slate-400">Common co-resistance with ESBL</td></tr>
+          <tr><td class="text-left font-medium">TMP-SMX</td><td>≥320</td><td><span class="sensitivity-r px-2 py-0.5 rounded text-xs font-bold">R</span></td><td class="text-left text-slate-400">High co-resistance rate</td></tr>
+          <tr><td class="text-left font-medium">Nitrofurantoin</td><td>32</td><td><span class="sensitivity-s px-2 py-0.5 rounded text-xs font-bold">S</span></td><td class="text-left text-slate-400">Uncomplicated UTI only (no tissue penetration)</td></tr>
+          <tr><td class="text-left font-medium">Colistin</td><td>≤0.5</td><td><span class="sensitivity-s px-2 py-0.5 rounded text-xs font-bold">S</span></td><td class="text-left text-slate-400">Last resort; nephrotoxic</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-3 p-2 bg-yellow-900/20 border border-yellow-700/30 rounded text-xs text-yellow-200">
+      <strong>⚠️ Lab Comment:</strong> ESBL confirmed by combination disk test (ceftazidime ± clavulanate ≥5mm difference). Recommend carbapenem for serious infections. Piperacillin-tazobactam may be considered for non-severe, non-high-inoculum infections per MERINO trial data.
+    </div>
+  </div>
+
+  <!-- Special Tests -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-purple-400 text-base mb-3">🔬 Special Susceptibility Tests</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <ul class="space-y-1.5">
+          <li><strong class="text-purple-300">MRSA Screen:</strong> Cefoxitin disk (≤21mm = MRSA) or Oxacillin MIC ≥4; confirm mecA/mecC PCR</li>
+          <li><strong class="text-purple-300">D-test (Inducible Clindamycin Resistance):</strong> Erythromycin R + Clindamycin S → Place disks 15-26mm apart. Flattened zone (D-shape) = positive = report Clindamycin R</li>
+          <li><strong class="text-purple-300">ESBL Detection:</strong> Combined disk method (CTX/CAZ ± clavulanate ≥5mm); Double-disk synergy; Chromogenic media (ChromID ESBL)</li>
+          <li><strong class="text-purple-300">Carbapenemase Detection:</strong> Modified Carbapenem Inactivation Method (mCIM); EDTA-CIM (for MBL); CarbaNP test; Immunochromatographic (NG-Test CARBA 5)</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="space-y-1.5">
+          <li><strong class="text-purple-300">VRE Detection:</strong> Vancomycin screen agar (6 µg/mL BHI); MIC determination; vanA/vanB genotyping</li>
+          <li><strong class="text-purple-300">High-Level Aminoglycoside Resistance (HLAR):</strong> Gentamicin 120µg & Streptomycin 300µg disks for Enterococcus endocarditis synergy prediction</li>
+          <li><strong class="text-purple-300">Colistin MIC:</strong> Broth microdilution ONLY (disk diffusion unreliable); mcr gene PCR</li>
+          <li><strong class="text-purple-300">Hetero-resistance (hVISA):</strong> Population analysis profile; Macromethod E-test; Glycopeptide resistance screening agar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`,
+
+antibiogram: `
+<div class="fade-in space-y-6">
+  <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+    <h2 class="text-lg font-bold text-sky-400 mb-2 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-5 h-5"></i> Antibiograms (Cumulative Susceptibility Reports)</h2>
+    <p class="text-slate-300 text-sm">An antibiogram summarizes local susceptibility patterns of common isolates to guide empiric therapy. Updated annually per CLSI M39 guidelines. Essential for antimicrobial stewardship.</p>
+  </div>
+
+  <!-- What is antibiogram -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-emerald-400 text-base mb-3">📈 Components of a Hospital Antibiogram</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Construction Rules (CLSI M39-A4):</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Include only first isolate per patient per species per analysis period</li>
+          <li>Minimum 30 isolates per species for statistical validity</li>
+          <li>Report %Susceptible (%S) for each drug-bug combination</li>
+          <li>Annual update recommended</li>
+          <li>Separate by ward/unit (ICU vs non-ICU) if possible</li>
+          <li>Separate by specimen type when clinically meaningful</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Clinical Applications:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Empiric therapy:</strong> Choose antibiotic with ≥80-90% susceptibility</li>
+          <li><strong>Stewardship:</strong> Track resistance trends over time</li>
+          <li><strong>Formulary decisions:</strong> Add/remove agents based on local data</li>
+          <li><strong>Infection prevention:</strong> Detect emerging resistance early</li>
+          <li><strong>Benchmarking:</strong> Compare with national/regional data</li>
+          <li><strong>Education:</strong> Guide prescribing behavior</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sample Antibiogram Table -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-yellow-400 text-base mb-3">📊 Sample ICU Antibiogram (%Susceptible)</h3>
+    <p class="text-xs text-slate-400 mb-3">Hypothetical tertiary care hospital ICU data — January to December 2024 | First isolates only</p>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs zone-table">
+        <thead class="bg-slate-800">
+          <tr>
+            <th class="text-left text-slate-300">Organism (n)</th>
+            <th>AMP</th>
+            <th>AMC</th>
+            <th>TZP</th>
+            <th>CRO</th>
+            <th>FEP</th>
+            <th>MEM</th>
+            <th>GEN</th>
+            <th>AMK</th>
+            <th>CIP</th>
+            <th>SXT</th>
+            <th>CST</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr>
+            <td class="text-left font-medium">E. coli (245)</td>
+            <td class="bg-red-900/30 text-red-300">28</td>
+            <td class="bg-yellow-900/30 text-yellow-300">62</td>
+            <td class="bg-yellow-900/30 text-yellow-300">78</td>
+            <td class="bg-yellow-900/30 text-yellow-300">55</td>
+            <td class="bg-yellow-900/30 text-yellow-300">58</td>
+            <td class="bg-green-900/30 text-green-300">98</td>
+            <td class="bg-yellow-900/30 text-yellow-300">72</td>
+            <td class="bg-green-900/30 text-green-300">94</td>
+            <td class="bg-red-900/30 text-red-300">38</td>
+            <td class="bg-red-900/30 text-red-300">42</td>
+            <td class="bg-green-900/30 text-green-300">99</td>
+          </tr>
+          <tr>
+            <td class="text-left font-medium">K. pneumoniae (180)</td>
+            <td class="text-slate-500">IR</td>
+            <td class="bg-red-900/30 text-red-300">45</td>
+            <td class="bg-yellow-900/30 text-yellow-300">62</td>
+            <td class="bg-red-900/30 text-red-300">38</td>
+            <td class="bg-red-900/30 text-red-300">42</td>
+            <td class="bg-yellow-900/30 text-yellow-300">78</td>
+            <td class="bg-yellow-900/30 text-yellow-300">55</td>
+            <td class="bg-yellow-900/30 text-yellow-300">75</td>
+            <td class="bg-red-900/30 text-red-300">32</td>
+            <td class="bg-red-900/30 text-red-300">35</td>
+            <td class="bg-green-900/30 text-green-300">92</td>
+          </tr>
+          <tr>
+            <td class="text-left font-medium">P. aeruginosa (120)</td>
+            <td class="text-slate-500">IR</td>
+            <td class="text-slate-500">IR</td>
+            <td class="bg-yellow-900/30 text-yellow-300">72</td>
+            <td class="text-slate-500">NA</td>
+            <td class="bg-yellow-900/30 text-yellow-300">68</td>
+            <td class="bg-yellow-900/30 text-yellow-300">75</td>
+            <td class="bg-yellow-900/30 text-yellow-300">70</td>
+            <td class="bg-yellow-900/30 text-yellow-300">78</td>
+            <td class="bg-yellow-900/30 text-yellow-300">62</td>
+            <td class="text-slate-500">NA</td>
+            <td class="bg-green-900/30 text-green-300">95</td>
+          </tr>
+          <tr>
+            <td class="text-left font-medium">A. baumannii (85)</td>
+            <td class="text-slate-500">IR</td>
+            <td class="text-slate-500">IR</td>
+            <td class="bg-red-900/30 text-red-300">18</td>
+            <td class="bg-red-900/30 text-red-300">12</td>
+            <td class="bg-red-900/30 text-red-300">15</td>
+            <td class="bg-red-900/30 text-red-300">22</td>
+            <td class="bg-red-900/30 text-red-300">30</td>
+            <td class="bg-red-900/30 text-red-300">35</td>
+            <td class="bg-red-900/30 text-red-300">15</td>
+            <td class="bg-red-900/30 text-red-300">18</td>
+            <td class="bg-yellow-900/30 text-yellow-300">78</td>
+          </tr>
+          <tr>
+            <td class="text-left font-medium">S. aureus (MSSA) (95)</td>
+            <td class="bg-red-900/30 text-red-300">5</td>
+            <td class="bg-green-900/30 text-green-300">98</td>
+            <td class="bg-green-900/30 text-green-300">99</td>
+            <td class="bg-green-900/30 text-green-300">98</td>
+            <td class="bg-green-900/30 text-green-300">99</td>
+            <td class="bg-green-900/30 text-green-300">100</td>
+            <td class="bg-green-900/30 text-green-300">95</td>
+            <td class="bg-green-900/30 text-green-300">100</td>
+            <td class="bg-green-900/30 text-green-300">88</td>
+            <td class="bg-green-900/30 text-green-300">92</td>
+            <td class="text-slate-500">NT</td>
+          </tr>
+          <tr>
+            <td class="text-left font-medium">MRSA (72)</td>
+            <td class="text-slate-500">IR</td>
+            <td class="text-slate-500">IR</td>
+            <td class="text-slate-500">IR</td>
+            <td class="text-slate-500">IR</td>
+            <td class="text-slate-500">IR</td>
+            <td class="text-slate-500">NA</td>
+            <td class="bg-yellow-900/30 text-yellow-300">55</td>
+            <td class="bg-green-900/30 text-green-300">100</td>
+            <td class="bg-red-900/30 text-red-300">22</td>
+            <td class="bg-yellow-900/30 text-yellow-300">68</td>
+            <td class="text-slate-500">NT</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-3 flex flex-wrap gap-3 text-xs">
+      <span class="bg-green-900/30 text-green-300 px-2 py-0.5 rounded">≥80% S = Suitable for empiric Rx</span>
+      <span class="bg-yellow-900/30 text-yellow-300 px-2 py-0.5 rounded">50-79% = Use with caution</span>
+      <span class="bg-red-900/30 text-red-300 px-2 py-0.5 rounded">&lt;50% = Avoid empirically</span>
+      <span class="text-slate-400">IR = Intrinsic Resistance | NA = Not Applicable | NT = Not Tested</span>
+    </div>
+    <div class="mt-2 text-xs text-slate-400">
+      AMP=Ampicillin, AMC=Amoxicillin-Clavulanate, TZP=Piperacillin-Tazobactam, CRO=Ceftriaxone, FEP=Cefepime, MEM=Meropenem, GEN=Gentamicin, AMK=Amikacin, CIP=Ciprofloxacin, SXT=Trimethoprim-Sulfamethoxazole, CST=Colistin
+    </div>
+  </div>
+
+  <!-- Interpretation -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-teal-400 text-base mb-3">🎯 Clinical Decision-Making with Antibiograms</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Empiric Therapy Rules:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>≥90% susceptibility:</strong> First-line empiric choice</li>
+          <li><strong>80-90%:</strong> Acceptable for non-critical infections</li>
+          <li><strong>&lt;80%:</strong> Not recommended for empiric use</li>
+          <li>Consider site of infection (urine concentrations differ from serum)</li>
+          <li>De-escalate once culture results available (within 48-72 hrs)</li>
+          <li>Combination therapy for critically ill until susceptibility known</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Stewardship Interventions:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Restrict antibiotics with &lt;50% susceptibility from empiric guidelines</li>
+          <li>Cycle/rotate classes if collateral sensitivity demonstrated</li>
+          <li>Cascade reporting: Report narrow-spectrum first; suppress broad-spectrum unless resistant</li>
+          <li>Selective reporting per CLSI guidelines (suppress nitrofurantoin for blood isolates)</li>
+          <li>Unit-specific antibiograms for ICU vs ward vs community</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gram-positive Antibiogram -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-orange-400 text-base mb-3">📋 Gram-Positive Antibiogram Considerations</h3>
+    <div class="text-sm text-slate-300">
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs zone-table">
+          <thead class="bg-slate-800">
+            <tr><th class="text-left">Organism</th><th>VAN</th><th>LZD</th><th>DAP</th><th>CLI</th><th>ERY</th><th>RIF</th><th>TET</th></tr>
+          </thead>
+          <tbody class="text-center">
+            <tr><td class="text-left font-medium">MRSA (72)</td><td class="text-green-300">100</td><td class="text-green-300">100</td><td class="text-green-300">99</td><td class="text-yellow-300">72</td><td class="text-red-300">28</td><td class="text-green-300">95</td><td class="text-green-300">88</td></tr>
+            <tr><td class="text-left font-medium">E. faecalis (55)</td><td class="text-green-300">98</td><td class="text-green-300">100</td><td class="text-green-300">99</td><td class="text-slate-500">IR</td><td class="text-slate-500">IR</td><td class="text-slate-500">NA</td><td class="text-yellow-300">65</td></tr>
+            <tr><td class="text-left font-medium">E. faecium (38)</td><td class="text-yellow-300">55</td><td class="text-green-300">100</td><td class="text-green-300">95</td><td class="text-slate-500">IR</td><td class="text-slate-500">IR</td><td class="text-slate-500">NA</td><td class="text-yellow-300">60</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2 text-xs text-slate-400">VAN=Vancomycin, LZD=Linezolid, DAP=Daptomycin, CLI=Clindamycin, ERY=Erythromycin, RIF=Rifampicin, TET=Tetracycline</p>
+    </div>
+  </div>
+</div>
+`,
+
+rapid: `
+<div class="fade-in space-y-6">
+  <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+    <h2 class="text-lg font-bold text-sky-400 mb-2 flex items-center gap-2"><i data-lucide="zap" class="w-5 h-5"></i> Rapid Diagnostic Tests & Molecular Methods</h2>
+    <p class="text-slate-300 text-sm">Modern microbiology combines culture with rapid diagnostics for faster time-to-result, enabling early targeted therapy and improved patient outcomes.</p>
+  </div>
+
+  <!-- Molecular -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-emerald-400 text-base mb-3">🧬 Molecular Diagnostics (NAATs)</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">PCR-Based Methods:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>GeneXpert MTB/RIF Ultra:</strong> TB + rifampicin resistance in 80 min; sensitivity 89% (smear-negative)</li>
+          <li><strong>FilmArray (BioFire):</strong> Multiplex panels — Blood Culture ID (27 targets + resistance genes in 1 hr)</li>
+          <li><strong>FilmArray Meningitis/Encephalitis Panel:</strong> 14 pathogens from CSF in 1 hr</li>
+          <li><strong>FilmArray Pneumonia Panel:</strong> 33 targets + 7 AMR genes from BAL/sputum</li>
+          <li><strong>GI Panel:</strong> 22 pathogens from stool</li>
+          <li><strong>Cepheid Xpert MRSA/SA:</strong> Direct from blood culture bottle; mecA detection</li>
+          <li><strong>Xpert Carba-R:</strong> KPC, NDM, VIM, OXA-48, IMP detection</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Other Molecular Methods:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>MALDI-TOF MS:</strong> Organism ID from colony in minutes; directly from blood cultures (Sepsityper)</li>
+          <li><strong>16S/18S/ITS rRNA sequencing:</strong> Definitive ID for unusual/non-cultivable organisms</li>
+          <li><strong>Whole Genome Sequencing (WGS):</strong> Outbreak investigation, resistance gene profiling, phylogenetics</li>
+          <li><strong>T2Candida:</strong> Direct from blood (T2MR); skips culture</li>
+          <li><strong>Karius Test:</strong> Cell-free DNA metagenomic sequencing (>1000 pathogens from plasma)</li>
+          <li><strong>Accelerate Pheno:</strong> AST directly from positive blood cultures (7 hrs)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Antigen/Serology -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-yellow-400 text-base mb-3">🎯 Antigen Detection & Serology</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Rapid Antigen Tests:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Strep A rapid test:</strong> Throat swab; specificity &gt;95%, sensitivity 70-90%</li>
+          <li><strong>Legionella urinary antigen:</strong> Serogroup 1 only; sensitivity ~75%, specificity ~99%</li>
+          <li><strong>Pneumococcal urinary antigen:</strong> Sensitivity 70-80%</li>
+          <li><strong>Cryptococcal antigen (CrAg):</strong> Lateral flow; serum/CSF; sensitivity &gt;99%</li>
+          <li><strong>Galactomannan (Aspergillus):</strong> Serum/BAL; cut-off 0.5/1.0 ODI</li>
+          <li><strong>β-D-Glucan (BDG):</strong> Pan-fungal (not Mucor/Crypto); cut-off ≥80 pg/mL</li>
+          <li><strong>C. difficile GDH + Toxin:</strong> Two-step algorithm (GDH screen → Toxin EIA → NAAT if discordant)</li>
+          <li><strong>Malaria RDT:</strong> HRP2 (P. falciparum) + pLDH (pan-Plasmodium)</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Serological Tests:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Widal test:</strong> Salmonella (limited utility; single titre unreliable)</li>
+          <li><strong>ASO titre:</strong> Post-streptococcal complications (RHD, PSGN)</li>
+          <li><strong>Brucella agglutination (SAT):</strong> ≥1:160 significant</li>
+          <li><strong>HIV serology:</strong> 4th gen Ag/Ab combo → confirmatory WB/immunoblot</li>
+          <li><strong>HBsAg, Anti-HCV:</strong> Hepatitis screening</li>
+          <li><strong>Procalcitonin (PCT):</strong> &gt;0.5 ng/mL suggests bacterial infection; guides antibiotic duration</li>
+          <li><strong>Dengue NS1 + IgM/IgG:</strong> NS1 (day 1-5), IgM (day 5+)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Point of Care -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-cyan-400 text-base mb-3">⚡ Impact on Clinical Management</h3>
+    <div class="grid md:grid-cols-3 gap-4 text-sm text-slate-300">
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <p class="font-bold text-cyan-300 mb-1">Time Savings</p>
+        <ul class="text-xs space-y-0.5">
+          <li>Blood culture ID: 24-48 hrs → 1-2 hrs (from positive bottle)</li>
+          <li>TB diagnosis: 6-8 weeks → 80 min (GeneXpert)</li>
+          <li>Meningitis panel: 48-72 hrs → 1 hr</li>
+          <li>AST from positive BC: 48 hrs → 7 hrs</li>
+        </ul>
+      </div>
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <p class="font-bold text-cyan-300 mb-1">Clinical Impact</p>
+        <ul class="text-xs space-y-0.5">
+          <li>Earlier de-escalation (stewardship)</li>
+          <li>Reduced mortality in BSI (faster targeted Rx)</li>
+          <li>Shorter length of stay</li>
+          <li>Infection control: Rapid MRSA/VRE screening</li>
+        </ul>
+      </div>
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <p class="font-bold text-cyan-300 mb-1">Limitations</p>
+        <ul class="text-xs space-y-0.5">
+          <li>Cost (panels $100-300+)</li>
+          <li>Detects genes, not expression (resistance gene ≠ phenotypic R always)</li>
+          <li>Cannot replace culture for full AST panel</li>
+          <li>Dead organisms detected (post-treatment positivity)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`,
+
+resistance: `
+<div class="fade-in space-y-6">
+  <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+    <h2 class="text-lg font-bold text-sky-400 mb-2 flex items-center gap-2"><i data-lucide="shield-alert" class="w-5 h-5"></i> Antimicrobial Resistance (AMR)</h2>
+    <p class="text-slate-300 text-sm">Understanding resistance mechanisms is critical for ICU/ED physicians managing multidrug-resistant organisms (MDROs). WHO declares AMR a top 10 global health threat.</p>
+  </div>
+
+  <!-- MDR Definitions -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-red-400 text-base mb-3">🚨 Resistance Definitions (Magiorakos et al. 2012)</h3>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+      <div class="p-3 bg-red-950/30 border border-red-800/30 rounded-lg">
+        <p class="font-bold text-red-400 mb-1">MDR (Multi-Drug Resistant)</p>
+        <p class="text-xs text-slate-300">Non-susceptible to ≥1 agent in ≥3 antimicrobial categories</p>
+        <p class="text-xs text-slate-400 mt-1">Example: ESBL E. coli resistant to penicillins + cephalosporins + fluoroquinolones</p>
+      </div>
+      <div class="p-3 bg-orange-950/30 border border-orange-800/30 rounded-lg">
+        <p class="font-bold text-orange-400 mb-1">XDR (Extensively Drug Resistant)</p>
+        <p class="text-xs text-slate-300">Non-susceptible to ≥1 agent in all BUT ≤2 categories</p>
+        <p class="text-xs text-slate-400 mt-1">Example: A. baumannii susceptible only to colistin + tigecycline</p>
+      </div>
+      <div class="p-3 bg-purple-950/30 border border-purple-800/30 rounded-lg">
+        <p class="font-bold text-purple-400 mb-1">PDR (Pan-Drug Resistant)</p>
+        <p class="text-xs text-slate-300">Non-susceptible to ALL agents in ALL categories</p>
+        <p class="text-xs text-slate-400 mt-1">Extremely rare but reported in A. baumannii, K. pneumoniae</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mechanisms -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-amber-400 text-base mb-3">⚙️ Resistance Mechanisms</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">1. Enzymatic Inactivation:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>β-Lactamases:</strong> Ambler Classification (A, B, C, D)</li>
+          <li>Class A: TEM, SHV, CTX-M (ESBLs); KPC (carbapenemase)</li>
+          <li>Class B: Metallo-β-lactamases (NDM, VIM, IMP) — Zn²⁺ dependent; NOT inhibited by clavulanate; inhibited by EDTA</li>
+          <li>Class C: AmpC (chromosomal in ESCAPPM organisms; plasmid-mediated CMY, DHA)</li>
+          <li>Class D: OXA-type (OXA-48 carbapenemase; OXA-23/24/51 in Acinetobacter)</li>
+          <li><strong>Aminoglycoside-modifying enzymes:</strong> AAC, ANT, APH</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">2. Target Modification:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>PBP alteration:</strong> mecA → PBP2a (MRSA); mosaic PBP (penicillin-R pneumococcus)</li>
+          <li><strong>Ribosomal methylation:</strong> erm genes (MLSB resistance — macrolides, lincosamides, streptogramin B)</li>
+          <li><strong>DNA gyrase/topoisomerase mutations:</strong> Fluoroquinolone resistance (stepwise)</li>
+          <li><strong>vanA/vanB:</strong> D-Ala-D-Lac substitution (VRE)</li>
+        </ul>
+        <p class="font-semibold text-white mt-2 mb-1">3. Reduced Permeability & Efflux:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Porin loss:</strong> OprD loss → carbapenem resistance in Pseudomonas</li>
+          <li><strong>Efflux pumps:</strong> MexAB-OprM (Pseudomonas); AcrAB-TolC (Enterobacteriaceae)</li>
+          <li>Often combine with enzyme production for high-level resistance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCAPE Pathogens -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-violet-400 text-base mb-3">☠️ WHO Critical Priority Pathogens & ESKAPE</h3>
+    <div class="text-sm text-slate-300">
+      <p class="mb-2 font-semibold text-white">ESKAPE Organisms (leading cause of nosocomial MDR infections):</p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="p-2 bg-slate-800 rounded"><strong class="text-red-300">E</strong> — Enterococcus faecium (VRE)</div>
+        <div class="p-2 bg-slate-800 rounded"><strong class="text-red-300">S</strong> — Staphylococcus aureus (MRSA/VISA/VRSA)</div>
+        <div class="p-2 bg-slate-800 rounded"><strong class="text-red-300">K</strong> — Klebsiella pneumoniae (ESBL/CRE)</div>
+        <div class="p-2 bg-slate-800 rounded"><strong class="text-red-300">A</strong> — Acinetobacter baumannii (CRAB)</div>
+        <div class="p-2 bg-slate-800 rounded"><strong class="text-red-300">P</strong> — Pseudomonas aeruginosa (CR-PA)</div>
+        <div class="p-2 bg-slate-800 rounded"><strong class="text-red-300">E</strong> — Enterobacter spp. (AmpC/CRE)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Treatment Options -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-green-400 text-base mb-3">💊 Therapeutic Options for MDR Organisms</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">CRE (Carbapenem-Resistant Enterobacteriaceae):</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Ceftazidime-Avibactam:</strong> Covers KPC, OXA-48 (NOT NDM)</li>
+          <li><strong>Meropenem-Vaborbactam:</strong> KPC-producing organisms</li>
+          <li><strong>Imipenem-Relebactam:</strong> KPC + some OXA</li>
+          <li><strong>Cefiderocol:</strong> Siderophore cephalosporin; covers NDM, all classes</li>
+          <li><strong>Aztreonam + Ceftazidime-Avibactam:</strong> For NDM producers (aztreonam stable to MBL; avibactam protects from other β-lactamases)</li>
+          <li><strong>Colistin:</strong> Last resort; combination therapy; TDM essential</li>
+          <li><strong>Tigecycline (high-dose):</strong> Non-UTI, non-BSI infections</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">MRSA:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li><strong>Vancomycin:</strong> Standard; AUC/MIC guided dosing (target AUC 400-600)</li>
+          <li><strong>Daptomycin:</strong> BSI, endocarditis (NOT pneumonia — inactivated by surfactant)</li>
+          <li><strong>Linezolid:</strong> Pneumonia, skin; myelosuppression risk &gt;14 days</li>
+          <li><strong>Ceftaroline:</strong> Anti-MRSA cephalosporin (5th gen); pneumonia + BSI</li>
+          <li><strong>TMP-SMX, Doxycycline:</strong> Non-severe SSTI</li>
+        </ul>
+        <p class="font-semibold text-white mt-2 mb-1">VRE:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Linezolid or Daptomycin (high-dose 8-12 mg/kg for BSI)</li>
+          <li>Quinupristin-Dalfopristin (E. faecium only, not E. faecalis)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stewardship -->
+  <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 card-hover">
+    <h3 class="font-bold text-sky-400 text-base mb-3">🏥 Antimicrobial Stewardship & Infection Control</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+      <div>
+        <p class="font-semibold text-white mb-1">Core Stewardship Strategies:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Prospective audit with feedback (ID pharmacist + physician)</li>
+          <li>Formulary restriction & pre-authorization</li>
+          <li>IV-to-oral conversion protocols</li>
+          <li>Dose optimization (PK/PD: prolonged infusions for β-lactams)</li>
+          <li>De-escalation within 48-72 hrs based on cultures</li>
+          <li>Duration guidelines (e.g., 7 days for HAP/VAP per IDSA)</li>
+          <li>Procalcitonin-guided cessation</li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-1">Infection Prevention & Control:</p>
+        <ul class="list-disc ml-4 space-y-0.5">
+          <li>Contact precautions for MDRO patients</li>
+          <li>Active surveillance cultures (rectal swab for CRE/VRE; nasal for MRSA)</li>
+          <li>Hand hygiene compliance monitoring (WHO 5 moments)</li>
+          <li>Environmental cleaning (UV-C, hydrogen peroxide vapor)</li>
+          <li>Antibiotic cycling/rotation (controversial but used)</li>
+          <li>Rapid diagnostics integration for early isolation</li>
+          <li>MDRO bundle: Decolonization + isolation + terminal cleaning + audit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`
+};
+
+function showTab(tabName) {
+  document.getElementById('mainContent').innerHTML = tabData[tabName];
+  document.querySelectorAll('#tabNav button').forEach(btn => {
+    btn.classList.remove('tab-active');
+    btn.classList.add('text-slate-400', 'hover:text-white');
+  });
+  const activeBtn = document.querySelector(`[data-tab="${tabName}"]`);
+  activeBtn.classList.add('tab-active');
+  activeBtn.classList.remove('text-slate-400', 'hover:text-white');
+  lucide.createIcons();
+}
+
+// Init
+showTab('specimens');
+
+const defaultConfig = {
+  main_title: '🧪 Microbiology & Cultures',
+  subtitle: 'Clinical Reference Guide — Specimens, Cultures, Sensitivity & Antibiograms',
+  background_color: '#020617',
+  surface_color: '#0f172a',
+  text_color: '#e2e8f0',
+  primary_action: '#0ea5e9',
+  secondary_action: '#334155',
+  font_family: 'IBM Plex Sans',
+  font_size: 14
+};
+
+</script>
+</body>
+</html>
