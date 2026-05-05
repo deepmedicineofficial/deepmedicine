@@ -1,0 +1,714 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Antihypertensive Drugs | Blood Pressure Pharmacology & Treatment | Deep Medicine</title> <meta name="description" content="Comprehensive guide to antihypertensive drugs including ACE inhibitors, ARBs, beta blockers, calcium channel blockers, diuretics, and clinical use in hypertension management."> <link rel="canonical" href="https://deepmedicine.in/clinical/drugs/antihypertensive"> <!-- Open Graph --> <meta property="og:title" content="Antihypertensive Drugs | Deep Medicine"> <meta property="og:description" content="Classification and clinical use of antihypertensive medications for blood pressure control."> <meta property="og:image" content="https://deepmedicine.in/images/antihypertensive-drugs.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; }
+  .font-heading { font-family: 'Playfair Display', serif; }
+
+  .drug-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 4px solid transparent;
+  }
+  .drug-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+  .class-section {
+    animation: fadeSlideIn 0.5s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .tab-btn { transition: all 0.25s ease; }
+  .tab-btn.active { transform: scale(1.02); }
+  .expand-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .expand-content.open {
+    max-height: 4000px;
+    padding-top: 12px;
+  }
+  .search-input:focus { box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.15); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#f0f4f3;"><!-- Header -->
+   <header id="app-header" class="relative overflow-hidden" style="background:linear-gradient(135deg,#0f4c5c 0%,#1a6b5a 50%,#0f4c5c 100%);">
+    <div class="absolute inset-0 opacity-10">
+     <svg width="100%" height="100%">
+      <defs>
+       <pattern id="grid" width="40" height="40" patternunits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" />
+       </pattern>
+      </defs><rect width="100%" height="100%" fill="url(#grid)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-4 py-8 sm:py-12 text-center">
+     <div class="inline-flex items-center gap-2 mb-3 px-4 py-1.5 rounded-full" style="background:rgba(255,255,255,0.12);"><i data-lucide="activity" style="width:16px;height:16px;color:#7ee8c7;"></i> <span class="text-xs font-semibold tracking-widest uppercase" style="color:#7ee8c7;">Clinical Pharmacology Reference</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-4xl md:text-5xl font-800 text-white mb-2">Antihypertensive Drugs</h1>
+     <p id="subtitle" class="text-base sm:text-lg font-medium" style="color:#a8e6cf;">Complete Pharmacological Classification</p>
+     <div class="flex flex-wrap justify-center gap-4 mt-6 text-xs" style="color:rgba(255,255,255,0.7);"><span class="flex items-center gap-1"><i data-lucide="layers" style="width:14px;height:14px;"></i> 10 Major Classes</span> <span class="flex items-center gap-1"><i data-lucide="pill" style="width:14px;height:14px;"></i> 80+ Drugs</span> <span class="flex items-center gap-1"><i data-lucide="book-open" style="width:14px;height:14px;"></i> Evidence-Based</span>
+     </div>
+    </div>
+   </header><!-- Search & Filter Bar -->
+   <div class="sticky top-0 z-30 border-b" style="background:rgba(240,244,243,0.95);backdrop-filter:blur(8px);border-color:#d1ddd8;">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+     <div class="flex flex-col sm:flex-row gap-3">
+      <div class="relative flex-1"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2" style="width:18px;height:18px;color:#6b8f85;"></i> <input id="searchInput" type="text" placeholder="Search drugs, classes, mechanisms..." class="search-input w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm font-medium outline-none" style="background:#fff;border-color:#c8d8d0;color:#1a3a34;" aria-label="Search drugs">
+      </div>
+      <div class="flex gap-2 overflow-x-auto pb-1 sm:pb-0" id="filterTabs"><button class="tab-btn active whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold" data-filter="all" style="background:#0f4c5c;color:#fff;">All Classes</button> <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold" data-filter="first-line" style="background:#e8efed;color:#3a6b5e;">First-Line</button> <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold" data-filter="emergency" style="background:#e8efed;color:#3a6b5e;">Emergency</button> <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold" data-filter="pregnancy" style="background:#e8efed;color:#3a6b5e;">Pregnancy-Safe</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-4 py-6" id="mainContent">
+   </main><!-- Footer -->
+   <footer class="text-center py-6 px-4 text-xs" style="color:#6b8f85;">
+    <p>For academic &amp; clinical reference only. Always verify with current formulary guidelines.</p>
+    <p class="mt-1">JNC 8 / ESC-ESH 2023 / AHA-ACC Guidelines Aligned</p>
+   </footer>
+  </div>
+  <script>
+// ======== DRUG DATA ========
+const DRUG_DATA = [
+  {
+    id: "diuretics",
+    name: "Diuretics",
+    icon: "droplets",
+    color: "#2196F3",
+    colorLight: "#e3f2fd",
+    tags: ["first-line"],
+    moa: "Reduce blood volume by increasing renal sodium and water excretion → decreased preload → reduced CO & SVR (chronic).",
+    subcategories: [
+      {
+        name: "Thiazide & Thiazide-like",
+        badge: "First-Line (JNC 8)",
+        badgeColor: "#1565c0",
+        mechanism: "Inhibit Na⁺-Cl⁻ symporter (NCC) in distal convoluted tubule. Chronic use → arteriolar vasodilation (↓SVR).",
+        drugs: [
+          { name: "Hydrochlorothiazide (HCTZ)", dose: "12.5–50 mg/day PO", notes: "Most widely prescribed; less potent than chlorthalidone" },
+          { name: "Chlorthalidone", dose: "12.5–25 mg/day PO", notes: "Longer t½ (45–60h); preferred in ALLHAT trial; superior 24h BP control" },
+          { name: "Indapamide", dose: "1.25–2.5 mg/day PO", notes: "Thiazide-like with additional direct vasodilatory action; less metabolic effects" },
+          { name: "Metolazone", dose: "2.5–10 mg/day PO", notes: "Effective even in renal impairment (GFR <30); potent when combined with loop diuretics" }
+        ],
+        sideEffects: "Hypokalemia, hyponatremia, hyperuricemia, hyperglycemia, hyperlipidemia, hypercalcemia, hypomagnesemia",
+        contraindications: "Anuria, severe hyponatremia, refractory hypokalemia, sulfonamide hypersensitivity (relative)"
+      },
+      {
+        name: "Loop Diuretics",
+        mechanism: "Inhibit Na⁺-K⁺-2Cl⁻ cotransporter (NKCC2) in thick ascending limb of Loop of Henle. Most potent natriuresis.",
+        drugs: [
+          { name: "Furosemide", dose: "20–80 mg/day PO/IV (up to 600mg in CKD)", notes: "Short acting (t½ 1.5–2h); bioavailability 50% PO; preferred in HF + HTN" },
+          { name: "Torsemide", dose: "5–20 mg/day PO", notes: "Better bioavailability (80%); longer duration; fewer ototoxic effects" },
+          { name: "Bumetanide", dose: "0.5–2 mg/day PO/IV", notes: "40× potent vs furosemide; predictable absorption" },
+          { name: "Ethacrynic Acid", dose: "25–100 mg/day PO", notes: "Non-sulfonamide; use in sulfa allergy; higher ototoxicity risk" }
+        ],
+        sideEffects: "Hypokalemia, hyponatremia, hypocalcemia, hypomagnesemia, ototoxicity, hyperuricemia, metabolic alkalosis",
+        contraindications: "Anuria, hepatic coma, severe electrolyte depletion"
+      },
+      {
+        name: "Potassium-Sparing Diuretics",
+        mechanism: "Block ENaC channels (amiloride/triamterene) or antagonize aldosterone receptors (spironolactone/eplerenone) in collecting duct.",
+        drugs: [
+          { name: "Spironolactone", dose: "25–100 mg/day PO", notes: "MRA; gold standard for resistant HTN (PATHWAY-2 trial); anti-androgenic effects" },
+          { name: "Eplerenone", dose: "50–100 mg/day PO", notes: "Selective MRA; fewer anti-androgenic side effects; proven in EPHESUS & EMPHASIS-HF" },
+          { name: "Amiloride", dose: "5–10 mg/day PO", notes: "Directly blocks ENaC; used as add-on to thiazides" },
+          { name: "Triamterene", dose: "50–100 mg/day PO", notes: "Pteridine derivative; available in combo with HCTZ (Dyazide®)" }
+        ],
+        sideEffects: "Hyperkalemia (especially with ACEi/ARB/CKD), gynecomastia (spironolactone), menstrual irregularities",
+        contraindications: "K⁺ >5.5 mEq/L, severe renal impairment (GFR <30), concurrent K⁺ supplements + ACEi/ARB (caution)"
+      }
+    ]
+  },
+  {
+    id: "acei",
+    name: "ACE Inhibitors",
+    icon: "shield",
+    color: "#e53935",
+    colorLight: "#ffebee",
+    tags: ["first-line", "pregnancy"],
+    moa: "Inhibit Angiotensin-Converting Enzyme → ↓Angiotensin II formation → vasodilation + ↓aldosterone → ↓SVR & blood volume. Also ↑bradykinin (→ cough, angioedema).",
+    subcategories: [
+      {
+        name: "Sulfhydryl-Containing",
+        mechanism: "SH group binds to zinc in ACE active site. First ACEi developed.",
+        drugs: [
+          { name: "Captopril", dose: "25–150 mg/day in 2–3 doses", notes: "Shortest acting ACEi; taste disturbance; proteinuria at high doses; used in hypertensive urgency (sublingual)" }
+        ],
+        sideEffects: "Dry cough (10–15%), hyperkalemia, taste disturbance, rash, neutropenia (rare), proteinuria",
+        contraindications: "Pregnancy (Cat D — teratogenic: renal agenesis, oligohydramnios), bilateral RAS, angioedema history"
+      },
+      {
+        name: "Dicarboxylate-Containing (Prodrugs)",
+        badge: "Most Commonly Prescribed",
+        badgeColor: "#c62828",
+        mechanism: "Carboxyl group binds ACE. Most are prodrugs (ester → active diacid by hepatic hydrolysis). Longer duration of action.",
+        drugs: [
+          { name: "Enalapril / Enalaprilat", dose: "5–40 mg/day PO; 1.25mg IV (enalaprilat)", notes: "Enalaprilat = only IV ACEi; proven in CONSENSUS & SOLVD; renal dose adjust" },
+          { name: "Lisinopril", dose: "10–40 mg/day PO", notes: "NOT a prodrug (directly active); hydrophilic; no hepatic metabolism; proven in ATLAS, GISSI-3" },
+          { name: "Ramipril", dose: "2.5–20 mg/day PO", notes: "HOPE trial landmark drug; cardioprotective in high CV risk; tissue ACE affinity" },
+          { name: "Perindopril", dose: "4–16 mg/day PO", notes: "EUROPA & ADVANCE trials; strong evidence in CAD + DM; long tissue t½" },
+          { name: "Benazepril", dose: "10–40 mg/day PO", notes: "Dual elimination (hepatic + renal); AASK trial in CKD" },
+          { name: "Quinapril", dose: "10–80 mg/day PO", notes: "High tissue ACE binding; may improve endothelial function" },
+          { name: "Trandolapril", dose: "1–4 mg/day PO", notes: "TRACE trial post-MI; longest t½ among ACEi" }
+        ],
+        sideEffects: "Dry cough (10–15%), hyperkalemia, angioedema (0.1–0.7% — higher in Black patients), acute renal failure in bilateral RAS, teratogenicity",
+        contraindications: "Pregnancy (ALL trimesters — Cat D), bilateral RAS, prior ACEi-angioedema, concurrent use with ARB + aliskiren (ALTITUDE trial risk)"
+      },
+      {
+        name: "Phosphonate-Containing",
+        mechanism: "Phosphinyl group binds zinc moiety of ACE.",
+        drugs: [
+          { name: "Fosinopril", dose: "10–40 mg/day PO", notes: "Balanced hepato-renal elimination; no dose adjustment in mild-moderate CKD" }
+        ],
+        sideEffects: "Similar class effects; relatively lower cough incidence",
+        contraindications: "Same as other ACEi"
+      }
+    ]
+  },
+  {
+    id: "arbs",
+    name: "Angiotensin II Receptor Blockers (ARBs)",
+    icon: "target",
+    color: "#ff7043",
+    colorLight: "#fbe9e7",
+    tags: ["first-line", "pregnancy"],
+    moa: "Selective AT₁ receptor antagonism → blocks vasoconstriction, aldosterone secretion, sympathetic activation, and cardiac/vascular remodeling. No bradykinin accumulation → no cough.",
+    subcategories: [
+      {
+        name: "Biphenyl Tetrazole Derivatives",
+        badge: "Most ARBs",
+        badgeColor: "#d84315",
+        mechanism: "Tetrazole ring mimics carboxyl group; binds AT₁ receptor. Insurmountable (non-competitive) antagonism for most.",
+        drugs: [
+          { name: "Losartan", dose: "25–100 mg/day PO", notes: "First ARB; unique uricosuric effect; LIFE trial (superior to atenolol for stroke); active metabolite EXP3174" },
+          { name: "Valsartan", dose: "80–320 mg/day PO", notes: "VALUE, Val-HeFT trials; FDA-approved for HF post-MI; no active metabolites" },
+          { name: "Irbesartan", dose: "150–300 mg/day PO", notes: "IDNT & IRMA-2 trials — renoprotective in diabetic nephropathy; highest bioavailability (60–80%)" },
+          { name: "Candesartan", dose: "8–32 mg/day PO", notes: "CHARM program in HF; tightest AT₁ binding (slowest dissociation); migraine prophylaxis evidence" },
+          { name: "Olmesartan", dose: "20–40 mg/day PO", notes: "ROADMAP trial in DM; sprue-like enteropathy (rare but serious — FDA warning)" },
+          { name: "Azilsartan (medoxomil)", dose: "40–80 mg/day PO", notes: "Newest ARB; superior BP reduction vs olmesartan & valsartan in trials; inverse agonist at AT₁" }
+        ],
+        sideEffects: "Hyperkalemia, dizziness, rare angioedema (much less than ACEi), teratogenicity",
+        contraindications: "Pregnancy (Cat D — same risk as ACEi), bilateral RAS, concurrent ACEi + aliskiren (ONTARGET, ALTITUDE)"
+      },
+      {
+        name: "Non-Biphenyl / Unique Structure",
+        mechanism: "Different chemical scaffolds but same AT₁ antagonism.",
+        drugs: [
+          { name: "Telmisartan", dose: "20–80 mg/day PO", notes: "Longest t½ (24h); PPARγ partial agonist (metabolic benefits); ONTARGET/TRANSCEND trials; lipophilic — good tissue penetration" },
+          { name: "Eprosartan", dose: "600 mg/day PO", notes: "Additional presynaptic sympatholytic action; non-biphenyl non-tetrazole" }
+        ],
+        sideEffects: "Same class; telmisartan may cause less hyperkalemia due to non-renal clearance",
+        contraindications: "Same as other ARBs"
+      }
+    ]
+  },
+  {
+    id: "ccbs",
+    name: "Calcium Channel Blockers (CCBs)",
+    icon: "zap",
+    color: "#8e24aa",
+    colorLight: "#f3e5f5",
+    tags: ["first-line"],
+    moa: "Block L-type voltage-gated Ca²⁺ channels → ↓intracellular Ca²⁺ in vascular smooth muscle (vasodilation) and/or cardiac myocytes (↓HR, ↓contractility, ↓conduction).",
+    subcategories: [
+      {
+        name: "Dihydropyridines (DHPs) — Vasculoselective",
+        badge: "Preferred for HTN",
+        badgeColor: "#6a1b9a",
+        mechanism: "Preferentially block vascular smooth muscle L-type Ca²⁺ channels → arteriolar vasodilation → ↓SVR. Minimal cardiac effect. Reflex tachycardia possible with short-acting agents.",
+        drugs: [
+          { name: "Amlodipine", dose: "2.5–10 mg/day PO", notes: "Longest t½ (30–50h); ALLHAT, ASCOT-BPLA, CAMELOT trials; safe in HF (PRAISE); most prescribed CCB" },
+          { name: "Nifedipine (ER/GITS)", dose: "30–120 mg/day PO", notes: "GITS formulation preferred; INSIGHT trial; avoid immediate-release (precipitous BP drop → reflex tachycardia → MI)" },
+          { name: "Felodipine", dose: "2.5–10 mg/day PO", notes: "HOT trial; high vascular selectivity; grapefruit interaction (CYP3A4)" },
+          { name: "Lercanidipine", dose: "10–20 mg/day PO", notes: "3rd gen DHP; highly lipophilic; slow onset; less ankle edema" },
+          { name: "Nicardipine", dose: "60–120 mg/day PO; IV 5–15 mg/h", notes: "IV formulation for hypertensive emergency; cerebrovascular selectivity" },
+          { name: "Clevidipine", dose: "IV 1–32 mg/h", notes: "Ultra-short acting (t½ 1 min); esterase-metabolized; for acute intraoperative/ICU BP control" },
+          { name: "Isradipine", dose: "5–10 mg/day PO", notes: "Short-acting; less commonly used; some evidence in pediatric HTN" },
+          { name: "Nimodipine", dose: "60 mg q4h PO (21 days)", notes: "Cerebrovascular selective; indicated for SAH vasospasm prevention — NOT primarily for HTN" }
+        ],
+        sideEffects: "Peripheral edema (dose-dependent, not fluid overload — arteriolar dilation), flushing, headache, reflex tachycardia, gingival hyperplasia",
+        contraindications: "Severe aortic stenosis (relative), cardiogenic shock; avoid immediate-release nifedipine"
+      },
+      {
+        name: "Non-Dihydropyridines — Cardioselective",
+        mechanism: "Block cardiac L-type Ca²⁺ channels → ↓HR (negative chronotropy), ↓contractility (negative inotropy), ↓AV conduction (negative dromotropy). Also vasodilate but less than DHPs.",
+        drugs: [
+          { name: "Verapamil", dose: "120–480 mg/day PO (SR); IV 5–10mg", notes: "Phenylalkylamine; strongest negative inotropy; INVEST trial; useful in rate control AF + HTN; severe constipation" },
+          { name: "Diltiazem", dose: "120–360 mg/day PO (ER); IV 0.25mg/kg", notes: "Benzothiazepine; intermediate cardiac/vascular selectivity; useful in HTN + AF/SVT; NORDIL trial" }
+        ],
+        sideEffects: "Bradycardia, AV block, constipation (especially verapamil), negative inotropy → HF exacerbation",
+        contraindications: "HFrEF (EF <40%), 2nd/3rd degree AV block, sick sinus syndrome (without pacemaker), concurrent β-blocker IV use"
+      }
+    ]
+  },
+  {
+    id: "beta-blockers",
+    name: "β-Adrenergic Blockers",
+    icon: "heart",
+    color: "#43a047",
+    colorLight: "#e8f5e9",
+    tags: ["first-line"],
+    moa: "Block β₁-adrenoreceptors → ↓HR, ↓contractility, ↓cardiac output. Also ↓renin release (JG cells). Chronic use: ↓SVR (vasodilatory types). Central sympatholytic effects.",
+    subcategories: [
+      {
+        name: "Non-Selective (β₁ + β₂)",
+        mechanism: "Block both β₁ (cardiac) and β₂ (bronchial, vascular, metabolic) receptors.",
+        drugs: [
+          { name: "Propranolol", dose: "40–320 mg/day PO in 2–3 doses (LA: once daily)", notes: "First β-blocker; highly lipophilic (CNS effects — anxiety, migraine, tremor); no ISA; membrane-stabilizing activity" },
+          { name: "Nadolol", dose: "40–320 mg/day PO", notes: "Longest acting β-blocker; hydrophilic; renal excretion; once daily; no ISA" },
+          { name: "Timolol", dose: "10–60 mg/day PO", notes: "Also ophthalmic for glaucoma; Norwegian Timolol Trial post-MI" },
+          { name: "Sotalol", dose: "80–320 mg/day PO", notes: "Unique: β-blocker + Class III antiarrhythmic (K⁺ channel blockade); primarily for arrhythmias, NOT standard HTN" },
+          { name: "Pindolol", dose: "10–60 mg/day PO", notes: "Intrinsic sympathomimetic activity (ISA) — less bradycardia; partial agonist" }
+        ],
+        sideEffects: "Bronchospasm, bradycardia, fatigue, cold extremities, sexual dysfunction, masking hypoglycemia, depression, vivid dreams (lipophilic agents)",
+        contraindications: "Severe asthma/COPD, 2nd/3rd degree AV block, decompensated HF (acute), cocaine-induced HTN (unopposed α-stimulation)"
+      },
+      {
+        name: "β₁-Selective (Cardioselective)",
+        badge: "Preferred in HTN",
+        badgeColor: "#2e7d32",
+        mechanism: "Preferential β₁ blockade at therapeutic doses. Selectivity is dose-dependent and lost at higher doses.",
+        drugs: [
+          { name: "Metoprolol (tartrate/succinate)", dose: "Tartrate: 50–200mg BID; Succinate(XL): 25–200mg/day", notes: "MERIT-HF (succinate in HFrEF); most used β-blocker; moderate lipophilicity; CYP2D6 metabolized" },
+          { name: "Atenolol", dose: "25–100 mg/day PO", notes: "Hydrophilic; LESS CNS effects; LIFE trial showed inferiority vs losartan for stroke; falling out of favor as 1st-line" },
+          { name: "Bisoprolol", dose: "2.5–20 mg/day PO", notes: "Highest β₁ selectivity; CIBIS-II trial in HFrEF; long t½ (10–12h); balanced clearance" },
+          { name: "Nebivolol", dose: "5–40 mg/day PO", notes: "3rd gen; β₁ selective + NO-mediated vasodilation (β₃ agonist); less metabolic effects; SENIORS trial" },
+          { name: "Betaxolol", dose: "10–20 mg/day PO", notes: "Long-acting; also ophthalmic" },
+          { name: "Esmolol", dose: "IV 500μg/kg bolus → 50–300μg/kg/min", notes: "Ultra-short acting (t½ 9min); esterase-metabolized; ICU/perioperative use; hypertensive emergency with tachycardia" }
+        ],
+        sideEffects: "Less bronchospasm than non-selective (but still caution in asthma); bradycardia, fatigue, weight gain, sexual dysfunction",
+        contraindications: "Same absolute contraindications; use with caution in asthma"
+      },
+      {
+        name: "α₁ + β Blockers (Combined)",
+        badge: "Vasodilatory",
+        badgeColor: "#558b2f",
+        mechanism: "Block both β (cardiac) and α₁ (vascular) receptors → vasodilation + ↓HR/CO. Balanced hemodynamic profile.",
+        drugs: [
+          { name: "Labetalol", dose: "200–800 mg/day PO BID; IV 20mg bolus → 1–2mg/min", notes: "α:β ratio = 1:3 PO, 1:7 IV; FIRST-LINE in pregnancy HTN & eclampsia; hypertensive emergency" },
+          { name: "Carvedilol", dose: "6.25–25 mg BID PO", notes: "α₁ + β₁ + β₂ block; antioxidant properties; COPERNICUS & COMET trials in HFrEF; ↓insulin resistance" }
+        ],
+        sideEffects: "Orthostatic hypotension (α-block), dizziness, fatigue, bronchospasm (less than pure β-blockers)",
+        contraindications: "Same as β-blockers + first-dose hypotension risk (start low)"
+      }
+    ]
+  },
+  {
+    id: "alpha-blockers",
+    name: "α-Adrenergic Blockers",
+    icon: "circle-dot",
+    color: "#f9a825",
+    colorLight: "#fffde7",
+    tags: [],
+    moa: "Block α₁-adrenoreceptors on vascular smooth muscle → venous & arteriolar dilation → ↓SVR & preload. NOT first-line for HTN monotherapy (ALLHAT doxazosin arm stopped early).",
+    subcategories: [
+      {
+        name: "Selective α₁-Blockers",
+        mechanism: "Selective post-synaptic α₁ blockade. Also relax prostatic smooth muscle → useful in BPH + HTN.",
+        drugs: [
+          { name: "Prazosin", dose: "1–20 mg/day PO in 2–3 doses", notes: "First selective α₁-blocker; first-dose syncope risk; also used for PTSD nightmares (off-label)" },
+          { name: "Doxazosin", dose: "1–16 mg/day PO", notes: "Longer acting; ALLHAT arm discontinued (↑HF vs chlorthalidone); useful in resistant HTN as add-on + BPH" },
+          { name: "Terazosin", dose: "1–20 mg/day PO", notes: "Intermediate acting; BPH + HTN dual indication; first-dose syncope" },
+          { name: "Tamsulosin", dose: "0.4–0.8 mg/day PO", notes: "α₁A subtype selective → prostate > vascular; primarily BPH, less BP effect (but still possible)" }
+        ],
+        sideEffects: "First-dose syncope/orthostatic hypotension, dizziness, nasal congestion, reflex tachycardia, intraoperative floppy iris syndrome (IFIS)",
+        contraindications: "Orthostatic hypotension, concurrent PDE5 inhibitor use (additive hypotension); NOT monotherapy for HTN"
+      },
+      {
+        name: "Non-Selective α-Blockers",
+        mechanism: "Block both α₁ and α₂ receptors. α₂ blockade → ↑NE release → reflex tachycardia. Specific indication: pheochromocytoma.",
+        drugs: [
+          { name: "Phenoxybenzamine", dose: "10–40 mg BID PO", notes: "Irreversible (non-competitive) α-blockade; preoperative pheochromocytoma preparation; t½ 24h; severe orthostatic hypotension" },
+          { name: "Phentolamine", dose: "2.5–5 mg IV bolus", notes: "Competitive reversible α-blocker; pheochromocytoma crisis; local infiltration for catecholamine extravasation; short-acting" }
+        ],
+        sideEffects: "Severe orthostatic hypotension, reflex tachycardia (must add β-blocker AFTER α-blockade in pheo), nasal congestion, miosis",
+        contraindications: "CAD (reflex tachycardia), cerebrovascular disease; NEVER give β-blocker before α-blockade in pheochromocytoma (hypertensive crisis)"
+      }
+    ]
+  },
+  {
+    id: "central",
+    name: "Central Sympatholytics",
+    icon: "brain",
+    color: "#5c6bc0",
+    colorLight: "#e8eaf6",
+    tags: ["pregnancy"],
+    moa: "Stimulate α₂-adrenoreceptors and/or imidazoline I₁ receptors in brainstem (NTS, RVLM) → ↓sympathetic outflow → ↓HR, ↓SVR, ↓renin release.",
+    subcategories: [
+      {
+        name: "α₂-Agonists",
+        mechanism: "Central α₂ stimulation in rostral ventrolateral medulla (RVLM) and nucleus tractus solitarius (NTS) → reduced sympathetic tone.",
+        drugs: [
+          { name: "Clonidine", dose: "0.1–0.8 mg/day PO BID; Patch: 0.1–0.3 mg/week", notes: "Also treats ADHD, opioid withdrawal, menopausal flushing; REBOUND HYPERTENSION if abruptly stopped; transdermal patch available" },
+          { name: "Guanfacine", dose: "1–3 mg/day PO", notes: "More α₂A selective; less sedation than clonidine; longer acting; also ADHD" },
+          { name: "Methyldopa", dose: "250–1000 mg BID-TID PO", notes: "FIRST-LINE in PREGNANCY (longest safety record — used since 1960s); converted to α-methyl-NE → α₂ agonist; Coombs-positive hemolytic anemia (10–20%)" }
+        ],
+        sideEffects: "Sedation, dry mouth, constipation, rebound hypertension (clonidine), depression, sexual dysfunction, hepatotoxicity (methyldopa), positive Coombs test",
+        contraindications: "Active hepatic disease (methyldopa), depression; NEVER abruptly discontinue clonidine"
+      },
+      {
+        name: "Imidazoline I₁-Receptor Agonists",
+        mechanism: "Selective I₁ receptor agonism in RVLM → ↓sympathetic outflow. Less α₂-mediated side effects (less sedation, dry mouth).",
+        drugs: [
+          { name: "Moxonidine", dose: "0.2–0.6 mg/day PO", notes: "Second-gen centrally acting; better tolerated than clonidine; may improve insulin sensitivity; avoid in HFrEF (MOXCON trial)" },
+          { name: "Rilmenidine", dose: "1–2 mg/day PO", notes: "Similar to moxonidine; less sedation; some renal I₁ activity (natriuresis)" }
+        ],
+        sideEffects: "Less sedation and dry mouth than α₂-agonists; rebound HTN possible but less than clonidine",
+        contraindications: "Severe HF (MOXCON); sick sinus syndrome; severe bradycardia"
+      }
+    ]
+  },
+  {
+    id: "vasodilators",
+    name: "Direct Vasodilators",
+    icon: "expand",
+    color: "#ef5350",
+    colorLight: "#ffebee",
+    tags: ["emergency", "pregnancy"],
+    moa: "Direct relaxation of vascular smooth muscle independent of autonomic nervous system → ↓SVR. Trigger reflex tachycardia & fluid retention → MUST combine with β-blocker + diuretic.",
+    subcategories: [
+      {
+        name: "Arteriolar Vasodilators",
+        mechanism: "Open K⁺ channels (minoxidil) or release NO (hydralazine) in arteriolar smooth muscle → dilation of resistance vessels → ↓SVR.",
+        drugs: [
+          { name: "Hydralazine", dose: "25–100 mg PO BID-QID; IV 10–20 mg for emergency", notes: "Direct arteriolar dilator via NO/cGMP pathway; safe in pregnancy; combined with isosorbide dinitrate in HFrEF for Black patients (A-HeFT trial); lupus-like syndrome at >200mg/day (slow acetylators)" },
+          { name: "Minoxidil", dose: "2.5–80 mg/day PO", notes: "Opens K⁺(ATP) channels; MOST POTENT oral vasodilator; reserved for refractory HTN; causes severe fluid retention + reflex tachycardia; hypertrichosis (→ topical use for hair loss)" }
+        ],
+        sideEffects: "Reflex tachycardia, fluid retention/edema, headache, lupus-like syndrome (hydralazine — dose-dependent), hypertrichosis & pericardial effusion (minoxidil)",
+        contraindications: "Hydralazine: SLE, severe tachycardia, mitral valve disease. Minoxidil: pheochromocytoma, dissecting aortic aneurysm"
+      },
+      {
+        name: "Arteriolar + Venous (Balanced) Vasodilators",
+        badge: "Hypertensive Emergency",
+        badgeColor: "#c62828",
+        mechanism: "Release NO → activates guanylyl cyclase → ↑cGMP → smooth muscle relaxation in BOTH arterioles and veins.",
+        drugs: [
+          { name: "Sodium Nitroprusside (SNP)", dose: "IV 0.25–10 μg/kg/min", notes: "MOST potent/fastest IV antihypertensive; onset seconds, offset 1–2 min; decomposes to NO + cyanide → CYANIDE TOXICITY risk with prolonged use (>48h or >2μg/kg/min); wrap in foil (light-sensitive); requires arterial line monitoring" },
+          { name: "Nitroglycerin (GTN)", dose: "IV 5–200 μg/min", notes: "Predominantly venodilator at low doses → ↓preload; arteriolar dilation at higher doses; preferred in ACS + HTN emergency & pulmonary edema; tolerance with continuous use" },
+          { name: "Fenoldopam", dose: "IV 0.1–1.6 μg/kg/min", notes: "Selective D₁-dopamine agonist → renal & splanchnic vasodilation; maintains/improves renal blood flow; alternative to SNP without cyanide risk; ↑intraocular pressure" }
+        ],
+        sideEffects: "SNP: cyanide/thiocyanate toxicity (lactic acidosis, altered mental status), reflex tachycardia. GTN: headache, tolerance, methemoglobinemia (rare). Fenoldopam: tachycardia, ↑IOP, hypokalemia",
+        contraindications: "SNP: hepatic/renal failure (cyanide clearance), Leber optic atrophy, B₁₂ deficiency. GTN: PDE5 inhibitor use. Fenoldopam: glaucoma"
+      }
+    ]
+  },
+  {
+    id: "raas-other",
+    name: "Other RAAS Modulators",
+    icon: "link",
+    color: "#00897b",
+    colorLight: "#e0f2f1",
+    tags: [],
+    moa: "Target the renin-angiotensin-aldosterone system at different points than ACEi/ARBs.",
+    subcategories: [
+      {
+        name: "Direct Renin Inhibitors (DRI)",
+        mechanism: "Directly inhibit renin enzyme (rate-limiting step of RAAS) → ↓Angiotensin I → ↓Ang II, ↓aldosterone. Blocks RAAS at its origin.",
+        drugs: [
+          { name: "Aliskiren", dose: "150–300 mg/day PO", notes: "First-in-class oral DRI; ALTITUDE trial: HARMFUL when combined with ACEi/ARB in diabetics (hyperkalemia, renal failure, hypotension); modest BP reduction; long t½ but low bioavailability (2.5%); high-fat meals ↓absorption" }
+        ],
+        sideEffects: "Diarrhea (dose-dependent), hyperkalemia, hypotension, angioedema (rare), cough (rare)",
+        contraindications: "Pregnancy; concurrent ACEi or ARB (especially in DM or GFR <60); bilateral RAS"
+      },
+      {
+        name: "Angiotensin Receptor-Neprilysin Inhibitor (ARNI)",
+        badge: "HFrEF Landmark",
+        badgeColor: "#00695c",
+        mechanism: "Sacubitril (neprilysin inhibitor) → ↑natriuretic peptides (ANP, BNP, CNP) → vasodilation, natriuresis, anti-remodeling. Valsartan (ARB) → blocks AT₁. Synergistic neurohormonal modulation.",
+        drugs: [
+          { name: "Sacubitril/Valsartan (Entresto®)", dose: "24/26 to 97/103 mg BID PO", notes: "PARADIGM-HF: 20% ↓CV death vs enalapril in HFrEF; also effective in HFpEF (PARAGON-HF subgroups); 36h washout from ACEi required (angioedema risk); emerging evidence for resistant HTN" }
+        ],
+        sideEffects: "Hypotension, hyperkalemia, angioedema (must NOT combine with ACEi — 36h washout), renal impairment, dizziness",
+        contraindications: "Concurrent ACEi use (36h washout mandatory), pregnancy, history of angioedema with ACEi/ARB, severe hepatic impairment"
+      }
+    ]
+  },
+  {
+    id: "miscellaneous",
+    name: "Miscellaneous & Newer Agents",
+    icon: "flask-conical",
+    color: "#78909c",
+    colorLight: "#eceff1",
+    tags: ["emergency"],
+    moa: "Various mechanisms not fitting neatly into major classes.",
+    subcategories: [
+      {
+        name: "Peripheral Adrenergic Neuron Blockers",
+        mechanism: "Deplete or block norepinephrine release from sympathetic nerve terminals. Largely historical — significant side effects.",
+        drugs: [
+          { name: "Reserpine", dose: "0.05–0.25 mg/day PO", notes: "Irreversibly blocks VMAT2 → depletes NE, 5-HT, DA from vesicles; very long-acting; low-dose (<0.1mg) still used in resistant HTN in resource-limited settings; historical significance" },
+          { name: "Guanethidine", dose: "10–50 mg/day PO", notes: "Prevents NE release from nerve terminals; severe orthostatic hypotension; largely obsolete; historical importance" }
+        ],
+        sideEffects: "Reserpine: depression (serious — suicidal ideation), nasal congestion, peptic ulcer, sedation. Guanethidine: severe orthostatic hypotension, diarrhea, retrograde ejaculation",
+        contraindications: "Depression (reserpine — absolute), peptic ulcer disease, pheochromocytoma (guanethidine)"
+      },
+      {
+        name: "Ganglionic Blockers",
+        mechanism: "Block nicotinic receptors at autonomic ganglia → inhibit both sympathetic & parasympathetic transmission. Reserved for severe emergencies.",
+        drugs: [
+          { name: "Trimethaphan", dose: "IV 0.5–5 mg/min (rarely available)", notes: "Historical use in aortic dissection (↓dP/dt); largely replaced by esmolol + nitroprusside; no longer commercially available in many countries" }
+        ],
+        sideEffects: "Severe orthostatic hypotension, urinary retention, paralytic ileus, mydriasis, cycloplegia (anti-parasympathetic effects), tachyphylaxis",
+        contraindications: "Glaucoma, urinary obstruction, coronary insufficiency"
+      },
+      {
+        name: "Endothelin Receptor Antagonists (ERA)",
+        mechanism: "Block ET_A and/or ET_B receptors → inhibit endothelin-1 mediated vasoconstriction. Primarily used in pulmonary arterial hypertension (PAH).",
+        drugs: [
+          { name: "Bosentan", dose: "62.5–125 mg BID PO", notes: "Non-selective ERA; PAH WHO Class III-IV; hepatotoxicity (monthly LFTs required); teratogenic; BREATHE-1 trial" },
+          { name: "Ambrisentan", dose: "5–10 mg/day PO", notes: "ET_A selective; less hepatotoxicity; ARIES trials; peripheral edema common" },
+          { name: "Macitentan", dose: "10 mg/day PO", notes: "Tissue-targeting ERA; SERAPHIN trial — ↓morbidity/mortality in PAH; better hepatic safety profile" }
+        ],
+        sideEffects: "Hepatotoxicity (bosentan), peripheral edema, anemia, teratogenicity (ALL ERAs — mandatory pregnancy testing)",
+        contraindications: "Pregnancy (Cat X), severe hepatic impairment, concurrent cyclosporine (bosentan)"
+      },
+      {
+        name: "Dopamine-1 Agonists & Other IV Agents",
+        badge: "ICU/Emergency",
+        badgeColor: "#546e7a",
+        mechanism: "Selective D₁ receptor agonism in renal, mesenteric, coronary, and cerebral vasculature → selective vasodilation while preserving organ perfusion.",
+        drugs: [
+          { name: "Fenoldopam", dose: "IV 0.1–1.6 μg/kg/min", notes: "(Also listed under vasodilators) D₁ selective; maintains renal perfusion; preferred in hypertensive emergency with AKI; no cyanide risk" },
+          { name: "Phentolamine", dose: "IV 2.5–5 mg bolus", notes: "For pheochromocytoma crisis and catecholamine extravasation; short-acting α-blocker" }
+        ],
+        sideEffects: "Tachycardia, headache, flushing, hypokalemia (fenoldopam); reflex tachycardia (phentolamine)",
+        contraindications: "Fenoldopam: glaucoma, ↑IOP. Phentolamine: CAD, peptic ulcer"
+      }
+    ]
+  }
+];
+
+// ======== STATE ========
+let currentFilter = 'all';
+let searchTerm = '';
+let expandedSections = new Set();
+let allData = DRUG_DATA;
+
+// ======== DEFAULT CONFIG ========
+const defaultConfig = {
+  main_title: "Antihypertensive Drugs",
+  subtitle: "Complete Pharmacological Classification",
+  background_color: "#f0f4f3",
+  surface_color: "#ffffff",
+  text_color: "#1a3a34",
+  primary_color: "#0f4c5c",
+  accent_color: "#7ee8c7",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+// ======== RENDER FUNCTIONS ========
+function renderDrugClasses(data) {
+  const container = document.getElementById('mainContent');
+  // Track existing sections
+  const existingIds = new Set([...container.children].map(el => el.dataset.classId));
+  const newIds = new Set(data.map(d => d.id));
+
+  // Remove sections no longer in filtered data
+  existingIds.forEach(id => {
+    if (!newIds.has(id)) {
+      const el = container.querySelector(`[data-class-id="${id}"]`);
+      if (el) el.remove();
+    }
+  });
+
+  data.forEach((drugClass, i) => {
+    let section = container.querySelector(`[data-class-id="${drugClass.id}"]`);
+    if (!section) {
+      section = document.createElement('div');
+      section.dataset.classId = drugClass.id;
+      section.className = 'class-section mb-6';
+      section.style.animationDelay = `${i * 0.06}s`;
+      container.appendChild(section);
+    }
+    section.innerHTML = renderClassHTML(drugClass);
+  });
+
+  // Re-attach event listeners
+  attachExpandListeners();
+  lucide.createIcons();
+}
+
+function renderClassHTML(dc) {
+  const isExpanded = expandedSections.has(dc.id);
+  return `
+    <div class="drug-card rounded-2xl overflow-hidden shadow-sm" style="background:var(--surface);border-left-color:${dc.color};">
+      <button class="expand-toggle w-full text-left px-5 py-4 flex items-center gap-4 cursor-pointer hover:bg-black/[0.02] transition-colors" data-id="${dc.id}" aria-expanded="${isExpanded}">
+        <div class="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center" style="background:${dc.colorLight};">
+          <i data-lucide="${dc.icon}" style="width:22px;height:22px;color:${dc.color};"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="text-lg font-bold truncate" style="color:var(--text);">${dc.name}</h2>
+          <p class="text-xs mt-0.5 line-clamp-1" style="color:var(--text);opacity:0.55;">${dc.moa.substring(0, 100)}…</p>
+        </div>
+        <div class="flex items-center gap-2">
+          ${dc.tags.includes('first-line') ? '<span class="badge" style="background:#dcfce7;color:#166534;">1st Line</span>' : ''}
+          ${dc.tags.includes('emergency') ? '<span class="badge" style="background:#fee2e2;color:#991b1b;">Emergency</span>' : ''}
+          ${dc.tags.includes('pregnancy') ? '<span class="badge" style="background:#fef3c7;color:#92400e;">⚠ Pregnancy</span>' : ''}
+          <i data-lucide="${isExpanded ? 'chevron-up' : 'chevron-down'}" style="width:20px;height:20px;color:var(--text);opacity:0.4;" class="flex-shrink-0"></i>
+        </div>
+      </button>
+      <div class="expand-content ${isExpanded ? 'open' : ''} px-5 pb-4">
+        <div class="mb-3 p-3 rounded-xl text-sm" style="background:${dc.colorLight};color:${dc.color};">
+          <strong>Mechanism:</strong> ${dc.moa}
+        </div>
+        ${dc.subcategories.map(sub => renderSubcategory(sub, dc.color, dc.colorLight)).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderSubcategory(sub, color, colorLight) {
+  return `
+    <div class="mb-4 last:mb-0">
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <h3 class="font-bold text-sm" style="color:var(--text);">${sub.name}</h3>
+        ${sub.badge ? `<span class="badge text-white" style="background:${sub.badgeColor};">${sub.badge}</span>` : ''}
+      </div>
+      <p class="text-xs mb-3" style="color:var(--text);opacity:0.6;"><em>${sub.mechanism}</em></p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs border-collapse">
+          <thead>
+            <tr style="background:${colorLight};">
+              <th class="text-left p-2 rounded-tl-lg font-semibold" style="color:${color};">Drug</th>
+              <th class="text-left p-2 font-semibold" style="color:${color};">Dose</th>
+              <th class="text-left p-2 rounded-tr-lg font-semibold" style="color:${color};">Clinical Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${sub.drugs.map((d, i) => `
+              <tr class="${i % 2 === 0 ? '' : 'bg-black/[0.02]'}">
+                <td class="p-2 font-semibold whitespace-nowrap" style="color:var(--text);">${highlightSearch(d.name)}</td>
+                <td class="p-2 whitespace-nowrap" style="color:var(--text);opacity:0.75;">${d.dose}</td>
+                <td class="p-2" style="color:var(--text);opacity:0.7;">${highlightSearch(d.notes)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-2 grid sm:grid-cols-2 gap-2 text-xs">
+        <div class="p-2 rounded-lg" style="background:#fef2f2;"><strong style="color:#991b1b;">Side Effects:</strong> <span style="color:#7f1d1d;">${sub.sideEffects}</span></div>
+        <div class="p-2 rounded-lg" style="background:#fefce8;"><strong style="color:#92400e;">Contraindications:</strong> <span style="color:#78350f;">${sub.contraindications}</span></div>
+      </div>
+    </div>
+  `;
+}
+
+function highlightSearch(text) {
+  if (!searchTerm) return text;
+  const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  return text.replace(regex, '<mark style="background:#fef08a;padding:0 2px;border-radius:2px;">$1</mark>');
+}
+
+function filterData() {
+  let filtered = DRUG_DATA;
+  if (currentFilter === 'first-line') filtered = filtered.filter(d => d.tags.includes('first-line'));
+  else if (currentFilter === 'emergency') filtered = filtered.filter(d => d.tags.includes('emergency'));
+  else if (currentFilter === 'pregnancy') filtered = filtered.filter(d => d.tags.includes('pregnancy'));
+
+  if (searchTerm) {
+    const s = searchTerm.toLowerCase();
+    filtered = filtered.filter(dc => {
+      if (dc.name.toLowerCase().includes(s) || dc.moa.toLowerCase().includes(s)) return true;
+      return dc.subcategories.some(sub =>
+        sub.name.toLowerCase().includes(s) ||
+        sub.drugs.some(d => d.name.toLowerCase().includes(s) || d.notes.toLowerCase().includes(s) || d.dose.toLowerCase().includes(s))
+      );
+    });
+  }
+  allData = filtered;
+  renderDrugClasses(filtered);
+}
+
+function attachExpandListeners() {
+  document.querySelectorAll('.expand-toggle').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.id;
+      if (expandedSections.has(id)) expandedSections.delete(id);
+      else expandedSections.add(id);
+      filterData();
+    };
+  });
+}
+
+// ======== SEARCH & FILTER ========
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchTerm = e.target.value.trim();
+  if (searchTerm) {
+    // Auto-expand all when searching
+    DRUG_DATA.forEach(d => expandedSections.add(d.id));
+  }
+  filterData();
+});
+
+document.getElementById('filterTabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  currentFilter = btn.dataset.filter;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = '#e8efed';
+    b.style.color = '#3a6b5e';
+  });
+  btn.classList.add('active');
+  btn.style.background = 'var(--primary)';
+  btn.style.color = '#fff';
+  filterData();
+});
+
+// ======== ELEMENT SDK ========
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const root = document.getElementById('app');
+  root.style.setProperty('--surface', c.surface_color);
+  root.style.setProperty('--text', c.text_color);
+  root.style.setProperty('--primary', c.primary_color);
+  root.style.background = c.background_color;
+
+  const header = document.getElementById('app-header');
+  header.style.background = `linear-gradient(135deg,${c.primary_color} 0%,${adjustColor(c.primary_color, 20)} 50%,${c.primary_color} 100%)`;
+
+  document.getElementById('mainTitle').textContent = c.main_title || defaultConfig.main_title;
+  document.getElementById('subtitle').textContent = c.subtitle || defaultConfig.subtitle;
+
+  const font = c.font_family || defaultConfig.font_family;
+  const baseSize = c.font_size || defaultConfig.font_size;
+  document.body.style.fontFamily = `'${font}', 'DM Sans', sans-serif`;
+  document.body.style.fontSize = `${baseSize}px`;
+  document.getElementById('mainTitle').style.fontSize = `${baseSize * 2.5}px`;
+  document.getElementById('subtitle').style.fontSize = `${baseSize * 1.15}px`;
+}
+
+function adjustColor(hex, amount) {
+  let r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+  r = Math.min(255, r + amount); g = Math.min(255, g + amount); b = Math.min(255, b + amount);
+  return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+}
+
+// Initial render
+applyConfig(defaultConfig);
+filterData();
+lucide.createIcons();
+</script>
+</body>
+</html>
