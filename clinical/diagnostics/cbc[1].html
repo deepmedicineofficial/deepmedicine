@@ -1,0 +1,1570 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Complete Blood Count (CBC) | Hematology & Diagnostic Guide | Deep Medicine</title> <meta name="description" content="Comprehensive CBC interpretation guide including RBC, WBC, platelets, hemoglobin, and clinical correlation for diagnosis and critical care."> <link rel="canonical" href="https://deepmedicine.in/clinical/diagnostics/complete-blood-count"> <!-- Open Graph --> <meta property="og:title" content="Complete Blood Count (CBC) | Deep Medicine"> <meta property="og:description" content="CBC interpretation for anemia, infection, bleeding disorders, and clinical diagnosis."> <meta property="og:image" content="https://deepmedicine.in/images/cbc.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+
+.app-root {
+  font-family: 'Source Sans 3', sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.heading-font { font-family: 'Playfair Display', Georgia, serif; }
+
+/* Clean background */
+.hero-bg {
+  background: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card styles */
+.param-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.param-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, #0ea5e9);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.param-card:hover::before { transform: scaleX(1); }
+.param-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(14,165,233,0.3), transparent);
+}
+
+/* Expandable content */
+.expand-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+.expand-content.open {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+/* Tab system */
+.tab-btn {
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+.tab-btn.active {
+  background: rgba(14,165,233,0.2);
+  color: #38bdf8;
+  border-color: rgba(14,165,233,0.4);
+}
+.tab-btn:hover:not(.active) {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.8);
+}
+
+/* Stat badge */
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Table */
+.ref-table th {
+  background: rgba(14,165,233,0.1);
+  color: #38bdf8;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 12px 16px;
+  text-align: left;
+}
+.ref-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px;
+}
+.ref-table tr:hover td {
+  background: rgba(255,255,255,0.03);
+}
+
+/* Tooltip */
+.cbc-tooltip {
+  position: relative;
+}
+.cbc-tooltip .tip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s ease;
+  z-index: 50;
+  margin-bottom: 6px;
+}
+.cbc-tooltip:hover .tip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Clinical badge colors */
+.badge-rbc { background: rgba(239,68,68,0.15); color: #f87171; }
+.badge-wbc { background: rgba(168,85,247,0.15); color: #c084fc; }
+.badge-plt { background: rgba(234,179,8,0.15); color: #facc15; }
+.badge-hgb { background: rgba(14,165,233,0.15); color: #38bdf8; }
+.badge-idx { background: rgba(34,197,94,0.15); color: #4ade80; }
+.badge-diff { background: rgba(251,146,60,0.15); color: #fb923c; }
+.badge-esr { background: rgba(236,72,153,0.15); color: #f472b6; }
+
+/* Stagger animations */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+.stagger-6 { transition-delay: 0.3s; }
+.stagger-7 { transition-delay: 0.35s; }
+
+@media (max-width: 768px) {
+  .tab-btn { padding: 8px 14px; font-size: 12px; }
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-root hero-bg text-white" id="appRoot" style="display:flex;flex-direction:column;">
+   <div class="relative z-10 flex-1 overflow-y-auto" style="min-height:100%;"><!-- HERO -->
+    <header class="px-6 py-16 md:py-24 text-center max-w-5xl mx-auto">
+     <div class="mb-6"><span class="stat-badge badge-hgb text-xs uppercase tracking-widest">Hematology Reference</span>
+     </div>
+     <h1 id="mainTitle" class="heading-font text-4xl md:text-6xl lg:text-7xl font-800 leading-tight mb-6" style="background:linear-gradient(135deg,#ffffff 0%,#38bdf8 50%,#f472b6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Complete Blood Count</h1>
+     <p id="subtitle" class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">A Comprehensive Parameter-by-Parameter Guide for Medical Professionals, Students &amp; Pathologists</p>
+     <div class="flex flex-wrap justify-center gap-4 text-sm">
+      <div class="stat-badge badge-rbc">
+       <span>🔴</span> RBC Series
+      </div>
+      <div class="stat-badge badge-wbc">
+       <span>🟣</span> WBC Series
+      </div>
+      <div class="stat-badge badge-plt">
+       <span>🟡</span> Platelet Series
+      </div>
+      <div class="stat-badge badge-idx">
+       <span>🟢</span> Indices
+      </div>
+     </div>
+    </header>
+    <div class="section-divider mx-auto max-w-4xl"></div><!-- INTRODUCTION -->
+    <section class="px-6 py-14 max-w-5xl mx-auto reveal">
+     <div class="param-card p-8" style="--card-accent:#38bdf8;">
+      <h2 class="heading-font text-2xl md:text-3xl font-700 mb-4 text-sky-300">What is a CBC?</h2>
+      <p class="text-slate-300 leading-relaxed mb-4">The <strong class="text-white">Complete Blood Count (CBC)</strong> is the most frequently ordered laboratory test worldwide. It provides a quantitative and qualitative analysis of the three major cellular components of blood: <strong class="text-red-400">Red Blood Cells (Erythrocytes)</strong>, <strong class="text-purple-400">White Blood Cells (Leukocytes)</strong>, and <strong class="text-yellow-300">Platelets (Thrombocytes)</strong>.</p>
+      <p class="text-slate-300 leading-relaxed mb-4">Modern automated hematology analyzers use principles of <em>electrical impedance</em>, <em>light scattering</em>, <em>fluorescence flow cytometry</em>, and <em>cytochemical staining</em> to generate CBC results. A standard CBC panel produces <strong class="text-white">15–25 measurable parameters</strong>, each with distinct clinical significance.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+       <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-center">
+        <div class="text-3xl mb-2">
+         🩸
+        </div>
+        <div class="text-red-300 font-600 text-sm">
+         Sample Required
+        </div>
+        <div class="text-white font-700">
+         2–3 mL EDTA Blood
+        </div>
+        <div class="text-slate-400 text-xs mt-1">
+         Lavender-top tube (K₂EDTA / K₃EDTA)
+        </div>
+       </div>
+       <div class="bg-sky-500/10 border border-sky-500/20 rounded-xl p-4 text-center">
+        <div class="text-3xl mb-2">
+         ⏱️
+        </div>
+        <div class="text-sky-300 font-600 text-sm">
+         Turnaround Time
+        </div>
+        <div class="text-white font-700">
+         30–60 Minutes
+        </div>
+        <div class="text-slate-400 text-xs mt-1">
+         Automated analyzers process in seconds
+        </div>
+       </div>
+       <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4 text-center">
+        <div class="text-3xl mb-2">
+         🔬
+        </div>
+        <div class="text-green-300 font-600 text-sm">
+         Gold Standard Backup
+        </div>
+        <div class="text-white font-700">
+         Peripheral Blood Smear
+        </div>
+        <div class="text-slate-400 text-xs mt-1">
+         Manual microscopy for morphology review
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- TAB NAVIGATION -->
+    <nav class="px-6 py-4 max-w-5xl mx-auto sticky top-0 z-40 bg-slate-900/80 backdrop-blur-xl rounded-2xl" id="tabNav">
+     <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide" id="tabContainer"><button class="tab-btn active" data-tab="rbc" onclick="switchTab('rbc')">🔴 RBC Series</button> <button class="tab-btn" data-tab="wbc" onclick="switchTab('wbc')">🟣 WBC Series</button> <button class="tab-btn" data-tab="platelets" onclick="switchTab('platelets')">🟡 Platelets</button> <button class="tab-btn" data-tab="indices" onclick="switchTab('indices')">🟢 RBC Indices</button> <button class="tab-btn" data-tab="differential" onclick="switchTab('differential')">🟠 Differential</button> <button class="tab-btn" data-tab="clinical" onclick="switchTab('clinical')">🩺 Clinical</button>
+     </div>
+    </nav><!-- ===================== TAB CONTENT ===================== -->
+    <div class="px-6 py-10 max-w-5xl mx-auto" id="tabContent"><!-- ============ RBC SERIES ============ -->
+     <div id="tab-rbc" class="tab-panel"><!-- RBC Count -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-1" style="--card-accent:#ef4444;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-rbc">RBC COUNT</span> <span class="text-slate-500 text-sm">Erythrocyte Count</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-red-300 mb-3">Red Blood Cell Count</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Total number of erythrocytes per unit volume of blood. Measured by <strong class="text-white">electrical impedance</strong> (Coulter principle) or <strong class="text-white">optical light scatter</strong> in automated analyzers.</p>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Adult Male
+         </div>
+         <div class="text-lg font-700 text-white">
+          4.5 – 5.5 × 10<sup>12</sup>/L
+         </div>
+         <div class="text-xs text-slate-500">
+          ≈ 4.5 – 5.5 million/µL
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Adult Female
+         </div>
+         <div class="text-lg font-700 text-white">
+          3.8 – 4.8 × 10<sup>12</sup>/L
+         </div>
+         <div class="text-xs text-slate-500">
+          ≈ 3.8 – 4.8 million/µL
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="mb-4 bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+          <h4 class="text-sm font-700 text-blue-300 uppercase tracking-wider mb-3">🏥 Disease Diagnostic Importance</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-green-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-green-300">
+              ANEMIA CLASSIFICATION
+             </div>
+             <p class="text-xs text-slate-300 mt-1">RBC count is foundational for diagnosing anemia type. Low RBC with low Hb indicates true anemia. Critical first step in workup: combined with Hct and MCV to classify as microcytic, normocytic, or macrocytic, guiding specific investigations (iron studies, B12/folate, reticulocyte count).</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-blue-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-blue-300">
+              MYELOPROLIFERATIVE NEOPLASMS
+             </div>
+             <p class="text-xs text-slate-300 mt-1"><strong>Polycythemia Vera (PV)</strong>: Markedly elevated RBC (often &gt;6.0 × 10¹²/L) with elevated Hct (&gt;54%), normal O₂ saturation = major diagnostic criterion. RBC count helps distinguish PV from secondary polycythemia.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-red-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-red-300">
+              CHRONIC HEMOLYSIS
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Persistently low RBC with compensatory reticulocytosis is hallmark of chronic hemolytic anemia (hereditary spherocytosis, sickle cell, thalassemia major). RBC count alone cannot distinguish; combine with RPI and PBS morphology.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-yellow-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-yellow-300">
+              PROGNOSIS IN CRITICAL ILLNESS
+             </div>
+             <p class="text-xs text-slate-300 mt-1">RBC count &lt;2.0 × 10¹²/L indicates severe anemia requiring urgent transfusion evaluation. Progressive decline predicts marrow failure (aplastic anemia, MDS) if reticulocyte response inadequate.</p>
+            </div>
+           </div>
+          </div>
+         </div>
+         <h4 class="text-sm font-700 text-red-300 uppercase tracking-wider mb-3">Clinical Significance</h4>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ INCREASED (Polycythemia / Erythrocytosis)
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Polycythemia Vera (PV) — JAK2 V617F mutation</li>
+            <li>• Secondary polycythemia (chronic hypoxia, COPD, high altitude)</li>
+            <li>• Dehydration (relative polycythemia)</li>
+            <li>• EPO-secreting tumors (renal cell carcinoma, hepatoma)</li>
+            <li>• Smoking — chronic carbon monoxide exposure</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ DECREASED (Anemia)
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Iron deficiency anemia (most common worldwide)</li>
+            <li>• Megaloblastic anemia (B12/folate deficiency)</li>
+            <li>• Hemolytic anemias (sickle cell, thalassemia, G6PD)</li>
+            <li>• Aplastic anemia — bone marrow failure</li>
+            <li>• Chronic disease / chronic kidney disease</li>
+            <li>• Acute hemorrhage</li>
+           </ul>
+          </div>
+         </div>
+         <div class="mt-4 bg-sky-500/10 border border-sky-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-sky-300 mb-1">
+           📝 PEARLS
+          </div>
+          <p class="text-sm text-slate-300">Neonates have higher RBC counts (5.0–6.5 × 10<sup>12</sup>/L) due to fetal erythropoiesis stimulated by low intrauterine pO₂. Values gradually decline to adult levels by 3–6 months of age (physiological anemia of infancy).</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Hemoglobin -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-2" style="--card-accent:#38bdf8;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-hgb">HEMOGLOBIN</span> <span class="text-slate-500 text-sm">Hb / Hgb</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-sky-300 mb-3">Hemoglobin Concentration</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">The concentration of hemoglobin in whole blood. Measured spectrophotometrically using the <strong class="text-white">cyanmethemoglobin (HiCN)</strong> method or <strong class="text-white">sodium lauryl sulfate (SLS)</strong> method. Hemoglobin is the primary oxygen-carrying metalloprotein — a tetramer of 2α and 2β globin chains, each bound to a heme group containing Fe²⁺.</p>
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Adult Male
+         </div>
+         <div class="text-lg font-700 text-white">
+          13.5 – 17.5 g/dL
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Adult Female
+         </div>
+         <div class="text-lg font-700 text-white">
+          12.0 – 16.0 g/dL
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          WHO Anemia Cutoff
+         </div>
+         <div class="text-lg font-700 text-white">
+          M: &lt;13 | F: &lt;12 g/dL
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="mb-4 bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+          <h4 class="text-sm font-700 text-blue-300 uppercase tracking-wider mb-3">🏥 Disease Diagnostic Importance</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-green-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-green-300">
+              ANEMIA SEVERITY ASSESSMENT
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Hemoglobin is THE primary parameter for anemia diagnosis. Severity correlates with clinical symptoms: Hb 7–9 g/dL = fatigue/dyspnea at exertion; Hb &lt;7 g/dL = risk of cardiac decompensation, myocardial ischemia, stroke. Directly determines transfusion thresholds in clinical practice.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-purple-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-purple-300">
+              HEMOGLOBINOPATHIES DIAGNOSIS
+             </div>
+             <p class="text-xs text-slate-300 mt-1"><strong>Sickle Cell Disease (HbSS)</strong>: Hb typically 7–10 g/dL due to chronic hemolysis. <strong>Thalassemia Major</strong>: Hb &lt;7 g/dL requires regular transfusions. Hemoglobin electrophoresis MUST be ordered when abnormal Hb variants detected on analyzer.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-red-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-red-300">
+              ACUTE VS CHRONIC DISEASE
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Acute hemorrhage: Hb drop &gt;1 g/dL in hours (before Hct drops) = plasma shift into interstitium. Chronic disease: gradual Hb decline allows physiological compensation. RBC count often NORMAL in chronic disease anemia despite low Hb = key differentiator.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-orange-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-orange-300">
+              TREATMENT MONITORING
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Serial Hb tracks efficacy of iron/B12/folate replacement, EPO therapy, transfusions, and chemotherapy. Expected rise in iron deficiency = 0.2 g/dL/day. Failure to rise suggests non-compliance, continued blood loss, or alternate diagnosis.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-pink-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-pink-300">
+              CARDIOPULMONARY COMPENSATION
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Hb &lt;5 g/dL increases tissue hypoxia risk exponentially. Combined with Hct, predicts cardiac output demands. In perioperative settings: Hb &lt;7 g/dL generally warrants transfusion pre-emptively in high-risk patients.</p>
+            </div>
+           </div>
+          </div>
+         </div>
+         <h4 class="text-sm font-700 text-sky-300 uppercase tracking-wider mb-3">Hemoglobin Variants &amp; Clinical Correlations</h4>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+           <div class="text-xs font-600 text-sky-400 mb-2">
+            Normal Hemoglobin Types
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• <strong>HbA (α₂β₂)</strong> — 95–97% of adult Hb</li>
+            <li>• <strong>HbA₂ (α₂δ₂)</strong> — 2–3.5% (↑ in β-thalassemia trait)</li>
+            <li>• <strong>HbF (α₂γ₂)</strong> — &lt;1% adult; 60–80% at birth</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            Abnormal Hemoglobins
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• <strong>HbS</strong> — Sickle cell (Glu→Val at β6)</li>
+            <li>• <strong>HbC</strong> — (Glu→Lys at β6) — target cells</li>
+            <li>• <strong>HbE</strong> — Common in Southeast Asia</li>
+            <li>• <strong>HbH</strong> — β₄ tetramers (3-gene α-thal)</li>
+           </ul>
+          </div>
+         </div>
+         <div class="mt-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-yellow-300 mb-1">
+           ⚠️ INTERFERENCE ALERT
+          </div>
+          <p class="text-sm text-slate-300">Lipemia, hyperbilirubinemia, and very high WBC counts (&gt;100 × 10⁹/L) can <strong>falsely elevate</strong> Hb values. Carboxyhemoglobin (HbCO) and methemoglobin (MetHb) are included in total Hb measurement but do not carry oxygen.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Hematocrit -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-3" style="--card-accent:#ef4444;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-rbc">HEMATOCRIT</span> <span class="text-slate-500 text-sm">Hct / PCV</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-red-300 mb-3">Hematocrit / Packed Cell Volume</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">The proportion of blood volume occupied by red blood cells, expressed as a percentage or L/L. In automated analyzers, Hct is a <strong class="text-white">calculated value</strong>: <code class="bg-white/10 px-2 py-0.5 rounded text-sky-300 text-sm">Hct = MCV × RBC count</code>. In manual methods, determined by centrifugation (Wintrobe or microhematocrit method).</p>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Adult Male
+         </div>
+         <div class="text-lg font-700 text-white">
+          40 – 54%
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Adult Female
+         </div>
+         <div class="text-lg font-700 text-white">
+          36 – 48%
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="mb-4 bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+          <h4 class="text-sm font-700 text-blue-300 uppercase tracking-wider mb-3">🏥 Disease Diagnostic Importance</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-green-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-green-300">
+              VOLUME STATUS &amp; HYDRATION
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Hct is a calculated marker of blood composition. <strong>Elevated Hct (≥54%)</strong> with elevated RBC/Hb = true polycythemia OR hemoconcentration (dehydration). <strong>Low Hct</strong> despite normal RBC/Hb may indicate dilutional state (SIADH, heart failure). Hct &gt;60% = hyperviscosity risk (thrombosis, stroke in PV).</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-purple-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-purple-300">
+              ACUTE HEMORRHAGE DETECTION
+             </div>
+             <p class="text-xs text-slate-300 mt-1"><strong>Critical Finding</strong>: Early hemorrhage shows ↓RBC/Hb but NORMAL Hct initially (ratio delay). After 24–48 hrs, fluid shifts normalize Hct. Serial Hct trending (not single value) is crucial: ↓1% per 8 hrs = ongoing bleeding. Hct &lt;30% = massive transfusion protocol likely needed.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-red-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-red-300">
+              THROMBOSIS RISK IN POLYCYTHEMIA
+             </div>
+             <p class="text-xs text-slate-300 mt-1">PV with Hct &gt;55% increases blood viscosity → thrombotic complications (CVA, MI, DVT/PE, splanchnic vein thrombosis). Target Hct &lt;45% in PV patients. This Hct threshold may indicate need for phlebotomy or cytoreductive therapy.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-orange-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-orange-300">
+              TRANSFUSION DECISION-MAKING
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Modern transfusion thresholds based on Hb not Hct. However, Hct contextualizes: Hct 24% + Hb 8 g/dL = normochromic picture; Hct 20% + Hb 8 g/dL = hypochromic (suspect iron deficiency). Restrictive transfusion strategy (Hb 7–9 g/dL) reduces complications vs liberal strategy.</p>
+            </div>
+           </div>
+           <div class="flex gap-3">
+            <div class="flex-shrink-0 w-2 h-2 rounded-full bg-pink-400 mt-2"></div>
+            <div>
+             <div class="text-sm font-600 text-pink-300">
+              PRE-OPERATIVE RISK STRATIFICATION
+             </div>
+             <p class="text-xs text-slate-300 mt-1">Hct &lt;20% pre-op = increased cardiac morbidity risk. Major surgery with Hct &lt;25% may warrant pre-operative transfusion. Cardiac patients with Hct &lt;25% at higher MI risk during perioperative period.</p>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ INCREASED
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Polycythemia vera (Hct &gt;60% → hyperviscosity risk)</li>
+            <li>• Dehydration (hemoconcentration)</li>
+            <li>• Burns — plasma loss</li>
+            <li>• High altitude acclimatization</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ DECREASED
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• All causes of anemia</li>
+            <li>• Overhydration / fluid overload</li>
+            <li>• Pregnancy (physiological hemodilution)</li>
+            <li>• Massive hemorrhage</li>
+           </ul>
+          </div>
+         </div>
+         <div class="mt-4 bg-sky-500/10 border border-sky-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-sky-300 mb-1">
+           📐 RULE OF THREE
+          </div>
+          <p class="text-sm text-slate-300">In normocytic normochromic states: <strong>Hct ≈ 3 × Hb</strong> and <strong>RBC × 3 ≈ Hb</strong>. Deviations suggest abnormal cell size, Hb content, or analytical error. This is a useful quick quality check.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Reticulocyte Count -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-4" style="--card-accent:#f472b6;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-esr">RETICULOCYTES</span> <span class="text-slate-500 text-sm">Retic Count</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-pink-300 mb-3">Reticulocyte Count</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Reticulocytes are immature RBCs containing residual RNA (ribosomal RNA). They are released from bone marrow and mature into RBCs in 1–2 days in circulation. Detected by <strong class="text-white">supravital staining</strong> (New Methylene Blue / Brilliant Cresyl Blue) or <strong class="text-white">fluorescent RNA dyes</strong> in automated analyzers.</p>
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Normal %
+         </div>
+         <div class="text-lg font-700 text-white">
+          0.5 – 2.5%
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Absolute Count
+         </div>
+         <div class="text-lg font-700 text-white">
+          25–100 × 10⁹/L
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Key Metric
+         </div>
+         <div class="text-lg font-700 text-white">
+          RPI (Retic Prod Index)
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="bg-pink-500/10 border border-pink-500/20 rounded-lg p-4 mb-4">
+          <div class="text-xs font-600 text-pink-300 mb-2">
+           📊 CORRECTED RETICULOCYTE COUNT &amp; RPI
+          </div>
+          <p class="text-sm text-slate-300 mb-2"><code class="bg-white/10 px-2 py-0.5 rounded text-pink-300">CRC = Retic% × (Patient Hct / Normal Hct)</code></p>
+          <p class="text-sm text-slate-300"><code class="bg-white/10 px-2 py-0.5 rounded text-pink-300">RPI = CRC / Maturation Factor</code> — RPI &gt;3 = adequate marrow response; RPI &lt;2 = inadequate</p>
+         </div>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ RETICULOCYTOSIS
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Hemolytic anemias (active RBC destruction)</li>
+            <li>• Post-hemorrhage recovery (day 3–5)</li>
+            <li>• Response to iron/B12/folate therapy</li>
+            <li>• Post-EPO administration</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ RETICULOCYTOPENIA
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Aplastic anemia</li>
+            <li>• Pure red cell aplasia</li>
+            <li>• Myelophthisic anemia</li>
+            <li>• Chemotherapy / radiation effect</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- ESR -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-5" style="--card-accent:#f472b6;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-esr">ESR</span> <span class="text-slate-500 text-sm">Erythrocyte Sedimentation Rate</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-pink-300 mb-3">Erythrocyte Sedimentation Rate (ESR)</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Rate at which RBCs sediment in one hour. A non-specific marker of inflammation. Gold standard: <strong class="text-white">Westergren method</strong> (200mm vertical tube, citrated blood). ESR depends on rouleaux formation driven by acute-phase proteins (fibrinogen, immunoglobulins).</p>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Male
+         </div>
+         <div class="text-lg font-700 text-white">
+          0 – 15 mm/hr
+         </div>
+         <div class="text-xs text-slate-500">
+          Age/2 (for age &gt;50)
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Female
+         </div>
+         <div class="text-lg font-700 text-white">
+          0 – 20 mm/hr
+         </div>
+         <div class="text-xs text-slate-500">
+          (Age + 10)/2 (for age &gt;50)
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ MARKEDLY ELEVATED (&gt;100 mm/hr)
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Multiple myeloma / Waldenström's</li>
+            <li>• Temporal (Giant Cell) arteritis</li>
+            <li>• Severe infections (TB, endocarditis)</li>
+            <li>• Metastatic malignancy</li>
+            <li>• Polymyalgia rheumatica</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ LOW / ZERO ESR
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Polycythemia vera</li>
+            <li>• Sickle cell disease (impaired rouleaux)</li>
+            <li>• Severe leukocytosis</li>
+            <li>• Congestive heart failure</li>
+            <li>• Hypofibrinogenemia / DIC</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- ============ WBC SERIES ============ -->
+     <div id="tab-wbc" class="tab-panel" style="display:none;"><!-- Total WBC -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-1" style="--card-accent:#a855f7;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-wbc">TOTAL WBC</span> <span class="text-slate-500 text-sm">Total Leukocyte Count (TLC)</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-purple-300 mb-3">White Blood Cell Count</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Total number of leukocytes per unit volume. WBCs are the body's defense system — comprising <strong class="text-white">granulocytes</strong> (neutrophils, eosinophils, basophils) and <strong class="text-white">agranulocytes</strong> (lymphocytes, monocytes). Measured by impedance or optical methods after RBC lysis.</p>
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Adult
+         </div>
+         <div class="text-lg font-700 text-white">
+          4.0 – 11.0 × 10⁹/L
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Neonate
+         </div>
+         <div class="text-lg font-700 text-white">
+          10 – 26 × 10⁹/L
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Child (2–6 yrs)
+         </div>
+         <div class="text-lg font-700 text-white">
+          5 – 15 × 10⁹/L
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ LEUKOCYTOSIS (&gt;11 × 10⁹/L)
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Bacterial infections (neutrophilic)</li>
+            <li>• Leukemia (CML can have WBC &gt;100 × 10⁹/L)</li>
+            <li>• Physiological: exercise, stress, pregnancy</li>
+            <li>• Corticosteroid therapy</li>
+            <li>• Tissue necrosis (MI, burns)</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ LEUKOPENIA (&lt;4 × 10⁹/L)
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Viral infections (HIV, hepatitis, EBV)</li>
+            <li>• Aplastic anemia</li>
+            <li>• Drug-induced (chemotherapy, chloramphenicol)</li>
+            <li>• Hypersplenism</li>
+            <li>• Autoimmune neutropenia / SLE</li>
+            <li>• Overwhelming sepsis (paradoxical)</li>
+           </ul>
+          </div>
+         </div>
+         <div class="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-purple-300 mb-1">
+           👶 PEDIATRIC NOTE
+          </div>
+          <p class="text-sm text-slate-300">At birth: neutrophil predominant. By day 4–7: <strong>first crossover</strong> — lymphocytes become dominant. At age 4–7 years: <strong>second crossover</strong> — neutrophils regain dominance (adult pattern). This is the famous "double crossover" of WBC differential in children.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Neutrophils -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-2" style="--card-accent:#8b5cf6;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-wbc">NEUTROPHILS</span> <span class="text-slate-500 text-sm">Polymorphonuclear Leukocytes</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-purple-300 mb-3">Neutrophils (Segmented &amp; Band Forms)</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Most abundant WBC type in adults. First responders to bacterial infection. Contain primary (azurophilic) and secondary (specific) granules. Lifespan in circulation: <strong class="text-white">6–8 hours</strong>. Half exist in the marginated pool (attached to vessel walls).</p>
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Relative
+         </div>
+         <div class="text-lg font-700 text-white">
+          40 – 70%
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Absolute (ANC)
+         </div>
+         <div class="text-lg font-700 text-white">
+          2.0 – 7.0 × 10⁹/L
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Bands (Immature)
+         </div>
+         <div class="text-lg font-700 text-white">
+          0 – 5%
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ NEUTROPHILIA
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Bacterial infections (primary cause)</li>
+            <li>• Acute inflammation / tissue necrosis</li>
+            <li>• CML / Leukemoid reaction</li>
+            <li>• Corticosteroids (demargination effect)</li>
+            <li>• Smoking, stress, post-exercise</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ NEUTROPENIA
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• <strong>Mild</strong>: 1.0–1.5 × 10⁹/L</li>
+            <li>• <strong>Moderate</strong>: 0.5–1.0 × 10⁹/L</li>
+            <li>• <strong>Severe / Agranulocytosis</strong>: &lt;0.5 × 10⁹/L</li>
+            <li>• Drug-induced: anti-thyroid drugs, clozapine</li>
+            <li>• Viral infections, typhoid, brucellosis</li>
+           </ul>
+          </div>
+         </div>
+         <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-yellow-300 mb-1">
+           🔀 LEFT SHIFT vs RIGHT SHIFT
+          </div>
+          <p class="text-sm text-slate-300"><strong>Left Shift</strong>: Increase in immature forms (bands, metamyelocytes, myelocytes) — seen in acute bacterial infections, sepsis. <strong>Right Shift</strong>: Hypersegmented neutrophils (&gt;5 lobes) — pathognomonic of megaloblastic anemia (B12/folate deficiency).</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Lymphocytes -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-3" style="--card-accent:#a855f7;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-wbc">LYMPHOCYTES</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-purple-300 mb-3">Lymphocytes (T, B &amp; NK Cells)</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Key mediators of adaptive immunity. <strong class="text-white">T-cells</strong> (60–70%) — cell-mediated immunity; <strong class="text-white">B-cells</strong> (10–20%) — humoral immunity / antibody production; <strong class="text-white">NK cells</strong> (10–15%) — innate immune surveillance. Small round cells with scant cytoplasm on PBS.</p>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Relative
+         </div>
+         <div class="text-lg font-700 text-white">
+          20 – 40%
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Absolute
+         </div>
+         <div class="text-lg font-700 text-white">
+          1.0 – 4.0 × 10⁹/L
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ LYMPHOCYTOSIS
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Viral infections (EBV — atypical lymphocytes / Downey cells)</li>
+            <li>• CMV, hepatitis, pertussis (whooping cough)</li>
+            <li>• CLL (most common adult leukemia in West)</li>
+            <li>• ALL (most common childhood leukemia)</li>
+            <li>• Toxoplasmosis</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ LYMPHOPENIA
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• HIV/AIDS (CD4+ T-cell destruction)</li>
+            <li>• Corticosteroid therapy (lymphocyte apoptosis)</li>
+            <li>• Radiation / chemotherapy</li>
+            <li>• SLE (autoimmune destruction)</li>
+            <li>• Severe COVID-19 (prognostic marker)</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Monocytes, Eosinophils, Basophils -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-4" style="--card-accent:#c084fc;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-wbc">MONO / EOS / BASO</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-purple-300 mb-3">Monocytes, Eosinophils &amp; Basophils</h3>
+       <div class="space-y-4 mb-4"><!-- Monocytes -->
+        <div class="bg-white/5 rounded-xl p-4">
+         <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+          <h4 class="font-700 text-purple-200">Monocytes (2–8% | 0.2–0.8 × 10⁹/L)</h4>
+         </div>
+         <p class="text-sm text-slate-300">Largest WBC. Circulate 1–3 days then migrate to tissues → become <strong class="text-white">macrophages</strong> (Kupffer cells in liver, alveolar macrophages, microglia in brain, osteoclasts in bone). Key in chronic inflammation and granuloma formation.</p>
+         <p class="text-xs text-slate-400 mt-2">⬆ in: TB, endocarditis, CMML, recovery from neutropenia | Mnemonic: "Monocytes for Months" (chronic infections)</p>
+        </div><!-- Eosinophils -->
+        <div class="bg-white/5 rounded-xl p-4">
+         <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-3 rounded-full bg-orange-400"></div>
+          <h4 class="font-700 text-orange-200">Eosinophils (1–4% | 0.04–0.4 × 10⁹/L)</h4>
+         </div>
+         <p class="text-sm text-slate-300">Bilobed nucleus, bright orange-red granules with eosin staining. Major Basic Protein (MBP) in granules is toxic to parasites. Key in allergic responses and parasitic defense.</p>
+         <p class="text-xs text-slate-400 mt-2">⬆ in: <strong>NAACP</strong> — Neoplasia, Asthma/Allergy, Addison's, Collagen vascular disease, Parasites | Churg-Strauss, Löffler syndrome</p>
+        </div><!-- Basophils -->
+        <div class="bg-white/5 rounded-xl p-4">
+         <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+          <h4 class="font-700 text-blue-200">Basophils (0–1% | 0–0.1 × 10⁹/L)</h4>
+         </div>
+         <p class="text-sm text-slate-300">Rarest WBC. Large dark blue-black metachromatic granules obscure the nucleus. Contain histamine and heparin. Tissue counterpart: <strong class="text-white">Mast cells</strong>. Express high-affinity IgE receptors (FcεRI).</p>
+         <p class="text-xs text-slate-400 mt-2">⬆ in: CML (highly characteristic), myeloproliferative neoplasms, hypothyroidism, ulcerative colitis</p>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-purple-300 mb-1">
+           🧪 HIGH-YIELD POINT
+          </div>
+          <p class="text-sm text-slate-300">Basophilia is the <strong>most specific</strong> marker for CML among the WBC differential findings. Combined with marked leukocytosis, left shift, and eosinophilia — strongly suggests CML (confirm with BCR-ABL1 / Philadelphia chromosome).</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- ============ PLATELETS ============ -->
+     <div id="tab-platelets" class="tab-panel" style="display:none;">
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-1" style="--card-accent:#eab308;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-plt">PLATELET COUNT</span> <span class="text-slate-500 text-sm">Thrombocyte Count</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-yellow-300 mb-3">Platelet Count</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Anucleate cytoplasmic fragments derived from <strong class="text-white">megakaryocytes</strong> in bone marrow. Regulated by <strong class="text-white">thrombopoietin (TPO)</strong> produced primarily in the liver. Each megakaryocyte produces ~1000–3000 platelets. Lifespan: <strong class="text-white">8–10 days</strong>. ~⅓ sequestered in spleen.</p>
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Normal Range
+         </div>
+         <div class="text-lg font-700 text-white">
+          150 – 400 × 10⁹/L
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Bleeding Risk
+         </div>
+         <div class="text-lg font-700 text-yellow-300">
+          &lt;50 × 10⁹/L
+         </div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3">
+         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+          Spontaneous Bleeding
+         </div>
+         <div class="text-lg font-700 text-red-400">
+          &lt;20 × 10⁹/L
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+           <div class="text-xs font-600 text-green-400 mb-2">
+            ⬆ THROMBOCYTOSIS (&gt;400 × 10⁹/L)
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• <strong>Reactive</strong>: Iron deficiency, infection, inflammation, post-splenectomy, malignancy</li>
+            <li>• <strong>Primary</strong>: Essential thrombocythemia (JAK2/CALR/MPL mutations)</li>
+            <li>• CML, Polycythemia Vera, Myelofibrosis</li>
+            <li>• Post-hemorrhage rebound</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-red-400 mb-2">
+            ⬇ THROMBOCYTOPENIA (&lt;150 × 10⁹/L)
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• <strong>ITP</strong> — immune destruction (anti-GPIIb/IIIa)</li>
+            <li>• <strong>TTP</strong> — ADAMTS13 deficiency (pentad)</li>
+            <li>• <strong>HUS</strong> — Shiga toxin (E.coli O157:H7)</li>
+            <li>• <strong>DIC</strong> — consumption coagulopathy</li>
+            <li>• <strong>HIT</strong> — Heparin-Induced (anti-PF4)</li>
+            <li>• Hypersplenism, aplastic anemia, MDS</li>
+           </ul>
+          </div>
+         </div>
+         <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-yellow-300 mb-1">
+           ⚠️ PSEUDOTHROMBOCYTOPENIA
+          </div>
+          <p class="text-sm text-slate-300">EDTA-dependent platelet clumping causes falsely low counts in ~0.1% of patients. <strong>Always check PBS</strong> for clumps. Remedy: redraw in citrate tube and correct count × 1.1 (dilution factor).</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- MPV & PDW -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-2" style="--card-accent:#fbbf24;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-plt">MPV &amp; PDW</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-yellow-300 mb-3">Mean Platelet Volume &amp; Platelet Distribution Width</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <div class="bg-white/5 rounded-xl p-4">
+         <h4 class="font-700 text-yellow-200 mb-2">MPV — Mean Platelet Volume</h4>
+         <div class="text-lg font-700 text-white mb-1">
+          7.5 – 11.5 fL
+         </div>
+         <p class="text-sm text-slate-300">Average size of platelets. Young platelets (reticulated) are larger and more hemostatically active. ⬆MPV = active thrombopoiesis (ITP, recovery). ⬇MPV = marrow failure, Wiskott-Aldrich syndrome (characteristically small platelets).</p>
+        </div>
+        <div class="bg-white/5 rounded-xl p-4">
+         <h4 class="font-700 text-yellow-200 mb-2">PDW — Platelet Distribution Width</h4>
+         <div class="text-lg font-700 text-white mb-1">
+          9 – 17 fL
+         </div>
+         <p class="text-sm text-slate-300">Measure of variation in platelet size (anisocytosis of platelets). ⬆PDW = reactive thrombocytosis, MPN, platelet activation. Used alongside MPV for differential diagnosis of thrombocytopenia causes.</p>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-yellow-300 mb-1">
+           💡 CLINICAL UTILITY
+          </div>
+          <p class="text-sm text-slate-300"><strong>ITP</strong>: ⬆MPV + ⬆PDW (large young platelets replacing destroyed ones). <strong>Aplastic anemia</strong>: ⬇MPV + normal PDW (marrow failure, small uniform platelets). <strong>Bernard-Soulier Syndrome</strong>: Giant platelets → very high MPV.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- ============ RBC INDICES ============ -->
+     <div id="tab-indices" class="tab-panel" style="display:none;"><!-- MCV -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-1" style="--card-accent:#22c55e;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-idx">MCV</span> <span class="text-slate-500 text-sm">Mean Corpuscular Volume</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-green-300 mb-3">MCV — Mean Corpuscular Volume</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Average volume of a single RBC in femtoliters (fL). <strong class="text-white">The most important index</strong> for classifying anemias morphologically. Directly measured by analyzers or calculated: <code class="bg-white/10 px-2 py-0.5 rounded text-green-300 text-sm">MCV = Hct (%) / RBC (millions/µL) × 10</code></p>
+       <div class="bg-white/5 rounded-lg p-3 mb-4 text-center">
+        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+         Normal Range
+        </div>
+        <div class="text-2xl font-700 text-white">
+         80 – 100 fL
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="overflow-x-auto">
+          <table class="ref-table w-full rounded-lg overflow-hidden">
+           <thead>
+            <tr>
+             <th>Classification</th>
+             <th>MCV</th>
+             <th>Key Causes</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="text-red-300 font-600">Microcytic</td>
+             <td>&lt;80 fL</td>
+             <td>Iron deficiency, Thalassemia, Anemia of chronic disease, Sideroblastic anemia, Lead poisoning — <strong class="text-white">Mnemonic: TAILS</strong></td>
+            </tr>
+            <tr>
+             <td class="text-green-300 font-600">Normocytic</td>
+             <td>80–100 fL</td>
+             <td>Acute hemorrhage, Hemolytic anemia, ACD, Aplastic anemia, CKD, Mixed deficiency</td>
+            </tr>
+            <tr>
+             <td class="text-sky-300 font-600">Macrocytic</td>
+             <td>&gt;100 fL</td>
+             <td><strong>Megaloblastic</strong>: B12/Folate deficiency. <strong>Non-megaloblastic</strong>: Liver disease, alcoholism, hypothyroidism, MDS, reticulocytosis</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div class="mt-4 bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-green-300 mb-1">
+           🔑 IRON DEFICIENCY vs THALASSEMIA TRAIT
+          </div>
+          <p class="text-sm text-slate-300"><strong>Mentzer Index = MCV/RBC</strong>: &gt;13 → Iron deficiency; &lt;13 → Thalassemia trait. Also: RDW is ⬆ in IDA (anisocytosis) but normal in thalassemia trait (uniform microcytosis).</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- MCH & MCHC -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-2" style="--card-accent:#4ade80;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-idx">MCH &amp; MCHC</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-green-300 mb-3">MCH &amp; MCHC — Hemoglobin Content Indices</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div class="bg-white/5 rounded-xl p-4">
+         <h4 class="font-700 text-green-200 mb-2">MCH — Mean Corpuscular Hemoglobin</h4>
+         <div class="text-lg font-700 text-white mb-1">
+          27 – 33 pg
+         </div>
+         <p class="text-sm text-slate-300">Average weight of Hb per RBC (in picograms). <code class="bg-white/10 px-1 rounded text-green-300 text-xs">MCH = Hb (g/dL) / RBC (millions/µL) × 10</code>. Parallels MCV — ⬇ in microcytic, ⬆ in macrocytic anemias.</p>
+        </div>
+        <div class="bg-white/5 rounded-xl p-4">
+         <h4 class="font-700 text-green-200 mb-2">MCHC — Mean Corpuscular Hb Concentration</h4>
+         <div class="text-lg font-700 text-white mb-1">
+          32 – 36 g/dL
+         </div>
+         <p class="text-sm text-slate-300">Average Hb concentration per RBC. <code class="bg-white/10 px-1 rounded text-green-300 text-xs">MCHC = Hb (g/dL) / Hct (%) × 100</code>. Most stable RBC index. Classifies as normochromic or hypochromic.</p>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-green-300 mb-1">
+           💎 HIGH-YIELD: ELEVATED MCHC (&gt;36 g/dL)
+          </div>
+          <p class="text-sm text-slate-300">Very few conditions raise MCHC: <strong>Hereditary Spherocytosis</strong> (most classic), cold agglutinins (artifact), severe dehydration. MCHC &gt;36 should prompt PBS review for spherocytes and a DAT/Coombs test.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- RDW -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-3" style="--card-accent:#22c55e;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-idx">RDW</span> <span class="text-slate-500 text-sm">Red Cell Distribution Width</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-green-300 mb-3">RDW — Red Cell Distribution Width</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Coefficient of variation of RBC volume. Quantifies <strong class="text-white">anisocytosis</strong> (variation in RBC size). Generated from the RBC histogram. Higher RDW = more size variation.</p>
+       <div class="bg-white/5 rounded-lg p-3 mb-4">
+        <div class="grid grid-cols-2 gap-3">
+         <div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+           RDW-CV
+          </div>
+          <div class="text-lg font-700 text-white">
+           11.5 – 14.5%
+          </div>
+         </div>
+         <div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">
+           RDW-SD
+          </div>
+          <div class="text-lg font-700 text-white">
+           39 – 46 fL
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="overflow-x-auto">
+          <table class="ref-table w-full rounded-lg overflow-hidden">
+           <thead>
+            <tr>
+             <th>MCV</th>
+             <th>Normal RDW</th>
+             <th>High RDW</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="text-red-300">Microcytic (&lt;80)</td>
+             <td>Thalassemia trait, ACD</td>
+             <td>Iron deficiency anemia, HbH disease</td>
+            </tr>
+            <tr>
+             <td class="text-green-300">Normocytic (80–100)</td>
+             <td>ACD, CKD, acute hemorrhage</td>
+             <td>Early iron/B12/folate deficiency, mixed deficiency, sickle cell</td>
+            </tr>
+            <tr>
+             <td class="text-sky-300">Macrocytic (&gt;100)</td>
+             <td>Aplastic anemia, liver disease</td>
+             <td>B12/Folate deficiency, MDS, immune hemolytic anemia</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div class="mt-4 bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+          <div class="text-xs font-600 text-green-300 mb-1">
+           🆕 EMERGING BIOMARKER
+          </div>
+          <p class="text-sm text-slate-300">RDW has emerged as an independent prognostic marker for mortality in heart failure, sepsis, COVID-19, and general ICU patients — elevated RDW correlates with oxidative stress and chronic inflammation beyond hematologic disease.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- ============ DIFFERENTIAL ============ -->
+     <div id="tab-differential" class="tab-panel" style="display:none;">
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-1" style="--card-accent:#fb923c;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-diff">DIFFERENTIAL COUNT</span>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-orange-300 mb-3">WBC Differential — Complete Reference Table</h3>
+       <p class="text-slate-300 leading-relaxed mb-6">The differential count provides relative (%) and absolute counts of each WBC type. <strong class="text-white">Always interpret absolute counts</strong> rather than percentages, as percentages can be misleading when total WBC is abnormal.</p>
+       <div class="overflow-x-auto">
+        <table class="ref-table w-full rounded-lg overflow-hidden">
+         <thead>
+          <tr>
+           <th>Cell Type</th>
+           <th>Relative %</th>
+           <th>Absolute Count</th>
+           <th>Key Function</th>
+          </tr>
+         </thead>
+         <tbody>
+          <tr>
+           <td class="font-600 text-purple-300">Neutrophils (Segs)</td>
+           <td>40–70%</td>
+           <td>2.0–7.0 × 10⁹/L</td>
+           <td>Phagocytosis of bacteria; first responders</td>
+          </tr>
+          <tr>
+           <td class="font-600 text-purple-300">Bands (Stabs)</td>
+           <td>0–5%</td>
+           <td>0–0.7 × 10⁹/L</td>
+           <td>Immature neutrophils; ⬆ = left shift</td>
+          </tr>
+          <tr>
+           <td class="font-600 text-blue-300">Lymphocytes</td>
+           <td>20–40%</td>
+           <td>1.0–4.0 × 10⁹/L</td>
+           <td>Adaptive immunity (T &amp; B cells, NK cells)</td>
+          </tr>
+          <tr>
+           <td class="font-600 text-pink-300">Monocytes</td>
+           <td>2–8%</td>
+           <td>0.2–0.8 × 10⁹/L</td>
+           <td>Phagocytosis; APC; chronic inflammation</td>
+          </tr>
+          <tr>
+           <td class="font-600 text-orange-300">Eosinophils</td>
+           <td>1–4%</td>
+           <td>0.04–0.4 × 10⁹/L</td>
+           <td>Parasitic defense; allergic responses</td>
+          </tr>
+          <tr>
+           <td class="font-600 text-sky-300">Basophils</td>
+           <td>0–1%</td>
+           <td>0–0.1 × 10⁹/L</td>
+           <td>Histamine/heparin release; IgE-mediated</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div><!-- PBS Morphology -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-2" style="--card-accent:#f97316;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge badge-diff">PBS MORPHOLOGY</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-orange-300 mb-3">Peripheral Blood Smear — Key RBC Morphologies</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">The PBS is the pathologist's most valuable tool. It provides morphological information that no analyzer can replicate.</p>
+       <div class="expand-content" style="max-height:2000px;opacity:1;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           🔴 Target Cells (Codocytes)
+          </div>
+          <p class="text-xs text-slate-400">Thalassemia, HbC, liver disease, post-splenectomy, iron deficiency</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           🌙 Sickle Cells (Drepanocytes)
+          </div>
+          <p class="text-xs text-slate-400">Sickle cell disease (HbSS) — irreversibly sickled cells</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           ⭕ Spherocytes
+          </div>
+          <p class="text-xs text-slate-400">Hereditary spherocytosis, AIHA, burns, Clostridium sepsis</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           💧 Teardrop Cells (Dacryocytes)
+          </div>
+          <p class="text-xs text-slate-400">Myelofibrosis (most classic), myelophthisic anemia, thalassemia major</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           🔷 Schistocytes (Fragments)
+          </div>
+          <p class="text-xs text-slate-400">TTP, HUS, DIC, MAHA, prosthetic heart valves — MICROANGIOPATHY</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           🥚 Elliptocytes (Ovalocytes)
+          </div>
+          <p class="text-xs text-slate-400">Hereditary elliptocytosis, iron deficiency, megaloblastic anemia</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           🪙 Rouleaux Formation
+          </div>
+          <p class="text-xs text-slate-400">Multiple myeloma, Waldenström's, chronic inflammation (↑fibrinogen/Ig)</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           👄 Bite Cells (Degmacytes)
+          </div>
+          <p class="text-xs text-slate-400">G6PD deficiency — Heinz body removal by splenic macrophages</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           🔵 Howell-Jolly Bodies
+          </div>
+          <p class="text-xs text-slate-400">Nuclear remnants — post-splenectomy, functional asplenia, megaloblastic</p>
+         </div>
+         <div class="bg-white/5 rounded-lg p-3">
+          <div class="font-600 text-red-300 text-sm">
+           〰️ Basophilic Stippling
+          </div>
+          <p class="text-xs text-slate-400">Lead poisoning, thalassemia, sideroblastic anemia, MDS</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- ============ CLINICAL ============ -->
+     <div id="tab-clinical" class="tab-panel" style="display:none;">
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-1" style="--card-accent:#06b6d4;">
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-cyan-300 mb-4">🩺 Systematic Approach to CBC Interpretation</h3>
+       <div class="space-y-4">
+        <div class="flex gap-4">
+         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-700">
+          1
+         </div>
+         <div>
+          <h4 class="font-700 text-white mb-1">Check Hemoglobin → Anemia or Polycythemia?</h4>
+          <p class="text-sm text-slate-300">Compare to age- and sex-specific reference ranges. WHO defines anemia as Hb &lt;13 g/dL (M) and &lt;12 g/dL (F).</p>
+         </div>
+        </div>
+        <div class="flex gap-4">
+         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-700">
+          2
+         </div>
+         <div>
+          <h4 class="font-700 text-white mb-1">Classify by MCV → Microcytic / Normocytic / Macrocytic</h4>
+          <p class="text-sm text-slate-300">MCV is the single most useful index. Narrows the differential diagnosis of anemia dramatically.</p>
+         </div>
+        </div>
+        <div class="flex gap-4">
+         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-700">
+          3
+         </div>
+         <div>
+          <h4 class="font-700 text-white mb-1">Check RDW → Uniform or Mixed Population?</h4>
+          <p class="text-sm text-slate-300">High RDW = anisocytosis. Differentiates IDA (high RDW) from thalassemia trait (normal RDW).</p>
+         </div>
+        </div>
+        <div class="flex gap-4">
+         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-700">
+          4
+         </div>
+         <div>
+          <h4 class="font-700 text-white mb-1">Assess Reticulocyte Count → Marrow Response?</h4>
+          <p class="text-sm text-slate-300">RPI &gt;3 = adequate response (hemolysis/hemorrhage). RPI &lt;2 = hypoproliferative (marrow failure/deficiency).</p>
+         </div>
+        </div>
+        <div class="flex gap-4">
+         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-700">
+          5
+         </div>
+         <div>
+          <h4 class="font-700 text-white mb-1">Evaluate WBC &amp; Differential → Infection / Malignancy?</h4>
+          <p class="text-sm text-slate-300">Use absolute counts. Identify neutrophilia/neutropenia, lymphocytosis, eosinophilia, or left shift.</p>
+         </div>
+        </div>
+        <div class="flex gap-4">
+         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-700">
+          6
+         </div>
+         <div>
+          <h4 class="font-700 text-white mb-1">Check Platelet Count → Bleeding / Thrombotic Risk?</h4>
+          <p class="text-sm text-slate-300">Rule out pseudothrombocytopenia. Correlate with MPV and clinical picture.</p>
+         </div>
+        </div>
+        <div class="flex gap-4">
+         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-700">
+          7
+         </div>
+         <div>
+          <h4 class="font-700 text-white mb-1">Review Peripheral Blood Smear</h4>
+          <p class="text-sm text-slate-300">The PBS is the gold standard for morphological assessment. Look for diagnostic pointers: schistocytes, blasts, parasites, inclusions.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Pancytopenia -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-2" style="--card-accent:#f43f5e;">
+       <div class="flex flex-wrap items-center gap-3 mb-4"><span class="stat-badge" style="background:rgba(244,63,94,0.15);color:#fb7185;">PANCYTOPENIA</span> <button class="ml-auto text-slate-400 hover:text-white transition" onclick="toggleExpand(this)" aria-label="Expand details"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>
+       </div>
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-rose-300 mb-3">Pancytopenia — All Lines Reduced</h3>
+       <p class="text-slate-300 leading-relaxed mb-4">Simultaneous reduction in all three cell lines (RBC, WBC, Platelets). Always warrants urgent investigation including bone marrow examination.</p>
+       <div class="expand-content">
+        <div class="border-t border-white/10 pt-4 mt-2">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+           <div class="text-xs font-600 text-rose-300 mb-2">
+            Hypocellular Marrow
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Aplastic anemia (idiopathic, drug-induced)</li>
+            <li>• Paroxysmal nocturnal hemoglobinuria (PNH)</li>
+            <li>• Fanconi anemia (constitutional)</li>
+           </ul>
+          </div>
+          <div>
+           <div class="text-xs font-600 text-rose-300 mb-2">
+            Cellular / Infiltrated Marrow
+           </div>
+           <ul class="text-sm text-slate-300 space-y-1">
+            <li>• Megaloblastic anemia (ineffective hematopoiesis)</li>
+            <li>• MDS, Acute leukemia, Hairy cell leukemia</li>
+            <li>• Myelofibrosis, Metastatic infiltration</li>
+            <li>• Hypersplenism, SLE, HIV, Leishmaniasis</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Quality Control Note -->
+      <div class="param-card p-6 md:p-8 mb-6 reveal stagger-3" style="--card-accent:#8b5cf6;">
+       <h3 class="heading-font text-xl md:text-2xl font-700 text-violet-300 mb-4">🔬 Pre-Analytical Variables &amp; Quality Control</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white/5 rounded-xl p-4">
+         <h4 class="font-600 text-violet-200 text-sm mb-2">Sample Collection Errors</h4>
+         <ul class="text-sm text-slate-300 space-y-1">
+          <li>• <strong>Under-filling EDTA tube</strong>: excess EDTA → RBC crenation, ⬇MCV, ⬇Hct</li>
+          <li>• <strong>Clotted sample</strong>: falsely low counts for all cell lines</li>
+          <li>• <strong>Hemolyzed sample</strong>: ⬇RBC, ⬆K⁺, ⬆LDH, falsely ⬆Hb</li>
+          <li>• <strong>Delayed processing (&gt;6hrs)</strong>: WBC degranulation, ⬆MCV (cell swelling)</li>
+         </ul>
+        </div>
+        <div class="bg-white/5 rounded-xl p-4">
+         <h4 class="font-600 text-violet-200 text-sm mb-2">Instrument Flags &amp; Interference</h4>
+         <ul class="text-sm text-slate-300 space-y-1">
+          <li>• <strong>Cold agglutinins</strong>: falsely ⬇RBC, ⬆MCV, ⬆MCHC (warm sample to 37°C)</li>
+          <li>• <strong>Giant platelets</strong>: counted as RBCs → falsely ⬆RBC</li>
+          <li>• <strong>Nucleated RBCs</strong>: counted as WBCs → falsely ⬆WBC (need correction)</li>
+          <li>• <strong>Platelet clumps (EDTA)</strong>: pseudothrombocytopenia → redraw in citrate</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- end tabContent --> <!-- Footer -->
+    <footer class="px-6 py-12 text-center border-t border-white/5">
+     <p class="text-slate-500 text-sm">CBC Reference Guide — For Medical Education &amp; Clinical Practice</p>
+     <p class="text-slate-600 text-xs mt-2">Always correlate laboratory findings with clinical context. Values may vary by laboratory and methodology.</p>
+    </footer>
+   </div><!-- end relative z-10 -->
+  </div><!-- end app-root -->
+  <script>
+// ============ TAB SYSTEM ============
+let currentTab = 'rbc';
+
+function switchTab(tabId) {
+  currentTab = tabId;
+  document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('tab-' + tabId);
+  if (panel) panel.style.display = 'block';
+  const btn = document.querySelector(`[data-tab="${tabId}"]`);
+  if (btn) btn.classList.add('active');
+  // Trigger reveal for newly visible cards
+  setTimeout(() => {
+    document.querySelectorAll('#tab-' + tabId + ' .reveal').forEach(el => el.classList.add('visible'));
+  }, 50);
+}
+
+// ============ EXPAND/COLLAPSE ============
+function toggleExpand(btn) {
+  const card = btn.closest('.param-card');
+  const content = card.querySelector('.expand-content');
+  if (content) {
+    content.classList.toggle('open');
+    const icon = btn.querySelector('i');
+    if (icon) icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+  }
+}
+
+// ============ SCROLL REVEAL ============
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+function observeReveals() {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ============ ELEMENT SDK ============
+const defaultConfig = {
+  main_title: 'Complete Blood Count',
+  subtitle: 'A Comprehensive Parameter-by-Parameter Guide for Medical Professionals, Students & Pathologists',
+  background_color: '#0f172a',
+  surface_color: '#1e293b',
+  text_color: '#e2e8f0',
+  primary_action_color: '#0ea5e9',
+  secondary_action_color: '#f472b6',
+  font_family: 'Playfair Display',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const title = document.getElementById('mainTitle');
+  const sub = document.getElementById('subtitle');
+  if (title) title.textContent = config.main_title || defaultConfig.main_title;
+  if (sub) sub.textContent = config.subtitle || defaultConfig.subtitle;
+
+  const bg = config.background_color || defaultConfig.background_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const primary = config.primary_action_color || defaultConfig.primary_action_color;
+  const secondary = config.secondary_action_color || defaultConfig.secondary_action_color;
+  const font = config.font_family || defaultConfig.font_family;
+  const size = config.font_size || defaultConfig.font_size;
+
+  const root = document.getElementById('appRoot');
+  if (root) {
+    root.style.background = `linear-gradient(135deg, ${bg} 0%, ${surface} 50%, ${primary}22 100%)`;
+    root.style.color = text;
+  }
+
+  // Font
+  document.querySelectorAll('.heading-font').forEach(el => {
+    el.style.fontFamily = `${font}, Georgia, serif`;
+  });
+  document.querySelectorAll('p, li, td, span, .text-sm, .text-xs').forEach(el => {
+    el.style.fontSize = ''; // Reset to let CSS handle, then scale
+  });
+  document.body.style.fontSize = size + 'px';
+
+  // Active tab color
+  document.querySelectorAll('.tab-btn.active').forEach(b => {
+    b.style.background = `${primary}33`;
+    b.style.color = primary;
+    b.style.borderColor = `${primary}66`;
+  });
+}
+
+// Init
+lucide.createIcons();
+observeReveals();
+// Trigger initial tab reveals
+setTimeout(() => {
+  document.querySelectorAll('#tab-rbc .reveal').forEach(el => el.classList.add('visible'));
+}, 100);
+</script>
+</body>
+</html>
