@@ -1,0 +1,576 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Toxicology & Poisoning | Emergency Poison Management | Deep Medicine</title> <meta name="description" content="Comprehensive toxicology guide covering poisoning management, antidotes, drug overdose, and emergency detoxification protocols."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/poisoning"> <!-- Open Graph --> <meta property="og:title" content="Toxicology & Poisoning | Deep Medicine"> <meta property="og:description" content="Emergency management of poisoning, overdoses, and toxic exposures with antidote-based treatment."> <meta property="og:image" content="https://deepmedicine.in/images/toxicology-poisoning.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html,body{height:100%;margin:0;font-family:'DM Sans',sans-serif}
+*{box-sizing:border-box}
+.scroll-hide::-webkit-scrollbar{display:none}
+.scroll-hide{-ms-overflow-style:none;scrollbar-width:none}
+.card-glow{transition:all .3s ease}
+.card-glow:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.fade-in{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.pulse-dot{animation:pulse-dot 1.5s ease infinite}
+.severity-critical{border-left:4px solid #ef4444}
+.severity-high{border-left:4px solid #f97316}
+.severity-moderate{border-left:4px solid #eab308}
+.tab-active{position:relative}
+.tab-active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:3px;border-radius:2px}
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details[open] .chevron-icon{transform:rotate(180deg)}
+.chevron-icon{transition:transform .2s ease}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto scroll-hide" style="background:#0f1117"><!-- Header -->
+   <header class="sticky top-0 z-50" style="background:linear-gradient(135deg,#0f1117 0%,#1a1d2e 100%);border-bottom:1px solid rgba(255,255,255,.06)">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+     <div class="flex items-center justify-between flex-wrap gap-3">
+      <div>
+       <h1 id="app-title" class="text-xl md:text-2xl font-bold" style="font-family:'Playfair Display',serif;color:#e2e8f0">☠️ Clinical Toxicology Reference</h1>
+       <p id="app-subtitle" class="text-xs md:text-sm mt-1" style="color:#94a3b8">Evidence-Based Poisoning Management — ICU / Emergency Medicine</p>
+      </div>
+      <div class="flex items-center gap-2"><span class="pulse-dot inline-block w-2 h-2 rounded-full" style="background:#22c55e"></span> <span class="text-xs" style="color:#64748b">Ready</span>
+      </div>
+     </div><!-- Search -->
+     <div class="mt-3 relative"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2" style="width:16px;height:16px;color:#64748b"></i> <input id="searchInput" type="text" placeholder="Search poison, antidote, or symptom..." class="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2" style="background:#1e2235;color:#e2e8f0;border:1px solid rgba(255,255,255,.08);focus:ring-color:#6366f1" oninput="filterPoisons(this.value)">
+     </div><!-- Category Tabs -->
+     <div class="flex gap-1 mt-3 overflow-x-auto scroll-hide pb-1"><button onclick="filterCategory('all')" class="cat-tab tab-active px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#6366f1;color:#fff" data-cat="all">All</button> <button onclick="filterCategory('household')" class="cat-tab px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#1e2235;color:#94a3b8" data-cat="household">Household</button> <button onclick="filterCategory('drugs')" class="cat-tab px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#1e2235;color:#94a3b8" data-cat="drugs">Drug OD</button> <button onclick="filterCategory('pesticide')" class="cat-tab px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#1e2235;color:#94a3b8" data-cat="pesticide">Pesticide</button> <button onclick="filterCategory('metals')" class="cat-tab px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#1e2235;color:#94a3b8" data-cat="metals">Heavy Metals</button> <button onclick="filterCategory('bites')" class="cat-tab px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#1e2235;color:#94a3b8" data-cat="bites">Bites &amp; Stings</button> <button onclick="filterCategory('gas')" class="cat-tab px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#1e2235;color:#94a3b8" data-cat="gas">Gases</button> <button onclick="filterCategory('plant')" class="cat-tab px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap" style="background:#1e2235;color:#94a3b8" data-cat="plant">Plants</button>
+     </div>
+    </div>
+   </header><!-- Content -->
+   <main id="poisonList" class="max-w-6xl mx-auto px-4 py-4 space-y-3">
+   </main><!-- Footer -->
+   <footer class="text-center py-6 px-4" style="color:#475569">
+    <p class="text-xs">⚠️ For clinical reference only. Always correlate with patient presentation, local protocols &amp; Poison Control.</p>
+    <p class="text-xs mt-1">Based on Harrison's, Goldfrank's Toxicology, WHO &amp; ACMT Guidelines</p>
+   </footer>
+  </div>
+  <script>
+const POISONS = [
+  {
+    id:"op",name:"Organophosphorus (OP) Poisoning",category:"pesticide",severity:"critical",
+    icon:"☠️",
+    mechanism:"Irreversible inhibition of acetylcholinesterase (AChE) → accumulation of ACh at muscarinic, nicotinic & CNS receptors. Aging of enzyme-OP complex occurs within 24–48h making it permanent.",
+    toxicKinetics:"Absorption: dermal, inhalational, GI. Onset: 30min–2h (oral), minutes (inhalational). Lipophilic → large Vd. Hepatic metabolism (some require activation, e.g. parathion→paraoxon).",
+    clinicalFeatures:{
+      muscarinic:"<b>DUMBBBELS</b> — Diarrhea, Urination, Miosis, Bradycardia/Bronchospasm/Bronchorrhea, Emesis, Lacrimation, Salivation. <b>Killer B's</b>: Bronchospasm + Bronchorrhea → primary cause of death.",
+      nicotinic:"Fasciculations, muscle weakness, tachycardia, hypertension, mydriasis (can mask miosis), respiratory muscle paralysis.",
+      cns:"Anxiety, restlessness, seizures, coma, respiratory center depression.",
+      complications:"Intermediate Syndrome (IMS): 24–96h post-exposure, proximal muscle weakness + neck flexor weakness + respiratory failure. OPIDN (Organophosphate-Induced Delayed Neuropathy): 2–4 weeks, distal sensorimotor neuropathy."
+    },
+    investigations:"Serum Cholinesterase (Pseudo/Butyryl-ChE): rapid, correlates with severity. RBC AChE (True ChE): more specific, slower to recover. ABG, ECG (QTc prolongation), Chest X-ray, Serum Lactate.",
+    management:[
+      {title:"Resuscitation (ABCDE)",detail:"Secure airway early — copious secretions. Suction aggressively. Intubate if GCS < 8, respiratory failure, or refractory bronchorrhea. Avoid succinylcholine (prolonged paralysis due to low ChE). Use rocuronium/vecuronium."},
+      {title:"Decontamination",detail:"Remove all clothes, wash skin with soap & water (staff must wear PPE — double gloves, gown). Gastric lavage within 1h if oral ingestion (protected airway). Activated charcoal 1g/kg if within 1h & airway protected."},
+      {title:"Atropine (CORNERSTONE)",detail:"<b>Test dose</b>: 1–3mg IV bolus (adult). <b>Target</b>: Dry secretions, HR > 80, clear chest. <b>Double the dose every 5 min</b> until atropinization. May need 10–100+ mg in severe cases. Then infusion: 10–20% of loading dose/hour. <b>DO NOT target pupil size or tachycardia as endpoints.</b> Monitor for atropine toxicity: hyperthermia, agitation, ileus."},
+      {title:"Pralidoxime (2-PAM / Obidoxime)",detail:"<b>Adults</b>: 1–2g IV over 15–30 min, then 500mg/h infusion OR repeat bolus q6–8h. Start within 24h (before aging). Continue for 48–72h minimum. Acts as AChE reactivator — most effective at nicotinic junctions (reverses fasciculations, weakness). Controversial in some RCTs (EDDP trial) but still recommended by WHO."},
+      {title:"Seizure Management",detail:"Benzodiazepines: Diazepam 5–10mg IV or Midazolam 5mg IM. Refractory: Phenobarbital. Avoid phenytoin (ineffective in OP seizures)."},
+      {title:"ICU Monitoring",detail:"Continuous SpO2, ECG, ABG q6h. Monitor for IMS (Day 2–4): serial NIF (Negative Inspiratory Force), neck flexor power. Ventilatory support if needed. Watch for ARDS, aspiration pneumonia, pancreatitis. Monitor serum ChE levels serially for recovery."},
+      {title:"Disposition",detail:"ICU admission for all moderate-severe cases. Observe mild cases for minimum 24h (delayed onset possible with fat-soluble OPs). Psychiatric evaluation if intentional."}
+    ]
+  },
+  {
+    id:"opc",name:"Organochlorine Poisoning (Endosulfan, Lindane)",category:"pesticide",severity:"high",
+    icon:"🧪",
+    mechanism:"GABA-A receptor antagonism → CNS excitation. Also inhibits Ca²⁺-Mg²⁺ ATPase. Highly lipophilic with prolonged tissue storage. Banned in many countries but still encountered.",
+    toxicKinetics:"Absorption: GI, dermal, inhalational. Highly lipophilic → accumulates in adipose. Long half-life (days to months). Hepatic metabolism, biliary excretion.",
+    clinicalFeatures:{
+      early:"Nausea, vomiting, diarrhea, headache, dizziness, paresthesias, apprehension.",
+      neurological:"Tremors, myoclonus, hyperreflexia, generalized tonic-clonic seizures (hallmark), status epilepticus.",
+      severe:"Coma, respiratory failure, rhabdomyolysis → AKI, hepatotoxicity, ventricular arrhythmias.",
+      complications:"Refractory status epilepticus, multi-organ dysfunction."
+    },
+    investigations:"No specific biomarker. Serum levels (specialized labs). CBC, RFT, LFT, CPK (rhabdomyolysis), ECG, ABG, serum electrolytes.",
+    management:[
+      {title:"Decontamination",detail:"Remove clothes, soap-water wash. Gastric lavage (protected airway) if < 1h. Activated charcoal 1g/kg. Cholestyramine 4g q6h may enhance elimination (interrupts enterohepatic circulation)."},
+      {title:"Seizure Control (Priority)",detail:"Diazepam 10mg IV, repeat q5min. Midazolam 0.2mg/kg IM if no IV access. Refractory: Phenobarbital 15–20mg/kg IV load. Status epilepticus: Propofol or thiopentone infusion with intubation."},
+      {title:"Supportive ICU Care",detail:"Aggressive IV hydration for rhabdomyolysis. Monitor CPK, urine myoglobin. Alkalinize urine if CPK > 5000. Avoid epinephrine (arrhythmia risk — sensitized myocardium). Lipid emulsion therapy (ILE) 20%: 1.5mL/kg bolus, then 0.25mL/kg/min — emerging evidence for lipophilic toxins."},
+      {title:"No Specific Antidote",detail:"Management is entirely supportive. Monitor for delayed hepatotoxicity (days). Serial LFT monitoring for 1 week."}
+    ]
+  },
+  {
+    id:"apap",name:"Paracetamol (Acetaminophen) Overdose",category:"drugs",severity:"critical",
+    icon:"💊",
+    mechanism:"Therapeutic doses: 90% glucuronidation/sulfation, 5% CYP2E1 → NAPQI (toxic) → conjugated by glutathione (GSH). Overdose: GSH depleted → NAPQI binds hepatocyte proteins → centrilobular hepatic necrosis (Zone 3). Toxic dose: > 150mg/kg or > 7.5g in adults.",
+    toxicKinetics:"Rapid GI absorption. Peak: 1–2h (IR), 4h+ (ER/co-formulations). T½: 2–4h (normal), > 4h suggests toxicity. Vd: 0.9 L/kg.",
+    clinicalFeatures:{
+      phase1:"0–24h: Asymptomatic or mild nausea, vomiting, malaise, diaphoresis. <b>Clinically deceptive — patient looks well!</b>",
+      phase2:"24–72h: RUQ pain, hepatomegaly, rising AST/ALT (can exceed 10,000 IU/L), rising INR/PT, oliguria begins.",
+      phase3:"72–96h: Peak hepatotoxicity. Fulminant hepatic failure: jaundice, coagulopathy, encephalopathy, hypoglycemia, lactic acidosis, AKI (25% — direct tubular toxicity + hepatorenal). Multi-organ failure → death.",
+      phase4:"4d–2wk: Recovery phase if patient survives. Complete hepatic regeneration typical (liver has remarkable regenerative capacity)."
+    },
+    investigations:"<b>4-hour serum paracetamol level</b> — plot on Rumack-Matthew Nomogram. AST/ALT q12h, INR/PT, serum creatinine, blood glucose, lactate, phosphate, arterial pH, ammonia. King's College Criteria for transplant referral.",
+    management:[
+      {title:"Gastric Decontamination",detail:"Activated charcoal 1g/kg if < 2h post-ingestion (up to 4h for co-ingestants/ER formulations). Most effective within 1h. Do NOT delay NAC for charcoal."},
+      {title:"N-Acetylcysteine (NAC) — ANTIDOTE",detail:"<b>Indications</b>: Level above treatment line on nomogram, unknown time of ingestion with detectable level, staggered overdose, any clinical/lab hepatotoxicity.<br><b>IV Protocol (Prescott/21h)</b>: 150mg/kg in 200mL D5W over 1h → 50mg/kg in 500mL D5W over 4h → 100mg/kg in 1000mL D5W over 16h. <b>Modified 2-bag protocol</b>: 200mg/kg over 4h → 100mg/kg over 16h (fewer anaphylactoid reactions).<br><b>Oral (Rumack 72h)</b>: 140mg/kg loading → 70mg/kg q4h × 17 doses.<br>NAC works best < 8h but gives benefit even at 24h+. Continue beyond 21h if INR > 2, ALT rising, or clinical deterioration."},
+      {title:"Anaphylactoid Reaction to NAC",detail:"Occurs in ~10–20%: flushing, urticaria, bronchospasm. STOP infusion temporarily. Give antihistamines (chlorpheniramine/diphenhydramine). Restart at slower rate. True anaphylaxis rare — do NOT withhold NAC for anaphylactoid reactions."},
+      {title:"Fulminant Hepatic Failure Management",detail:"ICU admission. Correct coagulopathy ONLY if actively bleeding (FFP/Cryo). Monitor glucose q1–2h (hepatic gluconeogenesis fails). Lactulose for encephalopathy. N-acetylcysteine infusion continues. ICP monitoring if Grade III–IV encephalopathy.<br><b>King's College Criteria (transplant referral)</b>: pH < 7.3 after resuscitation OR all three: INR > 6.5 + Creatinine > 3.4 + Grade III/IV encephalopathy."},
+      {title:"Disposition",detail:"Discharge if: 4h level below treatment line, asymptomatic, normal ALT/INR at 24h. Psychiatric evaluation for intentional OD before discharge."}
+    ]
+  },
+  {
+    id:"benzo",name:"Benzodiazepine Overdose",category:"drugs",severity:"moderate",
+    icon:"💉",
+    mechanism:"Enhances GABA-A receptor activity → ↑ chloride conductance → CNS depression. Allosteric positive modulator — requires endogenous GABA (hence ceiling effect on respiratory depression when taken alone). Danger increases dramatically with co-ingestants (opioids, alcohol, barbiturates).",
+    toxicKinetics:"Oral absorption variable. Some ultra-short acting (midazolam T½ 1.5–2.5h), some very long (diazepam T½ 20–100h including active metabolite desmethyldiazepam). High protein binding. Hepatic metabolism.",
+    clinicalFeatures:{
+      mild:"Drowsiness, slurred speech, ataxia, nystagmus.",
+      moderate:"Confusion, hypotonia, hyporeflexia, hypothermia.",
+      severe:"Coma, respiratory depression (especially with co-ingestants), aspiration, paradoxical agitation (elderly/children).",
+      complications:"Aspiration pneumonia. Pure BZD overdose rarely fatal alone — always suspect co-ingestion if severe."
+    },
+    investigations:"Urine drug screen (qualitative — false negatives with newer BZDs like clonazepam). Blood glucose (rule out hypoglycemia), ABG, co-ingestant screen, ethanol level, paracetamol level.",
+    management:[
+      {title:"Supportive Care (Mainstay)",detail:"Airway protection — lateral position. Intubation if GCS < 8 or loss of protective reflexes. Monitor SpO2, give supplemental O2. IV fluids, temperature management."},
+      {title:"Flumazenil (USE WITH EXTREME CAUTION)",detail:"<b>0.2mg IV over 30s, then 0.1mg/min to max 1mg</b>. CONTRAINDICATED if: chronic BZD use (precipitates withdrawal seizures), co-ingestion with TCA/pro-convulsant drugs, seizure history, ECG showing wide QRS. <b>Clinical pearl</b>: In the ED/ICU, we rarely use flumazenil for unknown overdoses. Reserve for iatrogenic oversedation (procedural sedation) where history is known."},
+      {title:"Decontamination",detail:"Activated charcoal if < 1h and airway protected. Gastric lavage rarely indicated."},
+      {title:"Observation",detail:"Monitor for 6–8h (short-acting) to 24h+ (long-acting). Watch for delayed respiratory depression with long-acting agents."}
+    ]
+  },
+  {
+    id:"opioid",name:"Opioid Overdose",category:"drugs",severity:"critical",
+    icon:"⚕️",
+    mechanism:"Mu-opioid receptor agonism → CNS depression, respiratory depression (↓ medullary response to CO2/hypoxia), miosis, decreased GI motility. Fentanyl analogues: extreme potency (100× morphine), rapid onset, lipophilic.",
+    toxicKinetics:"Variable by agent. Morphine: peak 1h oral, minutes IV. Fentanyl: rapid onset, short duration but patch absorption prolonged. Methadone: T½ 15–60h, QTc prolongation.",
+    clinicalFeatures:{
+      classic_triad:"<b>Classic Triad</b>: Miosis (pinpoint pupils) + Respiratory depression + Altered consciousness. Note: Meperidine, tramadol & hypoxia may cause mydriasis.",
+      respiratory:"Progressive: ↓ RR → shallow breathing → apnea. Hypoxic brain injury if prolonged.",
+      cardiovascular:"Bradycardia, hypotension. Methadone: QTc prolongation → Torsades de Pointes.",
+      other:"Non-cardiogenic pulmonary edema (especially heroin/naloxone administration), hypothermia, rhabdomyolysis (prolonged immobilization), compartment syndrome."
+    },
+    investigations:"Urine opiate screen (misses synthetics — fentanyl, methadone). ABG, ECG (QTc for methadone), CXR if pulmonary edema suspected, CPK, co-ingestant screen.",
+    management:[
+      {title:"Airway & Ventilation FIRST",detail:"Bag-valve-mask ventilation is the single most important intervention. Jaw thrust, suction. Naloxone is adjunct to ventilation, NOT a substitute."},
+      {title:"Naloxone (ANTIDOTE)",detail:"<b>IV/IM/IN</b>: Start 0.04–0.4mg IV (titrate to respiratory effort, NOT full consciousness — avoids withdrawal). Repeat q2–3min up to 10mg. If no response after 10mg, reconsider diagnosis.<br><b>IM/SC</b>: 0.4–2mg if no IV access. <b>Intranasal</b>: 4mg per nostril.<br><b>Critical</b>: Naloxone T½ (30–90min) is shorter than most opioids → RENARCOTIZATION risk. Must observe 4–6h post last naloxone dose. For long-acting opioids (methadone, ER formulations): naloxone infusion 2/3 of effective bolus dose per hour."},
+      {title:"Pulmonary Edema",detail:"Non-cardiogenic — occurs with heroin, naloxone administration. Supportive: CPAP/BiPAP or intubation + PEEP. Diuretics generally not effective (not cardiogenic). Usually resolves 24–48h."},
+      {title:"Body Packers/Stuffers",detail:"Whole bowel irrigation with PEG (GoLYTELY) 1–2L/h until clear. CT abdomen to confirm packets. Surgical consultation if obstruction or packet rupture. Continuous naloxone infusion on standby. ICU monitoring."}
+    ]
+  },
+  {
+    id:"tca",name:"Tricyclic Antidepressant (TCA) Overdose",category:"drugs",severity:"critical",
+    icon:"🔴",
+    mechanism:"Multiple mechanisms: (1) Na⁺ channel blockade → wide QRS, arrhythmias. (2) Anticholinergic → tachycardia, mydriasis, urinary retention, ileus. (3) α1-blockade → hypotension. (4) GABA-A antagonism → seizures. (5) Serotonin/NE reuptake inhibition. The Na⁺ channel blockade is the lethal mechanism.",
+    toxicKinetics:"Rapid absorption but anticholinergic effect delays gastric emptying (extended absorption window). High Vd (10–50 L/kg), high protein binding. Hepatic metabolism. Enterohepatic recirculation.",
+    clinicalFeatures:{
+      early:"Anticholinergic toxidrome: tachycardia, dry mouth, mydriasis, urinary retention, decreased bowel sounds, flushed skin, hyperthermia, agitation, delirium.",
+      cardiac:"<b>QRS > 100ms</b>: Na⁺ channel blockade → risk of VT. <b>QRS > 160ms</b>: high risk of VT/VF. R wave > 3mm in aVR (sensitive marker). Brugada-like pattern. Sinus tachycardia (anticholinergic). Hypotension (α-blockade + myocardial depression).",
+      neurological:"Seizures (often early, may be single or status). Coma. Myoclonus.",
+      complications:"Rapid deterioration — seizure → wide QRS → VT/VF → death can occur within 1–2h of ingestion."
+    },
+    investigations:"ECG (MOST IMPORTANT — repeat q30min for first 6h): QRS width, R in aVR, QTc. Serum TCA levels NOT useful for management (poor correlation with toxicity). ABG, electrolytes, glucose, co-ingestant screen.",
+    management:[
+      {title:"Sodium Bicarbonate (CORNERSTONE)",detail:"<b>Indication</b>: QRS > 100ms, hypotension, arrhythmias.<br><b>Dose</b>: 1–2 mEq/kg IV bolus. Target serum pH 7.45–7.55. Repeat boluses q5min until QRS narrows. Then NaHCO3 infusion: 150mEq in 1L D5W at 150–250mL/h. Mechanism: ↑ pH → ↓ free TCA binding to Na channels + ↑ Na gradient overcomes channel blockade."},
+      {title:"Seizure Management",detail:"Benzodiazepines FIRST: Diazepam 10mg IV or Midazolam 5mg IM. <b>AVOID phenytoin</b> (also Na⁺ channel blocker → worsens cardiac toxicity). Refractory: Propofol, phenobarbital."},
+      {title:"Hypotension Management",detail:"IV fluid bolus (crystalloid). Norepinephrine (first-line vasopressor — α-agonist counteracts α-blockade). Avoid pure β-agonists. Consider 20% lipid emulsion (ILE) in refractory cases: 1.5mL/kg bolus → 0.25mL/kg/min infusion."},
+      {title:"Arrhythmia Management",detail:"Wide-complex tachycardia: NaHCO3 bolus first. Lidocaine if refractory (different Na⁺ channel binding). <b>AVOID Class IA/IC antiarrhythmics</b> (procainamide, flecainide). <b>AVOID amiodarone</b> (QTc prolongation). Magnesium 2g IV for Torsades. Refractory VF: consider ILE."},
+      {title:"Decontamination",detail:"Activated charcoal 1g/kg if < 2h (extended window due to anticholinergic gastroparesis). Multi-dose activated charcoal (MDAC) may help due to enterohepatic recirculation: 0.5g/kg q4h."},
+      {title:"ICU Monitoring",detail:"Continuous cardiac monitoring minimum 24h. Serial ECG. If QRS remains normal for 24h + asymptomatic → can consider step-down. <b>Never clear a TCA OD based on drug levels.</b>"}
+    ]
+  },
+  {
+    id:"aluminium",name:"Aluminium/Zinc Phosphide (Celphos) Poisoning",category:"pesticide",severity:"critical",
+    icon:"💀",
+    mechanism:"Phosphide + gastric HCl/moisture → Phosphine gas (PH3). PH3 inhibits mitochondrial cytochrome C oxidase → cellular hypoxia → multi-organ failure. Also causes direct myocardial toxicity, free radical generation. <b>Lethal dose: 0.15–0.5g (single tablet of Celphos = 3g AlP)</b>.",
+    toxicKinetics:"Rapid generation of PH3 in stomach. Systemic absorption within minutes. No significant protein binding. PH3 has characteristic 'decaying fish / garlic' odor.",
+    clinicalFeatures:{
+      immediate:"Nausea, vomiting (may be phosphorescent/garlic smell), retrosternal burning, epigastric pain.",
+      cardiovascular:"<b>Refractory myocardial depression</b> — profound cardiogenic shock (hallmark). ECG: ST changes, conduction blocks, VT/VF. Pericarditis (late).",
+      metabolic:"Severe metabolic acidosis (pH < 7.1), ↑ lactate, hypermagnesemia, hyperkalemia, hypocalcemia.",
+      multiorgan:"ARDS, acute hepatic failure, AKI (ATN), DIC, adrenal insufficiency.",
+      prognosis:"Mortality 60–90%. Death usually 12–24h from refractory shock. Ingestion of > 1.5g almost uniformly fatal."
+    },
+    investigations:"ABG (severe metabolic acidosis), ECG, troponin, echocardiography (global hypokinesia), LFT, RFT, serum Mg/Ca/K, lactate, silver nitrate test (gastric aspirate turns black with PH3).",
+    management:[
+      {title:"No Proven Antidote — Management is Aggressive Supportive",detail:"This is one of the most lethal poisonings encountered in South Asian emergency departments. The key is aggressive hemodynamic support."},
+      {title:"Gastric Decontamination (UNIQUE)",detail:"<b>DO NOT use water-based lavage</b> (generates more PH3). Use KMnO4 (potassium permanganate) 1:10,000 solution or coconut oil/liquid paraffin to coat and reduce PH3 generation. Some centers use NaHCO3 lavage (7.5% — reduces acid contact → less PH3). Activated charcoal role uncertain but can be given."},
+      {title:"Hemodynamic Resuscitation",detail:"IV crystalloids aggressively. Early vasopressors: Norepinephrine + Dobutamine (for myocardial depression). Consider high-dose insulin-euglycemia therapy (HIE): Regular insulin 1 U/kg/h + D25W to maintain glucose 150–250 mg/dL — improves myocardial contractility. IV Magnesium Sulfate 3–4g bolus → 1g/h infusion (membrane stabilizer, anti-arrhythmic). IV Calcium gluconate for hypocalcemia."},
+      {title:"Metabolic Acidosis",detail:"NaHCO3 IV to maintain pH > 7.2. May require massive amounts (> 500 mEq). Refractory acidosis: consider hemodialysis for correction."},
+      {title:"Experimental Therapies",detail:"<b>Intra-aortic balloon pump (IABP)</b> / VA-ECMO for refractory cardiogenic shock — case reports showing survival. <b>Coconut oil</b> (oral/NG): proposed to coat phosphide & reduce PH3 release. <b>N-acetylcysteine</b>: free radical scavenger. <b>IV methylene blue</b>: for refractory shock (case reports). <b>Trimetazidine</b>: cytoprotective. Evidence is limited but in a lethal poisoning with no antidote, these are considered."},
+      {title:"Staff Safety",detail:"<b>PH3 gas is toxic to healthcare workers.</b> Treat in well-ventilated area. Emesis/gastric aspirate releases PH3. Staff should use N95 masks or work in negative-pressure rooms. Evacuate room if garlic odor detected."}
+    ]
+  },
+  {
+    id:"corrosive",name:"Corrosive Ingestion (Acid / Alkali)",category:"household",severity:"critical",
+    icon:"🧴",
+    mechanism:"<b>Acids</b> (HCl, H2SO4, toilet cleaners): Coagulation necrosis → eschar limits depth of penetration. Predominantly affect stomach (pyloroantral). <b>Alkalis</b> (NaOH, KOH, bleach, drain cleaners): Liquefaction necrosis → deeper penetration, full-thickness burns more common. Predominantly affect esophagus. Both can cause perforation.",
+    toxicKinetics:"Damage is immediate on contact. Severity depends on: concentration, pH (< 2 or > 12 → severe), volume, duration of contact, physical form (crystalline alkali adheres to mucosa → prolonged contact).",
+    clinicalFeatures:{
+      immediate:"Severe oropharyngeal pain, drooling, dysphagia, odynophagia, refusal to swallow. Lip/oral burns (but absence does NOT exclude esophageal/gastric injury — 10–30% have no oral burns).",
+      upper_gi:"Chest pain, epigastric pain, hematemesis. Perforation → mediastinitis (esophageal), peritonitis (gastric).",
+      respiratory:"Stridor, hoarseness (laryngeal/epiglottic edema), aspiration → chemical pneumonitis.",
+      systemic:"Acid ingestion: metabolic acidosis, hemolysis, DIC, AKI. Alkali: hypocalcemia (calcium soaps).",
+      late:"Esophageal stricture (weeks–months, especially alkali). Gastric outlet obstruction (acid). Esophageal carcinoma risk (1000× increased, decades later)."
+    },
+    investigations:"Chest X-ray + AXR (pneumomediastinum, pneumoperitoneum → perforation). CT chest/abdomen (if perforation suspected). CBC, ABG, electrolytes, lactate. <b>Endoscopy (EGD) within 12–24h</b> — Zargar classification guides prognosis. Contraindicated if perforation suspected.",
+    management:[
+      {title:"DO NOT Induce Vomiting / DO NOT Neutralize",detail:"<b>NEVER</b> give emetics or attempt gastric lavage (risk of re-exposure + perforation). <b>NEVER</b> attempt neutralization (acid for alkali or vice versa) — exothermic reaction causes thermal injury on top of chemical injury. <b>NEVER</b> give activated charcoal (ineffective, obscures endoscopy). Small sips of water/milk within minutes may dilute (controversial — max 250mL)."},
+      {title:"Airway Management",detail:"Priority #1. Examine oropharynx for edema. Stridor/hoarseness → early intubation (edema progresses rapidly). Prepare for surgical airway (cricothyrotomy) as laryngeal anatomy may be distorted. Fiberoptic intubation preferred if available."},
+      {title:"Resuscitation",detail:"IV fluids, analgesia (opioids — morphine 0.1mg/kg IV), NPO. Broad-spectrum antibiotics if perforation suspected (piperacillin-tazobactam or meropenem). Correct metabolic acidosis. Blood products for coagulopathy/DIC."},
+      {title:"Endoscopy & Grading (Zargar Classification)",detail:"<b>Grade 0</b>: Normal. <b>1</b>: Edema, hyperemia. <b>2a</b>: Superficial ulcers, friability. <b>2b</b>: Deep/circumferential ulcers. <b>3a</b>: Focal necrosis. <b>3b</b>: Extensive necrosis. Grade ≥ 2b → high risk of stricture. Grade 3b → risk of perforation, consider surgery."},
+      {title:"Surgical Consultation",detail:"Perforation → emergency surgery (esophagectomy/gastrectomy). Extensive Grade 3b necrosis → early surgery. Laparoscopy/thoracoscopy for assessment if unclear."},
+      {title:"Stricture Prevention",detail:"Steroids: CONTROVERSIAL. Some evidence for Grade 2b — Dexamethasone 1mg/kg/day × 3 weeks taper. Stenting or bougie dilatation starting at 3–6 weeks for developing strictures. Long-term follow-up mandatory (cancer surveillance)."}
+    ]
+  },
+  {
+    id:"co",name:"Carbon Monoxide (CO) Poisoning",category:"gas",severity:"critical",
+    icon:"🌫️",
+    mechanism:"CO binds hemoglobin with 200–250× affinity of O2 → carboxyhemoglobin (COHb) → left-shift of O2-dissociation curve → impaired O2 delivery. Also binds myoglobin (cardiac toxicity), cytochrome oxidase (cellular hypoxia). Net effect: tissue hypoxia despite normal PaO2.",
+    toxicKinetics:"Rapid inhalational absorption. T½ of COHb: 5–6h (room air), 60–90min (100% O2), 20–30min (hyperbaric O2 at 3 ATA).",
+    clinicalFeatures:{
+      mild:"Headache (throbbing, frontal — most common symptom), nausea, dizziness, fatigue. Often misdiagnosed as viral illness / migraine.",
+      moderate:"Confusion, visual disturbances, syncope, tachycardia, tachypnea, chest pain (ischemia).",
+      severe:"Seizures, coma, arrhythmias, myocardial infarction, pulmonary edema, rhabdomyolysis, lactic acidosis. <b>Cherry-red skin</b>: classic but LATE and unreliable sign — often seen postmortem.",
+      delayed:"<b>Delayed Neuropsychiatric Syndrome (DNS)</b>: 2–40 days post-exposure. Cognitive deficits, personality changes, parkinsonism, demyelination. Occurs in 15–40%. MRI: globus pallidus/white matter changes."
+    },
+    investigations:"<b>COHb level</b> (co-oximetry — NOT pulse oximetry, which reads COHb as O2Hb giving falsely normal SpO2). > 3% non-smoker, > 10% smoker = significant. ABG: normal PaO2 with ↓ SaO2 (saturation gap). ECG, troponin, lactate, CXR. Neuropsych testing before discharge.",
+    management:[
+      {title:"Remove from Source + High-Flow O2",detail:"100% O2 via non-rebreather mask IMMEDIATELY. Continue until COHb < 5% and asymptomatic. This is the most important intervention."},
+      {title:"Hyperbaric Oxygen Therapy (HBOT)",detail:"<b>Indications (generally accepted)</b>: COHb > 25% (> 20% in pregnancy), loss of consciousness, neurological symptoms, cardiac ischemia/arrhythmia, pregnancy (CO crosses placenta, fetal Hb has higher CO affinity). <b>Protocol</b>: 100% O2 at 2.5–3 ATA for 90–120 min. Reduces DNS incidence (Weaver trial). Repeat sessions may be needed."},
+      {title:"Cardiac Monitoring",detail:"Continuous ECG — arrhythmia risk. Serial troponin — myocardial injury common. Echocardiography if troponin elevated. CO-related MI managed supportively (not with PCI unless concurrent ACS)."},
+      {title:"Pregnancy Considerations",detail:"Lower threshold for HBOT. Continue O2 for 5× longer than non-pregnant patient (fetal COHb elimination is slower). Fetal monitoring. CO causes fetal hypoxia even with mild maternal symptoms."},
+      {title:"Follow-up",detail:"Neuropsych evaluation at 1 and 6 months (DNS detection). MRI brain if neurological symptoms persist. Education about CO detectors."}
+    ]
+  },
+  {
+    id:"snake",name:"Snake Envenomation",category:"bites",severity:"critical",
+    icon:"🐍",
+    mechanism:"<b>Elapidae (Cobra, Krait)</b>: Neurotoxins — presynaptic (β-bungarotoxin: destroys nerve terminal, irreversible) and postsynaptic (α-cobratoxin: competitive nAChR blockade, reversible with anti-venom). <b>Viperidae (Russell's Viper, Saw-scaled Viper)</b>: Hemotoxins — activates coagulation cascade → consumptive coagulopathy (DIC-like). Cytotoxins → local tissue necrosis. Nephrotoxins → AKI.",
+    toxicKinetics:"Variable absorption from bite site. Lymphatic spread → systemic. Onset: Elapid neurotoxicity 1–6h (Krait bites at night may present next morning). Viper hemotoxicity: local swelling within 30min, systemic coagulopathy 1–6h.",
+    clinicalFeatures:{
+      local:"Pain, swelling, ecchymosis, bullae, tissue necrosis (primarily vipers). Minimal local signs with elapid bites (especially Krait).",
+      neurotoxic:"Ptosis (earliest sign), external ophthalmoplegia, facial palsy, bulbar palsy (nasal voice, dysphagia, drooling), progressive descending paralysis → respiratory failure. Consciousness preserved until hypoxic.",
+      hemotoxic:"Persistent bleeding from bite site, gum bleeding, hematemesis, hematuria, ecchymoses, intracranial hemorrhage. 20-minute WBCT (Whole Blood Clotting Test): non-clotting blood = significant coagulopathy.",
+      renal:"AKI: direct nephrotoxicity (Russell's viper), myoglobinuria, hemoglobinuria, DIC-related cortical necrosis.",
+      systemic:"Hypotension (both types), anaphylaxis to venom, abdominal pain (viper), dark urine."
+    },
+    investigations:"<b>20-minute WBCT</b>: 2mL blood in clean glass tube, leave undisturbed 20 min. If non-clotting → coagulopathy (highly sensitive bedside test). CBC, PT/INR, aPTT, fibrinogen, D-dimer, LFT, RFT, CPK, urine myoglobin, blood group & cross-match.",
+    management:[
+      {title:"First Aid (WHO Guidelines)",detail:"Immobilize limb (splint). Reassure patient (anxiety worsens outcomes). Transport to hospital rapidly. <b>DO NOT</b>: tourniquet, incise wound, suck venom, apply ice, apply herbs/chemicals. Pressure immobilization bandage only for elapid bites (not vipers — worsens local necrosis)."},
+      {title:"Anti-Snake Venom (ASV) — ANTIDOTE",detail:"<b>Polyvalent ASV</b> (covers Big 4: Cobra, Krait, Russell's Viper, Saw-scaled Viper in India).<br><b>Indications</b>: Non-clotting WBCT, spontaneous bleeding, neurotoxic signs, cardiovascular compromise, AKI, significant local envenomation.<br><b>Dose</b>: 8–10 vials (WHO recommends same dose children & adults — venom is per-bite, not weight-based). Dissolve in 200mL NS, infuse over 1h (start slow 15min observation for anaphylaxis). Repeat after 6h if WBCT still non-clotting or neurotoxicity progressing.<br><b>Skin testing NOT recommended</b> (poor predictive value, delays treatment)."},
+      {title:"ASV Anaphylaxis Management",detail:"STOP ASV. Epinephrine 0.5mg IM (1:1000) — REPEAT q5min PRN. IV fluids, hydrocortisone 200mg IV, chlorpheniramine 10mg IV. Once stabilized, restart ASV at slower rate. <b>Do NOT withhold ASV due to prior reaction</b> — envenomation kills faster than managed anaphylaxis."},
+      {title:"Neurotoxic Envenomation",detail:"ASV (effective against postsynaptic toxins — cobra). Less effective against presynaptic (krait — already destroyed nerve terminals). <b>Neostigmine trial</b>: Atropine 0.6mg IV + Neostigmine 0.5mg IV (Tensilon-like test). If ptosis improves → continue neostigmine 0.5mg q30min. Works for postsynaptic (cobra), NOT presynaptic (krait). Ventilatory support: early intubation for respiratory failure. Krait bites may need prolonged ventilation (days–weeks until nerve terminals regenerate)."},
+      {title:"Hemotoxic Envenomation",detail:"ASV + blood products: FFP for active bleeding + coagulopathy. Packed RBC for significant anemia. Platelets if < 20,000 or active bleeding. Cryoprecipitate for fibrinogen < 100. Monitor WBCT q6h post-ASV. Heparin CONTRAINDICATED (it's consumptive, not thrombotic)."},
+      {title:"Renal & Surgical Management",detail:"AKI: aggressive hydration, monitor UO. Dialysis for standard indications. Fasciotomy ONLY if true compartment syndrome (measured pressures > 30mmHg) — clinical swelling alone is NOT an indication. Wound care: debridement of necrotic tissue, antibiotics only if secondary infection. Tetanus prophylaxis."}
+    ]
+  },
+  {
+    id:"scorpion",name:"Scorpion Envenomation",category:"bites",severity:"high",
+    icon:"🦂",
+    mechanism:"<b>Mesobuthus tamulus</b> (Indian Red Scorpion — most dangerous in India): venom stimulates massive autonomic storm. Initial cholinergic surge → followed by sustained catecholamine release (sympathetic storm). Direct myocardial toxicity. Na⁺ channel activation in autonomic ganglia.",
+    toxicKinetics:"Rapid local absorption. Systemic effects within 30min–2h. Venom components: neurotoxins, cardiotoxins, hemolytic toxins.",
+    clinicalFeatures:{
+      local:"Intense pain at sting site (out of proportion to appearance), paresthesias, local swelling.",
+      autonomic:"<b>Early cholinergic</b>: Profuse sweating (hallmark), salivation, bradycardia, vomiting, priapism. <b>Then sympathetic</b>: Tachycardia, hypertension, peripheral vasoconstriction, cold extremities, anxiety.",
+      cardiovascular:"Myocarditis → acute LV dysfunction → pulmonary edema (most common cause of death). ECG: ST-T changes mimicking MI, arrhythmias.",
+      other:"Pancreatitis (hyperamylasemia), DIC, rhabdomyolysis. Children: more severe due to dose-to-weight ratio."
+    },
+    investigations:"ECG (ST changes, arrhythmias), troponin, echocardiography (LV dysfunction), CXR (pulmonary edema), amylase/lipase, CBC, electrolytes, glucose (hyperglycemia common).",
+    management:[
+      {title:"Pain Management",detail:"Local: ice pack, local anesthetic infiltration (lignocaine 2% without adrenaline). Systemic: Paracetamol, NSAIDs. Opioids if severe."},
+      {title:"Prazosin (CORNERSTONE in Indian Red Scorpion)",detail:"<b>α1-blocker</b>: Counters catecholamine surge → reduces afterload → reduces pulmonary edema.<br><b>Dose</b>: Adults 0.5mg oral q6h (first dose may cause hypotension — give IV fluids pre-emptively). Children: 30mcg/kg/dose q6h. Start within first few hours — early prazosin dramatically reduces mortality (Bawaskar protocol). Monitor BP closely."},
+      {title:"Scorpion Anti-Venom",detail:"Available in some regions. Recommended by WHO. Most effective within 2h of sting. Dosing varies by product. Less widely available than snake ASV. Use if available — reduces need for ICU care."},
+      {title:"Pulmonary Edema Management",detail:"Dobutamine (for LV dysfunction): 5–20 mcg/kg/min. NTG infusion for afterload reduction (if not hypotensive). Diuretics: Furosemide 40–80mg IV. CPAP/BiPAP. Intubation + PEEP if refractory. <b>Avoid fluid overload</b> in presence of myocardial dysfunction."},
+      {title:"ICU Monitoring",detail:"All moderate-severe cases need ICU. Continuous ECG, hourly BP. Echocardiography q12–24h. Watch for arrhythmias. Children: monitor blood glucose (hyperglycemia → insulin if needed). Most recover within 48–72h with appropriate management."}
+    ]
+  },
+  {
+    id:"lead",name:"Lead Poisoning",category:"metals",severity:"high",
+    icon:"🔋",
+    mechanism:"Lead inhibits δ-aminolevulinic acid dehydratase (ALAD) and ferrochelatase → impaired heme synthesis. Binds sulfhydryl groups on enzymes. Substitutes for Ca²⁺ in neurons → neurotoxicity. Stored in bone (T½ 20–30 years). Crosses placenta and BBB.",
+    toxicKinetics:"Absorption: GI (adults 10–15%, children 40–50%), inhalational (significant). Distributes to blood (T½ 30 days), soft tissues, bone (>95% body burden). Renal excretion.",
+    clinicalFeatures:{
+      acute:"Abdominal colic ('lead colic'), vomiting, constipation, metallic taste.",
+      chronic_neuro:"<b>Children</b>: Learning disabilities, behavioral problems, ↓ IQ (even at levels < 5 μg/dL), encephalopathy (rare now). <b>Adults</b>: Peripheral neuropathy (wrist drop — radial nerve), headache, irritability, memory loss.",
+      hematologic:"Microcytic hypochromic anemia (or normocytic). <b>Basophilic stippling</b> on peripheral smear (impaired 5'-nucleotidase). Ringed sideroblasts on bone marrow.",
+      other:"Burton's line (blue-black line on gingiva — lead sulfide deposition). Nephropathy (proximal tubular dysfunction, chronic interstitial nephritis). Gout (saturnine gout). Abdominal X-ray: radio-opaque material.",
+      reproductive:"Male: ↓ sperm count/motility. Female: ↑ miscarriage risk. Teratogenic."
+    },
+    investigations:"<b>Venous blood lead level (BLL)</b>: Gold standard. > 5 μg/dL: elevated (CDC). > 45 μg/dL: chelation. > 70 μg/dL: emergency chelation + encephalopathy risk. Free erythrocyte protoporphyrin (FEP)/ZPP: elevated. Urine ALA, coproporphyrin: elevated. CBC + reticulocytes, BUN/Cr, uric acid. Abdominal X-ray. Long bone X-ray in children (lead lines at metaphysis).",
+    management:[
+      {title:"Source Identification & Removal",detail:"MOST IMPORTANT step. Common sources: old paint, contaminated water, occupational (batteries, smelting), traditional medicines (Surma, Sindoor, Ayurvedic preparations), ceramic glazes, retained bullets. Without source removal, chelation is futile."},
+      {title:"Chelation Therapy",detail:"<b>BLL 45–69 μg/dL (no encephalopathy)</b>: Succimer (DMSA) 10mg/kg q8h × 5 days, then q12h × 14 days (oral, outpatient).<br><b>BLL ≥ 70 μg/dL or encephalopathy</b>: <b>Dimercaprol (BAL)</b> 75mg/m² IM q4h × 5 days + <b>CaNa2EDTA</b> 1500mg/m²/day IV infusion (start 4h AFTER first BAL dose — never give EDTA alone, can worsen CNS lead). <b>NEVER use EDTA alone without BAL in encephalopathy</b> — mobilizes lead into brain.<br><b>D-Penicillamine</b>: oral alternative if DMSA unavailable. 25–40mg/kg/day. More side effects (nephrotoxicity, bone marrow suppression)."},
+      {title:"Encephalopathy Management",detail:"ICU admission. Seizures: benzodiazepines (avoid phenytoin if possible). Cerebral edema: Mannitol 0.25–0.5g/kg, dexamethasone. Maintain normoglycemia. Chelation as above. ICP monitoring if available."},
+      {title:"Follow-up",detail:"Recheck BLL within 48–72h of chelation (rebound from bone stores). May need repeated chelation courses. Neurodevelopmental follow-up in children. Occupational health referral for adults."}
+    ]
+  },
+  {
+    id:"arsenic",name:"Arsenic Poisoning",category:"metals",severity:"critical",
+    icon:"⚗️",
+    mechanism:"Inorganic arsenic (As³⁺ trivalent most toxic): binds sulfhydryl groups → inactivates pyruvate dehydrogenase and other mitochondrial enzymes → impaired oxidative phosphorylation. As⁵⁺ substitutes for phosphate in glycolysis ('arsenolysis'). Potent carcinogen (IARC Group 1).",
+    toxicKinetics:"Rapid GI absorption. Distributes to liver, kidney, lungs, skin, hair, nails. Methylation in liver → less toxic metabolites. Urine excretion. T½: 10h (blood), persists in keratin-rich tissues for months.",
+    clinicalFeatures:{
+      acute:"Garlic/metallic taste. <b>Severe GI</b>: 'rice-water' cholera-like diarrhea, vomiting, abdominal pain (hours post-ingestion). Hypovolemic shock. <b>Multi-organ failure</b>: QTc prolongation → Torsades, hepatitis, AKI (ATN), ARDS, encephalopathy, pancytopenia (days).",
+      chronic:"<b>Skin</b>: Diffuse hyperpigmentation ('raindrop' pattern), keratoses (palms/soles), Mees' lines (transverse white lines on nails — appear 4–6 weeks post-exposure). <b>Peripheral neuropathy</b>: painful sensorimotor (stocking-glove). <b>GI</b>: chronic diarrhea, hepatomegaly. <b>Hematologic</b>: pancytopenia, basophilic stippling. <b>Cancer</b>: Skin (Bowen's disease, SCC, BCC), lung, bladder, liver (angiosarcoma).",
+      blackfoot:"Endemic chronic arsenicosis (Bangladesh, West Bengal): 'Blackfoot disease' — peripheral vascular disease → gangrene."
+    },
+    investigations:"<b>24-hour urine arsenic</b>: > 50 μg/L (avoid seafood 48h before — organic arsenic in seafood gives false elevation). Speciated arsenic if needed. Spot urine adjusted to creatinine. Hair/nail arsenic (chronic). Blood arsenic (acute). CBC (pancytopenia), LFT, RFT, ECG (QTc), peripheral smear (basophilic stippling).",
+    management:[
+      {title:"Acute Stabilization",detail:"Aggressive IV resuscitation for cholera-like fluid losses (may lose liters). Vasopressors if needed. Correct electrolytes. Continuous ECG (QTc monitoring, Torsades risk → Magnesium IV). Whole bowel irrigation if radiopaque material on AXR."},
+      {title:"Chelation — Acute Symptomatic",detail:"<b>Dimercaprol (BAL)</b>: 3–5 mg/kg IM q4h × 5 days, then q6–12h × 7–14 days (taper). Switch to <b>Succimer (DMSA)</b> oral when tolerating PO: 10mg/kg q8h × 5 days → q12h × 14 days. <b>Unithiol (DMPS)</b>: alternative chelator (IV or oral), better side-effect profile than BAL, available in some countries."},
+      {title:"Chronic Arsenic Management",detail:"Source removal (contaminated water — most common in South Asia). Chelation: DMSA or D-Penicillamine for symptomatic cases with elevated urine arsenic. Long-term monitoring for malignancies: skin examination, CXR, urine cytology."},
+      {title:"Dialysis",detail:"Arsenic is poorly dialyzable but hemodialysis can help with AKI management and in combination with chelation (chelator-arsenic complex is dialyzable)."}
+    ]
+  },
+  {
+    id:"methanol",name:"Methanol Poisoning",category:"household",severity:"critical",
+    icon:"🍶",
+    mechanism:"Methanol itself has low toxicity (similar to ethanol). Toxicity from metabolites: Methanol → (alcohol dehydrogenase) → Formaldehyde → (aldehyde dehydrogenase) → <b>Formic acid</b>. Formic acid inhibits cytochrome oxidase → retinal toxicity (optic nerve) + metabolic acidosis. Latent period 12–24h while metabolites accumulate.",
+    toxicKinetics:"Rapid GI absorption (peak 30–90min). Vd 0.6 L/kg. T½: 2–3h (ethanol present → 40–50h due to competitive ADH inhibition). Lethal dose: 30–240 mL (0.4 mL/kg can cause blindness).",
+    clinicalFeatures:{
+      early:"Inebriation similar to ethanol but less pronounced. GI: nausea, vomiting, abdominal pain. <b>Visual symptoms</b>: blurred vision, scotomata, 'snowfield vision', photophobia — pathognomonic. May have latent period of 12–24h.",
+      late:"<b>Severe metabolic acidosis</b> (AG elevation, pH can drop to < 7.0). <b>Visual loss</b>: ranging from blurred vision to complete bilateral blindness. Fundoscopy: retinal edema, optic disc hyperemia. <b>CNS</b>: headache, confusion, seizures, coma. <b>CT/MRI</b>: bilateral putaminal hemorrhagic necrosis (characteristic), subcortical white matter necrosis.",
+      prognosis:"Without treatment: death or permanent blindness. Degree of acidosis at presentation correlates with outcome. pH < 7.0 associated with high mortality."
+    },
+    investigations:"<b>Serum methanol level</b> (may be undetectable if delayed). <b>Osmolal gap</b> (early — before metabolism): Measured osmolality − Calculated osmolality > 10 → consider toxic alcohols. <b>Anion gap metabolic acidosis</b> (late — after metabolism to formate). ABG/VBG, serum lactate, serum ethanol, BUN/Cr, lipase, fundoscopy, CT brain.",
+    management:[
+      {title:"Fomepizole (ANTIDOTE OF CHOICE)",detail:"<b>4-methylpyrazole</b>: competitive ADH inhibitor. <b>Dose</b>: 15mg/kg IV loading → 10mg/kg q12h × 4 doses → 15mg/kg q12h thereafter. Continue until methanol < 20 mg/dL and asymptomatic. <b>Advantages</b>: predictable pharmacokinetics, no inebriation, easy to dose. <b>Disadvantage</b>: expensive."},
+      {title:"Ethanol (Alternative if Fomepizole Unavailable)",detail:"Competes with methanol for ADH (20× higher affinity). <b>IV</b>: 10% ethanol in D5W — loading 7.6 mL/kg over 30min → maintenance 1.4 mL/kg/h. Target serum ethanol: 100–150 mg/dL. <b>Oral</b>: 40% spirit — loading 1.5 mL/kg → 0.3 mL/kg/h. Monitor glucose (hypoglycemia risk). Difficult to titrate, causes inebriation."},
+      {title:"Hemodialysis (KEY INTERVENTION)",detail:"<b>Indications</b>: methanol > 50 mg/dL, visual symptoms, renal failure, refractory acidosis, any end-organ damage. Methanol is small molecule, low protein binding, low Vd → ideal for dialysis. Also removes formic acid. Continue antidote during dialysis (fomepizole also removed — increase dosing to q4h during HD)."},
+      {title:"Folinic Acid (Leucovorin)",detail:"Enhances formate metabolism to CO2 + H2O. <b>Dose</b>: 1mg/kg IV q4–6h (max 50mg). If unavailable, use folic acid 50mg IV q4–6h. Continue until acidosis resolves."},
+      {title:"Supportive",detail:"NaHCO3 for severe acidosis (pH < 7.1) — large amounts may be needed. Ophthalmology consultation. Seizure management (benzodiazepines). ICU monitoring. Steroids for optic neuropathy (limited evidence — methylprednisolone 1g IV × 3 days)."}
+    ]
+  },
+  {
+    id:"ethylene",name:"Ethylene Glycol Poisoning",category:"household",severity:"critical",
+    icon:"🚗",
+    mechanism:"Ethylene glycol (antifreeze) → (ADH) → Glycoaldehyde → Glycolate → Glyoxylate → <b>Oxalate</b>. Glycolate causes metabolic acidosis. Oxalate precipitates with calcium → <b>calcium oxalate crystals</b> in renal tubules → AKI. Also causes cerebral edema.",
+    toxicKinetics:"Rapid absorption. Sweet taste → often ingested by children/accidentally. Vd: 0.5–0.8 L/kg. Lethal dose: ~1.5 mL/kg (100 mL in adults).",
+    clinicalFeatures:{
+      stage1:"0–12h: Inebriation WITHOUT ethanol smell on breath. Nausea, vomiting. GI irritation.",
+      stage2:"12–24h: Cardiopulmonary — tachycardia, hypertension, CHF, ARDS. Metabolic: severe AG metabolic acidosis, hypocalcemia (calcium chelated by oxalate → tetany, QTc prolongation).",
+      stage3:"24–72h: Renal — oliguric AKI, flank pain, hematuria. <b>Urine microscopy: calcium oxalate crystals (envelope-shaped monohydrate, needle-shaped dihydrate)</b> — pathognomonic. May present with cranial nerve palsies.",
+      fluorescence:"UV fluorescence of urine (fluorescein additive in antifreeze) — NOT reliable."
+    },
+    investigations:"Serum ethylene glycol level, osmolal gap (early), anion gap (late), calcium (↓), ABG, BUN/Cr, urinalysis with microscopy (Ca oxalate crystals), ECG (QTc prolongation from hypocalcemia), serum ethanol.",
+    management:[
+      {title:"Fomepizole (FIRST-LINE)",detail:"Same dosing as methanol poisoning: 15mg/kg IV load → 10mg/kg q12h. Blocks ADH → prevents metabolism to toxic metabolites. Start empirically if clinical suspicion even before levels return."},
+      {title:"Ethanol (Alternative)",detail:"Same protocol as methanol. Target serum ethanol 100–150 mg/dL."},
+      {title:"Hemodialysis",detail:"<b>Indications</b>: EG level > 50mg/dL, AKI, refractory acidosis, electrolyte disturbances. Efficiently removes EG and glycolate. Continue antidote during dialysis. Some patients need prolonged or repeated sessions."},
+      {title:"Calcium Replacement",detail:"Calcium gluconate 10% 10–20mL IV for symptomatic hypocalcemia or QTc prolongation. Caution: may worsen oxalate crystal deposition in tissues. Give only for symptomatic hypocalcemia."},
+      {title:"Thiamine + Pyridoxine (Cofactors)",detail:"Thiamine 100mg IV q6h: shunts glyoxylate → non-toxic α-hydroxy-β-ketoadipate. Pyridoxine 50mg IV q6h: shunts glyoxylate → glycine (non-toxic). Continue for 48h. Low risk, may reduce toxic metabolite formation."},
+      {title:"Bicarbonate + Supportive",detail:"NaHCO3 for severe acidosis. ICU monitoring. Continuous ECG. Monitor calcium, renal function closely. AKI may require dialysis support for days–weeks but usually recovers."}
+    ]
+  },
+  {
+    id:"oleander",name:"Oleander (Nerium oleander) Poisoning",category:"plant",severity:"critical",
+    icon:"🌺",
+    mechanism:"Contains cardiac glycosides (oleandrin, neriine, digitoxigenin) — inhibit Na⁺/K⁺ ATPase → ↑ intracellular Na⁺ → ↑ intracellular Ca²⁺ (via NCX exchanger) → positive inotropy + cardiac dysrhythmias. Mechanism identical to digoxin. Also contains oxalates and saponins.",
+    toxicKinetics:"All parts toxic (leaves, flowers, bark, seeds, sap). Boiling does NOT destroy toxins. 5–15 leaves may be lethal in adults. Absorption: GI. Onset: 2–4h.",
+    clinicalFeatures:{
+      gi:"Nausea, vomiting, abdominal pain, diarrhea (often first symptoms). Burning of oral mucosa.",
+      cardiac:"<b>Bradyarrhythmias</b> (most common): sinus bradycardia, AV blocks (1st, 2nd, 3rd degree), junctional rhythms. <b>Tachyarrhythmias</b>: atrial tachycardia with block (pathognomonic for digitalis-like toxicity), ventricular ectopy, bidirectional VT, VF. <b>Hyperkalemia</b>: inhibited Na⁺/K⁺ ATPase → K⁺ shifts extracellularly → cardiac arrest.",
+      systemic:"Drowsiness, visual disturbances (xanthopsia — yellow vision, like digoxin), dilated pupils, diaphoresis."
+    },
+    investigations:"ECG (frequent monitoring — arrhythmias are the killer). Serum potassium (CRITICAL — hyperkalemia correlates with severity). <b>Serum digoxin immunoassay</b>: may cross-react with oleandrin → useful as qualitative marker (but level does NOT correlate with severity as it does for digoxin). Electrolytes, RFT, ABG.",
+    management:[
+      {title:"Decontamination",detail:"Activated charcoal 1g/kg if < 2h (significant benefit as cardiac glycosides undergo enterohepatic circulation). Multi-dose activated charcoal (MDAC): 0.5g/kg q4h for enhanced elimination."},
+      {title:"Digoxin-specific Antibody Fragments (DigiFab) — ANTIDOTE",detail:"<b>Binds oleandrin</b> (cross-reactivity). <b>Indications</b>: hemodynamically significant bradycardia, ventricular arrhythmias, K⁺ > 5.5 mEq/L. <b>Empiric dose (unknown glycoside amount)</b>: 10–20 vials IV over 30 min. Monitor response — repeat if needed. <b>Highly effective</b> but expensive and may not be available in all settings."},
+      {title:"Hyperkalemia Management",detail:"Insulin 10U + D50W (shifts K⁺ intracellularly). NaHCO3 50 mEq IV. Calcium is CONTROVERSIAL in digitalis toxicity (may worsen intracellular Ca²⁺ overload → stone heart). Use calcium ONLY if life-threatening hyperkalemia with no DigiFab available — give slowly with continuous monitoring."},
+      {title:"Bradycardia Management",detail:"Atropine 0.5–1mg IV q3–5min (max 3mg). Temporary pacing if refractory (capture may be difficult due to ↑ threshold). Isoproterenol infusion as bridge."},
+      {title:"Avoid in Cardiac Glycoside Toxicity",detail:"<b>DO NOT</b> give calcium routinely. <b>DO NOT</b> cardiovert unless VF/pulseless VT (can trigger refractory arrhythmias — use lowest effective energy if needed). <b>DO NOT</b> use Class IA antiarrhythmics. Lidocaine/Phenytoin may be used for ventricular arrhythmias."},
+      {title:"Supportive",detail:"ICU admission. Continuous cardiac monitoring minimum 48h. IV fluids, antiemetics. Monitor potassium q2h initially. Disposition based on arrhythmia resolution."}
+    ]
+  },
+  {
+    id:"iron",name:"Iron Poisoning",category:"drugs",severity:"high",
+    icon:"🔩",
+    mechanism:"Excess free iron → direct corrosive injury to GI mucosa + free radical generation → lipid peroxidation → cellular damage. Overwhelms transferrin binding capacity → free iron in circulation → hepatotoxicity (zone 1 necrosis), cardiotoxicity, metabolic acidosis. Toxic dose: > 20 mg/kg elemental iron (moderate), > 60 mg/kg (severe/lethal).",
+    toxicKinetics:"GI absorption normally regulated but overwhelmed in OD. Peak serum iron: 4–6h. Concentrated in liver. Not renally excreted (no mechanism for elimination — hence chelation critical).",
+    clinicalFeatures:{
+      phase1:"0–6h: GI phase — vomiting (may be hemorrhagic), diarrhea (bloody/black), abdominal pain. Direct mucosal necrosis. Hemorrhagic gastritis.",
+      phase2:"6–24h: Latent/quiescent phase — apparent clinical improvement. DECEPTIVE — ongoing cellular damage. Patient may look well.",
+      phase3:"12–48h: Shock/metabolic phase — cardiovascular collapse, severe AG metabolic acidosis (lactic + Fe-mediated), hepatic failure (AST/ALT > 1000), coagulopathy, AKI, ARDS.",
+      phase4:"2–8 weeks: Late — GI scarring → pyloric/intestinal strictures, gastric outlet obstruction."
+    },
+    investigations:"<b>Serum iron level</b> (4–6h post-ingestion): > 300 μg/dL → symptomatic, > 500 μg/dL → serious toxicity, > 1000 μg/dL → potentially lethal. TIBC (not useful in acute OD — lab artifact). ABG, lactate, glucose, hepatic panel, coagulation, AXR (iron tablets are radiopaque). White count > 15,000 or glucose > 150 mg/dL: correlate with serum iron > 300 μg/dL.",
+    management:[
+      {title:"GI Decontamination",detail:"Activated charcoal does NOT bind iron. Whole bowel irrigation (WBI) with PEG: 1–2 L/h (adults), 500 mL/h (children) until rectal effluent clear AND repeat AXR shows no remaining tablets. Gastric lavage with normal saline (not bicarbonate/deferoxamine lavage — no evidence and delays systemic chelation)."},
+      {title:"Deferoxamine (DFO) — ANTIDOTE",detail:"<b>Indications</b>: serum iron > 500 μg/dL, metabolic acidosis, shock, altered mental status, persistent vomiting/diarrhea, or any signs of systemic toxicity.<br><b>Dose</b>: 15 mg/kg/h IV infusion (max 6–8 g/day). Chelates free iron → ferrioxamine (water-soluble, renally excreted — turns urine 'vin rosé' pinkish-orange). Continue until: clinical improvement + resolving acidosis + urine color normalizes. Usually 24–48h. <b>Caution</b>: > 24h continuous infusion → risk of ARDS (Yersinia sepsis also reported with DFO)."},
+      {title:"Supportive",detail:"Aggressive IV resuscitation (GI hemorrhage + third-spacing). Blood products for coagulopathy. ICU admission for moderate-severe. Serial serum iron levels, hepatic panels. Treat hepatic failure supportively. Gastric outlet obstruction may need surgical intervention weeks later."}
+    ]
+  },
+  {
+    id:"cyanide",name:"Cyanide Poisoning",category:"gas",severity:"critical",
+    icon:"💨",
+    mechanism:"CN⁻ binds cytochrome a₃ (cytochrome oxidase complex IV) → blocks mitochondrial electron transport chain → cellular unable to utilize O2 → histotoxic hypoxia. Cells switch to anaerobic metabolism → massive lactic acidosis. Death from cellular asphyxiation despite adequate O2 delivery.",
+    toxicKinetics:"Sources: HCN gas (fire smoke, industrial), cyanide salts (KCN, NaCN — suicide/homicide), cyanogenic glycosides (cassava, bitter almonds, apricot pits), nitroprusside infusion. Inhalation: seconds to minutes onset. Ingestion: 30min–1h. Lethal dose: 1–3 mg/kg (salts), 100–300 ppm (gas).",
+    clinicalFeatures:{
+      early:"Headache, anxiety, dizziness, confusion, tachypnea (stimulation of carotid body), tachycardia. <b>Bitter almond odor</b> (40% population genetically unable to detect).",
+      progressive:"Seizures, coma, apnea, cardiovascular collapse. <b>Bright cherry-red venous blood/skin</b> (cells can't extract O2 → venous blood remains oxygenated). Lactic acidosis > 8 mmol/L (highly suggestive).",
+      labs:"<b>↓ arteriovenous O2 difference</b> (venous PO2 elevated — cells can't use O2). Normal SpO2 initially. Severe AG metabolic acidosis, elevated lactate."
+    },
+    investigations:"<b>Blood cyanide levels</b> (rarely available acutely — TREAT EMPIRICALLY). ABG/VBG (narrowed A-V O2 difference), lactate (> 8 mmol/L highly suggestive in fire victims), co-oximetry (rule out concurrent CO poisoning in fire smoke), ECG, glucose.",
+    management:[
+      {title:"Immediate Actions",detail:"Remove from exposure (RESCUER SAFETY — PPE, do NOT mouth-to-mouth). 100% O2 high-flow. Rapid IV access. Decontamination if dermal exposure (remove clothes, copious water)."},
+      {title:"Hydroxocobalamin (Cyanokit) — ANTIDOTE OF CHOICE",detail:"<b>Dose</b>: 5g IV over 15 min (adults), 70 mg/kg (children). Can repeat ×1. <b>Mechanism</b>: cobalt chelates CN⁻ → cyanocobalamin (vitamin B12) → renally excreted. <b>Advantages</b>: safe, rapid, can be used empirically in fire victims (compatible with concurrent CO treatment), minimal side effects. <b>Side effects</b>: red discoloration of skin/urine (harmless, lasts days), interferes with colorimetric lab assays."},
+      {title:"Cyanide Antidote Kit (Lilly Kit — Alternative)",detail:"<b>Step 1</b>: Amyl nitrite pearls (inhale crushed pearl 15–30s/min while IV prepared). <b>Step 2</b>: Sodium nitrite 3% — 10mL (300mg) IV over 5 min (pediatric: 0.2 mL/kg). <b>Step 3</b>: Sodium thiosulfate 25% — 50mL (12.5g) IV over 10min (pediatric: 1.65 mL/kg). <b>Mechanism</b>: Nitrites induce methemoglobin → MetHb binds CN⁻ → cyanomethemoglobin. Thiosulfate provides sulfur → rhodanese enzyme converts CN⁻ → thiocyanate (non-toxic). <b>CAUTION</b>: Do NOT use nitrites in concurrent CO poisoning (further impairs O2 delivery via MetHb)."},
+      {title:"DMAP (4-Dimethylaminophenol)",detail:"Alternative methemoglobin inducer (used in some countries instead of sodium nitrite). 3.25 mg/kg IV. Faster MetHb formation than nitrite."},
+      {title:"Supportive Care",detail:"Intubation for apnea/coma. Correct acidosis: NaHCO3 (but treating the cause is key — antidotes). Vasopressors for shock. Seizures: benzodiazepines. ICU monitoring. Serial lactate to monitor response."}
+    ]
+  }
+];
+
+let currentData = POISONS;
+let currentCategory = "all";
+let currentSearch = "";
+
+function getSeverityColor(s){
+  return s==="critical"?"#ef4444":s==="high"?"#f97316":"#eab308";
+}
+function getSeverityBorder(s){
+  return s==="critical"?"severity-critical":s==="high"?"severity-high":"severity-moderate";
+}
+
+function renderPoisons(data){
+  const list = document.getElementById("poisonList");
+  if(!data.length){
+    list.innerHTML=`<div class="text-center py-16 fade-in"><p class="text-lg" style="color:#64748b">No results found. Try a different search term.</p></div>`;
+    return;
+  }
+  list.innerHTML = data.map(p=>`
+    <article class="rounded-xl card-glow fade-in ${getSeverityBorder(p.severity)}" style="background:#1a1d2e;border:1px solid rgba(255,255,255,.06)">
+      <details>
+        <summary class="p-4 md:p-5 flex items-start gap-3">
+          <span class="text-2xl flex-shrink-0 mt-0.5">${p.icon}</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <h2 class="font-bold text-base md:text-lg" style="color:#e2e8f0;font-family:'Playfair Display',serif">${p.name}</h2>
+              <span class="px-2 py-0.5 rounded-full text-xs font-semibold uppercase" style="background:${getSeverityColor(p.severity)}22;color:${getSeverityColor(p.severity)}">${p.severity}</span>
+              <span class="px-2 py-0.5 rounded-full text-xs" style="background:#6366f122;color:#818cf8">${p.category}</span>
+            </div>
+            <p class="text-xs md:text-sm line-clamp-2" style="color:#94a3b8">${p.mechanism.substring(0,120)}...</p>
+          </div>
+          <i data-lucide="chevron-down" class="chevron-icon flex-shrink-0 mt-1" style="width:20px;height:20px;color:#64748b"></i>
+        </summary>
+        <div class="px-4 pb-5 md:px-5 space-y-4" style="border-top:1px solid rgba(255,255,255,.04)">
+
+          <!-- Mechanism -->
+          <section class="pt-4">
+            <h3 class="flex items-center gap-2 font-semibold text-sm mb-2" style="color:#818cf8"><i data-lucide="zap" style="width:14px;height:14px"></i> Mechanism of Toxicity</h3>
+            <p class="text-sm leading-relaxed" style="color:#cbd5e1">${p.mechanism}</p>
+          </section>
+
+          <!-- Toxicokinetics -->
+          ${p.toxicKinetics?`<section>
+            <h3 class="flex items-center gap-2 font-semibold text-sm mb-2" style="color:#818cf8"><i data-lucide="activity" style="width:14px;height:14px"></i> Toxicokinetics</h3>
+            <p class="text-sm leading-relaxed" style="color:#cbd5e1">${p.toxicKinetics}</p>
+          </section>`:""}
+
+          <!-- Clinical Features -->
+          <section>
+            <h3 class="flex items-center gap-2 font-semibold text-sm mb-2" style="color:#f97316"><i data-lucide="stethoscope" style="width:14px;height:14px"></i> Clinical Features</h3>
+            <div class="grid gap-2">
+              ${Object.entries(p.clinicalFeatures).map(([k,v])=>`
+                <div class="rounded-lg p-3" style="background:#0f1117">
+                  <span class="text-xs font-semibold uppercase tracking-wide" style="color:#f97316">${k.replace(/_/g," ")}</span>
+                  <p class="text-sm mt-1 leading-relaxed" style="color:#cbd5e1">${v}</p>
+                </div>
+              `).join("")}
+            </div>
+          </section>
+
+          <!-- Investigations -->
+          <section>
+            <h3 class="flex items-center gap-2 font-semibold text-sm mb-2" style="color:#22c55e"><i data-lucide="search" style="width:14px;height:14px"></i> Investigations</h3>
+            <div class="rounded-lg p-3" style="background:#0f1117">
+              <p class="text-sm leading-relaxed" style="color:#cbd5e1">${p.investigations}</p>
+            </div>
+          </section>
+
+          <!-- Management -->
+          <section>
+            <h3 class="flex items-center gap-2 font-semibold text-sm mb-3" style="color:#6366f1"><i data-lucide="shield" style="width:14px;height:14px"></i> Management Protocol</h3>
+            <div class="space-y-2">
+              ${p.management.map((m,i)=>`
+                <div class="rounded-lg p-3 md:p-4" style="background:#0f1117;border-left:3px solid #6366f1">
+                  <div class="flex items-start gap-2">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold" style="background:#6366f1;color:#fff">${i+1}</span>
+                    <div>
+                      <h4 class="font-semibold text-sm" style="color:#e2e8f0">${m.title}</h4>
+                      <p class="text-sm mt-1 leading-relaxed" style="color:#cbd5e1">${m.detail}</p>
+                    </div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </section>
+
+        </div>
+      </details>
+    </article>
+  `).join("");
+  lucide.createIcons();
+}
+
+function filterPoisons(query){
+  currentSearch = query.toLowerCase();
+  applyFilters();
+}
+
+function filterCategory(cat){
+  currentCategory = cat;
+  document.querySelectorAll(".cat-tab").forEach(t=>{
+    if(t.dataset.cat===cat){
+      t.style.background="#6366f1";t.style.color="#fff";t.classList.add("tab-active");
+    } else {
+      t.style.background="#1e2235";t.style.color="#94a3b8";t.classList.remove("tab-active");
+    }
+  });
+  applyFilters();
+}
+
+function applyFilters(){
+  let filtered = POISONS;
+  if(currentCategory!=="all") filtered = filtered.filter(p=>p.category===currentCategory);
+  if(currentSearch){
+    filtered = filtered.filter(p=>{
+      const searchable = [p.name,p.mechanism,p.category,p.investigations,
+        ...Object.values(p.clinicalFeatures),
+        ...p.management.map(m=>m.title+" "+m.detail)
+      ].join(" ").toLowerCase();
+      return searchable.includes(currentSearch);
+    });
+  }
+  renderPoisons(filtered);
+}
+
+// Element SDK
+const defaultConfig = {
+  app_title: "☠️ Clinical Toxicology Reference",
+  subtitle_text: "Evidence-Based Poisoning Management — ICU / Emergency Medicine",
+  background_color: "#0f1117",
+  surface_color: "#1a1d2e",
+  text_color: "#e2e8f0",
+  accent_color: "#6366f1",
+  secondary_accent: "#f97316",
+  font_family: "Playfair Display",
+  font_size: 16
+};
+
+function applyConfig(config){
+  const c = {...defaultConfig,...config};
+  const t = document.getElementById("app-title");
+  const s = document.getElementById("app-subtitle");
+  if(t) t.textContent = c.app_title;
+  if(s) s.textContent = c.subtitle_text;
+  const app = document.getElementById("app");
+  if(app) app.style.background = c.background_color;
+  if(t){
+    t.style.color = c.text_color;
+    t.style.fontFamily = `${c.font_family}, Playfair Display, serif`;
+    t.style.fontSize = `${c.font_size * 1.5}px`;
+  }
+  if(s){
+    s.style.fontSize = `${c.font_size * 0.8}px`;
+  }
+}
+
+// Initial render
+renderPoisons(POISONS);
+lucide.createIcons();
+</script>
+</body>
+</html>
