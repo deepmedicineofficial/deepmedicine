@@ -1,0 +1,506 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>ICU Antibiotics | Critical Care Antimicrobial Therapy | Deep Medicine</title> <meta name="description" content="Comprehensive ICU antibiotics guide including empirical therapy, culture-based treatment, sepsis coverage, and critical care antimicrobial strategies."> <link rel="canonical" href="https://deepmedicine.in/core/icu/antibiotics"> <!-- Open Graph --> <meta property="og:title" content="ICU Antibiotics | Deep Medicine"> <meta property="og:description" content="Antibiotic strategies in ICU including empiric therapy, sepsis coverage, and targeted treatment."> <meta property="og:image" content="https://deepmedicine.in/images/antibiotics.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['Playfair Display', 'serif'],
+        body: ['DM Sans', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+
+  .app-shell { height: 100%; overflow-y: auto; overflow-x: hidden; }
+
+  .tab-active { border-bottom: 3px solid var(--accent); color: var(--accent); font-weight: 600; }
+  .card-hover { transition: all 0.25s ease; }
+  .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+
+  .fade-in { animation: fadeIn 0.35s ease forwards; opacity: 0; }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .slide-up { animation: slideUp 0.4s ease forwards; opacity: 0; transform: translateY(16px); }
+  @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+  :root {
+    --bg: #0f1729;
+    --surface: #1a2540;
+    --text: #e2e8f0;
+    --accent: #38bdf8;
+    --accent2: #f472b6;
+  }
+
+  .dose-pill { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 0.78rem; font-weight: 600; }
+
+  details summary { cursor: pointer; list-style: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .chevron-icon { transform: rotate(180deg); }
+  .chevron-icon { transition: transform 0.2s ease; }
+
+  .search-glow:focus { box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface); border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body" style="background:var(--bg); color:var(--text);">
+  <div class="app-shell h-full w-full" id="app"><!-- Header -->
+   <header class="w-full px-4 pt-6 pb-4 text-center fade-in" style="background: linear-gradient(135deg, var(--bg) 0%, #162033 100%);">
+    <div class="max-w-4xl mx-auto">
+     <div class="flex items-center justify-center gap-2 mb-1">
+      <div style="background:var(--accent); width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center;"><i data-lucide="shield" style="width:20px;height:20px;color:var(--bg);"></i>
+      </div>
+      <h1 id="main-title" class="font-heading text-2xl md:text-3xl font-extrabold" style="color:var(--accent);">Critical Care Antibiotics Guide</h1>
+     </div>
+     <p id="subtitle" class="text-sm mt-1 opacity-70">Evidence-Based Dosing &amp; Management</p><!-- Search -->
+     <div class="relative mt-4 max-w-md mx-auto"><i data-lucide="search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:0.5;"></i> <input id="search-input" type="text" placeholder="Search infections, drugs, organisms..." class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm search-glow outline-none" style="background:var(--surface); border:1px solid rgba(255,255,255,0.08); color:var(--text);" oninput="handleSearch(this.value)">
+     </div>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="w-full sticky top-0 z-20 px-2" style="background:var(--bg); border-bottom:1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-4xl mx-auto flex overflow-x-auto gap-1 py-1 no-scrollbar" id="tab-bar"><button onclick="switchTab('empiric')" data-tab="empiric" class="tab-btn tab-active whitespace-nowrap px-3 py-2.5 text-xs md:text-sm rounded-t-lg transition-colors"> <i data-lucide="zap" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Empiric Therapy </button> <button onclick="switchTab('drugs')" data-tab="drugs" class="tab-btn whitespace-nowrap px-3 py-2.5 text-xs md:text-sm rounded-t-lg transition-colors opacity-60"> <i data-lucide="pill" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Drug Dosing </button> <button onclick="switchTab('resistance')" data-tab="resistance" class="tab-btn whitespace-nowrap px-3 py-2.5 text-xs md:text-sm rounded-t-lg transition-colors opacity-60"> <i data-lucide="bug" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Resistance </button> <button onclick="switchTab('renal')" data-tab="renal" class="tab-btn whitespace-nowrap px-3 py-2.5 text-xs md:text-sm rounded-t-lg transition-colors opacity-60"> <i data-lucide="activity" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Renal Dosing </button> <button onclick="switchTab('deesc')" data-tab="deesc" class="tab-btn whitespace-nowrap px-3 py-2.5 text-xs md:text-sm rounded-t-lg transition-colors opacity-60"> <i data-lucide="arrow-down-circle" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>De-escalation </button>
+    </div>
+   </nav><!-- Content -->
+   <main class="w-full max-w-4xl mx-auto px-4 py-5" id="content-area"></main><!-- Footer -->
+   <footer class="w-full text-center py-4 px-4 text-xs opacity-40">
+    <p>For educational reference only. Always verify with institutional antibiograms and pharmacy. Not a substitute for clinical judgment.</p>
+   </footer>
+  </div>
+  <script>
+// ===== DATA =====
+const DATA = {
+  empiric: [
+    {
+      title: "Sepsis / Septic Shock",
+      icon: "alert-triangle",
+      urgency: "STAT",
+      search: "sepsis septic shock bacteremia",
+      steps: [
+        "Obtain 2 sets of blood cultures (aerobic + anaerobic) BEFORE antibiotics",
+        "Administer broad-spectrum IV antibiotics within 1 HOUR of recognition",
+        "Lactate level — repeat if initial >2 mmol/L",
+        "30 mL/kg crystalloid bolus for hypotension or lactate ≥4 mmol/L",
+        "Reassess volume status & tissue perfusion frequently"
+      ],
+      regimens: [
+        { name: "Standard", drugs: "Meropenem 1g IV q8h + Vancomycin 25–30 mg/kg IV load then 15–20 mg/kg q8–12h (trough-guided)" },
+        { name: "If MRSA low risk", drugs: "Piperacillin-Tazobactam 4.5g IV q6h (extended infusion over 4h)" },
+        { name: "If fungal suspected", drugs: "Add Micafungin 100mg IV daily or Fluconazole 800mg load then 400mg daily" }
+      ],
+      notes: "De-escalate within 48–72h based on culture & sensitivity. Duration typically 7–10 days. Procalcitonin-guided discontinuation recommended."
+    },
+    {
+      title: "Ventilator-Associated Pneumonia (VAP)",
+      icon: "wind",
+      urgency: "URGENT",
+      search: "vap pneumonia ventilator lung respiratory",
+      steps: [
+        "Obtain endotracheal aspirate or BAL for Gram stain & culture",
+        "Obtain blood cultures × 2 sets",
+        "Assess CPIS score or clinical criteria (new infiltrate + 2 of: fever, leukocytosis, purulent secretions)",
+        "Start empiric therapy — tailor to local antibiogram & risk factors for MDR"
+      ],
+      regimens: [
+        { name: "Low MDR risk (<5 days, no prior ABx)", drugs: "Ceftriaxone 2g IV q24h OR Ampicillin-Sulbactam 3g IV q6h" },
+        { name: "High MDR risk", drugs: "Meropenem 1g IV q8h (or 2g q8h extended infusion) + Vancomycin 15–20 mg/kg IV q8–12h + Tobramycin 7 mg/kg IV q24h" },
+        { name: "If Pseudomonas suspected", drugs: "Cefepime 2g IV q8h + Ciprofloxacin 400mg IV q8h (dual anti-pseudomonal)" }
+      ],
+      notes: "7-day course recommended (IDSA/ATS 2016). Shorter courses (≤7 days) associated with less resistance. Reassess at 48–72h."
+    },
+    {
+      title: "Intra-Abdominal Infection / Peritonitis",
+      icon: "circle-dot",
+      urgency: "URGENT",
+      search: "abdominal peritonitis intra-abdominal abscess bowel perforation",
+      steps: [
+        "Obtain blood cultures and peritoneal fluid (if accessible) for Gram stain & culture",
+        "Urgent surgical consultation for source control",
+        "Initiate empiric antibiotics covering gram-negatives, anaerobes ± enterococcus",
+        "CT abdomen/pelvis with IV contrast if source unclear"
+      ],
+      regimens: [
+        { name: "Community-acquired, mild-moderate", drugs: "Ceftriaxone 2g IV q24h + Metronidazole 500mg IV q8h" },
+        { name: "Healthcare-associated / severe", drugs: "Meropenem 1g IV q8h OR Piperacillin-Tazobactam 4.5g IV q6h (extended infusion)" },
+        { name: "If VRE/MDRO concern", drugs: "Meropenem 1g IV q8h + Vancomycin 15–20 mg/kg IV q8–12h ± Fluconazole 400mg IV daily" }
+      ],
+      notes: "Source control is paramount — antibiotics alone are insufficient for abscesses. Duration: 4 days post adequate source control (STOP-IT trial). Longer if inadequate source control."
+    },
+    {
+      title: "CNS Infection / Meningitis",
+      icon: "brain",
+      urgency: "STAT",
+      search: "meningitis cns brain encephalitis central nervous system",
+      steps: [
+        "Blood cultures × 2 IMMEDIATELY — do NOT delay antibiotics for LP",
+        "Administer Dexamethasone 0.15 mg/kg IV q6h × 4 days (give WITH or BEFORE first antibiotic dose)",
+        "Empiric antibiotics WITHIN 30 MINUTES of suspicion",
+        "LP when safe (CT head first if focal neuro deficit, papilledema, immunocompromised, seizure, GCS <10)"
+      ],
+      regimens: [
+        { name: "Adults 18–50y", drugs: "Ceftriaxone 2g IV q12h + Vancomycin 15–20 mg/kg IV q8–12h" },
+        { name: "Adults >50y or immunocompromised", drugs: "Ceftriaxone 2g IV q12h + Vancomycin 15–20 mg/kg q8–12h + Ampicillin 2g IV q4h (for Listeria)" },
+        { name: "If HSV encephalitis suspected", drugs: "Add Acyclovir 10 mg/kg IV q8h" }
+      ],
+      notes: "Dexamethasone most beneficial in pneumococcal meningitis. Discontinue if non-pneumococcal. Adjust based on CSF Gram stain, culture, PCR."
+    },
+    {
+      title: "Catheter-Related Bloodstream Infection (CRBSI)",
+      icon: "droplet",
+      urgency: "URGENT",
+      search: "crbsi catheter line central venous bloodstream clabsi",
+      steps: [
+        "Draw paired blood cultures: one from the catheter AND one peripherally (document time to positivity)",
+        "Assess for signs of tunnel infection, port pocket infection, or septic thrombophlebitis",
+        "Remove catheter if: S. aureus, Candida, tunnel infection, septic shock, or no clinical improvement at 72h",
+        "Salvage may be attempted for coagulase-negative Staph with antibiotic lock therapy if uncomplicated"
+      ],
+      regimens: [
+        { name: "Empiric (pending cultures)", drugs: "Vancomycin 15–20 mg/kg IV q8–12h ± Cefepime 2g IV q8h (if gram-neg suspected)" },
+        { name: "If Candida suspected", drugs: "Micafungin 100mg IV daily — ALWAYS remove catheter" },
+        { name: "Antibiotic lock (salvage)", drugs: "Vancomycin 5 mg/mL or Gentamicin 1 mg/mL lock solution, dwell 12h" }
+      ],
+      notes: "S. aureus CRBSI: 4–6 weeks IV therapy + TEE to rule out endocarditis. Coag-neg Staph: 5–7 days if catheter removed. Candida: 14 days after first negative blood culture."
+    },
+    {
+      title: "Urinary Tract Infection — Complicated / Urosepsis",
+      icon: "droplets",
+      urgency: "URGENT",
+      search: "uti urinary urosepsis pyelonephritis kidney",
+      steps: [
+        "Obtain urine culture AND blood cultures before antibiotics",
+        "Assess for obstruction (hydronephrosis) — urgent US or CT if suspected",
+        "Urology consult if obstructed infected system (nephrostomy/stent)",
+        "Start empiric antibiotics covering local uropathogens"
+      ],
+      regimens: [
+        { name: "Standard empiric", drugs: "Ceftriaxone 2g IV q24h OR Piperacillin-Tazobactam 4.5g IV q6h" },
+        { name: "ESBL risk", drugs: "Meropenem 1g IV q8h OR Ertapenem 1g IV q24h" },
+        { name: "Pseudomonas risk", drugs: "Cefepime 2g IV q8h OR Piperacillin-Tazobactam 4.5g IV q6h" }
+      ],
+      notes: "Step down to PO when afebrile ≥48h & clinically improving. Total duration 7–14 days. Remove or replace urinary catheter if present."
+    },
+    {
+      title: "Skin & Soft Tissue — Necrotizing Fasciitis",
+      icon: "flame",
+      urgency: "STAT",
+      search: "necrotizing fasciitis skin soft tissue nsti cellulitis",
+      steps: [
+        "EMERGENT surgical consultation — operative debridement is definitive treatment",
+        "Blood cultures, tissue cultures from OR (not wound swabs)",
+        "Broad-spectrum antibiotics IMMEDIATELY",
+        "Assess LRINEC score (WBC, Hb, Na, glucose, creatinine, CRP)",
+        "Serial exams q6–8h; plan for second-look surgery at 24–48h"
+      ],
+      regimens: [
+        { name: "Empiric broad-spectrum", drugs: "Meropenem 1g IV q8h + Vancomycin 15–20 mg/kg IV q8–12h + Clindamycin 900mg IV q8h (anti-toxin effect)" },
+        { name: "Type II (Group A Strep)", drugs: "Penicillin G 4MU IV q4h + Clindamycin 900mg IV q8h" },
+        { name: "Type I (polymicrobial)", drugs: "Piperacillin-Tazobactam 4.5g IV q6h + Vancomycin + Clindamycin 900mg IV q8h" }
+      ],
+      notes: "Clindamycin is added for its anti-toxin properties (inhibits ribosomal protein synthesis → suppresses toxin production). IVIG may be considered in streptococcal toxic shock. Mortality increases with every hour of surgical delay."
+    }
+  ],
+
+  drugs: [
+    { name: "Meropenem", class: "Carbapenem", spectrum: "Broad gram-neg, gram-pos, anaerobes (not MRSA)", dose: "1–2g IV q8h", infusion: "Extended infusion over 3h preferred for critically ill", monitor: "Seizure risk (lower than imipenem), drug interactions with valproic acid (↓ levels by 60–80%)", search: "meropenem carbapenem broad" },
+    { name: "Piperacillin-Tazobactam", class: "β-lactam/β-lactamase inhibitor", spectrum: "Broad gram-neg incl. Pseudomonas, anaerobes, some gram-pos", dose: "4.5g IV q6h", infusion: "Extended infusion over 4h (improves fT>MIC)", monitor: "Leukopenia with prolonged use, false-positive galactomannan", search: "piperacillin tazobactam zosyn pip-tazo piptazo" },
+    { name: "Vancomycin", class: "Glycopeptide", spectrum: "MRSA, coag-neg Staph, Enterococcus (non-VRE), Streptococci", dose: "Load: 25–30 mg/kg IV, then 15–20 mg/kg IV q8–12h", infusion: "Infuse over ≥1h (≥2h if >1g) to avoid Red Man Syndrome", monitor: "AUC/MIC target 400–600 (preferred over troughs per 2020 guidelines), nephrotoxicity (especially with pip-tazo), ototoxicity", search: "vancomycin mrsa glycopeptide staph" },
+    { name: "Cefepime", class: "4th-gen Cephalosporin", spectrum: "Gram-neg incl. Pseudomonas, AmpC-stable, some gram-pos", dose: "2g IV q8h", infusion: "Over 30 min (extended infusion 3–4h in severe infections)", monitor: "Neurotoxicity (encephalopathy, myoclonus, seizures) — risk ↑ in renal impairment. Dose-adjust for CrCl", search: "cefepime cephalosporin pseudomonas fourth generation" },
+    { name: "Ceftriaxone", class: "3rd-gen Cephalosporin", spectrum: "Broad gram-neg, Strep, NOT Pseudomonas", dose: "1–2g IV q12–24h", infusion: "Over 30 min", monitor: "Biliary sludging, do NOT co-infuse with calcium-containing solutions (neonates especially). Does not require renal adjustment", search: "ceftriaxone rocephin third generation cephalosporin meningitis" },
+    { name: "Metronidazole", class: "Nitroimidazole", spectrum: "Anaerobes (B. fragilis), C. difficile, parasites", dose: "500mg IV/PO q8h", infusion: "IV over 30–60 min", monitor: "Peripheral neuropathy with prolonged use, disulfiram-like reaction with alcohol, metallic taste", search: "metronidazole flagyl anaerobe cdiff clostridium" },
+    { name: "Linezolid", class: "Oxazolidinone", spectrum: "MRSA, VRE, gram-pos including resistant strains", dose: "600mg IV/PO q12h", infusion: "IV over 30–120 min", monitor: "Thrombocytopenia (monitor CBC weekly), serotonin syndrome with SSRIs/MAOIs, lactic acidosis, optic neuropathy (>28 days)", search: "linezolid zyvox vre mrsa oxazolidinone" },
+    { name: "Micafungin", class: "Echinocandin", spectrum: "Candida spp. (including C. glabrata, C. krusei), Aspergillus", dose: "100mg IV daily (invasive candidiasis), 150mg (esophageal)", infusion: "Over 1h", monitor: "LFTs, histamine-mediated reactions (rare). Poor CNS/eye penetration", search: "micafungin echinocandin candida fungal antifungal" },
+    { name: "Polymyxin B", class: "Polymyxin", spectrum: "XDR gram-neg: CRE, Acinetobacter, Pseudomonas", dose: "Load: 2.5 mg/kg (over 1h), then 1.25–1.5 mg/kg/day divided q12h", infusion: "IV over 1h (not CrCl-based dosing unlike colistin)", monitor: "Nephrotoxicity (less than colistin), neurotoxicity, skin hyperpigmentation", search: "polymyxin b xdr cre acinetobacter resistant" },
+    { name: "Tigecycline", class: "Glycylcycline", spectrum: "MRSA, VRE, ESBL, Acinetobacter, anaerobes (NOT Pseudomonas, NOT Proteus)", dose: "Load: 200mg IV, then 100mg IV q12h (high-dose for HAP/VAP)", infusion: "Over 30–60 min", monitor: "FDA black box: increased mortality. Nausea/vomiting common. Pancreatitis. Avoid as monotherapy for bacteremia (low serum levels)", search: "tigecycline tygacil glycylcycline acinetobacter" }
+  ],
+
+  resistance: [
+    { organism: "MRSA", mechanism: "mecA gene → altered PBP2a", treatments: "Vancomycin (AUC/MIC 400–600), Linezolid, Daptomycin (NOT for pneumonia), TMP-SMX, Doxycycline (mild SSTI)", notes: "Decolonization: Mupirocin nasal + CHG baths. Daptomycin inactivated by surfactant → avoid in pneumonia.", search: "mrsa methicillin resistant staphylococcus aureus" },
+    { organism: "VRE (Vancomycin-Resistant Enterococcus)", mechanism: "vanA/vanB genes → modified D-Ala-D-Ala target", treatments: "Linezolid 600mg IV/PO q12h, Daptomycin 8–12 mg/kg IV daily (higher dose for VRE), Tigecycline", notes: "E. faecium > E. faecalis for vancomycin resistance. Daptomycin dose for VRE is HIGHER than standard.", search: "vre vancomycin resistant enterococcus faecium faecalis" },
+    { organism: "ESBL-producing Enterobacterales", mechanism: "Extended-spectrum β-lactamases (CTX-M, TEM, SHV)", treatments: "Meropenem 1g IV q8h (drug of choice), Ertapenem 1g IV q24h (if non-severe, non-Pseudomonal)", notes: "Pip-Tazo may be considered for non-severe UTI with susceptibility (MERINO trial suggests carbapenem superiority for bacteremia).", search: "esbl extended spectrum beta lactamase ctx-m enterobacterales e.coli klebsiella" },
+    { organism: "CRE (Carbapenem-Resistant Enterobacterales)", mechanism: "KPC, NDM, OXA-48, VIM, IMP carbapenemases", treatments: "Ceftazidime-Avibactam (KPC, OXA-48), Meropenem-Vaborbactam (KPC), Cefiderocol, Polymyxin B", notes: "Identify carbapenemase type — treatment differs. NDM: Ceftazidime-Avibactam does NOT work → use Cefiderocol or Aztreonam + Ceftazidime-Avibactam combo.", search: "cre carbapenem resistant enterobacterales kpc ndm oxa-48" },
+    { organism: "MDR Pseudomonas aeruginosa", mechanism: "Multiple: efflux pumps, porin loss, AmpC, MBLs", treatments: "Ceftolozane-Tazobactam, Ceftazidime-Avibactam, Cefiderocol, Polymyxin B (last resort)", notes: "Dual anti-pseudomonal therapy for empiric severe infections. De-escalate to single agent once susceptibilities known.", search: "pseudomonas aeruginosa mdr multidrug resistant" },
+    { organism: "MDR Acinetobacter baumannii", mechanism: "OXA carbapenemases, efflux, biofilm", treatments: "Ampicillin-Sulbactam (high-dose: 9g q8h extended infusion), Polymyxin B, Tigecycline (high-dose), Cefiderocol", notes: "Sulbactam has intrinsic activity against Acinetobacter. Combination therapy often used. Avoid monotherapy.", search: "acinetobacter baumannii mdr xdr crab" },
+    { organism: "C. difficile Infection", mechanism: "Toxin A & B production, spore-forming", treatments: "Non-severe: Fidaxomicin 200mg PO BID × 10d (preferred) or Vancomycin 125mg PO QID × 10d. Severe/fulminant: Vancomycin 500mg PO/NG QID + Metronidazole 500mg IV q8h ± rectal Vancomycin enema", notes: "Stop offending antibiotics. Bezlotoxumab for recurrence prevention. FMT for ≥3 recurrences. Do NOT use anti-motility agents.", search: "c diff clostridium clostridioides difficile cdiff colitis diarrhea" }
+  ],
+
+  renal: [
+    { drug: "Vancomycin", normal: "15–20 mg/kg q8–12h", mild: "15 mg/kg q12–24h (CrCl 30–50)", moderate: "15 mg/kg q24–48h (CrCl 10–29)", severe: "15 mg/kg × 1, then redose per level", hd: "15–20 mg/kg post-HD; redose when level <15–20. CRRT: 15–20 mg/kg load then 7.5–10 mg/kg q12h (level-guided)", search: "vancomycin renal dose kidney" },
+    { drug: "Meropenem", normal: "1–2g q8h", mild: "1g q8h (CrCl 26–50)", moderate: "500mg–1g q12h (CrCl 10–25)", severe: "500mg q12h", hd: "500mg q12h, dose after HD. CRRT: 1g q8h (or 2g q8h extended infusion for severe infections)", search: "meropenem renal dose kidney carbapenem" },
+    { drug: "Cefepime", normal: "2g q8h", mild: "2g q12h (CrCl 30–50)", moderate: "1–2g q24h (CrCl 11–29)", severe: "1g q24h (CrCl ≤10)", hd: "1g q24h, dose after HD. CRRT: 1–2g q12h", search: "cefepime renal dose kidney neurotoxicity" },
+    { drug: "Piperacillin-Tazobactam", normal: "4.5g q6h (EI over 4h)", mild: "3.375g q6h (CrCl 20–40)", moderate: "2.25g q6h (CrCl <20)", severe: "2.25g q6h", hd: "2.25g q6h + 0.75g after HD. CRRT: 4.5g q6–8h", search: "piperacillin tazobactam zosyn renal dose kidney" },
+    { drug: "Ciprofloxacin", normal: "400mg IV q8–12h", mild: "400mg q12h", moderate: "200–400mg q12h", severe: "200mg q12h", hd: "200–400mg q12h post-HD. CRRT: 200–400mg q12h", search: "ciprofloxacin cipro renal dose kidney fluoroquinolone" },
+    { drug: "Linezolid", normal: "600mg q12h", mild: "No adjustment", moderate: "No adjustment", severe: "No adjustment", hd: "600mg q12h, dose after HD (30% removed). CRRT: 600mg q12h", search: "linezolid renal dose kidney" },
+    { drug: "Micafungin", normal: "100mg daily", mild: "No adjustment", moderate: "No adjustment", severe: "No adjustment", hd: "No adjustment (not dialyzed). CRRT: No adjustment", search: "micafungin renal dose kidney echinocandin" }
+  ],
+
+  deescalation: [
+    { title: "48–72 Hour Reassessment Protocol", items: [
+      "Review blood culture, respiratory culture, urine culture results",
+      "Check antibiotic susceptibilities — narrow spectrum ASAP",
+      "Reassess clinical trajectory: fever curve, WBC trend, procalcitonin (if obtained)",
+      "If cultures negative at 48h in clinically improving patient → consider stopping antibiotics",
+      "Switch from IV to PO if: afebrile ≥48h, functioning GI tract, no concerns for malabsorption",
+      "Remove unnecessary empiric coverage (e.g., stop vancomycin if no MRSA, stop antifungal if no fungal growth)"
+    ], search: "deescalation reassess 48 72 hour" },
+    { title: "IV-to-PO Switch Criteria (Sequential Therapy)", items: [
+      "Afebrile ≥ 24–48 hours",
+      "Clinically improving (hemodynamically stable, improving WBC/CRP)",
+      "Functioning GI tract (tolerating oral intake, no ileus/vomiting)",
+      "Identified organism susceptible to available oral agent",
+      "No infections REQUIRING prolonged IV: endocarditis, S. aureus bacteremia, meningitis, osteomyelitis (relative)"
+    ], search: "iv po switch oral step down sequential" },
+    { title: "Common IV → PO Conversions", items: [
+      "Meropenem → Levofloxacin 750mg PO daily (if susceptible, for UTI/respiratory)",
+      "Ceftriaxone → Cefpodoxime 200mg PO q12h or Amoxicillin-Clavulanate 875mg PO q12h",
+      "Vancomycin (MRSA SSTI) → TMP-SMX DS 2 tabs PO q12h or Doxycycline 100mg PO q12h",
+      "Ciprofloxacin IV → Ciprofloxacin 500–750mg PO q12h (excellent bioavailability ~70–80%)",
+      "Metronidazole IV → Metronidazole 500mg PO q8h (near 100% bioavailability)",
+      "Fluconazole IV → Fluconazole PO same dose (>90% bioavailability)",
+      "Linezolid IV → Linezolid 600mg PO q12h (~100% bioavailability)"
+    ], search: "conversion iv po oral switch bioavailability" },
+    { title: "Recommended Duration by Infection", items: [
+      "VAP: 7 days (IDSA/ATS 2016)",
+      "Community-acquired pneumonia: 5 days minimum (if clinically stable ≥48h)",
+      "Complicated UTI / Pyelonephritis: 7–14 days (shorter with source control)",
+      "Intra-abdominal (adequate source control): 4 days (STOP-IT trial)",
+      "Uncomplicated bacteremia (gram-negative): 7 days (BALANCE trial supports this)",
+      "S. aureus bacteremia: 4–6 weeks minimum (ALWAYS get TEE)",
+      "C. difficile: 10 days (fidaxomicin or vancomycin PO)",
+      "Skin/soft tissue (uncomplicated cellulitis): 5 days"
+    ], search: "duration length days course how long treat" }
+  ]
+};
+
+// ===== RENDER FUNCTIONS =====
+let currentTab = 'empiric';
+let searchQuery = '';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('tab-active');
+    b.classList.add('opacity-60');
+  });
+  const active = document.querySelector(`[data-tab="${tab}"]`);
+  if (active) { active.classList.add('tab-active'); active.classList.remove('opacity-60'); }
+  renderContent();
+}
+
+function handleSearch(val) {
+  searchQuery = val.toLowerCase().trim();
+  renderContent();
+}
+
+function matchSearch(searchField) {
+  if (!searchQuery) return true;
+  return searchField.toLowerCase().includes(searchQuery);
+}
+
+function urgencyColor(u) {
+  if (u === 'STAT') return 'background:#dc2626;color:#fff;';
+  return 'background:#f59e0b;color:#000;';
+}
+
+function renderContent() {
+  const area = document.getElementById('content-area');
+
+  if (currentTab === 'empiric') {
+    const items = DATA.empiric.filter(i => matchSearch(i.search + ' ' + i.title));
+    area.innerHTML = items.length === 0 ? noResults() : items.map((item, idx) => `
+      <details class="mb-4 slide-up" style="animation-delay:${idx * 60}ms; background:var(--surface); border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+        <summary class="flex items-center justify-between p-4 cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div style="background:var(--accent);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="${item.icon}" style="width:16px;height:16px;color:var(--bg);"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm md:text-base" style="color:var(--text);">${item.title}</h3>
+              <span class="dose-pill mt-1" style="${urgencyColor(item.urgency)}">${item.urgency}</span>
+            </div>
+          </div>
+          <i data-lucide="chevron-down" class="chevron-icon" style="width:18px;height:18px;opacity:0.4;flex-shrink:0;"></i>
+        </summary>
+        <div class="px-4 pb-4">
+          <div class="mb-3">
+            <h4 class="text-xs font-semibold uppercase tracking-wide mb-2" style="color:var(--accent);">Step-by-Step Management</h4>
+            <ol class="space-y-1.5 ml-4">
+              ${item.steps.map((s, i) => `<li class="text-sm opacity-85" style="list-style-type:decimal;padding-left:4px;"><span>${s}</span></li>`).join('')}
+            </ol>
+          </div>
+          <div class="mb-3">
+            <h4 class="text-xs font-semibold uppercase tracking-wide mb-2" style="color:var(--accent2);">Empiric Regimens</h4>
+            ${item.regimens.map(r => `
+              <div class="mb-2 p-2.5 rounded-lg" style="background:rgba(255,255,255,0.03);border-left:3px solid var(--accent2);">
+                <div class="text-xs font-semibold mb-0.5" style="color:var(--accent2);">${r.name}</div>
+                <div class="text-sm opacity-90">${r.drugs}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="p-2.5 rounded-lg" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15);">
+            <div class="flex items-start gap-2">
+              <i data-lucide="info" style="width:14px;height:14px;color:var(--accent);flex-shrink:0;margin-top:2px;"></i>
+              <p class="text-xs opacity-80">${item.notes}</p>
+            </div>
+          </div>
+        </div>
+      </details>
+    `).join('');
+  }
+
+  else if (currentTab === 'drugs') {
+    const items = DATA.drugs.filter(i => matchSearch(i.search + ' ' + i.name));
+    area.innerHTML = items.length === 0 ? noResults() : `<div class="grid gap-4 md:grid-cols-2">${items.map((d, idx) => `
+      <div class="card-hover slide-up p-4 rounded-xl" style="animation-delay:${idx * 50}ms; background:var(--surface); border:1px solid rgba(255,255,255,0.06);">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="pill" style="width:14px;height:14px;color:var(--accent);"></i>
+          <h3 class="font-bold text-sm" style="color:var(--accent);">${d.name}</h3>
+        </div>
+        <div class="dose-pill mb-2" style="background:rgba(244,114,182,0.15);color:var(--accent2);">${d.class}</div>
+        <div class="space-y-1.5 text-xs">
+          <p><span class="font-semibold" style="color:var(--accent);">Spectrum:</span> <span class="opacity-80">${d.spectrum}</span></p>
+          <p><span class="font-semibold" style="color:var(--accent);">Dose:</span> <span class="opacity-90">${d.dose}</span></p>
+          <p><span class="font-semibold" style="color:var(--accent);">Infusion:</span> <span class="opacity-80">${d.infusion}</span></p>
+          <p><span class="font-semibold" style="color:var(--accent2);">⚠ Monitor:</span> <span class="opacity-80">${d.monitor}</span></p>
+        </div>
+      </div>
+    `).join('')}</div>`;
+  }
+
+  else if (currentTab === 'resistance') {
+    const items = DATA.resistance.filter(i => matchSearch(i.search + ' ' + i.organism));
+    area.innerHTML = items.length === 0 ? noResults() : items.map((r, idx) => `
+      <div class="mb-4 slide-up rounded-xl overflow-hidden" style="animation-delay:${idx * 60}ms; background:var(--surface); border:1px solid rgba(255,255,255,0.06);">
+        <div class="p-4" style="border-left:4px solid var(--accent2);">
+          <div class="flex items-center gap-2 mb-2">
+            <i data-lucide="bug" style="width:16px;height:16px;color:var(--accent2);"></i>
+            <h3 class="font-bold text-sm md:text-base" style="color:var(--accent2);">${r.organism}</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <p><span class="font-semibold" style="color:var(--accent);">Mechanism:</span> <span class="opacity-80">${r.mechanism}</span></p>
+            <p><span class="font-semibold" style="color:var(--accent);">Treatment:</span> <span class="opacity-90">${r.treatments}</span></p>
+            <div class="p-2 rounded-lg mt-2" style="background:rgba(244,114,182,0.07);border:1px solid rgba(244,114,182,0.12);">
+              <p class="opacity-80"><span class="font-semibold" style="color:var(--accent2);">Key Pearl:</span> ${r.notes}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  else if (currentTab === 'renal') {
+    const items = DATA.renal.filter(i => matchSearch(i.search + ' ' + i.drug));
+    area.innerHTML = items.length === 0 ? noResults() : `
+      <div class="overflow-x-auto rounded-xl" style="border:1px solid rgba(255,255,255,0.06);">
+        <table class="w-full text-xs">
+          <thead>
+            <tr style="background:rgba(56,189,248,0.1);">
+              <th class="p-3 text-left font-semibold" style="color:var(--accent);">Drug</th>
+              <th class="p-3 text-left font-semibold" style="color:var(--accent);">Normal</th>
+              <th class="p-3 text-left font-semibold" style="color:var(--accent);">Mild ↓</th>
+              <th class="p-3 text-left font-semibold" style="color:var(--accent);">Moderate ↓</th>
+              <th class="p-3 text-left font-semibold" style="color:var(--accent);">Severe / Anuric</th>
+              <th class="p-3 text-left font-semibold" style="color:var(--accent2);">HD / CRRT</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${items.map((r, idx) => `
+              <tr class="slide-up" style="animation-delay:${idx * 40}ms; background:${idx % 2 === 0 ? 'var(--surface)' : 'rgba(255,255,255,0.02)'};">
+                <td class="p-3 font-semibold" style="color:var(--accent);">${r.drug}</td>
+                <td class="p-3 opacity-90">${r.normal}</td>
+                <td class="p-3 opacity-80">${r.mild}</td>
+                <td class="p-3 opacity-80">${r.moderate}</td>
+                <td class="p-3 opacity-80">${r.severe}</td>
+                <td class="p-3 opacity-80" style="color:var(--accent2);">${r.hd}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs mt-3 opacity-40 text-center">CrCl in mL/min. Always verify with pharmacy. HD = Hemodialysis, CRRT = Continuous Renal Replacement Therapy.</p>
+    `;
+  }
+
+  else if (currentTab === 'deesc') {
+    const items = DATA.deescalation.filter(i => matchSearch(i.search + ' ' + i.title));
+    area.innerHTML = items.length === 0 ? noResults() : items.map((d, idx) => `
+      <div class="mb-4 slide-up p-4 rounded-xl" style="animation-delay:${idx * 60}ms; background:var(--surface); border:1px solid rgba(255,255,255,0.06);">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="arrow-down-circle" style="width:16px;height:16px;color:var(--accent);"></i>
+          <h3 class="font-bold text-sm md:text-base" style="color:var(--accent);">${d.title}</h3>
+        </div>
+        <ul class="space-y-2">
+          ${d.items.map(item => `
+            <li class="flex items-start gap-2 text-xs">
+              <i data-lucide="check-circle" style="width:14px;height:14px;color:#22c55e;flex-shrink:0;margin-top:1px;"></i>
+              <span class="opacity-85">${item}</span>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `).join('');
+  }
+
+  lucide.createIcons();
+}
+
+function noResults() {
+  return `<div class="text-center py-12 fade-in"><i data-lucide="search-x" style="width:40px;height:40px;margin:0 auto 12px;opacity:0.3;display:block;"></i><p class="opacity-40 text-sm">No results found. Try a different search term.</p></div>`;
+}
+
+// ===== ELEMENT SDK =====
+const defaultConfig = {
+  background_color: "#0f1729",
+  surface_color: "#1a2540",
+  text_color: "#e2e8f0",
+  accent_color: "#38bdf8",
+  accent2_color: "#f472b6",
+  font_family: "DM Sans",
+  font_size: 14,
+  app_title: "Critical Care Antibiotics Guide",
+  subtitle_text: "Evidence-Based Dosing & Management"
+};
+
+function applyConfig(config) {
+  document.documentElement.style.setProperty('--bg', config.background_color || defaultConfig.background_color);
+  document.documentElement.style.setProperty('--surface', config.surface_color || defaultConfig.surface_color);
+  document.documentElement.style.setProperty('--text', config.text_color || defaultConfig.text_color);
+  document.documentElement.style.setProperty('--accent', config.accent_color || defaultConfig.accent_color);
+  document.documentElement.style.setProperty('--accent2', config.accent2_color || defaultConfig.accent2_color);
+
+  document.body.style.color = config.text_color || defaultConfig.text_color;
+  document.body.style.background = config.background_color || defaultConfig.background_color;
+
+  const font = config.font_family || defaultConfig.font_family;
+  const size = config.font_size || defaultConfig.font_size;
+  document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+  document.body.style.fontSize = `${size}px`;
+
+  const title = document.getElementById('main-title');
+  const sub = document.getElementById('subtitle');
+  if (title) {
+    title.textContent = config.app_title || defaultConfig.app_title;
+    title.style.color = config.accent_color || defaultConfig.accent_color;
+    title.style.fontFamily = `Playfair Display, ${font}, serif`;
+    title.style.fontSize = `${size * 2}px`;
+  }
+  if (sub) {
+    sub.textContent = config.subtitle_text || defaultConfig.subtitle_text;
+    sub.style.fontSize = `${size * 0.85}px`;
+  }
+}
+
+// Initial render
+applyConfig(defaultConfig);
+renderContent();
+lucide.createIcons();
+</script>
+</body>
+</html>
