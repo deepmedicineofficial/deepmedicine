@@ -1,0 +1,699 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Pediatrics Emergencies | Pediatric Critical Care & Acute Management | Deep Medicine</title> <meta name="description" content="Comprehensive guide to pediatric emergencies including respiratory distress, seizures, shock, dehydration, poisoning, and ICU pediatric care protocols."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/pediatric-emergencies"> <!-- Open Graph --> <meta property="og:title" content="Pediatrics Emergencies | Deep Medicine"> <meta property="og:description" content="Emergency management protocols for critical pediatric conditions in ICU and emergency care."> <meta property="og:image" content="https://deepmedicine.in/images/pediatric-emergencies.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; }
+    .prose-font { font-family: 'Crimson Pro', serif; }
+    .emergency-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .emergency-card:hover { transform: translateY(-2px); }
+    .tab-active { border-bottom: 3px solid; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .severity-critical { border-left: 4px solid #dc2626; }
+    .severity-high { border-left: 4px solid #ea580c; }
+    .severity-moderate { border-left: 4px solid #ca8a04; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .accordion-content.open { max-height: 8000px; }
+    .nav-scroll::-webkit-scrollbar { height: 4px; }
+    .nav-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+    .drug-table { border-collapse: separate; border-spacing: 0; }
+    .drug-table th, .drug-table td { padding: 8px 12px; border-bottom: 1px solid #334155; }
+    .search-highlight { background: #fbbf2440; border-radius: 2px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full bg-slate-900 text-slate-100 overflow-auto"><!-- Header -->
+   <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700/50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+     <div class="flex items-center justify-between flex-wrap gap-3">
+      <div>
+       <h1 id="mainTitle" class="text-2xl md:text-3xl font-800 bg-gradient-to-r from-rose-400 to-amber-400 bg-clip-text text-transparent">Paediatric Emergencies</h1>
+       <p id="subtitle" class="text-slate-400 text-sm font-300">Clinical Management Guide — Evidence-Based Protocols</p>
+      </div>
+      <div class="relative w-full sm:w-72"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i> <input id="searchInput" type="text" placeholder="Search emergencies..." class="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400" aria-label="Search emergencies">
+      </div>
+     </div>
+    </div><!-- Category Navigation -->
+    <nav class="max-w-7xl mx-auto px-4 pb-2">
+     <div class="flex gap-1 overflow-x-auto nav-scroll pb-2" id="categoryNav" role="tablist"></div>
+    </nav>
+   </header><!-- Main Content -->
+   <main class="max-w-7xl mx-auto px-4 py-6">
+    <div id="contentArea" class="space-y-4 fade-in"></div>
+    <div id="noResults" class="hidden text-center py-20 text-slate-400"><i data-lucide="search-x" class="w-16 h-16 mx-auto mb-4 opacity-50"></i>
+     <p class="text-lg">No emergencies found matching your search.</p>
+    </div>
+   </main><!-- Footer -->
+   <footer class="border-t border-slate-700/50 mt-12 py-6 text-center text-slate-500 text-xs px-4">
+    <p>⚠️ This guide is for educational and clinical reference only. Always follow institutional protocols and use clinical judgement.</p>
+    <p class="mt-1">Based on PALS, APLS &amp; Nelson's Textbook of Pediatrics guidelines.</p>
+   </footer>
+  </div>
+  <script>
+// ===== DATA =====
+const emergencies = [
+  {
+    category: "Respiratory",
+    icon: "wind",
+    items: [
+      {
+        title: "Status Asthmaticus",
+        severity: "critical",
+        definition: "Severe acute asthma unresponsive to initial bronchodilator therapy (3 doses of nebulized salbutamol), representing a life-threatening emergency requiring immediate intervention.",
+        clinical_features: [
+          "Severe respiratory distress with accessory muscle use, tracheal tug, intercostal/subcostal retractions",
+          "Inability to speak in sentences (or words in severe cases)",
+          "SpO₂ < 92% on room air",
+          "Silent chest on auscultation (ominous sign indicating minimal air entry)",
+          "Altered sensorium, exhaustion, cyanosis (impending respiratory failure)",
+          "Peak Expiratory Flow Rate (PEFR) < 33% predicted",
+          "Heart rate: >130 (5-12yrs), >120 (>12yrs); Paradoxus >25mmHg"
+        ],
+        management: [
+          { step: "Immediate Assessment", detail: "ABCDE approach. High-flow O₂ via non-rebreather mask (15L/min) to maintain SpO₂ 94-98%. Continuous SpO₂, cardiac monitoring. Obtain ABG if severe." },
+          { step: "First-Line Bronchodilator", detail: "Salbutamol nebulization 2.5mg (<5yrs) or 5mg (>5yrs) with O₂ at 6-8L/min — back-to-back nebulization every 20 min × 3 doses. Add Ipratropium bromide 250μg (<5yrs) or 500μg (>5yrs) to first 3 nebulizations." },
+          { step: "Corticosteroids", detail: "Prednisolone 1-2mg/kg oral (max 40mg) OR IV Methylprednisolone 1-2mg/kg Q6H OR IV Hydrocortisone 4mg/kg stat then 4mg/kg/day in divided doses. Give early — takes 4-6hrs for effect." },
+          { step: "IV Magnesium Sulfate", detail: "50mg/kg (max 2g) IV over 20 minutes as single dose. Monitor BP — may cause hypotension. Indicated when poor response to initial bronchodilator therapy." },
+          { step: "IV Aminophylline", detail: "Loading dose: 5mg/kg IV over 20 min (omit if on oral theophylline). Maintenance: 0.5-1mg/kg/hr infusion. Monitor levels (10-20μg/mL). Risk of arrhythmias — cardiac monitoring essential." },
+          { step: "IV Salbutamol", detail: "15μg/kg bolus over 10 min, then 1-5μg/kg/min infusion. Monitor for lactic acidosis, hypokalemia, tachycardia." },
+          { step: "Escalation / Intubation", detail: "Consider IV Ketamine 1-2mg/kg (bronchodilator properties). Intubation is LAST RESORT — risk of dynamic hyperinflation. Use ketamine for induction, permissive hypercapnia strategy. Call PICU early." }
+        ],
+        pearls: ["Never sedate an asthmatic child without preparation for intubation", "A 'silent chest' with distress = impending arrest", "ABG showing normal/high CO₂ in acute asthma = fatigue and impending failure", "Chest X-ray not routine — only if suspecting pneumothorax, foreign body or infection"]
+      },
+      {
+        title: "Acute Severe Croup (Laryngotracheobronchitis)",
+        severity: "high",
+        definition: "Viral infection (parainfluenza most common) causing subglottic oedema with characteristic barking cough, stridor, and respiratory distress. Peak age 6 months to 3 years.",
+        clinical_features: [
+          "Barking/seal-like cough, inspiratory stridor",
+          "Hoarse voice, low-grade fever",
+          "Westley Croup Score ≥8 = severe (max 17)",
+          "Sternal/subcostal retractions, nasal flaring",
+          "Worsening stridor at rest with agitation",
+          "Cyanosis, decreased air entry, altered consciousness (impending obstruction)"
+        ],
+        management: [
+          { step: "Keep Child Calm", detail: "Minimal handling — agitation worsens obstruction. Allow position of comfort (parent's lap). Avoid throat examination. No IV access unless critical." },
+          { step: "Nebulized Adrenaline", detail: "L-Adrenaline (1:1000) 0.5mL/kg (max 5mL) nebulized with O₂. Onset 10 min, duration 1-2 hrs. Observe 2-4 hrs post-dose for rebound. May repeat." },
+          { step: "Dexamethasone", detail: "0.6mg/kg PO/IM single dose (max 10mg). Alternative: Budesonide 2mg nebulized if vomiting. Steroids are the cornerstone — reduce need for intubation by 80%." },
+          { step: "Oxygen", detail: "Humidified O₂ by blow-by if SpO₂ < 92%. Avoid forced mask application." },
+          { step: "Heliox", detail: "Helium-oxygen mixture (70:30 or 80:20) — reduces turbulent flow. Consider as bridge if severe and awaiting steroid effect." },
+          { step: "Intubation (Rare)", detail: "If complete obstruction imminent: ETT 0.5-1mm smaller than calculated. Performed by most experienced operator. ENT standby for emergency tracheostomy." }
+        ],
+        pearls: ["Steeple sign on AP X-ray neck (subglottic narrowing)", "Distinguish from epiglottitis: croup = gradual onset, barky cough; epiglottitis = toxic, drooling, no cough", "Most children respond to single dose dexamethasone", "Recurrent croup episodes → consider subglottic stenosis or hemangioma"]
+      },
+      {
+        title: "Bronchiolitis (Severe)",
+        severity: "high",
+        definition: "RSV (most common) or other viral lower respiratory infection in infants <2 years causing small airway inflammation, oedema, and mucus plugging. Leading cause of infant hospitalization.",
+        clinical_features: [
+          "Coryzal prodrome 2-3 days, then progressive cough and wheeze",
+          "Tachypnoea (RR >60), nasal flaring, grunting",
+          "Fine inspiratory crackles ± expiratory wheeze",
+          "Poor feeding (<50% of usual intake), dehydration",
+          "Apnoea (especially in ex-premature infants <6 weeks)",
+          "SpO₂ < 92%, chest hyperinflation"
+        ],
+        management: [
+          { step: "Supportive Care (Mainstay)", detail: "Maintain SpO₂ ≥92% with nasal prong O₂ (up to 2L/min). Minimal handling. Nasopharyngeal suctioning ONLY if visible secretions obstructing. Elevate head 30°." },
+          { step: "Hydration", detail: "Small frequent feeds (NG if too distressed for oral). IV 0.9% NS + 5% Dextrose at 2/3 maintenance if NPO. Monitor I/O strictly." },
+          { step: "Respiratory Support Escalation", detail: "High-Flow Nasal Cannula (HFNC): Start 2L/kg/min. Reduces work of breathing, provides PEEP. If failing HFNC → CPAP 5-8 cmH₂O via nasal prongs." },
+          { step: "Apnoea Management", detail: "Caffeine citrate 20mg/kg loading → 5mg/kg/day maintenance (for apnoeic episodes). Continuous monitoring. Low threshold for PICU." },
+          { step: "What NOT to Do", detail: "Bronchodilators — NOT recommended (no evidence). Steroids — NOT recommended. Antibiotics — NOT routine (unless secondary bacterial infection). Chest physiotherapy — NOT recommended." },
+          { step: "PICU Criteria", detail: "Recurrent apnoea, exhaustion, rising CO₂ >65mmHg, failure of HFNC/CPAP, requiring >50% FiO₂." }
+        ],
+        pearls: ["Palivizumab prophylaxis for high-risk infants (ex-prem <29wks, CHD, CLD)", "Peak severity Day 3-5 of illness", "Hypertonic saline (3%) nebulization may reduce LOS in admitted patients", "Wang score for severity: mild (1-3), moderate (4-7), severe (8-12)"]
+      },
+      {
+        title: "Foreign Body Aspiration",
+        severity: "critical",
+        definition: "Inhalation of an object into the airway, most common in children aged 1-3 years. Peanuts, grapes, small toys are frequent culprits. Can cause complete or partial airway obstruction.",
+        clinical_features: [
+          "Sudden onset choking, coughing, gagging while eating/playing",
+          "Unilateral wheeze, decreased breath sounds on one side",
+          "Complete obstruction: inability to cry/cough/breathe, cyanosis",
+          "Partial obstruction: stridor, drooling, positional distress",
+          "May present late with recurrent pneumonia, persistent wheeze"
+        ],
+        management: [
+          { step: "Conscious Child — Effective Cough", detail: "Encourage coughing. DO NOT do blind finger sweeps. Position leaning forward. Monitor for deterioration." },
+          { step: "Conscious Child — Ineffective Cough", detail: "Infant <1yr: 5 back blows (heel of hand between scapulae, head down) → 5 chest thrusts (2 fingers, one finger breadth below nipple line). Child >1yr: 5 back blows → 5 abdominal thrusts (Heimlich manoeuvre). Alternate until relieved or unconscious." },
+          { step: "Unconscious Child", detail: "Open airway (jaw thrust). Look in mouth — only remove visible objects. Begin CPR (start with 5 rescue breaths). After 30 compressions, check mouth before breaths. Continue BLS. Call for help." },
+          { step: "Definitive Management", detail: "Rigid bronchoscopy by ENT/paediatric surgeon for removal. CXR (inspiratory/expiratory or bilateral decubitus films) — look for air trapping, mediastinal shift. CT if radio-lucent body suspected." },
+          { step: "Post-Removal", detail: "Observe for mucosal oedema. Short course dexamethasone if significant airway oedema. Antibiotics if secondary infection/abscess." }
+        ],
+        pearls: ["Most FBs lodge in right main bronchus (wider, more vertical)", "Normal CXR does NOT exclude FB — most organic materials are radiolucent", "Peanuts cause intense chemical pneumonitis", "Never attempt to remove FB with Magill forceps if below cords — bronchoscopy required"]
+      }
+    ]
+  },
+  {
+    category: "Cardiac",
+    icon: "heart",
+    items: [
+      {
+        title: "Paediatric Cardiac Arrest (PALS)",
+        severity: "critical",
+        definition: "Cessation of effective cardiac output. Unlike adults, paediatric arrests are primarily respiratory in origin (hypoxia/asphyxia), making early oxygenation and ventilation crucial.",
+        clinical_features: [
+          "Unresponsive, absent/agonal breathing",
+          "No palpable central pulse (carotid >1yr, brachial/femoral <1yr) within 10 seconds",
+          "Shockable rhythms (VF/pVT) — only 5-15% of paediatric arrests",
+          "Non-shockable rhythms (Asystole/PEA) — majority of paediatric arrests",
+          "Pre-arrest signs: bradycardia <60 with poor perfusion is indication to start CPR"
+        ],
+        management: [
+          { step: "BLS — High Quality CPR", detail: "Compression rate 100-120/min. Depth: 1/3 AP diameter (4cm infant, 5cm child). Full chest recoil. Ratio 15:2 (healthcare providers) or 30:2 (single rescuer). Minimize interruptions <10s. Infant: 2 thumb encircling technique preferred." },
+          { step: "Shockable Rhythm (VF/pVT)", detail: "Defibrillation 4J/kg (monophasic or biphasic). Resume CPR immediately for 2 min → rhythm check. If persistent: Adrenaline 10μg/kg (0.1mL/kg of 1:10000) IV/IO after 2nd shock, then every 3-5 min. Amiodarone 5mg/kg IV/IO after 3rd shock (max 3 doses)." },
+          { step: "Non-Shockable (Asystole/PEA)", detail: "CPR 2 min → rhythm check. Adrenaline 10μg/kg IV/IO as soon as access — repeat every 3-5 min. Identify and treat reversible causes (4H's & 4T's)." },
+          { step: "4H's and 4T's", detail: "Hypoxia (ventilate with 100% O₂), Hypovolaemia (20mL/kg bolus), Hypo/Hyperkalaemia (check electrolytes, calcium), Hypothermia. Tension pneumothorax (needle decompress), Tamponade (pericardiocentesis), Toxins (specific antidotes), Thromboembolism." },
+          { step: "Vascular Access", detail: "IV attempt for 60 seconds max → Intraosseous (IO) if IV fails. IO sites: proximal tibia (1st choice), distal femur, distal tibia. All PALS drugs can go IO." },
+          { step: "Post-ROSC Care", detail: "Targeted temperature management (36-37.5°C — avoid fever). Avoid hyperoxia (titrate SpO₂ 94-98%). Avoid hypotension (vasopressors if needed). 12-lead ECG, echocardiogram. Neurological monitoring." }
+        ],
+        pearls: ["Most common paediatric arrest rhythm = asystole (>60%)", "Bradycardia <60/min with signs of shock = start CPR", "Adrenaline via ETT: 100μg/kg (10× IV dose) — suboptimal, prefer IO", "ROSC predictors: initial shockable rhythm, short arrest time, witnessed arrest, bystander CPR"]
+      },
+      {
+        title: "Supraventricular Tachycardia (SVT)",
+        severity: "high",
+        definition: "Most common pathological tachyarrhythmia in children. Narrow complex tachycardia (HR typically 220-300 in infants, 180-250 in children) from re-entrant circuit or automatic focus above the His bundle.",
+        clinical_features: [
+          "Sudden onset rapid palpitations",
+          "Infants: poor feeding, pallor, irritability, diaphoresis, heart failure if prolonged >12-24hrs",
+          "Older children: chest pain, dizziness, syncope, awareness of fast heartbeat",
+          "ECG: narrow complex (QRS <0.09s), rate 220-300 (infant), absent/abnormal P waves",
+          "If haemodynamically unstable: hypotension, altered consciousness, pulmonary oedema"
+        ],
+        management: [
+          { step: "Vagal Manoeuvres (First-Line if Stable)", detail: "Infant: Apply ice pack/frozen glove to face for 15-30s (elicits diving reflex). DO NOT press on eyes. Older child: Valsalva (blowing through a syringe or straw), carotid massage (one side only). Success rate ~25-50%." },
+          { step: "Adenosine (Drug of Choice)", detail: "0.1mg/kg IV rapid push (max 1st dose 6mg) → flush with 5-10mL rapid NS flush (use stopcock technique, closest vein to heart). If no effect: 0.2mg/kg (max 12mg). If no effect: 0.3mg/kg (max 12mg). Must be RAPID push — half-life 10 seconds." },
+          { step: "Synchronized DC Cardioversion", detail: "If haemodynamically UNSTABLE or adenosine fails: 1J/kg → 2J/kg if needed. Ensure synchronization mode ON. Sedation with ketamine 1-2mg/kg IV if time allows." },
+          { step: "Maintenance/Prophylaxis", detail: "Propranolol 1mg/kg/day in 3 divided doses (infants — avoid in asthmatics/heart failure). Flecainide, sotalol, or amiodarone for refractory cases. Refer to paediatric cardiologist. Consider ablation if recurrent (>5yrs)." }
+        ],
+        pearls: ["SVT vs Sinus tachycardia: SVT has fixed rate, abrupt onset/offset, absent/retrograde P waves; sinus tachy varies with activity, has P waves, rate usually <220", "WPW pattern (delta wave, short PR) on baseline ECG — avoid digoxin/verapamil (risk VF)", "Verapamil CONTRAINDICATED in infants <1yr (refractory hypotension/arrest)", "Record rhythm strip during adenosine — diagnostic even if SVT recurs"]
+      },
+      {
+        title: "Congestive Heart Failure in Children",
+        severity: "high",
+        definition: "Inability of the heart to meet metabolic demands. In infants, commonly due to congenital heart disease (VSD, PDA, coarctation). In older children, cardiomyopathy, myocarditis, or rheumatic heart disease.",
+        clinical_features: [
+          "Infants: poor feeding, failure to thrive, diaphoresis with feeds, tachypnoea",
+          "Hepatomegaly (most reliable sign in infants), periorbital oedema",
+          "Tachycardia, gallop rhythm (S3), cardiomegaly",
+          "Pulmonary oedema: crepitations, respiratory distress",
+          "Older children: exercise intolerance, orthopnoea, peripheral oedema"
+        ],
+        management: [
+          { step: "Acute Stabilization", detail: "Prop up 45°. O₂ to maintain SpO₂ >94%. NPO if severe distress. Fluid restrict to 2/3 maintenance. Strict I/O monitoring. Daily weights." },
+          { step: "Diuretics", detail: "Furosemide 1-2mg/kg IV (onset 5 min) or PO. Maintenance: 1-4mg/kg/day in 2-3 doses. Add spironolactone 1-3mg/kg/day for K⁺-sparing effect. Monitor electrolytes." },
+          { step: "Afterload Reduction", detail: "ACE Inhibitors: Captopril 0.1-0.5mg/kg/dose TDS (neonates start 0.05mg/kg). Or Enalapril 0.1mg/kg/day. Monitor BP and renal function. First-dose hypotension risk." },
+          { step: "Inotropic Support (Acute Decompensation)", detail: "Dobutamine 5-20μg/kg/min (first-line inotrope). Milrinone 0.25-0.75μg/kg/min (inodilator — good for afterload reduction). Adrenaline 0.05-0.3μg/kg/min if cardiogenic shock." },
+          { step: "Digoxin", detail: "Digitalizing dose: 20-30μg/kg total (given as ½, ¼, ¼ at 8hr intervals). Maintenance: 5-10μg/kg/day in 2 doses. Monitor levels (therapeutic 1-2ng/mL). Beware toxicity with hypokalemia." },
+          { step: "Treat Underlying Cause", detail: "Correct anaemia (transfuse if Hb <7). Surgical repair of structural lesions. Treat arrhythmia. Carnitine supplementation if metabolic cause." }
+        ],
+        pearls: ["CXR: cardiomegaly (CTR >60% in infants, >50% in children), pulmonary venous congestion", "BNP/NT-proBNP elevated — useful for diagnosis and monitoring", "Most common cause of CHF in first week of life: HLHS, critical AS, coarctation", "Most common cause at 4-6 weeks: large VSD (as PVR drops)"]
+      }
+    ]
+  },
+  {
+    category: "Neurological",
+    icon: "brain",
+    items: [
+      {
+        title: "Status Epilepticus",
+        severity: "critical",
+        definition: "Continuous seizure activity lasting ≥5 minutes OR ≥2 seizures without regaining consciousness between them. A neurological emergency with rising morbidity/mortality after 30 minutes. Requires rapid, protocol-driven management.",
+        clinical_features: [
+          "Continuous generalized tonic-clonic activity >5 min",
+          "Multiple seizures without return to baseline consciousness",
+          "Cyanosis, hyperthermia, autonomic instability",
+          "May evolve to subtle SE (minimal motor activity but persistent EEG seizures)",
+          "Complications: rhabdomyolysis, aspiration, cerebral oedema, DIC"
+        ],
+        management: [
+          { step: "0-5 Minutes (Stabilization)", detail: "ABCDE. Recovery position. O₂ by mask. Suction if needed. Check glucose (treat if <3mmol/L: Dextrose 10% 2-5mL/kg). Do NOT restrain or put anything in mouth. Note time. Obtain IV access." },
+          { step: "5-10 Minutes (1st Line: Benzodiazepines)", detail: "IV/IO Lorazepam 0.1mg/kg (max 4mg) — preferred. OR IV Midazolam 0.15mg/kg. If NO IV access: Buccal Midazolam 0.5mg/kg (max 10mg) OR Rectal Diazepam 0.5mg/kg (max 20mg). May repeat ONE benzodiazepine dose at 10 min." },
+          { step: "10-20 Minutes (2nd Line)", detail: "IV Phenytoin 20mg/kg over 20 min (max rate 1mg/kg/min) with cardiac monitoring — risk of arrhythmia, hypotension, purple glove syndrome. OR IV Levetiracetam 40-60mg/kg over 15 min (max 3g) — fewer side effects, no monitoring. OR IV Sodium Valproate 40mg/kg over 5 min (avoid in <2yrs, liver disease, metabolic disorders)." },
+          { step: "20-40 Minutes (Refractory SE)", detail: "Call PICU/Anaesthesia. Options: Phenobarbital 20mg/kg IV over 20 min (respiratory depression risk — be prepared to intubate). Repeat phenytoin 10mg/kg if subtherapeutic levels." },
+          { step: ">40 Minutes (Super-Refractory SE)", detail: "RSI and intubation. Midazolam infusion 0.1-0.4mg/kg/hr. Or Thiopentone 3-5mg/kg bolus → 1-5mg/kg/hr infusion (requires EEG monitoring — aim burst suppression). Propofol infusion (use caution in children — propofol infusion syndrome risk)." },
+          { step: "Investigations", detail: "Glucose, electrolytes (Na⁺, Ca²⁺, Mg²⁺), FBC, LFT, ammonia, lactate, toxicology screen, blood cultures. Consider: LP (after stabilization, if infection suspected), CT/MRI brain, EEG." }
+        ],
+        pearls: ["Midazolam buccal is as effective as rectal diazepam and more socially acceptable", "Phenytoin precipitation in dextrose — flush with NS only", "Pyridoxine 100mg IV for neonatal seizures unresponsive to standard therapy (B6 dependent epilepsy)", "Febrile SE (>15min) — still follow protocol but prognosis generally better than structural SE"]
+      },
+      {
+        title: "Raised Intracranial Pressure (Raised ICP)",
+        severity: "critical",
+        definition: "Elevated ICP (>20mmHg) from mass lesion, cerebral oedema, hydrocephalus, or infection. Untreated herniation is rapidly fatal. Cushing's triad (bradycardia, hypertension, irregular respiration) is a late pre-terminal sign.",
+        clinical_features: [
+          "Headache (worse morning, bending, coughing), projectile vomiting",
+          "Papilloedema (may be absent acutely), VI nerve palsy (false localizing)",
+          "Infants: bulging fontanelle, setting-sun sign, increasing head circumference, separated sutures",
+          "Cushing's triad: bradycardia + hypertension + irregular breathing (LATE sign)",
+          "Altered consciousness (↓GCS), pupil asymmetry (ipsilateral dilated = uncal herniation)",
+          "Decorticate → decerebrate posturing (worsening herniation)"
+        ],
+        management: [
+          { step: "Immediate Measures", detail: "Elevate head 30° midline (ensure no jugular compression from ETT ties). Ensure adequate oxygenation (SpO₂ >95%) and avoid hypotension (CPP = MAP – ICP). GCS monitoring q15min." },
+          { step: "Hyperosmolar Therapy", detail: "Mannitol 20%: 0.5-1g/kg IV over 15-20 min (onset 15-30 min, lasts 4-6hrs). OR Hypertonic saline 3%: 3-5mL/kg over 10-20 min (preferred in hypovolemia — doesn't cause diuresis). Monitor serum osmolality (<320 mOsm/L for mannitol)." },
+          { step: "Controlled Ventilation", detail: "Target PaCO₂ 35-40mmHg (normocapnia). Brief hyperventilation (PaCO₂ 30-35) ONLY for acute herniation as temporary bridge. Prolonged hyperventilation harmful (cerebral vasoconstriction → ischemia)." },
+          { step: "Seizure Prophylaxis", detail: "Levetiracetam or Phenytoin — seizures increase ICP and metabolic demand. Treat aggressively if present." },
+          { step: "Dexamethasone", detail: "0.5-1mg/kg/day in 4 doses — ONLY for vasogenic oedema (tumours, abscesses). NOT effective for cytotoxic oedema (trauma, hypoxic-ischaemic injury)." },
+          { step: "Definitive Management", detail: "EVD (External Ventricular Drain) for hydrocephalus — also allows ICP monitoring. Decompressive craniectomy for refractory raised ICP. Emergency surgical evacuation of haematoma/mass. VP shunt for chronic hydrocephalus." },
+          { step: "Avoid", detail: "Hyperthermia (increases metabolic demand — target normothermia). Hyponatraemia (worsens oedema — maintain Na 145-155 in severe cases). Hypotension. Coughing/straining (adequate sedation)." }
+        ],
+        pearls: ["Infants: bulging fontanelle before papilloedema (open sutures allow some compensation)", "CT before LP if suspected raised ICP — herniation risk", "Monroe-Kellie doctrine: fixed skull = brain (80%) + CSF (10%) + blood (10%) — increase in one requires decrease in another", "GCS ≤8 = intubate for airway protection"]
+      },
+      {
+        title: "Febrile Seizures",
+        severity: "moderate",
+        definition: "Seizures occurring between 6 months and 5 years of age, associated with fever (≥38°C), in the absence of CNS infection or metabolic derangement. Most common neurological disorder of childhood (2-5% of children).",
+        clinical_features: [
+          "Simple febrile seizure (75%): generalized tonic-clonic, <15 min, single episode in 24hrs, complete recovery",
+          "Complex febrile seizure: focal onset, >15 min duration, recurs within 24hrs, or incomplete recovery (Todd's paresis)",
+          "Age 6 months to 5 years with documented fever",
+          "Child appears well post-ictally (if not — consider meningitis/encephalitis)",
+          "Recurrence risk: 30% overall; higher if <18 months, lower fever at onset, family history"
+        ],
+        management: [
+          { step: "Acute Management", detail: "Most seizures stop spontaneously within 2-3 min. Place in recovery position. Do not restrain. Time the seizure. If >5 min: treat as per status epilepticus protocol (buccal midazolam 0.5mg/kg)." },
+          { step: "Fever Control", detail: "Paracetamol 15mg/kg Q4-6H OR Ibuprofen 10mg/kg Q6-8H. Tepid sponging. Undress child. NOTE: Antipyretics do NOT prevent febrile seizures but improve comfort." },
+          { step: "Identify Fever Source", detail: "Full examination for source of infection. Consider UTI (common occult source in <2yrs). LP if: <12 months with complex seizure, meningeal signs, prolonged drowsiness, incomplete immunization." },
+          { step: "Parental Education", detail: "Reassure: febrile seizures are benign in vast majority. Risk of epilepsy: 1-2% (only marginally above general population). Recovery position teaching. When to seek emergency care. Rescue midazolam for recurrence if complex." },
+          { step: "Investigations", detail: "Simple FS in well child >18 months: No investigations needed. Consider FBC, CRP, blood culture, urine M/C/S for fever source. EEG NOT indicated for simple FS. Neuroimaging NOT indicated for simple FS." }
+        ],
+        pearls: ["Simple febrile seizures do NOT cause brain damage or epilepsy", "Do NOT prescribe daily anticonvulsants for simple FS — risks outweigh benefits", "Risk of meningitis is same in febrile children WITH and WITHOUT seizure", "Complex FS: consider prophylactic intermittent diazepam during febrile illness (0.5mg/kg PR Q8H for 48hrs)"]
+      }
+    ]
+  },
+  {
+    category: "Fluid & Electrolytes",
+    icon: "droplets",
+    items: [
+      {
+        title: "Severe Dehydration / Hypovolaemic Shock",
+        severity: "critical",
+        definition: "Loss of ≥10% body weight as fluid (usually from gastroenteritis). Presenting with signs of circulatory compromise. Leading cause of under-5 mortality globally. Requires immediate aggressive fluid resuscitation.",
+        clinical_features: [
+          "Severe (≥10%): lethargic/unconscious, sunken eyes, skin pinch goes back very slowly (>2s), unable to drink",
+          "Dry mucous membranes, absent tears, sunken fontanelle (infant)",
+          "Tachycardia, weak/impalpable pulses, prolonged CRT >3s",
+          "Hypotension (LATE sign in children — compensate until decompensation is sudden)",
+          "Oliguria/anuria (<0.5mL/kg/hr)",
+          "WHO Plan C criteria: 2 of — lethargy, sunken eyes, unable to drink, skin pinch very slow"
+        ],
+        management: [
+          { step: "Immediate Resuscitation", detail: "IV/IO access. Bolus: 0.9% Normal Saline 20mL/kg over 10-15 minutes. Reassess after each bolus (HR, CRT, BP, mental status). Repeat up to 3 boluses (60mL/kg) in first hour. If no improvement after 40-60mL/kg → consider other causes of shock." },
+          { step: "Deficit Replacement", detail: "Calculate deficit: % dehydration × weight (kg) × 10 = mL deficit. Replace over 24-48hrs (typically 48hrs for hypernatraemic dehydration). Fluid: 0.9% NS + 5% Dextrose. Subtract bolus volume from deficit." },
+          { step: "Maintenance Fluids", detail: "Holliday-Segar: 100mL/kg for first 10kg + 50mL/kg for next 10kg + 20mL/kg for each kg thereafter. Use isotonic fluids (0.9% NS + 5% Dextrose) — prevents iatrogenic hyponatraemia." },
+          { step: "Ongoing Losses", detail: "Replace stool-for-stool: 10mL/kg per watery stool. Vomiting losses: 2-5mL/kg per vomit. Reassess hydration status Q4-6H." },
+          { step: "Monitoring", detail: "Hourly urine output (target >1mL/kg/hr). Strict I/O. 4-6 hourly electrolytes (Na⁺, K⁺, glucose, urea, creatinine). Daily weights. Neuro obs if hypernatraemic (risk of cerebral oedema with rapid correction)." },
+          { step: "Potassium Replacement", detail: "Add KCl 20mmol/L to IV fluids AFTER confirming urine output. Never bolus potassium. Max peripheral concentration 40mmol/L. Max rate 0.5mmol/kg/hr." },
+          { step: "ORS (WHO Plan B/C Oral)", detail: "Low-osmolarity ORS (245 mOsm/L): 75mL/kg over 4hrs for moderate dehydration. Small frequent sips or NG if necessary. Continue breastfeeding." }
+        ],
+        pearls: ["Children compensate for hypovolemia better than adults — hypotension = >25% blood volume loss", "Hypernatraemic dehydration: correct Na slowly (max drop 0.5mmol/L/hr, 10-12 mmol/day) to prevent cerebral oedema", "Avoid hypotonic fluids (D5W, 0.45% NS) for maintenance in acutely ill children — risk of fatal hyponatraemia", "Signs resolve in order: mental status → pulse → CRT → urine output"]
+      },
+      {
+        title: "Diabetic Ketoacidosis (DKA)",
+        severity: "critical",
+        definition: "Life-threatening metabolic emergency: hyperglycaemia (>11mmol/L), ketonaemia/ketonuria, metabolic acidosis (pH <7.3, bicarb <15). Most common cause of mortality in Type 1 DM children. Cerebral oedema is the major complication (0.5-1% cases, 25% mortality).",
+        clinical_features: [
+          "Polyuria, polydipsia, weight loss (days-weeks history)",
+          "Vomiting, abdominal pain (mimics surgical abdomen)",
+          "Kussmaul breathing (deep rapid respiration — respiratory compensation)",
+          "Acetone (fruity) breath",
+          "Dehydration: sunken eyes, dry mucous membranes, tachycardia",
+          "Altered consciousness (severe): confusion → drowsiness → coma",
+          "Severity: Mild pH 7.2-7.3, Moderate pH 7.1-7.2, Severe pH <7.1"
+        ],
+        management: [
+          { step: "Hour 0-1: Initial Resuscitation", detail: "If shocked: 10mL/kg 0.9% NS bolus (NOT 20mL/kg — cerebral oedema risk). May repeat once if still shocked. Max initial bolus 20mL/kg. Start monitoring: hourly neuro obs, hourly BGL, 2-hrly electrolytes, strict I/O, cardiac monitor." },
+          { step: "Fluid Replacement (48hr Protocol)", detail: "Calculate: Maintenance + Deficit (assume 5% mild, 7% moderate, 10% severe) — replace over 48hrs evenly. Use 0.9% NS for first 4-6hrs, then 0.9% NS + 40mmol/L KCl. Switch to 0.45% NS + 5% Dextrose when BGL <14mmol/L (to prevent hypoglycaemia while continuing insulin)." },
+          { step: "Insulin Infusion", detail: "Start 1 HOUR after fluids commenced (NOT at time zero). Soluble insulin 0.05-0.1 units/kg/hr continuous IV infusion (newer protocols prefer 0.05). DO NOT bolus insulin. Aim glucose fall 3-5mmol/L/hr. If glucose falling too fast, add dextrose — do NOT stop insulin (still needed for ketone clearance)." },
+          { step: "Potassium", detail: "Total body K⁺ always depleted (even if initially normal/high due to acidosis shift). If K⁺ <3.5: 40mmol/L in fluids. If K⁺ 3.5-5.5: 20-40mmol/L. If K⁺ >5.5: withhold but recheck in 1hr. ECG monitoring if abnormal K⁺." },
+          { step: "Bicarbonate", detail: "Almost NEVER indicated. Only consider if pH <6.9 with cardiovascular compromise. Dose: 1-2mmol/kg over 60 min. Risks: paradoxical CNS acidosis, hypokalaemia, cerebral oedema." },
+          { step: "Cerebral Oedema (Emergency)", detail: "Suspect if: headache, bradycardia, hypertension, decreasing consciousness, pupil changes, posturing. Treatment: Hypertonic saline 3% 5mL/kg over 5 min OR Mannitol 0.5-1g/kg IV over 15 min. Elevate head 30°. Restrict fluids. CT brain. Intubate if GCS ≤8." },
+          { step: "Resolution Criteria", detail: "pH >7.3, Bicarb >15, BGL <14, ketones clearing, tolerating oral. Transition to SC insulin (give first SC dose 30-60 min BEFORE stopping infusion to prevent rebound ketosis)." }
+        ],
+        pearls: ["Cerebral oedema risk factors: younger age, new diagnosis, higher BUN, severe acidosis, rapid Na correction, bicarbonate use", "Phosphate depletion is universal — may give 50% of K as KPO4", "Abdominal pain resolves with correction of acidosis — if persistent, consider other diagnosis", "Monitor corrected Na: should rise with treatment (Na + 0.3 × [glucose-5.5]/5.5) — falling corrected Na = excess free water = cerebral oedema risk"]
+      }
+    ]
+  },
+  {
+    category: "Infectious",
+    icon: "bug",
+    items: [
+      {
+        title: "Bacterial Meningitis",
+        severity: "critical",
+        definition: "Infection of the meninges causing purulent inflammation of the CSF spaces. Mortality 5-10% even with treatment. Common organisms: Neonates (GBS, E.coli, Listeria); 1-3mo (GBS, E.coli, S.pneumoniae); >3mo (N.meningitidis, S.pneumoniae, H.influenzae type b).",
+        clinical_features: [
+          "Classic triad: fever, headache, neck stiffness (unreliable <18months)",
+          "Infants: irritability, poor feeding, bulging fontanelle, high-pitched cry, hypotonia",
+          "Kernig's sign (hip flexed 90°, pain on knee extension), Brudzinski's sign (neck flexion causes hip flexion)",
+          "Petechial/purpuric rash (N.meningitidis — meningococcal septicaemia)",
+          "Altered consciousness, seizures, focal neurological signs (cranial nerve palsies)",
+          "Late: signs of raised ICP (papilloedema, Cushing's triad, coning)"
+        ],
+        management: [
+          { step: "Antibiotics — IMMEDIATE", detail: "DO NOT delay for LP/CT. Time to antibiotics is the single most important prognostic factor.\n\nEmpiric: <3 months: Cefotaxime 50mg/kg Q6H + Amoxicillin/Ampicillin 50mg/kg Q6H (Listeria cover)\n>3 months: Ceftriaxone 100mg/kg/day (max 4g) in 1-2 doses OR Cefotaxime 50mg/kg Q6H\n\nAdd Vancomycin 15mg/kg Q6H if penicillin-resistant pneumococcus suspected (local resistance >1%)." },
+          { step: "Dexamethasone", detail: "0.15mg/kg Q6H × 4 days (or 0.4mg/kg Q12H × 2 days). Give BEFORE or WITH first dose of antibiotics. Reduces hearing loss and neurological sequelae (proven benefit mainly for H.influenzae and pneumococcal meningitis). Controversial in neonates — generally not given." },
+          { step: "Lumbar Puncture", detail: "Contraindicated if: signs of raised ICP, haemodynamic instability, coagulopathy, focal neurology, GCS<9, respiratory compromise. If LP delayed → blood cultures + empiric antibiotics immediately. CSF: WBC >1000 (neutrophilic), protein↑, glucose↓ (<40% serum), Gram stain, culture, PCR." },
+          { step: "Supportive Care", detail: "Fluid management: initially restrict to 2/3 maintenance (SIADH risk) then reassess. Monitor Na⁺. Seizure management. ICP management if signs present. Monitor hearing (brainstem audiometry before discharge)." },
+          { step: "Meningococcal Septicaemia Specific", detail: "Aggressive fluid resuscitation 20mL/kg boluses (may need 60-80mL/kg). Inotropes early. Treat DIC (FFP, platelets, cryoprecipitate). May progress to Waterhouse-Friderichsen syndrome (adrenal haemorrhage) — give hydrocortisone 2mg/kg if refractory shock." },
+          { step: "Duration", detail: "N.meningitidis: 7 days. S.pneumoniae: 10-14 days. H.influenzae: 10 days. GBS: 14-21 days. Gram-negative: 21 days." },
+          { step: "Public Health", detail: "Meningococcal: chemoprophylaxis for close contacts — Ciprofloxacin single dose (child 5mg/kg, adult 500mg) OR Rifampicin 2 days. Notify public health authority." }
+        ],
+        pearls: ["'Glass test' for meningococcal rash — non-blanching under pressure", "CSF Gram stain positive in only 60-90% — negative stain does NOT exclude", "Partially treated meningitis (prior oral antibiotics): modified CSF — rely on PCR", "Complications: subdural empyema, hydrocephalus, cerebral abscess, SIADH, hearing loss (8-30%)"]
+      },
+      {
+        title: "Septic Shock (Paediatric)",
+        severity: "critical",
+        definition: "Sepsis with cardiovascular dysfunction persisting despite ≥40mL/kg fluid resuscitation. SIRS criteria are insensitive in children — use clinical assessment. 'Golden hour' concept: early aggressive therapy reduces mortality from >50% to <10%.",
+        clinical_features: [
+          "Warm shock (early): flash CRT, bounding pulses, wide pulse pressure, warm peripheries, tachycardia",
+          "Cold shock (late/common in children): prolonged CRT >3s, weak pulses, mottled cold peripheries, narrow pulse pressure",
+          "Altered mental status (irritability → lethargy)",
+          "Temperature instability (fever OR hypothermia in neonates)",
+          "Tachycardia + tachypnoea out of proportion to fever",
+          "Oliguria <1mL/kg/hr, rising lactate (>2mmol/L)"
+        ],
+        management: [
+          { step: "0-5 Minutes: Recognition & Access", detail: "Recognize sepsis (2 IV access attempts, then IO). High-flow O₂. Blood glucose (treat if <3mmol/L). Blood cultures × 2, FBC, CRP, lactate, coagulation, blood gas. First dose antibiotics WITHIN 60 MINUTES of recognition." },
+          { step: "5-15 Minutes: Fluid Resuscitation", detail: "0.9% NS 20mL/kg bolus over 5-10 min. Push-pull syringe technique or pressure bag. Repeat up to 60mL/kg in first hour. Reassess after EACH bolus: HR, CRT, BP, urine output, mental status, hepatomegaly. If hepatomegaly develops (fluid overload) → inotropes." },
+          { step: "15-60 Minutes: Fluid-Refractory Shock", detail: "If shock persists after 40-60mL/kg:\nCOLD shock (poor perfusion): Adrenaline 0.05-0.3μg/kg/min (1st line)\nWARM shock (vasodilated): Noradrenaline 0.05-1μg/kg/min\nCentral access preferred for vasopressors (IO acceptable initially). Target MAP > 5th centile for age." },
+          { step: "Catecholamine-Resistant Shock", detail: "Consider: Hydrocortisone 2mg/kg bolus then 2mg/kg/day (adrenal insufficiency). Rule out pneumothorax, tamponade, intra-abdominal catastrophe. Vasopressin 0.0003-0.002 units/kg/min. ECMO referral if available." },
+          { step: "Antibiotics", detail: "Empiric broad-spectrum within 60 min:\nCommunity: Ceftriaxone 80mg/kg + consider Vancomycin if MRSA risk\nNosocomial: Piperacillin-tazobactam + Vancomycin ± Gentamicin\nNeutropenic: Piperacillin-tazobactam + Amikacin\nNeonate: Ampicillin + Gentamicin (add Cefotaxime if meningitis suspected)" },
+          { step: "Targets (First 6 Hours)", detail: "CRT <2s, normal pulses, warm peripheries. Urine output >1mL/kg/hr. Normal mental status. Lactate normalizing. ScvO₂ >70%. No differential between central and peripheral temperature >2°C." }
+        ],
+        pearls: ["Hypotension is a LATE sign in paediatric shock (compensated → decompensated is sudden)", "Most paediatric septic shock is COLD shock (unlike adults who are typically warm)", "Surviving Sepsis Campaign: antibiotics within 1 hour, 40-60mL/kg fluid in first hour", "Correct hypocalcaemia (ionized Ca²⁺ <1.0) — impairs cardiac contractility"]
+      }
+    ]
+  },
+  {
+    category: "Toxicology",
+    icon: "flask-round",
+    items: [
+      {
+        title: "Paracetamol (Acetaminophen) Poisoning",
+        severity: "high",
+        definition: "Most common paediatric poisoning. Toxic dose: >150mg/kg single ingestion (or >75mg/kg/day repeated supratherapeutic). Causes hepatotoxicity via NAPQI metabolite accumulation when glutathione stores depleted. Children <6 years have lower risk due to higher glutathione reserves and sulfation pathway preference.",
+        clinical_features: [
+          "Phase 1 (0-24hr): Asymptomatic or mild nausea, vomiting, malaise — deceptively well",
+          "Phase 2 (24-72hr): RUQ pain, rising ALT/AST, ↑INR, oliguria (hepatorenal)",
+          "Phase 3 (72-96hr): Peak hepatotoxicity — jaundice, coagulopathy, encephalopathy, hypoglycaemia, renal failure, lactic acidosis",
+          "Phase 4 (4-14 days): Recovery or death. Liver regenerates if patient survives",
+          "Massive ingestion (>500mg/kg): early metabolic acidosis, coma, lactic acidosis (mitochondrial toxicity)"
+        ],
+        management: [
+          { step: "Risk Assessment", detail: "Dose ingested: <150mg/kg = unlikely toxic. 150-250mg/kg = possible. >250mg/kg = probable. >500mg/kg = severe. Time of ingestion critical. Multiple ingestions (staggered): treat as high risk if total >150mg/kg in 24hrs." },
+          { step: "Activated Charcoal", detail: "1g/kg (max 50g) orally if within 1-2 hours of ingestion and airway protected. Most effective within 1 hour. Contraindicated if drowsy/vomiting." },
+          { step: "Paracetamol Level", detail: "Check at 4 hours post-ingestion (or immediately if presents after 4hrs). Plot on Rumack-Matthew nomogram (treatment line at 150μg/mL at 4hrs in most countries, 100μg/mL in some). If level above treatment line → NAC." },
+          { step: "N-Acetylcysteine (NAC)", detail: "IV protocol (21hr UK modified):\nBag 1: 150mg/kg in 200mL 5% Dextrose over 1 hour\nBag 2: 50mg/kg in 500mL 5% Dextrose over 4 hours\nBag 3: 100mg/kg in 1000mL 5% Dextrose over 16 hours\n(Adjust volumes for weight in children to avoid fluid overload)\nAnaphylactoid reactions common (rash, wheeze) — slow rate, give antihistamine, usually can continue." },
+          { step: "Monitoring", detail: "Paracetamol level (4hr and repeat), ALT/AST, INR/PT, creatinine, glucose, lactate, blood gas. Repeat LFTs at 24hrs (and daily if abnormal). If ALT rising despite NAC → continue NAC beyond 21hrs." },
+          { step: "Liver Failure / Transplant Criteria", detail: "King's College Criteria (for transplant referral):\npH <7.3 after resuscitation (non-paracetamol)\nOR all 3: PT >100s (INR >6.5) + Creatinine >300 + Grade III-IV encephalopathy\nContact liver unit early if INR >3, rising despite NAC, encephalopathy, or hypoglycaemia." }
+        ],
+        pearls: ["NAC is virtually 100% effective if given within 8hrs of ingestion", "Children <6 have better outcomes than adolescents at equivalent doses", "Late presentations (>24hrs): give NAC empirically if toxic dose suspected — don't wait for levels", "Staggered overdose = no nomogram applies — treat if total dose >150mg/kg/24hr or ANY abnormal bloods"]
+      },
+      {
+        title: "Organophosphate Poisoning",
+        severity: "critical",
+        definition: "Irreversible acetylcholinesterase inhibition causing cholinergic crisis. Common in rural areas (pesticide ingestion/dermal exposure). Mechanism: accumulation of acetylcholine at muscarinic, nicotinic, and CNS receptors. Can be lethal within hours without treatment.",
+        clinical_features: [
+          "DUMBBBELS (Muscarinic): Diarrhoea, Urination, Miosis, Bradycardia/Bronchospasm/Bronchorrhoea, Emesis, Lacrimation, Salivation",
+          "Nicotinic effects: Fasciculations, muscle weakness, paralysis, tachycardia (may override bradycardia)",
+          "CNS: Anxiety, seizures, coma, respiratory depression",
+          "Garlic/petroleum odour on breath or clothes",
+          "Intermediate syndrome (24-96hr): proximal weakness, cranial nerve palsies, respiratory failure (after initial improvement)",
+          "Delayed neuropathy (2-4 weeks): distal sensorimotor polyneuropathy"
+        ],
+        management: [
+          { step: "Decontamination", detail: "STAFF SAFETY FIRST — wear gloves, gown, apron. Remove all clothing, wash skin with soap and water thoroughly. Triple wash. Irrigate eyes 15+ minutes if ocular exposure. Do NOT induce vomiting." },
+          { step: "Atropine (Muscarinic Antagonist)", detail: "0.02-0.05mg/kg IV (minimum 0.1mg — smaller doses can cause paradoxical bradycardia). Repeat every 5-10 minutes DOUBLING the dose until atropinization achieved.\nTarget: clear chest (dry secretions), HR >80, systolic BP >80mmHg.\nMay need massive doses (total 10-100+ mg in severe cases). Atropine infusion 10-20% of loading/hour if needed." },
+          { step: "Pralidoxime (2-PAM) — Cholinesterase Reactivator", detail: "25-50mg/kg IV over 15-30 min (max 1g). Then infusion 10-20mg/kg/hr. Most effective within 24-48hrs (before 'ageing' of enzyme). Reverses nicotinic effects (muscle weakness, fasciculations). Continue for 24-48hrs after last atropine dose needed." },
+          { step: "Seizure Control", detail: "Diazepam 0.2-0.3mg/kg IV. Avoid phenytoin (ineffective for OP seizures). Midazolam infusion if refractory." },
+          { step: "Supportive Care", detail: "Intubation if respiratory failure (succ-inylcholine CONTRAINDICATED — prolonged paralysis). Use rocuronium. Frequent suctioning of copious secretions. Activated charcoal if oral ingestion within 1hr and airway protected. Monitor cholinesterase levels (RBC-AChE more reliable than plasma)." },
+          { step: "Monitoring", detail: "ICU admission minimum 48-72hrs (intermediate syndrome risk). Continuous cardiac monitoring. Frequent respiratory assessment. Serial cholinesterase levels. Watch for delayed neuropathy at 2-4 weeks follow-up." }
+        ],
+        pearls: ["Atropine endpoint is DRYING of secretions, NOT pupil dilation or tachycardia", "Succinylcholine contraindicated (metabolized by inhibited cholinesterase = prolonged paralysis)", "Intermediate syndrome: be vigilant 24-96hrs post-ingestion even if initial symptoms resolve", "Carbamate poisoning: similar presentation but self-limiting (reversible AChE inhibition) — pralidoxime controversial"]
+      }
+    ]
+  },
+  {
+    category: "Trauma",
+    icon: "shield-alert",
+    items: [
+      {
+        title: "Paediatric Trauma (Primary Survey & Resuscitation)",
+        severity: "critical",
+        definition: "Leading cause of death in children >1 year. Paediatric differences: larger head (C-spine vulnerability), compliant chest (internal injury without fracture), larger BSA:mass ratio (hypothermia risk), excellent cardiovascular compensation (late decompensation).",
+        clinical_features: [
+          "Mechanism-dependent: road traffic accident, fall, non-accidental injury (NAI)",
+          "Head injury most common lethal injury in paediatric trauma",
+          "Haemodynamic compensation until 25-30% blood volume loss — then rapid deterioration",
+          "Signs of major trauma: GCS <13, penetrating injury, long bone fractures, pelvic injury",
+          "Suspect NAI: injuries inconsistent with history, multiple injuries of different ages, delay in presentation, <2yrs with unexplained fractures"
+        ],
+        management: [
+          { step: "A — Airway with C-Spine", detail: "Manual in-line stabilization (head neutral — use shoulder roll in <8yrs to offset large occiput). Jaw thrust (not head tilt). Clear oropharynx with suction. Size-appropriate OPA/NPA. Intubation (RSI) if GCS ≤8, loss of airway reflexes, respiratory failure. C-collar if obtunded/mechanism." },
+          { step: "B — Breathing", detail: "100% O₂ via NRB mask. Expose chest fully. Look/listen/feel bilaterally. Life-threatening: tension pneumothorax (needle 2nd ICS MCL → chest drain), open pneumothorax (3-sided seal → drain), massive haemothorax (drain + fluid resus), flail chest (rare in children — compliant chest)." },
+          { step: "C — Circulation", detail: "Control external haemorrhage with direct pressure. 2× large bore IV (or IO within 60s if IV fails). Bloods: FBC, Crossmatch, coagulation, glucose, lactate, blood gas. Fluid: 20mL/kg 0.9% NS bolus × up to 3. If still shocked → blood 10-20mL/kg (O-neg or type-specific). Permissive hypotension NOT recommended in paediatric TBI." },
+          { step: "D — Disability", detail: "AVPU → GCS. Pupil size and reactivity. Blood glucose. Lateralizing signs. GCS ≤8 or deteriorating → intubate, CT head, neurosurgical consult." },
+          { step: "E — Exposure & Environment", detail: "Fully expose (log roll with C-spine protection). Complete exam including perineum and back. Then cover immediately — hypothermia prevention critical (large BSA). Warm fluids, warming blankets, warm environment." },
+          { step: "Key Calculations", detail: "Blood volume: Neonate 80mL/kg, Infant 80mL/kg, Child 70-80mL/kg. Weight estimation: (Age+4)×2 (1-10yr) or from Broselow tape. ETT size: (Age/4)+4 uncuffed, (Age/4)+3.5 cuffed. ETT depth (oral): Age/2 + 12cm." },
+          { step: "Investigations", detail: "Trauma CT (head, c-spine, chest, abdo-pelvis) if significant mechanism. FAST scan for free fluid (sensitivity lower in children). Pelvis XR. Chest XR. Consider whole-body CT in major trauma (risk-benefit of radiation)." }
+        ],
+        pearls: ["Children have excellent cardiovascular reserve — tachycardia is the EARLIEST sign of volume loss", "Normal BP does NOT exclude significant haemorrhage in a child", "Most solid organ injuries (liver, spleen) in children are managed non-operatively", "Always consider NAI: retinal haemorrhages, rib fractures in infants, metaphyseal (bucket-handle) fractures", "Paediatric trauma golden rule: treat the CHILD, not the CT scan"]
+      },
+      {
+        title: "Burns in Children",
+        severity: "high",
+        definition: "Thermal, chemical, or electrical injury. Children have thinner skin (deeper burns at lower temperatures), higher BSA:mass ratio (greater fluid losses), and are more vulnerable to hypothermia and hypovolaemia. Scald burns are most common. Consider NAI with symmetrical, sharp-margin burns.",
+        clinical_features: [
+          "Superficial (1st degree): red, painful, no blisters (e.g., sunburn) — NOT included in %TBSA",
+          "Partial thickness (2nd degree): blistered, weeping, very painful, pink/red, blanches",
+          "Full thickness (3rd degree): white/charred, painless (nerve destruction), leathery, non-blanching",
+          "BSA estimation: Lund-Browder chart (most accurate for children — different proportions to adults). Or palm of child's hand = 1% TBSA",
+          "Inhalation injury: soot around nares/mouth, singed nasal hairs, hoarse voice, stridor, carbonaceous sputum"
+        ],
+        management: [
+          { step: "Immediate First Aid", detail: "Cool running water 20 minutes (starting within 3hrs of burn). Temperature 15-25°C — NOT ice. Remove clothing/jewellery (unless adherent). Cover with cling film (non-circumferential). Prevent hypothermia — warm the child while cooling the burn." },
+          { step: "Airway / Inhalation Injury", detail: "Early intubation if inhalation suspected — oedema progresses rapidly over 12-24hrs. Signs: hoarse voice, stridor, facial burns, soot in sputum. Use uncut ETT. Carbon monoxide: 100% O₂ via NRB (displaces CO from Hb — SpO₂ unreliable). Check carboxyhaemoglobin." },
+          { step: "Fluid Resuscitation (Burns ≥10% TBSA)", detail: "Parkland formula modified for children:\nResuscitation fluid: 3-4mL × %TBSA × weight(kg) = total in 24hrs\nGive ½ in first 8hrs (from time of burn), ½ over next 16hrs\nUse Ringer's Lactate or Hartmann's solution\nADD maintenance fluids for children <30kg (Holliday-Segar)\nTitrate to urine output 1-2mL/kg/hr (infant) or 0.5-1mL/kg/hr (child)." },
+          { step: "Pain Management", detail: "IV Morphine 0.1-0.2mg/kg titrated. Intranasal fentanyl 1.5μg/kg for immediate relief. Paracetamol 15mg/kg + Ibuprofen 10mg/kg as adjuncts. Anxiolysis for dressing changes: nitrous oxide or ketamine 1-2mg/kg IV." },
+          { step: "Wound Care", detail: "Clean gently with saline. Debride loose blisters (controversial — some leave intact small blisters). Apply non-adherent dressing (e.g., Mepitel, silver sulfadiazine — avoid face). Elevate burned limbs. Tetanus prophylaxis if needed." },
+          { step: "Transfer to Burns Centre", detail: "Criteria: >10% TBSA (>5% in <5yrs), full thickness >5%, burns to face/hands/feet/genitalia/joints, circumferential burns, inhalation injury, electrical/chemical burns, associated trauma, suspected NAI." },
+          { step: "Circumferential Burns", detail: "Monitor for compartment syndrome (limbs) or respiratory compromise (chest). Escharotomy may be required — performed by burns surgeon along mid-axial lines." }
+        ],
+        pearls: ["Lund-Browder: child's head = 18% (infant) vs 9% (adult); legs relatively smaller", "NAI indicators: glove/stocking pattern, buttock immersion, cigarette burns, delay in presentation, inconsistent history", "Albumin controversial in first 24hrs — consider after 24hrs if large burns with hypoalbuminaemia", "Metabolic rate increases 50-100% in major burns — early enteral nutrition critical", "Silver sulfadiazine contraindicated in neonates (kernicterus risk) and sulfa allergy"]
+      }
+    ]
+  },
+  {
+    category: "Neonatal",
+    icon: "baby",
+    items: [
+      {
+        title: "Neonatal Resuscitation (NLS Protocol)",
+        severity: "critical",
+        definition: "Approximately 10% of newborns require some assistance at birth; 1% need extensive resuscitation. The transition from fetal to neonatal life requires lung aeration, establishment of breathing, and circulatory adaptation. Delays in effective ventilation are the primary cause of neonatal compromise.",
+        clinical_features: [
+          "Assess at birth: Tone, Breathing, Heart Rate",
+          "Poor tone/floppy, not breathing or gasping",
+          "Heart rate <100/min (assessed by auscultation or umbilical pulse palpation)",
+          "Persistent cyanosis despite drying and stimulation",
+          "Term vs preterm determines approach nuances (e.g., plastic wrap for <32 weeks)"
+        ],
+        management: [
+          { step: "Birth — Dry & Stimulate (30 seconds)", detail: "Dry thoroughly (warm towels, radiant warmer). Gentle stimulation (rubbing back, flicking soles). Position: neutral/slight extension (towel under shoulders). Keep warm (thermoregulation is critical). For <32 weeks: do NOT dry — place in plastic bag/wrap up to neck, hat on." },
+          { step: "Assess (at 60 seconds)", detail: "Breathing? (regular, gasping, absent). Heart rate? (>100, 60-100, <60). Colour/SpO₂? (preductal — right hand). If not breathing/HR <100 → proceed to ventilation." },
+          { step: "Inflation Breaths (5 breaths)", detail: "5 inflation breaths: sustained pressure 25-30cmH₂O for 2-3 seconds each (aim to achieve FRC). Use T-piece resuscitator or 500mL self-inflating bag with mask. Use AIR (21% FiO₂) for term; 21-30% for preterm. Jaw thrust + chin lift for mask seal." },
+          { step: "Ventilation Breaths", detail: "If HR <100 after inflation breaths: continue ventilation at 30 breaths/min (ventilation breath = shorter inspiratory time). Reassess every 30 seconds. Most important intervention = effective ventilation. If chest not moving: reposition, reapply mask, consider suction, open mouth, increase pressure." },
+          { step: "Chest Compressions", detail: "If HR <60 despite adequate ventilation for 30 seconds: 3:1 ratio (3 compressions : 1 ventilation). 2-thumb encircling technique. Depth 1/3 AP chest diameter. Rate ~120 events/min (90 compressions + 30 breaths). Increase FiO₂ to 100% when compressions started." },
+          { step: "Medications", detail: "If HR remains <60 despite effective ventilation + compressions:\nAdrenaline: 10-30μg/kg (0.1-0.3mL/kg of 1:10,000) IV via UVC (or ETT 50-100μg/kg while establishing access).\nVolume: 10mL/kg 0.9% NS or O-neg blood if blood loss suspected.\nUVC access: single-lumen catheter, insert until blood freely aspirates (usually 5-8cm in term)." },
+          { step: "Special Situations", detail: "Meconium: if vigorous (good tone, breathing, HR>100) — routine care. If NOT vigorous: intubate and suction ONLY if obstruction suspected (no evidence for routine tracheal suction).\nPneumothorax: transilluminate → needle aspiration (2nd ICS MCL, 21G butterfly).\nDiaphragmatic hernia: intubate immediately (bag-mask ventilation worsens gastric distension)." }
+        ],
+        pearls: ["Ventilation is THE most important intervention — get it right and most babies respond", "Target SpO₂ at 2min: 60%, 5min: 80%, 10min: 90% (normal transition is gradual)", "If baby not responding: 'MR SOPA' — Mask adjust, Reposition, Suction, Open mouth, Pressure increase, Airway alternative", "Delayed cord clamping (≥60s) for vigorous term and preterm infants — improves iron stores and transition"]
+      },
+      {
+        title: "Neonatal Sepsis",
+        severity: "critical",
+        definition: "Systemic bacterial infection in first 28 days of life. Early-onset (EOS <72hrs): vertical transmission (GBS, E.coli). Late-onset (LOS >72hrs): nosocomial or community-acquired (CoNS, S.aureus, Gram-negatives). Second most common cause of neonatal mortality globally.",
+        clinical_features: [
+          "Non-specific signs (sepsis mimics everything): temperature instability (hypothermia more common than fever in neonates)",
+          "Poor feeding, lethargy, irritability, 'not looking right'",
+          "Respiratory: tachypnoea, apnoea, grunting, desaturations",
+          "Cardiovascular: tachycardia, poor perfusion, hypotension (late)",
+          "GI: abdominal distension, vomiting, ileus (rule out NEC)",
+          "Haematological: jaundice, petechiae, bleeding (DIC)",
+          "Neurological: seizures, bulging fontanelle (meningitis)"
+        ],
+        management: [
+          { step: "Septic Screen", detail: "Blood culture (minimum 1mL, ideally 2 sites). FBC with differential (neutropenia, thrombocytopenia, I:T ratio >0.2). CRP (serial — may be normal initially, peaks 24-48hrs). Procalcitonin (earlier rise than CRP). Blood glucose, lactate, coagulation. Urine M/C/S (suprapubic or catheter). LP if clinically stable." },
+          { step: "Empiric Antibiotics — START WITHIN 1 HOUR", detail: "EOS (<72hrs): Ampicillin/Benzylpenicillin + Gentamicin (covers GBS, E.coli, Listeria).\nDoses: Ampicillin 50mg/kg Q8-12H (100mg/kg Q6H if meningitis). Gentamicin per local protocol (extended interval dosing common in neonates — typically 5mg/kg Q36H for <32wk, Q24H for term).\nLOS (>72hrs): Flucloxacillin + Gentamicin (or Vancomycin + Gentamicin if MRSA/CoNS risk/NICU-associated)." },
+          { step: "Supportive Care", detail: "Thermoregulation (maintain 36.5-37.5°C). IV fluids (restrict to 60-80% maintenance initially if haemodynamically stable). Monitor glucose (hypoglycaemia common). Respiratory support as needed (CPAP → ventilation)." },
+          { step: "Escalation (If Deteriorating)", detail: "Septic shock protocol: 10-20mL/kg NS boluses (max 60mL/kg in hour). Inotropes: Dopamine 5-20μg/kg/min → Adrenaline 0.05-0.3μg/kg/min. Hydrocortisone 1mg/kg Q8H for refractory hypotension (relative adrenal insufficiency). Consider DIC management (FFP 10-20mL/kg, platelets if <30,000)." },
+          { step: "Duration", detail: "Negative cultures + well by 36-48hrs: stop antibiotics (rule of 36). Proven bacteraemia: 7-14 days. Meningitis: GBS 14-21 days, Gram-negative 21+ days. Osteomyelitis: 4-6 weeks." },
+          { step: "Prevention", detail: "Intrapartum Antibiotic Prophylaxis (IAP): IV Penicillin/Ampicillin for GBS-positive mothers (≥4hrs before delivery ideal). Reduces EOS by 80%." }
+        ],
+        pearls: ["'Treat first, investigate second' — antibiotics should NEVER be delayed for results", "A well-looking neonate can deteriorate within hours — maintain high index of suspicion", "CRP at 0hrs has poor sensitivity — repeat at 24-48hrs more informative", "Ratio of immature:total neutrophils (I:T) >0.2 suggests sepsis but is non-specific", "Lumbar puncture: up to 30% of neonatal sepsis has concurrent meningitis — LP important when stable"]
+      }
+    ]
+  },
+  {
+    category: "Allergy",
+    icon: "syringe",
+    items: [
+      {
+        title: "Anaphylaxis in Children",
+        severity: "critical",
+        definition: "Severe, life-threatening systemic hypersensitivity reaction (Type I — IgE mediated). Rapid onset (minutes to hours). Common triggers in children: food (peanuts, tree nuts, milk, egg), insect stings, medications (antibiotics, NSAIDs), latex. Biphasic reaction in 5-20% (recurrence 4-12hrs after initial episode).",
+        clinical_features: [
+          "Skin (80-90%): urticaria, angioedema, flushing, pruritus (may be ABSENT in 10-20% of cases)",
+          "Respiratory: stridor, wheeze, hoarse voice, throat tightness, dyspnoea, persistent cough",
+          "Cardiovascular: hypotension, tachycardia, dizziness, syncope, cardiac arrest",
+          "GI: abdominal pain, vomiting, diarrhoea",
+          "Neurological: sense of doom, confusion, reduced consciousness",
+          "Diagnostic criteria: acute onset + involvement of ≥2 organ systems OR hypotension/airway compromise after exposure to KNOWN allergen"
+        ],
+        management: [
+          { step: "ADRENALINE IM — FIRST AND MOST IMPORTANT", detail: "Adrenaline (Epinephrine) 1:1000 (1mg/mL) IM into anterolateral thigh:\n<6 months: 100-150μg (0.1-0.15mL)\n6 months-5 years: 150μg (0.15mL)\n6-12 years: 300μg (0.3mL)\n>12 years: 500μg (0.5mL)\nRepeat every 5 minutes if no improvement. Most patients respond to 1-2 doses.\nNEVER delay adrenaline — it is the ONLY drug that saves lives in anaphylaxis." },
+          { step: "Position", detail: "Lay FLAT with legs elevated (unless vomiting → recovery position, or respiratory distress → sitting up). Do NOT allow to stand/sit up suddenly (can cause cardiac arrest due to empty ventricle)." },
+          { step: "High-Flow Oxygen", detail: "15L/min via non-rebreather mask. Even if SpO₂ appears normal initially." },
+          { step: "IV Fluid Bolus", detail: "If hypotensive/poor perfusion: 0.9% NS 20mL/kg bolus over 10 min. Repeat as needed (may need 40-60mL/kg due to vasodilation and capillary leak)." },
+          { step: "Second-Line Medications", detail: "Antihistamines: Chlorphenamine 0.2mg/kg IV/IM (max 10mg) — for symptom relief, does NOT treat shock. Hydrocortisone: 4mg/kg IV (max 200mg) — prevents biphasic reaction, takes 4-6hrs to work. Salbutamol nebulized 2.5-5mg — for persistent bronchospasm unresponsive to adrenaline." },
+          { step: "Refractory Anaphylaxis", detail: "IV Adrenaline infusion: 0.1-1μg/kg/min (only in monitored setting with experienced staff). Glucagon 20-30μg/kg IV (max 1mg) — for patients on beta-blockers (bypasses β-receptor blockade). Call for senior help/ICU." },
+          { step: "Observation & Discharge", detail: "Observe minimum 4-6 hours (some guidelines say 12-24hrs for severe/biphasic risk). Prescribe adrenaline auto-injector (EpiPen Jr 0.15mg or EpiPen 0.3mg). Written anaphylaxis action plan. Medical alert bracelet. Referral to paediatric allergist for skin prick/specific IgE testing. Educate on avoidance and recognition." }
+        ],
+        pearls: ["IM adrenaline has NO absolute contraindications in anaphylaxis — the risk of NOT giving it far outweighs any risk", "Common error: giving antihistamines/steroids INSTEAD of adrenaline — these are adjuncts, not treatment", "Biphasic reaction: observe ALL patients minimum 4hrs (some recommend 12hrs for severe reactions)", "Most anaphylaxis deaths occur due to: delayed adrenaline, upright positioning, or unrecognized respiratory compromise", "Food-dependent exercise-induced anaphylaxis: reaction only occurs if exercise follows food ingestion within 2-6hrs"]
+      }
+    ]
+  }
+];
+
+// ===== APP LOGIC =====
+let activeCategory = "All";
+let searchQuery = "";
+
+const defaultConfig = {
+  main_title: "Paediatric Emergencies",
+  subtitle: "Clinical Management Guide — Evidence-Based Protocols",
+  background_color: "#0f172a",
+  surface_color: "#1e293b",
+  text_color: "#e2e8f0",
+  primary_color: "#f43f5e",
+  secondary_color: "#f59e0b",
+  font_family: "Outfit",
+  font_size: 16
+};
+
+function renderCategories() {
+  const nav = document.getElementById('categoryNav');
+  const cats = ["All", ...emergencies.map(e => e.category)];
+  nav.innerHTML = cats.map(c => `
+    <button role="tab" aria-selected="${c === activeCategory}" onclick="setCategory('${c}')" class="px-4 py-2 text-sm font-500 whitespace-nowrap rounded-t transition-all ${c === activeCategory ? 'text-rose-400 tab-active border-rose-400 bg-slate-800' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'}">${c}</button>
+  `).join('');
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  renderCategories();
+  renderContent();
+}
+
+function renderContent() {
+  const area = document.getElementById('contentArea');
+  const noResults = document.getElementById('noResults');
+  let filtered = emergencies;
+
+  if (activeCategory !== "All") {
+    filtered = filtered.filter(e => e.category === activeCategory);
+  }
+
+  let html = '';
+  let hasResults = false;
+
+  filtered.forEach(cat => {
+    const items = cat.items.filter(item => {
+      if (!searchQuery) return true;
+      const q = searchQuery.toLowerCase();
+      return item.title.toLowerCase().includes(q) || item.definition.toLowerCase().includes(q) || item.clinical_features.some(f => f.toLowerCase().includes(q));
+    });
+
+    if (items.length === 0) return;
+    hasResults = true;
+
+    html += `<div class="mb-8"><div class="flex items-center gap-2 mb-4"><i data-lucide="${cat.icon}" class="w-5 h-5 text-rose-400"></i><h2 class="text-xl font-700 text-slate-200">${cat.category} Emergencies</h2></div>`;
+    items.forEach((item, idx) => {
+      const id = `${cat.category}-${idx}`;
+      const sevColor = item.severity === 'critical' ? 'bg-red-500/20 text-red-400' : item.severity === 'high' ? 'bg-orange-500/20 text-orange-400' : 'bg-yellow-500/20 text-yellow-400';
+      const sevBorder = item.severity === 'critical' ? 'severity-critical' : item.severity === 'high' ? 'severity-high' : 'severity-moderate';
+
+      html += `
+        <div class="emergency-card ${sevBorder} bg-slate-800/80 rounded-lg mb-3 overflow-hidden border border-slate-700/50">
+          <button onclick="toggleAccordion('${id}')" class="w-full px-5 py-4 flex items-center justify-between text-left gap-3 hover:bg-slate-700/30 transition" aria-expanded="false" aria-controls="content-${id}">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 flex-wrap">
+                <h3 class="font-600 text-lg text-slate-100">${item.title}</h3>
+                <span class="px-2 py-0.5 rounded text-xs font-600 uppercase ${sevColor}">${item.severity}</span>
+              </div>
+              <p class="text-slate-400 text-sm mt-1 line-clamp-1 prose-font">${item.definition.substring(0, 120)}...</p>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 flex-shrink-0 transition-transform" id="icon-${id}"></i>
+          </button>
+          <div id="content-${id}" class="accordion-content" role="region">
+            <div class="px-5 pb-5 space-y-5">
+              <div class="bg-slate-900/60 rounded-lg p-4 border border-slate-700/30">
+                <h4 class="text-rose-400 font-600 text-sm uppercase tracking-wide mb-2">Definition</h4>
+                <p class="text-slate-300 prose-font text-base leading-relaxed">${item.definition}</p>
+              </div>
+              <div>
+                <h4 class="text-amber-400 font-600 text-sm uppercase tracking-wide mb-3">Clinical Features</h4>
+                <ul class="space-y-2">${item.clinical_features.map(f => `<li class="flex gap-2 text-slate-300 text-sm"><span class="text-amber-400 mt-1 flex-shrink-0">•</span><span class="prose-font">${f}</span></li>`).join('')}</ul>
+              </div>
+              <div>
+                <h4 class="text-emerald-400 font-600 text-sm uppercase tracking-wide mb-3">Step-by-Step Management</h4>
+                <div class="space-y-3">${item.management.map((m, i) => `
+                  <div class="flex gap-3 bg-slate-900/40 rounded-lg p-3 border border-slate-700/20">
+                    <div class="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-700">${i + 1}</div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-600 text-slate-200 text-sm">${m.step}</p>
+                      <p class="text-slate-400 text-sm mt-1 prose-font whitespace-pre-line leading-relaxed">${m.detail}</p>
+                    </div>
+                  </div>
+                `).join('')}</div>
+              </div>
+              ${item.pearls ? `<div class="bg-amber-500/5 border border-amber-500/20 rounded-lg p-4">
+                <h4 class="text-amber-400 font-600 text-sm uppercase tracking-wide mb-2">💡 Clinical Pearls</h4>
+                <ul class="space-y-1">${item.pearls.map(p => `<li class="text-slate-300 text-sm prose-font flex gap-2"><span class="text-amber-400">→</span>${p}</li>`).join('')}</ul>
+              </div>` : ''}
+            </div>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+
+  area.innerHTML = html;
+  noResults.classList.toggle('hidden', hasResults);
+  lucide.createIcons();
+}
+
+function toggleAccordion(id) {
+  const content = document.getElementById(`content-${id}`);
+  const icon = document.getElementById(`icon-${id}`);
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open');
+  if (icon) icon.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  renderContent();
+});
+
+// Init
+renderCategories();
+renderContent();
+
+</script>
+</body>
+</html>
