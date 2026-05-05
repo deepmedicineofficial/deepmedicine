@@ -1,0 +1,489 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Drugs Classification | Pharmacology Drug Classes & Mechanisms | Deep Medicine</title> <meta name="description" content="Comprehensive drug classification guide covering pharmacological classes, mechanisms of action, and clinical applications in medicine and ICU care."> <link rel="canonical" href="https://deepmedicine.in/clinical/drugs/drugs-classification"> <!-- Open Graph --> <meta property="og:title" content="Drugs Classification | Deep Medicine"> <meta property="og:description" content="Systematic classification of drugs based on mechanism, class, and clinical use."> <meta property="og:image" content="https://deepmedicine.in/images/drugs-classification.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+    .font-heading { font-family: 'Playfair Display', Georgia, serif; }
+    .font-body { font-family: 'DM Sans', sans-serif; }
+    .card-glow:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+    .card-glow { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .fade-in { animation: fadeIn 0.6s ease forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .stagger-1 { animation-delay: 0.05s; }
+    .stagger-2 { animation-delay: 0.1s; }
+    .stagger-3 { animation-delay: 0.15s; }
+    .stagger-4 { animation-delay: 0.2s; }
+    .stagger-5 { animation-delay: 0.25s; }
+    .stagger-6 { animation-delay: 0.3s; }
+    .stagger-7 { animation-delay: 0.35s; }
+    .stagger-8 { animation-delay: 0.4s; }
+    .pill-tag { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.03em; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .accordion-content.open { max-height: 4000px; }
+    .chevron-icon { transition: transform 0.3s ease; }
+    .chevron-icon.rotated { transform: rotate(180deg); }
+    .search-glow:focus { box-shadow: 0 0 0 3px rgba(37,99,235,0.2); }
+    .nav-pill { transition: all 0.2s ease; cursor: pointer; }
+    .nav-pill:hover, .nav-pill.active { background: #1e3a5f; color: #e0f0ff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0c1929; }
+    ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body">
+  <div id="app-root" class="w-full h-full overflow-auto" style="background:#0f2035;"><!-- Header -->
+   <header style="background:linear-gradient(135deg,#0a1628 0%,#162d4a 50%,#1a3350 100%); border-bottom:1px solid #1e3a5f;" class="w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+     <div class="flex items-center gap-3 mb-3">
+      <div style="background:#2563eb;" class="w-10 h-10 rounded-lg flex items-center justify-center">
+       <svg width="22" height="22" fill="none" viewbox="0 0 24 24">
+        <path d="M12 2L9 9H2l6 4.5L5.5 22 12 17l6.5 5-2.5-8.5L22 9h-7L12 2z" fill="#e0f0ff" />
+       </svg>
+      </div><span class="pill-tag" style="background:#1e3a5f;color:#7db8f0;">PHARMACOLOGY REFERENCE</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-800 mb-3" style="color:#e8f4ff;">Comprehensive Drug Classification</h1>
+     <p id="subtitle" class="text-base sm:text-lg max-w-2xl" style="color:#7db8f0;">A systematic pharmacological reference covering major drug classes, mechanisms of action, examples, and clinical indications.</p>
+    </div>
+   </header><!-- Search & Nav -->
+   <div style="background:#0c1929;border-bottom:1px solid #1e3a5f;" class="w-full sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+     <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+      <div class="relative flex-1"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2" style="width:16px;height:16px;color:#4a7ab5;"></i> <input id="searchInput" type="text" placeholder="Search drugs, classes, or mechanisms..." class="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm search-glow outline-none" style="background:#162d4a;border:1px solid #1e3a5f;color:#e0f0ff;" oninput="filterCards(this.value)">
+      </div>
+      <div id="navPills" class="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0 flex-shrink-0"></div>
+     </div>
+    </div>
+   </div><!-- Main Content -->
+   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10" id="mainContent"></main><!-- Footer -->
+   <footer style="background:#0a1628;border-top:1px solid #1e3a5f;" class="w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+     <p style="color:#4a7ab5;" class="text-xs">⚕️ For educational reference only. Always consult updated pharmacological resources and clinical guidelines for patient care.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// Drug Data
+const DRUG_DATA = [
+  {
+    id:"antimicrobials", label:"Antimicrobials", icon:"shield", color:"#22c55e", bg:"#0a2e1a",
+    desc:"Agents that kill or inhibit growth of microorganisms including bacteria, viruses, fungi, and parasites.",
+    subcategories:[
+      { name:"Antibacterials (Antibiotics)", groups:[
+        { name:"β-Lactams", moa:"Inhibit cell wall synthesis by binding PBPs (Penicillin-Binding Proteins), preventing peptidoglycan cross-linking.",
+          drugs:["Penicillin G","Amoxicillin","Ampicillin","Piperacillin-Tazobactam","Cefazolin (1st gen)","Ceftriaxone (3rd gen)","Cefepime (4th gen)","Meropenem","Imipenem-Cilastatin"],
+          uses:"Community & hospital-acquired infections, meningitis, surgical prophylaxis, sepsis" },
+        { name:"Fluoroquinolones", moa:"Inhibit DNA gyrase (Topoisomerase II) and Topoisomerase IV → block DNA replication.",
+          drugs:["Ciprofloxacin","Levofloxacin","Moxifloxacin","Ofloxacin"],
+          uses:"UTIs, respiratory tract infections, GI infections, bone & joint infections" },
+        { name:"Macrolides", moa:"Bind 50S ribosomal subunit → inhibit translocation → bacteriostatic.",
+          drugs:["Azithromycin","Clarithromycin","Erythromycin"],
+          uses:"Atypical pneumonia, pharyngitis, skin infections, H. pylori (clarithro)" },
+        { name:"Aminoglycosides", moa:"Bind 30S ribosomal subunit → cause mRNA misreading → bactericidal.",
+          drugs:["Gentamicin","Amikacin","Tobramycin","Streptomycin"],
+          uses:"Serious Gram-negative infections, endocarditis (synergy), TB (streptomycin)" },
+        { name:"Tetracyclines", moa:"Bind 30S ribosomal subunit → prevent tRNA attachment → bacteriostatic.",
+          drugs:["Doxycycline","Minocycline","Tetracycline","Tigecycline"],
+          uses:"Acne, Lyme disease, Rickettsia, Chlamydia, Mycoplasma, MRSA (tigecycline)" },
+        { name:"Glycopeptides", moa:"Bind D-Ala-D-Ala terminus of peptidoglycan precursors → inhibit cell wall synthesis.",
+          drugs:["Vancomycin","Teicoplanin"],
+          uses:"MRSA, C. difficile (oral vancomycin), serious Gram-positive infections" },
+        { name:"Sulfonamides & Trimethoprim", moa:"Sequential blockade of folate synthesis pathway (PABA→dihydrofolate→tetrahydrofolate).",
+          drugs:["Co-trimoxazole (TMP-SMX)","Sulfasalazine","Dapsone"],
+          uses:"UTIs, PCP prophylaxis, Toxoplasmosis, Nocardia" },
+      ]},
+      { name:"Antifungals", groups:[
+        { name:"Azoles", moa:"Inhibit lanosterol 14α-demethylase (CYP51) → block ergosterol synthesis.",
+          drugs:["Fluconazole","Itraconazole","Voriconazole","Ketoconazole","Clotrimazole"],
+          uses:"Candidiasis, dermatophytosis, aspergillosis (voriconazole), systemic mycoses" },
+        { name:"Polyenes", moa:"Bind ergosterol in fungal membrane → form pores → cell lysis.",
+          drugs:["Amphotericin B","Nystatin"],
+          uses:"Severe systemic fungal infections, oral/vaginal candidiasis (nystatin)" },
+        { name:"Echinocandins", moa:"Inhibit β-(1,3)-D-glucan synthase → disrupt fungal cell wall.",
+          drugs:["Caspofungin","Micafungin","Anidulafungin"],
+          uses:"Invasive candidiasis, refractory aspergillosis" },
+      ]},
+      { name:"Antivirals", groups:[
+        { name:"Anti-Herpes", moa:"Guanosine analogues → phosphorylated by viral thymidine kinase → inhibit viral DNA polymerase.",
+          drugs:["Acyclovir","Valacyclovir","Ganciclovir","Foscarnet"],
+          uses:"HSV, VZV, CMV (ganciclovir), resistant CMV (foscarnet)" },
+        { name:"Antiretrovirals (HIV)", moa:"Multiple targets: reverse transcriptase (NRTIs, NNRTIs), protease, integrase, entry inhibitors.",
+          drugs:["Tenofovir (NRTI)","Emtricitabine (NRTI)","Efavirenz (NNRTI)","Dolutegravir (INSTI)","Ritonavir (PI booster)","Atazanavir (PI)"],
+          uses:"HIV treatment (HAART/ART), PrEP (Tenofovir+Emtricitabine)" },
+        { name:"Anti-Influenza", moa:"Neuraminidase inhibitors prevent viral release from host cells.",
+          drugs:["Oseltamivir","Zanamivir","Baloxavir"],
+          uses:"Influenza A & B treatment and prophylaxis" },
+      ]},
+      { name:"Antiparasitics", groups:[
+        { name:"Antimalarials", moa:"Various: heme polymerization inhibition, folate antagonism, mitochondrial electron transport disruption.",
+          drugs:["Chloroquine","Artemisinin (ACTs)","Mefloquine","Primaquine","Atovaquone-Proguanil"],
+          uses:"Malaria treatment & prophylaxis, P. vivax radical cure (primaquine)" },
+        { name:"Antihelminthics", moa:"Various: microtubule disruption, neuromuscular paralysis, GABA agonism.",
+          drugs:["Albendazole","Mebendazole","Ivermectin","Praziquantel","Pyrantel pamoate"],
+          uses:"Roundworms, hookworms, tapeworms, schistosomiasis, filariasis, strongyloides" },
+      ]}
+    ]
+  },
+  {
+    id:"cardiovascular", label:"Cardiovascular", icon:"heart", color:"#ef4444", bg:"#2e0a0a",
+    desc:"Drugs acting on the heart, blood vessels, and hemodynamic regulation.",
+    subcategories:[
+      { name:"Antihypertensives", groups:[
+        { name:"ACE Inhibitors", moa:"Block Angiotensin Converting Enzyme → ↓ Angiotensin II → vasodilation, ↓ aldosterone.",
+          drugs:["Enalapril","Ramipril","Lisinopril","Captopril","Perindopril"],
+          uses:"Hypertension, heart failure, diabetic nephropathy, post-MI remodeling" },
+        { name:"ARBs", moa:"Block AT1 receptors → prevent angiotensin II effects.",
+          drugs:["Losartan","Valsartan","Telmisartan","Irbesartan","Olmesartan"],
+          uses:"Hypertension, HF (ACEi-intolerant), diabetic nephropathy" },
+        { name:"Calcium Channel Blockers", moa:"Block L-type Ca²⁺ channels → vasodilation (dihydropyridines) or ↓ HR/conduction (non-DHP).",
+          drugs:["Amlodipine","Nifedipine (DHP)","Diltiazem (non-DHP)","Verapamil (non-DHP)"],
+          uses:"Hypertension, angina, arrhythmias (verapamil, diltiazem), Raynaud's" },
+        { name:"Beta-Blockers", moa:"Block β-adrenergic receptors → ↓ HR, ↓ contractility, ↓ renin release.",
+          drugs:["Metoprolol (β1-selective)","Atenolol","Bisoprolol","Propranolol (non-selective)","Carvedilol (α+β)"],
+          uses:"Hypertension, angina, HF (carvedilol, bisoprolol, metoprolol), post-MI, arrhythmias" },
+        { name:"Diuretics", moa:"↑ Renal Na⁺/water excretion by various tubular mechanisms.",
+          drugs:["Hydrochlorothiazide (thiazide)","Furosemide (loop)","Spironolactone (K⁺-sparing)","Indapamide","Torsemide"],
+          uses:"Hypertension, edema, heart failure, ascites, nephrotic syndrome" },
+      ]},
+      { name:"Antiarrhythmics (Vaughan-Williams)", groups:[
+        { name:"Class I (Na⁺ Channel Blockers)", moa:"Block fast Na⁺ channels → ↓ conduction velocity. Ia prolongs APD, Ib shortens APD, Ic no change.",
+          drugs:["Procainamide (Ia)","Lidocaine (Ib)","Flecainide (Ic)","Propafenone (Ic)"],
+          uses:"Ventricular arrhythmias, SVT, AF (Ic)" },
+        { name:"Class II (β-Blockers)", moa:"↓ Sympathetic drive → ↓ SA/AV node automaticity & conduction.",
+          drugs:["Metoprolol","Esmolol","Propranolol"],
+          uses:"Rate control in AF, SVT, post-MI arrhythmia prophylaxis" },
+        { name:"Class III (K⁺ Channel Blockers)", moa:"Block K⁺ channels → prolong repolarization & refractory period.",
+          drugs:["Amiodarone","Sotalol","Dofetilide","Ibutilide"],
+          uses:"AF/flutter, ventricular tachycardia, pharmacological cardioversion" },
+        { name:"Class IV (Ca²⁺ Channel Blockers)", moa:"Block L-type Ca²⁺ channels at SA/AV node → ↓ conduction & automaticity.",
+          drugs:["Verapamil","Diltiazem"],
+          uses:"SVT, rate control in AF, multifocal atrial tachycardia" },
+      ]},
+      { name:"Antianginals & Antiplatelets", groups:[
+        { name:"Nitrates", moa:"Release NO → ↑ cGMP → venodilation (↓ preload) and coronary vasodilation.",
+          drugs:["Nitroglycerin (sublingual, IV, patch)","Isosorbide mononitrate","Isosorbide dinitrate"],
+          uses:"Acute angina, chronic stable angina, acute MI, acute HF" },
+        { name:"Antiplatelets", moa:"Inhibit platelet activation/aggregation via COX-1, P2Y12, or GPIIb/IIIa pathways.",
+          drugs:["Aspirin (COX-1)","Clopidogrel (P2Y12)","Ticagrelor (P2Y12)","Prasugrel (P2Y12)"],
+          uses:"ACS, post-PCI DAPT, stroke prevention, peripheral arterial disease" },
+        { name:"Anticoagulants", moa:"Inhibit clotting cascade factors: thrombin (IIa), Xa, or vitamin K–dependent factor synthesis.",
+          drugs:["Heparin (UFH)","Enoxaparin (LMWH)","Warfarin (VKA)","Rivaroxaban (Xa)","Apixaban (Xa)","Dabigatran (IIa)"],
+          uses:"DVT/PE, AF stroke prevention, mechanical valves (warfarin), ACS" },
+      ]},
+      { name:"Heart Failure Drugs", groups:[
+        { name:"ARNI & Others", moa:"Sacubitril inhibits neprilysin (↑ natriuretic peptides) + Valsartan blocks AT1 receptor.",
+          drugs:["Sacubitril/Valsartan","Digoxin","Hydralazine + Isosorbide dinitrate","Ivabradine"],
+          uses:"HFrEF (ARNI as 1st line), symptomatic HF, rate control (digoxin)" },
+      ]}
+    ]
+  },
+  {
+    id:"cns", label:"CNS Drugs", icon:"brain", color:"#a855f7", bg:"#1e0a2e",
+    desc:"Agents acting on the central nervous system for neurological and psychiatric conditions.",
+    subcategories:[
+      { name:"Antidepressants", groups:[
+        { name:"SSRIs", moa:"Selectively inhibit serotonin reuptake transporter (SERT) → ↑ synaptic 5-HT.",
+          drugs:["Fluoxetine","Sertraline","Escitalopram","Paroxetine","Citalopram"],
+          uses:"Major depression, GAD, OCD, panic disorder, PTSD, social anxiety" },
+        { name:"SNRIs", moa:"Inhibit serotonin & norepinephrine reuptake → ↑ both neurotransmitters.",
+          drugs:["Venlafaxine","Duloxetine","Desvenlafaxine","Milnacipran"],
+          uses:"Depression, GAD, neuropathic pain (duloxetine), fibromyalgia" },
+        { name:"TCAs", moa:"Block reuptake of 5-HT & NE + anticholinergic, antihistaminic, α-blocking effects.",
+          drugs:["Amitriptyline","Nortriptyline","Imipramine","Clomipramine"],
+          uses:"Depression, neuropathic pain, migraine prophylaxis, OCD (clomipramine), enuresis" },
+        { name:"MAOIs", moa:"Irreversibly (or reversibly) inhibit monoamine oxidase → ↑ NE, 5-HT, DA.",
+          drugs:["Phenelzine","Tranylcypromine","Moclobemide (reversible)"],
+          uses:"Treatment-resistant depression, atypical depression (tyramine diet restriction!)" },
+      ]},
+      { name:"Antipsychotics", groups:[
+        { name:"Typical (1st Gen)", moa:"Block D2 dopamine receptors in mesolimbic pathway. High EPS risk.",
+          drugs:["Haloperidol","Chlorpromazine","Fluphenazine","Pimozide"],
+          uses:"Schizophrenia, acute psychosis, Tourette's (haloperidol), intractable hiccups" },
+        { name:"Atypical (2nd Gen)", moa:"Block D2 + 5-HT2A receptors → less EPS, better negative symptom coverage.",
+          drugs:["Risperidone","Olanzapine","Quetiapine","Aripiprazole","Clozapine"],
+          uses:"Schizophrenia, bipolar, treatment-resistant schizophrenia (clozapine), MDD augmentation" },
+      ]},
+      { name:"Antiepileptics", groups:[
+        { name:"Na⁺ Channel Blockers", moa:"Stabilize inactive state of voltage-gated Na⁺ channels → ↓ repetitive firing.",
+          drugs:["Carbamazepine","Phenytoin","Lamotrigine","Oxcarbazepine","Lacosamide"],
+          uses:"Focal seizures, GTCS, trigeminal neuralgia, bipolar (lamotrigine, carbamazepine)" },
+        { name:"GABA Enhancers & Others", moa:"↑ GABA activity (various mechanisms), SV2A binding, Ca²⁺ channel modulation.",
+          drugs:["Valproate","Levetiracetam","Gabapentin","Pregabalin","Topiramate","Phenobarbital","Benzodiazepines"],
+          uses:"Generalized & focal epilepsy, status epilepticus (BZDs, phenobarbital), neuropathic pain, migraine prophylaxis" },
+      ]},
+      { name:"Anxiolytics & Sedatives", groups:[
+        { name:"Benzodiazepines", moa:"Allosteric positive modulators at GABA-A receptor → ↑ Cl⁻ channel opening frequency.",
+          drugs:["Diazepam","Lorazepam","Alprazolam","Clonazepam","Midazolam"],
+          uses:"Anxiety, insomnia, status epilepticus, procedural sedation, alcohol withdrawal" },
+        { name:"Non-BZD Hypnotics (Z-drugs)", moa:"Selective GABA-A α1 subunit agonists → sedation with less anxiolytic/muscle relaxant effect.",
+          drugs:["Zolpidem","Zopiclone","Eszopiclone"],
+          uses:"Short-term insomnia management" },
+      ]},
+      { name:"Anti-Parkinson Drugs", groups:[
+        { name:"Dopaminergic Agents", moa:"Restore dopaminergic tone: L-DOPA → DA conversion, DA agonists, MAO-B/COMT inhibitors.",
+          drugs:["Levodopa/Carbidopa","Pramipexole","Ropinirole","Selegiline (MAO-B)","Entacapone (COMT)","Amantadine"],
+          uses:"Parkinson's disease, drug-induced parkinsonism, restless legs (DA agonists)" },
+      ]}
+    ]
+  },
+  {
+    id:"endocrine", label:"Endocrine", icon:"activity", color:"#f59e0b", bg:"#2e1f0a",
+    desc:"Hormonal and metabolic drugs affecting the endocrine system.",
+    subcategories:[
+      { name:"Antidiabetics", groups:[
+        { name:"Insulin", moa:"Exogenous insulin → activates insulin receptors → glucose uptake, glycogenesis, lipogenesis.",
+          drugs:["Rapid: Lispro, Aspart, Glulisine","Short: Regular insulin","Intermediate: NPH","Long: Glargine, Detemir, Degludec"],
+          uses:"Type 1 DM (all), Type 2 DM (when oral agents fail), DKA, hyperkalemia" },
+        { name:"Oral Hypoglycemics", moa:"Various: ↑ insulin secretion, ↓ hepatic glucose, ↑ insulin sensitivity, ↓ glucose reabsorption.",
+          drugs:["Metformin (biguanide)","Glimepiride (SU)","Sitagliptin (DPP-4i)","Empagliflozin (SGLT2i)","Pioglitazone (TZD)","Semaglutide (GLP-1 RA)"],
+          uses:"Type 2 DM, PCOS (metformin), HF & CKD benefit (SGLT2i), weight management (GLP-1 RA)" },
+      ]},
+      { name:"Thyroid Drugs", groups:[
+        { name:"Thyroid & Antithyroid", moa:"Levothyroxine replaces T4. Antithyroid drugs inhibit TPO → ↓ thyroid hormone synthesis.",
+          drugs:["Levothyroxine (T4)","Liothyronine (T3)","Methimazole/Carbimazole","Propylthiouracil (PTU)","Radioactive Iodine (I-131)"],
+          uses:"Hypothyroidism (levothyroxine), Graves' disease, thyroid storm (PTU + β-blocker)" },
+      ]},
+      { name:"Corticosteroids", groups:[
+        { name:"Glucocorticoids", moa:"Bind intracellular receptors → modulate gene transcription → anti-inflammatory & immunosuppressive.",
+          drugs:["Prednisolone","Methylprednisolone","Dexamethasone","Hydrocortisone","Budesonide","Beclomethasone (inhaled)"],
+          uses:"Asthma, COPD, autoimmune diseases, allergies, adrenal insufficiency, cerebral edema" },
+      ]},
+      { name:"Bone Metabolism", groups:[
+        { name:"Anti-Osteoporosis", moa:"Bisphosphonates inhibit osteoclast activity. Denosumab is anti-RANKL. Teriparatide is anabolic (PTH analogue).",
+          drugs:["Alendronate","Zoledronic acid","Denosumab","Teriparatide","Raloxifene (SERM)","Calcitonin"],
+          uses:"Osteoporosis, Paget's disease, hypercalcemia of malignancy" },
+      ]}
+    ]
+  },
+  {
+    id:"respiratory", label:"Respiratory", icon:"wind", color:"#06b6d4", bg:"#0a1e2e",
+    desc:"Drugs for airway diseases including asthma, COPD, and allergies.",
+    subcategories:[
+      { name:"Bronchodilators", groups:[
+        { name:"β2-Agonists", moa:"Activate β2-adrenergic receptors on airway smooth muscle → ↑ cAMP → bronchodilation.",
+          drugs:["Salbutamol/Albuterol (SABA)","Terbutaline (SABA)","Salmeterol (LABA)","Formoterol (LABA)","Vilanterol (LABA)"],
+          uses:"Acute asthma (SABA), maintenance asthma/COPD (LABA with ICS)" },
+        { name:"Anticholinergics", moa:"Block M3 muscarinic receptors on airway smooth muscle → bronchodilation + ↓ secretions.",
+          drugs:["Ipratropium (SAMA)","Tiotropium (LAMA)","Glycopyrronium (LAMA)","Umeclidinium (LAMA)"],
+          uses:"COPD maintenance, acute asthma (ipratropium as adjunct)" },
+        { name:"Methylxanthines", moa:"Non-selective PDE inhibition → ↑ cAMP + adenosine receptor antagonism.",
+          drugs:["Theophylline","Aminophylline"],
+          uses:"Refractory asthma/COPD (narrow therapeutic index)" },
+      ]},
+      { name:"Anti-inflammatory", groups:[
+        { name:"Inhaled Corticosteroids", moa:"↓ Airway inflammation by suppressing cytokine release, eosinophil recruitment.",
+          drugs:["Beclomethasone","Budesonide","Fluticasone","Mometasone","Ciclesonide"],
+          uses:"Persistent asthma (cornerstone), COPD with frequent exacerbations" },
+        { name:"Leukotriene Modifiers", moa:"Block CysLT1 receptors (montelukast) or inhibit 5-LOX (zileuton) → ↓ bronchoconstriction.",
+          drugs:["Montelukast","Zafirlukast","Zileuton"],
+          uses:"Asthma (add-on), exercise-induced bronchoconstriction, allergic rhinitis" },
+      ]},
+      { name:"Antihistamines", groups:[
+        { name:"H1-Blockers", moa:"Competitive antagonism at H1 histamine receptors → ↓ allergic symptoms.",
+          drugs:["Cetirizine","Loratadine","Fexofenadine (2nd gen, non-sedating)","Diphenhydramine","Chlorpheniramine (1st gen, sedating)"],
+          uses:"Allergic rhinitis, urticaria, pruritus, motion sickness (1st gen)" },
+      ]}
+    ]
+  },
+  {
+    id:"gi", label:"GI Drugs", icon:"utensils", color:"#f97316", bg:"#2e180a",
+    desc:"Drugs for gastrointestinal disorders including acid-peptic disease, motility, and inflammation.",
+    subcategories:[
+      { name:"Acid-Peptic Disease", groups:[
+        { name:"Proton Pump Inhibitors", moa:"Irreversibly inhibit H⁺/K⁺-ATPase (proton pump) on parietal cells → potent acid suppression.",
+          drugs:["Omeprazole","Esomeprazole","Pantoprazole","Rabeprazole","Lansoprazole"],
+          uses:"GERD, peptic ulcer, H. pylori triple therapy, Zollinger-Ellison, stress ulcer prophylaxis" },
+        { name:"H2-Blockers", moa:"Competitive antagonism at H2 receptors on parietal cells → ↓ basal & meal-stimulated acid.",
+          drugs:["Ranitidine","Famotidine","Cimetidine"],
+          uses:"GERD (mild), peptic ulcer, stress ulcer prophylaxis" },
+        { name:"Antacids & Mucosal Protectants", moa:"Neutralize gastric acid (antacids) or form protective barrier (sucralfate, bismuth).",
+          drugs:["Aluminum hydroxide","Magnesium hydroxide","Calcium carbonate","Sucralfate","Bismuth subsalicylate"],
+          uses:"Dyspepsia, peptic ulcer adjunct, H. pylori (bismuth quadruple therapy)" },
+      ]},
+      { name:"Antiemetics", groups:[
+        { name:"Antiemetic Classes", moa:"Block various receptors: 5-HT3 (CTZ), D2 (CTZ), NK1 (vomiting center), H1/mACh (vestibular).",
+          drugs:["Ondansetron (5-HT3)","Metoclopramide (D2 + 5-HT4)","Domperidone (D2)","Aprepitant (NK1)","Promethazine (H1)","Scopolamine (mACh)"],
+          uses:"Chemotherapy-induced N/V, post-op N/V, motion sickness, gastroparesis" },
+      ]},
+      { name:"IBD & Motility", groups:[
+        { name:"IBD Drugs", moa:"Various anti-inflammatory and immunomodulatory mechanisms targeting gut mucosa.",
+          drugs:["Mesalamine (5-ASA)","Sulfasalazine","Azathioprine","Infliximab (anti-TNFα)","Adalimumab","Vedolizumab (anti-integrin)"],
+          uses:"Ulcerative colitis, Crohn's disease, maintenance of remission" },
+        { name:"Laxatives", moa:"Various: osmotic retention, stimulant peristalsis, bulk-forming, stool softening.",
+          drugs:["Polyethylene glycol (osmotic)","Lactulose (osmotic)","Bisacodyl (stimulant)","Psyllium (bulk)","Docusate (softener)"],
+          uses:"Constipation, hepatic encephalopathy (lactulose), bowel prep" },
+      ]}
+    ]
+  },
+  {
+    id:"analgesics", label:"Analgesics", icon:"thermometer", color:"#ec4899", bg:"#2e0a1e",
+    desc:"Pain management drugs from mild analgesics to potent opioids and adjuvants.",
+    subcategories:[
+      { name:"Non-Opioid Analgesics", groups:[
+        { name:"NSAIDs", moa:"Inhibit COX-1 & COX-2 → ↓ prostaglandin synthesis → anti-inflammatory, analgesic, antipyretic.",
+          drugs:["Ibuprofen","Naproxen","Diclofenac","Ketorolac","Indomethacin","Celecoxib (COX-2 selective)","Etoricoxib"],
+          uses:"Pain, inflammation, fever, dysmenorrhea, gout (indomethacin), post-op pain (ketorolac)" },
+        { name:"Paracetamol (Acetaminophen)", moa:"Central COX inhibition + possible endocannabinoid system modulation. Weak peripheral anti-inflammatory.",
+          drugs:["Paracetamol/Acetaminophen"],
+          uses:"Mild-moderate pain, fever, first-line in pregnancy, osteoarthritis" },
+      ]},
+      { name:"Opioid Analgesics", groups:[
+        { name:"Opioid Agonists", moa:"Activate μ (mu), κ, δ opioid receptors → ↓ pain transmission, ↑ pain threshold, euphoria.",
+          drugs:["Morphine","Codeine","Tramadol","Fentanyl","Oxycodone","Hydromorphone","Methadone","Pethidine/Meperidine"],
+          uses:"Severe pain, cancer pain, post-surgical pain, palliative care, opioid dependence (methadone)" },
+        { name:"Opioid Antagonists", moa:"Competitive antagonism at opioid receptors → reverse opioid effects.",
+          drugs:["Naloxone","Naltrexone"],
+          uses:"Opioid overdose reversal (naloxone), alcohol/opioid dependence maintenance (naltrexone)" },
+      ]},
+      { name:"Anti-Gout Agents", groups:[
+        { name:"Gout Drugs", moa:"Various: ↓ uric acid production, ↑ uric acid excretion, anti-inflammatory (colchicine).",
+          drugs:["Allopurinol (XO inhibitor)","Febuxostat (XO inhibitor)","Colchicine (anti-inflammatory)","Probenecid (uricosuric)"],
+          uses:"Acute gout flare (colchicine + NSAID), chronic gout prophylaxis (allopurinol, febuxostat)" },
+      ]}
+    ]
+  },
+  {
+    id:"immunology", label:"Immunology", icon:"shield-check", color:"#8b5cf6", bg:"#1a0a2e",
+    desc:"Immunosuppressants, immunomodulators, and disease-modifying agents.",
+    subcategories:[
+      { name:"Immunosuppressants", groups:[
+        { name:"Calcineurin Inhibitors", moa:"Block calcineurin → inhibit IL-2 transcription → suppress T-cell activation.",
+          drugs:["Cyclosporine","Tacrolimus"],
+          uses:"Organ transplant rejection prevention, severe autoimmune diseases" },
+        { name:"Antimetabolites", moa:"Inhibit purine/pyrimidine synthesis → suppress lymphocyte proliferation.",
+          drugs:["Azathioprine","Mycophenolate mofetil","Methotrexate","Leflunomide"],
+          uses:"Transplant maintenance, RA (methotrexate 1st line DMARD), SLE, IBD" },
+        { name:"Biologics (mAbs)", moa:"Target specific cytokines or cell surface receptors involved in immune/inflammatory cascades.",
+          drugs:["Infliximab (anti-TNFα)","Adalimumab (anti-TNFα)","Rituximab (anti-CD20)","Tocilizumab (anti-IL-6)","Ustekinumab (anti-IL-12/23)","Secukinumab (anti-IL-17)"],
+          uses:"RA, psoriasis, IBD, SLE (rituximab), ankylosing spondylitis" },
+      ]}
+    ]
+  }
+];
+
+let activeFilter = 'all';
+let searchTerm = '';
+
+function buildNavPills() {
+  const nav = document.getElementById('navPills');
+  let html = `<button class="nav-pill px-3 py-1.5 rounded-full text-xs font-semibold active" style="color:#7db8f0;" data-cat="all" onclick="setFilter('all')">All</button>`;
+  DRUG_DATA.forEach(cat => {
+    html += `<button class="nav-pill px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap" style="color:#7db8f0;" data-cat="${cat.id}" onclick="setFilter('${cat.id}')">${cat.label}</button>`;
+  });
+  nav.innerHTML = html;
+}
+
+function setFilter(id) {
+  activeFilter = id;
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.toggle('active', p.dataset.cat === id));
+  renderCards();
+}
+
+function filterCards(val) {
+  searchTerm = val.toLowerCase().trim();
+  renderCards();
+}
+
+function matchesSearch(cat) {
+  if (!searchTerm) return true;
+  const s = searchTerm;
+  if (cat.label.toLowerCase().includes(s) || cat.desc.toLowerCase().includes(s)) return true;
+  for (const sub of cat.subcategories) {
+    if (sub.name.toLowerCase().includes(s)) return true;
+    for (const g of sub.groups) {
+      if (g.name.toLowerCase().includes(s) || g.moa.toLowerCase().includes(s) || g.uses.toLowerCase().includes(s)) return true;
+      if (g.drugs.some(d => d.toLowerCase().includes(s))) return true;
+    }
+  }
+  return false;
+}
+
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const icon = btn.querySelector('.chevron-icon');
+  content.classList.toggle('open');
+  icon.classList.toggle('rotated');
+}
+
+function renderCards() {
+  const main = document.getElementById('mainContent');
+  const filtered = DRUG_DATA.filter(cat => {
+    if (activeFilter !== 'all' && cat.id !== activeFilter) return false;
+    return matchesSearch(cat);
+  });
+
+  if (filtered.length === 0) {
+    main.innerHTML = `<div class="text-center py-20"><p style="color:#4a7ab5;" class="text-lg">No results found. Try a different search term.</p></div>`;
+    return;
+  }
+
+  let html = '';
+  filtered.forEach((cat, ci) => {
+    html += `<section class="mb-10 fade-in stagger-${Math.min(ci+1,8)}">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:${cat.bg};border:1px solid ${cat.color}33;">
+          <i data-lucide="${cat.icon}" style="width:18px;height:18px;color:${cat.color};"></i>
+        </div>
+        <div>
+          <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:${cat.color};">${cat.label}</h2>
+          <p class="text-xs" style="color:#5a8ab8;">${cat.desc}</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-4">`;
+
+    cat.subcategories.forEach(sub => {
+      html += `<div class="rounded-xl card-glow" style="background:#132840;border:1px solid #1e3a5f;">
+        <button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between px-5 py-4 text-left">
+          <span class="font-semibold text-sm sm:text-base" style="color:#c8e0f8;">${sub.name}</span>
+          <i data-lucide="chevron-down" class="chevron-icon flex-shrink-0" style="width:16px;height:16px;color:#4a7ab5;"></i>
+        </button>
+        <div class="accordion-content">
+          <div class="px-5 pb-5 space-y-4">`;
+
+      sub.groups.forEach(g => {
+        html += `<div class="rounded-lg p-4" style="background:#0f2035;border:1px solid #1a3350;">
+          <h4 class="font-semibold text-sm mb-2" style="color:${cat.color};">${g.name}</h4>
+          <div class="mb-3">
+            <span class="pill-tag mb-1" style="background:#1a3350;color:#7db8f0;">MOA</span>
+            <p class="text-xs mt-1 leading-relaxed" style="color:#8ab4d8;">${g.moa}</p>
+          </div>
+          <div class="mb-3">
+            <span class="pill-tag mb-1" style="background:${cat.bg};color:${cat.color};">DRUGS</span>
+            <div class="flex flex-wrap gap-1.5 mt-1.5">${g.drugs.map(d => `<span class="text-xs px-2 py-0.5 rounded" style="background:#1a3350;color:#c8e0f8;">${d}</span>`).join('')}</div>
+          </div>
+          <div>
+            <span class="pill-tag mb-1" style="background:#1e3a5f33;color:#5a8ab8;">INDICATIONS</span>
+            <p class="text-xs mt-1 leading-relaxed" style="color:#6a9ec5;">${g.uses}</p>
+          </div>
+        </div>`;
+      });
+
+      html += `</div></div></div>`;
+    });
+
+    html += `</div></section>`;
+  });
+
+  main.innerHTML = html;
+  lucide.createIcons();
+}
+
+// Element SDK
+const defaultConfig = {
+  main_title: "Comprehensive Drug Classification",
+  subtitle: "A systematic pharmacological reference covering major drug classes, mechanisms of action, examples, and clinical indications.",
+  background_color: "#0f2035",
+  surface_color: "#132840",
+  text_color: "#c8e0f8",
+  accent_color: "#2563eb",
+  muted_color: "#4a7ab5",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+// Init
+buildNavPills();
+renderCards();
+lucide.createIcons();
+</script>
+</body>
+</html>
