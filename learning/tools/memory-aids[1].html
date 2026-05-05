@@ -1,0 +1,360 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Memory Aids | Mnemonics & Study Tools | Deep Medicine</title> <meta name="description" content="High-yield memory aids and mnemonics to simplify complex medical concepts and improve retention for exams and clinical practice."> <link rel="canonical" href="https://deepmedicine.in/learning/tools/memory-aids"> <!-- Open Graph --> <meta property="og:title" content="Memory Aids | Deep Medicine"> <meta property="og:description" content="Mnemonics and study tools for faster recall and better retention in medicine."> <meta property="og:image" content="https://deepmedicine.in/images/memory-aids.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"DM Serif Display"', 'Georgia', 'serif'],
+            body: ['Nunito', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .app-root { height: 100%; overflow: auto; }
+    .card-glow:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+    .card-glow { transition: all 0.3s ease; }
+    .mnemonic-letter { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+    .tab-btn { transition: all 0.25s ease; }
+    .tab-btn.active { background: var(--primary); color: #fff; }
+    .fade-in { animation: fadeIn 0.4s ease forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .hero-pattern {
+      background-image: radial-gradient(circle at 20% 50%, rgba(16,185,129,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 80%, rgba(168,85,247,0.05) 0%, transparent 50%);
+    }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] summary .chevron-icon { transform: rotate(180deg); }
+    .chevron-icon { transition: transform 0.2s ease; }
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --primary: #10b981;
+      --secondary: #3b82f6;
+    }
+    .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-root scrollbar-thin" id="app-root" style="background-color: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif;"><!-- Hero Section -->
+   <header class="hero-pattern relative overflow-hidden" style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 text-center relative z-10">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-6" style="background: rgba(16,185,129,0.15); color: var(--primary);"><i data-lucide="stethoscope" style="width:16px;height:16px;"></i> MBBS Study Resource
+     </div>
+     <h1 id="page-title" class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 tracking-tight" style="color: #fff;">Memory Aids For MBBS Students</h1>
+     <p id="subtitle" class="text-lg sm:text-xl max-w-2xl mx-auto" style="color: rgba(226,232,240,0.7);">Your Ultimate Mnemonic Companion — Organized by Subject, Built for Recall</p>
+     <div class="flex flex-wrap justify-center gap-4 mt-8 text-sm font-semibold" style="color: rgba(226,232,240,0.5);"><span class="flex items-center gap-1.5"><i data-lucide="brain" style="width:16px;height:16px;color:var(--primary)"></i> 80+ Mnemonics</span> <span class="flex items-center gap-1.5"><i data-lucide="layers" style="width:16px;height:16px;color:var(--secondary)"></i> 10 Subjects</span> <span class="flex items-center gap-1.5"><i data-lucide="zap" style="width:16px;height:16px;color:#f59e0b"></i> High-Yield</span>
+     </div>
+    </div>
+   </header><!-- Search & Filter -->
+   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="flex flex-col sm:flex-row gap-3">
+     <div class="relative flex-1"><i data-lucide="search" style="width:18px;height:18px;position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(226,232,240,0.4);"></i> <input id="search-input" type="text" placeholder="Search mnemonics, topics, or keywords..." class="w-full pl-11 pr-4 py-3 rounded-xl text-sm font-semibold outline-none focus:ring-2" style="background:var(--surface);color:var(--text);border:1px solid rgba(255,255,255,0.08);--tw-ring-color:var(--primary);">
+     </div>
+    </div>
+   </div><!-- Subject Tabs -->
+   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-3">
+    <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin" id="tabs-container"></div>
+   </div><!-- Content Area -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <div id="content-area"></div>
+   </main><!-- Footer -->
+   <footer class="text-center py-8 text-sm font-semibold" style="color:rgba(226,232,240,0.3);border-top:1px solid rgba(255,255,255,0.05);">
+    <p>📚 Crafted for MBBS students — Learn Smart, Recall Fast</p>
+   </footer>
+  </div>
+  <script>
+const DATA = [
+  {
+    subject: "Anatomy",
+    icon: "bone",
+    color: "#ef4444",
+    mnemonics: [
+      { title: "Cranial Nerves (12 Pairs)", mnemonic: "Oh Oh Oh To Touch And Feel Very Good Velvet AH", expansion: ["I — Olfactory","II — Optic","III — Oculomotor","IV — Trochlear","V — Trigeminal","VI — Abducens","VII — Facial","VIII — Vestibulocochlear","IX — Glossopharyngeal","X — Vagus","XI — Accessory (Spinal)","XII — Hypoglossal"], tip: "Most tested topic in anatomy. Know the type (sensory/motor/both) for each.", yield: "high" },
+      { title: "Cranial Nerve Types (S/M/B)", mnemonic: "Some Say Marry Money But My Brother Says Big Brains Matter More", expansion: ["I — Sensory","II — Sensory","III — Motor","IV — Motor","V — Both","VI — Motor","VII — Both","VIII — Sensory","IX — Both","X — Both","XI — Motor","XII — Motor"], tip: "Pairs with the cranial nerve name mnemonic above.", yield: "high" },
+      { title: "Branches of External Carotid Artery", mnemonic: "Some Anatomists Like Freaking Out Poor Medical Students", expansion: ["Superior Thyroid","Ascending Pharyngeal","Lingual","Facial","Occipital","Posterior Auricular","Maxillary","Superficial Temporal"], tip: "Remember: first 4 are anterior branches.", yield: "high" },
+      { title: "Carpal Bones (Lateral to Medial)", mnemonic: "Some Lovers Try Positions That They Can't Handle", expansion: ["Scaphoid","Lunate","Triquetrum","Pisiform","Trapezium","Trapezoid","Capitate","Hamate"], tip: "Proximal row first (S-L-T-P), then distal row (T-T-C-H).", yield: "high" },
+      { title: "Rotator Cuff Muscles (SITS)", mnemonic: "SITS", expansion: ["Supraspinatus — Abduction (first 15°)","Infraspinatus — External rotation","Teres Minor — External rotation","Subscapularis — Internal rotation"], tip: "Supraspinatus tear is most common. Tests: Empty can test, Jobe's test.", yield: "high" },
+      { title: "Brachial Plexus Roots-to-Branches", mnemonic: "Robert Taylor Drinks Cold Beer", expansion: ["Roots","Trunks","Divisions","Cords","Branches"], tip: "C5-T1. Know Erb-Duchenne (C5-C6) and Klumpke's (C8-T1) palsies.", yield: "high" },
+      { title: "Layers of the Scalp", mnemonic: "SCALP", expansion: ["S — Skin","C — Connective tissue (dense)","A — Aponeurosis (galea)","L — Loose areolar tissue (danger zone)","P — Pericranium (periosteum)"], tip: "Loose areolar layer is the 'danger zone' — infections spread here.", yield: "medium" },
+      { title: "Boundaries of Femoral Triangle", mnemonic: "SAIL", expansion: ["S — Sartorius (lateral)","A — Adductor longus (medial)","I — Inguinal ligament (superior)","L — Lacunar ligament (not a true boundary but helpful)"], tip: "Contents: Nerve-Artery-Vein-Empty space-Lymphatics (NAVEL, lateral to medial).", yield: "high" },
+    ]
+  },
+  {
+    subject: "Physiology",
+    icon: "heart-pulse",
+    color: "#3b82f6",
+    mnemonics: [
+      { title: "Stages of Cardiac Action Potential", mnemonic: "0-1-2-3-4: Rapid Rise, Initial Repolarization, Plateau, Rapid Repolarization, Resting", expansion: ["Phase 0 — Rapid depolarization (Na⁺ influx)","Phase 1 — Initial repolarization (K⁺ out, Na⁺ channels close)","Phase 2 — Plateau (Ca²⁺ in = K⁺ out)","Phase 3 — Rapid repolarization (K⁺ efflux)","Phase 4 — Resting potential (Na⁺/K⁺ ATPase)"], tip: "Phase 2 plateau distinguishes cardiac from skeletal muscle AP.", yield: "high" },
+      { title: "Functions of the Liver", mnemonic: "ABCDES", expansion: ["A — Albumin & protein synthesis","B — Bile production","C — Cholesterol & Coagulation factors","D — Detoxification","E — Excretion (bilirubin)","S — Storage (glycogen, vitamins A, D, B12, iron)"], tip: "Liver function tests: AST, ALT, ALP, GGT, bilirubin, albumin, PT.", yield: "medium" },
+      { title: "Insulin Effects", mnemonic: "Insulin Is In — glucose goes IN cells", expansion: ["↑ Glucose uptake (muscle, fat)","↑ Glycogenesis","↑ Lipogenesis","↑ Protein synthesis","↓ Gluconeogenesis","↓ Glycogenolysis","↓ Lipolysis","↓ Ketogenesis"], tip: "GLUT4 is insulin-dependent (muscle & fat). Brain uses GLUT1/3 (insulin-independent).", yield: "high" },
+      { title: "Hormones of Anterior Pituitary", mnemonic: "FLAT PEG", expansion: ["F — FSH","L — LH","A — ACTH","T — TSH","P — Prolactin","E — Endorphins","G — GH"], tip: "Acidophils: GH, Prolactin. Basophils: FSH, LH, ACTH, TSH.", yield: "high" },
+      { title: "Oxygen-Hemoglobin Dissociation — Right Shift", mnemonic: "CADET face Right", expansion: ["C — CO₂ increase","A — Acidosis (↓ pH)","D — 2,3-DPG increase","E — Exercise","T — Temperature increase"], tip: "Right shift = more O₂ released to tissues. Left shift = opposite (fetal Hb, alkalosis).", yield: "high" },
+      { title: "ADH vs Aldosterone", mnemonic: "ADH = water Alone, Aldosterone = salt And water", expansion: ["ADH — Reabsorbs water only at collecting duct (V2 receptors)","Aldosterone — Reabsorbs Na⁺ (and water follows) + secretes K⁺/H⁺ at DCT/CD","ADH deficiency → Diabetes Insipidus (dilute urine)","Aldosterone excess → Conn's syndrome (HTN + hypokalemia)"], tip: "SIADH = excess ADH → concentrated urine, hyponatremia, euvolemic.", yield: "high" },
+    ]
+  },
+  {
+    subject: "Biochemistry",
+    icon: "flask-conical",
+    color: "#8b5cf6",
+    mnemonics: [
+      { title: "Essential Amino Acids", mnemonic: "PVT TIM HALL", expansion: ["P — Phenylalanine","V — Valine","T — Threonine","T — Tryptophan","I — Isoleucine","M — Methionine","H — Histidine","A — Arginine (conditionally)","L — Leucine","L — Lysine"], tip: "Leucine is purely ketogenic. Isoleucine & phenylalanine are both gluco- & ketogenic.", yield: "high" },
+      { title: "Vitamins: Fat Soluble", mnemonic: "ADEK (A-DEK)", expansion: ["A — Retinol (vision, epithelium)","D — Cholecalciferol (calcium absorption)","E — Tocopherol (antioxidant)","K — Phylloquinone (coagulation factors II, VII, IX, X)"], tip: "Fat-soluble → accumulate in body → toxicity possible. Malabsorption = deficiency.", yield: "high" },
+      { title: "TCA Cycle Substrates in Order", mnemonic: "Can I Keep Selling Sex For Money, Officer?", expansion: ["Citrate","Isocitrate","α-Ketoglutarate","Succinyl-CoA","Succinate","Fumarate","Malate","Oxaloacetate"], tip: "Produces 3 NADH, 1 FADH2, 1 GTP per turn. Rate-limiting enzyme: Isocitrate dehydrogenase.", yield: "high" },
+      { title: "Glycogen Storage Diseases (Types I–V)", mnemonic: "Very Poor Carbohydrate Metabolism", expansion: ["I — Von Gierke's (Glucose-6-phosphatase deficiency)","II — Pompe's (α-1,4-glucosidase / acid maltase)","III — Cori's (Debranching enzyme)","IV — Andersen's (Branching enzyme)","V — McArdle's (Muscle glycogen phosphorylase)"], tip: "Pompe's 'pumps' up the heart → cardiomegaly. McArdle's → exercise intolerance + myoglobinuria.", yield: "high" },
+      { title: "Collagen Synthesis Steps", mnemonic: "Go Pro Hydroxy Glyco Triple Extra", expansion: ["Gene transcription → preprocollagen","Proline & Lysine hydroxylation (needs Vit C)","Glycosylation","Triple helix formation → procollagen","Exocytosis","Cleavage → tropocollagen → cross-linking (Lysyl oxidase, needs Cu²⁺)"], tip: "Scurvy = Vitamin C deficiency → poor hydroxylation → weak collagen.", yield: "medium" },
+    ]
+  },
+  {
+    subject: "Pathology",
+    icon: "microscope",
+    color: "#f59e0b",
+    mnemonics: [
+      { title: "Acute Inflammation Cardinal Signs", mnemonic: "PRISH (Celsus Signs)", expansion: ["P — Pain (Dolor)","R — Redness (Rubor)","I — Immobility / Loss of function (Functio laesa)","S — Swelling (Tumor)","H — Heat (Calor)"], tip: "Mediated by histamine, prostaglandins, bradykinin. First responders: neutrophils.", yield: "high" },
+      { title: "Granulomatous Diseases", mnemonic: "CASTLE B", expansion: ["C — Crohn's disease","A — Aspergillosis (and other fungi)","S — Sarcoidosis","T — TB (Tuberculosis)","L — Leprosy","E — Eosinophilic granulomatosis","B — Berylliosis"], tip: "Caseating: TB, fungal. Non-caseating: Sarcoidosis, Crohn's, Berylliosis.", yield: "high" },
+      { title: "Tumor Markers", mnemonic: "AFP-CEA-CA-PSA", expansion: ["AFP — Hepatocellular carcinoma, Yolk sac tumor","CEA — Colorectal, Pancreatic cancer","CA-125 — Ovarian cancer","CA 19-9 — Pancreatic cancer","PSA — Prostate cancer","β-hCG — Choriocarcinoma, Testicular germ cell","S-100 — Melanoma, Schwannoma"], tip: "Tumor markers are for monitoring, NOT screening (except PSA, controversial).", yield: "high" },
+      { title: "Apoptosis vs Necrosis", mnemonic: "Apoptosis = programmed (neat), Necrosis = accidental (messy)", expansion: ["Apoptosis: Cell shrinkage, chromatin condensation, apoptotic bodies, NO inflammation","Necrosis: Cell swelling, membrane rupture, inflammation, enzymatic digestion","Apoptosis pathway: Intrinsic (mitochondrial/Bcl-2) or Extrinsic (Fas/TNF)","Necrosis types: Coagulative, Liquefactive, Caseous, Fat, Fibrinoid, Gangrenous"], tip: "Coagulative = most organs. Liquefactive = brain + abscess. Caseous = TB.", yield: "high" },
+      { title: "Amyloidosis Types", mnemonic: "AL for Light chains, AA for chronic inflammation", expansion: ["AL (Primary) — Light chain deposits (multiple myeloma, plasma cell disorders)","AA (Secondary) — Serum amyloid A (RA, TB, Crohn's, FMF)","Congo Red stain → Apple-green birefringence under polarized light","Organs: Kidney (nephrotic), Heart (restrictive CMP), Liver, Tongue (macroglossia)"], tip: "Most common organ involved: Kidney (both AL and AA).", yield: "medium" },
+    ]
+  },
+  {
+    subject: "Pharmacology",
+    icon: "pill",
+    color: "#10b981",
+    mnemonics: [
+      { title: "Cholinergic Side Effects", mnemonic: "DUMBBELSS", expansion: ["D — Diarrhea","U — Urination","M — Miosis","B — Bradycardia","B — Bronchospasm","E — Excitation of skeletal muscle / Emesis","L — Lacrimation","S — Salivation","S — Sweating"], tip: "Treatment: Atropine (muscarinic antagonist) + Pralidoxime (reactivates AChE if given early).", yield: "high" },
+      { title: "Atropine Side Effects", mnemonic: "Hot as a Hare, Dry as a Bone, Red as a Beet, Blind as a Bat, Mad as a Hatter", expansion: ["Hot — Hyperthermia (no sweating)","Dry — Dry mouth, skin","Red — Flushing","Blind — Mydriasis, cycloplegia","Mad — Delirium, hallucinations","Also: Tachycardia, urinary retention, constipation"], tip: "Treatment: Physostigmine (crosses BBB, reverses central & peripheral effects).", yield: "high" },
+      { title: "Beta-Blocker Contraindications", mnemonic: "ABCDE", expansion: ["A — Asthma / COPD (bronchoconstriction)","B — AV Block (2nd/3rd degree)","C — Cocaine intoxication (unopposed α)","D — Diabetes (masks hypoglycemia)","E — Electrolyte (hyperkalemia)"], tip: "Cardioselective (β1): Atenolol, Metoprolol, Bisoprolol — safer in asthma (not risk-free).", yield: "high" },
+      { title: "Drugs Causing Lupus-Like Syndrome", mnemonic: "SHIPP", expansion: ["S — Sulfonamides","H — Hydralazine (most common)","I — INH (Isoniazid)","P — Procainamide (most common drug cause)","P — Phenytoin"], tip: "Anti-histone antibodies are positive. Anti-dsDNA is typically negative (unlike true SLE).", yield: "medium" },
+      { title: "Cytochrome P450 Inducers", mnemonic: "CRAP GPS", expansion: ["C — Carbamazepine","R — Rifampin (most potent)","A — Alcohol (chronic use)","P — Phenytoin","G — Griseofulvin","P — Phenobarbital","S — St. John's Wort"], tip: "Inducers ↑ metabolism → ↓ drug levels. Critical for warfarin, OCPs, antiretrovirals.", yield: "high" },
+      { title: "Cytochrome P450 Inhibitors", mnemonic: "SICKFACES.COM", expansion: ["S — Sodium valproate","I — INH","C — Cimetidine","K — Ketoconazole","F — Fluconazole / Fluoxetine","A — Amiodarone","C — Ciprofloxacin","E — Erythromycin","S — Sulfonamides",". — ","C — Chloramphenicol","O — Omeprazole","M — Metronidazole"], tip: "Inhibitors ↓ metabolism → ↑ drug levels → toxicity risk. Watch with warfarin!", yield: "high" },
+    ]
+  },
+  {
+    subject: "Microbiology",
+    icon: "bug",
+    color: "#ec4899",
+    mnemonics: [
+      { title: "Encapsulated Organisms", mnemonic: "Some Killers Have Pretty Nice Capsules", expansion: ["S — Streptococcus pneumoniae","K — Klebsiella pneumoniae","H — Haemophilus influenzae","P — Pseudomonas aeruginosa","N — Neisseria meningitidis","C — Cryptococcus neoformans"], tip: "Capsules = antiphagocytic. Asplenic patients at highest risk → vaccinate!", yield: "high" },
+      { title: "Obligate Intracellular Organisms", mnemonic: "Really Cold", expansion: ["Rickettsia","Chlamydia","Also: Coxiella (can survive outside briefly)"], tip: "Can't make own ATP → need host cell. Cannot grow on standard culture media.", yield: "high" },
+      { title: "Obligate Aerobes", mnemonic: "Nagging Pests Must Breathe", expansion: ["N — Nocardia","P — Pseudomonas","M — Mycobacterium TB","B — Bacillus cereus"], tip: "TB loves lung apices (highest O₂). Pseudomonas → burn wounds, CF, nosocomial.", yield: "medium" },
+      { title: "Obligate Anaerobes", mnemonic: "Anaerobes Can't Breathe Air", expansion: ["A — Actinomyces","C — Clostridium (all species)","B — Bacteroides","A — Aminoglycosides ineffective against them"], tip: "Foul-smelling discharge = think anaerobes. Treatment: Metronidazole, Clindamycin.", yield: "high" },
+      { title: "Hepatitis Serological Markers", mnemonic: "IgM = recent, IgG = past/immune", expansion: ["HBsAg — Active infection (surface antigen)","Anti-HBs — Immunity (vaccine or recovered)","HBeAg — High infectivity","Anti-HBc IgM — Acute infection (window period marker)","Anti-HBc IgG — Chronic or past infection","HBV DNA — Viral load"], tip: "Window period: HBsAg negative, Anti-HBs negative, Anti-HBc IgM positive.", yield: "high" },
+    ]
+  },
+  {
+    subject: "Medicine",
+    icon: "clipboard-list",
+    color: "#06b6d4",
+    mnemonics: [
+      { title: "Causes of Pancreatitis", mnemonic: "I GET SMASHED", expansion: ["I — Idiopathic","G — Gallstones (most common)","E — Ethanol (2nd most common)","T — Trauma","S — Steroids","M — Mumps / Malignancy","A — Autoimmune","S — Scorpion sting","H — Hyperlipidemia / Hypercalcemia / Hypothermia","E — ERCP","D — Drugs (Azathioprine, Valproate, Thiazides)"], tip: "Ranson's criteria at admission & 48h for severity. CT severity index for necrosis.", yield: "high" },
+      { title: "Causes of Clubbing", mnemonic: "CLUBBING", expansion: ["C — Cyanotic heart disease","L — Lung disease (fibrosis, abscess, cancer, bronchiectasis)","U — Ulcerative colitis","B — Biliary cirrhosis","B — Birth defect (familial)","I — Infective endocarditis","N — Neoplasm (lung, mesothelioma)","G — GI disease (Crohn's, celiac)"], tip: "Grade: Nail fluctuation → Loss of angle → Drumstick → HPOA.", yield: "medium" },
+      { title: "ECG: Causes of ST Elevation", mnemonic: "ELEVATION", expansion: ["E — Electrolyte (hyperkalemia)","L — LBBB","E — Early repolarization (benign)","V — Ventricular aneurysm","A — Acute MI (STEMI)","T — Treatment (pericardiocentesis)","I — Injury (myocardial contusion)","O — Osborn waves (hypothermia)","N — Normal variant"], tip: "STEMI criteria: ≥2mm in V1-V3 or ≥1mm in other leads, in ≥2 contiguous leads.", yield: "high" },
+      { title: "Heart Failure Management", mnemonic: "ABCDE", expansion: ["A — ACE inhibitors / ARBs / ARNI (Sacubitril-Valsartan)","B — Beta-blockers (Carvedilol, Bisoprolol, Metoprolol succinate)","C — Cardiac resynchronization (if LBBB + EF≤35%)","D — Diuretics (Spironolactone ↓ mortality) + Digoxin","E — Exercise + Education + Empagliflozin (SGLT2i)"], tip: "Guideline-directed medical therapy (GDMT): ACEi + BB + MRA + SGLT2i = 'Fantastic Four'.", yield: "high" },
+    ]
+  },
+  {
+    subject: "Surgery",
+    icon: "scissors",
+    color: "#f97316",
+    mnemonics: [
+      { title: "Causes of Post-Op Fever (by Day)", mnemonic: "5 W's: Wind, Water, Walking, Wound, Wonder Drug", expansion: ["Day 1-2 — Wind (Atelectasis/Pneumonia)","Day 3-5 — Water (UTI — catheter-related)","Day 4-6 — Walking (DVT/Pulmonary Embolism)","Day 5-7 — Wound (Surgical site infection)","Day 7+ — Wonder Drug (Drug fever, abscess)"], tip: "Atelectasis is the MOST COMMON cause of fever in first 24-48 hours post-op.", yield: "high" },
+      { title: "Glasgow Coma Scale", mnemonic: "Eye 4, Verbal 5, Motor 6 (Total: 3-15)", expansion: ["Eye: 4-Spontaneous, 3-Voice, 2-Pain, 1-None","Verbal: 5-Oriented, 4-Confused, 3-Inappropriate, 2-Incomprehensible, 1-None","Motor: 6-Obeys, 5-Localizes, 4-Flexion withdrawal, 3-Abnormal flexion, 2-Extension, 1-None","Intubate if GCS ≤ 8","Severe ≤8, Moderate 9-12, Mild 13-15"], tip: "GCS ≤ 8 = intubate. Best motor response is most prognostic component.", yield: "high" },
+      { title: "Burns: Rule of Nines (Adult)", mnemonic: "Head 9, Arms 9×2, Legs 18×2, Trunk 36, Perineum 1", expansion: ["Head & Neck — 9%","Each Upper Limb — 9% (total 18%)","Each Lower Limb — 18% (total 36%)","Anterior Trunk — 18%","Posterior Trunk — 18%","Perineum — 1%","Patient's palm ≈ 1% BSA"], tip: "Parkland formula: 4ml × kg × %TBSA (give half in first 8 hours from time of burn).", yield: "high" },
+      { title: "Surgical Suture Layers of Anterior Abdominal Wall", mnemonic: "Skin, Scarpa, External O, Internal O, Transversus, Transversalis F, Extraperitoneal fat, Peritoneum", expansion: ["Skin","Subcutaneous fat (Camper's fascia)","Scarpa's fascia (membranous)","External oblique","Internal oblique","Transversus abdominis","Transversalis fascia","Extraperitoneal fat","Parietal peritoneum"], tip: "Linea alba = midline fusion of all aponeuroses. Weakest below arcuate line.", yield: "medium" },
+    ]
+  },
+  {
+    subject: "OBG / Pediatrics",
+    icon: "baby",
+    color: "#a855f7",
+    mnemonics: [
+      { title: "APGAR Score Components", mnemonic: "Appearance, Pulse, Grimace, Activity, Respiration", expansion: ["A — Appearance (skin color): 0-Blue, 1-Extremities blue, 2-Pink","P — Pulse (heart rate): 0-Absent, 1-<100, 2->100","G — Grimace (reflex): 0-No response, 1-Grimace, 2-Cry/cough","A — Activity (muscle tone): 0-Limp, 1-Some flexion, 2-Active","R — Respiration: 0-Absent, 1-Weak/irregular, 2-Strong cry"], tip: "Assessed at 1 and 5 minutes. Score 7-10 = normal. ≤3 = severe distress.", yield: "high" },
+      { title: "Bishops Score for Cervical Assessment", mnemonic: "DISCO — Dilation, Integrity (Effacement), Station, Consistency, Os (Position)", expansion: ["Dilation: 0-closed, 1-(1-2cm), 2-(3-4cm), 3-(5+cm)","Effacement: 0-(0-30%), 1-(40-50%), 2-(60-70%), 3-(80+%)","Station: 0-(-3), 1-(-2), 2-(-1/0), 3-(+1/+2)","Consistency: 0-Firm, 1-Medium, 2-Soft","Position: 0-Posterior, 1-Mid, 2-Anterior","Score ≥ 8: Favorable for induction"], tip: "Bishop Score ≥ 8 = favorable cervix, induction likely successful.", yield: "high" },
+      { title: "Teratogenic Drugs", mnemonic: "WART", expansion: ["W — Warfarin (nasal hypoplasia, stippled epiphyses)","A — ACE inhibitors (renal agenesis)","R — Retinoids/Isotretinoin (craniofacial, cardiac, CNS defects)","T — Thalidomide (phocomelia — limb reduction)","Also: Phenytoin (fetal hydantoin syndrome), Valproate (neural tube defects), Methotrexate, Lithium (Ebstein's anomaly)"], tip: "Folic acid 5mg pre-conception prevents neural tube defects in women on AEDs.", yield: "high" },
+      { title: "Developmental Milestones (Simplified)", mnemonic: "2-4-6-9-12 Rule", expansion: ["2 months — Social smile, Head up prone","4 months — Holds head steady, Laughs, Reaches for objects","6 months — Sits with support, Transfers objects, Babbles","9 months — Sits without support, Stranger anxiety, Pincer grasp (crude)","12 months — Walks with support, Says 1-2 words, Pincer grasp (fine)","18 months — Walks alone, 10+ words, Tower of 3-4 cubes","24 months — Runs, 2-word phrases, Tower of 6 cubes"], tip: "Social smile at 2m is the EARLIEST milestone asked in exams.", yield: "high" },
+    ]
+  },
+  {
+    subject: "PSM / Forensic",
+    icon: "shield",
+    color: "#64748b",
+    mnemonics: [
+      { title: "Primary Health Care Components", mnemonic: "HEMP FAMINE", expansion: ["H — Health education","E — Endemic disease control","M — Maternal & Child health + Family planning","P — Prevention & control of locally endemic diseases","F — Food & nutrition","A — Adequate safe water & sanitation","M — Medical treatment of common diseases","I — Immunization against major infectious diseases","N — Non-communicable disease prevention","E — Essential drug supply"], tip: "Alma Ata Declaration (1978): 'Health for All by 2000 AD'.", yield: "medium" },
+      { title: "Rigor Mortis Sequence", mnemonic: "Rigor starts at the face and goes down", expansion: ["First: Face & jaw (2-4 hours)","Then: Neck → Trunk → Upper limbs → Lower limbs","Full rigor: 12 hours","Stays: 12 hours","Disappears: 12 hours (same order as appearance)","Nysten's Rule: Jaw → Neck → Trunk → Limbs"], tip: "Cadaveric spasm (instantaneous rigor) = death during intense muscular activity.", yield: "high" },
+      { title: "Signs of Death — Immediate", mnemonic: "5 Cessations", expansion: ["Cessation of circulation (absent pulse, flat ECG)","Cessation of respiration (absent breath sounds)","Cessation of brain function (absent reflexes)","Cessation of muscle function (flaccidity)","Cessation of skin changes (pallor)","Brain death: Absent brainstem reflexes × 2 tests, 6-24h apart"], tip: "Brain death ≠ persistent vegetative state. PVS has intact brainstem.", yield: "medium" },
+      { title: "National Health Programs Key Years", mnemonic: "Timeline Associations", expansion: ["1953 — National Malaria Control Programme","1962 — National Malaria Eradication Programme","1978 — Expanded Programme on Immunization (EPI)","1985 — Universal Immunization Programme (UIP)","1992 — RCH (Reproductive & Child Health)","1997 — RNTCP (Revised TB control)","2005 — NRHM (National Rural Health Mission)","2013 — NUHM (Urban Health Mission)","2017 — Ayushman Bharat"], tip: "NRHM restructured to NHM (National Health Mission) in 2013.", yield: "medium" },
+    ]
+  }
+];
+
+let activeSubject = "All";
+let searchQuery = "";
+let allData = DATA;
+
+function renderTabs() {
+  const container = document.getElementById('tabs-container');
+  const subjects = ["All", ...DATA.map(d => d.subject)];
+  container.innerHTML = subjects.map(s => {
+    const isActive = activeSubject === s;
+    const subj = DATA.find(d => d.subject === s);
+    const bgColor = isActive ? (subj ? subj.color : 'var(--primary)') : 'var(--surface)';
+    const textColor = isActive ? '#fff' : 'var(--text)';
+    return `<button class="tab-btn flex-shrink-0 px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap" style="background:${bgColor};color:${textColor};border:1px solid ${isActive ? 'transparent' : 'rgba(255,255,255,0.08)'};" onclick="setSubject('${s}')">${s === 'All' ? '📚 All' : s}</button>`;
+  }).join('');
+}
+
+function setSubject(s) {
+  activeSubject = s;
+  renderTabs();
+  renderContent();
+}
+
+function getFilteredData() {
+  let data = activeSubject === "All" ? DATA : DATA.filter(d => d.subject === activeSubject);
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
+    data = data.map(subj => ({
+      ...subj,
+      mnemonics: subj.mnemonics.filter(m =>
+        m.title.toLowerCase().includes(q) ||
+        m.mnemonic.toLowerCase().includes(q) ||
+        m.expansion.some(e => e.toLowerCase().includes(q))
+      )
+    })).filter(subj => subj.mnemonics.length > 0);
+  }
+  return data;
+}
+
+function renderContent() {
+  const container = document.getElementById('content-area');
+  const data = getFilteredData();
+
+  if (data.length === 0) {
+    container.innerHTML = `<div class="text-center py-20 fade-in"><div class="text-5xl mb-4">🔍</div><p class="text-lg font-semibold" style="color:rgba(226,232,240,0.5);">No mnemonics found. Try a different search or subject.</p></div>`;
+    return;
+  }
+
+  let totalCount = data.reduce((a, b) => a + b.mnemonics.length, 0);
+
+  container.innerHTML = `
+    <p class="text-sm font-bold mb-6" style="color:rgba(226,232,240,0.4);">Showing ${totalCount} mnemonic${totalCount !== 1 ? 's' : ''}</p>
+    ${data.map(subj => `
+      <div class="mb-10 fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${subj.color}20;">
+            <i data-lucide="${subj.icon}" style="width:20px;height:20px;color:${subj.color};"></i>
+          </div>
+          <h2 class="font-heading text-2xl font-bold" style="color:#fff;">${subj.subject}</h2>
+          <span class="ml-auto text-xs font-bold px-2.5 py-1 rounded-full" style="background:${subj.color}20;color:${subj.color};">${subj.mnemonics.length} items</span>
+        </div>
+        <div class="grid gap-4">
+          ${subj.mnemonics.map((m, i) => renderCard(m, subj.color, i)).join('')}
+        </div>
+      </div>
+    `).join('')}
+  `;
+
+  lucide.createIcons();
+}
+
+function renderCard(m, color, index) {
+  const yieldBadge = m.yield === 'high'
+    ? `<span class="text-xs font-bold px-2 py-0.5 rounded-full" style="background:rgba(16,185,129,0.15);color:#10b981;">⚡ HIGH YIELD</span>`
+    : `<span class="text-xs font-bold px-2 py-0.5 rounded-full" style="background:rgba(251,191,36,0.15);color:#fbbf24;">📌 REVIEW</span>`;
+
+  const letters = m.mnemonic.split(' ').map(word => {
+    const first = word[0];
+    return `<span class="mnemonic-letter" style="background:${color}20;color:${color};">${first}</span>`;
+  }).join('');
+
+  return `
+    <details class="card-glow rounded-2xl overflow-hidden" style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);animation-delay:${index * 60}ms;">
+      <summary class="p-5 flex items-start gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            ${yieldBadge}
+          </div>
+          <h3 class="font-bold text-base sm:text-lg mb-2" style="color:#fff;">${m.title}</h3>
+          <div class="flex flex-wrap gap-1.5 mb-2">${letters}</div>
+          <p class="text-sm font-semibold" style="color:${color};">"${m.mnemonic}"</p>
+        </div>
+        <div class="chevron-icon flex-shrink-0 mt-1" style="color:rgba(226,232,240,0.4);">
+          <i data-lucide="chevron-down" style="width:20px;height:20px;"></i>
+        </div>
+      </summary>
+      <div class="px-5 pb-5 pt-0">
+        <div class="rounded-xl p-4 mb-3" style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.04);">
+          <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:${color};">Expansion</p>
+          <ul class="space-y-1.5">
+            ${m.expansion.map(e => `<li class="text-sm flex gap-2"><span style="color:${color};">›</span><span>${e}</span></li>`).join('')}
+          </ul>
+        </div>
+        <div class="flex items-start gap-2 p-3 rounded-lg" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.1);">
+          <i data-lucide="lightbulb" style="width:16px;height:16px;color:#10b981;flex-shrink:0;margin-top:2px;"></i>
+          <p class="text-sm" style="color:rgba(226,232,240,0.8);"><strong style="color:#10b981;">Clinical Tip:</strong> ${m.tip}</p>
+        </div>
+      </div>
+    </details>
+  `;
+}
+
+// Search handler
+document.getElementById('search-input').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  renderContent();
+});
+
+// Element SDK
+const defaultConfig = {
+  page_title: "Memory Aids For MBBS Students",
+  subtitle: "Your Ultimate Mnemonic Companion — Organized by Subject, Built for Recall",
+  background_color: "#0f172a",
+  surface_color: "#1e293b",
+  text_color: "#e2e8f0",
+  primary_color: "#10b981",
+  secondary_color: "#3b82f6",
+  font_family: "DM Serif Display",
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const root = document.documentElement;
+  root.style.setProperty('--bg', config.background_color || defaultConfig.background_color);
+  root.style.setProperty('--surface', config.surface_color || defaultConfig.surface_color);
+  root.style.setProperty('--text', config.text_color || defaultConfig.text_color);
+  root.style.setProperty('--primary', config.primary_color || defaultConfig.primary_color);
+  root.style.setProperty('--secondary', config.secondary_color || defaultConfig.secondary_color);
+
+  const appRoot = document.getElementById('app-root');
+  appRoot.style.backgroundColor = config.background_color || defaultConfig.background_color;
+  appRoot.style.color = config.text_color || defaultConfig.text_color;
+
+  const title = document.getElementById('page-title');
+  const sub = document.getElementById('subtitle');
+  title.textContent = config.page_title || defaultConfig.page_title;
+  sub.textContent = config.subtitle || defaultConfig.subtitle;
+
+  const font = config.font_family || defaultConfig.font_family;
+  title.style.fontFamily = `${font}, Georgia, serif`;
+
+  const baseSize = config.font_size || defaultConfig.font_size;
+  title.style.fontSize = `${baseSize * 2.8}px`;
+  sub.style.fontSize = `${baseSize * 1.15}px`;
+}
+
+// Initial render
+renderTabs();
+renderContent();
+lucide.createIcons();
+</script>
+</body>
+</html>
