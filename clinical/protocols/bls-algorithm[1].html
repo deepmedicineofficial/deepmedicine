@@ -1,0 +1,707 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>BLS Algorithm | Basic Life Support (CPR) Protocol | Deep Medicine</title> <meta name="description" content="Step-by-step Basic Life Support (BLS) algorithm including CPR, airway management, chest compressions, and emergency resuscitation steps."> <link rel="canonical" href="https://deepmedicine.in/clinical/protocols/bls-algorithm"> <!-- Open Graph --> <meta property="og:title" content="BLS Algorithm | Deep Medicine"> <meta property="og:description" content="Basic Life Support (BLS) and CPR algorithm for emergency resuscitation."> <meta property="og:image" content="https://deepmedicine.in/images/bls-algorithm.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .protocol-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .protocol-card:hover { transform: translateY(-2px); }
+    .pulse-ring { animation: pulseRing 1.5s infinite; }
+    @keyframes pulseRing { 0% { transform: scale(0.9); opacity: 1; } 100% { transform: scale(1.4); opacity: 0; } }
+    .step-connector { position: relative; }
+    .step-connector::after { content: ''; position: absolute; left: 50%; top: 100%; width: 3px; height: 24px; background: linear-gradient(to bottom, #dc2626, #991b1b); transform: translateX(-50%); }
+    .step-connector:last-child::after { display: none; }
+    .tab-active { border-bottom: 3px solid #dc2626; color: #dc2626; font-weight: 700; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .glow-red { box-shadow: 0 0 20px rgba(220, 38, 38, 0.15); }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full bg-slate-950 text-slate-100 overflow-auto"><!-- Header -->
+   <header class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-red-900/30">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="relative">
+       <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center"><i data-lucide="heart-pulse" class="w-6 h-6 text-white"></i>
+       </div>
+       <div class="absolute inset-0 bg-red-600 rounded-lg pulse-ring opacity-30"></div>
+      </div>
+      <div>
+       <h1 id="main-title" class="text-lg md:text-xl font-800 tracking-tight text-white">BLS Protocol Guide</h1>
+       <p id="subtitle" class="text-xs text-red-400 font-500 mono">AHA 2020 Guidelines</p>
+      </div>
+     </div><span class="hidden sm:inline text-xs bg-red-600/20 text-red-300 px-3 py-1 rounded-full border border-red-800/50 mono">Adult + Pediatric + Neonatal</span>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="sticky top-[73px] z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-hide"><button onclick="showTab('algorithm')" id="tab-algorithm" class="tab-active px-4 py-3 text-sm whitespace-nowrap transition-all">Algorithm</button> <button onclick="showTab('compressions')" id="tab-compressions" class="px-4 py-3 text-sm whitespace-nowrap text-slate-400 transition-all">CPR Details</button> <button onclick="showTab('aed')" id="tab-aed" class="px-4 py-3 text-sm whitespace-nowrap text-slate-400 transition-all">AED/Defib</button> <button onclick="showTab('airway')" id="tab-airway" class="px-4 py-3 text-sm whitespace-nowrap text-slate-400 transition-all">Airway</button> <button onclick="showTab('special')" id="tab-special" class="px-4 py-3 text-sm whitespace-nowrap text-slate-400 transition-all">Special Situations</button> <button onclick="showTab('pediatric')" id="tab-pediatric" class="px-4 py-3 text-sm whitespace-nowrap text-slate-400 transition-all">Pediatric/Neonatal</button> <button onclick="showTab('drugs')" id="tab-drugs" class="px-4 py-3 text-sm whitespace-nowrap text-slate-400 transition-all">ACLS Drugs</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-6xl mx-auto px-4 py-6 pb-20"><!-- Algorithm Tab -->
+    <section id="content-algorithm" class="fade-in space-y-6">
+     <div class="bg-gradient-to-br from-red-950/50 to-slate-900 border border-red-900/40 rounded-2xl p-5 glow-red">
+      <h2 class="text-lg font-700 text-red-400 mb-1 flex items-center gap-2"><i data-lucide="zap" class="w-5 h-5"></i> Chain of Survival (AHA 2020)</h2>
+      <p class="text-slate-400 text-sm mb-4">Each link must be activated rapidly — time to first compression &amp; defibrillation = primary determinant of survival.</p>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+       <div class="bg-slate-800/70 rounded-xl p-3 text-center border border-slate-700">
+        <div class="text-2xl mb-1">
+         📞
+        </div>
+        <p class="text-xs font-600 text-slate-200">Early Recognition &amp; Activation</p>
+        <p class="text-[10px] text-slate-500 mt-1">Call 911/Code Blue</p>
+       </div>
+       <div class="bg-slate-800/70 rounded-xl p-3 text-center border border-slate-700">
+        <div class="text-2xl mb-1">
+         🫁
+        </div>
+        <p class="text-xs font-600 text-slate-200">Early CPR</p>
+        <p class="text-[10px] text-slate-500 mt-1">Push Hard &amp; Fast</p>
+       </div>
+       <div class="bg-slate-800/70 rounded-xl p-3 text-center border border-slate-700">
+        <div class="text-2xl mb-1">
+         ⚡
+        </div>
+        <p class="text-xs font-600 text-slate-200">Early Defibrillation</p>
+        <p class="text-[10px] text-slate-500 mt-1">AED within 3-5 min</p>
+       </div>
+       <div class="bg-slate-800/70 rounded-xl p-3 text-center border border-slate-700">
+        <div class="text-2xl mb-1">
+         🏥
+        </div>
+        <p class="text-xs font-600 text-slate-200">Advanced Life Support</p>
+        <p class="text-[10px] text-slate-500 mt-1">ACLS/Drugs/Airway</p>
+       </div>
+       <div class="bg-slate-800/70 rounded-xl p-3 text-center border border-slate-700 col-span-2 md:col-span-1">
+        <div class="text-2xl mb-1">
+         🧊
+        </div>
+        <p class="text-xs font-600 text-slate-200">Post-Cardiac Arrest Care</p>
+        <p class="text-[10px] text-slate-500 mt-1">TTM/PCI/Neuro</p>
+       </div>
+      </div>
+     </div><!-- BLS Algorithm Steps -->
+     <h3 class="text-base font-700 text-white flex items-center gap-2"><i data-lucide="list-ordered" class="w-5 h-5 text-red-500"></i> BLS Algorithm — Stepwise</h3>
+     <div class="space-y-4">
+      <div class="protocol-card bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-700">
+         1
+        </div>
+        <div>
+         <h4 class="font-600 text-white text-sm">Scene Safety &amp; Responsiveness</h4>
+         <p class="text-slate-400 text-xs mt-1">Ensure scene is safe. Tap shoulders firmly &amp; shout "Are you okay?" Check for <span class="text-red-400 font-600">no breathing or only gasping</span> (agonal respirations = cardiac arrest). Simultaneously check carotid pulse (healthcare provider) — <span class="mono text-red-300">≤10 seconds</span>.</p>
+        </div>
+       </div>
+      </div>
+      <div class="flex justify-center">
+       <i data-lucide="chevron-down" class="w-5 h-5 text-red-600"></i>
+      </div>
+      <div class="protocol-card bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-700">
+         2
+        </div>
+        <div>
+         <h4 class="font-600 text-white text-sm">Activate Emergency Response &amp; Get AED</h4>
+         <p class="text-slate-400 text-xs mt-1">If unresponsive with no normal breathing &amp; no pulse: <strong class="text-white">Activate code/call 911</strong>. Send someone for AED/defibrillator. If alone with phone — call first, put on speaker, begin CPR. <span class="text-yellow-400">Lone rescuer with unwitnessed collapse in child → 2 min CPR first, then call.</span></p>
+        </div>
+       </div>
+      </div>
+      <div class="flex justify-center">
+       <i data-lucide="chevron-down" class="w-5 h-5 text-red-600"></i>
+      </div>
+      <div class="protocol-card bg-slate-900 border border-red-800/50 rounded-xl p-4 glow-red">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-700">
+         3
+        </div>
+        <div>
+         <h4 class="font-600 text-white text-sm">Begin High-Quality CPR — C-A-B Sequence</h4>
+         <p class="text-slate-400 text-xs mt-1"><strong class="text-red-300">Compressions FIRST (C)</strong>, then Airway (A), then Breathing (B). Start chest compressions immediately. <span class="mono text-green-400">30:2</span> ratio (single/two rescuer adult), <span class="mono text-green-400">15:2</span> (two-rescuer child/infant).</p>
+         <div class="mt-2 grid grid-cols-3 gap-2">
+          <div class="bg-slate-800 rounded-lg p-2 text-center">
+           <p class="text-red-400 font-700 mono text-sm">100-120/min</p>
+           <p class="text-[10px] text-slate-500">Rate</p>
+          </div>
+          <div class="bg-slate-800 rounded-lg p-2 text-center">
+           <p class="text-red-400 font-700 mono text-sm">≥2 inches</p>
+           <p class="text-[10px] text-slate-500">Depth (5-6cm)</p>
+          </div>
+          <div class="bg-slate-800 rounded-lg p-2 text-center">
+           <p class="text-red-400 font-700 mono text-sm">Full Recoil</p>
+           <p class="text-[10px] text-slate-500">Allow chest wall</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="flex justify-center">
+       <i data-lucide="chevron-down" class="w-5 h-5 text-red-600"></i>
+      </div>
+      <div class="protocol-card bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-700">
+         4
+        </div>
+        <div>
+         <h4 class="font-600 text-white text-sm">AED Arrives — Analyze &amp; Shock</h4>
+         <p class="text-slate-400 text-xs mt-1">Power on AED → attach pads → allow analysis → if <span class="text-yellow-300 font-600">shockable rhythm (VF/pVT)</span>: deliver shock → immediately resume CPR for 2 min. If <span class="text-blue-300 font-600">non-shockable (Asystole/PEA)</span>: resume CPR immediately. Minimize interruptions to <span class="mono text-red-300">&lt;10 seconds</span>.</p>
+        </div>
+       </div>
+      </div>
+      <div class="flex justify-center">
+       <i data-lucide="chevron-down" class="w-5 h-5 text-red-600"></i>
+      </div>
+      <div class="protocol-card bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-700">
+         5
+        </div>
+        <div>
+         <h4 class="font-600 text-white text-sm">Continue Until ROSC or ACLS Team</h4>
+         <p class="text-slate-400 text-xs mt-1">Continue CPR cycles. Rotate compressors every <span class="mono text-green-400">2 minutes</span> (or every 5 cycles) to prevent fatigue. Check rhythm every 2 min. Continue until: ROSC (spontaneous breathing, pulse, movement), ACLS team takes over, or termination criteria met.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Decision Box -->
+     <div class="bg-yellow-950/40 border border-yellow-700/40 rounded-xl p-4 mt-4">
+      <h4 class="text-yellow-400 font-600 text-sm flex items-center gap-2"><i data-lucide="alert-triangle" class="w-4 h-4"></i> Critical Decision: Pulse Present but No Breathing</h4>
+      <p class="text-slate-300 text-xs mt-1">If pulse is present but patient is not breathing normally → <strong class="text-white">Rescue breathing only</strong>: 1 breath every 5-6 seconds (adults) = 10-12 breaths/min. Recheck pulse every 2 minutes. If pulse becomes absent → start full CPR.</p>
+     </div>
+    </section><!-- CPR Details Tab -->
+    <section id="content-compressions" class="fade-in space-y-5 hidden">
+     <h2 class="text-lg font-700 text-white">High-Quality CPR Parameters</h2>
+     <div class="overflow-x-auto">
+      <table class="w-full text-xs border-collapse">
+       <thead>
+        <tr class="bg-red-950/50 text-red-300">
+         <th class="p-3 text-left rounded-tl-lg">Parameter</th>
+         <th class="p-3 text-center">Adult (Puberty+)</th>
+         <th class="p-3 text-center">Child (1yr–Puberty)</th>
+         <th class="p-3 text-center rounded-tr-lg">Infant (&lt;1yr)</th>
+        </tr>
+       </thead>
+       <tbody class="text-slate-300">
+        <tr class="border-b border-slate-800">
+         <td class="p-3 font-600 text-white">Compression Depth</td>
+         <td class="p-3 text-center mono">≥2 in (5-6 cm)</td>
+         <td class="p-3 text-center mono">≈2 in (5 cm) — ⅓ AP</td>
+         <td class="p-3 text-center mono">1.5 in (4 cm) — ⅓ AP</td>
+        </tr>
+        <tr class="border-b border-slate-800 bg-slate-900/50">
+         <td class="p-3 font-600 text-white">Rate</td>
+         <td class="p-3 text-center mono">100-120/min</td>
+         <td class="p-3 text-center mono">100-120/min</td>
+         <td class="p-3 text-center mono">100-120/min</td>
+        </tr>
+        <tr class="border-b border-slate-800">
+         <td class="p-3 font-600 text-white">Hand Position</td>
+         <td class="p-3 text-center">Heel of 2 hands, lower ½ sternum</td>
+         <td class="p-3 text-center">1 or 2 hands, lower ½ sternum</td>
+         <td class="p-3 text-center">2 fingers (single) or 2 thumb-encircling (2-rescuer)</td>
+        </tr>
+        <tr class="border-b border-slate-800 bg-slate-900/50">
+         <td class="p-3 font-600 text-white">C:V Ratio (1 rescuer)</td>
+         <td class="p-3 text-center mono">30:2</td>
+         <td class="p-3 text-center mono">30:2</td>
+         <td class="p-3 text-center mono">30:2</td>
+        </tr>
+        <tr class="border-b border-slate-800">
+         <td class="p-3 font-600 text-white">C:V Ratio (2 rescuer HCP)</td>
+         <td class="p-3 text-center mono">30:2</td>
+         <td class="p-3 text-center mono">15:2</td>
+         <td class="p-3 text-center mono">15:2</td>
+        </tr>
+        <tr class="border-b border-slate-800 bg-slate-900/50">
+         <td class="p-3 font-600 text-white">With Advanced Airway</td>
+         <td class="p-3 text-center" colspan="3">Continuous compressions at 100-120/min + 1 breath every 6 sec (10/min) — no pausing</td>
+        </tr>
+        <tr class="border-b border-slate-800">
+         <td class="p-3 font-600 text-white">Chest Recoil</td>
+         <td class="p-3 text-center" colspan="3">Allow FULL chest recoil between compressions — do NOT lean on chest</td>
+        </tr>
+        <tr>
+         <td class="p-3 font-600 text-white">Interruptions</td>
+         <td class="p-3 text-center" colspan="3">Minimize to &lt;10 seconds. Chest compression fraction (CCF) goal &gt;60%, ideally &gt;80%</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="grid md:grid-cols-2 gap-4 mt-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-red-400 font-600 text-sm mb-2">⚠️ Common CPR Errors</h4>
+       <ul class="text-xs text-slate-400 space-y-1.5">
+        <li>• Inadequate depth (&lt;5 cm) — most common error</li>
+        <li>• Excessive rate (&gt;120/min) — reduces filling time</li>
+        <li>• Incomplete recoil (leaning) — ↓ venous return, ↓ coronary perfusion</li>
+        <li>• Excessive ventilation — ↑ intrathoracic pressure, ↓ venous return</li>
+        <li>• Prolonged interruptions — every pause ↓ coronary perfusion pressure</li>
+        <li>• Compressor fatigue — quality declines after ~2 min even if unperceived</li>
+       </ul>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-green-400 font-600 text-sm mb-2">✓ Quality Metrics &amp; Feedback</h4>
+       <ul class="text-xs text-slate-400 space-y-1.5">
+        <li>• <strong class="text-white">ETCO₂</strong>: If intubated, target &gt;10 mmHg (indicates adequate perfusion); if &lt;10 after 20 min → poor prognosis</li>
+        <li>• <strong class="text-white">Arterial line</strong>: Diastolic BP &gt;25 mmHg = adequate CPP goal</li>
+        <li>• <strong class="text-white">Coronary Perfusion Pressure (CPP)</strong>: Target &gt;15 mmHg for ROSC</li>
+        <li>• <strong class="text-white">ScvO₂</strong>: Target &gt;30% during CPR</li>
+        <li>• Use real-time CPR feedback devices when available</li>
+       </ul>
+      </div>
+     </div>
+     <div class="bg-blue-950/30 border border-blue-800/40 rounded-xl p-4">
+      <h4 class="text-blue-400 font-600 text-sm mb-1">Hands-Only CPR (Lay Rescuer)</h4>
+      <p class="text-xs text-slate-400">For untrained bystanders or those unwilling to give breaths: <strong class="text-white">continuous chest compressions at 100-120/min without ventilation</strong>. Effective for first several minutes in adult witnessed VF/VT arrest (oxygen reserve in blood). Dispatcher-assisted CPR should guide this approach.</p>
+     </div>
+    </section><!-- AED Tab -->
+    <section id="content-aed" class="fade-in space-y-5 hidden">
+     <h2 class="text-lg font-700 text-white">AED &amp; Defibrillation</h2>
+     <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-yellow-400 font-600 text-sm mb-3">⚡ AED Steps</h4>
+       <ol class="text-xs text-slate-300 space-y-2">
+        <li class="flex gap-2"><span class="text-red-400 font-700 mono">1.</span> Power ON the AED</li>
+        <li class="flex gap-2"><span class="text-red-400 font-700 mono">2.</span> Attach pads — right infraclavicular + left lateral (V5-V6 position). Ensure dry skin, remove patches, shave if needed</li>
+        <li class="flex gap-2"><span class="text-red-400 font-700 mono">3.</span> Clear patient — "ANALYZING… EVERYONE CLEAR"</li>
+        <li class="flex gap-2"><span class="text-red-400 font-700 mono">4.</span> If shock advised → "CLEAR!" → deliver shock</li>
+        <li class="flex gap-2"><span class="text-red-400 font-700 mono">5.</span> Immediately resume CPR for 2 minutes</li>
+        <li class="flex gap-2"><span class="text-red-400 font-700 mono">6.</span> Repeat analysis after 2 min cycle</li>
+       </ol>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-yellow-400 font-600 text-sm mb-3">Pad Placement Options</h4>
+       <ul class="text-xs text-slate-300 space-y-2">
+        <li><strong class="text-white">Anterolateral (default):</strong> Right infraclavicular + left mid-axillary at V5-V6</li>
+        <li><strong class="text-white">Anteroposterior:</strong> Anterior left precordium + posterior left infrascapular — may be superior in refractory VF</li>
+        <li><strong class="text-white">Pregnancy:</strong> Standard position; pads do NOT harm fetus. Defibrillation IS indicated.</li>
+        <li><strong class="text-white">Implanted devices:</strong> Place pad ≥1 inch (2.5 cm) away from pacemaker/ICD generator</li>
+        <li><strong class="text-white">Transdermal patches:</strong> Remove, wipe skin, then apply pads</li>
+       </ul>
+      </div>
+     </div>
+     <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <h4 class="text-white font-600 text-sm mb-2">Defibrillation Energy Levels</h4>
+      <div class="overflow-x-auto">
+       <table class="w-full text-xs">
+        <thead>
+         <tr class="text-red-300 border-b border-slate-700">
+          <th class="p-2 text-left">Device</th>
+          <th class="p-2">1st Shock</th>
+          <th class="p-2">Subsequent</th>
+          <th class="p-2">Notes</th>
+         </tr>
+        </thead>
+        <tbody class="text-slate-300">
+         <tr class="border-b border-slate-800">
+          <td class="p-2 font-600">Biphasic (adult)</td>
+          <td class="p-2 text-center mono">120-200 J</td>
+          <td class="p-2 text-center mono">Equal or escalating</td>
+          <td class="p-2">Follow manufacturer; if unknown → max dose</td>
+         </tr>
+         <tr class="border-b border-slate-800">
+          <td class="p-2 font-600">Monophasic (adult)</td>
+          <td class="p-2 text-center mono">360 J</td>
+          <td class="p-2 text-center mono">360 J</td>
+          <td class="p-2">All shocks at 360 J</td>
+         </tr>
+         <tr class="border-b border-slate-800">
+          <td class="p-2 font-600">Pediatric (manual)</td>
+          <td class="p-2 text-center mono">2 J/kg</td>
+          <td class="p-2 text-center mono">4 J/kg (max 10 J/kg)</td>
+          <td class="p-2">Use pediatric pads/attenuator &lt;8 yr</td>
+         </tr>
+         <tr>
+          <td class="p-2 font-600">AED (child &lt;8yr)</td>
+          <td class="p-2 text-center" colspan="2">Use pediatric dose attenuator if available</td>
+          <td class="p-2">If unavailable → use standard adult AED</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+     <div class="bg-red-950/40 border border-red-800/40 rounded-xl p-4">
+      <h4 class="text-red-400 font-600 text-sm">⏱ Time is Critical</h4>
+      <p class="text-xs text-slate-300 mt-1">Survival from VF/pVT decreases <strong class="text-white">7-10% per minute</strong> without CPR. With bystander CPR the decline is reduced to 3-4%/min. Defibrillation within 3-5 min of collapse can achieve <strong class="text-white">50-70% survival</strong>.</p>
+     </div>
+    </section><!-- Airway Tab -->
+    <section id="content-airway" class="fade-in space-y-5 hidden">
+     <h2 class="text-lg font-700 text-white">Airway Management in BLS</h2>
+     <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-green-400 font-600 text-sm mb-3">Basic Airway Maneuvers</h4>
+       <ul class="text-xs text-slate-300 space-y-2">
+        <li><strong class="text-white">Head Tilt-Chin Lift:</strong> Default maneuver. Tilt head back with one hand on forehead, lift chin with fingertips of other hand. Opens oropharynx.</li>
+        <li><strong class="text-white">Jaw Thrust:</strong> For suspected C-spine injury. Place fingers behind mandibular angles, displace jaw anteriorly. NO head extension.</li>
+        <li><strong class="text-white">If jaw thrust inadequate:</strong> AHA 2020 — use head tilt-chin lift even with suspected spine injury (airway takes priority over immobilization).</li>
+       </ul>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-green-400 font-600 text-sm mb-3">Ventilation Methods</h4>
+       <ul class="text-xs text-slate-300 space-y-2">
+        <li><strong class="text-white">Mouth-to-mouth:</strong> Pinch nose, create seal, give 1 sec breath watching for chest rise</li>
+        <li><strong class="text-white">Mouth-to-nose:</strong> When mouth cannot be opened/sealed</li>
+        <li><strong class="text-white">Pocket mask:</strong> Preferred — barrier protection + supplemental O₂ port</li>
+        <li><strong class="text-white">Bag-Valve-Mask (BVM):</strong> 2-person technique preferred. EC-clamp grip. Deliver 600 mL tidal volume (enough for visible chest rise)</li>
+        <li><strong class="text-white">Mouth-to-stoma:</strong> For laryngectomy/tracheostomy patients</li>
+       </ul>
+      </div>
+     </div>
+     <div class="bg-yellow-950/40 border border-yellow-700/40 rounded-xl p-4">
+      <h4 class="text-yellow-400 font-600 text-sm mb-2">⚠️ Ventilation Pitfalls</h4>
+      <ul class="text-xs text-slate-300 space-y-1">
+       <li>• <strong class="text-red-400">Avoid excessive ventilation</strong> — causes gastric distension, ↑ intrathoracic pressure, ↓ venous return &amp; cardiac output</li>
+       <li>• Each breath: 1 second duration, just enough for visible chest rise</li>
+       <li>• Do NOT hyperventilate — even with advanced airway, limit to 10 breaths/min</li>
+       <li>• If chest doesn't rise: reposition airway, ensure adequate seal, consider obstruction</li>
+      </ul>
+     </div>
+     <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <h4 class="text-white font-600 text-sm mb-2">Foreign Body Airway Obstruction (FBAO)</h4>
+      <div class="grid md:grid-cols-2 gap-4 text-xs text-slate-300">
+       <div>
+        <p class="text-red-400 font-600 mb-1">Conscious Adult/Child — Severe Obstruction:</p>
+        <ol class="space-y-1 ml-3">
+         <li>1. Ask "Are you choking?" — if cannot speak/cough/breathe</li>
+         <li>2. Abdominal thrusts (Heimlich maneuver)</li>
+         <li>3. Repeat until effective or patient becomes unconscious</li>
+         <li>4. Pregnant/obese → chest thrusts instead</li>
+        </ol>
+       </div>
+       <div>
+        <p class="text-red-400 font-600 mb-1">Unconscious — After FBAO:</p>
+        <ol class="space-y-1 ml-3">
+         <li>1. Lower to ground, activate emergency response</li>
+         <li>2. Begin CPR (30:2) — compressions may dislodge object</li>
+         <li>3. Each time airway opened: look for visible object → remove if seen</li>
+         <li>4. Do NOT perform blind finger sweeps</li>
+        </ol>
+       </div>
+      </div>
+      <div class="mt-3 bg-slate-800 rounded-lg p-3">
+       <p class="text-xs text-slate-300"><strong class="text-white">Infant FBAO:</strong> 5 back blows (slaps) + 5 chest thrusts (two-finger). NO abdominal thrusts in infants. Repeat cycles until object expelled or infant becomes unresponsive → begin infant CPR.</p>
+      </div>
+     </div>
+    </section><!-- Special Situations Tab -->
+    <section id="content-special" class="fade-in space-y-5 hidden">
+     <h2 class="text-lg font-700 text-white">Special Resuscitation Situations</h2>
+     <div class="space-y-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-purple-400 font-600 text-sm mb-2">🤰 Cardiac Arrest in Pregnancy</h4>
+       <ul class="text-xs text-slate-300 space-y-1">
+        <li>• <strong class="text-white">Left lateral uterine displacement (LUD)</strong>: Manual displacement of gravid uterus to the left to relieve IVC compression</li>
+        <li>• Standard BLS with NO modification to compression depth or rate</li>
+        <li>• Defibrillation at standard energy — safe for fetus</li>
+        <li>• Remove fetal monitors during defibrillation</li>
+        <li>• <strong class="text-red-400">Perimortem C-section (PMCS)</strong>: If ≥20 weeks &amp; no ROSC within 4-5 min → emergent delivery to improve maternal resuscitation</li>
+        <li>• IV access above the diaphragm preferred</li>
+       </ul>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-blue-400 font-600 text-sm mb-2">🌊 Drowning</h4>
+       <ul class="text-xs text-slate-300 space-y-1">
+        <li>• Exception to C-A-B: Use <strong class="text-white">A-B-C</strong> sequence — hypoxia is primary insult</li>
+        <li>• Begin rescue breaths as soon as possible, even in water if trained</li>
+        <li>• 5 initial rescue breaths recommended</li>
+        <li>• C-spine precautions only if mechanism suggests (diving, high-speed water sports)</li>
+        <li>• Do NOT attempt to drain water from lungs — delays CPR</li>
+        <li>• Hypothermia common — prolonged resuscitation justified ("not dead until warm and dead")</li>
+       </ul>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-cyan-400 font-600 text-sm mb-2">🥶 Hypothermia</h4>
+       <ul class="text-xs text-slate-300 space-y-1">
+        <li>• Pulse check extended to <strong class="mono text-white">30-45 seconds</strong> (bradycardia expected)</li>
+        <li>• If no definite pulse → start CPR</li>
+        <li>• Defibrillation: If core temp &lt;30°C, may attempt 1 shock; if unsuccessful, defer further shocks until rewarmed to &gt;30°C</li>
+        <li>• Medications: Withhold or space ACLS drugs if core temp &lt;30°C (impaired metabolism)</li>
+        <li>• <strong class="text-white">Continue CPR during rewarming</strong> — do not terminate until normothermic</li>
+        <li>• Target rewarming: ECMO/cardiopulmonary bypass is gold standard for severe hypothermic arrest</li>
+       </ul>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-orange-400 font-600 text-sm mb-2">⚡ Electrocution / Lightning Strike</h4>
+       <ul class="text-xs text-slate-300 space-y-1">
+        <li>• Ensure source is disconnected before touching patient</li>
+        <li>• Lightning: Safe to touch immediately (no retained charge)</li>
+        <li>• Lightning may cause VF/asystole — standard BLS/ACLS</li>
+        <li>• <strong class="text-white">Reverse triage</strong> in mass lightning events: treat apparently dead first (they may respond to early CPR); walking wounded can wait</li>
+        <li>• Watch for associated trauma (falls, blasts)</li>
+       </ul>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-pink-400 font-600 text-sm mb-2">💊 Opioid Overdose</h4>
+       <ul class="text-xs text-slate-300 space-y-1">
+        <li>• Suspected opioid OD with definite pulse but no/abnormal breathing → <strong class="text-white">Naloxone + rescue breathing</strong></li>
+        <li>• <strong class="text-white">Naloxone (Narcan)</strong>: 2 mg IN (intranasal) or 0.4 mg IM — may repeat every 4 min</li>
+        <li>• If no pulse → full CPR + naloxone (naloxone alone won't help in cardiac arrest)</li>
+        <li>• AHA 2020: Lay rescuers should administer naloxone when available for suspected OD</li>
+        <li>• Recovery position after ROSC if breathing adequately</li>
+       </ul>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <h4 class="text-red-400 font-600 text-sm mb-2">🫀 Anaphylaxis Leading to Arrest</h4>
+       <ul class="text-xs text-slate-300 space-y-1">
+        <li>• <strong class="text-white">Epinephrine IM (0.3-0.5 mg of 1:1000)</strong> is first-line — give immediately if anaphylaxis suspected</li>
+        <li>• If cardiac arrest: standard BLS + early epinephrine IV (1 mg of 1:10,000 per ACLS)</li>
+        <li>• Aggressive fluid resuscitation (distributive shock)</li>
+        <li>• Prolonged CPR may be required (young, healthy patients with reversible cause)</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- Pediatric/Neonatal Tab -->
+    <section id="content-pediatric" class="fade-in space-y-5 hidden">
+     <h2 class="text-lg font-700 text-white">Pediatric &amp; Neonatal Resuscitation</h2>
+     <div class="bg-gradient-to-r from-blue-950/50 to-slate-900 border border-blue-800/40 rounded-xl p-4">
+      <h4 class="text-blue-400 font-600 text-sm mb-2">Age Definitions (AHA)</h4>
+      <div class="grid grid-cols-3 gap-3 text-xs text-center">
+       <div class="bg-slate-800/80 rounded-lg p-2">
+        <p class="text-white font-600">Neonate</p>
+        <p class="text-slate-400">Birth – 28 days</p>
+       </div>
+       <div class="bg-slate-800/80 rounded-lg p-2">
+        <p class="text-white font-600">Infant</p>
+        <p class="text-slate-400">&lt;1 year</p>
+       </div>
+       <div class="bg-slate-800/80 rounded-lg p-2">
+        <p class="text-white font-600">Child</p>
+        <p class="text-slate-400">1yr – Puberty</p>
+       </div>
+      </div>
+     </div>
+     <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <h4 class="text-green-400 font-600 text-sm mb-3">Infant BLS Key Differences</h4>
+      <ul class="text-xs text-slate-300 space-y-2">
+       <li>• <strong class="text-white">Check brachial pulse</strong> (not carotid) — ≤10 seconds</li>
+       <li>• <strong class="text-white">Compression technique:</strong> 2-finger (single rescuer) or 2-thumb encircling hands (2-rescuer — preferred, generates higher pressures)</li>
+       <li>• Depth: <strong class="mono text-red-300">1.5 inches (4 cm)</strong> or ⅓ AP diameter</li>
+       <li>• Landmark: Just below nipple line on sternum</li>
+       <li>• Cover mouth AND nose for rescue breaths (mouth-to-mouth-and-nose)</li>
+       <li>• Compression rate: 100-120/min (same as adult)</li>
+       <li>• <strong class="text-white">Most pediatric arrests are RESPIRATORY in etiology</strong> → ventilation is critical</li>
+      </ul>
+     </div>
+     <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <h4 class="text-purple-400 font-600 text-sm mb-3">👶 Neonatal Resuscitation (NRP) — Delivery Room</h4>
+      <p class="text-xs text-slate-400 mb-3">Follows Neonatal Resuscitation Program (NRP) algorithm — distinct from pediatric BLS.</p>
+      <div class="space-y-3 text-xs text-slate-300">
+       <div class="bg-slate-800 rounded-lg p-3">
+        <p class="text-white font-600 mb-1">Initial Steps (within 30 seconds):</p>
+        <ul class="space-y-0.5 ml-3">
+         <li>• Warm (radiant warmer, plastic wrap for &lt;32 wk)</li>
+         <li>• Dry (unless premature — leave in wrap)</li>
+         <li>• Stimulate (flick soles, rub back)</li>
+         <li>• Position airway (sniffing position, suction only if obstruction)</li>
+         <li>• Delayed cord clamping ≥30-60 sec if vigorous</li>
+        </ul>
+       </div>
+       <div class="bg-slate-800 rounded-lg p-3">
+        <p class="text-white font-600 mb-1">If HR &lt;100 or gasping/apneic:</p>
+        <ul class="space-y-0.5 ml-3">
+         <li>• <strong class="text-yellow-300">PPV (Positive Pressure Ventilation)</strong> — most important intervention in neonatal resuscitation</li>
+         <li>• Rate: 40-60 breaths/min ("breathe-two-three, breathe-two-three")</li>
+         <li>• Start with 21% FiO₂ (room air) for ≥35 weeks; 21-30% for &lt;35 weeks</li>
+         <li>• Titrate O₂ by SpO₂ targets (preductal, right hand)</li>
+         <li>• Reassess at 15-30 seconds of effective PPV</li>
+        </ul>
+       </div>
+       <div class="bg-slate-800 rounded-lg p-3">
+        <p class="text-white font-600 mb-1">If HR &lt;60 despite effective PPV × 30 sec:</p>
+        <ul class="space-y-0.5 ml-3">
+         <li>• Start chest compressions: <strong class="text-red-300">2 thumb-encircling technique</strong></li>
+         <li>• Ratio: <strong class="mono text-red-300">3:1</strong> (compressions:ventilations) = 90 compressions + 30 breaths/min = 120 events/min</li>
+         <li>• Depth: ⅓ AP diameter of chest</li>
+         <li>• Increase FiO₂ to 100% when compressions initiated</li>
+         <li>• Consider intubation (ETT) and UVC for epinephrine access</li>
+        </ul>
+       </div>
+       <div class="bg-red-950/50 rounded-lg p-3 border border-red-800/40">
+        <p class="text-white font-600 mb-1">If HR remains &lt;60 despite compressions + PPV:</p>
+        <ul class="space-y-0.5 ml-3">
+         <li>• <strong class="text-red-400">Epinephrine</strong>: 0.01-0.03 mg/kg IV/UVC (1:10,000) — preferred route</li>
+         <li>• ET route: 0.05-0.1 mg/kg (higher dose needed)</li>
+         <li>• Volume expansion: 10 mL/kg NS if suspected hypovolemia/blood loss</li>
+         <li>• Reassess — consider pneumothorax, congenital anomaly</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <h4 class="text-white font-600 text-sm mb-2">Neonatal Target SpO₂ (Preductal — Right Hand)</h4>
+      <div class="overflow-x-auto">
+       <table class="w-full text-xs">
+        <thead>
+         <tr class="text-blue-300 border-b border-slate-700">
+          <th class="p-2 text-left">Time After Birth</th>
+          <th class="p-2">Target SpO₂</th>
+         </tr>
+        </thead>
+        <tbody class="text-slate-300 mono">
+         <tr class="border-b border-slate-800">
+          <td class="p-2">1 min</td>
+          <td class="p-2">60-65%</td>
+         </tr>
+         <tr class="border-b border-slate-800">
+          <td class="p-2">2 min</td>
+          <td class="p-2">65-70%</td>
+         </tr>
+         <tr class="border-b border-slate-800">
+          <td class="p-2">3 min</td>
+          <td class="p-2">70-75%</td>
+         </tr>
+         <tr class="border-b border-slate-800">
+          <td class="p-2">4 min</td>
+          <td class="p-2">75-80%</td>
+         </tr>
+         <tr class="border-b border-slate-800">
+          <td class="p-2">5 min</td>
+          <td class="p-2">80-85%</td>
+         </tr>
+         <tr>
+          <td class="p-2">10 min</td>
+          <td class="p-2">85-95%</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- ACLS Drugs Tab -->
+    <section id="content-drugs" class="fade-in space-y-5 hidden">
+     <h2 class="text-lg font-700 text-white">ACLS Cardiac Arrest Medications</h2>
+     <p class="text-xs text-slate-400">These are ACLS-level drugs given during cardiac arrest resuscitation — included for completeness as the natural next step after BLS.</p>
+     <div class="space-y-3">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-center gap-2 mb-2">
+        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+        <h4 class="text-white font-600 text-sm">Epinephrine (Adrenaline)</h4>
+       </div>
+       <div class="text-xs text-slate-300 grid md:grid-cols-2 gap-3">
+        <div>
+         <p><strong class="text-slate-100">Dose:</strong> <span class="mono text-green-400">1 mg IV/IO</span> every 3-5 minutes</p>
+         <p class="mt-1"><strong class="text-slate-100">Concentration:</strong> 1:10,000 (0.1 mg/mL) for IV</p>
+         <p class="mt-1"><strong class="text-slate-100">Timing:</strong> VF/pVT → after 2nd shock; PEA/Asystole → as soon as possible</p>
+        </div>
+        <div>
+         <p><strong class="text-slate-100">MOA:</strong> α₁ vasoconstriction → ↑ aortic diastolic pressure → ↑ coronary &amp; cerebral perfusion pressure</p>
+         <p class="mt-1"><strong class="text-slate-100">Pediatric:</strong> <span class="mono">0.01 mg/kg</span> (0.1 mL/kg of 1:10,000) IV/IO q3-5min</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-center gap-2 mb-2">
+        <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+        <h4 class="text-white font-600 text-sm">Amiodarone</h4>
+       </div>
+       <div class="text-xs text-slate-300">
+        <p><strong class="text-slate-100">Indication:</strong> VF/pVT unresponsive to defibrillation + CPR + epinephrine</p>
+        <p class="mt-1"><strong class="text-slate-100">Dose:</strong> <span class="mono text-green-400">300 mg IV/IO bolus</span> (1st dose) → <span class="mono text-green-400">150 mg</span> (2nd dose if needed)</p>
+        <p class="mt-1"><strong class="text-slate-100">Pediatric:</strong> <span class="mono">5 mg/kg</span> IV/IO bolus (max 300 mg); may repeat to 15 mg/kg/day</p>
+       </div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-center gap-2 mb-2">
+        <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+        <h4 class="text-white font-600 text-sm">Lidocaine (Alternative to Amiodarone)</h4>
+       </div>
+       <div class="text-xs text-slate-300">
+        <p><strong class="text-slate-100">Dose:</strong> <span class="mono text-green-400">1-1.5 mg/kg IV/IO</span> (1st dose) → <span class="mono">0.5-0.75 mg/kg</span> q5-10min (max 3 mg/kg)</p>
+        <p class="mt-1"><strong class="text-slate-100">Pediatric:</strong> <span class="mono">1 mg/kg</span> IV/IO loading dose</p>
+       </div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-center gap-2 mb-2">
+        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+        <h4 class="text-white font-600 text-sm">Sodium Bicarbonate</h4>
+       </div>
+       <div class="text-xs text-slate-300">
+        <p><strong class="text-slate-100">Dose:</strong> <span class="mono text-green-400">1 mEq/kg IV</span></p>
+        <p class="mt-1"><strong class="text-slate-100">Indications:</strong> Hyperkalemia, TCA overdose, pre-existing metabolic acidosis, prolonged arrest. NOT routine.</p>
+       </div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-center gap-2 mb-2">
+        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        <h4 class="text-white font-600 text-sm">Calcium Chloride / Gluconate</h4>
+       </div>
+       <div class="text-xs text-slate-300">
+        <p><strong class="text-slate-100">Dose:</strong> CaCl₂: <span class="mono text-green-400">20 mg/kg (10% solution)</span> slow IV push; Ca Gluconate: 60 mg/kg</p>
+        <p class="mt-1"><strong class="text-slate-100">Indications:</strong> Hyperkalemia, hypocalcemia, calcium channel blocker OD, hypermagnesemia. NOT routine in arrest.</p>
+       </div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+       <div class="flex items-center gap-2 mb-2">
+        <div class="w-3 h-3 bg-teal-500 rounded-full"></div>
+        <h4 class="text-white font-600 text-sm">Magnesium Sulfate</h4>
+       </div>
+       <div class="text-xs text-slate-300">
+        <p><strong class="text-slate-100">Dose:</strong> <span class="mono text-green-400">1-2 g IV/IO</span> diluted in 10 mL D5W over 5-20 min (or push in arrest)</p>
+        <p class="mt-1"><strong class="text-slate-100">Indication:</strong> Torsades de Pointes (polymorphic VT with long QT)</p>
+       </div>
+      </div>
+     </div>
+     <div class="bg-red-950/40 border border-red-800/40 rounded-xl p-4">
+      <h4 class="text-red-400 font-600 text-sm mb-2">Reversible Causes — H's &amp; T's</h4>
+      <div class="grid grid-cols-2 gap-4 text-xs text-slate-300">
+       <div>
+        <p class="text-white font-600 mb-1">H's:</p>
+        <ul class="space-y-0.5 ml-2">
+         <li>• Hypovolemia</li>
+         <li>• Hypoxia</li>
+         <li>• Hydrogen ion (acidosis)</li>
+         <li>• Hypo/Hyperkalemia</li>
+         <li>• Hypothermia</li>
+        </ul>
+       </div>
+       <div>
+        <p class="text-white font-600 mb-1">T's:</p>
+        <ul class="space-y-0.5 ml-2">
+         <li>• Tension pneumothorax</li>
+         <li>• Tamponade (cardiac)</li>
+         <li>• Toxins</li>
+         <li>• Thrombosis — pulmonary</li>
+         <li>• Thrombosis — coronary</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+  </div>
+  <script>
+  // Tab management
+  function showTab(tabId) {
+    document.querySelectorAll('[id^="content-"]').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('[id^="tab-"]').forEach(el => { el.classList.remove('tab-active'); el.classList.add('text-slate-400'); });
+    const content = document.getElementById('content-' + tabId);
+    const tab = document.getElementById('tab-' + tabId);
+    if (content) { content.classList.remove('hidden'); content.classList.add('fade-in'); }
+    if (tab) { tab.classList.add('tab-active'); tab.classList.remove('text-slate-400'); }
+  }
+
+  // Element SDK
+  const defaultConfig = {
+    main_title: 'BLS Protocol Guide',
+    subtitle: 'AHA 2020 Guidelines',
+    background_color: '#020617',
+    surface_color: '#0f172a',
+    text_color: '#f1f5f9',
+    primary_action: '#dc2626',
+    secondary_action: '#94a3b8',
+    font_family: 'Outfit',
+    font_size: 14
+  };
+
+  function applyConfig(config) {
+    const c = { ...defaultConfig, ...config };
+    document.getElementById('main-title').textContent = c.main_title;
+    document.getElementById('subtitle').textContent = c.subtitle;
+    document.getElementById('app').style.backgroundColor = c.background_color;
+    document.getElementById('app').style.color = c.text_color;
+    document.getElementById('app').style.fontFamily = `${c.font_family}, Outfit, sans-serif`;
+  }
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
