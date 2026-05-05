@@ -1,0 +1,707 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Antidiabetic Drugs | Diabetes Pharmacology & Treatment | Deep Medicine</title> <meta name="description" content="Comprehensive guide to antidiabetic drugs including insulin, oral hypoglycemics, mechanisms, dosing principles, and clinical use in diabetes management."> <link rel="canonical" href="https://deepmedicine.in/clinical/drugs/antidiabetic"> <!-- Open Graph --> <meta property="og:title" content="Antidiabetic Drugs | Deep Medicine"> <meta property="og:description" content="Classification and clinical use of antidiabetic medications including insulin and oral agents."> <meta property="og:image" content="https://deepmedicine.in/images/antidiabetic-drugs.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+
+body { font-family: 'DM Sans', sans-serif; }
+.font-display { font-family: 'Playfair Display', serif; }
+
+.drug-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 4px solid transparent;
+}
+.drug-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.category-btn {
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.category-btn.active {
+  transform: scale(1.02);
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+.slide-up {
+  animation: slideUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease;
+  position: absolute;
+  z-index: 50;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+.tooltip-wrap:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.search-glow:focus {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.moa-tag {
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.expand-btn {
+  transition: transform 0.3s ease;
+}
+.expand-btn.rotated {
+  transform: rotate(180deg);
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: #f0f4f8;">
+   <!-- Header -->
+   <header class="w-full" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+     <div class="flex items-start gap-4">
+      <div class="hidden sm:flex w-14 h-14 rounded-2xl items-center justify-center flex-shrink-0" style="background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3);">
+       <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+       </svg>
+      </div>
+      <div>
+       <h1 id="mainTitle" class="font-display text-2xl sm:text-4xl font-800 text-white leading-tight">Anti-Diabetic Drugs</h1>
+       <p id="subtitle" class="text-blue-300 mt-1 text-sm sm:text-base" style="opacity:0.85;">Complete Pharmacological Classification &amp; Clinical Reference</p>
+       <div class="flex flex-wrap gap-2 mt-3">
+        <span class="badge text-blue-200" style="background:rgba(59,130,246,0.2); border:1px solid rgba(96,165,250,0.3);">Pharmacology</span> <span class="badge text-emerald-200" style="background:rgba(16,185,129,0.2); border:1px solid rgba(52,211,153,0.3);">Evidence-Based</span> <span class="badge text-amber-200" style="background:rgba(245,158,11,0.2); border:1px solid rgba(251,191,36,0.3);">Clinical</span>
+       </div>
+      </div>
+     </div><!-- Search -->
+     <div class="mt-5 relative max-w-xl">
+      <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" style="width:18px;height:18px;"></i> <input id="searchInput" type="text" placeholder="Search drugs, classes, mechanisms..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/10 text-white placeholder-slate-400 border border-white/10 text-sm search-glow focus:outline-none focus:bg-white/15 focus:border-blue-400/40">
+     </div>
+    </div>
+   </header><!-- Category Tabs -->
+   <nav class="w-full sticky top-0 z-30 border-b" style="background: rgba(240,244,248,0.95); backdrop-filter: blur(8px); border-color: #e2e8f0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+     <div id="categoryTabs" class="flex gap-2 py-3 overflow-x-auto no-scrollbar">
+     </div>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+    <div id="statsBar" class="mb-5 flex flex-wrap gap-3 text-xs"></div>
+    <div id="drugContent" class="space-y-4"></div>
+    <div id="noResults" class="hidden text-center py-16">
+     <div class="text-5xl mb-3">
+      🔍
+     </div>
+     <p class="text-slate-500 text-lg font-medium">No matching drugs found</p>
+     <p class="text-slate-400 text-sm mt-1">Try a different search term</p>
+    </div>
+   </main><!-- Footer -->
+   <footer class="w-full py-6 mt-4" style="background:#e2e8f0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+     <p class="text-slate-500 text-xs">Comprehensive Anti-Diabetic Drug Reference • For Academic &amp; Clinical Use</p>
+     <p class="text-slate-400 text-xs mt-1">Based on ADA/EASD Guidelines, Goodman &amp; Gilman's, Katzung Pharmacology</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// ===== DRUG DATA =====
+const DRUG_DATA = [
+  {
+    id: "insulin",
+    category: "Insulin & Analogues",
+    icon: "💉",
+    color: "#2563eb",
+    colorLight: "#dbeafe",
+    subcategories: [
+      {
+        name: "Rapid-Acting Insulin",
+        moa: "Binds insulin receptor → activates tyrosine kinase → GLUT4 translocation → ↑glucose uptake",
+        onset: "15 min", peak: "1–2 hr", duration: "3–5 hr",
+        drugs: [
+          { name: "Insulin Lispro (Humalog)", detail: "Reversed Pro-Lys at B28-B29; less hexamer formation. Dosing: 0.5–1 U/kg/day; bolus 1–4 U per meal" },
+          { name: "Insulin Aspart (NovoRapid)", detail: "Asp substitution at B28; rapid dissociation. Dosing: similar to Lispro; prefilled pens" },
+          { name: "Insulin Glulisine (Apidra)", detail: "Asp at B3, Lys at B29; fastest monomer formation. Dosing: 0.5–1 U/kg/day" },
+          { name: "Faster Aspart (Fiasp)", detail: "Aspart + niacinamide + L-arginine; ultra-rapid absorption (onset 12 min). Dosing: same as aspart; superior PPG control vs regular aspart" }
+        ],
+        clinicalPearl: "Inject 0–15 min before meals (Fiasp: 0–2 min). Preferred in insulin pumps (CSII). Peak hypoglycemia risk 1–2hr. HbA1c reduction 1.5–2% from baseline. Lipodystrophy if reused injection sites. Allergy/lipohypertrophy = switch analog class."
+      },
+      {
+        name: "Short-Acting (Regular) Insulin",
+        moa: "Same receptor mechanism; hexameric form delays absorption from SC site",
+        onset: "30–60 min", peak: "2–4 hr", duration: "6–8 hr",
+        drugs: [
+          { name: "Regular Insulin (Humulin R, Actrapid)", detail: "Only insulin for IV use in DKA/HHS; forms hexamers in zinc solution. IV drip: 0.1 U/kg/hr; adjust per glucose. SC dosing: 1–4 U per meal" }
+        ],
+        clinicalPearl: "SOLE insulin for IV. DKA protocol: 0.1 U/kg bolus, then 0.1 U/kg/hr infusion ↑ by 50% if glucose ↓ <100 mg/dL. Monitor K⁺ closely (K⁺ drops ~0.5 mEq/L per 100 mg/dL ↓ glucose). Give 30 min before SC meals. Hyperkalemia → give glucose + insulin. Less predictable than rapid analogs."
+      },
+      {
+        name: "Intermediate-Acting Insulin",
+        moa: "NPH: insulin-protamine complex slows SC absorption; same receptor mechanism",
+        onset: "1–2 hr", peak: "4–12 hr", duration: "12–18 hr",
+        drugs: [
+          { name: "NPH Insulin (Humulin N, Insulatard)", detail: "Neutral Protamine Hagedorn; cloudy suspension; MUST be resuspended before injection. Dosing: 0.1–0.2 U/kg BID; typical 10–20 U per injection" }
+        ],
+        clinicalPearl: "Variable PK (±20% variability). Erratic peak causes nocturnal hypoglycemia & dawn phenomenon. Being replaced by basal analogues in T1DM. Still used in resource-limited settings. Cannot be mixed with DPP-4i or GLP-1 RAs. Renal impairment = prolong duration."
+      },
+      {
+        name: "Long-Acting (Basal) Insulin",
+        moa: "Peakless basal coverage via slow SC absorption (microprecipitate or albumin binding)",
+        onset: "1–2 hr", peak: "Peakless/minimal", duration: "20–42+ hr",
+        drugs: [
+          { name: "Insulin Glargine (Lantus, Basaglar)", detail: "pH 4 → microprecipitate at pH 7.4; Gly at A21, +2 Arg at B30; 24 hr. Dosing: 0.1–0.3 U/kg OD at bedtime or morning" },
+          { name: "Insulin Glargine U-300 (Toujeo)", detail: "Concentrated (300 U/mL); smaller depot → flatter, longer profile ~36 hr. Dosing: 0.1–0.3 U/kg in 300 U/mL formulation; 1/3 volume vs U-100" },
+          { name: "Insulin Detemir (Levemir)", detail: "Myristic acid at B29 → albumin binding; 12–20 hr, often BID dosing (breakfast + dinner). Dosing: ~0.1–0.2 U/kg per injection BID" },
+          { name: "Insulin Degludec (Tresiba)", detail: "Multi-hexamer chains in SC tissue; ultra-long >42 hr; once daily. Dosing: 0.1–0.3 U/kg OD. Trough glucose variability ↓ 30% vs glargine (DEVOTE trial)" }
+        ],
+        clinicalPearl: "Glargine: do NOT mix with other insulins (acidic pH). Degludec = LOWEST nocturnal hypo risk (DEVOTE trial, p<0.001). Detemir requires BID dosing but good flexibility. All basal insulins: titrate +2–4 U every 3–5 days if FBG >130 mg/dL. Monitor for lipodystrophy."
+      },
+      {
+        name: "Pre-Mixed Insulin",
+        moa: "Combines bolus + basal in fixed ratio; biphasic absorption profile",
+        onset: "15–30 min", peak: "Dual peak", duration: "12–24 hr",
+        drugs: [
+          { name: "70/30 NPH/Regular (Mixtard, Humulin 70/30)", detail: "70% NPH + 30% Regular; traditional mix. Dosing: 0.3–0.5 U/kg BID AC meals" },
+          { name: "75/25 Lispro Mix (Humalog Mix)", detail: "75% Lispro protamine + 25% Lispro; rapid onset. Dosing: 0.5–1 U/kg BID AC meals" },
+          { name: "70/30 Aspart Mix (NovoMix 30)", detail: "70% Aspart protamine + 30% Aspart; similar to 75/25 mix. Dosing: AC meals BID" },
+          { name: "IDegAsp (Ryzodeg)", detail: "70% Degludec + 30% Aspart; modern co-formulation. Dosing: 0.5–1 U/kg OD, can be flipped to BID for better glycemic control" }
+        ],
+        clinicalPearl: "Convenient but INFLEXIBLE dosing—cannot titrate basal/bolus independently. Useful in T2DM with fixed eating patterns or poor compliance. Deprecated in T1DM (basal-bolus preferred). IDegAsp: more flexible timing than 70/30 (can give OD or BID)."
+      },
+      {
+        name: "Concentrated Insulin",
+        moa: "Same mechanism; higher concentration reduces injection volume for insulin-resistant patients",
+        onset: "Varies", peak: "Varies", duration: "Varies",
+        drugs: [
+          { name: "Insulin Regular U-500 (Humulin U-500)", detail: "500 U/mL; for severe insulin resistance (>200 U/day); acts like intermediate insulin in duration. Dosing: use U-500 syringe only; 1 mL = 500 U. Onset 1 hr, peak 2–8 hr, duration 16–24 hr" },
+          { name: "Insulin Lispro U-200 (Humalog U-200)", detail: "200 U/mL; same PK as U-100 lispro; half the volume. Dosing: use U-200 insulin pen or syringe; onset & duration unchanged" }
+        ],
+        clinicalPearl: "⚠️ HIGH ALERT: Dosing errors COMMON—prescribe dose in UNITS not mL. U-500 is red-labeled. U-500 acts like basal-bolus combo (longer duration than regular U-100). Use dedicated syringes. Transition from U-100 to U-500: unit conversion only, not volume conversion."
+      },
+    ]
+  },
+  {
+    id: "secretagogues",
+    category: "Insulin Secretagogues",
+    icon: "⚡",
+    color: "#d97706",
+    colorLight: "#fef3c7",
+    subcategories: [
+      {
+        name: "Sulfonylureas (SU) — 1st Generation",
+        moa: "Block ATP-sensitive K⁺ channels (SUR1/Kir6.2) on β-cells → depolarization → Ca²⁺ influx → insulin exocytosis",
+        onset: "1 hr", peak: "2–6 hr", duration: "12–24 hr",
+        drugs: [
+          { name: "Tolbutamide", detail: "Short-acting; hepatic metabolism; safest 1st-gen for elderly (historical). Dosing: 0.5–2 g TID" },
+          { name: "Chlorpropamide", detail: "Very long t½ (36 hr); causes SIADH/hyponatremia, disulfiram-like reaction. ❌ AVOID" },
+          { name: "Tolazamide", detail: "Intermediate duration; largely obsolete. Dosing: 0.1–0.5 g BID/TID" },
+          { name: "Acetohexamide", detail: "Active metabolite (hydroxyhexamide); renal excretion; historical use only" }
+        ],
+        clinicalPearl: "1st-gen SUs largely OBSOLETE due to long duration (erratic PK), drug interactions (CYP450), and higher hypoglycemia/weight gain risk. Avoided in modern practice."
+      },
+      {
+        name: "Sulfonylureas (SU) — 2nd Generation",
+        moa: "Same SUR1/Kir6.2 mechanism; higher potency, fewer drug interactions, better side effect profile",
+        onset: "1–2 hr", peak: "2–8 hr", duration: "12–24 hr",
+        drugs: [
+          { name: "Glibenclamide/Glyburide (Daonil)", detail: "Active metabolite (p-hydroxyglyburide); ⚠️ HIGHEST hypoglycemia risk among 2nd-gen. Dosing: 1.25–20 mg/day (max 20 mg/day). Avoid in CKD/elderly" },
+          { name: "Glipizide (Glucotrol)", detail: "No active metabolites; safer in CKD; hepatic metabolism. Dosing: 5–40 mg/day in divided doses. Take 30 min before meals" },
+          { name: "Gliclazide (Diamicron)", detail: "Antioxidant properties; selective for pancreatic SUR1. Dosing: 40–80 mg BID. ADVANCE trial: ↓MACE, ↓microalbuminuria. PREFERRED 2nd-gen SU" },
+          { name: "Glimepiride (Amaryl)", detail: "Binds 65-kDa SUR1 subunit; some extrapancreatic effects (myocardial KATP?). Dosing: 1–8 mg OD. Once-daily convenience; lower hypo than glyburide" }
+        ],
+        clinicalPearl: "HbA1c ↓1.0–1.5%. All SUs: weight gain +2–4 kg. GLICLAZIDE = PREFERRED SU (ADVANCE trial CV benefit). Glyburide: AVOID in T2DM if possible. CI: T1DM, pregnancy, DKA, severe renal/hepatic failure. Hypoglycemia risk especially with elderly/fasting/physical activity."
+      },
+      {
+        name: "Meglitinides (Glinides)",
+        moa: "Bind different site on SUR1 → same K⁺ channel closure → rapid, short-duration insulin release",
+        onset: "15–30 min", peak: "1 hr", duration: "3–4 hr",
+        drugs: [
+          { name: "Repaglinide (NovoNorm/Prandin)", detail: "Benzoic acid derivative; hepatic CYP3A4/2C8 metabolism; potency similar to SU" },
+          { name: "Nateglinide (Starlix)", detail: "D-phenylalanine derivative; faster onset, shorter duration; less potent than repaglinide" }
+        ],
+        clinicalPearl: "Take 0–15 min before each meal. Skip meal = skip dose. Good for irregular eating patterns. Less hypo than SU but still possible."
+      }
+    ]
+  },
+  {
+    id: "biguanides",
+    category: "Biguanides",
+    icon: "🛡️",
+    color: "#059669",
+    colorLight: "#d1fae5",
+    subcategories: [
+      {
+        name: "Metformin",
+        moa: "Activates AMPK → ↓hepatic glucose production (gluconeogenesis), ↑peripheral insulin sensitivity, ↓intestinal glucose absorption; inhibits mitochondrial complex I",
+        onset: "1–3 hr", peak: "2–3 hr (IR)", duration: "8–12 hr",
+        drugs: [
+          { name: "Metformin IR (Glucophage)", detail: "500/850/1000 mg tablets; max 2550 mg/day (or 2000 mg/day if eGFR 30–45). FIRST-LINE T2DM. Dosing: start 500 mg OD, titrate +500 mg weekly to target dose (1000–2000 mg/day in divided doses)" },
+          { name: "Metformin XR/SR (Glucophage XR, Glumetza)", detail: "Extended-release formulations; once-daily dosing (2000 mg OD); better GI tolerability than IR; same efficacy. Slower onset PK; maintain same daily dose as IR" }
+        ],
+        clinicalPearl: "✓ FIRST-LINE for T2DM (ADA/EASD consensus). HbA1c ↓1.0–1.5%. Weight neutral/slight ↓. No hypoglycemia monotherapy. GI side effects (↓ with XR/slow titration): diarrhea, nausea, abdominal bloating. STOP if eGFR <30 (lactic acidosis risk). Hold 48hr before iodinated contrast. B12 ↓ (check annually). Rare: MALA (lactic acidosis). Avoid alcohol (↑ risk). Safe in hepatic/cardiac disease."
+      },
+      {
+        name: "Other Biguanides (Historical)",
+        moa: "Same AMPK activation pathway",
+        onset: "—", peak: "—", duration: "—",
+        drugs: [
+          { name: "Phenformin", detail: "WITHDRAWN worldwide; 50x higher lactic acidosis risk than metformin" },
+          { name: "Buformin", detail: "WITHDRAWN; similar lactic acidosis concerns" }
+        ],
+        clinicalPearl: "Historical significance only. Phenformin withdrawal (1978) led to stringent metformin safety monitoring."
+      }
+    ]
+  },
+  {
+    id: "tzd",
+    category: "Thiazolidinediones (TZDs)",
+    icon: "🧬",
+    color: "#7c3aed",
+    colorLight: "#ede9fe",
+    subcategories: [
+      {
+        name: "Glitazones (PPARγ Agonists)",
+        moa: "Activate PPARγ nuclear receptor → ↑adiponectin, ↑GLUT4, ↑lipogenesis in adipose → ↓FFAs → ↑peripheral insulin sensitivity; gene transcription takes 4–12 weeks",
+        onset: "2–4 weeks", peak: "6–12 weeks", duration: "Sustained",
+        drugs: [
+          { name: "Pioglitazone (Actos)", detail: "15/30/45 mg tablets; dual PPARγ/PPARα agonist; improves lipid profile. Dosing: start 15 mg OD, titrate to 30–45 mg OD. PROactive trial: ↓MACE 10% (non-significant), ↓MI 16%" },
+          { name: "Rosiglitazone (Avandia)", detail: "4/8 mg tablets; restricted/withdrawn in many countries. RECORD trial (2009): ↑MI risk signal; now used with caution. Not recommended first-line" },
+          { name: "Troglitazone (Rezulin)", detail: "❌ WITHDRAWN 2000 (idiosyncratic hepatotoxicity; liver failure cases); historical significance only" },
+          { name: "Lobeglitazone (Duvie)", detail: "Approved South Korea; higher PPARγ selectivity, lower dose (0.5–1 mg OD); ongoing safety evaluation worldwide" }
+        ],
+        clinicalPearl: "HbA1c ↓0.5–1.4%. Takes 8–12 weeks for FULL effect. ADRs: weight gain +3–5 kg (↑adipose TG), edema, HF exacerbation (NYHA III/IV CI!), ↑fracture risk (esp. women, distal limb), ?bladder cancer (pioglitazone >2yr exposure). Monitor LFTs. Declining use due to side effects. Niche role in IR + lipid dysfunction."
+      }
+    ]
+  },
+  {
+    id: "agi",
+    category: "Alpha-Glucosidase Inhibitors",
+    icon: "🚫",
+    color: "#dc2626",
+    colorLight: "#fee2e2",
+    subcategories: [
+      {
+        name: "α-Glucosidase Inhibitors",
+        moa: "Competitively inhibit α-glucosidase enzymes (maltase, sucrase, glucoamylase) at brush border → delay carbohydrate digestion → ↓postprandial glucose",
+        onset: "With first bite", peak: "1–2 hr (PPG reduction)", duration: "4–6 hr",
+        drugs: [
+          { name: "Acarbose (Glucobay/Precose)", detail: "25/50/100 mg TID; most studied; STOP-NIDDM trial showed ↓T2DM progression & CV events" },
+          { name: "Miglitol (Glyset)", detail: "Systemically absorbed (unlike acarbose); renal excretion; similar efficacy" },
+          { name: "Voglibose (Volix/Basen)", detail: "Popular in Asia (Japan, India); more potent α-glucosidase inhibition; better GI tolerability" }
+        ],
+        clinicalPearl: "HbA1c ↓0.5–0.8%. Take with FIRST BITE of meal. Prominent GI effects (flatulence, bloating, diarrhea). Titrate slowly. Treat hypoglycemia with GLUCOSE only (not sucrose). Contraindicated: IBD, intestinal obstruction, cirrhosis."
+      }
+    ]
+  },
+  {
+    id: "incretin",
+    category: "Incretin-Based Therapies",
+    icon: "🔄",
+    color: "#0891b2",
+    colorLight: "#cffafe",
+    subcategories: [
+      {
+        name: "DPP-4 Inhibitors (Gliptins)",
+        moa: "Inhibit dipeptidyl peptidase-4 → ↑endogenous GLP-1 & GIP (2–3x) → glucose-dependent insulin secretion ↑, glucagon ↓",
+        onset: "1–2 hr", peak: "1–4 hr", duration: "24 hr",
+        drugs: [
+          { name: "Sitagliptin (Januvia)", detail: "100 mg OD; first DPP-4i; renal dose adjustment; TECOS trial: CV neutral" },
+          { name: "Vildagliptin (Galvus)", detail: "50 mg BID; monitor LFTs; not FDA-approved (EMA approved)" },
+          { name: "Saxagliptin (Onglyza)", detail: "5 mg OD; CYP3A4/5 metabolism; SAVOR-TIMI 53: ↑HF hospitalization signal" },
+          { name: "Linagliptin (Trajenta)", detail: "5 mg OD; biliary excretion (NO renal adjustment needed); ideal in CKD" },
+          { name: "Alogliptin (Nesina)", detail: "25 mg OD; EXAMINE trial: CV neutral; renal dose adjustment" },
+          { name: "Teneligliptin (Tenelia)", detail: "20 mg OD; popular in Japan/India; unique J-shaped structure; hepatic + renal elimination" },
+          { name: "Trelagliptin (Zafatek)", detail: "Weekly DPP-4i (Japan); 100 mg once weekly" },
+          { name: "Omarigliptin (Marizev)", detail: "Weekly DPP-4i (Japan); 25 mg once weekly" }
+        ],
+        clinicalPearl: "HbA1c ↓0.5–0.8%. Weight neutral. Very low hypoglycemia risk. Well tolerated. Rare: pancreatitis, joint pain. Saxagliptin: caution in HF."
+      },
+      {
+        name: "GLP-1 Receptor Agonists (Incretin Mimetics)",
+        moa: "Activate GLP-1 receptor → glucose-dependent ↑insulin, ↓glucagon, ↓gastric emptying, ↑satiety (hypothalamic), ↓appetite",
+        onset: "Varies", peak: "Varies", duration: "Hours to weeks",
+        drugs: [
+          { name: "Exenatide BID (Byetta)", detail: "Exendin-4 (Gila monster); 5/10 μg SC BID; 53% GLP-1 homology; DPP-4 resistant" },
+          { name: "Exenatide QW (Bydureon)", detail: "Extended-release microsphere; 2 mg SC weekly" },
+          { name: "Liraglutide (Victoza)", detail: "Fatty acid acylation → albumin binding; 0.6/1.2/1.8 mg SC OD; LEADER trial: ↓MACE 13%, ↓CV death" },
+          { name: "Lixisenatide (Adlyxin)", detail: "Exendin-4 based; 10/20 μg SC OD; mainly postprandial effect; ELIXA: CV neutral" },
+          { name: "Dulaglutide (Trulicity)", detail: "GLP-1-IgG4 Fc fusion; 0.75/1.5/3/4.5 mg SC weekly; REWIND: ↓MACE in broad T2DM population" },
+          { name: "Semaglutide SC (Ozempic)", detail: "0.25/0.5/1/2 mg SC weekly; SUSTAIN-6: ↓MACE 26%; highest HbA1c & weight reduction in class" },
+          { name: "Semaglutide Oral (Rybelsus)", detail: "First oral GLP-1 RA; co-formulated with SNAC (absorption enhancer); 3/7/14 mg OD; take fasting with sip of water" },
+          { name: "Semaglutide 2.4mg (Wegovy)", detail: "Higher dose for obesity; STEP trials: ~15% weight loss; SELECT trial: ↓MACE 20% in obese non-diabetics" }
+        ],
+        clinicalPearl: "HbA1c ↓1.0–1.8%. Weight loss 3–7+ kg. ↓CV events (liraglutide, semaglutide, dulaglutide). ADRs: nausea (titrate!), vomiting, diarrhea, pancreatitis (rare). CI: personal/family MTC history, MEN2."
+      },
+      {
+        name: "Dual GIP/GLP-1 Receptor Agonists (Twincretins)",
+        moa: "Activate both GIP and GLP-1 receptors → synergistic insulin secretion, ↓glucagon, ↓appetite, ↑energy expenditure, ↓fat mass",
+        onset: "Hours", peak: "Dose-dependent", duration: "1 week",
+        drugs: [
+          { name: "Tirzepatide (Mounjaro/Zepbound)", detail: "GIP:GLP-1 ratio ~5:1 affinity; 2.5/5/7.5/10/12.5/15 mg SC weekly; SURPASS trials: HbA1c ↓ up to 2.58%, weight ↓ up to 12.4 kg" }
+        ],
+        clinicalPearl: "Most potent glucose-lowering and weight-loss injectable. SURPASS & SURMOUNT trials show superiority over semaglutide. Same GI side effects as GLP-1 RAs. CI: MTC/MEN2. Game-changer for T2DM + obesity."
+      }
+    ]
+  },
+  {
+    id: "sglt2",
+    category: "SGLT2 Inhibitors (Gliflozins)",
+    icon: "💧",
+    color: "#0d9488",
+    colorLight: "#ccfbf1",
+    subcategories: [
+      {
+        name: "SGLT2 Inhibitors",
+        moa: "Selectively inhibit sodium-glucose co-transporter 2 in proximal tubule (S1/S2 segment) → ↓renal glucose reabsorption → glycosuria (~70–80g/day) → insulin-independent glucose lowering; also ↓Na⁺ reabsorption → natriuresis, osmotic diuresis",
+        onset: "1–2 hr", peak: "1.5–2 hr", duration: "24 hr",
+        drugs: [
+          { name: "Empagliflozin (Jardiance)", detail: "10/25 mg OD; EMPA-REG OUTCOME: ↓CV death 38%, ↓HF hospitalization 35%; EMPEROR trials: HF benefit regardless of DM" },
+          { name: "Dapagliflozin (Farxiga/Forxiga)", detail: "5/10 mg OD; DECLARE-TIMI 58: ↓HF hospitalization; DAPA-HF/DAPA-CKD: benefits in HFrEF & CKD regardless of DM" },
+          { name: "Canagliflozin (Invokana)", detail: "100/300 mg OD; CANVAS/CREDENCE: CV & renal benefits; initial amputation signal (debated)" },
+          { name: "Ertugliflozin (Steglatro)", detail: "5/15 mg OD; VERTIS-CV: CV safety established; less robust outcome data" },
+          { name: "Sotagliflozin (Zynquista)", detail: "Dual SGLT1/SGLT2 inhibitor; ↓intestinal glucose absorption + renal glycosuria; SOLOIST-WHF: HF benefit; approved for HF" },
+          { name: "Ipragliflozin (Suglat)", detail: "Japan/Korea; 50 mg OD; similar class effects" },
+          { name: "Tofogliflozin (Apleway/Deberza)", detail: "Japan; 20 mg OD; highest SGLT2 selectivity in class" },
+          { name: "Luseogliflozin (Lusefi)", detail: "Japan; 2.5/5 mg OD; lowest dose in class" }
+        ],
+        clinicalPearl: "HbA1c ↓0.5–1.0%. Weight loss 2–4 kg. ↓BP 3–5 mmHg. LANDMARK BENEFITS: ↓HF hospitalization, ↓CKD progression, ↓CV death (empagliflozin). ADRs: UTI, genital mycosis (candidiasis), euglycemic DKA (rare but DANGEROUS—check ketones!), volume depletion. Monitor eGFR. Temporarily hold peri-operatively."
+      }
+    ]
+  },
+  {
+    id: "amylin",
+    category: "Amylin Analogues & Others",
+    icon: "🧪",
+    color: "#be185d",
+    colorLight: "#fce7f3",
+    subcategories: [
+      {
+        name: "Amylin Analogues",
+        moa: "Synthetic amylin analogue → activates amylin receptors (CTR + RAMP) → ↓glucagon, ↓gastric emptying, ↑satiety",
+        onset: "20 min", peak: "30 min", duration: "3 hr",
+        drugs: [
+          { name: "Pramlintide (Symlin)", detail: "Pro25,28,29Ala substitutions; 15–60 μg SC before meals; adjunct to insulin in T1DM & T2DM" }
+        ],
+        clinicalPearl: "Used WITH insulin (not instead). ↓Postprandial glucose, ↓insulin dose by ~20%, mild weight loss. MUST reduce mealtime insulin by 50% when starting (hypoglycemia risk). Limited uptake due to complexity."
+      },
+      {
+        name: "Dopamine D2 Agonists",
+        moa: "Activates hypothalamic D2 receptors (at morning peak) → resets circadian neurohumoral dysregulation → ↓sympathetic tone, ↓hepatic glucose production, ↓postprandial TG",
+        onset: "1–2 hr", peak: "—", duration: "—",
+        drugs: [
+          { name: "Bromocriptine QR (Cycloset)", detail: "0.8 mg quick-release; titrate to 1.6–4.8 mg; take within 2 hr of waking; FDA-approved for T2DM" }
+        ],
+        clinicalPearl: "HbA1c ↓0.5–0.7%. Unique circadian mechanism. ADRs: nausea, dizziness, syncope, rhinitis. Cycloset Cardiovascular Safety Trial: no ↑CV risk. Rarely used; niche role."
+      },
+      {
+        name: "Bile Acid Sequestrants",
+        moa: "Binds bile acids in gut → ↑bile acid synthesis from cholesterol → activates FXR/TGR5 → ↑GLP-1 secretion, ↓hepatic glucose production; mechanism not fully elucidated",
+        onset: "Weeks", peak: "—", duration: "Chronic",
+        drugs: [
+          { name: "Colesevelam (WelChol)", detail: "3.75g/day (6 tabs or suspension); dual indication: T2DM + LDL-lowering; does NOT ↑hypoglycemia" }
+        ],
+        clinicalPearl: "HbA1c ↓0.3–0.5%. Also ↓LDL 15–18%. ADRs: constipation, ↑TG, drug interactions (bind other meds). Take other drugs 1hr before or 4hr after. Avoid if TG >500."
+      },
+      {
+        name: "Glucokinase Activators (GKAs)",
+        moa: "Allosteric activation of glucokinase (hexokinase IV) → ↓glucose threshold for insulin secretion, ↑hepatic glucose uptake; glucose-dependent mechanism",
+        onset: "—", peak: "—", duration: "—",
+        drugs: [
+          { name: "Dorzagliatin (Huatang Ning/Imeglimin adjacent)", detail: "First GKA approved (China 2022); dual-acting on β-cell and hepatocyte GK; 75 mg BID" },
+          { name: "Imeglimin (Twymeeg)", detail: "Japan 2021; mitochondrial mechanism (↑complex III, ↑insulin secretion, ↓hepatic gluconeogenesis); novel class—'glimins'" }
+        ],
+        clinicalPearl: "Emerging class. GKAs address fundamental glucose-sensing defect in T2DM. Imeglimin is a NEW CLASS—not a GKA but mitochondrial bioenergetic agent. Both represent pipeline innovation."
+      }
+    ]
+  },
+  {
+    id: "combinations",
+    category: "Fixed-Dose Combinations",
+    icon: "🔗",
+    color: "#4338ca",
+    colorLight: "#e0e7ff",
+    subcategories: [
+      {
+        name: "Oral FDCs",
+        moa: "Combines complementary mechanisms for synergistic glycemic control with improved adherence",
+        onset: "Varies", peak: "Varies", duration: "Varies",
+        drugs: [
+          { name: "Metformin + Glimepiride", detail: "↑Insulin sensitivity + ↑secretion; most prescribed FDC globally" },
+          { name: "Metformin + Sitagliptin (Janumet)", detail: "↑Insulin sensitivity + incretin enhancement; weight-neutral combination" },
+          { name: "Metformin + Vildagliptin (Galvumet)", detail: "Popular outside US; similar to Janumet" },
+          { name: "Metformin + Empagliflozin (Synjardy)", detail: "↑Insulin sensitivity + glycosuria; CV + renal benefits" },
+          { name: "Metformin + Dapagliflozin (Xigduo)", detail: "Similar benefits as Synjardy" },
+          { name: "Metformin + Pioglitazone (Actoplus Met)", detail: "Dual insulin sensitizer; additive effect on hepatic & peripheral IR" },
+          { name: "Empagliflozin + Linagliptin (Glyxambi)", detail: "SGLT2i + DPP-4i; complementary MOA without metformin" }
+        ],
+        clinicalPearl: "FDCs improve adherence (↓pill burden). Always titrate individual components first. Consider renal dosing of each component separately."
+      },
+      {
+        name: "Injectable FDCs",
+        moa: "Combines basal insulin with GLP-1 RA for complementary fasting + postprandial coverage with weight mitigation",
+        onset: "Varies", peak: "Varies", duration: "24 hr",
+        drugs: [
+          { name: "Insulin Glargine + Lixisenatide (Soliqua/iGlarLixi)", detail: "Glargine U100 + Lixisenatide; single injection OD; less weight gain & hypo than basal-bolus" },
+          { name: "Insulin Degludec + Liraglutide (Xultophy/iDegLira)", detail: "Degludec + Liraglutide in single pen; DUAL trials: superior to either component alone" }
+        ],
+        clinicalPearl: "Excellent intensification strategy post-basal insulin. Less weight gain, less hypoglycemia, and fewer injections than basal-bolus. Cost is a barrier."
+      }
+    ]
+  }
+];
+
+// ===== STATE =====
+let activeCategory = "all";
+let searchTerm = "";
+let expandedCards = new Set();
+
+// ===== DEFAULT CONFIG =====
+const defaultConfig = {
+  main_title: "Anti-Diabetic Drugs",
+  subtitle: "Complete Pharmacological Classification & Clinical Reference",
+  background_color: "#f0f4f8",
+  surface_color: "#ffffff",
+  text_color: "#0f172a",
+  primary_action_color: "#2563eb",
+  secondary_action_color: "#64748b",
+  font_family: "DM Sans",
+  font_size: 15
+};
+
+// ===== RENDER FUNCTIONS =====
+function renderCategoryTabs() {
+  const container = document.getElementById("categoryTabs");
+  const config = window.elementSdk?.config || defaultConfig;
+  const allCount = DRUG_DATA.reduce((s, c) => s + c.subcategories.reduce((s2, sc) => s2 + sc.drugs.length, 0), 0);
+
+  let html = `<button onclick="setCategory('all')" class="category-btn flex-shrink-0 px-4 py-2 rounded-xl text-sm font-600 border ${activeCategory === 'all' ? 'active' : ''}" style="background:${activeCategory === 'all' ? config.primary_action_color || defaultConfig.primary_action_color : config.surface_color || defaultConfig.surface_color}; color:${activeCategory === 'all' ? '#fff' : config.text_color || defaultConfig.text_color}; border-color:${activeCategory === 'all' ? 'transparent' : '#e2e8f0'};">All (${allCount})</button>`;
+
+  DRUG_DATA.forEach(cat => {
+    const count = cat.subcategories.reduce((s, sc) => s + sc.drugs.length, 0);
+    const isActive = activeCategory === cat.id;
+    html += `<button onclick="setCategory('${cat.id}')" class="category-btn flex-shrink-0 px-4 py-2 rounded-xl text-sm font-500 border whitespace-nowrap ${isActive ? 'active' : ''}" style="background:${isActive ? cat.color : config.surface_color || defaultConfig.surface_color}; color:${isActive ? '#fff' : config.text_color || defaultConfig.text_color}; border-color:${isActive ? 'transparent' : '#e2e8f0'};">${cat.icon} ${cat.category.split('(')[0].trim().split('—')[0].trim()} (${count})</button>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderStats() {
+  const container = document.getElementById("statsBar");
+  const config = window.elementSdk?.config || defaultConfig;
+  const filtered = getFilteredData();
+  const totalDrugs = filtered.reduce((s, c) => s + c.subcategories.reduce((s2, sc) => s2 + sc.drugs.length, 0), 0);
+  const totalClasses = filtered.reduce((s, c) => s + c.subcategories.length, 0);
+  const totalCats = filtered.length;
+
+  container.innerHTML = `
+    <span class="px-3 py-1.5 rounded-lg font-600" style="background:${defaultConfig.surface_color}; color:${config.primary_action_color || defaultConfig.primary_action_color}; border:1px solid #e2e8f0;">${totalCats} Categories</span>
+    <span class="px-3 py-1.5 rounded-lg font-600" style="background:${defaultConfig.surface_color}; color:#059669; border:1px solid #e2e8f0;">${totalClasses} Subclasses</span>
+    <span class="px-3 py-1.5 rounded-lg font-600" style="background:${defaultConfig.surface_color}; color:#d97706; border:1px solid #e2e8f0;">${totalDrugs} Drugs</span>
+  `;
+}
+
+function getFilteredData() {
+  let data = DRUG_DATA;
+  if (activeCategory !== "all") data = data.filter(c => c.id === activeCategory);
+  if (!searchTerm) return data;
+
+  const q = searchTerm.toLowerCase();
+  return data.map(cat => {
+    const filteredSubs = cat.subcategories.map(sc => {
+      const filteredDrugs = sc.drugs.filter(d =>
+        d.name.toLowerCase().includes(q) || d.detail.toLowerCase().includes(q)
+      );
+      const scMatch = sc.name.toLowerCase().includes(q) || sc.moa.toLowerCase().includes(q) || (sc.clinicalPearl && sc.clinicalPearl.toLowerCase().includes(q));
+      if (scMatch) return sc;
+      if (filteredDrugs.length > 0) return { ...sc, drugs: filteredDrugs };
+      return null;
+    }).filter(Boolean);
+    if (filteredSubs.length > 0) return { ...cat, subcategories: filteredSubs };
+    if (cat.category.toLowerCase().includes(q)) return cat;
+    return null;
+  }).filter(Boolean);
+}
+
+function renderContent() {
+  const config = window.elementSdk?.config || defaultConfig;
+  const fontFamily = config.font_family || defaultConfig.font_family;
+  const data = getFilteredData();
+  const container = document.getElementById("drugContent");
+  const noResults = document.getElementById("noResults");
+
+  if (data.length === 0) {
+    container.innerHTML = "";
+    noResults.classList.remove("hidden");
+    return;
+  }
+  noResults.classList.add("hidden");
+
+  let staggerIdx = 0;
+  let html = "";
+  data.forEach(cat => {
+    staggerIdx++;
+    const si = Math.min(staggerIdx, 5);
+    html += `<div class="fade-in stagger-${si}">`;
+    html += `<div class="flex items-center gap-3 mb-3 mt-2"><span class="text-2xl">${cat.icon}</span><h2 class="font-display text-xl font-700" style="color:${cat.color}; font-family:'Playfair Display',serif;">${cat.category}</h2></div>`;
+
+    cat.subcategories.forEach(sc => {
+      const cardId = cat.id + "_" + sc.name.replace(/[^a-zA-Z0-9]/g, "_");
+      const isExpanded = expandedCards.has(cardId);
+
+      html += `<div class="drug-card rounded-2xl p-4 sm:p-5 mb-3" style="background:${config.surface_color || defaultConfig.surface_color}; border-left-color:${cat.color}; box-shadow:0 1px 4px rgba(0,0,0,0.06);">`;
+
+      // Subclass header
+      html += `<div class="flex items-start justify-between gap-3 cursor-pointer" onclick="toggleCard('${cardId}')">`;
+      html += `<div class="flex-1 min-w-0"><h3 class="font-700 text-base sm:text-lg leading-snug" style="color:${config.text_color || defaultConfig.text_color}; font-family:'${fontFamily}',sans-serif;">${highlightSearch(sc.name)}</h3>`;
+      if (sc.onset && sc.onset !== "—") {
+        html += `<div class="flex flex-wrap gap-2 mt-2">`;
+        if (sc.onset) html += `<span class="moa-tag" style="background:${cat.colorLight}; color:${cat.color};">Onset: ${sc.onset}</span>`;
+        if (sc.peak) html += `<span class="moa-tag" style="background:${cat.colorLight}; color:${cat.color};">Peak: ${sc.peak}</span>`;
+        if (sc.duration) html += `<span class="moa-tag" style="background:${cat.colorLight}; color:${cat.color};">Duration: ${sc.duration}</span>`;
+        html += `</div>`;
+      }
+      html += `</div>`;
+      html += `<button class="expand-btn flex-shrink-0 mt-1 ${isExpanded ? 'rotated' : ''}" style="color:${config.secondary_action_color || defaultConfig.secondary_action_color};"><i data-lucide="chevron-down" style="width:20px;height:20px;"></i></button>`;
+      html += `</div>`;
+
+      // MOA
+      html += `<div class="mt-3 p-3 rounded-xl text-xs sm:text-sm leading-relaxed" style="background:${cat.colorLight}; color:${cat.color}; border:1px solid ${cat.color}22;"><strong>MOA:</strong> ${highlightSearch(sc.moa)}</div>`;
+
+      // Expandable drug list
+      html += `<div style="display:${isExpanded ? 'block' : 'none'};" id="card_${cardId}">`;
+
+      // Drugs table
+      html += `<div class="mt-3 space-y-2">`;
+      sc.drugs.forEach(d => {
+        html += `<div class="flex items-start gap-2 p-2.5 rounded-xl" style="background:${config.background_color || defaultConfig.background_color};">`;
+        html += `<span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background:${cat.color};"></span>`;
+        html += `<div class="min-w-0"><p class="font-600 text-sm" style="color:${config.text_color || defaultConfig.text_color};">${highlightSearch(d.name)}</p>`;
+        html += `<p class="text-xs mt-0.5 leading-relaxed" style="color:${config.secondary_action_color || defaultConfig.secondary_action_color};">${highlightSearch(d.detail)}</p></div></div>`;
+      });
+      html += `</div>`;
+
+      // Clinical pearl
+      if (sc.clinicalPearl) {
+        html += `<div class="mt-3 p-3 rounded-xl text-xs sm:text-sm leading-relaxed flex items-start gap-2" style="background:#fffbeb; border:1px solid #fcd34d44; color:#92400e;">`;
+        html += `<span class="flex-shrink-0 text-base">💡</span><div><strong>Clinical Pearl:</strong> ${highlightSearch(sc.clinicalPearl)}</div></div>`;
+      }
+
+      html += `</div>`; // end expandable
+      html += `</div>`; // end card
+    });
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+  lucide.createIcons();
+}
+
+function highlightSearch(text) {
+  if (!searchTerm) return text;
+  const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  return text.replace(regex, '<mark style="background:#fde68a;border-radius:2px;padding:0 1px;">$1</mark>');
+}
+
+function setCategory(id) {
+  activeCategory = id;
+  renderCategoryTabs();
+  renderStats();
+  renderContent();
+}
+
+function toggleCard(cardId) {
+  if (expandedCards.has(cardId)) expandedCards.delete(cardId);
+  else expandedCards.add(cardId);
+  renderContent();
+}
+
+// ===== SEARCH =====
+let searchTimeout;
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchTerm = e.target.value.trim();
+    if (searchTerm) expandedCards = new Set(getAllCardIds());
+    renderStats();
+    renderContent();
+  }, 200);
+});
+
+function getAllCardIds() {
+  const ids = [];
+  DRUG_DATA.forEach(cat => cat.subcategories.forEach(sc => {
+    ids.push(cat.id + "_" + sc.name.replace(/[^a-zA-Z0-9]/g, "_"));
+  }));
+  return ids;
+}
+
+// ===== ELEMENT SDK =====
+function applyConfig(config) {
+  const bg = config.background_color || defaultConfig.background_color;
+  const textColor = config.text_color || defaultConfig.text_color;
+  const font = config.font_family || defaultConfig.font_family;
+  const fontSize = config.font_size || defaultConfig.font_size;
+
+  document.getElementById("app").style.background = bg;
+  document.getElementById("mainTitle").textContent = config.main_title || defaultConfig.main_title;
+  document.getElementById("subtitle").textContent = config.subtitle || defaultConfig.subtitle;
+
+  document.getElementById("mainTitle").style.fontFamily = `'Playfair Display', ${font}, serif`;
+  document.body.style.fontFamily = `'${font}', 'DM Sans', sans-serif`;
+  document.body.style.fontSize = `${fontSize}px`;
+
+  renderCategoryTabs();
+  renderStats();
+  renderContent();
+}
+
+// Initial render
+renderCategoryTabs();
+renderStats();
+renderContent();
+lucide.createIcons();
+</script>
+</body>
+</html>
