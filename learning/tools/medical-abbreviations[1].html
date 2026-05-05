@@ -1,0 +1,615 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Medical Abbreviations | Clinical Terms & Short Forms | Deep Medicine</title> <meta name="description" content="Comprehensive list of medical abbreviations and clinical short forms used in practice, documentation, and exams."> <link rel="canonical" href="https://deepmedicine.in/learning/tools/medical-abbreviations"> <!-- Open Graph --> <meta property="og:title" content="Medical Abbreviations | Deep Medicine"> <meta property="og:description" content="Clinical abbreviations and short forms for quick reference and better understanding."> <meta property="og:image" content="https://deepmedicine.in/images/medical-abbreviations.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+.font-display { font-family: 'Playfair Display', Georgia, serif; }
+.cat-btn.active { transform: scale(1.02); }
+.abbr-card { transition: all 0.25s ease; }
+.abbr-card:hover { transform: translateY(-2px); }
+.fade-in { animation: fadeIn 0.4s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
+.search-glow:focus { box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+.hero-pattern {
+  background-image: radial-gradient(circle at 20% 50%, rgba(15,118,110,0.06) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(15,118,110,0.04) 0%, transparent 40%);
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto bg-stone-50 hero-pattern">
+   <!-- Header -->
+   <header class="w-full border-b border-stone-200" style="background: linear-gradient(135deg, #0f4f47 0%, #0f766e 50%, #0d9488 100%);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 text-center">
+     <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur rounded-full px-4 py-1.5 mb-4">
+      <i data-lucide="stethoscope" style="width:16px;height:16px;color:#99f6e4"></i> <span class="text-teal-100 text-xs font-medium tracking-wide uppercase">MBBS · MD Reference</span>
+     </div>
+     <h1 id="pageTitle" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">Medical Abbreviations</h1>
+     <p id="pageSubtitle" class="text-teal-100 text-base sm:text-lg max-w-xl mx-auto">Comprehensive Reference Guide for Healthcare Professionals</p><!-- Search -->
+     <div class="mt-6 max-w-lg mx-auto relative">
+      <i data-lucide="search" style="width:18px;height:18px;" class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none"></i> <input id="searchInput" type="text" placeholder="Search abbreviations... (e.g., ECG, BP, COPD)" class="w-full pl-11 pr-10 py-3 rounded-xl bg-white/95 border-0 text-stone-800 placeholder-stone-400 text-sm search-glow focus:outline-none"> <button id="clearSearch" class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 hidden" onclick="document.getElementById('searchInput').value='';this.classList.add('hidden');filterAbbreviations();"> <i data-lucide="x" style="width:16px;height:16px;"></i> </button>
+     </div>
+     <div id="resultCount" class="mt-3 text-teal-200 text-xs"></div>
+    </div>
+   </header><!-- Category Tabs -->
+   <nav class="w-full bg-white border-b border-stone-200 sticky top-0 z-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+     <div id="catTabs" class="flex gap-2 py-3 overflow-x-auto no-scrollbar"></div>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    <div id="contentArea"></div>
+   </main><!-- Footer -->
+   <footer class="w-full border-t border-stone-200 bg-white mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-center">
+     <p class="text-stone-400 text-xs">For educational reference only · Not a substitute for clinical judgment</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// ─── Data ───
+const categories = [
+  { id: "all", label: "All", icon: "layout-grid" },
+  { id: "general", label: "General", icon: "clipboard-list" },
+  { id: "cardio", label: "Cardiology", icon: "heart-pulse" },
+  { id: "pulm", label: "Pulmonology", icon: "wind" },
+  { id: "neuro", label: "Neurology", icon: "brain" },
+  { id: "gi", label: "Gastro", icon: "apple" },
+  { id: "endo", label: "Endocrine", icon: "activity" },
+  { id: "renal", label: "Renal", icon: "droplets" },
+  { id: "ortho", label: "Ortho", icon: "bone" },
+  { id: "pharm", label: "Pharmacology", icon: "pill" },
+  { id: "lab", label: "Lab & Dx", icon: "flask-conical" },
+  { id: "emergency", label: "Emergency", icon: "siren" },
+  { id: "surgery", label: "Surgery", icon: "scissors" },
+  { id: "obs", label: "OB/GYN", icon: "baby" },
+  { id: "psych", label: "Psychiatry", icon: "smile" }
+];
+
+const abbreviations = [
+  // General (30 entries)
+  { abbr: "Rx", full: "Prescription / Treatment", desc: "Denotes a medical prescription. Derived from the Latin 'recipe' meaning 'take thou'. Written at the top of every prescription order.", cat: "general", usage: "Rx: Tab. Amoxicillin 500mg TID × 7 days" },
+  { abbr: "Dx", full: "Diagnosis", desc: "The identification of a disease or condition by evaluating symptoms, signs, and investigation results.", cat: "general", usage: "Dx: Community-acquired pneumonia" },
+  { abbr: "Tx", full: "Treatment / Therapy", desc: "Refers to the management plan including medications, procedures, and supportive care for a condition.", cat: "general", usage: "Tx: IV antibiotics + supportive care" },
+  { abbr: "Hx", full: "History", desc: "The patient's medical history including presenting complaints, past medical history, family history, drug history, and social history.", cat: "general", usage: "Hx: 3-day fever with productive cough" },
+  { abbr: "Sx", full: "Symptoms", desc: "Subjective complaints reported by the patient such as pain, nausea, dyspnea, or fatigue.", cat: "general", usage: "Sx: Chest pain radiating to left arm" },
+  { abbr: "Px", full: "Physical Examination / Prognosis", desc: "Refers to either the clinical examination findings or the expected outcome of a disease.", cat: "general", usage: "Px: Bilateral basal crepitations" },
+  { abbr: "DDx", full: "Differential Diagnosis", desc: "A list of possible diagnoses ranked by probability based on clinical presentation and investigations.", cat: "general", usage: "DDx: MI, PE, aortic dissection, GERD" },
+  { abbr: "SOB", full: "Shortness of Breath", desc: "Subjective sensation of difficulty breathing or breathlessness. May indicate cardiac, pulmonary, or metabolic etiology.", cat: "general", usage: "Patient c/o SOB on exertion × 2 weeks" },
+  { abbr: "c/o", full: "Complaining Of", desc: "Used when documenting the patient's chief complaint or presenting symptoms.", cat: "general", usage: "Pt c/o severe headache since morning" },
+  { abbr: "NPO", full: "Nil Per Os (Nothing By Mouth)", desc: "Patient is to receive nothing orally, typically ordered before surgery or procedures requiring general anesthesia.", cat: "general", usage: "Keep NPO from midnight for OT in AM" },
+  { abbr: "PRN", full: "Pro Re Nata (As Needed)", desc: "Medication to be administered only when required based on patient's symptoms, not on a fixed schedule.", cat: "general", usage: "Paracetamol 500mg PO PRN for fever" },
+  { abbr: "STAT", full: "Statim (Immediately)", desc: "Order to be carried out immediately without delay. Used in urgent clinical situations.", cat: "general", usage: "Inj. Adrenaline 0.5mg IM STAT" },
+  { abbr: "OPD", full: "Outpatient Department", desc: "Hospital department where patients receive diagnosis and treatment without being admitted.", cat: "general", usage: "Follow up in OPD after 1 week" },
+  { abbr: "IPD", full: "Inpatient Department", desc: "Hospital department for admitted patients requiring continuous care and monitoring.", cat: "general", usage: "Admit to IPD for IV antibiotics" },
+  { abbr: "ADL", full: "Activities of Daily Living", desc: "Basic self-care tasks: bathing, dressing, eating, toileting, transferring, and continence. Key for functional assessment.", cat: "general", usage: "Patient independent in all ADLs" },
+  { abbr: "IADL", full: "Instrumental ADL", desc: "More complex activities beyond basic ADL: shopping, cooking, housekeeping, financial management, medication management, phone use.", cat: "general", usage: "Patient requires assistance with IADLs" },
+  { abbr: "Pt", full: "Patient", desc: "Individual receiving medical treatment or care.", cat: "general", usage: "Pt is a 65-year-old male" },
+  { abbr: "Yr/Yrs", full: "Year / Years", desc: "Unit of time measurement in age documentation.", cat: "general", usage: "Patient is 45 yrs old" },
+  { abbr: "M/F", full: "Male / Female", desc: "Patient biological sex designation.", cat: "general", usage: "45M with HTN" },
+  { abbr: "DOB", full: "Date of Birth", desc: "The date when a person was born. Used for age calculation and identification.", cat: "general", usage: "DOB: 15/06/1978" },
+  { abbr: "BMI", full: "Body Mass Index", desc: "Weight (kg) / Height (m²). Classification: <18.5 (underweight), 18.5–24.9 (normal), 25–29.9 (overweight), ≥30 (obese).", cat: "general", usage: "BMI 32 — obesity class I" },
+  { abbr: "VS", full: "Vital Signs", desc: "Core measurements: Temperature (Temp), Pulse rate (PR), Respiratory rate (RR), Blood pressure (BP), and oxygen saturation (SpO₂).", cat: "general", usage: "VS: Temp 38.5°C, PR 92, RR 24, BP 138/86, SpO₂ 95%" },
+  { abbr: "O/E", full: "On Examination", desc: "Clinical findings during physical examination of the patient.", cat: "general", usage: "O/E: Pallor present, icterus absent, petechiae on forearms" },
+  { abbr: "CVA", full: "Costovertebral Angle", desc: "Anatomical region where the 12th rib meets the vertebral column. Tenderness (CVA tenderness) suggests kidney pathology.", cat: "general", usage: "Bilingual CVA tenderness — pyelonephritis suspected" },
+  { abbr: "RUQ", full: "Right Upper Quadrant", desc: "Anatomical region of abdomen: houses liver, gallbladder, right kidney.", cat: "general", usage: "RUQ pain with Murphy's sign positive" },
+  { abbr: "LUQ", full: "Left Upper Quadrant", desc: "Anatomical region: houses spleen, left kidney, left colon.", cat: "general", usage: "LUQ tenderness on palpation" },
+  { abbr: "RLQ", full: "Right Lower Quadrant", desc: "Anatomical region: houses appendix, cecum, right ovary/testis.", cat: "general", usage: "RLQ pain with positive McBurney's point — appendicitis" },
+  { abbr: "LLQ", full: "Left Lower Quadrant", desc: "Anatomical region: houses sigmoid colon, left ovary/testis.", cat: "general", usage: "LLQ pain — diverticulitis suspected" },
+  { abbr: "Hb", full: "Hemoglobin", desc: "Iron-containing protein in RBCs transporting oxygen. Normal: 13.5–17.5 g/dL (males), 12–15.5 g/dL (females).", cat: "general", usage: "Hb 9.2 g/dL — mild anemia" },
+  { abbr: "WBC", full: "White Blood Cell Count", desc: "Total count of white cells per microliter. Normal: 4.5–11.0 × 10⁹/L. Elevated in infection, leukemia, stress.", cat: "general", usage: "WBC 15.2 × 10⁹/L — leukocytosis" },
+
+  // Cardiology (35 entries)
+  { abbr: "ECG/EKG", full: "Electrocardiogram", desc: "A 12-lead recording of the heart's electrical activity. Essential for diagnosing arrhythmias, ischemia, MI, and conduction defects.", cat: "cardio", usage: "ECG shows ST elevation in leads II, III, aVF" },
+  { abbr: "MI", full: "Myocardial Infarction", desc: "Death of myocardial tissue due to prolonged ischemia. Classified as STEMI or NSTEMI based on ECG findings. Diagnosed by troponin elevation + clinical presentation.", cat: "cardio", usage: "Acute anterior STEMI — activate cath lab" },
+  { abbr: "BP", full: "Blood Pressure", desc: "Force exerted by circulating blood on vessel walls. Measured as systolic/diastolic in mmHg. Normal: <120/80 mmHg.", cat: "cardio", usage: "BP: 150/95 mmHg — Stage 2 HTN" },
+  { abbr: "HTN", full: "Hypertension", desc: "Sustained elevation of BP ≥140/90 mmHg. Major risk factor for stroke, MI, CKD, and retinopathy. Classified as primary (essential) or secondary.", cat: "cardio", usage: "HTN managed with Amlodipine 5mg OD" },
+  { abbr: "CHF", full: "Congestive Heart Failure", desc: "Heart's inability to pump adequate blood. Presents with dyspnea, orthopnea, PND, pedal edema, and raised JVP. Classified by NYHA class I–IV.", cat: "cardio", usage: "CHF NYHA Class III — started on Furosemide + ACE-I" },
+  { abbr: "AF/AFib", full: "Atrial Fibrillation", desc: "Irregularly irregular heart rhythm with absent P waves on ECG. Most common sustained arrhythmia. Increases stroke risk 5-fold.", cat: "cardio", usage: "New-onset AFib — rate control with Metoprolol, CHA₂DS₂-VASc = 4" },
+  { abbr: "CAD", full: "Coronary Artery Disease", desc: "Atherosclerotic narrowing of coronary arteries causing reduced myocardial perfusion. Presents as angina, MI, or sudden death.", cat: "cardio", usage: "Triple-vessel CAD — referred for CABG" },
+  { abbr: "CABG", full: "Coronary Artery Bypass Grafting", desc: "Surgical revascularization using grafts (LIMA, SVG) to bypass stenosed coronary arteries. Indicated in left main disease, triple-vessel CAD.", cat: "cardio", usage: "CABG ×3 — LIMA to LAD, SVG to RCA & OM" },
+  { abbr: "PCI", full: "Percutaneous Coronary Intervention", desc: "Catheter-based procedure to open blocked coronary arteries using balloon angioplasty ± stent placement.", cat: "cardio", usage: "Primary PCI to LAD with DES placement" },
+  { abbr: "JVP", full: "Jugular Venous Pressure", desc: "Indirect measure of right atrial pressure. Elevated JVP (>4 cm above sternal angle) indicates fluid overload or right heart failure.", cat: "cardio", usage: "JVP raised 8 cm — consistent with right heart failure" },
+  { abbr: "DVT", full: "Deep Vein Thrombosis", desc: "Blood clot in deep veins, usually lower limbs. Risk factors: immobility, surgery, malignancy, OCP. Can embolize causing PE.", cat: "cardio", usage: "Left leg DVT confirmed on Doppler — started Enoxaparin" },
+  { abbr: "STEMI", full: "ST-Elevation Myocardial Infarction", desc: "Acute MI with ST segment elevation on ECG indicating complete coronary occlusion. Time-critical: primary PCI preferred within 120 minutes.", cat: "cardio", usage: "Anterior STEMI — door-to-balloon 90 minutes" },
+  { abbr: "NSTEMI", full: "Non-ST Elevation MI", desc: "Acute coronary syndrome without ST elevation. T-wave inversion or ST depression present. Managed with antiplatelet therapy + anticoagulation.", cat: "cardio", usage: "NSTEMI with positive troponin — DAPT + atorvastatin" },
+  { abbr: "ACS", full: "Acute Coronary Syndrome", desc: "Umbrella term for unstable angina, NSTEMI, and STEMI. Characterized by acute myocardial ischemia.", cat: "cardio", usage: "ACS — tropism repeated at 3 and 6 hours" },
+  { abbr: "Angina", full: "Angina Pectoris", desc: "Chest pain from myocardial ischemia. Stable: predictable with exertion. Unstable: new-onset, at rest, or increasing frequency.", cat: "cardio", usage: "Unstable angina — admission for observation" },
+  { abbr: "NYHA", full: "New York Heart Association", desc: "Classification of heart failure severity: Class I (no symptoms), II (symptoms with exertion), III (symptoms at rest with activity), IV (symptoms at rest).", cat: "cardio", usage: "CHF NYHA Class II — managed with diuretics" },
+  { abbr: "LVEF", full: "Left Ventricular Ejection Fraction", desc: "Percentage of blood ejected from left ventricle with each heartbeat. Normal >50%. HFrEF <40%, HFmrEF 41–49%, HFpEF >50%.", cat: "cardio", usage: "LVEF 35% — reduced EF heart failure" },
+  { abbr: "Echo", full: "Echocardiography", desc: "Ultrasound imaging of the heart. Transthoracic echo (TTE) non-invasive; transesophageal echo (TEE) more detailed. Assesses structure, function, and flow.", cat: "cardio", usage: "Echo shows EF 40% with global hypokinesis" },
+  { abbr: "TEE", full: "Transesophageal Echocardiography", desc: "Ultrasound probe advanced into esophagus for detailed cardiac imaging. Gold standard for endocarditis, thrombus, and aortic disease.", cat: "cardio", usage: "TEE confirms thrombus in left atrial appendage" },
+  { abbr: "Troponin", full: "Cardiac Troponin", desc: "Cardiac-specific proteins elevated 3–4 hours after MI. Most sensitive and specific marker of myocardial necrosis. High-sensitivity troponin improves early rule-out.", cat: "cardio", usage: "Troponin I 2.5 ng/mL — elevated, compatible with MI" },
+  { abbr: "CK-MB", full: "Creatine Kinase–Myocardial Band", desc: "Myocardial enzyme elevated in MI, peaks at 24–48 hours. Less specific than troponin but useful in older protocols.", cat: "cardio", usage: "CK-MB 8.5 ng/mL with positive troponin" },
+  { abbr: "Dobutamine", full: "Dobutamine Stress Echo", desc: "Pharmacological stress test using dobutamine infusion to simulate exertion. Assesses inducible ischemia in patients unable to exercise.", cat: "cardio", usage: "Dobutamine stress echo reveals inducible ischemia in LAD territory" },
+  { abbr: "Holter", full: "Holter Monitor", desc: "Portable ECG recorder worn 24–48 hours to detect arrhythmias and ischemic episodes in ambulatory setting.", cat: "cardio", usage: "Holter monitor reveals 12 episodes of NSVT" },
+  { abbr: "HFrEF", full: "Heart Failure with Reduced Ejection Fraction", desc: "Systolic heart failure with LVEF ≤40%. Pathophysiology: reduced contractility. Managed with ACE-I/ARB, beta-blockers, and diuretics.", cat: "cardio", usage: "HFrEF due to ischemic cardiomyopathy" },
+  { abbr: "HFpEF", full: "Heart Failure with Preserved EF", desc: "Diastolic heart failure with LVEF >50%. Pathophysiology: impaired relaxation and compliance. Often in HTN, DM, obesity.", cat: "cardio", usage: "HFpEF with severe diastolic dysfunction" },
+  { abbr: "PND", full: "Paroxysmal Nocturnal Dyspnea", desc: "Sudden awakening at night with severe dyspnea and orthopnea. Classic sign of acute left heart failure or pulmonary edema.", cat: "cardio", usage: "PND necessitating sleeping on 3–4 pillows" },
+  { abbr: "Orthopnea", full: "Orthopnea", desc: "Dyspnea when lying flat. Relieved by sitting up. Indicates elevated pulmonary capillary wedge pressure.", cat: "cardio", usage: "Orthopnea requiring 2 pillows" },
+  { abbr: "Preload", full: "Ventricular Preload", desc: "Degree of ventricular fiber stretch before contraction. Determined by venous return and intravascular volume.", cat: "cardio", usage: "Increased preload from fluid overload" },
+  { abbr: "Afterload", full: "Ventricular Afterload", desc: "Resistance against which ventricle must contract. Determined by peripheral vascular resistance and aortic pressure.", cat: "cardio", usage: "Increased afterload in uncontrolled HTN" },
+  { abbr: "SVG", full: "Saphenous Vein Graft", desc: "Venous conduit harvested from leg and used in CABG for coronary revascularization.", cat: "cardio", usage: "SVG to RCA patent on angiography" },
+  { abbr: "LIMA", full: "Left Internal Mammary Artery", desc: "Arterial graft with excellent long-term patency used in CABG, typically to LAD.", cat: "cardio", usage: "LIMA-to-LAD graft remains patent" },
+  { abbr: "LAD", full: "Left Anterior Descending Artery", desc: "Coronary artery supplying anterior wall and interventricular septum. Most commonly involved in anterior MI.", cat: "cardio", usage: "LAD 90% stenosis — PCI indicated" },
+  { abbr: "RCA", full: "Right Coronary Artery", desc: "Coronary artery supplying inferior wall. In 80% supplies AV node and 55% supplies SA node.", cat: "cardio", usage: "RCA occlusion — inferior STEMI" },
+  { abbr: "LCx", full: "Left Circumflex Artery", desc: "Coronary artery supplying lateral wall and inferior wall (in some). Involved in lateral MI.", cat: "cardio", usage: "LCx stenosis — lateral NSTEMI" },
+  { abbr: "Stent", full: "Coronary Stent", desc: "Metal scaffold deployed during PCI. BMS (bare metal): 1-month dual antiplatelet. DES (drug-eluting): 6–12 months DAPT.", cat: "cardio", usage: "DES placed to RCA, DAPT for 12 months" },
+
+  // Pulmonology (35 entries)
+  { abbr: "COPD", full: "Chronic Obstructive Pulmonary Disease", desc: "Progressive lung disease with irreversible airflow obstruction. Causes: smoking (90%), alpha-1 antitrypsin deficiency. Emphysema + chronic bronchitis. Gold stages I–IV by FEV1.", cat: "pulm", usage: "COPD GOLD Stage III — FEV1 35%, started triple therapy" },
+  { abbr: "Asthma", full: "Asthma", desc: "Chronic inflammatory airway disease with reversible obstruction. Presents with wheeze, dyspnea, cough, chest tightness. Triggered by allergens, exercise, viral infection.", cat: "pulm", usage: "Persistent asthma — ICS/LABA inhaler maintenance, SABA PRN" },
+  { abbr: "FEV1", full: "Forced Expiratory Volume in 1 Second", desc: "Volume of air exhaled in first second of forced expiration. Normal >80% predicted. Marker of airway obstruction severity. Key in COPD/asthma staging.", cat: "pulm", usage: "FEV1 42% predicted — moderate obstruction" },
+  { abbr: "FVC", full: "Forced Vital Capacity", desc: "Total air exhaled after maximal inspiration. FEV1/FVC <0.70 = obstruction. Reduced FVC = restriction.", cat: "pulm", usage: "FEV1/FVC 0.58 — obstructive pattern" },
+  { abbr: "PFT", full: "Pulmonary Function Test", desc: "Spirometry measuring lung volumes and flow rates. Assesses obstruction vs restriction. Bronchodilator challenge tests reversibility.", cat: "pulm", usage: "PFT: obstructive pattern, improves with bronchodilator — asthma suspected" },
+  { abbr: "ABG", full: "Arterial Blood Gas", desc: "Measures pH, PaCO2, PaO2, HCO3, base excess from arterial blood. Assesses oxygenation, ventilation, acid-base status.", cat: "pulm", usage: "ABG: pH 7.28, PaCO2 55, PaO2 62 — respiratory acidosis with hypoxia" },
+  { abbr: "SpO2", full: "Oxygen Saturation (Pulse Oximetry)", desc: "Percentage of hemoglobin saturated with oxygen. Normal >95%. Measured non-invasively via pulse oximeter. Estimates PaO2.", cat: "pulm", usage: "SpO2 88% on room air — mild hypoxemia" },
+  { abbr: "Hypoxia", full: "Hypoxemia (Low Blood Oxygen)", desc: "PaO2 <60 mmHg (or SpO2 <90% on room air). Causes: hypoventilation, diffusion impairment, V/Q mismatch, shunting, low FiO2.", cat: "pulm", usage: "Hypoxemia PaO2 55 — supplemental O2 initiated" },
+  { abbr: "Hypercapnia", full: "Hypercapnia (High CO2)", desc: "PaCO2 >50 mmHg. Causes: hypoventilation (depression, obesity, NMD), increased production. Can lead to respiratory acidosis.", cat: "pulm", usage: "Hypercapnia PaCO2 62 — NIV initiated" },
+  { abbr: "Pneumonia", full: "Pneumonia", desc: "Acute lower respiratory infection with consolidation on imaging. CAP (community-acquired), HAP (hospital-acquired), VAP (ventilator-associated). Presents with fever, cough, dyspnea.", cat: "pulm", usage: "CAP — ceftriaxone + azithromycin empirically" },
+  { abbr: "Bronchitis", full: "Acute Bronchitis", desc: "Inflammation of bronchi from viral infection. Presents with productive cough lasting 2–3 weeks. Self-limited; manage with supportive care.", cat: "pulm", usage: "Acute bronchitis — cough suppressant, monitor for secondary infection" },
+  { abbr: "Bronchiectasis", full: "Bronchiectasis", desc: "Permanent dilation of bronchi causing chronic productive cough, recurrent infections. Causes: CF, post-infection, immunodeficiency. Managed with chest physiotherapy, antibiotics.", cat: "pulm", usage: "Non-CF bronchiectasis — inhaled tobramycin, chest PT" },
+  { abbr: "Cystic Fibrosis", full: "Cystic Fibrosis (CF)", desc: "Autosomal recessive genetic disorder (CFTR mutation) causing thick, viscous secretions in lungs, GI tract, pancreas. Progressive lung disease, exocrine pancreatic insufficiency.", cat: "pulm", usage: "CF — IVT modulator (Ivacaftor), daily airway clearance, pancreatic enzymes" },
+  { abbr: "Pulmonary Edema", full: "Pulmonary Edema (Acute)", desc: "Fluid accumulation in lung interstitium/alveoli. Cardiogenic (elevated pulmonary capillary wedge pressure from CHF) or non-cardiogenic (increased capillary permeability, decreased oncotic pressure).", cat: "pulm", usage: "Acute cardiogenic pulmonary edema — IV furosemide, NIV, afterload reduction" },
+  { abbr: "PE", full: "Pulmonary Embolism", desc: "Blood clot in pulmonary artery causing acute right heart strain. Presents with dyspnea, chest pain, tachycardia. CTPA gold standard for diagnosis.", cat: "pulm", usage: "PE — anticoagulation with LMWH, thrombolysis if massive" },
+  { abbr: "CTPA", full: "CT Pulmonary Angiography", desc: "Imaging with IV contrast to visualize pulmonary arteries. Gold standard for PE diagnosis. Identifies thrombus, assesses right heart strain.", cat: "pulm", usage: "CTPA positive for saddle embolus — anticoagulation started" },
+  { abbr: "Pneumothorax", full: "Pneumothorax", desc: "Air in pleural space causing lung collapse. Spontaneous (primary/secondary), traumatic, iatrogenic. Presents with acute dyspnea, chest pain, decreased breath sounds.", cat: "pulm", usage: "Tension pneumothorax — needle decompression immediately, chest tube follow-up" },
+  { abbr: "Pleural Effusion", full: "Pleural Effusion", desc: "Abnormal fluid accumulation between pleura. Exudative (protein >30, LDH >60% serum, LDH/protein ratio >0.5) vs transudative. Causes: CHF, pneumonia, malignancy, PE.", cat: "pulm", usage: "Parapneumonic effusion — thoracentesis, culture, antibiotics" },
+  { abbr: "Empyema", full: "Empyema (Infected Pleural Effusion)", desc: "Pus in pleural space from infection. Complication of pneumonia. Presents with fever, pleuritic chest pain. Requires drainage + antibiotics.", cat: "pulm", usage: "Empyema — chest tube drainage, IV antibiotics × 3–4 weeks" },
+  { abbr: "Thoracentesis", full: "Thoracentesis", desc: "Needle aspiration of pleural fluid for diagnostic/therapeutic purposes. Analyzed for: cell count, glucose, LDH, protein, culture, cytology.", cat: "pulm", usage: "Thoracentesis: exudative fluid, positive culture for pneumococcus" },
+  { abbr: "Atelectasis", full: "Atelectasis (Collapse)", desc: "Partial or complete collapse of lung tissue. Causes: mucus plug, external compression, loss of surfactant. Presents with hypoxia, reduced breath sounds.", cat: "pulm", usage: "Post-op atelectasis — incentive spirometry, chest PT, suctioning" },
+  { abbr: "Aspiration", full: "Aspiration (Inhalation of Foreign Material)", desc: "Inhalation of gastric contents, food, or object into airways. Risk: altered consciousness, dysphagia. Aspiration pneumonia/pneumonitis follows.", cat: "pulm", usage: "Aspiration pneumonia — NPO, broad-spectrum antibiotics" },
+  { abbr: "Acute Respiratory Distress Syndrome", full: "ARDS", desc: "Acute onset bilateral infiltrates with hypoxia (PaO2/FiO2 <300). Caused by sepsis, aspiration, trauma, pancreatitis. Lung-protective ventilation required.", cat: "pulm", usage: "ARDS from sepsis — low-tidal volume ventilation (6 mL/kg), PEEP titration" },
+  { abbr: "Acute Respiratory Failure", full: "ARF", desc: "Inability to maintain adequate gas exchange. Type I (hypoxemic): PaO2 <60. Type II (hypercapnic): PaCO2 >50. Type III (peri-operative), Type IV (shock).", cat: "pulm", usage: "Type II respiratory failure — NIV initiated, monitor CO2" },
+  { abbr: "Mechanical Ventilation", full: "Mechanical Ventilation", desc: "Artificial support of breathing. Modes: assist-control (AC), synchronized IMV (SIMV), pressure support (PSV). Pressure- or volume-targeted.", cat: "pulm", usage: "AC mode 12 breaths/min, tidal volume 500 mL, FiO2 0.60" },
+  { abbr: "NIV", full: "Non-Invasive Ventilation", desc: "Ventilation without endotracheal intubation. CPAP (continuous positive airway pressure), BiPAP (bilevel). Used in COPD exacerbation, pulmonary edema, obesity hypoventilation.", cat: "pulm", usage: "BiPAP initiated for hypercapnic respiratory failure — IPAP 15, EPAP 8" },
+  { abbr: "PEEP", full: "Positive End-Expiratory Pressure", desc: "Positive pressure applied at end of expiration. Maintains alveolar recruitment. Standard 5 cmH2O; titrated in ARDS.", cat: "pulm", usage: "PEEP titrated to 12 cmH2O in ARDS" },
+  { abbr: "ILD", full: "Interstitial Lung Disease", desc: "Group of disorders affecting lung interstitium. Idiopathic pulmonary fibrosis (IPF), sarcoidosis, hypersensitivity pneumonitis. Presents with progressive dyspnea, restrictive pattern on PFT.", cat: "pulm", usage: "IPF diagnosed by HRCT — antifibrotic therapy (pirfenidone) started" },
+  { abbr: "IPF", full: "Idiopathic Pulmonary Fibrosis", desc: "Progressive interstitial lung fibrosis of unknown cause. Median survival 3–5 years. HRCT shows usual interstitial pneumonia (UIP) pattern.", cat: "pulm", usage: "IPF — pirfenidone 2403mg daily + supportive care" },
+  { abbr: "Sarcoidosis", full: "Sarcoidosis", desc: "Multisystem inflammatory disorder with non-caseating granulomas. Lungs (90%), skin, eyes, CNS involvement. Stage I–IV by chest X-ray. Often self-limited.", cat: "pulm", usage: "Pulmonary sarcoidosis Stage II — monitor, steroids if symptomatic" },
+  { abbr: "TB", full: "Tuberculosis", desc: "Infection from Mycobacterium tuberculosis. Primary TB (initial infection, usually asymptomatic), latent TB (positive TST/IGRA), active TB (symptomatic). Airborne transmission.", cat: "pulm", usage: "Active TB — RIPE (Rifampin, Isoniazid, Pyrazinamide, Ethambutol) × 2 months" },
+  { abbr: "Lung Cancer", full: "Lung Cancer", desc: "Most common cancer mortality. Types: NSCLC (85%, squamous, adenocarcinoma, large cell), SCLC (15%). Staged by TNM. Presents with cough, hemoptysis, chest pain.", cat: "pulm", usage: "NSCLC Stage IIIB — chemoradiation therapy (cisplatin + etoposide)" },
+  { abbr: "Hemoptysis", full: "Hemoptysis (Coughing Blood)", desc: "Expectoration of blood from airways. Massive (>200 mL in 24h) is life-threatening. Causes: infection (TB, pneumonia), malignancy, bronchiectasis, PE.", cat: "pulm", usage: "Hemoptysis from TB — chest imaging, bronchoscopy, airway management" },
+  { abbr: "Sleep Apnea", full: "Obstructive Sleep Apnea (OSA)", desc: "Recurrent airway collapse during sleep. Presents with snoring, witnessed apneas, daytime somnolence, nocturia, morning headache. Diagnosed by sleep study, treated with CPAP.", cat: "pulm", usage: "Severe OSA AHI 45 — CPAP therapy initiated, improved daytime alertness" },
+
+  // Neurology (30 entries)
+  { abbr: "CVA", full: "Cerebrovascular Accident (Stroke)", desc: "Acute focal neurological deficit due to cerebral ischemia (85%) or hemorrhage (15%). Time-critical: 'Time is Brain'. Door-to-needle <60 min for thrombolysis.", cat: "neuro", usage: "Acute ischemic CVA — tPA administered within window" },
+  { abbr: "TIA", full: "Transient Ischemic Attack", desc: "Brief episode of neurological dysfunction from focal cerebral ischemia without infarction. Symptoms resolve within 24 hours. High stroke risk follow-up needed.", cat: "neuro", usage: "TIA with right-sided weakness lasting 30 min — ABCD² score 5" },
+  { abbr: "GCS", full: "Glasgow Coma Scale", desc: "Standardized scale (3–15) assessing consciousness: Eye opening (1–4) + Verbal response (1–5) + Motor response (1–6). GCS ≤8 = severe, intubation indicated.", cat: "neuro", usage: "GCS: E2V3M5 = 10/15 — moderate head injury" },
+  { abbr: "CSF", full: "Cerebrospinal Fluid", desc: "Clear fluid surrounding brain and spinal cord. Obtained via lumbar puncture. Analysis includes cell count, protein, glucose, culture, and cytology.", cat: "neuro", usage: "CSF: WBC 500 (90% neutrophils), protein 180, glucose 20 — bacterial meningitis" },
+  { abbr: "LP", full: "Lumbar Puncture", desc: "Needle insertion into subarachnoid space (L3/L4 or L4/L5) to obtain CSF. Indicated in meningitis, SAH, MS, and idiopathic intracranial hypertension.", cat: "neuro", usage: "LP performed — opening pressure 28 cmH₂O" },
+  { abbr: "ICP", full: "Intracranial Pressure", desc: "Pressure within the cranial vault. Normal 5–15 mmHg. Elevated ICP presents with headache, vomiting, papilledema. Cushing's triad = late sign.", cat: "neuro", usage: "Raised ICP — Mannitol 20% 1g/kg IV + head elevation 30°" },
+  { abbr: "EEG", full: "Electroencephalogram", desc: "Recording of brain electrical activity via scalp electrodes. Essential for epilepsy diagnosis, classification, and monitoring.", cat: "neuro", usage: "EEG: 3 Hz spike-and-wave — absence seizures" },
+  { abbr: "SAH", full: "Subarachnoid Hemorrhage", desc: "Bleeding into subarachnoid space. Presents with worst headache of life, neck rigidity, photophobia. Caused by aneurysm rupture (80%), AVM, trauma.", cat: "neuro", usage: "NCCT confirms SAH — CTA shows anterior communicating aneurysm" },
+  { abbr: "ICH", full: "Intracerebral Hemorrhage", desc: "Bleeding into brain parenchyma. Causes: HTN (hypertensive ICH), amyloid angiopathy, anticoagulation, vascular lesions.", cat: "neuro", usage: "Hypertensive ICH in basal ganglia — supportive care + HTN management" },
+  { abbr: "SDH", full: "Subdural Hematoma", desc: "Bleeding between dura and brain. Acute (<3d): high mortality. Chronic (>20d): elderly, anticoagulated presenting with memory loss, gait disturbance.", cat: "neuro", usage: "Acute SDH on CT — neurosurgery consultation for evacuation" },
+  { abbr: "Epilepsy", full: "Epilepsy", desc: "Tendency to have recurrent, unprovoked seizures. Generalized (tonic-clonic, absence, myoclonic) vs focal. Diagnosed by seizure semiology + EEG.", cat: "neuro", usage: "Generalized tonic-clonic epilepsy — Levetiracetam 500mg BD" },
+  { abbr: "Status Epilepticus", full: "Status Epilepticus", desc: "Continuous seizure lasting >5 minutes or recurrent seizures without consciousness between. Life-threatening emergency. Treat with benzodiazepines + antiepileptics.", cat: "neuro", usage: "Status epilepticus — IV Lorazepam 4mg + IV phenytoin 18mg/kg" },
+  { abbr: "Migraine", full: "Migraine", desc: "Recurrent headache (4–72 hrs) with nausea, photophobia, phonophobia. Aura (visual, sensory) may precede. Treated with triptans, NSAIDs, preventive agents.", cat: "neuro", usage: "Migraine with aura — Sumatriptan 6mg SC acute + propranolol preventive" },
+  { abbr: "MS", full: "Multiple Sclerosis", desc: "Autoimmune CNS disease with demyelinating lesions. Relapsing-remitting (85%), primary progressive. Presents with optic neuritis, sensory loss, weakness.", cat: "neuro", usage: "MS relapse with optic neuritis — IV methylprednisolone 1g × 3 days" },
+  { abbr: "Parkinson's", full: "Parkinson's Disease", desc: "Neurodegenerative disease with dopaminergic neuron loss. Triad: rigidity, resting tremor, bradykinesia. Treated with dopamine agonists/levodopa.", cat: "neuro", usage: "Parkinson's disease — Levodopa/carbidopa initiated" },
+  { abbr: "ALS", full: "Amyotrophic Lateral Sclerosis", desc: "Progressive motor neuron disease with upper + lower motor neuron signs. Median survival 3–5 years. No cure; riluzole slows progression.", cat: "neuro", usage: "ALS — riluzole 50mg BD + multidisciplinary support" },
+  { abbr: "Dementia", full: "Dementia", desc: "Cognitive decline affecting memory, language, judgment. Alzheimer's (70%), vascular, Lewy body, frontotemporal. Diagnosed by cognitive testing + imaging.", cat: "neuro", usage: "Alzheimer's dementia — memantine + donepezil" },
+  { abbr: "Meningitis", full: "Meningitis", desc: "Inflammation of meninges. Bacterial (purulent CSF, high mortality), viral (lymphocytic, self-limiting), fungal. Classic triad: fever, headache, neck stiffness.", cat: "neuro", usage: "Bacterial meningitis — empiric antibiotics before LP" },
+  { abbr: "Encephalitis", full: "Encephalitis", desc: "Inflammation of brain parenchyma. Viral (HSV-1 most common), autoimmune. Presents with fever, altered mental status, seizures, focal deficits.", cat: "neuro", usage: "HSV encephalitis — IV acyclovir 10mg/kg Q8H" },
+  { abbr: "nMRI", full: "Neuroimaging MRI", desc: "Gold standard for CNS imaging. Superior soft tissue contrast. Diagnoses demyelination, infarction, mass lesions, gray matter disease.", cat: "neuro", usage: "Brain MRI shows demyelinating lesions — MS workup" },
+  { abbr: "Reflexes", full: "Deep Tendon Reflexes", desc: "Tested at biceps (C5-6), triceps (C7-8), patellar (L3-4), Achilles (S1-2). Graded 0–4. Hyperreflexia in UMN; hyporeflexia in LMN.", cat: "neuro", usage: "Brisk reflexes, sustained clonus — upper motor neuron signs" },
+  { abbr: "Babinski", full: "Babinski Sign", desc: "Dorsiflexion of great toe when sole is stroked. Present in UMN lesion. Normal = downward movement (flexor response).", cat: "neuro", usage: "Bilateral Babinski signs — bilateral pyramidal tract involvement" },
+  { abbr: "Stroke Protocol", full: "Stroke Protocol", desc: "Systematic approach: rapid assessment, NCCT exclude hemorrhage, thrombolysis eligibility (door-to-needle <60 min), then PCI if indicated.", cat: "neuro", usage: "Stroke protocol initiated — tPA-eligible, administered at 40 min" },
+  { abbr: "tPA", full: "Tissue Plasminogen Activator", desc: "Thrombolytic agent for acute ischemic stroke. IV tPA window 4.5 hrs. Alteplase 0.9 mg/kg. Risk of ICH (6%). Contraindicated in prior ICH, coagulopathy.", cat: "neuro", usage: "IV tPA 81 mg administered within window" },
+  { abbr: "Thrombectomy", full: "Mechanical Thrombectomy", desc: "Catheter-based removal of thrombus from major cerebral arteries. Indicated in LVO (large vessel occlusion) ischemic stroke within 24 hours.", cat: "neuro", usage: "Mechanical thrombectomy for LVO MCA — TICI 3 reperfusion" },
+
+  // Gastroenterology (25 entries)
+  { abbr: "GERD", full: "Gastroesophageal Reflux Disease", desc: "Chronic reflux of gastric acid into esophagus causing heartburn, regurgitation, and esophagitis. Diagnosed clinically; endoscopy for complications.", cat: "gi", usage: "GERD — PPI (Omeprazole 20mg) BD + lifestyle modifications" },
+  { abbr: "GI", full: "Gastrointestinal", desc: "Pertaining to the digestive tract from mouth to anus. Upper GI = esophagus to duodenum. Lower GI = jejunum to rectum.", cat: "gi", usage: "Upper GI bleed — IV PPI infusion + urgent OGD" },
+  { abbr: "LFT", full: "Liver Function Tests", desc: "Panel including ALT, AST, ALP, GGT, bilirubin (total/direct), albumin, PT/INR. Differentiates hepatocellular vs cholestatic patterns.", cat: "gi", usage: "LFT: ALT 450, AST 380, ALP normal — hepatocellular pattern" },
+  { abbr: "IBD", full: "Inflammatory Bowel Disease", desc: "Chronic inflammatory conditions: Crohn's disease (transmural, skip lesions, any GI segment) and Ulcerative colitis (mucosal, continuous, rectum → proximal).", cat: "gi", usage: "IBD — Crohn's with terminal ileum involvement on colonoscopy" },
+  { abbr: "OGD", full: "Oesophagogastroduodenoscopy", desc: "Upper GI endoscopy visualizing esophagus, stomach, and duodenum. Diagnostic and therapeutic (biopsy, hemostasis, dilation).", cat: "gi", usage: "OGD: Grade C esophagitis + CLO test positive" },
+  { abbr: "PUD", full: "Peptic Ulcer Disease", desc: "Ulceration of gastric or duodenal mucosa. Major causes: H. pylori infection and NSAIDs. Complications: bleeding, perforation, GOO.", cat: "gi", usage: "Duodenal PUD — H. pylori eradication triple therapy" },
+  { abbr: "H. pylori", full: "Helicobacter Pylori", desc: "Gram-negative bacterium causing gastritis, PUD, gastric cancer. Detected by CLO test, serology, stool antigen. Triple/quadruple therapy eradication.", cat: "gi", usage: "H. pylori positive CLO test — triple therapy: clarithromycin, metronidazole, omeprazole × 14 days" },
+  { abbr: "Cholecystitis", full: "Acute Cholecystitis", desc: "Inflammation of gallbladder. Usually due to cystic duct obstruction by gallstone. Presents with RUQ pain, positive Murphy's sign, fever, elevated WBC.", cat: "gi", usage: "Acute cholecystitis on ultrasound — cholecystectomy indicated" },
+  { abbr: "Pancreatitis", full: "Acute Pancreatitis", desc: "Inflammation of pancreas. Common causes: gallstones (50%), alcohol (35%). Presents with epigastric pain, elevated amylase/lipase. Managed supportively with IV fluids.", cat: "gi", usage: "Acute pancreatitis from gallstone — ICU admission, supportive care" },
+  { abbr: "Cirrhosis", full: "Hepatic Cirrhosis", desc: "End-stage liver disease with irreversible fibrosis. Causes: alcohol, viral hepatitis, autoimmune, NAFLD. Complications: portal HTN, ascites, hepatic encephalopathy.", cat: "gi", usage: "Decompensated cirrhosis with ascites — diuretics + lactulose" },
+  { abbr: "Hepatitis", full: "Hepatitis", desc: "Liver inflammation. Viral (HAV, HBV, HCV), autoimmune, alcoholic, drug-induced. Presents with jaundice, abdominal pain, elevated LFTs.", cat: "gi", usage: "Acute HBV hepatitis — supportive care, most recover spontaneously" },
+  { abbr: "Ascites", full: "Ascites", desc: "Abnormal fluid accumulation in peritoneal cavity. Causes: portal HTN (80%), peritoneal carcinomatosis, peritonitis. Assessed by ultrasound, tapped for analysis.", cat: "gi", usage: "Cirrhotic ascites — diuretics, salt restriction, paracentesis PRN" },
+  { abbr: "Varices", full: "Esophageal Varices", desc: "Dilated esophageal veins from portal HTN. Risk of catastrophic hemorrhage. Managed with prophylactic beta-blockers, endoscopic band ligation.", cat: "gi", usage: "Bleeding varices — OGD with band ligation + IV terlipressin" },
+  { abbr: "IBS", full: "Irritable Bowel Syndrome", desc: "Functional GI disorder with abdominal pain, altered bowel habits, bloating. IBS-D (diarrhea), IBS-C (constipation), IBS-M (mixed). Managed with diet, antispasmodics.", cat: "gi", usage: "IBS-D — dietary modification + alosetron if severe" },
+  { abbr: "Colonoscopy", full: "Colonoscopy", desc: "Examination of colon via endoscope. Diagnostic (biopsy, polyp evaluation) and therapeutic (polypectomy, hemostasis). Screening every 10 years if normal.", cat: "gi", usage: "Colonoscopy with polyp removal — follow-up in 3 years" },
+  { abbr: "Diverticulitis", full: "Diverticulitis", desc: "Inflammation of colonic diverticula. Presents with LLQ pain, fever, elevated WBC. Managed conservatively with NPO + antibiotics unless complicated.", cat: "gi", usage: "Uncomplicated diverticulitis — outpatient with oral antibiotics" },
+  { abbr: "Appendicitis", full: "Appendicitis", desc: "Inflammation of appendix. Classic presentation: RLQ pain (McBurney's point), fever, vomiting. Treated by appendectomy (open or laparoscopic).", cat: "gi", usage: "Acute appendicitis — urgent appendectomy" },
+  { abbr: "Celiac", full: "Celiac Disease", desc: "Autoimmune enteropathy triggered by gluten. Presents with diarrhea, malabsorption, weight loss. Diagnosed by positive tTG-IgA antibodies + duodenal biopsy.", cat: "gi", usage: "Celiac disease — gluten-free diet lifelong" },
+  { abbr: "Malabsorption", full: "Malabsorption", desc: "Impaired intestinal absorption of nutrients. Causes: celiac, IBD, tropical sprue, pancreatic insufficiency. Presents with steatorrhea, weight loss.", cat: "gi", usage: "Malabsorption workup — D-xylose test, fecal elastase, serology" },
+  { abbr: "Portal HTN", full: "Portal Hypertension", desc: "Elevated pressure in portal venous system (>12 mmHg). Causes: cirrhosis (pre-hepatic), thrombosis (post-hepatic). Leads to esophageal varices, ascites.", cat: "gi", usage: "Portal HTN with esophageal varices — propranolol 40mg BD prophylaxis" },
+  { abbr: "ALT", full: "Alanine Aminotransferase", desc: "Liver enzyme. Elevated in hepatocellular injury (ALT >AST suggests viral/autoimmune hepatitis vs alcoholic with AST >ALT).", cat: "gi", usage: "ALT 320 U/L — hepatocellular pattern" },
+  { abbr: "AST", full: "Aspartate Aminotransferase", desc: "Liver enzyme, also found in muscle, RBCs. AST >ALT (AST/ALT >1) suggests alcoholic hepatitis or cirrhosis.", cat: "gi", usage: "AST 280, ALT 85 — AST/ALT 3.3 consistent with alcoholic liver disease" },
+  { abbr: "ALP", full: "Alkaline Phosphatase", desc: "Enzyme from bone, liver, intestine. Elevated in cholestasis, osteoblastic activity, pregnancy. Low in hypophosphatasia.", cat: "gi", usage: "ALP 180 U/L with elevated bilirubin — cholestatic pattern" },
+
+  // Endocrine (25 entries)
+  { abbr: "DM", full: "Diabetes Mellitus", desc: "Metabolic disorder with chronic hyperglycemia. Type 1: autoimmune β-cell destruction. Type 2: insulin resistance + relative deficiency. Diagnosed by FBS ≥126, HbA1c ≥6.5%.", cat: "endo", usage: "DM Type 2 — HbA1c 8.5%, started Metformin 500mg BD" },
+  { abbr: "HbA1c", full: "Glycated Hemoglobin", desc: "Reflects average blood glucose over 2–3 months. Target <7% for most diabetics. Correlates with microvascular complication risk.", cat: "endo", usage: "HbA1c 9.2% — poor glycemic control, intensify regimen" },
+  { abbr: "DKA", full: "Diabetic Ketoacidosis", desc: "Life-threatening complication of DM (mainly Type 1). Triad: hyperglycemia >250, metabolic acidosis (pH <7.3), ketonemia. Treat with IV fluids + insulin infusion + K⁺ replacement.", cat: "endo", usage: "DKA: glucose 450, pH 7.1, ketones 5.2 — started DKA protocol" },
+  { abbr: "HHS", full: "Hyperglycemic Hyperosmolar State", desc: "Acute hyperglycemic crisis (usually Type 2 DM) with severe hyperglycemia, hyperosmolarity, minimal ketosis. High mortality. Requires IV fluids + insulin.", cat: "endo", usage: "HHS with glucose 1200, osmolarity 350 — intensive therapy" },
+  { abbr: "TSH", full: "Thyroid-Stimulating Hormone", desc: "Pituitary hormone regulating thyroid function. First-line test for thyroid disorders. High TSH = hypothyroidism, Low TSH = hyperthyroidism.", cat: "endo", usage: "TSH 15 mIU/L with low fT4 — primary hypothyroidism" },
+  { abbr: "fT4", full: "Free T4 (Thyroxine)", desc: "Active form of thyroid hormone. Normal 0.7–1.9 ng/dL. Low fT4 + high TSH = hypothyroidism; high fT4 + low TSH = hyperthyroidism.", cat: "endo", usage: "fT4 0.5 ng/dL — low, consistent with hypothyroidism" },
+  { abbr: "fT3", full: "Free T3 (Triiodothyronine)", desc: "Most metabolically active thyroid hormone. Normal 2.4–4.2 pg/mL. More sensitive indicator of hyperthyroidism than fT4.", cat: "endo", usage: "fT3 4.8 pg/mL — elevated, consistent with hyperthyroidism" },
+  { abbr: "FBS", full: "Fasting Blood Sugar", desc: "Blood glucose after ≥8 hours fasting. Normal <100 mg/dL. Impaired fasting glucose: 100–125. Diabetes: ≥126 mg/dL.", cat: "endo", usage: "FBS: 145 mg/dL — confirmed DM on repeat testing" },
+  { abbr: "PPBS", full: "Postprandial Blood Sugar", desc: "Blood glucose 2 hours after meal. Normal <140 mg/dL. Impaired: 140–200. Diabetes: >200 mg/dL.", cat: "endo", usage: "PPBS 210 mg/dL — impaired glucose tolerance" },
+  { abbr: "GTT", full: "Glucose Tolerance Test", desc: "Oral 75g glucose load with measurements at 0, 2 hours. Used to diagnose impaired glucose tolerance and gestational DM.", cat: "endo", usage: "GTT: fasting 95, 2-hour 155 — impaired glucose tolerance" },
+  { abbr: "Insulin Resistance", full: "Insulin Resistance", desc: "Reduced tissue sensitivity to insulin. Associated with obesity, metabolic syndrome, PCOS. Leads to compensatory hyperinsulinemia. Measured by HOMA-IR.", cat: "endo", usage: "HOMA-IR 4.2 — significant insulin resistance" },
+  { abbr: "Metabolic Syndrome", full: "Metabolic Syndrome", desc: "Cluster of conditions: central obesity, HTN, dyslipidemia, impaired glucose tolerance. ≥3 criteria diagnoses it. Increases CV risk 2-fold.", cat: "endo", usage: "Metabolic syndrome — lifestyle modification, monitor CV risk" },
+  { abbr: "PCOS", full: "Polycystic Ovary Syndrome", desc: "Endocrine disorder: oligo/anovulation, hyperandrogenism, polycystic ovaries (Rotterdam criteria — 2 of 3). Associated with insulin resistance and metabolic syndrome.", cat: "endo", usage: "PCOS — Metformin + OCP for cycle regulation" },
+  { abbr: "Amenorrhea", full: "Amenorrhea", desc: "Absence of menstruation. Primary (never menstruated), secondary (stopped after regular periods). Causes: pregnancy, PCOS, thyroid dysfunction, eating disorders.", cat: "endo", usage: "Secondary amenorrhea — TSH + pregnancy test + pelvic ultrasound" },
+  { abbr: "Hypothyroidism", full: "Hypothyroidism", desc: "Reduced thyroid function. Presents with fatigue, weight gain, cold intolerance, constipation, dry skin. Treated with levothyroxine replacement.", cat: "endo", usage: "Primary hypothyroidism — levothyroxine 25mcg OD, titrate Q6-8 weeks" },
+  { abbr: "Hyperthyroidism", full: "Hyperthyroidism", desc: "Excess thyroid function. Presents with weight loss, palpitations, heat intolerance, tremor, anxiety. Causes: Graves (autoimmune), toxic nodule, thyroiditis.", cat: "endo", usage: "Graves' disease — propranolol + PTU initially, then I-131 ablation" },
+  { abbr: "Graves'", full: "Graves' Disease", desc: "Autoimmune hyperthyroidism from TSH receptor antibodies. Presents with thyroid eye disease (exophthalmos), pretibial myxedema. Treated with anti-thyroid drugs or ablation.", cat: "endo", usage: "Graves' disease with eye involvement — PTU + prednisolone" },
+  { abbr: "Thyroiditis", full: "Thyroiditis", desc: "Thyroid inflammation. Hashimoto (autoimmune hypothyroidism), postpartum (transient hyper→hypo), subacute viral (painful), silent. Differentiated by TPO antibodies.", cat: "endo", usage: "Hashimoto's thyroiditis — levothyroxine replacement" },
+  { abbr: "Cushing's", full: "Cushing's Syndrome", desc: "Excess cortisol from pituitary (Cushing's disease), adrenal, or ectopic source. Presents with central obesity, hirsutism, easy bruising, HTN, DM.", cat: "endo", usage: "Cushing's syndrome — low-dose dexamethasone suppression test positive" },
+  { abbr: "Addison's", full: "Addison's Disease (Primary Adrenal Insufficiency)", desc: "Autoimmune adrenal destruction causing cortisol/aldosterone deficiency. Presents with fatigue, hypotension, hyperpigmentation. Treated with steroid + mineralocorticoid replacement.", cat: "endo", usage: "Addison's disease — hydrocortisone 15–20mg daily + fludrocortisone" },
+  { abbr: "Acromegaly", full: "Acromegaly", desc: "Excess GH from pituitary adenoma. Presents with coarse facial features, large hands/feet, jaw prognathism, DM, HTN. Diagnosed by elevated IGF-1 + GH not suppressed by OGTT.", cat: "endo", usage: "Acromegaly — transsphenoidal surgery for GH-secreting adenoma" },
+  { abbr: "Hypercalcemia", full: "Hypercalcemia", desc: "Elevated serum calcium (>10.5 mg/dL). Causes: hyperparathyroidism (55%), malignancy (45%). Symptoms: polyuria, polydipsia, constipation, confusion. Treat with IV fluids + bisphosphonates.", cat: "endo", usage: "Hypercalcemia 12.2 mg/dL from hyperparathyroidism — IV NS + zolendronate" },
+  { abbr: "Hyponatremia", full: "Hyponatremia (Low Sodium)", desc: "Serum Na <135 mEq/L. Causes: SIADH, heart failure, cirrhosis. Symptoms: confusion, seizures, coma. Correct slowly to avoid osmotic demyelination.", cat: "endo", usage: "SIADH with Na 118 — fluid restriction, hypertonic saline if symptomatic" },
+
+  // Renal (25 entries)
+  { abbr: "CKD", full: "Chronic Kidney Disease", desc: "Progressive loss of kidney function over ≥3 months. Staged by GFR (G1–G5). Causes: DM, HTN, GN. Stage 5 (GFR <15) = ESRD requiring RRT.", cat: "renal", usage: "CKD Stage 4 (GFR 22) — nephrology referral for RRT planning" },
+  { abbr: "AKI", full: "Acute Kidney Injury", desc: "Rapid decline in renal function over hours to days. KDIGO criteria: Cr rise ≥0.3 mg/dL in 48h or ≥1.5× baseline. Pre-renal, intrinsic, or post-renal.", cat: "renal", usage: "AKI Stage 2 — Cr 3.2 from baseline 1.0, started IV fluids" },
+  { abbr: "GFR", full: "Glomerular Filtration Rate", desc: "Volume of filtrate formed per minute by kidneys. Normal ~120 mL/min/1.73m². Estimated using CKD-EPI or MDRD equations.", cat: "renal", usage: "eGFR 35 mL/min — CKD Stage 3b" },
+  { abbr: "Creatinine", full: "Serum Creatinine", desc: "Waste product of muscle metabolism filtered by kidneys. Normal 0.7–1.3 mg/dL in males, 0.6–1.1 in females. Marker of kidney function.", cat: "renal", usage: "Serum creatinine 2.8 mg/dL — significant renal impairment" },
+  { abbr: "UTI", full: "Urinary Tract Infection", desc: "Bacterial infection of urinary tract. Lower UTI (cystitis): dysuria, frequency, urgency. Upper UTI (pyelonephritis): fever, flank pain, CVA tenderness.", cat: "renal", usage: "Uncomplicated UTI — Nitrofurantoin 100mg BD × 5 days" },
+  { abbr: "BUN", full: "Blood Urea Nitrogen", desc: "Measures urea nitrogen in blood. Elevated in renal failure, dehydration, GI bleeding, high protein diet. BUN:Cr ratio helps localize renal injury.", cat: "renal", usage: "BUN 45, Cr 2.8, BUN:Cr ratio 16 — intrinsic renal cause" },
+  { abbr: "Nephrotic Syndrome", full: "Nephrotic Syndrome", desc: "Proteinuria >3.5 g/day, hypoalbuminemia, edema, hyperlipidemia, lipiduria. Causes: FSGS, membranous, diabetic nephropathy. Treated with steroids ± immunosuppressants.", cat: "renal", usage: "Nephrotic syndrome from membranous GN — prednisone + tacrolimus" },
+  { abbr: "Nephritic Syndrome", full: "Nephritic Syndrome", desc: "Hematuria, dysmorphic RBCs, casts, azotemia, HTN, edema. Reflects glomerulonephritis. Causes: PSGN, IgAN, ANCA-GN.", cat: "renal", usage: "Nephritic syndrome — renal biopsy shows IgA nephropathy" },
+  { abbr: "Proteinuria", full: "Proteinuria (Albuminuria)", desc: "Abnormal urine protein excretion. Normal <150 mg/day. Microalbuminuria: 30–300 mg/day (early DM). Macroalbuminuria: >300 mg/day.", cat: "renal", usage: "24-hour proteinuria 4.8 g — nephrotic range proteinuria" },
+  { abbr: "Hematuria", full: "Hematuria (Blood in Urine)", desc: "Presence of RBCs in urine. Glomerular (dysmorphic, casts) vs non-glomerular (isomorphic). Gross hematuria visible; microscopic <5 RBCs/hpf.", cat: "renal", usage: "Microscopic hematuria with dysmorphic RBCs — renal source, likely GN" },
+  { abbr: "Casts", full: "Urinary Casts", desc: "Cylindrical protein structures in urine. Types: hyaline (normal), WBC (infection/GN), RBC (GN), granular (degeneration). Indicate renal origin of hematuria.", cat: "renal", usage: "RBC casts in urine — glomerulonephritis" },
+  { abbr: "ESRD", full: "End-Stage Renal Disease", desc: "GFR <15 mL/min or on RRT. Requires dialysis (hemodialysis, peritoneal dialysis) or transplantation for survival.", cat: "renal", usage: "ESRD — started on hemodialysis 3×/week" },
+  { abbr: "Dialysis", full: "Hemodialysis", desc: "Artificial kidney filtration. Access: fistula (preferred), graft, temporary catheter. 3–5 hour sessions, 3×/week. Removes waste, water, electrolytes.", cat: "renal", usage: "Hemodialysis via arm AVF, 4 hours 3×/week" },
+  { abbr: "Hyperkalemia", full: "Hyperkalemia (High Potassium)", desc: "Serum K >5.5 mEq/L. Causes: renal failure, acidosis, rhabdomyolysis, massive transfusion. ECG changes: peaked T waves. Treat with calcium gluconate + insulin + dextrose.", cat: "renal", usage: "Hyperkalemia 6.8 — peaked T waves on ECG, IV calcium gluconate stat" },
+  { abbr: "Hypokalemia", full: "Hypokalemia (Low Potassium)", desc: "Serum K <3.5 mEq/L. Causes: diuretics, diarrhea, vomiting, medications. Presents with weakness, palpitations, cardiac arrhythmias.", cat: "renal", usage: "Hypokalemia 3.0 — started KCl supplementation" },
+  { abbr: "Hyperphosphatemia", full: "Hyperphosphatemia", desc: "Serum PO₄ >4.5 mg/dL (usually in CKD/ESRD). Causes secondary hyperparathyroidism, vascular calcification. Managed with phosphate binders.", cat: "renal", usage: "Hyperphosphatemia 6.2 — calcimimetic + phosphate binder" },
+  { abbr: "Hypocalcemia", full: "Hypocalcemia (Low Calcium)", desc: "Serum Ca <8.5 mg/dL. Causes: hypoalbuminemia, vitamin D deficiency, renal failure, hypoparathyroidism. May cause tetany, seizures.", cat: "renal", usage: "Hypocalcemia 7.8 — IV calcium gluconate + vitamin D supplementation" },
+  { abbr: "CKD-MBD", full: "CKD-Mineral Bone Disorder", desc: "Abnormalities of calcium, phosphate, PTH, bone metabolism in CKD. Results in vascular calcification, renal osteodystrophy.", cat: "renal", usage: "CKD-MBD Stage 4 CKD — calcimimetic + phosphate binder + vitamin D" },
+  { abbr: "GN", full: "Glomerulonephritis", desc: "Inflammatory kidney disease. Types: PSGN, IgAN, FSGS, membranous, ANCA-GN. Presents with hematuria, proteinuria, reduced GFR.", cat: "renal", usage: "IgA nephropathy — renal biopsy confirms; monitor proteinuria" },
+  { abbr: "Lupus Nephritis", full: "Lupus Nephritis", desc: "Kidney involvement in SLE. WHO classes I–VI. Presents with proteinuria, hematuria, reduced GFR. Treated with immunosuppressants.", cat: "renal", usage: "WHO Class IV lupus nephritis — induction therapy with cyclophosphamide" },
+  { abbr: "ANCA", full: "Anti-Neutrophil Cytoplasmic Antibodies", desc: "Autoantibodies against neutrophil cytoplasmic antigens. Positive in ANCA-associated vasculitis. Types: c-ANCA (PR3/GPA), p-ANCA (MPO/MPA).", cat: "renal", usage: "c-ANCA positive, PR3 — GPA with glomerulonephritis, immunosuppression started" },
+  { abbr: "DMS", full: "Diabetic Nephropathy", desc: "Kidney damage from diabetes. Progresses: hyperfiltration → microalbuminuria → overt proteinuria → reduced GFR. Slowed by tight glycemic + BP control, ACE-I/ARB.", cat: "renal", usage: "Diabetic nephropathy Stage 3 — ramipril + tight BP control" },
+  { abbr: "Renal Doppler", full: "Renal Artery Doppler Ultrasound", desc: "Non-invasive imaging assessing renal artery blood flow. Diagnoses RAS (renal artery stenosis) with high sensitivity.", cat: "renal", usage: "Renal Doppler shows RAS — angioplasty/stent considered" },
+
+  // Ortho (25 entries)
+
+  // Ortho (25 entries)
+  { abbr: "OA", full: "Osteoarthritis", desc: "Degenerative joint disease with cartilage loss, osteophytes, subchondral sclerosis. Weight-bearing joints most affected. X-ray: LOSS (Loss of joint space, Osteophytes, Subchondral sclerosis, Subchondral cysts).", cat: "ortho", usage: "Bilateral knee OA — physiotherapy + Paracetamol PRN" },
+  { abbr: "RA", full: "Rheumatoid Arthritis", desc: "Chronic autoimmune inflammatory polyarthritis. Symmetrical small joint involvement (MCP, PIP, wrist). RF and anti-CCP positive. Treat early with DMARDs.", cat: "ortho", usage: "RA — started Methotrexate 15mg/week + Folic acid" },
+  { abbr: "ROM", full: "Range of Motion", desc: "Measured arc of movement at a joint. Active ROM (patient moves) vs passive ROM (examiner moves). Documented in degrees.", cat: "ortho", usage: "Right shoulder ROM: flexion 90° (normal 180°) — frozen shoulder" },
+  { abbr: "THR", full: "Total Hip Replacement", desc: "Surgical replacement of hip joint with prosthesis (femoral stem + acetabular cup). Indicated in severe OA, avascular necrosis, fracture neck femur.", cat: "ortho", usage: "Right THR for avascular necrosis — cemented prosthesis" },
+  { abbr: "ORIF", full: "Open Reduction Internal Fixation", desc: "Surgical procedure to reduce (realign) fracture under direct visualization and fix with plates, screws, nails, or wires.", cat: "ortho", usage: "ORIF right distal radius fracture with volar locking plate" },
+  { abbr: "ACL", full: "Anterior Cruciate Ligament", desc: "Knee ligament preventing anterior tibial displacement. Injury from non-contact deceleration or sudden direction change. Treated with ACL reconstruction.", cat: "ortho", usage: "ACL tear — arthroscopic reconstruction with hamstring autograft" },
+  { abbr: "Meniscus", full: "Meniscal Tear", desc: "Tear of fibrocartilage menisci (medial or lateral) in knee. Presents with pain, locking, swelling. MRI confirms; arthroscopic meniscectomy if symptomatic.", cat: "ortho", usage: "Medial meniscal tear — arthroscopic partial meniscectomy" },
+  { abbr: "Osteoporosis", full: "Osteoporosis", desc: "Decreased bone mineral density (T-score <-2.5). Risk of fragility fractures. Diagnosed by DEXA scan. Managed with calcium, vitamin D, bisphosphonates.", cat: "ortho", usage: "Osteoporosis T-score -3.2 — alendronate 70mg weekly + vitamin D" },
+  { abbr: "Fracture", full: "Bone Fracture", desc: "Break in bone continuity. Types: simple, compound, comminuted, pathological. Immobilization or surgery depending on type/location.", cat: "ortho", usage: "Closed fracture left tibia/fibula — casting × 8 weeks" },
+  { abbr: "Dislocation", full: "Joint Dislocation", desc: "Complete displacement of articulating bones. Requires reduction (closed or open). Common: shoulder, hip, knee, fingers.", cat: "ortho", usage: "Anterior shoulder dislocation — closed reduction under sedation" },
+  { abbr: "Bursitis", full: "Bursitis", desc: "Inflammation of fluid-filled bursa around joint. Causes: repetitive trauma, infection, crystals. Presents with localized pain and swelling.", cat: "ortho", usage: "Prepatellar bursitis — ice, NSAIDs, bursa aspiration if infected" },
+  { abbr: "Tendinitis", full: "Tendinitis (Tendonitis)", desc: "Inflammation of tendon. Common sites: rotator cuff (shoulder), Achilles, patellar. Managed with rest, ice, NSAIDs, physiotherapy.", cat: "ortho", usage: "Rotator cuff tendinitis — subacromial injection + physical therapy" },
+  { abbr: "Arthroscopy", full: "Arthroscopy", desc: "Minimally invasive inspection of joint using camera. Diagnostic and therapeutic (debridement, meniscectomy, ACL repair).", cat: "ortho", usage: "Knee arthroscopy for meniscal pathology — partial meniscectomy performed" },
+  { abbr: "Arthroplasty", full: "Arthroplasty (Joint Replacement)", desc: "Surgical procedure replacing damaged joint with prosthesis. Total (entire joint) or partial (unicompartmental). Indications: severe OA, rheumatoid arthritis.", cat: "ortho", usage: "Total knee arthroplasty for severe tricompartmental OA" },
+  { abbr: "Arthritis", full: "Arthritis", desc: "Joint inflammation. Types: OA (degenerative), RA (autoimmune), infectious (septic arthritis), crystalline (gout, pseudogout).", cat: "ortho", usage: "Septic arthritis of knee — joint aspiration, antibiotics" },
+  { abbr: "Gout", full: "Gout (Uric Acid Arthropathy)", desc: "Acute inflammatory arthritis from monosodium urate crystal deposition. Classically first MTP joint. Managed with NSAIDs, colchicine, allopurinol.", cat: "ortho", usage: "Acute gout attack — indomethacin 50mg TID × 5 days" },
+  { abbr: "Pseudogout", full: "Pseudogout (CPPD)", desc: "Acute arthritis from calcium pyrophosphate dihydrate crystals. Mimics gout but typically affects larger joints (knee, wrist, shoulder).", cat: "ortho", usage: "Pseudogout — joint aspiration shows rhomboid crystals" },
+  { abbr: "Lupus", full: "Systemic Lupus Erythematosus (SLE)", desc: "Multisystem autoimmune disease. Arthritis, rash, serositis, renal, CNS involvement. Diagnosed by ANA + specific antibodies (anti-dsDNA, anti-Smith).", cat: "ortho", usage: "SLE with lupus nephritis — prednisone + cyclophosphamide" },
+  { abbr: "Sciatica", full: "Sciatica (Lumbar Radiculopathy)", desc: "Pain radiating along sciatic nerve (lower back → buttock → leg). Usually from herniated disc compressing nerve root. Managed conservatively or surgically if severe.", cat: "ortho", usage: "Sciatica from L5 disc herniation — conservative management, gabapentin" },
+  { abbr: "Stenosis", full: "Spinal Stenosis", desc: "Narrowing of spinal canal or nerve root foramina. Causes neurogenic claudication (leg pain with walking, relieved by sitting). Managed with NSAIDs, physical therapy, or decompression surgery.", cat: "ortho", usage: "Lumbar stenosis — conservative management, laminectomy if progressive" },
+  { abbr: "Spondylolysis", full: "Spondylolysis", desc: "Defect in pars interarticularis of vertebra. Stress fracture from repetitive hyperextension. Can lead to spondylolisthesis.", cat: "ortho", usage: "Spondylolysis L5 — activity restriction, back brace" },
+  { abbr: "Spondylolisthesis", full: "Spondylolisthesis", desc: "Anterior displacement of one vertebra on another. Caused by spondylolysis or degenerative changes. Presents with back pain and neurologic symptoms.", cat: "ortho", usage: "Grade 1 spondylolisthesis L4-L5 — conservative management" },
+  { abbr: "Kyphosis", full: "Kyphosis", desc: "Abnormal forward curvature of thoracic spine. Causes: poor posture, osteoporosis, degenerative disease, ankylosing spondylitis.", cat: "ortho", usage: "Osteoporotic kyphosis — bracing, physical therapy" },
+  { abbr: "Lordosis", full: "Lordosis", desc: "Abnormal inward curvature of lumbar/cervical spine. Normal cervical/lumbar lordosis; increased lordosis indicates instability.", cat: "ortho", usage: "Increased lumbar lordosis from disc herniation" },
+
+  // Pharmacology (30 entries)
+  { abbr: "PO", full: "Per Os (By Mouth)", desc: "Oral route of drug administration. Most common route. Requires functioning GI tract and patient ability to swallow.", cat: "pharm", usage: "Amoxicillin 500mg PO TID × 7 days" },
+  { abbr: "IV", full: "Intravenous", desc: "Drug administration directly into a vein. Provides 100% bioavailability and rapid onset. Routes: bolus, infusion, or piggyback.", cat: "pharm", usage: "IV NS 0.9% at 125 mL/hr" },
+  { abbr: "IM", full: "Intramuscular", desc: "Injection into muscle tissue (deltoid, vastus lateralis, gluteus). Provides depot effect with sustained absorption.", cat: "pharm", usage: "Inj. Diclofenac 75mg IM STAT for acute pain" },
+  { abbr: "SC/SQ", full: "Subcutaneous", desc: "Injection into subcutaneous tissue (abdomen, thigh, upper arm). Used for insulin, LMWH, and certain biologics.", cat: "pharm", usage: "Inj. Enoxaparin 60mg SC BD" },
+  { abbr: "OD", full: "Once Daily (Omni Die)", desc: "Medication to be taken once per day. Typically morning unless specified otherwise.", cat: "pharm", usage: "Tab. Atorvastatin 40mg PO OD at bedtime" },
+  { abbr: "BD/BID", full: "Twice Daily (Bis In Die)", desc: "Medication to be taken twice per day, approximately 12 hours apart.", cat: "pharm", usage: "Tab. Metformin 500mg PO BD with meals" },
+  { abbr: "TID/TDS", full: "Three Times Daily (Ter Die Sumendus)", desc: "Medication to be taken three times per day, approximately 8 hours apart.", cat: "pharm", usage: "Tab. Amoxicillin 500mg PO TID × 7 days" },
+  { abbr: "QID", full: "Four Times Daily (Quater In Die)", desc: "Medication to be taken four times per day, approximately 6 hours apart.", cat: "pharm", usage: "Tab. Paracetamol 500mg PO QID" },
+  { abbr: "NSAID", full: "Non-Steroidal Anti-Inflammatory Drug", desc: "Class of drugs inhibiting COX enzymes (COX-1/COX-2), reducing prostaglandin synthesis. Analgesic, anti-inflammatory, antipyretic. GI and renal side effects.", cat: "pharm", usage: "Avoid NSAIDs in CKD — switch to Paracetamol" },
+  { abbr: "ACE-I", full: "ACE Inhibitor", desc: "Angiotensin-Converting Enzyme Inhibitor. Blocks ACE reducing angiotensin II. First-line for HTN, CHF, diabetic nephropathy. Side effect: dry cough (switch to ARB).", cat: "pharm", usage: "Ramipril 5mg OD — monitor K⁺ and creatinine" },
+  { abbr: "ARB", full: "Angiotensin Receptor Blocker", desc: "Blocks AT1 angiotensin receptor. Similar efficacy to ACE-I but no dry cough. Used in HTN, CHF, diabetic nephropathy.", cat: "pharm", usage: "Losartan 50mg OD for HTN" },
+  { abbr: "Beta-Blocker", full: "Beta-Adrenergic Receptor Antagonist", desc: "Blocks beta receptors reducing HR, BP, contractility. Used in HTN, CAD, arrhythmias, anxiety. Examples: metoprolol, atenolol, propranolol.", cat: "pharm", usage: "Metoprolol 25mg BD for AF rate control" },
+  { abbr: "CCB", full: "Calcium Channel Blocker", desc: "Inhibits calcium influx in vascular smooth muscle and cardiac tissue. Dilates blood vessels, reduces contractility. Used in HTN, angina, arrhythmias.", cat: "pharm", usage: "Amlodipine 5mg OD for HTN" },
+  { abbr: "Statin", full: "HMG-CoA Reductase Inhibitor", desc: "Lowers LDL cholesterol by inhibiting cholesterol synthesis. Cardioprotective. Examples: atorvastatin, simvastatin, pravastatin.", cat: "pharm", usage: "Atorvastatin 40mg OD — LDL reduced to 70" },
+  { abbr: "PPI", full: "Proton Pump Inhibitor", desc: "Blocks H+/K+ pump in gastric parietal cells, reducing acid secretion. Used for GERD, PUD, prevention of NSAID-induced ulcers.", cat: "pharm", usage: "Omeprazole 20mg BD for GERD" },
+  { abbr: "H2 Blocker", full: "H2-Receptor Antagonist", desc: "Reduces gastric acid secretion. Less potent than PPIs. Examples: ranitidine, famotidine. Declining use due to PPI availability.", cat: "pharm", usage: "Famotidine 20mg BD as maintenance therapy" },
+  { abbr: "Antibiotic", full: "Antimicrobial Agent", desc: "Kills or inhibits bacteria. Classes: aminoglycosides, cephalosporins, fluoroquinolones, macrolides, penicillins, tetracyclines.", cat: "pharm", usage: "Ceftriaxone 1g IV Q12H for bacterial meningitis" },
+  { abbr: "Antifungal", full: "Antifungal Agent", desc: "Treats fungal infections. Examples: azoles (fluconazole), echinocandins (caspofungin), polyenes (amphotericin B).", cat: "pharm", usage: "Fluconazole 400mg OD for cryptococcal meningitis" },
+  { abbr: "Antiretroviral", full: "Antiretroviral (HIV) Drug", desc: "Treats HIV infection. Classes: NRTIs, NNRTIs, PIs, INSTIs, Entry inhibitors. Usually combination ART (HAART).", cat: "pharm", usage: "Tenofovir/emtricitabine/dolutegravir for newly diagnosed HIV" },
+  { abbr: "Anticoagulant", full: "Anticoagulant", desc: "Prevents blood clot formation. Types: unfractionated heparin (UFH), low-molecular-weight heparin (LMWH, enoxaparin), warfarin, DOACs (apixaban, rivaroxaban).", cat: "pharm", usage: "Warfarin INR goal 2–3 for AFib with stroke risk" },
+  { abbr: "Antiplatelet", full: "Antiplatelet Agent", desc: "Prevents platelet aggregation. Examples: aspirin, clopidogrel, ticagrelor. Used for MI prevention, post-PCI (DAPT).", cat: "pharm", usage: "Dual antiplatelet therapy: aspirin + clopidogrel post-stent" },
+  { abbr: "Diuretic", full: "Diuretic (Water Pill)", desc: "Increases urine output by blocking sodium/water reabsorption. Types: loop (furosemide), thiazide (hydrochlorothiazide), potassium-sparing (spironolactone).", cat: "pharm", usage: "Furosemide 40mg OD for CHF fluid overload" },
+  { abbr: "Insulin", full: "Insulin", desc: "Hormone regulating glucose metabolism. Types: rapid (lispro), short (regular), intermediate (NPH), long-acting (glargine, detemir). Dosing individualized.", cat: "pharm", usage: "Insulin glargine 20 units SC OD + mealtime boluses" },
+  { abbr: "Corticosteroid", full: "Corticosteroid (Glucocorticoid)", desc: "Anti-inflammatory immunosuppressant. Reduces inflammation, immune response. Used for autoimmune, allergic, endocrine conditions. Long-term use risks: infections, osteoporosis.", cat: "pharm", usage: "Prednisolone 1mg/kg/day for acute inflammation, taper over 4 weeks" },
+  { abbr: "Immunosuppressant", full: "Immunosuppressive Agent", desc: "Suppresses immune response. Used in autoimmune disease, transplant rejection prevention. Examples: methotrexate, azathioprine, tacrolimus, mycophenolate.", cat: "pharm", usage: "Methotrexate 15mg/week for RA" },
+  { abbr: "Biologics", full: "Biologic Agents", desc: "Engineered proteins targeting specific immune pathways. Used for RA, IBD, cancer. Examples: TNF-alpha inhibitors (infliximab), IL-6 inhibitors (tocilizumab).", cat: "pharm", usage: "TNF-inhibitor (infliximab) for moderate-severe RA inadequate response to DMARDs" },
+
+  // Lab & Diagnostics (30 entries)
+  { abbr: "CBC/FBC", full: "Complete / Full Blood Count", desc: "Includes Hb, WBC (with differential), platelets, RBC indices (MCV, MCH, MCHC), hematocrit. First-line investigation for most presentations.", cat: "lab", usage: "CBC: Hb 8.2, MCV 68, MCH 22 — microcytic hypochromic anemia" },
+  { abbr: "ESR", full: "Erythrocyte Sedimentation Rate", desc: "Non-specific marker of inflammation. Rate at which RBCs settle in 1 hour. Elevated in infection, autoimmune disease, malignancy.", cat: "lab", usage: "ESR 85 mm/hr — correlate with CRP and clinical picture" },
+  { abbr: "CRP", full: "C-Reactive Protein", desc: "Acute phase reactant produced by liver. Rises within 6 hours of inflammation. More specific than ESR. Useful for monitoring treatment response.", cat: "lab", usage: "CRP 120 mg/L — significant acute inflammation" },
+  { abbr: "CT", full: "Computed Tomography", desc: "Cross-sectional imaging using X-rays. NCCT for stroke, trauma. CECT for masses, abscess. CT angiography for PE, aortic dissection.", cat: "lab", usage: "NCCT brain: hyperdense lesion in right basal ganglia — ICH" },
+  { abbr: "MRI", full: "Magnetic Resonance Imaging", desc: "Imaging using magnetic fields and radio waves. Superior soft tissue contrast. Gold standard for CNS, MSK, and pelvic pathology. No ionizing radiation.", cat: "lab", usage: "MRI brain with contrast: ring-enhancing lesion — DDx: abscess vs tumor" },
+  { abbr: "USG", full: "Ultrasonography", desc: "Real-time imaging using sound waves. No radiation. First-line for abdominal, obstetric, thyroid, and soft tissue evaluation.", cat: "lab", usage: "USG abdomen: gallbladder calculi with wall thickening — acute cholecystitis" },
+  { abbr: "PT/INR", full: "Prothrombin Time / International Normalized Ratio", desc: "Measures extrinsic coagulation pathway. INR standardizes PT across labs. Target INR 2–3 for warfarin therapy. Elevated in liver disease, DIC.", cat: "lab", usage: "INR 3.8 on Warfarin — hold dose, recheck in 48 hours" },
+  { abbr: "BMP", full: "Basic Metabolic Panel", desc: "Includes Na⁺, K⁺, Cl⁻, HCO₃⁻, BUN, creatinine, glucose, Ca²⁺. Essential for assessing electrolytes and renal function.", cat: "lab", usage: "BMP: K⁺ 5.8, Cr 3.2 — hyperkalemia in AKI, ECG + IV calcium" },
+  { abbr: "CMP", full: "Comprehensive Metabolic Panel", desc: "Extended version of BMP including liver function tests (ALT, AST, ALP, bilirubin, albumin, protein).", cat: "lab", usage: "CMP shows hypokalemia 3.2 K⁺, ALT 120 — need supplementation and hepatic workup" },
+  { abbr: "Coagulation Profile", full: "Coagulation Profile (PT, aPTT, fibrinogen)", desc: "Assesses coagulation system. PT for extrinsic pathway, aPTT for intrinsic pathway, fibrinogen concentration. Abnormality suggests deficiency/inhibitor.", cat: "lab", usage: "Coagulation profile: PT prolonged, aPTT normal, fibrinogen low — likely DIC" },
+  { abbr: "RBC", full: "Red Blood Cell Count", desc: "Number of RBCs per microliter. Normal 4.5–5.9 × 10¹²/L (males), 4.1–5.1 × 10¹²/L (females). Low = anemia, high = polycythemia.", cat: "lab", usage: "RBC 3.8 × 10¹²/L — mild anemia" },
+  { abbr: "Platelets", full: "Platelet Count", desc: "Number of platelets per microliter. Normal 150–400 × 10⁹/L. Low = thrombocytopenia (bleeding risk), high = thrombocytosis (clotting risk).", cat: "lab", usage: "Platelets 450 × 10⁹/L — mild thrombocytosis" },
+  { abbr: "MCV", full: "Mean Corpuscular Volume", desc: "Average RBC size. Normal 80–100 fL. Low = microcytic (iron deficiency, thalassemia), high = macrocytic (B12/folate deficiency).", cat: "lab", usage: "MCV 68 fL — microcytosis consistent with iron deficiency" },
+  { abbr: "MCH", full: "Mean Corpuscular Hemoglobin", desc: "Average Hb per RBC. Normal 27–33 pg. Low = hypochromia, high = hyperchromia.", cat: "lab", usage: "MCH 22 pg — hypochromia" },
+  { abbr: "MCHC", full: "Mean Corpuscular Hemoglobin Concentration", desc: "Average Hb concentration in RBCs. Normal 32–36 g/dL. Most commonly used parameter.", cat: "lab", usage: "MCHC 31 g/dL — hypochromia" },
+  { abbr: "Hematocrit", full: "Hematocrit (Packed Cell Volume)", desc: "Percentage of blood volume occupied by RBCs. Normal 41–50% (males), 36–44% (females). Reflects Hb level indirectly.", cat: "lab", usage: "Hematocrit 32% — anemia" },
+  { abbr: "Reticulocyte Count", full: "Reticulocyte Count", desc: "Immature RBCs in circulation. Normal 0.5–2%. Elevated in hemolysis, bleeding, iron supplementation (bone marrow response). Low in BM failure.", cat: "lab", usage: "Reticulocyte count elevated at 8% — appropriate response to anemia" },
+  { abbr: "Ferritin", full: "Serum Ferritin", desc: "Iron storage protein. Low in iron deficiency; elevated in iron overload, inflammation, malignancy. Not specific for iron status alone.", cat: "lab", usage: "Ferritin 12 ng/mL — iron deficiency anemia" },
+  { abbr: "Iron Studies", full: "Iron Studies (Serum Iron, TIBC, Transferrin Saturation)", desc: "Assesses iron metabolism. Serum iron low, TIBC high, transferrin saturation low in iron deficiency.", cat: "lab", usage: "Iron studies: serum iron 40, TIBC 450, sat 9% — iron deficiency" },
+  { abbr: "B12", full: "Vitamin B12 (Cobalamin)", desc: "Essential for DNA synthesis, myelin formation. Deficiency causes macrocytic anemia, neuropathy, cognitive dysfunction. Diagnosed by low serum B12 + elevated methylmalonic acid.", cat: "lab", usage: "B12 220 pmol/L — deficiency, start B12 supplementation" },
+  { abbr: "Folate", full: "Folic Acid (Folate)", desc: "Cofactor in DNA synthesis. Deficiency causes macrocytic anemia, NTDs in pregnancy. Diagnosed by low serum folate + elevated homocysteine.", cat: "lab", usage: "Folate 2.1 ng/mL — deficiency, start supplementation" },
+  { abbr: "Glucose", full: "Blood Glucose (Fasting/Random)", desc: "Measured blood sugar. Fasting normal <100. Random normal <140. Used for DM screening and monitoring.", cat: "lab", usage: "Fasting glucose 180 mg/dL — hyperglycemia" },
+  { abbr: "Troponin", full: "Cardiac Troponin I/T", desc: "Cardiac-specific regulatory proteins. Elevated 3–4 hours after myocardial necrosis. Most sensitive/specific for MI. High-sensitivity assays improve early detection.", cat: "lab", usage: "Troponin I 2.5 μg/L — elevated, compatible with MI" },
+  { abbr: "BNP", full: "B-Type Natriuretic Peptide", desc: "Hormone released from ventricles in response to stretch/HTN. Elevated in CHF, useful for diagnosis and prognosis. NT-proBNP is more stable.", cat: "lab", usage: "BNP 580 pg/mL — elevated, consistent with CHF" },
+  { abbr: "D-Dimer", full: "D-Dimer", desc: "Fibrin degradation product elevated in thrombosis. Sensitive but not specific for PE/DVT. High negative predictive value (rule out PE/DVT).", cat: "lab", usage: "D-dimer 0.3 μg/mL — low probability PE, no further imaging needed" },
+  { abbr: "Lipid Panel", full: "Lipid Profile (Total Cholesterol, LDL, HDL, Triglycerides)", desc: "Assesses cardiovascular risk. Total cholesterol <200, LDL <100 (optimal), HDL >40 (male), >50 (female), TG <150.", cat: "lab", usage: "Lipid panel: total 240, LDL 160, HDL 35, TG 180 — dyslipidemia, start statin" },
+  { abbr: "TSI", full: "Thyroid Stimulating Immunoglobulin", desc: "Antibodies that mimic TSH, binding to TSH receptors. Positive in Graves' disease. Confirms autoimmune hyperthyroidism.", cat: "lab", usage: "TSI positive — Graves' disease confirmed" },
+  { abbr: "Tissue Typing", full: "HLA Tissue Typing", desc: "Identifies human leukocyte antigen (HLA) alleles for transplant matching and disease association. Importance in transplant rejection prevention.", cat: "lab", usage: "HLA typing for kidney transplant — 6/6 match found" },
+  { abbr: "Blood Culture", full: "Blood Culture", desc: "Culture of blood for bacterial/fungal growth. Gold standard for bacteremia diagnosis. Multiple sets improve sensitivity.", cat: "lab", usage: "Blood culture grows Staphylococcus aureus — endocarditis workup" },
+  { abbr: "Urinalysis", full: "Urinalysis (UA)", desc: "Examination of urine for color, clarity, specific gravity, pH, glucose, protein, ketones, leukocyte esterase, nitrites, RBCs, WBCs, casts.", cat: "lab", usage: "UA: protein 3+, RBCs 8–10, dysmorphic RBCs, casts — glomerulonephritis" },
+
+  // Emergency Medicine (30 entries)
+  { abbr: "CPR", full: "Cardiopulmonary Resuscitation", desc: "Emergency procedure combining chest compressions (100–120/min, 5–6 cm depth) and rescue breaths. 30:2 ratio. Minimize interruptions. Follow ALS algorithm.", cat: "emergency", usage: "Witnessed cardiac arrest — CPR initiated, AED applied" },
+  { abbr: "ALS", full: "Advanced Life Support", desc: "Structured approach to cardiac arrest: CPR + defibrillation + airway management + IV access + drugs. Identify reversible causes (4H's and 4T's).", cat: "emergency", usage: "ALS protocol: VF → shock 200J → CPR 2 min → Adrenaline 1mg" },
+  { abbr: "ACLS", full: "Advanced Cardiovascular Life Support", desc: "AHA protocol for cardiac emergencies including cardiac arrest algorithms, post-resuscitation care, acute coronary syndromes, and stroke management.", cat: "emergency", usage: "ACLS-certified team responded to code blue" },
+  { abbr: "FAST", full: "Focused Assessment with Sonography for Trauma", desc: "Bedside ultrasound examining 4 areas: Morrison's pouch, splenorenal recess, pelvis, and pericardium. Detects free fluid in trauma.", cat: "emergency", usage: "FAST positive — free fluid in Morrison's pouch, activate OR" },
+  { abbr: "RSI", full: "Rapid Sequence Intubation", desc: "Emergency airway technique: preoxygenation → induction agent (Propofol/Ketamine) → paralytic (Succinylcholine/Rocuronium) → intubation. No bag-mask ventilation between.", cat: "emergency", usage: "RSI with Ketamine 2mg/kg + Rocuronium 1.2mg/kg — Grade 1 view" },
+  { abbr: "Intubation", full: "Endotracheal Intubation", desc: "Placement of tube in trachea for airway protection and mechanical ventilation. Routes: oral (awake, RSI), nasal (awake), surgical (cricothyrotomy, tracheostomy).", cat: "emergency", usage: "Oral intubation with 8.0 ET tube — correct position verified by capnography" },
+  { abbr: "Cricothyrotomy", full: "Cricothyrotomy", desc: "Emergency surgical airway through cricothyroid membrane. Indicated in failed intubation, facial trauma, airway obstruction.", cat: "emergency", usage: "Surgical airway (cricothyrotomy) for airway obstruction" },
+  { abbr: "ROSC", full: "Return of Spontaneous Circulation", desc: "Resumption of perfusing cardiac rhythm during resuscitation. Goal of CPR. Followed by post-resuscitation care, targeted temperature management.", cat: "emergency", usage: "ROSC achieved after 3 minutes of CPR — continue post-resuscitation protocol" },
+  { abbr: "Code Blue", full: "Code Blue (Cardiac Arrest)", desc: "Announcement of cardiac arrest requiring immediate resuscitation. Initiates emergency response team activation.", cat: "emergency", usage: "Code blue called — resuscitation team arrived within 2 minutes" },
+  { abbr: "Sepsis", full: "Sepsis", desc: "Life-threatening organ dysfunction from dysregulated immune response to infection. SIRS + suspected infection. Septic shock = sepsis + refractory hypotension.", cat: "emergency", usage: "Sepsis from urinary source — lactate 4.2, vasopressors started" },
+  { abbr: "Anaphylaxis", full: "Anaphylaxis", desc: "Severe, life-threatening allergic reaction. Presents with bronchospasm, angioedema, hypotension, urticaria within minutes of allergen exposure.", cat: "emergency", usage: "Anaphylaxis to penicillin — IM epinephrine 0.3mg, IV access, antihistamines" },
+  { abbr: "Shock", full: "Shock", desc: "Acute circulatory failure with inadequate tissue perfusion. Types: cardiogenic, hypovolemic, distributive (septic), obstructive (PE).", cat: "emergency", usage: "Hypovolemic shock from GI bleed — IV fluids, blood transfusion, GI consult" },
+  { abbr: "Dehydration", full: "Dehydration", desc: "Loss of body fluids and electrolytes. Causes: vomiting, diarrhea, excessive sweating. Assessed by clinical signs (mucous membranes, skin turgor, orthostatic vitals).", cat: "emergency", usage: "Mild dehydration — oral rehydration solution OD" },
+  { abbr: "Acidosis", full: "Metabolic Acidosis", desc: "Low blood pH (<7.35) from bicarbonate loss or acid accumulation. ABG shows pH <7.35, HCO₃ <22, anion gap normal or elevated.", cat: "emergency", usage: "DKA with pH 7.1 — IV fluids + insulin infusion" },
+  { abbr: "Alkalosis", full: "Metabolic Alkalosis", desc: "High blood pH (>7.45) from bicarbonate excess or H⁺ loss. ABG shows pH >7.45, HCO₃ >26.", cat: "emergency", usage: "Metabolic alkalosis from vomiting — IV saline + K⁺ replacement" },
+  { abbr: "Hypothermia", full: "Hypothermia", desc: "Core body temperature <32°C. Causes: environmental exposure, immersion. Managed with passive/active rewarming. Resuscitate until 'warm and dead'.", cat: "emergency", usage: "Profound hypothermia 28°C — extracorporeal rewarming indicated" },
+  { abbr: "Hyperthermia", full: "Hyperthermia (Heat Stroke)", desc: "Core temperature >40.5°C with CNS dysfunction. Medical (infection, medications) vs exertional. Requires aggressive cooling.", cat: "emergency", usage: "Heat stroke — evaporative cooling, core temp 39°C" },
+  { abbr: "Drowning", full: "Drowning / Near-Drowning", desc: "Respiratory impairment from immersion in fluid. Can cause aspiration, hypoxia, hypothermia. Resuscitate immediately regardless of submersion time.", cat: "emergency", usage: "Near-drowning victim — prolonged CPR, 90 minutes before pronouncement" },
+  { abbr: "Trauma", full: "Trauma / Injury", desc: "Bodily injury from external force. Blunt (MVA, fall) or penetrating (GSW, stab wound). Managed per ATLS protocol (primary, secondary survey).", cat: "emergency", usage: "Blunt trauma from MVA — ATLS protocol activated" },
+  { abbr: "ATLS", full: "Advanced Trauma Life Support", desc: "Systematic approach to trauma: Primary survey (airway, breathing, circulation, disability, exposure), resuscitation, secondary survey.", cat: "emergency", usage: "ATLS activation for multi-system trauma" },
+  { abbr: "Pneumothorax", full: "Pneumothorax (Collapsed Lung)", desc: "Air in pleural space causing lung collapse. Spontaneous (primary/secondary) or traumatic. Presents with dyspnea, chest pain, decreased breath sounds.", cat: "emergency", usage: "Tension pneumothorax — needle decompression 2nd ICS, then chest tube" },
+  { abbr: "Hemothorax", full: "Hemothorax (Blood in Pleural Space)", desc: "Bleeding into pleural cavity from trauma, anticoagulation, malignancy. Presents with dyspnea, hypotension. Requires chest tube drainage.", cat: "emergency", usage: "Hemothorax post-trauma — chest tube drains 1500 mL blood → VATS" },
+  { abbr: "Tamponade", full: "Cardiac Tamponade", desc: "Pericardial fluid compressing heart chambers impeding filling. Beck's triad: JVD, hypotension, muffled heart sounds. Requires urgent pericardiocentesis.", cat: "emergency", usage: "Cardiac tamponade post-trauma — ultrasound-guided pericardiocentesis performed" },
+  { abbr: "Rhabdo", full: "Rhabdomyolysis", desc: "Muscle breakdown releasing myoglobin into bloodstream. Causes: crush injury, prolonged immobility, statins, exertion. Presents with dark urine, hyperkalemia, AKI.", cat: "emergency", usage: "Rhabdomyolysis from crush injury — aggressive IV fluids, urine alkalinization" },
+  { abbr: "DIC", full: "Disseminated Intravascular Coagulation", desc: "Pathologic activation of coagulation cascade causing microthrombi + consumption coagulopathy. Causes: sepsis, trauma, malignancy.", cat: "emergency", usage: "DIC from sepsis — PT/aPTT prolonged, fibrinogen low, D-dimer elevated" },
+  { abbr: "MAS", full: "Meconium Aspiration Syndrome", desc: "Aspiration of meconium in utero/at delivery causing airway obstruction, hypoxia. Neonatal emergency requiring immediate airway clearance.", cat: "emergency", usage: "MAS in newborn — mechanical ventilation, high-frequency oscillatory ventilation" },
+  { abbr: "Eclampsia", full: "Eclampsia", desc: "Seizures in pregnancy/postpartum from preeclampsia. Life-threatening maternal/fetal emergency. Managed with magnesium sulfate, antihypertensives.", cat: "emergency", usage: "Eclamptic seizure at 35 weeks — magnesium sulfate, urgent delivery" },
+  { abbr: "Foreign Body", full: "Foreign Body Ingestion/Aspiration", desc: "Accidental/intentional swallowing/inhalation of non-food object. Airway FB life-threatening; GI FB often passes. Endoscopy for removal.", cat: "emergency", usage: "Aspiration of coin — bronchoscopy for airway FB removal" },
+  { abbr: "Status Asthmaticus", full: "Status Asthmaticus (Severe Asthma Exacerbation)", desc: "Life-threatening asthma attack unresponsive to standard therapy. Requires ICU, IV steroids, continuous nebulizers, mechanical ventilation if needed.", cat: "emergency", usage: "Status asthmaticus — intubation, high-dose steroids, continuous albuterol" },
+
+  // Surgery (30 entries)
+  { abbr: "GA", full: "General Anesthesia", desc: "Drug-induced reversible state of unconsciousness, analgesia, amnesia, and muscle relaxation. Triad: hypnotic + opioid + muscle relaxant.", cat: "surgery", usage: "Procedure under GA — ASA Grade II" },
+  { abbr: "LA", full: "Local Anesthesia", desc: "Reversible blockade of nerve conduction in a specific area. Agents: Lidocaine (rapid onset, 1–2 hr), Bupivacaine (slow onset, 4–8 hr).", cat: "surgery", usage: "Excision biopsy under LA — 2% Lidocaine with Adrenaline" },
+  { abbr: "Regional", full: "Regional Anesthesia", desc: "Anesthesia of a large region via nerve block (epidural, spinal, peripheral nerve blocks). Used alone or combined with GA.", cat: "surgery", usage: "Lower limb surgery under spinal anesthesia — bupivacaine 0.5% 15mg" },
+  { abbr: "Spinal", full: "Spinal Anesthesia", desc: "Single-shot injection of local anesthetic into subarachnoid space. Rapid onset, limited duration (1–3 hours). Used for lower body surgery.", cat: "surgery", usage: "Cesarean section under spinal anesthesia — rapid onset" },
+  { abbr: "Epidural", full: "Epidural Anesthesia", desc: "Continuous infusion or boluses of local anesthetic into epidural space. Longer duration than spinal, titratable. Used perioperatively, postoperative analgesia.", cat: "surgery", usage: "Labor analgesia via epidural — patient-controlled epidural analgesia (PCEA)" },
+  { abbr: "ASA", full: "American Society of Anesthesiologists (Physical Status)", desc: "Classification of patient fitness for anesthesia: I (healthy) to VI (brain-dead organ donor). Predicts perioperative morbidity.", cat: "surgery", usage: "ASA Grade III — patient with severe systemic disease (CHF)" },
+  { abbr: "I&D", full: "Incision and Drainage", desc: "Surgical procedure to open and drain an abscess. Involves incision over point of maximum fluctuance, breaking loculations, irrigation, and packing.", cat: "surgery", usage: "Perianal abscess — I&D under LA" },
+  { abbr: "POD", full: "Post-Operative Day", desc: "Counting system after surgery: POD 0 = day of surgery, POD 1 = first day after. Used to track recovery milestones and expected events.", cat: "surgery", usage: "POD 2 post-appendectomy — tolerating oral feeds, afebrile" },
+  { abbr: "OT", full: "Operation Theatre / Operating Room", desc: "Sterile surgical environment for operative procedures. Includes laminar airflow, anesthesia equipment, surgical instruments, and monitoring systems.", cat: "surgery", usage: "Patient shifted to OT for emergency laparotomy" },
+  { abbr: "Extubation", full: "Extubation (Removal of Endotracheal Tube)", desc: "Removal of endotracheal tube at end of surgery/critical care after assessment of readiness (spontaneous breathing trial, airway reflexes intact).", cat: "surgery", usage: "Extubated on POD 0 after successful trial — breathing spontaneously" },
+  { abbr: "Anesthesia Record", full: "Anesthesia Record", desc: "Documentation of intraoperative patient course: vital signs, medications, fluid balance, airway management, complications.", cat: "surgery", usage: "Anesthesia record: stable vitals, 2L crystalloid infused, emergence uneventful" },
+  { abbr: "Hemostasis", full: "Hemostasis (Bleeding Control)", desc: "Surgical techniques to stop bleeding: electrocautery, ligation, vessel clips, hemostatic agents (gauze, thrombin, fibrin glue).", cat: "surgery", usage: "Hemostasis achieved with electrocautery and ligation of bleeding vessel" },
+  { abbr: "Hemovac", full: "Hemovac / Surgical Drain", desc: "Closed suction drainage system placed in surgical wound to drain blood/fluid. Prevents hematoma/seroma formation.", cat: "surgery", usage: "Hemovac drain placed — outputs 120 mL serosanguinous fluid POD 1" },
+  { abbr: "Drain", full: "Surgical Drain", desc: "Tube placed in surgical wound for passive or active drainage. Types: Penrose (passive), Jackson-Pratt (active), Blake (active). Removed when output minimal.", cat: "surgery", usage: "Jackson-Pratt drain — removed POD 4 when output <10 mL/24h" },
+  { abbr: "Wound Closure", full: "Wound Closure Techniques", desc: "Primary (sutured), delayed primary, secondary. Suture materials: absorbable (catgut, Vicryl), non-absorbable (nylon, prolene).", cat: "surgery", usage: "Skin closed with subcuticular Monocryl sutures — cosmetic closure" },
+  { abbr: "Dehiscence", full: "Wound Dehiscence", desc: "Separation of wound edges before complete healing. Risk factors: infection, obesity, poor nutrition, tension. Requires reclosure.", cat: "surgery", usage: "Wound dehiscence on POD 8 — explored, no infection, resuturing performed" },
+  { abbr: "Evisceration", full: "Wound Evisceration", desc: "Protrusion of abdominal contents through dehiscent incision. Surgical emergency. Cover with sterile gauze, IV fluids, urgent reexploration.", cat: "surgery", usage: "Abdominal evisceration — bowel visible, emergent reclosure" },
+  { abbr: "Infection", full: "Surgical Site Infection (SSI)", desc: "Infection of surgical wound. Superficial, deep, or organ/space. Presents >72 hours postop with fever, erythema, pus, pain.", cat: "surgery", usage: "SSI with purulent discharge — wound culture, broad-spectrum antibiotics" },
+  { abbr: "Seroma", full: "Seroma", desc: "Asymptomatic fluid collection in surgical wound from serum leakage. Usually resorbs spontaneously. Drain if large/symptomatic.", cat: "surgery", usage: "Seroma post-lumpectomy — observation, needle aspiration if enlarging" },
+  { abbr: "Hematoma", full: "Hematoma", desc: "Blood collection in surgical wound/tissue. Small hematomas resorb; large ones require drainage. Risk of infection.", cat: "surgery", usage: "Postoperative hematoma — ultrasound confirms, observation vs aspiration" },
+  { abbr: "DVT Prophylaxis", full: "DVT Prophylaxis (Thromboembolism Prevention)", desc: "Pharmacologic (anticoagulants) and mechanical (sequential compression devices, early mobilization) measures to prevent postoperative DVT.", cat: "surgery", usage: "DVT prophylaxis post-op — enoxaparin SC + SCDs × 7 days" },
+  { abbr: "ICD", full: "Infection Control Department", desc: "Hospital department managing infection prevention and surveillance. Monitors SSI rates, recommends antibiotic policies.", cat: "surgery", usage: "ICD notified of post-op SSI cluster — investigation initiated" },
+  { abbr: "Antibiotic Stewardship", full: "Antibiotic Stewardship", desc: "Appropriate selection, dosing, and duration of antibiotics. Aims to reduce resistance while optimizing outcomes.", cat: "surgery", usage: "Prophylactic cephalosporin × 1 dose intraoperatively per stewardship guidelines" },
+  { abbr: "Elective Surgery", full: "Elective Surgery", desc: "Planned procedure performed when patient is optimized medically. Non-urgent timing allows preoperative workup.", cat: "surgery", usage: "Elective cholecystectomy — preop workup completed, surgery scheduled" },
+  { abbr: "Urgent Surgery", full: "Urgent Surgery", desc: "Surgery needed within hours due to acute condition not immediately life-threatening but requires prompt intervention.", cat: "surgery", usage: "Urgent appendectomy — patient deteriorating, surgery within 2 hours" },
+  { abbr: "Emergency Surgery", full: "Emergency Surgery", desc: "Immediate surgical intervention required (minutes to hours) for life-threatening condition. Minimal preoperative time.", cat: "surgery", usage: "Emergency laparotomy for ruptured AAA — activated immediately" },
+  { abbr: "Laparoscopy", full: "Laparoscopic Surgery", desc: "Minimally invasive surgery using small incisions and camera (laparoscope). Advantages: less pain, faster recovery, shorter hospital stay.", cat: "surgery", usage: "Laparoscopic cholecystectomy — 4 trocars, specimen removed via bag" },
+  { abbr: "Laparotomy", full: "Laparotomy (Open Abdominal Surgery)", desc: "Surgical opening of abdominal cavity via vertical (midline) or horizontal (Pfannenstiel) incision. Provides wide exposure for intra-abdominal procedures.", cat: "surgery", usage: "Emergency laparotomy for perforated viscus — midline incision" },
+  { abbr: "Thoracotomy", full: "Thoracotomy (Open Chest Surgery)", desc: "Surgical opening of thoracic cavity via intercostal or median sternotomy incision. Access to heart, lungs, esophagus.", cat: "surgery", usage: "Median sternotomy for CABG — 3 vessel disease" },
+
+  // OB/GYN (30 entries)
+  { abbr: "LSCS", full: "Lower Segment Cesarean Section", desc: "Surgical delivery via transverse incision on lower uterine segment. Indications: fetal distress, malpresentation, CPD, previous 2+ LSCS, placenta previa.", cat: "obs", usage: "Emergency LSCS for fetal bradycardia — live male, 3.2 kg" },
+  { abbr: "LMP", full: "Last Menstrual Period", desc: "First day of last normal menstrual period. Used to calculate gestational age and expected date of delivery (EDD) using Naegele's rule (+7 days, −3 months, +1 year).", cat: "obs", usage: "LMP: 15/01/2024 → EDD: 22/10/2024" },
+  { abbr: "EDD", full: "Expected Date of Delivery", desc: "Estimated due date calculated from LMP (Naegele's rule) or confirmed by first trimester USG (most accurate). Normal pregnancy = 40 weeks ± 2 weeks.", cat: "obs", usage: "EDD by USG: 28/10/2024 — concordant with LMP dates" },
+  { abbr: "G/P", full: "Gravida / Para", desc: "Obstetric history notation. Gravida = total pregnancies. Para = deliveries >20 weeks (TPAL: Term, Preterm, Abortions, Living).", cat: "obs", usage: "G3P2L2 — third pregnancy, 2 prior term deliveries, 2 living children" },
+  { abbr: "PPH", full: "Postpartum Hemorrhage", desc: "Blood loss >500 mL (vaginal) or >1000 mL (cesarean) after delivery. Primary (<24h): uterine atony (70%), trauma, retained tissue, coagulopathy (4 T's).", cat: "obs", usage: "Primary PPH — atonic uterus, Oxytocin infusion + uterine massage" },
+  { abbr: "FHR", full: "Fetal Heart Rate", desc: "Normal FHR: 110–160 bpm. Monitored by Doppler or CTG. Abnormalities: bradycardia (<110), tachycardia (>160), decelerations (early, late, variable).", cat: "obs", usage: "CTG: FHR 155 bpm, good variability, 2 accelerations — reactive" },
+  { abbr: "CTG", full: "Cardiotocography", desc: "Simultaneous recording of fetal heart rate and uterine contractions. Assesses fetal well-being: normal (reassuring), equivocal, pathological (worrisome).", cat: "obs", usage: "CTG tracings concerning — variable decelerations, reduced variability" },
+  { abbr: "NST", full: "Non-Stress Test", desc: "Fetal monitoring assessing FHR reactivity to fetal movement. Reactive (two or more accelerations >15 bpm lasting ≥15 sec) = reassuring.", cat: "obs", usage: "NST at 38 weeks — reactive, normal fetal well-being" },
+  { abbr: "Biophysical Profile", full: "Biophysical Profile (BPP)", desc: "Ultrasound assessment scoring: FHR, fetal breathing, gross body movement, fetal tone, amniotic fluid. Score 8–10 = normal.", cat: "obs", usage: "BPP score 6/8 — oligohydramnios, deliver soon" },
+  { abbr: "Preeclampsia", full: "Preeclampsia", desc: "Pregnancy-induced HTN (≥140/90) + proteinuria/organ dysfunction after 20 weeks. Severe: BP ≥160/110, symptoms, labs abnormal. Risk of eclampsia.", cat: "obs", usage: "Severe preeclampsia at 34 weeks — IV labetalol, corticosteroids, delivery" },
+  { abbr: "Eclampsia", full: "Eclampsia", desc: "Seizures in pregnancy/postpartum from preeclampsia. Life-threatening maternal/fetal emergency. Managed with magnesium sulfate, antihypertensives, delivery.", cat: "obs", usage: "Eclamptic seizure at 35 weeks — magnesium sulfate, urgent delivery" },
+  { abbr: "HELLP Syndrome", full: "HELLP Syndrome (Hemolysis, Elevated Liver Enzymes, Low Platelets)", desc: "Severe variant of preeclampsia. Hemolysis (schistocytes), LFT elevation, thrombocytopenia (<100,000). Obstetric emergency.", cat: "obs", usage: "HELLP syndrome — platelets 45,000, AST 450, LDH 800 — urgent delivery" },
+  { abbr: "GDM", full: "Gestational Diabetes Mellitus", desc: "Glucose intolerance first recognized in pregnancy. Screened at 24–28 weeks with 1-hour glucose challenge test. Diagnosed if fasting ≥126, 1-hour ≥180, 2-hour ≥155 mg/dL.", cat: "obs", usage: "GDM diagnosed — dietary modification, monitor glucose, metformin if needed" },
+  { abbr: "Miscarriage", full: "Miscarriage (Spontaneous Abortion)", desc: "Spontaneous loss of pregnancy <20 weeks. Threatened (pain/bleeding, viable), incomplete (partial tissue passed), complete (all tissue passed).", cat: "obs", usage: "Threatened miscarriage — ultrasound confirms fetal cardiac activity" },
+  { abbr: "Ectopic", full: "Ectopic Pregnancy", desc: "Implantation outside uterine cavity (tubal, ovarian, abdominal). Presents with lower abdominal pain, vaginal bleeding, elevated β-hCG. Rupture = emergency.", cat: "obs", usage: "Ruptured ectopic pregnancy — emergency LSCS, β-hCG 50,000" },
+  { abbr: "Molar Pregnancy", full: "Molar Pregnancy (Hydatidiform Mole)", desc: "Abnormal pregnancy from chromosomal error. Complete mole (no fetal tissue), partial (with fetal tissue). Presents with vaginal bleeding, large uterus for dates.", cat: "obs", usage: "Molar pregnancy — suction evacuation, follow β-hCG to zero" },
+  { abbr: "IUGR", full: "Intrauterine Growth Restriction", desc: "Fetus <10th percentile for gestational age. Causes: placental insufficiency, maternal HTN, infection. Monitoring: serial ultrasounds, NST, consider delivery if indicated.", cat: "obs", usage: "IUGR at 34 weeks — amniotic fluid index 6 cm, delivery at 37 weeks" },
+  { abbr: "Oligohydramnios", full: "Oligohydramnios (Low Amniotic Fluid)", desc: "Amniotic fluid index <5 cm or single deepest pocket <2 cm. Risk of cord compression, fetal distress. Requires close monitoring.", cat: "obs", usage: "Oligohydramnios AFI 4 — consider delivery if at term" },
+  { abbr: "Polyhydramnios", full: "Polyhydramnios (Excess Amniotic Fluid)", desc: "Amniotic fluid index >25 cm. Causes: fetal anomalies, DM, multiple gestation, fetal anemia. Risk of preterm labor, cord prolapse.", cat: "obs", usage: "Polyhydramnios in DM pregnancy — frequent NST monitoring" },
+  { abbr: "Labor", full: "Labor", desc: "Series of involuntary uterine contractions (3 in 10 minutes, lasting >40 sec) causing cervical effacement/dilation. Three stages: latent, active, deceleration, delivery.", cat: "obs", usage: "Active labor — cervix 6 cm dilated, regular contractions 3–5 min apart" },
+  { abbr: "Induced Labor", full: "Induction of Labor", desc: "Artificial initiation of labor via cervical ripening agents (misoprostol, dinoprostone) or IV oxytocin. Indications: postdates, maternal/fetal compromise.", cat: "obs", usage: "Induction at 41 weeks — cervical ripening with misoprostol" },
+  { abbr: "Augmentation", full: "Augmentation of Labor", desc: "Enhancement of spontaneous labor with oxytocin or amniotomy for inadequate progress.", cat: "obs", usage: "Augmentation after 6 hours no cervical change — oxytocin started" },
+  { abbr: "Episiotomy", full: "Episiotomy (Perineal Incision)", desc: "Surgical incision of perineum to enlarge vaginal opening during delivery. Mediolateral (most common) or median. Reduces severe perineal trauma.", cat: "obs", usage: "Mediolateral episiotomy performed — sutured in layers" },
+  { abbr: "Vacuum Extraction", full: "Vacuum Extraction (Operative Vaginal Delivery)", desc: "Cup applied to fetal scalp with traction during contractions. Indicates: prolonged second stage, fetal distress. Risks: scalp lacerations, cephalohematoma.", cat: "obs", usage: "Vacuum extraction in second stage — successful delivery, cephalohematoma noted" },
+  { abbr: "Forceps Delivery", full: "Forceps Delivery", desc: "Metallic instruments applied to fetal head for traction. Low/outlet (visible scalp) vs mid-cavity (higher station). Rare now due to CS availability.", cat: "obs", usage: "Low forceps delivery — successful, episiotomy extended" },
+  { abbr: "Retained Placenta", full: "Retained Placenta", desc: "Failure to expel placenta within 30–60 minutes of delivery. Manual removal under GA required if bleeding uncontrolled. Risk of PPH, infection.", cat: "obs", usage: "Retained placenta — manual removal performed, oxytocin post-extraction" },
+  { abbr: "Placenta Previa", full: "Placenta Previa", desc: "Placenta covers cervical os partially (partial) or completely (complete). Risk of antepartum/postpartum hemorrhage. Delivery by LSCS if complete.", cat: "obs", usage: "Complete placenta previa — LSCS at 39 weeks (elective)" },
+  { abbr: "Placental Abruption", full: "Placental Abruption (Abruptio Placentae)", desc: "Premature placental separation from uterine wall. Presents with vaginal bleeding, abdominal pain, uterine tenderness. Risk of PPH, DIC, fetal death.", cat: "obs", usage: "Placental abruption at 32 weeks — emergency LSCS, 2.5 kg stillbirth" },
+  { abbr: "β-hCG", full: "Beta Human Chorionic Gonadotropin", desc: "Hormone produced by trophoblast; doubles every 48–72 hours in early pregnancy. Used to diagnose, confirm dating, exclude miscarriage/ectopic.", cat: "obs", usage: "β-hCG 125,000 at 10 weeks — appropriately elevated" },
+  { abbr: "RhoGAM", full: "Rh Immunoglobulin (RhIG)", desc: "Passive immunization given to Rh-negative mother to prevent sensitization from Rh-positive fetal cells. Dose: 300 μg IM after delivery or complications.", cat: "obs", usage: "RhIG 300 mcg IM given to Rh-negative mother after vaginal delivery of Rh-positive infant" },
+
+  // Psychiatry (25 entries)
+  { abbr: "MDD", full: "Major Depressive Disorder", desc: "≥5 of 9 SIGECAPS criteria for ≥2 weeks (must include depressed mood or anhedonia). Sleep, Interest, Guilt, Energy, Concentration, Appetite, Psychomotor, Suicidal ideation.", cat: "psych", usage: "MDD — moderate severity, started SSRI (Sertraline 50mg)" },
+  { abbr: "GAD", full: "Generalized Anxiety Disorder", desc: "Excessive worry about multiple domains for ≥6 months with ≥3 somatic symptoms (restlessness, fatigue, concentration difficulty, irritability, muscle tension, sleep disturbance).", cat: "psych", usage: "GAD — CBT + SSRI (Escitalopram 10mg OD)" },
+  { abbr: "OCD", full: "Obsessive-Compulsive Disorder", desc: "Recurrent intrusive thoughts (obsessions) and repetitive behaviors (compulsions) causing significant distress and functional impairment. Ego-dystonic.", cat: "psych", usage: "OCD — contamination obsessions with hand-washing compulsions — high-dose SSRI + ERP" },
+  { abbr: "PTSD", full: "Post-Traumatic Stress Disorder", desc: "Develops after exposure to traumatic event. Symptoms: re-experiencing (flashbacks), avoidance, negative cognitions, hyperarousal. Duration >1 month.", cat: "psych", usage: "PTSD following MVA — trauma-focused CBT initiated" },
+  { abbr: "MSE", full: "Mental State Examination", desc: "Systematic psychiatric assessment: Appearance, Behavior, Speech, Mood, Affect, Thought (form/content), Perception, Cognition, Insight, Judgment.", cat: "psych", usage: "MSE: Kempt, cooperative, normal speech, low mood, congruent affect, no delusions/hallucinations, intact cognition, good insight" },
+  { abbr: "Psychosis", full: "Psychosis", desc: "Loss of reality testing with delusions, hallucinations, disorganized speech/behavior. Causes: schizophrenia, bipolar, depression with psychosis, medical/substance-induced.", cat: "psych", usage: "Psychosis with paranoid delusions — antipsychotic (risperidone 3mg daily)" },
+  { abbr: "Schizophrenia", full: "Schizophrenia", desc: "Chronic psychotic disorder. Symptoms: positive (hallucinations, delusions), negative (blunted affect, alogia, avolition), cognitive. Requires antipsychotics.", cat: "psych", usage: "Schizophrenia diagnosed — olanzapine 10mg daily + psychosocial support" },
+  { abbr: "Bipolar I", full: "Bipolar I Disorder", desc: "Manic episodes with depressive episodes. Mania: ≥7 days elevated mood, 3+ criteria (decreased need for sleep, flight of ideas, distractibility, grandiosity, risky behavior, goal-directed activity, talkativeness).", cat: "psych", usage: "Bipolar I mania — lithium 900mg BD, antipsychotic adjunct" },
+  { abbr: "Bipolar II", full: "Bipolar II Disorder", desc: "Hypomanic episodes (<7 days, less severe) with depressive episodes. No full manic episodes.", cat: "psych", usage: "Bipolar II depression — SSRI monotherapy contraindicated (risk of mood switching), lamotrigine preferred" },
+  { abbr: "Mania", full: "Manic Episode", desc: "Distinct period of abnormally elevated, expansive, or irritable mood lasting ≥1 week with significant impairment. Grandiosity, decreased sleep need, flight of ideas, distractibility, risky behavior.", cat: "psych", usage: "Acute mania — hospitalization, IV valproate, antipsychotic" },
+  { abbr: "Hypomania", full: "Hypomanic Episode", desc: "Elevated mood <7 days with milder impairment than mania. Increased productivity often noted (distinct from baseline).", cat: "psych", usage: "Hypomanic episode — valproate monotherapy sufficient" },
+  { abbr: "Depression", full: "Depressive Episode", desc: "Sustained low mood with loss of pleasure, sleep disturbance, fatigue, guilt, concentration difficulty, psychomotor changes, suicidal thoughts.", cat: "psych", usage: "Moderate depression — SSRI + psychotherapy" },
+  { abbr: "Dysthymia", full: "Persistent Depressive Disorder (Dysthymia)", desc: "Depressed mood most days for ≥2 years. Chronic, lower severity than MDD. Risk of superimposed MDD ('double depression').", cat: "psych", usage: "Dysthymia × 4 years — SSRI initiated" },
+  { abbr: "Panic Disorder", full: "Panic Disorder", desc: "Recurrent unexpected panic attacks with ≥1 month of worry about future attacks or avoidance. Panic attack: sudden intense fear with physical symptoms.", cat: "psych", usage: "Panic disorder — SSRI (paroxetine) + CBT" },
+  { abbr: "Anxiety Disorder", full: "Anxiety Disorder (General)", desc: "Excessive anxiety/worry causing functional impairment. Types: GAD, panic, social, specific phobia, agoraphobia.", cat: "psych", usage: "Generalized anxiety — benzodiazepine PRN, SSRI maintenance" },
+  { abbr: "Social Anxiety", full: "Social Anxiety Disorder", desc: "Intense fear/anxiety in social situations with possible panic, embarrassment. Avoidance leads to functional impairment.", cat: "psych", usage: "Social phobia — SSRI + CBT/exposure therapy" },
+  { abbr: "Agoraphobia", full: "Agoraphobia", desc: "Fear of situations (crowds, public transport, open spaces) with difficulty escaping or getting help. Often comorbid with panic disorder.", cat: "psych", usage: "Agoraphobia with panic — SSRI + behavioral therapy" },
+  { abbr: "Insomnia", full: "Insomnia Disorder", desc: "Persistent difficulty initiating/maintaining sleep for ≥1 month. Causes impaired daytime functioning. Primary (idiopathic) vs secondary (medical, psychiatric, substance).", cat: "psych", usage: "Chronic insomnia — cognitive behavioral therapy for insomnia (CBT-I), trazodone PRN" },
+  { abbr: "Sleep Apnea", full: "Obstructive Sleep Apnea (OSA)", desc: "Recurrent airway collapse during sleep causing arousals, hypoxia. Presents with snoring, daytime somnolence, witnessed apneas. CPAP treatment.", cat: "psych", usage: "OSA diagnosed on sleep study — CPAP initiated, improvement in daytime function" },
+  { abbr: "ADHD", full: "Attention-Deficit/Hyperactivity Disorder", desc: "Childhood-onset neurodevelopmental disorder. Inattention, hyperactivity, impulsivity affecting functioning across contexts. Stimulant medication + behavioral interventions.", cat: "psych", usage: "ADHD in adult — methylphenidate initiated, improved focus" },
+  { abbr: "Autism Spectrum", full: "Autism Spectrum Disorder (ASD)", desc: "Neurodevelopmental disorder with persistent social communication difficulties and restricted, repetitive behaviors. Spectrum from mild to severe impairment.", cat: "psych", usage: "ASD diagnosed in child — behavioral support, speech therapy" },
+  { abbr: "Personality Disorder", full: "Personality Disorder", desc: "Pervasive maladaptive personality traits causing functional impairment. Clusters: A (odd), B (dramatic), C (anxious). Examples: ASPD, BPD, NPD.", cat: "psych", usage: "Borderline personality disorder — DBT (Dialectical Behavior Therapy)" },
+  { abbr: "Substance Abuse", full: "Substance Use Disorder", desc: "Maladaptive substance use causing impairment. DSM-5: ≥2 of 11 criteria over 12 months. Mild, moderate, or severe.", cat: "psych", usage: "Alcohol use disorder moderate — counseling, naltrexone, AA meetings" },
+  { abbr: "Withdrawal", full: "Withdrawal Syndrome", desc: "Physical symptoms after cessation of substance. Alcohol: tremor, seizures, delirium tremens. Opioid: dilated pupils, sweating, anxiety, pain. Management: supportive, medications.", cat: "psych", usage: "Alcohol withdrawal syndrome — benzodiazepine (lorazepam), thiamine, supportive care" },
+];
+
+let activeCategory = "all";
+let allData = abbreviations;
+
+// ─── Render ───
+function renderTabs() {
+  const c = document.getElementById("catTabs");
+  c.innerHTML = categories.map(cat => `
+    <button onclick="setCategory('${cat.id}')" id="tab-${cat.id}"
+      class="cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap
+      ${activeCategory === cat.id ? 'bg-teal-700 text-white shadow-sm active' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}">
+      <i data-lucide="${cat.icon}" style="width:13px;height:13px;"></i>
+      ${cat.label}
+    </button>
+  `).join("");
+  lucide.createIcons();
+}
+
+function renderCards(data) {
+  const area = document.getElementById("contentArea");
+  if (!data.length) {
+    area.innerHTML = `<div class="text-center py-16"><div class="text-stone-300 text-5xl mb-4">🔍</div><p class="text-stone-400 text-sm">No abbreviations found</p></div>`;
+    return;
+  }
+  // Group by category
+  const grouped = {};
+  data.forEach(item => {
+    const cat = categories.find(c => c.id === item.cat);
+    const label = cat ? cat.label : item.cat;
+    if (!grouped[label]) grouped[label] = [];
+    grouped[label].push(item);
+  });
+
+  let html = "";
+  let delay = 0;
+  for (const [section, items] of Object.entries(grouped)) {
+    html += `<div class="mb-8"><h2 class="font-display text-lg font-bold text-stone-800 mb-3 flex items-center gap-2">
+      <span class="w-1 h-5 bg-teal-600 rounded-full inline-block"></span>${section}
+      <span class="text-xs font-normal text-stone-400 font-sans">(${items.length})</span>
+    </h2><div class="grid grid-cols-1 md:grid-cols-2 gap-3">`;
+    items.forEach(item => {
+      html += `
+      <div class="abbr-card bg-white rounded-xl border border-stone-200 p-4 fade-in shadow-sm hover:shadow-md" style="animation-delay:${delay}ms">
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 bg-teal-50 text-teal-700 font-bold text-sm px-2.5 py-1 rounded-lg border border-teal-100 font-mono">${item.abbr}</div>
+          <div class="min-w-0 flex-1">
+            <h3 class="font-semibold text-stone-800 text-sm leading-tight">${item.full}</h3>
+            <p class="text-stone-500 text-xs mt-1.5 leading-relaxed">${item.desc}</p>
+            <div class="mt-2 bg-stone-50 rounded-lg px-3 py-2 border border-stone-100">
+              <span class="text-[10px] uppercase tracking-wider text-stone-400 font-semibold">Clinical Usage</span>
+              <p class="text-stone-600 text-xs mt-0.5 italic">${item.usage}</p>
+            </div>
+          </div>
+        </div>
+      </div>`;
+      delay = Math.min(delay + 30, 300);
+    });
+    html += `</div></div>`;
+  }
+  area.innerHTML = html;
+  document.getElementById("resultCount").textContent = `Showing ${data.length} abbreviation${data.length !== 1 ? 's' : ''}`;
+}
+
+function setCategory(id) {
+  activeCategory = id;
+  renderTabs();
+  filterAbbreviations();
+}
+
+function filterAbbreviations() {
+  const q = document.getElementById("searchInput").value.toLowerCase().trim();
+  document.getElementById("clearSearch").classList.toggle("hidden", !q);
+  let filtered = allData;
+  if (activeCategory !== "all") filtered = filtered.filter(a => a.cat === activeCategory);
+  if (q) filtered = filtered.filter(a => a.abbr.toLowerCase().includes(q) || a.full.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q));
+  renderCards(filtered);
+}
+
+document.getElementById("searchInput").addEventListener("input", filterAbbreviations);
+
+// ─── Element SDK ───
+const defaultConfig = {
+  page_title: "Medical Abbreviations",
+  page_subtitle: "Comprehensive Reference Guide for Healthcare Professionals",
+  background_color: "#fafaf9",
+  surface_color: "#ffffff",
+  text_color: "#1c1917",
+  primary_action_color: "#0f766e",
+  secondary_action_color: "#0d9488",
+  font_family: "DM Sans",
+  font_size: 14,
+};
+
+function applyConfig(config) {
+  const t = config.page_title || defaultConfig.page_title;
+  const s = config.page_subtitle || defaultConfig.page_subtitle;
+  document.getElementById("pageTitle").textContent = t;
+  document.getElementById("pageSubtitle").textContent = s;
+
+  const bg = config.background_color || defaultConfig.background_color;
+  const sf = config.surface_color || defaultConfig.surface_color;
+  const tx = config.text_color || defaultConfig.text_color;
+  const pa = config.primary_action_color || defaultConfig.primary_action_color;
+  const sa = config.secondary_action_color || defaultConfig.secondary_action_color;
+  const ff = config.font_family || defaultConfig.font_family;
+  const fs = config.font_size || defaultConfig.font_size;
+
+  document.getElementById("app").style.backgroundColor = bg;
+  document.querySelectorAll(".abbr-card").forEach(el => { el.style.backgroundColor = sf; });
+  document.querySelectorAll("h2, h3").forEach(el => { el.style.color = tx; });
+  document.querySelectorAll(".cat-btn.active").forEach(el => { el.style.backgroundColor = pa; });
+  document.querySelector("header").style.background = `linear-gradient(135deg, ${pa} 0%, ${sa} 100%)`;
+
+  const stack = `${ff}, 'DM Sans', sans-serif`;
+  document.body.style.fontFamily = stack;
+  document.getElementById("pageTitle").style.fontFamily = `'Playfair Display', ${ff}, serif`;
+  document.querySelectorAll("p, span, button").forEach(el => { el.style.fontSize = `${fs}px`; });
+  document.querySelectorAll("h2").forEach(el => { el.style.fontSize = `${fs * 1.3}px`; });
+  document.querySelectorAll("h3").forEach(el => { el.style.fontSize = `${fs}px`; });
+  document.getElementById("pageTitle").style.fontSize = `${fs * 2.5}px`;
+}
+
+// Initial render
+renderTabs();
+renderCards(allData);
+</script>
+</body>
+</html>
