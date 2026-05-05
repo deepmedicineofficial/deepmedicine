@@ -1,0 +1,758 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Urine Analysis | Urinalysis Interpretation & Diagnostic Guide | Deep Medicine</title> <meta name="description" content="Complete urinalysis guide including dipstick interpretation, urine microscopy, proteinuria, hematuria, casts, crystals, and clinical diagnosis."> <link rel="canonical" href="https://deepmedicine.in/clinical/diagnostics/urine-analysis"> <!-- Open Graph --> <meta property="og:title" content="Urine Analysis | Deep Medicine"> <meta property="og:description" content="Step-by-step urinalysis interpretation for clinical and renal diagnosis."> <meta property="og:image" content="https://deepmedicine.in/images/urine-analysis.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .font-heading { font-family: 'Crimson Pro', serif; }
+    .font-body { font-family: 'DM Sans', sans-serif; }
+    .tab-active { background: var(--primary-action); color: #fff; }
+    .tab-inactive { background: var(--surface); color: var(--text-color); }
+    .card-section { background: var(--surface); border: 1px solid rgba(0,0,0,0.06); }
+    :root {
+      --bg: #0f1a2e;
+      --surface: #1a2740;
+      --text-color: #e2e8f0;
+      --primary-action: #3b82f6;
+      --secondary-action: #64748b;
+    }
+    .scroll-container { overflow-y: auto; height: 100%; }
+    table th { position: sticky; top: 0; z-index: 2; }
+    .fade-in { animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body" style="background: var(--bg); color: var(--text-color);">
+  <div class="scroll-container h-full w-full"><!-- Header -->
+   <header class="px-4 sm:px-8 pt-8 pb-4">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--primary-action);"><i data-lucide="flask-conical" style="width:22px;height:22px;color:#fff;"></i>
+      </div>
+      <div>
+       <h1 id="main-title" class="font-heading text-3xl sm:text-4xl font-bold" style="color: var(--text-color);">Urine Analysis</h1>
+       <p id="subtitle" class="text-sm font-medium" style="color: var(--secondary-action);">Complete Clinical Pathology Reference</p>
+      </div>
+     </div>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="px-4 sm:px-8 mb-6">
+    <div class="max-w-6xl mx-auto flex flex-wrap gap-2" id="tab-nav"><button onclick="showTab('physical')" class="tab-btn tab-active px-4 py-2 rounded-lg text-sm font-semibold transition-all">Physical Exam</button> <button onclick="showTab('chemical')" class="tab-btn tab-inactive px-4 py-2 rounded-lg text-sm font-semibold transition-all">Chemical Exam</button> <button onclick="showTab('microscopic')" class="tab-btn tab-inactive px-4 py-2 rounded-lg text-sm font-semibold transition-all">Microscopic Exam</button> <button onclick="showTab('clinical')" class="tab-btn tab-inactive px-4 py-2 rounded-lg text-sm font-semibold transition-all">Clinical Significance</button> <button onclick="showTab('collection')" class="tab-btn tab-inactive px-4 py-2 rounded-lg text-sm font-semibold transition-all">Collection &amp; QC</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="px-4 sm:px-8 pb-12">
+    <div class="max-w-6xl mx-auto"><!-- Physical Examination -->
+     <section id="tab-physical" class="tab-content fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><!-- Volume -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="droplets" style="width:18px;height:18px;color:var(--primary-action)"></i> Volume</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal (Adult)</td>
+           <td class="py-2">600–2000 mL/24h</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Average</td>
+           <td class="py-2">1200–1500 mL/24h</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Oliguria</td>
+           <td class="py-2">&lt; 400 mL/24h</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Anuria</td>
+           <td class="py-2">&lt; 100 mL/24h</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Polyuria</td>
+           <td class="py-2">&gt; 3000 mL/24h</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Color -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="palette" style="width:18px;height:18px;color:var(--primary-action)"></i> Color</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal</td>
+           <td class="py-2">Pale yellow to amber (Urochrome)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Red/Pink</td>
+           <td class="py-2">Hematuria, hemoglobinuria, myoglobinuria, beets, rifampicin</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Dark brown</td>
+           <td class="py-2">Bilirubin (hepatitis), myoglobin, melanin</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Orange</td>
+           <td class="py-2">Bilirubin, pyridium, dehydration</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Green/Blue</td>
+           <td class="py-2">Pseudomonas UTI, methylene blue, amitriptyline</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Black</td>
+           <td class="py-2">Alkaptonuria (homogentisic acid), melanoma</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Appearance -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="eye" style="width:18px;height:18px;color:var(--primary-action)"></i> Appearance / Turbidity</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal</td>
+           <td class="py-2">Clear to slightly hazy</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Turbid causes</td>
+           <td class="py-2">WBCs, RBCs, bacteria, crystals, epithelial cells, lipids, mucus</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Milky</td>
+           <td class="py-2">Chyluria (filariasis), lipiduria (nephrotic syndrome)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Odor & SG -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="gauge" style="width:18px;height:18px;color:var(--primary-action)"></i> Odor &amp; Specific Gravity</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal odor</td>
+           <td class="py-2">Faintly aromatic</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Ammonia</td>
+           <td class="py-2">Old standing specimen, UTI (urea-splitting organisms)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Fruity/Sweet</td>
+           <td class="py-2">Diabetic ketoacidosis (acetone)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Mousy/Musty</td>
+           <td class="py-2">Phenylketonuria</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Maple syrup</td>
+           <td class="py-2">Maple syrup urine disease (branched-chain aminoaciduria)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Sp. Gravity (normal)</td>
+           <td class="py-2">1.003–1.030 (random); 1.015–1.025 (24h)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Isosthenuria</td>
+           <td class="py-2">Fixed at 1.010 (renal failure, loss of concentrating ability)</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Hyposthenuria</td>
+           <td class="py-2">&lt; 1.007 (Diabetes insipidus, overhydration)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- pH -->
+       <div class="card-section rounded-xl p-5 md:col-span-2">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="activity" style="width:18px;height:18px;color:var(--primary-action)"></i> pH</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+         <div>
+          <span class="font-semibold">Normal range:</span> 4.5–8.0 (average 6.0, slightly acidic)
+         </div>
+         <div>
+          <span class="font-semibold">Acidic urine:</span> High protein diet, DKA, starvation, diarrhea, cranberries, ammonium chloride
+         </div>
+         <div>
+          <span class="font-semibold">Alkaline urine:</span> Vegetarian diet, UTI (Proteus), vomiting, RTA, old specimens, bicarbonate therapy
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Chemical Examination -->
+     <section id="tab-chemical" class="tab-content hidden fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><!-- Protein -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="shield" style="width:18px;height:18px;color:var(--primary-action)"></i> Protein</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal</td>
+           <td class="py-2">&lt; 150 mg/24h (albumin &lt; 30 mg/24h)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Dipstick detects</td>
+           <td class="py-2">Primarily albumin (≥30 mg/dL)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Microalbuminuria</td>
+           <td class="py-2">30–300 mg/24h (early diabetic nephropathy)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Nephrotic range</td>
+           <td class="py-2">&gt; 3.5 g/24h</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Bence Jones protein</td>
+           <td class="py-2">Light chains (multiple myeloma) — NOT detected by dipstick; use SSA/heat test</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Confirmatory tests</td>
+           <td class="py-2">Sulfosalicylic acid (SSA), heat &amp; acetic acid test, 24h urine protein</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">False positive</td>
+           <td class="py-2">Highly alkaline urine (pH &gt; 8), concentrated specimen, quaternary ammonium compounds</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Glucose -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="candy" style="width:18px;height:18px;color:var(--primary-action)"></i> Glucose</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal</td>
+           <td class="py-2">Negative (renal threshold ~180 mg/dL blood glucose)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Dipstick method</td>
+           <td class="py-2">Glucose oxidase (specific for glucose)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Glycosuria causes</td>
+           <td class="py-2">Diabetes mellitus, pregnancy, Fanconi syndrome, renal glycosuria</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">False negative</td>
+           <td class="py-2">Ascorbic acid (vitamin C), high specific gravity</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Benedict's test</td>
+           <td class="py-2">Non-specific reducing substance test (detects galactose, fructose, lactose also)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Ketones -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="flame" style="width:18px;height:18px;color:var(--primary-action)"></i> Ketones</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal</td>
+           <td class="py-2">Negative</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Types</td>
+           <td class="py-2">Acetoacetate (detected by dipstick), acetone, β-hydroxybutyrate (most abundant but NOT detected by dipstick)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Dipstick reaction</td>
+           <td class="py-2">Sodium nitroprusside (Legal's test principle)</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Causes</td>
+           <td class="py-2">DKA, starvation, high-fat diet, pregnancy (hyperemesis), alcoholic ketoacidosis, glycogen storage diseases</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Blood -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="heart" style="width:18px;height:18px;color:var(--primary-action)"></i> Blood (Hemoglobin)</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Normal</td>
+           <td class="py-2">Negative</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Dipstick detects</td>
+           <td class="py-2">Free hemoglobin, intact RBCs, myoglobin (peroxidase activity)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Pattern</td>
+           <td class="py-2">Uniform color = free Hb/myoglobin; speckled = intact RBCs</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">False positive</td>
+           <td class="py-2">Menstrual contamination, oxidizing agents, bacterial peroxidases</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">False negative</td>
+           <td class="py-2">Ascorbic acid, formalin, high specific gravity, captopril</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Bilirubin & Urobilinogen -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="sun" style="width:18px;height:18px;color:var(--primary-action)"></i> Bilirubin &amp; Urobilinogen</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Bilirubin normal</td>
+           <td class="py-2">Negative (only conjugated/direct bilirubin appears in urine)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">↑ Bilirubin</td>
+           <td class="py-2">Obstructive jaundice, hepatocellular disease</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Urobilinogen normal</td>
+           <td class="py-2">0.2–1.0 mg/dL (Ehrlich units)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">↑ Urobilinogen</td>
+           <td class="py-2">Hemolytic anemia, hepatitis</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">↓ / Absent urobilinogen</td>
+           <td class="py-2">Complete biliary obstruction, broad-spectrum antibiotics</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Ictotest</td>
+           <td class="py-2">Confirmatory for bilirubin (diazo tablet test)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Nitrite & Leukocyte Esterase -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="bug" style="width:18px;height:18px;color:var(--primary-action)"></i> Nitrite &amp; Leukocyte Esterase</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Nitrite normal</td>
+           <td class="py-2">Negative</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Nitrite positive</td>
+           <td class="py-2">Gram-negative bacteria (E. coli, Klebsiella, Proteus) reduce nitrate → nitrite</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">False negative nitrite</td>
+           <td class="py-2">Gram-positive organisms, insufficient bladder incubation (&lt; 4h), ascorbic acid, low dietary nitrate</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">LE normal</td>
+           <td class="py-2">Negative</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">LE positive</td>
+           <td class="py-2">Pyuria / WBCs (UTI, interstitial nephritis)</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Both positive</td>
+           <td class="py-2">Strong indicator of bacterial UTI</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </section><!-- Microscopic Examination -->
+     <section id="tab-microscopic" class="tab-content hidden fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><!-- Cells -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="circle" style="width:18px;height:18px;color:var(--primary-action)"></i> Cells</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">RBCs normal</td>
+           <td class="py-2">0–2 /HPF</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Dysmorphic RBCs</td>
+           <td class="py-2">Glomerular origin (acanthocytes, GBM damage)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Isomorphic RBCs</td>
+           <td class="py-2">Non-glomerular (stones, trauma, tumor)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">WBCs normal</td>
+           <td class="py-2">0–5 /HPF</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Pyuria</td>
+           <td class="py-2">&gt; 5 WBC/HPF (UTI, interstitial nephritis, TB)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Eosinophiluria</td>
+           <td class="py-2">Allergic interstitial nephritis, cholesterol emboli (Hansel stain)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Squamous epithelial</td>
+           <td class="py-2">&gt; 5/LPF suggests contamination (inadequate collection)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Transitional epithelial</td>
+           <td class="py-2">From renal pelvis, ureter, bladder — large clumps suggest carcinoma</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Renal tubular epithelial (RTE)</td>
+           <td class="py-2">ATN, nephrotoxic drugs, viral infections — significant even in small numbers</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Casts -->
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="test-tube" style="width:18px;height:18px;color:var(--primary-action)"></i> Casts (Tamm-Horsfall Mucoprotein)</h3>
+        <p class="text-xs mb-3" style="color:var(--secondary-action)">Formed in distal tubules and collecting ducts. Always indicate RENAL pathology (except hyaline).</p>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Hyaline</td>
+           <td class="py-2">Non-specific; exercise, dehydration, fever, CHF (up to 2/LPF normal)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">RBC casts</td>
+           <td class="py-2"><strong>Glomerulonephritis</strong> (pathognomonic), vasculitis, malignant HTN</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">WBC casts</td>
+           <td class="py-2"><strong>Pyelonephritis</strong>, acute interstitial nephritis, lupus nephritis</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Granular (muddy brown)</td>
+           <td class="py-2"><strong>Acute Tubular Necrosis (ATN)</strong></td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Waxy casts</td>
+           <td class="py-2">Chronic renal failure (advanced stasis, broad = renal failure casts)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Fatty casts</td>
+           <td class="py-2"><strong>Nephrotic syndrome</strong> (Maltese cross under polarized light)</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Epithelial cell casts</td>
+           <td class="py-2">ATN, heavy metal poisoning, allograft rejection</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Crystals -->
+       <div class="card-section rounded-xl p-5 md:col-span-2">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="diamond" style="width:18px;height:18px;color:var(--primary-action)"></i> Crystals</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+          <h4 class="font-semibold text-sm mb-2" style="color:var(--primary-action)">Acidic Urine Crystals</h4>
+          <table class="w-full text-sm">
+           <tbody>
+            <tr class="border-b border-white/5">
+             <td class="py-1 font-semibold">Uric acid</td>
+             <td class="py-1">Rhomboid/rosette, yellow-brown; gout, tumor lysis</td>
+            </tr>
+            <tr class="border-b border-white/5">
+             <td class="py-1 font-semibold">Calcium oxalate</td>
+             <td class="py-1">Envelope/dumbbell shape; ethylene glycol poisoning, hyperoxaluria</td>
+            </tr>
+            <tr class="border-b border-white/5">
+             <td class="py-1 font-semibold">Cystine</td>
+             <td class="py-1">Hexagonal (benzene ring); <strong>pathognomonic for cystinuria</strong></td>
+            </tr>
+            <tr>
+             <td class="py-1 font-semibold">Tyrosine/Leucine</td>
+             <td class="py-1">Fine needles/spheroids; severe liver disease</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div>
+          <h4 class="font-semibold text-sm mb-2" style="color:var(--primary-action)">Alkaline Urine Crystals</h4>
+          <table class="w-full text-sm">
+           <tbody>
+            <tr class="border-b border-white/5">
+             <td class="py-1 font-semibold">Triple phosphate</td>
+             <td class="py-1">"Coffin-lid" shape; UTI with Proteus (struvite stones)</td>
+            </tr>
+            <tr class="border-b border-white/5">
+             <td class="py-1 font-semibold">Ammonium biurate</td>
+             <td class="py-1">"Thorn apple"; old specimens</td>
+            </tr>
+            <tr class="border-b border-white/5">
+             <td class="py-1 font-semibold">Calcium carbonate</td>
+             <td class="py-1">Dumbbell/spherical; usually non-pathological</td>
+            </tr>
+            <tr>
+             <td class="py-1 font-semibold">Calcium phosphate</td>
+             <td class="py-1">Prisms/star-shaped; hyperparathyroidism</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div><!-- Organisms & Others -->
+       <div class="card-section rounded-xl p-5 md:col-span-2">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="microscope" style="width:18px;height:18px;color:var(--primary-action)"></i> Organisms &amp; Other Elements</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+         <div>
+          <h4 class="font-semibold mb-1">Bacteria</h4>
+          <p>Significant bacteriuria: ≥ 10⁵ CFU/mL (clean catch midstream). Rods (Gram-negative) vs cocci (Gram-positive).</p>
+         </div>
+         <div>
+          <h4 class="font-semibold mb-1">Yeast</h4>
+          <p>Candida spp. — oval, budding cells. Common in diabetes, immunosuppression, females.</p>
+         </div>
+         <div>
+          <h4 class="font-semibold mb-1">Parasites</h4>
+          <p>Trichomonas vaginalis (motile, flagellated). Schistosoma haematobium eggs (terminal spine).</p>
+         </div>
+         <div>
+          <h4 class="font-semibold mb-1">Spermatozoa</h4>
+          <p>May be seen post-coitus or retrograde ejaculation.</p>
+         </div>
+         <div>
+          <h4 class="font-semibold mb-1">Mucus</h4>
+          <p>Thread-like, low refractive index. Non-pathological (from urinary tract glands).</p>
+         </div>
+         <div>
+          <h4 class="font-semibold mb-1">Oval Fat Bodies</h4>
+          <p>RTE cells with absorbed lipids; Maltese cross on polarized light. Nephrotic syndrome.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Clinical Significance -->
+     <section id="tab-clinical" class="tab-content hidden fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3">Glomerular Disease Pattern</h3>
+        <ul class="text-sm space-y-2">
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Proteinuria (often nephrotic range &gt; 3.5g/24h)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>RBC casts (pathognomonic)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Dysmorphic RBCs (acanthocytes)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Fatty casts &amp; oval fat bodies (nephrotic)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Lipiduria with Maltese cross pattern</span></li>
+        </ul>
+       </div>
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3">ATN Pattern</h3>
+        <ul class="text-sm space-y-2">
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Muddy brown granular casts (hallmark)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Renal tubular epithelial (RTE) cell casts</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Free RTE cells</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Low specific gravity (isosthenuria ~1.010)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>FENa &gt; 2% (intrinsic renal failure)</span></li>
+        </ul>
+       </div>
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3">UTI Pattern</h3>
+        <ul class="text-sm space-y-2">
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Nitrite positive (Gram-negative organisms)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Leukocyte esterase positive</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>WBCs &gt; 5/HPF (pyuria)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Bacteria visible on microscopy</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>WBC casts = pyelonephritis (upper UTI)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Alkaline pH with ammonia odor (Proteus mirabilis)</span></li>
+        </ul>
+       </div>
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3">Diabetes Mellitus Pattern</h3>
+        <ul class="text-sm space-y-2">
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Glycosuria (blood glucose &gt; 180 mg/dL)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Ketonuria (DKA — acetoacetate detected)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Microalbuminuria (early nephropathy marker)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Polyuria with low specific gravity</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Fruity odor (acetone in DKA)</span></li>
+         <li class="flex gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px"></i><span>Candida on microscopy (immunosuppression)</span></li>
+        </ul>
+       </div>
+       <div class="card-section rounded-xl p-5 md:col-span-2">
+        <h3 class="font-heading text-xl font-bold mb-3">Differential Diagnosis by Jaundice Type</h3>
+        <div class="overflow-x-auto">
+         <table class="w-full text-sm">
+          <thead>
+           <tr class="border-b border-white/10">
+            <th class="py-2 text-left font-semibold" style="background:var(--surface)">Type</th>
+            <th class="py-2 text-left" style="background:var(--surface)">Urine Bilirubin</th>
+            <th class="py-2 text-left" style="background:var(--surface)">Urine Urobilinogen</th>
+            <th class="py-2 text-left" style="background:var(--surface)">Urine Color</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr class="border-b border-white/5">
+            <td class="py-2 font-semibold">Pre-hepatic (Hemolytic)</td>
+            <td>Negative</td>
+            <td>↑↑ Increased</td>
+            <td>Dark (excess urobilinogen)</td>
+           </tr>
+           <tr class="border-b border-white/5">
+            <td class="py-2 font-semibold">Hepatic</td>
+            <td>Positive</td>
+            <td>↑ Increased</td>
+            <td>Dark yellow-brown</td>
+           </tr>
+           <tr>
+            <td class="py-2 font-semibold">Post-hepatic (Obstructive)</td>
+            <td>Positive (++)</td>
+            <td>Absent/↓</td>
+            <td>Dark brown (tea/cola colored)</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </section><!-- Collection & QC -->
+     <section id="tab-collection" class="tab-content hidden fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="test-tubes" style="width:18px;height:18px;color:var(--primary-action)"></i> Collection Methods</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Random</td>
+           <td class="py-2">Most common; convenient but variable concentration</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">First morning</td>
+           <td class="py-2">Best for routine; most concentrated, ideal for protein, nitrite, pregnancy testing</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Clean-catch midstream</td>
+           <td class="py-2">Standard for culture; reduces contamination</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">24-hour collection</td>
+           <td class="py-2">Quantitative: protein, creatinine clearance, electrolytes, hormones</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Catheterized</td>
+           <td class="py-2">Sterile; bedridden patients, ICU</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Suprapubic aspiration</td>
+           <td class="py-2">Gold standard for sterile collection (infants, suspected anaerobes)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="clock" style="width:18px;height:18px;color:var(--primary-action)"></i> Specimen Handling &amp; Timing</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Analyze within</td>
+           <td class="py-2">1 hour of collection (or refrigerate at 2–8°C, max 2h)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Delayed analysis effects</td>
+           <td class="py-2">↑ pH, ↑ bacteria, ↓ glucose, ↓ ketones, ↓ bilirubin, lysis of casts/cells</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Preservatives</td>
+           <td class="py-2">Boric acid (culture), toluene (24h chemistry), thymol, formalin (cytology)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Container</td>
+           <td class="py-2">Clean, dry, leak-proof; sterile for culture</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Minimum volume</td>
+           <td class="py-2">12 mL (routine UA); centrifuge 10–15 mL at 400g × 5 min</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="clipboard-check" style="width:18px;height:18px;color:var(--primary-action)"></i> Quality Control</h3>
+        <table class="w-full text-sm">
+         <tbody>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Dipstick storage</td>
+           <td class="py-2">Room temp, tightly capped, avoid humidity; discard if discolored</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">QC controls</td>
+           <td class="py-2">Run positive and negative controls each shift / new lot</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Timing</td>
+           <td class="py-2">Read dipstick at exact manufacturer-specified times (60–120 sec for most pads)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+           <td class="py-2 font-semibold">Interference</td>
+           <td class="py-2">Ascorbic acid is the most common interfering substance (false-neg glucose, blood, nitrite)</td>
+          </tr>
+          <tr>
+           <td class="py-2 font-semibold">Microscopy standardization</td>
+           <td class="py-2">KOVA system or standardized slide; report per HPF (400×) or LPF (100×)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="card-section rounded-xl p-5">
+        <h3 class="font-heading text-xl font-bold mb-3 flex items-center gap-2"><i data-lucide="list-ordered" style="width:18px;height:18px;color:var(--primary-action)"></i> Routine UA Workflow</h3>
+        <ol class="text-sm space-y-2 list-decimal list-inside">
+         <li><strong>Assess physical properties</strong> — color, clarity, odor, volume</li>
+         <li><strong>Chemical dipstick</strong> — pH, SG, protein, glucose, ketones, blood, bilirubin, urobilinogen, nitrite, LE</li>
+         <li><strong>Centrifuge</strong> — 10–15 mL at 400g × 5 min; decant to 0.5–1 mL sediment</li>
+         <li><strong>Microscopic exam</strong> — scan 10 LPF then 10 HPF; report cells, casts, crystals, organisms</li>
+         <li><strong>Correlate findings</strong> — dipstick vs microscopy agreement; reflex to culture if indicated</li>
+         <li><strong>Report &amp; flag</strong> — critical values (e.g., new RBC casts, massive proteinuria)</li>
+        </ol>
+       </div>
+      </div>
+     </section>
+    </div>
+   </main>
+  </div>
+  <script>
+    // Tab navigation
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('tab-active');
+        btn.classList.add('tab-inactive');
+      });
+      event.currentTarget.classList.remove('tab-inactive');
+      event.currentTarget.classList.add('tab-active');
+    }
+
+    // Element SDK
+    const defaultConfig = {
+      main_title: 'Urine Analysis',
+      subtitle: 'Complete Clinical Pathology Reference',
+      background_color: '#0f1a2e',
+      surface_color: '#1a2740',
+      text_color: '#e2e8f0',
+      primary_action: '#3b82f6',
+      secondary_action: '#64748b',
+      font_family: 'Crimson Pro',
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+
+      const bg = config.background_color || defaultConfig.background_color;
+      const surface = config.surface_color || defaultConfig.surface_color;
+      const text = config.text_color || defaultConfig.text_color;
+      const primary = config.primary_action || defaultConfig.primary_action;
+      const secondary = config.secondary_action || defaultConfig.secondary_action;
+
+      document.documentElement.style.setProperty('--bg', bg);
+      document.documentElement.style.setProperty('--surface', surface);
+      document.documentElement.style.setProperty('--text-color', text);
+      document.documentElement.style.setProperty('--primary-action', primary);
+      document.documentElement.style.setProperty('--secondary-action', secondary);
+
+      document.body.style.background = bg;
+      document.body.style.color = text;
+
+      const font = config.font_family || defaultConfig.font_family;
+      const size = config.font_size || defaultConfig.font_size;
+      document.getElementById('main-title').style.fontFamily = `${font}, serif`;
+      document.querySelectorAll('.font-heading').forEach(el => el.style.fontFamily = `${font}, serif`);
+      document.getElementById('main-title').style.fontSize = `${size * 2}px`;
+      document.getElementById('subtitle').style.fontSize = `${size * 0.85}px`;
+    }
+
+    lucide.createIcons();
+  </script>
+ </body>
+</html>
