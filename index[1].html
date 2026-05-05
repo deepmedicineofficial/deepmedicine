@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="en" class="h-full scroll-smooth">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEEPMEDICINE - Medical Education Platform</title>
+  <!-- Meta Tags -->
+  <meta name="description" content="Deep Medicine is a modern medical learning platform offering ICU notes, emergency medicine, antibiotics guides, and AI-powered tools for medical students.">
+  <meta name="author" content="Deep Medicine">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0d9488">
+  
+  <!-- canonical -->
+  <link rel="canonical" href="https://deepmedicine.in">
+  
+  <!-- Standard favicon -->
+<!-- PNG favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="icon" sizes="512x512" href="images/android-chrome-512x512.png">
+<link rel="icon" sizes="192x192" href="images/android-chrome-192x192.png">
+
+
+<!-- Apple (iPhone/iPad) -->
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
+<!-- Android / Chrome -->
+<link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Deep Medicine | Medical Learning Platform">
+  <meta property="og:description" content="Explore ICU notes, emergency medicine, antibiotics, and AI-powered tools for medical students.">
+  <meta property="og:image" content="https://deepmedicine.in/images/logo.jpg">
+  <meta property="og:url" content="https://deepmedicine.in">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deep Medicine | Medical Study Platform">
+  <meta name="twitter:description" content="ICU notes, emergency medicine, antibiotics & AI tools for students.">
+  <meta name="twitter:image" content="https://deepmedicine.in/images/logo.jpg">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace']
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+body { overflow-x: hidden; }
+.dark { --bg: #0f172a; --surface: #1e293b; --text: #f1f5f9; --muted: #94a3b8; }
+:root { --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --muted: #64748b; }
+
+/* Animations */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 5px rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 20px rgba(6,182,212,0.6); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes countUp { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+@keyframes carousel { 0%, 30% { opacity: 1; } 33%, 97% { opacity: 0; } 100% { opacity: 1; } }
+
+.animate-fade-in-up { animation: fadeInUp 0.6s ease forwards; }
+.animate-slide-in { animation: slideIn 0.3s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.stagger-1 { animation-delay: 0.1s; opacity: 0; }
+.stagger-2 { animation-delay: 0.2s; opacity: 0; }
+.stagger-3 { animation-delay: 0.3s; opacity: 0; }
+.stagger-4 { animation-delay: 0.4s; opacity: 0; }
+
+/* Carousel */
+.carousel-item {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;   /* ❗ disables clicks */
+  transition: opacity 0.6s ease;
+  z-index: 0;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  pointer-events: auto;   /* ✅ only active slide clickable */
+  z-index: 1;
+  position: relative;
+}
+
+/* Menu */
+.menu-overlay { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+.submenu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+.submenu.open { max-height: 600px; padding: 8px 0; }
+.menu-item.active .menu-label { color: #06b6d4; background: rgba(6,182,212,0.1); }
+
+/* Cards */
+.tool-card { transition: all 0.3s ease; }
+.tool-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(6,182,212,0.15); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+
+/* Focus Mode */
+.focus-mode .non-essential { opacity: 0.1; pointer-events: none; }
+.focus-mode .essential { position: relative; z-index: 10; }
+
+/* TOC */
+.toc-item.active { border-left-color: #06b6d4; color: #06b6d4; }
+
+/* Highlight boxes */
+.highlight-box { border-left: 4px solid #06b6d4; background: rgba(6,182,212,0.05); }
+.warning-box { border-left: 4px solid #f59e0b; background: rgba(245,158,11,0.05); }
+.danger-box { border-left: 4px solid #ef4444; background: rgba(239,68,68,0.05); }
+
+/* Filter pills */
+.filter-pill { transition: all 0.2s; }
+.filter-pill.active { background: #06b6d4; color: white; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+  <div id="app-wrapper" class="h-full w-full overflow-auto">
+   <!-- Top Navbar -->
+   <nav id="navbar" class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700/50 transition-colors">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+
+    <!-- Left -->
+    <div class="flex items-center gap-3">
+
+      <!-- Menu -->
+      <button id="menu-toggle" 
+        class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition" 
+        aria-label="Menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Logo + Brand -->
+      <a href="index.html" class="flex items-center gap-2">
+
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+
+        <span id="brand-name" 
+          class="text-lg font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+          DEEPMEDICINE
+        </span>
+      </a>
+    </div>
+
+    <!-- Right -->
+    <div class="flex items-center gap-2">
+
+      <button id="focus-toggle" 
+        class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition" 
+        title="Focus Mode">
+        <i data-lucide="eye" class="w-5 h-5"></i>
+      </button>
+
+      <button id="dark-toggle" 
+        class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition" 
+        aria-label="Toggle Dark Mode">
+        <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+        <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+      </button>
+
+    </div>
+
+  </div>
+</nav>
+   <!-- Side Menu Overlay -->
+   <div id="menu-overlay" class="fixed inset-0 z-[60] menu-overlay hidden" onclick="closeMenu()"></div><!-- Side Menu -->
+   <aside id="side-menu" class="fixed top-0 left-0 h-full w-80 max-w-[85vw] z-[70] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full transition-transform duration-300 overflow-y-auto">
+    <div class="p-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="3"/>
+  <circle cx="12" cy="12" r="8"/>
+</svg>
+      </div><span class="font-bold text-cyan-600">DEEPMEDICINE</span>
+     </div><button onclick="closeMenu()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div><!-- Search -->
+    <div class="p-4">
+     <div class="relative">
+      <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i> <input id="menu-search" type="text" placeholder="Smart Search..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border-0 text-sm focus:ring-2 focus:ring-cyan-500 outline-none" oninput="filterMenu(this.value)">
+     </div>
+    </div><!-- Menu Items -->
+    <nav id="menu-nav" class="px-3 pb-6">
+     <div class="menu-item" data-menu="home">
+      <div class="menu-label flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="window.location.hash='#home'">
+       <i data-lucide="home" class="w-5 h-5 text-cyan-500"></i><span>Home</span>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="emergency">
+      <div class="menu-label flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="toggleSubmenu('emergency')">
+       <div class="flex items-center gap-3"><i data-lucide="siren" class="w-5 h-5 text-red-500"></i><span>Emergency Medicine</span>
+       </div><i data-lucide="chevron-down" class="w-4 h-4 submenu-arrow transition-transform"></i>
+      </div>
+      <div class="submenu pl-8" id="sub-emergency">
+       <a href="core/emergency/trauma-primary-survey.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Trauma Management</a> <a href="core/emergency/poisoning-management.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Poisioning Management</a> <a href="core/emergency/burns-management.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Burns Management</a> <a href="core/emergency/cardiac-emergencies.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Cardiac Emergency</a> <a href="core/emergency/sepsis-management.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Sepsis Management</a> <a href="core/emergency/airway-ventilation.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Airway Management</a> <a href="core/emergency/neurological-emergencies.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Neurological Emergency</a> <a href="core/emergency/renal-emergencies.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Renal Emergency</a> <a href="core/emergency/obstetric-emergencies.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Obstetric Emergency</a> <a href="core/emergency/pediatrics-emergencies.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Pediatric Emergency</a>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="icu">
+      <div class="menu-label flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="toggleSubmenu('icu')">
+       <div class="flex items-center gap-3"><i data-lucide="heart-pulse" class="w-5 h-5 text-pink-500"></i><span>ICU &amp; Critical Care</span>
+       </div><i data-lucide="chevron-down" class="w-4 h-4 submenu-arrow transition-transform"></i>
+      </div>
+      <div class="submenu pl-8" id="sub-icu">
+       <a href="core/icu/fluid-management.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Fluid Management</a> <a href="core/icu/icu-nutrition.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">ICU Nutrition</a> <a href="core/icu/airway-ventilation.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Airway Ventilation</a> <a href="core/icu/icu-protocols.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Protocols And Guidelines</a> <a href="core/icu/cardiac-drugs.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Cardiac Drugs</a> <a href="core/icu/antibiotics.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Critical Antibiotics</a> <a href="core/icu/stroke-seizures.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Stroke And Seizures</a> <a href="core/icu/myocardial-infarction.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Myocardial Infarction</a> <a href="core/icu/gastrointestinal-bleed.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Gastrointestinal Bleed</a> <a href="core/icu/infectious-disease.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Infectious Disease</a>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="internal">
+      <div class="menu-label flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="toggleSubmenu('internal')">
+       <div class="flex items-center gap-3"><i data-lucide="stethoscope" class="w-5 h-5 text-blue-500"></i><span>Internal Medicine</span>
+       </div><i data-lucide="chevron-down" class="w-4 h-4 submenu-arrow transition-transform"></i>
+      </div>
+      <div class="submenu pl-8" id="sub-internal">
+       <a href="core/internal-medicine/cardiology.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Cardiology</a> <a href="core/internal-medicine/gastroenterology.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Gastroenterology</a> <a href="core/internal-medicine/neurology.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Neurology</a> <a href="core/internal-medicine/nephrology.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Nephrology</a> <a href="core/internal-medicine/endocrinology.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Endocrinology</a> <a href="core/internal-medicine/urology.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Urology</a> <a href="core/internal-medicine/poisoning.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Toxicology And Poisioning</a> <a href="core/internal-medicine/infectious-diseases.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Infectious Disease</a>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="drugs">
+      <div class="menu-label flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="toggleSubmenu('drugs')">
+       <div class="flex items-center gap-3"><i data-lucide="pill" class="w-5 h-5 text-green-500"></i><span>Drugs &amp; Dosages</span>
+       </div><i data-lucide="chevron-down" class="w-4 h-4 submenu-arrow transition-transform"></i>
+      </div>
+      <div class="submenu pl-8" id="sub-drugs">
+       <a href="clinical/drugs/drugs-classification.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Drugs Classification</a> <a href="clinical/drugs/antibiotics-classification.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Antibiotics Classification</a> <a href="clinical/drugs/doc.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Drugs Of Choice</a> <a href="clinical/drugs/drug-interactions.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Drugs Interactions</a> <a href="clinical/drugs/analgesics-nsaids.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Analgesics &amp; NSAIDS</a> <a href="clinical/drugs/antidiabetic.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Antidiabetic Drugs</a> <a href="clinical/drugs/antihypertensive.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Hypertensice Drugs</a> <a href="clinical/drugs/pediatric-doses.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Pediatric Doses</a>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="procedures">
+      <div class="menu-label flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="toggleSubmenu('procedures')">
+       <div class="flex items-center gap-3"><i data-lucide="scissors" class="w-5 h-5 text-orange-500"></i><span>Clinical Procedures</span>
+       </div><i data-lucide="chevron-down" class="w-4 h-4 submenu-arrow transition-transform"></i>
+      </div>
+      <div class="submenu pl-8" id="sub-procedures">
+       <a href="learning/clinical-procedures/central-venous-catheterization.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Central Venous Catheterization</a> <a href="learning/clinical-procedures/endotracheal-intubation.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Endotracheal Intubation</a> <a href="learning/clinical-procedures/lumbar-puncture.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Lumbar Puncture</a> <a href="learning/clinical-procedures/fluid-tapping.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Thoracentesis &amp; Paracentesis</a> <a href="learning/clinical-procedures/foleys-catheterization.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Foleys Catheterization</a> <a href="learning/clinical-procedures/ryles-tube-insertion.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Rules Tube Insertion</a> <a href="learning/clinical-procedures/wound-dressings.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Wound Dressing</a> <a href="learning/clinical-procedures/suturing.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Suturing Techniques</a>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="diagnostics">
+      <div class="menu-label flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="toggleSubmenu('diagnostics')">
+       <div class="flex items-center gap-3"><i data-lucide="microscope" class="w-5 h-5 text-purple-500"></i><span>Diagnostics</span>
+       </div><i data-lucide="chevron-down" class="w-4 h-4 submenu-arrow transition-transform"></i>
+      </div>
+      <div class="submenu pl-8" id="sub-diagnostics">
+       <a href="clinical/diagnostics/cardiac-biomarkers.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Biomkarkers &amp; Cardiac Enzymes</a> <a href="clinical/diagnostics/ecg.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">ECG Highlighted</a> <a href="clinical/diagnostics/abg-interpretation.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">ABG Interpretation</a> <a href="clinical/diagnostics/lab-values.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Lab Values</a> <a href="clinical/diagnostics/urine-analysis.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Urine Analysis</a> <a href="clinical/diagnostics/cbc.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Complete Blood Count</a> <a href="clinical/diagnostics/chest-xray.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Chest Xray</a> <a href="clinical/diagnostics/microbiology.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Microbiology &amp; Culture</a>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="protocols">
+      <div class="menu-label flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition" onclick="toggleSubmenu('protocols')">
+       <div class="flex items-center gap-3"><i data-lucide="clipboard-list" class="w-5 h-5 text-teal-500"></i><span>Protocols &amp; Guidelines</span>
+       </div><i data-lucide="chevron-down" class="w-4 h-4 submenu-arrow transition-transform"></i>
+      </div>
+      <div class="submenu pl-8" id="sub-protocols">
+       <a href="clinical/protocols/acls-algorithm.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">ACLS Algorithm</a> <a href="clinical/protocols/bls-algorithm.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">BLS Protocol</a> <a href="clinical/protocols/sepsis-protocol.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Sepsis Bundle Protocol</a> <a href="clinical/protocols/dka-protocol.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">DKA Protocol</a> <a href="clinical/protocols/blood-transfusion.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Blood Transfusion</a> <a href="clinical/protocols/antibiotics-prophylaxis.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Antibiotic Prophylaxis</a> <a href="clinical/protocols/icu-protocol.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">ICU Protocols</a> <a href="clinical/protocols/crisis-protocol.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">Crisis Protocols</a>
+      </div>
+     </div>
+     <div class="menu-item" data-menu="games">
+      <div class="menu-label flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition">
+       <i data-lucide="gamepad-2" class="w-5 h-5 text-amber-500"></i><a href="pages/brain-games.html" class="flex-1">Brain Games</a>
+      </div>
+     </div>
+     <hr class="my-3 border-slate-200 dark:border-slate-700">
+     <div class="menu-item">
+      <a href="pages/about.html" class="menu-label flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition"> <i data-lucide="info" class="w-5 h-5 text-slate-400"></i><span>About / Contact</span> </a>
+     </div>
+     <div class="menu-item">
+      <a href="pages/privacy-policy.html" class="menu-label flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition"> <i data-lucide="shield" class="w-5 h-5 text-slate-400"></i><span>Privacy Policy</span> </a>
+     </div>
+     <div class="menu-item">
+      <a href="pages/terms-of-use.html" class="menu-label flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition"> <i data-lucide="file-text" class="w-5 h-5 text-slate-400"></i><span>Terms of Use</span> </a>
+     </div>
+     <div class="menu-item">
+      <a href="pages/medical-disclaimer.html" class="menu-label flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition"> <i data-lucide="alert-triangle" class="w-5 h-5 text-slate-400"></i><span>Medical Disclaimer</span> </a>
+     </div>
+    </nav>
+   </aside><!-- Sticky TOC (Desktop) -->
+   <div id="toc" class="fixed right-4 top-24 w-48 hidden xl:block z-30 non-essential">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-lg border border-slate-200 dark:border-slate-700">
+     <h4 class="text-xs font-bold uppercase text-slate-400 mb-3">On This Page</h4>
+     <nav class="space-y-1 text-xs">
+      <a href="#hero" class="toc-item block pl-3 py-1 border-l-2 border-slate-200 dark:border-slate-600 hover:text-cyan-500 transition">Hero</a> <a href="#tools" class="toc-item block pl-3 py-1 border-l-2 border-slate-200 dark:border-slate-600 hover:text-cyan-500 transition">Study Tools</a> <a href="#clinical" class="toc-item block pl-3 py-1 border-l-2 border-slate-200 dark:border-slate-600 hover:text-cyan-500 transition">Clinical Tools</a> <a href="#mcq" class="toc-item block pl-3 py-1 border-l-2 border-slate-200 dark:border-slate-600 hover:text-cyan-500 transition">MCQs</a> <a href="#timer" class="toc-item block pl-3 py-1 border-l-2 border-slate-200 dark:border-slate-600 hover:text-cyan-500 transition">Timer</a> <a href="#community" class="toc-item block pl-3 py-1 border-l-2 border-slate-200 dark:border-slate-600 hover:text-cyan-500 transition">Community</a> <a href="#contact" class="toc-item block pl-3 py-1 border-l-2 border-slate-200 dark:border-slate-600 hover:text-cyan-500 transition">Contact</a>
+     </nav>
+    </div>
+   </div><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Welcome + Daily Tip -->
+    <section class="mb-6 animate-fade-in-up">
+     <div class="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 dark:from-cyan-500/5 dark:to-blue-500/5 rounded-xl p-4 border border-cyan-200/50 dark:border-cyan-800/30">
+      <h1 id="welcome-msg" class="text-lg font-bold mb-1">Welcome to DeepMedicine 👋</h1>
+      <p class="text-xs text-slate-600 dark:text-slate-400 mb-2">Your evidence-based clinical companion for medical excellence.</p>
+      <div class="highlight-box rounded-lg p-3">
+       <div class="flex items-start gap-2">
+        <i data-lucide="lightbulb" class="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0"></i>
+        <div>
+         <span class="text-[10px] font-bold uppercase text-cyan-600 dark:text-cyan-400">Today's Tip</span>
+         <p id="daily-tip" class="text-xs mt-0.5 text-slate-700 dark:text-slate-300">In acute MI, door-to-balloon time should be &lt;90 minutes. Remember: Time is Myocardium! 🫀</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Hero Carousel -->
+    <section id="hero" class="mb-12 animate-fade-in-up stagger-2">
+     <div class="relative rounded-3xl overflow-hidden h-72 md:h-80 shadow-xl">
+      <div class="carousel-item active bg-gradient-to-br from-cyan-600 via-blue-700 to-indigo-800 flex items-center justify-center p-8">
+       <div class="text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-3 animate-float">Master Emergency</h2>
+        <p class="text-cyan-100 mb-6 max-w-lg mx-auto">Evidence-based protocols, drug doses &amp; clinical pearls at your fingertips</p>
+        <div class="flex flex-wrap justify-center gap-3">
+         <a href="core/emergency/emergency-drugs.html" class="px-5 py-2.5 bg-white text-blue-700 font-semibold rounded-xl hover:bg-cyan-50 transition">Start Learning Concepts</a> <a href="clinical/diagnostics/abg-interpretation.html" class="px-5 py-2.5 bg-white/20 text-white font-semibold rounded-xl hover:bg-white/30 transition border border-white/30">ABG Interpret</a> <a href="learning/study/mechanical-ventilation.html" class="px-5 py-2.5 bg-white/20 text-white font-semibold rounded-xl hover:bg-white/30 transition border border-white/30">Ventilator Guide</a>  
+        </div>
+       </div>
+      </div>
+      <div class="carousel-item bg-gradient-to-br from-emerald-600 via-teal-700 to-cyan-800 flex items-center justify-center p-8">
+       <div class="text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-3">Learn &amp; Practice</h2>
+        <p class="text-emerald-100 mb-6 max-w-lg mx-auto">Ventilator settings, vasopressors &amp; life-saving protocols</p>
+        <div class="flex flex-wrap justify-center gap-3">
+         <a href="learning/study/abc-emergencies.html" class="px-5 py-2.5 bg-white text-teal-700 font-semibold rounded-xl hover:bg-emerald-50 transition">ABC Emergencies</a> <a href="learning/tools/mcqs.html" class="px-5 py-2.5 bg-white/20 text-white font-semibold rounded-xl hover:bg-white/30 transition border border-white/30">Practice MCQs</a> <a href="learning/tools/flashcards.html" class="px-5 py-2.5 bg-white/20 text-white font-semibold rounded-xl hover:bg-white/30 transition border border-white/30">Flashcards</a>
+        </div>
+       </div>
+      </div>
+      <div class="carousel-item bg-gradient-to-br from-purple-600 via-violet-700 to-indigo-800 flex items-center justify-center p-8">
+       <div class="text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-3">Clinical Procedures</h2>
+        <p class="text-purple-100 mb-6 max-w-lg mx-auto">Step-by-step guides with tips from experienced clinicians</p>
+        <div class="flex flex-wrap justify-center gap-3">
+         <a href="core/emergency/airway-ventilation.html" class="px-5 py-2.5 bg-white text-purple-700 font-semibold rounded-xl hover:bg-purple-50 transition">Airway &amp; Ventilation</a> <a href="learning/clinical-procedures/central-line.html" class="px-5 py-2.5 bg-white/20 text-white font-semibold rounded-xl hover:bg-white/30 transition border border-white/30">Central Line</a> <a href="learning/clinical-procedures/intubation.html" class="px-5 py-2.5 bg-white/20 text-white font-semibold rounded-xl hover:bg-white/30 transition border border-white/30">Intubation</a>
+        </div>
+       </div>
+      </div><!-- Carousel dots -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+       <button onclick="goToSlide(0)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/50 transition"></button> <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/50 transition"></button> <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/50 transition"></button>
+      </div>
+     </div>
+    </section><!-- Daily Highlight (Static Rotation) -->
+    <section class="mb-8 non-essential animate-fade-in-up stagger-1">
+     <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700">
+      <div class="flex items-center gap-2 mb-3">
+       <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i>
+       <h3 class="font-bold text-sm uppercase text-amber-600 dark:text-amber-400">Daily Highlight</h3>
+      </div>
+      <div id="daily-highlight" class="text-sm text-slate-700 dark:text-slate-300"></div>
+     </div>
+    </section><!-- Stats -->
+    <section class="mb-12 non-essential">
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 text-center shadow-sm border border-slate-200 dark:border-slate-700 animate-fade-in-up stagger-1">
+       <div class="text-3xl font-extrabold text-cyan-600">
+        500+
+       </div>
+       <div class="text-xs text-slate-500 mt-1">
+        Clinical Topics
+       </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 text-center shadow-sm border border-slate-200 dark:border-slate-700 animate-fade-in-up stagger-2">
+       <div class="text-3xl font-extrabold text-blue-600">
+        2000+
+       </div>
+       <div class="text-xs text-slate-500 mt-1">
+        MCQs
+       </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 text-center shadow-sm border border-slate-200 dark:border-slate-700 animate-fade-in-up stagger-3">
+       <div class="text-3xl font-extrabold text-purple-600">
+        100+
+       </div>
+       <div class="text-xs text-slate-500 mt-1">
+        Drug Protocols
+       </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 text-center shadow-sm border border-slate-200 dark:border-slate-700 animate-fade-in-up stagger-4">
+       <div class="text-3xl font-extrabold text-emerald-600">
+        50+
+       </div>
+       <div class="text-xs text-slate-500 mt-1">
+        Procedures
+       </div>
+      </div>
+     </div>
+    </section><!-- Filter System -->
+    <section class="mb-6 non-essential">
+     <div class="flex flex-wrap gap-2">
+      <button class="filter-pill active px-4 py-1.5 rounded-full text-sm font-medium bg-slate-200 dark:bg-slate-700 transition" onclick="filterCards('all', this)">All</button> <button class="filter-pill px-4 py-1.5 rounded-full text-sm font-medium bg-slate-200 dark:bg-slate-700 transition" onclick="filterCards('study', this)">Study</button> <button class="filter-pill px-4 py-1.5 rounded-full text-sm font-medium bg-slate-200 dark:bg-slate-700 transition" onclick="filterCards('clinical', this)">Clinical</button>
+     </div>
+    </section><!-- Study Tools -->
+    <section id="tools" class="mb-12 essential">
+     <h2 class="text-xl font-bold mb-5 flex items-center gap-2"><i data-lucide="book-open" class="w-5 h-5 text-cyan-500"></i> Study Tools</h2>
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="study-tools-grid">
+      <a href="learning/study/physical-examinations.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="user-check" class="w-6 h-6 text-cyan-600"></i>
+       </div><h3 class="font-semibold text-sm"> General Physical Examinations</h3><p class="text-xs text-slate-500 mt-1">Step-by-step bedside mastery</p></a> <a href="learning/study/emergency-protocols.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="siren" class="w-6 h-6 text-blue-600"></i>
+       </div><h3 class="font-semibold text-sm">Emergency Protocols</h3><p class="text-xs text-slate-500 mt-1">Act fast And Think structured</p></a> <a href="learning/study/differential-diagnosis.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="activity" class="w-6 h-6 text-purple-600"></i>
+       </div><h3 class="font-semibold text-sm">Differential Diagnosis</h3><p class="text-xs text-slate-500 mt-1">From symptom to certainty</p></a> <a href="learning/study/clinical-emergencies.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="brain-circuit" class="w-6 h-6 text-amber-600"></i>
+       </div><h3 class="font-semibold text-sm">Clinical Emergencies</h3><p class="text-xs text-slate-500 mt-1">Recognize. Respond. Stabilize.</p></a> <a href="learning/study/clinical-expert.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="git-branch" class="w-6 h-6 text-rose-600"></i>
+       </div><h3 class="font-semibold text-sm">Clinical Expert</h3><p class="text-xs text-slate-500 mt-1">See like a senior clinician</p></a> <a href="learning/study/cpr.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="heart-pulse" class="w-6 h-6 text-indigo-600"></i>
+       </div><h3 class="font-semibold text-sm">CPR</h3><p class="text-xs text-slate-500 mt-1">Every second saves a life</p></a> <a href="learning/study/abc-emergencies.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="wind" class="w-6 h-6 text-teal-600"></i>
+       </div><h3 class="font-semibold text-sm">ABC Emergencies</h3><p class="text-xs text-slate-500 mt-1">Airway. Breathing. Circulation—first</p></a> <a href="learning/study/case-discussions.html" class="tool-card study-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="message-square" class="w-6 h-6 text-red-600"></i>
+       </div><h3 class="font-semibold text-sm">Case Discussions</h3><p class="text-xs text-slate-500 mt-1">Learn through real scenarios</p></a>
+     </div>
+    </section><!-- Clinical Tools -->
+    <section id="clinical" class="mb-12 essential">
+     <h2 class="text-xl font-bold mb-5 flex items-center gap-2"><i data-lucide="activity" class="w-5 h-5 text-emerald-500"></i> Clinical Tools</h2>
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="clinical-tools-grid">
+      <a href="learning/tools/mcqs.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="clipboard-check" class="w-6 h-6 text-emerald-600"></i>
+       </div><h3 class="font-semibold text-sm">MCQs</h3><p class="text-xs text-slate-500 mt-1">Test your clinical thinking</p></a> <a href="learning/tools/flashcards.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="layers" class="w-6 h-6 text-orange-600"></i>
+       </div><h3 class="font-semibold text-sm">Flashcards</h3><p class="text-xs text-slate-500 mt-1">Rapid recall for differentials</p></a> <a href="learning/tools/concept-maps.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="git-branch" class="w-6 h-6 text-sky-600"></i>
+       </div><h3 class="font-semibold text-sm">Concept Maps</h3><p class="text-xs text-slate-500 mt-1">Visualize complex decisions</p></a> <a href="learning/tools/mnemonics.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="brain" class="w-6 h-6 text-pink-600"></i>
+       </div><h3 class="font-semibold text-sm">Mnemonics</h3><p class="text-xs text-slate-500 mt-1">Remember what matters fast</p></a> <a href="learning/tools/medical-abbreviations.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="book-open" class="w-6 h-6 text-violet-600"></i>
+       </div><h3 class="font-semibold text-sm">Medical Abbreviations</h3><p class="text-xs text-slate-500 mt-1">Decode clinical language</p></a> <a href="core/icu/fluid-management.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="droplet" class="w-6 h-6 text-cyan-600"></i>
+       </div><h3 class="font-semibold text-sm">IV Fluid Guide</h3><p class="text-xs text-slate-500 mt-1">Choose the right fluid, fast</p></a> <a href="learning/tools/flowcharts.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-lime-100 dark:bg-lime-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="shuffle" class="w-6 h-6 text-lime-600"></i>
+       </div><h3 class="font-semibold text-sm">Flowcharts</h3><p class="text-xs text-slate-500 mt-1">Stepwise clinical pathways</p></a> <a href="learning/tools/visual-hacks.html" class="tool-card clinical-card bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+       <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-fuchsia-100 dark:bg-fuchsia-900/30 flex items-center justify-center group-hover:scale-110 transition"><i data-lucide="eye" class="w-6 h-6 text-fuchsia-600"></i>
+       </div><h3 class="font-semibold text-sm">Visual Hacks</h3><p class="text-xs text-slate-500 mt-1">Simplify numbers & patterns</p></a>
+     </div>
+    </section><!-- MCQs & Flashcards -->
+    <section id="mcq" class="mb-12 essential">
+     <div class="grid md:grid-cols-2 gap-6">
+      <!-- MCQ Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+       <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold flex items-center gap-2"><i data-lucide="help-circle" class="w-5 h-5 text-cyan-500"></i> Quick MCQ</h3><button onclick="refreshMCQ()" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Refresh"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button>
+       </div>
+       <div id="mcq-container">
+        <p id="mcq-question" class="text-sm font-medium mb-3"></p>
+        <div id="mcq-options" class="space-y-2"></div>
+        <div id="mcq-explanation" class="hidden mt-3 p-3 rounded-xl bg-cyan-50 dark:bg-cyan-900/20 text-sm text-slate-700 dark:text-slate-300"></div>
+        <div id="mcq-score" class="mt-3 text-xs text-slate-500">
+         Score: <span id="score-val">0</span>/<span id="score-total">0</span>
+        </div>
+       </div>
+       <div class="flex items-center gap-2 mt-4">
+        <button onclick="prevMCQ()" class="px-3 py-1.5 text-xs rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Prev</button> <button onclick="nextMCQ()" class="px-3 py-1.5 text-xs rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Next</button> <button onclick="shuffleMCQ()" class="px-3 py-1.5 text-xs rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Shuffle</button> <a href="learning/tools/mcqs.html" class="ml-auto px-3 py-1.5 text-xs rounded-lg bg-cyan-600 text-white hover:bg-cyan-700 transition font-medium">More MCQs →</a>
+       </div>
+      </div><!-- Flashcard -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+       <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold flex items-center gap-2"><i data-lucide="layers" class="w-5 h-5 text-blue-500"></i> Flashcard</h3><button onclick="refreshFlashcard()" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Refresh"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button>
+       </div>
+       <div id="flashcard" class="min-h-[240px] rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 border-0 p-8 flex items-center justify-center cursor-pointer transition-all hover:shadow-lg" onclick="flipFlashcard()">
+        <p id="flashcard-content" class="text-center text-lg font-semibold text-white"></p>
+       </div>
+       <p class="text-xs text-center text-slate-400 mt-2">Click to flip</p>
+       <div class="flex items-center gap-2 mt-4">
+        <button onclick="prevFlashcard()" class="px-3 py-1.5 text-xs rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Prev</button> <button onclick="nextFlashcard()" class="px-3 py-1.5 text-xs rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Next</button> <button onclick="shuffleFlashcards()" class="px-3 py-1.5 text-xs rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Shuffle</button> <a href="learning/tools/flashcards.html" class="ml-auto px-3 py-1.5 text-xs rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition font-medium">All Cards →</a>
+       </div>
+      </div>
+     </div>
+    </section><!-- Study Timer -->
+    <section id="timer" class="mb-12 essential">
+     <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 max-w-md mx-auto text-center">
+      <h3 class="font-bold mb-4 flex items-center justify-center gap-2"><i data-lucide="clock" class="w-5 h-5 text-emerald-500"></i> Study Session Timer</h3>
+      <div class="text-5xl font-mono font-bold text-cyan-600 mb-5" id="timer-display">
+       30:00
+      </div>
+      <div class="flex justify-center gap-2 mb-4">
+       <button onclick="setTimer(30)" class="timer-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-100 dark:bg-slate-700 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 transition">30 min</button> <button onclick="setTimer(45)" class="timer-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-100 dark:bg-slate-700 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 transition">45 min</button> <button onclick="setTimer(60)" class="timer-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-100 dark:bg-slate-700 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 transition">1 hour</button>
+      </div>
+      <div class="flex justify-center gap-3">
+       <button onclick="startTimer()" id="timer-start" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition">Start</button> <button onclick="pauseTimer()" class="px-5 py-2.5 rounded-xl bg-amber-500 text-white font-medium hover:bg-amber-600 transition">Pause</button> <button onclick="resetTimer()" class="px-5 py-2.5 rounded-xl bg-red-500 text-white font-medium hover:bg-red-600 transition">Reset</button>
+      </div>
+     </div>
+    </section><!-- Embedded Learning / Concept Map -->
+    <section class="mb-12 non-essential"><button onclick="openConceptMapsModal()" class="w-full bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition text-left group"> <div class="flex items-center justify-between"> <h3 class="font-bold flex items-center gap-2"><i data-lucide="git-branch" class="w-5 h-5 text-purple-500"></i> Clinical Concept Maps</h3><i data-lucide="maximize-2" class="w-5 h-5 text-slate-400 group-hover:text-purple-500 transition"></i> </div><p class="text-xs text-slate-500 mt-2">Click to explore interactive concept maps</p></button> </section><!-- Concept Maps Modal --> <div id="concept-maps-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center"> <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="closeConceptMapsModal()"></div> <div class="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-11/12 h-5/6 max-w-4xl overflow-hidden flex flex-col"><!-- Modal Header --> <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700"> <h2 class="text-xl font-bold flex items-center gap-2"><i data-lucide="git-branch" class="w-6 h-6 text-purple-500"></i> Clinical Concept Maps</h2><button onclick="closeConceptMapsModal()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i data-lucide="x" class="w-5 h-5"></i></button> </div><!-- Modal Content --> <div class="flex-1 overflow-hidden flex flex-col"> <div class="flex-1 overflow-hidden">
+  <div id="concept-maps-container" class="flex w-full transition-transform duration-300 ease-out">
+        <!-- Map 1: Shock --> 
+        <div class="concept-map w-full flex-shrink-0 flex items-center justify-center p-6"> <div class="flex items-center justify-center min-w-full"> <div class="text-center"> <div class="inline-block px-4 py-2 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 font-bold text-sm mb-4"> SHOCK </div> <div class="flex flex-wrap gap-4 justify-center items-start max-w-2xl mx-auto"> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium"> Cardiogenic </div> <div class="text-[10px] text-slate-500 mt-1"> MI, HF, Valve </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-medium"> Hypovolemic </div> <div class="text-[10px] text-slate-500 mt-1"> Hemorrhage, Burns </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-medium"> Distributive </div> <div class="text-[10px] text-slate-500 mt-1"> Sepsis, Anaphylaxis </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium"> Obstructive </div> <div class="text-[10px] text-slate-500 mt-1"> PE, Tamponade </div> </div> </div> </div> </div> </div>
+    <!-- Map 2: Chest Pain DDx -->
+    <div class="concept-map w-full flex-shrink-0 flex items-center justify-center p-6"> <div class="flex items-center justify-center min-w-full"> <div class="text-center"> <div class="inline-block px-4 py-2 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 font-bold text-sm mb-4"> CHEST PAIN </div> <div class="flex flex-wrap gap-4 justify-center items-start max-w-2xl mx-auto"> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs font-medium"> Cardiac </div> <div class="text-[9px] text-slate-500 mt-0.5"> ACS, Peri </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 text-xs font-medium"> Vascular </div> <div class="text-[9px] text-slate-500 mt-0.5"> AAA, PE </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-medium"> Pulmonary </div> <div class="text-[9px] text-slate-500 mt-0.5"> Pneumonia, PTX </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 text-xs font-medium"> GI </div> <div class="text-[9px] text-slate-500 mt-0.5"> GERD, PUD </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs font-medium"> MSK </div> <div class="text-[9px] text-slate-500 mt-0.5"> Trauma, Strain </div> </div> </div> </div> </div> </div>
+    <!-- Map 3: Dyspnea --> 
+    <div class="concept-map w-full flex-shrink-0 flex items-center justify-center p-6"> <div class="flex items-center justify-center min-w-full"> <div class="text-center"> <div class="inline-block px-4 py-2 rounded-xl bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-300 font-bold text-sm mb-4"> DYSPNEA </div> <div class="flex flex-wrap gap-4 justify-center items-start max-w-2xl mx-auto"> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium"> Cardiac </div> <div class="text-[10px] text-slate-500 mt-1"> CHF, MI, Arrhythmia </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 text-xs font-medium"> Pulmonary </div> <div class="text-[10px] text-slate-500 mt-1"> Pneumonia, Asthma </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-300 text-xs font-medium"> Vascular </div> <div class="text-[10px] text-slate-500 mt-1"> PE, Aortic </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-lime-100 dark:bg-lime-900/30 text-lime-700 dark:text-lime-300 text-xs font-medium"> Metabolic </div> <div class="text-[10px] text-slate-500 mt-1"> Anemia, DKA, Sepsis </div> </div> </div> </div> </div> </div>
+    <!-- Map 4: Altered Mental Status --> 
+    <div class="concept-map w-full flex-shrink-0 flex items-center justify-center p-6"> <div class="flex items-center justify-center min-w-full"> <div class="text-center"> <div class="inline-block px-4 py-2 rounded-xl bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 font-bold text-sm mb-4"> ALTERED MENTAL STATUS </div> <div class="flex flex-wrap gap-4 justify-center items-start max-w-2xl mx-auto"> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs font-medium"> CNS </div> <div class="text-[9px] text-slate-500 mt-0.5"> Stroke, Seizure </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-medium"> Toxic </div> <div class="text-[9px] text-slate-500 mt-0.5"> Drugs, Alcohol </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-medium"> Metabolic </div> <div class="text-[9px] text-slate-500 mt-0.5"> Hypo/Hyperglycemia </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium"> Infectious </div> <div class="text-[9px] text-slate-500 mt-0.5"> Meningitis, Sepsis </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium"> Hypoxia </div> <div class="text-[9px] text-slate-500 mt-0.5"> Low SpO2, CO Poison </div> </div> </div> </div> </div> </div>
+    <!-- Map 5: Acute Abdomen --> 
+    <div class="concept-map w-full flex-shrink-0 flex items-center justify-center p-6"> <div class="flex items-center justify-center min-w-full"> <div class="text-center"> <div class="inline-block px-4 py-2 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 font-bold text-sm mb-4"> ACUTE ABDOMEN </div> <div class="flex flex-wrap gap-4 justify-center items-start max-w-2xl mx-auto"> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs font-medium"> Vascular </div> <div class="text-[9px] text-slate-500 mt-0.5"> AAA, Ischemia </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-medium"> Inflammatory </div> <div class="text-[9px] text-slate-500 mt-0.5"> Appendicitis, Panc </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 text-xs font-medium"> Biliary </div> <div class="text-[9px] text-slate-500 mt-0.5"> Cholecystitis, Chol </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-medium"> Obstruction </div> <div class="text-[9px] text-slate-500 mt-0.5"> Bowel, Obstruction </div> </div> <div class="text-center"> <div class="w-0.5 h-5 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-2 py-1 rounded-lg bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 text-xs font-medium"> GI Bleed </div> <div class="text-[9px] text-slate-500 mt-0.5"> UGI, LGI </div> </div> </div> </div> </div> </div>
+    <!-- Map 6: Hypertension --> 
+    <div class="concept-map w-full flex-shrink-0 flex items-center justify-center p-6"> <div class="flex items-center justify-center min-w-full"> <div class="text-center"> <div class="inline-block px-4 py-2 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 font-bold text-sm mb-4"> HYPERTENSION </div> <div class="flex flex-wrap gap-4 justify-center items-start max-w-2xl mx-auto"> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium"> Essential </div> <div class="text-[10px] text-slate-500 mt-1"> 90-95% of cases </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-medium"> Renal </div> <div class="text-[10px] text-slate-500 mt-1"> Stenosis, CKD </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-medium"> Endocrine </div> <div class="text-[10px] text-slate-500 mt-1"> Thyroid, Pheo </div> </div> <div class="text-center"> <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 mx-auto"></div> <div class="px-3 py-1.5 rounded-lg bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium"> Medication </div> <div class="text-[10px] text-slate-500 mt-1"> NSAIDs, Stimulants </div> </div> </div> </div> </div> </div> </div> </div><!-- Modal Footer --> <div class="flex items-center justify-between p-6 border-t border-slate-200 dark:border-slate-700"> <div class="flex items-center gap-3"><button onclick="prevConceptMap()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i data-lucide="chevron-left" class="w-5 h-5"></i></button> <span id="concept-counter" class="text-sm font-medium text-slate-600 dark:text-slate-400 min-w-20 text-center">1 / 6</span> <button onclick="nextConceptMap()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i data-lucide="chevron-right" class="w-5 h-5"></i></button> </div><button onclick="closeConceptMapsModal()" class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-sm font-medium">Close</button> </div> </div> </div> </div> 
+    
+    <script>
+let currentMap = 0;
+const totalMaps = 6;
+
+function updateSlider() {
+  const container = document.getElementById("concept-maps-container");
+  container.style.transform = `translateX(-${currentMap * 100}%)`;
+
+  document.getElementById("concept-counter").innerText =
+    `${currentMap + 1} / ${totalMaps}`;
+}
+
+function nextConceptMap() {
+  if (currentMap < totalMaps - 1) {
+    currentMap++;
+    updateSlider();
+  }
+}
+
+function prevConceptMap() {
+  if (currentMap > 0) {
+    currentMap--;
+    updateSlider();
+  }
+}
+
+function openConceptMapsModal() {
+  document.getElementById("concept-maps-modal").classList.remove("hidden");
+  currentMap = 0;
+  updateSlider();
+}
+
+function closeConceptMapsModal() {
+  document.getElementById("concept-maps-modal").classList.add("hidden");
+}
+document.addEventListener("DOMContentLoaded", () => {
+  updateSlider();
+});
+
+</script>
+    </section><!-- Trusted/Evidence -->
+    <section class="mb-12 non-essential">
+     <div class="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+      <h3 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="award" class="w-5 h-5 text-amber-500"></i> Trusted &amp; Evidence-Based</h3>
+      <div class="grid md:grid-cols-3 gap-4">
+       <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0"><i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+        </div>
+        <div>
+         <h4 class="font-semibold text-sm">Peer-Reviewed</h4>
+         <p class="text-xs text-slate-500">Content from latest guidelines</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0"><i data-lucide="book-open" class="w-5 h-5 text-blue-600"></i>
+        </div>
+        <div>
+         <h4 class="font-semibold text-sm">Referenced</h4>
+         <p class="text-xs text-slate-500">Harrison's, UpToDate, PubMed</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center flex-shrink-0"><i data-lucide="users" class="w-5 h-5 text-purple-600"></i>
+        </div>
+        <div>
+         <h4 class="font-semibold text-sm">Expert Curated</h4>
+         <p class="text-xs text-slate-500">By practicing physicians</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Community -->
+    <section id="community" class="mb-12 non-essential">
+     <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 text-center">
+      <h3 class="font-bold text-xl mb-2">Join Our Community</h3>
+      <p class="text-sm text-slate-500 mb-5">Connect with thousands of medical professionals</p>
+      <div class="flex flex-wrap justify-center gap-3">
+       <a href="https://t.me/deepmedicineofficial" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-300 font-medium text-sm hover:bg-sky-200 dark:hover:bg-sky-900/50 transition">
+        <svg class="w-5 h-5" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 3.97-1.73 6.62-2.87 7.94-3.44 3.78-1.57 4.56-1.84 5.07-1.85.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .38z" />
+        </svg> Telegram </a> <a href="https://www.instagram.com/deep_medicine_official" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 font-medium text-sm hover:bg-pink-200 dark:hover:bg-pink-900/50 transition"> <i data-lucide="instagram" class="w-5 h-5"></i>Instagram </a> <a href="https://www.youtube.com/@deep_medicine_official" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 font-medium text-sm hover:bg-red-200 dark:hover:bg-red-900/50 transition"> <i data-lucide="youtube" class="w-5 h-5"></i>YouTube </a> <a href="https://linkedin.com/in/deep-medicine" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium text-sm hover:bg-blue-200 dark:hover:bg-blue-900/50 transition"> <i data-lucide="linkedin" class="w-5 h-5"></i>LinkedIn </a> <a href="https://twitter.com/deepmedicineorg" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition"> <i data-lucide="twitter" class="w-5 h-5"></i>Twitter </a>
+        <a href="https://www.pinterest.com/deepmedicineofficial/" target="_blank" rel="noopener noreferrer" 
+class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
+    <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5-.09-.81-.17-2.06.03-2.95.18-.79 1.16-5.02 1.16-5.02s-.3-.6-.3-1.49c0-1.4.81-2.45 1.82-2.45.86 0 1.27.65 1.27 1.42 0 .86-.55 2.14-.83 3.33-.24 1 .5 1.81 1.48 1.81 1.78 0 3.15-1.87 3.15-4.57 0-2.39-1.72-4.07-4.17-4.07-2.84 0-4.51 2.13-4.51 4.34 0 .86.33 1.78.74 2.28.08.1.09.19.07.29-.08.32-.26 1.02-.3 1.16-.05.19-.16.23-.37.14-1.38-.64-2.25-2.64-2.25-4.25 0-3.46 2.52-6.63 7.27-6.63 3.82 0 6.79 2.72 6.79 6.35 0 3.79-2.39 6.84-5.7 6.84-1.11 0-2.16-.58-2.52-1.26l-.68 2.6c-.25.96-.92 2.17-1.37 2.9C9.9 21.79 10.93 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+  </svg>
+
+  Pinterest
+</a>
+      </div>
+     </div>
+    </section><!-- Contact Form -->
+    <section id="contact" class="mb-12 non-essential">
+     <div class="bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-2xl p-8 shadow-sm border border-cyan-200 dark:border-cyan-800/50 max-w-lg mx-auto text-center">
+      <div class="w-14 h-14 rounded-full bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mx-auto mb-4">
+       <i data-lucide="mail" class="w-7 h-7 text-cyan-600"></i>
+      </div>
+      <h3 class="font-bold text-xl mb-2">Have a Question?</h3>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Get in touch with us for any queries, feedback, or collaboration opportunities.</p><a href="mailto:deepmedicineofficial@gmail.com" class="inline-block px-6 py-3 rounded-xl bg-cyan-600 text-white font-semibold hover:bg-cyan-700 transition">Send Us an Email</a>
+     </div>
+    </section><!-- Next/Previous Navigation -->
+    <section class="mb-12 non-essential">
+     <div class="flex justify-between">
+      <a href="#tools" onclick="document.getElementById('app-wrapper').scrollTo({top:document.getElementById('tools').offsetTop - 80, behavior:'smooth'}); return false;" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition"> Getting Started <i data-lucide="chevron-right" class="w-4 h-4"></i> </a> <a href="learning/study/abc-emergencies.html" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition"> Emergency Medicine <i data-lucide="chevron-right" class="w-4 h-4"></i> </a>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-slate-900 dark:bg-slate-950 text-slate-300 py-10 mt-8">
+    <div class="max-w-6xl mx-auto px-4">
+     <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+       <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+         <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="3" />
+         </svg>
+        </div><span class="font-bold text-white">DEEPMEDICINE</span>
+       </div>
+       <p class="text-xs text-slate-400">Evidence-based medical education platform for healthcare professionals.</p>
+      </div>
+      <div>
+       <h4 class="font-semibold text-white text-sm mb-3">Quick Links</h4>
+       <nav class="space-y-2 text-xs">
+        <a href="core/emergency/emergency-drugs.html" class="block hover:text-cyan-400 transition">Emergency Drugs</a> <a href="learning/study/emergency-protocols.html" class="block hover:text-cyan-400 transition">Emergency Protocols</a> <a href="learning/study/mechanical-ventilation.html" class="block hover:text-cyan-400 transition">Mechanical Ventilation Guide</a> <a href="procedures.html" class="block hover:text-cyan-400 transition">Procedures</a>
+       </nav>
+      </div>
+      <div>
+       <h4 class="font-semibold text-white text-sm mb-3">Connect</h4>
+       <nav class="space-y-2 text-xs">
+        <a href="pages/about.html" class="block hover:text-cyan-400 transition">About Us &amp; Contact</a> <a href="pages/privacy.html" class="block hover:text-cyan-400 transition">Privacy Policy</a> <a href="pages/terms.html" class="block hover:text-cyan-400 transition">Terms of Use</a>
+       </nav>
+      </div>
+      <div>
+       <h4 class="font-semibold text-white text-sm mb-3">Social</h4>
+       <div class="flex gap-3">
+        <a href="https://t.me/deepmedicineofficial" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-cyan-600 transition"><i data-lucide="send" class="w-4 h-4"></i></a> <a href="https://instagram.com/deep_medicine_official" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-pink-600 transition"><i data-lucide="instagram" class="w-4 h-4"></i></a> <a href="https://youtube.com/@deep_medicine_official" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-red-600 transition"><i data-lucide="youtube" class="w-4 h-4"></i></a> <a href="https://linkedin.com/company/deepmedicine" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+       </div>
+      </div>
+     </div>
+     <hr class="border-slate-700 mb-6">
+     <div class="text-center text-xs text-slate-500">
+      <p class="mb-2">© 2024 DeepMedicine. All rights reserved.</p>
+      <div class="warning-box inline-block rounded-lg p-3 text-[10px] text-slate-400 max-w-xl">
+       <strong>Medical Disclaimer:</strong> Content is for educational purposes only. Always consult qualified healthcare providers for clinical decisions. Not a substitute for professional medical advice.
+      </div>
+     </div>
+    </div>
+   </footer><!-- Floating Quick Access Menu -->
+   
+<div id="quick-access-menu" class="fixed bottom-20 right-4 z-40">
+
+  <div id="quick-options" class="flex flex-col gap-3 hidden mb-2">
+
+    <!-- Clinical Instruments -->
+    <a href="clinical/quick-reference/clinical-instruments.html" 
+       class="flex items-center justify-end gap-3 group"
+       title="Clinical Instruments">
+
+      <span class="px-2 py-1 text-[11px] font-medium text-slate-700 bg-white/90 backdrop-blur rounded shadow group-hover:text-red-600 transition">
+        Instruments
+      </span>
+
+      <div class="w-12 h-12 rounded-full bg-red-500 text-white shadow-lg flex items-center justify-center group-hover:bg-red-600 transition">
+        <span class="text-lg">💉</span>
+      </div>
+
+    </a>
+
+    <!-- Clinical Tools -->
+    <a href="clinical/quick-reference/clinical-tools.html" 
+       class="flex items-center justify-end gap-3 group"
+       title="Clinical Tools">
+
+      <span class="px-2 py-1 text-[11px] font-medium text-slate-700 bg-white/90 backdrop-blur rounded shadow group-hover:text-purple-600 transition">
+        Tools
+      </span>
+
+      <div class="w-12 h-12 rounded-full bg-purple-500 text-white shadow-lg flex items-center justify-center group-hover:bg-purple-600 transition">
+        <span class="text-lg">📓</span>
+      </div>
+
+    </a>
+
+    <!-- ECG -->
+    <a href="clinical/quick-reference/clinical-protocols.html" 
+       class="flex items-center justify-end gap-3 group"
+       title="Clinical Protocols">
+
+      <span class="px-2 py-1 text-[11px] font-medium text-slate-700 bg-white/90 backdrop-blur rounded shadow group-hover:text-pink-600 transition">
+        Protocols
+      </span>
+
+      <div class="w-12 h-12 rounded-full bg-pink-500 text-white shadow-lg flex items-center justify-center group-hover:bg-pink-600 transition">
+        <span class="text-lg">📊</span>
+      </div>
+
+    </a>
+
+    <!-- Clinical Decisions -->
+    <a href="clinical/quick-reference/clinical-decisions.html" 
+       class="flex items-center justify-end gap-3 group"
+       title="Clinical Decisions">
+
+      <span class="px-2 py-1 text-[11px] font-medium text-slate-700 bg-white/90 backdrop-blur rounded shadow group-hover:text-emerald-600 transition">
+        Clinical Decisions
+      </span>
+
+      <div class="w-12 h-12 rounded-full bg-emerald-500 text-white shadow-lg flex items-center justify-center group-hover:bg-emerald-600 transition">
+        <span class="text-lg">🧠</span>
+      </div>
+
+    </a>
+    </div><button id="quick-toggle" onclick="toggleQuickAccess()" class="w-12 h-12 rounded-full bg-cyan-600 text-white shadow-lg flex items-center justify-center hover:bg-cyan-700 transition pulse-glow"> <i data-lucide="search" class="w-5 h-5"></i> </button>
+   </div>
+   <script>
+   function toggleQuickAccess() {
+     const options = document.getElementById('quick-options');
+     const btn = document.getElementById('quick-toggle');
+     options.classList.toggle('hidden');
+     btn.style.transform = options.classList.contains('hidden') ? '' : 'rotate(45deg)';
+   }
+   </script><!-- Scroll to Top --> <button id="scroll-top" class="fixed bottom-6 right-4 z-40 w-12 h-12 rounded-full bg-slate-800 dark:bg-slate-700 text-white shadow-lg flex items-center justify-center hover:bg-slate-700 dark:hover:bg-slate-600 transition opacity-0 pointer-events-none" onclick="document.getElementById('app-wrapper').scrollTo({top:0,behavior:'smooth'})"> <i data-lucide="chevron-up" class="w-5 h-5"></i> </button>
+  </div><!-- end app-wrapper -->
+  <script>
+// === Config & SDK Init ===
+const defaultConfig = {
+  brand_name: 'DEEPMEDICINE',
+  welcome_message: 'Welcome to DeepMedicine 👋',
+  daily_tip: 'In acute MI, door-to-balloon time should be <90 minutes. Remember: Time is Myocardium! 🫀',
+  background_color: '#f8fafc',
+  surface_color: '#ffffff',
+  text_color: '#0f172a',
+  primary_action_color: '#0891b2',
+  secondary_action_color: '#3b82f6',
+  font_family: 'Plus Jakarta Sans',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const c = {...defaultConfig, ...config};
+  document.getElementById('brand-name').textContent = c.brand_name;
+  document.getElementById('welcome-msg').textContent = c.welcome_message;
+  document.getElementById('daily-tip').textContent = c.daily_tip;
+
+  const root = document.documentElement;
+  // Apply font
+  const font = c.font_family || defaultConfig.font_family;
+  document.body.style.fontFamily = `${font}, Plus Jakarta Sans, sans-serif`;
+
+  // Apply colors to appropriate elements
+  const isDark = document.documentElement.classList.contains('dark');
+  if (!isDark) {
+    document.body.style.backgroundColor = c.background_color;
+  }
+}
+
+// === Dark Mode ===
+document.getElementById('dark-toggle').addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+});
+
+// === Menu ===
+let openSubmenu = null;
+function openMenu() {
+  document.getElementById('side-menu').style.transform = 'translateX(0)';
+  document.getElementById('menu-overlay').classList.remove('hidden');
+}
+function closeMenu() {
+  document.getElementById('side-menu').style.transform = 'translateX(-100%)';
+  document.getElementById('menu-overlay').classList.add('hidden');
+}
+document.getElementById('menu-toggle').addEventListener('click', openMenu);
+
+function toggleSubmenu(name) {
+  const sub = document.getElementById('sub-' + name);
+  const item = document.querySelector(`[data-menu="${name}"]`);
+  if (openSubmenu && openSubmenu !== name) {
+    document.getElementById('sub-' + openSubmenu).classList.remove('open');
+    document.querySelector(`[data-menu="${openSubmenu}"]`).classList.remove('active');
+    const prevArrow = document.querySelector(`[data-menu="${openSubmenu}"] .submenu-arrow`);
+    if (prevArrow) prevArrow.style.transform = '';
+  }
+  const isOpen = sub.classList.contains('open');
+  sub.classList.toggle('open');
+  item.classList.toggle('active');
+  const arrow = item.querySelector('.submenu-arrow');
+  if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+  openSubmenu = isOpen ? null : name;
+}
+
+function filterMenu(query) {
+  const items = document.querySelectorAll('#menu-nav .menu-item');
+  const q = query.toLowerCase();
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+
+// === Carousel ===
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-item');
+const dots = document.querySelectorAll('.carousel-dot');
+function goToSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].style.background = 'rgba(255,255,255,0.5)';
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].style.background = 'white';
+}
+setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+dots[0].style.background = 'white';
+
+// === MCQ ===
+const mcqs = [
+  { q: "What is the first-line drug for anaphylaxis?", opts: ["Hydrocortisone", "Adrenaline (Epinephrine)", "Chlorpheniramine", "Salbutamol"], ans: 1, exp: "Adrenaline IM (0.5mg in adults) is the first-line treatment. It reverses peripheral vasodilation and reduces edema.", answered: false },
+  { q: "Normal QRS duration on ECG is:", opts: ["<0.04s", "<0.12s", "<0.20s", "<0.40s"], ans: 1, exp: "Normal QRS is 0.06-0.12 seconds. >0.12s suggests bundle branch block or ventricular origin.", answered: false },
+  { q: "Glasgow Coma Scale - best motor response score is:", opts: ["4", "5", "6", "3"], ans: 2, exp: "GCS Motor: 6=obeys commands, 5=localizes pain, 4=withdraws, 3=abnormal flexion, 2=extension, 1=none.", answered: false },
+  { q: "Target SpO2 in COPD exacerbation:", opts: ["88-92%", "94-98%", "99-100%", "85-88%"], ans: 0, exp: "Target 88-92% in COPD to avoid CO2 retention from loss of hypoxic drive.", answered: false },
+  { q: "CURB-65 score includes all EXCEPT:", opts: ["Confusion", "Urea >7mmol/L", "Heart rate >100", "Age ≥65"], ans: 2, exp: "CURB-65: Confusion, Urea>7, RR≥30, BP<90/60, Age≥65. Heart rate is not included.", answered: false }
+];
+
+let mcqIdx = 0, score = 0, totalAnswered = 0;
+
+function renderMCQ() {
+  const m = mcqs[mcqIdx];
+
+  document.getElementById('mcq-question').textContent = `Q${mcqIdx + 1}. ${m.q}`;
+  document.getElementById('mcq-explanation').classList.add('hidden');
+
+  const optsDiv = document.getElementById('mcq-options');
+
+  optsDiv.innerHTML = m.opts.map((o, i) => `
+    <button 
+      onclick="answerMCQ(${i})"
+      ${m.answered ? 'disabled' : ''}
+      class="w-full text-left px-4 py-2.5 rounded-xl text-sm border border-slate-200 dark:border-slate-600 hover:bg-cyan-50 dark:hover:bg-cyan-900/20 transition">
+      ${String.fromCharCode(65 + i)}. ${o}
+    </button>
+  `).join('');
+
+  // If already answered, re-show result state
+  if (m.answered) {
+    answerMCQ(m.selected, true);
+  }
+}
+
+function answerMCQ(i, isRender = false) {
+  const m = mcqs[mcqIdx];
+
+  // 🚫 Prevent multiple scoring
+  if (m.answered && !isRender) return;
+
+  if (!m.answered) {
+    m.answered = true;
+    m.selected = i;
+    totalAnswered++;
+
+    if (i === m.ans) score++;
+  }
+
+  const btns = document.querySelectorAll('#mcq-options button');
+
+  btns.forEach((b, idx) => {
+    b.disabled = true;
+
+    if (idx === m.ans) {
+      b.classList.add('bg-green-100', 'dark:bg-green-900/30', 'border-green-400');
+    }
+
+    if (idx === m.selected && m.selected !== m.ans) {
+      b.classList.add('bg-red-100', 'dark:bg-red-900/30', 'border-red-400');
+    }
+  });
+
+  document.getElementById('score-val').textContent = score;
+  document.getElementById('score-total').textContent = totalAnswered;
+
+  document.getElementById('mcq-explanation').textContent = m.exp;
+  document.getElementById('mcq-explanation').classList.remove('hidden');
+}
+
+function nextMCQ() {
+  mcqIdx = (mcqIdx + 1) % mcqs.length;
+  renderMCQ();
+}
+
+function prevMCQ() {
+  mcqIdx = (mcqIdx - 1 + mcqs.length) % mcqs.length;
+  renderMCQ();
+}
+
+function shuffleMCQ() {
+  mcqs.sort(() => Math.random() - 0.5);
+  mcqIdx = 0;
+  renderMCQ();
+}
+
+function refreshMCQ() {
+  score = 0;
+  totalAnswered = 0;
+  mcqIdx = 0;
+
+  // 🔁 Reset all questions
+  mcqs.forEach(m => {
+    m.answered = false;
+    m.selected = null;
+  });
+
+  document.getElementById('score-val').textContent = '0';
+  document.getElementById('score-total').textContent = '0';
+
+  renderMCQ();
+}
+
+renderMCQ();
+
+// === Flashcards ===
+const flashcards = [
+  { front: "What is Beck's Triad?", back: "Hypotension, Muffled heart sounds, Distended neck veins → Cardiac Tamponade" },
+  { front: "Rule of 9s for Burns (Adult)", back: "Head 9%, Each arm 9%, Anterior trunk 18%, Posterior trunk 18%, Each leg 18%, Perineum 1%" },
+  { front: "Charcot's Triad", back: "Fever + Jaundice + RUQ Pain → Ascending Cholangitis" },
+  { front: "Normal ABG Values", back: "pH 7.35-7.45, pCO2 35-45, pO2 80-100, HCO3 22-26, BE ±2" },
+  { front: "FAST Scan Windows", back: "RUQ (Morrison's), LUQ (Splenorenal), Suprapubic, Subxiphoid (Pericardial)" }
+];
+let fcIdx = 0, flipped = false;
+function renderFlashcard() {
+  flipped = false;
+  document.getElementById('flashcard-content').textContent = flashcards[fcIdx].front;
+  document.getElementById('flashcard').style.background = 'linear-gradient(to bottom right, #3b82f6, #4f46e5)';
+}
+function flipFlashcard() {
+  flipped = !flipped;
+  const fc = document.getElementById('flashcard');
+  document.getElementById('flashcard-content').textContent = flipped ? flashcards[fcIdx].back : flashcards[fcIdx].front;
+  if (flipped) {
+    fc.style.background = 'linear-gradient(to bottom right, #ec4899, #a855f7)';
+  } else {
+    fc.style.background = 'linear-gradient(to bottom right, #3b82f6, #4f46e5)';
+  }
+}
+function nextFlashcard() { fcIdx = (fcIdx + 1) % flashcards.length; renderFlashcard(); }
+function prevFlashcard() { fcIdx = (fcIdx - 1 + flashcards.length) % flashcards.length; renderFlashcard(); }
+function shuffleFlashcards() { flashcards.sort(() => Math.random() - 0.5); fcIdx = 0; renderFlashcard(); }
+function refreshFlashcard() { fcIdx = 0; renderFlashcard(); }
+renderFlashcard();
+
+// === Timer ===
+let timerSeconds = 1800, timerInterval = null, timerRunning = false;
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60), s = timerSeconds % 60;
+  document.getElementById('timer-display').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function setTimer(min) { timerSeconds = min * 60; timerRunning = false; clearInterval(timerInterval); updateTimerDisplay(); }
+function startTimer() {
+  if (timerRunning) return;
+  timerRunning = true;
+  timerInterval = setInterval(() => {
+    if (timerSeconds <= 0) { clearInterval(timerInterval); timerRunning = false; return; }
+    timerSeconds--;
+    updateTimerDisplay();
+  }, 1000);
+}
+function pauseTimer() { clearInterval(timerInterval); timerRunning = false; }
+function resetTimer() { pauseTimer(); timerSeconds = 1800; updateTimerDisplay(); }
+
+// === Filter ===
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const studyCards = document.querySelectorAll('.study-card');
+  const clinicalCards = document.querySelectorAll('.clinical-card');
+  if (type === 'all') { studyCards.forEach(c => c.style.display = ''); clinicalCards.forEach(c => c.style.display = ''); }
+  else if (type === 'study') { studyCards.forEach(c => c.style.display = ''); clinicalCards.forEach(c => c.style.display = 'none'); }
+  else { studyCards.forEach(c => c.style.display = 'none'); clinicalCards.forEach(c => c.style.display = ''); }
+}
+
+// === Focus Mode ===
+let focusMode = false;
+document.getElementById('focus-toggle').addEventListener('click', () => {
+  focusMode = !focusMode;
+  document.body.classList.toggle('focus-mode', focusMode);
+});
+
+// === Scroll to Top ===
+const wrapper = document.getElementById('app-wrapper');
+wrapper.addEventListener('scroll', () => {
+  const btn = document.getElementById('scroll-top');
+  if (wrapper.scrollTop > 400) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
+  else { btn.style.opacity = '0'; btn.style.pointerEvents = 'none'; }
+});
+
+// === Daily Highlight (Static Rotation) ===
+const highlights = [
+  "<strong>Sepsis Hour-1 Bundle:</strong> Measure lactate, obtain blood cultures, administer broad-spectrum antibiotics, begin rapid fluid resuscitation (30mL/kg), apply vasopressors if hypotensive after fluids.",
+  "<strong>STEMI Management:</strong> Dual antiplatelet (Aspirin + P2Y12 inhibitor), Heparin, Primary PCI within 90 min. If PCI unavailable, fibrinolysis within 30 min.",
+  "<strong>Status Epilepticus:</strong> Lorazepam 0.1mg/kg IV → if persists, Phenytoin 20mg/kg IV → if persists, intubate + Midazolam/Propofol infusion.",
+  "<strong>DKA Checklist:</strong> IV fluids (NS 1L/hr), Insulin infusion (0.1U/kg/hr), Potassium replacement (if K<5.3), Monitor glucose hourly, Check ABG q2h.",
+  "<strong>ACLS: Shockable Rhythm:</strong> CPR → Analyze → Shock 200J biphasic → CPR 2min → Epi 1mg q3-5min → Shock → Amiodarone 300mg → Repeat."
+];
+const today = new Date().getDay();
+document.getElementById('daily-highlight').innerHTML = highlights[today % highlights.length];
+
+// === TOC Active State ===
+const sections = ['hero','tools','clinical','mcq','timer','community','contact'];
+wrapper.addEventListener('scroll', () => {
+  const tocItems = document.querySelectorAll('.toc-item');
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < 200 && rect.bottom > 0) {
+        tocItems.forEach(t => t.classList.remove('active'));
+        if (tocItems[i]) tocItems[i].classList.add('active');
+      }
+    }
+  });
+});
+
+// Init Lucide
+lucide.createIcons();
+</script>
+</body>
+</html>
