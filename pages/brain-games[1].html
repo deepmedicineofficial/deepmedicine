@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brain Boost Puzzles</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+  <style>
+:root{--bg:#0f172a;--surface:#1e293b;--surface2:#334155;--accent:#f59e0b;--accent2:#8b5cf6;--text:#f1f5f9;--text2:#94a3b8}
+.light{--bg:#f8fafc;--surface:#ffffff;--surface2:#e2e8f0;--accent:#f59e0b;--accent2:#7c3aed;--text:#0f172a;--text2:#64748b}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);transition:background .3s,color .3s}
+.mono{font-family:'JetBrains Mono',monospace}
+.card{background:var(--surface);border-radius:1rem;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.btn{padding:.6rem 1.4rem;border-radius:.75rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit;font-size:.95rem}
+.btn:active{transform:scale(.95)}
+.btn-primary{background:var(--accent);color:#0f172a}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-secondary{background:var(--surface2);color:var(--text)}
+.btn-secondary:hover{filter:brightness(1.15)}
+.btn-accent{background:var(--accent2);color:#fff}
+.btn-accent:hover{filter:brightness(1.1)}
+
+/* Sliding puzzle */
+.slide-grid{display:grid;gap:4px;user-select:none}
+.slide-tile{display:flex;align-items:center;justify-content:center;font-weight:700;border-radius:.5rem;cursor:pointer;transition:transform .12s,background .15s;background:var(--accent);color:#0f172a}
+.slide-tile:hover{filter:brightness(1.1)}
+.slide-tile.empty{background:transparent;cursor:default;pointer-events:none}
+
+/* Memory */
+.mem-grid{display:grid;gap:8px;perspective:800px}
+.mem-card{position:relative;cursor:pointer;aspect-ratio:1;border-radius:.65rem;transform-style:preserve-3d;transition:transform .4s}
+.mem-card.flipped{transform:rotateY(180deg)}
+.mem-card.matched{opacity:.6;pointer-events:none}
+.mem-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:.65rem;backface-visibility:hidden;font-size:1.8rem}
+.mem-front{background:var(--accent2);color:#fff;font-weight:700;font-size:1.5rem}
+.mem-back{background:var(--accent);color:#0f172a;transform:rotateY(180deg)}
+
+/* Logic */
+.logic-option{padding:.75rem 1rem;border-radius:.65rem;background:var(--surface2);cursor:pointer;transition:all .15s;border:2px solid transparent;text-align:left}
+.logic-option:hover{border-color:var(--accent)}
+.logic-option.selected{border-color:var(--accent);background:rgba(245,158,11,.15)}
+.logic-option.correct{border-color:#22c55e;background:rgba(34,197,94,.15)}
+.logic-option.wrong{border-color:#ef4444;background:rgba(239,68,68,.15)}
+
+/* Modal overlay */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-overlay.show{opacity:1;pointer-events:auto}
+.modal-box{background:var(--surface);border-radius:1.25rem;padding:2rem;max-width:360px;width:90%;text-align:center;transform:scale(.9);transition:transform .25s}
+.modal-overlay.show .modal-box{transform:scale(1)}
+
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:var(--surface);border-radius:0 0 1rem 1rem;position:sticky;top:0;z-index:50}
+.stat{display:flex;align-items:center;gap:.35rem;font-size:.85rem;color:var(--text2)}
+.stat span{color:var(--accent);font-weight:700}
+
+@keyframes pop{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.pop{animation:pop .35s ease}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full overflow-auto">
+  <div id="app" class="h-full w-full flex flex-col">
+   <!-- Top Bar (hidden on menu) -->
+   <div id="topBar" class="top-bar" style="display:none">
+    <button class="btn btn-secondary" style="padding:.4rem .8rem;font-size:.8rem" onclick="goHome()"><i data-lucide="arrow-left" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:4px"></i>Menu</button>
+    <div id="gameTitle" style="font-weight:700;font-size:1.05rem"></div>
+    <div style="display:flex;gap:.75rem;align-items:center">
+     <button id="themeBtn" class="btn btn-secondary" style="padding:.35rem .6rem;font-size:.75rem" onclick="toggleTheme()"><i data-lucide="sun" style="width:14px;height:14px"></i></button> <button id="soundBtn" class="btn btn-secondary" style="padding:.35rem .6rem;font-size:.75rem" onclick="toggleSound()"><i data-lucide="volume-2" style="width:14px;height:14px"></i></button>
+    </div>
+   </div><!-- Stats Bar -->
+   
+   
+   <div id="statsBar" style="display:none;padding:.5rem 1rem;display:none;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <div class="stat">
+     ⏱ <span id="timerDisplay">0:00</span>
+    </div>
+    <div class="stat">
+     🎯 Moves: <span id="movesDisplay">0</span>
+    </div>
+    <div class="stat">
+     ⭐ Score: <span id="scoreDisplay">0</span>
+    </div>
+    <div class="stat">
+     🏆 Best: <span id="bestDisplay">-</span>
+    </div>
+   </div><!-- Difficulty bar -->
+   <div id="diffBar" style="display:none;padding:.4rem 1rem;gap:.5rem;justify-content:center;flex-wrap:wrap">
+    <button class="btn btn-secondary diff-btn" data-diff="easy" onclick="setDifficulty('easy')" style="font-size:.8rem;padding:.35rem .9rem">Easy</button> <button class="btn btn-secondary diff-btn" data-diff="medium" onclick="setDifficulty('medium')" style="font-size:.8rem;padding:.35rem .9rem">Medium</button> <button class="btn btn-secondary diff-btn" data-diff="hard" onclick="setDifficulty('hard')" style="font-size:.8rem;padding:.35rem .9rem">Hard</button> <button class="btn btn-primary" onclick="restartGame()" style="font-size:.8rem;padding:.35rem .9rem">Restart</button>
+   </div><!-- Main Content -->
+   <div id="content" class="flex-1 flex items-center justify-content-center p-4" style="justify-content:center">
+    <!-- Menu Screen -->
+    <div id="menuScreen" class="card p-8 w-full" style="max-width:520px">
+     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+      <h1 id="mainTitle" class="text-center" style="font-size:1.8rem;font-weight:700;flex:1">🧠 Brain Boost Puzzles</h1><button class="btn btn-secondary" style="padding:.35rem .6rem;font-size:.75rem" onclick="showAbout()" title="About"><i data-lucide="info" style="width:16px;height:16px"></i></button>
+     </div>
+     <p class="text-center" style="color:var(--text2);margin-bottom:1.5rem;font-size:.95rem">Choose a mode to sharpen your mind</p>
+     <div style="display:flex;flex-direction:column;gap:.8rem"><button class="btn btn-primary" style="padding:1rem;font-size:1.05rem;text-align:left;display:flex;align-items:center;justify-content:space-between" onclick="tutorialMode('slide')"> <span>🔢 Number Slide Puzzle</span> <i data-lucide="help-circle" style="width:18px;height:18px;opacity:.7"></i> </button> <button class="btn btn-accent" style="padding:1rem;font-size:1.05rem;text-align:left;display:flex;align-items:center;justify-content:space-between" onclick="tutorialMode('memory')"> <span>🃏 Memory Match</span> <i data-lucide="help-circle" style="width:18px;height:18px;opacity:.7"></i> </button> <button class="btn btn-secondary" style="padding:1rem;font-size:1.05rem;border:2px solid var(--accent);text-align:left;display:flex;align-items:center;justify-content:space-between" onclick="tutorialMode('logic')"> <span>💡 Logic Puzzles</span> <i data-lucide="help-circle" style="width:18px;height:18px;opacity:.7"></i> </button>
+     </div>
+     <div style="margin-top:1.5rem;display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap"><button class="btn btn-secondary" style="font-size:.8rem;padding:.4rem .75rem" onclick="toggleTheme()"><i data-lucide="sun" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px"></i>Theme</button> <button class="btn btn-secondary" style="font-size:.8rem;padding:.4rem .75rem" onclick="toggleSound()"><i data-lucide="volume-2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px"></i>Sound</button> <button class="btn btn-secondary" style="font-size:.8rem;padding:.4rem .75rem" onclick="showLeaderboard()"><i data-lucide="trophy" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px"></i>Scores</button>
+     </div>
+    </div><!-- Game Area -->
+    <div id="gameArea" style="display:none;width:100%;max-width:520px">
+     <div id="gameBoard" class="card p-4"></div>
+    </div>
+   </div>
+  </div><!-- Leaderboard Modal -->
+  <div id="lbModal" class="modal-overlay">
+   <div class="modal-box" style="max-width:400px">
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem">🏆 Best Scores</h2>
+    <div id="lbContent"></div><button class="btn btn-secondary" style="margin-top:1rem" onclick="closeLb()">Close</button>
+   </div>
+  </div><!-- Tutorial Modal -->
+  <div id="tutorialModal" class="modal-overlay">
+   <div class="modal-box" style="max-width:420px;text-align:left">
+    <h2 id="tutTitle" style="font-size:1.2rem;font-weight:700;margin-bottom:.75rem;text-align:center"></h2>
+    <div id="tutContent" style="font-size:.9rem;line-height:1.6;color:var(--text2);margin-bottom:1rem"></div>
+    <div style="background:var(--surface2);border-radius:.5rem;padding:.75rem;margin-bottom:1rem;font-size:.8rem;border-left:3px solid var(--accent)"><strong style="color:var(--accent)">💡 Pro Tip:</strong>
+     <p id="tutTip" style="margin-top:.3rem"></p>
+    </div>
+    <div style="display:flex;gap:.75rem"><button class="btn btn-secondary" onclick="closeTutorial()" style="flex:1;font-size:.85rem">Skip</button> <button class="btn btn-primary" onclick="startGameFromTutorial()" style="flex:1;font-size:.85rem">Play Now</button>
+    </div>
+   </div>
+  </div><!-- About Modal -->
+  <div id="aboutModal" class="modal-overlay">
+   <div class="modal-box" style="max-width:420px;text-align:left">
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem;text-align:center">About Brain Boost</h2>
+    <div style="font-size:.9rem;line-height:1.6;color:var(--text2);margin-bottom:1rem">
+     <p style="margin-bottom:.75rem"><strong style="color:var(--accent)">🎮 Game Features:</strong></p>
+     <ul style="margin-left:1rem;margin-bottom:.75rem">
+      <li>3 unique puzzle modes</li>
+      <li>3 difficulty levels per game</li>
+      <li>Real-time scoring &amp; leaderboards</li>
+      <li>Smooth animations &amp; sound effects</li>
+      <li>Dark/Light theme support</li>
+     </ul>
+     <p style="margin-bottom:.75rem"><strong style="color:var(--accent)">🧠 Benefits:</strong></p>
+     <ul style="margin-left:1rem;margin-bottom:.75rem">
+      <li>Improve memory and recall</li>
+      <li>Enhance logical reasoning</li>
+      <li>Boost problem-solving skills</li>
+      <li>Track your progress over time</li>
+     </ul>
+     <p style="font-size:.8rem;margin-top:1rem;padding:.75rem;background:var(--surface2);border-radius:.5rem">Version 1.0 • Built for brain training • Pure HTML5 + Web Audio</p>
+    </div><button class="btn btn-primary" style="width:100%" onclick="closeAbout()">Got it!</button>
+   </div>
+  </div><!-- Win Modal -->
+  <div id="winModal" class="modal-overlay">
+   <div class="modal-box">
+    <div id="winEmoji" style="font-size:3.5rem;margin-bottom:.5rem">
+     🎉
+    </div>
+    <h2 id="winTitle" style="font-size:1.5rem;font-weight:700;margin-bottom:.5rem">Congratulations!</h2>
+    <p id="winMsg" style="color:var(--text2);margin-bottom:.25rem"></p>
+    <p id="winGrade" style="font-weight:700;color:var(--accent);font-size:1.2rem;margin-bottom:1rem"></p>
+    <div style="display:flex;gap:.75rem;justify-content:center">
+     <button class="btn btn-primary" onclick="restartGame()">Play Again</button> <button class="btn btn-secondary" onclick="goHome()">Menu</button>
+    </div>
+   </div>
+  </div><!-- Leaderboard Modal -->
+  <div id="lbModal" class="modal-overlay">
+   <div class="modal-box" style="max-width:400px">
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem">🏆 Best Scores</h2>
+    <div id="lbContent"></div><button class="btn btn-secondary" style="margin-top:1rem" onclick="closeLb()">Close</button>
+   </div>
+  </div>
+  <script>
+let currentGame=null,difficulty='easy',timer=null,seconds=0,moves=0,score=0,soundOn=true,darkMode=true;
+let gameState={};
+
+// ─── Audio (Web Audio API) ───
+const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+function playTone(freq,dur,type='sine'){
+  if(!soundOn)return;
+  try{audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.value=.08;o.connect(g);g.connect(audioCtx.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);o.stop(audioCtx.currentTime+dur)}catch(e){}
+}
+function sfxClick(){playTone(600,.08)}
+function sfxMatch(){playTone(800,.1);setTimeout(()=>playTone(1000,.15),100)}
+function sfxWin(){[0,100,200,300].forEach((d,i)=>setTimeout(()=>playTone(600+i*150,.2,'triangle'),d))}
+function sfxWrong(){playTone(200,.2,'sawtooth')}
+
+// ─── Theme ───
+function toggleTheme(){darkMode=!darkMode;document.body.classList.toggle('light',!darkMode);lucide.createIcons()}
+function toggleSound(){soundOn=!soundOn;sfxClick()}
+
+// ─── Timer ───
+function startTimer(){stopTimer();seconds=0;updateTimer();timer=setInterval(()=>{seconds++;updateTimer()},1000)}
+function stopTimer(){if(timer){clearInterval(timer);timer=null}}
+function updateTimer(){const m=Math.floor(seconds/60),s=seconds%60;document.getElementById('timerDisplay').textContent=m+':'+(s<10?'0':'')+s}
+
+// ─── UI helpers ───
+function showEl(id,disp='flex'){document.getElementById(id).style.display=disp}
+function hideEl(id){document.getElementById(id).style.display='none'}
+function updateMoves(n){moves=n;document.getElementById('movesDisplay').textContent=n}
+function updateScore(n){score=n;document.getElementById('scoreDisplay').textContent=n}
+
+function goHome(){stopTimer();hideEl('topBar');hideEl('statsBar');hideEl('diffBar');hideEl('gameArea');showEl('menuScreen','block');hideModal();currentGame=null}
+function hideModal(){document.getElementById('winModal').classList.remove('show');document.getElementById('lbModal').classList.remove('show');document.getElementById('tutorialModal').classList.remove('show');document.getElementById('aboutModal').classList.remove('show')}
+
+function setDifficulty(d){difficulty=d;document.querySelectorAll('.diff-btn').forEach(b=>b.style.background=b.dataset.diff===d?'var(--accent)':'var(--surface2)');document.querySelectorAll('.diff-btn').forEach(b=>b.style.color=b.dataset.diff===d?'#0f172a':'var(--text)');restartGame()}
+
+function startGame(type){
+  currentGame=type;
+  hideEl('menuScreen');showEl('topBar');showEl('statsBar');showEl('diffBar');showEl('gameArea','block');
+  const titles={slide:'🔢 Number Slide',memory:'🃏 Memory Match',logic:'💡 Logic Puzzles'};
+  document.getElementById('gameTitle').textContent=titles[type];
+  setDifficulty(difficulty);
+  lucide.createIcons();
+}
+function restartGame(){
+  if(!currentGame)return;
+  hideModal();updateMoves(0);updateScore(0);
+  loadBest();
+  if(currentGame==='slide')initSlide();
+  else if(currentGame==='memory')initMemory();
+  else if(currentGame==='logic')initLogic();
+}
+
+// ─── Best scores ───
+function saveBest(game,diff,val){
+  const key='bb_'+game+'_'+diff;
+  const prev=localStorage.getItem(key);
+  if(!prev||val<parseInt(prev)){localStorage.setItem(key,val)}
+}
+function loadBest(){
+  const key='bb_'+(currentGame||'')+'_'+difficulty;
+  const v=localStorage.getItem(key);
+  document.getElementById('bestDisplay').textContent=v||'-';
+}
+function showLeaderboard(){
+  let html='';
+  ['slide','memory','logic'].forEach(g=>{
+    const name={slide:'Number Slide',memory:'Memory Match',logic:'Logic Puzzles'}[g];
+    html+=`<div style="font-weight:600;margin-top:.75rem;color:var(--accent)">${name}</div>`;
+    ['easy','medium','hard'].forEach(d=>{
+      const v=localStorage.getItem('bb_'+g+'_'+d);
+      html+=`<div style="display:flex;justify-content:space-between;font-size:.85rem;color:var(--text2);padding:.15rem 0"><span>${d}</span><span style="color:var(--text)">${v||'—'}</span></div>`;
+    });
+  });
+  document.getElementById('lbContent').innerHTML=html;
+  document.getElementById('lbModal').classList.add('show');
+}
+function closeLb(){document.getElementById('lbModal').classList.remove('show')}
+
+// ─── Tutorial System ───
+const tutorialData={
+  slide:{
+    title:'🔢 Number Slide Puzzle',
+    desc:'Arrange all tiles in numerical order from 1 to n². Click tiles next to the empty space to slide them.',
+    tips:'Work on the edges first—get the top row correct, then focus on other rows. The corner pieces are usually the hardest to move later.'
+  },
+  memory:{
+    title:'🃏 Memory Match',
+    desc:'Flip cards to find matching emoji pairs. Remember where each card is and match them all before running out of moves.',
+    tips:'Start by flipping cards systematically. Memory works best when you develop a mental map of card locations.'
+  },
+  logic:{
+    title:'💡 Logic Puzzles',
+    desc:'Solve brain teasers and pattern recognition questions. Each correct answer builds your score. Think carefully before answering.',
+    tips:'Read questions twice. Sometimes the trick is in the wording. Use pattern recognition and mathematical reasoning.'
+  }
+};
+
+function showAbout(){document.getElementById('aboutModal').classList.add('show');sfxClick()}
+function closeAbout(){document.getElementById('aboutModal').classList.remove('show')}
+
+function tutorialMode(gameType){
+  const data=tutorialData[gameType];
+  if(!data)return;
+  document.getElementById('tutTitle').textContent=data.title;
+  document.getElementById('tutContent').textContent=data.desc;
+  document.getElementById('tutTip').textContent=data.tips;
+  document.getElementById('tutorialModal').dataset.game=gameType;
+  document.getElementById('tutorialModal').classList.add('show');
+  sfxClick();
+}
+
+function closeTutorial(){hideModal()}
+
+function startGameFromTutorial(){
+  const gameType=document.getElementById('tutorialModal').dataset.game;
+  hideModal();startGame(gameType);
+}
+
+function showWin(msg,gradeText,emoji){
+  sfxWin();stopTimer();
+  document.getElementById('winEmoji').textContent=emoji||'🎉';
+  document.getElementById('winTitle').textContent='Puzzle Complete!';
+  document.getElementById('winMsg').textContent=msg;
+  document.getElementById('winGrade').textContent=gradeText;
+  document.getElementById('winModal').classList.add('show');
+}
+
+function getGrade(moves,optimal){
+  const r=moves/optimal;
+  if(r<=1.2)return{g:'🧠 Genius!',e:'🏆'};
+  if(r<=1.6)return{g:'⭐ Pro',e:'🎉'};
+  if(r<=2.2)return{g:'👍 Intermediate',e:'👏'};
+  return{g:'🌱 Beginner',e:'😊'};
+}
+
+// ═══════════════════════════════
+// SLIDING PUZZLE
+// ═══════════════════════════════
+function initSlide(){
+  const sizes={easy:3,medium:4,hard:5};
+  const n=sizes[difficulty];
+  const total=n*n;
+  // Generate solvable puzzle
+  let tiles=Array.from({length:total-1},(_, i)=>i+1);
+  tiles.push(0);
+  // Shuffle by performing random valid moves
+  let emptyIdx=total-1;
+  for(let i=0;i<n*300;i++){
+    const neighbors=[];
+    const r=Math.floor(emptyIdx/n),c=emptyIdx%n;
+    if(r>0)neighbors.push(emptyIdx-n);
+    if(r<n-1)neighbors.push(emptyIdx+n);
+    if(c>0)neighbors.push(emptyIdx-1);
+    if(c<n-1)neighbors.push(emptyIdx+1);
+    const pick=neighbors[Math.floor(Math.random()*neighbors.length)];
+    [tiles[emptyIdx],tiles[pick]]=[tiles[pick],tiles[emptyIdx]];
+    emptyIdx=pick;
+  }
+  gameState={tiles,n,emptyIdx};
+  updateMoves(0);startTimer();renderSlide();
+}
+
+function renderSlide(){
+  const{tiles,n}=gameState;
+  const sz=Math.min(400,window.innerWidth-64);
+  const tileSize=Math.floor((sz-4*(n-1))/n);
+  const board=document.getElementById('gameBoard');
+  board.innerHTML='';
+  board.style.display='flex';board.style.justifyContent='center';
+  const grid=document.createElement('div');
+  grid.className='slide-grid';
+  grid.style.gridTemplateColumns=`repeat(${n},${tileSize}px)`;
+  grid.style.gridTemplateRows=`repeat(${n},${tileSize}px)`;
+  tiles.forEach((v,i)=>{
+    const d=document.createElement('div');
+    d.className='slide-tile'+(v===0?' empty':'');
+    d.style.fontSize=(tileSize*.35)+'px';
+    if(v!==0){d.textContent=v;d.onclick=()=>slideTap(i)}
+    grid.appendChild(d);
+  });
+  board.appendChild(grid);
+}
+
+function slideTap(idx){
+  const{tiles,n}=gameState;
+  const ei=gameState.emptyIdx;
+  const r=Math.floor(idx/n),c=idx%n,er=Math.floor(ei/n),ec=ei%n;
+  if((Math.abs(r-er)+Math.abs(c-ec))!==1)return;
+  sfxClick();
+  [tiles[idx],tiles[ei]]=[tiles[ei],tiles[idx]];
+  gameState.emptyIdx=idx;
+  updateMoves(moves+1);
+  renderSlide();
+  // Check win
+  const won=tiles.every((v,i)=>i===tiles.length-1?v===0:v===i+1);
+  if(won){
+    const s=Math.max(1000-moves*10-seconds*2,100);
+    updateScore(s);saveBest('slide',difficulty,moves);
+    const opt=gameState.n*gameState.n*2;
+    const{g,e}=getGrade(moves,opt);
+    showWin(`${moves} moves in ${document.getElementById('timerDisplay').textContent}`,g,e);
+  }
+}
+
+// ═══════════════════════════════
+// MEMORY MATCH
+// ═══════════════════════════════
+function initMemory(){
+  const pairs={easy:6,medium:10,hard:15};
+  const p=pairs[difficulty];
+  const emojis=['🍎','🍊','🍋','🍇','🍉','🍓','🫐','🥝','🍑','🥭','🍍','🥥','🌶️','🍒','🍌','🥑','🍈','🫒'];
+  const chosen=emojis.slice(0,p);
+  let cards=[...chosen,...chosen].map((e,i)=>({id:i,emoji:e,flipped:false,matched:false}));
+  // Shuffle
+  for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]]}
+  gameState={cards,flippedIds:[],lockBoard:false,matchedCount:0,totalPairs:p};
+  updateMoves(0);startTimer();renderMemory();
+}
+
+function renderMemory(){
+  const{cards}=gameState;
+  const total=cards.length;
+  const cols=total<=12?4:total<=20?5:6;
+  const board=document.getElementById('gameBoard');
+  board.innerHTML='';board.style.display='flex';board.style.justifyContent='center';
+  const grid=document.createElement('div');
+  grid.className='mem-grid';
+  grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+  grid.style.maxWidth='400px';grid.style.width='100%';
+  cards.forEach((c,i)=>{
+    const card=document.createElement('div');
+    card.className='mem-card'+(c.flipped||c.matched?' flipped':'')+(c.matched?' matched':'');
+    card.id='mc'+i;
+    card.innerHTML=`<div class="mem-face mem-front">?</div><div class="mem-face mem-back">${c.emoji}</div>`;
+    if(!c.matched)card.onclick=()=>memTap(i);
+    grid.appendChild(card);
+  });
+  board.appendChild(grid);
+}
+
+function memTap(idx){
+  const s=gameState;
+  if(s.lockBoard||s.cards[idx].flipped||s.cards[idx].matched)return;
+  sfxClick();
+  s.cards[idx].flipped=true;
+  s.flippedIds.push(idx);
+  document.getElementById('mc'+idx).classList.add('flipped');
+  if(s.flippedIds.length===2){
+    updateMoves(moves+1);
+    s.lockBoard=true;
+    const[a,b]=s.flippedIds;
+    if(s.cards[a].emoji===s.cards[b].emoji){
+      sfxMatch();
+      s.cards[a].matched=s.cards[b].matched=true;
+      s.matchedCount++;
+      s.flippedIds=[];s.lockBoard=false;
+      document.getElementById('mc'+a).classList.add('matched');
+      document.getElementById('mc'+b).classList.add('matched');
+      if(s.matchedCount===s.totalPairs){
+        const sc=Math.max(1000-moves*15-seconds*3,100);
+        updateScore(sc);saveBest('memory',difficulty,moves);
+        const{g,e}=getGrade(moves,s.totalPairs);
+        showWin(`${moves} moves in ${document.getElementById('timerDisplay').textContent}`,g,e);
+      }
+    }else{
+      sfxWrong();
+      setTimeout(()=>{
+        s.cards[a].flipped=s.cards[b].flipped=false;
+        document.getElementById('mc'+a).classList.remove('flipped');
+        document.getElementById('mc'+b).classList.remove('flipped');
+        s.flippedIds=[];s.lockBoard=false;
+      },700);
+    }
+  }
+}
+
+// ═══════════════════════════════
+// LOGIC PUZZLES
+// ═══════════════════════════════
+const logicBank=[
+  {q:"What comes next: 2, 6, 12, 20, ?",opts:["28","30","32","25"],ans:1},
+  {q:"Complete: 1, 1, 2, 3, 5, 8, ?",opts:["11","12","13","10"],ans:2},
+  {q:"If A=1, B=2, C=3... what is F+G?",opts:["11","12","13","14"],ans:2},
+  {q:"Which doesn't belong: 2, 3, 5, 9, 11?",opts:["2","9","3","11"],ans:1},
+  {q:"Next: 3, 9, 27, 81, ?",opts:["162","243","200","189"],ans:1},
+  {q:"If all Zips are Zaps, and all Zaps are Zops, are all Zips Zops?",opts:["Yes","No","Maybe","Not enough info"],ans:0},
+  {q:"What is half of 2+2?",opts:["1","2","3","4"],ans:1},
+  {q:"Complete: J, F, M, A, M, J, ?",opts:["A","J","S","O"],ans:1},
+  {q:"How many squares on a chess board?",opts:["64","32","128","48"],ans:0},
+  {q:"Next: 1, 4, 9, 16, 25, ?",opts:["30","36","35","49"],ans:1},
+  {q:"If 5+3=28, 9+1=810, then 7+3=?",opts:["410","421","310","221"],ans:0},
+  {q:"Which is the odd one out: Circle, Triangle, Square, Cylinder?",opts:["Circle","Triangle","Cylinder","Square"],ans:2},
+  {q:"Next: O, T, T, F, F, S, S, ?",opts:["E","N","T","S"],ans:0},
+  {q:"A bat and ball cost $1.10. The bat costs $1 more. Ball costs?",opts:["$0.10","$0.05","$0.15","$0.01"],ans:1},
+  {q:"How many months have 28 days?",opts:["1","6","12","All of them"],ans:3},
+];
+
+function initLogic(){
+  const counts={easy:5,medium:8,hard:12};
+  const shuffled=[...logicBank].sort(()=>Math.random()-.5).slice(0,counts[difficulty]);
+  gameState={questions:shuffled,current:0,answered:0,correct:0,selected:null,locked:false};
+  updateMoves(0);updateScore(0);startTimer();renderLogic();
+}
+
+function renderLogic(){
+  const s=gameState;
+  const q=s.questions[s.current];
+  const board=document.getElementById('gameBoard');
+  board.style.display='block';
+  const progress=`${s.current+1}/${s.questions.length}`;
+  board.innerHTML=`
+    <div style="text-align:center;color:var(--text2);font-size:.85rem;margin-bottom:.75rem">Question ${progress}</div>
+    <div style="font-size:1.1rem;font-weight:600;margin-bottom:1.25rem;line-height:1.5">${q.q}</div>
+    <div id="logicOpts" style="display:flex;flex-direction:column;gap:.6rem"></div>
+    <div id="logicFeedback" style="text-align:center;margin-top:1rem;font-weight:600;min-height:2rem"></div>
+    <div id="logicNext" style="text-align:center;margin-top:.5rem"></div>
+  `;
+  const optsContainer=document.getElementById('logicOpts');
+  q.opts.forEach((opt,i)=>{
+    const d=document.createElement('div');
+    d.className='logic-option';d.textContent=opt;d.id='lopt'+i;
+    d.onclick=()=>logicSelect(i);
+    optsContainer.appendChild(d);
+  });
+}
+
+function logicSelect(idx){
+  const s=gameState;if(s.locked)return;
+  s.locked=true;s.answered++;
+  updateMoves(s.answered);
+  const q=s.questions[s.current];
+  const el=document.getElementById('lopt'+idx);
+  const fb=document.getElementById('logicFeedback');
+  if(idx===q.ans){
+    sfxMatch();el.classList.add('correct');
+    s.correct++;updateScore(s.correct*100);
+    fb.innerHTML='<span style="color:#22c55e">✓ Correct!</span>';
+  }else{
+    sfxWrong();el.classList.add('wrong');
+    document.getElementById('lopt'+q.ans).classList.add('correct');
+    fb.innerHTML='<span style="color:#ef4444">✗ Wrong!</span>';
+  }
+  const nxt=document.getElementById('logicNext');
+  if(s.current<s.questions.length-1){
+    nxt.innerHTML='<button class="btn btn-primary" style="font-size:.85rem" onclick="nextLogic()">Next →</button>';
+  }else{
+    saveBest('logic',difficulty,s.questions.length-s.correct);
+    const r=s.correct/s.questions.length;
+    const g=r>=.9?'🧠 Genius!':r>=.7?'⭐ Pro':r>=.5?'👍 Intermediate':'🌱 Beginner';
+    const e=r>=.9?'🏆':r>=.7?'🎉':r>=.5?'👏':'😊';
+    setTimeout(()=>showWin(`${s.correct}/${s.questions.length} correct`,g,e),600);
+  }
+}
+function nextLogic(){gameState.current++;gameState.locked=false;renderLogic()}
+
+// ─── Element SDK ───
+const defaultConfig={game_title:'🧠 Brain Boost Puzzles',background_color:'#0f172a',surface_color:'#1e293b',text_color:'#f1f5f9',accent_color:'#f59e0b',secondary_color:'#8b5cf6',font_family:'Fredoka',font_size:16};
+
+lucide.createIcons();
+</script>
+</body>
+</html>
