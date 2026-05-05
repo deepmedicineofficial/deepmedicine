@@ -1,0 +1,801 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Cardiac Emergencies | Acute Cardiac Care | Deep Medicine</title> <meta name="description" content="Comprehensive guide to cardiac emergencies including acute coronary syndrome, arrhythmias, cardiac arrest, and emergency management."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/cardiac-emergencies"> <!-- Open Graph --> <meta property="og:title" content="Cardiac Emergencies | Deep Medicine"> <meta property="og:description" content="Acute cardiac emergencies with rapid diagnosis and management strategies."> <meta property="og:image" content="https://deepmedicine.in/images/cardiac-emergencies.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; }
+  .font-display { font-family: 'Playfair Display', serif; }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(220,38,38,0.15); }
+    50% { box-shadow: 0 0 40px rgba(220,38,38,0.3); }
+  }
+  @keyframes ecgLine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim-fade-up {
+    animation: fadeUp 0.5s ease-out both;
+  }
+  .ecg-sweep::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(220,38,38,0.06) 50%, transparent 100%);
+    animation: ecgLine 3s linear infinite;
+    pointer-events: none;
+  }
+  .card-hover { transition: transform 0.25s, box-shadow 0.25s; }
+  .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+  .tab-active { border-bottom: 3px solid; }
+  .collapse-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .collapse-content.open { max-height: 4000px; }
+
+  /* ECG SVG background */
+  .ecg-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.04; pointer-events: none;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #991b1b; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0a0a0f;"><!-- Hero Section -->
+   <header class="relative overflow-hidden ecg-sweep" style="background: linear-gradient(135deg, #1a0a0a 0%, #0a0a0f 40%, #0f0a1a 100%);">
+    <div class="ecg-bg">
+     <svg viewbox="0 0 1200 200" preserveaspectratio="none" style="width:100%;height:100%;"><polyline fill="none" stroke="#dc2626" stroke-width="2" points="0,100 100,100 150,100 170,60 190,140 210,30 230,170 250,100 300,100 400,100 450,100 470,60 490,140 510,30 530,170 550,100 600,100 700,100 750,100 770,60 790,140 810,30 830,170 850,100 900,100 1000,100 1050,100 1070,60 1090,140 1110,30 1130,170 1150,100 1200,100" />
+     </svg>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-24 relative z-10">
+     <div class="flex items-center gap-3 mb-6 anim-fade-up">
+      <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15); animation: pulseGlow 2s infinite;"><i data-lucide="heart-pulse" style="color:#dc2626; width:28px; height:28px;"></i>
+      </div><span class="text-xs font-semibold tracking-[0.2em] uppercase" style="color:#dc2626;">Emergency Medicine Reference</span>
+     </div>
+     <h1 id="mainTitle" class="font-display text-4xl md:text-6xl font-extrabold leading-tight mb-4 anim-fade-up" style="color:#f5f0eb; animation-delay:0.1s;">Cardiac Emergencies</h1>
+     <p id="subtitle" class="text-lg md:text-xl max-w-2xl anim-fade-up" style="color:#a89b8c; animation-delay:0.2s;">Critical Care &amp; Emergency Medicine Reference</p>
+     <div class="flex flex-wrap gap-3 mt-8 anim-fade-up" style="animation-delay:0.3s;"><span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(220,38,38,0.12); color:#f87171;">ACLS Protocols</span> <span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(251,191,36,0.12); color:#fbbf24;">Evidence-Based</span> <span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(52,211,153,0.12); color:#34d399;">ICU / ED Guidelines</span>
+     </div>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="sticky top-0 z-40 border-b" style="background:rgba(10,10,15,0.95); backdrop-filter:blur(12px); border-color:rgba(220,38,38,0.15);">
+    <div class="max-w-6xl mx-auto px-6 flex gap-1 overflow-x-auto" id="tabNav"><button onclick="switchTab('overview')" data-tab="overview" class="tab-btn tab-active px-4 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors" style="color:#dc2626; border-color:#dc2626;">Overview</button> <button onclick="switchTab('stemi')" data-tab="stemi" class="tab-btn px-4 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors" style="color:#6b7280;">STEMI/ACS</button> <button onclick="switchTab('arrhythmia')" data-tab="arrhythmia" class="tab-btn px-4 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors" style="color:#6b7280;">Arrhythmias</button> <button onclick="switchTab('arrest')" data-tab="arrest" class="tab-btn px-4 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors" style="color:#6b7280;">Cardiac Arrest</button> <button onclick="switchTab('failure')" data-tab="failure" class="tab-btn px-4 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors" style="color:#6b7280;">Heart Failure</button> <button onclick="switchTab('tamponade')" data-tab="tamponade" class="tab-btn px-4 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors" style="color:#6b7280;">Tamponade &amp; Others</button>
+    </div>
+   </nav><!-- Content Sections -->
+   <main class="max-w-6xl mx-auto px-6 py-10"><!-- OVERVIEW -->
+    <section id="tab-overview" class="tab-content">
+     <div class="grid md:grid-cols-3 gap-5 mb-10">
+      <div class="card-hover rounded-2xl p-6 relative overflow-hidden" style="background:linear-gradient(135deg,#1c1017,#151015); border:1px solid rgba(220,38,38,0.12);">
+       <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(220,38,38,0.15);"><i data-lucide="activity" style="color:#f87171; width:20px; height:20px;"></i>
+       </div>
+       <h3 class="text-lg font-bold mb-2" style="color:#f5f0eb;">Acute Coronary Syndromes</h3>
+       <p class="text-sm leading-relaxed" style="color:#a89b8c;">STEMI, NSTEMI, Unstable Angina — Time-critical management with reperfusion strategies, antiplatelet &amp; anticoagulation therapy.</p>
+       <div class="mt-4 text-xs font-bold px-2 py-1 rounded inline-block" style="background:rgba(220,38,38,0.1); color:#f87171;">
+        ⏱ Door-to-Balloon &lt;90 min
+       </div>
+      </div>
+      <div class="card-hover rounded-2xl p-6" style="background:linear-gradient(135deg,#101720,#0f1015); border:1px solid rgba(59,130,246,0.12);">
+       <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(59,130,246,0.15);"><i data-lucide="zap" style="color:#60a5fa; width:20px; height:20px;"></i>
+       </div>
+       <h3 class="text-lg font-bold mb-2" style="color:#f5f0eb;">Lethal Arrhythmias</h3>
+       <p class="text-sm leading-relaxed" style="color:#a89b8c;">VF, Pulseless VT, Torsades de Pointes, Complete Heart Block — Immediate defibrillation, antiarrhythmics &amp; pacing.</p>
+       <div class="mt-4 text-xs font-bold px-2 py-1 rounded inline-block" style="background:rgba(59,130,246,0.1); color:#60a5fa;">
+        ⚡ Defibrillate Immediately
+       </div>
+      </div>
+      <div class="card-hover rounded-2xl p-6" style="background:linear-gradient(135deg,#101a17,#0f1015); border:1px solid rgba(52,211,153,0.12);">
+       <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(52,211,153,0.15);"><i data-lucide="shield" style="color:#34d399; width:20px; height:20px;"></i>
+       </div>
+       <h3 class="text-lg font-bold mb-2" style="color:#f5f0eb;">Cardiac Arrest (ACLS)</h3>
+       <p class="text-sm leading-relaxed" style="color:#a89b8c;">High-quality CPR, ACLS algorithms, reversible causes (H's &amp; T's), post-cardiac arrest care &amp; targeted temperature management.</p>
+       <div class="mt-4 text-xs font-bold px-2 py-1 rounded inline-block" style="background:rgba(52,211,153,0.1); color:#34d399;">
+        🫀 Push Hard, Push Fast
+       </div>
+      </div>
+     </div><!-- Classification Table -->
+     <div class="rounded-2xl overflow-hidden mb-10" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <div class="px-6 py-4 border-b" style="border-color:rgba(255,255,255,0.06);">
+       <h2 class="text-lg font-bold" style="color:#f5f0eb;">Classification of Cardiac Emergencies</h2>
+      </div>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr style="background:rgba(220,38,38,0.06);">
+          <th class="text-left px-6 py-3 font-semibold" style="color:#f87171;">Category</th>
+          <th class="text-left px-6 py-3 font-semibold" style="color:#f87171;">Conditions</th>
+          <th class="text-left px-6 py-3 font-semibold" style="color:#f87171;">Urgency</th>
+          <th class="text-left px-6 py-3 font-semibold" style="color:#f87171;">Key Intervention</th>
+         </tr>
+        </thead>
+        <tbody style="color:#c4b8a9;">
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="px-6 py-3 font-semibold" style="color:#f5f0eb;">ACS</td>
+          <td class="px-6 py-3">STEMI, NSTEMI, UA</td>
+          <td class="px-6 py-3"><span class="px-2 py-0.5 rounded text-xs font-bold" style="background:rgba(220,38,38,0.15); color:#f87171;">IMMEDIATE</span></td>
+          <td class="px-6 py-3">PCI / Thrombolysis</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="px-6 py-3 font-semibold" style="color:#f5f0eb;">Arrhythmias</td>
+          <td class="px-6 py-3">VF, VT, SVT, Bradycardia, Heart Block</td>
+          <td class="px-6 py-3"><span class="px-2 py-0.5 rounded text-xs font-bold" style="background:rgba(220,38,38,0.15); color:#f87171;">IMMEDIATE</span></td>
+          <td class="px-6 py-3">Defibrillation / Pacing / Drugs</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="px-6 py-3 font-semibold" style="color:#f5f0eb;">Cardiac Arrest</td>
+          <td class="px-6 py-3">Asystole, PEA, VF, Pulseless VT</td>
+          <td class="px-6 py-3"><span class="px-2 py-0.5 rounded text-xs font-bold" style="background:rgba(220,38,38,0.15); color:#f87171;">IMMEDIATE</span></td>
+          <td class="px-6 py-3">CPR + ACLS Algorithm</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="px-6 py-3 font-semibold" style="color:#f5f0eb;">Acute HF</td>
+          <td class="px-6 py-3">Cardiogenic Shock, Flash Pulmonary Edema</td>
+          <td class="px-6 py-3"><span class="px-2 py-0.5 rounded text-xs font-bold" style="background:rgba(251,191,36,0.15); color:#fbbf24;">URGENT</span></td>
+          <td class="px-6 py-3">Diuretics / Vasodilators / Inotropes</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="px-6 py-3 font-semibold" style="color:#f5f0eb;">Tamponade</td>
+          <td class="px-6 py-3">Pericardial Effusion with Hemodynamic Compromise</td>
+          <td class="px-6 py-3"><span class="px-2 py-0.5 rounded text-xs font-bold" style="background:rgba(220,38,38,0.15); color:#f87171;">IMMEDIATE</span></td>
+          <td class="px-6 py-3">Pericardiocentesis</td>
+         </tr>
+         <tr>
+          <td class="px-6 py-3 font-semibold" style="color:#f5f0eb;">Aortic Dissection</td>
+          <td class="px-6 py-3">Type A &amp; Type B (Stanford)</td>
+          <td class="px-6 py-3"><span class="px-2 py-0.5 rounded text-xs font-bold" style="background:rgba(220,38,38,0.15); color:#f87171;">IMMEDIATE</span></td>
+          <td class="px-6 py-3">BP Control / Surgery (Type A)</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div><!-- Quick Stats -->
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="rounded-xl p-5 text-center" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+       <div class="text-3xl font-extrabold font-display" style="color:#dc2626;">
+        17.9M
+       </div>
+       <div class="text-xs mt-1" style="color:#a89b8c;">
+        CVD Deaths/Year (WHO)
+       </div>
+      </div>
+      <div class="rounded-xl p-5 text-center" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+       <div class="text-3xl font-extrabold font-display" style="color:#fbbf24;">
+        &lt;90
+       </div>
+       <div class="text-xs mt-1" style="color:#a89b8c;">
+        Min Door-to-Balloon
+       </div>
+      </div>
+      <div class="rounded-xl p-5 text-center" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+       <div class="text-3xl font-extrabold font-display" style="color:#34d399;">
+        100-120
+       </div>
+       <div class="text-xs mt-1" style="color:#a89b8c;">
+        CPR Compressions/Min
+       </div>
+      </div>
+      <div class="rounded-xl p-5 text-center" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+       <div class="text-3xl font-extrabold font-display" style="color:#60a5fa;">
+        5-6
+       </div>
+       <div class="text-xs mt-1" style="color:#a89b8c;">
+        cm Compression Depth
+       </div>
+      </div>
+     </div>
+    </section><!-- STEMI / ACS -->
+    <section id="tab-stemi" class="tab-content hidden">
+     <h2 class="font-display text-2xl md:text-3xl font-bold mb-6" style="color:#f5f0eb;">Acute Coronary Syndromes (ACS)</h2><!-- ACS Spectrum -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#f87171;">ACS Spectrum</h3>
+      <div class="grid md:grid-cols-3 gap-4">
+       <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.2);">
+        <h4 class="font-bold mb-2" style="color:#f87171;">STEMI</h4>
+        <ul class="text-sm space-y-1.5" style="color:#c4b8a9;">
+         <li>• ST elevation ≥1mm in ≥2 contiguous leads</li>
+         <li>• New LBBB with clinical suspicion</li>
+         <li>• Complete occlusion of coronary artery</li>
+         <li>• <strong style="color:#f87171;">Troponin: Elevated</strong></li>
+         <li>• <strong style="color:#f87171;">Tx: Emergent PCI or Thrombolysis</strong></li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4" style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.2);">
+        <h4 class="font-bold mb-2" style="color:#fbbf24;">NSTEMI</h4>
+        <ul class="text-sm space-y-1.5" style="color:#c4b8a9;">
+         <li>• ST depression, T-wave inversion or normal ECG</li>
+         <li>• Partial occlusion / thrombus</li>
+         <li>• <strong style="color:#fbbf24;">Troponin: Elevated</strong></li>
+         <li>• Risk stratify with GRACE/TIMI score</li>
+         <li>• <strong style="color:#fbbf24;">Tx: Early invasive vs. conservative</strong></li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4" style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.2);">
+        <h4 class="font-bold mb-2" style="color:#34d399;">Unstable Angina</h4>
+        <ul class="text-sm space-y-1.5" style="color:#c4b8a9;">
+         <li>• Ischemic symptoms at rest or crescendo pattern</li>
+         <li>• ECG may show ST/T changes</li>
+         <li>• <strong style="color:#34d399;">Troponin: Normal</strong></li>
+         <li>• High-risk plaque but no necrosis yet</li>
+         <li>• <strong style="color:#34d399;">Tx: Antiplatelet + anticoagulation</strong></li>
+        </ul>
+       </div>
+      </div>
+     </div><!-- STEMI Management Algorithm -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-5" style="color:#f87171;">STEMI Management Algorithm</h3>
+      <div class="space-y-3">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold" style="background:#dc2626; color:#fff;">
+         1
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:rgba(220,38,38,0.06);">
+         <h4 class="font-bold text-sm" style="color:#f5f0eb;">Initial Assessment (0-10 min)</h4>
+         <p class="text-sm mt-1" style="color:#a89b8c;">12-lead ECG within 10 min of first medical contact • Focused H&amp;P • IV access • Continuous monitoring • O₂ if SpO₂ &lt; 90%</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold" style="background:#dc2626; color:#fff;">
+         2
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:rgba(220,38,38,0.06);">
+         <h4 class="font-bold text-sm" style="color:#f5f0eb;">Immediate Pharmacotherapy</h4>
+         <p class="text-sm mt-1" style="color:#a89b8c;"><strong style="color:#f5f0eb;">MONA+</strong> — Morphine (if pain persists) • Oxygen (if hypoxic) • Nitroglycerin SL/IV (avoid in RV infarct, SBP&lt;90, PDE5i use) • Aspirin 325mg chewed • P2Y12 inhibitor (Ticagrelor 180mg or Clopidogrel 600mg) • Heparin (UFH or Enoxaparin)</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold" style="background:#dc2626; color:#fff;">
+         3
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:rgba(220,38,38,0.06);">
+         <h4 class="font-bold text-sm" style="color:#f5f0eb;">Reperfusion Strategy Decision</h4>
+         <p class="text-sm mt-1" style="color:#a89b8c;"><strong style="color:#f87171;">PCI-capable facility (Door-to-Balloon &lt;90 min):</strong> Primary PCI<br><strong style="color:#fbbf24;">Non-PCI facility (Door-to-Needle &lt;30 min):</strong> Fibrinolysis (Tenecteplase/Alteplase/Streptokinase) → Transfer for rescue PCI if no reperfusion in 60-90 min</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold" style="background:#dc2626; color:#fff;">
+         4
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:rgba(220,38,38,0.06);">
+         <h4 class="font-bold text-sm" style="color:#f5f0eb;">Post-Reperfusion / ICU Care</h4>
+         <p class="text-sm mt-1" style="color:#a89b8c;">Continuous telemetry • Serial ECG &amp; Troponins • Echo for LV function • Beta-blocker (if hemodynamically stable) • ACE inhibitor/ARB (within 24h if anterior MI or EF&lt;40%) • High-intensity statin • Monitor for complications: arrhythmia, cardiogenic shock, mechanical complications</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Contraindications to Fibrinolysis -->
+     <div class="rounded-2xl p-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#fbbf24;">⚠ Contraindications to Fibrinolysis</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div>
+        <h4 class="font-semibold text-sm mb-2" style="color:#f87171;">Absolute</h4>
+        <ul class="text-sm space-y-1" style="color:#c4b8a9;">
+         <li>• Prior intracranial hemorrhage</li>
+         <li>• Known intracranial neoplasm / AVM</li>
+         <li>• Active internal bleeding (excl. menses)</li>
+         <li>• Suspected aortic dissection</li>
+         <li>• Ischemic stroke within 3 months</li>
+         <li>• Significant head/facial trauma within 3 months</li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold text-sm mb-2" style="color:#fbbf24;">Relative</h4>
+        <ul class="text-sm space-y-1" style="color:#c4b8a9;">
+         <li>• Severe uncontrolled HTN (&gt;180/110)</li>
+         <li>• Current anticoagulant use (INR &gt;2)</li>
+         <li>• Traumatic/prolonged CPR (&gt;10 min)</li>
+         <li>• Major surgery within 3 weeks</li>
+         <li>• Pregnancy or 1 week postpartum</li>
+         <li>• Non-compressible vascular puncture</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- ARRHYTHMIAS -->
+    <section id="tab-arrhythmia" class="tab-content hidden">
+     <h2 class="font-display text-2xl md:text-3xl font-bold mb-6" style="color:#f5f0eb;">Life-Threatening Arrhythmias</h2><!-- Tachyarrhythmias -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#60a5fa;">Tachyarrhythmias (HR &gt; 100 bpm)</h3>
+      <div class="space-y-3" id="tachyAccordion"><!-- VF -->
+       <div class="rounded-xl overflow-hidden" style="border:1px solid rgba(220,38,38,0.15);"><button onclick="toggleCollapse(this)" class="w-full flex items-center justify-between px-5 py-3 text-left" style="background:rgba(220,38,38,0.06);"> <span class="font-semibold text-sm" style="color:#f87171;">Ventricular Fibrillation (VF)</span> <i data-lucide="chevron-down" style="width:16px;height:16px;color:#f87171;" class="transition-transform"></i> </button>
+        <div class="collapse-content">
+         <div class="px-5 py-4 text-sm" style="color:#c4b8a9;">
+          <p class="mb-2"><strong style="color:#f5f0eb;">ECG:</strong> Chaotic, irregular waveforms; no identifiable P, QRS, or T waves</p>
+          <p class="mb-2"><strong style="color:#f5f0eb;">Hemodynamics:</strong> No cardiac output → Pulseless → Cardiac arrest</p>
+          <p class="mb-2"><strong style="color:#f87171;">Treatment:</strong></p>
+          <ul class="ml-4 space-y-1">
+           <li>• <strong>Immediate unsynchronized defibrillation</strong> — Biphasic 120-200J, Monophasic 360J</li>
+           <li>• Resume CPR immediately for 2 min after each shock</li>
+           <li>• Epinephrine 1mg IV/IO every 3-5 min</li>
+           <li>• Amiodarone 300mg IV bolus → 150mg repeat</li>
+           <li>• Consider Lidocaine 1-1.5 mg/kg if Amiodarone unavailable</li>
+           <li>• Address reversible causes (H's &amp; T's)</li>
+          </ul>
+         </div>
+        </div>
+       </div><!-- VT with Pulse -->
+       <div class="rounded-xl overflow-hidden" style="border:1px solid rgba(251,191,36,0.15);"><button onclick="toggleCollapse(this)" class="w-full flex items-center justify-between px-5 py-3 text-left" style="background:rgba(251,191,36,0.06);"> <span class="font-semibold text-sm" style="color:#fbbf24;">Ventricular Tachycardia (with Pulse)</span> <i data-lucide="chevron-down" style="width:16px;height:16px;color:#fbbf24;" class="transition-transform"></i> </button>
+        <div class="collapse-content">
+         <div class="px-5 py-4 text-sm" style="color:#c4b8a9;">
+          <p class="mb-2"><strong style="color:#f5f0eb;">ECG:</strong> Wide complex tachycardia (QRS &gt;120ms), regular rhythm, rate 150-250 bpm</p>
+          <p class="mb-2"><strong style="color:#f5f0eb;">Types:</strong> Monomorphic VT (stable QRS) vs Polymorphic VT (varying QRS morphology)</p>
+          <p class="mb-2"><strong style="color:#fbbf24;">Treatment — Stable:</strong></p>
+          <ul class="ml-4 space-y-1">
+           <li>• Amiodarone 150mg IV over 10 min → infusion 1mg/min for 6h</li>
+           <li>• Procainamide 20-50mg/min until arrhythmia suppressed</li>
+           <li>• Sotalol IV if above fail</li>
+          </ul>
+          <p class="mt-2 mb-2"><strong style="color:#f87171;">Treatment — Unstable (hypotension, AMS, chest pain):</strong></p>
+          <ul class="ml-4 space-y-1">
+           <li>• <strong>Synchronized cardioversion</strong> — 100J → 200J → 300J → 360J</li>
+           <li>• Sedation with Midazolam/Etomidate if conscious</li>
+          </ul>
+         </div>
+        </div>
+       </div><!-- SVT -->
+       <div class="rounded-xl overflow-hidden" style="border:1px solid rgba(52,211,153,0.15);"><button onclick="toggleCollapse(this)" class="w-full flex items-center justify-between px-5 py-3 text-left" style="background:rgba(52,211,153,0.06);"> <span class="font-semibold text-sm" style="color:#34d399;">Supraventricular Tachycardia (SVT)</span> <i data-lucide="chevron-down" style="width:16px;height:16px;color:#34d399;" class="transition-transform"></i> </button>
+        <div class="collapse-content">
+         <div class="px-5 py-4 text-sm" style="color:#c4b8a9;">
+          <p class="mb-2"><strong style="color:#f5f0eb;">ECG:</strong> Narrow complex (QRS &lt;120ms), regular, rate 150-250 bpm, P waves often hidden</p>
+          <p class="mb-2"><strong style="color:#34d399;">Treatment:</strong></p>
+          <ul class="ml-4 space-y-1">
+           <li>• <strong>Vagal maneuvers</strong> — Valsalva (modified), carotid sinus massage, cold water immersion</li>
+           <li>• <strong>Adenosine</strong> — 6mg rapid IV push → 12mg → 12mg (with saline flush)</li>
+           <li>• If refractory: Verapamil 2.5-5mg IV or Diltiazem 15-20mg IV</li>
+           <li>• Unstable: Synchronized cardioversion 50-100J</li>
+          </ul>
+         </div>
+        </div>
+       </div><!-- Torsades -->
+       <div class="rounded-xl overflow-hidden" style="border:1px solid rgba(168,139,250,0.15);"><button onclick="toggleCollapse(this)" class="w-full flex items-center justify-between px-5 py-3 text-left" style="background:rgba(168,139,250,0.06);"> <span class="font-semibold text-sm" style="color:#a78bfa;">Torsades de Pointes</span> <i data-lucide="chevron-down" style="width:16px;height:16px;color:#a78bfa;" class="transition-transform"></i> </button>
+        <div class="collapse-content">
+         <div class="px-5 py-4 text-sm" style="color:#c4b8a9;">
+          <p class="mb-2"><strong style="color:#f5f0eb;">ECG:</strong> Polymorphic VT with "twisting of the points" around baseline, preceded by prolonged QT</p>
+          <p class="mb-2"><strong style="color:#f5f0eb;">Causes:</strong> Drug-induced QT prolongation (antiarrhythmics, antibiotics, antipsychotics), hypokalemia, hypomagnesemia</p>
+          <p class="mb-2"><strong style="color:#a78bfa;">Treatment:</strong></p>
+          <ul class="ml-4 space-y-1">
+           <li>• <strong>Magnesium Sulfate 2g IV over 5-10 min</strong> (first-line regardless of Mg level)</li>
+           <li>• Overdrive pacing (temporary transvenous) at 100-120 bpm</li>
+           <li>• Isoproterenol infusion if pacing unavailable</li>
+           <li>• Correct K⁺ to &gt;4.0 mEq/L</li>
+           <li>• <strong>AVOID:</strong> Amiodarone, Procainamide (worsen QT prolongation)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Bradyarrhythmias -->
+     <div class="rounded-2xl p-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#fbbf24;">Bradyarrhythmias (HR &lt; 60 bpm)</h3>
+      <div class="space-y-3">
+       <div class="rounded-xl p-4" style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.12);">
+        <h4 class="font-semibold text-sm mb-2" style="color:#fbbf24;">Symptomatic Bradycardia Algorithm</h4>
+        <div class="text-sm space-y-2" style="color:#c4b8a9;">
+         <p>1. <strong style="color:#f5f0eb;">Assess adequacy of perfusion</strong> — Hypotension? Altered mental status? Signs of shock? Chest pain? Acute HF?</p>
+         <p>2. <strong style="color:#f5f0eb;">Atropine</strong> — 1mg IV every 3-5 min (max 3mg) — first-line for symptomatic bradycardia</p>
+         <p>3. <strong style="color:#f5f0eb;">If Atropine ineffective:</strong></p>
+         <ul class="ml-4 space-y-1">
+          <li>• <strong>Transcutaneous pacing</strong> — Set rate 60-80, increase mA until capture</li>
+          <li>• <strong>Dopamine</strong> 5-20 mcg/kg/min infusion</li>
+          <li>• <strong>Epinephrine</strong> 2-10 mcg/min infusion</li>
+         </ul>
+         <p>4. <strong style="color:#f5f0eb;">Prepare for transvenous pacing</strong> if refractory</p>
+         <p class="mt-3 p-3 rounded-lg" style="background:rgba(220,38,38,0.08);"><strong style="color:#f87171;">⚠ Note:</strong> Atropine is INEFFECTIVE in infranodal blocks (Mobitz Type II, Complete Heart Block) — proceed directly to pacing</p>
+        </div>
+       </div>
+       <div class="grid md:grid-cols-3 gap-3">
+        <div class="rounded-xl p-4" style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.1);">
+         <h4 class="font-semibold text-xs mb-2" style="color:#34d399;">1st Degree AVB</h4>
+         <p class="text-xs" style="color:#a89b8c;">PR &gt;200ms, all P waves conducted. Usually benign — observe.</p>
+        </div>
+        <div class="rounded-xl p-4" style="background:rgba(251,191,36,0.05); border:1px solid rgba(251,191,36,0.1);">
+         <h4 class="font-semibold text-xs mb-2" style="color:#fbbf24;">2nd Degree Type I (Wenckebach)</h4>
+         <p class="text-xs" style="color:#a89b8c;">Progressive PR prolongation → dropped beat. Usually at AV node. Often benign.</p>
+        </div>
+        <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.1);">
+         <h4 class="font-semibold text-xs mb-2" style="color:#f87171;">2nd Degree Type II / 3rd Degree (CHB)</h4>
+         <p class="text-xs" style="color:#a89b8c;">Sudden dropped beats without PR change (Mobitz II) or complete AV dissociation (CHB). <strong>Requires pacing.</strong></p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- CARDIAC ARREST -->
+    <section id="tab-arrest" class="tab-content hidden">
+     <h2 class="font-display text-2xl md:text-3xl font-bold mb-6" style="color:#f5f0eb;">Cardiac Arrest &amp; ACLS</h2><!-- CPR Quality Box -->
+     <div class="rounded-2xl p-6 mb-6" style="background:linear-gradient(135deg,#1c0a0a,#111118); border:1px solid rgba(220,38,38,0.2);">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#dc2626;">
+        <i data-lucide="heart" style="width:20px;height:20px;color:#fff;"></i>
+       </div>
+       <h3 class="font-bold text-lg" style="color:#f87171;">High-Quality CPR — The Foundation</h3>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+       <div class="rounded-lg p-3 text-center" style="background:rgba(0,0,0,0.3);">
+        <div class="text-xl font-bold" style="color:#f87171;">
+         100-120
+        </div>
+        <div class="text-xs" style="color:#a89b8c;">
+         Compressions/min
+        </div>
+       </div>
+       <div class="rounded-lg p-3 text-center" style="background:rgba(0,0,0,0.3);">
+        <div class="text-xl font-bold" style="color:#f87171;">
+         5-6 cm
+        </div>
+        <div class="text-xs" style="color:#a89b8c;">
+         Depth (2-2.4 in)
+        </div>
+       </div>
+       <div class="rounded-lg p-3 text-center" style="background:rgba(0,0,0,0.3);">
+        <div class="text-xl font-bold" style="color:#f87171;">
+         30:2
+        </div>
+        <div class="text-xs" style="color:#a89b8c;">
+         Ratio (no advanced airway)
+        </div>
+       </div>
+       <div class="rounded-lg p-3 text-center" style="background:rgba(0,0,0,0.3);">
+        <div class="text-xl font-bold" style="color:#f87171;">
+         Full
+        </div>
+        <div class="text-xs" style="color:#a89b8c;">
+         Chest Recoil
+        </div>
+       </div>
+       <div class="rounded-lg p-3 text-center" style="background:rgba(0,0,0,0.3);">
+        <div class="text-xl font-bold" style="color:#f87171;">
+         &lt;10s
+        </div>
+        <div class="text-xs" style="color:#a89b8c;">
+         Interruptions
+        </div>
+       </div>
+      </div>
+     </div><!-- ACLS Algorithm -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-5" style="color:#60a5fa;">ACLS Cardiac Arrest Algorithm</h3>
+      <div class="grid md:grid-cols-2 gap-6"><!-- Shockable -->
+       <div class="rounded-xl p-5" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.15);">
+        <h4 class="font-bold mb-3 flex items-center gap-2" style="color:#f87171;"><i data-lucide="zap" style="width:16px;height:16px;"></i> Shockable (VF / Pulseless VT)</h4>
+        <ol class="text-sm space-y-2" style="color:#c4b8a9;">
+         <li><strong style="color:#f5f0eb;">1.</strong> CPR → Rhythm check → <strong style="color:#f87171;">SHOCK</strong> (Biphasic 120-200J)</li>
+         <li><strong style="color:#f5f0eb;">2.</strong> CPR 2 min → Rhythm check → <strong style="color:#f87171;">SHOCK</strong></li>
+         <li><strong style="color:#f5f0eb;">3.</strong> <strong style="color:#fbbf24;">Epinephrine 1mg IV/IO</strong> (then q3-5min)</li>
+         <li><strong style="color:#f5f0eb;">4.</strong> CPR 2 min → Rhythm check → <strong style="color:#f87171;">SHOCK</strong></li>
+         <li><strong style="color:#f5f0eb;">5.</strong> <strong style="color:#a78bfa;">Amiodarone 300mg IV</strong> (then 150mg)</li>
+         <li><strong style="color:#f5f0eb;">6.</strong> Continue cycle — CPR → Check → Shock → Drugs</li>
+        </ol>
+       </div><!-- Non-Shockable -->
+       <div class="rounded-xl p-5" style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15);">
+        <h4 class="font-bold mb-3 flex items-center gap-2" style="color:#60a5fa;"><i data-lucide="minus-circle" style="width:16px;height:16px;"></i> Non-Shockable (Asystole / PEA)</h4>
+        <ol class="text-sm space-y-2" style="color:#c4b8a9;">
+         <li><strong style="color:#f5f0eb;">1.</strong> CPR immediately (no shock indicated)</li>
+         <li><strong style="color:#f5f0eb;">2.</strong> <strong style="color:#fbbf24;">Epinephrine 1mg IV/IO ASAP</strong> (then q3-5min)</li>
+         <li><strong style="color:#f5f0eb;">3.</strong> CPR 2 min → Rhythm check</li>
+         <li><strong style="color:#f5f0eb;">4.</strong> If rhythm changes to shockable → switch algorithm</li>
+         <li><strong style="color:#f5f0eb;">5.</strong> <strong style="color:#34d399;">Aggressively search for reversible causes</strong></li>
+         <li><strong style="color:#f5f0eb;">6.</strong> Consider advanced airway, waveform capnography</li>
+        </ol>
+       </div>
+      </div>
+     </div><!-- H's and T's -->
+     <div class="rounded-2xl p-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#34d399;">Reversible Causes — The H's &amp; T's</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div class="rounded-xl p-4" style="background:rgba(52,211,153,0.05);">
+        <h4 class="font-bold text-sm mb-3" style="color:#34d399;">5 H's</h4>
+        <ul class="text-sm space-y-2" style="color:#c4b8a9;">
+         <li><strong style="color:#f5f0eb;">H</strong>ypovolemia — IV fluids, blood products, stop bleeding</li>
+         <li><strong style="color:#f5f0eb;">H</strong>ypoxia — Advanced airway, 100% O₂, confirm placement</li>
+         <li><strong style="color:#f5f0eb;">H</strong>ydrogen ion (Acidosis) — Sodium bicarbonate, ventilation</li>
+         <li><strong style="color:#f5f0eb;">H</strong>ypo/Hyperkalemia — Calcium, insulin+glucose, kayexalate / IV KCl</li>
+         <li><strong style="color:#f5f0eb;">H</strong>ypothermia — Active rewarming (core temp monitoring)</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4" style="background:rgba(52,211,153,0.05);">
+        <h4 class="font-bold text-sm mb-3" style="color:#34d399;">5 T's</h4>
+        <ul class="text-sm space-y-2" style="color:#c4b8a9;">
+         <li><strong style="color:#f5f0eb;">T</strong>ension Pneumothorax — Needle decompression → Chest tube</li>
+         <li><strong style="color:#f5f0eb;">T</strong>amponade (Cardiac) — Pericardiocentesis / Thoracotomy</li>
+         <li><strong style="color:#f5f0eb;">T</strong>oxins — Specific antidotes (Naloxone, Flumazenil, Digibind, Lipid emulsion)</li>
+         <li><strong style="color:#f5f0eb;">T</strong>hrombosis (Coronary) — PCI / Fibrinolysis during CPR</li>
+         <li><strong style="color:#f5f0eb;">T</strong>hrombosis (Pulmonary) — Systemic thrombolysis (Alteplase 50mg IV)</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- HEART FAILURE -->
+    <section id="tab-failure" class="tab-content hidden">
+     <h2 class="font-display text-2xl md:text-3xl font-bold mb-6" style="color:#f5f0eb;">Acute Decompensated Heart Failure</h2><!-- Clinical Profiles -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#60a5fa;">Forrester / Nohria-Stevenson Classification</h3>
+      <div class="grid grid-cols-2 gap-3">
+       <div class="rounded-xl p-4 text-center" style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.15);">
+        <h4 class="font-bold text-sm" style="color:#34d399;">Profile A — Warm &amp; Dry</h4>
+        <p class="text-xs mt-1" style="color:#a89b8c;">Adequate perfusion, no congestion<br>
+         CI &gt;2.2, PCWP &lt;18<br><strong>Tx:</strong> Optimize oral meds</p>
+       </div>
+       <div class="rounded-xl p-4 text-center" style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15);">
+        <h4 class="font-bold text-sm" style="color:#60a5fa;">Profile B — Warm &amp; Wet</h4>
+        <p class="text-xs mt-1" style="color:#a89b8c;">Adequate perfusion, congested<br>
+         CI &gt;2.2, PCWP &gt;18<br><strong>Tx:</strong> IV Diuretics ± Vasodilators</p>
+       </div>
+       <div class="rounded-xl p-4 text-center" style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15);">
+        <h4 class="font-bold text-sm" style="color:#fbbf24;">Profile L — Cold &amp; Dry</h4>
+        <p class="text-xs mt-1" style="color:#a89b8c;">Low perfusion, no congestion<br>
+         CI &lt;2.2, PCWP &lt;18<br><strong>Tx:</strong> Cautious fluids ± Inotropes</p>
+       </div>
+       <div class="rounded-xl p-4 text-center" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.15);">
+        <h4 class="font-bold text-sm" style="color:#f87171;">Profile C — Cold &amp; Wet</h4>
+        <p class="text-xs mt-1" style="color:#a89b8c;">Low perfusion + congested<br>
+         CI &lt;2.2, PCWP &gt;18<br><strong>Tx:</strong> Inotropes + Diuretics ± MCS</p>
+       </div>
+      </div>
+     </div><!-- Cardiogenic Shock -->
+     <div class="rounded-2xl p-6 mb-6" style="background:linear-gradient(135deg,#1c0a0a,#111118); border:1px solid rgba(220,38,38,0.2);">
+      <h3 class="font-bold text-lg mb-4" style="color:#f87171;">🚨 Cardiogenic Shock</h3>
+      <div class="text-sm space-y-2" style="color:#c4b8a9;">
+       <p><strong style="color:#f5f0eb;">Definition:</strong> SBP &lt;90 (or vasopressors needed) + CI &lt;2.2 + PCWP &gt;15 + End-organ hypoperfusion</p>
+       <p><strong style="color:#f5f0eb;">Diagnosis:</strong> SCAI Shock Classification Stages A–E</p>
+       <div class="mt-3 space-y-2">
+        <p><strong style="color:#f87171;">Management Ladder:</strong></p>
+        <ol class="ml-4 space-y-1.5">
+         <li><strong>1.</strong> IV Fluids (cautious 250ml bolus if not volume overloaded)</li>
+         <li><strong>2.</strong> Norepinephrine (vasopressor of choice per SOAP II trial)</li>
+         <li><strong>3.</strong> Dobutamine 2.5-20 mcg/kg/min (inotrope) or Milrinone</li>
+         <li><strong>4.</strong> IABP (Intra-Aortic Balloon Pump) — routine use not recommended (IABP-SHOCK II)</li>
+         <li><strong>5.</strong> Impella / ECMO for refractory shock</li>
+         <li><strong>6.</strong> Emergent revascularization if ACS-related</li>
+        </ol>
+       </div>
+      </div>
+     </div><!-- Flash Pulmonary Edema -->
+     <div class="rounded-2xl p-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#60a5fa;">Flash Pulmonary Edema — Acute Management</h3>
+      <div class="text-sm" style="color:#c4b8a9;">
+       <p class="mb-3"><strong style="color:#f5f0eb;">Mnemonic: LMNOP</strong></p>
+       <div class="grid md:grid-cols-5 gap-3">
+        <div class="rounded-lg p-3 text-center" style="background:rgba(59,130,246,0.06);">
+         <div class="text-lg font-bold" style="color:#60a5fa;">
+          L
+         </div>
+         <div class="text-xs">
+          Lasix (Furosemide)<br>
+          40-80mg IV
+         </div>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(59,130,246,0.06);">
+         <div class="text-lg font-bold" style="color:#60a5fa;">
+          M
+         </div>
+         <div class="text-xs">
+          Morphine<br>
+          2-4mg IV (caution)
+         </div>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(59,130,246,0.06);">
+         <div class="text-lg font-bold" style="color:#60a5fa;">
+          N
+         </div>
+         <div class="text-xs">
+          Nitroglycerin<br>
+          SL/IV infusion
+         </div>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(59,130,246,0.06);">
+         <div class="text-lg font-bold" style="color:#60a5fa;">
+          O
+         </div>
+         <div class="text-xs">
+          Oxygen / NIV<br>
+          CPAP or BiPAP
+         </div>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(59,130,246,0.06);">
+         <div class="text-lg font-bold" style="color:#60a5fa;">
+          P
+         </div>
+         <div class="text-xs">
+          Position<br>
+          Upright / Legs down
+         </div>
+        </div>
+       </div>
+       <p class="mt-4 p-3 rounded-lg" style="background:rgba(251,191,36,0.06);"><strong style="color:#fbbf24;">Key:</strong> NIV (CPAP/BiPAP) reduces intubation rates by 50% (3CPO Trial). Start early!</p>
+      </div>
+     </div>
+    </section><!-- TAMPONADE & OTHERS -->
+    <section id="tab-tamponade" class="tab-content hidden">
+     <h2 class="font-display text-2xl md:text-3xl font-bold mb-6" style="color:#f5f0eb;">Tamponade, Dissection &amp; Other Emergencies</h2><!-- Cardiac Tamponade -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#f87171;">Cardiac Tamponade</h3>
+      <div class="text-sm" style="color:#c4b8a9;">
+       <p class="mb-3"><strong style="color:#f5f0eb;">Beck's Triad:</strong> Hypotension + Muffled heart sounds + JVD (present in ~30% of acute tamponade)</p>
+       <p class="mb-3"><strong style="color:#f5f0eb;">Additional Signs:</strong> Pulsus paradoxus (&gt;10 mmHg drop in SBP on inspiration), tachycardia, electrical alternans on ECG, low-voltage QRS</p>
+       <p class="mb-3"><strong style="color:#f5f0eb;">Diagnosis:</strong> Bedside Echo — RA/RV diastolic collapse, IVC plethora, respiratory variation in mitral/tricuspid inflow</p>
+       <div class="mt-4 p-4 rounded-xl" style="background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.15);">
+        <h4 class="font-bold text-sm mb-2" style="color:#f87171;">Emergency Management</h4>
+        <ul class="space-y-1.5">
+         <li>• <strong style="color:#f5f0eb;">Pericardiocentesis</strong> — Subxiphoid approach, echo-guided preferred, 18G spinal needle</li>
+         <li>• IV fluid bolus (250-500ml NS) as bridge to maintain preload</li>
+         <li>• Avoid positive pressure ventilation (decreases venous return)</li>
+         <li>• Avoid diuretics &amp; vasodilators (worsen hemodynamics)</li>
+         <li>• Surgical pericardial window if recurrent or traumatic</li>
+        </ul>
+       </div>
+      </div>
+     </div><!-- Aortic Dissection -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#a78bfa;">Acute Aortic Dissection</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+       <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.12);">
+        <h4 class="font-bold text-sm mb-2" style="color:#f87171;">Type A (Ascending Aorta)</h4>
+        <ul class="text-xs space-y-1" style="color:#c4b8a9;">
+         <li>• Involves ascending aorta ± arch</li>
+         <li>• Mortality: 1-2% per hour untreated</li>
+         <li>• <strong style="color:#f87171;">Treatment: EMERGENT SURGERY</strong></li>
+         <li>• Complications: AI, tamponade, coronary malperfusion, stroke</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4" style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.12);">
+        <h4 class="font-bold text-sm mb-2" style="color:#60a5fa;">Type B (Descending Aorta)</h4>
+        <ul class="text-xs space-y-1" style="color:#c4b8a9;">
+         <li>• Distal to L. subclavian artery</li>
+         <li>• Often managed medically if uncomplicated</li>
+         <li>• <strong style="color:#60a5fa;">Treatment: BP &amp; HR Control</strong></li>
+         <li>• TEVAR if complicated (malperfusion, rupture)</li>
+        </ul>
+       </div>
+      </div>
+      <div class="text-sm p-4 rounded-xl" style="background:rgba(168,139,250,0.06); color:#c4b8a9;">
+       <p><strong style="color:#a78bfa;">Medical Management (All Types):</strong></p>
+       <ul class="mt-2 space-y-1">
+        <li>• <strong>Target:</strong> HR &lt;60, SBP 100-120 mmHg</li>
+        <li>• <strong>1st:</strong> IV Esmolol or Labetalol (reduce dP/dt)</li>
+        <li>• <strong>2nd:</strong> Add Nitroprusside or Nicardipine if BP still high (ONLY after beta-blockade)</li>
+        <li>• Pain control: IV Morphine/Fentanyl</li>
+        <li>• CT Angiography or TEE for diagnosis</li>
+       </ul>
+      </div>
+     </div><!-- Hypertensive Emergency -->
+     <div class="rounded-2xl p-6 mb-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#fbbf24;">Hypertensive Emergency</h3>
+      <div class="text-sm" style="color:#c4b8a9;">
+       <p class="mb-3"><strong style="color:#f5f0eb;">Definition:</strong> BP &gt;180/120 with acute end-organ damage (encephalopathy, AKI, retinopathy, aortic dissection, acute HF, eclampsia)</p>
+       <div class="overflow-x-auto mt-3">
+        <table class="w-full text-xs">
+         <thead>
+          <tr style="background:rgba(251,191,36,0.06);">
+           <th class="text-left px-3 py-2 font-semibold" style="color:#fbbf24;">Scenario</th>
+           <th class="text-left px-3 py-2 font-semibold" style="color:#fbbf24;">Preferred Agent</th>
+           <th class="text-left px-3 py-2 font-semibold" style="color:#fbbf24;">BP Target</th>
+          </tr>
+         </thead>
+         <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="px-3 py-2">Aortic Dissection</td>
+           <td class="px-3 py-2">Esmolol + Nitroprusside</td>
+           <td class="px-3 py-2">SBP &lt;120 in 20 min</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="px-3 py-2">Acute Pulmonary Edema</td>
+           <td class="px-3 py-2">NTG IV + Furosemide</td>
+           <td class="px-3 py-2">25% reduction in 1h</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="px-3 py-2">ACS</td>
+           <td class="px-3 py-2">NTG IV + Esmolol</td>
+           <td class="px-3 py-2">25% reduction in 1h</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="px-3 py-2">Eclampsia</td>
+           <td class="px-3 py-2">Labetalol / Hydralazine + MgSO4</td>
+           <td class="px-3 py-2">&lt;160/110</td>
+          </tr>
+          <tr>
+           <td class="px-3 py-2">Pheochromocytoma</td>
+           <td class="px-3 py-2">Phentolamine (α-blocker first)</td>
+           <td class="px-3 py-2">Gradual reduction</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </div><!-- Acute PE -->
+     <div class="rounded-2xl p-6" style="background:#111118; border:1px solid rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-4" style="color:#34d399;">Massive Pulmonary Embolism</h3>
+      <div class="text-sm" style="color:#c4b8a9;">
+       <p class="mb-3"><strong style="color:#f5f0eb;">Definition:</strong> PE causing hemodynamic instability (SBP &lt;90 for &gt;15 min, or requiring vasopressors, or cardiac arrest)</p>
+       <p class="mb-2"><strong style="color:#f5f0eb;">Diagnosis:</strong> CTPA (gold standard) or bedside Echo (RV dilation, McConnell's sign, D-shaped septum)</p>
+       <div class="mt-3 p-4 rounded-xl" style="background:rgba(52,211,153,0.06);">
+        <p class="font-bold mb-2" style="color:#34d399;">Treatment:</p>
+        <ul class="space-y-1.5">
+         <li>• <strong style="color:#f5f0eb;">Systemic Thrombolysis:</strong> Alteplase 100mg IV over 2h (or 50mg bolus in cardiac arrest)</li>
+         <li>• Anticoagulation: UFH bolus 80 U/kg → 18 U/kg/h infusion</li>
+         <li>• Hemodynamic support: IV fluids (cautious), Norepinephrine, Dobutamine</li>
+         <li>• If thrombolysis contraindicated: Catheter-directed therapy or Surgical embolectomy</li>
+         <li>• ECMO as bridge in refractory cases</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="max-w-6xl mx-auto px-6 py-8 border-t" style="border-color:rgba(255,255,255,0.06);">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+     <div class="flex items-center gap-2"><i data-lucide="heart-pulse" style="width:16px;height:16px;color:#dc2626;"></i> <span class="text-sm font-semibold" style="color:#f5f0eb;">Cardiac Emergencies Reference</span>
+     </div>
+     <p class="text-xs text-center" style="color:#6b7280;">For educational purposes only. Based on AHA/ACC/ESC Guidelines. Always follow institutional protocols. Not a substitute for clinical judgment.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// Default config
+const defaultConfig = {
+  main_title: 'Cardiac Emergencies',
+  subtitle: 'Critical Care & Emergency Medicine Reference',
+  background_color: '#0a0a0f',
+  surface_color: '#111118',
+  text_color: '#f5f0eb',
+  primary_action: '#dc2626',
+  secondary_action: '#60a5fa',
+  font_family: 'DM Sans',
+  font_size: 16
+};
+
+// Tab switching
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('tab-active');
+    b.style.color = '#6b7280';
+    b.style.borderColor = 'transparent';
+  });
+  const section = document.getElementById('tab-' + tabId);
+  const btn = document.querySelector(`[data-tab="${tabId}"]`);
+  if (section) section.classList.remove('hidden');
+  if (btn) {
+    btn.classList.add('tab-active');
+    const c = window.elementSdk?.config?.primary_action || defaultConfig.primary_action;
+    btn.style.color = c;
+    btn.style.borderColor = c;
+  }
+  lucide.createIcons();
+}
+
+// Accordion collapse
+function toggleCollapse(btn) {
+  const content = btn.nextElementSibling;
+  const icon = btn.querySelector('[data-lucide]');
+  content.classList.toggle('open');
+  if (icon) icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+// Element SDK
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+
+  document.getElementById('mainTitle').textContent = c.main_title;
+  document.getElementById('subtitle').textContent = c.subtitle;
+
+  // Colors
+  const app = document.getElementById('app');
+  app.style.background = c.background_color;
+
+  // Font
+  const ff = `${c.font_family}, DM Sans, sans-serif`;
+  document.body.style.fontFamily = ff;
+
+  // Font size
+  const base = c.font_size || 16;
+  document.body.style.fontSize = base + 'px';
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>
