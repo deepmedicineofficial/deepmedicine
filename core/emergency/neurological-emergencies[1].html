@@ -1,0 +1,824 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Neurological Emergencies | Acute Neuro Critical Care | Deep Medicine</title> <meta name="description" content="Comprehensive guide to neurological emergencies including stroke, seizures, coma, and acute neurocritical care management."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/neurological-emergencies"> <!-- Open Graph --> <meta property="og:title" content="Neurological Emergencies | Deep Medicine"> <meta property="og:description" content="Rapid assessment and management of neurological emergencies including stroke, seizures, and coma."> <meta property="og:image" content="https://deepmedicine.in/images/neurological-emergencies.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; }
+  .font-heading { font-family: 'Playfair Display', serif; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.3); }
+    50% { box-shadow: 0 0 20px 4px rgba(220, 38, 38, 0.15); }
+  }
+  .anim-fade { animation: fadeUp 0.5s ease both; }
+  .anim-d1 { animation-delay: 0.05s; }
+  .anim-d2 { animation-delay: 0.1s; }
+  .anim-d3 { animation-delay: 0.15s; }
+  .anim-d4 { animation-delay: 0.2s; }
+  .anim-d5 { animation-delay: 0.25s; }
+  .pulse-border { animation: pulseGlow 2.5s ease-in-out infinite; }
+
+  .topic-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+  .topic-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .tab-btn {
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .detail-section { display: none; }
+  .detail-section.active { display: block; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: #0B0F1A;"><!-- HERO -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #0B0F1A 0%, #1a1025 40%, #0f1a2e 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #dc2626 0%, transparent 50%), radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 40%);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+     <div class="flex items-center gap-3 mb-4 anim-fade">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center pulse-border" style="background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.4);"><i data-lucide="brain" style="width:22px;height:22px;color:#ef4444;"></i>
+      </div><span class="text-xs font-semibold tracking-widest uppercase" style="color:#ef4444;">Emergency Medicine &amp; Critical Care</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-5xl lg:text-6xl font-800 leading-tight mb-3 anim-fade anim-d1" style="color:#f1f5f9;">Neurological<br>
+      Emergencies</h1>
+     <p id="subtitle" class="text-base sm:text-lg max-w-xl anim-fade anim-d2" style="color:#94a3b8;">A comprehensive clinical reference for MBBS/MD practitioners — covering diagnosis, management algorithms, and ICU protocols.</p>
+     <div class="flex flex-wrap gap-3 mt-6 anim-fade anim-d3"><span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(220,38,38,0.15);color:#fca5a5;border:1px solid rgba(220,38,38,0.25);">🚨 Time-Critical</span> <span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.25);">🧠 Evidence-Based</span> <span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">📋 Protocol-Driven</span>
+     </div>
+    </div>
+   </header><!-- NAV GRID -->
+   <nav id="topicGrid" class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <h2 class="text-sm font-semibold tracking-widest uppercase mb-5 anim-fade" style="color:#64748b;">Select a Topic</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" id="cardContainer"></div>
+   </nav><!-- DETAIL VIEW -->
+   <div id="detailView" class="hidden max-w-6xl mx-auto px-4 sm:px-6 pb-16"><button id="backBtn"
+  class="flex items-center gap-1 text-sm font-medium mb-6 group
+         px-4 pt-3 pb-2 rounded-lg
+         text-blue-100
+         bg-gradient-to-b from-blue-500 to-blue-700
+         shadow-[0_4px_0_#1e3a8a,0_6px_12px_rgba(0,0,0,0.3)]
+         hover:shadow-[0_2px_0_#1e3a8a,0_4px_8px_rgba(0,0,0,0.3)]
+         active:translate-y-[2px]
+         active:shadow-[0_1px_0_#1e3a8a]
+         transition-all duration-150">
+
+  <i data-lucide="arrow-left"
+     class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1">
+  </i>
+
+  Back to Topics
+</button>
+    <div id="detailHeader" class="mb-6"></div><!-- TABS -->
+    <div class="flex gap-1 mb-6 overflow-x-auto pb-2" id="tabBar" style="border-bottom: 1px solid #1e293b;"></div><!-- TAB CONTENT -->
+    <div id="tabContent" class="rounded-2xl p-4 sm:p-6" style="background:#111827; border:1px solid #1e293b;"></div>
+   </div><!-- FOOTER -->
+   <footer class="text-center py-8 px-4" style="border-top:1px solid #1e293b;">
+    <p class="text-xs" style="color:#475569;">⚕️ For educational &amp; clinical reference purposes. Always correlate with patient presentation &amp; institutional protocols.</p>
+   </footer>
+  </div>
+  <script>
+// ========== DATA ==========
+const TOPICS = [
+  {
+    id: 'stroke', icon: 'zap', color: '#ef4444', title: 'Acute Stroke',
+    tagline: 'Time is Brain — Every minute counts',
+    tabs: {
+      'Overview': `
+        <h3>Definition & Epidemiology</h3>
+        <p>Stroke is an acute neurological deficit due to vascular injury to the CNS. It remains the <strong>2nd leading cause of death</strong> and the <strong>#1 cause of adult disability</strong> worldwide.</p>
+        <div class="grid sm:grid-cols-2 gap-3 my-4">
+          <div class="info-box"><strong>Ischemic Stroke (85%)</strong><br>Thrombotic, Embolic, Lacunar, Watershed</div>
+          <div class="info-box"><strong>Hemorrhagic Stroke (15%)</strong><br>Intracerebral (ICH), Subarachnoid (SAH)</div>
+        </div>
+        <h3>Golden Hour Principle</h3>
+        <ul>
+          <li><strong>Door-to-CT:</strong> ≤ 25 minutes</li>
+          <li><strong>Door-to-Needle (IV tPA):</strong> ≤ 60 minutes</li>
+          <li><strong>Door-to-Groin (Thrombectomy):</strong> ≤ 90 minutes</li>
+          <li><strong>IV tPA Window:</strong> 0–4.5 hours from onset</li>
+          <li><strong>Mechanical Thrombectomy:</strong> Up to 24 hours (selected patients, DAWN/DEFUSE-3 criteria)</li>
+        </ul>`,
+      'Assessment': `
+        <h3>Rapid Neurological Assessment</h3>
+        <table>
+          <tr><th>Tool</th><th>Components</th><th>Purpose</th></tr>
+          <tr><td>FAST</td><td>Face, Arms, Speech, Time</td><td>Prehospital screening</td></tr>
+          <tr><td>NIHSS</td><td>11 items, score 0–42</td><td>Severity grading & tPA eligibility</td></tr>
+          <tr><td>mRS</td><td>Scale 0–6</td><td>Functional outcome measure</td></tr>
+          <tr><td>ABCD²</td><td>Age, BP, Clinical, Duration, Diabetes</td><td>TIA risk stratification</td></tr>
+        </table>
+        <h3>NIHSS Quick Interpretation</h3>
+        <ul>
+          <li><strong>0–4:</strong> Minor stroke</li>
+          <li><strong>5–15:</strong> Moderate stroke — tPA candidate</li>
+          <li><strong>16–20:</strong> Moderate-severe</li>
+          <li><strong>21–42:</strong> Severe stroke — high mortality risk</li>
+        </ul>
+        <h3>Imaging Protocol</h3>
+        <ul>
+          <li><strong>NCCT Head:</strong> STAT — rule out hemorrhage (mandatory before thrombolysis)</li>
+          <li><strong>CT Angiography:</strong> Identify large vessel occlusion (LVO)</li>
+          <li><strong>CT Perfusion:</strong> Core vs penumbra mismatch (for extended window)</li>
+          <li><strong>MRI DWI/FLAIR:</strong> DWI-FLAIR mismatch → wake-up stroke eligibility</li>
+        </ul>`,
+      'Management': `
+        <h3>Acute Ischemic Stroke Protocol</h3>
+        <div class="alert-box">🚨 <strong>ABCs first!</strong> Secure airway if GCS ≤ 8. Intubate with RSI if needed. Maintain SpO₂ > 94%.</div>
+        <h4>IV Thrombolysis (Alteplase / Tenecteplase)</h4>
+        <ul>
+          <li><strong>Alteplase:</strong> 0.9 mg/kg (max 90 mg) — 10% bolus, rest over 60 min</li>
+          <li><strong>Tenecteplase:</strong> 0.25 mg/kg single bolus (emerging evidence, preferred for LVO before thrombectomy)</li>
+          <li><strong>BP target pre-tPA:</strong> &lt; 185/110 mmHg</li>
+          <li><strong>BP target post-tPA:</strong> &lt; 180/105 mmHg × 24 hours</li>
+        </ul>
+        <h4>Mechanical Thrombectomy</h4>
+        <ul>
+          <li>LVO (ICA, M1, M2, basilar)</li>
+          <li>NIHSS ≥ 6, ASPECTS ≥ 6</li>
+          <li>0–6 hrs: standard window</li>
+          <li>6–24 hrs: DAWN/DEFUSE-3 criteria (perfusion mismatch)</li>
+        </ul>
+        <h4>Hemorrhagic Stroke (ICH)</h4>
+        <ul>
+          <li><strong>BP Target:</strong> SBP 130–150 mmHg (IV Labetalol / Nicardipine)</li>
+          <li><strong>Reverse anticoagulation:</strong> Warfarin → Vit K + 4-factor PCC; DOACs → Idarucizumab (dabigatran), Andexanet alfa (Xa inhibitors)</li>
+          <li><strong>ICP management:</strong> HOB 30°, Mannitol 20% (1g/kg) or Hypertonic Saline 3% (250 mL)</li>
+          <li><strong>Surgical evacuation:</strong> Cerebellar ICH > 3cm, hydrocephalus, or deteriorating</li>
+        </ul>`,
+      'ICU Care': `
+        <h3>Neuro-ICU Monitoring</h3>
+        <ul>
+          <li>Continuous EEG monitoring (detect non-convulsive seizures)</li>
+          <li>Invasive ICP monitoring if GCS ≤ 8 with abnormal CT</li>
+          <li>Cerebral Perfusion Pressure (CPP) target: 60–70 mmHg</li>
+          <li>Targeted Temperature Management: 36–37°C (avoid hyperthermia)</li>
+          <li>Glucose: 140–180 mg/dL (avoid hypo & hyperglycemia)</li>
+          <li>DVT prophylaxis: pneumatic compression → LMWH after 24–48 hrs (if no hemorrhage)</li>
+          <li>Dysphagia screen before any oral intake</li>
+        </ul>
+        <h3>Complications to Anticipate</h3>
+        <table>
+          <tr><th>Complication</th><th>Timeframe</th><th>Intervention</th></tr>
+          <tr><td>Hemorrhagic transformation</td><td>24–48 hrs post-tPA</td><td>Repeat CT, hold anticoagulation</td></tr>
+          <tr><td>Malignant MCA edema</td><td>2–5 days</td><td>Decompressive craniectomy (age < 60)</td></tr>
+          <tr><td>Seizures</td><td>First 7 days</td><td>Levetiracetam (no prophylactic AEDs in ischemic)</td></tr>
+          <tr><td>Aspiration pneumonia</td><td>48–72 hrs</td><td>NPO, NG tube, antibiotics</td></tr>
+        </table>`
+    }
+  },
+  {
+    id: 'se', icon: 'activity', color: '#f59e0b', title: 'Status Epilepticus',
+    tagline: 'Seizure > 5 min = Medical Emergency',
+    tabs: {
+      'Overview': `
+        <h3>Definition (ILAE 2015)</h3>
+        <ul>
+          <li><strong>Status Epilepticus (SE):</strong> Continuous seizure ≥ 5 minutes OR ≥ 2 seizures without regaining consciousness</li>
+          <li><strong>Refractory SE (RSE):</strong> Persists despite 2 appropriate AEDs</li>
+          <li><strong>Super-Refractory SE (SRSE):</strong> Continues ≥ 24 hrs despite anesthetic agents</li>
+        </ul>
+        <h3>Etiology — "VITAMINS"</h3>
+        <div class="info-box">
+          <strong>V</strong>ascular · <strong>I</strong>nfection · <strong>T</strong>rauma · <strong>A</strong>utoimmune · <strong>M</strong>etabolic · <strong>I</strong>nborn errors · <strong>N</strong>eoplasm · <strong>S</strong>tructural/Substances
+        </div>
+        <p>Most common cause in known epileptics: <strong>AED non-compliance</strong></p>
+        <p>Most common cause de novo: <strong>Stroke, CNS infection, metabolic</strong></p>`,
+      'Protocol': `
+        <h3>Staged Management Algorithm</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#ef4444;"></div>
+            <div class="timeline-content">
+              <strong>Stage 1 (0–5 min) — Stabilization</strong>
+              <p>ABCs, O₂, IV access, check glucose, position safely. Thiamine 100mg IV if alcoholism suspected → then Dextrose 50% 50mL.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#f59e0b;"></div>
+            <div class="timeline-content">
+              <strong>Stage 2 (5–20 min) — First-line Benzos</strong>
+              <p><strong>IV Lorazepam:</strong> 0.1 mg/kg (max 4 mg/dose), repeat once in 5 min<br>
+              <strong>OR IM Midazolam:</strong> 10 mg (if no IV access) — RAMPART trial<br>
+              <strong>OR PR Diazepam:</strong> 0.2 mg/kg</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#3b82f6;"></div>
+            <div class="timeline-content">
+              <strong>Stage 3 (20–40 min) — Second-line AEDs</strong>
+              <p><strong>IV Levetiracetam:</strong> 60 mg/kg (max 4500 mg) over 15 min — ESETT trial<br>
+              <strong>OR IV Fosphenytoin:</strong> 20 mg PE/kg at 150 mg PE/min<br>
+              <strong>OR IV Valproate:</strong> 40 mg/kg (max 3000 mg) over 10 min</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#8b5cf6;"></div>
+            <div class="timeline-content">
+              <strong>Stage 4 (>40 min) — Refractory SE → ICU</strong>
+              <p>Intubate + continuous IV infusion:<br>
+              <strong>Midazolam:</strong> 0.2 mg/kg bolus → 0.1–2 mg/kg/hr<br>
+              <strong>Propofol:</strong> 2 mg/kg bolus → 30–200 mcg/kg/min (watch for PRIS)<br>
+              <strong>Ketamine:</strong> 1–3 mg/kg bolus → 1–10 mg/kg/hr (NMDA antagonist)<br>
+              Target: burst-suppression on cEEG for 24–48 hrs</p>
+            </div>
+          </div>
+        </div>`,
+      'ICU Care': `
+        <h3>Neuro-ICU Management of RSE/SRSE</h3>
+        <ul>
+          <li><strong>Continuous EEG (cEEG):</strong> Mandatory — titrate to burst-suppression or seizure-free pattern</li>
+          <li>Wean anesthetics slowly after 24–48 hrs seizure-free</li>
+          <li>Transition to long-term AED regimen before weaning</li>
+          <li>Investigate underlying etiology aggressively: LP, MRI brain, autoimmune panel, toxicology</li>
+        </ul>
+        <h3>Special Considerations</h3>
+        <table>
+          <tr><th>Scenario</th><th>Management</th></tr>
+          <tr><td>Autoimmune encephalitis (anti-NMDA-R)</td><td>IV Methylprednisolone 1g × 5d + IVIG/PLEX</td></tr>
+          <tr><td>Non-convulsive SE (NCSE)</td><td>High index of suspicion, diagnose via EEG, treat aggressively</td></tr>
+          <tr><td>Eclampsia</td><td>IV MgSO₄ 4g bolus → 1g/hr, deliver baby</td></tr>
+          <tr><td>Propofol Infusion Syndrome</td><td>Stop propofol, supportive care, switch to midazolam/ketamine</td></tr>
+        </table>`
+    }
+  },
+  {
+    id: 'coma', icon: 'eye-off', color: '#8b5cf6', title: 'Coma & Altered Sensorium',
+    tagline: 'Systematic approach to the unresponsive patient',
+    tabs: {
+      'Overview': `
+        <h3>Definition</h3>
+        <p><strong>Coma:</strong> A state of unarousable unresponsiveness (GCS ≤ 8). The patient cannot be awakened and shows no purposeful response to stimuli.</p>
+        <h3>Etiological Framework — "AEIOU-TIPS"</h3>
+        <div class="info-box">
+          <strong>A</strong>lcohol/Acidosis · <strong>E</strong>pilepsy/Encephalopathy · <strong>I</strong>nsulin (hypo/hyperglycemia) · <strong>O</strong>piates/Overdose · <strong>U</strong>remia<br>
+          <strong>T</strong>rauma/Temperature · <strong>I</strong>nfection · <strong>P</strong>sychogenic/Poisoning · <strong>S</strong>troke/SAH/Shock
+        </div>
+        <h3>Key Differentiation</h3>
+        <table>
+          <tr><th>Condition</th><th>Eyes</th><th>Motor</th><th>Awareness</th></tr>
+          <tr><td>Coma</td><td>Closed</td><td>Reflex only</td><td>None</td></tr>
+          <tr><td>Vegetative State</td><td>Open (sleep-wake)</td><td>Reflex</td><td>None</td></tr>
+          <tr><td>Minimally Conscious</td><td>Open</td><td>Inconsistent purposeful</td><td>Partial</td></tr>
+          <tr><td>Locked-in</td><td>Open</td><td>Quadriplegic</td><td>Full (vertical eye movement)</td></tr>
+        </table>`,
+      'Assessment': `
+        <h3>Structured Coma Examination</h3>
+        <h4>1. Glasgow Coma Scale (GCS)</h4>
+        <table>
+          <tr><th>Component</th><th>Response</th><th>Score</th></tr>
+          <tr><td rowspan="4">Eye (E)</td><td>Spontaneous</td><td>4</td></tr>
+          <tr><td>To voice</td><td>3</td></tr>
+          <tr><td>To pain</td><td>2</td></tr>
+          <tr><td>None</td><td>1</td></tr>
+          <tr><td rowspan="5">Verbal (V)</td><td>Oriented</td><td>5</td></tr>
+          <tr><td>Confused</td><td>4</td></tr>
+          <tr><td>Inappropriate words</td><td>3</td></tr>
+          <tr><td>Incomprehensible</td><td>2</td></tr>
+          <tr><td>None</td><td>1</td></tr>
+          <tr><td rowspan="6">Motor (M)</td><td>Obeys commands</td><td>6</td></tr>
+          <tr><td>Localizes pain</td><td>5</td></tr>
+          <tr><td>Withdrawal</td><td>4</td></tr>
+          <tr><td>Abnormal flexion</td><td>3</td></tr>
+          <tr><td>Extension</td><td>2</td></tr>
+          <tr><td>None</td><td>1</td></tr>
+        </table>
+        <h4>2. Pupillary Examination</h4>
+        <ul>
+          <li><strong>Bilateral fixed dilated:</strong> Brainstem death, atropine, severe hypoxia</li>
+          <li><strong>Bilateral pinpoint:</strong> Opioid overdose, pontine hemorrhage</li>
+          <li><strong>Unilateral fixed dilated:</strong> Uncal herniation (CN III compression) — EMERGENCY</li>
+          <li><strong>Bilateral mid-fixed:</strong> Midbrain lesion</li>
+        </ul>
+        <h4>3. Brainstem Reflexes</h4>
+        <ul>
+          <li>Corneal reflex (CN V/VII)</li>
+          <li>Oculocephalic / Doll's eyes (CN III, VI, VIII)</li>
+          <li>Gag reflex (CN IX/X)</li>
+          <li>Cough reflex (CN X)</li>
+        </ul>`,
+      'Management': `
+        <h3>Emergency Management Algorithm</h3>
+        <div class="alert-box">🚨 <strong>Immediate:</strong> ABC stabilization. Intubate if GCS ≤ 8 (protect airway). C-spine precautions if trauma.</div>
+        <h4>Empiric "Coma Cocktail"</h4>
+        <ul>
+          <li><strong>Dextrose 50%:</strong> 50 mL IV (after checking glucose)</li>
+          <li><strong>Thiamine:</strong> 100 mg IV (BEFORE glucose if alcoholism suspected)</li>
+          <li><strong>Naloxone:</strong> 0.4–2 mg IV (if opioid overdose suspected) — titrate to respiratory effort</li>
+          <li><strong>Flumazenil:</strong> 0.2 mg IV (benzodiazepine OD — use cautiously, risk of seizures)</li>
+        </ul>
+        <h4>Targeted Investigations</h4>
+        <ul>
+          <li>STAT: Glucose, ABG, electrolytes, renal/hepatic panel, ammonia, toxicology screen</li>
+          <li>CT Head without contrast (rule out hemorrhage, mass, hydrocephalus)</li>
+          <li>LP if meningitis/encephalitis suspected (after CT)</li>
+          <li>EEG if non-convulsive SE suspected</li>
+          <li>MRI Brain if CT non-diagnostic</li>
+        </ul>
+        <h4>Herniation Syndromes — Recognize & Act</h4>
+        <table>
+          <tr><th>Type</th><th>Signs</th><th>Emergency Tx</th></tr>
+          <tr><td>Uncal (transtentorial)</td><td>Ipsilateral CN III palsy, contralateral hemiparesis</td><td>Mannitol/HTS, hyperventilate briefly, neurosurgery</td></tr>
+          <tr><td>Central</td><td>Bilateral small reactive → fixed pupils, Cheyne-Stokes</td><td>Same as above</td></tr>
+          <tr><td>Tonsillar</td><td>Sudden apnea, bradycardia, neck stiffness</td><td>Intubate, osmotherapy, emergent decompression</td></tr>
+        </table>`
+    }
+  },
+  {
+    id: 'meningitis', icon: 'thermometer', color: '#10b981', title: 'Meningitis & Encephalitis',
+    tagline: 'Empiric antibiotics BEFORE LP — do not delay',
+    tabs: {
+      'Overview': `
+        <h3>Definitions</h3>
+        <ul>
+          <li><strong>Meningitis:</strong> Inflammation of the meninges (headache, neck stiffness, fever)</li>
+          <li><strong>Encephalitis:</strong> Inflammation of the brain parenchyma (altered consciousness, seizures, focal deficits)</li>
+          <li><strong>Meningoencephalitis:</strong> Both</li>
+        </ul>
+        <h3>Classic Triad of Bacterial Meningitis</h3>
+        <div class="info-box">
+          <strong>Fever + Neck Stiffness + Altered Mental Status</strong><br>
+          Present in only ~44% of cases. Absence does NOT rule out meningitis.
+        </div>
+        <h3>Common Pathogens by Age</h3>
+        <table>
+          <tr><th>Age Group</th><th>Common Organisms</th></tr>
+          <tr><td>Neonates (< 3 mo)</td><td>GBS, E. coli, Listeria</td></tr>
+          <tr><td>Children (3 mo–18 yr)</td><td>N. meningitidis, S. pneumoniae</td></tr>
+          <tr><td>Adults (18–50 yr)</td><td>S. pneumoniae, N. meningitidis</td></tr>
+          <tr><td>> 50 yr / Immunocompromised</td><td>S. pneumoniae, Listeria, GNB</td></tr>
+        </table>`,
+      'Diagnosis': `
+        <h3>Clinical Signs</h3>
+        <ul>
+          <li><strong>Kernig's sign:</strong> Pain/resistance on knee extension with hip flexed 90°</li>
+          <li><strong>Brudzinski's sign:</strong> Involuntary hip flexion on passive neck flexion</li>
+          <li><strong>Jolt accentuation:</strong> Worsening headache with horizontal head rotation (sensitive)</li>
+          <li><strong>Petechial rash:</strong> Think N. meningitidis → may progress to purpura fulminans</li>
+        </ul>
+        <h3>CSF Analysis</h3>
+        <table>
+          <tr><th>Parameter</th><th>Bacterial</th><th>Viral</th><th>TB</th><th>Fungal</th></tr>
+          <tr><td>Appearance</td><td>Turbid</td><td>Clear</td><td>Fibrin web</td><td>Clear/hazy</td></tr>
+          <tr><td>WBC</td><td>>1000 (PMNs)</td><td>10–500 (Lymphs)</td><td>50–500 (Lymphs)</td><td>50–500 (Lymphs)</td></tr>
+          <tr><td>Protein</td><td>↑↑↑</td><td>Normal/↑</td><td>↑↑</td><td>↑↑</td></tr>
+          <tr><td>Glucose</td><td>↓↓↓</td><td>Normal</td><td>↓↓</td><td>↓↓</td></tr>
+        </table>
+        <div class="alert-box">⚡ <strong>Do NOT delay antibiotics for LP!</strong> If CT needed first → give empiric Abx → CT → LP</div>`,
+      'Treatment': `
+        <h3>Empiric Antibiotic Protocol</h3>
+        <table>
+          <tr><th>Age/Scenario</th><th>Empiric Regimen</th></tr>
+          <tr><td>Adults < 50</td><td>Ceftriaxone 2g IV q12h + Vancomycin 15–20 mg/kg IV q8–12h</td></tr>
+          <tr><td>Adults > 50 / Immunocompromised</td><td>Above + Ampicillin 2g IV q4h (Listeria cover)</td></tr>
+          <tr><td>Neonates</td><td>Ampicillin + Cefotaxime (or Gentamicin)</td></tr>
+          <tr><td>Post-neurosurgery</td><td>Vancomycin + Cefepime (or Meropenem)</td></tr>
+        </table>
+        <h3>Adjunctive Dexamethasone</h3>
+        <ul>
+          <li><strong>Dose:</strong> 0.15 mg/kg IV q6h × 4 days</li>
+          <li><strong>Timing:</strong> Give 15–20 min BEFORE or WITH first dose of antibiotics</li>
+          <li><strong>Benefit:</strong> Reduces mortality & neurological sequelae in S. pneumoniae meningitis</li>
+          <li><strong>Evidence:</strong> de Gans & van de Beek, NEJM 2002</li>
+        </ul>
+        <h3>HSV Encephalitis</h3>
+        <ul>
+          <li><strong>Suspect if:</strong> Fever + altered sensorium + temporal lobe seizures/abnormalities</li>
+          <li><strong>Treatment:</strong> IV Acyclovir 10 mg/kg q8h × 14–21 days — START EMPIRICALLY</li>
+          <li><strong>Confirm:</strong> CSF HSV PCR + MRI (temporal lobe hyperintensity)</li>
+        </ul>`
+    }
+  },
+  {
+    id: 'icp', icon: 'trending-up', color: '#dc2626', title: 'Raised ICP',
+    tagline: 'Recognize early — herniation is irreversible',
+    tabs: {
+      'Overview': `
+        <h3>Normal ICP: 5–15 mmHg</h3>
+        <p>Raised ICP (> 20 mmHg sustained) is a neurosurgical and neuro-ICU emergency that, if untreated, leads to cerebral herniation and death.</p>
+        <h3>Monro-Kellie Doctrine</h3>
+        <div class="info-box">
+          The cranial vault is a fixed-volume container. An increase in any one component (brain ~80%, blood ~10%, CSF ~10%) must be compensated by a decrease in another — or ICP rises.
+        </div>
+        <h3>Common Causes</h3>
+        <ul>
+          <li><strong>Mass effect:</strong> Tumor, abscess, hematoma (EDH, SDH, ICH)</li>
+          <li><strong>Cerebral edema:</strong> Ischemic stroke, traumatic brain injury, hepatic encephalopathy</li>
+          <li><strong>Hydrocephalus:</strong> Obstructive or communicating</li>
+          <li><strong>Venous congestion:</strong> Cerebral venous sinus thrombosis (CVST)</li>
+          <li><strong>Idiopathic Intracranial Hypertension (IIH)</strong></li>
+        </ul>`,
+      'Signs': `
+        <h3>Clinical Features</h3>
+        <h4>Cushing's Triad (Late & Ominous)</h4>
+        <div class="alert-box">🚨 <strong>Hypertension + Bradycardia + Irregular Respirations</strong> = Impending herniation. Act NOW.</div>
+        <h4>Early Signs</h4>
+        <ul>
+          <li>Headache (worse in morning, with Valsalva)</li>
+          <li>Nausea & projectile vomiting</li>
+          <li>Papilledema on fundoscopy</li>
+          <li>CN VI palsy (false localizing — longest intracranial course)</li>
+          <li>Decreasing consciousness (earliest reliable sign in ICU)</li>
+        </ul>
+        <h4>Pupillary Changes</h4>
+        <ul>
+          <li><strong>Unilateral dilated fixed pupil:</strong> Ipsilateral uncal herniation (CN III compression)</li>
+          <li><strong>Bilateral fixed dilated:</strong> Bilateral herniation / brainstem death</li>
+        </ul>`,
+      'Management': `
+        <h3>Stepwise ICP Management (Tier-Based)</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#10b981;"></div>
+            <div class="timeline-content">
+              <strong>Tier 0 — General Measures</strong>
+              <p>HOB 30°, head midline, avoid tight C-collar, sedation (propofol/midazolam), analgesia, normothermia, normovolemia, avoid hypercarbia (PaCO₂ 35–40 mmHg).</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#3b82f6;"></div>
+            <div class="timeline-content">
+              <strong>Tier 1 — Osmotherapy</strong>
+              <p><strong>Mannitol 20%:</strong> 0.25–1 g/kg IV bolus q4–6h (keep serum osm < 320)<br>
+              <strong>Hypertonic Saline 3%:</strong> 250 mL bolus or 23.4% 30 mL via central line (target Na 145–155)</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#f59e0b;"></div>
+            <div class="timeline-content">
+              <strong>Tier 2 — CSF Drainage & Advanced</strong>
+              <p>EVD (External Ventricular Drain) — both diagnostic (ICP monitoring) and therapeutic.<br>
+              Moderate hyperventilation PaCO₂ 30–35 mmHg (short-term bridge only).</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker" style="background:#ef4444;"></div>
+            <div class="timeline-content">
+              <strong>Tier 3 — Surgical / Rescue</strong>
+              <p>Decompressive craniectomy (DECIMAL, DESTINY, HAMLET, RESCUEicp trials).<br>
+              Barbiturate coma: Thiopentone 5 mg/kg bolus → 3–5 mg/kg/hr (last resort — monitor with cEEG).<br>
+              Therapeutic hypothermia 33–35°C (limited evidence, use in select cases).</p>
+            </div>
+          </div>
+        </div>
+        <h3>CPP Targets</h3>
+        <div class="info-box"><strong>CPP = MAP − ICP</strong><br>Target: 60–70 mmHg. Avoid CPP > 70 (risk of ARDS). Avoid CPP < 60 (cerebral ischemia).</div>`
+    }
+  },
+  {
+    id: 'gbs', icon: 'arrow-down-circle', color: '#06b6d4', title: 'Guillain-Barré Syndrome',
+    tagline: 'Ascending paralysis — watch the respiratory function',
+    tabs: {
+      'Overview': `
+        <h3>Definition</h3>
+        <p>GBS is an acute, immune-mediated polyradiculoneuropathy causing <strong>ascending flaccid paralysis</strong>. It is the most common cause of acute flaccid paralysis worldwide.</p>
+        <h3>Subtypes</h3>
+        <table>
+          <tr><th>Subtype</th><th>Features</th><th>Nerve Target</th></tr>
+          <tr><td>AIDP (most common in West)</td><td>Demyelinating, ascending weakness</td><td>Myelin</td></tr>
+          <tr><td>AMAN</td><td>Pure motor axonal</td><td>Axonal motor</td></tr>
+          <tr><td>AMSAN</td><td>Sensorimotor axonal (severe)</td><td>Axonal motor + sensory</td></tr>
+          <tr><td>Miller Fisher</td><td>Ophthalmoplegia, ataxia, areflexia</td><td>Anti-GQ1b antibody</td></tr>
+        </table>
+        <h3>Antecedent Infections (1–4 weeks prior)</h3>
+        <ul>
+          <li><strong>Campylobacter jejuni</strong> (most common, 30%) — diarrheal illness</li>
+          <li>CMV, EBV, Mycoplasma, Zika virus, COVID-19</li>
+        </ul>`,
+      'Assessment': `
+        <h3>Clinical Presentation</h3>
+        <ul>
+          <li>Symmetric ascending weakness (legs → arms → face → bulbar → respiratory)</li>
+          <li>Hyporeflexia / areflexia</li>
+          <li>Sensory symptoms (paresthesias, pain) — often precede weakness</li>
+          <li>Autonomic dysfunction (30%): tachycardia, BP lability, urinary retention, ileus</li>
+          <li>Facial nerve palsy (bilateral in 50%)</li>
+        </ul>
+        <h3>Diagnosis</h3>
+        <ul>
+          <li><strong>CSF:</strong> Albuminocytologic dissociation (↑ protein, normal WBC) — may be normal in first week</li>
+          <li><strong>NCS/EMG:</strong> Demyelination pattern (prolonged distal latency, conduction block, ↓ velocity) or axonal pattern</li>
+          <li><strong>Anti-ganglioside antibodies:</strong> Anti-GQ1b (Miller Fisher), Anti-GM1 (AMAN)</li>
+        </ul>
+        <h3>⚠️ Respiratory Monitoring — "20/30/40 Rule"</h3>
+        <div class="alert-box">🚨 Intubate if:<br>
+          <strong>FVC < 20 mL/kg</strong> (normal ~60)<br>
+          <strong>MIP < −30 cmH₂O</strong> (normal < −80)<br>
+          <strong>MEP < 40 cmH₂O</strong> (normal > 80)<br>
+          Or: ≥30% decline in FVC from baseline. Do NOT wait for hypoxia/hypercarbia — these are LATE signs.</div>`,
+      'Treatment': `
+        <h3>Immunotherapy (Start Early)</h3>
+        <table>
+          <tr><th>Treatment</th><th>Regimen</th><th>Notes</th></tr>
+          <tr><td>IVIG</td><td>0.4 g/kg/day × 5 days</td><td>Preferred — easier to administer, fewer hemodynamic issues</td></tr>
+          <tr><td>Plasmapheresis (PLEX)</td><td>5 exchanges over 2 weeks</td><td>Equally effective, preferred if IVIG contraindicated</td></tr>
+        </table>
+        <div class="info-box">⚠️ <strong>Corticosteroids are NOT effective</strong> in GBS (unlike CIDP). Do not give steroids.</div>
+        <h3>ICU Monitoring Essentials</h3>
+        <ul>
+          <li>Serial FVC (q4–6h during progression)</li>
+          <li>Continuous cardiac monitoring (arrhythmias from dysautonomia)</li>
+          <li>DVT prophylaxis (immobilized patient)</li>
+          <li>Pain management (neuropathic pain is common — gabapentin/pregabalin)</li>
+          <li>Early rehabilitation & physiotherapy</li>
+          <li>Monitor bulbar function (swallowing, gag reflex) — risk of aspiration</li>
+        </ul>
+        <h3>Prognosis</h3>
+        <ul>
+          <li>80% achieve independent walking at 6 months</li>
+          <li>3–5% mortality (respiratory failure, PE, cardiac arrhythmia)</li>
+          <li>Poor prognostic factors: older age, rapid progression, need for ventilation, axonal subtype, C. jejuni</li>
+        </ul>`
+    }
+  },
+  {
+    id: 'tbi', icon: 'shield-alert', color: '#f97316', title: 'Traumatic Brain Injury',
+    tagline: 'Prevent secondary brain injury',
+    tabs: {
+      'Overview': `
+        <h3>Classification by GCS</h3>
+        <table>
+          <tr><th>Severity</th><th>GCS</th><th>CT Findings</th></tr>
+          <tr><td>Mild</td><td>13–15</td><td>Usually normal; observe</td></tr>
+          <tr><td>Moderate</td><td>9–12</td><td>Variable; admit for monitoring</td></tr>
+          <tr><td>Severe</td><td>3–8</td><td>Often abnormal; ICU + ICP monitoring</td></tr>
+        </table>
+        <h3>Types of Intracranial Injury</h3>
+        <ul>
+          <li><strong>Epidural Hematoma (EDH):</strong> Middle meningeal artery tear. Lucid interval → rapid deterioration. Lens-shaped on CT. Surgical EMERGENCY.</li>
+          <li><strong>Subdural Hematoma (SDH):</strong> Bridging veins. Crescent-shaped on CT. Elderly, anticoagulated patients.</li>
+          <li><strong>Subarachnoid Hemorrhage (Traumatic):</strong> Blood in sulci. Monitor for vasospasm.</li>
+          <li><strong>Diffuse Axonal Injury (DAI):</strong> Shearing forces. CT may appear normal. MRI SWI shows punctate hemorrhages at grey-white junction. Poor prognosis.</li>
+          <li><strong>Contusions:</strong> Coup-contrecoup pattern. Temporal & frontal poles. May expand → "blossoming" contusions.</li>
+        </ul>`,
+      'Management': `
+        <h3>Primary Survey (ATLS)</h3>
+        <div class="alert-box">🚨 <strong>A</strong>irway (C-spine) → <strong>B</strong>reathing → <strong>C</strong>irculation → <strong>D</strong>isability (GCS, pupils) → <strong>E</strong>xposure</div>
+        <ul>
+          <li>Intubate if GCS ≤ 8 (RSI with manual in-line stabilization)</li>
+          <li>Avoid hypotension: SBP < 90 mmHg doubles mortality in TBI</li>
+          <li>Avoid hypoxia: SpO₂ < 90% — immediate correction</li>
+        </ul>
+        <h3>Brain Trauma Foundation (BTF) Guidelines</h3>
+        <table>
+          <tr><th>Parameter</th><th>Target</th></tr>
+          <tr><td>ICP</td><td>< 22 mmHg</td></tr>
+          <tr><td>CPP</td><td>60–70 mmHg</td></tr>
+          <tr><td>SBP</td><td>≥ 100 (15–49 yr), ≥ 110 (50–69 yr)</td></tr>
+          <tr><td>PaCO₂</td><td>35–45 mmHg (no prophylactic hyperventilation)</td></tr>
+          <tr><td>Temperature</td><td>36–37.5°C (avoid fever)</td></tr>
+          <tr><td>Glucose</td><td>140–180 mg/dL</td></tr>
+          <tr><td>Sodium</td><td>Eunatremia or mild hypernatremia if using HTS</td></tr>
+          <tr><td>Seizure prophylaxis</td><td>Levetiracetam or Phenytoin × 7 days (early post-traumatic seizures only)</td></tr>
+        </table>
+        <h3>Surgical Indications</h3>
+        <ul>
+          <li><strong>EDH > 30 mL</strong> or thickness > 15 mm → Immediate craniotomy</li>
+          <li><strong>SDH > 10 mm</strong> or midline shift > 5 mm → Surgical evacuation</li>
+          <li><strong>Depressed skull fracture</strong> > table thickness → Elevation</li>
+          <li><strong>Refractory ICP</strong> → Decompressive craniectomy</li>
+        </ul>`
+    }
+  },
+  {
+    id: 'myasthenia', icon: 'battery-low', color: '#ec4899', title: 'Myasthenic Crisis',
+    tagline: 'NMJ failure — respiratory arrest risk',
+    tabs: {
+      'Overview': `
+        <h3>Myasthenia Gravis (MG)</h3>
+        <p>Autoimmune disorder of the neuromuscular junction. Antibodies against <strong>AChR (85%)</strong> or <strong>MuSK (5–8%)</strong> cause fatigable weakness.</p>
+        <h3>Myasthenic Crisis</h3>
+        <div class="alert-box">🚨 Severe exacerbation of MG leading to <strong>respiratory failure requiring intubation/ventilation</strong>. Mortality: 4–8% (historical > 40%).</div>
+        <h3>Triggers</h3>
+        <ul>
+          <li>Infection (most common trigger — especially respiratory)</li>
+          <li>Surgery / anesthesia</li>
+          <li>Medication changes (tapering immunotherapy, starting offending drugs)</li>
+          <li><strong>Drugs that worsen MG:</strong> Aminoglycosides, fluoroquinolones, beta-blockers, magnesium, D-penicillamine, immune checkpoint inhibitors</li>
+        </ul>
+        <h3>vs. Cholinergic Crisis</h3>
+        <table>
+          <tr><th>Feature</th><th>Myasthenic Crisis</th><th>Cholinergic Crisis</th></tr>
+          <tr><td>Cause</td><td>Undertreated MG</td><td>Excess pyridostigmine</td></tr>
+          <tr><td>Pupils</td><td>Normal</td><td>Miosis (small)</td></tr>
+          <tr><td>Secretions</td><td>Normal</td><td>Excessive (SLUDGE)</td></tr>
+          <tr><td>Fasciculations</td><td>Absent</td><td>Present</td></tr>
+          <tr><td>Management</td><td>Immunotherapy (IVIG/PLEX)</td><td>Stop pyridostigmine, atropine</td></tr>
+        </table>`,
+      'Treatment': `
+        <h3>Acute Management</h3>
+        <ul>
+          <li><strong>Secure airway:</strong> Intubate if FVC < 15–20 mL/kg or NIF < −20 cmH₂O</li>
+          <li><strong>STOP pyridostigmine</strong> during crisis (reduces secretions, simplifies management)</li>
+          <li>Start BiPAP early if possible (may avoid intubation in selected patients)</li>
+        </ul>
+        <h3>Immunotherapy</h3>
+        <table>
+          <tr><th>Treatment</th><th>Regimen</th><th>Onset</th></tr>
+          <tr><td>IVIG</td><td>0.4 g/kg/day × 5 days</td><td>2–5 days</td></tr>
+          <tr><td>PLEX</td><td>5 exchanges over 10–14 days</td><td>Faster onset (days)</td></tr>
+        </table>
+        <div class="info-box">Both IVIG & PLEX are equally effective. Choice depends on availability, patient factors, and hemodynamic stability.</div>
+        <h3>Long-term Management (Post-crisis)</h3>
+        <ul>
+          <li>Restart pyridostigmine at low dose once extubated</li>
+          <li>Optimize chronic immunotherapy: Prednisone, Azathioprine, Mycophenolate, Rituximab</li>
+          <li>Consider thymectomy (MGTX trial — benefit in AChR+ MG age 18–65)</li>
+        </ul>`
+    }
+  }
+];
+
+// ========== APP STATE ==========
+let currentTopic = null;
+let currentTab = null;
+let allData = [];
+
+const defaultConfig = {
+  main_title: 'Neurological Emergencies',
+  subtitle: 'Critical Care & Emergency Medicine',
+  background_color: '#0B0F1A',
+  surface_color: '#111827',
+  text_color: '#f1f5f9',
+  primary_action_color: '#ef4444',
+  secondary_action_color: '#64748b',
+  font_family: 'Playfair Display',
+  font_size: 16
+};
+
+// ========== RENDER FUNCTIONS ==========
+function renderCards() {
+  const container = document.getElementById('cardContainer');
+  container.innerHTML = '';
+  TOPICS.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.className = `topic-card rounded-xl p-4 anim-fade anim-d${Math.min(i+1,5)}`;
+    card.style.cssText = `background:${getConfig('surface_color')};border:1px solid #1e293b;`;
+    card.innerHTML = `
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style="background:${t.color}22;border:1px solid ${t.color}44;">
+        <i data-lucide="${t.icon}" style="width:18px;height:18px;color:${t.color};"></i>
+      </div>
+      <h3 class="font-semibold text-sm mb-1" style="color:${getConfig('text_color')};">${t.title}</h3>
+      <p class="text-xs leading-relaxed" style="color:${getConfig('secondary_action_color')};">${t.tagline}</p>
+    `;
+    card.onclick = () => openTopic(t.id);
+    container.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+function getConfig(key) {
+  return (window.elementSdk && window.elementSdk.config && window.elementSdk.config[key]) || defaultConfig[key];
+}
+
+function openTopic(id) {
+  currentTopic = TOPICS.find(t => t.id === id);
+  if (!currentTopic) return;
+  document.getElementById('topicGrid').classList.add('hidden');
+  document.getElementById('detailView').classList.remove('hidden');
+
+  const header = document.getElementById('detailHeader');
+  header.innerHTML = `
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:${currentTopic.color}22;border:1px solid ${currentTopic.color}44;">
+        <i data-lucide="${currentTopic.icon}" style="width:22px;height:22px;color:${currentTopic.color};"></i>
+      </div>
+      <div>
+        <h2 class="font-heading text-xl sm:text-2xl font-bold" style="color:${getConfig('text_color')};">${currentTopic.title}</h2>
+        <p class="text-xs" style="color:${currentTopic.color};">${currentTopic.tagline}</p>
+      </div>
+    </div>
+  `;
+
+  const tabs = Object.keys(currentTopic.tabs);
+  currentTab = tabs[0];
+  renderTabs(tabs);
+  renderTabContent();
+  lucide.createIcons();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderTabs(tabs) {
+  const bar = document.getElementById('tabBar');
+  bar.innerHTML = '';
+  tabs.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = `tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap`;
+    btn.style.color = t === currentTab ? getConfig('primary_action_color') : getConfig('secondary_action_color');
+    if (t === currentTab) {
+      btn.classList.add('active');
+      btn.style.cssText += `background:${getConfig('surface_color')};`;
+      btn.querySelector = null;
+      const after = document.createElement('style');
+      after.textContent = `.tab-btn.active::after{background:${getConfig('primary_action_color')};}`;
+      bar.appendChild(after);
+    }
+    btn.textContent = t;
+    btn.onclick = () => { currentTab = t; renderTabs(Object.keys(currentTopic.tabs)); renderTabContent(); };
+    bar.appendChild(btn);
+  });
+}
+
+function renderTabContent() {
+  const content = document.getElementById('tabContent');
+  const cfg = {
+    surface: getConfig('surface_color'),
+    text: getConfig('text_color'),
+    muted: getConfig('secondary_action_color'),
+    accent: getConfig('primary_action_color'),
+    bg: getConfig('background_color')
+  };
+
+  content.style.background = cfg.surface;
+  content.style.color = cfg.text;
+  content.innerHTML = `
+    <style>
+      #tabContent h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: ${cfg.text}; }
+      #tabContent h3:first-child { margin-top: 0; }
+      #tabContent h4 { font-size: 0.95rem; font-weight: 600; margin: 1.2rem 0 0.4rem; color: ${cfg.accent}; }
+      #tabContent p { line-height: 1.7; margin-bottom: 0.75rem; color: ${cfg.muted}; }
+      #tabContent strong { color: ${cfg.text}; }
+      #tabContent ul { list-style: none; padding: 0; margin: 0.5rem 0; }
+      #tabContent ul li { padding: 0.35rem 0 0.35rem 1.2rem; position: relative; color: ${cfg.muted}; line-height: 1.6; }
+      #tabContent ul li::before { content: '▸'; position: absolute; left: 0; color: ${cfg.accent}; font-size: 0.8em; }
+      #tabContent table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.85rem; }
+      #tabContent th { text-align: left; padding: 0.5rem; background: ${cfg.bg}; color: ${cfg.accent}; border-bottom: 2px solid ${cfg.accent}33; font-weight: 600; }
+      #tabContent td { padding: 0.5rem; border-bottom: 1px solid #1e293b; color: ${cfg.muted}; }
+      #tabContent tr:hover td { background: ${cfg.bg}88; }
+      .info-box { padding: 1rem; border-radius: 0.75rem; margin: 0.75rem 0; background: ${cfg.bg}; border-left: 3px solid ${cfg.accent}; color: ${cfg.muted}; line-height: 1.6; }
+      .info-box strong { color: ${cfg.text}; }
+      .alert-box { padding: 1rem; border-radius: 0.75rem; margin: 0.75rem 0; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.25); color: #fca5a5; line-height: 1.6; }
+      .alert-box strong { color: #fecaca; }
+      .timeline { position: relative; padding-left: 2rem; margin: 1rem 0; }
+      .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #1e293b; }
+      .timeline-item { position: relative; margin-bottom: 1.5rem; }
+      .timeline-marker { width: 16px; height: 16px; border-radius: 50%; position: absolute; left: -2rem; top: 4px; border: 2px solid ${cfg.bg}; }
+      .timeline-content strong { color: ${cfg.text}; display: block; margin-bottom: 0.3rem; }
+      .timeline-content p { margin: 0; color: ${cfg.muted}; }
+    </style>
+    <div class="content-body">${currentTopic.tabs[currentTab]}</div>
+  `;
+}
+
+function goBack() {
+  document.getElementById('detailView').classList.add('hidden');
+  document.getElementById('topicGrid').classList.remove('hidden');
+  currentTopic = null;
+  currentTab = null;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ========== ELEMENT SDK ==========
+function applyConfig(config) {
+  const c = key => config[key] || defaultConfig[key];
+  const app = document.getElementById('app');
+  app.style.background = c('background_color');
+
+  const title = document.getElementById('mainTitle');
+  const sub = document.getElementById('subtitle');
+  if (title) {
+    title.textContent = c('main_title');
+    title.style.color = c('text_color');
+    title.style.fontFamily = `${c('font_family')}, Playfair Display, serif`;
+    title.style.fontSize = `${c('font_size') * 2.5}px`;
+  }
+  if (sub) {
+    sub.textContent = c('subtitle');
+    sub.style.color = c('secondary_action_color');
+    sub.style.fontFamily = `${c('font_family')}, DM Sans, sans-serif`;
+  }
+  renderCards();
+  if (currentTopic) {
+    renderTabs(Object.keys(currentTopic.tabs));
+    renderTabContent();
+  }
+}
+
+// ========== INIT ==========
+document.getElementById('backBtn').addEventListener('click', goBack);
+renderCards();
+lucide.createIcons();
+</script>
+</body>
+</html>
