@@ -1,0 +1,737 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Thoracentesis & Paracentesis | Fluid Tapping Procedures | Deep Medicine</title> <meta name="description" content="Guide to thoracentesis and paracentesis including indications, technique, fluid analysis, complications, and clinical applications."> <link rel="canonical" href="https://deepmedicine.in/learning/procedures/fluid-tapping"> <!-- Open Graph --> <meta property="og:title" content="Thoracentesis & Paracentesis | Deep Medicine"> <meta property="og:description" content="Fluid tapping procedures with technique, indications, and complications."> <meta property="og:image" content="https://deepmedicine.in/images/fluid-tapping.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+
+  .font-heading { font-family: 'Playfair Display', Georgia, serif; }
+  .font-body { font-family: 'Source Sans 3', sans-serif; }
+
+  .app-root {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .hero-pattern {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(59,130,246,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(16,185,129,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 60% 80%, rgba(99,102,241,0.05) 0%, transparent 50%);
+  }
+
+  .step-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 4px solid transparent;
+  }
+  .step-card:hover {
+    border-left-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .tab-btn {
+    transition: all 0.25s ease;
+    position: relative;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+    border-radius: 3px 3px 0 0;
+  }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn.active { color: var(--accent); }
+
+  .fade-in {
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .checklist-item input:checked + span { text-decoration: line-through; opacity: 0.6; }
+
+  .section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
+  }
+
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #e2e8f0;
+    --accent: #38bdf8;
+    --accent2: #818cf8;
+  }
+
+  .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .collapsible-content.open { max-height: 5000px; }
+
+  .pulse-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .scroll-top-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 50;
+    border: none;
+  }
+  .scroll-top-btn.visible { opacity: 1; pointer-events: all; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="app-root hero-pattern font-body" id="appRoot" style="background-color: var(--bg); color: var(--text);"><!-- Header -->
+   <header class="w-full px-4 sm:px-8 pt-8 pb-6 fade-in" style="animation-delay: 0.1s;">
+    <div class="max-w-5xl mx-auto">
+     <div class="flex items-center gap-3 mb-2">
+      <div class="pulse-dot" style="background: var(--accent);"></div><span class="uppercase tracking-widest text-xs font-semibold" style="color: var(--accent);">Clinical Protocol</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-2" style="color: var(--text);">Tapping Procedure Guide</h1>
+     <p id="subtitle" class="text-lg sm:text-xl opacity-70 font-light" style="color: var(--text);">Standard Protocol Reference — Thoracentesis &amp; Paracentesis</p>
+     <div class="section-divider mt-6"></div>
+    </div>
+   </header><!-- Tab Navigation -->
+   <nav class="w-full px-4 sm:px-8 sticky top-0 z-40 fade-in" style="background-color: var(--bg); animation-delay: 0.2s;">
+    <div class="max-w-5xl mx-auto flex gap-1 overflow-x-auto pb-1 pt-2" id="tabNav"><button class="tab-btn active px-4 py-3 text-sm font-semibold whitespace-nowrap rounded-t-lg" data-tab="thoracentesis" style="color: var(--accent);"> <i data-lucide="wind" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:6px;"></i>Thoracentesis </button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap rounded-t-lg opacity-60" data-tab="paracentesis"> <i data-lucide="droplets" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:6px;"></i>Paracentesis </button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap rounded-t-lg opacity-60" data-tab="checklist"> <i data-lucide="clipboard-check" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:6px;"></i>Checklist </button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap rounded-t-lg opacity-60" data-tab="complications"> <i data-lucide="alert-triangle" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:6px;"></i>Complications </button>
+    </div>
+    <div class="section-divider"></div>
+   </nav><!-- Content Area -->
+   <main class="w-full px-4 sm:px-8 py-6">
+    <div class="max-w-5xl mx-auto"><!-- THORACENTESIS -->
+     <section id="tab-thoracentesis" class="tab-content fade-in">
+      <div class="grid gap-4"><!-- Definition -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold mb-3 flex items-center gap-2" style="color: var(--accent);"><i data-lucide="info" style="width:20px;height:20px;"></i> Definition</h2>
+        <p class="leading-relaxed opacity-90"><strong>Thoracentesis</strong> (Pleural Tapping) is the percutaneous aspiration of fluid from the pleural space for <em>diagnostic</em> or <em>therapeutic</em> purposes. It is one of the most commonly performed bedside procedures in internal medicine and critical care.</p>
+       </div><!-- Indications -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);"><button class="w-full flex items-center justify-between collapsible-toggle" data-target="thorInd"> <h2 class="font-heading text-xl font-bold flex items-center gap-2" style="color: var(--accent);"><i data-lucide="list" style="width:20px;height:20px;"></i> Indications</h2><i data-lucide="chevron-down" class="toggle-icon transition-transform" style="width:20px;height:20px;color:var(--accent);"></i> </button>
+        <div class="collapsible-content open mt-4" id="thorInd">
+         <div class="grid sm:grid-cols-2 gap-4">
+          <div class="rounded-lg p-4" style="background-color: var(--bg);">
+           <h3 class="font-semibold mb-2" style="color: var(--accent2);">🔬 Diagnostic</h3>
+           <ul class="space-y-1 text-sm opacity-90">
+            <li>• New-onset pleural effusion</li>
+            <li>• Undiagnosed effusion persisting &gt;3 days</li>
+            <li>• Suspected empyema or malignant effusion</li>
+            <li>• Fever with pleural effusion</li>
+            <li>• Differentiation: Transudate vs Exudate</li>
+           </ul>
+          </div>
+          <div class="rounded-lg p-4" style="background-color: var(--bg);">
+           <h3 class="font-semibold mb-2" style="color: var(--accent2);">💊 Therapeutic</h3>
+           <ul class="space-y-1 text-sm opacity-90">
+            <li>• Large symptomatic effusion (dyspnea)</li>
+            <li>• Massive effusion with mediastinal shift</li>
+            <li>• Empyema drainage</li>
+            <li>• Instillation of sclerosing agents</li>
+            <li>• Relief before definitive surgery</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div><!-- Contraindications -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);"><button class="w-full flex items-center justify-between collapsible-toggle" data-target="thorContra"> <h2 class="font-heading text-xl font-bold flex items-center gap-2" style="color: var(--accent);"><i data-lucide="shield-off" style="width:20px;height:20px;"></i> Contraindications</h2><i data-lucide="chevron-down" class="toggle-icon transition-transform" style="width:20px;height:20px;color:var(--accent);"></i> </button>
+        <div class="collapsible-content open mt-4" id="thorContra">
+         <div class="grid sm:grid-cols-2 gap-4">
+          <div class="rounded-lg p-4 border" style="background-color: var(--bg); border-color: #ef4444;">
+           <h3 class="font-semibold mb-2 text-red-400">⛔ Absolute</h3>
+           <ul class="space-y-1 text-sm opacity-90">
+            <li>• Uncooperative patient</li>
+            <li>• Uncorrected bleeding diathesis (INR &gt;1.5, Platelets &lt;50,000)</li>
+            <li>• Skin infection at puncture site</li>
+            <li>• Mechanical ventilation (relative — needs expert)</li>
+           </ul>
+          </div>
+          <div class="rounded-lg p-4 border" style="background-color: var(--bg); border-color: #f59e0b;">
+           <h3 class="font-semibold mb-2 text-amber-400">⚠️ Relative</h3>
+           <ul class="space-y-1 text-sm opacity-90">
+            <li>• Small effusion (&lt;1 cm on USG)</li>
+            <li>• Altered coagulation (use USG guidance)</li>
+            <li>• Bullous emphysema</li>
+            <li>• Single functioning lung on contralateral side</li>
+            <li>• Anticoagulant therapy</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div><!-- Equipment -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);"><button class="w-full flex items-center justify-between collapsible-toggle" data-target="thorEquip"> <h2 class="font-heading text-xl font-bold flex items-center gap-2" style="color: var(--accent);"><i data-lucide="package" style="width:20px;height:20px;"></i> Equipment Required</h2><i data-lucide="chevron-down" class="toggle-icon transition-transform" style="width:20px;height:20px;color:var(--accent);"></i> </button>
+        <div class="collapsible-content mt-4" id="thorEquip">
+         <div class="grid sm:grid-cols-3 gap-3">
+          <div class="rounded-lg p-3 text-sm" style="background-color: var(--bg);">
+           <h4 class="font-semibold mb-2" style="color: var(--accent2);">Sterile Kit</h4>
+           <ul class="space-y-1 opacity-90">
+            <li>• Sterile gloves &amp; gown</li>
+            <li>• Sterile drapes</li>
+            <li>• Antiseptic (Povidone-iodine / Chlorhexidine)</li>
+            <li>• Gauze pads</li>
+           </ul>
+          </div>
+          <div class="rounded-lg p-3 text-sm" style="background-color: var(--bg);">
+           <h4 class="font-semibold mb-2" style="color: var(--accent2);">Needles &amp; Syringes</h4>
+           <ul class="space-y-1 opacity-90">
+            <li>• 18G &amp; 20G needles</li>
+            <li>• 16G/18G IV cannula</li>
+            <li>• 20 mL &amp; 50 mL syringes</li>
+            <li>• 3-way stopcock</li>
+            <li>• Connecting tubing</li>
+           </ul>
+          </div>
+          <div class="rounded-lg p-3 text-sm" style="background-color: var(--bg);">
+           <h4 class="font-semibold mb-2" style="color: var(--accent2);">Anesthesia &amp; Misc</h4>
+           <ul class="space-y-1 opacity-90">
+            <li>• 2% Lignocaine (Lidocaine)</li>
+            <li>• 5 mL syringe + 25G needle</li>
+            <li>• Sterile collection bottles</li>
+            <li>• Adhesive dressing</li>
+            <li>• USG machine (if available)</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div><!-- Step-by-Step Procedure -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-5" style="color: var(--accent);"><i data-lucide="list-ordered" style="width:20px;height:20px;"></i> Step-by-Step Procedure</h2>
+        <div class="space-y-3" id="thorSteps">
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           1
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Patient Preparation &amp; Consent</h3>
+           <p class="text-sm opacity-80">Explain the procedure, risks, benefits, and alternatives. Obtain <strong>written informed consent</strong>. Verify identity, check coagulation profile (INR, platelet count). Review imaging (CXR / USG) to confirm effusion side and estimate volume.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           2
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Positioning</h3>
+           <p class="text-sm opacity-80">Patient sits upright, leaning forward on a bedside table with arms supported. If unable to sit: lateral decubitus with affected side down. Mark the site using <strong>USG guidance</strong> (preferred) or percussion (dullness).</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           3
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Site Selection</h3>
+           <p class="text-sm opacity-80"><strong>Landmark:</strong> 1–2 intercostal spaces below the upper border of percussion dullness. Typically <strong>7th–9th intercostal space</strong>, in the mid-scapular or posterior axillary line. Always insert at the <strong>upper border of the lower rib</strong> (to avoid the neurovascular bundle running under each rib).</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           4
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Aseptic Technique</h3>
+           <p class="text-sm opacity-80">Perform hand hygiene. Don sterile gloves and gown. Clean the area with antiseptic in concentric circles (inside → out). Apply sterile drapes around the puncture site. Maintain sterile field throughout.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           5
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Local Anesthesia</h3>
+           <p class="text-sm opacity-80">Infiltrate <strong>2% Lignocaine (5–10 mL)</strong> using a 25G needle. Anesthetize: skin → subcutaneous tissue → intercostal muscles → parietal pleura. Aspirate before injecting at each layer. Walk the needle over the <strong>superior border of the rib</strong>.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           6
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Needle Insertion &amp; Aspiration</h3>
+           <p class="text-sm opacity-80">Insert the aspiration needle (16–18G cannula) attached to a syringe via a 3-way stopcock. Advance perpendicular to the chest wall at the <strong>upper border of the lower rib</strong>. Apply gentle negative pressure. A "give" is felt as the needle enters the pleural space and fluid is aspirated.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           7
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Fluid Collection</h3>
+           <p class="text-sm opacity-80"><strong>Diagnostic:</strong> Aspirate 50–100 mL into sterile containers. Send for: biochemistry (protein, LDH, glucose), cell count &amp; differential, Gram stain &amp; culture, cytology, ADA, and pH. <strong>Therapeutic:</strong> Drain slowly, <strong>maximum 1–1.5 L in one sitting</strong> to prevent re-expansion pulmonary edema.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           8
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Needle Removal &amp; Dressing</h3>
+           <p class="text-sm opacity-80">Ask the patient to hold breath in expiration or hum. Remove the needle swiftly. Apply firm pressure with gauze, then adhesive occlusive dressing. Ensure no air entry occurs during removal.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           9
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Post-Procedure Care</h3>
+           <p class="text-sm opacity-80">Monitor vitals for 1 hour. Obtain a <strong>post-procedure CXR</strong> (erect PA) within 1–2 hours to rule out pneumothorax. Document: volume aspirated, fluid appearance, samples sent, patient tolerance. Watch for: dyspnea, chest pain, cough, hypotension.</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Light's Criteria -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-4" style="color: var(--accent);"><i data-lucide="flask-conical" style="width:20px;height:20px;"></i> Light's Criteria — Exudate vs Transudate</h2>
+        <p class="text-sm opacity-80 mb-4">An effusion is an <strong>Exudate</strong> if it meets <strong>any ONE</strong> of the following:</p>
+        <div class="overflow-x-auto">
+         <table class="w-full text-sm rounded-lg overflow-hidden">
+          <thead>
+           <tr style="background-color: var(--accent); color: var(--bg);">
+            <th class="p-3 text-left font-semibold">Parameter</th>
+            <th class="p-3 text-left font-semibold">Exudate</th>
+            <th class="p-3 text-left font-semibold">Transudate</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr style="background-color: var(--bg);">
+            <td class="p-3 font-medium">Pleural Protein / Serum Protein</td>
+            <td class="p-3 font-bold" style="color: var(--accent);">&gt; 0.5</td>
+            <td class="p-3 opacity-70">≤ 0.5</td>
+           </tr>
+           <tr style="background-color: rgba(30,41,59,0.5);">
+            <td class="p-3 font-medium">Pleural LDH / Serum LDH</td>
+            <td class="p-3 font-bold" style="color: var(--accent);">&gt; 0.6</td>
+            <td class="p-3 opacity-70">≤ 0.6</td>
+           </tr>
+           <tr style="background-color: var(--bg);">
+            <td class="p-3 font-medium">Pleural LDH</td>
+            <td class="p-3 font-bold" style="color: var(--accent);">&gt; ⅔ upper limit of normal serum LDH</td>
+            <td class="p-3 opacity-70">≤ ⅔ upper limit</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3 mt-4">
+         <div class="rounded-lg p-3 text-sm" style="background-color: var(--bg);">
+          <h4 class="font-semibold mb-1" style="color: var(--accent2);">Common Transudates</h4>
+          <p class="opacity-80">CCF, Cirrhosis, Nephrotic syndrome, Hypothyroidism, Meigs' syndrome</p>
+         </div>
+         <div class="rounded-lg p-3 text-sm" style="background-color: var(--bg);">
+          <h4 class="font-semibold mb-1" style="color: var(--accent2);">Common Exudates</h4>
+          <p class="opacity-80">Pneumonia (parapneumonic), TB, Malignancy, Pulmonary embolism, Rheumatoid, Pancreatitis</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- PARACENTESIS -->
+     <section id="tab-paracentesis" class="tab-content hidden">
+      <div class="grid gap-4 fade-in">
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold mb-3 flex items-center gap-2" style="color: var(--accent);"><i data-lucide="info" style="width:20px;height:20px;"></i> Definition</h2>
+        <p class="leading-relaxed opacity-90"><strong>Paracentesis</strong> (Abdominal Tapping / Ascitic Tap) is the percutaneous aspiration of fluid from the peritoneal cavity. Performed for diagnostic evaluation of new-onset ascites or therapeutic large-volume removal in tense ascites.</p>
+       </div>
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);"><button class="w-full flex items-center justify-between collapsible-toggle" data-target="paraInd"> <h2 class="font-heading text-xl font-bold flex items-center gap-2" style="color: var(--accent);"><i data-lucide="list" style="width:20px;height:20px;"></i> Indications</h2><i data-lucide="chevron-down" class="toggle-icon transition-transform" style="width:20px;height:20px;color:var(--accent);"></i> </button>
+        <div class="collapsible-content open mt-4" id="paraInd">
+         <div class="grid sm:grid-cols-2 gap-4">
+          <div class="rounded-lg p-4" style="background-color: var(--bg);">
+           <h3 class="font-semibold mb-2" style="color: var(--accent2);">🔬 Diagnostic</h3>
+           <ul class="space-y-1 text-sm opacity-90">
+            <li>• New-onset ascites</li>
+            <li>• Suspected spontaneous bacterial peritonitis (SBP)</li>
+            <li>• Cirrhotic patient with fever, pain, or encephalopathy</li>
+            <li>• Malignant ascites evaluation</li>
+           </ul>
+          </div>
+          <div class="rounded-lg p-4" style="background-color: var(--bg);">
+           <h3 class="font-semibold mb-2" style="color: var(--accent2);">💊 Therapeutic</h3>
+           <ul class="space-y-1 text-sm opacity-90">
+            <li>• Tense ascites causing respiratory compromise</li>
+            <li>• Diuretic-resistant ascites</li>
+            <li>• Large-volume paracentesis (LVP)</li>
+            <li>• Relief before procedures or imaging</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div><!-- Para Step-by-Step -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-5" style="color: var(--accent);"><i data-lucide="list-ordered" style="width:20px;height:20px;"></i> Step-by-Step Procedure</h2>
+        <div class="space-y-3">
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           1
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Consent &amp; Preparation</h3>
+           <p class="text-sm opacity-80">Informed consent. Verify coagulation (INR, platelets). Ensure bladder is emptied (catheterize if needed). Review imaging to confirm ascites. Patient supine with slight left lateral tilt.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           2
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Site Selection</h3>
+           <p class="text-sm opacity-80"><strong>Preferred site:</strong> Left lower quadrant — <strong>2 cm medial and 2 cm superior to the ASIS</strong> (McBurney's point equivalent on the left). Avoid: surgical scars, distended veins, visible collaterals, and the inferior epigastric artery. <strong>USG guidance</strong> is strongly recommended.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           3
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Aseptic Technique &amp; Anesthesia</h3>
+           <p class="text-sm opacity-80">Sterile prep identical to thoracentesis. Infiltrate 2% Lignocaine (5–10 mL) through skin, subcutaneous tissue, rectus sheath, and peritoneum. Use Z-track technique: pull skin 2 cm caudally before inserting needle to create a non-linear track (prevents persistent leak).</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           4
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Needle Insertion</h3>
+           <p class="text-sm opacity-80">Insert 16–18G cannula using the Z-track technique. Advance with negative pressure until ascitic fluid is aspirated. Remove the needle stylet; leave the cannula in situ. Connect to 3-way stopcock and drainage bag/syringe.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           5
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Fluid Collection &amp; Analysis</h3>
+           <p class="text-sm opacity-80"><strong>Diagnostic tap:</strong> 50–100 mL. Send for: cell count (TLC/DLC), albumin, protein, culture (inoculate blood culture bottles at bedside), Gram stain, cytology, ADA, glucose, LDH. Calculate <strong>SAAG</strong> (Serum-Ascites Albumin Gradient).</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           6
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Large-Volume Paracentesis (LVP)</h3>
+           <p class="text-sm opacity-80">Can drain <strong>up to 5 L safely</strong> without albumin replacement. If &gt;5 L drained: give <strong>IV Albumin 6–8 g per litre drained</strong> (e.g., 100 mL of 20% albumin per 2.5 L) to prevent paracentesis-induced circulatory dysfunction (PICD). Drain over 1–2 hours.</p>
+          </div>
+         </div>
+         <div class="step-card rounded-lg p-4 flex gap-4" style="background-color: var(--bg);">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background-color: var(--accent); color: var(--bg);">
+           7
+          </div>
+          <div>
+           <h3 class="font-semibold mb-1">Post-Procedure Care</h3>
+           <p class="text-sm opacity-80">Apply sterile dressing. Place patient on the opposite side for 2 hours to prevent leak. Monitor vitals (BP, HR). Watch for: persistent leak, hypotension, peritonitis signs, hematoma. Document volume, appearance, and samples.</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- SAAG -->
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-4" style="color: var(--accent);"><i data-lucide="flask-conical" style="width:20px;height:20px;"></i> SAAG — Serum-Ascites Albumin Gradient</h2>
+        <p class="text-sm opacity-80 mb-3"><strong>SAAG = Serum Albumin − Ascites Albumin</strong></p>
+        <div class="overflow-x-auto">
+         <table class="w-full text-sm rounded-lg overflow-hidden">
+          <thead>
+           <tr style="background-color: var(--accent); color: var(--bg);">
+            <th class="p-3 text-left font-semibold">SAAG Value</th>
+            <th class="p-3 text-left font-semibold">Interpretation</th>
+            <th class="p-3 text-left font-semibold">Common Causes</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr style="background-color: var(--bg);">
+            <td class="p-3 font-bold" style="color: var(--accent);">≥ 1.1 g/dL</td>
+            <td class="p-3">Portal Hypertension</td>
+            <td class="p-3 opacity-80">Cirrhosis, CCF, Budd-Chiari, Portal vein thrombosis</td>
+           </tr>
+           <tr style="background-color: rgba(30,41,59,0.5);">
+            <td class="p-3 font-bold" style="color: var(--accent2);">&lt; 1.1 g/dL</td>
+            <td class="p-3">Non-Portal Hypertension</td>
+            <td class="p-3 opacity-80">TB peritonitis, Malignancy, Pancreatic, Nephrotic syndrome</td>
+           </tr>
+          </tbody>
+         </table>
+        </div><!-- SBP Criteria -->
+        <div class="mt-4 rounded-lg p-4 border" style="background-color: var(--bg); border-color: #ef4444;">
+         <h3 class="font-semibold mb-2 text-red-400">🚨 SBP Diagnostic Criteria</h3>
+         <p class="text-sm opacity-90"><strong>Ascitic fluid PMN (Neutrophil) count ≥ 250/mm³</strong> = Diagnostic of SBP. Start empirical antibiotics immediately (IV Cefotaxime 2g q8h or Ceftriaxone). Positive ascitic fluid culture further confirms diagnosis.</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- CHECKLIST -->
+     <section id="tab-checklist" class="tab-content hidden">
+      <div class="fade-in grid gap-4">
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-2" style="color: var(--accent);"><i data-lucide="clipboard-check" style="width:20px;height:20px;"></i> Pre-Procedure Checklist</h2>
+        <p class="text-sm opacity-60 mb-4">Tick off each item before starting. Click "Reset" to clear all.</p>
+        <div class="space-y-2" id="checklistContainer"><!-- Built by JS -->
+        </div><button id="resetChecklist" class="mt-4 px-4 py-2 rounded-lg text-sm font-semibold transition-colors" style="background-color: var(--accent2); color: var(--bg);"> <i data-lucide="rotate-ccw" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"></i> Reset </button>
+       </div>
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-4" style="color: var(--accent);"><i data-lucide="send" style="width:20px;height:20px;"></i> Sample Labeling &amp; Routing</h2>
+        <div class="overflow-x-auto">
+         <table class="w-full text-sm rounded-lg overflow-hidden">
+          <thead>
+           <tr style="background-color: var(--accent); color: var(--bg);">
+            <th class="p-3 text-left font-semibold">Bottle</th>
+            <th class="p-3 text-left font-semibold">Send To</th>
+            <th class="p-3 text-left font-semibold">Tests</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr style="background-color: var(--bg);">
+            <td class="p-3">Plain / EDTA</td>
+            <td class="p-3">Biochemistry</td>
+            <td class="p-3 opacity-80">Protein, Albumin, LDH, Glucose, ADA</td>
+           </tr>
+           <tr style="background-color: rgba(30,41,59,0.5);">
+            <td class="p-3">EDTA</td>
+            <td class="p-3">Pathology</td>
+            <td class="p-3 opacity-80">TLC, DLC (Cell Count &amp; Differential)</td>
+           </tr>
+           <tr style="background-color: var(--bg);">
+            <td class="p-3">Blood Culture Bottle</td>
+            <td class="p-3">Microbiology</td>
+            <td class="p-3 opacity-80">Gram Stain, C/S, AFB</td>
+           </tr>
+           <tr style="background-color: rgba(30,41,59,0.5);">
+            <td class="p-3">Heparinized syringe</td>
+            <td class="p-3">ABG Lab</td>
+            <td class="p-3 opacity-80">Fluid pH</td>
+           </tr>
+           <tr style="background-color: var(--bg);">
+            <td class="p-3">Plain / Cytology jar</td>
+            <td class="p-3">Cytopathology</td>
+            <td class="p-3 opacity-80">Malignant cells</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </section><!-- COMPLICATIONS -->
+     <section id="tab-complications" class="tab-content hidden">
+      <div class="fade-in grid gap-4">
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-4" style="color: var(--accent);"><i data-lucide="alert-triangle" style="width:20px;height:20px;"></i> Thoracentesis Complications</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+         <div class="rounded-lg p-4 border" style="background-color: var(--bg); border-color: #ef4444;">
+          <h3 class="font-semibold text-red-400 mb-2">Serious</h3>
+          <ul class="text-sm space-y-1 opacity-90">
+           <li>• <strong>Pneumothorax</strong> (most common serious)</li>
+           <li>• Hemothorax (intercostal artery injury)</li>
+           <li>• Re-expansion pulmonary edema (&gt;1.5 L drained rapidly)</li>
+           <li>• Organ laceration (liver/spleen)</li>
+           <li>• Air embolism (rare)</li>
+          </ul>
+         </div>
+         <div class="rounded-lg p-4 border" style="background-color: var(--bg); border-color: #f59e0b;">
+          <h3 class="font-semibold text-amber-400 mb-2">Minor</h3>
+          <ul class="text-sm space-y-1 opacity-90">
+           <li>• Pain at puncture site</li>
+           <li>• Subcutaneous hematoma</li>
+           <li>• Vasovagal reaction</li>
+           <li>• Local infection / cellulitis</li>
+           <li>• Dry tap (loculated fluid)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-4" style="color: var(--accent);"><i data-lucide="alert-triangle" style="width:20px;height:20px;"></i> Paracentesis Complications</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+         <div class="rounded-lg p-4 border" style="background-color: var(--bg); border-color: #ef4444;">
+          <h3 class="font-semibold text-red-400 mb-2">Serious</h3>
+          <ul class="text-sm space-y-1 opacity-90">
+           <li>• <strong>PICD</strong> — Paracentesis-Induced Circulatory Dysfunction (hypotension, renal failure)</li>
+           <li>• Bowel perforation</li>
+           <li>• Hemorrhage (inferior epigastric artery)</li>
+           <li>• Secondary bacterial peritonitis</li>
+          </ul>
+         </div>
+         <div class="rounded-lg p-4 border" style="background-color: var(--bg); border-color: #f59e0b;">
+          <h3 class="font-semibold text-amber-400 mb-2">Minor</h3>
+          <ul class="text-sm space-y-1 opacity-90">
+           <li>• Persistent ascitic fluid leak</li>
+           <li>• Local pain and bruising</li>
+           <li>• Abdominal wall hematoma</li>
+           <li>• Vasovagal episode</li>
+           <li>• Wound infection</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+       <div class="rounded-xl p-5 sm:p-6" style="background-color: var(--surface);">
+        <h2 class="font-heading text-xl font-bold flex items-center gap-2 mb-4" style="color: var(--accent);"><i data-lucide="shield-check" style="width:20px;height:20px;"></i> Prevention of Complications</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+         <div class="rounded-lg p-4" style="background-color: var(--bg);">
+          <h4 class="font-semibold mb-2" style="color: var(--accent2);">Thoracentesis</h4>
+          <ul class="text-sm space-y-1 opacity-90">
+           <li>✅ Use USG guidance (reduces pneumothorax by 70%)</li>
+           <li>✅ Never drain &gt;1.5 L at once</li>
+           <li>✅ Insert over superior rib border</li>
+           <li>✅ Stop if patient coughs persistently or feels chest tightness</li>
+           <li>✅ Post-procedure CXR mandatory</li>
+          </ul>
+         </div>
+         <div class="rounded-lg p-4" style="background-color: var(--bg);">
+          <h4 class="font-semibold mb-2" style="color: var(--accent2);">Paracentesis</h4>
+          <ul class="text-sm space-y-1 opacity-90">
+           <li>✅ Use Z-track technique (prevents persistent leak)</li>
+           <li>✅ Albumin infusion if draining &gt;5 L</li>
+           <li>✅ Avoid surgical scars &amp; visible collaterals</li>
+           <li>✅ USG-guided site selection</li>
+           <li>✅ Empty bladder before procedure</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </main><!-- Footer -->
+   <footer class="w-full px-4 sm:px-8 py-6 mt-4">
+    <div class="max-w-5xl mx-auto text-center text-xs opacity-40">
+     <div class="section-divider mb-4"></div>
+     <p>For educational and clinical reference purposes. Always follow institutional protocols and clinical judgment.</p>
+    </div>
+   </footer>
+  </div><!-- Scroll to top --> <button class="scroll-top-btn" id="scrollTopBtn" style="background-color: var(--accent); color: var(--bg);" aria-label="Scroll to top"> <i data-lucide="chevron-up" style="width:22px;height:22px;"></i> </button>
+  <script>
+  // Checklist items
+  const checklistItems = [
+    "Patient identity verified (Name, MRN, DOB)",
+    "Written informed consent obtained",
+    "Indication confirmed and documented",
+    "Imaging reviewed (CXR / USG / CT)",
+    "Coagulation profile checked (INR ≤ 1.5, Platelets ≥ 50,000)",
+    "Anticoagulants held as per protocol",
+    "Allergies reviewed (esp. local anesthetic, antiseptic)",
+    "Equipment assembled and checked",
+    "Sterile field prepared",
+    "Local anesthetic drawn up (2% Lignocaine)",
+    "Sample bottles labeled with patient details",
+    "Monitoring equipment ready (SpO₂, BP, HR)",
+    "Resuscitation trolley accessible",
+    "USG machine available (if USG-guided)",
+    "Bladder emptied (for paracentesis)",
+    "IV access secured"
+  ];
+
+  function buildChecklist() {
+    const c = document.getElementById('checklistContainer');
+    c.innerHTML = '';
+    checklistItems.forEach((item, i) => {
+      const label = document.createElement('label');
+      label.className = 'checklist-item flex items-start gap-3 rounded-lg p-3 cursor-pointer transition-colors';
+      label.style.backgroundColor = 'var(--bg)';
+      label.innerHTML = `
+        <input type="checkbox" class="mt-1 w-4 h-4 rounded accent-sky-400 flex-shrink-0" id="chk${i}">
+        <span class="text-sm opacity-90">${item}</span>
+      `;
+      c.appendChild(label);
+    });
+  }
+  buildChecklist();
+
+  document.getElementById('resetChecklist').addEventListener('click', () => {
+    document.querySelectorAll('#checklistContainer input').forEach(cb => cb.checked = false);
+  });
+
+  // Tab navigation
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabSections = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => { b.classList.remove('active'); b.style.color = ''; b.style.opacity = '0.6'; });
+      btn.classList.add('active');
+      btn.style.color = 'var(--accent)';
+      btn.style.opacity = '1';
+      tabSections.forEach(s => s.classList.add('hidden'));
+      const sec = document.getElementById('tab-' + target);
+      sec.classList.remove('hidden');
+      // Re-trigger animation
+      sec.querySelectorAll('.fade-in').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.style.animation = '';
+      });
+    });
+  });
+
+  // Collapsible sections
+  document.querySelectorAll('.collapsible-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      target.classList.toggle('open');
+      const icon = btn.querySelector('.toggle-icon');
+      icon.style.transform = target.classList.contains('open') ? '' : 'rotate(-90deg)';
+    });
+  });
+
+  // Scroll to top
+  const appRoot = document.getElementById('appRoot');
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  appRoot.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', appRoot.scrollTop > 400);
+  });
+  scrollBtn.addEventListener('click', () => appRoot.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Element SDK
+  const defaultConfig = {
+    background_color: '#0f172a',
+    surface_color: '#1e293b',
+    text_color: '#e2e8f0',
+    accent_color: '#38bdf8',
+    accent2_color: '#818cf8',
+    font_family: 'Source Sans 3',
+    font_size: 16,
+    main_title: 'Tapping Procedure Guide',
+    subtitle: 'Standard Protocol Reference — Thoracentesis & Paracentesis'
+  };
+
+  function applyConfig(config) {
+    const root = document.documentElement;
+    root.style.setProperty('--bg', config.background_color || defaultConfig.background_color);
+    root.style.setProperty('--surface', config.surface_color || defaultConfig.surface_color);
+    root.style.setProperty('--text', config.text_color || defaultConfig.text_color);
+    root.style.setProperty('--accent', config.accent_color || defaultConfig.accent_color);
+    root.style.setProperty('--accent2', config.accent2_color || defaultConfig.accent2_color);
+
+    const appEl = document.getElementById('appRoot');
+    appEl.style.backgroundColor = config.background_color || defaultConfig.background_color;
+    appEl.style.color = config.text_color || defaultConfig.text_color;
+
+    const font = config.font_family || defaultConfig.font_family;
+    const baseSize = config.font_size || defaultConfig.font_size;
+    appEl.style.fontFamily = `${font}, 'Source Sans 3', sans-serif`;
+    appEl.style.fontSize = baseSize + 'px';
+
+    document.getElementById('mainTitle').textContent = config.main_title || defaultConfig.main_title;
+    document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+
+    // Update heading font
+    document.querySelectorAll('.font-heading').forEach(el => {
+      el.style.fontFamily = `'Playfair Display', ${font}, Georgia, serif`;
+    });
+
+    // Scroll btn
+    scrollBtn.style.backgroundColor = config.accent_color || defaultConfig.accent_color;
+    scrollBtn.style.color = config.background_color || defaultConfig.background_color;
+  }
+  lucide.createIcons();
+</script>
+</body>
+</html>
