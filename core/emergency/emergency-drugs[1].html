@@ -1,0 +1,1456 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Emergency Drugs | ICU & Resuscitation Medications | Deep Medicine</title> <meta name="description" content="Comprehensive guide to emergency drugs including vasopressors, inotropes, resuscitation medications, and critical care drug protocols."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/emergency-drugs"> <!-- Open Graph --> <meta property="og:title" content="Emergency Drugs | Deep Medicine"> <meta property="og:description" content="Essential emergency and ICU drugs with indications, dosing principles, and clinical use."> <meta property="og:image" content="https://deepmedicine.in/images/emergency-drugs.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  * { box-sizing: border-box; }
+  html { height: 100%; }
+  body { height: 100%; width: 100%; margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; overflow: hidden; }
+  #app { display: flex; flex-direction: column; width: 100%; height: 100%; }
+  main { flex: 1; overflow-y: auto; width: 100%; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .drug-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .drug-card:hover { transform: translateY(-2px); }
+  .category-pill { transition: all 0.2s ease; }
+  .category-pill.active { transform: scale(1.05); }
+  .fade-in { animation: fadeIn 0.4s ease forwards; opacity: 0; }
+  @keyframes fadeIn { to { opacity: 1; } }
+  .slide-up { animation: slideUp 0.5s ease forwards; opacity: 0; transform: translateY(16px); }
+  @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+  .pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .search-glow:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2); outline: none; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #1a1a2e; }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  .detail-overlay { transition: opacity 0.3s ease, visibility 0.3s ease; }
+  .detail-panel { transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; overflow-y: auto; }
+  .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 9999px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  @media (max-width: 768px) {
+    body { font-size: 14px; }
+  }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" style="background: #0d0d1a;"><!-- Header -->
+   <header class="sticky top-0 z-40" style="background: linear-gradient(135deg, #1a0a0a 0%, #1a1a2e 100%); border-bottom: 1px solid #2a1a1a;">
+    <div style="width: 100%; padding: 1rem 0.75rem;">
+     <div class="flex items-center justify-between gap-2 flex-wrap">
+      <div class="flex items-center gap-2 min-w-0">
+       <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #dc2626, #991b1b);"><i data-lucide="heart-pulse" style="width:22px;height:22px;color:#fff;"></i>
+       </div>
+       <div class="min-w-0">
+        <h1 id="appTitle" class="text-base font-bold leading-tight truncate" style="color: #f5f5f5;">Emergency Drugs Reference</h1>
+        <p id="appSubtitle" class="text-xs leading-tight truncate" style="color: #ef4444;">Clinical Doses &amp; Uses</p>
+       </div>
+      </div>
+      <div class="flex items-center gap-1 flex-shrink-0"><span class="pulse-dot w-2 h-2 rounded-full inline-block" style="background:#22c55e;"></span> <span class="text-xs hidden sm:inline" style="color:#6b7280;">Evidence-Based</span>
+      </div>
+     </div><!-- Search -->
+     <div style="margin-top: 0.75rem; position: relative;"><i data-lucide="search" style="width:16px;height:16px;color:#6b7280; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);"></i> <input id="searchInput" type="text" placeholder="Search drug, category..." class="search-glow" style="width: 100%; padding-left: 2.5rem; padding-right: 1rem; padding-top: 0.625rem; padding-bottom: 0.625rem; border-radius: 0.75rem; font-size: 0.875rem; background:#111125; border:1px solid #2a2a4a; color:#e5e5e5;">
+     </div><!-- Category Filters -->
+     <div id="categoryFilters" class="flex gap-2 overflow-x-auto pb-1" style="margin-top: 0.75rem; -webkit-overflow-scrolling: touch;">
+     </div>
+    </div>
+   </header><!-- Drug Count -->
+   <div style="width: 100%; padding: 1rem 0.75rem 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+    <p id="drugCount" class="text-xs" style="color:#6b7280; font-size: 0.75rem;"></p>
+    <p class="text-xs mono" style="color:#4b5563; font-size: 0.75rem;">⚠️ Verify</p>
+   </div><!-- Drug Cards Grid -->
+   <main style="flex: 1; padding: 0 0.75rem 2rem; overflow-y: auto;">
+    <div id="drugGrid" style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+    </div>
+   </main><!-- Detail Panel Overlay -->
+   <div id="detailOverlay" class="detail-overlay fixed inset-0 z-50 invisible opacity-0" style="background:rgba(0,0,0,0.7); top: 0; left: 0; right: 0; bottom: 0; position: fixed; z-index: 50;" onclick="closeDetail(event)">
+    <div id="detailPanel" class="detail-panel absolute right-0 top-0 bottom-0 overflow-y-auto" style="background:#111125;transform:translateX(100%); position: absolute; right: 0; top: 0; bottom: 0; width: 100%; overflow-y: auto;">
+    </div>
+   </div><!-- Disclaimer Footer -->
+   <footer style="text-align: center; padding: 1rem 0.75rem; border-top: 1px solid #1a1a2e; color: #4b5563; font-size: 0.75rem; flex-shrink: 0;">
+    <p>⚕️ For qualified medical professionals only. Verify against institutional protocols.</p>
+   </footer>
+  </div>
+  <script>
+// ─── DRUG DATABASE ───
+const DRUGS = [
+  // CARDIAC ARREST & RESUSCITATION
+  {
+    name: "Adrenaline (Epinephrine)",
+    category: "Cardiac Arrest",
+    color: "#dc2626",
+    icon: "heart-pulse",
+    urgency: "STAT",
+    classInfo: "Catecholamine (α1, β1, β2 agonist)",
+    indications: [
+      "Cardiac Arrest (VF/pVT/Asystole/PEA)",
+      "Anaphylaxis",
+      "Severe Bronchospasm",
+      "Septic Shock (2nd line)"
+    ],
+    doses: [
+      { route: "IV (Cardiac Arrest)", dose: "1 mg (1:10,000) every 3-5 min", note: "Push dose, follow with 20 mL flush" },
+      { route: "IM (Anaphylaxis)", dose: "0.3-0.5 mg (1:1,000) anterolateral thigh", note: "Repeat every 5-15 min PRN" },
+      { route: "IV Infusion", dose: "0.01-0.5 µg/kg/min", note: "Titrate to MAP/HR" },
+      { route: "Nebulized", dose: "2-5 mg in 3 mL NS", note: "For stridor/croup" },
+      { route: "Pediatric (Cardiac Arrest)", dose: "0.01 mg/kg (0.1 mL/kg of 1:10,000)", note: "Max 1 mg/dose" }
+    ],
+    pearls: [
+      "In cardiac arrest: give EARLY, don't wait for rhythm analysis cycles",
+      "Anaphylaxis: IM into vastus lateralis, NOT deltoid — better absorption",
+      "Never give 1:1,000 concentration IV — fatal hypertensive crisis",
+      "Refractory anaphylaxis → start IV infusion at 0.1 µg/kg/min",
+      "Cold/peripheral patients: central line preferred for infusion"
+    ],
+    contraindications: "No absolute contraindication in cardiac arrest. Relative: tachyarrhythmias, coronary insufficiency"
+  },
+  {
+    name: "Amiodarone",
+    category: "Cardiac Arrest",
+    color: "#dc2626",
+    icon: "activity",
+    urgency: "STAT",
+    classInfo: "Class III Antiarrhythmic (K+ channel blocker, also Na+/Ca2+/β block)",
+    indications: [
+      "Shockable Cardiac Arrest (VF/pVT) after 3rd shock",
+      "Hemodynamically stable VT",
+      "Rate control in AF/Atrial Flutter",
+      "SVT refractory to adenosine"
+    ],
+    doses: [
+      { route: "IV (Cardiac Arrest)", dose: "300 mg bolus in 20 mL D5W", note: "After 3rd shock" },
+      { route: "IV (2nd dose in arrest)", dose: "150 mg bolus", note: "After 5th shock" },
+      { route: "IV (Stable VT)", dose: "150 mg over 10 min", note: "Then 1 mg/min × 6h, then 0.5 mg/min × 18h" },
+      { route: "Max dose", dose: "2.2 g in 24 hours", note: "" }
+    ],
+    pearls: [
+      "In arrest: push rapidly, undiluted is acceptable if no time",
+      "Stable VT: SLOW infusion — rapid push causes severe hypotension",
+      "Causes phlebitis → use central line for prolonged infusion",
+      "Monitor QTc — risk of Torsades if QTc >500 ms",
+      "Half-life: 40-55 DAYS — effects persist long after stopping"
+    ],
+    contraindications: "Severe sinus node dysfunction, 2nd/3rd degree AV block (without pacemaker), cardiogenic shock, iodine hypersensitivity"
+  },
+  {
+    name: "Atropine",
+    category: "Cardiac Arrest",
+    color: "#dc2626",
+    icon: "zap",
+    urgency: "STAT",
+    classInfo: "Muscarinic Antagonist (Parasympatholytic)",
+    indications: [
+      "Symptomatic Bradycardia",
+      "Organophosphate / Nerve Agent Poisoning",
+      "Pre-intubation (pediatric)",
+      "Bradycardia in ACS (vagal-mediated)"
+    ],
+    doses: [
+      { route: "IV (Bradycardia)", dose: "0.5 mg every 3-5 min", note: "Max 3 mg total" },
+      { route: "IV (OP Poisoning)", dose: "2-4 mg initial, then double every 5 min", note: "Titrate to dry secretions, may need 10-100+ mg" },
+      { route: "Pediatric", dose: "0.02 mg/kg (min 0.1 mg)", note: "Max single dose 0.5 mg child, 1 mg adolescent" },
+      { route: "ETT (if no IV)", dose: "2-3 mg diluted in 10 mL NS", note: "2-2.5× IV dose" }
+    ],
+    pearls: [
+      "Doses <0.5 mg may cause PARADOXICAL bradycardia",
+      "NOT effective in infranodal block (Mobitz II, 3rd degree) → pace",
+      "In OP poisoning: atropinize until secretions DRY — pupils are NOT the endpoint",
+      "Won't work in denervated hearts (transplant patients)",
+      "No longer recommended for asystole/PEA (AHA 2020)"
+    ],
+    contraindications: "Glaucoma (relative), infranodal block (ineffective, not contraindicated)"
+  },
+  // VASOPRESSORS & INOTROPES
+  {
+    name: "Noradrenaline (Norepinephrine)",
+    category: "Vasopressors",
+    color: "#7c3aed",
+    icon: "trending-up",
+    urgency: "URGENT",
+    classInfo: "Catecholamine (potent α1, moderate β1 agonist)",
+    indications: [
+      "Septic Shock — FIRST LINE vasopressor",
+      "Distributive Shock",
+      "Cardiogenic Shock (with adequate volume)",
+      "Post-cardiac arrest hypotension"
+    ],
+    doses: [
+      { route: "IV Infusion", dose: "0.05-0.5 µg/kg/min (start 0.1)", note: "Titrate to MAP ≥65 mmHg" },
+      { route: "High dose", dose: "Up to 1-3.3 µg/kg/min", note: "Consider adding vasopressin if >0.5" },
+      { route: "Concentration", dose: "4-16 mg in 250 mL D5W/NS", note: "Central line preferred" }
+    ],
+    pearls: [
+      "SSC Guidelines 2021: 1st line pressor in septic shock — superior to dopamine",
+      "Start EARLY — delayed vasopressors = increased mortality",
+      "Can run peripherally short-term (large bore, antecubital) while awaiting central access",
+      "If dose >0.5 µg/kg/min → add vasopressin 0.03 U/min as steroid-sparing",
+      "Extravasation → phentolamine 5-10 mg in 10 mL NS locally infiltrated"
+    ],
+    contraindications: "Hypovolemia (correct first), mesenteric/peripheral ischemia (relative)"
+  },
+  {
+    name: "Dobutamine",
+    category: "Vasopressors",
+    color: "#7c3aed",
+    icon: "heart",
+    urgency: "URGENT",
+    classInfo: "Synthetic Catecholamine (β1 > β2 agonist)",
+    indications: [
+      "Cardiogenic Shock (with adequate BP)",
+      "Acute Decompensated Heart Failure — low output",
+      "Stress echocardiography",
+      "Septic shock with myocardial dysfunction"
+    ],
+    doses: [
+      { route: "IV Infusion", dose: "2-20 µg/kg/min", note: "Start at 2.5, titrate to CO/CI targets" },
+      { route: "Stress Echo", dose: "5-40 µg/kg/min", note: "Incremental protocol" }
+    ],
+    pearls: [
+      "May DROP BP due to β2 vasodilation → often paired with noradrenaline",
+      "Increases myocardial O₂ demand — caution in ACS",
+      "Tachyphylaxis develops within 48-72 hrs of continuous infusion",
+      "Monitor for arrhythmias — especially at doses >15 µg/kg/min",
+      "NOT a vasopressor — it's an inotrope/inodilator"
+    ],
+    contraindications: "HOCM, severe aortic stenosis (dynamic outflow obstruction)"
+  }
+];
+
+// ─── CATEGORIES ───
+const CATEGORIES = [
+  { key: "all", label: "All Drugs", color: "#ef4444" },
+  { key: "Cardiac Arrest", label: "Cardiac Arrest", color: "#dc2626" },
+  { key: "Vasopressors", label: "Vasopressors", color: "#7c3aed" },
+  { key: "Airway / RSI", label: "Airway / RSI", color: "#ea580c" },
+  { key: "Anti-Arrhythmics", label: "Anti-Arrhythmics", color: "#0891b2" },
+  { key: "Sedation", label: "Sedation", color: "#2563eb" },
+  { key: "Electrolytes", label: "Electrolytes", color: "#16a34a" },
+  { key: "Toxicology", label: "Toxicology", color: "#db2777" },
+  { key: "Neurological", label: "Neurological", color: "#ca8a04" },
+  { key: "Miscellaneous", label: "Misc", color: "#6b7280" }
+];
+
+let activeCategory = "all";
+let searchTerm = "";
+
+// ─── DEFAULT CONFIG ───
+const defaultConfig = {
+  app_title: "Emergency Drugs Reference",
+  subtitle_text: "Clinical Doses & Uses — ICU / ED / Medicine",
+  background_color: "#0d0d1a",
+  surface_color: "#151528",
+  text_color: "#e5e5e5",
+  primary_action_color: "#ef4444",
+  secondary_action_color: "#6b7280",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+// ─── RENDER CATEGORIES ───
+function renderCategories() {
+  const container = document.getElementById('categoryFilters');
+  container.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = `category-pill flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap`;
+    btn.style.cssText = activeCategory === cat.key
+      ? `background:${cat.color};color:#fff;box-shadow:0 0 12px ${cat.color}44;`
+      : `background:${cat.color}18;color:${cat.color};border:1px solid ${cat.color}33;`;
+    if (activeCategory === cat.key) btn.classList.add('active');
+    btn.textContent = cat.label;
+    btn.onclick = () => { activeCategory = cat.key; renderCategories(); renderDrugs(); };
+    container.appendChild(btn);
+  });
+}
+
+// ─── RENDER DRUG CARDS ───
+function renderDrugs() {
+  const grid = document.getElementById('drugGrid');
+  grid.innerHTML = '';
+
+  const filtered = DRUGS.filter(d => {
+    const catMatch = activeCategory === 'all' || d.category === activeCategory;
+    if (!searchTerm) return catMatch;
+    const s = searchTerm.toLowerCase();
+    const textMatch = d.name.toLowerCase().includes(s) ||
+      d.category.toLowerCase().includes(s) ||
+      d.classInfo.toLowerCase().includes(s) ||
+      d.indications.some(i => i.toLowerCase().includes(s));
+    return catMatch && textMatch;
+  });
+
+  document.getElementById('drugCount').textContent = `${filtered.length} drug${filtered.length !== 1 ? 's' : ''} found`;
+
+  filtered.forEach((drug, i) => {
+    const card = document.createElement('div');
+    card.className = 'drug-card rounded-xl p-4 cursor-pointer slide-up';
+    card.style.cssText = `background:#151528;border:1px solid ${drug.color}22;animation-delay:${i * 0.04}s;`;
+    card.onclick = () => openDetail(drug);
+
+    const urgencyColors = { STAT: '#ef4444', URGENT: '#f59e0b' };
+    card.innerHTML = `
+      <div class="flex items-start justify-between gap-2 mb-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:${drug.color}22;">
+            <i data-lucide="${drug.icon}" style="width:16px;height:16px;color:${drug.color};"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 class="drug-name-text font-semibold text-sm leading-tight truncate" style="color:#e5e5e5;">${drug.name}</h3>
+            <p class="drug-class-text text-xs mt-0.5 truncate" style="color:#6b7280;">${drug.classInfo}</p>
+          </div>
+        </div>
+        <span class="badge flex-shrink-0" style="background:${urgencyColors[drug.urgency]}22;color:${urgencyColors[drug.urgency]};">
+          ${drug.urgency}
+        </span>
+      </div>
+      <div class="flex flex-wrap gap-1 mb-2">
+        <span class="badge" style="background:${drug.color}18;color:${drug.color};">${drug.category}</span>
+      </div>
+      <div class="space-y-1">
+        ${drug.doses.slice(0, 2).map(d => `
+          <div class="drug-dose-text flex items-start gap-1.5 text-xs" style="color:#9ca3af;">
+            <span class="mono font-medium flex-shrink-0" style="color:${drug.color};">${d.route}:</span>
+            <span class="truncate">${d.dose}</span>
+          </div>
+        `).join('')}
+        ${drug.doses.length > 2 ? `<p class="text-xs" style="color:#4b5563;">+${drug.doses.length - 2} more routes — tap for details</p>` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  lucide.createIcons();
+}
+
+// ─── DETAIL PANEL ───
+function openDetail(drug) {
+  const overlay = document.getElementById('detailOverlay');
+  const panel = document.getElementById('detailPanel');
+  const urgencyColors = { STAT: '#ef4444', URGENT: '#f59e0b' };
+
+  panel.innerHTML = `
+    <div class="sticky top-0 z-10 p-4 flex items-center justify-between" style="background:linear-gradient(135deg, ${drug.color}15, #111125);border-bottom:1px solid ${drug.color}22;">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:${drug.color}22;">
+          <i data-lucide="${drug.icon}" style="width:20px;height:20px;color:${drug.color};"></i>
+        </div>
+        <div class="min-w-0">
+          <h2 class="text-base font-bold truncate" style="color:#f5f5f5;">${drug.name}</h2>
+          <p class="text-xs" style="color:${drug.color};">${drug.classInfo}</p>
+        </div>
+      </div>
+      <button onclick="closeDetail()" class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 hover:opacity-80" style="background:#ffffff10;">
+        <i data-lucide="x" style="width:16px;height:16px;color:#9ca3af;"></i>
+      </button>
+    </div>
+
+    <div class="p-4 space-y-5">
+      <!-- Urgency & Category -->
+      <div class="flex flex-wrap gap-2">
+        <span class="badge" style="background:${urgencyColors[drug.urgency]}22;color:${urgencyColors[drug.urgency]};">${drug.urgency}</span>
+        <span class="badge" style="background:${drug.color}18;color:${drug.color};">${drug.category}</span>
+      </div>
+
+      <!-- Indications -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:${drug.color};">
+          <i data-lucide="clipboard-list" style="width:14px;height:14px;"></i> Indications
+        </h3>
+        <ul class="space-y-1.5">
+          ${drug.indications.map(ind => `
+            <li class="flex items-start gap-2 text-sm" style="color:#d1d5db;">
+              <span class="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style="background:${drug.color};"></span>
+              ${ind}
+            </li>
+          `).join('')}
+        </ul>
+      </section>
+
+      <!-- Doses -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:#22c55e;">
+          <i data-lucide="syringe" style="width:14px;height:14px;"></i> Doses & Routes
+        </h3>
+        <div class="space-y-2">
+          ${drug.doses.map(d => `
+            <div class="rounded-lg p-3" style="background:#0d0d1a;border:1px solid #1a1a2e;">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <span class="mono text-xs font-semibold" style="color:${drug.color};">${d.route}</span>
+              </div>
+              <p class="mono text-sm font-medium" style="color:#f5f5f5;">${d.dose}</p>
+              ${d.note ? `<p class="text-xs mt-1" style="color:#9ca3af;">💡 ${d.note}</p>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      </section>
+
+      <!-- Clinical Pearls -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:#f59e0b;">
+          <i data-lucide="lightbulb" style="width:14px;height:14px;"></i> Clinical Pearls
+        </h3>
+        <div class="space-y-2">
+          ${drug.pearls.map(p => `
+            <div class="flex items-start gap-2.5 text-sm rounded-lg p-2.5" style="background:#f59e0b08;border-left:2px solid #f59e0b33;color:#d1d5db;">
+              <span class="flex-shrink-0 mt-0.5">⚡</span>
+              <span>${p}</span>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+
+      <!-- Contraindications -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:#ef4444;">
+          <i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Contraindications
+        </h3>
+        <div class="rounded-lg p-3 text-sm" style="background:#ef444410;border:1px solid #ef444422;color:#fca5a5;">
+          ${drug.contraindications}
+        </div>
+      </section>
+    </div>
+  `;
+
+  overlay.style.visibility = 'visible';
+  overlay.style.opacity = '1';
+  panel.style.transform = 'translateX(0)';
+  lucide.createIcons();
+}
+
+function closeDetail(e) {
+  if (e && e.target !== e.currentTarget) return;
+  const overlay = document.getElementById('detailOverlay');
+  const panel = document.getElementById('detailPanel');
+  panel.style.transform = 'translateX(100%)';
+  overlay.style.opacity = '0';
+  setTimeout(() => { overlay.style.visibility = 'hidden'; }, 300);
+}
+
+// ─── SEARCH ───
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchTerm = e.target.value;
+  renderDrugs();
+});
+
+// ─── KEYBOARD ───
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+// ─── INIT ───
+renderCategories();
+renderDrugs();
+lucide.createIcons();
+  </script>
+  <div class="flex items-center justify-between gap-2 sm:gap-3 flex-wrap">
+   <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #dc2626, #991b1b);"><i data-lucide="heart-pulse" style="width:22px;height:22px;color:#fff;"></i>
+    </div>
+    <div class="min-w-0">
+     <h1 id="appTitle" class="text-sm sm:text-lg font-bold leading-tight truncate" style="color: #f5f5f5;">Emergency Drugs Reference</h1>
+     <p id="appSubtitle" class="text-xs leading-tight truncate" style="color: #ef4444;">Clinical Doses &amp; Uses</p>
+    </div>
+   </div>
+   <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0"><span class="pulse-dot w-2 h-2 rounded-full inline-block" style="background:#22c55e;"></span> <span class="text-xs hidden sm:inline" style="color:#6b7280;">Evidence-Based</span>
+   </div>
+  </div><!-- Search -->
+  <div class="mt-3 relative" style="margin-top: 0.75rem;"><i data-lucide="search" style="width:16px;height:16px;color:#6b7280; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);"></i> <input id="searchInput" type="text" placeholder="Search drug, category..." class="search-glow" style="width: 100%; padding-left: 2.5rem; padding-right: 1rem; padding-top: 0.625rem; padding-bottom: 0.625rem; border-radius: 0.75rem; font-size: 0.875rem; background:#111125; border:1px solid #2a2a4a; color:#e5e5e5;">
+  </div><!-- Category Filters -->
+  <div id="categoryFilters" class="flex gap-2 mt-3 overflow-x-auto pb-1" style="margin-top: 0.75rem; gap: 0.5rem; -webkit-overflow-scrolling: touch;">
+  </div> <!-- Drug Count -->
+  <div style="width: 100%; padding: 1rem 0.75rem 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+   <p id="drugCount" class="text-xs" style="color:#6b7280; font-size: 0.75rem;"></p>
+   <p class="text-xs mono" style="color:#4b5563; font-size: 0.75rem;">⚠️ Verify</p>
+  </div><!-- Drug Cards Grid -->
+  <main style="flex: 1; padding: 0 0.75rem 2rem; overflow-y: auto;">
+   <div id="drugGrid" style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+   </div>
+  </main><!-- Detail Panel Overlay -->
+  <div id="detailOverlay" class="detail-overlay fixed inset-0 z-50 invisible opacity-0" style="background:rgba(0,0,0,0.7);" onclick="closeDetail(event)">
+   <div id="detailPanel" class="detail-panel absolute right-0 top-0 bottom-0 overflow-y-auto" style="background:#111125;transform:translateX(100%);width:100%;">
+   </div>
+  </div><!-- Disclaimer Footer -->
+  <footer class="text-center py-4 px-3 sm:px-4 text-xs" style="border-top:1px solid #1a1a2e;color:#4b5563;">
+   <p>⚕️ For qualified medical professionals only. Verify against institutional protocols.</p>
+  </footer>
+  <script>
+// ─── DRUG DATABASE ───
+const DRUGS = [
+  // CARDIAC ARREST & RESUSCITATION
+  {
+    name: "Adrenaline (Epinephrine)",
+    category: "Cardiac Arrest",
+    color: "#dc2626",
+    icon: "heart-pulse",
+    urgency: "STAT",
+    classInfo: "Catecholamine (α1, β1, β2 agonist)",
+    indications: [
+      "Cardiac Arrest (VF/pVT/Asystole/PEA)",
+      "Anaphylaxis",
+      "Severe Bronchospasm",
+      "Septic Shock (2nd line)"
+    ],
+    doses: [
+      { route: "IV (Cardiac Arrest)", dose: "1 mg (1:10,000) every 3-5 min", note: "Push dose, follow with 20 mL flush" },
+      { route: "IM (Anaphylaxis)", dose: "0.3-0.5 mg (1:1,000) anterolateral thigh", note: "Repeat every 5-15 min PRN" },
+      { route: "IV Infusion", dose: "0.01-0.5 µg/kg/min", note: "Titrate to MAP/HR" },
+      { route: "Nebulized", dose: "2-5 mg in 3 mL NS", note: "For stridor/croup" },
+      { route: "Pediatric (Cardiac Arrest)", dose: "0.01 mg/kg (0.1 mL/kg of 1:10,000)", note: "Max 1 mg/dose" }
+    ],
+    pearls: [
+      "In cardiac arrest: give EARLY, don't wait for rhythm analysis cycles",
+      "Anaphylaxis: IM into vastus lateralis, NOT deltoid — better absorption",
+      "Never give 1:1,000 concentration IV — fatal hypertensive crisis",
+      "Refractory anaphylaxis → start IV infusion at 0.1 µg/kg/min",
+      "Cold/peripheral patients: central line preferred for infusion"
+    ],
+    contraindications: "No absolute contraindication in cardiac arrest. Relative: tachyarrhythmias, coronary insufficiency"
+  },
+  {
+    name: "Amiodarone",
+    category: "Cardiac Arrest",
+    color: "#dc2626",
+    icon: "activity",
+    urgency: "STAT",
+    classInfo: "Class III Antiarrhythmic (K+ channel blocker, also Na+/Ca2+/β block)",
+    indications: [
+      "Shockable Cardiac Arrest (VF/pVT) after 3rd shock",
+      "Hemodynamically stable VT",
+      "Rate control in AF/Atrial Flutter",
+      "SVT refractory to adenosine"
+    ],
+    doses: [
+      { route: "IV (Cardiac Arrest)", dose: "300 mg bolus in 20 mL D5W", note: "After 3rd shock" },
+      { route: "IV (2nd dose in arrest)", dose: "150 mg bolus", note: "After 5th shock" },
+      { route: "IV (Stable VT)", dose: "150 mg over 10 min", note: "Then 1 mg/min × 6h, then 0.5 mg/min × 18h" },
+      { route: "Max dose", dose: "2.2 g in 24 hours", note: "" }
+    ],
+    pearls: [
+      "In arrest: push rapidly, undiluted is acceptable if no time",
+      "Stable VT: SLOW infusion — rapid push causes severe hypotension",
+      "Causes phlebitis → use central line for prolonged infusion",
+      "Monitor QTc — risk of Torsades if QTc >500 ms",
+      "Half-life: 40-55 DAYS — effects persist long after stopping"
+    ],
+    contraindications: "Severe sinus node dysfunction, 2nd/3rd degree AV block (without pacemaker), cardiogenic shock, iodine hypersensitivity"
+  },
+  {
+    name: "Atropine",
+    category: "Cardiac Arrest",
+    color: "#dc2626",
+    icon: "zap",
+    urgency: "STAT",
+    classInfo: "Muscarinic Antagonist (Parasympatholytic)",
+    indications: [
+      "Symptomatic Bradycardia",
+      "Organophosphate / Nerve Agent Poisoning",
+      "Pre-intubation (pediatric)",
+      "Bradycardia in ACS (vagal-mediated)"
+    ],
+    doses: [
+      { route: "IV (Bradycardia)", dose: "0.5 mg every 3-5 min", note: "Max 3 mg total" },
+      { route: "IV (OP Poisoning)", dose: "2-4 mg initial, then double every 5 min", note: "Titrate to dry secretions, may need 10-100+ mg" },
+      { route: "Pediatric", dose: "0.02 mg/kg (min 0.1 mg)", note: "Max single dose 0.5 mg child, 1 mg adolescent" },
+      { route: "ETT (if no IV)", dose: "2-3 mg diluted in 10 mL NS", note: "2-2.5× IV dose" }
+    ],
+    pearls: [
+      "Doses <0.5 mg may cause PARADOXICAL bradycardia",
+      "NOT effective in infranodal block (Mobitz II, 3rd degree) → pace",
+      "In OP poisoning: atropinize until secretions DRY — pupils are NOT the endpoint",
+      "Won't work in denervated hearts (transplant patients)",
+      "No longer recommended for asystole/PEA (AHA 2020)"
+    ],
+    contraindications: "Glaucoma (relative), infranodal block (ineffective, not contraindicated)"
+  },
+  // VASOPRESSORS & INOTROPES
+  {
+    name: "Noradrenaline (Norepinephrine)",
+    category: "Vasopressors",
+    color: "#7c3aed",
+    icon: "trending-up",
+    urgency: "URGENT",
+    classInfo: "Catecholamine (potent α1, moderate β1 agonist)",
+    indications: [
+      "Septic Shock — FIRST LINE vasopressor",
+      "Distributive Shock",
+      "Cardiogenic Shock (with adequate volume)",
+      "Post-cardiac arrest hypotension"
+    ],
+    doses: [
+      { route: "IV Infusion", dose: "0.05-0.5 µg/kg/min (start 0.1)", note: "Titrate to MAP ≥65 mmHg" },
+      { route: "High dose", dose: "Up to 1-3.3 µg/kg/min", note: "Consider adding vasopressin if >0.5" },
+      { route: "Concentration", dose: "4-16 mg in 250 mL D5W/NS", note: "Central line preferred" }
+    ],
+    pearls: [
+      "SSC Guidelines 2021: 1st line pressor in septic shock — superior to dopamine",
+      "Start EARLY — delayed vasopressors = increased mortality",
+      "Can run peripherally short-term (large bore, antecubital) while awaiting central access",
+      "If dose >0.5 µg/kg/min → add vasopressin 0.03 U/min as steroid-sparing",
+      "Extravasation → phentolamine 5-10 mg in 10 mL NS locally infiltrated"
+    ],
+    contraindications: "Hypovolemia (correct first), mesenteric/peripheral ischemia (relative)"
+  },
+  {
+    name: "Dobutamine",
+    category: "Vasopressors",
+    color: "#7c3aed",
+    icon: "heart",
+    urgency: "URGENT",
+    classInfo: "Synthetic Catecholamine (β1 > β2 agonist)",
+    indications: [
+      "Cardiogenic Shock (with adequate BP)",
+      "Acute Decompensated Heart Failure — low output",
+      "Stress echocardiography",
+      "Septic shock with myocardial dysfunction"
+    ],
+    doses: [
+      { route: "IV Infusion", dose: "2-20 µg/kg/min", note: "Start at 2.5, titrate to CO/CI targets" },
+      { route: "Stress Echo", dose: "5-40 µg/kg/min", note: "Incremental protocol" }
+    ],
+    pearls: [
+      "May DROP BP due to β2 vasodilation → often paired with noradrenaline",
+      "Increases myocardial O₂ demand — caution in ACS",
+      "Tachyphylaxis develops within 48-72 hrs of continuous infusion",
+      "Monitor for arrhythmias — especially at doses >15 µg/kg/min",
+      "NOT a vasopressor — it's an inotrope/inodilator"
+    ],
+    contraindications: "HOCM, severe aortic stenosis (dynamic outflow obstruction)"
+  },
+  {
+    name: "Vasopressin (ADH)",
+    category: "Vasopressors",
+    color: "#7c3aed",
+    icon: "droplets",
+    urgency: "URGENT",
+    classInfo: "V1 receptor agonist (non-catecholamine vasopressor)",
+    indications: [
+      "Septic Shock — adjunct to norepinephrine",
+      "Cardiac Arrest (alternative to 1st/2nd epinephrine)",
+      "Variceal Hemorrhage (via terlipressin/equivalent)",
+      "Diabetes Insipidus"
+    ],
+    doses: [
+      { route: "IV Infusion (Septic Shock)", dose: "0.03-0.04 U/min", note: "Fixed dose, do NOT titrate" },
+      { route: "IV Bolus (Cardiac Arrest)", dose: "40 U single dose", note: "Replaces 1st or 2nd epi" },
+      { route: "DI", dose: "Desmopressin (DDAVP) 1-4 µg IV", note: "Different drug/indication" }
+    ],
+    pearls: [
+      "Fixed-dose in sepsis: 0.03 U/min — increasing dose increases ischemia, not efficacy",
+      "Add when norepinephrine >0.25-0.5 µg/kg/min → catecholamine-sparing",
+      "Mechanism: restores depleted vasopressin in prolonged shock",
+      "Reduces norepinephrine requirement and may allow steroid dose reduction",
+      "Digital/splanchnic ischemia risk — monitor extremities"
+    ],
+    contraindications: "Significant cardiac dysfunction (may increase afterload), mesenteric ischemia"
+  },
+  // AIRWAY & RSI
+  {
+    name: "Succinylcholine",
+    category: "Airway / RSI",
+    color: "#ea580c",
+    icon: "wind",
+    urgency: "STAT",
+    classInfo: "Depolarizing Neuromuscular Blocker",
+    indications: [
+      "Rapid Sequence Intubation (RSI)",
+      "Laryngospasm",
+      "Short procedures requiring paralysis"
+    ],
+    doses: [
+      { route: "IV", dose: "1-1.5 mg/kg", note: "Onset 30-60 sec, duration 6-10 min" },
+      { route: "IM (no IV)", dose: "3-4 mg/kg", note: "Onset 2-3 min, max 150 mg" },
+      { route: "Pediatric", dose: "2 mg/kg IV (infant), 1-1.5 mg/kg (child)", note: "Preceded by atropine 0.02 mg/kg" }
+    ],
+    pearls: [
+      "Fastest onset of ANY paralytic — gold standard for crash airway",
+      "KILLS via hyperkalemia in: burns >24h, crush injury, denervation, prolonged immobility",
+      "Fasciculations are normal — defasciculation with 10% non-depolarizer dose is optional",
+      "Contraindicated if K⁺ >5.5 or risk of hyperkalemia",
+      "Malignant Hyperthermia: treat with dantrolene 2.5 mg/kg IV"
+    ],
+    contraindications: "Hyperkalemia risk (burns >24h, denervation, rhabdo), malignant hyperthermia history, penetrating eye injury (relative)"
+  },
+  {
+    name: "Rocuronium",
+    category: "Airway / RSI",
+    color: "#ea580c",
+    icon: "shield",
+    urgency: "STAT",
+    classInfo: "Non-depolarizing Neuromuscular Blocker (aminosteroid)",
+    indications: [
+      "RSI (when succinylcholine contraindicated or as primary)",
+      "Maintained paralysis for ventilation",
+      "Surgical relaxation"
+    ],
+    doses: [
+      { route: "IV (RSI dose)", dose: "1.0-1.2 mg/kg", note: "Onset 45-60 sec at RSI dose" },
+      { route: "IV (Standard)", dose: "0.6 mg/kg", note: "Onset 60-90 sec" },
+      { route: "Maintenance", dose: "0.1-0.2 mg/kg PRN", note: "Guided by TOF" },
+      { route: "Reversal", dose: "Sugammadex 16 mg/kg (immediate) or 2-4 mg/kg (2 twitches)", note: "Full reversal in 2-3 min" }
+    ],
+    pearls: [
+      "At 1.2 mg/kg → approaches succinylcholine onset time",
+      "REVERSIBLE with sugammadex — major safety advantage",
+      "Duration: 30-60 min (dose-dependent) — have plan for failed airway",
+      "No hyperkalemia, no malignant hyperthermia, no fasciculations",
+      "Preferred in ICU patients, hyperkalemia risk, and burns"
+    ],
+    contraindications: "Hypersensitivity to aminosteroids. No absolute contraindications in emergency."
+  },
+  {
+    name: "Ketamine",
+    category: "Airway / RSI",
+    color: "#ea580c",
+    icon: "brain",
+    urgency: "STAT",
+    classInfo: "NMDA Receptor Antagonist (Dissociative Anesthetic)",
+    indications: [
+      "RSI induction — especially in hypotension/shock",
+      "Procedural Sedation",
+      "Status Asthmaticus (bronchodilation)",
+      "Acute Pain Management",
+      "Status Epilepticus (refractory)"
+    ],
+    doses: [
+      { route: "IV (RSI Induction)", dose: "1-2 mg/kg", note: "Onset 30-60 sec, lasts 10-15 min" },
+      { route: "IM (Sedation)", dose: "3-5 mg/kg", note: "Onset 3-5 min, lasts 15-30 min" },
+      { route: "IV (Analgesic subdissociative)", dose: "0.1-0.3 mg/kg over 15 min", note: "Excellent for acute pain" },
+      { route: "IV (Status Asthmaticus)", dose: "0.5-1 mg/kg then 0.5 mg/kg/hr", note: "Bronchodilatory" },
+      { route: "IV (Refractory SE)", dose: "1-3 mg/kg bolus then 1-10 mg/kg/hr", note: "Last-line" }
+    ],
+    pearls: [
+      "Hemodynamically STABLE — ideal for shocked/hypotensive patients for RSI",
+      "Myth busted: does NOT increase ICP in ventilated patients at induction doses",
+      "Bronchodilator — excellent choice in asthmatic patients",
+      "Emergence reactions: lower with midazolam 0.05 mg/kg co-administration",
+      "Preserves airway reflexes and spontaneous respirations (at lower doses)",
+      "Increases secretions → consider glycopyrrolate 0.004 mg/kg"
+    ],
+    contraindications: "Age <3 months (relative), severe uncontrolled hypertension, aortic dissection, eclampsia (relative)"
+  },
+  // ANTI-ARRHYTHMICS
+  {
+    name: "Adenosine",
+    category: "Anti-Arrhythmics",
+    color: "#0891b2",
+    icon: "zap-off",
+    urgency: "STAT",
+    classInfo: "Purinergic (A1) Receptor Agonist — AV nodal blocker",
+    indications: [
+      "SVT (AVNRT, AVRT) — 1st line for stable SVT",
+      "Diagnostic: wide-complex tachycardia (unmask flutter/origin)",
+      "Pre-excited AF (controversial, specialist only)"
+    ],
+    doses: [
+      { route: "IV Rapid Push", dose: "6 mg → 12 mg → 12 mg", note: "Each followed by rapid 20 mL NS flush, arm up" },
+      { route: "Central Line", dose: "3 mg initial", note: "Halve the dose for central access" },
+      { route: "Pediatric", dose: "0.1 mg/kg → 0.2 mg/kg (max 12 mg)", note: "Same rapid push technique" }
+    ],
+    pearls: [
+      "TECHNIQUE IS EVERYTHING: use 3-way stopcock, fastest push possible, elevate arm",
+      "Warn patient: 'You'll feel like an elephant is sitting on your chest for 10 seconds'",
+      "Half-life: 10 seconds — must reach heart before degradation",
+      "Theophylline/caffeine BLOCKS effect → may need higher doses",
+      "Dipyridamole/carbamazepine POTENTIATES → use 3 mg initial",
+      "Record rhythm strip during administration — diagnostic gold"
+    ],
+    contraindications: "2nd/3rd degree AV block, sick sinus syndrome (without pacemaker), asthma (relative — bronchospasm risk)"
+  },
+  {
+    name: "Lidocaine (Lignocaine)",
+    category: "Anti-Arrhythmics",
+    color: "#0891b2",
+    icon: "activity",
+    urgency: "URGENT",
+    classInfo: "Class IB Antiarrhythmic (Na+ channel blocker)",
+    indications: [
+      "VF/pVT cardiac arrest (alternative to amiodarone)",
+      "Stable monomorphic VT",
+      "Ventricular ectopy post-MI",
+      "Local anesthetic toxicity prevention (max dose awareness)"
+    ],
+    doses: [
+      { route: "IV (Cardiac Arrest)", dose: "1-1.5 mg/kg bolus", note: "Additional 0.5-0.75 mg/kg every 5-10 min, max 3 mg/kg" },
+      { route: "IV Infusion (post-ROSC)", dose: "1-4 mg/min", note: "After successful defibrillation" },
+      { route: "Local Anesthetic Max", dose: "4.5 mg/kg (plain), 7 mg/kg (with epi)", note: "LAST: lipid emulsion 1.5 mL/kg 20% intralipid" }
+    ],
+    pearls: [
+      "Alternative to amiodarone in VF/pVT arrest per AHA",
+      "Reduce dose by 50% in: liver failure, CHF, age >70, shock",
+      "Toxicity signs: perioral numbness → tinnitus → seizures → cardiac arrest",
+      "LAST protocol: 20% intralipid 1.5 mL/kg bolus then 0.25 mL/kg/min",
+      "Does NOT prolong QT (advantage over amiodarone)"
+    ],
+    contraindications: "High-grade AV block, severe SA node dysfunction, Stokes-Adams syndrome, Wolff-Parkinson-White (relative)"
+  },
+  // SEDATION & ANALGESIA
+  {
+    name: "Midazolam",
+    category: "Sedation",
+    color: "#2563eb",
+    icon: "moon",
+    urgency: "URGENT",
+    classInfo: "Benzodiazepine (GABA-A agonist, short-acting)",
+    indications: [
+      "Procedural sedation",
+      "Status Epilepticus (1st/2nd line)",
+      "Anxiolysis pre-procedure",
+      "ICU sedation (short-term)",
+      "Agitation management"
+    ],
+    doses: [
+      { route: "IV (Sedation)", dose: "0.5-2 mg titrated slowly", note: "Onset 1-2 min, peak 3-5 min" },
+      { route: "IM (Status Epilepticus)", dose: "10 mg (>40 kg), 5 mg (13-40 kg)", note: "RAMPART trial: IM midaz > IV lorazepam for pre-hospital SE" },
+      { route: "Intranasal", dose: "0.2 mg/kg (max 10 mg)", note: "Use concentrated form, MAD device" },
+      { route: "IV Infusion (ICU)", dose: "0.02-0.1 mg/kg/hr", note: "Daily awakening trials, avoid >48h" },
+      { route: "Reversal", dose: "Flumazenil 0.2 mg IV every 1 min (max 1 mg)", note: "Caution: seizures in chronic benzo use" }
+    ],
+    pearls: [
+      "RAMPART trial: IM midazolam is SUPERIOR to IV lorazepam for out-of-hospital SE",
+      "Accumulates in renal failure → active metabolite (α-hydroxymidazolam)",
+      "Synergistic respiratory depression with opioids — reduce doses by 30-50% when combined",
+      "Paradoxical agitation in elderly & children — switch to different agent",
+      "ICU: propofol/dexmedetomidine preferred over midazolam for most patients (PADIS 2018)"
+    ],
+    contraindications: "Severe respiratory depression (without ventilatory support), acute narrow-angle glaucoma, shock/hypotension"
+  },
+  {
+    name: "Morphine",
+    category: "Sedation",
+    color: "#2563eb",
+    icon: "pill",
+    urgency: "URGENT",
+    classInfo: "Opioid Agonist (µ-receptor)",
+    indications: [
+      "Acute severe pain (trauma, burns, post-op)",
+      "Acute Coronary Syndrome (with caution)",
+      "Acute Pulmonary Edema",
+      "Palliative care/end-of-life"
+    ],
+    doses: [
+      { route: "IV", dose: "2-4 mg every 5-15 min", note: "Titrate to effect, onset 5 min" },
+      { route: "IM/SC", dose: "5-10 mg every 3-4 hrs", note: "Onset 15-30 min" },
+      { route: "IV Infusion (ICU)", dose: "1-5 mg/hr", note: "Titrate; use pain scales" },
+      { route: "Pediatric IV", dose: "0.05-0.1 mg/kg every 5-10 min", note: "Max 0.3 mg/kg cumulative" },
+      { route: "Reversal", dose: "Naloxone 0.04-0.4 mg IV", note: "Titrate to respiration, not consciousness" }
+    ],
+    pearls: [
+      "ACS: use with CAUTION — may cause hypotension/bradycardia, no mortality benefit proven",
+      "Pulmonary edema: reduces preload + anxiety, but evidence is mixed — NIV is superior",
+      "Histamine release → bronchospasm, hypotension — avoid in asthmatics, use fentanyl instead",
+      "Renal failure: active metabolite (M6G) accumulates → prolonged effect, use fentanyl/hydromorphone",
+      "Naloxone half-life (30-90 min) < morphine (3-4h) → re-sedation risk, may need repeat/infusion"
+    ],
+    contraindications: "Severe respiratory depression (unmonitored), paralytic ileus, acute/severe asthma, known hypersensitivity"
+  },
+  // ELECTROLYTES & METABOLIC
+  {
+    name: "Calcium Gluconate / Chloride",
+    category: "Electrolytes",
+    color: "#16a34a",
+    icon: "shield-plus",
+    urgency: "STAT",
+    classInfo: "Electrolyte (Membrane Stabilizer in Hyperkalemia)",
+    indications: [
+      "Hyperkalemia with ECG changes — FIRST DRUG",
+      "Calcium channel blocker overdose",
+      "Hydrofluoric acid burns",
+      "Hypocalcemia (symptomatic/severe)",
+      "Massive transfusion (citrate toxicity)"
+    ],
+    doses: [
+      { route: "IV (Hyperkalemia)", dose: "10 mL of 10% Calcium Gluconate over 2-3 min", note: "Repeat in 5-10 min if ECG unchanged" },
+      { route: "IV (Ca Chloride - Central)", dose: "10 mL of 10% CaCl₂ over 5-10 min", note: "3× more elemental Ca²⁺ than gluconate; CENTRAL LINE ONLY" },
+      { route: "IV (CCB Overdose)", dose: "CaCl₂ 20 mL of 10% bolus, repeat every 15-20 min", note: "Up to 3-4 doses, then infusion 0.2-0.4 mL/kg/hr" },
+      { route: "Topical (HF burns)", dose: "2.5% Ca gluconate gel", note: "Apply continuously; intra-arterial for digital exposure" }
+    ],
+    pearls: [
+      "Hyperkalemia: Ca²⁺ does NOT lower K⁺ — it STABILIZES myocardium. Still need insulin/dextrose/kayexalate/dialysis",
+      "CaCl₂ = 3× more Ca²⁺ than gluconate but causes tissue necrosis if extravasated → CENTRAL LINE",
+      "Gluconate is safe peripherally → use when no central line",
+      "CCB overdose: high-dose calcium + high-dose insulin (HDI) protocol is critical",
+      "Digoxin toxicity: Ca²⁺ is RELATIVELY contraindicated (stone heart theory) — use digoxin Fab",
+      "Onset: 1-3 minutes, duration: 30-60 minutes"
+    ],
+    contraindications: "Digoxin toxicity (relative), hypercalcemia, concurrent IV bicarbonate (precipitates)"
+  },
+  {
+    name: "Sodium Bicarbonate",
+    category: "Electrolytes",
+    color: "#16a34a",
+    icon: "beaker",
+    urgency: "URGENT",
+    classInfo: "Alkalinizing Agent",
+    indications: [
+      "Severe Metabolic Acidosis (pH <7.1)",
+      "Tricyclic Antidepressant (TCA) overdose",
+      "Hyperkalemia (adjunct)",
+      "Sodium channel blocker toxicity (QRS >120 ms)",
+      "Urine alkalinization (salicylate, methotrexate)"
+    ],
+    doses: [
+      { route: "IV (Acidosis)", dose: "1-2 mEq/kg slow bolus", note: "Recheck ABG in 30 min" },
+      { route: "IV (TCA Toxicity)", dose: "1-2 mEq/kg bolus, repeat until QRS <120 ms", note: "Target pH 7.45-7.55" },
+      { route: "IV Infusion", dose: "150 mEq (3 amps) in 1L D5W", note: "Run at 150-250 mL/hr; for urine alkalinization" },
+      { route: "Hyperkalemia", dose: "50 mEq (1 amp) over 5 min", note: "Effect is slow and limited — not 1st line" }
+    ],
+    pearls: [
+      "TCA overdose: bicarb is the ANTIDOTE — give for QRS >100 ms, seizures, hypotension",
+      "Do NOT use routinely in cardiac arrest — worsen intracellular acidosis",
+      "Hyperventilation is more effective for raising pH than bicarb in many settings",
+      "Incompatible with calcium (precipitates) — flush line between",
+      "Each amp (50 mEq) = 900 mOsm → hypernatremia and hyperosmolality risk"
+    ],
+    contraindications: "Metabolic/respiratory alkalosis, hypokalemia (worsens), hypernatremia"
+  },
+  {
+    name: "50% Dextrose (D50W)",
+    category: "Electrolytes",
+    color: "#16a34a",
+    icon: "candy",
+    urgency: "STAT",
+    classInfo: "Hypertonic Glucose Solution",
+    indications: [
+      "Severe Hypoglycemia (BG <54 mg/dL / <3 mmol/L)",
+      "Altered mental status with unknown etiology (empiric)",
+      "Hyperkalemia (with insulin)",
+      "Sulfonylurea/insulin overdose"
+    ],
+    doses: [
+      { route: "IV (Adult Hypoglycemia)", dose: "25-50 mL of D50W (12.5-25 g glucose)", note: "Recheck BG in 15 min, repeat PRN" },
+      { route: "IV (Hyperkalemia protocol)", dose: "25 g D50W with 10 U regular insulin", note: "Shifts K⁺ intracellularly; monitor BG q15-30 min" },
+      { route: "Pediatric", dose: "D10W: 2-5 mL/kg; D25W for older children", note: "D50W is hyperosmolar — avoid in neonates" },
+      { route: "Neonatal", dose: "D10W 2 mL/kg", note: "D50W causes sclerosing injury in small veins" }
+    ],
+    pearls: [
+      "ALWAYS check glucose before D50W in altered mental status — it's part of the 'coma cocktail'",
+      "Give THIAMINE before/with dextrose in alcoholics/malnourished → prevent Wernicke's",
+      "D50W is extremely hyperosmolar (2,525 mOsm/L) → thrombophlebitis if peripheral",
+      "Insulin-dextrose for hyperK: onset 15-30 min, lowers K⁺ by 0.5-1.5 mEq/L",
+      "Sulfonylurea OD: octreotide 50-100 µg SC q6h prevents rebound hypoglycemia"
+    ],
+    contraindications: "Hyperglycemia, intracranial hemorrhage (theoretical — osmotic shifts)"
+  },
+  // TOXICOLOGY
+  {
+    name: "Naloxone (Narcan)",
+    category: "Toxicology",
+    color: "#db2777",
+    icon: "syringe",
+    urgency: "STAT",
+    classInfo: "Pure Opioid Antagonist (µ, κ, δ receptors)",
+    indications: [
+      "Opioid Overdose (respiratory depression)",
+      "Altered consciousness (empiric — opioid suspected)",
+      "Neonatal opioid depression",
+      "Clonidine overdose (partial response)"
+    ],
+    doses: [
+      { route: "IV (Overdose)", dose: "0.04-0.4 mg titrated every 2-3 min", note: "Goal: restore respirations, NOT full consciousness" },
+      { route: "IV (Apneic/Arrest)", dose: "2 mg IV push", note: "Full dose when life-threatening" },
+      { route: "IM/SC/IN (Pre-hospital)", dose: "0.4-2 mg IM; 4 mg intranasal (2 mg/nostril)", note: "Onset IM: 2-5 min, IN: 3-5 min" },
+      { route: "IV Infusion", dose: "2/3 of effective bolus dose per hour", note: "For long-acting opioids (methadone, extended-release)" },
+      { route: "Pediatric", dose: "0.01 mg/kg if partial reversal; 0.1 mg/kg if full", note: "Max 2 mg/dose" }
+    ],
+    pearls: [
+      "TITRATE to respiration (RR >12), NOT consciousness — prevents acute withdrawal, vomiting, aspiration",
+      "Naloxone half-life (30-90 min) << most opioids → RE-SEDATION is the major risk",
+      "Methadone/fentanyl patch OD: may need infusion for 12-24+ hours",
+      "Acute withdrawal → projectile vomiting, agitation, pulmonary edema, arrhythmia",
+      "Post-reversal: OBSERVE minimum 4-6 hours (or longer for long-acting opioids)"
+    ],
+    contraindications: "Hypersensitivity. Be cautious in opioid-dependent patients (withdrawal). No absolute contraindication in life-threatening OD."
+  },
+  {
+    name: "N-Acetylcysteine (NAC)",
+    category: "Toxicology",
+    color: "#db2777",
+    icon: "flask-conical",
+    urgency: "URGENT",
+    classInfo: "Glutathione Precursor / Antioxidant",
+    indications: [
+      "Paracetamol (Acetaminophen) Overdose",
+      "Acute Liver Failure (non-paracetamol — off-label)",
+      "Contrast-induced nephropathy prevention (controversial)"
+    ],
+    doses: [
+      { route: "IV (21-hour protocol)", dose: "Loading: 150 mg/kg in 200 mL D5W over 1h → 50 mg/kg in 500 mL over 4h → 100 mg/kg in 1000 mL over 16h", note: "Most common protocol worldwide" },
+      { route: "IV (Modified 2-bag)", dose: "200 mg/kg in 500 mL over 4h → 100 mg/kg in 1000 mL over 16h", note: "Fewer anaphylactoid reactions" },
+      { route: "Oral (72-hour)", dose: "140 mg/kg loading → 70 mg/kg q4h × 17 doses", note: "Mix with cola/juice; vomiting common" }
+    ],
+    pearls: [
+      "Most effective within 8 hours of ingestion — but give even at 24+ hours if indicated",
+      "Use Rumack-Matthew nomogram: plot 4-hour level — above treatment line = treat",
+      "Anaphylactoid reactions (10-20%): flush, urticaria, bronchospasm → slow rate, antihistamine, continue",
+      "Check: paracetamol level at 4h post-ingestion, LFTs, INR, creatinine, lactate",
+      "King's College criteria for transplant referral: pH <7.3, INR >6.5, Cr >3.4, Grade III encephalopathy"
+    ],
+    contraindications: "No absolute contraindication in paracetamol OD. Relative: asthma (anaphylactoid risk)"
+  },
+  {
+    name: "Activated Charcoal",
+    category: "Toxicology",
+    color: "#db2777",
+    icon: "circle",
+    urgency: "URGENT",
+    classInfo: "Adsorbent / GI Decontaminant",
+    indications: [
+      "Oral Poisoning — within 1-2 hours of ingestion",
+      "Multi-dose: theophylline, carbamazepine, dapsone, phenobarbital",
+      "Life-threatening overdose of adsorbable substance"
+    ],
+    doses: [
+      { route: "Oral (Adult)", dose: "50-100 g (1 g/kg) as single dose", note: "In 200-400 mL water; best within 1 hour" },
+      { route: "Oral (Pediatric)", dose: "1 g/kg (max 50 g)", note: "Via NG tube if unable to swallow" },
+      { route: "Multi-dose", dose: "25-50 g every 2-4 hours", note: "For drugs with enterohepatic circulation" }
+    ],
+    pearls: [
+      "Golden hour: most effective <1 hour post-ingestion; benefit drops rapidly after",
+      "Does NOT adsorb: iron, lithium, potassium, alcohols, acids/alkalis, hydrocarbons",
+      "Mnemonic for charcoal failures: 'PHAILS' — Pesticides, Hydrocarbons, Acids/Alkalis, Iron, Lithium, Solvents",
+      "CONTRAINDICATED if unprotected airway — aspiration of charcoal is devastating",
+      "Do NOT give with sorbitol in children (dehydration risk)"
+    ],
+    contraindications: "Unprotected airway, corrosive ingestion, GI perforation/obstruction, substances not adsorbed"
+  },
+  // NEUROLOGICAL
+  {
+    name: "Mannitol",
+    category: "Neurological",
+    color: "#ca8a04",
+    icon: "brain",
+    urgency: "STAT",
+    classInfo: "Osmotic Diuretic",
+    indications: [
+      "Raised ICP — Herniation syndrome",
+      "Acute angle-closure glaucoma",
+      "Rhabdomyolysis (forced diuresis)",
+      "Cerebral edema (traumatic/non-traumatic)"
+    ],
+    doses: [
+      { route: "IV (Raised ICP)", dose: "0.25-1 g/kg bolus over 15-20 min", note: "20% solution; can repeat every 4-6h" },
+      { route: "IV (Herniation)", dose: "1-1.5 g/kg rapid bolus", note: "Buys time for definitive management" },
+      { route: "IV (Glaucoma)", dose: "1-2 g/kg over 30-60 min", note: "Reduces aqueous humor production" }
+    ],
+    pearls: [
+      "Monitor serum osmolality: stop if >320 mOsm/L or osmolar gap >10",
+      "Effect onset: 15-30 min ICP reduction, peaks 1 hour",
+      "MUST have a Foley catheter — massive diuresis will occur",
+      "Rebounds if used >48-72h — transition to hypertonic saline",
+      "Crystallizes at cool temperatures → use in-line filter, warm if crystallized",
+      "Hypertonic saline (3% or 23.4%) is alternative — works even with hypotension"
+    ],
+    contraindications: "Anuria/severe renal failure, severe dehydration, active intracranial bleeding, severe heart failure (pulmonary edema risk)"
+  },
+  {
+    name: "Levetiracetam (Keppra)",
+    category: "Neurological",
+    color: "#ca8a04",
+    icon: "zap",
+    urgency: "URGENT",
+    classInfo: "SV2A Modulator (Antiepileptic)",
+    indications: [
+      "Status Epilepticus — 2nd line (after benzodiazepines)",
+      "Seizure prophylaxis (TBI, neurosurgery, SAH)",
+      "New-onset seizures in ED/ICU"
+    ],
+    doses: [
+      { route: "IV (Status Epilepticus)", dose: "60 mg/kg (max 4500 mg) over 10-15 min", note: "Recent evidence supports higher dosing" },
+      { route: "IV (Loading)", dose: "20-60 mg/kg", note: "Older dosing: 20 mg/kg; newer trials: 60 mg/kg" },
+      { route: "Maintenance", dose: "500-1500 mg BID", note: "Adjust for renal function" }
+    ],
+    pearls: [
+      "No hepatic metabolism → safe in liver failure, fewer drug interactions than phenytoin",
+      "Does NOT require level monitoring in emergency setting",
+      "ESETT trial: levetiracetam = fosphenytoin = valproate for benzodiazepine-resistant SE",
+      "Behavioral side effects ('Keppra rage') — usually with chronic use, not acute loading",
+      "No cardiovascular depression — safer than phenytoin for arrhythmia risk",
+      "Renally cleared: reduce dose if CrCl <50"
+    ],
+    contraindications: "Hypersensitivity. Dose adjust in renal impairment."
+  },
+  // MISCELLANEOUS
+  {
+    name: "Hydrocortisone",
+    category: "Miscellaneous",
+    color: "#6b7280",
+    icon: "shield",
+    urgency: "URGENT",
+    classInfo: "Glucocorticoid (Physiologic Steroid)",
+    indications: [
+      "Adrenal Crisis",
+      "Septic Shock (refractory to vasopressors)",
+      "Anaphylaxis (adjunct — prevents biphasic reaction)",
+      "Acute Severe Asthma/COPD exacerbation",
+      "Relative Adrenal Insufficiency in ICU"
+    ],
+    doses: [
+      { route: "IV (Adrenal Crisis)", dose: "100 mg bolus then 50 mg q6-8h", note: "Or 200 mg/24h continuous infusion" },
+      { route: "IV (Septic Shock)", dose: "200 mg/day (50 mg q6h or infusion)", note: "SSC: if norepinephrine ≥0.25 µg/kg/min" },
+      { route: "IV (Anaphylaxis adjunct)", dose: "200 mg IV", note: "Does NOT replace epinephrine — onset 4-6 hours" },
+      { route: "IV (Severe Asthma)", dose: "100 mg q6-8h or methylpred 60-125 mg q6h", note: "Transition to oral prednisolone within 24-48h" }
+    ],
+    pearls: [
+      "Adrenal crisis: draw cortisol BEFORE giving, but NEVER delay treatment for labs",
+      "Septic shock: ADRENAL trial showed faster shock reversal but no mortality benefit → use in refractory shock",
+      "Anaphylaxis: steroids prevent biphasic reaction (6-12h later) but are NOT acute treatment",
+      "Stress-dose steroids: any patient on chronic steroids (>5 mg pred/day for >3 weeks) who is critically ill",
+      "Taper after >5-7 days of use to avoid adrenal suppression rebound"
+    ],
+    contraindications: "No absolute contraindication in emergency. Relative: uncontrolled infection (without antibiotics), live vaccines"
+  },
+  {
+    name: "Tranexamic Acid (TXA)",
+    category: "Miscellaneous",
+    color: "#6b7280",
+    icon: "droplets",
+    urgency: "STAT",
+    classInfo: "Antifibrinolytic (Lysine Analogue)",
+    indications: [
+      "Major Trauma with Hemorrhage (<3 hours)",
+      "Postpartum Hemorrhage",
+      "GI Bleeding (evidence evolving)",
+      "Surgical Bleeding / Perioperative"
+    ],
+    doses: [
+      { route: "IV (Trauma — CRASH-2)", dose: "1 g over 10 min then 1 g over 8 hours", note: "MUST give within 3 hours of injury" },
+      { route: "IV (PPH — WOMAN trial)", dose: "1 g IV over 10 min", note: "Repeat 1 g if bleeding continues at 30 min" },
+      { route: "IV (GI Bleeding)", dose: "1 g IV", note: "HALT-IT trial: no benefit in GI bleed → NOT routinely recommended" },
+      { route: "Topical", dose: "Soak gauze with 500 mg-1g in 10 mL", note: "Dental extraction, epistaxis" }
+    ],
+    pearls: [
+      "CRASH-2: 1.5% absolute mortality reduction in trauma IF given <3 hours",
+      "AFTER 3 hours: TXA INCREASES mortality in trauma — timing is CRITICAL",
+      "WOMAN trial: reduces death from bleeding in PPH, especially if given <3h",
+      "GI bleed: HALT-IT showed NO benefit and trend toward DVT → avoid routine use",
+      "Give EARLY in massive transfusion protocol — part of damage control resuscitation",
+      "Seizure risk with high doses (>2g) especially in cardiac surgery"
+    ],
+    contraindications: "Active thromboembolic disease, DIC (relative), >3 hours post-injury in trauma, subarachnoid hemorrhage (controversial)"
+  },
+  {
+    name: "Magnesium Sulfate",
+    category: "Miscellaneous",
+    color: "#6b7280",
+    icon: "sparkles",
+    urgency: "URGENT",
+    classInfo: "Electrolyte / Smooth Muscle Relaxant / Membrane Stabilizer",
+    indications: [
+      "Eclampsia / Severe Pre-eclampsia — FIRST LINE",
+      "Torsades de Pointes (polymorphic VT with long QT)",
+      "Severe Acute Asthma (refractory)",
+      "Hypomagnesemia",
+      "Digoxin toxicity with hypomagnesemia"
+    ],
+    doses: [
+      { route: "IV (Eclampsia — Zuspan)", dose: "4-6 g over 15-20 min loading → 1-2 g/hr infusion", note: "Pritchard: 4g IV + 5g each buttock IM, then 5g IM q4h" },
+      { route: "IV (Torsades)", dose: "1-2 g in 50-100 mL over 5-20 min", note: "Can push faster in arrest; follow with infusion 0.5-1 g/hr" },
+      { route: "IV (Severe Asthma)", dose: "2 g over 20 min", note: "Single dose; adjunct to β-agonists/steroids" },
+      { route: "IV (Hypomagnesemia)", dose: "1-2 g over 1-2 hours", note: "Severe: up to 4-6 g in first 24h" }
+    ],
+    pearls: [
+      "Eclampsia: MgSO₄ is SUPERIOR to diazepam and phenytoin for seizure prevention (Magpie trial)",
+      "Torsades: Mg²⁺ is THE treatment even with normal Mg²⁺ levels — give empirically",
+      "Monitor: knee jerk reflexes (lost at ~7 mEq/L), respiratory rate, urine output",
+      "Toxicity antidote: Calcium Gluconate 1g IV (10 mL of 10%) — have it ready at bedside",
+      "Therapeutic range eclampsia: 4-7 mEq/L (4.8-8.4 mg/dL)",
+      "Renal clearance: reduce dose/increase monitoring in renal impairment"
+    ],
+    contraindications: "Myasthenia gravis, heart block, hypermagnesemia. Use cautiously in renal impairment."
+  }
+];
+
+// ─── CATEGORIES ───
+const CATEGORIES = [
+  { key: "all", label: "All Drugs", color: "#ef4444" },
+  { key: "Cardiac Arrest", label: "Cardiac Arrest", color: "#dc2626" },
+  { key: "Vasopressors", label: "Vasopressors", color: "#7c3aed" },
+  { key: "Airway / RSI", label: "Airway / RSI", color: "#ea580c" },
+  { key: "Anti-Arrhythmics", label: "Anti-Arrhythmics", color: "#0891b2" },
+  { key: "Sedation", label: "Sedation", color: "#2563eb" },
+  { key: "Electrolytes", label: "Electrolytes", color: "#16a34a" },
+  { key: "Toxicology", label: "Toxicology", color: "#db2777" },
+  { key: "Neurological", label: "Neurological", color: "#ca8a04" },
+  { key: "Miscellaneous", label: "Misc", color: "#6b7280" }
+];
+
+let activeCategory = "all";
+let searchTerm = "";
+
+// ─── DEFAULT CONFIG ───
+const defaultConfig = {
+  app_title: "Emergency Drugs Reference",
+  subtitle_text: "Clinical Doses & Uses — ICU / ED / Medicine",
+  background_color: "#0d0d1a",
+  surface_color: "#151528",
+  text_color: "#e5e5e5",
+  primary_action_color: "#ef4444",
+  secondary_action_color: "#6b7280",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+// ─── INIT ELEMENT SDK ───
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => {
+    const c = { ...defaultConfig, ...config };
+    const font = `${c.font_family}, DM Sans, sans-serif`;
+    const base = c.font_size || 14;
+
+    document.getElementById('app').style.background = c.background_color;
+    document.getElementById('appTitle').textContent = c.app_title;
+    document.getElementById('appTitle').style.color = c.text_color;
+    document.getElementById('appTitle').style.fontFamily = font;
+    document.getElementById('appTitle').style.fontSize = `${base * 1.3}px`;
+    document.getElementById('appSubtitle').textContent = c.subtitle_text;
+    document.getElementById('appSubtitle').style.color = c.primary_action_color;
+    document.getElementById('appSubtitle').style.fontFamily = font;
+    document.getElementById('appSubtitle').style.fontSize = `${base * 0.8}px`;
+
+    document.querySelectorAll('.drug-card').forEach(card => {
+      card.style.background = c.surface_color;
+      card.style.fontFamily = font;
+    });
+    document.querySelectorAll('.drug-name-text').forEach(el => {
+      el.style.color = c.text_color;
+      el.style.fontSize = `${base}px`;
+    });
+    document.querySelectorAll('.drug-class-text, .drug-dose-text').forEach(el => {
+      el.style.fontFamily = font;
+      el.style.fontSize = `${base * 0.78}px`;
+    });
+    document.getElementById('drugCount').style.color = c.secondary_action_color;
+    document.getElementById('drugCount').style.fontFamily = font;
+    document.getElementById('searchInput').style.fontFamily = font;
+    document.getElementById('searchInput').style.fontSize = `${base}px`;
+  },
+  mapToCapabilities: (config) => {
+    const c = { ...defaultConfig, ...config };
+    const makeColor = (key) => ({
+      get: () => c[key] || defaultConfig[key],
+      set: (v) => { c[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+    });
+    return {
+      recolorables: [
+        makeColor('background_color'),
+        makeColor('surface_color'),
+        makeColor('text_color'),
+        makeColor('primary_action_color'),
+        makeColor('secondary_action_color')
+      ],
+      borderables: [],
+      fontEditable: {
+        get: () => c.font_family || defaultConfig.font_family,
+        set: (v) => { c.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+      },
+      fontSizeable: {
+        get: () => c.font_size || defaultConfig.font_size,
+        set: (v) => { c.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+      }
+    };
+  },
+  mapToEditPanelValues: (config) => {
+    const c = { ...defaultConfig, ...config };
+    return new Map([
+      ["app_title", c.app_title],
+      ["subtitle_text", c.subtitle_text]
+    ]);
+  }
+});
+
+// ─── RENDER CATEGORIES ───
+function renderCategories() {
+  const container = document.getElementById('categoryFilters');
+  container.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = `category-pill flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap`;
+    btn.style.cssText = activeCategory === cat.key
+      ? `background:${cat.color};color:#fff;box-shadow:0 0 12px ${cat.color}44;`
+      : `background:${cat.color}18;color:${cat.color};border:1px solid ${cat.color}33;`;
+    if (activeCategory === cat.key) btn.classList.add('active');
+    btn.textContent = cat.label;
+    btn.onclick = () => { activeCategory = cat.key; renderCategories(); renderDrugs(); };
+    container.appendChild(btn);
+  });
+}
+
+// ─── RENDER DRUG CARDS ───
+function renderDrugs() {
+  const grid = document.getElementById('drugGrid');
+  grid.innerHTML = '';
+
+  const filtered = DRUGS.filter(d => {
+    const catMatch = activeCategory === 'all' || d.category === activeCategory;
+    if (!searchTerm) return catMatch;
+    const s = searchTerm.toLowerCase();
+    const textMatch = d.name.toLowerCase().includes(s) ||
+      d.category.toLowerCase().includes(s) ||
+      d.classInfo.toLowerCase().includes(s) ||
+      d.indications.some(i => i.toLowerCase().includes(s));
+    return catMatch && textMatch;
+  });
+
+  document.getElementById('drugCount').textContent = `${filtered.length} drug${filtered.length !== 1 ? 's' : ''} found`;
+
+  filtered.forEach((drug, i) => {
+    const card = document.createElement('div');
+    card.className = 'drug-card rounded-xl p-4 cursor-pointer slide-up';
+    card.style.cssText = `background:#151528;border:1px solid ${drug.color}22;animation-delay:${i * 0.04}s;`;
+    card.onclick = () => openDetail(drug);
+
+    const urgencyColors = { STAT: '#ef4444', URGENT: '#f59e0b' };
+    card.innerHTML = `
+      <div class="flex items-start justify-between gap-2 mb-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:${drug.color}22;">
+            <i data-lucide="${drug.icon}" style="width:16px;height:16px;color:${drug.color};"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 class="drug-name-text font-semibold text-sm leading-tight truncate" style="color:#e5e5e5;">${drug.name}</h3>
+            <p class="drug-class-text text-xs mt-0.5 truncate" style="color:#6b7280;">${drug.classInfo}</p>
+          </div>
+        </div>
+        <span class="badge flex-shrink-0" style="background:${urgencyColors[drug.urgency]}22;color:${urgencyColors[drug.urgency]};">
+          ${drug.urgency}
+        </span>
+      </div>
+      <div class="flex flex-wrap gap-1 mb-2">
+        <span class="badge" style="background:${drug.color}18;color:${drug.color};">${drug.category}</span>
+      </div>
+      <div class="space-y-1">
+        ${drug.doses.slice(0, 2).map(d => `
+          <div class="drug-dose-text flex items-start gap-1.5 text-xs" style="color:#9ca3af;">
+            <span class="mono font-medium flex-shrink-0" style="color:${drug.color};">${d.route}:</span>
+            <span class="truncate">${d.dose}</span>
+          </div>
+        `).join('')}
+        ${drug.doses.length > 2 ? `<p class="text-xs" style="color:#4b5563;">+${drug.doses.length - 2} more routes — tap for details</p>` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  lucide.createIcons();
+}
+
+// ─── DETAIL PANEL ───
+function openDetail(drug) {
+  const overlay = document.getElementById('detailOverlay');
+  const panel = document.getElementById('detailPanel');
+  const urgencyColors = { STAT: '#ef4444', URGENT: '#f59e0b' };
+
+  panel.innerHTML = `
+    <div class="sticky top-0 z-10 p-4 flex items-center justify-between" style="background:linear-gradient(135deg, ${drug.color}15, #111125);border-bottom:1px solid ${drug.color}22;">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:${drug.color}22;">
+          <i data-lucide="${drug.icon}" style="width:20px;height:20px;color:${drug.color};"></i>
+        </div>
+        <div class="min-w-0">
+          <h2 class="text-base font-bold truncate" style="color:#f5f5f5;">${drug.name}</h2>
+          <p class="text-xs" style="color:${drug.color};">${drug.classInfo}</p>
+        </div>
+      </div>
+      <button onclick="closeDetail()" class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 hover:opacity-80" style="background:#ffffff10;">
+        <i data-lucide="x" style="width:16px;height:16px;color:#9ca3af;"></i>
+      </button>
+    </div>
+
+    <div class="p-4 space-y-5">
+      <!-- Urgency & Category -->
+      <div class="flex flex-wrap gap-2">
+        <span class="badge" style="background:${urgencyColors[drug.urgency]}22;color:${urgencyColors[drug.urgency]};">${drug.urgency}</span>
+        <span class="badge" style="background:${drug.color}18;color:${drug.color};">${drug.category}</span>
+      </div>
+
+      <!-- Indications -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:${drug.color};">
+          <i data-lucide="clipboard-list" style="width:14px;height:14px;"></i> Indications
+        </h3>
+        <ul class="space-y-1.5">
+          ${drug.indications.map(ind => `
+            <li class="flex items-start gap-2 text-sm" style="color:#d1d5db;">
+              <span class="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style="background:${drug.color};"></span>
+              ${ind}
+            </li>
+          `).join('')}
+        </ul>
+      </section>
+
+      <!-- Doses -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:#22c55e;">
+          <i data-lucide="syringe" style="width:14px;height:14px;"></i> Doses & Routes
+        </h3>
+        <div class="space-y-2">
+          ${drug.doses.map(d => `
+            <div class="rounded-lg p-3" style="background:#0d0d1a;border:1px solid #1a1a2e;">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <span class="mono text-xs font-semibold" style="color:${drug.color};">${d.route}</span>
+              </div>
+              <p class="mono text-sm font-medium" style="color:#f5f5f5;">${d.dose}</p>
+              ${d.note ? `<p class="text-xs mt-1" style="color:#9ca3af;">💡 ${d.note}</p>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      </section>
+
+      <!-- Clinical Pearls -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:#f59e0b;">
+          <i data-lucide="lightbulb" style="width:14px;height:14px;"></i> Clinical Pearls
+        </h3>
+        <div class="space-y-2">
+          ${drug.pearls.map(p => `
+            <div class="flex items-start gap-2.5 text-sm rounded-lg p-2.5" style="background:#f59e0b08;border-left:2px solid #f59e0b33;color:#d1d5db;">
+              <span class="flex-shrink-0 mt-0.5">⚡</span>
+              <span>${p}</span>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+
+      <!-- Contraindications -->
+      <section>
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2" style="color:#ef4444;">
+          <i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Contraindications
+        </h3>
+        <div class="rounded-lg p-3 text-sm" style="background:#ef444410;border:1px solid #ef444422;color:#fca5a5;">
+          ${drug.contraindications}
+        </div>
+      </section>
+    </div>
+  `;
+
+  overlay.style.visibility = 'visible';
+  overlay.style.opacity = '1';
+  panel.style.transform = 'translateX(0)';
+  lucide.createIcons();
+}
+
+function closeDetail(e) {
+  if (e && e.target !== e.currentTarget) return;
+  const overlay = document.getElementById('detailOverlay');
+  const panel = document.getElementById('detailPanel');
+  panel.style.transform = 'translateX(100%)';
+  overlay.style.opacity = '0';
+  setTimeout(() => { overlay.style.visibility = 'hidden'; }, 300);
+}
+
+// ─── SEARCH ───
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchTerm = e.target.value;
+  renderDrugs();
+});
+
+// ─── KEYBOARD ───
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+// ─── INIT ───
+renderCategories();
+renderDrugs();
+lucide.createIcons();
+</script>
+</body>
+</html>
