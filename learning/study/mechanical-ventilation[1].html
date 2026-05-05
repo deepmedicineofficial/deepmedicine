@@ -1,0 +1,575 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Mechanical Ventilation | ICU Ventilator Management | Deep Medicine</title> <meta name="description" content="Comprehensive guide to mechanical ventilation including ventilator modes, settings, indications, and ICU management strategies."> <link rel="canonical" href="https://deepmedicine.in/learning/study/mechanical-ventilation"> <!-- Open Graph --> <meta property="og:title" content="Mechanical Ventilation | Deep Medicine"> <meta property="og:description" content="Ventilator modes, settings, and ICU management strategies for mechanical ventilation."> <meta property="og:image" content="https://deepmedicine.in/images/mechanical-ventilation.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+.font-display { font-family: 'Playfair Display', serif; }
+
+.card-glow { transition: all 0.3s ease; }
+.card-glow:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+
+.tab-btn { transition: all 0.25s ease; }
+.tab-btn.active { border-bottom: 3px solid; }
+
+.fade-in { animation: fadeIn 0.4s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+.param-row { transition: background 0.2s ease; }
+.param-row:hover { filter: brightness(1.05); }
+
+.pulse-dot { animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+
+.mode-badge { font-size: 0.65rem; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0f1923;"><!-- Header -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #0f1923 0%, #1a2d3d 50%, #0f1923 100%);">
+    <div class="absolute inset-0 opacity-10">
+     <div style="background: radial-gradient(circle at 20% 50%, #22d3ee 0%, transparent 50%);width:100%;height:100%;"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-4 py-8 sm:py-12">
+     <div class="flex items-center gap-3 mb-3">
+      <div class="pulse-dot w-2.5 h-2.5 rounded-full" style="background:#22d3ee;"></div><span class="text-xs font-semibold tracking-widest uppercase" style="color:#22d3ee;">Clinical Reference</span>
+     </div>
+     <h1 id="mainTitle" class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight" style="color:#e2e8f0;">Mechanical Ventilation<br>
+      Settings Guide</h1>
+     <p id="subtitle" class="mt-3 text-base sm:text-lg max-w-2xl" style="color:#94a3b8;">Comprehensive reference for all ventilation modes, parameters, compression settings, and clinical applications.</p>
+     <div class="flex flex-wrap gap-3 mt-6"><span class="mode-badge" style="background:#164e63;color:#22d3ee;">ICU Reference</span> <span class="mode-badge" style="background:#1e3a2f;color:#34d399;">Evidence-Based</span> <span class="mode-badge" style="background:#3b1f2b;color:#f472b6;">MBBS / MD Level</span>
+     </div>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="sticky top-0 z-20 border-b" style="background:#0f1923;border-color:#1e3a4a;">
+    <div class="max-w-6xl mx-auto px-4 flex gap-1 overflow-x-auto" id="tabBar"><button class="tab-btn active px-4 py-3 text-sm font-semibold whitespace-nowrap" style="color:#22d3ee;border-color:#22d3ee;" data-tab="modes" onclick="switchTab('modes')">Ventilation Modes</button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap" style="color:#94a3b8;" data-tab="params" onclick="switchTab('params')">Core Parameters</button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap" style="color:#94a3b8;" data-tab="compression" onclick="switchTab('compression')">Compression Settings</button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap" style="color:#94a3b8;" data-tab="alarms" onclick="switchTab('alarms')">Alarms &amp; Safety</button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap" style="color:#94a3b8;" data-tab="clinical" onclick="switchTab('clinical')">Clinical Scenarios</button> <button class="tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap" style="color:#94a3b8;" data-tab="weaning" onclick="switchTab('weaning')">Weaning Protocols</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-6xl mx-auto px-4 py-6" id="content"></main><!-- Footer -->
+   <footer class="border-t py-6 text-center" style="border-color:#1e3a4a;">
+    <p class="text-xs" style="color:#64748b;">⚕️ For educational &amp; clinical reference purposes. Always correlate with patient condition, ABG, and clinical judgment.</p>
+   </footer>
+  </div>
+  <script>
+const defaultConfig = {
+  main_title: "Mechanical Ventilation<br>Settings Guide",
+  subtitle: "Comprehensive reference for all ventilation modes, parameters, compression settings, and clinical applications.",
+  background_color: "#0f1923",
+  surface_color: "#162736",
+  text_color: "#e2e8f0",
+  primary_action: "#22d3ee",
+  secondary_action: "#94a3b8",
+  font_family: "DM Sans",
+  font_size: 16
+};
+
+let currentTab = 'modes';
+
+// --- DATA ---
+const MODES_DATA = [
+  {
+    name: "Volume Control (VCV)",
+    aka: "Volume-Cycled Ventilation",
+    color: "#22d3ee",
+    icon: "activity",
+    desc: "Delivers a set tidal volume at a set rate. The ventilator controls volume and flow; pressure is variable.",
+    params: [
+      { p: "Tidal Volume (Vt)", v: "6–8 mL/kg IBW", note: "Use IBW, not actual weight. ARDS: 4–6 mL/kg." },
+      { p: "Respiratory Rate", v: "12–20 bpm", note: "Adjust based on PaCO₂ & pH targets." },
+      { p: "PEEP", v: "5–20 cmH₂O", note: "Higher in ARDS (per ARDSNet table)." },
+      { p: "FiO₂", v: "21%–100%", note: "Titrate to SpO₂ 92–96%. ARDS target 88–95%." },
+      { p: "Flow Rate", v: "40–80 L/min", note: "Decelerating waveform often preferred." },
+      { p: "I:E Ratio", v: "1:2 to 1:3", note: "Inverse ratio in refractory hypoxemia." }
+    ],
+    indications: ["Post-operative patients", "Neuromuscular disease", "Heavy sedation / paralysis", "Guaranteed minute ventilation needed"]
+  },
+  {
+    name: "Pressure Control (PCV)",
+    aka: "Pressure-Cycled Ventilation",
+    color: "#a78bfa",
+    icon: "gauge",
+    desc: "Delivers breaths at a set inspiratory pressure for a set time. Volume is variable depending on compliance and resistance.",
+    params: [
+      { p: "Inspiratory Pressure (Pinsp)", v: "10–30 cmH₂O", note: "Set to achieve Vt 6–8 mL/kg IBW." },
+      { p: "Respiratory Rate", v: "12–20 bpm", note: "Mandatory rate." },
+      { p: "Inspiratory Time (Ti)", v: "0.8–1.2 sec", note: "Determines I:E ratio." },
+      { p: "PEEP", v: "5–20 cmH₂O", note: "Plateau = Pinsp + PEEP." },
+      { p: "FiO₂", v: "21%–100%", note: "Titrate to SpO₂ target." },
+      { p: "Rise Time", v: "0.05–0.4 sec", note: "Faster rise = quicker pressure delivery." }
+    ],
+    indications: ["ARDS (lung-protective)", "Peak pressure control needed", "Air leak syndromes", "Neonatal / pediatric ventilation"]
+  },
+  {
+    name: "SIMV (Synchronized Intermittent Mandatory Ventilation)",
+    aka: "SIMV + PS",
+    color: "#34d399",
+    icon: "repeat",
+    desc: "Delivers a set number of mandatory breaths (volume or pressure) synchronized with patient effort. Spontaneous breaths between mandatory breaths can be pressure-supported.",
+    params: [
+      { p: "Mandatory Rate", v: "6–12 bpm", note: "Lower than full support; allows spontaneous breathing." },
+      { p: "Tidal Volume / Pinsp", v: "Per VCV or PCV", note: "Depends on SIMV-VC or SIMV-PC." },
+      { p: "Pressure Support (PS)", v: "5–15 cmH₂O", note: "Added for spontaneous breaths." },
+      { p: "PEEP", v: "5–15 cmH₂O", note: "Standard PEEP settings." },
+      { p: "FiO₂", v: "21%–100%", note: "Titrate to target." },
+      { p: "Trigger Sensitivity", v: "1–3 cmH₂O or 1–3 L/min", note: "Flow trigger preferred." }
+    ],
+    indications: ["Weaning from ventilation", "Patients with some respiratory drive", "Transition from full support", "Combined mandatory + spontaneous breathing"]
+  },
+  {
+    name: "Pressure Support Ventilation (PSV)",
+    aka: "Spontaneous + PS",
+    color: "#f472b6",
+    icon: "wind",
+    desc: "Patient-triggered, pressure-limited, flow-cycled mode. Every breath is spontaneous and supported by a set pressure. No mandatory breaths.",
+    params: [
+      { p: "Pressure Support Level", v: "5–20 cmH₂O", note: "Overcome ETT resistance: ~5–8 cmH₂O." },
+      { p: "PEEP", v: "5–10 cmH₂O", note: "Maintain alveolar recruitment." },
+      { p: "FiO₂", v: "21%–60%", note: "Usually lower FiO₂ needed." },
+      { p: "Trigger Sensitivity", v: "1–2 cmH₂O / 1–2 L/min", note: "Must be sensitive for patient comfort." },
+      { p: "Cycling Off (%)", v: "25–50%", note: "% of peak flow at which inspiration ends." },
+      { p: "Backup Rate (Apnea)", v: "8–12 bpm", note: "Safety net if apnea detected." }
+    ],
+    indications: ["Weaning trials", "Spontaneous breathing trials (SBT)", "Awake, cooperative patients", "Pre-extubation assessment"]
+  },
+  {
+    name: "CPAP (Continuous Positive Airway Pressure)",
+    aka: "Spontaneous CPAP",
+    color: "#fbbf24",
+    icon: "cloud",
+    desc: "Constant positive pressure maintained throughout the respiratory cycle. All breaths are spontaneous with no ventilator-delivered breaths.",
+    params: [
+      { p: "CPAP Level", v: "5–15 cmH₂O", note: "Splints airways, recruits alveoli." },
+      { p: "FiO₂", v: "21%–60%", note: "Titrate to SpO₂ ≥92%." },
+      { p: "Flow", v: "Demand flow", note: "System must meet patient demand." }
+    ],
+    indications: ["Obstructive sleep apnea", "Cardiogenic pulmonary edema", "Post-extubation support", "Spontaneous breathing trial"]
+  },
+  {
+    name: "BiPAP / BiLevel",
+    aka: "Bilevel Positive Airway Pressure",
+    color: "#fb923c",
+    icon: "arrow-up-down",
+    desc: "Two levels of pressure: higher during inspiration (IPAP) and lower during expiration (EPAP). Non-invasive ventilation mode.",
+    params: [
+      { p: "IPAP", v: "10–25 cmH₂O", note: "Inspiratory support. Start 10, titrate up." },
+      { p: "EPAP", v: "4–10 cmH₂O", note: "Equivalent to PEEP." },
+      { p: "PS (IPAP-EPAP)", v: "6–15 cmH₂O", note: "Effective driving pressure." },
+      { p: "FiO₂", v: "21%–100%", note: "Titrate to SpO₂." },
+      { p: "Backup Rate", v: "10–15 bpm", note: "For S/T mode." },
+      { p: "Rise Time", v: "0.1–0.4 sec", note: "Patient comfort." }
+    ],
+    indications: ["COPD exacerbation", "Acute cardiogenic pulmonary edema", "Immunocompromised with respiratory failure", "Obesity hypoventilation", "Do-not-intubate patients"]
+  },
+  {
+    name: "APRV (Airway Pressure Release Ventilation)",
+    aka: "Bilevel / Time-Cycled",
+    color: "#e879f9",
+    icon: "chevrons-up",
+    desc: "Time-triggered, pressure-limited mode with two alternating pressure levels. Prolonged high pressure (P-high) with brief releases (P-low) for CO₂ elimination.",
+    params: [
+      { p: "P-high", v: "20–35 cmH₂O", note: "Recruitment pressure. ≈ Plateau pressure." },
+      { p: "P-low", v: "0–5 cmH₂O", note: "Usually 0 cmH₂O for max expiratory flow." },
+      { p: "T-high", v: "4–6 sec", note: "Time at P-high. Long for recruitment." },
+      { p: "T-low", v: "0.4–0.8 sec", note: "Brief release. Target 75% of peak EF." },
+      { p: "FiO₂", v: "40%–100%", note: "Often high initially, wean aggressively." },
+      { p: "Auto-PEEP", v: "Monitor", note: "Intrinsic PEEP from short T-low." }
+    ],
+    indications: ["Severe ARDS", "Refractory hypoxemia", "Open lung strategy", "Allows spontaneous breathing at both levels"]
+  },
+  {
+    name: "PRVC (Pressure-Regulated Volume Control)",
+    aka: "Adaptive Pressure Control",
+    color: "#2dd4bf",
+    icon: "sliders",
+    desc: "Hybrid mode combining benefits of VCV and PCV. Guarantees a target tidal volume using the lowest possible pressure, breath-by-breath auto-regulation.",
+    params: [
+      { p: "Target Tidal Volume", v: "6–8 mL/kg IBW", note: "Guaranteed volume delivery." },
+      { p: "Max Pressure Limit", v: "30–35 cmH₂O", note: "Upper pressure safety limit." },
+      { p: "Respiratory Rate", v: "12–20 bpm", note: "Set mandatory rate." },
+      { p: "PEEP", v: "5–20 cmH₂O", note: "Standard PEEP titration." },
+      { p: "FiO₂", v: "21%–100%", note: "Titrate to target." },
+      { p: "Inspiratory Time", v: "0.8–1.2 sec", note: "Set or auto-calculated." }
+    ],
+    indications: ["Changing lung compliance", "Desire for volume guarantee with pressure delivery", "Post-operative care", "Weaning with volume safety"]
+  }
+];
+
+const PARAMS_DATA = [
+  { category: "Volume Parameters", color: "#22d3ee", items: [
+    { name: "Tidal Volume (Vt)", range: "6–8 mL/kg IBW", detail: "Volume delivered per breath. Use Ideal Body Weight. ARDS: 4–6 mL/kg. Formula: Male IBW = 50 + 2.3×(height in inches − 60); Female IBW = 45.5 + 2.3×(height in inches − 60).", critical: "Vt >10 mL/kg → VILI risk ↑↑" },
+    { name: "Minute Ventilation (VE)", range: "5–8 L/min", detail: "VE = Vt × RR. Primary determinant of PaCO₂. Increase VE to lower CO₂.", critical: "VE < 4 L/min → Hypercapnia risk" },
+    { name: "Dead Space (Vd/Vt)", range: "0.2–0.4", detail: "Ratio of wasted ventilation. Elevated in PE, ARDS, hypovolemia. Normal ~0.33.", critical: "Vd/Vt > 0.6 → Poor prognosis in ARDS" }
+  ]},
+  { category: "Pressure Parameters", color: "#a78bfa", items: [
+    { name: "Peak Inspiratory Pressure (PIP)", range: "<35 cmH₂O", detail: "Maximum airway pressure during inspiration. Affected by resistance + compliance. High PIP with normal Pplat → airway resistance (bronchospasm, secretions, kinked ETT).", critical: "PIP >40 → Barotrauma risk" },
+    { name: "Plateau Pressure (Pplat)", range: "<30 cmH₂O", detail: "Measured during 0.5s inspiratory hold. Reflects alveolar pressure and lung compliance. THE key VILI parameter.", critical: "Pplat >30 → ↓ Vt or ↓ PEEP" },
+    { name: "Driving Pressure (ΔP)", range: "<15 cmH₂O", detail: "ΔP = Pplat − PEEP. Best predictor of mortality in ARDS. Reflects strain on functional lung tissue.", critical: "ΔP >15 → Strongest ARDS mortality predictor" },
+    { name: "Mean Airway Pressure (MAP)", range: "10–25 cmH₂O", detail: "Average pressure over entire respiratory cycle. Primary determinant of oxygenation. ↑MAP = ↑Oxygenation but ↑hemodynamic effects.", critical: "MAP >25 → Hemodynamic compromise" },
+    { name: "PEEP", range: "5–24 cmH₂O", detail: "Positive End-Expiratory Pressure. Prevents alveolar collapse, recruits atelectatic lung, improves V/Q matching, increases FRC. Use ARDSNet PEEP/FiO₂ tables.", critical: "PEEP >15 → Monitor cardiac output" },
+    { name: "Auto-PEEP (Intrinsic)", range: "Should be <5", detail: "Trapped gas pressure from incomplete exhalation. Common in COPD/asthma. Measure with expiratory hold maneuver. Total PEEP = Set PEEP + Auto-PEEP.", critical: "Auto-PEEP >10 → ↓RR, ↑ expiratory time" }
+  ]},
+  { category: "Flow & Timing", color: "#34d399", items: [
+    { name: "Inspiratory Flow Rate", range: "40–80 L/min", detail: "Speed of gas delivery. Higher flow → shorter Ti → longer Te. Decelerating waveform improves gas distribution.", critical: "Low flow + high demand → air hunger" },
+    { name: "I:E Ratio", range: "1:2 to 1:3", detail: "Inspiratory-to-expiratory time ratio. Normal 1:2. Inverse ratio (2:1) for refractory hypoxemia. Obstructive disease: 1:3 to 1:5.", critical: "Inverse ratio → auto-PEEP risk" },
+    { name: "Inspiratory Time (Ti)", range: "0.8–1.2 sec", detail: "Duration of inspiration. Longer Ti improves oxygenation, shorter Ti allows more expiratory time.", critical: "Ti >1.5s in obstructive → air trapping" },
+    { name: "Trigger Sensitivity", range: "1–3 cmH₂O or 1–3 L/min", detail: "Effort required to trigger a breath. Pressure trigger: 1–2 cmH₂O below PEEP. Flow trigger: 1–3 L/min (preferred, less work).", critical: "Too insensitive → ↑ WOB; Too sensitive → auto-triggering" }
+  ]},
+  { category: "Oxygenation", color: "#f472b6", items: [
+    { name: "FiO₂", range: "21%–100%", detail: "Fraction of inspired oxygen. Start 100%, wean to <60% ASAP to avoid O₂ toxicity. Target SpO₂ 92–96% (ARDS 88–95%).", critical: "FiO₂ >60% for >24h → O₂ toxicity risk" },
+    { name: "P/F Ratio", range: ">300 normal", detail: "PaO₂/FiO₂ ratio. Mild ARDS: 200–300. Moderate: 100–200. Severe: <100. Quick assessment of oxygenation efficiency.", critical: "P/F <100 → Severe ARDS, consider prone" },
+    { name: "SpO₂ Target", range: "92–96%", detail: "Peripheral oxygen saturation target. ARDS: 88–95%. COPD: 88–92%. Avoid hyperoxia in post-cardiac arrest (target 94–98%).", critical: "SpO₂ <88% → Immediate intervention" },
+    { name: "OI (Oxygenation Index)", range: "<25 favorable", detail: "OI = (MAP × FiO₂ × 100) / PaO₂. Better than P/F as it includes MAP. Used especially in pediatrics.", critical: "OI >40 → Consider ECMO" }
+  ]}
+];
+
+const COMPRESSION_DATA = [
+  { category: "Gas Compression & Volume Loss", color: "#22d3ee", icon: "minimize-2", items: [
+    { name: "Compressible Volume", range: "1–5 mL/cmH₂O", detail: "Volume lost in the ventilator circuit due to gas compression. Typically ~3 mL/cmH₂O of pressure. At 30 cmH₂O PIP, ~90 mL may be lost to circuit compression.", clinical: "Significant in neonates/pediatrics where Vt is small." },
+    { name: "Compliance Factor (CF)", range: "1–4 mL/cmH₂O", detail: "Circuit compliance factor. Modern ventilators auto-compensate. CF = ΔVolume / ΔPressure of the circuit during pre-use test. Delivered Vt = Set Vt − (CF × PIP).", clinical: "Always run circuit compliance test before connecting patient." },
+    { name: "Tubing Compliance Compensation", range: "On/Off", detail: "Modern ventilators measure circuit compliance during self-test and compensate delivered volumes. Must be enabled. Without compensation, actual delivered Vt may be significantly less than set Vt.", clinical: "CRITICAL in pediatric/neonatal ventilation." },
+    { name: "Effective Tidal Volume", range: "= Set Vt − Compression Loss", detail: "Actual volume reaching the patient. Effective Vt = Set Vt − (Circuit CF × [PIP − PEEP]). Monitor exhaled Vt at the Y-piece for accuracy.", clinical: "Exhaled Vt at Y-piece is the most accurate measurement." }
+  ]},
+  { category: "Lung Compliance (Static & Dynamic)", color: "#a78bfa", icon: "bar-chart-2", items: [
+    { name: "Static Compliance (Cstat)", range: "60–100 mL/cmH₂O", detail: "Cstat = Vt / (Pplat − PEEP). Measured during zero-flow state (inspiratory hold). Reflects elastic recoil of lung + chest wall only.", clinical: "↓ Cstat: ARDS, pulmonary edema, fibrosis, pneumothorax, atelectasis, obesity, abdominal distension." },
+    { name: "Dynamic Compliance (Cdyn)", range: "50–80 mL/cmH₂O", detail: "Cdyn = Vt / (PIP − PEEP). Includes both elastic AND resistive components. Always ≤ Cstat.", clinical: "↓ Cdyn with normal Cstat → ↑ Airway Resistance (bronchospasm, secretions, ETT obstruction)." },
+    { name: "Specific Compliance", range: "0.05–0.1 mL/cmH₂O/mL", detail: "Compliance normalized to FRC. Specific Compliance = Cstat / FRC. Allows comparison between patients of different sizes.", clinical: "More accurate for comparing lung function across body sizes." },
+    { name: "Pressure-Volume Curve", range: "Sigmoid shape", detail: "Lower inflection point (LIP): optimal PEEP level, start of recruitment. Upper inflection point (UIP): overdistension begins. Set PEEP above LIP, keep Pplat below UIP.", clinical: "LIP guides PEEP; UIP guides pressure limit." }
+  ]},
+  { category: "Airway Resistance & Compression Forces", color: "#34d399", icon: "git-branch", items: [
+    { name: "Airway Resistance (Raw)", range: "2–10 cmH₂O/L/sec", detail: "Raw = (PIP − Pplat) / Flow. Measures resistance to airflow. Includes ETT, airways, and circuit resistance.", clinical: "↑ Raw: bronchospasm, secretions, small ETT, kinked tube, biting on ETT." },
+    { name: "ETT Resistance", range: "Varies by size", detail: "ETT Size 6.0: ~15 cmH₂O/L/sec. ETT Size 7.0: ~10. ETT Size 8.0: ~6. Resistance ∝ 1/r⁴ (Poiseuille's law). Doubles with each 1mm decrease in diameter.", clinical: "Use largest appropriate ETT. Consider ATC (Automatic Tube Compensation)." },
+    { name: "Time Constant (τ)", range: "0.3–0.5 sec", detail: "τ = Compliance × Resistance. Time for 63% of volume change. Full emptying ≈ 3–5τ. Obstructive: τ ↑ (slow emptying). Restrictive: τ ↓ (fast emptying).", clinical: "COPD τ may be 1–2 sec → need 3–5 sec expiratory time." },
+    { name: "Auto-PEEP Compression", range: "Should be 0", detail: "Gas trapping due to incomplete exhalation. Total PEEP = Set PEEP + Auto-PEEP. Increases intrathoracic pressure, decreases venous return, increases WOB, and causes hemodynamic compromise.", clinical: "Rx: ↓ RR, ↓ Vt, ↑ expiratory time, bronchodilators." }
+  ]},
+  { category: "Chest Wall & Pleural Compression", color: "#f472b6", icon: "maximize-2", items: [
+    { name: "Chest Wall Compliance (Ccw)", range: "150–250 mL/cmH₂O", detail: "Measured separately using esophageal pressure monitoring. Total compliance: 1/Ctotal = 1/Clung + 1/Ccw.", clinical: "↓ Ccw: obesity, ascites, abdominal compartment syndrome, chest wall edema, burns." },
+    { name: "Transpulmonary Pressure (PTP)", range: "Target <25 cmH₂O", detail: "PTP = Pairway − Ppleural (estimated via esophageal pressure). True distending pressure of the lung. More accurate than Pplat alone for guiding ventilation.", clinical: "Use esophageal manometry in obesity, abdominal HTN. PTP-guided PEEP may be superior." },
+    { name: "Intra-Abdominal Pressure (IAP)", range: "<12 mmHg normal", detail: "Transmitted to thorax via diaphragm. IAP >20 mmHg → Abdominal Compartment Syndrome. Reduces lung compliance, elevates Pplat falsely.", clinical: "Measure via bladder pressure. Surgical decompression if ACS." },
+    { name: "Pleural Pressure (Ppl)", range: "−5 to −8 cmH₂O (spont)", detail: "Becomes positive during PPV. Estimated by esophageal balloon. Affects venous return, cardiac output, and true lung distension assessment.", clinical: "Positive Ppl during PPV → ↓ venous return → ↓ cardiac output." }
+  ]},
+  { category: "Compression Volume Calculations", color: "#fbbf24", icon: "calculator", items: [
+    { name: "Circuit Volume Loss Formula", range: "CF × (PIP − PEEP)", detail: "Lost Volume = Circuit Compliance Factor × (Peak Pressure − PEEP). Example: CF 3 mL/cmH₂O, PIP 30, PEEP 10 → Loss = 3 × 20 = 60 mL.", clinical: "At Vt 300 mL, that's 20% volume loss. Critical in pediatrics!" },
+    { name: "Humidifier Compression", range: "0.5–2 mL/cmH₂O additional", detail: "Heated humidifiers and HME filters add additional compressible volume and resistance. HME adds 1–3 cmH₂O resistance and ~30 mL dead space.", clinical: "Consider during low Vt ventilation. HME contraindicated in ARDS protocols." },
+    { name: "Patient-Ventilator Compression Mismatch", range: "Variable", detail: "Occurs when ventilator delivery doesn't match patient demand. Causes: flow starvation, trigger delay, cycle asynchrony. Detected by waveform analysis (scooping on pressure waveform).", clinical: "Address with: ↑ flow rate, adjust trigger, switch modes, or adjust rise time." }
+  ]}
+];
+
+const ALARMS_DATA = [
+  { category: "Pressure Alarms", color: "#ef4444", items: [
+    { p: "High Pressure", setting: "PIP + 10 cmH₂O or ≤40", causes: "Bronchospasm, secretions, coughing, biting ETT, pneumothorax, ↓compliance, kinked tube" },
+    { p: "Low Pressure", setting: "PIP − 10 cmH₂O or ≥5", causes: "Circuit disconnect, cuff leak, chest tube air leak, circuit leak" },
+    { p: "High PEEP", setting: "Set PEEP + 5", causes: "Expiratory valve malfunction, auto-PEEP, water in circuit" },
+    { p: "Low PEEP", setting: "Set PEEP − 3", causes: "Circuit leak, disconnect, cuff leak" }
+  ]},
+  { category: "Volume Alarms", color: "#f59e0b", items: [
+    { p: "High Vt", setting: "Set Vt + 20%", causes: "Resolving pathology, improving compliance, pressure mode over-delivery" },
+    { p: "Low Vt", setting: "Set Vt − 20%", causes: "Leak, ↓compliance, ↓patient effort, worsening pathology" },
+    { p: "High Minute Ventilation", setting: "VE + 2 L/min", causes: "Tachypnea, pain, anxiety, fever, metabolic acidosis" },
+    { p: "Low Minute Ventilation", setting: "VE − 2 L/min", causes: "Apnea, over-sedation, fatigue, neuromuscular weakness" }
+  ]},
+  { category: "Rate & Apnea Alarms", color: "#8b5cf6", items: [
+    { p: "High Respiratory Rate", setting: "RR + 10 bpm", causes: "Pain, anxiety, hypoxemia, acidosis, PE, fever, sepsis" },
+    { p: "Low Respiratory Rate", setting: "RR − 5 bpm", causes: "Over-sedation, CNS pathology, neuromuscular blockade" },
+    { p: "Apnea Alarm", setting: "10–20 sec", causes: "Over-sedation, brainstem injury, NMB, phrenic nerve damage" }
+  ]},
+  { category: "FiO₂ & Technical Alarms", color: "#06b6d4", items: [
+    { p: "High/Low FiO₂", setting: "± 5% of set FiO₂", causes: "Blender malfunction, gas supply failure" },
+    { p: "Gas Supply Failure", setting: "Auto-detect", causes: "Pipeline failure, empty cylinders, connection issues" },
+    { p: "Power Failure", setting: "Auto-detect", causes: "Electrical supply, battery backup status, UPS failure" }
+  ]}
+];
+
+const CLINICAL_DATA = [
+  { scenario: "ARDS (Acute Respiratory Distress Syndrome)", color: "#ef4444", icon: "alert-triangle", protocol: "ARDSNet Lung-Protective Ventilation", settings: [
+    "Mode: Volume Control (VCV) or PRVC",
+    "Vt: 4–6 mL/kg IBW (strict low tidal volume)",
+    "RR: 20–35 bpm (to maintain VE)",
+    "Plateau Pressure: ≤30 cmH₂O (absolute limit)",
+    "Driving Pressure: <15 cmH₂O (mortality target)",
+    "PEEP: Per ARDSNet Low or High PEEP/FiO₂ table",
+    "FiO₂: Titrate to SpO₂ 88–95%",
+    "pH target: 7.25–7.45 (permissive hypercapnia)",
+    "Consider: Prone positioning if P/F <150",
+    "Consider: NMB for 48h if P/F <150",
+    "Consider: ECMO if OI >40 or P/F <60"
+  ]},
+  { scenario: "COPD Exacerbation", color: "#34d399", icon: "wind", protocol: "Prevent Auto-PEEP, Optimize Expiration", settings: [
+    "Mode: PSV or SIMV (if intubated); BiPAP (if NIV)",
+    "Vt: 6–8 mL/kg IBW",
+    "RR: 10–14 bpm (low rate to allow expiration)",
+    "I:E Ratio: 1:3 to 1:5 (prolonged expiration)",
+    "PEEP: 5–8 cmH₂O (≤80% of auto-PEEP)",
+    "FiO₂: Target SpO₂ 88–92% (avoid hyperoxia)",
+    "Flow Rate: 60–80 L/min (short Ti)",
+    "Monitor: Auto-PEEP with expiratory hold",
+    "NIV: IPAP 10–20, EPAP 4–8 cmH₂O",
+    "Avoid: Over-ventilation (may cause alkalosis)"
+  ]},
+  { scenario: "Severe Asthma (Status Asthmaticus)", color: "#a78bfa", icon: "cloud-lightning", protocol: "Minimize Air Trapping", settings: [
+    "Mode: VCV (guaranteed volume despite high resistance)",
+    "Vt: 6–8 mL/kg IBW",
+    "RR: 8–12 bpm (very low to maximize Te)",
+    "I:E Ratio: 1:4 to 1:5",
+    "Flow Rate: 80–100 L/min (square waveform)",
+    "PEEP: 0–5 cmH₂O (avoid adding to auto-PEEP)",
+    "FiO₂: 100% initially, wean quickly",
+    "PIP may be very high (accept up to 50 if Pplat <30)",
+    "Target: Pplat <30, permissive hypercapnia acceptable",
+    "Rx: IV MgSO₄, continuous nebulized albuterol, IV steroids",
+    "Consider: Ketamine for bronchodilation + sedation"
+  ]},
+  { scenario: "Traumatic Brain Injury (TBI)", color: "#f59e0b", icon: "brain", protocol: "Strict Normoventilation, Prevent Secondary Injury", settings: [
+    "Mode: VCV (strict CO₂ control)",
+    "Vt: 6–8 mL/kg IBW",
+    "RR: Titrate to PaCO₂ 35–40 mmHg (strict)",
+    "PEEP: 5–8 cmH₂O (monitor ICP effect)",
+    "FiO₂: Target PaO₂ >80 mmHg, SpO₂ >95%",
+    "HOB elevated 30–45°",
+    "Avoid: Hypoxemia (PaO₂ <60) = secondary injury",
+    "Avoid: Hyperventilation (PaCO₂ <30) unless herniation",
+    "Brief hyperventilation ONLY for acute herniation: PaCO₂ 30–35",
+    "Target: Eucarbia, normoxia, PEEP that doesn't ↑ ICP"
+  ]},
+  { scenario: "Post-Cardiac Arrest", color: "#f472b6", icon: "heart", protocol: "Targeted Temperature + Lung-Protective", settings: [
+    "Mode: VCV or PRVC",
+    "Vt: 6–8 mL/kg IBW",
+    "RR: Target PaCO₂ 35–45 mmHg (normocarbia)",
+    "PEEP: 5–10 cmH₂O",
+    "FiO₂: Target SpO₂ 94–98% (AVOID hyperoxia!)",
+    "Avoid: PaO₂ >300 mmHg (associated with worse outcomes)",
+    "Pplat: <30 cmH₂O",
+    "During TTM: Reduced CO₂ production, may need ↓ RR",
+    "Monitor: ETCO₂ continuously, ABG q1–4h",
+    "Temperature correction: Use α-stat for ABG interpretation"
+  ]},
+  { scenario: "Obesity / BMI >40", color: "#fb923c", icon: "scale", protocol: "Recruitment, Transpulmonary Pressure Guidance", settings: [
+    "Mode: PCV or PRVC preferred",
+    "Vt: 6–8 mL/kg IBW (NOT actual weight!)",
+    "PEEP: 10–20 cmH₂O (higher to counter IAP)",
+    "FiO₂: Often higher baseline required",
+    "Position: Reverse Trendelenburg 30° (↓ IAP on diaphragm)",
+    "Consider: Esophageal manometry for true PTP",
+    "Pplat may be elevated due to ↓Ccw, not ↓Clung",
+    "Use PTP (transpulmonary pressure) to guide, not Pplat alone",
+    "Recruitment maneuvers may be needed post-intubation",
+    "Higher PEEP needed to overcome abdominal compression"
+  ]}
+];
+
+const WEANING_DATA = [
+  { name: "Readiness Criteria", color: "#22d3ee", items: [
+    "Underlying cause improving or resolved",
+    "FiO₂ ≤40%, PEEP ≤8 cmH₂O",
+    "P/F ratio >150–200",
+    "Hemodynamically stable (minimal/no vasopressors)",
+    "Adequate mental status (follows commands)",
+    "Temperature <38.5°C",
+    "Hb >7 g/dL (>8 if cardiac disease)",
+    "No planned surgery within 24h"
+  ]},
+  { name: "RSBI (Rapid Shallow Breathing Index)", color: "#a78bfa", items: [
+    "RSBI = Respiratory Rate / Tidal Volume (in L)",
+    "Measured during 1 min of unassisted breathing",
+    "RSBI <105: Likely to wean successfully (PPV ~80%)",
+    "RSBI >105: Likely to fail (NPV ~95%)",
+    "Best single predictor of weaning outcome",
+    "Sensitivity 97%, Specificity 64%"
+  ]},
+  { name: "Spontaneous Breathing Trial (SBT)", color: "#34d399", items: [
+    "Method 1: T-piece trial (30–120 min)",
+    "Method 2: PS 5–8 cmH₂O + PEEP 5 (30–120 min)",
+    "Method 3: ATC (Automatic Tube Compensation)",
+    "Duration: 30 min sufficient; 120 min maximum",
+    "Monitor: RR, HR, SpO₂, BP, anxiety, diaphoresis",
+    "Pass criteria: RR <35, SpO₂ >90%, HR change <20%",
+    "Fail criteria: RR >35, SpO₂ <90%, arrhythmia, distress"
+  ]},
+  { name: "Weaning Modes Progression", color: "#f472b6", items: [
+    "Stage 1: Full support (VCV/PCV) → assess daily",
+    "Stage 2: SIMV (↓ mandatory rate by 2–4 q4–6h)",
+    "Stage 3: PSV (↓ PS by 2–4 cmH₂O q2–4h)",
+    "Stage 4: PS 5–8 + PEEP 5 (minimal support)",
+    "Stage 5: SBT → Extubation",
+    "Alternative: Daily SBT without gradual reduction",
+    "Evidence favors daily SBT > gradual SIMV weaning"
+  ]},
+  { name: "Post-Extubation", color: "#fbbf24", items: [
+    "High-flow nasal cannula (HFNC): 40–60 L/min",
+    "Prophylactic NIV for high-risk patients",
+    "High risk: age >65, cardiac disease, BMI >30, >7d MV",
+    "Monitor for 24–48h post-extubation",
+    "Reintubation criteria: same as intubation criteria",
+    "Cuff leak test before extubation if risk for edema",
+    "Steroids pre-extubation if failed cuff leak test"
+  ]}
+];
+
+// --- RENDER FUNCTIONS ---
+function renderModes() {
+  return `<div class="space-y-6 fade-in">${MODES_DATA.map(m => `
+    <div class="card-glow rounded-xl overflow-hidden" style="background:#162736;border:1px solid #1e3a4a;">
+      <div class="p-5 sm:p-6">
+        <div class="flex items-start gap-3 mb-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:${m.color}22;">
+            <i data-lucide="${m.icon}" style="color:${m.color};width:20px;height:20px;"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold" style="color:#e2e8f0;">${m.name}</h2>
+            <p class="text-xs mt-0.5" style="color:#64748b;">${m.aka}</p>
+          </div>
+        </div>
+        <p class="text-sm mt-3 mb-4" style="color:#94a3b8;">${m.desc}</p>
+        <div class="rounded-lg overflow-hidden" style="border:1px solid #1e3a4a;">
+          <table class="w-full text-sm">
+            <thead><tr style="background:#0f1923;">
+              <th class="text-left px-3 py-2 font-semibold" style="color:${m.color};">Parameter</th>
+              <th class="text-left px-3 py-2 font-semibold" style="color:${m.color};">Range</th>
+              <th class="text-left px-3 py-2 font-semibold hidden sm:table-cell" style="color:${m.color};">Notes</th>
+            </tr></thead>
+            <tbody>${m.params.map((r,i) => `<tr class="param-row" style="background:${i%2===0?'#162736':'#1a2f40'};">
+              <td class="px-3 py-2 font-medium" style="color:#e2e8f0;">${r.p}</td>
+              <td class="px-3 py-2" style="color:#fbbf24;">${r.v}</td>
+              <td class="px-3 py-2 hidden sm:table-cell" style="color:#94a3b8;">${r.note}</td>
+            </tr>`).join('')}</tbody>
+          </table>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          ${m.indications.map(ind => `<span class="text-xs px-2.5 py-1 rounded-full" style="background:${m.color}15;color:${m.color};border:1px solid ${m.color}33;">${ind}</span>`).join('')}
+        </div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderParams() {
+  return `<div class="space-y-6 fade-in">${PARAMS_DATA.map(cat => `
+    <div class="rounded-xl overflow-hidden" style="background:#162736;border:1px solid #1e3a4a;">
+      <div class="px-5 py-3" style="background:${cat.color}15;border-bottom:1px solid #1e3a4a;">
+        <h2 class="font-bold" style="color:${cat.color};">${cat.category}</h2>
+      </div>
+      <div class="divide-y" style="border-color:#1e3a4a;">
+        ${cat.items.map(item => `
+        <div class="p-4 sm:p-5 param-row">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mb-2">
+            <h3 class="font-semibold" style="color:#e2e8f0;">${item.name}</h3>
+            <span class="text-sm font-mono font-bold" style="color:#fbbf24;">${item.range}</span>
+          </div>
+          <p class="text-sm mb-2" style="color:#94a3b8;">${item.detail}</p>
+          <div class="flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg" style="background:#7f1d1d33;border:1px solid #7f1d1d55;">
+            <i data-lucide="alert-circle" style="color:#ef4444;width:14px;height:14px;flex-shrink:0;"></i>
+            <span style="color:#fca5a5;">${item.critical}</span>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderCompression() {
+  return `<div class="space-y-6 fade-in">${COMPRESSION_DATA.map(cat => `
+    <div class="card-glow rounded-xl overflow-hidden" style="background:#162736;border:1px solid #1e3a4a;">
+      <div class="px-5 py-3 flex items-center gap-2" style="background:${cat.color}15;border-bottom:1px solid #1e3a4a;">
+        <i data-lucide="${cat.icon}" style="color:${cat.color};width:18px;height:18px;"></i>
+        <h2 class="font-bold" style="color:${cat.color};">${cat.category}</h2>
+      </div>
+      <div class="divide-y" style="border-color:#1e3a4a;">
+        ${cat.items.map(item => `
+        <div class="p-4 sm:p-5 param-row">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mb-2">
+            <h3 class="font-semibold" style="color:#e2e8f0;">${item.name}</h3>
+            <span class="text-sm font-mono font-bold" style="color:#fbbf24;">${item.range}</span>
+          </div>
+          <p class="text-sm mb-2" style="color:#94a3b8;">${item.detail}</p>
+          <div class="flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg" style="background:${cat.color}11;border:1px solid ${cat.color}33;">
+            <i data-lucide="stethoscope" style="color:${cat.color};width:14px;height:14px;flex-shrink:0;"></i>
+            <span style="color:${cat.color};">${item.clinical}</span>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderAlarms() {
+  return `<div class="space-y-6 fade-in">${ALARMS_DATA.map(cat => `
+    <div class="rounded-xl overflow-hidden" style="background:#162736;border:1px solid #1e3a4a;">
+      <div class="px-5 py-3" style="background:${cat.color}22;border-bottom:1px solid #1e3a4a;">
+        <h2 class="font-bold" style="color:${cat.color};">${cat.category}</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr style="background:#0f1923;">
+            <th class="text-left px-4 py-2 font-semibold" style="color:#e2e8f0;">Alarm</th>
+            <th class="text-left px-4 py-2 font-semibold" style="color:#fbbf24;">Setting</th>
+            <th class="text-left px-4 py-2 font-semibold" style="color:#94a3b8;">Common Causes</th>
+          </tr></thead>
+          <tbody>${cat.items.map((r,i) => `<tr class="param-row" style="background:${i%2===0?'#162736':'#1a2f40'};">
+            <td class="px-4 py-3 font-medium" style="color:#e2e8f0;">${r.p}</td>
+            <td class="px-4 py-3 font-mono text-xs" style="color:#fbbf24;">${r.setting}</td>
+            <td class="px-4 py-3 text-xs" style="color:#94a3b8;">${r.causes}</td>
+          </tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderClinical() {
+  return `<div class="space-y-6 fade-in">${CLINICAL_DATA.map(s => `
+    <div class="card-glow rounded-xl overflow-hidden" style="background:#162736;border:1px solid #1e3a4a;">
+      <div class="p-5 sm:p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:${s.color}22;">
+            <i data-lucide="${s.icon}" style="color:${s.color};width:20px;height:20px;"></i>
+          </div>
+          <div>
+            <h2 class="font-bold text-lg" style="color:#e2e8f0;">${s.scenario}</h2>
+            <p class="text-xs" style="color:${s.color};">${s.protocol}</p>
+          </div>
+        </div>
+        <ul class="space-y-2 mt-4">
+          ${s.settings.map(st => `<li class="flex items-start gap-2 text-sm">
+            <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${s.color};"></span>
+            <span style="color:#cbd5e1;">${st}</span>
+          </li>`).join('')}
+        </ul>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderWeaning() {
+  return `<div class="space-y-6 fade-in">${WEANING_DATA.map(w => `
+    <div class="rounded-xl overflow-hidden" style="background:#162736;border:1px solid #1e3a4a;">
+      <div class="px-5 py-3" style="background:${w.color}15;border-bottom:1px solid #1e3a4a;">
+        <h2 class="font-bold" style="color:${w.color};">${w.name}</h2>
+      </div>
+      <ul class="p-4 sm:p-5 space-y-2">
+        ${w.items.map(item => `<li class="flex items-start gap-2 text-sm">
+          <i data-lucide="check-circle" style="color:${w.color};width:16px;height:16px;flex-shrink:0;margin-top:2px;"></i>
+          <span style="color:#cbd5e1;">${item}</span>
+        </li>`).join('')}
+      </ul>
+    </div>`).join('')}</div>`;
+}
+
+const renderers = { modes: renderModes, params: renderParams, compression: renderCompression, alarms: renderAlarms, clinical: renderClinical, weaning: renderWeaning };
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    const isActive = b.dataset.tab === tab;
+    b.classList.toggle('active', isActive);
+    b.style.color = isActive ? '#22d3ee' : '#94a3b8';
+    b.style.borderColor = isActive ? '#22d3ee' : 'transparent';
+  });
+  const content = document.getElementById('content');
+  content.innerHTML = renderers[tab]();
+  lucide.createIcons();
+}
+
+// Initial render
+switchTab('modes');
+</script>
+</body>
+</html>
