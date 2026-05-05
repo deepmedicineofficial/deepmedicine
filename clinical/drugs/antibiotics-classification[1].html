@@ -1,0 +1,614 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Antibiotics Classification | Antimicrobial Classes & Mechanisms | Deep Medicine</title> <meta name="description" content="Comprehensive classification of antibiotics including beta-lactams, macrolides, aminoglycosides, fluoroquinolones, and mechanisms of action."> <link rel="canonical" href="https://deepmedicine.in/clinical/drugs/antibiotics-classification"> <!-- Open Graph --> <meta property="og:title" content="Antibiotics Classification | Deep Medicine"> <meta property="og:description" content="Detailed classification of antibiotics with mechanisms and clinical usage."> <meta property="og:image" content="https://deepmedicine.in/images/antibiotics-classification.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+.font-heading { font-family: 'Playfair Display', serif; }
+.card-glow:hover { box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.15); }
+.tab-active { position: relative; }
+.tab-active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px; background: var(--accent); border-radius: 2px; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-up { animation: fadeUp 0.4s ease-out forwards; }
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+.badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+.expand-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.expand-content.open { max-height: 4000px; }
+.search-highlight { background: rgba(251, 191, 36, 0.3); border-radius: 2px; padding: 0 2px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: #0f172a; color: #e2e8f0;"><!-- Header -->
+   <header class="sticky top-0 z-50 backdrop-blur-xl border-b" style="background: rgba(15,23,42,0.92); border-color: #1e293b;">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+     <div class="flex items-center justify-between flex-wrap gap-3">
+      <div>
+       <h1 id="app-title" class="font-heading text-2xl md:text-3xl font-bold" style="color: #f8fafc;">Antibiotics Classification Guide</h1>
+       <p id="app-subtitle" class="text-sm mt-1" style="color: #94a3b8;">Comprehensive Pharmacology Reference</p>
+      </div>
+      <div class="relative w-full sm:w-72"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2" style="width:16px;height:16px;color:#64748b;"></i> <input id="search-input" type="text" placeholder="Search antibiotics, class, MOA..." class="w-full pl-9 pr-4 py-2 rounded-lg text-sm border focus:outline-none focus:ring-2" style="background:#1e293b;border-color:#334155;color:#e2e8f0;--tw-ring-color:#3b82f6;">
+      </div>
+     </div><!-- Category Tabs -->
+     <nav id="category-tabs" class="flex gap-1 mt-4 overflow-x-auto pb-1" role="tablist"></nav>
+    </div>
+   </header><!-- Main Content -->
+   <main class="max-w-7xl mx-auto px-4 py-6">
+    <div id="content-area"></div>
+   </main><!-- Drug Detail Modal -->
+   <div id="drug-modal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="modal-backdrop"></div>
+    <div class="absolute inset-4 md:inset-8 lg:inset-y-8 lg:inset-x-[15%] rounded-2xl overflow-auto border" style="background:#1e293b;border-color:#334155;">
+     <div id="modal-content" class="p-6 md:p-8"></div>
+    </div>
+   </div>
+  </div>
+  <script>
+// ===== ANTIBIOTICS DATABASE =====
+const ANTIBIOTICS_DATA = [
+  {
+    category: "β-Lactams",
+    icon: "shield",
+    color: "#3b82f6",
+    colorRgb: "59,130,246",
+    description: "Inhibit cell wall synthesis by binding to PBPs (Penicillin-Binding Proteins). Bactericidal.",
+    classes: [
+      {
+        name: "Penicillins",
+        moa: "Bind PBPs → inhibit transpeptidase → block peptidoglycan cross-linking → cell lysis",
+        spectrum: "Gram-positive (natural); Broad-spectrum (aminopenicillins)",
+        resistance: "β-lactamase production, altered PBPs (MRSA), efflux pumps",
+        drugs: [
+          { name: "Penicillin G", type: "Natural", dose: "2–4 MU IV q4h", indication: "Streptococcal infections, Syphilis, Rheumatic fever prophylaxis", adverse: "Hypersensitivity, anaphylaxis, seizures (high dose)", note: "Drug of choice for Group A Strep pharyngitis" },
+          { name: "Penicillin V", type: "Natural (Oral)", dose: "250–500 mg PO q6h", indication: "Mild streptococcal infections, dental prophylaxis", adverse: "GI upset, rash, hypersensitivity", note: "Acid-stable oral form" },
+          { name: "Amoxicillin", type: "Aminopenicillin", dose: "500 mg–1g PO q8h", indication: "Otitis media, sinusitis, UTI, H. pylori (triple therapy)", adverse: "Diarrhea, rash (mononucleosis), hypersensitivity", note: "Better oral absorption than ampicillin" },
+          { name: "Ampicillin", type: "Aminopenicillin", dose: "1–2 g IV q4–6h", indication: "Listeria meningitis, enterococcal infections, SBE prophylaxis", adverse: "Rash, diarrhea, pseudomembranous colitis", note: "Drug of choice for Listeria" },
+          { name: "Amoxicillin-Clavulanate", type: "β-Lactam + Inhibitor", dose: "625 mg PO q8h or 1.2g IV q8h", indication: "Animal bites, diabetic foot, sinusitis, aspiration pneumonia", adverse: "Diarrhea, hepatotoxicity (rare)", note: "Clavulanate inhibits class A β-lactamases" },
+          { name: "Piperacillin-Tazobactam", type: "Anti-pseudomonal + Inhibitor", dose: "4.5 g IV q6h", indication: "Nosocomial pneumonia, intra-abdominal infections, febrile neutropenia", adverse: "Thrombocytopenia, hypokalemia, neurotoxicity", note: "Broad-spectrum including Pseudomonas" },
+          { name: "Flucloxacillin", type: "Anti-staphylococcal", dose: "500 mg–1g PO/IV q6h", indication: "MSSA skin/soft tissue infections, osteomyelitis, endocarditis", adverse: "Cholestatic hepatitis, rash", note: "Penicillinase-resistant; not effective against MRSA" },
+        ]
+      },
+      {
+        name: "Cephalosporins",
+        moa: "Same as penicillins — bind PBPs, inhibit cell wall synthesis. Increasingly Gram-negative coverage with generations.",
+        spectrum: "1st Gen: Gram+; 2nd: Gram+ & some Gram−; 3rd: Gram−; 4th: Broad; 5th: MRSA",
+        resistance: "Extended-spectrum β-lactamases (ESBLs), AmpC β-lactamases",
+        drugs: [
+          { name: "Cefalexin (1st Gen)", type: "1st Generation", dose: "500 mg PO q6h", indication: "Uncomplicated UTI, skin infections, surgical prophylaxis", adverse: "GI upset, hypersensitivity (~10% cross-reactivity with penicillin allergy)", note: "Excellent MSSA & Strep coverage" },
+          { name: "Cefuroxime (2nd Gen)", type: "2nd Generation", dose: "750 mg–1.5g IV q8h; 250–500 mg PO q12h", indication: "Community-acquired pneumonia, sinusitis, UTI, Lyme disease", adverse: "Diarrhea, rash, Clostridioides difficile infection", note: "Good H. influenzae & Moraxella coverage" },
+          { name: "Ceftriaxone (3rd Gen)", type: "3rd Generation", dose: "1–2 g IV/IM q24h (meningitis: 2g q12h)", indication: "Meningitis, gonorrhea, community pneumonia, typhoid", adverse: "Biliary sludging/pseudolithiasis, diarrhea", note: "Long half-life, once-daily dosing; avoid in neonates with jaundice" },
+          { name: "Ceftazidime (3rd Gen)", type: "3rd Gen Anti-pseudomonal", dose: "1–2 g IV q8h", indication: "Pseudomonal infections, nosocomial pneumonia, melioidosis", adverse: "Neurotoxicity, C. difficile, rash", note: "Anti-pseudomonal but poor Gram+ coverage" },
+          { name: "Cefepime (4th Gen)", type: "4th Generation", dose: "1–2 g IV q8–12h", indication: "Febrile neutropenia, nosocomial infections, Pseudomonas", adverse: "Neurotoxicity (encephalopathy), rash", note: "Resists AmpC β-lactamases" },
+          { name: "Ceftaroline (5th Gen)", type: "5th Generation", dose: "600 mg IV q12h", indication: "MRSA pneumonia, complicated skin infections", adverse: "Diarrhea, rash, eosinophilia", note: "Only cephalosporin active against MRSA" },
+        ]
+      },
+      {
+        name: "Carbapenems",
+        moa: "Bind PBPs with highest affinity. Resist most β-lactamases. Ultra-broad spectrum bactericidal agents.",
+        spectrum: "Broadest β-lactam spectrum: Gram+, Gram−, anaerobes. NOT: MRSA, Atypicals.",
+        resistance: "Carbapenemases (KPC, NDM, OXA-48), porin mutations",
+        drugs: [
+          { name: "Meropenem", type: "Carbapenem", dose: "1–2 g IV q8h", indication: "Severe nosocomial infections, meningitis, ESBL infections", adverse: "Seizures (lower risk than imipenem), diarrhea, rash", note: "Preferred carbapenem for CNS infections" },
+          { name: "Imipenem-Cilastatin", type: "Carbapenem + DHP-I inhibitor", dose: "500 mg IV q6h", indication: "Polymicrobial infections, empiric severe sepsis", adverse: "Seizures (higher risk), nausea, C. difficile", note: "Cilastatin prevents renal metabolism" },
+          { name: "Ertapenem", type: "Carbapenem", dose: "1 g IV/IM q24h", indication: "Community intra-abdominal, diabetic foot, pelvic infections", adverse: "Diarrhea, headache, phlebitis", note: "Once daily; NO Pseudomonas or Acinetobacter coverage" },
+        ]
+      },
+      {
+        name: "Monobactams",
+        moa: "Binds PBP3 of Gram-negative bacteria only. Monocyclic β-lactam ring.",
+        spectrum: "Gram-negative aerobes only (including Pseudomonas)",
+        resistance: "Metallo-β-lactamases (but resists most serine β-lactamases)",
+        drugs: [
+          { name: "Aztreonam", type: "Monobactam", dose: "1–2 g IV/IM q8h", indication: "Gram-negative infections in penicillin-allergic patients, Pseudomonas", adverse: "Rash, GI upset, phlebitis", note: "Safe in penicillin/cephalosporin allergy (no cross-reactivity)" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Aminoglycosides",
+    icon: "zap",
+    color: "#f59e0b",
+    colorRgb: "245,158,11",
+    description: "Bind 30S ribosomal subunit → misread mRNA → faulty proteins. Bactericidal. Concentration-dependent killing.",
+    classes: [
+      {
+        name: "Aminoglycosides",
+        moa: "Irreversibly bind 30S ribosomal subunit → codon misreading → defective proteins → cell death",
+        spectrum: "Gram-negative aerobes; Synergistic with β-lactams for Gram+ (Enterococcus, Staph)",
+        resistance: "Aminoglycoside-modifying enzymes, ribosomal methylation, decreased uptake",
+        drugs: [
+          { name: "Gentamicin", type: "Aminoglycoside", dose: "5–7 mg/kg IV q24h (OD dosing) or 1–2 mg/kg q8h", indication: "Gram-negative sepsis, synergy for endocarditis (Enterococcus), UTI", adverse: "Nephrotoxicity, ototoxicity (vestibular), neuromuscular blockade", note: "Monitor trough levels (<1 µg/mL); avoid with other nephrotoxins" },
+          { name: "Amikacin", type: "Aminoglycoside", dose: "15 mg/kg IV q24h", indication: "MDR Gram-negative infections, MDR-TB (2nd line)", adverse: "Nephrotoxicity, ototoxicity (cochlear > vestibular)", note: "Resists most aminoglycoside-modifying enzymes" },
+          { name: "Streptomycin", type: "Aminoglycoside", dose: "15 mg/kg IM q24h (max 1g)", indication: "TB (1st line in some regimens), plague, tularemia, brucellosis", adverse: "Vestibular toxicity, nephrotoxicity", note: "Oldest aminoglycoside; primarily used for TB & special infections" },
+          { name: "Tobramycin", type: "Aminoglycoside", dose: "5–7 mg/kg IV q24h; Inhaled: 300 mg q12h", indication: "Pseudomonal infections, CF lung infections (inhaled)", adverse: "Nephrotoxicity, ototoxicity", note: "More active against Pseudomonas than gentamicin" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Macrolides",
+    icon: "circle-dot",
+    color: "#8b5cf6",
+    colorRgb: "139,92,246",
+    description: "Bind 50S ribosomal subunit → block translocation. Bacteriostatic. Cover atypicals.",
+    classes: [
+      {
+        name: "Macrolides",
+        moa: "Reversibly bind 23S rRNA of 50S subunit → inhibit translocation step of protein synthesis",
+        spectrum: "Gram-positive, atypicals (Mycoplasma, Chlamydia, Legionella), some Gram-negative",
+        resistance: "Ribosomal methylation (erm genes), efflux pumps (mef genes)",
+        drugs: [
+          { name: "Azithromycin", type: "Azalide (15-membered)", dose: "500 mg PO day 1, then 250 mg q24h × 4 days; or 500 mg IV q24h", indication: "Community-acquired pneumonia, Chlamydia, traveler's diarrhea, MAC prophylaxis in HIV", adverse: "QT prolongation, GI upset, hepatotoxicity (rare)", note: "Long tissue half-life (68h); excellent intracellular penetration" },
+          { name: "Clarithromycin", type: "14-membered macrolide", dose: "500 mg PO q12h", indication: "H. pylori (triple therapy), MAC treatment, atypical pneumonia, sinusitis", adverse: "Metallic taste, GI upset, CYP3A4 inhibitor (drug interactions!)", note: "More potent than erythromycin; significant drug interactions" },
+          { name: "Erythromycin", type: "14-membered macrolide", dose: "250–500 mg PO q6h; 0.5–1g IV q6h", indication: "Pertussis, Chlamydia (pregnancy), acne, gastroparesis (prokinetic)", adverse: "GI upset (motilin agonist), QT prolongation, cholestatic hepatitis", note: "Prototype macrolide; strong CYP3A4 inhibitor" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Fluoroquinolones",
+    icon: "target",
+    color: "#ef4444",
+    colorRgb: "239,68,68",
+    description: "Inhibit DNA Gyrase (Topoisomerase II) & Topoisomerase IV → block DNA replication. Bactericidal.",
+    classes: [
+      {
+        name: "Fluoroquinolones",
+        moa: "Inhibit DNA gyrase (Gram−, primary target) & Topoisomerase IV (Gram+) → DNA fragmentation → cell death",
+        spectrum: "Broad: Gram-negative, some Gram-positive; Respiratory quinolones cover pneumococcus & atypicals",
+        resistance: "Target mutations (gyrA, parC), efflux pumps, plasmid-mediated (qnr genes)",
+        drugs: [
+          { name: "Ciprofloxacin", type: "2nd Generation", dose: "500–750 mg PO q12h; 400 mg IV q8–12h", indication: "UTI, Pseudomonal infections, anthrax, traveler's diarrhea, bone/joint infections", adverse: "Tendon rupture, QT prolongation, CNS effects, aortic dissection risk", note: "Best anti-pseudomonal quinolone; avoid in children (cartilage damage)" },
+          { name: "Levofloxacin", type: "3rd Gen (Respiratory)", dose: "500–750 mg PO/IV q24h", indication: "Community-acquired pneumonia, sinusitis, UTI, prostatitis", adverse: "Tendon rupture, peripheral neuropathy, dysglycemia, C. difficile", note: "Respiratory quinolone — covers S. pneumoniae & atypicals" },
+          { name: "Moxifloxacin", type: "4th Gen (Respiratory)", dose: "400 mg PO/IV q24h", indication: "CAP, acute sinusitis, MDR-TB (2nd line), intra-abdominal infections", adverse: "QT prolongation (highest risk), hepatotoxicity, tendon damage", note: "Best anaerobic coverage among quinolones; NO renal excretion — avoid for UTI" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Glycopeptides",
+    icon: "lock",
+    color: "#ec4899",
+    colorRgb: "236,72,153",
+    description: "Bind D-Ala-D-Ala terminus of peptidoglycan → block transglycosylation & transpeptidation. Bactericidal (slow).",
+    classes: [
+      {
+        name: "Glycopeptides & Lipoglycopeptides",
+        moa: "Bind D-Ala-D-Ala of peptidoglycan precursor → inhibit cell wall cross-linking",
+        spectrum: "Gram-positive ONLY: MRSA, MRSE, Enterococci, C. difficile (oral vancomycin)",
+        resistance: "vanA gene (VRE): D-Ala-D-Lac substitution; vanB: variable resistance",
+        drugs: [
+          { name: "Vancomycin", type: "Glycopeptide", dose: "15–20 mg/kg IV q8–12h (target AUC/MIC 400–600); 125 mg PO q6h for C. diff", indication: "MRSA infections, febrile neutropenia (empiric), C. difficile colitis (oral), endocarditis", adverse: "Red Man Syndrome (histamine release — slow infusion), nephrotoxicity, ototoxicity", note: "IV for systemic MRSA; oral ONLY for C. difficile (not absorbed)" },
+          { name: "Teicoplanin", type: "Glycopeptide", dose: "Loading 6–12 mg/kg q12h × 3 doses, then 6–12 mg/kg q24h", indication: "MRSA (alternative to vancomycin), bone/joint infections, endocarditis", adverse: "Rash, thrombocytopenia, ototoxicity (less than vancomycin)", note: "Longer half-life, IM route possible, no Red Man Syndrome" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Tetracyclines",
+    icon: "hexagon",
+    color: "#14b8a6",
+    colorRgb: "20,184,166",
+    description: "Bind 30S ribosomal subunit → block aminoacyl-tRNA attachment. Bacteriostatic. Broad spectrum.",
+    classes: [
+      {
+        name: "Tetracyclines",
+        moa: "Reversibly bind 30S ribosomal subunit at A-site → prevent aminoacyl-tRNA binding → block protein synthesis",
+        spectrum: "Broad: Gram+, Gram−, atypicals, Rickettsia, spirochetes, protozoa (malaria)",
+        resistance: "Efflux pumps (tet genes), ribosomal protection proteins",
+        drugs: [
+          { name: "Doxycycline", type: "2nd Gen Tetracycline", dose: "100 mg PO/IV q12h", indication: "Rickettsia, Lyme disease, Chlamydia, acne, malaria prophylaxis, MRSA (mild skin)", adverse: "Photosensitivity, GI upset, esophageal ulceration, tooth discoloration (children <8y)", note: "Most commonly used tetracycline; does NOT require renal adjustment" },
+          { name: "Minocycline", type: "2nd Gen Tetracycline", dose: "100 mg PO q12h", indication: "Acne vulgaris, MRSA skin infections, nocardiosis", adverse: "Vestibular toxicity (dizziness), skin hyperpigmentation, lupus-like syndrome", note: "Best CNS penetration among tetracyclines" },
+          { name: "Tigecycline", type: "Glycylcycline (3rd Gen)", dose: "100 mg IV loading, then 50 mg IV q12h", indication: "Complicated skin/intra-abdominal infections, MDR organisms, ESBL producers", adverse: "Nausea/vomiting, pancreatitis, increased mortality (FDA warning)", note: "Overcomes tet efflux & ribosomal protection; NOT for bloodstream infections" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Sulfonamides",
+    icon: "layers",
+    color: "#f97316",
+    colorRgb: "249,115,22",
+    description: "Inhibit folate synthesis pathway. Bacteriostatic (combination is bactericidal). Synergistic.",
+    classes: [
+      {
+        name: "Sulfonamides & Trimethoprim",
+        moa: "Sulfonamides inhibit dihydropteroate synthase; Trimethoprim inhibits dihydrofolate reductase → sequential folate blockade",
+        spectrum: "Broad: UTI pathogens, PCP (Pneumocystis), Nocardia, Toxoplasma, MRSA (mild)",
+        resistance: "Altered DHPS/DHFR enzymes, folate pathway bypass, decreased permeability",
+        drugs: [
+          { name: "Trimethoprim-Sulfamethoxazole (TMP-SMX)", type: "Combination", dose: "DS tablet (160/800mg) PO q12h; PCP: 15–20 mg/kg/day TMP IV divided q6–8h", indication: "UTI, PCP prophylaxis & treatment (HIV), MRSA skin infections, Nocardia, Toxoplasma", adverse: "Stevens-Johnson syndrome, hyperkalemia, bone marrow suppression, crystalluria", note: "Avoid in G6PD deficiency; maintain hydration; sulfa allergy common" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Oxazolidinones",
+    icon: "atom",
+    color: "#06b6d4",
+    colorRgb: "6,182,212",
+    description: "Bind 50S ribosomal subunit → prevent 70S initiation complex formation. Bacteriostatic.",
+    classes: [
+      {
+        name: "Oxazolidinones",
+        moa: "Bind 23S rRNA of 50S subunit → block formation of 70S initiation complex → prevent translation initiation",
+        spectrum: "Gram-positive: MRSA, VRE, drug-resistant pneumococci, Nocardia",
+        resistance: "23S rRNA mutations, cfr gene (rare)",
+        drugs: [
+          { name: "Linezolid", type: "Oxazolidinone", dose: "600 mg PO/IV q12h", indication: "VRE infections, MRSA pneumonia, MRSA skin infections when vancomycin fails", adverse: "Thrombocytopenia (monitor CBC weekly), serotonin syndrome (with SSRIs), peripheral neuropathy, lactic acidosis", note: "100% oral bioavailability (IV→PO switch easy); weak MAO inhibitor — avoid tyramine-rich foods" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Nitroimidazoles",
+    icon: "flame",
+    color: "#a855f7",
+    colorRgb: "168,85,247",
+    description: "Reduced intracellularly → toxic free radicals → DNA strand breakage. Bactericidal for anaerobes.",
+    classes: [
+      {
+        name: "Nitroimidazoles",
+        moa: "Enter cell → reduced by ferredoxin in anaerobes → toxic nitro radical intermediates → DNA damage → cell death",
+        spectrum: "Obligate anaerobes (Bacteroides, Clostridium), protozoa (Giardia, Entamoeba, Trichomonas)",
+        resistance: "Decreased nitroreductase activity, increased DNA repair, efflux",
+        drugs: [
+          { name: "Metronidazole", type: "Nitroimidazole", dose: "500 mg PO/IV q8h; Amoebiasis: 750 mg PO q8h × 7–10d", indication: "Anaerobic infections, C. difficile (mild), bacterial vaginosis, H. pylori, amoebiasis, giardiasis", adverse: "Metallic taste, disulfiram-like reaction with alcohol, peripheral neuropathy (prolonged use)", note: "Penetrates abscesses & CNS well; avoid alcohol during and 48h after treatment" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Polymyxins",
+    icon: "shield-alert",
+    color: "#64748b",
+    colorRgb: "100,116,139",
+    description: "Disrupt outer membrane by binding LPS → membrane lysis. Last-resort for MDR Gram-negatives.",
+    classes: [
+      {
+        name: "Polymyxins",
+        moa: "Cationic peptides bind LPS in Gram-negative outer membrane → displace Ca²⁺/Mg²⁺ → membrane disruption → cell lysis",
+        spectrum: "Gram-negative ONLY: MDR Pseudomonas, Acinetobacter, Klebsiella (CRE)",
+        resistance: "LPS modification (mcr genes — plasmid-mediated colistin resistance)",
+        drugs: [
+          { name: "Colistin (Polymyxin E)", type: "Polymyxin", dose: "Loading: 300 mg CBA IV; Maintenance: 150 mg CBA IV q12h", indication: "MDR/XDR Gram-negative infections (last resort), CRE, MDR Acinetobacter", adverse: "Nephrotoxicity (dose-limiting), neurotoxicity (paresthesias, weakness)", note: "Last resort agent; use in combination; nebulized for MDR lung infections" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Lipopeptides",
+    icon: "droplet",
+    color: "#10b981",
+    colorRgb: "16,185,129",
+    description: "Insert into Gram-positive cell membrane → depolarization → rapid cell death. Bactericidal.",
+    classes: [
+      {
+        name: "Lipopeptides",
+        moa: "Calcium-dependent insertion into Gram-positive cell membrane → ion channel formation → membrane depolarization → cell death",
+        spectrum: "Gram-positive: MRSA, VRE, drug-resistant Streptococci",
+        resistance: "Rare; cell membrane charge modifications (mprF mutations)",
+        drugs: [
+          { name: "Daptomycin", type: "Cyclic Lipopeptide", dose: "4–6 mg/kg IV q24h (bacteremia: 6–10 mg/kg)", indication: "MRSA bacteremia, right-sided endocarditis, VRE, complicated skin infections", adverse: "CPK elevation/myopathy (monitor weekly), eosinophilic pneumonia", note: "INACTIVATED by surfactant — do NOT use for pneumonia; monitor CPK weekly" },
+        ]
+      }
+    ]
+  }
+];
+
+// ===== STATE =====
+let activeCategory = 0;
+let searchQuery = '';
+let expandedCards = new Set();
+
+// ===== DEFAULT CONFIG =====
+const defaultConfig = {
+  app_title: 'Antibiotics Classification Guide',
+  subtitle: 'Comprehensive Pharmacology Reference',
+  background_color: '#0f172a',
+  surface_color: '#1e293b',
+  text_color: '#e2e8f0',
+  primary_action_color: '#3b82f6',
+  secondary_action_color: '#94a3b8',
+  font_family: 'DM Sans',
+  font_size: 15
+};
+
+// ===== RENDER FUNCTIONS =====
+function renderTabs() {
+  const container = document.getElementById('category-tabs');
+  container.innerHTML = '';
+  ANTIBIOTICS_DATA.forEach((cat, i) => {
+    const btn = document.createElement('button');
+    btn.className = `flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${i === activeCategory ? 'tab-active' : 'opacity-60 hover:opacity-90'}`;
+    btn.style.cssText = i === activeCategory ? `background:${cat.color}22;color:${cat.color};--accent:${cat.color}` : `color:#94a3b8;--accent:${cat.color}`;
+    btn.innerHTML = `<i data-lucide="${cat.icon}" style="width:14px;height:14px;"></i><span>${cat.name || cat.category}</span>`;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', i === activeCategory);
+    btn.onclick = () => { activeCategory = i; expandedCards.clear(); renderAll(); };
+    container.appendChild(btn);
+  });
+  lucide.createIcons();
+}
+
+function highlightText(text, query) {
+  if (!query) return text;
+  const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  return text.replace(re, '<span class="search-highlight">$1</span>');
+}
+
+function renderContent() {
+  const container = document.getElementById('content-area');
+  container.innerHTML = '';
+  const cat = ANTIBIOTICS_DATA[activeCategory];
+  const q = searchQuery.toLowerCase();
+
+  // Category Header
+  const header = document.createElement('div');
+  header.className = 'mb-6 animate-fade-up';
+  header.innerHTML = `
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${cat.color}22;">
+        <i data-lucide="${cat.icon}" style="width:20px;height:20px;color:${cat.color};"></i>
+      </div>
+      <h2 class="font-heading text-xl md:text-2xl font-bold" style="color:#f8fafc;">${cat.category}</h2>
+    </div>
+    <p class="text-sm leading-relaxed max-w-3xl" style="color:#94a3b8;">${cat.description}</p>
+  `;
+  container.appendChild(header);
+
+  // Classes
+  cat.classes.forEach((cls, ci) => {
+    const filteredDrugs = q ? cls.drugs.filter(d =>
+      d.name.toLowerCase().includes(q) || d.type.toLowerCase().includes(q) ||
+      d.indication.toLowerCase().includes(q) || d.dose.toLowerCase().includes(q) ||
+      cls.moa.toLowerCase().includes(q) || cls.name.toLowerCase().includes(q)
+    ) : cls.drugs;
+
+    if (q && filteredDrugs.length === 0) return;
+
+    const section = document.createElement('div');
+    section.className = `mb-6 animate-fade-up stagger-${ci + 1}`;
+    const cardId = `${activeCategory}-${ci}`;
+    const isExpanded = expandedCards.has(cardId);
+
+    section.innerHTML = `
+      <div class="rounded-2xl border overflow-hidden" style="background:${defaultConfig.surface_color};border-color:#334155;">
+        <!-- Class Header -->
+        <button class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors class-toggle" data-card="${cardId}" aria-expanded="${isExpanded}">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-heading text-lg font-bold" style="color:${cat.color};">${highlightText(cls.name, searchQuery)}</h3>
+            <p class="text-xs mt-1 truncate" style="color:#64748b;">${cls.spectrum}</p>
+          </div>
+          <div class="ml-3 flex items-center gap-2">
+            <span class="badge" style="background:${cat.color}22;color:${cat.color};">${filteredDrugs.length} drug${filteredDrugs.length !== 1 ? 's' : ''}</span>
+            <i data-lucide="chevron-down" class="transition-transform ${isExpanded ? 'rotate-180' : ''}" style="width:18px;height:18px;color:#64748b;"></i>
+          </div>
+        </button>
+
+        <!-- Expanded Content -->
+        <div class="expand-content ${isExpanded ? 'open' : ''}">
+          <div class="px-5 pb-3 border-t" style="border-color:#334155;">
+            <!-- MOA & Resistance -->
+            <div class="grid md:grid-cols-2 gap-3 py-3">
+              <div class="p-3 rounded-xl" style="background:#0f172a;">
+                <div class="flex items-center gap-1.5 mb-1">
+                  <i data-lucide="crosshair" style="width:12px;height:12px;color:${cat.color};"></i>
+                  <span class="text-xs font-bold uppercase tracking-wider" style="color:${cat.color};">Mechanism of Action</span>
+                </div>
+                <p class="text-xs leading-relaxed" style="color:#cbd5e1;">${highlightText(cls.moa, searchQuery)}</p>
+              </div>
+              <div class="p-3 rounded-xl" style="background:#0f172a;">
+                <div class="flex items-center gap-1.5 mb-1">
+                  <i data-lucide="shield-alert" style="width:12px;height:12px;color:#f59e0b;"></i>
+                  <span class="text-xs font-bold uppercase tracking-wider" style="color:#f59e0b;">Resistance</span>
+                </div>
+                <p class="text-xs leading-relaxed" style="color:#cbd5e1;">${cls.resistance}</p>
+              </div>
+            </div>
+
+            <!-- Drugs Table -->
+            <div class="space-y-2 pb-3">
+              ${filteredDrugs.map(d => `
+                <div class="drug-card rounded-xl p-4 cursor-pointer hover:ring-1 transition-all" style="background:#0f172a;--tw-ring-color:${cat.color}40;" data-drug='${JSON.stringify(d).replace(/'/g, "&#39;")}' data-class='${JSON.stringify({name:cls.name,moa:cls.moa,spectrum:cls.spectrum,resistance:cls.resistance}).replace(/'/g, "&#39;")}' data-color="${cat.color}">
+                  <div class="flex items-start justify-between gap-3 flex-wrap">
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <h4 class="font-bold text-sm" style="color:#f8fafc;">${highlightText(d.name, searchQuery)}</h4>
+                        <span class="badge" style="background:${cat.color}15;color:${cat.color};">${highlightText(d.type, searchQuery)}</span>
+                      </div>
+                      <p class="text-xs mt-1.5" style="color:#94a3b8;"><strong style="color:#cbd5e1;">Dose:</strong> ${highlightText(d.dose, searchQuery)}</p>
+                      <p class="text-xs mt-1 line-clamp-2" style="color:#64748b;">${highlightText(d.indication, searchQuery)}</p>
+                    </div>
+                    <i data-lucide="chevron-right" style="width:16px;height:16px;color:#475569;flex-shrink:0;margin-top:2px;"></i>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    container.appendChild(section);
+  });
+
+  // No results
+  if (q && container.querySelectorAll('.drug-card').length === 0) {
+    container.innerHTML += `<div class="text-center py-12"><i data-lucide="search-x" style="width:48px;height:48px;color:#334155;margin:0 auto;display:block;"></i><p class="mt-3 text-sm" style="color:#64748b;">No results found for "${searchQuery}"</p></div>`;
+  }
+
+  lucide.createIcons();
+  bindCardEvents();
+}
+
+function bindCardEvents() {
+  document.querySelectorAll('.class-toggle').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.card;
+      if (expandedCards.has(id)) expandedCards.delete(id);
+      else expandedCards.add(id);
+      renderContent();
+    };
+  });
+
+  document.querySelectorAll('.drug-card').forEach(card => {
+    card.onclick = () => {
+      const drug = JSON.parse(card.dataset.drug);
+      const cls = JSON.parse(card.dataset.class);
+      const color = card.dataset.color;
+      showDrugModal(drug, cls, color);
+    };
+  });
+}
+
+function showDrugModal(drug, cls, color) {
+  const modal = document.getElementById('drug-modal');
+  const content = document.getElementById('modal-content');
+  content.innerHTML = `
+    <div class="flex items-start justify-between mb-6">
+      <div>
+        <span class="badge mb-2" style="background:${color}22;color:${color};">${drug.type}</span>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold" style="color:#f8fafc;">${drug.name}</h2>
+        <p class="text-sm mt-1" style="color:#64748b;">Class: ${cls.name}</p>
+      </div>
+      <button id="close-modal-btn" class="p-2 rounded-lg hover:bg-white/10 transition-colors" aria-label="Close modal">
+        <i data-lucide="x" style="width:20px;height:20px;color:#94a3b8;"></i>
+      </button>
+    </div>
+
+    <div class="grid gap-4">
+      <!-- Dosage -->
+      <div class="p-4 rounded-xl border" style="background:#0f172a;border-color:${color}33;">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="pill" style="width:16px;height:16px;color:${color};"></i>
+          <h3 class="font-bold text-sm" style="color:${color};">Dosage</h3>
+        </div>
+        <p class="text-sm font-mono" style="color:#e2e8f0;">${drug.dose}</p>
+      </div>
+
+      <!-- MOA -->
+      <div class="p-4 rounded-xl" style="background:#0f172a;">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="crosshair" style="width:16px;height:16px;color:${color};"></i>
+          <h3 class="font-bold text-sm" style="color:${color};">Mechanism of Action</h3>
+        </div>
+        <p class="text-sm leading-relaxed" style="color:#cbd5e1;">${cls.moa}</p>
+      </div>
+
+      <!-- Spectrum -->
+      <div class="p-4 rounded-xl" style="background:#0f172a;">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="radio" style="width:16px;height:16px;color:#14b8a6;"></i>
+          <h3 class="font-bold text-sm" style="color:#14b8a6;">Spectrum of Activity</h3>
+        </div>
+        <p class="text-sm leading-relaxed" style="color:#cbd5e1;">${cls.spectrum}</p>
+      </div>
+
+      <!-- Indications -->
+      <div class="p-4 rounded-xl" style="background:#0f172a;">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="stethoscope" style="width:16px;height:16px;color:#3b82f6;"></i>
+          <h3 class="font-bold text-sm" style="color:#3b82f6;">Clinical Indications</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          ${drug.indication.split(', ').map(ind => `<span class="text-xs px-2.5 py-1 rounded-lg" style="background:#3b82f615;color:#93c5fd;">${ind}</span>`).join('')}
+        </div>
+      </div>
+
+      <!-- Adverse Effects -->
+      <div class="p-4 rounded-xl border" style="background:#0f172a;border-color:#ef444433;">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="alert-triangle" style="width:16px;height:16px;color:#ef4444;"></i>
+          <h3 class="font-bold text-sm" style="color:#ef4444;">Adverse Effects</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          ${drug.adverse.split(', ').map(ae => `<span class="text-xs px-2.5 py-1 rounded-lg" style="background:#ef444415;color:#fca5a5;">${ae}</span>`).join('')}
+        </div>
+      </div>
+
+      <!-- Resistance -->
+      <div class="p-4 rounded-xl" style="background:#0f172a;">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="shield-alert" style="width:16px;height:16px;color:#f59e0b;"></i>
+          <h3 class="font-bold text-sm" style="color:#f59e0b;">Resistance Mechanisms</h3>
+        </div>
+        <p class="text-sm leading-relaxed" style="color:#cbd5e1;">${cls.resistance}</p>
+      </div>
+
+      <!-- Clinical Pearl -->
+      ${drug.note ? `
+      <div class="p-4 rounded-xl border" style="background:${color}08;border-color:${color}33;">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="lightbulb" style="width:16px;height:16px;color:${color};"></i>
+          <h3 class="font-bold text-sm" style="color:${color};">Clinical Pearl</h3>
+        </div>
+        <p class="text-sm leading-relaxed" style="color:#e2e8f0;">${drug.note}</p>
+      </div>` : ''}
+    </div>
+  `;
+  modal.classList.remove('hidden');
+  lucide.createIcons();
+
+  document.getElementById('close-modal-btn').onclick = () => modal.classList.add('hidden');
+  document.getElementById('modal-backdrop').onclick = () => modal.classList.add('hidden');
+}
+
+function renderAll() {
+  renderTabs();
+  renderContent();
+}
+
+// ===== SEARCH =====
+document.getElementById('search-input').addEventListener('input', (e) => {
+  searchQuery = e.target.value.trim();
+  if (searchQuery) {
+    // Search across all categories, switch to first with results
+    const q = searchQuery.toLowerCase();
+    for (let i = 0; i < ANTIBIOTICS_DATA.length; i++) {
+      const hasResults = ANTIBIOTICS_DATA[i].classes.some(cls =>
+        cls.drugs.some(d =>
+          d.name.toLowerCase().includes(q) || d.type.toLowerCase().includes(q) ||
+          d.indication.toLowerCase().includes(q) || cls.moa.toLowerCase().includes(q) ||
+          cls.name.toLowerCase().includes(q)
+        )
+      );
+      if (hasResults) { activeCategory = i; break; }
+    }
+    expandedCards.clear();
+    ANTIBIOTICS_DATA[activeCategory].classes.forEach((_, ci) => expandedCards.add(`${activeCategory}-${ci}`));
+  }
+  renderAll();
+});
+
+// Keyboard close modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') document.getElementById('drug-modal').classList.add('hidden');
+});
+
+// ===== ELEMENT SDK =====
+function applyConfig(config) {
+  const t = document.getElementById('app-title');
+  const s = document.getElementById('app-subtitle');
+  if (t) t.textContent = config.app_title || defaultConfig.app_title;
+  if (s) s.textContent = config.subtitle || defaultConfig.subtitle;
+
+  const app = document.getElementById('app');
+  if (app) app.style.background = config.background_color || defaultConfig.background_color;
+
+  const font = config.font_family || defaultConfig.font_family;
+  document.body.style.fontFamily = `${font}, sans-serif`;
+
+  const size = config.font_size || defaultConfig.font_size;
+  document.body.style.fontSize = `${size}px`;
+}
+
+// Initial render
+renderAll();
+</script>
+</body>
+</html>
