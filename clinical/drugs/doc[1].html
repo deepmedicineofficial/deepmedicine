@@ -1,0 +1,875 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Drugs of Choice | First-Line Clinical Medications Guide | Deep Medicine</title> <meta name="description" content="Comprehensive guide to drugs of choice for common diseases including first-line, second-line therapies and clinical decision-making principles."> <link rel="canonical" href="https://deepmedicine.in/clinical/drugs/doc"> <!-- Open Graph --> <meta property="og:title" content="Drugs of Choice | Deep Medicine"> <meta property="og:description" content="First-line and preferred drugs for common clinical conditions and emergency care."> <meta property="og:image" content="https://deepmedicine.in/images/drugs-of-choice.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+* { box-sizing: border-box; }
+html { height: 100%; width: 100%; }
+body { 
+  height: 100%; 
+  width: 100%; 
+  margin: 0; 
+  padding: 0; 
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+:root {
+  --bg: #0c1220;
+  --surface: #151d30;
+  --text: #e2e8f0;
+  --primary: #3b82f6;
+  --secondary: #64748b;
+}
+.app-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+header {
+  flex-shrink: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #0f1729 0%, #162033 100%);
+  border-bottom: 1px solid #1e293b;
+  z-index: 40;
+}
+header .content {
+  max-width: 100%;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  header .content { padding: 1.25rem; }
+}
+header .title-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #f1f5f9;
+  font-size: clamp(1.25rem, 5vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+header p {
+  color: #94a3b8;
+  font-size: clamp(0.75rem, 3vw, 0.875rem);
+  margin: 0.25rem 0 0 0;
+}
+header .badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+nav {
+  flex-shrink: 0;
+  width: 100%;
+  border-bottom: 1px solid #1e293b;
+  background: var(--bg);
+  z-index: 30;
+}
+#catBar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+@media (min-width: 768px) {
+  #catBar { padding: 0.75rem 1.25rem; }
+}
+#catBar::-webkit-scrollbar {
+  height: 4px;
+}
+#catBar::-webkit-scrollbar-track {
+  background: transparent;
+}
+#catBar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 2px;
+}
+.cat-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #1e293b;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cat-btn:hover {
+  border-color: var(--primary);
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+}
+.cat-btn.active {
+  border-color: var(--primary);
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+main {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg);
+}
+main::-webkit-scrollbar {
+  width: 6px;
+}
+main::-webkit-scrollbar-track {
+  background: transparent;
+}
+main::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+.content-wrapper {
+  max-width: 100%;
+  width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .content-wrapper { padding: 1.5rem 1rem; }
+}
+@media (min-width: 1024px) {
+  .content-wrapper { max-width: 1440px; padding: 2rem 1.5rem; }
+}
+#resultCount {
+  color: #64748b;
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+#drugGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  width: 100%;
+}
+@media (max-width: 640px) {
+  #drugGrid { 
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+@media (min-width: 641px) and (max-width: 1023px) {
+  #drugGrid { 
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  #drugGrid { 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+.drug-card {
+  background: var(--surface);
+  border: 1px solid #1e293b;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.drug-card:hover {
+  border-color: #334155;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.drug-card .header-bar {
+  height: 3px;
+  width: 100%;
+}
+.drug-card .content {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.drug-card .cat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+.drug-card .tags {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+  justify-content: flex-end;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.tag-first { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.tag-alt { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+.tag-icu { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+.tag-peds { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+.tag-preg { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+.drug-card h3 {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+.drug-card .drug-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #22d3ee;
+  margin-bottom: 0.75rem;
+}
+.drug-card .moa {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #94a3b8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  flex: 1;
+}
+.drug-card .pearl {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: #64748b;
+}
+.pearl-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pearl-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.search-box {
+  background: var(--surface);
+  border: 1px solid #1e293b;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.search-box:focus-within {
+  border-color: var(--primary);
+}
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
+  width: 100%;
+  font-family: inherit;
+}
+.search-box input::placeholder {
+  color: #64748b;
+}
+.search-icon {
+  width: 16px;
+  height: 16px;
+  color: #64748b;
+  flex-shrink: 0;
+}
+#emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #64748b;
+}
+#emptyState i {
+  width: 3rem;
+  height: 3rem;
+  color: #334155;
+  margin: 0 auto 0.75rem;
+  display: block;
+}
+#emptyState p {
+  font-size: 0.875rem;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-content {
+  background: var(--surface);
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  max-width: 100%;
+  width: 100%;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  transform: scale(0.95);
+  transition: transform 0.2s;
+}
+@media (min-width: 640px) {
+  .modal-content { 
+    max-width: 600px;
+    max-height: 85vh;
+  }
+}
+.modal-overlay.open .modal-content {
+  transform: scale(1);
+}
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+.modal-header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+@media (max-width: 640px) {
+  .modal-header { padding: 1rem; }
+}
+.modal-title {
+  flex: 1;
+}
+.modal-title .cat {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.modal-title h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0.25rem 0 0.5rem 0;
+  line-height: 1.3;
+}
+.modal-title .drug {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #22d3ee;
+  margin-top: 0.25rem;
+}
+.close-btn {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.modal-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0 1.5rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 640px) {
+  .modal-tags { padding: 0 1rem; }
+}
+.modal-body {
+  padding: 0 1.5rem 1.5rem;
+  space: 1rem;
+}
+@media (max-width: 640px) {
+  .modal-body { padding: 0 1rem 1rem; }
+}
+.section {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+.section.highlight {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.section-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.section.highlight .section-title {
+  color: #60a5fa;
+}
+.section-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin-left: 22px;
+}
+.section.highlight .section-text {
+  color: #e2e8f0;
+}
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #1e293b;
+  font-size: 0.75rem;
+  color: #475569;
+}
+@media (max-width: 640px) {
+  .modal-footer { padding: 0.75rem 1rem; }
+}
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 480px) {
+  header h1 { font-size: 1.125rem; }
+  .drug-card h3 { font-size: 0.85rem; }
+  #drugGrid { grid-template-columns: 1fr; }
+}
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body>
+  <div class="app-wrapper" id="app">
+   <!-- Header -->
+   <header>
+    <div class="content">
+     <div class="title-section">
+      <div>
+       <h1 id="mainTitle">Drugs of Choice</h1>
+       <p id="subtitleText">Clinical Reference Guide — Evidence-Based Pharmacotherapy</p>
+      </div>
+      <div class="badges">
+       <span class="badge tag-icu">MBBS / MD</span> <span class="badge tag-first" style="display: none;">ICU &amp; EM</span>
+      </div>
+     </div><!-- Search Box -->
+     <div class="search-box">
+      <i data-lucide="search" class="search-icon"></i> <input id="searchInput" type="text" placeholder="Search drug, condition, or category..." aria-label="Search drugs or conditions">
+     </div>
+    </div>
+   </header><!-- Category Filter Nav -->
+   <nav aria-label="Category filter">
+    <div id="catBar"></div>
+   </nav><!-- Main Content -->
+   <main>
+    <div class="content-wrapper">
+     <span id="resultCount"></span>
+     <div id="drugGrid"></div>
+     <div id="emptyState" class="hidden">
+      <i data-lucide="search-x"></i>
+      <p>No matching results found.</p>
+     </div>
+    </div>
+   </main>
+  </div><!-- Detail Modal -->
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
+   <div class="modal-content" id="modalContent"></div>
+  </div>
+  <script>
+// ── DRUG DATA (Clinically Accurate, Evidence-Based) ──
+const DATA = [
+// ── CARDIOLOGY ──
+{cat:"Cardiology",condition:"Hypertension (First-Line)",drug:"Amlodipine / Losartan / Hydrochlorothiazide",alt:"ACE Inhibitors (Enalapril, Ramipril)",moa:"CCB: L-type Ca²⁺ channel blockade → vasodilation. ARB: AT1 receptor antagonism. Thiazide: NCC inhibition in DCT.",dose:"Amlodipine 5–10mg OD; Losartan 50–100mg OD; HCTZ 12.5–25mg OD",indication:"Essential HTN, isolated systolic HTN in elderly (CCB preferred), diabetic nephropathy (ARB preferred per RENAAL/IDNT trials)",se:"Amlodipine: pedal edema, flushing. Losartan: hyperkalemia, teratogenic. HCTZ: hypokalemia, hyperuricemia",evidence:"JNC-8, ACC/AHA 2017, ALLHAT, VALUE trial",pearl:"In Black patients, CCB + Thiazide preferred over ACEI/ARB monotherapy (ALLHAT). ARBs are renoprotective in T2DM.",tags:["first"]},
+{cat:"Cardiology",condition:"Acute STEMI",drug:"Tenecteplase (if no PCI) / Heparin + Aspirin + Clopidogrel/Ticagrelor",alt:"Alteplase, Streptokinase",moa:"Tenecteplase: fibrin-specific plasminogen activator. Dual antiplatelet: COX-1 + P2Y12 inhibition.",dose:"TNK: weight-based IV bolus. ASA 325mg load → 75mg. Ticagrelor 180mg load → 90mg BD.",indication:"STEMI within 12h if PCI unavailable within 120 min (ESC/AHA guidelines)",se:"Bleeding (ICH risk ~0.9%), reperfusion arrhythmias",evidence:"ASSENT-2, CLARITY-TIMI 28, PLATO trial",pearl:"Door-to-needle <30min for fibrinolysis. Ticagrelor superior to Clopidogrel (PLATO) but higher bleeding risk.",tags:["icu"]},
+{cat:"Cardiology",condition:"Heart Failure (HFrEF)",drug:"Sacubitril/Valsartan + Carvedilol + Spironolactone + Empagliflozin",alt:"Enalapril, Bisoprolol, Dapagliflozin",moa:"ARNI: neprilysin inhibition ↑natriuretic peptides + AT1 blockade. SGLT2i: osmotic diuresis, cardioprotective remodeling.",dose:"Sacubitril/Valsartan 24/26mg BD titrate to 97/103mg BD. Carvedilol 3.125mg BD titrate. Empagliflozin 10mg OD.",indication:"HFrEF (EF ≤40%) — 'Fantastic Four' guideline-directed medical therapy",se:"Hypotension, hyperkalemia, angioedema (ARNI), genital mycotic infections (SGLT2i)",evidence:"PARADIGM-HF, EMPEROR-Reduced, DAPA-HF, RALES",pearl:"Never combine ARNI with ACEI (angioedema risk). Allow 36h washout. SGLT2i benefit is additive and class-independent.",tags:["first"]},
+{cat:"Cardiology",condition:"Atrial Fibrillation (Rate Control)",drug:"Metoprolol / Diltiazem",alt:"Digoxin (if HF), Amiodarone (if critically ill)",moa:"β-blocker: ↓AV node conduction. Diltiazem: L-type Ca²⁺ channel block at AV node.",dose:"Metoprolol 25–100mg BD. Diltiazem 60–120mg TDS or SR 120–360mg OD.",indication:"AF with RVR, rate control strategy (AFFIRM trial equivalent outcomes to rhythm control)",se:"Bradycardia, hypotension. Diltiazem contraindicated in HFrEF.",evidence:"AFFIRM, RACE-II (lenient vs strict rate control)",pearl:"Target HR <110 at rest (lenient) is non-inferior. In WPW+AF → IV Procainamide, NEVER AV nodal blockers.",tags:["icu"]},
+{cat:"Cardiology",condition:"Acute Pulmonary Edema",drug:"IV Furosemide + Nitroglycerin infusion + Non-invasive ventilation",alt:"Morphine (falling out of favor), Dobutamine if cardiogenic shock",moa:"Furosemide: loop of Henle Na-K-2Cl inhibition. NTG: venodilation → ↓preload.",dose:"Furosemide 40–80mg IV bolus (1-2.5× home dose). NTG 10–200mcg/min IV.",indication:"Acute decompensated heart failure with pulmonary congestion",se:"Hypokalemia, ototoxicity (furosemide), headache/hypotension (NTG)",evidence:"3CPO trial (NIV), DOSE trial (furosemide dosing)",pearl:"CPAP/BiPAP reduces intubation rates by ~50%. Morphine associated with worse outcomes — use cautiously. Sit patient upright.",tags:["icu"]},
+
+// ── PULMONOLOGY ──
+{cat:"Pulmonology",condition:"Acute Asthma Exacerbation",drug:"Salbutamol (Albuterol) nebulization + Ipratropium + IV/Oral Corticosteroids",alt:"IV Magnesium Sulfate, SC Epinephrine (severe), IV Aminophylline",moa:"Salbutamol: β2-agonist → bronchial smooth muscle relaxation via ↑cAMP. Ipratropium: muscarinic antagonist.",dose:"Salbutamol 2.5–5mg neb q20min × 3, then q1-4h. Ipratropium 500mcg neb. Prednisolone 40–50mg OD × 5–7 days.",indication:"Acute bronchospasm, status asthmaticus",se:"Tachycardia, tremor, hypokalemia (salbutamol). Dry mouth (ipratropium).",evidence:"GINA 2024, BTS/SIGN guidelines, 3Mg trial (MgSO₄)",pearl:"IV MgSO₄ 2g over 20min in life-threatening asthma. Ipratropium added in first hour only. Never delay steroids.",tags:["icu","first"]},
+{cat:"Pulmonology",condition:"COPD (Stable, Maintenance)",drug:"Tiotropium (LAMA) + Formoterol/Salmeterol (LABA)",alt:"Add ICS (Budesonide/Fluticasone) if eosinophils >300, frequent exacerbations",moa:"LAMA: sustained M3 receptor blockade. LABA: prolonged β2-agonism.",dose:"Tiotropium 18mcg OD inhaler. Formoterol 12mcg BD. Triple: Fluticasone/Umeclidinium/Vilanterol.",indication:"GOLD Group B-E COPD. Step-up to triple therapy per GOLD 2024.",se:"Dry mouth (LAMA), oral candidiasis & pneumonia risk (ICS)",evidence:"UPLIFT, TORCH, IMPACT, ETHOS trials",pearl:"ICS increases pneumonia risk in COPD (unlike asthma). Use only if eos >300 or frequent exacerbations. LAMA > LABA for exacerbation prevention.",tags:["first"]},
+{cat:"Pulmonology",condition:"Community-Acquired Pneumonia",drug:"Amoxicillin + Macrolide (Azithromycin) OR Respiratory Fluoroquinolone",alt:"Ceftriaxone + Azithromycin (inpatient), Piperacillin-Tazobactam (severe/ICU)",moa:"β-lactam: PBP inhibition → cell wall lysis. Macrolide: 50S ribosomal inhibition + immunomodulatory.",dose:"Amoxicillin 1g TDS. Azithromycin 500mg D1 → 250mg D2-5. Levofloxacin 750mg OD.",indication:"CAP (CURB-65 / PSI guided). Dual therapy for inpatient. Monotherapy outpatient if no comorbidities.",se:"GI upset, QT prolongation (macrolide/FQ), C. diff risk, tendon rupture (FQ)",evidence:"ATS/IDSA 2019, CAP-START, COMMUNITY trial",pearl:"Always cover atypicals in moderate-severe CAP. Steroids (Dexamethasone 6mg × 4d) reduce mortality in severe CAP (CAPE COD trial).",tags:["first"]},
+{cat:"Pulmonology",condition:"Pulmonary Embolism",drug:"Low-molecular-weight Heparin (Enoxaparin) → DOAC (Rivaroxaban/Apixaban)",alt:"Unfractionated Heparin (massive PE), Alteplase (submassive/massive)",moa:"LMWH: Anti-Xa >> Anti-IIa. DOACs: direct Factor Xa inhibition.",dose:"Enoxaparin 1mg/kg BD SC. Rivaroxaban 15mg BD × 21d → 20mg OD. Apixaban 10mg BD × 7d → 5mg BD.",indication:"Acute PE (submassive). Massive PE → systemic thrombolysis. Risk stratify with sPESI, troponin, RV dysfunction.",se:"Bleeding, HIT (UFH), GI bleeding (Rivaroxaban > Apixaban)",evidence:"EINSTEIN-PE, AMPLIFY, PEITHO (tenecteplase in submassive PE)",pearl:"DOACs preferred over warfarin (no bridging needed with Rivaroxaban/Apixaban). Contraindicated in antiphospholipid syndrome — use warfarin.",tags:["icu","first"]},
+
+// ── NEUROLOGY ──
+{cat:"Neurology",condition:"Acute Ischemic Stroke",drug:"IV Alteplase (tPA) within 4.5h / Mechanical Thrombectomy up to 24h",alt:"Tenecteplase (emerging evidence, AcT trial)",moa:"Alteplase: plasminogen → plasmin → fibrinolysis of occluding thrombus.",dose:"Alteplase 0.9mg/kg (max 90mg): 10% bolus, 90% over 60min.",indication:"Acute ischemic stroke within 4.5h of onset (NINDS criteria). Thrombectomy for LVO up to 24h (DAWN/DEFUSE-3).",se:"Symptomatic ICH (~6%), angioedema, reperfusion injury",evidence:"NINDS, ECASS-III, MR CLEAN, DAWN, DEFUSE-3, AcT trial",pearl:"BP must be <185/110 before tPA. Tenecteplase (single bolus) may replace alteplase — AcT trial shows non-inferiority. Thrombectomy is the game-changer for LVO.",tags:["icu"]},
+{cat:"Neurology",condition:"Status Epilepticus",drug:"IV Lorazepam → IV Levetiracetam / Phenytoin/Fosphenytoin → Midazolam infusion",alt:"IV Valproate, Lacosamide, Phenobarbital",moa:"Benzodiazepines: GABA-A potentiation. Levetiracetam: SV2A modulation. Phenytoin: Na⁺ channel blockade.",dose:"Lorazepam 0.1mg/kg IV (max 4mg/dose, repeat ×1). Levetiracetam 60mg/kg (max 4500mg). Phenytoin 20mg/kg.",indication:"Seizure >5 min or ≥2 seizures without recovery (ACEP/AAN definition)",se:"Respiratory depression (benzos), purple glove syndrome (phenytoin), hypotension",evidence:"RAMPART (IM midazolam), ESETT trial (LEV = PHT = VPA), Established SE guidelines",pearl:"ESETT showed LEV, fosphenytoin, and valproate equally effective as 2nd line. Levetiracetam preferred due to fewer drug interactions and no cardiac monitoring needed.",tags:["icu"]},
+{cat:"Neurology",condition:"Migraine (Acute)",drug:"Sumatriptan (oral/SC) + NSAID (Naproxen)",alt:"Rimegepant (CGRP antagonist), IV Metoclopramide + Ketorolac (ER)",moa:"Triptan: 5-HT1B/1D agonist → cranial vasoconstriction + ↓CGRP release.",dose:"Sumatriptan 50–100mg PO or 6mg SC. Naproxen 500mg PO.",indication:"Moderate-severe migraine. Triptans most effective if taken early in attack.",se:"Chest tightness (non-cardiac), tingling, contraindicated in CAD/uncontrolled HTN",evidence:"AHS 2021 guidelines, triptan meta-analyses",pearl:"Combination sumatriptan + naproxen superior to either alone. In the ER, IV metoclopramide 10-20mg is highly effective and underutilized. Avoid opioids for migraine.",tags:["first"]},
+{cat:"Neurology",condition:"Epilepsy (Maintenance — Generalized)",drug:"Levetiracetam / Valproate",alt:"Lamotrigine (women of childbearing age — avoid valproate)",moa:"LEV: SV2A binding. VPA: ↑GABA, Na⁺/Ca²⁺ channel block, HDAC inhibition.",dose:"LEV 500mg BD, titrate to 1500mg BD. VPA 500mg BD, titrate to 1000mg BD.",indication:"Generalized tonic-clonic, myoclonic (JME — valproate first choice), absence seizures",se:"LEV: irritability, behavioral changes. VPA: weight gain, tremor, hepatotoxicity, teratogenic (NTD risk ~5%)",evidence:"SANAD I & II trials",pearl:"Valproate is absolutely contraindicated in women of reproductive age unless no alternative (Pregnancy Prevention Programme). Lamotrigine is preferred for women.",tags:["first"]},
+
+// ── ENDOCRINOLOGY ──
+{cat:"Endocrinology",condition:"Type 2 Diabetes (First-Line)",drug:"Metformin + SGLT2 inhibitor (Empagliflozin/Dapagliflozin)",alt:"GLP-1 RA (Semaglutide) if obesity/ASCVD",moa:"Metformin: ↓hepatic gluconeogenesis via AMPK activation. SGLT2i: blocks glucose reabsorption in PCT → glycosuria.",dose:"Metformin 500mg OD → titrate to 1g BD (with meals). Empagliflozin 10–25mg OD.",indication:"T2DM, especially with CKD, HFrEF, or ASCVD (SGLT2i has cardiorenal benefits beyond glycemia)",se:"Metformin: GI upset, B12 deficiency, lactic acidosis (rare). SGLT2i: UTI, DKA (euglycemic), Fournier gangrene (rare).",evidence:"UKPDS, EMPA-REG, DAPA-CKD, CREDENCE, ADA/EASD 2024 consensus",pearl:"SGLT2i reduces HF hospitalization by ~30% even in non-diabetics (DAPA-HF). Hold metformin if eGFR <30. GLP-1 RA (semaglutide) superior for weight loss + CV benefit.",tags:["first"]},
+{cat:"Endocrinology",condition:"Diabetic Ketoacidosis (DKA)",drug:"IV Regular Insulin infusion + Aggressive IV Normal Saline + K⁺ replacement",alt:"SC insulin protocol (mild DKA, resource-limited settings)",moa:"Insulin: activates glucose transporters, suppresses lipolysis → ↓ketogenesis, drives K⁺ intracellularly.",dose:"Insulin 0.1 U/kg/h infusion (no bolus per recent evidence). NS 15-20mL/kg/h initially. K⁺ 20-40mEq/L in fluids if K⁺ 3.3-5.3.",indication:"DKA: glucose >250, pH <7.3, bicarb <18, anion gap >12, ketonemia",se:"Hypoglycemia, hypokalemia (fatal if not replaced before insulin), cerebral edema (children)",evidence:"ADA DKA guidelines 2024, JBDS-IP guidelines",pearl:"ALWAYS check K⁺ before starting insulin. If K⁺ <3.3, replace K⁺ FIRST — insulin will kill the patient. Switch to SC insulin when gap closes, patient eating, and overlap 1-2h.",tags:["icu","first"]},
+{cat:"Endocrinology",condition:"Thyroid Storm",drug:"Propranolol + PTU (Propylthiouracil) → Lugol's Iodine (1h after PTU) + Hydrocortisone",alt:"Methimazole (less preferred acutely — PTU blocks peripheral T4→T3 conversion)",moa:"PTU: blocks TPO + peripheral deiodinase (T4→T3). Iodine: Wolff-Chaikoff effect. Steroids: ↓T4→T3 + adrenal support.",dose:"PTU 200mg q4h PO/NG. Lugol's 5 drops q8h (1h AFTER PTU). Propranolol 60-80mg q4h. Hydrocortisone 100mg q8h IV.",indication:"Thyroid storm (Burch-Wartofsky score >45): fever, tachycardia, AMS, high-output cardiac failure",se:"Agranulocytosis (PTU — rare but fatal), hepatotoxicity",evidence:"ATA 2016 hyperthyroidism guidelines, Burch-Wartofsky scoring",pearl:"SEQUENCE MATTERS: PTU must be given 1h BEFORE iodine — otherwise iodine fuels hormone synthesis (Jod-Basedow). Cholestyramine can be added to reduce enterohepatic T4 recycling.",tags:["icu"]},
+
+// ── INFECTIOUS DISEASE ──
+{cat:"Infectious Disease",condition:"Bacterial Meningitis (Adult)",drug:"Ceftriaxone + Vancomycin + Dexamethasone",alt:"Meropenem (if Listeria suspected, add Ampicillin)",moa:"Ceftriaxone: 3rd-gen cephalosporin, excellent CSF penetration. Vancomycin: covers resistant pneumococcus. Dex: ↓inflammatory CSF damage.",dose:"Ceftriaxone 2g IV q12h. Vancomycin 15-20mg/kg IV q8-12h. Dex 0.15mg/kg IV q6h × 4 days (BEFORE or WITH first antibiotic dose).",indication:"Suspected bacterial meningitis. Empiric until CSF culture results.",se:"Nephrotoxicity (vanco), red man syndrome, C. diff",evidence:"De Gans (NEJM 2002) — dexamethasone ↓mortality in pneumococcal meningitis",pearl:"Dexamethasone MUST be given before or with first antibiotic dose — not after. Benefit proven mainly for S. pneumoniae. Add Ampicillin if age >50, immunocompromised, or alcoholic (Listeria coverage).",tags:["icu","first"]},
+{cat:"Infectious Disease",condition:"Severe Sepsis / Septic Shock",drug:"Broad-spectrum: Meropenem/Piperacillin-Tazobactam + Norepinephrine + IV Crystalloids",alt:"Add Vancomycin (MRSA risk), Fluconazole/Caspofungin (fungal risk)",moa:"Carbapenems: broadest β-lactam spectrum. Norepinephrine: α1 > β1 → ↑MAP without excessive tachycardia.",dose:"Meropenem 1g IV q8h (extended infusion 3h). NE 0.05-1 mcg/kg/min titrate to MAP ≥65.",indication:"Sepsis-3 criteria: infection + SOFA ≥2 + lactate >2. Hour-1 bundle: cultures, antibiotics, fluids, pressors.",se:"Seizures (meropenem — rare), digital ischemia (NE at high doses)",evidence:"Surviving Sepsis Campaign 2021, PROCESS/ProMISe/ARISE, ANDROMEDA-SHOCK",pearl:"Antibiotics within 1 HOUR — each hour delay increases mortality 7.6%. Norepinephrine is FIRST-LINE vasopressor (NOT dopamine — SOAP-II trial). Target MAP ≥65, lactate clearance >10%/2h.",tags:["icu"]},
+{cat:"Infectious Disease",condition:"Malaria (P. falciparum, Severe)",drug:"IV Artesunate → Artemether-Lumefantrine (oral, after recovery)",alt:"IV Quinine + Doxycycline/Clindamycin",moa:"Artesunate: endoperoxide bridge generates free radicals → rapid parasiticidal activity against all stages including ring forms.",dose:"IV Artesunate 2.4mg/kg at 0, 12, 24h then daily. Switch to oral ACT when able.",indication:"Severe falciparum malaria: cerebral malaria, parasitemia >5%, severe anemia, renal failure, ARDS",se:"Delayed hemolytic anemia (post-artesunate), QT prolongation (quinine)",evidence:"SEAQUAMAT, AQUAMAT trials — artesunate superior to quinine (35% mortality reduction)",pearl:"IV Artesunate replaced quinine as DOC after AQUAMAT/SEAQUAMAT. Monitor for delayed hemolysis up to 4 weeks. Exchange transfusion no longer recommended.",tags:["icu"]},
+
+// ── GASTROENTEROLOGY ──
+{cat:"Gastroenterology",condition:"H. pylori Eradication",drug:"PPI + Clarithromycin + Amoxicillin (Triple therapy 14 days)",alt:"Bismuth quadruple therapy (PPI + Bismuth + Metronidazole + Tetracycline) if clarithromycin resistance >15%",moa:"PPI: ↑gastric pH → activates amoxicillin. Clarithromycin: 50S ribosomal inhibition.",dose:"Omeprazole 20mg BD + Clarithromycin 500mg BD + Amoxicillin 1g BD × 14 days.",indication:"H. pylori-positive PUD, gastric MALT lymphoma, functional dyspepsia",se:"Metallic taste, diarrhea, QT prolongation (clarithromycin)",evidence:"Maastricht VI/Florence consensus, ACG 2017 guidelines",pearl:"14 days > 7 days (↑eradication rate ~10%). Bismuth quadruple is first-line if local clarithromycin resistance >15%. Confirm eradication with urea breath test 4 weeks after completing therapy.",tags:["first"]},
+{cat:"Gastroenterology",condition:"Acute Variceal Bleeding",drug:"IV Octreotide + Urgent Endoscopic Variceal Ligation (EVL) + IV Ceftriaxone",alt:"IV Terlipressin (superior outside US), Balloon tamponade (Sengstaken-Blakemore) as bridge",moa:"Octreotide: splanchnic vasoconstriction → ↓portal pressure. Ceftriaxone: prophylaxis ↓SBP and mortality.",dose:"Octreotide 50mcg IV bolus → 50mcg/h infusion × 3-5 days. Ceftriaxone 1g IV OD × 7 days.",indication:"Acute upper GI bleed in known/suspected cirrhosis with portal hypertension",se:"Bradycardia (octreotide), hyponatremia (terlipressin)",evidence:"Baveno VII consensus, AASLD guidelines",pearl:"Antibiotics reduce mortality by ~25% in variceal bleed — DO NOT forget. Terlipressin is superior but unavailable in many countries. Target Hb 7-8g/dL (restrictive strategy — Villanueva trial).",tags:["icu"]},
+{cat:"Gastroenterology",condition:"Acute Pancreatitis",drug:"Aggressive IV Lactated Ringer's + Analgesics (IV Paracetamol/Opioids) + Early Enteral Nutrition",alt:"Meropenem ONLY if infected necrosis (not for prophylaxis)",moa:"LR: superior to NS due to anti-inflammatory properties (↓SIRS). Early feeding maintains gut barrier.",dose:"LR 1.5mL/kg/h initially (goal-directed, titrate to UOP). Paracetamol 1g IV q6h ± Morphine.",indication:"Acute pancreatitis (Atlanta criteria). Aggressive hydration in first 12-24h is critical.",se:"Fluid overload, respiratory compromise if over-resuscitated",evidence:"WATERFALL trial (moderate vs aggressive fluids), AGA 2018, IAP/APA guidelines",pearl:"WATERFALL trial tempered aggressive hydration — moderate (1.5mL/kg/h) may be safer. NO role for prophylactic antibiotics. Early oral feeding (within 24h if tolerated) improves outcomes. ERCP only for cholangitis, not just choledocholithiasis.",tags:["icu"]},
+
+// ── NEPHROLOGY ──
+{cat:"Nephrology",condition:"Hyperkalemia (Acute, Severe)",drug:"IV Calcium Gluconate + Insulin-Dextrose + Salbutamol nebulization + Sodium Zirconium Cyclosilicate",alt:"IV Sodium Bicarbonate (if acidotic), Kayexalate (slow onset), emergent hemodialysis",moa:"Ca²⁺: membrane stabilization (↓cardiac excitability). Insulin: drives K⁺ intracellularly via Na-K-ATPase.",dose:"Ca Gluconate 10mL of 10% IV over 2-3min. Insulin 10U + Dextrose 50% 50mL IV. Salbutamol 10-20mg neb.",indication:"K⁺ >6.0 with ECG changes (peaked T waves, wide QRS) or >6.5 regardless of ECG",se:"Hypoglycemia (insulin — monitor glucose q1h for 6h), hypocalcemia",evidence:"UK Renal Association guidelines, ZORA trial (SZC)",pearl:"Calcium does NOT lower K⁺ — it protects the heart (buys ~30-60min). Insulin-glucose works in 15-30min but causes hypoglycemia in 1/6 patients — MUST co-administer dextrose and monitor. SZC is the new oral K⁺ binder — faster onset than Kayexalate.",tags:["icu"]},
+{cat:"Nephrology",condition:"CKD — Slowing Progression",drug:"ACEI/ARB + SGLT2 inhibitor (Dapagliflozin) + Finerenone",alt:"Optimize BP (<130/80), glycemic control, avoid nephrotoxins",moa:"ACEI/ARB: ↓glomerular pressure via efferent arteriolar dilation. SGLT2i: tubuloglomerular feedback → ↓hyperfiltration. Finerenone: non-steroidal MRA → anti-inflammatory/anti-fibrotic.",dose:"Dapagliflozin 10mg OD (down to eGFR 20). Finerenone 10-20mg OD.",indication:"CKD with albuminuria (UACR >30mg/g), especially diabetic kidney disease",se:"AKI on initiation (ACEI), euglycemic DKA (SGLT2i), hyperkalemia (finerenone)",evidence:"DAPA-CKD, CREDENCE, FIDELIO-DKD, FIGARO-DKD, EMPA-KIDNEY",pearl:"SGLT2i is now the single most impactful drug added to CKD management in decades. Dapagliflozin works even in NON-DIABETIC CKD (DAPA-CKD). Initial eGFR dip of 10-30% is expected and acceptable — do not stop.",tags:["first"]},
+
+// ── HEMATOLOGY ──
+{cat:"Hematology",condition:"Iron Deficiency Anemia",drug:"Oral Ferrous Sulfate (mild) / IV Ferric Carboxymaltose (moderate-severe/intolerance)",alt:"IV Iron Sucrose, Ferrous Fumarate",moa:"Iron repletes depleted stores → ↑hemoglobin synthesis in erythroblasts. FCM delivers high-dose iron in single infusion.",dose:"Ferrous Sulfate 200mg (65mg elemental Fe) BD-TDS on empty stomach. FCM 15-20mg/kg (max 1000mg) single IV infusion over 15min.",indication:"IDA (ferritin <30, TSAT <20%). IV route if oral intolerance, IBD, CKD on ESA, heart failure, or rapid correction needed.",se:"Oral: GI upset, constipation (take alternate days per IRONMAN). IV: hypophosphatemia (FCM), anaphylaxis (rare with modern formulations).",evidence:"IRONMAN trial (HF), PIVOTAL (CKD), FERGIcor",pearl:"Alternate-day oral iron is equivalent to daily dosing with fewer side effects (hepcidin rebound). FCM causes transient hypophosphatemia in ~50% — monitor in repeat dosing. Always investigate CAUSE of IDA (GI malignancy in >40y).",tags:["first"]},
+{cat:"Hematology",condition:"Heparin-Induced Thrombocytopenia (HIT)",drug:"Argatroban (IV) or Fondaparinux (SC)",alt:"Bivalirudin (especially in PCI)",moa:"Argatroban: direct thrombin inhibitor (hepatic clearance). Fondaparinux: indirect Xa inhibitor — no cross-reactivity with HIT antibodies.",dose:"Argatroban 2mcg/kg/min IV (0.5mcg in hepatic dysfunction), titrate to aPTT 1.5-3×. Fondaparinux 7.5mg SC OD.",indication:"4Ts score ≥4. STOP ALL HEPARIN (including flushes). Start alternative anticoagulation — HIT is prothrombotic.",se:"Bleeding, argatroban falsely elevates INR (complicates warfarin transition)",evidence:"ASH 2018 HIT guidelines",pearl:"HIT is a PROTHROMBOTIC state — stopping heparin alone is insufficient, must anticoagulate. Never give warfarin until platelets recover >150K (causes warfarin-induced skin necrosis/venous limb gangrene). Fondaparinux is increasingly used off-label — simpler dosing.",tags:["icu"]},
+
+// ── PSYCHIATRY ──
+{cat:"Psychiatry",condition:"Major Depressive Disorder",drug:"Escitalopram / Sertraline (SSRI)",alt:"Venlafaxine (SNRI), Mirtazapine (if insomnia/weight loss), Bupropion (if fatigue/smoking)",moa:"SSRI: selective serotonin reuptake inhibition → ↑synaptic 5-HT over 2-4 weeks.",dose:"Escitalopram 10mg OD → max 20mg. Sertraline 50mg OD → max 200mg.",indication:"MDD (first-line per NICE/APA), GAD, PTSD, OCD (higher doses), panic disorder",se:"GI upset (first 1-2 wks), sexual dysfunction (~40%), hyponatremia (elderly), serotonin syndrome (combination), QT prolongation (citalopram > escitalopram)",evidence:"STAR*D, CAN-BIND, NICE CG90",pearl:"Takes 2-4 weeks for clinical effect — warn patients. Sertraline safest in cardiac disease. Escitalopram fewest drug interactions. NEVER stop abruptly — taper to avoid discontinuation syndrome. Black box warning <25yo — monitor suicidality closely in first weeks.",tags:["first"]},
+{cat:"Psychiatry",condition:"Acute Psychosis / Agitation (ER)",drug:"IM Haloperidol + Lorazepam + Diphenhydramine ('B52' cocktail) OR IM Olanzapine",alt:"IV Droperidol, IM Midazolam (undifferentiated agitation), PO Olanzapine",moa:"Haloperidol: D2 receptor antagonism. Lorazepam: GABA-A potentiation. Diphenhydramine: prevents acute dystonia.",dose:"Haloperidol 5mg + Lorazepam 2mg + Diphenhydramine 50mg IM (B52). OR Olanzapine 10mg IM.",indication:"Acute agitation requiring rapid tranquilization in ER/ICU setting",se:"QT prolongation, NMS (haloperidol), respiratory depression (benzos), metabolic syndrome (olanzapine)",evidence:"TREC trials, Calver 2015, AJEM systematic reviews",pearl:"NEVER combine IM olanzapine with IM benzodiazepine — risk of fatal respiratory depression. Always check QTc before haloperidol (>500ms is contraindication). De-escalation techniques should be attempted FIRST.",tags:["icu"]},
+
+// ── RHEUMATOLOGY ──
+{cat:"Rheumatology",condition:"Rheumatoid Arthritis",drug:"Methotrexate (anchor drug) + Folic acid",alt:"Hydroxychloroquine + Sulfasalazine (triple therapy), Biologics: Adalimumab, Tocilizumab",moa:"MTX: DHFR inhibition → ↓purine/pyrimidine synthesis + adenosine-mediated anti-inflammatory effect.",dose:"MTX 7.5mg/week → titrate to 25mg/week (oral/SC). Folic acid 5mg weekly (day after MTX).",indication:"RA — start within 3 months of diagnosis (window of opportunity). Treat-to-target: remission or low disease activity.",se:"Hepatotoxicity, pancytopenia, interstitial pneumonitis, teratogenic (stop 3 months before conception)",evidence:"TEAR, tREACH, STRATEGY trials, ACR/EULAR 2022 guidelines",pearl:"Subcutaneous MTX has superior bioavailability at doses >15mg/week. Folic acid reduces side effects without ↓efficacy. If inadequate response at 12-16 weeks → add biologic (TNF inhibitor preferred first).",tags:["first"]},
+{cat:"Rheumatology",condition:"Acute Gout Flare",drug:"Colchicine (within 12h) / NSAID (Naproxen/Indomethacin) / Prednisolone",alt:"IL-1 inhibitor (Anakinra) for refractory polyarticular gout",moa:"Colchicine: tubulin polymerization inhibition → ↓neutrophil chemotaxis and NLRP3 inflammasome. NSAID: COX inhibition.",dose:"Colchicine 0.5mg TDS × 3-4 days (low-dose — AGREE trial). Naproxen 500mg BD. Prednisolone 30-35mg OD × 5d.",indication:"Acute gout flare. NSAID if no contraindication, colchicine if within 12h, steroids if CKD/NSAID-intolerant.",se:"Diarrhea (colchicine — dose-dependent), GI/renal (NSAID), hyperglycemia (steroids)",evidence:"AGREE trial (low-dose colchicine), ACR/EULAR 2023 gout guidelines",pearl:"LOW-dose colchicine is as effective as high-dose with far fewer GI side effects (AGREE trial). Start urate-lowering therapy (allopurinol) during the flare itself — the old practice of waiting is outdated (LASSO trial, ACR 2020).",tags:["first"]},
+
+// ── TOXICOLOGY / EMERGENCY ──
+{cat:"Emergency / Toxicology",condition:"Opioid Overdose",drug:"Naloxone (Narcan)",alt:"Nalmefene (longer-acting)",moa:"Competitive μ-opioid receptor antagonist → rapid reversal of respiratory depression.",dose:"0.4-2mg IV/IM/IN, repeat q2-3min. Intranasal: 4mg (community setting). Infusion: 2/3 of reversal dose per hour.",indication:"Suspected opioid overdose with respiratory depression (RR <12, pinpoint pupils, ↓GCS)",se:"Acute opioid withdrawal (agitation, vomiting, hypertension), pulmonary edema (rare)",evidence:"WHO guidelines, ACEP policy statement",pearl:"Naloxone half-life (30-90min) is SHORTER than most opioids — patient may re-sedate. Observe ≥4h (longer for long-acting opioids/methadone). Titrate to respiratory effort, not consciousness — over-reversal causes acute withdrawal.",tags:["icu"]},
+{cat:"Emergency / Toxicology",condition:"Paracetamol (Acetaminophen) Overdose",drug:"N-Acetylcysteine (NAC)",alt:"Activated charcoal (within 1h of ingestion)",moa:"NAC replenishes glutathione → detoxifies NAPQI (toxic metabolite). Also direct antioxidant and improves microcirculation.",dose:"IV: 150mg/kg in 200mL over 1h → 50mg/kg in 500mL over 4h → 100mg/kg in 1000mL over 16h. (Modified 2-bag protocol increasingly used.)",indication:"Serum paracetamol level above treatment line on Rumack-Matthew nomogram (≥4h post-ingestion), or staggered overdose with any detectable level + risk factors.",se:"Anaphylactoid reaction (~15% — slow infusion, antihistamines), nausea/vomiting",evidence:"Prescott (1979 — original NAC), SNAP trial (modified 2-bag protocol), Bateman nomogram",pearl:"NAC is virtually 100% hepatoprotective if given within 8 hours. The 2-bag modified protocol (SNAP trial) reduces adverse reactions vs traditional 3-bag. If in doubt, START NAC — you can always stop it. Activated charcoal only useful within 1h (rarely given).",tags:["icu","first"]},
+{cat:"Emergency / Toxicology",condition:"Anaphylaxis",drug:"IM Epinephrine (Adrenaline) — anterolateral thigh",alt:"IV Epinephrine infusion (refractory anaphylaxis)",moa:"α1: vasoconstriction → ↑BP, ↓mucosal edema. β1: ↑cardiac output. β2: bronchodilation, ↓mast cell degranulation.",dose:"0.5mg IM (0.5mL of 1:1000) in anterolateral thigh. Repeat q5-15min. Pediatric: 0.01mg/kg (max 0.3mg).",indication:"Anaphylaxis (WAO criteria: acute onset + skin/mucosal + respiratory compromise and/or hypotension)",se:"Tachycardia, anxiety, tremor. IV bolus can cause fatal arrhythmia — NEVER give IV bolus of 1:1000.",evidence:"EAACI/WAO 2024 guidelines, Resuscitation Council UK",pearl:"IM, NOT SC. Anterolateral THIGH, not deltoid (faster peak levels). DO NOT delay for antihistamines/steroids — epinephrine is the ONLY life-saving intervention. >90% of anaphylaxis deaths are from delayed/withheld epinephrine. Biphasic reaction in ~20% — observe 6-12h.",tags:["icu","first"]},
+{cat:"Emergency / Toxicology",condition:"Organophosphate Poisoning",drug:"Atropine (high-dose) + Pralidoxime (PAM)",alt:"Glycopyrrolate (less CNS penetration)",moa:"Atropine: competitive muscarinic antagonism. PAM: reactivates acetylcholinesterase before 'aging' occurs.",dose:"Atropine 2-5mg IV q5-10min, DOUBLE dose until secretions dry (may need 10-100+ mg). PAM 1-2g IV over 15-30min then 500mg/h infusion.",indication:"OP poisoning (SLUDGE/DUMBELS syndrome: salivation, lacrimation, urination, diarrhea, GI cramps, emesis, miosis, bradycardia)",se:"Atropine toxicity at very high doses (agitation, hyperthermia), PAM-induced muscle rigidity",evidence:"Eddleston (Lancet) — OP management, WHO guidelines",pearl:"Atropine endpoint is DRY SECRETIONS, not pupil size or heart rate. No maximum dose — keep doubling. PAM must be given within 24-48h before AChE 'ages' irreversibly (depends on compound). Diazepam for seizures. Remove clothes, decontaminate skin.",tags:["icu"]},
+
+// ── PEDIATRICS ──
+{cat:"Pediatrics",condition:"Neonatal Sepsis (Early-Onset)",drug:"Ampicillin + Gentamicin",alt:"Cefotaxime (NOT ceftriaxone in neonates — bilirubin displacement)",moa:"Ampicillin covers GBS + Listeria. Gentamicin: synergistic gram-negative cover + enhances ampicillin activity.",dose:"Ampicillin 50mg/kg IV q12h (<7d) or q8h (>7d). Gentamicin 4-5mg/kg IV q24-36h (based on GA).",indication:"Suspected early-onset neonatal sepsis (<72h): GBS, E. coli, Listeria monocytogenes",se:"Nephrotoxicity, ototoxicity (gentamicin — monitor levels), seizures (high-dose ampicillin)",evidence:"NICE CG149, AAP neonatal sepsis guidelines, Kaiser Sepsis Calculator",pearl:"Ceftriaxone is CONTRAINDICATED in neonates — it displaces bilirubin from albumin → kernicterus. Use cefotaxime if 3rd-gen cephalosporin needed. Blood culture before antibiotics but NEVER delay treatment.",tags:["peds","first"]},
+{cat:"Pediatrics",condition:"Pediatric Febrile Seizure",drug:"Acute: Rectal Diazepam / Buccal Midazolam. Antipyretic: Paracetamol",alt:"IV Lorazepam (if access available)",moa:"Benzodiazepines: GABA-A potentiation → rapid seizure termination.",dose:"Buccal Midazolam 0.5mg/kg (max 10mg). Rectal Diazepam 0.5mg/kg. Paracetamol 15mg/kg q4-6h.",indication:"Simple febrile seizure (6mo-5yr, <15min, generalized, single in 24h) — reassurance. Complex or prolonged → treat.",se:"Respiratory depression (benzos), hepatotoxicity (paracetamol overdose)",evidence:"AAP febrile seizure guidelines, NICE CG137",pearl:"Simple febrile seizures do NOT cause epilepsy, brain damage, or developmental delay — parental reassurance is the most important intervention. Antipyretics do NOT prevent febrile seizures (evidence-based). Only treat if seizure >5min.",tags:["peds"]},
+{cat:"Pediatrics",condition:"Croup (Laryngotracheobronchitis)",drug:"Single dose Dexamethasone + Nebulized Epinephrine (moderate-severe)",alt:"Budesonide nebulization (if vomiting, can't take oral dex)",moa:"Dexamethasone: ↓subglottic inflammation. Nebulized epi: α-adrenergic mucosal vasoconstriction → ↓edema.",dose:"Dexamethasone 0.6mg/kg PO/IM single dose (max 16mg). Nebulized Epi 0.5mL/kg of 1:1000 (max 5mL).",indication:"Westley croup score ≥2. Mild: dex alone. Moderate-severe: dex + neb epi. Observe ≥2h post-epi (rebound).",se:"Epi: tachycardia, rebound stridor (observe 2-4h). Dex: minimal with single dose.",evidence:"Cochrane reviews (glucocorticoids in croup), Bjornson 2013",pearl:"A SINGLE dose of dexamethasone is all that's needed — even for mild croup (↓return visits by 50%). Heliox for severe cases awaiting intubation. If no response to treatment, think epiglottitis, bacterial tracheitis, or foreign body.",tags:["peds","first"]},
+
+// ── OBSTETRICS ──
+{cat:"Obstetrics",condition:"Eclampsia / Severe Pre-eclampsia",drug:"IV Magnesium Sulfate (MgSO₄)",alt:"IV Labetalol / Nifedipine (BP control). Delivery is the definitive treatment.",moa:"Mg²⁺: NMDA receptor antagonism + ↓cerebral vasospasm + ↑prostacyclin → seizure prophylaxis.",dose:"Loading: 4g IV over 15-20min. Maintenance: 1g/h infusion for 24h post-delivery. Monitor: reflexes, RR, UOP.",indication:"Eclampsia (seizures), severe pre-eclampsia for seizure prophylaxis (BP ≥160/110, HELLP, symptoms)",se:"Flushing, hypotension, respiratory depression, loss of deep tendon reflexes (toxicity sign)",evidence:"MAGPIE trial (↓eclampsia risk by 58%), Collaborative Eclampsia Trial",pearl:"MgSO₄ is SUPERIOR to diazepam and phenytoin for eclampsia (Collaborative Eclampsia Trial). Antidote: Calcium Gluconate 1g IV for Mg toxicity. Check patellar reflexes q1h — loss of reflexes precedes respiratory arrest. Therapeutic range: 4-7 mEq/L.",tags:["icu","preg"]},
+{cat:"Obstetrics",condition:"Preterm Labor (Tocolysis)",drug:"Nifedipine (oral CCB) + Antenatal Corticosteroids (Betamethasone)",alt:"Atosiban (oxytocin receptor antagonist — used in Europe), Indomethacin (<32 weeks)",moa:"Nifedipine: L-type Ca²⁺ channel blockade → myometrial relaxation. Betamethasone: ↑fetal surfactant production.",dose:"Nifedipine 20mg PO loading → 10-20mg q4-6h. Betamethasone 12mg IM × 2 doses 24h apart.",indication:"Preterm labor 24-34 weeks. Tocolysis buys 48h for steroids to work. Steroids reduce RDS, IVH, NEC, death.",se:"Nifedipine: hypotension, tachycardia, headache. Steroids: transient fetal HR changes, maternal hyperglycemia",evidence:"APOSTEL-III, Cochrane (nifedipine vs others), ALPS trial (late preterm steroids)",pearl:"Tocolysis goal is 48 HOURS — just enough for corticosteroids. Nifedipine preferred over terbutaline (fewer maternal side effects). MgSO₄ for NEUROPROTECTION (not tocolysis) if <32 weeks — ↓cerebral palsy risk (BEAM trial).",tags:["preg"]},
+
+// ── ICU / CRITICAL CARE ──
+{cat:"Critical Care",condition:"ARDS (Acute Respiratory Distress Syndrome)",drug:"Low Tidal Volume Ventilation (6mL/kg IBW) + Prone Positioning + Conservative Fluids",alt:"Neuromuscular blockade (cisatracurium — first 48h), ECMO (refractory)",moa:"Low TV: ↓volutrauma/barotrauma. Proning: V/Q optimization + ↓atelectasis. Restrictive fluids: ↓pulmonary edema.",dose:"TV 6mL/kg IBW, Pplat <30cmH₂O. Prone 16h/day. Target CVP <4 or negative fluid balance.",indication:"Berlin criteria: acute onset, bilateral infiltrates, PaO₂/FiO₂ <300 (mild), <200 (mod), <100 (severe), not fully explained by cardiac failure.",se:"Hemodynamic instability during proning, pressure injuries, ETT displacement",evidence:"ARDSNet (ARMA), PROSEVA (prone), FACTT (fluids), ACURASYS (NMB), EOLIA (ECMO)",pearl:"PROSEVA is one of the most practice-changing ICU trials — 16h prone positioning ↓mortality from 33% → 16% in severe ARDS. MUST use ideal body weight for TV calculation (not actual weight — common error). Driving pressure <15 cmH₂O is a better target than plateau pressure alone.",tags:["icu"]},
+{cat:"Critical Care",condition:"Septic Shock — Refractory to Norepinephrine",drug:"Vasopressin (add at NE 0.25-0.5 mcg/kg/min) + Hydrocortisone",alt:"Epinephrine (3rd-line), Angiotensin II (ATHOS-3)",moa:"Vasopressin: V1 receptor agonism → vasoconstriction independent of catecholamine receptors. Hydrocortisone: restores vascular catecholamine sensitivity + treats relative adrenal insufficiency.",dose:"Vasopressin 0.03-0.04 U/min (fixed, not titrated). Hydrocortisone 50mg IV q6h (APROCCHSS protocol).",indication:"Septic shock requiring NE >0.25mcg/kg/min despite adequate fluid resuscitation (30mL/kg crystalloid)",se:"Digital/splanchnic ischemia (vasopressin), hyperglycemia/immunosuppression (steroids)",evidence:"VASST, VANISH, APROCCHSS, ADRENAL trials, SSC 2021 guidelines",pearl:"Vasopressin is NOT first-line — add it to NE, don't replace. Low-dose steroids (APROCCHSS: hydrocortisone + fludrocortisone) reduce 90-day mortality in septic shock. ADRENAL trial was neutral — difference may be fludrocortisone addition.",tags:["icu"]},
+{cat:"Critical Care",condition:"Rapid Sequence Intubation (RSI)",drug:"Ketamine + Rocuronium",alt:"Propofol (if hemodynamically stable), Succinylcholine (shorter duration)",moa:"Ketamine: NMDA antagonist → dissociative anesthesia + sympathomimetic (maintains BP/HR). Rocuronium: non-depolarizing NMB → complete paralysis.",dose:"Ketamine 1.5-2mg/kg IV push. Rocuronium 1.2mg/kg IV (modified RSI dose for rapid onset ~45-60s).",indication:"Emergency airway management requiring rapid sequence intubation. Ketamine preferred in shock, asthma, undifferentiated hypotension.",se:"Ketamine: emergence reactions, ↑secretions (pre-treat with glycopyrrolate), transient ↑ICP (debated). Rocuronium: prolonged paralysis if can't intubate.",evidence:"KeRSI trial, Cochrane (ketamine vs others in ED RSI)",pearl:"Ketamine's 'ICP elevation' is a MYTH that persists — modern evidence shows no clinically significant ICP rise. Sugammadex 16mg/kg can reverse rocuronium in 'can't intubate, can't oxygenate' scenarios. Always have a failed airway plan (bougie, video laryngoscope, surgical airway).",tags:["icu"]},
+{cat:"Critical Care",condition:"ICU Sedation",drug:"Propofol (short-term) / Dexmedetomidine (if avoiding deep sedation)",alt:"Midazolam (avoid if possible — delirium risk), Ketamine infusion (opioid-sparing)",moa:"Propofol: GABA-A potentiation + Na⁺ channel block. Dexmedetomidine: α2-adrenergic agonist → 'cooperative sedation' without respiratory depression.",dose:"Propofol 5-50mcg/kg/min. Dex 0.2-1.5mcg/kg/h (no bolus in most protocols). Target RASS -1 to 0.",indication:"Mechanically ventilated ICU patients. Light sedation strategy (RASS -1 to 0) per guidelines.",se:"Propofol: hypotension, hypertriglyceridemia, propofol infusion syndrome (>48h, >5mg/kg/h). Dex: bradycardia, hypotension.",evidence:"SPICE-III (dex vs usual care), PADIS guidelines 2018, ABC trial (awakening + breathing)",pearl:"Target LIGHT sedation (RASS -1 to 0) — reduces ventilator days, delirium, ICU mortality. Daily sedation interruption (Kress, NEJM 2000) + spontaneous breathing trials = ABC bundle. Propofol infusion syndrome: check triglycerides and CK daily if >48h. Dexmedetomidine preserves respiratory drive — useful for NIV.",tags:["icu"]}
+];
+
+// ── CATEGORY COLOR MAP ──
+const CAT_COLORS={
+"Cardiology":"#ef4444","Pulmonology":"#3b82f6","Neurology":"#a855f7","Endocrinology":"#f59e0b",
+"Infectious Disease":"#10b981","Gastroenterology":"#f97316","Nephrology":"#06b6d4","Hematology":"#ec4899",
+"Psychiatry":"#8b5cf6","Rheumatology":"#14b8a6","Emergency / Toxicology":"#dc2626","Pediatrics":"#22c55e",
+"Obstetrics":"#f472b6","Critical Care":"#6366f1"
+};
+const CAT_ICONS={
+"Cardiology":"heart-pulse","Pulmonology":"wind","Neurology":"brain","Endocrinology":"activity",
+"Infectious Disease":"bug","Gastroenterology":"apple","Nephrology":"droplets","Hematology":"test-tubes",
+"Psychiatry":"brain","Rheumatology":"bone","Emergency / Toxicology":"siren","Pediatrics":"baby",
+"Obstetrics":"heart-handshake","Critical Care":"monitor"
+};
+
+let activeCategory = "All";
+let searchTerm = "";
+
+// ── RENDER CATEGORIES ──
+function renderCategories(){
+const bar=document.getElementById("catBar");
+const cats=["All",...Object.keys(CAT_COLORS)];
+bar.innerHTML=cats.map(c=>{
+const active=c===activeCategory?"active":"";
+const color=c==="All"?"#64748b":CAT_COLORS[c];
+const icon=c==="All"?"layers":CAT_ICONS[c]||"circle";
+return `<button onclick="setCategory('${c}')" class="cat-btn ${active}" style="color:${active?color:'#94a3b8'}">
+<i data-lucide="${icon}"></i> <span>${c}</span></button>`;
+}).join("");
+lucide.createIcons();
+}
+
+function setCategory(c){activeCategory=c;renderCategories();renderDrugsRaw();}
+
+// ── RENDER DRUG CARDS ──
+function renderDrugsRaw(){
+const grid=document.getElementById("drugGrid");
+const empty=document.getElementById("emptyState");
+const countEl=document.getElementById("resultCount");
+const s=searchTerm.toLowerCase();
+lastFiltered=DATA.filter(d=>{
+const catMatch=activeCategory==="All"||d.cat===activeCategory;
+const searchMatch=!s||d.condition.toLowerCase().includes(s)||d.drug.toLowerCase().includes(s)||d.cat.toLowerCase().includes(s)||d.moa.toLowerCase().includes(s)||d.pearl.toLowerCase().includes(s);
+return catMatch&&searchMatch;
+});
+countEl.textContent=`${lastFiltered.length} drug${lastFiltered.length!==1?'s':''} found`;
+if(!lastFiltered.length){grid.innerHTML="";empty.classList.remove("hidden");return;}
+empty.classList.add("hidden");
+grid.innerHTML=lastFiltered.map((d,i)=>{
+const color=CAT_COLORS[d.cat]||"#64748b";
+const tags=d.tags.map(t=>{
+const cls={first:"tag-first",alt:"tag-alt",icu:"tag-icu",peds:"tag-peds",preg:"tag-preg"}[t]||"tag-first";
+const label={first:"1st Line",alt:"Alternative",icu:"ICU/Critical",peds:"Pediatric",preg:"Obstetric"}[t]||t;
+return `<span class="badge ${cls}">${label}</span>`;
+}).join("");
+return `<div class="drug-card fade-in" style="animation-delay:${Math.min(i*30,300)}ms;--card-color:${color}" onclick="showDetail(${i})">
+<div class="header-bar" style="background:${color}"></div>
+<div class="content">
+<span class="cat-label" style="color:${color}">${d.cat}</span>
+<div class="tags">${tags}</div>
+<h3>${d.condition}</h3>
+<p class="drug-name">💊 ${d.drug}</p>
+<p class="moa">${d.moa}</p>
+<div class="pearl">
+<i data-lucide="sparkles" class="pearl-icon"></i>
+<span class="pearl-text">${d.pearl.split('.')[0]}</span>
+</div>
+</div>
+</div>`;
+}).join("");
+lucide.createIcons();
+}
+
+// ── DETAIL MODAL ──
+function showDetail(idx){
+const d=lastFiltered[idx];if(!d)return;
+const color=CAT_COLORS[d.cat]||"#64748b";
+const modal=document.getElementById("modal");
+const content=document.getElementById("modalContent");
+const tags=d.tags.map(t=>{
+const cls={first:"tag-first",alt:"tag-alt",icu:"tag-icu",peds:"tag-peds",preg:"tag-preg"}[t]||"tag-first";
+const label={first:"1st Line",alt:"Alternative",icu:"ICU/Critical",peds:"Pediatric",preg:"Obstetric"}[t]||t;
+return `<span class="badge ${cls}">${label}</span>`;
+}).join("");
+
+const sections=[
+{icon:"target",title:"Indication",text:d.indication},
+{icon:"flask-conical",title:"Mechanism of Action",text:d.moa},
+{icon:"pill",title:"Dosage",text:d.dose},
+{icon:"git-branch",title:"Alternative",text:d.alt},
+{icon:"alert-triangle",title:"Side Effects & Cautions",text:d.se},
+{icon:"book-open",title:"Evidence Base",text:d.evidence},
+{icon:"gem",title:"Clinical Pearl",text:d.pearl,highlight:true}
+];
+
+content.innerHTML=`
+<div class="modal-header" style="border-top:4px solid ${color}">
+<div class="modal-title">
+<span class="cat" style="color:${color}">${d.cat}</span>
+<h2>${d.condition}</h2>
+<p class="drug">💊 ${d.drug}</p>
+</div>
+<button onclick="closeModal()" class="close-btn" aria-label="Close"><i data-lucide="x"></i></button>
+</div>
+<div class="modal-tags">${tags}</div>
+<div class="modal-body">
+${sections.map(s=>`<div class="section ${s.highlight?'highlight':''}">
+<div class="section-header">
+<i data-lucide="${s.icon}" class="section-icon" style="color:${s.highlight?'#60a5fa':color}"></i>
+<span class="section-title" style="color:${s.highlight?'#60a5fa':'#94a3b8'}">${s.title}</span>
+</div>
+<p class="section-text">${s.text}</p>
+</div>`).join("")}
+</div>
+<div class="modal-footer">
+<p><strong style="color:#f59e0b">⚠ Disclaimer:</strong> For educational purposes. Verify doses per institutional protocols and patient-specific factors.</p>
+</div>
+`;
+modal.classList.add("open");
+lucide.createIcons();
+}
+
+function closeModal(){document.getElementById("modal").classList.remove("open");}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+// ── SEARCH ──
+document.getElementById("searchInput").addEventListener("input",e=>{searchTerm=e.target.value;renderDrugsRaw();});
+
+// ── ELEMENT SDK ──
+const defaultConfig={
+main_title:"Drugs of Choice",
+subtitle_text:"Clinical Reference Guide — Evidence-Based Pharmacotherapy",
+background_color:"#0c1220",
+surface_color:"#151d30",
+text_color:"#e2e8f0",
+primary_color:"#3b82f6",
+secondary_color:"#64748b",
+font_family:"DM Sans",
+font_size:14
+};
+
+function applyConfig(cfg){
+const bg=cfg.background_color||defaultConfig.background_color;
+const sf=cfg.surface_color||defaultConfig.surface_color;
+const tx=cfg.text_color||defaultConfig.text_color;
+const pr=cfg.primary_color||defaultConfig.primary_color;
+const sc=cfg.secondary_color||defaultConfig.secondary_color;
+const ff=cfg.font_family||defaultConfig.font_family;
+const fs=cfg.font_size||defaultConfig.font_size;
+
+document.documentElement.style.setProperty("--bg",bg);
+document.documentElement.style.setProperty("--surface",sf);
+document.documentElement.style.setProperty("--text",tx);
+document.documentElement.style.setProperty("--primary",pr);
+document.documentElement.style.setProperty("--secondary",sc);
+document.body.style.background=bg;
+document.body.style.color=tx;
+document.body.style.fontFamily=`${ff}, DM Sans, sans-serif`;
+
+const title=document.getElementById("mainTitle");
+const sub=document.getElementById("subtitleText");
+if(title)title.textContent=cfg.main_title||defaultConfig.main_title;
+if(sub)sub.textContent=cfg.subtitle_text||defaultConfig.subtitle_text;
+
+document.querySelectorAll(".drug-card").forEach(c=>{c.style.background=sf;c.style.borderColor=sf;});
+document.querySelectorAll(".search-box").forEach(s=>{s.style.background=sf;});
+
+title.style.fontFamily=`Playfair Display, ${ff}, serif`;
+title.style.fontSize=`${fs*1.6}px`;
+sub.style.fontSize=`${fs*0.85}px`;
+document.getElementById("resultCount").style.fontSize=`${fs*0.85}px`;
+}
+
+// ===== SAFE INIT CHECK =====
+if (window.elementSdk && typeof window.elementSdk.init === "function") {
+
+  window.elementSdk.init({
+    defaultConfig,
+
+    // ===== APPLY CONFIG =====
+    onConfigChange: async (cfg) => {
+      if (!cfg) return;
+
+      applyConfig(cfg); // Make sure this function exists
+    },
+
+    // ===== EDIT PANEL CONTROLS =====
+    mapToCapabilities: (cfg) => {
+      const c = { ...defaultConfig, ...cfg };
+
+      const makeColor = (key) => ({
+        get: () => c[key],
+        set: (v) => {
+          c[key] = v;
+          window.elementSdk.setConfig({ [key]: v });
+        }
+      });
+
+      return {
+        recolorables: [
+          makeColor('background_color'),
+          makeColor('surface_color'),
+          makeColor('text_color'),
+          makeColor('primary_color'),
+          makeColor('secondary_color')
+        ],
+        borderables: [],
+
+        fontEditable: {
+          get: () => c.font_family,
+          set: (v) => {
+            c.font_family = v;
+            window.elementSdk.setConfig({ font_family: v });
+          }
+        },
+
+        fontSizeable: {
+          get: () => c.font_size,
+          set: (v) => {
+            c.font_size = v;
+            window.elementSdk.setConfig({ font_size: v });
+          }
+        }
+      };
+    },
+
+    // ===== PANEL VALUES =====
+    mapToEditPanelValues: (cfg) => {
+      const c = { ...defaultConfig, ...cfg };
+
+      return new Map([
+        ["main_title", c.main_title],
+        ["subtitle_text", c.subtitle_text]
+      ]);
+    }
+
+  });
+
+} else {
+  console.error("❌ elementSdk not loaded properly");
+}
+
+// ── INIT ──
+let lastFiltered=[];
+renderCategories();
+renderDrugsRaw();
+</script>
+</body>
+</html>
