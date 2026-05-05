@@ -1,0 +1,864 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Obstetric Emergencies | Maternal Emergency Care | Deep Medicine</title> <meta name="description" content="Comprehensive guide to obstetric emergencies including postpartum hemorrhage, eclampsia, antepartum complications, and emergency management."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/obstetric-emergencies"> <!-- Open Graph --> <meta property="og:title" content="Obstetric Emergencies | Deep Medicine"> <meta property="og:description" content="Emergency management of obstetric conditions including PPH, eclampsia, and labor complications."> <meta property="og:image" content="https://deepmedicine.in/images/obstetric-emergencies.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html,body{margin:0;padding:0;height:100%;font-family:'Source Sans 3',sans-serif}
+*{box-sizing:border-box}
+.font-heading{font-family:'DM Serif Display',serif}
+.app-root{height:100%;overflow-y:auto;overflow-x:hidden}
+
+/* Animated gradient header */
+.hero-bg{background:linear-gradient(135deg,#0f172a 0%,#1e293b 40%,#7f1d1d 100%);position:relative;overflow:hidden}
+.hero-bg::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(220,38,38,0.08) 0%,transparent 50%);animation:pulse-bg 8s ease-in-out infinite}
+@keyframes pulse-bg{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+
+/* Card styles */
+.emergency-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;backdrop-filter:blur(10px);transition:all 0.3s ease}
+.emergency-card:hover{border-color:rgba(220,38,38,0.4);transform:translateY(-2px);box-shadow:0 8px 32px rgba(220,38,38,0.1)}
+
+/* Severity badges */
+.severity-critical{background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff}
+.severity-high{background:linear-gradient(135deg,#ea580c,#c2410c);color:#fff}
+.severity-moderate{background:linear-gradient(135deg,#d97706,#b45309);color:#fff}
+
+/* Timeline */
+.timeline-line{position:absolute;left:15px;top:32px;bottom:0;width:2px;background:linear-gradient(to bottom,#dc2626,transparent)}
+
+/* Accordion */
+.acc-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.acc-content.open{max-height:8000px}
+.acc-toggle i{transition:transform 0.3s ease}
+.acc-toggle.active i{transform:rotate(180deg)}
+
+/* Nav */
+.nav-pill{padding:6px 14px;border-radius:999px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all 0.2s;border:1px solid rgba(255,255,255,0.1)}
+.nav-pill:hover,.nav-pill.active{background:rgba(220,38,38,0.2);border-color:#dc2626;color:#fca5a5}
+
+/* Subtle entrance animations */
+.fade-up{opacity:0;transform:translateY(20px);animation:fadeUp 0.6s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* Scrollbar */
+.app-root::-webkit-scrollbar{width:6px}
+.app-root::-webkit-scrollbar-track{background:#0f172a}
+.app-root::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+
+/* Protocol box */
+.protocol-box{background:linear-gradient(135deg,rgba(220,38,38,0.08),rgba(220,38,38,0.02));border-left:3px solid #dc2626;border-radius:0 12px 12px 0;padding:16px 20px}
+
+/* Stat counter */
+.stat-ring{width:72px;height:72px;border-radius:50%;border:3px solid rgba(220,38,38,0.3);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fca5a5}
+
+/* Search */
+.search-box{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#e2e8f0;outline:none;transition:border-color 0.2s}
+.search-box:focus{border-color:#dc2626}
+.search-box::placeholder{color:#64748b}
+
+/* Back to top */
+.btt{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:#dc2626;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity 0.3s;z-index:50;border:none;box-shadow:0 4px 16px rgba(220,38,38,0.4)}
+.btt.visible{opacity:1}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="app-root" id="appRoot"><!-- HERO -->
+   <header class="hero-bg py-12 px-4 sm:px-8 text-center" id="heroSection">
+    <div class="max-w-4xl mx-auto fade-up">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-800/40 bg-red-950/30 text-red-300 text-xs font-medium mb-6 tracking-wider uppercase"><i data-lucide="shield-alert" style="width:14px;height:14px"></i> Clinical Reference Guide
+     </div>
+     <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl text-white leading-tight mb-4" id="mainTitle">Obstetric ICU Emergencies</h1>
+     <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-3" id="subtitle">A Comprehensive Clinical Experience Guide for Critical Care in Obstetrics</p>
+     <p class="text-red-400/80 text-sm font-medium tracking-wide" id="authorName">MBBS, MD (Obs &amp; Gynec) | ICU Intensivist | Emergency Medicine Specialist</p><!-- Stats -->
+     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10 max-w-2xl mx-auto">
+      <div class="flex flex-col items-center gap-2">
+       <div class="stat-ring">
+        12
+       </div><span class="text-slate-400 text-xs">Emergencies</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+       <div class="stat-ring">
+        48
+       </div><span class="text-slate-400 text-xs">Protocols</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+       <div class="stat-ring">
+        96
+       </div><span class="text-slate-400 text-xs">Clinical Tips</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+       <div class="stat-ring">
+        ∞
+       </div><span class="text-slate-400 text-xs">Lives Saved</span>
+      </div>
+     </div>
+    </div>
+   </header><!-- NAVIGATION & SEARCH -->
+   <nav class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-white/5 px-4 py-3">
+    <div class="max-w-5xl mx-auto">
+     <div class="flex items-center gap-3 mb-3"><i data-lucide="search" style="width:16px;height:16px;color:#64748b;flex-shrink:0"></i> <input type="text" id="searchInput" class="search-box w-full px-3 py-2 text-sm" placeholder="Search emergencies, protocols, drugs..." aria-label="Search emergencies">
+     </div>
+     <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar" id="navPills"><button class="nav-pill active" data-filter="all">All</button> <button class="nav-pill" data-filter="hemorrhage">Hemorrhage</button> <button class="nav-pill" data-filter="hypertensive">Hypertensive</button> <button class="nav-pill" data-filter="cardiac">Cardiac</button> <button class="nav-pill" data-filter="respiratory">Respiratory</button> <button class="nav-pill" data-filter="sepsis">Sepsis</button> <button class="nav-pill" data-filter="other">Other</button>
+     </div>
+    </div>
+   </nav><!-- MAIN CONTENT -->
+   <main class="bg-slate-950 px-4 sm:px-6 py-8" id="mainContent">
+    <div class="max-w-5xl mx-auto space-y-4" id="cardContainer"><!-- 1. MASSIVE OBSTETRIC HEMORRHAGE -->
+     <article class="emergency-card p-5 sm:p-7" data-category="hemorrhage" data-keywords="pph postpartum hemorrhage blood loss shock transfusion uterotonic"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-red-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="droplets" style="width:20px;height:20px;color:#fca5a5"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">1. Massive Obstetric Hemorrhage</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">PPH &gt;1000ml • Leading cause of maternal mortality worldwide • Golden hour management is decisive</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">⚡ Immediate Protocol (First 15 Minutes)</h3>
+         <div class="relative pl-8 space-y-4">
+          <div class="timeline-line"></div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-red-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">0 min:</strong> Call CODE OB HEMORRHAGE — Activate massive transfusion protocol (MTP). Two 16G IV lines. Elevate legs. 100% O₂ via non-rebreather mask.</p>
+          </div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-red-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">2 min:</strong> Bimanual uterine compression. Oxytocin 40 IU in 500ml NS at 250ml/hr. Tranexamic acid 1g IV over 10 min (WOMAN trial protocol).</p>
+          </div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-red-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">5 min:</strong> If atonic: Carboprost (Hemabate) 250mcg IM q15min (max 8 doses). Misoprostol 800–1000mcg PR/SL. Methylergometrine 0.2mg IM (avoid in hypertension!).</p>
+          </div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-red-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">10 min:</strong> Send bloods: CBC, coagulation, fibrinogen, crossmatch 6 units. Start O-negative PRBC if crossmatch not ready. Target fibrinogen &gt;2g/L with cryoprecipitate.</p>
+          </div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-orange-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">15 min:</strong> If medical management fails → Bakri balloon tamponade (inflate 300–500ml). Prepare for surgical intervention: B-Lynch suture, uterine artery ligation, or peripartum hysterectomy.</p>
+          </div>
+         </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">📋 4 T's Etiology</h4>
+          <ul class="space-y-1.5 text-slate-300">
+           <li>• <strong class="text-red-300">Tone (70%)</strong> — Uterine atony. Risk: polyhydramnios, macrosomia, prolonged labor, grand multiparity</li>
+           <li>• <strong class="text-orange-300">Trauma (20%)</strong> — Cervical/vaginal lacerations, uterine rupture, uterine inversion</li>
+           <li>• <strong class="text-yellow-300">Tissue (9%)</strong> — Retained placenta, placenta accreta spectrum</li>
+           <li>• <strong class="text-amber-300">Thrombin (1%)</strong> — DIC, coagulopathy, anticoagulant use</li>
+          </ul>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">🩸 Transfusion Targets</h4>
+          <ul class="space-y-1.5 text-slate-300">
+           <li>• PRBC:FFP:Platelet = <strong class="text-white">1:1:1 ratio</strong></li>
+           <li>• Hb target: &gt;7 g/dL (&gt;8 if cardiac disease)</li>
+           <li>• Fibrinogen target: &gt;2 g/L (critical in obstetrics)</li>
+           <li>• Platelets target: &gt;50 × 10⁹/L</li>
+           <li>• Ionized Ca²⁺: Replace after every 4 units PRBC</li>
+           <li>• Avoid hypothermia: Use blood warmer</li>
+          </ul>
+         </div>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl — From the ICU</h4>
+         <p class="text-slate-300 italic">"In my 15+ years of managing obstetric hemorrhage, the single most important factor is <strong class="text-white">speed of recognition</strong>. By the time a young obstetric patient becomes tachycardic, she has already lost 1.5–2 liters. Young women compensate until they suddenly decompensate — there is no gradual decline. Quantify blood loss visually AND by weight. A soaked pad = 100ml, a soaked abdominal sponge = 150ml. Never wait for lab results to start transfusion. Fibrinogen drops fastest and predicts DIC — check it early and often."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 2. ECLAMPSIA & SEVERE PRE-ECLAMPSIA -->
+     <article class="emergency-card p-5 sm:p-7" data-category="hypertensive" data-keywords="eclampsia preeclampsia seizure magnesium hellp hypertension fits convulsion"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="zap" style="width:20px;height:20px;color:#c4b5fd"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">2. Eclampsia &amp; Severe Pre-eclampsia</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">BP ≥160/110 with end-organ damage • Seizure prevention &amp; control • HELLP syndrome overlap</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">⚡ Eclamptic Seizure — Immediate Management</h3>
+         <div class="relative pl-8 space-y-4">
+          <div class="timeline-line"></div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-purple-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">During seizure:</strong> Left lateral position. Protect airway — DO NOT insert anything into mouth. Suction if needed. 100% O₂. Time the seizure.</p>
+          </div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-purple-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">MgSO₄ Loading:</strong> 4g IV over 15–20 min (Zuspan regimen) OR 4g IV + 10g IM (Pritchard regimen for resource-limited settings). <em>This is the ONLY first-line drug. Not diazepam. Not phenytoin.</em></p>
+          </div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-purple-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">MgSO₄ Maintenance:</strong> 1–2g/hr IV infusion for 24h post last seizure or post delivery. Monitor: Patellar reflexes, RR &gt;16, urine output &gt;25ml/hr.</p>
+          </div>
+          <div class="relative">
+           <div class="absolute left-[-23px] top-1 w-3 h-3 rounded-full bg-purple-500 border-2 border-slate-900"></div>
+           <p><strong class="text-white">Recurrent seizure:</strong> Additional 2g MgSO₄ IV over 5 min. If still seizing → Midazolam 2mg IV or Thiopental for intubation.</p>
+          </div>
+         </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">💊 Antihypertensive Protocol</h4>
+          <ul class="space-y-1.5">
+           <li>• <strong class="text-white">1st line:</strong> Labetalol 20mg IV → 40mg → 80mg q10min (max 300mg)</li>
+           <li>• <strong class="text-white">2nd line:</strong> Hydralazine 5–10mg IV q20min</li>
+           <li>• <strong class="text-white">3rd line:</strong> Nifedipine 10–20mg PO q30min (avoid sublingual!)</li>
+           <li>• <strong class="text-white">Target:</strong> SBP 140–150, DBP 90–100 (not lower!)</li>
+           <li>• <strong class="text-red-400">Avoid:</strong> ACE inhibitors, ARBs (teratogenic). Nitroprusside (cyanide toxicity to fetus)</li>
+          </ul>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">⚠️ HELLP Syndrome</h4>
+          <ul class="space-y-1.5">
+           <li>• <strong class="text-white">H</strong>emolysis: LDH &gt;600, schistocytes, bilirubin ↑</li>
+           <li>• <strong class="text-white">EL</strong>evated Liver enzymes: AST &gt;70 IU/L</li>
+           <li>• <strong class="text-white">LP</strong>ow Platelets: &lt;100 × 10⁹/L</li>
+           <li>• Delivery is the definitive treatment</li>
+           <li>• Dexamethasone 10mg IV q12h may ↑ platelets</li>
+           <li>• Risk: DIC, hepatic rupture, abruption, renal failure</li>
+          </ul>
+         </div>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"MgSO₄ toxicity kills. Always keep calcium gluconate 1g at the bedside as the antidote. The triad of toxicity: loss of patellar reflexes → respiratory depression → cardiac arrest. In resource-limited settings where infusion pumps are unavailable, Pritchard's IM regimen is lifesaving. I've managed eclampsia in district hospitals with just MgSO₄ ampules and a competent nurse — and it works. The key is not to panic and not to reach for diazepam first."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 3. AMNIOTIC FLUID EMBOLISM -->
+     <article class="emergency-card p-5 sm:p-7" data-category="other" data-keywords="amniotic fluid embolism afe sudden collapse coagulopathy"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="wind" style="width:20px;height:20px;color:#67e8f9"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">3. Amniotic Fluid Embolism (AFE)</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">Unpredictable, unpreventable • Mortality 20–60% • Triad: Hypoxia + Hypotension + Coagulopathy</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">⚡ Recognition &amp; Response</h3>
+         <ul class="space-y-2">
+          <li><strong class="text-white">Presentation:</strong> Sudden dyspnea → hypotension → altered consciousness → seizures → DIC → cardiac arrest. Often occurs during labor, C-section, or immediately postpartum.</li>
+          <li><strong class="text-white">Immediate:</strong> Call for help. ABCDE approach. Intubate early (these patients crash fast). High-flow O₂. Two large-bore IVs. Arterial line ASAP.</li>
+          <li><strong class="text-white">Hemodynamics:</strong> Initially RIGHT heart failure (pulmonary vasospasm) → then LEFT heart failure. Norepinephrine 0.1–0.5 mcg/kg/min as first vasopressor. Consider dobutamine if LV failure predominates.</li>
+          <li><strong class="text-white">Coagulopathy:</strong> Often develops severe DIC within 30 min. Aggressive MTP: PRBC, FFP, cryoprecipitate, platelets. Consider rFVIIa (NovoSeven) as rescue therapy.</li>
+          <li><strong class="text-white">If cardiac arrest:</strong> Standard ACLS but with LEFT UTERINE DISPLACEMENT. Perimortem cesarean within 4 minutes if ≥23 weeks. This saves BOTH mother and baby.</li>
+         </ul>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"AFE is the most terrifying obstetric emergency. A perfectly healthy woman delivering her baby can be dead within minutes. I recall a case — a G2P1 during active labor who suddenly gasped, desaturated to 60%, and became pulseless within 90 seconds. We performed perimortem cesarean at 4 minutes. Both survived. The lesson: have a rehearsed protocol. You will not have time to think. Diagnosis is clinical — do NOT wait for any lab confirmation."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 4. PERIPARTUM CARDIOMYOPATHY -->
+     <article class="emergency-card p-5 sm:p-7" data-category="cardiac" data-keywords="peripartum cardiomyopathy ppcm heart failure ef ejection fraction"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-rose-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="heart" style="width:20px;height:20px;color:#fda4af"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">4. Peripartum Cardiomyopathy (PPCM)</h2><span class="severity-high text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">High</span>
+        </div>
+        <p class="text-slate-400 text-sm">EF &lt;45% in last month of pregnancy to 5 months postpartum • Often misdiagnosed as "normal pregnancy symptoms"</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="grid sm:grid-cols-2 gap-4">
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">🔍 Diagnosis</h4>
+          <ul class="space-y-1.5">
+           <li>• Dyspnea, orthopnea, PND, peripheral edema</li>
+           <li>• BNP/NT-proBNP markedly elevated</li>
+           <li>• Echo: EF &lt;45%, dilated LV, global hypokinesis</li>
+           <li>• CXR: Cardiomegaly, pulmonary edema</li>
+           <li>• <strong class="text-red-300">Trap:</strong> Symptoms mimic normal late pregnancy!</li>
+          </ul>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">💊 ICU Management</h4>
+          <ul class="space-y-1.5">
+           <li>• <strong class="text-white">Antenatal:</strong> Hydralazine + nitrates (no ACEi!)</li>
+           <li>• <strong class="text-white">Postpartum:</strong> ACEi/ARB + β-blocker + diuretic</li>
+           <li>• Bromocriptine 2.5mg BD × 2 weeks (anti-prolactin, cardioprotective)</li>
+           <li>• Anticoagulation if EF &lt;30% or LV thrombus</li>
+           <li>• If cardiogenic shock → Inotropes → ECMO/VAD if available</li>
+          </ul>
+         </div>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"The tragedy of PPCM is delayed diagnosis. I've seen patients referred as 'anxiety' or 'normal pregnancy breathlessness' who were actually in florid heart failure with an EF of 15%. Rule of thumb: if a pregnant or postpartum woman says she can't breathe lying down, get a BNP and echo THAT DAY. Early bromocriptine has changed outcomes dramatically — advocate for it. Recovery to normal EF occurs in ~50% of patients, but EF &lt;30% at diagnosis carries significant mortality."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 5. OBSTETRIC SEPSIS -->
+     <article class="emergency-card p-5 sm:p-7" data-category="sepsis" data-keywords="sepsis septic shock chorioamnionitis endometritis puerperal fever"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="thermometer" style="width:20px;height:20px;color:#fcd34d"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">5. Obstetric Sepsis &amp; Septic Shock</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">3rd leading cause of maternal death • Hour-1 bundle • Source control is paramount</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">⚡ Hour-1 Sepsis Bundle (Adapted for Obstetrics)</h3>
+         <ul class="space-y-2">
+          <li>✅ Measure <strong class="text-white">lactate</strong>. If &gt;2 mmol/L → re-measure within 2–4 hrs</li>
+          <li>✅ <strong class="text-white">Blood cultures × 2</strong> + HVS + urine culture + wound swab BEFORE antibiotics</li>
+          <li>✅ <strong class="text-white">Broad-spectrum antibiotics within 1 hour:</strong> Piperacillin-tazobactam 4.5g IV + Clindamycin 900mg IV (covers GAS &amp; anaerobes). Add Gentamicin 5mg/kg if septic shock.</li>
+          <li>✅ <strong class="text-white">IV crystalloid 30ml/kg</strong> if hypotensive or lactate ≥4 (use balanced crystalloid — Ringer's lactate preferred over NS)</li>
+          <li>✅ <strong class="text-white">Vasopressors</strong> if MAP &lt;65 despite fluids → Norepinephrine first line. Target MAP ≥65 mmHg.</li>
+         </ul>
+        </div>
+        <div class="bg-slate-800/40 rounded-xl p-4">
+         <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">🔎 Common Sources in Obstetrics</h4>
+         <ul class="space-y-1.5">
+          <li>• <strong class="text-amber-300">Chorioamnionitis:</strong> Fever + uterine tenderness + fetal tachycardia. Deliver promptly.</li>
+          <li>• <strong class="text-amber-300">Endometritis:</strong> Post-cesarean or post-delivery. Foul lochia, fever.</li>
+          <li>• <strong class="text-amber-300">Pyelonephritis:</strong> Most common non-genital source. Flank pain + fever + pyuria.</li>
+          <li>• <strong class="text-amber-300">Wound infection/Necrotizing fasciitis:</strong> Rapidly progressive. Surgical emergency!</li>
+          <li>• <strong class="text-amber-300">Group A Strep (GAS):</strong> Can cause fulminant sepsis within hours. Think of it in every postpartum fever!</li>
+          <li>• <strong class="text-amber-300">Septic abortion:</strong> Retained products + infection. Evacuation is source control.</li>
+         </ul>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"Obstetric patients are physiologically vasodilated with high cardiac output. A 'normal' BP of 110/70 in a previously hypertensive preeclamptic patient IS shock. Use the obstetric early warning score (MOEWS). The most lethal mistake I've seen is treating endometritis with antibiotics alone when there is a 6cm pelvic abscess requiring drainage. Source control means: if there's pus, drain it. If there are retained products, evacuate them. Antibiotics without source control = death."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 6. PULMONARY EMBOLISM -->
+     <article class="emergency-card p-5 sm:p-7" data-category="respiratory" data-keywords="pulmonary embolism pe dvt thromboembolism vte anticoagulation"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="activity" style="width:20px;height:20px;color:#93c5fd"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">6. Massive Pulmonary Embolism</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">Pregnancy = 5–10× VTE risk • Massive PE = hemodynamic instability • Do not delay treatment for imaging</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">⚡ Massive PE Protocol</h3>
+         <ul class="space-y-2">
+          <li><strong class="text-white">If hemodynamically unstable:</strong> UFH 80 IU/kg bolus → 18 IU/kg/hr infusion. Do NOT wait for CTPA!</li>
+          <li><strong class="text-white">Thrombolysis:</strong> Alteplase 100mg IV over 2 hours. Pregnancy is a RELATIVE contraindication — in massive PE with arrest, GIVE IT. The alternative is death.</li>
+          <li><strong class="text-white">If cardiac arrest:</strong> Prolonged CPR (at least 60 min). Consider surgical embolectomy or catheter-directed therapy if available.</li>
+          <li><strong class="text-white">Stable PE:</strong> LMWH (Enoxaparin 1mg/kg BD). Avoid warfarin antenatally (teratogenic). CTPA is preferred over V/Q scan.</li>
+          <li><strong class="text-white">Postpartum:</strong> Switch to warfarin (safe in breastfeeding). Target INR 2–3 for minimum 6 weeks.</li>
+         </ul>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"D-dimer is useless in pregnancy — it's physiologically elevated. If you suspect PE, go straight to imaging. In a crashing patient, bedside echo showing RV dilation and McConnell's sign is enough to start thrombolysis. I have personally administered alteplase to a 34-week pregnant woman in PEA arrest — she survived, delivered a healthy baby 3 weeks later. Do not let fear of bleeding complications kill your patient."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 7. DIC -->
+     <article class="emergency-card p-5 sm:p-7" data-category="hemorrhage" data-keywords="dic disseminated intravascular coagulation consumptive coagulopathy"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-red-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="git-branch" style="width:20px;height:20px;color:#fca5a5"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">7. Disseminated Intravascular Coagulation (DIC)</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">Consumptive coagulopathy • Always secondary to an underlying cause • Treat the cause, replace the factors</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="grid sm:grid-cols-2 gap-4">
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">🔬 Obstetric Causes</h4>
+          <ul class="space-y-1.5">
+           <li>• Placental abruption (most common)</li>
+           <li>• Amniotic fluid embolism</li>
+           <li>• HELLP syndrome</li>
+           <li>• Sepsis / chorioamnionitis</li>
+           <li>• Retained dead fetus (&gt;4 weeks)</li>
+           <li>• Massive hemorrhage / transfusion</li>
+           <li>• Acute fatty liver of pregnancy</li>
+          </ul>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">💉 Replacement Therapy</h4>
+          <ul class="space-y-1.5">
+           <li>• <strong class="text-white">FFP 15ml/kg</strong> if PT/APTT &gt;1.5× normal</li>
+           <li>• <strong class="text-white">Cryoprecipitate 10 units</strong> if fibrinogen &lt;2 g/L</li>
+           <li>• <strong class="text-white">Platelets</strong> if &lt;50 × 10⁹/L with active bleeding</li>
+           <li>• <strong class="text-white">Tranexamic acid 1g</strong> IV (adjunct)</li>
+           <li>• Monitor: Fibrinogen q1–2h, PT/APTT, D-dimer, FDP</li>
+          </ul>
+         </div>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"DIC is not a diagnosis — it's a complication. If you're replacing factors faster than the patient is using them, you're losing the battle. The obstetric fibrinogen normal is 4–6 g/L, NOT 2–4 g/L. A fibrinogen of 2.5 g/L in an obstetric patient means she is ALREADY in early DIC. In abruption with DIC, deliver the baby and the placenta — that's your source control. Every minute of delay increases factor consumption."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 8. UTERINE RUPTURE -->
+     <article class="emergency-card p-5 sm:p-7" data-category="hemorrhage" data-keywords="uterine rupture vbac scar dehiscence"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-orange-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="alert-triangle" style="width:20px;height:20px;color:#fdba74"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">8. Uterine Rupture</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">VBAC risk 0.5–1% • Previous classical scar = high risk • Fetal bradycardia is the earliest sign</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">⚡ Recognition &amp; Response</h3>
+         <ul class="space-y-2">
+          <li><strong class="text-white">Signs:</strong> Sudden fetal bradycardia (most reliable), loss of station, cessation of contractions, maternal tachycardia, sudden abdominal pain, vaginal bleeding, palpable fetal parts through abdomen</li>
+          <li><strong class="text-white">Action:</strong> Category 1 cesarean section — Decision-to-delivery interval &lt;15 minutes. Simultaneous resuscitation. Call neonatal team.</li>
+          <li><strong class="text-white">Surgical:</strong> Repair if possible (future fertility desired + clean edges). Hysterectomy if hemorrhage uncontrolled or extensive damage.</li>
+          <li><strong class="text-white">Fetal outcomes:</strong> Depend on time from rupture to delivery. Beyond 18 min = significant risk of hypoxic brain injury.</li>
+         </ul>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"In VBAC, the CTG is your lifeline. A sudden, prolonged deceleration with loss of variability in a previously normal trace should be treated as rupture until proven otherwise. I have performed crash cesareans in under 10 minutes for this — the team drills make the difference. Never allow VBAC without an OT team immediately available. A previous classical (vertical) scar is an absolute contraindication for VBAC — the rupture rate is 4–9%."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 9. PLACENTA ACCRETA SPECTRUM -->
+     <article class="emergency-card p-5 sm:p-7" data-category="hemorrhage" data-keywords="placenta accreta increta percreta adherent invasive"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-pink-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="layers" style="width:20px;height:20px;color:#f9a8d4"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">9. Placenta Accreta Spectrum (PAS)</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">Accreta → Increta → Percreta • Rising incidence with cesarean rates • Planned management saves lives</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="grid sm:grid-cols-3 gap-3">
+         <div class="bg-slate-800/40 rounded-xl p-4 text-center">
+          <h4 class="text-pink-300 font-bold text-sm mb-1">Accreta</h4>
+          <p class="text-xs">Adheres to myometrium<br>
+           Does not invade</p>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-4 text-center">
+          <h4 class="text-orange-300 font-bold text-sm mb-1">Increta</h4>
+          <p class="text-xs">Invades into<br>
+           myometrium</p>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-4 text-center">
+          <h4 class="text-red-300 font-bold text-sm mb-1">Percreta</h4>
+          <p class="text-xs">Penetrates through to<br>
+           bladder/serosa</p>
+         </div>
+        </div>
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">Planned Delivery Protocol</h3>
+         <ul class="space-y-2">
+          <li>• Deliver at 34–36 weeks in a center with blood bank, ICU, and multidisciplinary team</li>
+          <li>• Crossmatch 6 PRBC + 4 FFP. Cell-saver in OT. Interventional radiology on standby for balloon occlusion of internal iliac arteries</li>
+          <li>• Midline vertical skin incision. Upper segment hysterotomy (AVOID the placenta). Deliver baby. DO NOT attempt to remove placenta</li>
+          <li>• Proceed to cesarean hysterectomy with placenta in-situ. Urology if bladder involvement (percreta)</li>
+          <li>• Average blood loss: 3–5 liters. Have MTP activated pre-operatively</li>
+         </ul>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"The single worst thing you can do with a suspected accreta is try to pull the placenta off. I have seen an accreta turned into a 7-liter hemorrhage by a trainee who 'just wanted to see if it would come.' If the placenta does not separate with gentle cord traction within 30 seconds at cesarean — STOP. Leave it. Close. Plan the hysterectomy. MRI with gadolinium postpartum (if antenatal diagnosis missed) can guide surgical planning."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 10. ACUTE FATTY LIVER OF PREGNANCY -->
+     <article class="emergency-card p-5 sm:p-7" data-category="other" data-keywords="aflp acute fatty liver swansea criteria jaundice liver failure"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-yellow-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="box" style="width:20px;height:20px;color:#fde047"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">10. Acute Fatty Liver of Pregnancy (AFLP)</h2><span class="severity-high text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">High</span>
+        </div>
+        <p class="text-slate-400 text-sm">Rare but lethal (1:10,000) • Swansea criteria • Often confused with HELLP • Delivery is curative</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="bg-slate-800/40 rounded-xl p-4">
+         <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">📋 Swansea Criteria (≥6 needed)</h4>
+         <div class="grid grid-cols-2 gap-2 text-xs">
+          <div>
+           • Vomiting
+          </div>
+          <div>
+           • Abdominal pain
+          </div>
+          <div>
+           • Polydipsia/polyuria
+          </div>
+          <div>
+           • Encephalopathy
+          </div>
+          <div>
+           • Bilirubin &gt;14 μmol/L
+          </div>
+          <div>
+           • Hypoglycemia &lt;4 mmol/L
+          </div>
+          <div>
+           • Uric acid &gt;340 μmol/L
+          </div>
+          <div>
+           • Leukocytosis &gt;11
+          </div>
+          <div>
+           • Ascites/bright liver on USS
+          </div>
+          <div>
+           • AST/ALT &gt;42 IU/L
+          </div>
+          <div>
+           • Ammonia &gt;47 μmol/L
+          </div>
+          <div>
+           • Renal impairment Cr &gt;150
+          </div>
+          <div>
+           • Coagulopathy PT &gt;14s
+          </div>
+          <div>
+           • Microvesicular steatosis on biopsy
+          </div>
+         </div>
+        </div>
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">Management</h3>
+         <ul class="space-y-2">
+          <li>• <strong class="text-white">Stabilize:</strong> Correct hypoglycemia (10% dextrose infusion), correct coagulopathy, manage encephalopathy (lactulose + rifaximin)</li>
+          <li>• <strong class="text-white">Deliver:</strong> As soon as stabilized. Vaginal if favorable, cesarean if not. This is the ONLY cure.</li>
+          <li>• <strong class="text-white">Post-delivery:</strong> Monitor in ICU for 48–72h. Liver function usually recovers within 1–2 weeks. If worsening → consider liver transplant referral.</li>
+          <li>• <strong class="text-white">Differentiate from HELLP:</strong> AFLP has hypoglycemia, elevated ammonia, DIC, and low AT-III. HELLP has hemolysis + thrombocytopenia predominating.</li>
+         </ul>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"AFLP is the great mimicker. I've seen it present as 'gastritis' and diagnosed only when the patient became encephalopathic. The key distinguishing feature from HELLP: check the glucose and ammonia. Profound hypoglycemia in a third-trimester patient with liver dysfunction = AFLP until proven otherwise. These patients need ICU from the moment of diagnosis. Post-delivery, they can still deteriorate for 48 hours before improving."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 11. CARDIAC ARREST IN PREGNANCY -->
+     <article class="emergency-card p-5 sm:p-7" data-category="cardiac" data-keywords="cardiac arrest cpr resuscitation perimortem cesarean"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-red-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="heart-off" style="width:20px;height:20px;color:#fca5a5"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">11. Cardiac Arrest in Pregnancy</h2><span class="severity-critical text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">Critical</span>
+        </div>
+        <p class="text-slate-400 text-sm">Modified ACLS • Left uterine displacement • Perimortem cesarean at 4 minutes • BEAUTIFHUL mnemonic</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="protocol-box">
+         <h3 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-3">⚡ Modified ACLS for Pregnancy</h3>
+         <ul class="space-y-2">
+          <li><strong class="text-white">BLS:</strong> Standard CPR with hand placement slightly HIGHER on sternum. Left uterine displacement (15–30° wedge or manual displacement) — continuous.</li>
+          <li><strong class="text-white">ACLS:</strong> Standard algorithms apply. All drugs at standard doses. Defibrillation at standard energy — it does NOT harm the fetus. Remove fetal monitors before defib.</li>
+          <li><strong class="text-white">4 Minutes:</strong> If no ROSC by 4 min AND ≥23 weeks gestation → BEGIN perimortem cesarean. Delivery within 5 min of arrest = best outcomes for BOTH. This aids maternal resuscitation by relieving aortocaval compression.</li>
+          <li><strong class="text-white">Intubation:</strong> Use 6.0–7.0 ETT (smaller due to airway edema). Expect difficult airway. Rapid desaturation. Video laryngoscope preferred.</li>
+         </ul>
+        </div>
+        <div class="bg-slate-800/40 rounded-xl p-4">
+         <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">🧠 Reversible Causes (BEAUTIFHUL)</h4>
+         <div class="grid grid-cols-2 gap-1 text-xs">
+          <div>
+           <strong class="text-red-300">B</strong>leeding/DIC
+          </div>
+          <div>
+           <strong class="text-red-300">E</strong>mbolism (PE/AFE)
+          </div>
+          <div>
+           <strong class="text-red-300">A</strong>nesthetic complications
+          </div>
+          <div>
+           <strong class="text-red-300">U</strong>terine atony
+          </div>
+          <div>
+           <strong class="text-red-300">T</strong>rauma
+          </div>
+          <div>
+           <strong class="text-red-300">I</strong>mmune (anaphylaxis)
+          </div>
+          <div>
+           <strong class="text-red-300">F</strong>ever/sepsis
+          </div>
+          <div>
+           <strong class="text-red-300">H</strong>yper/hypo (K⁺, Mg²⁺)
+          </div>
+          <div>
+           <strong class="text-red-300">U</strong>nstable cardiac (MI, aortic dissection)
+          </div>
+          <div>
+           <strong class="text-red-300">L</strong>ong QT / toxins
+          </div>
+         </div>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"Perimortem cesarean is NOT about saving the baby — it's about saving the mother. Removing the gravid uterus eliminates aortocaval compression and returns 30% of cardiac output to maternal circulation. I have seen ROSC occur within seconds of delivery. Have a scalpel on the crash cart. The decision is not 'should we cut?' — it's 'are we fast enough?' Drill this with your team. Every OB unit should simulate this quarterly."</p>
+        </div>
+       </div>
+      </div>
+     </article><!-- 12. OBSTETRIC AIRWAY EMERGENCY -->
+     <article class="emergency-card p-5 sm:p-7" data-category="respiratory" data-keywords="difficult airway intubation failed aspiration anaesthesia"><button class="acc-toggle w-full text-left flex items-start gap-4" aria-expanded="false">
+       <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-950/60 flex items-center justify-center mt-1">
+        <i data-lucide="air-vent" style="width:20px;height:20px;color:#5eead4"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+         <h2 class="font-heading text-xl sm:text-2xl text-white">12. Obstetric Airway Emergency</h2><span class="severity-high text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">High</span>
+        </div>
+        <p class="text-slate-400 text-sm">8× higher failed intubation rate • Rapid desaturation • Aspiration risk (Mendelson's) • Always have Plan B</p>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;color:#94a3b8;flex-shrink:0;margin-top:8px"></i> </button>
+      <div class="acc-content">
+       <div class="mt-6 ml-0 sm:ml-14 space-y-5 text-slate-300 text-sm leading-relaxed">
+        <div class="grid sm:grid-cols-2 gap-4">
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">⚠️ Why OB Airways Are Dangerous</h4>
+          <ul class="space-y-1.5">
+           <li>• Airway edema (especially in preeclampsia)</li>
+           <li>• Weight gain + large breasts → short neck, difficult positioning</li>
+           <li>• Reduced FRC → desaturation in 60–90 seconds (vs 3–5 min in non-pregnant)</li>
+           <li>• Full stomach (delayed gastric emptying) → aspiration risk</li>
+           <li>• Engorged mucosal vessels → bleed with instrumentation</li>
+          </ul>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-4">
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-2">✅ Failed Intubation Drill</h4>
+          <ul class="space-y-1.5">
+           <li>1. Max 2 intubation attempts by most experienced person</li>
+           <li>2. Declare failed intubation. Call for help.</li>
+           <li>3. Insert 2nd-gen supraglottic airway (i-gel/LMA)</li>
+           <li>4. If successful → Continue anesthesia or wake up</li>
+           <li>5. If CICO → Front-of-neck access (cricothyroidotomy)</li>
+           <li>6. Preoxygenate to SpO₂ 100% with 15° head-up tilt + ramped position</li>
+          </ul>
+         </div>
+        </div>
+        <div class="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-widest mb-2">🏥 Clinical Pearl</h4>
+         <p class="text-slate-300 italic">"Every obstetric unit must have a video laryngoscope and a surgeon who can perform a cricothyroidotomy. Period. In my experience, the obstetric patient who desaturates to 70% during a failed intubation has about 30 seconds before bradycardia. Pre-oxygenation with high-flow nasal oxygen DURING laryngoscopy (NODESAT technique) buys you precious time. Always use RSI with cricoid pressure. And for Mendelson's aspiration — pH &lt;2.5 gastric content is essentially acid burns to the lungs. Ranitidine 50mg IV + metoclopramide 10mg IV + sodium citrate 30ml PO before GA is non-negotiable."</p>
+        </div>
+       </div>
+      </div>
+     </article>
+    </div><!-- end cardContainer --> <!-- QUICK REFERENCE FOOTER -->
+    <div class="max-w-5xl mx-auto mt-12 mb-8">
+     <div class="emergency-card p-6 sm:p-8">
+      <h2 class="font-heading text-2xl text-white mb-4">📞 Quick Emergency Drug Reference</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm text-left">
+        <thead>
+         <tr class="border-b border-white/10 text-slate-400 text-xs uppercase tracking-wider">
+          <th class="py-3 pr-4">Drug</th>
+          <th class="py-3 pr-4">Dose</th>
+          <th class="py-3 pr-4">Indication</th>
+          <th class="py-3">Caution</th>
+         </tr>
+        </thead>
+        <tbody class="text-slate-300">
+         <tr class="border-b border-white/5">
+          <td class="py-2.5 pr-4 text-white font-medium">Oxytocin</td>
+          <td class="py-2.5 pr-4">40 IU in 500ml NS</td>
+          <td class="py-2.5 pr-4">Uterine atony</td>
+          <td class="py-2.5">Hypotension if bolused fast</td>
+         </tr>
+         <tr class="border-b border-white/5">
+          <td class="py-2.5 pr-4 text-white font-medium">MgSO₄</td>
+          <td class="py-2.5 pr-4">4g IV loading → 1–2g/hr</td>
+          <td class="py-2.5 pr-4">Eclampsia</td>
+          <td class="py-2.5">Toxicity → Ca gluconate 1g</td>
+         </tr>
+         <tr class="border-b border-white/5">
+          <td class="py-2.5 pr-4 text-white font-medium">Tranexamic Acid</td>
+          <td class="py-2.5 pr-4">1g IV over 10 min</td>
+          <td class="py-2.5 pr-4">PPH, DIC</td>
+          <td class="py-2.5">Give within 3h of onset</td>
+         </tr>
+         <tr class="border-b border-white/5">
+          <td class="py-2.5 pr-4 text-white font-medium">Carboprost</td>
+          <td class="py-2.5 pr-4">250mcg IM q15min</td>
+          <td class="py-2.5 pr-4">Refractory atony</td>
+          <td class="py-2.5">Avoid in asthma!</td>
+         </tr>
+         <tr class="border-b border-white/5">
+          <td class="py-2.5 pr-4 text-white font-medium">Labetalol</td>
+          <td class="py-2.5 pr-4">20→40→80mg IV q10min</td>
+          <td class="py-2.5 pr-4">Severe hypertension</td>
+          <td class="py-2.5">Avoid in asthma/heart block</td>
+         </tr>
+         <tr class="border-b border-white/5">
+          <td class="py-2.5 pr-4 text-white font-medium">Norepinephrine</td>
+          <td class="py-2.5 pr-4">0.1–0.5 mcg/kg/min</td>
+          <td class="py-2.5 pr-4">Septic/cardiogenic shock</td>
+          <td class="py-2.5">Via central line ideally</td>
+         </tr>
+         <tr>
+          <td class="py-2.5 pr-4 text-white font-medium">Alteplase</td>
+          <td class="py-2.5 pr-4">100mg IV over 2h</td>
+          <td class="py-2.5 pr-4">Massive PE</td>
+          <td class="py-2.5">Pregnancy = relative CI only</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+     <p class="text-center text-slate-600 text-xs mt-8 px-4">This clinical reference is based on personal experience and current evidence-based guidelines (RCOG, ACOG, WHO, SSC). Not a substitute for clinical judgment. Updated protocols should always be consulted.</p>
+    </div>
+   </main><!-- Back to Top --> <button class="btt" id="bttBtn" aria-label="Back to top"><i data-lucide="arrow-up" style="width:20px;height:20px"></i></button>
+  </div><!-- end app-root -->
+  <script>
+// === DEFAULT CONFIG ===
+const defaultConfig = {
+  main_title: "Obstetric ICU Emergencies",
+  subtitle: "A Comprehensive Clinical Experience Guide for Critical Care in Obstetrics",
+  author_name: "MBBS, MD (Obs & Gynec) | ICU Intensivist | Emergency Medicine Specialist",
+  background_color: "#0a0f1e",
+  surface_color: "#1e293b",
+  text_color: "#e2e8f0",
+  primary_action_color: "#dc2626",
+  secondary_action_color: "#94a3b8",
+  font_family: "DM Serif Display",
+  font_size: 16
+};
+
+// === ELEMENT SDK ===
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const root = document.getElementById('appRoot');
+  const mainContent = document.getElementById('mainContent');
+
+  // Text
+  document.getElementById('mainTitle').textContent = c.main_title;
+  document.getElementById('subtitle').textContent = c.subtitle;
+  document.getElementById('authorName').textContent = c.author_name;
+
+  // Colors
+  root.style.backgroundColor = c.background_color;
+  mainContent.style.backgroundColor = c.background_color;
+
+  document.querySelectorAll('.emergency-card').forEach(card => {
+    card.style.backgroundColor = c.surface_color + '1a';
+    card.style.borderColor = c.surface_color + '40';
+  });
+
+  document.querySelectorAll('.font-heading').forEach(el => {
+    el.style.color = c.text_color;
+  });
+
+  document.querySelectorAll('.severity-critical,.severity-high').forEach(el => {
+    el.style.background = `linear-gradient(135deg,${c.primary_action_color},${c.primary_action_color}cc)`;
+  });
+
+  document.querySelectorAll('.stat-ring').forEach(el => {
+    el.style.borderColor = c.primary_action_color + '50';
+    el.style.color = c.primary_action_color + 'cc';
+  });
+
+  document.querySelectorAll('.protocol-box').forEach(el => {
+    el.style.borderLeftColor = c.primary_action_color;
+  });
+
+  document.querySelectorAll('.nav-pill.active').forEach(el => {
+    el.style.borderColor = c.primary_action_color;
+  });
+
+  // Fonts
+  const customFont = c.font_family || defaultConfig.font_family;
+  const baseFontStack = "'Source Sans 3', sans-serif";
+  document.querySelectorAll('.font-heading').forEach(el => {
+    el.style.fontFamily = `${customFont}, serif`;
+  });
+  root.style.fontFamily = baseFontStack;
+
+  // Font size
+  const base = c.font_size || defaultConfig.font_size;
+  root.style.fontSize = base + 'px';
+}
+
+// === ACCORDION ===
+document.querySelectorAll('.acc-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const content = btn.nextElementSibling;
+    const isOpen = content.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.acc-content.open').forEach(c => c.classList.remove('open'));
+    document.querySelectorAll('.acc-toggle.active').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-expanded','false'); });
+    if (!isOpen) {
+      content.classList.add('open');
+      btn.classList.add('active');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+// === FILTER ===
+document.querySelectorAll('.nav-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const filter = pill.dataset.filter;
+    document.querySelectorAll('.emergency-card').forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// === SEARCH ===
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase();
+  // Reset filter pills
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  document.querySelector('.nav-pill[data-filter="all"]').classList.add('active');
+  document.querySelectorAll('.emergency-card').forEach(card => {
+    const text = (card.textContent + ' ' + card.dataset.keywords).toLowerCase();
+    card.style.display = text.includes(q) ? '' : 'none';
+  });
+});
+
+// === BACK TO TOP ===
+const appRoot = document.getElementById('appRoot');
+const bttBtn = document.getElementById('bttBtn');
+appRoot.addEventListener('scroll', () => {
+  bttBtn.classList.toggle('visible', appRoot.scrollTop > 500);
+});
+bttBtn.addEventListener('click', () => {
+  appRoot.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Init icons
+lucide.createIcons();
+</script>
+</body>
+</html>
