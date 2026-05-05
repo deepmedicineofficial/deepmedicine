@@ -1,0 +1,774 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Clinical Protocols | Standard Treatment Guidelines & Algorithms | Deep Medicine</title> <meta name="description" content="Comprehensive clinical protocols covering emergency care, ICU management, diagnostic pathways, and evidence-based treatment algorithms."> <link rel="canonical" href="https://deepmedicine.in/clinical/quick-reference/clinical-protocols"> <!-- Open Graph --> <meta property="og:title" content="Clinical Protocols | Deep Medicine"> <meta property="og:description" content="Standardized clinical protocols for diagnosis, treatment, and emergency management in healthcare."> <meta property="og:image" content="https://deepmedicine.in/images/clinical-protocols.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        body: ['IBM Plex Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace']
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; }
+.icu-app { height: 100%; overflow: auto; }
+.protocol-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+.protocol-card:hover { transform: translateY(-2px); }
+.step-line::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 2px;
+  background: currentColor;
+  opacity: 0.2;
+}
+.dose-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.tab-btn { transition: all 0.2s; }
+.tab-btn.active { border-bottom: 3px solid; }
+.fade-in { animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.search-input:focus { outline: none; box-shadow: 0 0 0 2px rgba(220,50,47,0.3); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.accordion-body.open { max-height: 8000px; }
+.severity-critical { border-left: 4px solid #dc322f; }
+.severity-urgent { border-left: 4px solid #cb4b16; }
+.severity-standard { border-left: 4px solid #268bd2; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="icu-app font-body" id="app" style="background:#0a0f1a;color:#c8cdd8;"><!-- Header -->
+   <header id="header" style="background:linear-gradient(135deg,#0d1526 0%,#1a1025 100%);border-bottom:1px solid #1e2a3a;" class="sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6">
+     <div class="flex items-center justify-between flex-wrap gap-3">
+      <div class="flex items-center gap-3">
+       <div style="background:#dc322f;" class="w-10 h-10 rounded-lg flex items-center justify-center"><i data-lucide="activity" style="color:#fff;width:22px;height:22px;"></i>
+       </div>
+       <div>
+        <h1 id="mainTitle" class="text-xl sm:text-2xl font-bold" style="color:#f0f2f5;">ICU Protocols &amp; Emergencies</h1>
+        <p id="mainSubtitle" class="text-xs sm:text-sm" style="color:#6b7a8d;">Critical Care Quick Reference</p>
+       </div>
+      </div>
+      <div class="relative w-full sm:w-72"><i data-lucide="search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#6b7a8d;"></i> <input id="searchInput" type="text" placeholder="Search protocols, drugs..." class="search-input w-full pl-10 pr-4 py-2 rounded-lg text-sm" style="background:#111827;border:1px solid #1e2a3a;color:#c8cdd8;">
+      </div>
+     </div><!-- Tabs -->
+     <nav class="flex gap-1 mt-4 overflow-x-auto pb-1" id="tabBar"><button class="tab-btn active px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-tab="emergencies" style="color:#dc322f;border-color:#dc322f;">🚨 Emergencies</button> <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-tab="protocols" style="color:#6b7a8d;border-color:transparent;">📋 Protocols</button> <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-tab="drugs" style="color:#6b7a8d;border-color:transparent;">💊 Drug Dosing</button> <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-tab="ventilator" style="color:#6b7a8d;border-color:transparent;">🫁 Ventilator</button> <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-tab="calculators" style="color:#6b7a8d;border-color:transparent;">🧮 Calculators</button>
+     </nav>
+    </div>
+   </header><!-- Content -->
+   <main class="max-w-7xl mx-auto px-4 py-6 sm:px-6" id="content"></main><!-- Disclaimer -->
+   <footer class="max-w-7xl mx-auto px-4 pb-8 sm:px-6">
+    <div class="rounded-lg p-4 text-xs text-center" style="background:#111827;border:1px solid #1e2a3a;color:#6b7a8d;"><strong>⚠️ Disclaimer:</strong> This guide is for educational reference only. Always verify doses with current institutional protocols, pharmacopoeia, and patient-specific factors. Not a substitute for clinical judgment.
+    </div>
+   </footer>
+  </div>
+  <script>
+// ===== DATA =====
+const DATA = {
+  emergencies: [
+    {
+      id: 'cardiac-arrest',
+      title: 'Cardiac Arrest (ACLS)',
+      icon: 'heart',
+      severity: 'critical',
+      tags: ['acls','cpr','vfib','vtach','pea','asystole'],
+      summary: 'Immediate BLS/ACLS algorithm for shockable and non-shockable rhythms.',
+      steps: [
+        { label: 'Confirm Arrest', detail: 'Check pulse ≤10 sec. If no pulse → Call code, start CPR 30:2 (100-120/min, depth 5-6 cm). Attach defibrillator.' },
+        { label: 'Rhythm Analysis', detail: 'Shockable (VF/pVT): Proceed to defibrillation. Non-shockable (PEA/Asystole): Continue CPR, go to step 4.' },
+        { label: 'Defibrillation (Shockable)', detail: 'Biphasic 120-200J (or manufacturer recommendation). Resume CPR immediately × 2 min before recheck.' },
+        { label: 'Epinephrine', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Epinephrine 1 mg IV/IO q3-5 min</span> — Give after 2nd shock for shockable; give ASAP for non-shockable rhythms.' },
+        { label: 'Amiodarone (Shockable)', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Amiodarone 300 mg IV bolus</span>, then <span class="dose-pill" style="background:#2a1215;color:#dc322f;">150 mg IV</span> for refractory VF/pVT. Alt: Lidocaine 1-1.5 mg/kg.' },
+        { label: 'Reversible Causes (H\'s & T\'s)', detail: '<b>H\'s:</b> Hypovolemia, Hypoxia, H+ (acidosis), Hypo/Hyperkalemia, Hypothermia.<br><b>T\'s:</b> Tension pneumothorax, Tamponade, Toxins, Thrombosis (PE/MI).' },
+        { label: 'ROSC Achieved', detail: 'Target: SBP >90, SpO₂ 92-98%, PaCO₂ 35-45, Temp 32-36°C (TTM). 12-lead ECG → cath lab if STEMI. Continuous EEG monitoring.' }
+      ]
+    },
+    {
+      id: 'septic-shock',
+      title: 'Septic Shock (Hour-1 Bundle)',
+      icon: 'thermometer',
+      severity: 'critical',
+      tags: ['sepsis','septic shock','hour-1','surviving sepsis','lactate','vasopressors'],
+      summary: 'Surviving Sepsis Campaign Hour-1 Bundle — initiate within 1 hour of recognition.',
+      steps: [
+        { label: 'Measure Lactate', detail: 'If lactate ≥2 mmol/L → remeasure within 2-4 hrs. Target lactate clearance ≥20% in 2 hrs.' },
+        { label: 'Blood Cultures', detail: 'Obtain ≥2 sets (aerobic + anaerobic) BEFORE antibiotics. Do not delay antibiotics >45 min for cultures.' },
+        { label: 'Broad-Spectrum Antibiotics', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Meropenem 1g IV q8h</span> + <span class="dose-pill" style="background:#2a1215;color:#dc322f;">Vancomycin 25-30 mg/kg IV load</span>. Adjust per local antibiogram. Administer within 1 hour.' },
+        { label: 'Fluid Resuscitation', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">30 mL/kg crystalloid (LR or NS) within 3 hrs</span>. Reassess with dynamic measures (PLR, PPV, SVV, POCUS IVC).' },
+        { label: 'Vasopressors if MAP <65', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Norepinephrine 0.1-1 mcg/kg/min</span> (1st line). Add <span class="dose-pill" style="background:#2a1215;color:#dc322f;">Vasopressin 0.03-0.04 U/min</span> (2nd line). Consider <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Epinephrine 0.1-0.5 mcg/kg/min</span> if inadequate.' },
+        { label: 'Refractory Shock', detail: '<span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Hydrocortisone 50 mg IV q6h</span> if vasopressor-dependent >4 hrs. Consider stress-dose steroids (Surviving Sepsis 2021).' },
+        { label: 'Source Control', detail: 'Identify and intervene within 6-12 hrs: drain abscess, debride necrotic tissue, remove infected device, repair perforation.' }
+      ]
+    },
+    {
+      id: 'anaphylaxis',
+      title: 'Anaphylaxis',
+      icon: 'alert-triangle',
+      severity: 'critical',
+      tags: ['anaphylaxis','epinephrine','allergy','angioedema','urticaria'],
+      summary: 'Immediate recognition and management of anaphylactic shock.',
+      steps: [
+        { label: 'Recognize', detail: 'Acute onset (min to hrs): skin (urticaria, flushing) + respiratory (stridor, wheeze, dyspnea) ± hypotension ± GI symptoms. High index of suspicion.' },
+        { label: 'Epinephrine IM (1st Line)', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Epinephrine 0.3-0.5 mg IM (1:1000) mid-anterolateral thigh</span>. Repeat q5-15 min PRN. DO NOT DELAY.' },
+        { label: 'Position & Access', detail: 'Supine with legs elevated (if tolerated). 2 large-bore IVs. If airway compromise → sit upright. Prepare for intubation.' },
+        { label: 'IV Fluids', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">NS 1-2 L rapid bolus</span>. May need 5-10 L in severe distributive shock.' },
+        { label: 'Adjuncts', detail: '<span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Diphenhydramine 50 mg IV</span> + <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Ranitidine 50 mg IV</span> (H1+H2 blockade).<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Methylprednisolone 125 mg IV</span> (prevents biphasic reaction).<br>Nebulized albuterol 2.5-5 mg for bronchospasm.' },
+        { label: 'Refractory', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Epinephrine infusion 0.1-1 mcg/kg/min</span>. Consider <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Glucagon 1-5 mg IV</span> if on beta-blockers.' },
+        { label: 'Observation', detail: 'Monitor ≥6 hrs (mild) to ≥24 hrs (severe). Prescribe EpiPen at discharge. Allergy/immunology referral.' }
+      ]
+    },
+    {
+      id: 'status-epilepticus',
+      title: 'Status Epilepticus',
+      icon: 'zap',
+      severity: 'critical',
+      tags: ['seizure','status epilepticus','benzodiazepine','levetiracetam','phenytoin'],
+      summary: 'Convulsive seizure lasting >5 min or recurrent without recovery — a neurological emergency.',
+      steps: [
+        { label: 'Stabilize (0-5 min)', detail: 'ABCs. Suction, O₂, lateral position. IV access. Check glucose → if <60 mg/dL: <span class="dose-pill" style="background:#2a1215;color:#dc322f;">D50 50 mL IV</span> + <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Thiamine 100 mg IV</span>.' },
+        { label: '1st Line: Benzodiazepine (5-10 min)', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Lorazepam 0.1 mg/kg IV (max 4 mg/dose)</span> — repeat ×1 in 5 min.<br>Alt: <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Midazolam 10 mg IM</span> if no IV access.' },
+        { label: '2nd Line: AED Loading (10-30 min)', detail: 'If seizures persist:<br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">Levetiracetam 60 mg/kg IV (max 4500 mg) over 15 min</span><br>OR <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Fosphenytoin 20 mg PE/kg IV at 150 mg PE/min</span><br>OR <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Valproate 40 mg/kg IV (max 3000 mg) over 10 min</span>.' },
+        { label: '3rd Line: Refractory SE (>30 min)', detail: 'Intubate. Then one of:<br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">Propofol 2 mg/kg bolus → 20-60 mcg/kg/min</span><br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">Midazolam 0.2 mg/kg bolus → 0.1-2 mg/kg/hr</span><br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Ketamine 1-2 mg/kg bolus → 1-10 mg/kg/hr</span>.' },
+        { label: 'Monitoring', detail: 'Continuous EEG (cEEG). Target: seizure suppression or burst-suppression. Wean anesthetic after 24-48 hrs seizure-free.' },
+        { label: 'Investigations', detail: 'Labs: glucose, electrolytes, Ca²⁺, Mg²⁺, AED levels, toxicology screen. Imaging: CT head → MRI brain. LP if infection suspected.' }
+      ]
+    },
+    {
+      id: 'acute-pe',
+      title: 'Massive Pulmonary Embolism',
+      icon: 'wind',
+      severity: 'critical',
+      tags: ['pe','pulmonary embolism','thrombolysis','tpa','alteplase','heparin','anticoagulation'],
+      summary: 'Massive PE with hemodynamic instability — requires immediate reperfusion.',
+      steps: [
+        { label: 'Recognize', detail: 'Acute dyspnea + hypotension (SBP <90) + tachycardia + elevated JVP. RV strain on echo (RV dilation, McConnell sign). Elevated troponin, BNP.' },
+        { label: 'Stabilize', detail: 'O₂ to maintain SpO₂ >92%. Cautious IV fluids 250-500 mL (avoid RV overload). Consider <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Norepinephrine</span> for hemodynamic support.' },
+        { label: 'Anticoagulation', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Heparin 80 U/kg IV bolus → 18 U/kg/hr infusion</span>. Target aPTT 60-80 sec. Start immediately if PE suspected.' },
+        { label: 'Systemic Thrombolysis (Massive PE)', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Alteplase (tPA) 100 mg IV over 2 hrs</span><br>OR accelerated: <span class="dose-pill" style="background:#2a1215;color:#dc322f;">Alteplase 0.6 mg/kg (max 50 mg) over 15 min</span> in cardiac arrest.<br>Hold heparin during infusion, restart after aPTT <80.' },
+        { label: 'Alternatives if Thrombolysis CI', detail: 'Catheter-directed therapy (CDT), surgical embolectomy, or ECMO. Multidisciplinary PE response team (PERT).' },
+        { label: 'Submassive PE', detail: 'Hemodynamically stable + RV strain. Anticoagulate. Consider thrombolysis if deteriorating. Monitor in ICU ≥24-48 hrs.' }
+      ]
+    },
+    {
+      id: 'dka',
+      title: 'Diabetic Ketoacidosis (DKA)',
+      icon: 'droplets',
+      severity: 'urgent',
+      tags: ['dka','diabetic ketoacidosis','insulin','glucose','potassium','acidosis','bicarbonate'],
+      summary: 'Hyperglycemia + metabolic acidosis + ketonemia — systematic fluid, insulin, and electrolyte management.',
+      steps: [
+        { label: 'Diagnosis', detail: 'Glucose >250 mg/dL, pH <7.3, HCO₃ <18, Anion gap >12, Ketones positive. Classify: Mild (pH 7.25-7.3), Moderate (7.0-7.24), Severe (<7.0).' },
+        { label: 'Fluid Resuscitation', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">NS 1-1.5 L/hr × first 1-2 hrs</span>. Then 250-500 mL/hr NS. Switch to D5 ½NS when glucose <200 mg/dL. Total deficit typically 5-9 L.' },
+        { label: 'Potassium First!', detail: 'Check K⁺ BEFORE insulin.<br>K⁺ <3.3: <span class="dose-pill" style="background:#2a1215;color:#dc322f;">KCl 20-40 mEq/hr IV. Hold insulin until K⁺ >3.3</span><br>K⁺ 3.3-5.3: 20-30 mEq/L in each liter of IV fluid.<br>K⁺ >5.3: Hold K⁺, recheck q2h.' },
+        { label: 'Insulin', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Regular insulin 0.1-0.14 U/kg/hr IV infusion</span> (no bolus per ADA 2023). Target glucose drop 50-70 mg/dL/hr. When glucose <200 → reduce to 0.02-0.05 U/kg/hr + D5 fluid.' },
+        { label: 'Bicarbonate', detail: 'Only if pH <6.9: <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">NaHCO₃ 100 mEq in 400 mL water + 20 mEq KCl over 2 hrs</span>. Repeat until pH >6.9.' },
+        { label: 'Monitoring', detail: 'BMP q2h, VBG q2-4h, glucose q1h. Anion gap closure = resolution (not glucose!). Transition to SQ insulin when: eating, pH >7.3, AG normal. Overlap IV + SQ insulin by 1-2 hrs.' },
+        { label: 'Cerebral Edema (Caution)', detail: 'More common in pediatrics. Avoid rapid glucose/osmolality correction. If suspected: <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Mannitol 0.5-1 g/kg IV</span> or <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Hypertonic saline 3% 2-5 mL/kg</span>.' }
+      ]
+    },
+    {
+      id: 'hypertensive-emergency',
+      title: 'Hypertensive Emergency',
+      icon: 'gauge',
+      severity: 'urgent',
+      tags: ['hypertensive emergency','nicardipine','labetalol','nitroprusside','bp','blood pressure','aortic dissection'],
+      summary: 'SBP >180 and/or DBP >120 with acute end-organ damage — controlled BP reduction required.',
+      steps: [
+        { label: 'Identify End-Organ Damage', detail: 'Neuro: encephalopathy, stroke, ICH. Cardiac: ACS, acute HF, aortic dissection. Renal: AKI, hematuria. Eclampsia. Retinopathy.' },
+        { label: 'General Target', detail: 'Reduce MAP by ≤25% in first hour. Then to 160/100 over next 2-6 hrs. Then gradually to normal over 24-48 hrs. Exception: aortic dissection & ICH.' },
+        { label: 'First-Line: Nicardipine', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Nicardipine 5 mg/hr IV, titrate 2.5 mg/hr q5-15 min (max 15 mg/hr)</span>. Preferred for most scenarios. Predictable, titratable.' },
+        { label: 'Alternative: Labetalol', detail: '<span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Labetalol 20 mg IV bolus → 40 → 80 mg q10 min (max 300 mg)</span> or infusion 0.5-2 mg/min. Good for aortic dissection (add to esmolol).' },
+        { label: 'Aortic Dissection', detail: 'Target HR <60, SBP 100-120 mmHg.<br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">Esmolol 500 mcg/kg bolus → 50-200 mcg/kg/min</span> (beta-blocker FIRST to reduce shear stress). Then add nicardipine or nitroprusside.' },
+        { label: 'Acute ICH', detail: 'If SBP >220: target SBP 140-180. If SBP 150-220: target SBP 140 within 1 hr is safe (INTERACT2).<br>Use nicardipine or clevidipine.' },
+        { label: 'Eclampsia', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">MgSO₄ 4-6g IV load → 1-2 g/hr</span> for seizure prophylaxis/treatment. BP: <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Labetalol IV</span> or <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Hydralazine 5-10 mg IV q20 min</span>. Definitive: delivery.' }
+      ]
+    },
+    {
+      id: 'rsi',
+      title: 'Rapid Sequence Intubation (RSI)',
+      icon: 'syringe',
+      severity: 'urgent',
+      tags: ['intubation','rsi','airway','ketamine','succinylcholine','rocuronium','etomidate'],
+      summary: 'Structured approach to emergency airway management in the critically ill.',
+      steps: [
+        { label: 'Preparation', detail: 'SOAP-ME: Suction, O₂, Airway equipment (ETT, laryngoscope, bougie, LMA), Pharmacy (drugs drawn up), Monitors (SpO₂, ETCO₂, ECG). Assess for difficult airway (LEMON).' },
+        { label: 'Preoxygenation', detail: 'NRB 15 L/min × 3 min OR 8 vital capacity breaths. HFNC at 60 L/min for apneic oxygenation. Goal: EtO₂ >85%. Position: ramped, head of bed 30°.' },
+        { label: 'Pretreatment (Optional)', detail: '<span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Fentanyl 1-3 mcg/kg IV</span> (blunt sympathetic surge — caution in hypotension).<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Lidocaine 1.5 mg/kg IV</span> (raised ICP, reactive airway).' },
+        { label: 'Induction', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Ketamine 1.5-2 mg/kg IV</span> (hemodynamically stable, bronchospasm)<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Etomidate 0.3 mg/kg IV</span> (hemodynamically neutral — avoid in sepsis/adrenal insufficiency)<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Propofol 1-2 mg/kg IV</span> (status epilepticus — caution in hypotension).' },
+        { label: 'Paralysis', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">Succinylcholine 1.5 mg/kg IV</span> (onset 45 sec, duration 6-10 min). CI: hyperkalemia, burns >48h, denervation.<br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">Rocuronium 1.2 mg/kg IV</span> (onset 60 sec, duration 45-60 min). Reversible with sugammadex.' },
+        { label: 'Placement & Confirmation', detail: 'Direct/video laryngoscopy. Bougie if poor view. Confirm with: <b>ETCO₂ waveform (gold standard)</b>, bilateral breath sounds, chest rise, SpO₂. Secure at appropriate depth (3× ETT size at lip).' },
+        { label: 'Post-Intubation', detail: 'CXR for tube position. Lung-protective ventilation: TV 6-8 mL/kg IBW, PEEP 5-8, FiO₂ titrate. Sedation: propofol or dexmedetomidine + fentanyl. OG/NG tube. Arterial line.' }
+      ]
+    }
+  ],
+  protocols: [
+    {
+      id: 'sedation',
+      title: 'Sedation & Analgesia (PADIS)',
+      icon: 'moon',
+      severity: 'standard',
+      tags: ['sedation','pain','delirium','rass','cam-icu','padis','dexmedetomidine','propofol','fentanyl'],
+      summary: 'Pain, Agitation, Delirium, Immobility, Sleep — evidence-based ICU sedation management.',
+      steps: [
+        { label: 'Analgesia First', detail: 'Assess pain (CPOT or NRS). Target: CPOT <3.<br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">Fentanyl 25-100 mcg IV q1-2h PRN</span> or <span class="dose-pill" style="background:#2a1215;color:#dc322f;">Fentanyl infusion 25-200 mcg/hr</span>.<br>Multimodal: <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Acetaminophen 1g IV q6h</span>, <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Ketamine 0.1-0.3 mg/kg/hr</span> (opioid-sparing).' },
+        { label: 'Sedation', detail: 'Target RASS 0 to -2 (light sedation). Daily SATs (spontaneous awakening trials).<br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">Dexmedetomidine 0.2-1.5 mcg/kg/hr</span> (preferred — less delirium).<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Propofol 5-50 mcg/kg/min</span> (check triglycerides q48h, monitor for PRIS).' },
+        { label: 'Delirium Screening', detail: 'CAM-ICU q shift. Risk factors: age, dementia, severity, benzodiazepines, immobility. Prevention: early mobilization, sleep hygiene, reorient, minimize benzos.' },
+        { label: 'Delirium Treatment', detail: 'Non-pharmacologic first. If agitated/dangerous:<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Haloperidol 2-5 mg IV q6-8h PRN</span> (monitor QTc).<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Quetiapine 50-200 mg PO BID</span>. Dexmedetomidine if on ventilator.' },
+        { label: 'ABCDEF Bundle', detail: '<b>A</b>ssess/manage pain, <b>B</b>oth SAT + SBT, <b>C</b>hoice of sedation, <b>D</b>elirium monitor/manage, <b>E</b>arly mobility, <b>F</b>amily engagement. Compliance reduces mortality and ICU days.' }
+      ]
+    },
+    {
+      id: 'ards',
+      title: 'ARDS Management',
+      icon: 'cloud',
+      severity: 'standard',
+      tags: ['ards','lung protective','proning','peep','tidal volume','nmba','ecmo'],
+      summary: 'Berlin criteria classification and evidence-based ventilatory/adjunctive management.',
+      steps: [
+        { label: 'Berlin Criteria', detail: 'Acute onset (≤7 days), bilateral opacities (not fully explained by effusions/atelectasis), respiratory failure not fully explained by cardiac failure.<br>Mild: P/F 200-300, Moderate: 100-200, Severe: <100 (on PEEP ≥5).' },
+        { label: 'Lung-Protective Ventilation', detail: '<span class="dose-pill" style="background:#2a1215;color:#dc322f;">TV 4-6 mL/kg IBW</span>. Plateau Paw ≤30 cmH₂O. Driving pressure ≤15 cmH₂O. RR 20-35 (permissive hypercapnia OK, pH >7.20).' },
+        { label: 'PEEP Titration', detail: 'Use ARDSNet PEEP-FiO₂ tables (Low or High PEEP strategy). Higher PEEP in moderate-severe ARDS. Monitor hemodynamics. Goal SpO₂ 88-95%.' },
+        { label: 'Prone Positioning', detail: 'If P/F <150 on FiO₂ ≥0.6 and PEEP ≥5: <span class="dose-pill" style="background:#2a1215;color:#dc322f;">Prone ≥16 hrs/day</span> (PROSEVA trial: 28-day mortality reduction). Requires dedicated team, secure tubes.' },
+        { label: 'Neuromuscular Blockade', detail: '<span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Cisatracurium 0.1-0.2 mg/kg bolus → 1-3 mcg/kg/min</span> for 48 hrs in severe ARDS with ventilator dyssynchrony (early, deep sedation first). Monitor with TOF.' },
+        { label: 'Conservative Fluid Strategy', detail: 'After initial resuscitation → target even to negative fluid balance (FACTT trial). Furosemide to achieve. Monitor with CVP, dynamic measures.' },
+        { label: 'Rescue Therapies', detail: 'Inhaled pulmonary vasodilators: <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">iNO 5-40 ppm</span> or <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Epoprostenol nebulized 10-50 ng/kg/min</span>.<br>VV-ECMO: consider if P/F <80 despite optimization (EOLIA criteria). Refer early.' }
+      ]
+    },
+    {
+      id: 'aki',
+      title: 'Acute Kidney Injury (AKI)',
+      icon: 'filter',
+      severity: 'standard',
+      tags: ['aki','crrt','dialysis','renal','kdigo','creatinine','oliguria'],
+      summary: 'KDIGO staging, prevention, and renal replacement therapy in ICU.',
+      steps: [
+        { label: 'KDIGO Staging', detail: 'Stage 1: Cr ↑ ≥0.3 mg/dL in 48h or ≥1.5× baseline or UO <0.5 mL/kg/h ×6-12h.<br>Stage 2: Cr ≥2× baseline or UO <0.5 ×12h.<br>Stage 3: Cr ≥3× or ≥4.0 or RRT initiation or UO <0.3 ×24h or anuria ×12h.' },
+        { label: 'Identify Etiology', detail: '<b>Pre-renal:</b> Hypovolemia, low CO, hepatorenal. <b>Intrinsic:</b> ATN (ischemic, toxic), AIN, glomerulonephritis. <b>Post-renal:</b> Obstruction → renal US.<br>Urine studies: FENa (<1% pre-renal, >2% intrinsic), urine microscopy.' },
+        { label: 'Supportive Management', detail: 'Optimize volume status (avoid hypo/hypervolemia). Target MAP ≥65. Avoid nephrotoxins (NSAIDs, aminoglycosides, IV contrast). Dose-adjust renally cleared medications.' },
+        { label: 'RRT Indications (Emergency)', detail: '<b>A</b>cidosis (severe, refractory pH <7.1), <b>E</b>lectrolytes (refractory hyperK >6.5), <b>I</b>ntoxication (toxic alcohols, lithium, salicylates), <b>O</b>verload (fluid, refractory to diuretics), <b>U</b>remia (encephalopathy, pericarditis).' },
+        { label: 'CRRT vs IHD', detail: 'CRRT (preferred in hemodynamically unstable patients): CVVHDF typical dose <span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">25-30 mL/kg/hr effluent</span>. Anticoagulation: citrate (preferred) or heparin.<br>IHD: hemodynamically stable, urgent toxin removal.' },
+        { label: 'Diuretic Trial', detail: '<span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">Furosemide stress test: 1-1.5 mg/kg IV</span>. UO <200 mL in 2 hrs predicts AKI progression → consider early RRT.' }
+      ]
+    },
+    {
+      id: 'transfusion',
+      title: 'Blood Products & Transfusion',
+      icon: 'heart-pulse',
+      severity: 'standard',
+      tags: ['transfusion','prbc','ffp','platelets','massive transfusion','coagulopathy','txa'],
+      summary: 'Evidence-based transfusion triggers and massive transfusion protocol.',
+      steps: [
+        { label: 'RBC Transfusion Triggers', detail: 'Restrictive: <span class="dose-pill" style="background:#2a1215;color:#dc322f;">Hb <7 g/dL</span> (general ICU — TRICC trial).<br>Liberal: Hb <9 g/dL (acute MI, unstable angina, severe hypoxemia).<br>Each unit pRBC raises Hb ~1 g/dL.' },
+        { label: 'Platelet Transfusion', detail: '<b>Threshold:</b> <10K (prophylactic), <20K (fever/sepsis), <50K (active bleeding/pre-procedure), <100K (neurosurgery/CNS bleeding).<br>1 apheresis unit raises platelet count by ~30-50K.' },
+        { label: 'FFP / Plasma', detail: 'INR >1.5 with active bleeding or pre-invasive procedure.<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">10-15 mL/kg FFP</span>. Typically 4 units. For warfarin reversal: prefer 4-factor PCC.' },
+        { label: 'Cryoprecipitate', detail: 'Fibrinogen <150 mg/dL (bleeding) or <200 (DIC with bleeding).<br><span class="dose-pill" style="background:#1a1f2e;color:#268bd2;">10 units cryo</span> raises fibrinogen ~70 mg/dL.' },
+        { label: 'Massive Transfusion Protocol (MTP)', detail: 'Activate when: anticipated need ≥10 units pRBC/24h or >4 units/hr.<br>Ratio: <span class="dose-pill" style="background:#2a1215;color:#dc322f;">1:1:1 (pRBC : FFP : Platelets)</span> (PROPPR trial).<br><span class="dose-pill" style="background:#2a1215;color:#dc322f;">TXA 1g IV over 10 min within 3 hrs of injury → 1g over 8 hrs</span>.' },
+        { label: 'Complications', detail: 'TACO (volume overload), TRALI (non-cardiogenic pulmonary edema within 6h), febrile/allergic reactions, hyperkalemia (irradiated blood for at-risk), citrate toxicity (monitor iCa²⁺ during MTP).' }
+      ]
+    }
+  ],
+  drugs: [
+    { category: 'Vasopressors & Inotropes', items: [
+      { name: 'Norepinephrine', dose: '0.1–1 mcg/kg/min', route: 'IV (central)', notes: '1st-line septic shock. α1 >> β1. Titrate to MAP ≥65.' },
+      { name: 'Vasopressin', dose: '0.03–0.04 U/min', route: 'IV', notes: '2nd-line adjunct. Non-titratable (fixed dose). V1 receptor agonist.' },
+      { name: 'Epinephrine', dose: '0.1–0.5 mcg/kg/min', route: 'IV', notes: 'Anaphylaxis, refractory shock, post-cardiac arrest. α+β agonist.' },
+      { name: 'Phenylephrine', dose: '0.5–5 mcg/kg/min', route: 'IV', notes: 'Pure α1. Avoid in low CO states. Use for SVR support.' },
+      { name: 'Dobutamine', dose: '2.5–20 mcg/kg/min', route: 'IV', notes: 'Cardiogenic shock (with vasopressor). β1 > β2. May cause hypotension.' },
+      { name: 'Milrinone', dose: '0.375–0.75 mcg/kg/min', route: 'IV', notes: 'PDE3 inhibitor. Inodilator. Useful in RV failure, pulmonary HTN. Reduce dose in renal impairment.' },
+      { name: 'Dopamine', dose: '2–20 mcg/kg/min', route: 'IV', notes: 'Low dose: renal (unproven). Mid: β1 (inotrope). High: α1 (vasopressor). More arrhythmogenic than NE.' },
+      { name: 'Angiotensin II', dose: '20 ng/kg/min (start)', route: 'IV', notes: 'Vasoconstrictor for refractory distributive shock (ATHOS-3 trial). Titrate to MAP.' }
+    ]},
+    { category: 'Sedation & Analgesia', items: [
+      { name: 'Propofol', dose: '5–50 mcg/kg/min', route: 'IV', notes: 'Fast on/off. Check triglycerides q48h. PRIS risk if >80 mcg/kg/min or >48h. Calories count (1.1 kcal/mL).' },
+      { name: 'Dexmedetomidine', dose: '0.2–1.5 mcg/kg/hr', route: 'IV', notes: 'α2-agonist. Less delirium. No respiratory depression. Bradycardia risk. Good for extubation.' },
+      { name: 'Midazolam', dose: '0.5–5 mg/hr', route: 'IV', notes: 'Benzo. Avoid prolonged use (delirium, prolonged sedation). Active metabolites accumulate in renal/hepatic failure.' },
+      { name: 'Fentanyl', dose: '25–200 mcg/hr', route: 'IV infusion', notes: 'Synthetic opioid. No histamine release. Chest wall rigidity at high doses. Accumulates in renal failure.' },
+      { name: 'Ketamine', dose: '0.1–0.5 mg/kg/hr', route: 'IV', notes: 'NMDA antagonist. Analgesic at low dose. Bronchodilator. Sympathomimetic. Use for opioid-sparing.' },
+      { name: 'Hydromorphone', dose: '0.2–0.6 mg IV q2-4h', route: 'IV', notes: '5-7× more potent than morphine. Preferred in renal impairment over morphine (no M6G).' }
+    ]},
+    { category: 'Anticoagulants', items: [
+      { name: 'Heparin (UFH)', dose: '80 U/kg bolus → 18 U/kg/hr', route: 'IV', notes: 'Monitor aPTT q6h (target 60-80s or per protocol). Reversible with protamine. HIT risk.' },
+      { name: 'Enoxaparin (Prophylaxis)', dose: '40 mg SQ daily', route: 'SQ', notes: 'DVT prophylaxis. Adjust for CrCl <30 (30 mg daily). Anti-Xa monitoring in obesity/renal.' },
+      { name: 'Enoxaparin (Treatment)', dose: '1 mg/kg SQ q12h', route: 'SQ', notes: 'Treatment dose for VTE. CrCl <30: 1 mg/kg q24h. Monitor anti-Xa in special populations.' },
+      { name: 'Argatroban', dose: '0.5–2 mcg/kg/min', route: 'IV', notes: 'Direct thrombin inhibitor for HIT. Hepatically cleared. Monitor aPTT. Start 0.5 in hepatic impairment.' },
+      { name: 'Bivalirudin', dose: '0.15–0.25 mg/kg/hr', route: 'IV', notes: 'DTI for HIT. Renally cleared. Can use for CRRT anticoagulation. Short half-life (~25 min).' }
+    ]},
+    { category: 'Electrolyte Replacement', items: [
+      { name: 'KCl (Potassium)', dose: '10-20 mEq/hr IV (max 40)', route: 'IV/PO', notes: 'Peripheral max 10 mEq/hr. Central 20-40 mEq/hr with cardiac monitoring. 10 mEq raises K⁺ ~0.1.' },
+      { name: 'MgSO₄ (Magnesium)', dose: '1-2 g IV over 1-2 hrs', route: 'IV', notes: 'Severe: 4-6g over 1 hr then 1-2 g/hr. Torsades: 2g IV push. Pre-eclampsia: 4-6g load → 1-2 g/hr.' },
+      { name: 'Calcium Gluconate', dose: '1-2 g IV over 10-20 min', route: 'IV', notes: 'Symptomatic hypocalcemia. Hyperkalemia: 1g over 2-3 min (membrane stabilizer). 3× less elemental Ca than CaCl.' },
+      { name: 'Calcium Chloride', dose: '0.5-1 g IV over 5-10 min', route: 'IV (central preferred)', notes: '3× more elemental Ca than gluconate. Caustic — prefer central line. Cardiac arrest hyperK.' },
+      { name: 'Sodium Phosphate', dose: '15-30 mmol IV over 4-6 hrs', route: 'IV', notes: 'For PO₄ <1.5 mg/dL. Monitor calcium (can precipitate hypocalcemia). Slower infusion in renal impairment.' }
+    ]}
+  ],
+  ventilator: [
+    {
+      id: 'initial-settings',
+      title: 'Initial Ventilator Settings',
+      content: `<div class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="p-3 rounded-lg" style="background:#111827;border:1px solid #1e2a3a;">
+            <div class="text-xs font-semibold mb-1" style="color:#dc322f;">Mode</div>
+            <div class="text-sm">Volume-Assist Control (VAC) — most common initial mode</div>
+          </div>
+          <div class="p-3 rounded-lg" style="background:#111827;border:1px solid #1e2a3a;">
+            <div class="text-xs font-semibold mb-1" style="color:#dc322f;">Tidal Volume</div>
+            <div class="text-sm">6-8 mL/kg <b>IBW</b> (ideal body weight). ARDS: 4-6 mL/kg IBW.</div>
+          </div>
+          <div class="p-3 rounded-lg" style="background:#111827;border:1px solid #1e2a3a;">
+            <div class="text-xs font-semibold mb-1" style="color:#dc322f;">Respiratory Rate</div>
+            <div class="text-sm">14-20 breaths/min. Adjust for pH/PaCO₂. ARDS: up to 35.</div>
+          </div>
+          <div class="p-3 rounded-lg" style="background:#111827;border:1px solid #1e2a3a;">
+            <div class="text-xs font-semibold mb-1" style="color:#dc322f;">FiO₂</div>
+            <div class="text-sm">Start 100%, wean rapidly to target SpO₂ 92-96% (88-92% COPD).</div>
+          </div>
+          <div class="p-3 rounded-lg" style="background:#111827;border:1px solid #1e2a3a;">
+            <div class="text-xs font-semibold mb-1" style="color:#dc322f;">PEEP</div>
+            <div class="text-sm">5 cmH₂O (standard). ARDS: titrate 8-18+ per PEEP-FiO₂ table.</div>
+          </div>
+          <div class="p-3 rounded-lg" style="background:#111827;border:1px solid #1e2a3a;">
+            <div class="text-xs font-semibold mb-1" style="color:#dc322f;">Limits</div>
+            <div class="text-sm">Plateau pressure ≤30 cmH₂O. Driving pressure (Pplat - PEEP) ≤15.</div>
+          </div>
+        </div>
+        <div class="p-3 rounded-lg" style="background:#0d1526;border:1px solid #1e2a3a;">
+          <div class="text-xs font-semibold mb-2" style="color:#268bd2;">📐 IBW Formula</div>
+          <div class="text-sm font-mono">Male: 50 + 2.3 × (height in inches − 60)<br>Female: 45.5 + 2.3 × (height in inches − 60)</div>
+        </div>
+      </div>`
+    },
+    {
+      id: 'vent-modes',
+      title: 'Ventilator Modes Comparison',
+      content: `<div class="overflow-x-auto"><table class="w-full text-sm" style="border-collapse:collapse;">
+        <thead><tr style="border-bottom:2px solid #1e2a3a;">
+          <th class="text-left p-2" style="color:#dc322f;">Mode</th>
+          <th class="text-left p-2">Control</th>
+          <th class="text-left p-2">Trigger</th>
+          <th class="text-left p-2">Best For</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1e2a3a;"><td class="p-2 font-semibold">VAC</td><td class="p-2">Volume</td><td class="p-2">Time/Patient</td><td class="p-2">Initial setup, paralyzed pts</td></tr>
+          <tr style="border-bottom:1px solid #1e2a3a;"><td class="p-2 font-semibold">PAC</td><td class="p-2">Pressure</td><td class="p-2">Time/Patient</td><td class="p-2">Pressure-limited strategies</td></tr>
+          <tr style="border-bottom:1px solid #1e2a3a;"><td class="p-2 font-semibold">PSV</td><td class="p-2">Pressure</td><td class="p-2">Patient only</td><td class="p-2">Weaning, SBT</td></tr>
+          <tr style="border-bottom:1px solid #1e2a3a;"><td class="p-2 font-semibold">SIMV</td><td class="p-2">V or P + PS</td><td class="p-2">Sync</td><td class="p-2">Transitioning (less used now)</td></tr>
+          <tr style="border-bottom:1px solid #1e2a3a;"><td class="p-2 font-semibold">APRV</td><td class="p-2">Pressure</td><td class="p-2">Time-cycled</td><td class="p-2">ARDS (controversial), alveolar recruitment</td></tr>
+          <tr><td class="p-2 font-semibold">HFOV</td><td class="p-2">Oscillation</td><td class="p-2">Continuous</td><td class="p-2">Rescue in severe ARDS (limited evidence)</td></tr>
+        </tbody>
+      </table></div>`
+    },
+    {
+      id: 'sbt-weaning',
+      title: 'Weaning & SBT Protocol',
+      content: `<div class="space-y-3">
+        <div class="p-3 rounded-lg severity-standard" style="background:#111827;">
+          <div class="font-semibold mb-2" style="color:#268bd2;">Daily Readiness Screen</div>
+          <ul class="text-sm space-y-1 ml-4 list-disc">
+            <li>FiO₂ ≤40%, PEEP ≤8 cmH₂O</li>
+            <li>Hemodynamically stable (no/low-dose vasopressors)</li>
+            <li>Adequate mental status (follows commands, RASS 0 to -1)</li>
+            <li>No active sepsis or uncontrolled arrhythmia</li>
+            <li>Cough and gag reflex present</li>
+          </ul>
+        </div>
+        <div class="p-3 rounded-lg severity-urgent" style="background:#111827;">
+          <div class="font-semibold mb-2" style="color:#cb4b16;">SBT Method (30-120 min)</div>
+          <div class="text-sm">PSV 5-8 cmH₂O + PEEP 5 (most common) OR T-piece trial.<br>Monitor: RR, HR, SpO₂, patient comfort, accessory muscle use.</div>
+        </div>
+        <div class="p-3 rounded-lg severity-critical" style="background:#111827;">
+          <div class="font-semibold mb-2" style="color:#dc322f;">SBT Failure Criteria</div>
+          <ul class="text-sm space-y-1 ml-4 list-disc">
+            <li>RR >35 or RSBI (f/VT) >105</li>
+            <li>SpO₂ <90%, HR >140 or Δ >20%</li>
+            <li>SBP >180 or <90, new arrhythmia</li>
+            <li>Agitation, diaphoresis, paradoxical breathing</li>
+          </ul>
+        </div>
+        <div class="p-3 rounded-lg" style="background:#0d1526;border:1px solid #1e2a3a;">
+          <div class="text-sm"><b>If SBT passed:</b> Assess airway patency (cuff leak test if high risk). Extubate. Post-extubation: HFNC or NIV for high-risk patients.</div>
+        </div>
+      </div>`
+    },
+    {
+      id: 'troubleshoot',
+      title: 'Ventilator Troubleshooting (DOPES)',
+      content: `<div class="space-y-3">
+        <div class="p-3 rounded-lg severity-critical" style="background:#111827;">
+          <div class="font-semibold mb-2" style="color:#dc322f;">Acute Desaturation / High Pressures — DOPES Mnemonic</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            <div class="p-2 rounded" style="background:#0d1526;"><b style="color:#dc322f;">D</b>isplacement — ETT dislodged/mainstem</div>
+            <div class="p-2 rounded" style="background:#0d1526;"><b style="color:#dc322f;">O</b>bstruction — mucus plug, biting, kink</div>
+            <div class="p-2 rounded" style="background:#0d1526;"><b style="color:#dc322f;">P</b>neumothorax — tension PTX</div>
+            <div class="p-2 rounded" style="background:#0d1526;"><b style="color:#dc322f;">E</b>quipment — vent malfunction, circuit disconnect</div>
+            <div class="p-2 rounded" style="background:#0d1526;"><b style="color:#dc322f;">S</b>tacking — breath stacking / auto-PEEP</div>
+          </div>
+        </div>
+        <div class="p-3 rounded-lg" style="background:#111827;border:1px solid #1e2a3a;">
+          <div class="font-semibold mb-2 text-sm">Immediate Actions</div>
+          <ol class="text-sm space-y-1 ml-4 list-decimal">
+            <li>Disconnect from vent → hand ventilate with BVM</li>
+            <li>Check SpO₂, auscultate bilaterally</li>
+            <li>Suction ETT, check tube position & cuff</li>
+            <li>If tension PTX suspected → needle decompression 2nd ICS MCL</li>
+            <li>Stat CXR, ABG</li>
+          </ol>
+        </div>
+      </div>`
+    }
+  ]
+};
+
+// ===== STATE =====
+let currentTab = 'emergencies';
+let searchTerm = '';
+let openAccordions = new Set();
+
+// ===== RENDER =====
+function renderContent() {
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  const div = document.createElement('div');
+  div.className = 'fade-in';
+
+  if (currentTab === 'emergencies') div.innerHTML = renderProtocolList(DATA.emergencies);
+  else if (currentTab === 'protocols') div.innerHTML = renderProtocolList(DATA.protocols);
+  else if (currentTab === 'drugs') div.innerHTML = renderDrugTables();
+  else if (currentTab === 'ventilator') div.innerHTML = renderVentilator();
+  else if (currentTab === 'calculators') div.innerHTML = renderCalculators();
+
+  content.appendChild(div);
+  lucide.createIcons();
+  bindAccordions();
+  if (currentTab === 'calculators') bindCalculators();
+}
+
+function filterBySearch(items) {
+  if (!searchTerm) return items;
+  const q = searchTerm.toLowerCase();
+  return items.filter(item => {
+    const searchable = [item.title, item.summary, ...(item.tags || [])].join(' ').toLowerCase();
+    return searchable.includes(q);
+  });
+}
+
+function renderProtocolList(items) {
+  const filtered = filterBySearch(items);
+  if (!filtered.length) return `<div class="text-center py-12" style="color:#6b7a8d;"><i data-lucide="search-x" style="width:48px;height:48px;margin:0 auto 12px;display:block;"></i><p class="text-lg">No protocols found for "${searchTerm}"</p></div>`;
+
+  return filtered.map(p => `
+    <div class="protocol-card mb-4 rounded-xl overflow-hidden severity-${p.severity}" style="background:#111827;border:1px solid #1e2a3a;">
+      <button class="accordion-trigger w-full text-left p-4 sm:p-5 flex items-start gap-3" data-id="${p.id}">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style="background:${p.severity==='critical'?'#2a1215':p.severity==='urgent'?'#2a1a10':'#0d1526'};">
+          <i data-lucide="${p.icon}" style="width:18px;height:18px;color:${p.severity==='critical'?'#dc322f':p.severity==='urgent'?'#cb4b16':'#268bd2'};"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 class="font-bold text-base sm:text-lg" style="color:#f0f2f5;">${p.title}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full font-medium" style="background:${p.severity==='critical'?'#2a1215':p.severity==='urgent'?'#2a1a10':'#0d1526'};color:${p.severity==='critical'?'#dc322f':p.severity==='urgent'?'#cb4b16':'#268bd2'};">${p.severity.toUpperCase()}</span>
+          </div>
+          <p class="text-sm mt-1" style="color:#6b7a8d;">${p.summary}</p>
+        </div>
+        <i data-lucide="chevron-down" class="accordion-chevron flex-shrink-0 mt-1 transition-transform duration-300" style="width:20px;height:20px;color:#6b7a8d;${openAccordions.has(p.id)?'transform:rotate(180deg)':''}"></i>
+      </button>
+      <div class="accordion-body ${openAccordions.has(p.id)?'open':''}" data-body="${p.id}">
+        <div class="px-4 sm:px-5 pb-5 pt-0">
+          <div class="space-y-4">
+            ${p.steps.map((s,i) => `
+              <div class="relative step-line pl-10">
+                <div class="absolute left-0 top-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background:${p.severity==='critical'?'#2a1215':p.severity==='urgent'?'#2a1a10':'#0d1526'};color:${p.severity==='critical'?'#dc322f':p.severity==='urgent'?'#cb4b16':'#268bd2'};">${i+1}</div>
+                <div>
+                  <div class="font-semibold text-sm" style="color:#f0f2f5;">${s.label}</div>
+                  <div class="text-sm mt-1 leading-relaxed" style="color:#9aa3b0;">${s.detail}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDrugTables() {
+  const q = searchTerm.toLowerCase();
+  return DATA.drugs.map(cat => {
+    const items = q ? cat.items.filter(d => [d.name,d.dose,d.notes,d.route,cat.category].join(' ').toLowerCase().includes(q)) : cat.items;
+    if (!items.length) return '';
+    return `
+      <div class="mb-6">
+        <h2 class="text-lg font-bold mb-3 flex items-center gap-2" style="color:#f0f2f5;">
+          <span class="w-1.5 h-6 rounded-full inline-block" style="background:#dc322f;"></span>${cat.category}
+        </h2>
+        <div class="overflow-x-auto rounded-xl" style="border:1px solid #1e2a3a;">
+          <table class="w-full text-sm" style="border-collapse:collapse;">
+            <thead><tr style="background:#0d1526;">
+              <th class="text-left p-3 font-semibold" style="color:#dc322f;min-width:130px;">Drug</th>
+              <th class="text-left p-3 font-semibold" style="color:#dc322f;min-width:160px;">Dose</th>
+              <th class="text-left p-3 font-semibold" style="color:#dc322f;">Route</th>
+              <th class="text-left p-3 font-semibold" style="color:#dc322f;min-width:250px;">Key Notes</th>
+            </tr></thead>
+            <tbody>
+              ${items.map((d,i) => `<tr style="background:${i%2===0?'#111827':'#0f1520'};border-bottom:1px solid #1e2a3a;">
+                <td class="p-3 font-semibold" style="color:#f0f2f5;">${d.name}</td>
+                <td class="p-3"><span class="font-mono text-xs" style="color:#cb4b16;">${d.dose}</span></td>
+                <td class="p-3" style="color:#9aa3b0;">${d.route}</td>
+                <td class="p-3" style="color:#9aa3b0;">${d.notes}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }).join('') || `<div class="text-center py-12" style="color:#6b7a8d;">No drugs found for "${searchTerm}"</div>`;
+}
+
+function renderVentilator() {
+  return DATA.ventilator.map(v => `
+    <div class="protocol-card mb-4 rounded-xl overflow-hidden" style="background:#111827;border:1px solid #1e2a3a;">
+      <button class="accordion-trigger w-full text-left p-4 sm:p-5 flex items-center gap-3" data-id="${v.id}">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:#0d1526;">
+          <i data-lucide="airplay" style="width:18px;height:18px;color:#268bd2;"></i>
+        </div>
+        <h3 class="font-bold flex-1" style="color:#f0f2f5;">${v.title}</h3>
+        <i data-lucide="chevron-down" class="accordion-chevron flex-shrink-0 transition-transform duration-300" style="width:20px;height:20px;color:#6b7a8d;${openAccordions.has(v.id)?'transform:rotate(180deg)':''}"></i>
+      </button>
+      <div class="accordion-body ${openAccordions.has(v.id)?'open':''}" data-body="${v.id}">
+        <div class="px-4 sm:px-5 pb-5">${v.content}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCalculators() {
+  return `
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- IBW Calculator -->
+      <div class="rounded-xl p-5" style="background:#111827;border:1px solid #1e2a3a;">
+        <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color:#f0f2f5;">
+          <i data-lucide="ruler" style="width:20px;height:20px;color:#dc322f;"></i> IBW & Tidal Volume
+        </h3>
+        <div class="space-y-3">
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="calc-sex">Sex</label>
+            <select id="calc-sex" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="calc-height">Height (cm)</label>
+            <input id="calc-height" type="number" value="170" min="100" max="220" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+          </div>
+          <button id="calc-ibw-btn" class="w-full py-2 rounded-lg font-semibold text-sm" style="background:#dc322f;color:#fff;">Calculate</button>
+          <div id="calc-ibw-result" class="p-3 rounded-lg text-sm hidden" style="background:#0d1526;border:1px solid #1e2a3a;"></div>
+        </div>
+      </div>
+      <!-- MAP Calculator -->
+      <div class="rounded-xl p-5" style="background:#111827;border:1px solid #1e2a3a;">
+        <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color:#f0f2f5;">
+          <i data-lucide="heart-pulse" style="width:20px;height:20px;color:#dc322f;"></i> MAP Calculator
+        </h3>
+        <div class="space-y-3">
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="calc-sbp">SBP (mmHg)</label>
+            <input id="calc-sbp" type="number" value="120" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+          </div>
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="calc-dbp">DBP (mmHg)</label>
+            <input id="calc-dbp" type="number" value="80" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+          </div>
+          <button id="calc-map-btn" class="w-full py-2 rounded-lg font-semibold text-sm" style="background:#dc322f;color:#fff;">Calculate MAP</button>
+          <div id="calc-map-result" class="p-3 rounded-lg text-sm hidden" style="background:#0d1526;border:1px solid #1e2a3a;"></div>
+        </div>
+      </div>
+      <!-- Creatinine Clearance -->
+      <div class="rounded-xl p-5" style="background:#111827;border:1px solid #1e2a3a;">
+        <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color:#f0f2f5;">
+          <i data-lucide="beaker" style="width:20px;height:20px;color:#dc322f;"></i> CrCl (Cockcroft-Gault)
+        </h3>
+        <div class="space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="crcl-age">Age (yrs)</label>
+              <input id="crcl-age" type="number" value="65" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+            </div>
+            <div>
+              <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="crcl-weight">Weight (kg)</label>
+              <input id="crcl-weight" type="number" value="70" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="crcl-cr">Serum Creatinine (mg/dL)</label>
+            <input id="crcl-cr" type="number" value="1.2" step="0.1" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+          </div>
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="crcl-sex">Sex</label>
+            <select id="crcl-sex" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <button id="calc-crcl-btn" class="w-full py-2 rounded-lg font-semibold text-sm" style="background:#dc322f;color:#fff;">Calculate CrCl</button>
+          <div id="calc-crcl-result" class="p-3 rounded-lg text-sm hidden" style="background:#0d1526;border:1px solid #1e2a3a;"></div>
+        </div>
+      </div>
+      <!-- Corrected Na -->
+      <div class="rounded-xl p-5" style="background:#111827;border:1px solid #1e2a3a;">
+        <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color:#f0f2f5;">
+          <i data-lucide="flask-conical" style="width:20px;height:20px;color:#dc322f;"></i> Corrected Sodium
+        </h3>
+        <div class="space-y-3">
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="na-measured">Measured Na⁺ (mEq/L)</label>
+            <input id="na-measured" type="number" value="130" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+          </div>
+          <div>
+            <label class="text-sm font-medium block mb-1" style="color:#9aa3b0;" for="na-glucose">Glucose (mg/dL)</label>
+            <input id="na-glucose" type="number" value="500" class="w-full p-2 rounded-lg text-sm" style="background:#0d1526;border:1px solid #1e2a3a;color:#c8cdd8;">
+          </div>
+          <button id="calc-na-btn" class="w-full py-2 rounded-lg font-semibold text-sm" style="background:#dc322f;color:#fff;">Calculate</button>
+          <div id="calc-na-result" class="p-3 rounded-lg text-sm hidden" style="background:#0d1526;border:1px solid #1e2a3a;"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function bindAccordions() {
+  document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      if (openAccordions.has(id)) openAccordions.delete(id);
+      else openAccordions.add(id);
+      const body = document.querySelector(`[data-body="${id}"]`);
+      const chevron = btn.querySelector('.accordion-chevron');
+      if (body) body.classList.toggle('open');
+      if (chevron) chevron.style.transform = openAccordions.has(id) ? 'rotate(180deg)' : '';
+    });
+  });
+}
+
+function bindCalculators() {
+  document.getElementById('calc-ibw-btn')?.addEventListener('click', () => {
+    const sex = document.getElementById('calc-sex').value;
+    const cm = parseFloat(document.getElementById('calc-height').value);
+    const inches = cm / 2.54;
+    const ibw = sex === 'male' ? 50 + 2.3*(inches-60) : 45.5 + 2.3*(inches-60);
+    const tv6 = (ibw*6).toFixed(0), tv8 = (ibw*8).toFixed(0);
+    const res = document.getElementById('calc-ibw-result');
+    res.classList.remove('hidden');
+    res.innerHTML = `<b style="color:#f0f2f5;">IBW:</b> <span style="color:#dc322f;">${ibw.toFixed(1)} kg</span><br><b style="color:#f0f2f5;">TV (6 mL/kg):</b> ${tv6} mL &nbsp; <b style="color:#f0f2f5;">TV (8 mL/kg):</b> ${tv8} mL`;
+  });
+  document.getElementById('calc-map-btn')?.addEventListener('click', () => {
+    const sbp = parseFloat(document.getElementById('calc-sbp').value);
+    const dbp = parseFloat(document.getElementById('calc-dbp').value);
+    const map = (dbp + (sbp-dbp)/3).toFixed(1);
+    const res = document.getElementById('calc-map-result');
+    res.classList.remove('hidden');
+    res.innerHTML = `<b style="color:#f0f2f5;">MAP:</b> <span style="color:${map<65?'#dc322f':'#2aa198'};">${map} mmHg</span> ${map<65?'⚠️ Below target (65 mmHg)':'✓ Adequate'}`;
+  });
+  document.getElementById('calc-crcl-btn')?.addEventListener('click', () => {
+    const age = parseFloat(document.getElementById('crcl-age').value);
+    const wt = parseFloat(document.getElementById('crcl-weight').value);
+    const cr = parseFloat(document.getElementById('crcl-cr').value);
+    const sex = document.getElementById('crcl-sex').value;
+    let crcl = ((140-age)*wt)/(72*cr);
+    if (sex==='female') crcl *= 0.85;
+    const res = document.getElementById('calc-crcl-result');
+    res.classList.remove('hidden');
+    res.innerHTML = `<b style="color:#f0f2f5;">CrCl:</b> <span style="color:#dc322f;">${crcl.toFixed(1)} mL/min</span><br><span style="color:#6b7a8d;">Dose adjust: ${crcl<30?'Severe impairment — major adjustments needed':crcl<60?'Moderate impairment — dose adjustments required':'Mild or no impairment'}</span>`;
+  });
+  document.getElementById('calc-na-btn')?.addEventListener('click', () => {
+    const na = parseFloat(document.getElementById('na-measured').value);
+    const glu = parseFloat(document.getElementById('na-glucose').value);
+    const corrected = na + 1.6*((glu-100)/100);
+    const res = document.getElementById('calc-na-result');
+    res.classList.remove('hidden');
+    res.innerHTML = `<b style="color:#f0f2f5;">Corrected Na⁺:</b> <span style="color:#dc322f;">${corrected.toFixed(1)} mEq/L</span><br><span style="color:#6b7a8d;">Katz correction: Na + 1.6 × [(Glucose − 100) / 100]</span>`;
+  });
+}
+
+// ===== TABS =====
+document.getElementById('tabBar').addEventListener('click', (e) => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  currentTab = btn.dataset.tab;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.color = '#6b7a8d';
+    b.style.borderColor = 'transparent';
+  });
+  btn.classList.add('active');
+  btn.style.color = '#dc322f';
+  btn.style.borderColor = '#dc322f';
+  openAccordions.clear();
+  renderContent();
+});
+
+// ===== SEARCH =====
+let searchTimeout;
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchTerm = e.target.value.trim();
+    renderContent();
+  }, 250);
+});
+
+// ===== ELEMENT SDK =====
+const defaultConfig = {
+  app_title: 'ICU Protocols & Emergencies',
+  subtitle: 'Critical Care Quick Reference',
+  background_color: '#0a0f1a',
+  surface_color: '#111827',
+  text_color: '#c8cdd8',
+  primary_action_color: '#dc322f',
+  secondary_action_color: '#268bd2',
+  font_family: 'IBM Plex Sans',
+  font_size: 14
+};
+
+function applyConfig(config) {
+  const bg = config.background_color || defaultConfig.background_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const primary = config.primary_action_color || defaultConfig.primary_action_color;
+  const secondary = config.secondary_action_color || defaultConfig.secondary_action_color;
+  const font = config.font_family || defaultConfig.font_family;
+  const fontSize = config.font_size || defaultConfig.font_size;
+
+  const app = document.getElementById('app');
+  app.style.background = bg;
+  app.style.color = text;
+  app.style.fontFamily = `${font}, IBM Plex Sans, sans-serif`;
+  app.style.fontSize = `${fontSize}px`;
+
+  document.getElementById('mainTitle').textContent = config.app_title || defaultConfig.app_title;
+  document.getElementById('mainSubtitle').textContent = config.subtitle || defaultConfig.subtitle;
+
+  document.getElementById('mainTitle').style.color = '#f0f2f5';
+  document.getElementById('mainTitle').style.fontSize = `${fontSize * 1.6}px`;
+  document.getElementById('mainSubtitle').style.fontSize = `${fontSize * 0.85}px`;
+}
+
+// Initial render
+renderContent();
+lucide.createIcons();
+</script>
+</body>
+</html>
