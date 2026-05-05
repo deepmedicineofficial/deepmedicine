@@ -1,0 +1,622 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Antibiotic Prophylaxis | Surgical & Infection Prevention Guidelines | Deep Medicine</title> <meta name="description" content="Comprehensive guide to antibiotic prophylaxis including surgical prophylaxis, timing, dosing principles, and infection prevention strategies."> <link rel="canonical" href="https://deepmedicine.in/clinical/protocols/antibiotic-prophylaxis"> <!-- Open Graph --> <meta property="og:title" content="Antibiotic Prophylaxis | Deep Medicine"> <meta property="og:description" content="Evidence-based antibiotic prophylaxis for surgery and infection prevention."> <meta property="og:image" content="https://deepmedicine.in/images/antibiotic-prophylaxis.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+body { font-family: 'DM Sans', sans-serif; }
+.font-heading { font-family: 'Fraunces', serif; }
+.tab-active { border-bottom: 3px solid; }
+.card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+.card-hover:hover { transform: translateY(-2px); }
+details summary { cursor: pointer; list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details[open] .chevron-icon { transform: rotate(180deg); }
+.chevron-icon { transition: transform 0.25s ease; }
+.fade-in { animation: fadeIn 0.4s ease both; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.badge { display:inline-flex; align-items:center; padding:2px 10px; border-radius:9999px; font-size:0.7rem; font-weight:600; letter-spacing:0.03em; text-transform:uppercase; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0f1117;"><!-- Hero -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #0f1117 0%, #1a1d2e 50%, #0f1117 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #4f8cff 0%, transparent 50%), radial-gradient(circle at 80% 20%, #22d3a7 0%, transparent 40%);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-12 md:py-20 text-center">
+     <div class="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase" style="background:rgba(79,140,255,0.12); color:#4f8cff;"><i data-lucide="shield-check" style="width:14px;height:14px;"></i> Evidence-Based Clinical Reference
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl md:text-5xl lg:text-6xl font-800 mb-4 leading-tight" style="color:#e8ecf4;">Antibiotic Prophylaxis</h1>
+     <p id="subtitle" class="text-lg md:text-xl max-w-2xl mx-auto" style="color:#8b93a7;">Clinical Reference Guide</p>
+     <p class="text-xs mt-4" style="color:#505872;">Based on AHA/ACC, ASHP, IDSA, WHO &amp; NICE Guidelines</p>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="sticky top-0 z-30 border-b" style="background:#13151f; border-color:#1e2235;">
+    <div class="max-w-6xl mx-auto px-4 flex overflow-x-auto gap-1 scrollbar-hide"><button onclick="showTab('overview')" data-tab="overview" class="tab-btn tab-active whitespace-nowrap px-4 py-3 text-sm font-600 transition-colors" style="color:#4f8cff; border-color:#4f8cff;">Overview</button> <button onclick="showTab('surgical')" data-tab="surgical" class="tab-btn whitespace-nowrap px-4 py-3 text-sm font-500 transition-colors" style="color:#8b93a7; border-color:transparent;">Surgical</button> <button onclick="showTab('cardiac')" data-tab="cardiac" class="tab-btn whitespace-nowrap px-4 py-3 text-sm font-500 transition-colors" style="color:#8b93a7; border-color:transparent;">Cardiac IE</button> <button onclick="showTab('medical')" data-tab="medical" class="tab-btn whitespace-nowrap px-4 py-3 text-sm font-500 transition-colors" style="color:#8b93a7; border-color:transparent;">Medical</button> <button onclick="showTab('special')" data-tab="special" class="tab-btn whitespace-nowrap px-4 py-3 text-sm font-500 transition-colors" style="color:#8b93a7; border-color:transparent;">Special Populations</button> <button onclick="showTab('pearls')" data-tab="pearls" class="tab-btn whitespace-nowrap px-4 py-3 text-sm font-500 transition-colors" style="color:#8b93a7; border-color:transparent;">ICU Pearls</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-6xl mx-auto px-4 py-8"><!-- OVERVIEW TAB -->
+    <section id="tab-overview" class="tab-content fade-in space-y-8"><!-- Definition & Principles -->
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-2xl font-700 mb-4" style="color:#e8ecf4;">What is Antibiotic Prophylaxis?</h2>
+      <p class="leading-relaxed mb-6" style="color:#a0a8be;">Antibiotic prophylaxis is the <strong style="color:#e8ecf4;">pre-emptive administration of antimicrobials</strong> to prevent infection in patients who are not yet infected but are at elevated risk due to planned procedures, immunocompromised states, or specific exposures. The goal is to achieve adequate tissue/serum drug concentration <strong style="color:#4f8cff;">before bacterial contamination</strong> occurs.</p>
+      <div class="grid md:grid-cols-3 gap-4">
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <div class="flex items-center gap-2 mb-3">
+         <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(79,140,255,0.15);">
+          <i data-lucide="clock" style="width:16px;height:16px;color:#4f8cff;"></i>
+         </div>
+         <h3 class="font-600 text-sm" style="color:#e8ecf4;">Timing</h3>
+        </div>
+        <p class="text-sm" style="color:#8b93a7;">Administer <strong style="color:#e8ecf4;">30–60 min before incision</strong>. Vancomycin/fluoroquinolones: begin 120 min before. Repeat if surgery &gt;2 half-lives or blood loss &gt;1500 mL.</p>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <div class="flex items-center gap-2 mb-3">
+         <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(34,211,167,0.15);">
+          <i data-lucide="target" style="width:16px;height:16px;color:#22d3a7;"></i>
+         </div>
+         <h3 class="font-600 text-sm" style="color:#e8ecf4;">Spectrum</h3>
+        </div>
+        <p class="text-sm" style="color:#8b93a7;">Target the <strong style="color:#e8ecf4;">most likely pathogens</strong> for the procedure site. Narrow-spectrum preferred. Broad empiric cover is NOT prophylaxis.</p>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <div class="flex items-center gap-2 mb-3">
+         <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(251,191,36,0.15);">
+          <i data-lucide="timer" style="width:16px;height:16px;color:#fbbf24;"></i>
+         </div>
+         <h3 class="font-600 text-sm" style="color:#e8ecf4;">Duration</h3>
+        </div>
+        <p class="text-sm" style="color:#8b93a7;"><strong style="color:#e8ecf4;">Single dose or ≤24 hours post-op</strong> for most surgical prophylaxis. Cardiac surgery: up to 48h. Longer ≠ better and increases resistance.</p>
+       </div>
+      </div>
+     </div><!-- Key Principles -->
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-xl font-700 mb-5" style="color:#e8ecf4;">Core Principles (ASHP/IDSA/WHO)</h2>
+      <div class="space-y-3">
+       <div class="flex gap-3 items-start">
+        <span class="mt-1 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-700" style="background:#4f8cff; color:#0f1117;">1</span>
+        <p class="text-sm" style="color:#a0a8be;"><strong style="color:#e8ecf4;">Indication must be evidence-based.</strong> Not all surgeries require prophylaxis — Clean (Class I) wounds have SSI rates &lt;2% without prophylaxis. Prophylaxis is indicated for clean-contaminated (Class II), implant/prosthesis surgery, and high-risk patients.</p>
+       </div>
+       <div class="flex gap-3 items-start">
+        <span class="mt-1 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-700" style="background:#4f8cff; color:#0f1117;">2</span>
+        <p class="text-sm" style="color:#a0a8be;"><strong style="color:#e8ecf4;">Correct drug at the correct dose.</strong> Weight-based dosing: Cefazolin 2g (3g if ≥120 kg). Underdosing in obese patients is the #1 modifiable failure point.</p>
+       </div>
+       <div class="flex gap-3 items-start">
+        <span class="mt-1 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-700" style="background:#4f8cff; color:#0f1117;">3</span>
+        <p class="text-sm" style="color:#a0a8be;"><strong style="color:#e8ecf4;">Redosing intraoperatively.</strong> Redose at 2× the half-life of the drug (Cefazolin q4h intra-op; Cefoxitin q2h). Also redose for significant blood loss (&gt;1500 mL).</p>
+       </div>
+       <div class="flex gap-3 items-start">
+        <span class="mt-1 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-700" style="background:#4f8cff; color:#0f1117;">4</span>
+        <p class="text-sm" style="color:#a0a8be;"><strong style="color:#e8ecf4;">Discontinue promptly.</strong> Extended prophylaxis beyond 24h does NOT reduce SSI rates but DOES increase <em>C. difficile</em> risk, resistance emergence, and drug-related adverse events.</p>
+       </div>
+       <div class="flex gap-3 items-start">
+        <span class="mt-1 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-700" style="background:#4f8cff; color:#0f1117;">5</span>
+        <p class="text-sm" style="color:#a0a8be;"><strong style="color:#e8ecf4;">Consider local antibiogram.</strong> If institutional MRSA rates &gt;10–20% for the specific procedure, add Vancomycin to (not replace) standard prophylaxis.</p>
+       </div>
+      </div>
+     </div><!-- Wound Classification -->
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-xl font-700 mb-5" style="color:#e8ecf4;">Surgical Wound Classification &amp; SSI Risk</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr style="border-bottom:2px solid #1e2235;">
+          <th class="text-left py-3 px-3 font-600" style="color:#4f8cff;">Class</th>
+          <th class="text-left py-3 px-3 font-600" style="color:#4f8cff;">Type</th>
+          <th class="text-left py-3 px-3 font-600" style="color:#4f8cff;">SSI Rate</th>
+          <th class="text-left py-3 px-3 font-600" style="color:#4f8cff;">Prophylaxis?</th>
+          <th class="text-left py-3 px-3 font-600 hidden md:table-cell" style="color:#4f8cff;">Examples</th>
+         </tr>
+        </thead>
+        <tbody style="color:#a0a8be;">
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-3 px-3"><span class="badge" style="background:rgba(34,211,167,0.15);color:#22d3a7;">I</span></td>
+          <td class="py-3 px-3 font-500" style="color:#e8ecf4;">Clean</td>
+          <td class="py-3 px-3">1–3%</td>
+          <td class="py-3 px-3">Only if implant/prosthesis</td>
+          <td class="py-3 px-3 hidden md:table-cell">Thyroidectomy, hernia (no mesh), breast biopsy</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-3 px-3"><span class="badge" style="background:rgba(79,140,255,0.15);color:#4f8cff;">II</span></td>
+          <td class="py-3 px-3 font-500" style="color:#e8ecf4;">Clean-Contaminated</td>
+          <td class="py-3 px-3">3–11%</td>
+          <td class="py-3 px-3 font-600" style="color:#22d3a7;">Yes — Recommended</td>
+          <td class="py-3 px-3 hidden md:table-cell">Cholecystectomy, hysterectomy, elective colon</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-3 px-3"><span class="badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;">III</span></td>
+          <td class="py-3 px-3 font-500" style="color:#e8ecf4;">Contaminated</td>
+          <td class="py-3 px-3">10–17%</td>
+          <td class="py-3 px-3 font-600" style="color:#fbbf24;">Yes → Treatment</td>
+          <td class="py-3 px-3 hidden md:table-cell">Open fractures, GI spillage, fresh traumatic wounds</td>
+         </tr>
+         <tr>
+          <td class="py-3 px-3"><span class="badge" style="background:rgba(239,68,68,0.15);color:#ef4444;">IV</span></td>
+          <td class="py-3 px-3 font-500" style="color:#e8ecf4;">Dirty/Infected</td>
+          <td class="py-3 px-3">&gt;27%</td>
+          <td class="py-3 px-3 font-600" style="color:#ef4444;">Treatment (not prophylaxis)</td>
+          <td class="py-3 px-3 hidden md:table-cell">Abscess drainage, perforated viscus, fecal peritonitis</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- SURGICAL TAB -->
+    <section id="tab-surgical" class="tab-content fade-in space-y-6 hidden">
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-2xl font-700 mb-2" style="color:#e8ecf4;">Surgical Prophylaxis by Procedure</h2>
+      <p class="text-sm mb-6" style="color:#8b93a7;">ASHP/IDSA/SIS/SHEA Clinical Practice Guidelines 2013 (updated). β-lactam allergy alternatives listed.</p>
+      <div class="space-y-3" id="surgical-accordion"><!-- Cardiac -->
+       <details class="rounded-xl overflow-hidden" style="background:#1e2235;"><summary class="flex items-center justify-between p-4">
+         <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(239,68,68,0.15);">
+           <i data-lucide="heart" style="width:16px;height:16px;color:#ef4444;"></i>
+          </div><span class="font-600 text-sm" style="color:#e8ecf4;">Cardiac Surgery (CABG, Valve, Device Implant)</span>
+         </div><i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#8b93a7;"></i> </summary>
+        <div class="px-4 pb-4 text-sm space-y-2" style="color:#a0a8be;">
+         <div class="rounded-lg p-3" style="background:#13151f;">
+          <p><strong style="color:#4f8cff;">First Line:</strong> Cefazolin 2g IV (3g if ≥120 kg), within 60 min of incision. Redose q4h intra-op.</p>
+          <p><strong style="color:#fbbf24;">Penicillin Allergy:</strong> Vancomycin 15 mg/kg IV (begin 120 min before) OR Clindamycin 900 mg IV.</p>
+          <p><strong style="color:#22d3a7;">Duration:</strong> ≤48 hours post-op. Single dose may be adequate for low-risk.</p>
+          <p><strong style="color:#ef4444;">Organisms:</strong> <em>S. aureus</em>, CoNS, Gram-negative bacilli.</p>
+          <p class="mt-2 text-xs" style="color:#505872;">If MRSA prevalence high: add Vancomycin to Cefazolin (do not replace). Consider mupirocin nasal decolonization + CHG bathing (NICE/WHO).</p>
+         </div>
+        </div>
+       </details><!-- Orthopaedic -->
+       <details class="rounded-xl overflow-hidden" style="background:#1e2235;"><summary class="flex items-center justify-between p-4">
+         <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(79,140,255,0.15);">
+           <i data-lucide="bone" style="width:16px;height:16px;color:#4f8cff;"></i>
+          </div><span class="font-600 text-sm" style="color:#e8ecf4;">Orthopaedic (Arthroplasty, Spine, Open Fractures)</span>
+         </div><i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#8b93a7;"></i> </summary>
+        <div class="px-4 pb-4 text-sm space-y-2" style="color:#a0a8be;">
+         <div class="rounded-lg p-3" style="background:#13151f;">
+          <p><strong style="color:#4f8cff;">Joint Replacement/Spine with Hardware:</strong> Cefazolin 2g IV. Duration ≤24h.</p>
+          <p><strong style="color:#fbbf24;">Open Fractures:</strong></p>
+          <ul class="list-disc ml-5 space-y-1">
+           <li><strong>Gustilo I–II:</strong> Cefazolin 2g IV q8h × 24h (some extend to 72h or until wound closure)</li>
+           <li><strong>Gustilo III:</strong> Cefazolin + Gentamicin (or add Metronidazole for farm/soil contamination)</li>
+           <li><strong>Gustilo IIIC (vascular injury):</strong> Add Penicillin G for Clostridial coverage</li>
+          </ul>
+          <p><strong style="color:#22d3a7;">Allergy:</strong> Vancomycin or Clindamycin. For Gram-neg cover: Aztreonam or Aminoglycoside.</p>
+         </div>
+        </div>
+       </details><!-- GI / Colorectal -->
+       <details class="rounded-xl overflow-hidden" style="background:#1e2235;"><summary class="flex items-center justify-between p-4">
+         <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(34,211,167,0.15);">
+           <i data-lucide="stethoscope" style="width:16px;height:16px;color:#22d3a7;"></i>
+          </div><span class="font-600 text-sm" style="color:#e8ecf4;">GI / Colorectal Surgery</span>
+         </div><i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#8b93a7;"></i> </summary>
+        <div class="px-4 pb-4 text-sm space-y-2" style="color:#a0a8be;">
+         <div class="rounded-lg p-3" style="background:#13151f;">
+          <p><strong style="color:#4f8cff;">Colorectal:</strong> Cefazolin 2g + Metronidazole 500 mg IV. OR Ertapenem 1g IV single dose.</p>
+          <p><strong style="color:#22d3a7;">Mechanical Bowel Prep + Oral Antibiotics (MBP+OA):</strong> Neomycin 1g + Erythromycin base 1g PO at 1 PM, 2 PM, 11 PM day before surgery. Strong evidence for reduced SSI when combined with IV prophylaxis (NNT ~10).</p>
+          <p><strong style="color:#4f8cff;">Appendectomy:</strong> Cefoxitin 2g IV single dose. OR Cefazolin + Metronidazole.</p>
+          <p><strong style="color:#4f8cff;">Cholecystectomy (lap, low-risk):</strong> NOT routinely recommended. Give if high-risk: acute, empyema, immunosuppressed, conversion to open.</p>
+          <p><strong style="color:#fbbf24;">Allergy:</strong> Clindamycin + Aminoglycoside or Aztreonam + Metronidazole.</p>
+         </div>
+        </div>
+       </details><!-- Neurosurgery -->
+       <details class="rounded-xl overflow-hidden" style="background:#1e2235;"><summary class="flex items-center justify-between p-4">
+         <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(168,85,247,0.15);">
+           <i data-lucide="brain" style="width:16px;height:16px;color:#a855f7;"></i>
+          </div><span class="font-600 text-sm" style="color:#e8ecf4;">Neurosurgery (Craniotomy, CSF Shunts)</span>
+         </div><i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#8b93a7;"></i> </summary>
+        <div class="px-4 pb-4 text-sm" style="color:#a0a8be;">
+         <div class="rounded-lg p-3" style="background:#13151f;">
+          <p><strong style="color:#4f8cff;">Craniotomy:</strong> Cefazolin 2g IV. Duration ≤24h.</p>
+          <p><strong style="color:#4f8cff;">CSF Shunt/EVD Insertion:</strong> Cefazolin 2g IV single dose. Evidence for reduced shunt infection (OR 0.51).</p>
+          <p><strong style="color:#4f8cff;">Transsphenoidal:</strong> Cefazolin 2g IV ± nasal Mupirocin.</p>
+          <p><strong style="color:#fbbf24;">MRSA risk:</strong> Add Vancomycin. <strong>Allergy:</strong> Vancomycin or Clindamycin.</p>
+         </div>
+        </div>
+       </details><!-- Urology -->
+       <details class="rounded-xl overflow-hidden" style="background:#1e2235;"><summary class="flex items-center justify-between p-4">
+         <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(251,191,36,0.15);">
+           <i data-lucide="activity" style="width:16px;height:16px;color:#fbbf24;"></i>
+          </div><span class="font-600 text-sm" style="color:#e8ecf4;">Urological Procedures</span>
+         </div><i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#8b93a7;"></i> </summary>
+        <div class="px-4 pb-4 text-sm" style="color:#a0a8be;">
+         <div class="rounded-lg p-3" style="background:#13151f;">
+          <p><strong style="color:#4f8cff;">TURP / Cystoscopy with manipulation:</strong> TMP-SMX DS or Ciprofloxacin single dose (if urine sterile).</p>
+          <p><strong style="color:#4f8cff;">Prosthetic implant (penile, ureteral stent):</strong> Cefazolin 2g IV + Gentamicin.</p>
+          <p><strong style="color:#ef4444;">Key:</strong> Always obtain pre-op urine culture. If bacteriuria, treat based on culture before elective procedure.</p>
+         </div>
+        </div>
+       </details><!-- ObGyn -->
+       <details class="rounded-xl overflow-hidden" style="background:#1e2235;"><summary class="flex items-center justify-between p-4">
+         <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(236,72,153,0.15);">
+           <i data-lucide="baby" style="width:16px;height:16px;color:#ec4899;"></i>
+          </div><span class="font-600 text-sm" style="color:#e8ecf4;">Obstetric &amp; Gynecologic Surgery</span>
+         </div><i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#8b93a7;"></i> </summary>
+        <div class="px-4 pb-4 text-sm" style="color:#a0a8be;">
+         <div class="rounded-lg p-3" style="background:#13151f;">
+          <p><strong style="color:#4f8cff;">Cesarean Section:</strong> Cefazolin 2g IV <strong style="color:#22d3a7;">BEFORE skin incision</strong> (not after cord clamping — landmark change). Consider adding Azithromycin 500mg IV for unscheduled C-sections (C/SOAP trial: NNT=12 for SSI reduction).</p>
+          <p><strong style="color:#4f8cff;">Hysterectomy (all routes):</strong> Cefazolin 2g IV single dose.</p>
+          <p><strong style="color:#4f8cff;">Abortion/D&amp;C:</strong> Doxycycline 200 mg PO pre-procedure (1st trimester surgical abortion).</p>
+          <p><strong style="color:#fbbf24;">Allergy:</strong> Clindamycin + Gentamicin. OR Metronidazole + Gentamicin.</p>
+         </div>
+        </div>
+       </details><!-- Head/Neck & ENT -->
+       <details class="rounded-xl overflow-hidden" style="background:#1e2235;"><summary class="flex items-center justify-between p-4">
+         <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(14,165,233,0.15);">
+           <i data-lucide="mic" style="width:16px;height:16px;color:#0ea5e9;"></i>
+          </div><span class="font-600 text-sm" style="color:#e8ecf4;">Head &amp; Neck / Clean-Contaminated</span>
+         </div><i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#8b93a7;"></i> </summary>
+        <div class="px-4 pb-4 text-sm" style="color:#a0a8be;">
+         <div class="rounded-lg p-3" style="background:#13151f;">
+          <p><strong style="color:#4f8cff;">Clean-contaminated (through oral/pharyngeal mucosa):</strong> Cefazolin 2g + Metronidazole 500 mg IV. OR Ampicillin-Sulbactam 3g IV.</p>
+          <p><strong style="color:#4f8cff;">Duration:</strong> ≤24h post-op.</p>
+          <p><strong style="color:#8b93a7;">Clean head/neck (thyroid, parotid, no mucosal breach):</strong> Prophylaxis NOT indicated.</p>
+         </div>
+        </div>
+       </details>
+      </div>
+     </div><!-- Redosing Quick Reference -->
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-xl font-700 mb-4" style="color:#e8ecf4;">Intraoperative Redosing Reference</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr style="border-bottom:2px solid #1e2235;">
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Drug</th>
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Half-life</th>
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Redose Interval</th>
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Standard Dose</th>
+         </tr>
+        </thead>
+        <tbody style="color:#a0a8be;">
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Cefazolin</td>
+          <td class="py-2 px-3">1.8h</td>
+          <td class="py-2 px-3">4h</td>
+          <td class="py-2 px-3">2g (3g if ≥120 kg)</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Cefoxitin</td>
+          <td class="py-2 px-3">0.7h</td>
+          <td class="py-2 px-3">2h</td>
+          <td class="py-2 px-3">2g</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Cefuroxime</td>
+          <td class="py-2 px-3">1.3h</td>
+          <td class="py-2 px-3">4h</td>
+          <td class="py-2 px-3">1.5g</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Clindamycin</td>
+          <td class="py-2 px-3">2.4h</td>
+          <td class="py-2 px-3">6h</td>
+          <td class="py-2 px-3">900 mg</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Metronidazole</td>
+          <td class="py-2 px-3">6–8h</td>
+          <td class="py-2 px-3">Not typically needed</td>
+          <td class="py-2 px-3">500 mg</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Vancomycin</td>
+          <td class="py-2 px-3">4–8h</td>
+          <td class="py-2 px-3">Not typically redosed</td>
+          <td class="py-2 px-3">15 mg/kg</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- CARDIAC IE TAB -->
+    <section id="tab-cardiac" class="tab-content fade-in space-y-6 hidden">
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-2xl font-700 mb-2" style="color:#e8ecf4;">Infective Endocarditis Prophylaxis</h2>
+      <p class="text-sm mb-6" style="color:#8b93a7;">AHA/ACC 2021 Guidelines — Significantly narrowed indications from 2007 update.</p><!-- High Risk Conditions -->
+      <div class="rounded-xl p-5 mb-5" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2);">
+       <h3 class="font-600 mb-3 flex items-center gap-2" style="color:#ef4444;"><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i> Prophylaxis ONLY for Highest-Risk Cardiac Conditions</h3>
+       <ul class="text-sm space-y-2" style="color:#a0a8be;">
+        <li class="flex gap-2"><span style="color:#ef4444;">•</span> Prosthetic cardiac valves (mechanical, bioprosthetic, or homograft)</li>
+        <li class="flex gap-2"><span style="color:#ef4444;">•</span> Previous infective endocarditis</li>
+        <li class="flex gap-2"><span style="color:#ef4444;">•</span> Cardiac transplant recipients with valvulopathy</li>
+        <li class="flex gap-2"><span style="color:#ef4444;">•</span> Unrepaired cyanotic CHD, including palliative shunts/conduits</li>
+        <li class="flex gap-2"><span style="color:#ef4444;">•</span> Repaired CHD with prosthetic material/device — first 6 months after procedure</li>
+        <li class="flex gap-2"><span style="color:#ef4444;">•</span> Repaired CHD with residual defects at/adjacent to prosthetic patch or device</li>
+       </ul>
+      </div><!-- NOT indicated -->
+      <div class="rounded-xl p-5 mb-5" style="background:rgba(34,211,167,0.08); border:1px solid rgba(34,211,167,0.2);">
+       <h3 class="font-600 mb-3 flex items-center gap-2" style="color:#22d3a7;"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Prophylaxis NO LONGER Recommended For</h3>
+       <ul class="text-sm space-y-1" style="color:#a0a8be;">
+        <li>• Mitral valve prolapse (even with regurgitation)</li>
+        <li>• Bicuspid aortic valve</li>
+        <li>• Calcific aortic stenosis</li>
+        <li>• Rheumatic heart disease</li>
+        <li>• Hypertrophic cardiomyopathy</li>
+        <li>• All GI/GU procedures (even in high-risk cardiac patients)</li>
+       </ul>
+      </div><!-- Procedures -->
+      <div class="rounded-xl p-5 mb-5" style="background:#1e2235;">
+       <h3 class="font-600 mb-3" style="color:#e8ecf4;">Procedures Requiring Prophylaxis (in high-risk patients only)</h3>
+       <p class="text-sm mb-2" style="color:#a0a8be;"><strong style="color:#4f8cff;">Dental procedures</strong> involving manipulation of gingival tissue, periapical region of teeth, or perforation of oral mucosa.</p>
+       <p class="text-sm mb-2" style="color:#a0a8be;"><strong style="color:#4f8cff;">Respiratory tract</strong> procedures involving incision/biopsy of respiratory mucosa (tonsillectomy, adenoidectomy, bronchoscopy with biopsy).</p>
+       <p class="text-sm" style="color:#a0a8be;"><strong style="color:#ef4444;">NOT indicated:</strong> GI endoscopy (even with biopsy), GU procedures, routine anesthetic injections through non-infected tissue.</p>
+      </div><!-- Regimens -->
+      <h3 class="font-heading text-lg font-700 mb-3" style="color:#e8ecf4;">IE Prophylaxis Regimens (30–60 min before procedure)</h3>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr style="border-bottom:2px solid #1e2235;">
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Situation</th>
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Drug</th>
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Adult Dose</th>
+          <th class="text-left py-2 px-3 font-600" style="color:#4f8cff;">Pediatric Dose</th>
+         </tr>
+        </thead>
+        <tbody style="color:#a0a8be;">
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Oral</td>
+          <td class="py-2 px-3">Amoxicillin</td>
+          <td class="py-2 px-3">2g PO</td>
+          <td class="py-2 px-3">50 mg/kg PO</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">Unable to take PO</td>
+          <td class="py-2 px-3">Ampicillin OR Cefazolin/Ceftriaxone</td>
+          <td class="py-2 px-3">2g IM/IV OR 1g IM/IV</td>
+          <td class="py-2 px-3">50 mg/kg</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e2235;">
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">PCN allergy (oral)</td>
+          <td class="py-2 px-3">Cephalexin OR Azithromycin OR Doxycycline</td>
+          <td class="py-2 px-3">2g / 500 mg / 100 mg PO</td>
+          <td class="py-2 px-3">50 / 15 / — mg/kg</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-500" style="color:#e8ecf4;">PCN allergy + unable to take PO</td>
+          <td class="py-2 px-3">Cefazolin/Ceftriaxone</td>
+          <td class="py-2 px-3">1g IM/IV</td>
+          <td class="py-2 px-3">50 mg/kg</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <p class="text-xs mt-3" style="color:#505872;">⚠ Cephalosporins should NOT be used in patients with history of anaphylaxis, angioedema, or urticaria to penicillins.</p>
+     </div>
+    </section><!-- MEDICAL TAB -->
+    <section id="tab-medical" class="tab-content fade-in space-y-6 hidden">
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-2xl font-700 mb-2" style="color:#e8ecf4;">Medical (Non-Surgical) Prophylaxis</h2>
+      <p class="text-sm mb-6" style="color:#8b93a7;">Common indications encountered in ICU, Emergency, and General Medicine.</p>
+      <div class="space-y-4"><!-- SBP -->
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 flex items-center gap-2" style="color:#e8ecf4;"><span class="w-2 h-2 rounded-full" style="background:#4f8cff;"></span> SBP Prophylaxis (Cirrhosis)</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#4f8cff;">Primary (GI bleed):</strong> Ceftriaxone 1g IV × 7 days (or Norfloxacin 400 mg BID PO if able). All cirrhotic patients with GI bleed — reduces mortality.</p>
+         <p><strong style="color:#4f8cff;">Primary (low ascitic protein):</strong> Norfloxacin 400 mg/day PO (ascitic fluid protein &lt;1.5 g/dL + either Na ≤130, Cr ≥1.2, BUN ≥25, or Child-Pugh ≥9 with bilirubin ≥3).</p>
+         <p><strong style="color:#4f8cff;">Secondary (prior SBP episode):</strong> Norfloxacin 400 mg/day PO indefinitely (or TMP-SMX DS daily). Reduces recurrence from ~70% to ~20%.</p>
+        </div>
+       </div><!-- Meningitis contacts -->
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 flex items-center gap-2" style="color:#e8ecf4;"><span class="w-2 h-2 rounded-full" style="background:#a855f7;"></span> Meningococcal Meningitis Contacts</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#4f8cff;">Rifampin:</strong> 600 mg PO q12h × 2 days (adults). Children: 10 mg/kg q12h.</p>
+         <p><strong style="color:#4f8cff;">Ciprofloxacin:</strong> 500 mg PO × 1 dose (adults, preferred for convenience).</p>
+         <p><strong style="color:#4f8cff;">Ceftriaxone:</strong> 250 mg IM × 1 dose (preferred in pregnancy).</p>
+         <p><strong style="color:#ef4444;">Timing:</strong> Administer within 24h of index case identification. Effective up to 14 days post-exposure.</p>
+        </div>
+       </div><!-- Rheumatic Fever -->
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 flex items-center gap-2" style="color:#e8ecf4;"><span class="w-2 h-2 rounded-full" style="background:#22d3a7;"></span> Rheumatic Fever Secondary Prophylaxis</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#4f8cff;">Benzathine Penicillin G:</strong> 1.2 MU IM every 3–4 weeks (most effective).</p>
+         <p><strong style="color:#4f8cff;">Alternative:</strong> Penicillin V 250 mg PO BID or Sulfadiazine 1g PO daily.</p>
+         <p><strong style="color:#22d3a7;">Duration:</strong> RF without carditis: 5 years or until age 21. RF with carditis (no valvular disease): 10 years or until age 21. RF with persistent valvular disease: 10 years or until age 40 (some say lifelong).</p>
+        </div>
+       </div><!-- PJP -->
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 flex items-center gap-2" style="color:#e8ecf4;"><span class="w-2 h-2 rounded-full" style="background:#fbbf24;"></span> PJP Prophylaxis (Pneumocystis jirovecii)</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#4f8cff;">HIV:</strong> CD4 &lt;200 cells/μL or CD4% &lt;14% or oral candidiasis. TMP-SMX 1 SS or DS daily (also covers Toxoplasma).</p>
+         <p><strong style="color:#4f8cff;">Non-HIV:</strong> Prolonged corticosteroids (≥20 mg prednisone equivalent ≥4 weeks), organ transplant, certain chemotherapy regimens, temozolomide + RT.</p>
+         <p><strong style="color:#fbbf24;">Alternatives:</strong> Dapsone 100 mg/day PO (check G6PD first!), Atovaquone 1500 mg/day PO, or Pentamidine 300 mg inhaled monthly.</p>
+        </div>
+       </div><!-- Post-Splenectomy -->
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 flex items-center gap-2" style="color:#e8ecf4;"><span class="w-2 h-2 rounded-full" style="background:#ef4444;"></span> Post-Splenectomy / Asplenic Patients</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#ef4444;">OPSI (Overwhelming Post-Splenectomy Infection)</strong> carries 50–70% mortality. Prevention is critical.</p>
+         <p><strong style="color:#4f8cff;">Vaccinations (ideally 2 weeks pre-splenectomy):</strong> Pneumococcal (PCV20 or PCV15→PPSV23), Meningococcal (MenACWY + MenB), Hib, Annual Influenza.</p>
+         <p><strong style="color:#4f8cff;">Antibiotic Prophylaxis:</strong> Penicillin V 250 mg PO BID — at minimum 2 years post-splenectomy in adults; until age 5 (minimum) in children. Many experts recommend lifelong in high-risk patients.</p>
+         <p><strong style="color:#fbbf24;">Standby antibiotics:</strong> All asplenic patients should carry emergency Amoxicillin (or Levofloxacin if allergic) to self-administer at onset of febrile illness if unable to reach medical care within 2 hours.</p>
+        </div>
+       </div><!-- TB Latent -->
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 flex items-center gap-2" style="color:#e8ecf4;"><span class="w-2 h-2 rounded-full" style="background:#0ea5e9;"></span> Latent TB Treatment (Preventive Therapy)</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#4f8cff;">3HP (preferred):</strong> Isoniazid + Rifapentine weekly × 12 doses (DOT). Shortest effective regimen.</p>
+         <p><strong style="color:#4f8cff;">4R:</strong> Rifampin daily × 4 months. Better completion rates than 9H.</p>
+         <p><strong style="color:#4f8cff;">9H (traditional):</strong> Isoniazid daily × 9 months (add Pyridoxine 25–50 mg/day to prevent neuropathy).</p>
+         <p><strong style="color:#fbbf24;">Monitor:</strong> LFTs at baseline and monthly if risk factors for hepatotoxicity (age &gt;35, alcohol use, chronic liver disease, HIV).</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- SPECIAL POPULATIONS TAB -->
+    <section id="tab-special" class="tab-content fade-in space-y-6 hidden">
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-2xl font-700 mb-6" style="color:#e8ecf4;">Special Populations &amp; Situations</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-3 flex items-center gap-2 text-sm" style="color:#ec4899;"><i data-lucide="baby" style="width:16px;height:16px;"></i> Neonates — GBS Prophylaxis</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#e8ecf4;">Intrapartum:</strong> Penicillin G 5 MU IV loading → 2.5–3 MU q4h until delivery. OR Ampicillin 2g IV → 1g q4h.</p>
+         <p><strong style="color:#fbbf24;">PCN allergy:</strong> Cefazolin 2g IV → 1g q8h (low-risk allergy). Vancomycin 20 mg/kg q8h or Clindamycin (if susceptible) for high-risk allergy.</p>
+         <p><strong style="color:#8b93a7;">Indications:</strong> GBS+ screen at 36–37 weeks, GBS bacteriuria, prior infant with GBS disease, unknown status with risk factors (preterm &lt;37 wks, ROM ≥18h, intrapartum fever ≥38°C).</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-3 flex items-center gap-2 text-sm" style="color:#fbbf24;"><i data-lucide="scale" style="width:16px;height:16px;"></i> Obesity (BMI ≥40)</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#e8ecf4;">Cefazolin:</strong> 3g if ≥120 kg (critical — underdosing is #1 failure point).</p>
+         <p><strong style="color:#e8ecf4;">Vancomycin:</strong> 15 mg/kg actual body weight (max 2g/dose). Use actual body weight for loading.</p>
+         <p><strong style="color:#e8ecf4;">Gentamicin:</strong> Use adjusted body weight (IBW + 0.4 × [ABW − IBW]).</p>
+         <p><strong style="color:#ef4444;">Bariatric surgery:</strong> Cefazolin 3g (all patients, regardless of weight) + consider skin antisepsis with CHG.</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-3 flex items-center gap-2 text-sm" style="color:#22d3a7;"><i data-lucide="syringe" style="width:16px;height:16px;"></i> Renal Impairment</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#e8ecf4;">Single-dose prophylaxis:</strong> No dose adjustment needed (drug is cleared after surgery).</p>
+         <p><strong style="color:#e8ecf4;">Extended prophylaxis (≤24–48h):</strong> Adjust for CrCl &lt;30 mL/min. Cefazolin: 2g q8h→q12h. Vancomycin: extend dosing interval, may not need 2nd dose.</p>
+         <p><strong style="color:#ef4444;">Avoid:</strong> Aminoglycosides for prophylaxis in severe CKD unless absolutely necessary (use with TDM).</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-3 flex items-center gap-2 text-sm" style="color:#a855f7;"><i data-lucide="alert-circle" style="width:16px;height:16px;"></i> β-Lactam Allergy Assessment</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#e8ecf4;">True anaphylaxis (Type I):</strong> Avoid all β-lactams. Use Vancomycin + Aztreonam or Clindamycin + Gentamicin.</p>
+         <p><strong style="color:#e8ecf4;">Non-severe (rash, remote history):</strong> Cephalosporins are safe (&lt;1% cross-reactivity). Cefazolin is particularly low-risk (unique R1 side chain).</p>
+         <p><strong style="color:#22d3a7;">Best practice:</strong> Allergy history is wrong in &gt;90% of cases. Penicillin skin testing can de-label safely and save Vancomycin use (antimicrobial stewardship).</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-3 flex items-center gap-2 text-sm" style="color:#ef4444;"><i data-lucide="shield-alert" style="width:16px;height:16px;"></i> MRSA-Colonized Patients</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#e8ecf4;">Known MRSA+ or institutional rate &gt;10–20%:</strong> ADD Vancomycin 15 mg/kg IV to standard Cefazolin (do NOT replace — dual coverage).</p>
+         <p><strong style="color:#e8ecf4;">Decolonization bundle:</strong> Mupirocin 2% nasal ointment BID × 5 days + CHG body wash. Strongest evidence in cardiac and orthopaedic surgery.</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-3 flex items-center gap-2 text-sm" style="color:#0ea5e9;"><i data-lucide="droplets" style="width:16px;height:16px;"></i> Neutropenic Patients</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p><strong style="color:#e8ecf4;">Fluoroquinolone prophylaxis:</strong> Levofloxacin 500 mg/day PO during expected neutropenia (ANC &lt;100 for &gt;7 days). ASCO/IDSA guideline.</p>
+         <p><strong style="color:#fbbf24;">Controversy:</strong> Reduces febrile neutropenia episodes but increases FQ resistance and <em>C. difficile</em> risk. Individualize based on local epidemiology.</p>
+         <p><strong style="color:#e8ecf4;">Antifungal:</strong> Posaconazole or Micafungin during prolonged neutropenia in AML/MDS or allo-HSCT.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ICU PEARLS TAB -->
+    <section id="tab-pearls" class="tab-content fade-in space-y-6 hidden">
+     <div class="rounded-2xl p-6 md:p-8" style="background:#181b28; border:1px solid #1e2235;">
+      <h2 class="font-heading text-2xl font-700 mb-2" style="color:#e8ecf4;">ICU &amp; Emergency Medicine Pearls</h2>
+      <p class="text-sm mb-6" style="color:#8b93a7;">Practical points for the intensivist and emergency physician.</p>
+      <div class="space-y-4">
+       <div class="rounded-xl p-5" style="background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.15);">
+        <h3 class="font-600 mb-2 text-sm" style="color:#ef4444;">🚨 Post-Exposure Prophylaxis (PEP) — Time-Critical</h3>
+        <div class="text-sm space-y-2" style="color:#a0a8be;">
+         <p><strong style="color:#e8ecf4;">Rabies:</strong> Wound wash (soap + water 15 min) + HRIG (20 IU/kg infiltrated around wound) + Rabies vaccine (Day 0, 3, 7, 14). Non-immunized: 4 doses. Previously immunized: 2 doses (Day 0, 3), no HRIG. <strong style="color:#ef4444;">Do NOT delay — rabies is 100% fatal once symptomatic.</strong></p>
+         <p><strong style="color:#e8ecf4;">Needlestick/HIV:</strong> Start 3-drug ART within 2 hours (ideally &lt;72h). Tenofovir/Emtricitabine + Dolutegravir × 28 days. Baseline + 6-week + 12-week HIV testing.</p>
+         <p><strong style="color:#e8ecf4;">Hepatitis B:</strong> If source HBsAg+ and recipient unvaccinated: HBIG + vaccine series. If vaccinated with anti-HBs &gt;10: no treatment needed.</p>
+         <p><strong style="color:#e8ecf4;">Tetanus:</strong> Clean minor wound: Td/Tdap if &gt;10 years since booster. Contaminated wound: Td/Tdap if &gt;5 years + TIG if &lt;3 doses of primary series or unknown.</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 text-sm" style="color:#4f8cff;">🫁 VAP Prevention Bundle (not prophylaxis per se, but critical)</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p>• HOB elevation 30–45° • Daily sedation interruption + SBT • Oral care with CHG 0.12% q6h • DVT prophylaxis • Stress ulcer prophylaxis (if indicated) • Subglottic secretion drainage ETT when available</p>
+         <p><strong style="color:#fbbf24;">Note:</strong> Selective digestive decontamination (SDD) and selective oropharyngeal decontamination (SOD) — used in some European ICUs — reduce ICU mortality (NNT ~20) but remain controversial due to resistance concerns. Not standard in North America/Asia.</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 text-sm" style="color:#22d3a7;">🦠 Surgical Prophylaxis Failures — Top Causes</h3>
+        <ol class="text-sm space-y-1 list-decimal ml-5" style="color:#a0a8be;">
+         <li><strong style="color:#e8ecf4;">Wrong timing</strong> — given &gt;60 min before or after incision</li>
+         <li><strong style="color:#e8ecf4;">Underdosing in obesity</strong> — using standard 2g Cefazolin in 140 kg patient</li>
+         <li><strong style="color:#e8ecf4;">Failure to redose</strong> — long surgery without intra-op redosing</li>
+         <li><strong style="color:#e8ecf4;">Wrong drug</strong> — Cefazolin for colorectal (no anaerobic cover)</li>
+         <li><strong style="color:#e8ecf4;">Excessive duration</strong> — 5-day courses post-op (promotes resistance, not benefit)</li>
+         <li><strong style="color:#e8ecf4;">MRSA not covered</strong> — known colonization but no Vancomycin added</li>
+        </ol>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 text-sm" style="color:#fbbf24;">💊 Antimicrobial Stewardship Quick Wins</h3>
+        <div class="text-sm space-y-1" style="color:#a0a8be;">
+         <p>• <strong style="color:#e8ecf4;">Stop prophylaxis within 24h</strong> — this single intervention can reduce antibiotic-days by 30% in surgical wards.</p>
+         <p>• <strong style="color:#e8ecf4;">De-label penicillin allergy</strong> — 90% of "allergic" patients can safely receive β-lactams. Direct oral amoxicillin challenge is safe for low-risk history.</p>
+         <p>• <strong style="color:#e8ecf4;">Avoid vancomycin for convenience</strong> — reserve for documented MRSA colonization/infection or true anaphylaxis to β-lactams.</p>
+         <p>• <strong style="color:#e8ecf4;">Oral step-down:</strong> POET trial showed oral antibiotics non-inferior to IV for left-sided endocarditis. The IV-only dogma is changing.</p>
+        </div>
+       </div>
+       <div class="rounded-xl p-5" style="background:#1e2235;">
+        <h3 class="font-600 mb-2 text-sm" style="color:#a855f7;">📋 Open Fracture in the ED — Quick Protocol</h3>
+        <div class="text-sm" style="color:#a0a8be;">
+         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+          <div class="rounded-lg p-3" style="background:#13151f;">
+           <p class="font-600 text-xs mb-1" style="color:#22d3a7;">Gustilo I–II</p>
+           <p class="text-xs">Cefazolin 2g IV<br>
+            Tetanus update<br>
+            Irrigate &amp; debride &lt;6h</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:#13151f;">
+           <p class="font-600 text-xs mb-1" style="color:#fbbf24;">Gustilo IIIA–B</p>
+           <p class="text-xs">Cefazolin 2g IV +<br>
+            Gentamicin 5 mg/kg IV<br>
+            Urgent OR within 6h</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:#13151f;">
+           <p class="font-600 text-xs mb-1" style="color:#ef4444;">Gustilo IIIC / Farm</p>
+           <p class="text-xs">Above + Penicillin G 4MU IV (Clostridial cover)<br>
+            ± Metronidazole if soil contamination</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="text-center py-8 px-4 border-t" style="border-color:#1e2235;">
+    <p class="text-xs" style="color:#505872;">For clinical education purposes. Always verify against current local guidelines and institutional protocols. Drug dosing should be confirmed with pharmacy. Last updated based on AHA 2021, ASHP/IDSA 2013, WHO 2016, NICE 2020 guidelines.</p>
+   </footer>
+  </div>
+  <script>
+const defaultConfig = {
+  main_title: 'Antibiotic Prophylaxis',
+  subtitle: 'Clinical Reference Guide',
+  background_color: '#0f1117',
+  surface_color: '#181b28',
+  text_color: '#a0a8be',
+  accent_color: '#4f8cff',
+  heading_color: '#e8ecf4',
+  font_family: 'Fraunces',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const el = (id) => document.getElementById(id);
+  el('mainTitle').textContent = config.main_title || defaultConfig.main_title;
+  el('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+
+  const app = el('app');
+  app.style.background = config.background_color || defaultConfig.background_color;
+
+  document.querySelectorAll('.font-heading').forEach(h => {
+    h.style.fontFamily = `${config.font_family || defaultConfig.font_family}, serif`;
+    h.style.color = config.heading_color || defaultConfig.heading_color;
+  });
+
+  const baseSize = config.font_size || defaultConfig.font_size;
+  document.querySelectorAll('p, li, td, th').forEach(e => {
+    e.style.fontSize = e.classList.contains('text-xs') ? `${baseSize * 0.75}px` : '';
+  });
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('tab-active');
+    b.style.color = '#8b93a7';
+    b.style.borderColor = 'transparent';
+  });
+  const section = document.getElementById('tab-' + name);
+  if (section) { section.classList.remove('hidden'); section.classList.add('fade-in'); }
+  const btn = document.querySelector(`[data-tab="${name}"]`);
+  if (btn) { btn.classList.add('tab-active'); btn.style.color = '#4f8cff'; btn.style.borderColor = '#4f8cff'; }
+  lucide.createIcons();
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>
