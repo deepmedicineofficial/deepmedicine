@@ -1,0 +1,865 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Drug Interactions | Clinical Pharmacology & Safety Guide | Deep Medicine</title> <meta name="description" content="Comprehensive guide to drug interactions including pharmacokinetic and pharmacodynamic interactions, ICU drugs, and clinical safety considerations."> <link rel="canonical" href="https://deepmedicine.in/clinical/drugs/drug-interactions"> <!-- Open Graph --> <meta property="og:title" content="Drug Interactions | Deep Medicine"> <meta property="og:description" content="Clinical drug interaction guide for safe prescribing and ICU medication management."> <meta property="og:image" content="https://deepmedicine.in/images/drug-interactions.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+.font-heading { font-family: 'Instrument Serif', serif; }
+.font-body { font-family: 'DM Sans', sans-serif; }
+.severity-contraindicated { background: #991b1b; color: #fff; }
+.severity-major { background: #dc2626; color: #fff; }
+.severity-moderate { background: #f59e0b; color: #1a1a1a; }
+.severity-minor { background: #22c55e; color: #1a1a1a; }
+.drug-tag { transition: all 0.2s; }
+.drug-tag:hover { transform: scale(1.05); }
+.result-card { animation: slideUp 0.3s ease-out; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.pulse-dot { animation: pulse-dot 1.5s infinite; }
+.tab-active { border-bottom: 2px solid #e11d48; color: #e11d48; }
+.search-input:focus { outline: none; box-shadow: 0 0 0 2px rgba(225,29,72,0.3); }
+details summary::-webkit-details-marker { display: none; }
+details summary::marker { display: none; }
+details[open] .chevron-icon { transform: rotate(180deg); }
+.chevron-icon { transition: transform 0.2s; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background:#0f0f12;">
+   <!-- Header -->
+   <header class="w-full" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#1a1a2e 100%);border-bottom:1px solid #2a2a3e;">
+    <div class="max-w-5xl mx-auto px-4 py-5 sm:py-6">
+     <div class="flex items-center gap-3 mb-1">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#e11d48;">
+       <i data-lucide="pill" style="width:20px;height:20px;color:#fff;"></i>
+      </div>
+      <div>
+       <h1 id="app-title" class="font-heading text-2xl sm:text-3xl" style="color:#f1f1f4;">Drug Interaction Reference</h1>
+       <p id="subtitle-text" class="text-xs sm:text-sm" style="color:#8888a4;">Clinical Decision Support — ICU &amp; Emergency Medicine</p>
+      </div>
+     </div>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="w-full" style="background:#1a1a2e;border-bottom:1px solid #2a2a3e;" role="navigation" aria-label="Main navigation">
+    <div class="max-w-5xl mx-auto px-4 flex gap-0 overflow-x-auto">
+     <button onclick="switchTab('checker')" id="tab-checker" class="tab-btn tab-active px-4 py-3 text-sm font-medium whitespace-nowrap" style="background:none;border:none;border-bottom:2px solid #e11d48;color:#e11d48;cursor:pointer;"> <i data-lucide="search" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i> Interaction Checker </button> <button onclick="switchTab('reference')" id="tab-reference" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="background:none;border:none;border-bottom:2px solid transparent;color:#8888a4;cursor:pointer;"> <i data-lucide="book-open" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i> Quick Reference </button> <button onclick="switchTab('icu')" id="tab-icu" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="background:none;border:none;border-bottom:2px solid transparent;color:#8888a4;cursor:pointer;"> <i data-lucide="activity" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i> ICU Protocols </button> <button onclick="switchTab('cyp')" id="tab-cyp" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="background:none;border:none;border-bottom:2px solid transparent;color:#8888a4;cursor:pointer;"> <i data-lucide="flask-round" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i> CYP450 Pathways </button>
+    </div>
+   </nav><!-- Content Area -->
+   <main class="max-w-5xl mx-auto px-4 py-5">
+    <!-- TAB: Checker -->
+    <section id="panel-checker">
+     <!-- Search -->
+     <div class="rounded-xl p-4 sm:p-5 mb-5" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+      <label for="drug-search" class="block text-sm font-semibold mb-2" style="color:#c8c8df;">Select Drugs to Check Interactions</label>
+      <div class="relative">
+       <i data-lucide="search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#5a5a7a;"></i> <input id="drug-search" type="text" placeholder="Type drug name (e.g., Warfarin, Amiodarone)..." autocomplete="off" class="search-input w-full rounded-lg text-sm py-3 pl-10 pr-4" style="background:#12121a;border:1px solid #2a2a3e;color:#e8e8f0;" oninput="handleSearch(this.value)" onfocus="showDropdown()">
+       <div id="search-dropdown" class="absolute left-0 right-0 top-full mt-1 rounded-lg max-h-48 overflow-y-auto hidden z-50" style="background:#22223a;border:1px solid #3a3a5e;"></div>
+      </div>
+      <div id="selected-drugs" class="flex flex-wrap gap-2 mt-3"></div><button onclick="checkInteractions()" class="mt-4 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all" style="background:#e11d48;color:#fff;border:none;cursor:pointer;" onmouseover="this.style.background='#be123c'" onmouseout="this.style.background='#e11d48'"> <i data-lucide="zap" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i> Check Interactions </button>
+     </div><!-- Results -->
+     <div id="results-area"></div><!-- Severity Legend -->
+     <div class="rounded-xl p-4 mt-5" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+      <h3 class="text-sm font-semibold mb-3" style="color:#c8c8df;">Severity Classification</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+       <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#991b1b;"></span><span class="text-xs" style="color:#a8a8c4;"><strong style="color:#f87171;">Contraindicated</strong> — Avoid combination entirely</span>
+       </div>
+       <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#dc2626;"></span><span class="text-xs" style="color:#a8a8c4;"><strong style="color:#f87171;">Major</strong> — Life-threatening risk</span>
+       </div>
+       <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#f59e0b;"></span><span class="text-xs" style="color:#a8a8c4;"><strong style="color:#fbbf24;">Moderate</strong> — May require adjustment</span>
+       </div>
+       <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#22c55e;"></span><span class="text-xs" style="color:#a8a8c4;"><strong style="color:#4ade80;">Minor</strong> — Low clinical significance</span>
+       </div>
+      </div>
+     </div>
+    </section><!-- TAB: Quick Reference -->
+    <section id="panel-reference" class="hidden">
+     <div id="reference-content"></div>
+    </section><!-- TAB: ICU Protocols -->
+    <section id="panel-icu" class="hidden">
+     <div id="icu-content"></div>
+    </section><!-- TAB: CYP450 -->
+    <section id="panel-cyp" class="hidden">
+     <div id="cyp-content"></div>
+    </section>
+   </main><!-- Disclaimer -->
+   <footer class="max-w-5xl mx-auto px-4 py-4 mb-4">
+    <div class="rounded-lg p-3" style="background:#1e1e30;border:1px solid #2a2a3e;">
+     <p class="text-xs text-center" style="color:#6a6a8a;"><i data-lucide="alert-triangle" style="width:12px;height:12px;display:inline;vertical-align:-2px;margin-right:4px;color:#f59e0b;"></i> <strong>Clinical Disclaimer:</strong> This tool is for educational and clinical decision support only. Always verify interactions using institutional pharmacopeia, UpToDate, Lexicomp, or Micromedex. Not a substitute for clinical judgment.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// ===================== DRUG DATABASE =====================
+const DRUGS = [
+  // ANTICOAGULANTS & ANTIPLATELETS
+  { name:"Warfarin", class:"Anticoagulant", mechanism:"Vitamin K epoxide reductase inhibitor", cyp:["CYP2C9","CYP3A4","CYP1A2"] },
+  { name:"Heparin", class:"Anticoagulant", mechanism:"Antithrombin III activator", cyp:[] },
+  { name:"Dabigatran", class:"DOAC (Direct Thrombin Inhibitor)", mechanism:"Direct Factor IIa inhibitor", cyp:["P-gp"] },
+  { name:"Edoxaban", class:"DOAC (Factor Xa inhibitor)", mechanism:"Direct Factor Xa inhibitor", cyp:["CYP3A4","P-gp"] },
+  { name:"Clopidogrel", class:"Antiplatelet (P2Y12 inhibitor)", mechanism:"Irreversible P2Y12 ADP receptor antagonist (prodrug)", cyp:["CYP2C19","CYP3A4"] },
+  { name:"Ticagrelor", class:"Antiplatelet (P2Y12 inhibitor)", mechanism:"Reversible P2Y12 antagonist", cyp:["CYP3A4"] },
+  { name:"Prasugrel", class:"Antiplatelet (P2Y12 inhibitor)", mechanism:"Irreversible P2Y12 antagonist (prodrug)", cyp:["CYP3A4"] },
+  { name:"Aspirin", class:"Antiplatelet / NSAID", mechanism:"Irreversible COX-1 inhibitor", cyp:[] },
+  { name:"Dipyridamole", class:"Antiplatelet", mechanism:"Phosphodiesterase inhibitor → ↑cAMP", cyp:[] },
+  { name:"Enoxaparin", class:"LMWH", mechanism:"Factor Xa > IIa inhibition via antithrombin III", cyp:[] },
+  { name:"Dalteparin", class:"LMWH", mechanism:"Factor Xa > IIa inhibition", cyp:[] },
+  { name:"Rivaroxaban", class:"DOAC (Factor Xa inhibitor)", mechanism:"Direct Factor Xa inhibitor", cyp:["CYP3A4","P-gp"] },
+  { name:"Apixaban", class:"DOAC (Factor Xa inhibitor)", mechanism:"Direct Factor Xa inhibitor", cyp:["CYP3A4","P-gp"] },
+
+  // CARDIOVASCULAR
+  { name:"Amiodarone", class:"Antiarrhythmic (Class III)", mechanism:"Multi-channel blocker (Na+/K+/Ca2+/β-blocker)", cyp:["CYP3A4","CYP2C9","CYP2D6"] },
+  { name:"Sotalol", class:"Antiarrhythmic (Class III)", mechanism:"Non-selective β-blocker + K+ channel blocker", cyp:[] },
+  { name:"Flecainide", class:"Antiarrhythmic (Class Ic)", mechanism:"Na+ channel blocker", cyp:["CYP2D6"] },
+  { name:"Procainamide", class:"Antiarrhythmic (Class Ia)", mechanism:"Na+ channel blocker + anticholinergic", cyp:[] },
+  { name:"Quinidine", class:"Antiarrhythmic (Class Ia)", mechanism:"Na+ channel blocker + CYP2D6 inhibitor", cyp:["CYP3A4"] },
+  { name:"Digoxin", class:"Cardiac Glycoside", mechanism:"Na+/K+ ATPase inhibitor → ↑intracellular Ca2+", cyp:["P-gp"] },
+  { name:"Metoprolol", class:"Beta-Blocker (β1-selective)", mechanism:"β1-adrenergic receptor antagonist", cyp:["CYP2D6"] },
+  { name:"Atenolol", class:"Beta-Blocker (β1-selective)", mechanism:"β1-adrenergic receptor antagonist", cyp:[] },
+  { name:"Bisoprolol", class:"Beta-Blocker (β1-selective)", mechanism:"β1-adrenergic receptor antagonist", cyp:["CYP3A4"] },
+  { name:"Carvedilol", class:"Beta-Blocker (mixed α/β)", mechanism:"Non-selective β-blocker + α1-blocker", cyp:["CYP2D6"] },
+  { name:"Labetalol", class:"Beta-Blocker (mixed α/β)", mechanism:"Non-selective β-blocker + α1-blocker", cyp:[] },
+  { name:"Propranolol", class:"Beta-Blocker (non-selective)", mechanism:"Non-selective β-blocker", cyp:["CYP1A2","CYP2D6"] },
+  { name:"Amlodipine", class:"Calcium Channel Blocker (DHP)", mechanism:"L-type Ca2+ channel blocker", cyp:["CYP3A4"] },
+  { name:"Nifedipine", class:"Calcium Channel Blocker (DHP)", mechanism:"L-type Ca2+ channel blocker", cyp:["CYP3A4"] },
+  { name:"Felodipine", class:"Calcium Channel Blocker (DHP)", mechanism:"L-type Ca2+ channel blocker", cyp:["CYP3A4"] },
+  { name:"Diltiazem", class:"Calcium Channel Blocker (non-DHP)", mechanism:"L-type Ca2+ channel blocker + AV nodal suppression", cyp:["CYP3A4"] },
+  { name:"Verapamil", class:"Calcium Channel Blocker (non-DHP)", mechanism:"L-type Ca2+ channel blocker + AV nodal suppression + P-gp inhibitor", cyp:["CYP3A4","CYP1A2"] },
+  { name:"Losartan", class:"ARB", mechanism:"AT1 receptor antagonist (prodrug via CYP2C9)", cyp:["CYP2C9","CYP3A4"] },
+  { name:"Valsartan", class:"ARB", mechanism:"AT1 receptor antagonist", cyp:[] },
+  { name:"Irbesartan", class:"ARB", mechanism:"AT1 receptor antagonist", cyp:["CYP2C9"] },
+  { name:"Olmesartan", class:"ARB", mechanism:"AT1 receptor antagonist", cyp:[] },
+  { name:"Enalapril", class:"ACE Inhibitor", mechanism:"ACE inhibitor (prodrug → Enalaprilat)", cyp:[] },
+  { name:"Lisinopril", class:"ACE Inhibitor", mechanism:"ACE inhibitor (active drug, no hepatic metabolism)", cyp:[] },
+  { name:"Ramipril", class:"ACE Inhibitor", mechanism:"ACE inhibitor (prodrug)", cyp:[] },
+  { name:"Perindopril", class:"ACE Inhibitor", mechanism:"ACE inhibitor (prodrug)", cyp:[] },
+  { name:"Atorvastatin", class:"HMG-CoA Reductase Inhibitor (Statin)", mechanism:"Competitive inhibitor of HMG-CoA reductase", cyp:["CYP3A4"] },
+  { name:"Simvastatin", class:"HMG-CoA Reductase Inhibitor (Statin)", mechanism:"Competitive inhibitor of HMG-CoA reductase (prodrug)", cyp:["CYP3A4"] },
+  { name:"Pravastatin", class:"HMG-CoA Reductase Inhibitor (Statin)", mechanism:"Active drug, minimal CYP metabolism", cyp:[] },
+  { name:"Rosuvastatin", class:"HMG-CoA Reductase Inhibitor (Statin)", mechanism:"Active drug, minimal CYP metabolism", cyp:[] },
+  { name:"Lovastatin", class:"HMG-CoA Reductase Inhibitor (Statin)", mechanism:"Competitive inhibitor (prodrug)", cyp:["CYP3A4"] },
+  { name:"Ezetimibe", class:"Cholesterol Absorption Inhibitor", mechanism:"Niemann-Pick C1-like 1 protein inhibitor", cyp:[] },
+  { name:"Spironolactone", class:"Potassium-Sparing Diuretic", mechanism:"Mineralocorticoid receptor antagonist", cyp:["CYP3A4"] },
+  { name:"Furosemide", class:"Loop Diuretic", mechanism:"Na+/K+/2Cl− cotransporter (NKCC2) inhibitor", cyp:[] },
+  { name:"Torsemide", class:"Loop Diuretic", mechanism:"NKCC2 inhibitor", cyp:["CYP2C9"] },
+  { name:"Bumetanide", class:"Loop Diuretic", mechanism:"NKCC2 inhibitor", cyp:[] },
+  { name:"Hydroclorothiazide", class:"Thiazide Diuretic", mechanism:"Na+/Cl− cotransporter inhibitor", cyp:[] },
+  { name:"Chlorthalidone", class:"Thiazide-like Diuretic", mechanism:"Na+/Cl− cotransporter inhibitor", cyp:[] },
+
+  // ENDOCRINE & METABOLIC
+  { name:"Metformin", class:"Biguanide", mechanism:"AMPK activator, ↓hepatic gluconeogenesis", cyp:[] },
+  { name:"Glibenclamide", class:"Sulfonylurea", mechanism:"KATP channel blocker → insulin release", cyp:["CYP2C9"] },
+  { name:"Glipizide", class:"Sulfonylurea", mechanism:"KATP channel blocker", cyp:["CYP2C9"] },
+  { name:"Gliclazide", class:"Sulfonylurea", mechanism:"KATP channel blocker", cyp:["CYP2C9"] },
+  { name:"Pioglitazone", class:"Thiazolidinedione", mechanism:"PPAR-γ agonist", cyp:["CYP2C8","CYP3A4"] },
+  { name:"Rosiglitazone", class:"Thiazolidinedione", mechanism:"PPAR-γ agonist", cyp:["CYP2C8"] },
+  { name:"Sitagliptin", class:"DPP-4 Inhibitor", mechanism:"DPP-4 enzyme inhibitor → ↑GLP-1 levels", cyp:[] },
+  { name:"Vildagliptin", class:"DPP-4 Inhibitor", mechanism:"DPP-4 inhibitor", cyp:[] },
+  { name:"Linagliptin", class:"DPP-4 Inhibitor", mechanism:"DPP-4 inhibitor", cyp:["CYP3A4"] },
+  { name:"Exenatide", class:"GLP-1 Receptor Agonist", mechanism:"GLP-1 receptor agonist → insulin secretion", cyp:[] },
+  { name:"Dulaglutide", class:"GLP-1 Receptor Agonist", mechanism:"GLP-1 receptor agonist", cyp:[] },
+  { name:"Insulin", class:"Hormone", mechanism:"Insulin receptor agonist → GLUT4 translocation", cyp:[] },
+  { name:"Insulin glargine", class:"Insulin", mechanism:"Long-acting basal insulin", cyp:[] },
+  { name:"Insulin aspart", class:"Insulin", mechanism:"Rapid-acting insulin", cyp:[] },
+  { name:"Levothyroxine", class:"Thyroid Hormone", mechanism:"Thyroid hormone replacement (T4 → T3 conversion)", cyp:[] },
+  { name:"Hydrocortisone", class:"Corticosteroid", mechanism:"Glucocorticoid + mineralocorticoid receptor agonist", cyp:["CYP3A4"] },
+  { name:"Dexamethasone", class:"Corticosteroid", mechanism:"Glucocorticoid receptor agonist → NF-κB suppression", cyp:["CYP3A4"] },
+  { name:"Prednisolone", class:"Corticosteroid", mechanism:"Glucocorticoid receptor agonist (prodrug)", cyp:[] },
+  { name:"Methylprednisolone", class:"Corticosteroid", mechanism:"Glucocorticoid agonist", cyp:[] },
+
+  // ANTIBIOTICS & ANTIINFECTIVES
+  { name:"Amoxicillin", class:"Penicillin", mechanism:"β-lactam → bacterial cell wall inhibitor", cyp:[] },
+  { name:"Ampicillin", class:"Penicillin", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Amoxicillin-Clavulanic acid", class:"β-lactam + β-lactamase inhibitor", mechanism:"Amoxicillin + clavulanic acid", cyp:[] },
+  { name:"Cephalexin", class:"Cephalosporin (1st Gen)", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Ceftriaxone", class:"Cephalosporin (3rd Gen)", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Cefepime", class:"Cephalosporin (4th Gen)", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Cefazolin", class:"Cephalosporin (1st Gen)", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Meropenem", class:"Carbapenem", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Imipenem", class:"Carbapenem", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Ciprofloxacin", class:"Fluoroquinolone", mechanism:"DNA gyrase + topoisomerase IV inhibitor", cyp:["CYP1A2"] },
+  { name:"Levofloxacin", class:"Fluoroquinolone", mechanism:"DNA gyrase inhibitor", cyp:[] },
+  { name:"Moxifloxacin", class:"Fluoroquinolone", mechanism:"DNA gyrase + topoisomerase IV inhibitor", cyp:["CYP3A4"] },
+  { name:"Ofloxacin", class:"Fluoroquinolone", mechanism:"DNA gyrase inhibitor", cyp:[] },
+  { name:"Clarithromycin", class:"Macrolide", mechanism:"50S ribosomal subunit inhibitor + CYP3A4 inhibitor", cyp:["CYP3A4"] },
+  { name:"Erythromycin", class:"Macrolide", mechanism:"50S ribosomal subunit inhibitor", cyp:["CYP3A4"] },
+  { name:"Azithromycin", class:"Macrolide", mechanism:"50S ribosomal subunit inhibitor (minimal CYP inhibition)", cyp:[] },
+  { name:"Roxithromycin", class:"Macrolide", mechanism:"50S ribosomal inhibitor", cyp:[] },
+  { name:"Vancomycin", class:"Glycopeptide Antibiotic", mechanism:"D-Ala-D-Ala binding → cell wall synthesis inhibitor", cyp:[] },
+  { name:"Gentamicin", class:"Aminoglycoside", mechanism:"30S ribosomal subunit binding → protein synthesis inhibitor", cyp:[] },
+  { name:"Tobramycin", class:"Aminoglycoside", mechanism:"30S ribosomal inhibitor", cyp:[] },
+  { name:"Amikacin", class:"Aminoglycoside", mechanism:"30S ribosomal inhibitor", cyp:[] },
+  { name:"Metronidazole", class:"Nitroimidazole", mechanism:"DNA strand breakage via nitroso radicals", cyp:["CYP2C9"] },
+  { name:"Clindamycin", class:"Lincosamide", mechanism:"50S ribosomal inhibitor", cyp:["CYP3A4"] },
+  { name:"Linezolid", class:"Oxazolidinone", mechanism:"50S ribosomal inhibitor + weak MAO inhibitor", cyp:[] },
+  { name:"Doxycycline", class:"Tetracycline", mechanism:"30S ribosomal inhibitor", cyp:[] },
+  { name:"Minocycline", class:"Tetracycline", mechanism:"30S ribosomal inhibitor", cyp:[] },
+  { name:"Nitrofurantoin", class:"Nitrofuran", mechanism:"Bacterial DNA damaging agent", cyp:[] },
+  { name:"Trimethoprim-Sulfamethoxazole", class:"Antifolate", mechanism:"DHFR + DHPS inhibitor", cyp:["CYP2C9"] },
+  { name:"Piperacillin-Tazobactam", class:"β-lactam + β-lactamase inhibitor", mechanism:"Piperacillin + tazobactam", cyp:[] },
+  { name:"Ceftazidime", class:"Cephalosporin (3rd Gen)", mechanism:"β-lactam antibiotic", cyp:[] },
+  { name:"Rifampicin", class:"Antitubercular", mechanism:"RNA polymerase inhibitor + potent CYP inducer", cyp:["CYP3A4","CYP2C9","CYP2C19","CYP1A2"] },
+  { name:"Isoniazid", class:"Antitubercular", mechanism:"Mycobacterial cell wall synthesis inhibitor", cyp:["CYP2E1"] },
+  { name:"Pyrazinamide", class:"Antitubercular", mechanism:"Nicotinamidase inhibitor", cyp:[] },
+  { name:"Ethambutol", class:"Antitubercular", mechanism:"Arabinosyl transferase inhibitor", cyp:[] },
+
+  // ANTIFUNGALS & ANTIVIRALS
+  { name:"Fluconazole", class:"Antifungal (Azole)", mechanism:"14α-demethylase (CYP51) inhibitor", cyp:["CYP2C9","CYP2C19","CYP3A4"] },
+  { name:"Ketoconazole", class:"Antifungal (Azole)", mechanism:"14α-demethylase inhibitor + potent CYP3A4 inhibitor", cyp:["CYP3A4"] },
+  { name:"Itraconazole", class:"Antifungal (Azole)", mechanism:"14α-demethylase inhibitor", cyp:["CYP3A4"] },
+  { name:"Voriconazole", class:"Antifungal (Azole)", mechanism:"14α-demethylase inhibitor", cyp:["CYP2C19","CYP3A4"] },
+  { name:"Posaconazole", class:"Antifungal (Azole)", mechanism:"14α-demethylase inhibitor", cyp:["CYP3A4"] },
+  { name:"Amphotericin B", class:"Polyene Antifungal", mechanism:"Fungal membrane disruption (ergosterol binding)", cyp:[] },
+  { name:"Caspofungin", class:"Echinocandin", mechanism:"β-1,3-glucan synthase inhibitor", cyp:[] },
+  { name:"Acyclovir", class:"Antiviral (Nucleoside)", mechanism:"Viral DNA polymerase inhibitor", cyp:[] },
+  { name:"Valacyclovir", class:"Antiviral (Nucleoside)", mechanism:"Acyclovir prodrug", cyp:[] },
+  { name:"Oseltamivir", class:"Antiviral (Neuraminidase Inhibitor)", mechanism:"Influenza neuraminidase inhibitor", cyp:[] },
+
+  // NERVOUS SYSTEM
+  { name:"Phenytoin", class:"Antiepileptic", mechanism:"Voltage-gated Na+ channel blocker", cyp:["CYP2C9","CYP2C19"] },
+  { name:"Carbamazepine", class:"Antiepileptic", mechanism:"Voltage-gated Na+ channel blocker + CYP inducer", cyp:["CYP3A4"] },
+  { name:"Valproic acid", class:"Antiepileptic", mechanism:"↑ GABA synthesis + Na+ channel blocking", cyp:["CYP2C9"] },
+  { name:"Levetiracetam", class:"Antiepileptic", mechanism:"SV2A protein binding", cyp:[] },
+  { name:"Lamotrigine", class:"Antiepileptic", mechanism:"Na+ channel blocker", cyp:["UGT1A4"] },
+  { name:"Topiramate", class:"Antiepileptic", mechanism:"GABA potentiation + Na+ channel blocking", cyp:[] },
+  { name:"Lithium", class:"Mood Stabilizer", mechanism:"Inositol monophosphatase inhibitor, GSK-3β inhibitor", cyp:[] },
+  { name:"Fluoxetine", class:"SSRI", mechanism:"Selective serotonin reuptake inhibitor", cyp:["CYP2D6","CYP2C9"] },
+  { name:"Sertraline", class:"SSRI", mechanism:"Selective serotonin reuptake inhibitor", cyp:["CYP2D6","CYP2C19"] },
+  { name:"Paroxetine", class:"SSRI", mechanism:"SSRI + CYP2D6 inhibitor", cyp:["CYP2D6"] },
+  { name:"Citalopram", class:"SSRI", mechanism:"SSRI", cyp:["CYP2C19","CYP3A4"] },
+  { name:"Escitalopram", class:"SSRI", mechanism:"SSRI (S-isomer of citalopram)", cyp:["CYP2C19","CYP3A4"] },
+  { name:"Venlafaxine", class:"SNRI", mechanism:"Serotonin + norepinephrine reuptake inhibitor", cyp:["CYP2D6"] },
+  { name:"Duloxetine", class:"SNRI", mechanism:"SNRI", cyp:["CYP1A2","CYP2D6"] },
+  { name:"Bupropion", class:"Atypical Antidepressant", mechanism:"Dopamine + norepinephrine reuptake inhibitor + CYP2D6 inhibitor", cyp:["CYP2D6"] },
+  { name:"Mirtazapine", class:"Atypical Antidepressant", mechanism:"α2 antagonist → ↑ NE/5-HT", cyp:["CYP1A2","CYP2D6","CYP3A4"] },
+  { name:"Trazodone", class:"Atypical Antidepressant", mechanism:"5-HT2A antagonist + SERT inhibition", cyp:["CYP3A4"] },
+  { name:"Tramadol", class:"Opioid Analgesic", mechanism:"μ-opioid agonist + SNRI", cyp:["CYP2D6","CYP3A4"] },
+  { name:"Morphine", class:"Opioid Analgesic", mechanism:"μ-opioid receptor agonist", cyp:["UGT2B7"] },
+  { name:"Codeine", class:"Opioid Analgesic", mechanism:"μ-opioid agonist (prodrug via CYP2D6)", cyp:["CYP2D6"] },
+  { name:"Fentanyl", class:"Opioid Analgesic", mechanism:"μ-opioid receptor agonist (high potency)", cyp:["CYP3A4"] },
+  { name:"Oxycodone", class:"Opioid Analgesic", mechanism:"μ-opioid agonist", cyp:["CYP2D6","CYP3A4"] },
+  { name:"Hydrocodone", class:"Opioid Analgesic", mechanism:"μ-opioid agonist", cyp:["CYP2D6"] },
+  { name:"Methadone", class:"Opioid Agonist", mechanism:"μ-opioid agonist + NMDA antagonist", cyp:["CYP2B6","CYP2D6","CYP3A4"] },
+  { name:"Buprenorphine", class:"Opioid Partial Agonist", mechanism:"μ-opioid partial agonist", cyp:["CYP3A4"] },
+  { name:"Naloxone", class:"Opioid Antagonist", mechanism:"μ-opioid receptor antagonist", cyp:[] },
+  { name:"Midazolam", class:"Benzodiazepine", mechanism:"GABA-A positive allosteric modulator", cyp:["CYP3A4"] },
+  { name:"Lorazepam", class:"Benzodiazepine", mechanism:"GABA-A agonist", cyp:[] },
+  { name:"Diazepam", class:"Benzodiazepine", mechanism:"GABA-A agonist", cyp:["CYP2C19","CYP3A4"] },
+  { name:"Alprazolam", class:"Benzodiazepine", mechanism:"GABA-A agonist", cyp:["CYP3A4"] },
+  { name:"Clonazepam", class:"Benzodiazepine", mechanism:"GABA-A agonist", cyp:["CYP3A4"] },
+  { name:"Flumazenil", class:"Benzodiazepine Antagonist", mechanism:"Competitive GABA-A antagonist", cyp:[] },
+  { name:"Propofol", class:"IV Anesthetic", mechanism:"GABA-A agonist + Na+ channel modulation", cyp:["CYP2B6"] },
+  { name:"Thiopental", class:"Barbiturate", mechanism:"GABA-A agonist", cyp:["CYP2C9"] },
+  { name:"Phenobarbital", class:"Barbiturate", mechanism:"GABA-A agonist + universal CYP inducer", cyp:[] },
+  { name:"Dexmedetomidine", class:"Sedative", mechanism:"α2-adrenergic agonist", cyp:[] },
+
+  // VASOPRESSORS & INOTROPES
+  { name:"Norepinephrine", class:"Vasopressor", mechanism:"α1 > β1 adrenergic agonist", cyp:["COMT","MAO"] },
+  { name:"Dopamine", class:"Vasopressor/Inotrope", mechanism:"Dose-dependent DA/β1/α1 agonist", cyp:["COMT","MAO"] },
+  { name:"Dobutamine", class:"Inotrope", mechanism:"β1 > β2 adrenergic agonist", cyp:["COMT"] },
+  { name:"Epinephrine", class:"Vasopressor/Inotrope", mechanism:"α1 = β1 > β2 adrenergic agonist", cyp:["COMT","MAO"] },
+  { name:"Phenylephrine", class:"Vasopressor", mechanism:"α1-selective adrenergic agonist", cyp:["MAO"] },
+  { name:"Vasopressin", class:"Vasopressor", mechanism:"V1 receptor agonist → vasoconstriction", cyp:[] },
+  { name:"Terlipressin", class:"Vasopressor", mechanism:"V1 > V2 receptor agonist", cyp:[] },
+  { name:"Milrinone", class:"Inotrope", mechanism:"Phosphodiesterase-3 inhibitor → ↑cAMP", cyp:[] },
+
+  // OTHERS
+  { name:"Potassium Chloride", class:"Electrolyte", mechanism:"K+ supplementation", cyp:[] },
+  { name:"Magnesium Sulfate", class:"Electrolyte", mechanism:"Mg2+ supplementation", cyp:[] },
+  { name:"Calcium Gluconate", class:"Electrolyte", mechanism:"Ca2+ supplementation", cyp:[] },
+  { name:"Dextrose", class:"Carbohydrate", mechanism:"Glucose replacement", cyp:[] },
+  { name:"Fresh Frozen Plasma", class:"Blood Product", mechanism:"Coagulation factor replacement", cyp:[] },
+  { name:"Albumin", class:"Plasma Volume Expander", mechanism:"Colloid for volume expansion", cyp:[] },
+  { name:"Sodium Bicarbonate", class:"Electrolyte", mechanism:"HCO3− supplementation for acidosis", cyp:[] },
+  { name:"Sucralfate", class:"Gastroprotectant", mechanism:"Aluminum hydroxide + sulfate complex → mucosal coating", cyp:[] },
+  { name:"Famotidine", class:"H2-Receptor Antagonist", mechanism:"H2 receptor antagonist", cyp:[] },
+  { name:"Omeprazole", class:"Proton Pump Inhibitor", mechanism:"Irreversible H+/K+ ATPase inhibitor", cyp:["CYP2C19","CYP3A4"] },
+  { name:"Pantoprazole", class:"Proton Pump Inhibitor", mechanism:"Irreversible H+/K+ ATPase inhibitor", cyp:["CYP2C19"] },
+  { name:"Esomeprazole", class:"Proton Pump Inhibitor", mechanism:"H+/K+ ATPase inhibitor (S-isomer)", cyp:["CYP2C19","CYP3A4"] },
+  { name:"Lansoprazole", class:"Proton Pump Inhibitor", mechanism:"H+/K+ ATPase inhibitor", cyp:["CYP3A4"] },
+  { name:"Ranitidine", class:"H2-Receptor Antagonist", mechanism:"H2 antagonist (CYP inhibitor)", cyp:["CYP1A2","CYP2D6"] },
+  { name:"Metoclopramide", class:"Antiemetic", mechanism:"D2 antagonist + 5-HT4 agonist", cyp:[] },
+  { name:"Ondansetron", class:"5-HT3 Antagonist", mechanism:"5-HT3 receptor antagonist", cyp:["CYP3A4","CYP2D6"] },
+  { name:"Granisetron", class:"5-HT3 Antagonist", mechanism:"5-HT3 antagonist", cyp:["CYP3A4"] },
+  { name:"Dexamethasone", class:"Corticosteroid (Anti-emetic)", mechanism:"NK1 antagonist activity + glucocorticoid effects", cyp:["CYP3A4"] },
+  { name:"Vecuronium", class:"Neuromuscular Blocker", mechanism:"Non-depolarizing paralytic agent", cyp:["Ester hydrolysis"] },
+  { name:"Rocuronium", class:"Neuromuscular Blocker", mechanism:"Non-depolarizing paralytic (rapid onset)", cyp:[] },
+  { name:"Atracurium", class:"Neuromuscular Blocker", mechanism:"Non-depolarizing (Hofmann elimination)", cyp:[] },
+  { name:"Succinylcholine", class:"Neuromuscular Blocker", mechanism:"Depolarizing paralytic", cyp:["Plasma pseudocholinesterase"] },
+  { name:"Cimetidine", class:"H2-Receptor Antagonist", mechanism:"H2 antagonist + potent CYP inhibitor", cyp:["CYP1A2","CYP2C9","CYP2D6","CYP3A4"] }
+];
+
+// ===================== INTERACTIONS DATABASE =====================
+const INTERACTIONS = [
+  { drug1:"Warfarin", drug2:"Amiodarone", severity:"major", onset:"Delayed (days–weeks)", mechanism:"Amiodarone inhibits CYP2C9 & CYP3A4, reducing warfarin metabolism by 30-50%. Also displaces warfarin from protein binding sites.",
+    clinical:"INR can increase 2-3 fold. Risk of major hemorrhage (GI, intracranial). Effect persists weeks after amiodarone discontinuation due to long t½ (40-55 days).",
+    management:"Reduce warfarin dose by 30-50% when initiating amiodarone. Monitor INR weekly for 6-8 weeks, then monthly. Watch for bruising, melena, hematuria.",
+    evidence:"Well-established. Multiple RCTs and case series. UpToDate Grade 1A recommendation." },
+  { drug1:"Warfarin", drug2:"Aspirin", severity:"major", onset:"Immediate–Days", mechanism:"Aspirin inhibits COX-1 → impairs platelet function. Combined with warfarin's coagulation factor inhibition, synergistic bleeding risk. Aspirin may also cause GI mucosal erosion.",
+    clinical:"2-5x increased risk of major GI hemorrhage. Risk of intracranial hemorrhage significantly elevated in elderly (>75 years).",
+    management:"Avoid combination unless absolutely indicated (mechanical heart valve + CAD). Use lowest aspirin dose (75-100mg). Add PPI gastroprotection. Monitor INR closely.",
+    evidence:"WOEST trial, PIONEER AF-PCI. ESC/AHA guidelines recommend minimizing dual therapy duration." },
+  { drug1:"Warfarin", drug2:"Fluconazole", severity:"major", onset:"2-3 days", mechanism:"Fluconazole is a potent CYP2C9 inhibitor (the primary metabolic pathway of S-warfarin, the more potent enantiomer). Also inhibits CYP3A4.",
+    clinical:"INR can double or triple within 2-4 days. Significant hemorrhagic risk.",
+    management:"If unavoidable, reduce warfarin dose by 25-50%. Check INR at 3 and 7 days. Consider alternative antifungal (terbinafine for dermatophytes).",
+    evidence:"Multiple case reports, pharmacokinetic studies confirm 40-80% increase in warfarin AUC." },
+  { drug1:"Warfarin", drug2:"Rifampicin", severity:"contraindicated", onset:"5-7 days", mechanism:"Rifampicin is the most potent known CYP inducer (CYP3A4, 2C9, 2C19, 1A2). Massively increases warfarin clearance. Also induces P-glycoprotein.",
+    clinical:"INR can drop to sub-therapeutic within 5-7 days, leading to thromboembolic events (stroke, DVT, PE). Effect persists 2-3 weeks after rifampicin discontinuation.",
+    management:"AVOID combination. If TB treatment required, consider switching to LMWH/DOAC with very close monitoring. If must co-administer, may need 2-3x warfarin dose with INR checks every 2-3 days.",
+    evidence:"Multiple studies. INR reduction of 50-70% documented. Class effect of all rifamycins (rifabutin less potent)." },
+  { drug1:"Warfarin", drug2:"Metronidazole", severity:"major", onset:"2-5 days", mechanism:"Metronidazole inhibits CYP2C9, reducing clearance of S-warfarin.",
+    clinical:"INR elevation with risk of bleeding.",
+    management:"Monitor INR at baseline and 3-5 days into therapy. Consider empiric 25-30% warfarin dose reduction.",
+    evidence:"Pharmacokinetic studies confirm S-warfarin AUC increase. Clinical bleeding events reported." },
+  { drug1:"Clopidogrel", drug2:"Omeprazole", severity:"moderate", onset:"Delayed", mechanism:"Omeprazole competitively inhibits CYP2C19, which is required for bioactivation of clopidogrel to its active thiol metabolite. Reduces active metabolite by ~45%.",
+    clinical:"Reduced antiplatelet effect. In vitro platelet reactivity increased. Clinical significance debated — COGENT trial showed no increase in CV events, but FDA issued warning.",
+    management:"Use pantoprazole (minimal CYP2C19 inhibition) or famotidine/ranitidine instead. If omeprazole necessary, separate dosing by 12 hours (limited evidence for benefit).",
+    evidence:"FDA boxed warning. COGENT trial (2010). ESC/ACC guidelines recommend avoiding combination." },
+  { drug1:"Simvastatin", drug2:"Amiodarone", severity:"major", onset:"Weeks", mechanism:"Amiodarone inhibits CYP3A4 + OATP1B1, increasing simvastatin levels 2-3 fold. Simvastatin is extensively CYP3A4-metabolized.",
+    clinical:"Risk of rhabdomyolysis (CK >10x ULN), myopathy, acute kidney injury from myoglobinuria.",
+    management:"Do NOT exceed simvastatin 20mg/day with amiodarone (FDA limit). Consider switching to pravastatin or rosuvastatin (minimal CYP3A4 metabolism). Monitor CK and symptoms (muscle pain, dark urine).",
+    evidence:"FDA safety communication. Multiple case reports of rhabdomyolysis." },
+  { drug1:"Simvastatin", drug2:"Clarithromycin", severity:"contraindicated", onset:"Days", mechanism:"Clarithromycin is a potent CYP3A4 inhibitor. Dramatically increases simvastatin plasma levels (up to 10-fold).",
+    clinical:"Very high risk of rhabdomyolysis, myopathy, hepatotoxicity, and acute renal failure.",
+    management:"CONTRAINDICATED. Hold simvastatin during clarithromycin course. Alternative: use azithromycin (no CYP3A4 inhibition) or switch statin to pravastatin/rosuvastatin.",
+    evidence:"FDA contraindication. Pharmacokinetic data shows 10x AUC increase." },
+  { drug1:"Simvastatin", drug2:"Ketoconazole", severity:"contraindicated", onset:"Days", mechanism:"Ketoconazole is among the most potent CYP3A4 inhibitors known.",
+    clinical:"Extreme elevation of simvastatin levels → rhabdomyolysis, renal failure.",
+    management:"CONTRAINDICATED. Use fluconazole with dose-adjusted statin, or switch to pravastatin/rosuvastatin.",
+    evidence:"FDA contraindication." },
+  { drug1:"Atorvastatin", drug2:"Clarithromycin", severity:"major", onset:"Days", mechanism:"CYP3A4 inhibition by clarithromycin increases atorvastatin exposure 4-5 fold.",
+    clinical:"Risk of myopathy and rhabdomyolysis, though lower than with simvastatin.",
+    management:"Limit atorvastatin to 20mg/day during clarithromycin. Use azithromycin if possible. Monitor for muscle symptoms.",
+    evidence:"Pharmacokinetic studies. FDA recommendation." },
+  { drug1:"Digoxin", drug2:"Amiodarone", severity:"major", onset:"Days–Weeks", mechanism:"Amiodarone inhibits P-glycoprotein (renal and intestinal) and reduces digoxin renal clearance by ~50%. Amiodarone also displaces digoxin from tissue binding.",
+    clinical:"Digoxin toxicity: nausea, vomiting, visual changes (yellow halos), bradycardia, heart block, ventricular arrhythmias (bidirectional VT). Hypokalemia worsens toxicity.",
+    management:"Reduce digoxin dose by 50% when starting amiodarone. Monitor digoxin levels (target 0.5-0.9 ng/mL in HF). Check K+, Mg2+, Cr regularly. ECG monitoring.",
+    evidence:"Well-established interaction. Standard teaching in pharmacology." },
+  { drug1:"Digoxin", drug2:"Furosemide", severity:"major", onset:"Days", mechanism:"Furosemide causes hypokalemia and hypomagnesemia. Low K+ increases digoxin binding to Na+/K+ ATPase, potentiating toxicity at therapeutic levels.",
+    clinical:"Digoxin toxicity even with 'normal' serum digoxin levels. Arrhythmias (PVCs, bigeminy, VT/VF), nausea, confusion.",
+    management:"Monitor K+ and Mg2+ closely. Supplement K+ (target >4.0 mEq/L) and Mg2+ (target >2.0 mg/dL). Consider adding spironolactone for K+ retention.",
+    evidence:"Classic pharmacology interaction. Well-documented in heart failure literature." },
+  { drug1:"Metoprolol", drug2:"Fluoxetine", severity:"moderate", onset:"1-2 weeks", mechanism:"Fluoxetine is a potent CYP2D6 inhibitor. Metoprolol is extensively metabolized by CYP2D6. Fluoxetine can increase metoprolol levels 4-6 fold.",
+    clinical:"Excessive bradycardia, hypotension, fatigue, dizziness, heart block in severe cases.",
+    management:"Monitor HR and BP. Consider switching to atenolol/bisoprolol (less CYP2D6 dependent) or use escitalopram/sertraline (weaker CYP2D6 inhibition).",
+    evidence:"Pharmacokinetic studies confirm significant AUC increase." },
+  { drug1:"Diltiazem", drug2:"Metoprolol", severity:"major", onset:"Hours–Days", mechanism:"Pharmacodynamic synergy: both suppress AV node conduction and reduce heart rate. Diltiazem also inhibits CYP2D6 → ↑metoprolol levels.",
+    clinical:"Profound bradycardia, AV block (2nd/3rd degree), hypotension, cardiogenic shock possible.",
+    management:"Avoid combination or use with extreme caution. If needed, start with low doses and titrate slowly. Continuous ECG monitoring. Keep atropine and transcutaneous pacer ready.",
+    evidence:"Multiple case reports. Guideline warnings in ACC/AHA recommendations." },
+  { drug1:"Metformin", drug2:"Furosemide", severity:"moderate", onset:"Days", mechanism:"Furosemide can impair renal function → reduced metformin clearance. Dehydration further concentrates metformin.",
+    clinical:"Risk of lactic acidosis (rare but potentially fatal — mortality 30-50%). Symptoms: malaise, myalgia, respiratory distress, abdominal pain, hypothermia.",
+    management:"Monitor renal function (eGFR). Hold metformin if eGFR <30. Ensure adequate hydration. Caution in elderly, hepatic impairment, sepsis.",
+    evidence:"MHRA/FDA warnings. Risk increases with renal impairment." },
+  { drug1:"ACE Inhibitor", drug2:"Potassium Chloride", severity:"major", onset:"Days–Weeks", mechanism:"ACE inhibitors reduce aldosterone → ↓K+ excretion. Exogenous K+ supplementation on top of this → hyperkalemia.",
+    clinical:"Hyperkalemia (>5.5 mEq/L): muscle weakness, paresthesias, ECG changes (peaked T waves → wide QRS → sine wave → cardiac arrest).",
+    management:"Monitor K+ within 1 week of starting combination, then regularly. Avoid combination if possible. If needed, use low-dose K+ with frequent monitoring.",
+    evidence:"Standard teaching. Multiple guidelines warn against combination." },
+  { drug1:"Enalapril", drug2:"Potassium Chloride", severity:"major", onset:"Days–Weeks", mechanism:"ACE inhibitors reduce aldosterone → ↓K+ excretion. Adding K+ supplementation causes dangerous hyperkalemia.",
+    clinical:"Hyperkalemia: ECG changes, cardiac arrhythmias, potential cardiac arrest.",
+    management:"Monitor K+ closely. Generally avoid unless documented hypokalemia.",
+    evidence:"Well-established. Guideline recommendations." },
+  { drug1:"Lisinopril", drug2:"Potassium Chloride", severity:"major", onset:"Days–Weeks", mechanism:"ACE inhibitor reduces aldosterone → K+ retention + exogenous K+ → hyperkalemia.",
+    clinical:"Hyperkalemia risk with cardiac complications.",
+    management:"Monitor K+ within 1 week. Avoid routine K+ supplementation with ACEi.",
+    evidence:"Standard pharmacology." },
+  { drug1:"Enalapril", drug2:"Spironolactone", severity:"major", onset:"Days–Weeks", mechanism:"Dual RAAS blockade: ACEi reduces aldosterone production, spironolactone blocks aldosterone receptor. Profound K+ retention.",
+    clinical:"Severe hyperkalemia. Risk highest in CKD, diabetes, elderly.",
+    management:"If used together (as in RALES protocol for HF), start spironolactone 12.5-25mg. Check K+ at 3 days, 1 week, monthly. Hold if K+ >5.0.",
+    evidence:"RALES trial. FDA safety warnings." },
+  { drug1:"Lisinopril", drug2:"Spironolactone", severity:"major", onset:"Days–Weeks", mechanism:"ACEi + MRA = double K+ retention.",
+    clinical:"Severe hyperkalemia, especially in renal impairment.",
+    management:"Monitor K+ aggressively. Low-dose spironolactone only.",
+    evidence:"RALES, EMPHASIS-HF. Guideline-directed but requires monitoring." },
+  { drug1:"Spironolactone", drug2:"Potassium Chloride", severity:"contraindicated", onset:"Days", mechanism:"Spironolactone retains K+ by blocking aldosterone. Adding K+ is dangerous additive effect.",
+    clinical:"Severe hyperkalemia → cardiac arrest.",
+    management:"AVOID combination. If K+ supplementation absolutely needed, intensive monitoring in ICU setting.",
+    evidence:"Contraindicated in most guidelines." },
+  { drug1:"Vancomycin", drug2:"Gentamicin", severity:"major", onset:"Days", mechanism:"Additive nephrotoxicity. Vancomycin causes oxidative tubular injury; gentamicin accumulates in proximal tubular cells causing necrosis. Synergistic renal damage.",
+    clinical:"Acute kidney injury (AKI), ototoxicity (irreversible vestibular/cochlear damage). Risk increases with duration >5 days.",
+    management:"Monitor trough levels (vancomycin AUC/MIC 400-600; gentamicin trough <1 μg/mL). Check creatinine daily. Use extended-interval gentamicin dosing. Limit combination to <5 days when possible.",
+    evidence:"Multiple studies. Guidelines recommend therapeutic drug monitoring." },
+  { drug1:"Furosemide", drug2:"Gentamicin", severity:"major", onset:"Days", mechanism:"Furosemide causes hypovolemia → reduced gentamicin clearance → accumulation. Both are independently ototoxic.",
+    clinical:"Enhanced nephrotoxicity and ototoxicity. May cause irreversible hearing loss.",
+    management:"Monitor gentamicin levels closely. Ensure euvolemia. Avoid concurrent use when possible.",
+    evidence:"Well-documented interaction." },
+  { drug1:"Lithium", drug2:"Furosemide", severity:"major", onset:"Days", mechanism:"Furosemide causes Na+ depletion → compensatory Li+ reabsorption in proximal tubule (Li+ and Na+ compete for same transporter). Dehydration concentrates lithium further.",
+    clinical:"Lithium toxicity: tremor, ataxia, confusion, seizures, nephrogenic DI, cardiac arrhythmias. Severe cases: coma, death.",
+    management:"Monitor lithium levels (target 0.6-1.0 mEq/L). If diuretic needed, use lower doses with frequent Li+ checks. Maintain hydration and Na+ intake.",
+    evidence:"Well-established. All loop/thiazide diuretics can precipitate Li+ toxicity." },
+  { drug1:"Lithium", drug2:"Enalapril", severity:"major", onset:"Days–Weeks", mechanism:"ACE inhibitors reduce GFR → decreased lithium clearance. Also affect proximal tubule Na+ reabsorption.",
+    clinical:"Lithium toxicity with potentially fatal outcome.",
+    management:"Reduce lithium dose by 25-50%. Monitor Li+ levels at 5-7 days and regularly thereafter.",
+    evidence:"Multiple case reports. Consistent pharmacokinetic data." },
+  { drug1:"Lithium", drug2:"Lisinopril", severity:"major", onset:"Days–Weeks", mechanism:"ACEi reduces GFR and alters Na+ handling → Li+ accumulation.",
+    clinical:"Lithium toxicity.",
+    management:"Reduce lithium dose. Frequent monitoring.",
+    evidence:"Class effect of all ACE inhibitors." },
+  { drug1:"Tramadol", drug2:"Fluoxetine", severity:"major", onset:"Hours–Days", mechanism:"Dual serotonergic: Tramadol has SNRI activity + fluoxetine is an SSRI. Fluoxetine also inhibits CYP2D6, altering tramadol metabolism (↓ M1 analgesic metabolite, ↑ parent compound with more serotonergic activity).",
+    clinical:"Serotonin syndrome: hyperthermia >38.5°C, agitation, clonus (spontaneous/inducible), hyperreflexia, diaphoresis, tremor, diarrhea. Severe: seizures, DIC, rhabdomyolysis, death.",
+    management:"AVOID combination. Use non-serotonergic analgesics (paracetamol, NSAIDs, non-tramadol opioids). If serotonin syndrome suspected: stop all serotonergic drugs, supportive care, cyproheptadine 12mg loading then 4mg q4h.",
+    evidence:"Hunter Criteria for diagnosis. Multiple case reports. FDA warning on serotonergic drug combinations." },
+  { drug1:"Tramadol", drug2:"Sertraline", severity:"major", onset:"Hours–Days", mechanism:"Both serotonergic. Sertraline also inhibits CYP2D6 (moderate).",
+    clinical:"Serotonin syndrome risk.",
+    management:"Avoid combination. Alternative analgesics preferred.",
+    evidence:"FDA serotonin syndrome warning." },
+  { drug1:"Fentanyl", drug2:"Midazolam", severity:"major", onset:"Minutes", mechanism:"Pharmacodynamic synergy: both cause CNS depression. Fentanyl (μ-opioid) + midazolam (GABA-A) produce synergistic respiratory depression beyond additive effect.",
+    clinical:"Respiratory depression, apnea, hypoxia, death. Commonly used intentionally in procedural sedation but requires monitoring.",
+    management:"When used together (ICU/procedural): continuous SpO2, capnography, trained personnel, reversal agents available (naloxone + flumazenil). Reduce doses of both by 25-50%.",
+    evidence:"FDA Black Box Warning on opioid-benzodiazepine combination." },
+  { drug1:"Morphine", drug2:"Midazolam", severity:"major", onset:"Minutes", mechanism:"Synergistic CNS and respiratory depression via separate pathways (μ-opioid + GABA-A).",
+    clinical:"Respiratory failure, obtundation, death.",
+    management:"Reduce both doses. Continuous monitoring mandatory. Naloxone and flumazenil at bedside.",
+    evidence:"FDA Black Box Warning." },
+  { drug1:"Phenytoin", drug2:"Rifampicin", severity:"major", onset:"1-2 weeks", mechanism:"Rifampicin induces CYP2C9 and CYP2C19, accelerating phenytoin metabolism. Phenytoin has saturable kinetics — small changes in metabolism cause disproportionate level drops.",
+    clinical:"Seizure breakthrough due to subtherapeutic phenytoin levels.",
+    management:"Monitor phenytoin levels closely. May need 50-100% dose increase. Adjust during and 2-3 weeks after rifampicin.",
+    evidence:"Well-documented. Non-linear kinetics make management challenging." },
+  { drug1:"Carbamazepine", drug2:"Erythromycin", severity:"major", onset:"1-3 days", mechanism:"Erythromycin potently inhibits CYP3A4, the primary metabolic pathway of carbamazepine.",
+    clinical:"Carbamazepine toxicity: diplopia, ataxia, nystagmus, drowsiness, nausea, cardiac arrhythmias, SIADH.",
+    management:"AVOID combination. Use azithromycin (no CYP3A4 inhibition). If unavoidable, reduce carbamazepine and monitor levels.",
+    evidence:"Multiple case reports. Well-characterized interaction." },
+  { drug1:"Carbamazepine", drug2:"Clarithromycin", severity:"major", onset:"1-3 days", mechanism:"Clarithromycin potently inhibits CYP3A4 → carbamazepine accumulation.",
+    clinical:"Carbamazepine toxicity.",
+    management:"Use azithromycin instead. Monitor CBZ levels if combination unavoidable.",
+    evidence:"Well-documented." },
+  { drug1:"Rivaroxaban", drug2:"Ketoconazole", severity:"contraindicated", onset:"Days", mechanism:"Ketoconazole inhibits both CYP3A4 and P-gp, the dual elimination pathways of rivaroxaban. Increases rivaroxaban exposure by ~160%.",
+    clinical:"Major bleeding risk.",
+    management:"CONTRAINDICATED. Use alternative antifungal.",
+    evidence:"FDA contraindication in product labeling." },
+  { drug1:"Rivaroxaban", drug2:"Rifampicin", severity:"contraindicated", onset:"1-2 weeks", mechanism:"Rifampicin induces CYP3A4 and P-gp, reducing rivaroxaban levels by ~50%.",
+    clinical:"Therapeutic failure → thromboembolism.",
+    management:"AVOID. Switch to warfarin with close INR monitoring during rifampicin therapy, or use LMWH.",
+    evidence:"Product labeling. Pharmacokinetic studies." },
+  { drug1:"Apixaban", drug2:"Ketoconazole", severity:"major", onset:"Days", mechanism:"Dual CYP3A4 + P-gp inhibition increases apixaban exposure ~2 fold.",
+    clinical:"Increased bleeding risk.",
+    management:"Reduce apixaban dose by 50% if on standard dose (5mg BID → 2.5mg BID). Avoid ketoconazole if already on reduced dose.",
+    evidence:"FDA labeling. Pharmacokinetic data." },
+  { drug1:"Norepinephrine", drug2:"Propofol", severity:"moderate", onset:"Minutes", mechanism:"Propofol causes vasodilation and myocardial depression. This opposes norepinephrine's vasopressor effect, requiring dose escalation.",
+    clinical:"Hemodynamic instability. Higher norepinephrine requirements. Propofol infusion syndrome risk with prolonged high-dose use (>5mg/kg/h >48h).",
+    management:"In ICU: use lowest effective propofol dose. Consider dexmedetomidine or midazolam as alternatives for sedation in vasopressor-dependent patients. Monitor lactate, triglycerides, CK for PRIS.",
+    evidence:"ICU sedation guidelines (PADIS 2018). PRIS case series." },
+  { drug1:"Metformin", drug2:"Insulin", severity:"moderate", onset:"Hours", mechanism:"Pharmacodynamic synergy: both lower blood glucose via different mechanisms. Additive hypoglycemic effect.",
+    clinical:"Hypoglycemia: tremor, diaphoresis, confusion, seizures, coma. Metformin alone rarely causes hypoglycemia, but adding insulin significantly increases risk.",
+    management:"Reduce insulin dose when adding metformin (typically by 10-25%). Frequent SMBG. Educate patient on hypoglycemia signs. Keep glucose gel/glucagon available.",
+    evidence:"Standard diabetes management. ADA guidelines." },
+  { drug1:"Ciprofloxacin", drug2:"Warfarin", severity:"major", onset:"3-5 days", mechanism:"Ciprofloxacin inhibits CYP1A2 and may alter gut flora reducing vitamin K synthesis.",
+    clinical:"Elevated INR, bleeding risk.",
+    management:"Monitor INR at day 3-5 of ciprofloxacin. May need warfarin dose reduction.",
+    evidence:"Multiple case reports. FDA warning." },
+  { drug1:"Aspirin", drug2:"Clopidogrel", severity:"moderate", onset:"Immediate", mechanism:"Dual antiplatelet therapy (DAPT): ASA inhibits COX-1 + clopidogrel inhibits P2Y12. Synergistic platelet inhibition.",
+    clinical:"Increased bleeding risk (GI, intracranial, surgical). However, this is often INTENTIONALLY prescribed post-ACS/PCI.",
+    management:"When indicated (post-ACS/PCI): use for guideline-directed duration (1-12 months). Add PPI. Use ASA 75-100mg. Monitor for bleeding signs.",
+    evidence:"CURE, PLATO, PEGASUS trials. AHA/ESC DAPT guidelines." },
+  { drug1:"Aspirin", drug2:"Enoxaparin", severity:"moderate", onset:"Immediate", mechanism:"Additive anticoagulant + antiplatelet effects.",
+    clinical:"Increased bleeding risk. Commonly used together in ACS protocols.",
+    management:"Standard in ACS management per guidelines. Monitor for bleeding. PPI for GI protection.",
+    evidence:"ESSENCE, TIMI 11B trials." },
+  { drug1:"Warfarin", drug2:"Clarithromycin", severity:"major", onset:"3-5 days", mechanism:"CYP3A4 inhibition reduces R-warfarin metabolism. May also reduce gut flora vitamin K production.",
+    clinical:"Elevated INR. Bleeding risk.",
+    management:"Monitor INR closely. Consider azithromycin as alternative.",
+    evidence:"Multiple case reports." },
+  { drug1:"Dexamethasone", drug2:"Warfarin", severity:"moderate", onset:"Days", mechanism:"Complex: dexamethasone can induce CYP3A4 (reducing warfarin) but also has direct effects on clotting factors. Net effect is variable.",
+    clinical:"Unpredictable INR changes — can increase or decrease.",
+    management:"Monitor INR closely during initiation and discontinuation of dexamethasone.",
+    evidence:"Variable reports. Individualized monitoring needed." },
+  { drug1:"Amlodipine", drug2:"Simvastatin", severity:"major", onset:"Weeks", mechanism:"Amlodipine inhibits CYP3A4, increasing simvastatin levels ~2 fold.",
+    clinical:"Myopathy, rhabdomyolysis risk.",
+    management:"Do NOT exceed simvastatin 20mg with amlodipine (FDA limit). Consider pravastatin or rosuvastatin.",
+    evidence:"FDA safety communication." },
+  { drug1:"Losartan", drug2:"Fluconazole", severity:"moderate", onset:"Days", mechanism:"Fluconazole inhibits CYP2C9, which converts losartan to its active metabolite (E-3174). Reduced antihypertensive effect.",
+    clinical:"Reduced blood pressure control.",
+    management:"Monitor BP. Consider switching to non-CYP2C9 dependent ARB (valsartan, telmisartan).",
+    evidence:"Pharmacokinetic studies." },
+  { drug1:"Losartan", drug2:"Rifampicin", severity:"major", onset:"1-2 weeks", mechanism:"Rifampicin induces CYP2C9 and CYP3A4, but paradoxically may increase conversion to active metabolite while also increasing overall elimination.",
+    clinical:"Net reduction in antihypertensive effect. Poorly controlled blood pressure.",
+    management:"Monitor BP closely. May need dose increase or switch to non-CYP dependent antihypertensive.",
+    evidence:"Pharmacokinetic studies show complex effects." }
+];
+
+// ===================== STATE =====================
+let selectedDrugs = [];
+let allData = [];
+
+// ===================== SEARCH & SELECTION =====================
+function handleSearch(val) {
+  const dd = document.getElementById('search-dropdown');
+  if (!val.trim()) { dd.classList.add('hidden'); return; }
+  const q = val.toLowerCase();
+  const matches = DRUGS.filter(d => d.name.toLowerCase().includes(q) && !selectedDrugs.includes(d.name)).slice(0, 8);
+  if (!matches.length) { dd.innerHTML = '<div class="px-3 py-2 text-sm" style="color:#6a6a8a;">No matches</div>'; dd.classList.remove('hidden'); return; }
+  dd.innerHTML = matches.map(d => `<div class="px-3 py-2 text-sm cursor-pointer hover:bg-[#2a2a4a]" style="color:#d0d0e8;" onclick="selectDrug('${d.name}')">${d.name} <span style="color:#6a6a8a;">— ${d.class}</span></div>`).join('');
+  dd.classList.remove('hidden');
+}
+
+function showDropdown() { handleSearch(document.getElementById('drug-search').value); }
+
+function selectDrug(name) {
+  if (selectedDrugs.includes(name) || selectedDrugs.length >= 10) return;
+  selectedDrugs.push(name);
+  renderSelectedDrugs();
+  document.getElementById('drug-search').value = '';
+  document.getElementById('search-dropdown').classList.add('hidden');
+}
+
+function removeDrug(name) {
+  selectedDrugs = selectedDrugs.filter(d => d !== name);
+  renderSelectedDrugs();
+}
+
+function renderSelectedDrugs() {
+  const c = document.getElementById('selected-drugs');
+  c.innerHTML = selectedDrugs.map(d => `<span class="drug-tag inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium cursor-pointer" style="background:#2a2a4e;color:#c8c8f0;border:1px solid #3e3e68;" onclick="removeDrug('${d}')">${d} <span style="color:#e11d48;">✕</span></span>`).join('');
+}
+
+// ===================== CHECK INTERACTIONS =====================
+function checkInteractions() {
+  const area = document.getElementById('results-area');
+  if (selectedDrugs.length < 2) {
+    area.innerHTML = `<div class="rounded-xl p-4 text-center" style="background:#1a1a2e;border:1px solid #2a2a3e;"><p class="text-sm" style="color:#8888a4;"><i data-lucide="info" style="width:16px;height:16px;display:inline;vertical-align:-3px;margin-right:4px;"></i>Select at least 2 drugs to check interactions.</p></div>`;
+    lucide.createIcons();
+    return;
+  }
+  const found = [];
+  for (let i = 0; i < selectedDrugs.length; i++) {
+    for (let j = i + 1; j < selectedDrugs.length; j++) {
+      const a = selectedDrugs[i], b = selectedDrugs[j];
+      INTERACTIONS.forEach(ix => {
+        if ((ix.drug1 === a && ix.drug2 === b) || (ix.drug1 === b && ix.drug2 === a)) found.push(ix);
+        // ACE inhibitor class matching
+        if (ix.drug1 === "ACE Inhibitor" || ix.drug2 === "ACE Inhibitor") {
+          const aceI = ["Enalapril","Lisinopril"];
+          const other = ix.drug1 === "ACE Inhibitor" ? ix.drug2 : ix.drug1;
+          if (aceI.includes(a) && other === b || aceI.includes(b) && other === a) {
+            if (!found.some(f => f.drug1 === ix.drug1 && f.drug2 === ix.drug2)) found.push({...ix, drug1: aceI.includes(a)?a:b, drug2: other===a?a:b});
+          }
+        }
+      });
+    }
+  }
+
+  // Remove duplicates
+  const unique = [];
+  const seen = new Set();
+  found.forEach(f => {
+    const key = [f.drug1, f.drug2].sort().join('|') + f.severity;
+    if (!seen.has(key)) { seen.add(key); unique.push(f); }
+  });
+
+  // Sort by severity
+  const sevOrder = { contraindicated: 0, major: 1, moderate: 2, minor: 3 };
+  unique.sort((a, b) => sevOrder[a.severity] - sevOrder[b.severity]);
+
+  if (!unique.length) {
+    area.innerHTML = `<div class="rounded-xl p-5 text-center" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+      <div class="w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-3" style="background:#16a34a22;"><i data-lucide="check-circle" style="width:24px;height:24px;color:#22c55e;"></i></div>
+      <p class="text-sm font-semibold" style="color:#22c55e;">No Known Interactions Found</p>
+      <p class="text-xs mt-1" style="color:#8888a4;">No interactions in database for this combination. Always verify with institutional resources.</p>
+    </div>`;
+    lucide.createIcons();
+    return;
+  }
+
+  const stats = { contraindicated: 0, major: 0, moderate: 0, minor: 0 };
+  unique.forEach(u => stats[u.severity]++);
+
+  let html = `<div class="rounded-xl p-4 mb-4 flex flex-wrap gap-3 items-center" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+    <span class="text-sm font-semibold" style="color:#c8c8df;">${unique.length} Interaction${unique.length>1?'s':''} Found:</span>
+    ${stats.contraindicated ? `<span class="px-2 py-0.5 rounded text-xs font-bold severity-contraindicated">${stats.contraindicated} Contraindicated</span>` : ''}
+    ${stats.major ? `<span class="px-2 py-0.5 rounded text-xs font-bold severity-major">${stats.major} Major</span>` : ''}
+    ${stats.moderate ? `<span class="px-2 py-0.5 rounded text-xs font-bold severity-moderate">${stats.moderate} Moderate</span>` : ''}
+    ${stats.minor ? `<span class="px-2 py-0.5 rounded text-xs font-bold severity-minor">${stats.minor} Minor</span>` : ''}
+  </div>`;
+
+  unique.forEach((ix, idx) => {
+    const sevColor = { contraindicated:'#991b1b', major:'#dc2626', moderate:'#f59e0b', minor:'#22c55e' }[ix.severity];
+    const sevBg = { contraindicated:'#991b1b15', major:'#dc262615', moderate:'#f59e0b15', minor:'#22c55e15' }[ix.severity];
+    html += `<div class="result-card rounded-xl mb-3 overflow-hidden" style="background:#1a1a2e;border:1px solid #2a2a3e;animation-delay:${idx*80}ms;">
+      <div class="p-4" style="border-left:4px solid ${sevColor};">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <span class="px-2 py-0.5 rounded text-xs font-bold uppercase severity-${ix.severity}">${ix.severity}</span>
+          <span class="text-base font-semibold" style="color:#e8e8f0;">${ix.drug1}</span>
+          <i data-lucide="arrow-left-right" style="width:14px;height:14px;color:#5a5a7a;"></i>
+          <span class="text-base font-semibold" style="color:#e8e8f0;">${ix.drug2}</span>
+          ${ix.onset ? `<span class="ml-auto text-xs px-2 py-0.5 rounded" style="background:#22223a;color:#8888a4;">Onset: ${ix.onset}</span>` : ''}
+        </div>
+        <div class="space-y-3 text-sm" style="color:#b0b0cc;">
+          <details>
+            <summary class="flex items-center gap-2 cursor-pointer select-none font-semibold" style="color:#e11d48;">
+              <i data-lucide="flask-round" style="width:14px;height:14px;"></i> Mechanism
+              <i data-lucide="chevron-down" class="chevron-icon ml-auto" style="width:14px;height:14px;color:#5a5a7a;"></i>
+            </summary>
+            <p class="mt-2 pl-5">${ix.mechanism}</p>
+          </details>
+          <details open>
+            <summary class="flex items-center gap-2 cursor-pointer select-none font-semibold" style="color:#f59e0b;">
+              <i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Clinical Significance
+              <i data-lucide="chevron-down" class="chevron-icon ml-auto" style="width:14px;height:14px;color:#5a5a7a;"></i>
+            </summary>
+            <p class="mt-2 pl-5">${ix.clinical}</p>
+          </details>
+          <details open>
+            <summary class="flex items-center gap-2 cursor-pointer select-none font-semibold" style="color:#22c55e;">
+              <i data-lucide="shield" style="width:14px;height:14px;"></i> Management
+              <i data-lucide="chevron-down" class="chevron-icon ml-auto" style="width:14px;height:14px;color:#5a5a7a;"></i>
+            </summary>
+            <p class="mt-2 pl-5">${ix.management}</p>
+          </details>
+          ${ix.evidence ? `<details>
+            <summary class="flex items-center gap-2 cursor-pointer select-none font-semibold" style="color:#818cf8;">
+              <i data-lucide="file-text" style="width:14px;height:14px;"></i> Evidence
+              <i data-lucide="chevron-down" class="chevron-icon ml-auto" style="width:14px;height:14px;color:#5a5a7a;"></i>
+            </summary>
+            <p class="mt-2 pl-5">${ix.evidence}</p>
+          </details>` : ''}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  area.innerHTML = html;
+  lucide.createIcons();
+}
+
+// ===================== TAB SWITCHING =====================
+function switchTab(tab) {
+  ['checker','reference','icu','cyp'].forEach(t => {
+    document.getElementById('panel-'+t).classList.toggle('hidden', t !== tab);
+    const btn = document.getElementById('tab-'+t);
+    if (t === tab) { btn.style.borderBottomColor = '#e11d48'; btn.style.color = '#e11d48'; }
+    else { btn.style.borderBottomColor = 'transparent'; btn.style.color = '#8888a4'; }
+  });
+  if (tab === 'reference') renderReference();
+  if (tab === 'icu') renderICU();
+  if (tab === 'cyp') renderCYP();
+}
+
+// ===================== REFERENCE TAB =====================
+function renderReference() {
+  const c = document.getElementById('reference-content');
+  if (c.children.length) return;
+  const categories = {};
+  DRUGS.forEach(d => { if (!categories[d.class]) categories[d.class] = []; categories[d.class].push(d); });
+
+  let html = `<div class="mb-4"><h2 class="font-heading text-xl" style="color:#e8e8f0;">Drug Quick Reference</h2><p class="text-xs" style="color:#6a6a8a;">Tap a drug class to expand</p></div>`;
+
+  Object.entries(categories).forEach(([cls, drugs]) => {
+    html += `<details class="rounded-xl mb-2 overflow-hidden" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+      <summary class="px-4 py-3 cursor-pointer select-none flex items-center justify-between" style="color:#c8c8df;">
+        <span class="font-semibold text-sm">${cls} <span class="text-xs font-normal" style="color:#6a6a8a;">(${drugs.length})</span></span>
+        <i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#5a5a7a;"></i>
+      </summary>
+      <div class="px-4 pb-4 space-y-3">
+        ${drugs.map(d => `<div class="rounded-lg p-3" style="background:#12121a;border:1px solid #22223a;">
+          <div class="font-semibold text-sm" style="color:#e8e8f0;">${d.name}</div>
+          <div class="text-xs mt-1" style="color:#a0a0c0;"><strong>MOA:</strong> ${d.mechanism}</div>
+          ${d.cyp.length ? `<div class="text-xs mt-1" style="color:#818cf8;"><strong>Metabolism:</strong> ${d.cyp.join(', ')}</div>` : `<div class="text-xs mt-1" style="color:#6a6a8a;">Minimal hepatic CYP metabolism</div>`}
+        </div>`).join('')}
+      </div>
+    </details>`;
+  });
+  c.innerHTML = html;
+  lucide.createIcons();
+}
+
+// ===================== ICU PROTOCOLS TAB =====================
+function renderICU() {
+  const c = document.getElementById('icu-content');
+  if (c.children.length) return;
+
+  const protocols = [
+    { title:"Vasopressor Selection in Septic Shock", icon:"activity",
+      content:`<div class="space-y-2 text-sm" style="color:#b0b0cc;">
+        <p><strong style="color:#e11d48;">First-Line:</strong> Norepinephrine (0.01-3 μg/kg/min) — Target MAP ≥65 mmHg</p>
+        <p><strong style="color:#f59e0b;">Second-Line:</strong> Vasopressin 0.03-0.04 U/min (add to NE, not replace)</p>
+        <p><strong style="color:#818cf8;">Third-Line:</strong> Epinephrine if cardiac dysfunction suspected</p>
+        <p><strong>Key Interactions:</strong></p>
+        <ul class="list-disc pl-5 space-y-1 text-xs">
+          <li>Propofol ↓ MAP → ↑ vasopressor requirement. Switch to dexmedetomidine/midazolam</li>
+          <li>Hydrocortisone 50mg q6h if vasopressor-refractory (Surviving Sepsis 2021)</li>
+          <li>Monitor lactate clearance q2-4h as perfusion marker</li>
+          <li>Avoid terlipressin with coronary artery disease (splanchnic ischemia risk)</li>
+        </ul>
+      </div>` },
+    { title:"Sedation & Analgesia Interactions", icon:"moon",
+      content:`<div class="space-y-2 text-sm" style="color:#b0b0cc;">
+        <p><strong style="color:#e11d48;">⚠ Opioid + Benzodiazepine</strong> — Synergistic respiratory depression (FDA Black Box)</p>
+        <p><strong>Fentanyl + Midazolam:</strong> Reduce both by 25-50%. Capnography mandatory.</p>
+        <p><strong>Propofol Infusion Syndrome (PRIS):</strong> >5mg/kg/h for >48h → metabolic acidosis, rhabdomyolysis, cardiac failure, hyperlipidemia. Monitor CK, triglycerides, lactate daily.</p>
+        <p><strong>PADIS 2018 Recommendations:</strong></p>
+        <ul class="list-disc pl-5 space-y-1 text-xs">
+          <li>Target light sedation (RASS 0 to -2)</li>
+          <li>Daily sedation interruption (SAT) + SBT protocol</li>
+          <li>Dexmedetomidine preferred over benzodiazepines (↓ delirium)</li>
+          <li>Avoid routine benzodiazepine infusions (↑ delirium, ↑ MV days)</li>
+        </ul>
+      </div>` },
+    { title:"Anticoagulation in Critical Care", icon:"droplet",
+      content:`<div class="space-y-2 text-sm" style="color:#b0b0cc;">
+        <p><strong>VTE Prophylaxis:</strong> Enoxaparin 40mg SC daily OR Heparin 5000U SC q8-12h</p>
+        <p><strong>Therapeutic:</strong> Heparin infusion — aPTT target 60-80s or anti-Xa 0.3-0.7 IU/mL</p>
+        <p><strong>Critical Interactions:</strong></p>
+        <ul class="list-disc pl-5 space-y-1 text-xs">
+          <li><strong>Heparin + Platelets:</strong> Monitor for HIT (heparin-induced thrombocytopenia) — 50% drop in plt count days 5-10</li>
+          <li><strong>Warfarin + Antibiotics:</strong> Most antibiotics alter INR. Check at day 3-5 of any new antibiotic</li>
+          <li><strong>DOACs + CYP3A4 inhibitors:</strong> Rivaroxaban/apixaban levels ↑ with azoles, clarithromycin</li>
+          <li><strong>Enoxaparin in renal failure:</strong> Avoid if CrCl <30 (accumulation → bleeding). Use UFH instead</li>
+          <li><strong>Reversal agents:</strong> Protamine (heparin), Vitamin K + FFP/PCC (warfarin), Idarucizumab (dabigatran), Andexanet alfa (Xa inhibitors)</li>
+        </ul>
+      </div>` },
+    { title:"Electrolyte Emergencies & Drug Interactions", icon:"zap",
+      content:`<div class="space-y-2 text-sm" style="color:#b0b0cc;">
+        <p><strong style="color:#e11d48;">Hyperkalemia (K+ >5.5):</strong></p>
+        <ul class="list-disc pl-5 space-y-1 text-xs">
+          <li>ACEi/ARB + Spironolactone + K+ supplements = DEADLY TRIAD</li>
+          <li>Treatment: Calcium gluconate 10% 10mL IV (membrane stabilization) → Insulin 10U + D50 (K+ shift) → Kayexalate/Patiromer (K+ removal) → Dialysis if refractory</li>
+          <li>Digoxin toxicity worsened by hypokalemia (↑ ATPase binding)</li>
+        </ul>
+        <p class="mt-2"><strong style="color:#f59e0b;">Hypomagnesemia:</strong></p>
+        <ul class="list-disc pl-5 space-y-1 text-xs">
+          <li>Loop diuretics cause Mg2+ wasting → refractory hypokalemia</li>
+          <li>Must correct Mg2+ before K+ will normalize</li>
+          <li>PPIs (omeprazole) can cause chronic hypomagnesemia (mechanism: ↓ TRPM6 absorption)</li>
+        </ul>
+      </div>` },
+    { title:"Antimicrobial Stewardship — Key Interactions", icon:"shield",
+      content:`<div class="space-y-2 text-sm" style="color:#b0b0cc;">
+        <p><strong>Vancomycin + Gentamicin:</strong> Double nephrotoxicity. TDM mandatory. Limit combo to <5 days.</p>
+        <p><strong>Vancomycin + Piperacillin-Tazobactam:</strong> ↑ AKI risk vs Vancomycin + Cefepime (recent evidence).</p>
+        <p><strong>Linezolid:</strong> Weak MAO inhibitor → serotonin syndrome with SSRIs/tramadol. Avoid combination.</p>
+        <p><strong>Metronidazole + Alcohol:</strong> Disulfiram-like reaction. Also potentiates warfarin (CYP2C9 inhibition).</p>
+        <p><strong>Ciprofloxacin:</strong> CYP1A2 inhibitor → ↑ theophylline toxicity (seizures). QTc prolongation with other QT-prolonging drugs (amiodarone, haloperidol).</p>
+        <p><strong>Rifampicin:</strong> Universal CYP inducer. Reduces levels of nearly every CYP-metabolized drug. Always check interactions.</p>
+      </div>` }
+  ];
+
+  let html = `<div class="mb-4"><h2 class="font-heading text-xl" style="color:#e8e8f0;">ICU Clinical Protocols</h2><p class="text-xs" style="color:#6a6a8a;">Evidence-based interaction-aware protocols</p></div>`;
+  protocols.forEach(p => {
+    html += `<details class="rounded-xl mb-3 overflow-hidden" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+      <summary class="px-4 py-3 cursor-pointer select-none flex items-center gap-2" style="color:#c8c8df;">
+        <i data-lucide="${p.icon}" style="width:16px;height:16px;color:#e11d48;"></i>
+        <span class="font-semibold text-sm flex-1">${p.title}</span>
+        <i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#5a5a7a;"></i>
+      </summary>
+      <div class="px-4 pb-4">${p.content}</div>
+    </details>`;
+  });
+  c.innerHTML = html;
+  lucide.createIcons();
+}
+
+// ===================== CYP450 TAB =====================
+function renderCYP() {
+  const c = document.getElementById('cyp-content');
+  if (c.children.length) return;
+
+  const cyps = [
+    { enzyme:"CYP3A4", pct:"~50% of all drug metabolism", substrates:["Simvastatin","Atorvastatin","Amlodipine","Midazolam","Fentanyl","Rivaroxaban","Apixaban","Carbamazepine","Diltiazem","Dexamethasone"],
+      inhibitors:["Ketoconazole (potent)","Clarithromycin (potent)","Erythromycin","Fluconazole","Amiodarone","Diltiazem","Grapefruit juice"],
+      inducers:["Rifampicin (potent)","Carbamazepine","Phenytoin","Dexamethasone","St. John's Wort"] },
+    { enzyme:"CYP2D6", pct:"~25% of all drug metabolism", substrates:["Metoprolol","Tramadol","Codeine","Fluoxetine","Sertraline"],
+      inhibitors:["Fluoxetine (potent)","Paroxetine (potent)","Bupropion","Amiodarone","Sertraline (moderate)"],
+      inducers:["Not significantly inducible (genetic polymorphism-driven)"] },
+    { enzyme:"CYP2C9", pct:"~15% of all drug metabolism", substrates:["Warfarin (S-isomer)","Phenytoin","Losartan","NSAIDs (ibuprofen, celecoxib)"],
+      inhibitors:["Fluconazole (potent)","Amiodarone","Metronidazole","Fluoxetine"],
+      inducers:["Rifampicin"] },
+    { enzyme:"CYP2C19", pct:"~10% of all drug metabolism", substrates:["Clopidogrel (activation)","Omeprazole","Phenytoin","Sertraline"],
+      inhibitors:["Omeprazole","Fluconazole","Fluoxetine"],
+      inducers:["Rifampicin"] },
+    { enzyme:"CYP1A2", pct:"~5% of all drug metabolism", substrates:["Theophylline","Caffeine","Warfarin (R-isomer)","Clozapine"],
+      inhibitors:["Ciprofloxacin (potent)","Fluvoxamine (potent)"],
+      inducers:["Rifampicin","Smoking (PAH)","Charcoal-grilled foods"] },
+    { enzyme:"P-glycoprotein (P-gp)", pct:"Drug efflux transporter", substrates:["Digoxin","Rivaroxaban","Apixaban","Dabigatran","Cyclosporine"],
+      inhibitors:["Amiodarone","Clarithromycin","Ketoconazole","Verapamil","Cyclosporine"],
+      inducers:["Rifampicin","St. John's Wort","Carbamazepine"] }
+  ];
+
+  let html = `<div class="mb-4"><h2 class="font-heading text-xl" style="color:#e8e8f0;">CYP450 & Transporter Pathways</h2><p class="text-xs" style="color:#6a6a8a;">Key enzyme systems for predicting drug interactions</p></div>`;
+
+  cyps.forEach(e => {
+    html += `<details class="rounded-xl mb-3 overflow-hidden" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+      <summary class="px-4 py-3 cursor-pointer select-none flex items-center gap-2" style="color:#c8c8df;">
+        <span class="px-2 py-0.5 rounded text-xs font-bold" style="background:#e11d4820;color:#e11d48;">${e.enzyme}</span>
+        <span class="text-sm flex-1" style="color:#8888a4;">${e.pct}</span>
+        <i data-lucide="chevron-down" class="chevron-icon" style="width:16px;height:16px;color:#5a5a7a;"></i>
+      </summary>
+      <div class="px-4 pb-4 grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+        <div class="rounded-lg p-3" style="background:#12121a;border:1px solid #22223a;">
+          <div class="text-xs font-semibold mb-2" style="color:#818cf8;">Substrates</div>
+          <div class="flex flex-wrap gap-1">${e.substrates.map(s => `<span class="text-xs px-2 py-0.5 rounded" style="background:#818cf815;color:#a5b4fc;">${s}</span>`).join('')}</div>
+        </div>
+        <div class="rounded-lg p-3" style="background:#12121a;border:1px solid #22223a;">
+          <div class="text-xs font-semibold mb-2" style="color:#f87171;">Inhibitors (↑ substrate levels)</div>
+          <div class="flex flex-wrap gap-1">${e.inhibitors.map(s => `<span class="text-xs px-2 py-0.5 rounded" style="background:#f8717115;color:#fca5a5;">${s}</span>`).join('')}</div>
+        </div>
+        <div class="rounded-lg p-3" style="background:#12121a;border:1px solid #22223a;">
+          <div class="text-xs font-semibold mb-2" style="color:#4ade80;">Inducers (↓ substrate levels)</div>
+          <div class="flex flex-wrap gap-1">${e.inducers.map(s => `<span class="text-xs px-2 py-0.5 rounded" style="background:#4ade8015;color:#86efac;">${s}</span>`).join('')}</div>
+        </div>
+      </div>
+    </details>`;
+  });
+
+  // Add clinical pearls
+  html += `<div class="rounded-xl p-4 mt-4" style="background:#1a1a2e;border:1px solid #2a2a3e;">
+    <h3 class="text-sm font-semibold mb-3" style="color:#fbbf24;"><i data-lucide="lightbulb" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i> Clinical Pearls</h3>
+    <ul class="space-y-2 text-xs" style="color:#b0b0cc;">
+      <li>🔴 <strong>Rifampicin</strong> is the most potent CYP inducer — assume it interacts with EVERYTHING metabolized hepatically</li>
+      <li>🔴 <strong>Azole antifungals</strong> and <strong>macrolides</strong> (except azithromycin) are potent CYP3A4 inhibitors</li>
+      <li>🟡 <strong>Grapefruit juice</strong> inhibits intestinal CYP3A4 (not hepatic) — affects high first-pass drugs (simvastatin, felodipine)</li>
+      <li>🟢 <strong>Pravastatin & Rosuvastatin</strong> have minimal CYP metabolism — safest statins with CYP inhibitors</li>
+      <li>🟢 <strong>Azithromycin</strong> does NOT significantly inhibit CYP3A4 — preferred macrolide when interactions are a concern</li>
+      <li>🟡 <strong>CYP2D6</strong> is NOT inducible — poor metabolizers (6-10% Caucasians) need permanent dose adjustments</li>
+      <li>🔴 <strong>Genetic polymorphism tip:</strong> CYP2C19 poor metabolizers (~2-5% Caucasians, ~15-20% Asians) have reduced clopidogrel activation</li>
+    </ul>
+  </div>`;
+
+  c.innerHTML = html;
+  lucide.createIcons();
+}
+
+// ===================== CLICK OUTSIDE TO CLOSE DROPDOWN =====================
+document.addEventListener('click', (e) => {
+  const dd = document.getElementById('search-dropdown');
+  const input = document.getElementById('drug-search');
+  if (!dd.contains(e.target) && e.target !== input) dd.classList.add('hidden');
+});
+
+// ===================== ELEMENT SDK =====================
+const defaultConfig = {
+  app_title: "Drug Interaction Reference",
+  subtitle_text: "Clinical Decision Support — ICU & Emergency Medicine",
+  background_color: "#0f0f12",
+  surface_color: "#1a1a2e",
+  text_color: "#e8e8f0",
+  accent_color: "#e11d48",
+  muted_color: "#8888a4",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+async function applyConfig(config) {
+  const t = (k) => config[k] || defaultConfig[k];
+  document.getElementById('app-title').textContent = t('app_title');
+  document.getElementById('subtitle-text').textContent = t('subtitle_text');
+
+  const wrapper = document.getElementById('app-wrapper');
+  wrapper.style.background = t('background_color');
+
+  const font = t('font_family');
+  const baseSize = t('font_size') || 14;
+  const baseFontStack = `${font}, 'DM Sans', sans-serif`;
+
+  document.body.style.fontFamily = baseFontStack;
+  document.getElementById('app-title').style.fontSize = `${baseSize * 1.8}px`;
+  document.getElementById('subtitle-text').style.fontSize = `${baseSize * 0.85}px`;
+
+  // Apply colors to existing elements
+  document.querySelectorAll('[style*="background:#1a1a2e"]').forEach(el => {
+    el.style.background = t('surface_color');
+  });
+}
+
+// Init icons
+lucide.createIcons();
+</script>
+</body>
+</html>
