@@ -1,0 +1,653 @@
+<!doctype html> 
+<html lang="en" class="h-full"> 
+    <head> <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>ABC Emergencies | Airway, Breathing, Circulation | Deep Medicine</title> 
+    <meta name="description" content="Master ABC emergencies—Airway, Breathing, and Circulation—with rapid assessment, life-saving interventions, and clinical decision strategies."> 
+    <link rel="canonical" href="https://deepmedicine.in/learning/study/abc-emergencies"> 
+    <!-- Open Graph --> 
+    <meta property="og:title" content="ABC Emergencies | Deep Medicine"> 
+    <meta property="og:description" content="Airway, Breathing, Circulation approach for emergency care with rapid interventions and clinical strategies."> 
+    <meta property="og:image" content="https://deepmedicine.in/images/abc-emergency.jpg"> 
+    <!-- Styles --> 
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script> 
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <!-- Icons --> 
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+  }
+
+  .card-glow-a { box-shadow: 0 0 40px rgba(239,68,68,0.08), 0 4px 24px rgba(0,0,0,0.3); }
+  .card-glow-b { box-shadow: 0 0 40px rgba(59,130,246,0.08), 0 4px 24px rgba(0,0,0,0.3); }
+  .card-glow-c { box-shadow: 0 0 40px rgba(168,85,247,0.08), 0 4px 24px rgba(0,0,0,0.3); }
+
+  .abc-tab { transition: all 0.3s ease; cursor: pointer; }
+  .abc-tab:hover { transform: translateY(-2px); }
+  .abc-tab.active-a { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; }
+  .abc-tab.active-b { background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; }
+  .abc-tab.active-c { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; }
+
+  .fade-in { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.1s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.2s; }
+
+  .pulse-dot { animation: pulseDot 2s infinite; }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .severity-critical { border-left: 4px solid #ef4444; }
+  .severity-urgent { border-left: 4px solid #f59e0b; }
+  .severity-moderate { border-left: 4px solid #3b82f6; }
+
+  .expand-btn { transition: transform 0.2s ease; }
+  .expand-btn.open { transform: rotate(180deg); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #1e293b; }
+  ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto hero-gradient text-slate-200"><!-- Header -->
+   <header class="relative px-4 sm:px-8 pt-8 pb-6">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center"><i data-lucide="activity" style="width:22px;height:22px;color:#ef4444;"></i>
+      </div><span class="text-xs font-semibold tracking-widest uppercase text-red-400">Emergency Medicine</span>
+     </div>
+     <h1 id="mainTitle" class="text-3xl sm:text-5xl font-extrabold leading-tight" style="font-family:'Playfair Display',serif;">ABC Emergencies</h1>
+     <p id="subtitle" class="mt-2 text-base sm:text-lg text-slate-400 max-w-2xl">Clinical Reference Guide — Airway · Breathing · Circulation</p>
+     <div class="mt-4 flex flex-wrap gap-2"><span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-700/60 text-slate-300">ICU / Critical Care</span> <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-700/60 text-slate-300">Emergency Dept</span> <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-700/60 text-slate-300">ACLS / BLS</span>
+     </div>
+    </div>
+   </header><!-- Quick Stats -->
+   <section class="px-4 sm:px-8 pb-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-3 gap-3">
+     <div class="bg-slate-800/60 rounded-xl p-4 text-center border border-slate-700/50">
+      <div class="text-2xl font-bold text-red-400">
+       A
+      </div>
+      <div class="text-xs text-slate-400 mt-1">
+       Airway
+      </div>
+      <div class="text-[10px] text-slate-500 mt-0.5">
+       6 Emergencies
+      </div>
+     </div>
+     <div class="bg-slate-800/60 rounded-xl p-4 text-center border border-slate-700/50">
+      <div class="text-2xl font-bold text-blue-400">
+       B
+      </div>
+      <div class="text-xs text-slate-400 mt-1">
+       Breathing
+      </div>
+      <div class="text-[10px] text-slate-500 mt-0.5">
+       7 Emergencies
+      </div>
+     </div>
+     <div class="bg-slate-800/60 rounded-xl p-4 text-center border border-slate-700/50">
+      <div class="text-2xl font-bold text-purple-400">
+       C
+      </div>
+      <div class="text-xs text-slate-400 mt-1">
+       Circulation
+      </div>
+      <div class="text-[10px] text-slate-500 mt-0.5">
+       8 Emergencies
+      </div>
+     </div>
+    </div>
+   </section><!-- Tabs -->
+   <nav class="px-4 sm:px-8 pb-4 sticky top-0 z-20 hero-gradient">
+    <div class="max-w-6xl mx-auto flex gap-2"><button class="abc-tab active-a flex-1 py-3 rounded-xl font-semibold text-sm" data-tab="airway" onclick="switchTab('airway')"> <i data-lucide="wind" style="width:16px;height:16px;display:inline;vertical-align:-3px;"></i> Airway </button> <button class="abc-tab flex-1 py-3 rounded-xl font-semibold text-sm bg-slate-800/60 text-slate-400 border border-slate-700/50" data-tab="breathing" onclick="switchTab('breathing')"> <i data-lucide="cloud" style="width:16px;height:16px;display:inline;vertical-align:-3px;"></i> Breathing </button> <button class="abc-tab flex-1 py-3 rounded-xl font-semibold text-sm bg-slate-800/60 text-slate-400 border border-slate-700/50" data-tab="circulation" onclick="switchTab('circulation')"> <i data-lucide="heart-pulse" style="width:16px;height:16px;display:inline;vertical-align:-3px;"></i> Circulation </button>
+    </div>
+   </nav><!-- Content Area -->
+   <main id="contentArea" class="px-4 sm:px-8 pb-10">
+    <div class="max-w-6xl mx-auto" id="cardContainer"></div>
+   </main><!-- Footer -->
+   <footer class="px-4 sm:px-8 py-6 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+     <p id="footerText" class="text-xs text-slate-500">Professional Clinical Reference — For trained medical professionals only</p>
+     <div class="flex items-center gap-1.5 text-xs text-slate-600"><span class="pulse-dot w-2 h-2 rounded-full bg-green-500 inline-block"></span> Evidence-Based Protocols
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+// ============ DATA ============
+const DATA = {
+  airway: {
+    color: "red",
+    glowClass: "card-glow-a",
+    icon: "wind",
+    intro: "Airway emergencies demand immediate recognition and intervention. Failure to secure the airway within minutes leads to hypoxia, brain injury, and death. The mantra: <strong>Look, Listen, Feel — then Act.</strong>",
+    items: [
+      {
+        title: "Complete Airway Obstruction (FBAO)",
+        severity: "critical",
+        definition: "Total occlusion of the upper airway by a foreign body, preventing gas exchange. The patient cannot speak, cough, or breathe.",
+        causes: "Food bolus (meat, bread), small objects in children, dentures, blood clots post-surgery, vomitus aspiration.",
+        clinicalFeatures: "Universal choking sign (hands clutching throat), inability to speak or cough, rapidly progressing cyanosis, silent chest, paradoxical breathing movements, loss of consciousness within 3–5 minutes.",
+        management: [
+          "Conscious adult: 5 back blows → 5 abdominal thrusts (Heimlich maneuver) — repeat cycle",
+          "Unconscious: Begin CPR, open airway, attempt ventilation, perform direct laryngoscopy to remove visible FB with Magill forceps",
+          "Infant <1yr: 5 back blows + 5 chest thrusts (NO abdominal thrusts)",
+          "Surgical airway (cricothyrotomy) if complete obstruction unrelieved",
+          "Post-removal: CXR to rule out aspiration, monitor for post-obstructive pulmonary edema"
+        ],
+        pearls: "⚡ If the patient can cough forcefully, encourage coughing — do NOT intervene yet. Intervene only when cough becomes ineffective or silent."
+      },
+      {
+        title: "Anaphylaxis — Airway Compromise",
+        severity: "critical",
+        definition: "Severe type I hypersensitivity reaction causing rapid angioedema of the tongue, uvula, larynx, and epiglottis leading to upper airway obstruction.",
+        causes: "Drugs (penicillin, NSAIDs, contrast media), foods (nuts, shellfish, eggs), insect stings (bee, wasp), latex, idiopathic.",
+        clinicalFeatures: "Stridor, hoarseness, drooling, sensation of throat closing, facial/lip/tongue swelling, urticaria, hypotension, tachycardia, bronchospasm, GI symptoms (nausea/vomiting).",
+        management: [
+          "IM Epinephrine 0.5mg (1:1000) anterolateral thigh — FIRST LINE, repeat every 5–15 min",
+          "Secure airway EARLY — intubation before edema progresses (smaller ETT size anticipated)",
+          "IV fluids: NS 1–2L bolus for hypotension",
+          "Adjuncts: IV Hydrocortisone 200mg, IV Chlorphenamine 10mg, Nebulized salbutamol for bronchospasm",
+          "Failed intubation → surgical cricothyrotomy",
+          "Observe 6–24 hrs for biphasic reaction"
+        ],
+        pearls: "⚡ NEVER delay epinephrine. Antihistamines/steroids are adjuncts, NOT primary treatment. Biphasic reactions occur in 5–20% cases — mandatory observation period."
+      },
+      {
+        title: "Acute Epiglottitis",
+        severity: "critical",
+        definition: "Rapidly progressive cellulitis of the epiglottis and supraglottic structures causing life-threatening airway obstruction. Now more common in adults than children (post Hib vaccine era).",
+        causes: "H. influenzae type B (classic), Streptococcus, Staphylococcus, thermal/chemical burns, crack cocaine inhalation.",
+        clinicalFeatures: "Acute onset sore throat, muffled 'hot potato' voice, drooling, dysphagia, tripod position, high fever, stridor (LATE sign = impending obstruction), thumbprint sign on lateral neck X-ray.",
+        management: [
+          "DO NOT examine throat with tongue depressor (risk of laryngospasm → complete obstruction)",
+          "Keep patient upright and calm — minimize agitation",
+          "Controlled intubation in OR with ENT/anesthesia standby and surgical airway ready",
+          "IV Ceftriaxone 2g + Dexamethasone 0.6mg/kg",
+          "Nebulized epinephrine as temporizing measure",
+          "ICU admission for airway monitoring"
+        ],
+        pearls: "⚡ In adults, epiglottitis may present subtly as severe sore throat disproportionate to exam findings. High index of suspicion saves lives."
+      },
+      {
+        title: "Ludwig's Angina",
+        severity: "critical",
+        definition: "Bilateral submandibular space infection causing rapidly progressive cellulitis with tongue elevation and displacement, threatening airway compromise.",
+        causes: "Dental infections (70–90%), mandibular fractures, tongue piercings, submandibular gland sialadenitis.",
+        clinicalFeatures: "Bilateral submandibular swelling (woody, brawny induration), elevated/protruding tongue, trismus, dysphagia, drooling, fever, 'bull neck' appearance, floor of mouth erythema.",
+        management: [
+          "Secure airway FIRST — awake fiberoptic intubation preferred (blind nasal/oral intubation dangerous)",
+          "Failed intubation → surgical airway (tracheostomy preferred over cricothyrotomy)",
+          "IV Antibiotics: Ampicillin-Sulbactam or Clindamycin + Ceftriaxone",
+          "CT neck with contrast to identify abscess (if airway secured)",
+          "Surgical drainage of abscess if present",
+          "Dexamethasone to reduce edema"
+        ],
+        pearls: "⚡ Ludwig's angina can progress from mild floor-of-mouth swelling to complete airway obstruction in hours. Any dental infection with submandibular swelling = high alert."
+      },
+      {
+        title: "Laryngospasm",
+        severity: "urgent",
+        definition: "Involuntary sustained closure of the vocal cords causing complete or near-complete glottic obstruction. Common in post-anesthesia recovery.",
+        causes: "Airway instrumentation, extubation, blood/secretions on vocal cords, light anesthesia planes, GERD, hypocalcemia.",
+        clinicalFeatures: "Inspiratory stridor → sudden silent chest, chest wall retractions, paradoxical breathing, desaturation, impossible to ventilate with BVM.",
+        management: [
+          "Jaw thrust + continuous positive airway pressure (CPAP) via tight-fitting BVM",
+          "Suction oropharynx to remove secretions/blood",
+          "Larson's maneuver: firm pressure in 'laryngospasm notch' (behind each earlobe, between mastoid and mandible)",
+          "Succinylcholine 0.1–0.5 mg/kg IV (or 4mg/kg IM) if above fails",
+          "Reintubation if persistent",
+          "IV Atropine if bradycardia develops"
+        ],
+        pearls: "⚡ Larson's maneuver works by stimulating a cranial nerve reflex — try it before reaching for medications. Most laryngospasm responds within 30–60 seconds."
+      },
+      {
+        title: "Massive Hemoptysis with Airway Flooding",
+        severity: "critical",
+        definition: "Expectoration of >600mL blood in 24 hours (or >100mL/hr) causing airway flooding and asphyxiation rather than exsanguination.",
+        causes: "TB cavities, bronchiectasis, lung cancer, pulmonary AVM, anticoagulation, Rasmussen's aneurysm, aspergilloma.",
+        clinicalFeatures: "Coughing up large volumes of bright red blood, gurgling respirations, hypoxia, respiratory distress, inability to clear airway, hemodynamic instability.",
+        management: [
+          "Position bleeding lung DEPENDENT (lateral decubitus) to protect good lung",
+          "Large bore ETT (≥8.0) for suctioning — consider main-stem intubation of non-bleeding lung",
+          "Double-lumen ETT or bronchial blocker for lung isolation",
+          "Urgent bronchoscopy for source identification",
+          "Bronchial artery embolization (interventional radiology)",
+          "Surgical resection if embolization fails",
+          "Correct coagulopathy: FFP, platelets, TXA 1g IV"
+        ],
+        pearls: "⚡ The cause of death is drowning, not bleeding. Protecting the good lung is priority #1. Always position bleeding side DOWN."
+      }
+    ]
+  },
+  breathing: {
+    color: "blue",
+    glowClass: "card-glow-b",
+    icon: "cloud",
+    intro: "Breathing emergencies involve failure of oxygenation or ventilation (or both). Rapid identification of the underlying mechanism guides life-saving intervention. Think: <strong>Is it an oxygenation problem or a ventilation problem?</strong>",
+    items: [
+      {
+        title: "Tension Pneumothorax",
+        severity: "critical",
+        definition: "Progressive accumulation of air in the pleural space via a one-way valve mechanism, causing mediastinal shift, compression of the contralateral lung, and impaired venous return → obstructive shock.",
+        causes: "Trauma (penetrating/blunt), mechanical ventilation (barotrauma), central line insertion, post-CPR rib fractures, COPD/asthma bleb rupture.",
+        clinicalFeatures: "Severe dyspnea, tracheal deviation AWAY from affected side, absent breath sounds unilaterally, hyperresonance to percussion, distended neck veins (JVD), hypotension, tachycardia, cyanosis, PEA arrest.",
+        management: [
+          "CLINICAL DIAGNOSIS — DO NOT wait for CXR",
+          "Needle decompression: 14G needle, 2nd ICS mid-clavicular line (or 4th/5th ICS anterior axillary line) — rush of air confirms diagnosis",
+          "Immediate tube thoracostomy (chest drain 28–32Fr) in 5th ICS anterior axillary line (triangle of safety)",
+          "Connect to underwater seal with +/- suction",
+          "CXR post-procedure to confirm lung re-expansion",
+          "If bilateral: decompress BOTH sides",
+          "In arrest: bilateral thoracostomies (finger thoracostomy if rapid)"
+        ],
+        pearls: "⚡ In trauma cardiac arrest, bilateral finger thoracostomies are part of the reversible causes protocol. Classic signs may be absent in hypovolemic patients (flat neck veins)."
+      },
+      {
+        title: "Massive Pulmonary Embolism",
+        severity: "critical",
+        definition: "Large thrombus (usually from DVT) occluding >50% of pulmonary vasculature, causing acute right heart failure, severe hypoxemia, and cardiovascular collapse.",
+        causes: "DVT (proximal leg veins, pelvic veins), prolonged immobilization, post-surgery, malignancy, OCP use, thrombophilia, long-haul flights.",
+        clinicalFeatures: "Sudden dyspnea, pleuritic chest pain, tachycardia disproportionate to findings, hypotension, syncope, JVD, right heart strain on ECG (S1Q3T3, RBBB, right axis), elevated troponin/BNP, RV dilation on bedside echo.",
+        management: [
+          "High-flow O₂, IV access, continuous monitoring",
+          "Hemodynamically unstable (massive PE): Systemic thrombolysis — Alteplase 100mg IV over 2 hours (or 50mg bolus in arrest)",
+          "Unfractionated Heparin bolus 80 U/kg then 18 U/kg/hr infusion",
+          "Bedside ECHO: RV dilation, McConnell's sign, D-sign — confirms clinical diagnosis",
+          "CTPA when stable for definitive diagnosis",
+          "Surgical embolectomy or catheter-directed therapy if thrombolysis contraindicated/failed",
+          "IVC filter if anticoagulation absolutely contraindicated"
+        ],
+        pearls: "⚡ Massive PE in cardiac arrest: give thrombolytics and continue CPR for 60–90 minutes before stopping. Bedside ECHO is the single most useful test in the acute setting."
+      },
+      {
+        title: "Acute Severe Asthma (Status Asthmaticus)",
+        severity: "critical",
+        definition: "Life-threatening bronchospasm unresponsive to initial bronchodilator therapy. Progressive air trapping leads to respiratory muscle fatigue, hypercapnia, and respiratory arrest.",
+        causes: "Allergen exposure, viral infection, medication non-compliance, exercise, cold air, emotional stress, NSAID/beta-blocker exposure.",
+        clinicalFeatures: "Severe dyspnea, can't speak in sentences, accessory muscle use, RR >25, HR >110, PEFR <33% predicted, SpO₂ <92%, SILENT CHEST (ominous — indicates minimal air movement), drowsiness, confusion (CO₂ narcosis).",
+        management: [
+          "Continuous nebulized Salbutamol 5mg + Ipratropium 500mcg back-to-back",
+          "IV Hydrocortisone 200mg or Methylprednisolone 125mg",
+          "IV Magnesium Sulphate 2g over 20 min (smooth muscle relaxation)",
+          "IV Aminophylline 5mg/kg loading (if not on theophylline)",
+          "Epinephrine 0.5mg IM or IV Salbutamol infusion (250mcg bolus) for near-arrest",
+          "NIV with caution (BIPAP) — may delay intubation",
+          "Intubation (ketamine induction) if exhaustion/arrest: expect difficult ventilation — low RR, long expiratory time, permissive hypercapnia",
+          "Heliox (70:30 He:O₂) if available"
+        ],
+        pearls: "⚡ A 'silent chest' in acute asthma is NOT improvement — it means air is not moving. A rising CO₂ on ABG in an asthmatic patient = respiratory failure. Normal pCO₂ in acute asthma is also alarming (should be LOW due to hyperventilation)."
+      },
+      {
+        title: "Acute Exacerbation of COPD",
+        severity: "urgent",
+        definition: "Acute worsening of respiratory symptoms beyond normal day-to-day variation requiring change in therapy. Often precipitated by infection. Can progress to type 2 respiratory failure.",
+        causes: "Bacterial infection (H. influenzae, S. pneumoniae, M. catarrhalis), viral infection, air pollution, PE, pneumothorax, non-compliance.",
+        clinicalFeatures: "Increased dyspnea, increased sputum volume/purulence, wheeze, use of accessory muscles, pursed lip breathing, barrel chest, reduced air entry, coarse crackles, cyanosis, CO₂ retention signs (flapping tremor, confusion, warm peripheries).",
+        management: [
+          "Controlled O₂: Target SpO₂ 88–92% via Venturi mask 24–28%",
+          "Nebulized Salbutamol 5mg + Ipratropium 500mcg",
+          "Prednisolone 40mg PO for 5 days (or IV Hydrocortisone 200mg)",
+          "Antibiotics if purulent sputum: Amoxicillin-clavulanate or Doxycycline",
+          "NIV (BiPAP) for type 2 respiratory failure: pH <7.35, pCO₂ >45mmHg — IPAP 12–20, EPAP 4–6",
+          "ABG at 30 mins and 1 hour to assess NIV response",
+          "Intubation if NIV failure, GCS drop, or pH <7.25 despite NIV"
+        ],
+        pearls: "⚡ In COPD, giving high-flow O₂ can worsen hypercapnia via the Haldane effect and V/Q mismatch. Always use controlled, titrated oxygen. BiPAP has dramatically reduced intubation rates in AECOPD."
+      },
+      {
+        title: "Acute Pulmonary Edema (Flash APO)",
+        severity: "critical",
+        definition: "Rapid accumulation of fluid in the pulmonary interstitium and alveoli due to acutely elevated left heart filling pressures, causing severe hypoxemic respiratory failure.",
+        causes: "Acute MI, hypertensive crisis, acute mitral regurgitation (papillary muscle rupture, chordae rupture), acute aortic regurgitation, fluid overload, renal artery stenosis (Pickering syndrome).",
+        clinicalFeatures: "Acute severe dyspnea, orthopnea, pink frothy sputum, bilateral crackles (wet lungs), S3 gallop, elevated JVP, hypertension (often >180 systolic), tachycardia, diaphoresis, agitation.",
+        management: [
+          "Sit patient UPRIGHT — legs over bed edge",
+          "High-flow O₂ or CPAP/BiPAP (NIV is FIRST-LINE — reduces intubation by 50%)",
+          "IV GTN (Nitroglycerin) infusion: Start 10–20 mcg/min, titrate to SBP (most important drug)",
+          "IV Furosemide 40–80mg (more for diuretic effect, less for acute preload reduction)",
+          "IV Morphine 2–4mg cautiously (reduces preload, anxiety — use sparingly, risk of respiratory depression)",
+          "Treat underlying cause: STEMI → cath lab, hypertensive emergency → GTN drip",
+          "Intubation if NIV failure or severe fatigue"
+        ],
+        pearls: "⚡ NIV (CPAP 10cmH₂O) is the single most effective intervention in flash APO — it reduces preload, afterload, and work of breathing simultaneously. Start it BEFORE diuretics take effect."
+      },
+      {
+        title: "Flail Chest",
+        severity: "urgent",
+        definition: "Three or more consecutive ribs fractured in two or more places creating a free-floating segment that moves paradoxically with respiration, causing severe pain, splinting, and underlying pulmonary contusion.",
+        causes: "High-impact blunt thoracic trauma: RTA, falls from height, crush injuries.",
+        clinicalFeatures: "Paradoxical chest wall movement (segment moves IN on inspiration, OUT on expiration), severe chest wall pain, crepitus, rapid shallow breathing, hypoxia, visible chest wall deformity, underlying pulmonary contusion (develops over 24–48hrs).",
+        management: [
+          "Aggressive analgesia: Thoracic epidural (gold standard) or paravertebral block or IV PCA",
+          "High-flow O₂, incentive spirometry, chest physiotherapy",
+          "NIV/CPAP for respiratory support — acts as internal pneumatic splint",
+          "Intubation + mechanical ventilation if respiratory failure (acts as internal splint)",
+          "Avoid fluid overload (worsens underlying pulmonary contusion)",
+          "Surgical rib fixation (ORIF) if prolonged ventilator dependence",
+          "ICU monitoring — pulmonary contusion worsens at 24–72 hours"
+        ],
+        pearls: "⚡ The flail segment itself is NOT the main problem — the underlying pulmonary contusion is what kills. Fluid restrict and optimize analgesia to keep the patient breathing deeply and clearing secretions."
+      },
+      {
+        title: "Drowning / Submersion Injury",
+        severity: "critical",
+        definition: "Respiratory impairment from submersion/immersion in liquid. Causes laryngospasm, aspiration, surfactant washout, ARDS, and severe hypoxemia.",
+        causes: "Accidental submersion (children in pools), alcohol/drug intoxication near water, seizures, trauma, hypothermia, suicide attempts.",
+        clinicalFeatures: "Respiratory distress, cough, pink frothy sputum, pulmonary crackles, hypoxemia refractory to O₂, hypothermia, altered consciousness, cardiac arrhythmias, ARDS (develops 6–24 hours).",
+        management: [
+          "Rescue from water with C-spine precautions if trauma suspected",
+          "CPR immediately if pulseless — prioritize ventilations (it's a hypoxic arrest)",
+          "High-flow O₂, warm blankets, remove wet clothing",
+          "Intubation + mechanical ventilation with PEEP for persistent hypoxia",
+          "Lung-protective ventilation (6ml/kg IBW) — treat as ARDS",
+          "Rewarm to ≥32°C before declaring death",
+          "Observe ALL submersion victims for minimum 6–8 hours (delayed ARDS)",
+          "No benefit from prophylactic antibiotics or steroids"
+        ],
+        pearls: "⚡ 'Nobody is dead until they are warm and dead.' Aggressive rewarming before terminating resuscitation in hypothermic drowning. Cold water drowning has remarkable survival stories even after prolonged submersion."
+      }
+    ]
+  },
+  circulation: {
+    color: "purple",
+    glowClass: "card-glow-c",
+    icon: "heart-pulse",
+    intro: "Circulatory emergencies involve failure of the cardiovascular system to deliver adequate oxygen to tissues. Rapid identification of the type of shock and its etiology directs life-saving therapy. Ask: <strong>Is the pump failing, the tank empty, or the pipes dilated/obstructed?</strong>",
+    items: [
+      {
+        title: "Cardiac Arrest (Shockable Rhythms — VF/pVT)",
+        severity: "critical",
+        definition: "Absence of cardiac output due to ventricular fibrillation or pulseless ventricular tachycardia — the most survivable arrest rhythms when treated early with defibrillation.",
+        causes: "Acute MI (most common), electrolyte abnormalities (hypo/hyperkalemia), drug toxicity, long QT syndrome, WPW, Brugada, commotio cordis, hypothermia.",
+        clinicalFeatures: "Unresponsive, no pulse, no breathing (or agonal gasps only), ECG shows VF (chaotic fibrillatory baseline) or VT (wide complex regular tachycardia without pulses).",
+        management: [
+          "Immediate high-quality CPR: 30:2 ratio, depth 5–6cm, rate 100–120/min, full recoil",
+          "Defibrillation ASAP: Biphasic 150–200J → 200J → 200J (every 2 min rhythm check)",
+          "After 3rd shock: Epinephrine 1mg IV every 3–5 min + Amiodarone 300mg IV bolus (then 150mg)",
+          "Advanced airway (ETT/SGA) with continuous CPR, waveform capnography (ETCO₂ >10 mmHg = good CPR)",
+          "Identify and treat reversible causes: 4H's and 4T's",
+          "Post-ROSC: 12-lead ECG, targeted temperature management (32–36°C), coronary angiography if STEMI",
+          "Minimize interruptions in CPR — <10 seconds for rhythm checks"
+        ],
+        pearls: "⚡ Defibrillation within 3–5 minutes of VF gives 50–70% survival. Each minute delay reduces survival by 7–10%. Early, high-quality CPR + early defibrillation = lives saved."
+      },
+      {
+        title: "Cardiac Arrest (Non-Shockable — PEA / Asystole)",
+        severity: "critical",
+        definition: "Cardiac arrest with organized electrical activity but no mechanical output (PEA) or no electrical activity (asystole). Poorer prognosis — survival depends on identifying and treating the cause.",
+        causes: "Hypovolemia, hypoxia, hydrogen ions (acidosis), hypo/hyperkalemia, hypothermia, tension pneumothorax, cardiac tamponade, toxins, thrombosis (PE or MI).",
+        clinicalFeatures: "Unresponsive, no pulse, no breathing. PEA: organized rhythm on monitor but no palpable pulse. Asystole: flat line (confirm in 2 leads, check connections, increase gain).",
+        management: [
+          "High-quality CPR — no defibrillation indicated",
+          "Epinephrine 1mg IV as soon as possible (every 3–5 min)",
+          "Systematic 4H's/4T's evaluation during CPR:",
+          "  → Hypovolemia: IV fluid bolus, blood products, tourniquet for hemorrhage",
+          "  → Hypoxia: advanced airway, confirm ventilation",
+          "  → H⁺ (acidosis): sodium bicarbonate 50mEq if severe acidosis/hyperK",
+          "  → Hypo/HyperK: IV calcium, insulin-dextrose, sodium bicarbonate",
+          "  → Hypothermia: active rewarming",
+          "  → Tamponade: pericardiocentesis / thoracotomy",
+          "  → Tension PTX: needle/finger thoracostomy",
+          "  → Thrombosis (PE): thrombolytics during CPR, continue 60–90 min",
+          "Point-of-care ultrasound (POCUS) during rhythm checks to identify cause"
+        ],
+        pearls: "⚡ PEA/Asystole is not 'untreatable' — it has a CAUSE. Find the cause, treat the cause. Bedside ultrasound during pulse checks is the single most useful tool for identifying reversible causes."
+      },
+      {
+        title: "Hypovolemic Shock (Hemorrhagic)",
+        severity: "critical",
+        definition: "Circulatory failure due to acute blood loss (>30–40% blood volume) causing inadequate tissue perfusion. Class III–IV hemorrhage is immediately life-threatening.",
+        causes: "Trauma (solid organ injury, pelvic fractures, long bone fractures), GI bleed (variceal, peptic ulcer), ruptured AAA, ruptured ectopic pregnancy, post-partum hemorrhage, coagulopathy.",
+        clinicalFeatures: "Class I (<15% loss): anxiety, normal vitals. Class II (15–30%): tachycardia, narrowed pulse pressure. Class III (30–40%): hypotension, tachycardia >120, altered mental status, cool clammy skin. Class IV (>40%): profound hypotension, obtundation, negligible urine output.",
+        management: [
+          "Massive Transfusion Protocol: 1:1:1 ratio (pRBC : FFP : Platelets)",
+          "2 large-bore IV (14–16G) or IO access, crossmatch, type-specific or O-neg blood",
+          "Tranexamic Acid (TXA) 1g IV over 10 min WITHIN 3 hours of injury",
+          "Permissive hypotension: target SBP 80–90 mmHg (MAP 50) until surgical control — EXCEPT in TBI (target SBP >100)",
+          "Source control: OR for surgical bleeding, IR for embolization, endoscopy for GI bleed",
+          "Avoid hypothermia (warm fluids, bear hugger), correct acidosis, correct coagulopathy — lethal triad",
+          "REBOA (resuscitative endovascular balloon occlusion of aorta) for infradiaphragmatic hemorrhage as bridge",
+          "Avoid excessive crystalloid — dilutional coagulopathy"
+        ],
+        pearls: "⚡ The lethal triad of trauma: Hypothermia + Acidosis + Coagulopathy. Break any part of this triad. TXA must be given within 3 hours — after 3 hours it INCREASES mortality."
+      },
+      {
+        title: "Cardiogenic Shock",
+        severity: "critical",
+        definition: "Pump failure — the heart cannot generate adequate cardiac output to meet tissue demands despite adequate filling pressures. Mortality 40–50% even with treatment.",
+        causes: "Acute MI (especially large anterior STEMI), acute decompensated HF, myocarditis, stress cardiomyopathy (Takotsubo), valvular catastrophe (acute MR/AR), post-cardiac surgery, arrhythmia.",
+        clinicalFeatures: "Hypotension (SBP <90 for >30 min), tachycardia, cold/clammy extremities, mottled skin, altered sensorium, oliguria (<0.5mL/kg/hr), elevated JVP, pulmonary edema (wet and cold phenotype), elevated lactate.",
+        management: [
+          "Urgent coronary angiography + PCI for MI-related cardiogenic shock (door-to-balloon)",
+          "Inotropes: Dobutamine 2.5–20 mcg/kg/min (first-line) or Milrinone",
+          "Vasopressor: Norepinephrine (if MAP critically low) — preferred over dopamine",
+          "Mechanical circulatory support: IABP (intra-aortic balloon pump), Impella, VA-ECMO",
+          "Diuretics if pulmonary edema — but cautiously (avoid further reducing preload excessively)",
+          "NIV/intubation for respiratory failure",
+          "Avoid excessive fluid (already volume overloaded)",
+          "Monitor with arterial line, central line, serial lactate, urine output, echocardiography"
+        ],
+        pearls: "⚡ Cardiogenic shock = COLD + WET. The SHOCK trial showed early revascularization saves lives. Do NOT waste time — activate the cath lab immediately for STEMI + shock."
+      },
+      {
+        title: "Septic Shock",
+        severity: "critical",
+        definition: "Life-threatening organ dysfunction due to dysregulated host response to infection, with persistent hypotension requiring vasopressors AND lactate >2 mmol/L despite adequate fluid resuscitation (Sepsis-3 criteria).",
+        causes: "Pneumonia (most common), UTI/urosepsis, intra-abdominal infection (peritonitis, cholangitis), skin/soft tissue (necrotizing fasciitis), meningitis, endocarditis, device-related infections.",
+        clinicalFeatures: "Fever or hypothermia, tachycardia, hypotension refractory to fluids, warm flushed skin initially → cold mottled skin (late), altered mental status, oliguria, tachypnea, elevated lactate >2, SOFA score ≥2.",
+        management: [
+          "HOUR-1 BUNDLE (Surviving Sepsis Campaign):",
+          "  → Measure lactate (remeasure if >2)",
+          "  → Blood cultures BEFORE antibiotics (but don't delay Abx)",
+          "  → Broad-spectrum IV antibiotics within 1 HOUR (every hour delay increases mortality 7%)",
+          "  → 30 mL/kg crystalloid for hypotension or lactate ≥4",
+          "  → Norepinephrine for MAP <65 despite fluids (start early, don't fluid overload)",
+          "Add Vasopressin 0.03 U/min as second vasopressor",
+          "Hydrocortisone 200mg/day if refractory shock (vasopressor-dependent >4 hrs)",
+          "Source control: drain abscess, remove infected device, debride necrotic tissue",
+          "Lung-protective ventilation if intubated, glycemic control (target <180 mg/dL)"
+        ],
+        pearls: "⚡ TIME KILLS in sepsis. Every hour of antibiotic delay = 7% increase in mortality. Give antibiotics FIRST, investigate SECOND. Early norepinephrine is better than excessive fluid loading."
+      },
+      {
+        title: "Cardiac Tamponade",
+        severity: "critical",
+        definition: "Accumulation of fluid/blood in the pericardial space causing compression of cardiac chambers, impaired diastolic filling, and ultimately cardiovascular collapse. Even small rapid effusions can be lethal.",
+        causes: "Trauma (penetrating — knife/bullet), post-MI (free wall rupture), malignancy (lung, breast, lymphoma), uremia, post-cardiac surgery, aortic dissection, tuberculosis, iatrogenic (post-catheterization/pacemaker).",
+        clinicalFeatures: "Beck's Triad: hypotension + muffled heart sounds + elevated JVP. Also: tachycardia, pulsus paradoxus >10mmHg (drop in SBP during inspiration), Kussmaul's sign, electrical alternans on ECG, plethoric IVC on ECHO with RA/RV diastolic collapse.",
+        management: [
+          "Emergency pericardiocentesis: subxiphoid approach under ultrasound guidance — aspirate even 20–30mL to dramatically improve hemodynamics",
+          "IV fluid bolus (500mL–1L) as temporizing measure to increase preload",
+          "AVOID vasodilators, diuretics, and positive pressure ventilation (all reduce preload → worsens tamponade)",
+          "Traumatic tamponade → emergency thoracotomy in ED (resuscitative thoracotomy)",
+          "Pericardial window (surgical) for recurrent effusion",
+          "Leave pericardial drain in situ, monitor for re-accumulation",
+          "Treat underlying cause (malignancy, infection, autoimmune)"
+        ],
+        pearls: "⚡ Cardiac tamponade is a CLINICAL diagnosis — don't wait for formal echo if patient is crashing. Bedside POCUS showing pericardial effusion + hemodynamic instability = needle in the pericardium NOW."
+      },
+      {
+        title: "Acute STEMI",
+        severity: "critical",
+        definition: "Complete thrombotic occlusion of a coronary artery causing transmural myocardial ischemia/infarction. Without reperfusion, progressive myocardial necrosis occurs — 'Time is Muscle.'",
+        causes: "Atherosclerotic plaque rupture with superimposed thrombus (>90%), coronary spasm, coronary dissection (SCAD), coronary embolism, cocaine-induced vasospasm.",
+        clinicalFeatures: "Crushing central chest pain radiating to left arm/jaw/back, >20 min duration, unrelieved by rest/GTN, diaphoresis, nausea, dyspnea, sense of impending doom. ST elevation ≥1mm in 2 contiguous leads (≥2mm in V1-V3). Reciprocal ST depression. New LBBB in appropriate clinical context.",
+        management: [
+          "ACTIVATE CATH LAB IMMEDIATELY — Primary PCI (door-to-balloon <90 min, or <120 min if transfer)",
+          "MONA (with caveats): Morphine (cautious), O₂ (only if SpO₂ <94%), Nitroglycerin (SL/IV), Aspirin 300mg STAT",
+          "Dual antiplatelet: Aspirin 300mg + Ticagrelor 180mg (or Clopidogrel 600mg)",
+          "Anticoagulation: Heparin 5000U IV bolus (or Enoxaparin 0.5mg/kg)",
+          "If PCI not available within 120 min → Fibrinolysis: Tenecteplase (weight-based) within 12 hrs of symptom onset",
+          "Beta-blocker (Metoprolol 25mg PO) if no contraindications (HR/BP adequate, no acute HF)",
+          "High-dose statin: Atorvastatin 80mg",
+          "Monitor for reperfusion arrhythmias, mechanical complications (VSD, free wall rupture, papillary muscle rupture)"
+        ],
+        pearls: "⚡ In STEMI, every 30 minutes of delay to reperfusion = significant increase in 1-year mortality. A single ECG can save a life — get the 12-lead within 10 minutes of first medical contact. Posterior STEMI (ST depression V1-V3) is easily missed — do posterior leads V7-V9."
+      },
+      {
+        title: "Aortic Dissection",
+        severity: "critical",
+        definition: "Tear in the aortic intima allowing blood to enter the media, creating a false lumen that propagates anterogradely or retrogradely, compromising branch vessels and risking rupture. Stanford Type A (ascending aorta) = surgical emergency. Type B (descending only) = medical management unless complicated.",
+        causes: "Uncontrolled hypertension (#1), Marfan syndrome, Ehlers-Danlos, bicuspid aortic valve, Turner syndrome, cocaine/amphetamine use, aortic instrumentation, pregnancy (3rd trimester), weightlifting (acute Valsalva).",
+        clinicalFeatures: "Sudden-onset 'tearing/ripping' chest/back pain (maximal at onset — unlike MI which crescendos), migratory pain as dissection propagates, blood pressure differential between arms (>20mmHg), pulse deficits, new aortic regurgitation murmur (Type A), stroke symptoms, mesenteric/limb ischemia, widened mediastinum on CXR.",
+        management: [
+          "ANTI-IMPULSE THERAPY — reduce HR and BP to limit propagation:",
+          "  → Target HR <60 bpm FIRST: IV Esmolol (500mcg/kg bolus → 50–200mcg/kg/min) or IV Labetalol",
+          "  → Target SBP 100–120mmHg: add IV Nitroprusside or IV Nicardipine ONLY AFTER HR controlled",
+          "  → NEVER give vasodilators before beta-blockers (reflex tachycardia increases aortic shear stress)",
+          "CT Angiography (aorta) — definitive diagnosis",
+          "Type A (ascending): EMERGENCY SURGICAL REPAIR — mortality increases 1–2% per hour without surgery",
+          "Type B (uncomplicated): Medical management in ICU — anti-impulse therapy, serial imaging",
+          "Type B (complicated — malperfusion, rupture, refractory pain): TEVAR (thoracic endovascular aortic repair)",
+          "Pain control: IV Morphine (also reduces sympathetic drive)"
+        ],
+        pearls: "⚡ The #1 misdiagnosis for aortic dissection is ACS/MI. If you give thrombolytics or anticoagulation to a dissection → catastrophic hemorrhage. Always consider dissection in severe sudden-onset chest/back pain, especially if hypertensive. Check bilateral arm BPs on EVERY acute chest pain patient."
+      }
+    ]
+  }
+};
+
+// ============ STATE ============
+let activeTab = "airway";
+let expandedCards = new Set();
+
+// ============ RENDER ============
+function switchTab(tab) {
+  activeTab = tab;
+  expandedCards.clear();
+
+  // Update tab buttons
+  document.querySelectorAll('.abc-tab').forEach(btn => {
+    const t = btn.dataset.tab;
+    if (t === tab) {
+      btn.className = `abc-tab active-${tab === 'airway' ? 'a' : tab === 'breathing' ? 'b' : 'c'} flex-1 py-3 rounded-xl font-semibold text-sm`;
+    } else {
+      btn.className = 'abc-tab flex-1 py-3 rounded-xl font-semibold text-sm bg-slate-800/60 text-slate-400 border border-slate-700/50';
+    }
+  });
+
+  renderCards();
+}
+
+function renderCards() {
+  const section = DATA[activeTab];
+  const c = section.color;
+  const colorMap = { red: { bg: 'bg-red-500/10', border: 'border-red-500/20', text: 'text-red-400', badge: 'bg-red-500/20 text-red-300', dot: 'bg-red-500' }, blue: { bg: 'bg-blue-500/10', border: 'border-blue-500/20', text: 'text-blue-400', badge: 'bg-blue-500/20 text-blue-300', dot: 'bg-blue-500' }, purple: { bg: 'bg-purple-500/10', border: 'border-purple-500/20', text: 'text-purple-400', badge: 'bg-purple-500/20 text-purple-300', dot: 'bg-purple-500' }};
+  const cm = colorMap[c];
+  const container = document.getElementById('cardContainer');
+
+  let html = `<div class="mb-6 p-4 rounded-xl ${cm.bg} border ${cm.border} fade-in"><p class="text-sm leading-relaxed text-slate-300">${section.intro}</p></div>`;
+
+  section.items.forEach((item, i) => {
+    const isOpen = expandedCards.has(`${activeTab}-${i}`);
+    const sevClass = item.severity === 'critical' ? 'severity-critical' : item.severity === 'urgent' ? 'severity-urgent' : 'severity-moderate';
+    const sevLabel = item.severity === 'critical' ? '🔴 CRITICAL' : item.severity === 'urgent' ? '🟡 URGENT' : '🔵 MODERATE';
+
+    html += `<div class="mb-3 rounded-xl bg-slate-800/70 border border-slate-700/40 ${section.glowClass} ${sevClass} fade-in stagger-${(i % 4) + 1}" style="animation-fill-mode:both;">
+      <button class="w-full text-left p-4 sm:p-5 flex items-start justify-between gap-3" onclick="toggleCard('${activeTab}-${i}')">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <span class="text-[10px] font-bold tracking-wider uppercase ${cm.badge} px-2 py-0.5 rounded-full">${sevLabel}</span>
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-100 leading-snug">${item.title}</h3>
+          <p class="text-xs text-slate-400 mt-1 line-clamp-2">${item.definition}</p>
+        </div>
+        <i data-lucide="chevron-down" class="expand-btn ${isOpen ? 'open' : ''} mt-1 flex-shrink-0" style="width:20px;height:20px;color:#94a3b8;"></i>
+      </button>
+      ${isOpen ? renderExpandedContent(item, cm) : ''}
+    </div>`;
+  });
+
+  container.innerHTML = html;
+  lucide.createIcons();
+}
+
+function renderExpandedContent(item, cm) {
+  let mgmtHtml = item.management.map(step => {
+    const isIndented = step.startsWith('  →');
+    const cleaned = step.replace('  → ', '');
+    return `<li class="${isIndented ? 'ml-4 text-slate-400' : 'text-slate-300'} text-sm leading-relaxed">${isIndented ? cleaned : step}</li>`;
+  }).join('');
+
+  return `<div class="px-4 sm:px-5 pb-5 space-y-4 fade-in">
+    <div class="grid sm:grid-cols-2 gap-3">
+      <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-700/30">
+        <h4 class="text-xs font-semibold uppercase tracking-wider ${cm.text} mb-2">
+          <i data-lucide="search" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> Causes / Etiology
+        </h4>
+        <p class="text-sm text-slate-300 leading-relaxed">${item.causes}</p>
+      </div>
+      <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-700/30">
+        <h4 class="text-xs font-semibold uppercase tracking-wider ${cm.text} mb-2">
+          <i data-lucide="stethoscope" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> Clinical Features
+        </h4>
+        <p class="text-sm text-slate-300 leading-relaxed">${item.clinicalFeatures}</p>
+      </div>
+    </div>
+    <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-700/30">
+      <h4 class="text-xs font-semibold uppercase tracking-wider ${cm.text} mb-2">
+        <i data-lucide="syringe" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> Management Protocol
+      </h4>
+      <ol class="list-decimal list-inside space-y-1.5">${mgmtHtml}</ol>
+    </div>
+    <div class="p-3 rounded-lg bg-amber-500/5 border border-amber-500/20">
+      <h4 class="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-1">
+        <i data-lucide="zap" style="width:12px;height:12px;display:inline;vertical-align:-2px;"></i> Clinical Pearl
+      </h4>
+      <p class="text-sm text-amber-200/80 leading-relaxed">${item.pearls}</p>
+    </div>
+  </div>`;
+}
+
+function toggleCard(id) {
+  if (expandedCards.has(id)) expandedCards.delete(id);
+  else expandedCards.add(id);
+  renderCards();
+}
+
+// ============ SDK ============
+const defaultConfig = {
+  main_title: "ABC Emergencies",
+  subtitle: "Clinical Reference Guide — Airway · Breathing · Circulation",
+  footer_text: "Professional Clinical Reference — For trained medical professionals only",
+  background_color: "#0f172a",
+  surface_color: "#1e293b",
+  text_color: "#e2e8f0",
+  accent_color: "#ef4444",
+  secondary_accent: "#3b82f6",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+function applyConfig(config) {
+  const t = (k) => config[k] || defaultConfig[k];
+  document.getElementById('mainTitle').textContent = t('main_title');
+  document.getElementById('subtitle').textContent = t('subtitle');
+  document.getElementById('footerText').textContent = t('footer_text');
+
+  const font = t('font_family');
+  document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+
+  const app = document.getElementById('app');
+  app.style.background = `linear-gradient(135deg, ${t('background_color')} 0%, ${t('surface_color')} 40%, ${t('background_color')} 100%)`;
+  app.style.color = t('text_color');
+}
+
+// Initial render
+renderCards();
+applyConfig(defaultConfig);
+lucide.createIcons();
+</script>
+</body>
+</html>
