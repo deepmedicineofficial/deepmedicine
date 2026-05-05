@@ -1,0 +1,848 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>ICU Nutrition | Critical Care Nutritional Support | Deep Medicine</title> <meta name="description" content="Comprehensive ICU nutrition guide including enteral feeding, parenteral nutrition, caloric requirements, and critical care nutrition strategies."> <link rel="canonical" href="https://deepmedicine.in/core/icu/icu-nutrition"> <!-- Open Graph --> <meta property="og:title" content="ICU Nutrition | Deep Medicine"> <meta property="og:description" content="Critical care nutrition including enteral and parenteral feeding strategies in ICU patients."> <meta property="og:image" content="https://deepmedicine.in/images/icu-nutrition.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { font-family: 'DM Sans', sans-serif; }
+    .heading-font { font-family: 'Playfair Display', serif; }
+    .tab-active { border-bottom: 3px solid var(--primary-action); color: var(--primary-action); }
+    .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    :root {
+      --bg-color: #0f172a;
+      --surface-color: #1e293b;
+      --text-color: #e2e8f0;
+      --primary-action: #38bdf8;
+      --secondary-action: #64748b;
+    }
+    .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: var(--bg-color); }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--secondary-action); border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto scrollbar-thin" style="background: var(--bg-color); color: var(--text-color);"><!-- Header -->
+   <header class="sticky top-0 z-50 backdrop-blur-md border-b" style="background: rgba(15,23,42,0.9); border-color: var(--secondary-action);">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6">
+     <div class="flex items-center justify-between">
+      <div>
+       <h1 id="main-title" class="heading-font text-xl sm:text-2xl font-bold" style="color: var(--primary-action);">ICU Nutrition Guide</h1>
+       <p id="subtitle" class="text-xs sm:text-sm mt-0.5" style="color: var(--secondary-action);">Evidence-Based Critical Care Nutrition Protocol</p>
+      </div>
+      <div class="flex items-center gap-2"><span class="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium" style="background: var(--surface-color); color: var(--primary-action); border: 1px solid var(--primary-action);"> <i data-lucide="stethoscope" style="width:14px;height:14px;"></i> Clinical Reference </span>
+      </div>
+     </div>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="sticky top-[65px] z-40 border-b overflow-x-auto" style="background: var(--bg-color); border-color: rgba(100,116,139,0.3);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex gap-0"><button onclick="switchTab('overview')" id="tab-overview" class="tab-btn tab-active px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors">Overview</button> <button onclick="switchTab('assessment')" id="tab-assessment" class="tab-btn px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors" style="color: var(--secondary-action);">Assessment</button> <button onclick="switchTab('enteral')" id="tab-enteral" class="tab-btn px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors" style="color: var(--secondary-action);">Enteral</button> <button onclick="switchTab('parenteral')" id="tab-parenteral" class="tab-btn px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors" style="color: var(--secondary-action);">Parenteral</button> <button onclick="switchTab('pediatric')" id="tab-pediatric" class="tab-btn px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors" style="color: var(--secondary-action);">Pediatric</button> <button onclick="switchTab('monitoring')" id="tab-monitoring" class="tab-btn px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors" style="color: var(--secondary-action);">Monitoring</button> <button onclick="switchTab('special')" id="tab-special" class="tab-btn px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors" style="color: var(--secondary-action);">Special Cases</button>
+    </div>
+   </nav><!-- Content Area -->
+   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6"><!-- Overview Tab -->
+    <section id="content-overview" class="tab-content fade-in">
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+      <div class="card-hover rounded-xl p-5" style="background: var(--surface-color); border: 1px solid rgba(56,189,248,0.2);">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(56,189,248,0.15);"><i data-lucide="clock" style="width:20px;height:20px;color:var(--primary-action);"></i>
+        </div>
+        <h3 class="font-semibold text-sm">Early Nutrition</h3>
+       </div>
+       <p class="text-xs leading-relaxed" style="color: var(--secondary-action);">Initiate enteral nutrition within <strong style="color:var(--text-color);">24–48 hours</strong> of ICU admission in hemodynamically stable patients (ASPEN/SCCM 2016, ESPEN 2019).</p>
+      </div>
+      <div class="card-hover rounded-xl p-5" style="background: var(--surface-color); border: 1px solid rgba(56,189,248,0.2);">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(56,189,248,0.15);"><i data-lucide="target" style="width:20px;height:20px;color:var(--primary-action);"></i>
+        </div>
+        <h3 class="font-semibold text-sm">Caloric Targets</h3>
+       </div>
+       <p class="text-xs leading-relaxed" style="color: var(--secondary-action);">Adults: <strong style="color:var(--text-color);">25–30 kcal/kg/day</strong>. Avoid overfeeding in acute phase. Use indirect calorimetry when available (Grade A).</p>
+      </div>
+      <div class="card-hover rounded-xl p-5" style="background: var(--surface-color); border: 1px solid rgba(56,189,248,0.2);">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(56,189,248,0.15);"><i data-lucide="shield" style="width:20px;height:20px;color:var(--primary-action);"></i>
+        </div>
+        <h3 class="font-semibold text-sm">Protein Priority</h3>
+       </div>
+       <p class="text-xs leading-relaxed" style="color: var(--secondary-action);">Protein: <strong style="color:var(--text-color);">1.2–2.0 g/kg/day</strong>. Higher ranges for burns, trauma, and multi-organ failure. Essential to mitigate muscle wasting.</p>
+      </div>
+     </div><!-- Phases of ICU Nutrition -->
+     <div class="rounded-xl p-5 sm:p-6 mb-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Metabolic Phases in Critical Illness</h2>
+      <div class="space-y-4">
+       <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+         <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background: var(--primary-action); color: var(--bg-color);">
+          1
+         </div>
+         <div class="w-0.5 flex-1 mt-1" style="background: var(--secondary-action);"></div>
+        </div>
+        <div class="pb-4">
+         <h4 class="font-semibold text-sm mb-1">Ebb Phase (0–24 hrs)</h4>
+         <p class="text-xs" style="color: var(--secondary-action);">Hypometabolic state. ↓ Cardiac output, ↓ O₂ consumption, ↓ Core temperature. Focus on resuscitation, not nutrition. Hyperglycemia due to stress hormones (cortisol, catecholamines, glucagon).</p>
+        </div>
+       </div>
+       <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+         <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background: var(--primary-action); color: var(--bg-color);">
+          2
+         </div>
+         <div class="w-0.5 flex-1 mt-1" style="background: var(--secondary-action);"></div>
+        </div>
+        <div class="pb-4">
+         <h4 class="font-semibold text-sm mb-1">Flow Phase – Acute Catabolic (Day 1–7)</h4>
+         <p class="text-xs" style="color: var(--secondary-action);">Hypermetabolic, hypercatabolic. ↑ REE 20–60%. Massive protein catabolism (up to 250g muscle/day). Initiate trophic feeding → advance to target. Permissive underfeeding (70% of target) may be considered in obese patients.</p>
+        </div>
+       </div>
+       <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+         <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background: var(--primary-action); color: var(--bg-color);">
+          3
+         </div>
+        </div>
+        <div>
+         <h4 class="font-semibold text-sm mb-1">Anabolic Recovery Phase (Day 7+)</h4>
+         <p class="text-xs" style="color: var(--secondary-action);">Transition to anabolism. Full caloric targets. Increase protein to 1.5–2.5 g/kg/day. Rehabilitation nutrition: combine with early mobilization. Monitor refeeding syndrome risk.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Key Principles -->
+     <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Guiding Principles (ASPEN/ESPEN/SCCM)</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+       <div class="flex items-start gap-2 p-3 rounded-lg" style="background: var(--bg-color);"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i>
+        <p class="text-xs">EN preferred over PN (↓ infectious complications, ↓ mortality)</p>
+       </div>
+       <div class="flex items-start gap-2 p-3 rounded-lg" style="background: var(--bg-color);"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i>
+        <p class="text-xs">Gastric feeding as first-line; post-pyloric if high aspiration risk</p>
+       </div>
+       <div class="flex items-start gap-2 p-3 rounded-lg" style="background: var(--bg-color);"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i>
+        <p class="text-xs">Do NOT delay EN for absence of bowel sounds or flatus</p>
+       </div>
+       <div class="flex items-start gap-2 p-3 rounded-lg" style="background: var(--bg-color);"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i>
+        <p class="text-xs">Measure gastric residual volumes (GRV); do not hold feeds for GRV &lt;500 mL</p>
+       </div>
+       <div class="flex items-start gap-2 p-3 rounded-lg" style="background: var(--bg-color);"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i>
+        <p class="text-xs">Supplemental PN only if EN fails to meet &gt;60% target by Day 7</p>
+       </div>
+       <div class="flex items-start gap-2 p-3 rounded-lg" style="background: var(--bg-color);"><i data-lucide="check-circle" style="width:16px;height:16px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i>
+        <p class="text-xs">Glycemic control: target 140–180 mg/dL (avoid hypoglycemia)</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Assessment Tab -->
+    <section id="content-assessment" class="tab-content hidden fade-in">
+     <div class="rounded-xl p-5 sm:p-6 mb-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Nutritional Risk Screening</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-xs">
+        <thead>
+         <tr style="border-bottom: 1px solid var(--secondary-action);">
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Tool</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Population</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Parameters</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">High Risk Score</th>
+         </tr>
+        </thead>
+        <tbody style="color: var(--secondary-action);">
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3 font-medium" style="color:var(--text-color);">NRS-2002</td>
+          <td class="py-2 px-3">Adults</td>
+          <td class="py-2 px-3">BMI, weight loss, food intake, disease severity</td>
+          <td class="py-2 px-3">≥3</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3 font-medium" style="color:var(--text-color);">NUTRIC Score</td>
+          <td class="py-2 px-3">ICU Adults</td>
+          <td class="py-2 px-3">Age, APACHE II, SOFA, comorbidities, days hospital→ICU, IL-6</td>
+          <td class="py-2 px-3">≥5 (without IL-6)</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3 font-medium" style="color:var(--text-color);">STRONGkids</td>
+          <td class="py-2 px-3">Pediatric</td>
+          <td class="py-2 px-3">Subjective assessment, high-risk disease, intake/losses, weight loss</td>
+          <td class="py-2 px-3">≥4</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3 font-medium" style="color:var(--text-color);">SGNA</td>
+          <td class="py-2 px-3">Pediatric</td>
+          <td class="py-2 px-3">History, physical exam, functional capacity</td>
+          <td class="py-2 px-3">B or C</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div><!-- Energy Requirements -->
+     <div class="rounded-xl p-5 sm:p-6 mb-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Energy Requirement Estimation</h2>
+      <div class="space-y-4">
+       <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+        <h4 class="font-semibold text-sm mb-2" style="color: var(--primary-action);">Gold Standard: Indirect Calorimetry (IC)</h4>
+        <p class="text-xs mb-2" style="color: var(--secondary-action);">Measures REE via VO₂ and VCO₂. Weir equation: REE = (3.941 × VO₂ + 1.106 × VCO₂) × 1440</p>
+        <p class="text-xs" style="color: var(--secondary-action);">RQ = VCO₂/VO₂ → Indicates substrate utilization (0.7=fat, 0.85=mixed, 1.0=carbs, &gt;1.0=lipogenesis/overfeeding)</p>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+        <h4 class="font-semibold text-sm mb-2" style="color: var(--primary-action);">Predictive Equations (when IC unavailable)</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs" style="color: var(--secondary-action);">
+         <div>
+          <p class="font-medium" style="color:var(--text-color);">Harris-Benedict (adjusted)</p>
+          <p>Males: 66.5 + (13.75×W) + (5.003×H) - (6.775×A)</p>
+          <p>Females: 655.1 + (9.563×W) + (1.850×H) - (4.676×A)</p>
+          <p class="mt-1">Apply stress factor: 1.2–1.5×</p>
+         </div>
+         <div>
+          <p class="font-medium" style="color:var(--text-color);">Penn State (ICU-validated)</p>
+          <p>REE = HBE(0.85) + VE(33) + Tmax(175) - 6433</p>
+          <p class="mt-2 font-medium" style="color:var(--text-color);">Simple Rule of Thumb</p>
+          <p>25–30 kcal/kg/day (actual body weight, unless obese)</p>
+         </div>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+        <h4 class="font-semibold text-sm mb-2" style="color: var(--primary-action);">Obesity Adjustments (BMI ≥30)</h4>
+        <p class="text-xs" style="color: var(--secondary-action);">Use 11–14 kcal/kg actual BW/day OR 22–25 kcal/kg ideal BW/day. Protein: ≥2.0 g/kg IBW/day. Hypocaloric, high-protein approach preferred.</p>
+       </div>
+      </div>
+     </div><!-- Protein Assessment -->
+     <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Protein Requirements by Condition</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-xs">
+        <thead>
+         <tr style="border-bottom: 1px solid var(--secondary-action);">
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Clinical Condition</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Protein (g/kg/day)</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Notes</th>
+         </tr>
+        </thead>
+        <tbody style="color: var(--secondary-action);">
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">General ICU</td>
+          <td class="py-2 px-3">1.2–2.0</td>
+          <td class="py-2 px-3">Higher end for surgical/trauma</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Burns (&gt;20% TBSA)</td>
+          <td class="py-2 px-3">1.5–2.5</td>
+          <td class="py-2 px-3">Massive protein losses via wounds</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Sepsis/MODS</td>
+          <td class="py-2 px-3">1.5–2.0</td>
+          <td class="py-2 px-3">Advance gradually after resuscitation</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">CRRT/Dialysis</td>
+          <td class="py-2 px-3">2.0–2.5</td>
+          <td class="py-2 px-3">Amino acid losses via effluent (10–15g/day)</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">AKI (no RRT)</td>
+          <td class="py-2 px-3">0.8–1.0</td>
+          <td class="py-2 px-3">Do not restrict protein to delay RRT</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3" style="color:var(--text-color);">Hepatic Encephalopathy</td>
+          <td class="py-2 px-3">1.2–1.5</td>
+          <td class="py-2 px-3">Do NOT restrict protein; use BCAA if intolerant</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- Enteral Nutrition Tab -->
+    <section id="content-enteral" class="tab-content hidden fade-in">
+     <div class="rounded-xl p-5 sm:p-6 mb-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Enteral Nutrition Protocol</h2><!-- Initiation -->
+      <div class="mb-6">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2"><i data-lucide="play" style="width:14px;height:14px;color:var(--primary-action);"></i> Initiation &amp; Advancement</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold mb-2" style="color:var(--primary-action);">Start</p>
+         <ul class="text-xs space-y-1" style="color: var(--secondary-action);">
+          <li>• Trophic feeding: 10–20 mL/hr (or 500 kcal/day)</li>
+          <li>• Isotonic, polymeric formula as default</li>
+          <li>• Start within 24–48h of admission</li>
+          <li>• Head of bed elevation ≥30–45°</li>
+         </ul>
+        </div>
+        <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold mb-2" style="color:var(--primary-action);">Advance</p>
+         <ul class="text-xs space-y-1" style="color: var(--secondary-action);">
+          <li>• Increase by 10–25 mL/hr every 4–8 hours</li>
+          <li>• Target: 80% of goal by 48–72 hours</li>
+          <li>• Hold for hemodynamic instability (MAP &lt;60, rising lactate, escalating vasopressors)</li>
+          <li>• Resume at prior rate once stable</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Formula Selection -->
+      <div class="mb-6">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2"><i data-lucide="beaker" style="width:14px;height:14px;color:var(--primary-action);"></i> Formula Selection</h3>
+       <div class="overflow-x-auto">
+        <table class="w-full text-xs">
+         <thead>
+          <tr style="border-bottom: 1px solid var(--secondary-action);">
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Formula Type</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Indication</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Examples</th>
+          </tr>
+         </thead>
+         <tbody style="color: var(--secondary-action);">
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Standard Polymeric (1.0 kcal/mL)</td>
+           <td class="py-2 px-3">Default for most ICU patients</td>
+           <td class="py-2 px-3">Osmolite, Jevity, Nutrison</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">High-Protein (1.0–1.5 kcal/mL)</td>
+           <td class="py-2 px-3">Surgical, trauma, burns</td>
+           <td class="py-2 px-3">Promote, Fresubin HP</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Calorie-Dense (1.5–2.0 kcal/mL)</td>
+           <td class="py-2 px-3">Fluid restriction (CHF, renal, ARDS)</td>
+           <td class="py-2 px-3">TwoCal, Nutrison Energy</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Semi-Elemental/Peptide-Based</td>
+           <td class="py-2 px-3">Malabsorption, short bowel, pancreatitis</td>
+           <td class="py-2 px-3">Peptamen, Vital, Survimed</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Diabetes-Specific</td>
+           <td class="py-2 px-3">Persistent hyperglycemia</td>
+           <td class="py-2 px-3">Glucerna, Diben</td>
+          </tr>
+          <tr>
+           <td class="py-2 px-3" style="color:var(--text-color);">Immune-Modulating</td>
+           <td class="py-2 px-3">Major elective surgery (perioperative)</td>
+           <td class="py-2 px-3">Impact, Oxepa (arginine, omega-3, nucleotides)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div><!-- GI Complications -->
+      <div>
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#f59e0b;"></i> Managing EN Intolerance</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold mb-1" style="color:var(--text-color);">High GRV (&gt;500 mL)</p>
+         <p class="text-xs" style="color: var(--secondary-action);">→ Prokinetics: Metoclopramide 10mg IV q6h or Erythromycin 250mg IV q12h. Switch to post-pyloric if persistent.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold mb-1" style="color:var(--text-color);">Diarrhea</p>
+         <p class="text-xs" style="color: var(--secondary-action);">→ Rule out C. diff. Consider fiber-containing formula, reduce osmolality. Avoid holding feeds; switch to continuous infusion.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold mb-1" style="color:var(--text-color);">Vomiting/Regurgitation</p>
+         <p class="text-xs" style="color: var(--secondary-action);">→ HOB &gt;45°, continuous infusion, post-pyloric tube, prokinetics. Hold if active aspiration.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold mb-1" style="color:var(--text-color);">Abdominal Distension</p>
+         <p class="text-xs" style="color: var(--secondary-action);">→ Measure abdominal girth. Rule out ileus, bowel obstruction, abdominal compartment syndrome. Reduce rate or hold.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Access Routes -->
+     <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Access Routes</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+       <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+        <h4 class="font-semibold text-sm mb-2" style="color: var(--primary-action);">Nasogastric (NG/OG)</h4>
+        <ul class="text-xs space-y-1" style="color: var(--secondary-action);">
+         <li>• First-line access</li>
+         <li>• Verify placement: X-ray, pH &lt;5</li>
+         <li>• Bolus or continuous</li>
+         <li>• Short-term (&lt;4–6 weeks)</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+        <h4 class="font-semibold text-sm mb-2" style="color: var(--primary-action);">Nasojejunal (NJ) / Post-pyloric</h4>
+        <ul class="text-xs space-y-1" style="color: var(--secondary-action);">
+         <li>• High aspiration risk</li>
+         <li>• Gastroparesis/GRV intolerance</li>
+         <li>• Continuous infusion only</li>
+         <li>• Endoscopic/fluoroscopic placement</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+        <h4 class="font-semibold text-sm mb-2" style="color: var(--primary-action);">PEG / Surgical Jejunostomy</h4>
+        <ul class="text-xs space-y-1" style="color: var(--secondary-action);">
+         <li>• Long-term (&gt;4–6 weeks)</li>
+         <li>• PEG: percutaneous endoscopic</li>
+         <li>• Jejunostomy: post-gastric surgery</li>
+         <li>• Lower risk of displacement</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- Parenteral Nutrition Tab -->
+    <section id="content-parenteral" class="tab-content hidden fade-in">
+     <div class="rounded-xl p-5 sm:p-6 mb-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Parenteral Nutrition (PN)</h2>
+      <div class="p-4 rounded-lg mb-4" style="background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);">
+       <p class="text-xs font-semibold flex items-center gap-2" style="color:#f59e0b;"><i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Key Principle</p>
+       <p class="text-xs mt-1" style="color: var(--secondary-action);">PN is NOT first-line. Use only when EN is contraindicated, insufficient (&lt;60% target by Day 7), or functionally impossible. Early PN (Day 1–3) in well-nourished patients increases infections (EPaNIC trial).</p>
+      </div><!-- Indications -->
+      <div class="mb-6">
+       <h3 class="font-semibold text-sm mb-3">Indications for PN</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div class="flex items-start gap-2 p-2 rounded text-xs" style="color: var(--secondary-action);"><i data-lucide="arrow-right" style="width:12px;height:12px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i> <span>Complete bowel obstruction</span>
+        </div>
+        <div class="flex items-start gap-2 p-2 rounded text-xs" style="color: var(--secondary-action);"><i data-lucide="arrow-right" style="width:12px;height:12px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i> <span>High-output fistula (&gt;500 mL/day)</span>
+        </div>
+        <div class="flex items-start gap-2 p-2 rounded text-xs" style="color: var(--secondary-action);"><i data-lucide="arrow-right" style="width:12px;height:12px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i> <span>Severe short bowel syndrome</span>
+        </div>
+        <div class="flex items-start gap-2 p-2 rounded text-xs" style="color: var(--secondary-action);"><i data-lucide="arrow-right" style="width:12px;height:12px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i> <span>Mesenteric ischemia</span>
+        </div>
+        <div class="flex items-start gap-2 p-2 rounded text-xs" style="color: var(--secondary-action);"><i data-lucide="arrow-right" style="width:12px;height:12px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i> <span>Severe mucositis/GI GvHD</span>
+        </div>
+        <div class="flex items-start gap-2 p-2 rounded text-xs" style="color: var(--secondary-action);"><i data-lucide="arrow-right" style="width:12px;height:12px;color:var(--primary-action);flex-shrink:0;margin-top:2px;"></i> <span>EN intolerance despite optimization</span>
+        </div>
+       </div>
+      </div><!-- PN Composition -->
+      <div class="mb-6">
+       <h3 class="font-semibold text-sm mb-3">PN Composition &amp; Prescribing</h3>
+       <div class="overflow-x-auto">
+        <table class="w-full text-xs">
+         <thead>
+          <tr style="border-bottom: 1px solid var(--secondary-action);">
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Component</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Daily Requirement</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Max Rate / Notes</th>
+          </tr>
+         </thead>
+         <tbody style="color: var(--secondary-action);">
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Dextrose (D10–D70)</td>
+           <td class="py-2 px-3">Provide 50–70% non-protein calories</td>
+           <td class="py-2 px-3">Max GIR: 4–5 mg/kg/min (adults). Monitor glucose q4–6h initially</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Amino Acids (AA)</td>
+           <td class="py-2 px-3">1.2–2.0 g/kg/day</td>
+           <td class="py-2 px-3">Standard AA solutions. BCAA-enriched for hepatic encephalopathy</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">IV Lipid Emulsions (ILE)</td>
+           <td class="py-2 px-3">0.7–1.5 g/kg/day (provide 30–50% non-protein cal)</td>
+           <td class="py-2 px-3">Max 1.5 g/kg/day. MCT/LCT or olive-oil based (SMOFlipid) preferred</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Electrolytes</td>
+           <td class="py-2 px-3">Na, K, Ca, Mg, PO₄ per labs</td>
+           <td class="py-2 px-3">Watch PO₄ closely (refeeding). Ca:PO₄ ratio critical for stability</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Trace Elements</td>
+           <td class="py-2 px-3">Zn, Cu, Se, Mn, Cr</td>
+           <td class="py-2 px-3">Reduce Mn in cholestasis; ↑ Zn in diarrhea/fistula/burns</td>
+          </tr>
+          <tr>
+           <td class="py-2 px-3" style="color:var(--text-color);">Vitamins</td>
+           <td class="py-2 px-3">MVI daily</td>
+           <td class="py-2 px-3">Extra thiamine (B1) before dextrose in malnourished (prevent Wernicke's)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div><!-- PN Complications -->
+      <div>
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2"><i data-lucide="alert-circle" style="width:14px;height:14px;color:#ef4444;"></i> PN Complications</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">CLABSI</p>
+         <p class="text-xs" style="color: var(--secondary-action);">Central line infection. Strict aseptic technique, dedicated PN lumen. Remove line if suspected.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">Hyperglycemia</p>
+         <p class="text-xs" style="color: var(--secondary-action);">Limit dextrose GIR. Add insulin to PN bag or separate drip. Target 140–180 mg/dL.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">Hypertriglyceridemia</p>
+         <p class="text-xs" style="color: var(--secondary-action);">Hold ILE if TG &gt;400 mg/dL. Check weekly. Reduce lipid dose to 0.5g/kg/day.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">PN-Associated Cholestasis</p>
+         <p class="text-xs" style="color: var(--secondary-action);">↑ Bilirubin, ↑ ALP. Cycle PN, reduce ILE, use fish-oil ILE (Omegaven). Start EN ASAP.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">Refeeding Syndrome</p>
+         <p class="text-xs" style="color: var(--secondary-action);">↓PO₄, ↓K, ↓Mg. Start low, advance slowly. Pre-treat with thiamine 200–300mg IV.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">Fluid Overload</p>
+         <p class="text-xs" style="color: var(--secondary-action);">Use concentrated formulas. Daily I/O balance. Limit total volume per fluid strategy.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Pediatric Tab -->
+    <section id="content-pediatric" class="tab-content hidden fade-in">
+     <div class="rounded-xl p-5 sm:p-6 mb-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Pediatric ICU Nutrition</h2>
+      <div class="p-4 rounded-lg mb-5" style="background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3);">
+       <p class="text-xs font-semibold" style="color:var(--primary-action);">📌 Key Guideline: ASPEN 2017 Pediatric Critical Care Nutrition</p>
+       <p class="text-xs mt-1" style="color: var(--secondary-action);">Children are NOT small adults. Higher metabolic rate per kg, limited glycogen/fat reserves, ongoing growth demands. Malnutrition prevalence in PICU: 24–50%.</p>
+      </div><!-- Age-based requirements -->
+      <div class="mb-6">
+       <h3 class="font-semibold text-sm mb-3">Energy &amp; Protein Requirements by Age</h3>
+       <div class="overflow-x-auto">
+        <table class="w-full text-xs">
+         <thead>
+          <tr style="border-bottom: 1px solid var(--secondary-action);">
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Age Group</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Energy (kcal/kg/day)</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Protein (g/kg/day)</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Fluid (mL/kg/day)</th>
+          </tr>
+         </thead>
+         <tbody style="color: var(--secondary-action);">
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Preterm Neonate</td>
+           <td class="py-2 px-3">110–130</td>
+           <td class="py-2 px-3">3.5–4.0</td>
+           <td class="py-2 px-3">150–180</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Term Neonate (0–1 mo)</td>
+           <td class="py-2 px-3">90–120</td>
+           <td class="py-2 px-3">2.5–3.0</td>
+           <td class="py-2 px-3">120–150</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Infant (1–12 mo)</td>
+           <td class="py-2 px-3">70–100</td>
+           <td class="py-2 px-3">2.0–3.0</td>
+           <td class="py-2 px-3">100–120</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Toddler (1–3 yr)</td>
+           <td class="py-2 px-3">60–90</td>
+           <td class="py-2 px-3">1.5–2.0</td>
+           <td class="py-2 px-3">Holliday-Segar</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Child (3–10 yr)</td>
+           <td class="py-2 px-3">50–75</td>
+           <td class="py-2 px-3">1.5–2.0</td>
+           <td class="py-2 px-3">Holliday-Segar</td>
+          </tr>
+          <tr>
+           <td class="py-2 px-3" style="color:var(--text-color);">Adolescent (10–18 yr)</td>
+           <td class="py-2 px-3">30–55</td>
+           <td class="py-2 px-3">1.5–2.0</td>
+           <td class="py-2 px-3">Holliday-Segar (max 2.4L)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div><!-- Pediatric EN -->
+      <div class="mb-6">
+       <h3 class="font-semibold text-sm mb-3">Pediatric Enteral Formulas</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+         <h4 class="text-xs font-semibold mb-2" style="color: var(--primary-action);">Infants (&lt;1 year)</h4>
+         <ul class="text-xs space-y-1" style="color: var(--secondary-action);">
+          <li>• Breast milk (preferred) – add HMF for preterm</li>
+          <li>• Standard infant formula (20 kcal/oz)</li>
+          <li>• Concentrated to 24–30 kcal/oz if fluid-restricted</li>
+          <li>• Extensively hydrolyzed (Alimentum, Nutramigen) for CMPA</li>
+          <li>• Amino acid-based (EleCare, Neocate) for severe allergy</li>
+         </ul>
+        </div>
+        <div class="p-4 rounded-lg" style="background: var(--bg-color);">
+         <h4 class="text-xs font-semibold mb-2" style="color: var(--primary-action);">Children (1–13 years)</h4>
+         <ul class="text-xs space-y-1" style="color: var(--secondary-action);">
+          <li>• Pediatric polymeric (PediaSure 1.0, Nutren Junior)</li>
+          <li>• High-calorie (1.5 kcal/mL) for fluid restriction</li>
+          <li>• Peptide-based (Peptamen Junior) for GI dysfunction</li>
+          <li>• Blenderized diet via GT for long-term patients</li>
+          <li>• Adult formulas acceptable for &gt;10 yr / &gt;40 kg</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Neonatal PN -->
+      <div class="mb-6">
+       <h3 class="font-semibold text-sm mb-3">Neonatal &amp; Pediatric PN Protocol</h3>
+       <div class="overflow-x-auto">
+        <table class="w-full text-xs">
+         <thead>
+          <tr style="border-bottom: 1px solid var(--secondary-action);">
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Component</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Start (Day 1)</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Advance</th>
+           <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Max</th>
+          </tr>
+         </thead>
+         <tbody style="color: var(--secondary-action);">
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Amino Acids</td>
+           <td class="py-2 px-3">1.5–2.0 g/kg (neonate), 1.0 g/kg (child)</td>
+           <td class="py-2 px-3">↑ 0.5–1.0 g/kg/day</td>
+           <td class="py-2 px-3">3.5–4.0 (preterm), 2.0–3.0 (child)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">Dextrose (GIR)</td>
+           <td class="py-2 px-3">4–6 mg/kg/min (neonate)</td>
+           <td class="py-2 px-3">↑ 1–2 mg/kg/min/day</td>
+           <td class="py-2 px-3">10–14 mg/kg/min (neonate), 5 (adolescent)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+           <td class="py-2 px-3" style="color:var(--text-color);">IV Lipid</td>
+           <td class="py-2 px-3">1.0 g/kg/day</td>
+           <td class="py-2 px-3">↑ 0.5–1.0 g/kg/day</td>
+           <td class="py-2 px-3">3.0 g/kg (preterm), 2.0–3.0 (child)</td>
+          </tr>
+          <tr>
+           <td class="py-2 px-3" style="color:var(--text-color);">SMOFlipid/Omegaven</td>
+           <td class="py-2 px-3" colspan="3">Preferred in PNALD. Fish oil reduces bilirubin. Dose: 1g/kg/day Omegaven for cholestasis rescue</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div><!-- Pediatric Special Considerations -->
+      <div>
+       <h3 class="font-semibold text-sm mb-3">Pediatric-Specific Considerations</h3>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">🫀 Congenital Heart Disease</p>
+         <p class="text-xs" style="color: var(--secondary-action);">↑ REE 30–50%. Fluid-restricted: use concentrated formulas. Post-surgical: EN within 6–24h if hemodynamically stable.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">🧠 Traumatic Brain Injury</p>
+         <p class="text-xs" style="color: var(--secondary-action);">Hypermetabolic. Early EN &lt;72h. Target full calories by Day 7. Avoid hyperglycemia. Zinc supplementation may help.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">🔥 Pediatric Burns</p>
+         <p class="text-xs" style="color: var(--secondary-action);">Galveston formula: 1800 kcal/m² + 1300 kcal/m² burn. Protein 3g/kg/day. Start EN within 6h. Vitamin C, Zinc, Copper supplementation.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background: var(--bg-color);">
+         <p class="text-xs font-semibold" style="color:var(--text-color);">🫁 Pediatric ARDS/Ventilated</p>
+         <p class="text-xs" style="color: var(--secondary-action);">Use IC if available (Schofield equation if not). Avoid overfeeding (↑ CO₂ production). Fluid restriction may require calorie-dense formula.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Monitoring Tab -->
+    <section id="content-monitoring" class="tab-content hidden fade-in">
+     <div class="rounded-xl p-5 sm:p-6 mb-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+      <h2 class="heading-font text-lg font-bold mb-4" style="color: var(--primary-action);">Nutrition Monitoring Protocol</h2>
+      <div class="overflow-x-auto mb-6">
+       <table class="w-full text-xs">
+        <thead>
+         <tr style="border-bottom: 1px solid var(--secondary-action);">
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Parameter</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Frequency</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color: var(--primary-action);">Target / Interpretation</th>
+         </tr>
+        </thead>
+        <tbody style="color: var(--secondary-action);">
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Blood Glucose</td>
+          <td class="py-2 px-3">q4–6h initially, then q6–8h</td>
+          <td class="py-2 px-3">140–180 mg/dL. Avoid &lt;70 and &gt;250</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Electrolytes (Na, K, Cl, HCO₃)</td>
+          <td class="py-2 px-3">Daily (initiation), then 2–3×/wk</td>
+          <td class="py-2 px-3">Normal ranges. Adjust PN/IV fluids accordingly</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Phosphate, Magnesium, Calcium</td>
+          <td class="py-2 px-3">Daily × 3–5 days (refeeding risk), then 2×/wk</td>
+          <td class="py-2 px-3">Critical for refeeding syndrome detection. Replace aggressively</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Triglycerides</td>
+          <td class="py-2 px-3">Baseline, then weekly (on ILE)</td>
+          <td class="py-2 px-3">&lt;400 mg/dL. Hold lipid if &gt;400</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">LFTs (AST, ALT, ALP, Bilirubin)</td>
+          <td class="py-2 px-3">Baseline, then weekly on PN</td>
+          <td class="py-2 px-3">Monitor for PN-associated liver disease</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Prealbumin (Transthyretin)</td>
+          <td class="py-2 px-3">Weekly</td>
+          <td class="py-2 px-3">t½ = 2–3 days. Better marker than albumin. Rising = adequate nutrition</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Nitrogen Balance</td>
+          <td class="py-2 px-3">Weekly if feasible</td>
+          <td class="py-2 px-3">N balance = (Protein intake/6.25) – (UUN + 4). Target positive balance</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(100,116,139,0.2);">
+          <td class="py-2 px-3" style="color:var(--text-color);">Weight</td>
+          <td class="py-2 px-3">Daily</td>
+          <td class="py-2 px-3">Interpret cautiously (fluid shifts). Dry weight trends more useful</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3" style="color:var(--text-color);">GRV / Abdominal Exam</td>
+          <td class="py-2 px-3">q4–6h (EN patients)</td>
+          <td class="py-2 px-3">Do not routinely hold for GRV &lt;500. Assess clinically</td>
+         </tr>
+        </tbody>
+       </table>
+      </div><!-- Refeeding Syndrome -->
+      <div class="p-5 rounded-lg" style="background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color:#ef4444;"><i data-lucide="alert-octagon" style="width:16px;height:16px;"></i> Refeeding Syndrome – Prevention &amp; Management</h3>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+         <p class="text-xs font-semibold mb-1" style="color:var(--text-color);">Risk Factors (NICE criteria):</p>
+         <ul class="text-xs space-y-0.5" style="color: var(--secondary-action);">
+          <li>• BMI &lt;16 kg/m²</li>
+          <li>• Unintentional weight loss &gt;15% in 3–6 months</li>
+          <li>• Little/no intake for &gt;10 days</li>
+          <li>• Low PO₄, K, or Mg pre-feeding</li>
+          <li>• Alcoholism, anorexia nervosa, cancer, post-bariatric</li>
+         </ul>
+        </div>
+        <div>
+         <p class="text-xs font-semibold mb-1" style="color:var(--text-color);">Management Protocol:</p>
+         <ul class="text-xs space-y-0.5" style="color: var(--secondary-action);">
+          <li>• Thiamine 200–300mg IV BEFORE feeding × 3 days</li>
+          <li>• Start at 10 kcal/kg/day (max 50% target)</li>
+          <li>• Advance by 33% every 1–2 days if stable</li>
+          <li>• Replace PO₄, K, Mg aggressively (IV preferred)</li>
+          <li>• Monitor electrolytes q12h × 72 hours</li>
+          <li>• Restrict Na; supplement micronutrients</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Special Cases Tab -->
+    <section id="content-special" class="tab-content hidden fade-in">
+     <div class="space-y-5"><!-- Sepsis/Shock -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color: var(--primary-action);"><i data-lucide="activity" style="width:16px;height:16px;"></i> Sepsis &amp; Hemodynamic Instability</h3>
+       <div class="text-xs space-y-2" style="color: var(--secondary-action);">
+        <p><strong style="color:var(--text-color);">Contraindication to EN:</strong> Uncontrolled shock (rising lactate, escalating vasopressors ≥2, MAP &lt;60 despite resuscitation).</p>
+        <p><strong style="color:var(--text-color);">Low-dose EN safe if:</strong> MAP stable on single vasopressor (norepinephrine ≤0.14 mcg/kg/min), resolving lactate, adequate resuscitation.</p>
+        <p><strong style="color:var(--text-color);">Approach:</strong> Trophic feeding (10–20 mL/hr) during acute resuscitation → advance once hemodynamics stabilize (24–48h). Monitor for bowel ischemia (abdominal distension, rising lactate with feeds, bloody stool).</p>
+        <p><strong style="color:var(--text-color);">Protein:</strong> 1.5–2.0 g/kg/day. Do not delay protein delivery.</p>
+       </div>
+      </div><!-- ARDS -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color: var(--primary-action);"><i data-lucide="wind" style="width:16px;height:16px;"></i> ARDS &amp; Mechanical Ventilation</h3>
+       <div class="text-xs space-y-2" style="color: var(--secondary-action);">
+        <p><strong style="color:var(--text-color);">Avoid overfeeding:</strong> Excess calories → ↑ CO₂ production → difficulty weaning. RQ &gt;1.0 indicates overfeeding.</p>
+        <p><strong style="color:var(--text-color);">Prone positioning:</strong> EN can continue in prone position. Use continuous infusion, post-pyloric preferred. Hold 1–2h before proning if bolus.</p>
+        <p><strong style="color:var(--text-color);">Fluid strategy:</strong> Conservative fluid approach in ARDS. Use calorie-dense (1.5–2.0 kcal/mL) formula to minimize volume.</p>
+        <p><strong style="color:var(--text-color);">ECMO:</strong> EN is safe and preferred on ECMO. Start within 24h. Monitor for gut ischemia.</p>
+       </div>
+      </div><!-- Acute Kidney Injury -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color: var(--primary-action);"><i data-lucide="droplet" style="width:16px;height:16px;"></i> Acute Kidney Injury &amp; CRRT</h3>
+       <div class="text-xs space-y-2" style="color: var(--secondary-action);">
+        <p><strong style="color:var(--text-color);">AKI without RRT:</strong> Protein 0.8–1.0 g/kg/day (do NOT restrict to prevent RRT initiation). Standard EN formula.</p>
+        <p><strong style="color:var(--text-color);">CRRT:</strong> Protein 2.0–2.5 g/kg/day (amino acid losses 10–15g/day via effluent). Full caloric support. Account for citrate calories (~500 kcal/day from regional anticoagulation).</p>
+        <p><strong style="color:var(--text-color);">Electrolytes:</strong> Restrict K, PO₄ only if persistently elevated despite RRT. Use renal-specific formula only if electrolyte derangements unmanageable.</p>
+        <p><strong style="color:var(--text-color);">Fluid:</strong> Volume-dense formulas. Account for CRRT fluid removal in overall fluid balance.</p>
+       </div>
+      </div><!-- Liver Failure -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color: var(--primary-action);"><i data-lucide="heart" style="width:16px;height:16px;"></i> Acute Liver Failure / Cirrhosis</h3>
+       <div class="text-xs space-y-2" style="color: var(--secondary-action);">
+        <p><strong style="color:var(--text-color);">DO NOT restrict protein.</strong> Protein restriction does NOT improve hepatic encephalopathy (Level 1 evidence). Target 1.2–1.5 g/kg/day.</p>
+        <p><strong style="color:var(--text-color);">BCAA-enriched formulas:</strong> Only if documented protein intolerance (rare).</p>
+        <p><strong style="color:var(--text-color);">Energy:</strong> 25–35 kcal/kg dry BW/day. Use dry/ideal weight (ascites distorts actual weight).</p>
+        <p><strong style="color:var(--text-color);">Micronutrients:</strong> Thiamine, folate, zinc supplementation. Reduce manganese and copper in cholestasis.</p>
+        <p><strong style="color:var(--text-color);">Timing:</strong> Late evening snack (50g complex carbs) prevents overnight gluconeogenesis and muscle catabolism.</p>
+       </div>
+      </div><!-- Pancreatitis -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color: var(--primary-action);"><i data-lucide="zap" style="width:16px;height:16px;"></i> Acute Pancreatitis</h3>
+       <div class="text-xs space-y-2" style="color: var(--secondary-action);">
+        <p><strong style="color:var(--text-color);">Mild:</strong> Oral diet as tolerated (low-fat, soft). No need for NPO or "pancreatic rest."</p>
+        <p><strong style="color:var(--text-color);">Severe (necrosis, organ failure):</strong> EN within 24–48h via nasogastric (NG = NJ per meta-analyses). EN ↓ infection, ↓ mortality vs PN.</p>
+        <p><strong style="color:var(--text-color);">Formula:</strong> Polymeric formula is acceptable (no benefit of semi-elemental in RCTs). Start low, advance.</p>
+        <p><strong style="color:var(--text-color);">PN:</strong> Only if EN fails or contraindicated. If &gt;Day 5 without EN achieving &gt;60% target.</p>
+       </div>
+      </div><!-- Burns -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color: var(--primary-action);"><i data-lucide="flame" style="width:16px;height:16px;"></i> Major Burns (&gt;20% TBSA)</h3>
+       <div class="text-xs space-y-2" style="color: var(--secondary-action);">
+        <p><strong style="color:var(--text-color);">Timing:</strong> EN within 4–6 hours of injury (↓ ileus, ↓ hypermetabolism, ↓ bacterial translocation).</p>
+        <p><strong style="color:var(--text-color);">Energy:</strong> Curreri formula: 25 kcal/kg + 40 kcal/%TBSA burn. Or Toronto formula (IC preferred). REE ↑ 40–100%.</p>
+        <p><strong style="color:var(--text-color);">Protein:</strong> 1.5–2.5 g/kg/day. High-protein formula essential.</p>
+        <p><strong style="color:var(--text-color);">Micronutrients:</strong> Vitamin C 1000mg/day, Zinc 220mg/day, Copper, Selenium. Oxandrolone in select patients. Glutamine debated.</p>
+        <p><strong style="color:var(--text-color);">Glycemic control:</strong> Insulin for target &lt;150 mg/dL. Burns cause severe insulin resistance.</p>
+       </div>
+      </div><!-- Post-operative -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: var(--surface-color); border: 1px solid rgba(100,116,139,0.3);">
+       <h3 class="font-semibold text-sm mb-3 flex items-center gap-2" style="color: var(--primary-action);"><i data-lucide="scissors" style="width:16px;height:16px;"></i> Post-Surgical / ERAS Protocol</h3>
+       <div class="text-xs space-y-2" style="color: var(--secondary-action);">
+        <p><strong style="color:var(--text-color);">ERAS (Enhanced Recovery After Surgery):</strong> Clear fluids up to 2h pre-op. Carbohydrate loading 12h and 2h pre-op. Oral intake Day 0 post-op.</p>
+        <p><strong style="color:var(--text-color);">GI surgery:</strong> Early EN (Day 1) via jejunostomy below anastomosis. No evidence to wait for bowel sounds, flatus, or BM.</p>
+        <p><strong style="color:var(--text-color);">Open abdomen:</strong> EN safe and recommended. Protein losses via peritoneal fluid (additional 2g/L measured).</p>
+        <p><strong style="color:var(--text-color);">Immunonutrition:</strong> Arginine + omega-3 + nucleotides perioperatively for major GI cancer surgery (↓ infections by 30%).</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="border-t py-4 mt-8" style="border-color: rgba(100,116,139,0.3);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+     <p class="text-xs" style="color: var(--secondary-action);">Clinical Reference Only • Based on ASPEN, ESPEN, SCCM, A.S.P.E.N. Pediatric 2017 Guidelines • Not a substitute for clinical judgment</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+  // Tab switching
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(el => {
+      el.classList.remove('tab-active');
+      el.style.color = 'var(--secondary-action)';
+    });
+    const content = document.getElementById('content-' + tabName);
+    const tab = document.getElementById('tab-' + tabName);
+    if (content) { content.classList.remove('hidden'); content.classList.add('fade-in'); }
+    if (tab) { tab.classList.add('tab-active'); tab.style.color = ''; }
+  }
+
+  // Element SDK
+  const defaultConfig = {
+    main_title: 'ICU Nutrition Guide',
+    subtitle: 'Evidence-Based Critical Care Nutrition Protocol',
+    background_color: '#0f172a',
+    surface_color: '#1e293b',
+    text_color: '#e2e8f0',
+    primary_action: '#38bdf8',
+    secondary_action: '#64748b',
+    font_family: 'DM Sans',
+    font_size: 14
+  };
+
+  function applyConfig(config) {
+    document.documentElement.style.setProperty('--bg-color', config.background_color || defaultConfig.background_color);
+    document.documentElement.style.setProperty('--surface-color', config.surface_color || defaultConfig.surface_color);
+    document.documentElement.style.setProperty('--text-color', config.text_color || defaultConfig.text_color);
+    document.documentElement.style.setProperty('--primary-action', config.primary_action || defaultConfig.primary_action);
+    document.documentElement.style.setProperty('--secondary-action', config.secondary_action || defaultConfig.secondary_action);
+
+    const app = document.getElementById('app');
+    app.style.color = config.text_color || defaultConfig.text_color;
+    app.style.background = config.background_color || defaultConfig.background_color;
+
+    const title = document.getElementById('main-title');
+    const subtitle = document.getElementById('subtitle');
+    if (title) title.textContent = config.main_title || defaultConfig.main_title;
+    if (subtitle) subtitle.textContent = config.subtitle || defaultConfig.subtitle;
+
+    const font = config.font_family || defaultConfig.font_family;
+    const baseSize = config.font_size || defaultConfig.font_size;
+    document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+    if (title) { title.style.fontFamily = `Playfair Display, ${font}, serif`; title.style.fontSize = `${baseSize * 1.6}px`; }
+    if (subtitle) subtitle.style.fontSize = `${baseSize * 0.85}px`;
+  }
+
+  applyConfig(defaultConfig);
+  lucide.createIcons();
+</script>
+</body>
+</html>
