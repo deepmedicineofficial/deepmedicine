@@ -1,0 +1,728 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Endocrinology | Hormonal Disorders & Metabolic Diseases | Deep Medicine</title> <meta name="description" content="Comprehensive endocrinology guide covering hormonal disorders, diabetes, thyroid disease, adrenal and pituitary disorders with clinical management."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/endocrinology"> <!-- Open Graph --> <meta property="og:title" content="Endocrinology | Deep Medicine"> <meta property="og:description" content="Hormonal and metabolic disorders with clinical diagnosis and management strategies."> <meta property="og:image" content="https://deepmedicine.in/images/endocrinology.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+    .font-heading { font-family: 'Playfair Display', serif; }
+    .font-body { font-family: 'Source Sans 3', sans-serif; }
+    .disease-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .disease-card:hover { transform: translateY(-2px); }
+    .tab-active { border-bottom: 3px solid; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .sidebar-link { transition: all 0.2s; }
+    .sidebar-link:hover, .sidebar-link.active { padding-left: 1rem; }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    .content-section { scroll-margin-top: 1rem; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body">
+  <div id="app" class="h-full w-full overflow-auto" style="background: #0f1729;"><!-- Header -->
+   <header class="sticky top-0 z-50" style="background: linear-gradient(135deg, #1a2744 0%, #0f1729 100%); border-bottom: 1px solid #2a3a5c;">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+     <div>
+      <h1 id="main-title" class="font-heading text-xl md:text-2xl" style="color: #e8c87a;">Endocrinology Clinical Reference</h1>
+      <p id="subtitle" class="text-sm mt-1" style="color: #8a9bc0;">Comprehensive Disease Guide — MBBS/MD Level</p>
+     </div><button id="mobile-menu-btn" class="md:hidden p-2 rounded" style="color: #e8c87a;"> <i data-lucide="menu" style="width:24px;height:24px;"></i> </button>
+    </div><!-- Category Tabs -->
+    <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
+     <div id="category-tabs" class="flex gap-1 pb-1 text-sm font-medium whitespace-nowrap">
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 p-4"><!-- Sidebar -->
+    <aside id="sidebar" class="hidden md:block w-full md:w-64 flex-shrink-0 rounded-lg p-4" style="background: #1a2744; border: 1px solid #2a3a5c;">
+     <div class="mb-3">
+      <div class="relative"><input id="search-input" type="text" placeholder="Search diseases..." class="w-full px-3 py-2 rounded text-sm" style="background: #0f1729; border: 1px solid #2a3a5c; color: #d1dce8;">
+      </div>
+     </div>
+     <nav id="sidebar-nav" class="space-y-1 text-sm max-h-96 overflow-y-auto" style="color: #8a9bc0;">
+     </nav>
+    </aside><!-- Content Area -->
+    <main id="content-area" class="flex-1 min-w-0 fade-in">
+    </main>
+   </div>
+  </div>
+  <script>
+    // ===== CLINICAL DATA =====
+    const endoData = {
+      categories: [
+        { id: 'thyroid', name: 'Thyroid', icon: 'activity' },
+        { id: 'diabetes', name: 'Diabetes Mellitus', icon: 'droplet' },
+        { id: 'adrenal', name: 'Adrenal', icon: 'zap' },
+        { id: 'pituitary', name: 'Pituitary', icon: 'brain' },
+        { id: 'parathyroid', name: 'Calcium & Parathyroid', icon: 'bone' },
+        { id: 'gonadal', name: 'Gonadal', icon: 'heart' },
+        { id: 'metabolic', name: 'Metabolic & Obesity', icon: 'scale' }
+      ],
+      diseases: [
+        // THYROID
+        {
+          id: 'hypothyroidism', category: 'thyroid', name: 'Hypothyroidism',
+          definition: 'Clinical syndrome resulting from deficiency of thyroid hormones (T3, T4), leading to generalized slowing of metabolic processes.',
+          epidemiology: 'Prevalence 4-10% in adults; F:M ratio 5-8:1. Subclinical hypothyroidism in 4-15% of population. Increases with age.',
+          etiology: [
+            { type: 'Primary (95%)', causes: 'Hashimoto thyroiditis (most common in iodine-sufficient areas), Iodine deficiency (most common worldwide), Post-radioiodine/surgery, Drugs (lithium, amiodarone, checkpoint inhibitors), Congenital (thyroid dysgenesis/dyshormonogenesis)' },
+            { type: 'Secondary/Central', causes: 'Pituitary adenoma, Sheehan syndrome, cranial irradiation, infiltrative diseases' },
+            { type: 'Tertiary', causes: 'Hypothalamic dysfunction — rare' }
+          ],
+          pathophysiology: 'Decreased T3/T4 → loss of negative feedback → elevated TSH (primary). Reduced basal metabolic rate affecting virtually every organ system. Decreased Na+/K+-ATPase activity, reduced thermogenesis, glycosaminoglycan deposition in tissues (myxedema).',
+          clinical_features: {
+            general: 'Fatigue, cold intolerance, weight gain, constipation, dry skin, hair loss, hoarse voice, menorrhagia',
+            cardiovascular: 'Bradycardia, diastolic hypertension, pericardial effusion, elevated LDL',
+            neurological: 'Delayed relaxation of DTRs, carpal tunnel syndrome, cognitive slowing, depression',
+            severe: 'Myxedema coma — hypothermia, altered mental status, hypoventilation, hyponatremia (medical emergency, mortality 25-60%)'
+          },
+          investigations: {
+            first_line: 'TSH (elevated in primary), Free T4 (low)',
+            confirmatory: 'Anti-TPO antibodies (Hashimoto), Anti-thyroglobulin antibodies',
+            additional: 'CBC (macrocytic anemia), Lipid profile (↑LDL), CK (↑), Na+ (↓ in severe), ECG (low voltage, bradycardia)'
+          },
+          diagnosis: 'Primary: ↑TSH + ↓FT4. Subclinical: ↑TSH + normal FT4. Central: ↓/normal TSH + ↓FT4.',
+          treatment: {
+            pharmacological: 'Levothyroxine (LT4) — Start 1.6 μg/kg/day in young healthy adults. Start 25-50 μg/day in elderly/cardiac disease. Take on empty stomach, 30-60 min before breakfast.',
+            monitoring: 'TSH every 6-8 weeks until stable, then annually. Target TSH 0.5-2.5 mU/L (age-adjusted).',
+            special: 'Myxedema coma: IV levothyroxine 200-400 μg loading + IV hydrocortisone 100mg q8h (before thyroxine to prevent adrenal crisis) + supportive care.'
+          },
+          complications: 'Myxedema coma, cardiovascular disease, infertility, congenital hypothyroidism in offspring if untreated in pregnancy.',
+          prognosis: 'Excellent with appropriate replacement. Lifelong therapy required in most cases.'
+        },
+        {
+          id: 'hyperthyroidism', category: 'thyroid', name: 'Hyperthyroidism / Thyrotoxicosis',
+          definition: 'Thyrotoxicosis: clinical state from excess thyroid hormones. Hyperthyroidism: thyrotoxicosis due to increased thyroid hormone synthesis and secretion.',
+          epidemiology: 'Prevalence ~1.3%. F:M = 5-10:1. Graves disease accounts for 60-80% of cases.',
+          etiology: [
+            { type: 'Graves Disease', causes: 'Autoimmune — TSH receptor stimulating antibodies (TRAb/TSI). Associated with HLA-DR3. Triggered by stress, smoking, postpartum.' },
+            { type: 'Toxic Multinodular Goiter', causes: 'Autonomous nodules — common in elderly and iodine-deficient areas' },
+            { type: 'Toxic Adenoma', causes: 'Single autonomous adenoma (Plummer disease)' },
+            { type: 'Other', causes: 'Subacute thyroiditis (de Quervain), Amiodarone, Iodine excess (Jod-Basedow), Factitious, hCG-mediated (gestational), TSH-secreting pituitary adenoma' }
+          ],
+          pathophysiology: 'Excess T3/T4 → increased β-adrenergic receptor sensitivity, increased BMR, enhanced catabolism, increased oxygen consumption. In Graves: IgG antibodies stimulate TSH receptor → diffuse thyroid hyperplasia and excess hormone production.',
+          clinical_features: {
+            general: 'Weight loss despite increased appetite, heat intolerance, sweating, tremor, anxiety, palpitations, diarrhea, oligomenorrhea',
+            cardiovascular: 'Tachycardia/AF (10-25%), wide pulse pressure, high-output cardiac failure, systolic hypertension',
+            eyes_graves: 'Graves ophthalmopathy (25-50%): proptosis, lid lag, lid retraction, periorbital edema, diplopia, optic neuropathy. Due to GAG deposition and lymphocytic infiltration of extraocular muscles.',
+            skin_graves: 'Pretibial myxedema (1-4%), thyroid acropachy (rare)',
+            severe: 'Thyroid storm — fever >40°C, tachycardia >140, altered mental status, multi-organ dysfunction (mortality 10-30%)'
+          },
+          investigations: {
+            first_line: 'TSH (suppressed <0.1), Free T4 (elevated), Free T3 (elevated — may be T3 thyrotoxicosis)',
+            confirmatory: 'TRAb/TSI (Graves), Radioiodine uptake and scan (diffuse=Graves, hot nodule=toxic adenoma, low uptake=thyroiditis/factitious)',
+            additional: 'CBC (neutropenia from ATDs), LFTs (baseline before ATDs), ESR (↑ in subacute thyroiditis)'
+          },
+          diagnosis: 'Suppressed TSH + elevated FT4/FT3. Differentiate cause by antibodies and RAIU scan.',
+          treatment: {
+            pharmacological: 'Antithyroid drugs (ATDs): Carbimazole/Methimazole 15-40mg/day or PTU 100-150mg TDS (PTU preferred in 1st trimester and thyroid storm). β-blockers (propranolol 40-80mg TDS) for symptom control.',
+            definitive: 'Radioactive Iodine (RAI) I-131 — CI in pregnancy, Graves ophthalmopathy. Surgery (total/subtotal thyroidectomy) — for large goiter, suspicious nodules, patient preference.',
+            monitoring: 'TFTs every 4-6 weeks on ATDs. ATD trial 12-18 months (30-50% remission in Graves). Watch for agranulocytosis (0.2-0.5%) — urgent FBC if sore throat/fever.',
+            storm: 'Thyroid storm: PTU loading → iodine (1hr after PTU) + propranolol + hydrocortisone 100mg q8h + cooling + supportive ICU care. Burch-Wartofsky score >45 = storm.'
+          },
+          complications: 'Atrial fibrillation, heart failure, osteoporosis, thyroid storm, Graves ophthalmopathy progression.',
+          prognosis: 'Good with treatment. Graves: 30-50% remission after 12-18 months ATDs. Most eventually need definitive therapy.'
+        },
+        {
+          id: 'thyroid_nodules', category: 'thyroid', name: 'Thyroid Nodules & Cancer',
+          definition: 'Discrete lesions within the thyroid gland. ~5-7% are malignant. Thyroid cancers: papillary (80%), follicular (10%), medullary (5-10%), anaplastic (1-2%).',
+          epidemiology: 'Palpable nodules 4-7% of population; incidental on US 20-67%. Thyroid cancer incidence rising. F:M 3:1. Peak 30-50 years.',
+          etiology: [
+            { type: 'Benign', causes: 'Colloid nodule, follicular adenoma, thyroid cyst, Hashimoto nodule' },
+            { type: 'Malignant — Papillary', causes: 'Radiation exposure (childhood), RET/PTC rearrangements, BRAF V600E mutation. Lymphatic spread. Excellent prognosis.' },
+            { type: 'Malignant — Follicular', causes: 'Iodine deficiency, RAS mutations, PAX8-PPARγ. Hematogenous spread (bone, lung). Cannot diagnose on FNA (need capsular invasion on histology).' },
+            { type: 'Malignant — Medullary', causes: 'Parafollicular C-cells. Sporadic (75%) vs familial/MEN2 (25%). RET proto-oncogene mutations. Calcitonin marker.' },
+            { type: 'Malignant — Anaplastic', causes: 'Dedifferentiation from papillary/follicular. Elderly. Rapidly fatal (median survival 5 months).' }
+          ],
+          pathophysiology: 'Papillary: Orphan Annie eye nuclei, psammoma bodies, papillary architecture. Follicular: encapsulated with capsular/vascular invasion. Medullary: amyloid deposition (calcitonin-derived), associated CEA elevation.',
+          clinical_features: {
+            presentation: 'Usually asymptomatic nodule. Suspicious features: rapid growth, fixation, lymphadenopathy, hoarseness (RLN involvement), dysphagia, stridor.',
+            red_flags: 'Male sex, age <20 or >60, h/o radiation, family history thyroid cancer/MEN2, firm/fixed/irregular nodule, ipsilateral lymphadenopathy'
+          },
+          investigations: {
+            first_line: 'TSH (if suppressed → likely benign hot nodule), Thyroid ultrasound (TIRADS classification)',
+            key: 'Fine Needle Aspiration Cytology (FNAC) — Bethesda classification I-VI. Required for nodules ≥1cm with suspicious US features.',
+            additional: 'Calcitonin (if medullary suspected/MEN2), CEA, Genetic testing (RET for medullary), Molecular markers (Bethesda III/IV — Afirma, ThyroSeq)'
+          },
+          diagnosis: 'US-guided FNAC with Bethesda reporting. TIRADS scoring for FNA decision. Staging: TNM (AJCC 8th edition). Age <55 only Stage I or II.',
+          treatment: {
+            surgery: 'Total thyroidectomy for cancers >4cm, bilateral, extrathyroidal extension, distant metastases. Lobectomy for low-risk <4cm unilateral papillary/follicular.',
+            adjuvant: 'Radioactive iodine ablation (RAI) for intermediate/high-risk DTC. TSH suppression with levothyroxine (target TSH <0.1 in high-risk, 0.1-0.5 intermediate, 0.5-2.0 low-risk).',
+            medullary: 'Total thyroidectomy + central neck dissection. No RAI (C-cells don\'t take up iodine). TKIs (vandetanib, cabozantinib) for advanced.',
+            anaplastic: 'Multimodal — surgery if resectable + external beam radiation + chemotherapy (doxorubicin, paclitaxel). Immunotherapy/TKIs emerging. Palliative in most.'
+          },
+          complications: 'Surgical: hypoparathyroidism (transient 20-30%, permanent 1-2%), RLN injury (1-2%). Radioiodine: sialadenitis, secondary malignancy (rare).',
+          prognosis: 'Papillary: >98% 10-year survival. Follicular: 85-90% 10-year. Medullary: 75-85% 10-year. Anaplastic: median survival 5 months.'
+        },
+        // DIABETES
+        {
+          id: 'dm_type1', category: 'diabetes', name: 'Type 1 Diabetes Mellitus',
+          definition: 'Autoimmune destruction of pancreatic β-cells leading to absolute insulin deficiency. Accounts for 5-10% of all diabetes.',
+          epidemiology: 'Incidence increasing 3-4% annually worldwide. Peak onset 4-6 years and 10-14 years. Finland/Sardinia highest rates. HLA-DR3/DR4 associated.',
+          etiology: [
+            { type: 'Type 1A (Autoimmune, 90%)', causes: 'Genetic susceptibility (HLA-DR3, DR4, DQ2, DQ8) + environmental trigger (viral — Coxsackie B, rubella, enterovirus; early cow\'s milk, vitamin D deficiency) → T-cell mediated β-cell destruction' },
+            { type: 'Type 1B (Idiopathic)', causes: 'No evidence of autoimmunity. More common in African/Asian descent.' },
+            { type: 'LADA', causes: 'Latent Autoimmune Diabetes in Adults — slower onset, antibody-positive, initially non-insulin requiring. Age >30.' }
+          ],
+          pathophysiology: 'Genetic predisposition → environmental trigger → autoimmune insulitis → progressive β-cell destruction → >80-90% β-cells destroyed → absolute insulin deficiency → hyperglycemia + uninhibited lipolysis → ketoacidosis. Honeymoon period (residual β-cell function) may last months.',
+          clinical_features: {
+            classic: 'Polyuria, polydipsia, polyphagia with weight loss (4 Ps). Acute onset over days-weeks.',
+            dka_presentation: '25-30% present with DKA: Kussmaul breathing, fruity breath (acetone), dehydration, abdominal pain, altered consciousness',
+            associated: 'Other autoimmune diseases: thyroid (20-30%), celiac (5-10%), Addison, vitiligo, pernicious anemia'
+          },
+          investigations: {
+            diagnosis: 'Random glucose ≥200 + symptoms, OR Fasting glucose ≥126 mg/dL (7.0 mmol/L), OR 2hr OGTT ≥200 mg/dL (11.1 mmol/L), OR HbA1c ≥6.5% (48 mmol/mol)',
+            autoantibodies: 'GAD65 (most sensitive in adults), IA-2, ZnT8, IAA (most useful in children <5). ≥1 positive confirms autoimmune etiology.',
+            additional: 'C-peptide (low/undetectable — distinguishes from T2DM), Fasting insulin (low), ABG/ketones if DKA suspected'
+          },
+          diagnosis: 'Hyperglycemia + autoantibodies + low C-peptide. Often clinical — young, lean, acute onset, ketosis-prone.',
+          treatment: {
+            insulin: 'Basal-bolus regimen: Basal (glargine/detemir/degludec) + Rapid-acting (lispro/aspart/glulisine) before meals. OR Continuous Subcutaneous Insulin Infusion (CSII/pump). Total daily dose ~0.5-1.0 U/kg. Basal:Bolus ≈ 50:50.',
+            monitoring: 'SMBG 4-10x/day or CGM (continuous glucose monitoring). Target: pre-meal 80-130, post-meal <180 mg/dL. HbA1c target <7% (individualized).',
+            technology: 'CGM (Dexcom, Libre), Insulin pumps, Closed-loop/hybrid systems (artificial pancreas), Smart pens',
+            dka_management: 'IV fluids (0.9% NaCl → 0.45% when Na normalizes), IV insulin infusion 0.1 U/kg/hr, K+ replacement (if <5.3), monitor q1-2h. Transition to SC insulin when gap closes, eating, ketones clearing.',
+            adjuncts: 'Carbohydrate counting, Insulin:carb ratios, Correction factor, Sick day rules education'
+          },
+          complications: 'DKA (most dangerous acute), hypoglycemia, microvascular (retinopathy, nephropathy, neuropathy), macrovascular (CVD — less prominent than T2DM), lipohypertrophy.',
+          prognosis: 'Life expectancy reduced by 11-13 years vs general population (improving with modern management). HbA1c <7% dramatically reduces microvascular complications (DCCT/EDIC trial).'
+        },
+        {
+          id: 'dm_type2', category: 'diabetes', name: 'Type 2 Diabetes Mellitus',
+          definition: 'Progressive disorder characterized by insulin resistance and relative insulin deficiency. Accounts for 90-95% of all diabetes.',
+          epidemiology: '~537 million adults globally (2021). Prevalence 10-15% in most developed nations. Strong association with obesity (80-90% are overweight/obese). Increasing in youth.',
+          etiology: [
+            { type: 'Genetic', causes: 'Polygenic (>400 risk loci). TCF7L2 strongest single gene. Concordance in monozygotic twins 60-90%. Strong family history.' },
+            { type: 'Environmental/Lifestyle', causes: 'Obesity (especially visceral/central), physical inactivity, Western diet, aging, sleep deprivation' },
+            { type: 'Other Risk Factors', causes: 'Gestational diabetes history, PCOS, South Asian/African/Hispanic ethnicity, low birth weight, medications (steroids, statins, antipsychotics)' }
+          ],
+          pathophysiology: 'The "Ominous Octet" (DeFronzo): 1) ↓Insulin secretion (β-cell failure), 2) ↑Glucagon (α-cell dysfunction), 3) ↑Hepatic glucose production, 4) ↑Lipolysis, 5) ↓Incretin effect, 6) ↑Renal glucose reabsorption, 7) Neurotransmitter dysfunction, 8) Muscle insulin resistance. Progressive β-cell decline (~4% per year).',
+          clinical_features: {
+            presentation: 'Often asymptomatic for years. Screening-detected. Polyuria, polydipsia, fatigue, blurred vision, recurrent infections (candida), slow wound healing.',
+            metabolic_syndrome: 'Central obesity + ≥2 of: ↑TG, ↓HDL, hypertension, ↑fasting glucose (IDF criteria). Insulin resistance syndrome.',
+            complications_at_dx: '20-30% have microvascular complications at diagnosis due to delayed detection. Acanthosis nigricans (insulin resistance marker).'
+          },
+          investigations: {
+            diagnosis: 'Same criteria as T1DM: FPG ≥126, 2hr OGTT ≥200, HbA1c ≥6.5%, or random glucose ≥200 + symptoms. Requires 2 abnormal tests if asymptomatic.',
+            baseline: 'HbA1c, fasting lipids, renal function (eGFR, uACR), LFTs, fundoscopy, foot examination, BP, BMI/waist circumference',
+            screening: 'All adults ≥35 (ADA 2024), or earlier if overweight + risk factors. Repeat every 3 years if normal.'
+          },
+          diagnosis: 'Clinical context (age, obesity, family history, no ketosis) + hyperglycemia criteria. C-peptide normal/elevated. Antibodies negative.',
+          treatment: {
+            lifestyle: 'First-line always: 5-10% weight loss, 150 min/week moderate exercise, Mediterranean/DASH diet, smoking cessation. Can reduce HbA1c by 1-2%.',
+            pharmacological: 'Step 1: Metformin (unless eGFR <30 or CI). Step 2 (based on comorbidities): ASCVD/high risk → GLP-1 RA or SGLT2i. Heart failure/CKD → SGLT2i. Obesity → GLP-1 RA. If HbA1c still above target → add agents from different classes.',
+            drug_classes: 'Metformin (↓hepatic glucose output), SGLT2i (empagliflozin, dapagliflozin — glycosuria, CV/renal benefits), GLP-1 RA (semaglutide, liraglutide — incretin, weight loss, CV benefit), DPP-4i (sitagliptin — weight neutral), TZDs (pioglitazone — insulin sensitizer), SU (glimepiride — secretagogue, hypoglycemia risk), Insulin (when above agents fail or HbA1c >10%)',
+            targets: 'HbA1c <7% (general), <6.5% (newly diagnosed, no complications), <8% (elderly, frail, limited life expectancy). Individualize.',
+            monitoring: 'HbA1c every 3 months until stable, then 6-monthly. Annual: eyes, feet, kidneys, lipids, BP.'
+          },
+          complications: 'Microvascular: diabetic retinopathy, nephropathy (leading cause ESRD), neuropathy (peripheral, autonomic). Macrovascular: MI (2-4x risk), stroke, PVD. Others: diabetic foot (leading cause non-traumatic amputation), infections.',
+          prognosis: 'Reduces life expectancy by 6-7 years. Intensive glycemic + BP + lipid control significantly reduces complications (UKPDS legacy effect). Remission possible with significant weight loss (DiRECT trial — 15kg loss → 86% remission at 1 year).'
+        },
+        {
+          id: 'dka', category: 'diabetes', name: 'Diabetic Ketoacidosis (DKA)',
+          definition: 'Life-threatening acute metabolic complication characterized by hyperglycemia (>250 mg/dL), metabolic acidosis (pH <7.3, HCO3 <18), and ketonemia/ketonuria.',
+          epidemiology: 'Annual incidence 4-8/1000 in T1DM. Mortality 2-5% (developed countries), up to 30% in developing. Leading cause of death in T1DM <24 years.',
+          etiology: [
+            { type: 'Precipitants (5 Is)', causes: 'Infection (most common 30-40%), Insulin omission/non-compliance, Infarction (MI, stroke), Initial presentation of T1DM, Iatrogenic (steroids, SGLT2i)' },
+            { type: 'Euglycemic DKA', causes: 'SGLT2 inhibitors, pregnancy, starvation, alcohol — glucose may be <250 mg/dL' }
+          ],
+          pathophysiology: 'Absolute/relative insulin deficiency + counter-regulatory hormone excess (glucagon, cortisol, catecholamines, GH) → hyperglycemia (↑gluconeogenesis, ↓glucose uptake) + osmotic diuresis → dehydration. Uninhibited lipolysis → FFA → hepatic ketogenesis (β-hydroxybutyrate, acetoacetate) → metabolic acidosis (high anion gap).',
+          clinical_features: {
+            symptoms: 'Polyuria, polydipsia, nausea/vomiting, abdominal pain (can mimic acute abdomen), weakness, altered consciousness',
+            signs: 'Kussmaul breathing (deep, rapid), fruity breath (acetone), dehydration (tachycardia, hypotension, dry mucous membranes, reduced skin turgor), hypothermia (vasodilation)',
+            severity: 'Mild: pH 7.25-7.30, HCO3 15-18, Alert. Moderate: pH 7.0-7.24, HCO3 10-14, Drowsy. Severe: pH <7.0, HCO3 <10, Stupor/coma.'
+          },
+          investigations: {
+            immediate: 'Blood glucose, VBG/ABG (pH, HCO3, pCO2), Serum ketones (β-hydroxybutyrate >3 mmol/L), U&E (K+ critical — may be normal/high despite total body depletion), Anion gap = Na - (Cl + HCO3) — elevated >12',
+            additional: 'FBC (↑WCC from stress — not necessarily infection), Serum osmolality, Lactate, Blood cultures, CXR, Urinalysis, ECG, Lipase if abdominal pain'
+          },
+          diagnosis: 'Triad: Glucose >250 (or known DM) + pH <7.3 or HCO3 <18 + Ketonemia (β-OHB >3) or significant ketonuria (≥2+).',
+          treatment: {
+            fluids: '1st hour: 1-1.5L 0.9% NaCl. Then 250-500 mL/hr adjusted to hemodynamics. Switch to 0.45% NaCl when corrected Na normal/high. Add 5% dextrose when glucose <250 (to continue insulin for ketone clearance).',
+            insulin: 'Fixed-rate IV insulin infusion 0.1 U/kg/hr. Do NOT bolus (risk of cerebral edema in young). Target glucose fall 50-75 mg/dL/hr. Continue until ketones <0.6, pH >7.3, HCO3 >18.',
+            potassium: 'If K+ <3.3: hold insulin, replace K+ aggressively (40 mEq/hr). If K+ 3.3-5.3: add 20-40 mEq to each liter of fluid. If K+ >5.3: hold K+, recheck in 2 hours. Monitor q1-2h.',
+            bicarbonate: 'Only if pH <6.9 (100 mEq NaHCO3 in 400mL over 2hrs). Controversial — may worsen intracellular acidosis and hypokalemia.',
+            monitoring: 'Hourly: glucose, ketones, GCS. 2-hourly: VBG, K+, Na+. Fluid balance chart. Resolution criteria: glucose <200 + 2 of: pH >7.3, HCO3 >15, ketones <0.6.',
+            transition: 'Overlap SC insulin 1-2 hours before stopping IV infusion. Resume usual regimen or start basal-bolus. Identify and treat precipitant.'
+          },
+          complications: 'Cerebral edema (children — 0.5-1%, mortality 25%), hypokalemia (most dangerous), hypoglycemia, ARDS, DVT, aspiration, rhabdomyolysis.',
+          prognosis: 'Mortality 2-5% with appropriate management. Recurrence rate 20-30% within 1 year. Education on sick-day rules critical for prevention.'
+        },
+        // ADRENAL
+        {
+          id: 'cushing', category: 'adrenal', name: "Cushing's Syndrome",
+          definition: 'Clinical manifestations of chronic glucocorticoid excess from any cause. Cushing disease specifically refers to ACTH-secreting pituitary adenoma.',
+          epidemiology: 'Incidence 2-3/million/year (endogenous). F:M 3:1. Exogenous (iatrogenic) is far more common. Pituitary adenoma (Cushing disease) accounts for 70% of endogenous ACTH-dependent cases.',
+          etiology: [
+            { type: 'Exogenous (Most common)', causes: 'Chronic glucocorticoid therapy (oral, inhaled high-dose, topical, intra-articular)' },
+            { type: 'ACTH-dependent (80%)', causes: "Cushing disease (pituitary corticotroph adenoma 70%), Ectopic ACTH (small cell lung cancer, carcinoid, medullary thyroid cancer, pheo 10-15%), Ectopic CRH (rare)" },
+            { type: 'ACTH-independent (20%)', causes: 'Adrenal adenoma (10%), Adrenal carcinoma (5%), Bilateral macronodular adrenal hyperplasia (BMAH), Primary pigmented nodular adrenocortical disease (PPNAD/Carney complex)' }
+          ],
+          pathophysiology: 'Chronic cortisol excess → protein catabolism (proximal myopathy, thin skin, striae), gluconeogenesis/insulin resistance (diabetes), fat redistribution (central obesity, moon face, buffalo hump), mineralocorticoid effect (hypertension, hypokalemia), immunosuppression, bone resorption (osteoporosis), psychiatric effects.',
+          clinical_features: {
+            classic: 'Central obesity, moon face, buffalo hump, purple striae (>1cm wide), proximal myopathy, thin skin, easy bruising',
+            metabolic: 'Hypertension (80%), glucose intolerance/DM (30-40%), dyslipidemia, hypokalemia (especially ectopic ACTH)',
+            other: 'Hirsutism, acne, menstrual irregularity, erectile dysfunction, osteoporosis/fractures, psychiatric (depression 50-80%, psychosis), poor wound healing, recurrent infections',
+            discriminatory: 'Features that best discriminate Cushing from simple obesity: proximal myopathy, purple striae >1cm, easy bruising, facial plethora, unexplained osteoporosis in young'
+          },
+          investigations: {
+            screening: '24hr urinary free cortisol (UFC) ≥3x ULN, Late-night salivary cortisol (≥2 elevated), 1mg overnight dexamethasone suppression test (DST) — cortisol >1.8 μg/dL = positive. Need ≥2 positive tests.',
+            localization: 'ACTH level: suppressed = adrenal source; normal/elevated = pituitary or ectopic. High-dose DST (8mg) — >50% suppression suggests pituitary. CRH stimulation test. Bilateral inferior petrosal sinus sampling (BIPSS) — gold standard for distinguishing pituitary vs ectopic.',
+            imaging: 'Pituitary MRI (adenoma — may be <6mm), Adrenal CT (adenoma/carcinoma), CT chest/abdomen if ectopic ACTH suspected. 68Ga-DOTATATE PET for occult ectopic.'
+          },
+          diagnosis: 'Step 1: Confirm hypercortisolism (2+ screening tests). Step 2: ACTH-dependent vs independent. Step 3: Localize source (BIPSS if ACTH-dependent and MRI equivocal).',
+          treatment: {
+            surgical: "Cushing disease: Transsphenoidal surgery (TSS) — 65-90% remission for microadenomas. Adrenal adenoma: Laparoscopic adrenalectomy (cure rate >95%). Ectopic: Resect primary tumor if identified.",
+            medical: 'Steroidogenesis inhibitors: Ketoconazole, Metyrapone, Osilodrostat (11β-hydroxylase). Pituitary-directed: Pasireotide, Cabergoline. Glucocorticoid receptor antagonist: Mifepristone. Used pre-operatively or when surgery fails/contraindicated.',
+            radiation: 'Pituitary radiotherapy (stereotactic/conventional) if TSS fails. Effect delayed 3-5 years. Risk of hypopituitarism.',
+            perioperative: 'Post-curative surgery: patients need glucocorticoid replacement (HPA axis suppressed) — taper over 6-18 months. Monitor for adrenal insufficiency.'
+          },
+          complications: 'Cardiovascular disease (leading cause of death), VTE (4-10x risk), opportunistic infections, osteoporotic fractures, avascular necrosis, psychiatric morbidity.',
+          prognosis: 'Untreated: 5-year mortality 50%. Post-successful surgery: mortality returns toward normal over years. Recurrence after TSS 15-25% at 10 years.'
+        },
+        {
+          id: 'addison', category: 'adrenal', name: "Addison's Disease / Primary Adrenal Insufficiency",
+          definition: 'Destruction or dysfunction of the adrenal cortex leading to deficiency of cortisol, aldosterone, and adrenal androgens. Requires >90% gland destruction for clinical manifestation.',
+          epidemiology: 'Prevalence 100-140/million. F:M 2.6:1. Autoimmune adrenalitis most common in developed countries (80-90%). TB most common worldwide.',
+          etiology: [
+            { type: 'Autoimmune (80-90%)', causes: 'Autoimmune adrenalitis — 21-hydroxylase antibodies. Isolated or part of APS Type 1 (Addison + hypoparathyroidism + mucocutaneous candidiasis) or APS Type 2 (Addison + autoimmune thyroid + T1DM)' },
+            { type: 'Infectious', causes: 'Tuberculosis (most common worldwide), HIV/CMV, fungal (histoplasmosis, coccidioidomycosis)' },
+            { type: 'Other', causes: 'Bilateral adrenalectomy, adrenal hemorrhage (Waterhouse-Friderichsen — meningococcemia), metastases (lung, breast), infiltrative (amyloid, sarcoid, hemochromatosis), drugs (ketoconazole, etomidate, mitotane), congenital adrenal hyperplasia, adrenoleukodystrophy (X-linked, young males)' }
+          ],
+          pathophysiology: 'Cortisol deficiency → loss of negative feedback → ↑ACTH + ↑MSH (same precursor POMC) → hyperpigmentation. Cortisol deficiency → impaired gluconeogenesis, hypotension, inability to mount stress response. Aldosterone deficiency → Na+ wasting, K+ retention, hypovolemia, metabolic acidosis. Adrenal androgen deficiency → ↓libido, ↓axillary/pubic hair in women.',
+          clinical_features: {
+            chronic: 'Fatigue (100%), hyperpigmentation (92% — palmar creases, buccal mucosa, scars, nipples, pressure areas), weight loss, postural hypotension, salt craving, GI symptoms (nausea, abdominal pain)',
+            acute_crisis: 'Adrenal crisis — circulatory shock refractory to fluids/vasopressors, severe hypotension, altered consciousness, hypoglycemia, fever. Triggered by infection, surgery, trauma, or abrupt steroid withdrawal. MEDICAL EMERGENCY.',
+            biochemical: 'Hyponatremia (90%), hyperkalemia (65%), hypoglycemia, hypercalcemia (6%), eosinophilia, lymphocytosis'
+          },
+          investigations: {
+            first_line: 'Morning cortisol (9am): <100 nmol/L (3 μg/dL) highly suggestive; >500 nmol/L (18 μg/dL) excludes. Short Synacthen (ACTH stimulation) test: 250μg IM/IV — cortisol at 30min <500 nmol/L (18 μg/dL) = adrenal insufficiency.',
+            confirmatory: 'ACTH level: markedly elevated in primary (often >2x ULN). 21-hydroxylase antibodies (autoimmune). Renin/aldosterone: ↑Renin, ↓Aldosterone.',
+            additional: 'U&E (↓Na+, ↑K+), glucose (↓), CT adrenals (calcification=TB/hemorrhage, bilateral enlargement=infiltrative/metastatic, small=autoimmune/atrophy), Very long chain fatty acids (adrenoleukodystrophy in young males), Chest X-ray/TB workup'
+          },
+          diagnosis: 'Failed short Synacthen test + elevated ACTH = primary adrenal insufficiency. Identify cause with antibodies/imaging.',
+          treatment: {
+            replacement: 'Hydrocortisone 15-25mg/day in 2-3 divided doses (10mg AM, 5mg noon, 5mg late afternoon — mimics circadian rhythm). OR Prednisolone 3-5mg/day. Fludrocortisone 50-200μg/day (mineralocorticoid replacement — titrate to renin). DHEA 25-50mg/day in women (controversial).',
+            sick_day_rules: 'Double/triple hydrocortisone dose during intercurrent illness. IM hydrocortisone 100mg if vomiting/unable to take oral. Emergency injection kit training for patient/family.',
+            crisis_management: 'Adrenal crisis: IV hydrocortisone 100mg stat, then 50mg q6-8h. Aggressive IV 0.9% NaCl (1L in 1st hour). Identify/treat precipitant. No need for fludrocortisone acutely (high-dose hydrocortisone has mineralocorticoid activity).',
+            monitoring: 'Clinical assessment (energy, weight, BP, postural). Renin for fludrocortisone dosing. Avoid over-replacement (Cushingoid features, osteoporosis). Steroid emergency card/MedicAlert.'
+          },
+          complications: 'Adrenal crisis (5-10% per patient-year), osteoporosis (from over-replacement), cardiovascular mortality (2x), reduced quality of life.',
+          prognosis: 'Normal life expectancy with adequate replacement and education. However, studies show 2x cardiovascular mortality and reduced QoL vs general population. Adrenal crisis mortality 6% per episode.'
+        },
+        {
+          id: 'pheo', category: 'adrenal', name: 'Pheochromocytoma & Paraganglioma',
+          definition: 'Catecholamine-secreting tumors arising from chromaffin cells. Pheochromocytoma: adrenal medulla. Paraganglioma: extra-adrenal sympathetic/parasympathetic ganglia. Rule of 10s is outdated — genetic in 30-40%.',
+          epidemiology: 'Prevalence 0.1-0.6% of hypertensive patients. Mean age at diagnosis 40-50. Annual incidence 2-8/million.',
+          etiology: [
+            { type: 'Genetic (30-40%)', causes: 'SDH mutations (SDHB — malignant risk, SDHD — head/neck paraganglioma), VHL, RET (MEN2), NF1, MAX, TMEM127, FH. Screen ALL patients.' },
+            { type: 'Sporadic', causes: '60-70%. Somatic mutations in same genes.' }
+          ],
+          pathophysiology: 'Excess catecholamine secretion (norepinephrine predominantly in pheo, epinephrine if adrenal) → sustained/paroxysmal α1/β1-adrenergic stimulation → hypertension, tachycardia, vasoconstriction, hyperglycemia, lipolysis. Can produce dopamine (malignant), metanephrines, chromogranin A.',
+          clinical_features: {
+            classic_triad: 'Episodic headache + sweating + palpitations (with or without hypertension). Paroxysms last minutes to hours.',
+            hypertension: 'Sustained (50%) or paroxysmal (30%) or normotensive (20%). Resistant/labile hypertension. Orthostatic hypotension (volume depletion paradox).',
+            other: 'Anxiety/panic, pallor (NOT flushing), tremor, weight loss, hyperglycemia, cardiomyopathy (catecholamine-induced/Takotsubo), pulmonary edema',
+            triggers: 'Anesthesia, surgery, tyramine-rich foods, medications (metoclopramide, TCAs, β-blockers alone), bladder distension (bladder paraganglioma), exercise'
+          },
+          investigations: {
+            biochemical: 'Plasma-free metanephrines (sensitivity 96-99%, specificity 85-89%) — FIRST LINE. OR 24hr urine fractionated metanephrines + catecholamines. >2-4x ULN virtually diagnostic.',
+            imaging: 'CT adrenals (after biochemical confirmation — >90% sensitivity). MRI (T2 bright "light bulb sign"). Functional: 123I-MIBG scan, 68Ga-DOTATATE PET/CT (superior for metastatic/paraganglioma), 18F-FDG PET.',
+            additional: 'Genetic testing (all patients), Chromogranin A, Screening for associated tumors in syndromes (MEN2: medullary thyroid, hyperparathyroidism; VHL: renal, CNS hemangioblastoma)'
+          },
+          diagnosis: 'Elevated plasma metanephrines (>2x ULN) + adrenal/extra-adrenal mass on imaging. Genetic testing to guide management.',
+          treatment: {
+            preoperative: 'α-blockade FIRST: Phenoxybenzamine 10mg BD (titrate to 1mg/kg/day) or doxazosin 2-8mg BD. Start 10-14 days pre-op. Then β-blockade (ONLY after adequate α-blockade — otherwise unopposed α → hypertensive crisis): propranolol or atenolol. Metyrosine if difficult control. Liberal salt and fluids to expand volume.',
+            surgical: 'Laparoscopic adrenalectomy (curative for benign). Open surgery if large (>6cm), invasive, or paraganglioma. Intra-op: phentolamine IV for hypertensive surges, esmolol for tachycardia. Post-op: watch for hypotension/hypoglycemia.',
+            malignant: '10-15% malignant (defined by metastases, not histology). SDHB mutation highest risk. CVD (cyclophosphamide, vincristine, dacarbazine), 131I-MIBG therapy, temozolomide, sunitinib. 5-year survival ~50% for malignant.',
+            follow_up: 'Lifelong annual biochemical screening (recurrence/metachronous). Plasma metanephrines. Genetic counseling/family screening.'
+          },
+          complications: 'Hypertensive crisis, stroke, MI, arrhythmias, catecholamine cardiomyopathy, aortic dissection, pulmonary edema, multi-organ failure (pheochromocytoma crisis).',
+          prognosis: '95% cure for benign after surgery. Malignant: 5-year survival 40-60%. Recurrence 5-10% even after apparently curative surgery.'
+        },
+        // PITUITARY
+        {
+          id: 'acromegaly', category: 'pituitary', name: 'Acromegaly',
+          definition: 'Chronic insidious disease caused by excess growth hormone (GH) secretion, almost always from a pituitary somatotroph adenoma. If before epiphyseal closure: gigantism.',
+          epidemiology: 'Prevalence 40-130/million. Annual incidence 3-4/million. Mean age at diagnosis 40-50. Mean delay to diagnosis 7-10 years.',
+          etiology: [
+            { type: 'Pituitary adenoma (>95%)', causes: 'Somatotroph adenoma (most sporadic). Macroadenoma (>1cm) in 70%. Mixed GH/prolactin-secreting (25%).' },
+            { type: 'Familial', causes: 'MEN1 (20% have GH adenoma), Carney complex, Familial isolated pituitary adenoma (FIPA), X-LAG (X-linked acrogigantism — AIP gene)' },
+            { type: 'Extra-pituitary (rare)', causes: 'Ectopic GHRH (carcinoid, pancreatic NET). Ectopic GH (extremely rare).' }
+          ],
+          pathophysiology: 'Excess GH → hepatic IGF-1 production → soft tissue, cartilage, bone growth + metabolic effects (insulin resistance, lipolysis). GH is diabetogenic (counter-regulatory hormone). Effects on virtually every organ: skeletal overgrowth, organomegaly, collagen deposition.',
+          clinical_features: {
+            facial: 'Frontal bossing, prognathism (mandibular overgrowth), macroglossia, tooth spacing, coarse facial features (comparison with old photos diagnostic)',
+            extremities: 'Enlarged hands and feet (ring size increase, shoe size increase), spade-like hands, thickened fingers',
+            systemic: 'Hyperhidrosis, oily skin, skin tags (colonic polyps association), carpal tunnel (50%), arthropathy, sleep apnea (70%), hypertension (35%), cardiomyopathy (biventricular hypertrophy), DM/IGT (50%), goiter',
+            mass_effect: 'Headaches, visual field defects (bitemporal hemianopia — optic chiasm compression), hypopituitarism (compression of normal pituitary)',
+            cancer_risk: 'Increased colorectal polyps and cancer — colonoscopy at diagnosis and surveillance every 3-5 years'
+          },
+          investigations: {
+            screening: 'IGF-1 (age- and sex-matched) — elevated in 97% of acromegalics. Single best screening test.',
+            confirmatory: 'Oral Glucose Tolerance Test (75g): GH nadir should be <1 μg/L (0.4 with ultrasensitive assays). Failure to suppress = acromegaly.',
+            imaging: 'Pituitary MRI with gadolinium — size, invasion (cavernous sinus), chiasm compression.',
+            additional: 'Visual fields (formal perimetry), Pituitary function panel (prolactin, ACTH, TSH, LH/FSH), Echocardiogram, Sleep study, Colonoscopy, Glucose tolerance'
+          },
+          diagnosis: 'Elevated IGF-1 + failure of GH suppression on OGTT + pituitary adenoma on MRI.',
+          treatment: {
+            surgical: 'Transsphenoidal surgery (TSS) — first-line. Microadenoma: 80-90% cure. Macroadenoma: 40-60% cure. Experienced neurosurgeon critical (>50 cases/year).',
+            medical: 'Somatostatin analogues (SSA): Octreotide LAR, Lanreotide — normalize IGF-1 in 55-70%. Dopamine agonist: Cabergoline (effective if modest GH elevation or co-secretion of PRL). GH receptor antagonist: Pegvisomant — normalizes IGF-1 in >90% but doesn\'t shrink tumor.',
+            radiotherapy: 'Stereotactic radiosurgery (Gamma Knife) if surgery + medical therapy fails. Effect over 5-15 years. Risk of hypopituitarism (50-80% at 10 years).',
+            monitoring: 'IGF-1 and GH (target <1 μg/L) every 3-6 months. MRI annually until stable. Comorbidity management: BP, DM, sleep apnea, cardiac.'
+          },
+          complications: 'Cardiovascular disease (leading cause of death — 60%), diabetes, colorectal cancer, vertebral fractures, sleep apnea, arthropathy (irreversible).',
+          prognosis: 'Untreated: 2-3x mortality (mainly cardiovascular). With biochemical control (GH <1, normal IGF-1): mortality normalizes. Musculoskeletal and joint changes often irreversible.'
+        },
+        {
+          id: 'prolactinoma', category: 'pituitary', name: 'Prolactinoma & Hyperprolactinemia',
+          definition: 'Prolactinoma: prolactin-secreting pituitary adenoma — most common functioning pituitary tumor (40%). Hyperprolactinemia: elevated serum prolactin from any cause.',
+          epidemiology: 'Prevalence of hyperprolactinemia in general population ~0.4%. Prolactinomas: microprolactinomas (F>>M), macroprolactinomas (M>F). Peak incidence 20-40 years.',
+          etiology: [
+            { type: 'Prolactinoma', causes: 'Micro (<10mm, 90% in women) or Macro (>10mm, more common in men). Giant prolactinomas >40mm (rare). PRL level correlates with tumor size.' },
+            { type: 'Physiological', causes: 'Pregnancy (10-20x normal), lactation, stress, sleep, nipple stimulation, exercise' },
+            { type: 'Pharmacological (most common cause)', causes: 'Antipsychotics (risperidone worst offender), metoclopramide/domperidone, SSRIs, methyldopa, verapamil, estrogens' },
+            { type: 'Stalk effect', causes: 'Non-functioning pituitary adenoma compressing stalk → loss of dopamine inhibition → mild ↑PRL (<100 μg/L typically). Key differential from prolactinoma.' },
+            { type: 'Other', causes: 'Hypothyroidism (↑TRH stimulates PRL), CKD, cirrhosis, chest wall lesions (herpes zoster), PCOS' }
+          ],
+          pathophysiology: 'Prolactin normally inhibited by hypothalamic dopamine via D2 receptors on lactotrophs. Prolactinoma: autonomous PRL secretion. Effects: suppresses GnRH → hypogonadotropic hypogonadism → amenorrhea, infertility, ↓libido. Galactorrhea (direct mammary effect).',
+          clinical_features: {
+            women: 'Amenorrhea/oligomenorrhea (90%), galactorrhea (50-80%), infertility, ↓libido, vaginal dryness, osteoporosis (estrogen deficiency)',
+            men: 'Erectile dysfunction, ↓libido, infertility (↓sperm), gynecomastia (rare), galactorrhea (rare). Often present late with macroadenoma — headaches, visual field defects.',
+            mass_effect: 'Headaches, bitemporal hemianopia, cranial nerve palsies (cavernous sinus invasion), hypopituitarism'
+          },
+          investigations: {
+            first_line: 'Serum prolactin: Micro <200 μg/L, Macro 200-10,000+. >250 μg/L virtually diagnostic of macroprolactinoma. "Hook effect" — very large tumors may give falsely low PRL on standard assay (request serial dilutions if large mass + modest PRL).',
+            exclude_other: 'TFTs (hypothyroidism), pregnancy test, renal function, medication history, macroprolactin screen (polyethylene glycol precipitation)',
+            imaging: 'Pituitary MRI with gadolinium. Assess size, stalk compression, chiasm involvement, cavernous sinus invasion.',
+            additional: 'Visual fields (if macroadenoma), Pituitary function panel, Bone density (if prolonged hypogonadism)'
+          },
+          diagnosis: 'PRL level correlating with tumor size on MRI + exclusion of other causes. Stalk effect: typically PRL <100 + non-functioning adenoma on MRI.',
+          treatment: {
+            medical: 'Dopamine agonists (DA) — FIRST-LINE for ALL prolactinomas (not surgery): Cabergoline 0.25-1mg twice weekly (superior efficacy, fewer side effects). Bromocriptine 2.5-10mg/day (cheaper, more evidence in pregnancy). Normalizes PRL in 80-90%, shrinks tumor in 80%.',
+            surgical: 'TSS: Only if DA-intolerant, DA-resistant (10-15%), CSF leak from tumor shrinkage, or patient preference (especially microprolactinoma in woman wanting pregnancy). Cure rate: micro 80-90%, macro 30-40%.',
+            monitoring: 'PRL every 3-6 months initially. MRI at 1 year, then annually for macro (less frequently for micro). Trial DA withdrawal after 2+ years of normal PRL + significant tumor shrinkage (30-40% recurrence).',
+            pregnancy: 'Discontinue cabergoline once pregnant (microprolactinoma). Monitor visual fields each trimester for macro. Bromocriptine preferred if DA needed during pregnancy (more safety data).'
+          },
+          complications: 'Osteoporosis (hypogonadism), pituitary apoplexy (acute hemorrhage into tumor — sudden headache, visual loss, meningism — emergency), CSF rhinorrhea (after shrinkage of giant adenoma).',
+          prognosis: 'Excellent with DA therapy. Most achieve biochemical and tumor control. Microprolactinomas in women may resolve spontaneously post-menopause.'
+        },
+        // PARATHYROID/CALCIUM
+        {
+          id: 'hyperparathyroidism', category: 'parathyroid', name: 'Primary Hyperparathyroidism',
+          definition: 'Excessive PTH secretion from one or more parathyroid glands leading to hypercalcemia. Third most common endocrine disorder.',
+          epidemiology: 'Prevalence 1-7/1000. F:M 3:1. Incidence increases with age. Peak 50-60 years. Most common cause of hypercalcemia in outpatients.',
+          etiology: [
+            { type: 'Single adenoma (80-85%)', causes: 'Benign monoclonal neoplasm of one parathyroid gland' },
+            { type: 'Four-gland hyperplasia (10-15%)', causes: 'Often familial — MEN1, MEN2A, familial isolated hyperparathyroidism' },
+            { type: 'Parathyroid carcinoma (<1%)', causes: 'Suspect if markedly elevated calcium (>14 mg/dL) and very high PTH (>5-10x ULN). Palpable neck mass.' },
+            { type: 'Familial', causes: 'MEN1 (3Ps: Parathyroid, Pituitary, Pancreas), MEN2A (Medullary thyroid, Pheo, Parathyroid), FHH (familial hypocalciuric hypercalcemia — benign, no treatment needed)' }
+          ],
+          pathophysiology: 'Excess PTH → ↑osteoclastic bone resorption (releases Ca²⁺ + PO₄), ↑renal Ca²⁺ reabsorption, ↑1,25-dihydroxyvitamin D synthesis (↑intestinal Ca absorption), ↑renal PO₄ excretion. Net result: hypercalcemia + hypophosphatemia + hypercalciuria.',
+          clinical_features: {
+            mnemonic: '"Bones, Stones, Moans, Groans, and Psychic Overtones"',
+            bones: 'Osteoporosis (cortical bone — distal 1/3 radius), osteitis fibrosa cystica (severe — brown tumors, subperiosteal resorption, salt-and-pepper skull), fractures',
+            stones: 'Nephrolithiasis (calcium oxalate/phosphate — 15-20%), nephrocalcinosis, renal impairment',
+            moans: 'Abdominal pain, constipation, nausea, peptic ulcers, pancreatitis',
+            groans: 'Fatigue, muscle weakness, polyuria/polydipsia, shortened QTc',
+            psychic: 'Depression, cognitive dysfunction, anxiety, confusion (severe hypercalcemia)',
+            asymptomatic: '80% now diagnosed asymptomatic (incidental hypercalcemia on routine bloods)'
+          },
+          investigations: {
+            biochemistry: 'Serum calcium (↑ or high-normal), PTH (elevated or inappropriately normal — should be suppressed in hypercalcemia), Phosphate (↓ or low-normal), ALP (↑ if bone disease), 25-OH Vitamin D, 24hr urine calcium (↑ — rules out FHH if Ca/Cr clearance ratio >0.02)',
+            localization: 'Sestamibi-SPECT/CT (sensitivity 70-90%), Neck ultrasound, 4D-CT (increasingly used). Localization for surgical planning — NOT for diagnosis.',
+            additional: 'DEXA (osteoporosis screening — especially distal radius), Renal imaging (stones), eGFR, ECG'
+          },
+          diagnosis: 'Hypercalcemia + elevated/inappropriately normal PTH + elevated urine calcium. Exclude FHH (low urine calcium, family history, Ca/Cr ratio <0.01).',
+          treatment: {
+            surgery: 'Parathyroidectomy — ONLY CURE. Indications: Symptomatic (stones, fractures, overt bone disease) OR Asymptomatic with any of: Ca >1.0 mg/dL above ULN, T-score <-2.5, eGFR <60, Age <50, Vertebral fracture, 24hr urine Ca >400mg. Minimally invasive with intra-op PTH monitoring. Cure rate >95%.',
+            medical_observation: 'If not meeting surgical criteria: adequate hydration, avoid thiazides/lithium, moderate calcium intake (1000mg/day), vitamin D repletion (if deficient), annual monitoring (Ca, eGFR, DEXA every 1-2 years).',
+            pharmacological: 'Cinacalcet (calcimimetic — reduces Ca but not PTH effect on bone), Bisphosphonates/Denosumab (if osteoporosis and surgery declined), IV fluids + calcitonin + bisphosphonate (hypercalcemic crisis)'
+          },
+          complications: 'Nephrolithiasis, renal impairment, osteoporotic fractures, cardiovascular disease (controversial), hungry bone syndrome post-surgery (severe hypocalcemia).',
+          prognosis: 'Excellent after successful surgery. Recurrence <5% if sporadic adenoma. Higher in hyperplasia/MEN. Untreated mild disease: stable in many over 10-15 years.'
+        },
+        // GONADAL
+        {
+          id: 'pcos', category: 'gonadal', name: 'Polycystic Ovary Syndrome (PCOS)',
+          definition: 'Heterogeneous endocrine-metabolic disorder characterized by oligo/anovulation, hyperandrogenism, and polycystic ovarian morphology. Most common endocrine disorder in women of reproductive age.',
+          epidemiology: 'Prevalence 8-13% (up to 20% with Rotterdam criteria). Leading cause of anovulatory infertility. Diagnosis often in late teens/20s.',
+          etiology: [
+            { type: 'Genetic', causes: 'Polygenic — >100 susceptibility loci. Family clustering. 40% of sisters affected. Genes involved in steroidogenesis, insulin signaling, inflammation.' },
+            { type: 'Pathogenesis', causes: 'Intrinsic ovarian dysfunction + insulin resistance + neuroendocrine abnormality (↑LH pulse frequency). Likely fetal programming + postnatal amplification by obesity.' }
+          ],
+          pathophysiology: 'Insulin resistance → compensatory hyperinsulinemia → stimulates ovarian theca cell androgen production + reduces hepatic SHBG → ↑free androgens. ↑LH:FSH ratio → arrested follicular development (polycystic morphology) → anovulation. Excess androgens → hirsutism, acne, alopecia. Chronic anovulation → unopposed estrogen → endometrial hyperplasia risk.',
+          clinical_features: {
+            reproductive: 'Oligomenorrhea/amenorrhea (75%), infertility (40% of anovulatory infertility), recurrent miscarriage',
+            hyperandrogenism: 'Hirsutism (Ferriman-Gallwey score ≥4-6 depending on ethnicity), acne (persistent adult), androgenic alopecia (frontotemporal thinning)',
+            metabolic: 'Obesity (50-70%, predominantly central), insulin resistance (50-70%), impaired glucose tolerance/T2DM (30-40% by age 40), dyslipidemia (↑TG, ↓HDL), metabolic syndrome (30-40%)',
+            psychological: 'Depression, anxiety, reduced quality of life, eating disorders, body image issues',
+            other: 'Acanthosis nigricans (insulin resistance), obstructive sleep apnea, NAFLD (non-alcoholic fatty liver disease)'
+          },
+          investigations: {
+            diagnosis: 'Rotterdam criteria (2003) — need 2 of 3: 1) Oligo/anovulation, 2) Clinical/biochemical hyperandrogenism, 3) Polycystic ovaries on ultrasound (≥12 follicles 2-9mm or volume >10mL per ovary). After excluding other causes.',
+            hormonal: 'Total/free testosterone (↑), SHBG (↓), LH:FSH ratio (may be >2:1), DHEA-S, 17-OHP (rule out CAH), TSH, prolactin',
+            metabolic: 'Fasting glucose + insulin (HOMA-IR), HbA1c or 2hr OGTT (screen all), Lipid profile, Liver function',
+            imaging: 'Pelvic ultrasound (transvaginal preferred). Endometrial thickness if prolonged amenorrhea (>12mm → biopsy for hyperplasia).',
+            exclude: '17-OHP (congenital adrenal hyperplasia), cortisol (Cushing), TSH, prolactin, androgen-secreting tumor (if rapid virilization/very high testosterone)'
+          },
+          diagnosis: 'Rotterdam criteria with exclusion of other causes. Now classified into 4 phenotypes: A (full triad — most severe metabolically), B (hyperandrogenism + ovulatory dysfunction), C (hyperandrogenism + PCO morphology), D (ovulatory dysfunction + PCO morphology).',
+          treatment: {
+            lifestyle: 'FIRST-LINE for all: 5-10% weight loss improves all features (restores ovulation in 30-50%). Structured exercise (150 min/week moderate + resistance training). Dietary intervention (Mediterranean/low-GI).',
+            menstrual_regulation: 'Combined OCP (anti-androgenic — cyproterone acetate, drospirenone preferred). Cyclical progestogens if OCP contraindicated. Protects endometrium.',
+            hyperandrogenism: 'OCP + spironolactone 50-200mg/day (anti-androgen — CI in pregnancy), Finasteride (5α-reductase inhibitor), topical eflornithine (facial hirsutism), laser/electrolysis.',
+            infertility: 'Letrozole (aromatase inhibitor) — FIRST-LINE for ovulation induction (superior to clomiphene per NEJM 2014). Clomiphene citrate (second-line). Metformin as adjunct. Gonadotropins (FSH). Laparoscopic ovarian drilling. IVF if above fails.',
+            metabolic: 'Metformin 1500-2000mg/day (insulin sensitization — especially if IGT/high-risk for DM). GLP-1 RA (emerging evidence for weight + metabolic benefits). Statin if dyslipidemic. Screen annually for DM/metabolic syndrome.',
+            new_guidelines: '2023 International PCOS Guidelines emphasize: combined OCP as first-line for menstrual regulation/hyperandrogenism, letrozole for ovulation induction, lifestyle as foundation.'
+          },
+          complications: 'T2DM (5-8x risk), cardiovascular disease (2x risk), endometrial cancer (2.7x), gestational diabetes, pre-eclampsia, infertility, NAFLD, OSA, psychological morbidity.',
+          prognosis: 'Lifelong condition but manageable. Metabolic risks require lifelong surveillance. Reproductive features may improve with age. Hirsutism is chronic. Weight management is key modifiable factor.'
+        },
+        // METABOLIC
+        {
+          id: 'obesity', category: 'metabolic', name: 'Obesity & Metabolic Syndrome',
+          definition: 'Obesity: chronic relapsing disease of excess adiposity (BMI ≥30). Metabolic syndrome: cluster of interconnected metabolic abnormalities increasing cardiovascular and diabetes risk.',
+          epidemiology: 'Global obesity prevalence doubled since 1980. ~650 million adults obese (13% worldwide). US prevalence ~42%. Metabolic syndrome: 25-35% of adults.',
+          etiology: [
+            { type: 'Energy imbalance', causes: 'Caloric excess + reduced expenditure. Ultra-processed foods, sedentary lifestyle, sleep deprivation, psychosocial stress.' },
+            { type: 'Neuroendocrine', causes: 'Leptin resistance, ghrelin dysregulation, hypothalamic inflammation, gut microbiome alterations, adipocyte dysfunction.' },
+            { type: 'Genetic', causes: 'Polygenic (>900 loci, FTO strongest). Monogenic rare: MC4R (most common monogenic — 5%), LEP, LEPR, POMC deficiency.' },
+            { type: 'Secondary', causes: 'Hypothyroidism, Cushing syndrome, PCOS, hypothalamic obesity (craniopharyngioma), medications (antipsychotics, steroids, insulin, sulfonylureas, valproate, gabapentin).' }
+          ],
+          pathophysiology: 'Adipose tissue expansion → adipocyte hypertrophy → hypoxia → chronic low-grade inflammation (↑TNF-α, IL-6, resistin; ↓adiponectin) → insulin resistance → ectopic fat deposition (liver, muscle, visceral, pancreas) → metabolic dysfunction. Visceral adiposity metabolically most harmful.',
+          clinical_features: {
+            classification: 'BMI 25-29.9: Overweight. 30-34.9: Class I. 35-39.9: Class II. ≥40: Class III. Waist circumference: >102cm M / >88cm F (metabolic risk). Consider ethnicity-specific cut-offs.',
+            metabolic_syndrome: 'IDF criteria: Central obesity (waist ≥94cm M/≥80cm F [Europid]) + ≥2 of: TG ≥150, HDL <40 M/<50 F, BP ≥130/85, FPG ≥100 mg/dL or known T2DM',
+            complications_list: 'T2DM, NAFLD/NASH, CVD (MI, stroke), OSA, GERD, OA (weight-bearing joints), cancer (breast, colon, endometrial, kidney, esophageal), infertility/PCOS, depression, venous thromboembolism'
+          },
+          investigations: {
+            assessment: 'BMI, waist circumference, BP, Fasting glucose/HbA1c, Lipid profile, LFTs (NAFLD screening), TSH (exclude hypothyroidism), cortisol if Cushingoid, sleep study if symptomatic',
+            staging: 'Edmonton Obesity Staging System (0-4) — assesses medical, mental, functional impact. Guides treatment intensity.',
+            screening: 'Annual metabolic screening. Fatty liver index/FIB-4 for NAFLD. STOP-Bang for OSA. PHQ-9 for depression.'
+          },
+          diagnosis: 'BMI ≥30 (or ≥27.5 for Asian populations). Metabolic syndrome by IDF/ATP-III criteria. Identify complications and secondary causes.',
+          treatment: {
+            lifestyle: 'Foundation: 500-750 kcal/day deficit (aim 5-10% weight loss). Behavioral therapy (CBT). Exercise 150-300 min/week. Mediterranean/DASH diet. Sleep optimization. Multi-disciplinary team.',
+            pharmacotherapy: 'Indicated if BMI ≥30 (or ≥27 with comorbidity) + failed lifestyle alone. GLP-1 RAs: Semaglutide 2.4mg weekly (STEP trials — 15-17% weight loss), Liraglutide 3.0mg daily (8%). Tirzepatide (GIP/GLP-1 dual — 20-22% weight loss, SURMOUNT). Orlistat (modest, GI side effects). Naltrexone/bupropion (5-8%). Phentermine (short-term).',
+            surgery: 'Bariatric/metabolic surgery: BMI ≥40 or ≥35 with comorbidities (some guidelines now ≥30 with poorly controlled T2DM). Roux-en-Y gastric bypass (25-35% total weight loss), Sleeve gastrectomy (most common, 20-30%), Adjustable gastric band (less effective). T2DM remission 40-80%. Reduces mortality 30-40%.',
+            metabolic_syndrome: 'Treat individual components: Statins (dyslipidemia), ACEi/ARB (hypertension), Metformin (pre-diabetes/DM). Address root cause (obesity/insulin resistance).'
+          },
+          complications: 'All-cause mortality increases with BMI >30. Greatest impact: T2DM (7-12x risk), cardiovascular disease, certain cancers. Obesity paradox in established HF/CKD.',
+          prognosis: '5-10% weight loss significantly improves all metabolic parameters. Long-term weight maintenance challenging (metabolic adaptation, hormonal changes). Bariatric surgery provides most durable results. GLP-1 RAs represent paradigm shift. Obesity increasingly recognized as chronic disease requiring long-term treatment.'
+        }
+      ]
+    };
+
+    // ===== APP STATE =====
+    let currentCategory = 'thyroid';
+    let currentDisease = null;
+    let allDiseases = endoData.diseases;
+
+    // ===== DEFAULT CONFIG =====
+    const defaultConfig = {
+      main_title: 'Endocrinology Clinical Reference',
+      subtitle: 'Comprehensive Disease Guide — MBBS/MD Level',
+      background_color: '#0f1729',
+      surface_color: '#1a2744',
+      text_color: '#d1dce8',
+      primary_color: '#e8c87a',
+      secondary_color: '#8a9bc0',
+      font_family: 'Source Sans 3',
+      font_size: 15
+    };
+
+    // ===== RENDER FUNCTIONS =====
+    function renderCategoryTabs() {
+      const container = document.getElementById('category-tabs');
+      container.innerHTML = endoData.categories.map(cat => `
+        <button onclick="selectCategory('${cat.id}')" class="px-3 py-2 rounded-t transition-all ${currentCategory === cat.id ? 'tab-active' : 'opacity-60 hover:opacity-100'}" style="color: ${currentCategory === cat.id ? '#e8c87a' : '#8a9bc0'}; border-color: #e8c87a;">
+          ${cat.name}
+        </button>
+      `).join('');
+    }
+
+    function renderSidebar() {
+      const nav = document.getElementById('sidebar-nav');
+      const diseases = allDiseases.filter(d => d.category === currentCategory);
+      nav.innerHTML = diseases.map(d => `
+        <a href="#" onclick="event.preventDefault(); selectDisease('${d.id}')" class="sidebar-link block py-2 px-2 rounded text-sm ${currentDisease && currentDisease.id === d.id ? 'active' : ''}" style="color: ${currentDisease && currentDisease.id === d.id ? '#e8c87a' : '#8a9bc0'}; background: ${currentDisease && currentDisease.id === d.id ? '#0f172966' : 'transparent'};">
+          ${d.name}
+        </a>
+      `).join('');
+    }
+
+    function renderContent() {
+      const area = document.getElementById('content-area');
+      if (!currentDisease) {
+        const diseases = allDiseases.filter(d => d.category === currentCategory);
+        area.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-in">
+            ${diseases.map(d => `
+              <div onclick="selectDisease('${d.id}')" class="disease-card p-5 rounded-lg cursor-pointer" style="background: #1a2744; border: 1px solid #2a3a5c;">
+                <h3 class="font-heading text-lg mb-2 section-title" style="color: #e8c87a;">${d.name}</h3>
+                <p class="text-sm muted-text line-clamp-3" style="color: #8a9bc0;">${d.definition}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        return;
+      }
+
+      const d = currentDisease;
+      area.innerHTML = `
+        <div class="fade-in space-y-4">
+          <button onclick="currentDisease=null; render();" class="flex items-center gap-2 text-sm mb-2 hover:underline" style="color: #8a9bc0;">
+            <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back to list
+          </button>
+          <div class="rounded-lg p-5 md:p-7" style="background: #1a2744; border: 1px solid #2a3a5c;">
+            <h2 class="font-heading text-xl md:text-2xl mb-1 section-title" style="color: #e8c87a;">${d.name}</h2>
+            <p class="body-text mb-4" style="color: #d1dce8;">${d.definition}</p>
+
+            ${renderSection('Epidemiology', d.epidemiology)}
+            ${renderEtiology(d.etiology)}
+            ${renderSection('Pathophysiology', d.pathophysiology)}
+            ${renderClinicalFeatures(d.clinical_features)}
+            ${renderInvestigations(d.investigations)}
+            ${renderSection('Diagnosis', d.diagnosis)}
+            ${renderTreatment(d.treatment)}
+            ${renderSection('Complications', d.complications)}
+            ${renderSection('Prognosis', d.prognosis)}
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function renderSection(title, content) {
+      if (!content) return '';
+      return `
+        <details open class="content-section mb-3">
+          <summary class="flex items-center gap-2 font-semibold text-sm uppercase tracking-wide mb-2 select-none" style="color: #e8c87a;">
+            <i data-lucide="chevron-down" style="width:14px;height:14px;"></i> ${title}
+          </summary>
+          <p class="body-text text-sm leading-relaxed pl-5" style="color: #d1dce8;">${content}</p>
+        </details>
+      `;
+    }
+
+    function renderEtiology(etiology) {
+      if (!etiology || !etiology.length) return '';
+      return `
+        <details open class="content-section mb-3">
+          <summary class="flex items-center gap-2 font-semibold text-sm uppercase tracking-wide mb-2 select-none" style="color: #e8c87a;">
+            <i data-lucide="chevron-down" style="width:14px;height:14px;"></i> Etiology
+          </summary>
+          <div class="pl-5 space-y-2">
+            ${etiology.map(e => `
+              <div class="rounded p-3" style="background: #0f172966;">
+                <span class="font-semibold text-sm" style="color: #e8c87a;">${e.type}:</span>
+                <span class="text-sm body-text" style="color: #d1dce8;"> ${e.causes}</span>
+              </div>
+            `).join('')}
+          </div>
+        </details>
+      `;
+    }
+
+    function renderClinicalFeatures(features) {
+      if (!features) return '';
+      return `
+        <details open class="content-section mb-3">
+          <summary class="flex items-center gap-2 font-semibold text-sm uppercase tracking-wide mb-2 select-none" style="color: #e8c87a;">
+            <i data-lucide="chevron-down" style="width:14px;height:14px;"></i> Clinical Features
+          </summary>
+          <div class="pl-5 space-y-2">
+            ${Object.entries(features).map(([key, val]) => `
+              <div class="rounded p-3" style="background: #0f172966;">
+                <span class="font-semibold text-sm capitalize" style="color: #e8c87a;">${key.replace(/_/g, ' ')}:</span>
+                <span class="text-sm body-text" style="color: #d1dce8;"> ${val}</span>
+              </div>
+            `).join('')}
+          </div>
+        </details>
+      `;
+    }
+
+    function renderInvestigations(inv) {
+      if (!inv) return '';
+      return `
+        <details open class="content-section mb-3">
+          <summary class="flex items-center gap-2 font-semibold text-sm uppercase tracking-wide mb-2 select-none" style="color: #e8c87a;">
+            <i data-lucide="chevron-down" style="width:14px;height:14px;"></i> Investigations
+          </summary>
+          <div class="pl-5 space-y-2">
+            ${Object.entries(inv).map(([key, val]) => `
+              <div class="rounded p-3" style="background: #0f172966;">
+                <span class="font-semibold text-sm capitalize" style="color: #e8c87a;">${key.replace(/_/g, ' ')}:</span>
+                <span class="text-sm body-text" style="color: #d1dce8;"> ${val}</span>
+              </div>
+            `).join('')}
+          </div>
+        </details>
+      `;
+    }
+
+    function renderTreatment(tx) {
+      if (!tx) return '';
+      return `
+        <details open class="content-section mb-3">
+          <summary class="flex items-center gap-2 font-semibold text-sm uppercase tracking-wide mb-2 select-none" style="color: #e8c87a;">
+            <i data-lucide="chevron-down" style="width:14px;height:14px;"></i> Treatment
+          </summary>
+          <div class="pl-5 space-y-2">
+            ${Object.entries(tx).map(([key, val]) => `
+              <div class="rounded p-3" style="background: #0f172966;">
+                <span class="font-semibold text-sm capitalize" style="color: #e8c87a;">${key.replace(/_/g, ' ')}:</span>
+                <span class="text-sm body-text" style="color: #d1dce8;"> ${val}</span>
+              </div>
+            `).join('')}
+          </div>
+        </details>
+      `;
+    }
+
+    function render() {
+      renderCategoryTabs();
+      renderSidebar();
+      renderContent();
+      lucide.createIcons();
+    }
+
+    // ===== INTERACTIONS =====
+    window.selectCategory = function(catId) {
+      currentCategory = catId;
+      currentDisease = null;
+      render();
+    };
+
+    window.selectDisease = function(diseaseId) {
+      currentDisease = allDiseases.find(d => d.id === diseaseId);
+      render();
+      document.getElementById('content-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // Search
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      const q = e.target.value.toLowerCase();
+      const nav = document.getElementById('sidebar-nav');
+      const filtered = allDiseases.filter(d => d.name.toLowerCase().includes(q) || d.definition.toLowerCase().includes(q));
+      if (q.length > 0) {
+        nav.innerHTML = filtered.map(d => `
+          <a href="#" onclick="event.preventDefault(); selectCategory('${d.category}'); selectDisease('${d.id}')" class="sidebar-link block py-2 px-2 rounded text-sm" style="color: #8a9bc0;">
+            ${d.name} <span class="text-xs opacity-50">(${d.category})</span>
+          </a>
+        `).join('') || '<p class="text-xs px-2" style="color:#8a9bc0;">No results</p>';
+      } else {
+        renderSidebar();
+      }
+    });
+
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('hidden');
+      sidebar.classList.toggle('block');
+    });
+
+    // Init
+    render();
+  </script>
+ </body>
+</html>
