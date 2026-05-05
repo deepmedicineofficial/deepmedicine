@@ -1,0 +1,1598 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Case Discussion | Clinical Reasoning & Analysis | Deep Medicine</title> <meta name="description" content="Learn clinical case discussion with structured reasoning, differential diagnosis, and step-by-step analysis for real-world medical decision making."> <link rel="canonical" href="https://deepmedicine.in/learning/study/case-discussion"> <!-- Open Graph --> <meta property="og:title" content="Case Discussion | Deep Medicine"> <meta property="og:description" content="Structured clinical case discussions with diagnostic reasoning and management strategies."> <meta property="og:image" content="https://deepmedicine.in/images/case-discussion.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+
+.app-root {
+  height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+.heading-font { font-family: 'Playfair Display', Georgia, serif; }
+
+.system-card {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.system-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -12px rgba(0,0,0,0.25);
+}
+
+.case-panel {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-btn { transition: all 0.2s ease; }
+.tab-btn.active { border-bottom: 3px solid; }
+
+.reveal-btn { transition: all 0.25s ease; }
+.reveal-btn:hover { filter: brightness(1.1); }
+
+.fade-in { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.hero-pattern {
+  background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.3); border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="app-root"></div>
+  <script>
+const defaultConfig = {
+  main_title: "Clinical Case Discussion Hub" ,
+  subtitle_text: "MBBS / MD — Case-Based Learning",
+  background_color: "#0f172a",
+  surface_color: "#1e293b",
+  text_color: "#e2e8f0",
+  primary_action: "#6d28d9",
+  secondary_action: "#38bdf8",
+  font_family: "Source Sans 3",
+  font_size: 16
+};
+
+const systems = [
+  {
+    id: "cardiology", name: "Cardiology", icon: "heart", emoji: "❤️",
+    desc: "Heart & Circulatory System",
+    cases: [
+      {
+        title: "Acute ST-Elevation MI in a 55-year-old Male",
+        presentation: "A 55-year-old male smoker with a history of hypertension and type 2 diabetes presents to the ER with severe, crushing retrosternal chest pain radiating to the left arm and jaw for 45 minutes. He is diaphoretic, anxious, and nauseated. BP: 90/60 mmHg, HR: 110/min, SpO₂: 94%.",
+        history: "PMH: HTN (10 yrs), T2DM (8 yrs), dyslipidemia. Medications: Amlodipine 5mg, Metformin 1g BD. Family Hx: Father died of MI at age 52. Social: 20 pack-year smoker, occasional alcohol.",
+        examination: "General: Diaphoretic, pale, distressed. CVS: S1 S2 heard, S4 gallop present, no murmurs. JVP not elevated. Lungs: Bilateral basal fine crepitations (Killip Class II). Abdomen: Soft, non-tender. Periphery: Cool extremities, CRT > 3 sec.",
+        investigations: "ECG: ST elevation in leads II, III, aVF (Inferior STEMI) with reciprocal ST depression in I, aVL. Troponin I: 15.8 ng/mL (markedly elevated). CBC: WBC 12,400. RBS: 220 mg/dL. Creatinine: 1.1 mg/dL. Chest X-ray: Mild pulmonary congestion. Echo: Inferior wall hypokinesia, EF 40%.",
+        diagnosis: "Acute Inferior ST-Elevation Myocardial Infarction (STEMI) with Killip Class II heart failure, likely due to RCA occlusion.",
+        management: "IMMEDIATE: MONA protocol — Morphine 2-4mg IV, Oxygen if SpO₂ <94%, Nitroglycerin SL (avoid if BP <90), Aspirin 325mg chewed STAT. REPERFUSION: Primary PCI within 90 minutes (Door-to-Balloon). If PCI unavailable, Fibrinolysis with Tenecteplase within 30 min. ADJUNCTIVE: Dual antiplatelet (Aspirin + Ticagrelor/Clopidogrel), Heparin infusion, Statin (Atorvastatin 80mg), Beta-blocker (once hemodynamically stable), ACE inhibitor (Ramipril). MONITORING: Continuous telemetry, serial troponins, repeat ECG at 60-90 min. SECONDARY PREVENTION: Smoking cessation, diabetes optimization, cardiac rehabilitation, lifestyle modification.",
+        discussion: "Key teaching points: 1) Time is muscle — every 30-minute delay reduces survival. 2) Inferior STEMI should prompt evaluation for right ventricular involvement (right-sided ECG leads). 3) Avoid nitrates and diuretics in RV infarction. 4) Killip classification guides prognosis: Class I (no HF) to Class IV (cardiogenic shock). 5) TIMI and GRACE scores aid risk stratification."
+      },
+{
+title: "ST-Elevation Myocardial Infarction (Anterior STEMI)",
+presentation: "A 58-year-old male presents with severe central chest pain for 2 hours, radiating to left arm and jaw, associated with sweating and vomiting. HR: 110/min, BP: 90/60 mmHg.",
+history: "Diabetic, hypertensive, smoker (30 pack-years).",
+examination: "Diaphoresis, S4 gallop, basal crepitations.",
+investigations: "ECG: ST elevation in V1–V4. Troponin I elevated. Echo: Anterior wall hypokinesia, EF 35%.",
+diagnosis: "Acute anterior wall STEMI (LAD occlusion).",
+management: "Immediate PCI (preferred) or thrombolysis (tenecteplase), dual antiplatelets (aspirin + P2Y12 inhibitor), heparin, statins, beta-blocker (if stable).",
+discussion: "Time = muscle. Door-to-balloon <90 min. Anterior MI → high mortality."
+},
+
+{
+title: "NSTEMI / Unstable Angina",
+presentation: "A 62-year-old male with chest pain at rest for 30 minutes, relieved partially by rest.",
+history: "Known CAD, dyslipidemia.",
+examination: "Normal exam or mild tachycardia.",
+investigations: "ECG: ST depression in V4–V6. Troponin mildly elevated.",
+diagnosis: "NSTEMI.",
+management: "MONA + anticoagulation (heparin), early invasive strategy (angiography).",
+discussion: "No ST elevation but myocardial injury present."
+},
+
+{
+title: "Atrial Fibrillation with RVR",
+presentation: "A 70-year-old female presents with palpitations and dizziness. HR: 150/min, irregular.",
+history: "Hypertension, mitral stenosis.",
+examination: "Irregularly irregular pulse, no distinct P waves.",
+investigations: "ECG: Absent P waves, irregular RR intervals.",
+diagnosis: "Atrial fibrillation with rapid ventricular response.",
+management: "Rate control (beta-blocker/diltiazem), anticoagulation (CHA₂DS₂-VASc), rhythm control if needed.",
+discussion: "Risk of stroke → anticoagulation mandatory."
+},
+
+{
+title: "Complete Heart Block",
+presentation: "A 65-year-old male presents with syncope (Stokes-Adams attack). HR: 35/min.",
+history: "Ischemic heart disease.",
+examination: "Bradycardia, cannon A waves.",
+investigations: "ECG: AV dissociation, independent P and QRS.",
+diagnosis: "Third-degree AV block.",
+management: "Temporary pacing → permanent pacemaker.",
+discussion: "AV conduction failure → life-threatening bradycardia."
+},
+
+{
+title: "Acute Pericarditis",
+presentation: "A 30-year-old male presents with sharp chest pain relieved by sitting forward.",
+history: "Recent viral illness.",
+examination: "Pericardial friction rub.",
+investigations: "ECG: Diffuse ST elevation + PR depression.",
+diagnosis: "Acute pericarditis.",
+management: "NSAIDs + colchicine.",
+discussion: "Positional chest pain is key differentiator."
+},
+
+{
+title: "Cardiac Tamponade",
+presentation: "A 45-year-old female presents with dyspnea and hypotension.",
+history: "Known malignancy.",
+examination: "Beck’s triad: hypotension, JVD, muffled heart sounds.",
+investigations: "Echo: Pericardial effusion with RV collapse.",
+diagnosis: "Cardiac tamponade.",
+management: "Urgent pericardiocentesis.",
+discussion: "Medical emergency."
+},
+
+{
+title: "Hypertrophic Cardiomyopathy",
+presentation: "A 22-year-old athlete presents with syncope during exercise.",
+history: "Family history of sudden cardiac death.",
+examination: "Harsh systolic murmur ↑ with Valsalva.",
+investigations: "Echo: Asymmetric septal hypertrophy.",
+diagnosis: "HOCM.",
+management: "Beta-blockers, avoid strenuous exercise, ICD if high risk.",
+discussion: "Most common cause of SCD in young athletes."
+},
+
+{
+title: "Dilated Cardiomyopathy",
+presentation: "A 50-year-old male with progressive dyspnea and fatigue.",
+history: "Alcohol use.",
+examination: "S3 gallop, cardiomegaly.",
+investigations: "Echo: Dilated ventricles, EF <40%.",
+diagnosis: "Dilated cardiomyopathy.",
+management: "ACE inhibitors, beta-blockers, diuretics.",
+discussion: "Leads to systolic heart failure."
+},
+
+{
+title: "Infective Endocarditis",
+presentation: "A 48-year-old IV drug user with fever and murmur.",
+history: "IV drug abuse.",
+examination: "Janeway lesions, Osler nodes.",
+investigations: "Blood cultures positive, echo vegetations.",
+diagnosis: "Infective endocarditis.",
+management: "IV antibiotics (vancomycin).",
+discussion: "Use Duke criteria."
+},
+
+{
+title: "Aortic Dissection",
+presentation: "A 60-year-old male with sudden tearing chest pain radiating to back.",
+history: "Hypertension.",
+examination: "Pulse deficit, BP difference in arms.",
+investigations: "CT angiography: Dissection flap.",
+diagnosis: "Aortic dissection (Type A).",
+management: "Emergency surgery (Type A), IV beta-blockers.",
+discussion: "Pain + pulse deficit = classic clue."
+},
+    ]
+  },
+  {
+    id: "pulmonology", name: "Pulmonology", icon: "wind", emoji: "🫁",
+    desc: "Respiratory System",
+    cases: [
+      {
+        title: "Community-Acquired Pneumonia with ARDS",
+        presentation: "A 62-year-old male presents with high-grade fever (103°F), productive cough with rust-colored sputum, severe dyspnea, and right-sided pleuritic chest pain for 3 days. He is tachypneic (RR: 32/min), SpO₂: 82% on room air, BP: 100/65 mmHg, HR: 120/min.",
+        history: "PMH: COPD (GOLD Stage II), chronic alcoholism. Medications: Salbutamol inhaler PRN. No recent travel. No TB contacts. Immunization: Not up to date for pneumococcal vaccine.",
+        examination: "General: Toxic, using accessory muscles. Chest: Reduced chest expansion right side, dull percussion note right lower zone, bronchial breathing with coarse crepitations right mid and lower zones. Left lung: Scattered rhonchi. CVS: Tachycardia, no murmurs.",
+        investigations: "Chest X-ray: Dense right lower lobe consolidation with air bronchograms; bilateral patchy infiltrates. ABG: pH 7.28, PaO₂ 52 mmHg, PaCO₂ 48 mmHg, HCO₃ 20 (mixed acidosis). PaO₂/FiO₂ ratio: 120 (severe ARDS). CBC: WBC 22,000 with left shift. Procalcitonin: 8.5 ng/mL. Blood culture: Pending. Sputum: Gram-positive diplococci (Streptococcus pneumoniae). CRP: 280 mg/L.",
+        diagnosis: "Severe Community-Acquired Pneumonia (CAP) due to Streptococcus pneumoniae complicated by Acute Respiratory Distress Syndrome (ARDS) — Berlin criteria met (PaO₂/FiO₂ < 150).",
+        management: "RESPIRATORY SUPPORT: Immediate intubation and mechanical ventilation with lung-protective strategy — Tidal Volume 6 mL/kg IBW, Plateau Pressure <30 cmH₂O, PEEP titration per ARDSNet protocol. Prone positioning for 16+ hrs/day. ANTIBIOTICS: IV Ceftriaxone 2g OD + IV Azithromycin 500mg OD (escalate to Piperacillin-Tazobactam if no improvement). SUPPORTIVE: Conservative fluid management, vasopressors (Norepinephrine) if MAP <65, DVT prophylaxis, stress ulcer prophylaxis, glucose control. MONITORING: Serial ABGs, daily CXR, procalcitonin trends.",
+        discussion: "Key points: 1) CURB-65 score guides disposition — this patient scores 4 (ICU admission). 2) ARDS is diagnosed by Berlin criteria: acute onset, bilateral opacities, PaO₂/FiO₂ ratio. 3) Low tidal volume ventilation reduces mortality by 22% (ARDSNet trial). 4) Prone positioning improves V/Q mismatch. 5) De-escalation guided by culture sensitivity."
+      },
+
+{
+title: "Acute Severe Asthma (Status Asthmaticus)",
+presentation: "A 26-year-old female presents with severe breathlessness for 6 hours, unable to speak full sentences. History of wheezing since childhood. RR: 34/min, HR: 128/min, SpO₂: 88% on room air.",
+history: "Known asthma, poor inhaler compliance, recent viral URI trigger.",
+examination: "Accessory muscle use, diffuse bilateral wheeze, silent chest areas (ominous).",
+investigations: "ABG: Initially respiratory alkalosis → later hypercapnia (PaCO₂ rising). Peak flow <50% predicted.",
+diagnosis: "Acute severe asthma progressing to life-threatening asthma.",
+management: "Oxygen, nebulized salbutamol + ipratropium, IV steroids, MgSO₄ IV, consider intubation if fatigue.",
+discussion: "Silent chest + rising CO₂ = impending respiratory failure."
+},
+
+{
+title: "Acute Exacerbation of COPD",
+presentation: "A 65-year-old male smoker presents with worsening dyspnea, cough, and purulent sputum for 3 days. RR: 30/min, SpO₂: 85%.",
+history: "Chronic smoker (40 pack-years), known COPD.",
+examination: "Barrel chest, decreased breath sounds, wheeze.",
+investigations: "ABG: Respiratory acidosis with metabolic compensation. CXR: Hyperinflation.",
+diagnosis: "Acute exacerbation of COPD (likely infective).",
+management: "Controlled O₂ (target 88–92%), bronchodilators, steroids, antibiotics, NIV (BiPAP).",
+discussion: "Avoid high O₂ → risk of CO₂ retention."
+},
+
+{
+title: "Pulmonary Embolism",
+presentation: "A 40-year-old female presents with sudden dyspnea and pleuritic chest pain. HR: 120/min, BP: 90/60 mmHg.",
+history: "Recent surgery, prolonged immobilization.",
+examination: "Tachypnea, clear lungs.",
+investigations: "D-dimer elevated, CT pulmonary angiography: Filling defect.",
+diagnosis: "Massive pulmonary embolism.",
+management: "Thrombolysis (alteplase), anticoagulation.",
+discussion: "Sudden dyspnea + risk factors = PE until proven otherwise."
+},
+
+{
+title: "Community-Acquired Pneumonia",
+presentation: "A 50-year-old male with fever, productive cough, pleuritic chest pain.",
+history: "Diabetic.",
+examination: "Bronchial breath sounds, crackles.",
+investigations: "CXR: Lobar consolidation. WBC elevated.",
+diagnosis: "Lobar pneumonia (likely Streptococcus pneumoniae).",
+management: "IV antibiotics (ceftriaxone + azithromycin).",
+discussion: "CURB-65 score guides admission."
+},
+
+{
+title: "Pulmonary Tuberculosis",
+presentation: "A 32-year-old male with chronic cough, hemoptysis, weight loss.",
+history: "Close TB contact.",
+examination: "Cachexia, crepitations upper lobe.",
+investigations: "Sputum AFB positive, GeneXpert positive.",
+diagnosis: "Pulmonary TB.",
+management: "ATT (HRZE regimen).",
+discussion: "Upper lobe predilection due to high oxygen."
+},
+
+{
+title: "ARDS",
+presentation: "A 45-year-old ICU patient develops severe hypoxia after sepsis.",
+history: "Sepsis (pneumonia).",
+examination: "Diffuse crackles.",
+investigations: "PaO₂/FiO₂ <200. CXR: Bilateral infiltrates.",
+diagnosis: "ARDS (Berlin criteria).",
+management: "Low tidal volume ventilation, PEEP.",
+discussion: "Non-cardiogenic pulmonary edema."
+},
+
+{
+title: "Pneumothorax (Tension)",
+presentation: "A 28-year-old male with sudden chest pain and breathlessness.",
+history: "Tall thin individual.",
+examination: "Tracheal deviation, absent breath sounds, hyperresonance.",
+investigations: "Clinical diagnosis.",
+diagnosis: "Tension pneumothorax.",
+management: "Immediate needle decompression → chest tube.",
+discussion: "Do not wait for X-ray."
+},
+
+{
+title: "Bronchiectasis",
+presentation: "A 35-year-old female with chronic productive cough and foul-smelling sputum.",
+history: "Recurrent infections.",
+examination: "Crackles, clubbing.",
+investigations: "HRCT: Dilated bronchi.",
+diagnosis: "Bronchiectasis.",
+management: "Chest physiotherapy, antibiotics.",
+discussion: "Think CF or post-infectious causes."
+},
+
+{
+title: "Interstitial Lung Disease (IPF)",
+presentation: "A 60-year-old male with progressive dyspnea and dry cough.",
+history: "No smoking history.",
+examination: "Velcro crackles, clubbing.",
+investigations: "HRCT: Honeycombing.",
+diagnosis: "Idiopathic pulmonary fibrosis.",
+management: "Pirfenidone, oxygen therapy.",
+discussion: "Restrictive pattern on PFT."
+},
+
+{
+title: "Lung Cancer",
+presentation: "A 55-year-old smoker with cough, hemoptysis, weight loss.",
+history: "40 pack-year smoking.",
+examination: "Clubbing, lymphadenopathy.",
+investigations: "CT chest mass, biopsy confirms carcinoma.",
+diagnosis: "Primary lung cancer.",
+management: "Surgery/chemo/radiotherapy based on stage.",
+discussion: "Paraneoplastic syndromes common."
+},
+    ]
+  },
+  {
+    id: "gastroenterology", name: "Gastroenterology", icon: "apple", emoji: "🫄",
+    desc: "GI & Hepatobiliary System",
+    cases: [
+      {
+        title: "Acute Pancreatitis with Organ Failure",
+        presentation: "A 45-year-old obese male presents with sudden onset severe epigastric pain radiating to the back for 6 hours, aggravated by eating, partially relieved by leaning forward. Associated with persistent vomiting, abdominal distension, and inability to pass flatus. HR: 118/min, BP: 95/60, Temp: 38.8°C.",
+        history: "PMH: Heavy alcohol use (60g/day × 15 yrs), gallstones diagnosed 2 years ago (surgery declined). No prior episodes. BMI: 34.",
+        examination: "General: Distressed, dehydrated. Abdomen: Diffuse tenderness maximal in epigastrium, guarding, absent bowel sounds, Grey Turner sign (flank ecchymosis — suggests retroperitoneal hemorrhage). No organomegaly palpable.",
+        investigations: "Serum Amylase: 1,850 U/L (>3× ULN). Lipase: 2,400 U/L. CBC: WBC 18,500, Hct 48%. CRP: 320 mg/L. LFTs: Bilirubin 3.2, ALT 185 (suggests biliary etiology). Calcium: 7.2 mg/dL (hypocalcemia — poor prognostic sign). LDH: 680. BUN: 32. CECT Abdomen (at 72h): Bulky pancreas with >50% necrosis, peripancreatic fluid collections. Modified CT Severity Index: 8/10. Ranson Score at 48h: 5 (predicted mortality >40%). APACHE II: 12.",
+        diagnosis: "Acute Severe Necrotizing Pancreatitis (likely alcohol + gallstone etiology) with organ dysfunction (hemodynamic instability, renal impairment).",
+        management: "ICU CARE: Aggressive IV crystalloid resuscitation (Ringer Lactate 5-10 mL/kg/hr initially, goal-directed). ANALGESIA: IV Paracetamol + Tramadol; Epidural analgesia if refractory. NPO initially → early enteral feeding via nasojejunal tube within 24-48h (reduces infection, mortality). ANTIBIOTICS: Not routine; start only if infected necrosis suspected (Imipenem/Meropenem). ERCP: If confirmed biliary pancreatitis with cholangitis — urgent ERCP within 24h. MONITORING: Serial CRP, organ failure assessment (Modified Marshall Score). INTERVENTION: If walled-off necrosis (WON) with infection after 4 weeks → step-up approach: percutaneous drainage → video-assisted retroperitoneal debridement (VARD). Cholecystectomy during same admission once recovered.",
+        discussion: "Teaching points: 1) Revised Atlanta Classification: Mild (no organ failure), Moderately severe (transient OF <48h), Severe (persistent OF). 2) Ranson, BISAP, APACHE II for prognosis. 3) Early enteral nutrition is superior to TPN. 4) Prophylactic antibiotics NOT recommended (IAP/APA guidelines). 5) Step-up approach > open necrosectomy (PANTER trial)."
+      },
+
+{
+title: "Acute Pancreatitis",
+presentation: "A 45-year-old obese male presents with sudden severe epigastric pain radiating to the back for 8 hours, aggravated by food and relieved by leaning forward. Associated vomiting. HR: 118/min, BP: 95/60 mmHg, Temp: 38.5°C.",
+history: "Alcohol use, gallstones.",
+examination: "Epigastric tenderness, guarding.",
+investigations: "Serum lipase >3x normal, amylase elevated, CT: inflamed pancreas.",
+diagnosis: "Acute pancreatitis (likely gallstone/alcohol-induced).",
+management: "Aggressive IV fluids, analgesia, NPO, treat cause.",
+discussion: "Lipase is more specific than amylase."
+},
+
+{
+title: "Upper GI Bleed (Peptic Ulcer)",
+presentation: "A 50-year-old male presents with hematemesis and melena. BP: 85/60 mmHg.",
+history: "NSAID use.",
+examination: "Pallor, tachycardia.",
+investigations: "Hb low, endoscopy: bleeding ulcer.",
+diagnosis: "Upper GI bleed due to peptic ulcer.",
+management: "IV fluids, PPI infusion, endoscopic therapy.",
+discussion: "Stabilize first, then scope."
+},
+
+{
+title: "Cirrhosis with Portal Hypertension",
+presentation: "A 55-year-old alcoholic male with abdominal distension and confusion.",
+history: "Chronic alcohol use.",
+examination: "Ascites, spider angioma, asterixis.",
+investigations: "USG: cirrhotic liver, portal hypertension.",
+diagnosis: "Decompensated cirrhosis.",
+management: "Diuretics, lactulose, paracentesis.",
+discussion: "Complications: varices, encephalopathy."
+},
+
+{
+title: "Hepatic Encephalopathy",
+presentation: "A 60-year-old cirrhotic patient presents with confusion and altered sleep cycle.",
+history: "Alcoholic liver disease.",
+examination: "Asterixis, disorientation.",
+investigations: "Ammonia elevated.",
+diagnosis: "Hepatic encephalopathy.",
+management: "Lactulose, rifaximin.",
+discussion: "Ammonia accumulation affects brain."
+},
+
+{
+title: "Acute Viral Hepatitis",
+presentation: "A 25-year-old male with jaundice, fatigue, anorexia.",
+history: "Contaminated food.",
+examination: "Icterus, hepatomegaly.",
+investigations: "AST/ALT >1000, viral markers positive.",
+diagnosis: "Acute viral hepatitis.",
+management: "Supportive.",
+discussion: "ALT > AST in viral hepatitis."
+},
+
+{
+title: "Cholelithiasis",
+presentation: "A 40-year-old female with RUQ pain after fatty meals.",
+history: "Obesity.",
+examination: "Murphy sign positive.",
+investigations: "USG: gallstones.",
+diagnosis: "Gallstones.",
+management: "Cholecystectomy.",
+discussion: "4 Fs: female, fat, forty, fertile."
+},
+
+{
+title: "Acute Cholangitis",
+presentation: "A 50-year-old male with fever, jaundice, RUQ pain.",
+history: "Gallstones.",
+examination: "Charcot triad present.",
+investigations: "LFT cholestatic pattern.",
+diagnosis: "Acute cholangitis.",
+management: "IV antibiotics, ERCP.",
+discussion: "Reynolds pentad = severe."
+},
+
+{
+title: "Inflammatory Bowel Disease (Ulcerative Colitis)",
+presentation: "A 28-year-old male with chronic bloody diarrhea.",
+history: "No infection.",
+examination: "Abdominal tenderness.",
+investigations: "Colonoscopy: continuous lesions.",
+diagnosis: "Ulcerative colitis.",
+management: "5-ASA, steroids.",
+discussion: "Colon-only disease."
+},
+
+{
+title: "Crohn’s Disease",
+presentation: "A 30-year-old female with abdominal pain, diarrhea, weight loss.",
+history: "Chronic symptoms.",
+examination: "Perianal fistula.",
+investigations: "Skip lesions on colonoscopy.",
+diagnosis: "Crohn’s disease.",
+management: "Steroids, biologics.",
+discussion: "Transmural involvement."
+},
+
+{
+title: "Hepatocellular Carcinoma",
+presentation: "A 60-year-old male with weight loss and RUQ pain.",
+history: "Chronic hepatitis B.",
+examination: "Hepatomegaly.",
+investigations: "AFP elevated, imaging shows mass.",
+diagnosis: "HCC.",
+management: "Surgery, TACE, sorafenib.",
+discussion: "Common in cirrhosis."
+},
+    ]
+  },
+  {
+    id: "nephrology", name: "Nephrology", icon: "droplets", emoji: "💧",
+    desc: "Renal & Urinary System",
+    cases: [
+      {
+        title: "Diabetic Nephropathy with Nephrotic Syndrome",
+        presentation: "A 58-year-old female with T2DM for 18 years presents with progressive bilateral pedal edema, facial puffiness, frothy urine, and fatigue for 2 months. BP: 160/100 mmHg. Weight gain of 8 kg over 6 weeks.",
+        history: "PMH: T2DM (poorly controlled, HbA1c 9.8%), HTN, diabetic retinopathy (proliferative, laser-treated). Medications: Glimepiride, Metformin, Amlodipine. No NSAID use.",
+        examination: "General: Anasarca — pitting edema up to sacrum, periorbital puffiness, bilateral pleural effusion (reduced breath sounds at bases). Abdomen: Shifting dullness positive (ascites). Fundoscopy: Proliferative diabetic retinopathy.",
+        investigations: "Urinalysis: 4+ proteinuria, no RBCs, no casts. 24h Urine Protein: 6.8 g/day (nephrotic range). Serum Albumin: 1.8 g/dL. Total Cholesterol: 380 mg/dL. Creatinine: 2.4 mg/dL, eGFR: 28 mL/min (CKD Stage 4). HbA1c: 9.8%. Renal USG: Both kidneys normal-sized (DDx from other CKD causes where kidneys are small). Diabetic retinopathy present → biopsy often NOT required (clinical diagnosis). If biopsy done: Kimmelstiel-Wilson nodular glomerulosclerosis.",
+        diagnosis: "Diabetic Nephropathy Stage IV (Overt Nephropathy) with Nephrotic Syndrome, CKD Stage 4, secondary to long-standing poorly controlled T2DM.",
+        management: "BP CONTROL: Target <130/80. ACEi/ARB is cornerstone — start Losartan 50mg titrate to max tolerated (reduces proteinuria, slows progression). Add Finerenone (non-steroidal MRA — FIDELIO-DKD trial). GLYCEMIC CONTROL: Switch to Insulin regimen. Add SGLT2 inhibitor (Dapagliflozin/Empagliflozin) — proven renoprotective benefit (DAPA-CKD, CREDENCE trials) even in CKD. EDEMA: Furosemide 40-80mg with salt restriction (<2g Na/day). Albumin infusion if severe hypoalbuminemia with diuretic resistance. LIPIDS: Atorvastatin 40mg. MONITOR: Serum K⁺ closely with ACEi + Finerenone. Serial eGFR, UACR every 3 months. PREPARE: Nephrology referral for dialysis planning (AV fistula) as eGFR approaches 15-20. Dietary protein restriction (0.8 g/kg/day).",
+        discussion: "Key points: 1) Natural history: Hyperfiltration → Microalbuminuria → Overt proteinuria → Progressive GFR decline → ESRD. 2) Presence of diabetic retinopathy strongly supports diabetic nephropathy without biopsy. 3) SGLT2 inhibitors are now standard of care regardless of glycemia. 4) Finerenone adds renal/CV benefit on top of RAASi. 5) Avoid nephrotoxins: NSAIDs, contrast, aminoglycosides."
+      },
+
+{
+title: "Acute Kidney Injury (Pre-renal)",
+presentation: "A 60-year-old male presents with decreased urine output for 2 days following severe diarrhea. Complains of dizziness and weakness. BP: 85/60 mmHg, HR: 110/min.",
+history: "Recent gastroenteritis, no known CKD.",
+examination: "Dry mucous membranes, decreased skin turgor.",
+investigations: "Creatinine: 2.5 mg/dL (baseline 0.9), BUN/Cr ratio >20:1, Urine Na <20 mEq/L, FeNa <1%.",
+diagnosis: "Pre-renal acute kidney injury due to hypovolemia.",
+management: "IV fluids (normal saline), correct underlying cause.",
+discussion: "Low FeNa + high BUN/Cr → pre-renal AKI."
+},
+
+{
+title: "Acute Tubular Necrosis",
+presentation: "A 55-year-old patient develops oliguria after septic shock.",
+history: "ICU admission for sepsis.",
+examination: "Volume overload, edema.",
+investigations: "Creatinine rising, FeNa >2%, muddy brown casts in urine.",
+diagnosis: "Intrinsic AKI (ATN).",
+management: "Supportive care, dialysis if indicated.",
+discussion: "Muddy brown casts = ATN hallmark."
+},
+
+{
+title: "Nephrotic Syndrome",
+presentation: "A 35-year-old female presents with generalized edema and frothy urine.",
+history: "No prior illness.",
+examination: "Anasarca, ascites.",
+investigations: "Proteinuria >3.5 g/day, hypoalbuminemia, hyperlipidemia.",
+diagnosis: "Nephrotic syndrome (likely minimal change or membranous).",
+management: "Diuretics, ACE inhibitors, statins, steroids (depending cause).",
+discussion: "Loss of albumin → edema."
+},
+
+{
+title: "Nephritic Syndrome (Post-strep GN)",
+presentation: "A 10-year-old child with hematuria and edema 2 weeks after sore throat.",
+history: "Recent streptococcal infection.",
+examination: "Periorbital edema, hypertension.",
+investigations: "RBC casts, low C3, ASO titer elevated.",
+diagnosis: "Post-streptococcal glomerulonephritis.",
+management: "Supportive, control BP.",
+discussion: "Nephritic = hematuria + hypertension."
+},
+
+{
+title: "Chronic Kidney Disease",
+presentation: "A 58-year-old diabetic presents with fatigue, pruritus, and decreased urine output.",
+history: "Long-standing diabetes, hypertension.",
+examination: "Pallor, uremic frost.",
+investigations: "eGFR <30, anemia, hyperkalemia, metabolic acidosis.",
+diagnosis: "CKD stage 4–5.",
+management: "Dialysis planning, EPO, phosphate binders.",
+discussion: "Irreversible nephron loss."
+},
+
+{
+title: "Hyperkalemia Emergency",
+presentation: "A 65-year-old male with weakness and palpitations.",
+history: "CKD, missed dialysis.",
+examination: "Bradycardia.",
+investigations: "K⁺: 6.8 mEq/L, ECG: peaked T waves.",
+diagnosis: "Severe hyperkalemia.",
+management: "Calcium gluconate, insulin + glucose, dialysis.",
+discussion: "Calcium stabilizes myocardium."
+},
+
+{
+title: "Renal Calculi",
+presentation: "A 40-year-old male with severe flank pain radiating to groin.",
+history: "Low water intake.",
+examination: "Restless patient, CVA tenderness.",
+investigations: "CT KUB: ureteric stone.",
+diagnosis: "Ureteric calculi.",
+management: "NSAIDs, hydration, alpha-blockers, lithotripsy.",
+discussion: "Colicky pain + hematuria."
+},
+
+{
+title: "Acute Glomerulonephritis (RPGN)",
+presentation: "A 45-year-old male with rapidly worsening renal function and hematuria.",
+history: "Autoimmune disease suspected.",
+examination: "Edema, hypertension.",
+investigations: "Crescent formation on biopsy.",
+diagnosis: "Rapidly progressive GN.",
+management: "Steroids + cyclophosphamide.",
+discussion: "Rapid decline → urgent treatment."
+},
+
+{
+title: "Diabetic Nephropathy",
+presentation: "A 55-year-old diabetic with proteinuria.",
+history: "Poor glycemic control.",
+examination: "Hypertension.",
+investigations: "Microalbuminuria → macroalbuminuria.",
+diagnosis: "Diabetic nephropathy.",
+management: "ACE inhibitors, glycemic control.",
+discussion: "Leading cause of CKD."
+},
+
+{
+title: "Polycystic Kidney Disease",
+presentation: "A 40-year-old with flank pain and hematuria.",
+history: "Family history of kidney disease.",
+examination: "Palpable kidneys.",
+investigations: "Ultrasound: multiple renal cysts.",
+diagnosis: "Autosomal dominant PKD.",
+management: "BP control, dialysis later.",
+discussion: "Associated with berry aneurysms."
+},
+    ]
+  },
+  {
+    id: "neurology", name: "Neurology", icon: "brain", emoji: "🧠",
+    desc: "Central & Peripheral Nervous System",
+    cases: [
+      {
+        title: "Acute Ischemic Stroke — MCA Territory",
+        presentation: "A 68-year-old male with atrial fibrillation (not on anticoagulation) is brought to ER with sudden onset right-sided hemiplegia, facial droop, and global aphasia. Symptoms began 90 minutes ago. BP: 185/105, HR: irregularly irregular 92/min, GCS: 10 (E3V2M5). NIHSS: 18.",
+        history: "PMH: AF diagnosed 1 year ago (refused warfarin), HTN, hyperlipidemia. Medications: Aspirin 75mg, Atenolol 50mg.",
+        examination: "Neuro: Right UMN facial palsy, right hemiplegia (power 0/5 upper and lower limbs), global aphasia, right homonymous hemianopia, gaze preference to left, right-sided neglect. Plantar: Right extensor. CVS: Irregularly irregular rhythm.",
+        investigations: "NCCT Brain (STAT): No hemorrhage, early hyperdense left MCA sign, loss of insular ribbon. CT Angiography: Left MCA M1 segment occlusion. CT Perfusion: Large penumbra (salvageable tissue). ECG: AF with rapid ventricular rate. Blood glucose: 145 mg/dL. INR: 1.0. Platelets: 210,000.",
+        diagnosis: "Acute Left MCA territory ischemic stroke (cardioembolic — AF), NIHSS 18 (severe), within thrombolysis and thrombectomy window.",
+        management: "HYPERACUTE (Golden Hour): IV Alteplase (tPA) 0.9 mg/kg (max 90mg) — 10% bolus, rest over 60 min (within 4.5h window). SIMULTANEOUSLY: Activate interventional neuro for mechanical thrombectomy (within 24h for large vessel occlusion with favorable perfusion imaging — DAWN/DEFUSE-3 trials). BP MANAGEMENT: Permissive hypertension; lower only if >185/110 pre-thrombolysis (IV Labetalol/Nicardipine). Target <180/105 for 24h post-tPA. STROKE UNIT: NPO until swallow assessment. DVT prophylaxis (SCDs initially, LMWH after 24h imaging). ANTICOAGULATION: Start DOACs (Apixaban 5mg BD) for AF after 4-14 days based on infarct size (1-3-6-12 day rule). REHABILITATION: Early mobilization, PT/OT/Speech therapy from day 1-2. SECONDARY PREVENTION: Statin, BP control, AF rate/rhythm control.",
+        discussion: "Teaching points: 1) 'Time is Brain' — 1.9 million neurons lost per minute in stroke. 2) NIHSS guides severity and treatment decisions. 3) Thrombectomy revolutionized large vessel occlusion stroke care (NNT = 2.6). 4) CHA₂DS₂-VASc score mandates anticoagulation in AF. 5) Hemorrhagic transformation risk highest in first 24-48h post-thrombolysis."
+      },
+
+{
+title: "Acute Ischemic Stroke (MCA Territory)",
+presentation: "A 65-year-old male presents with sudden onset right-sided weakness and slurred speech for 1 hour. No loss of consciousness. BP: 170/100 mmHg.",
+history: "Hypertension, diabetes, atrial fibrillation (not on anticoagulation).",
+examination: "Right hemiplegia (power 2/5), facial droop, expressive aphasia. NIHSS: 14.",
+investigations: "CT Brain (non-contrast): No bleed. MRI DWI: Acute infarct in left MCA territory. ECG: AF.",
+diagnosis: "Acute ischemic stroke (left MCA) likely cardioembolic.",
+management: "IV thrombolysis (Alteplase 0.9 mg/kg within 4.5 hr window), mechanical thrombectomy if large vessel occlusion, start anticoagulation later.",
+discussion: "Time is brain. Rule out hemorrhage before thrombolysis."
+},
+
+{
+title: "Intracerebral Hemorrhage",
+presentation: "A 58-year-old male presents with sudden severe headache, vomiting, and loss of consciousness.",
+history: "Uncontrolled hypertension.",
+examination: "GCS: 8, unequal pupils.",
+investigations: "CT Brain: Hyperdense bleed in basal ganglia.",
+diagnosis: "Hypertensive intracerebral hemorrhage.",
+management: "BP control (labetalol), neurosurgical evaluation.",
+discussion: "Most common site: basal ganglia."
+},
+
+{
+title: "Subarachnoid Hemorrhage",
+presentation: "A 45-year-old female presents with sudden ‘worst headache of life’.",
+history: "No trauma.",
+examination: "Neck stiffness, photophobia.",
+investigations: "CT: Blood in subarachnoid space, LP: xanthochromia.",
+diagnosis: "Subarachnoid hemorrhage (ruptured berry aneurysm).",
+management: "Nimodipine, neurosurgical clipping/coiling.",
+discussion: "Risk of vasospasm."
+},
+
+{
+title: "Status Epilepticus",
+presentation: "A 30-year-old male presents with continuous seizures >10 minutes.",
+history: "Known epilepsy, missed meds.",
+examination: "Unconscious, ongoing seizures.",
+investigations: "Electrolytes, glucose.",
+diagnosis: "Status epilepticus.",
+management: "IV lorazepam → phenytoin → levetiracetam.",
+discussion: "Emergency—prevent brain damage."
+},
+
+{
+title: "Meningitis (Acute Bacterial)",
+presentation: "A 22-year-old presents with fever, headache, neck stiffness.",
+history: "Acute onset.",
+examination: "Kernig, Brudzinski positive.",
+investigations: "CSF: neutrophils ↑, protein ↑, glucose ↓.",
+diagnosis: "Acute bacterial meningitis.",
+management: "IV ceftriaxone + vancomycin, steroids.",
+discussion: "Start antibiotics immediately."
+},
+
+{
+title: "Guillain-Barré Syndrome",
+presentation: "A 28-year-old male with ascending weakness over 3 days.",
+history: "Recent diarrhea.",
+examination: "Areflexia, flaccid paralysis.",
+investigations: "CSF: albuminocytologic dissociation.",
+diagnosis: "GBS.",
+management: "IVIG or plasmapheresis.",
+discussion: "Risk of respiratory failure."
+},
+
+{
+title: "Myasthenia Gravis",
+presentation: "A 35-year-old female with ptosis and diplopia worsening by evening.",
+history: "Autoimmune disease.",
+examination: "Fatigable weakness.",
+investigations: "Anti-AChR antibodies positive.",
+diagnosis: "Myasthenia gravis.",
+management: "Pyridostigmine, steroids, thymectomy.",
+discussion: "Weakness improves with rest."
+},
+
+{
+title: "Parkinson’s Disease",
+presentation: "A 65-year-old male with tremors, rigidity, slow movements.",
+history: "Gradual onset.",
+examination: "Resting tremor, cogwheel rigidity.",
+investigations: "Clinical diagnosis.",
+diagnosis: "Parkinson’s disease.",
+management: "Levodopa + carbidopa.",
+discussion: "Loss of dopaminergic neurons."
+},
+
+{
+title: "Multiple Sclerosis",
+presentation: "A 30-year-old female with vision loss and limb weakness.",
+history: "Relapsing-remitting course.",
+examination: "Optic neuritis, UMN signs.",
+investigations: "MRI: demyelinating plaques, CSF: oligoclonal bands.",
+diagnosis: "Multiple sclerosis.",
+management: "Steroids for relapse, disease-modifying therapy.",
+discussion: "Autoimmune demyelination."
+},
+
+{
+title: "Brain Tumor (Glioblastoma)",
+presentation: "A 55-year-old male with progressive headache and seizures.",
+history: "Gradual worsening.",
+examination: "Focal deficits.",
+investigations: "MRI: ring-enhancing lesion.",
+diagnosis: "Glioblastoma multiforme.",
+management: "Surgery + radiotherapy + temozolomide.",
+discussion: "Most aggressive primary brain tumor."
+},
+    ]
+  },
+  {
+    id: "endocrinology", name: "Endocrinology", icon: "zap", emoji: "⚡",
+    desc: "Hormonal & Metabolic Disorders",
+    cases: [
+      {
+        title: "Diabetic Ketoacidosis (DKA) in New-Onset T1DM",
+        presentation: "A 22-year-old female presents with polyuria, polydipsia, and 10 kg weight loss over 4 weeks. For the last 2 days: severe vomiting, diffuse abdominal pain, and progressive drowsiness. RR: 32/min (deep, Kussmaul breathing), HR: 124, BP: 90/55, Temp: 37.2°C, GCS: 12.",
+        history: "Previously healthy. No prior diabetes diagnosis. Family Hx: Mother has Hashimoto's thyroiditis. No medication or drug use.",
+        examination: "General: Dehydrated (sunken eyes, dry mucosa, reduced skin turgor), fruity breath odor (acetone). Abdomen: Diffuse tenderness (DKA can mimic acute abdomen). Neuro: Drowsy but arousable. No focal deficits. No papilledema.",
+        investigations: "RBS: 480 mg/dL. ABG: pH 7.08, PaCO₂ 18 (respiratory compensation), HCO₃ 6 mEq/L. Anion Gap: 28 (elevated). Serum Ketones: 6.8 mmol/L (strongly positive). Na⁺: 128 (pseudohyponatremia — corrected Na: 134). K⁺: 5.4 (total body K⁺ depleted despite high serum level). Urine: 4+ glucose, 4+ ketones. HbA1c: 13.2%. Anti-GAD antibodies: Positive. C-peptide: 0.1 ng/mL (absent endogenous insulin).",
+        diagnosis: "Severe Diabetic Ketoacidosis (pH <7.1) as initial presentation of Type 1 Diabetes Mellitus (autoimmune — anti-GAD positive).",
+        management: "FLUID RESUSCITATION: 0.9% NS 1-1.5L in first hour, then 250-500 mL/hr. Switch to 0.45% NS once Na normalizes. Add D5 when glucose <250. INSULIN: Regular Insulin infusion 0.1 units/kg/hr (NO bolus per recent guidelines). Aim glucose drop 50-70 mg/dL/hr. DO NOT stop insulin until anion gap closes (even if glucose normalizes — add dextrose). POTASSIUM: If K⁺ <5.3 → add 20-40 mEq KCl/L to each liter. If K⁺ <3.3 → hold insulin, replete K⁺ first. BICARBONATE: Only if pH <6.9 (100 mEq NaHCO₃). MONITORING: Hourly glucose, 2-hourly BMP, continuous telemetry, strict I/O. TRANSITION: When able to eat + AG closed + pH >7.3 → start subcutaneous basal-bolus insulin (overlap IV for 1-2h). EDUCATION: Sick day rules, carb counting, insulin self-administration, DKA prevention.",
+        discussion: "Key points: 1) DKA criteria: Glucose >250, pH <7.3, HCO₃ <18, Anion Gap >12, ketonemia. 2) Cerebral edema risk with overly rapid correction (especially in young patients). 3) Most dangerous electrolyte: K⁺ — hypokalemia during treatment causes arrhythmias. 4) Resolution defined by AG normalization, NOT glucose. 5) Precipitating factors: Infection, non-compliance, new diagnosis."
+      },
+
+{
+title: "Diabetic Ketoacidosis (DKA)",
+presentation: "A 22-year-old male presents with polyuria, polydipsia, vomiting, and abdominal pain for 2 days. Altered sensorium since morning. RR: 32/min (Kussmaul breathing), HR: 120/min, BP: 90/60 mmHg.",
+history: "Known Type 1 Diabetes, missed insulin doses. Recent infection.",
+examination: "Dehydration, fruity breath odor (acetone), tachypnea.",
+investigations: "Glucose: 450 mg/dL, ABG: metabolic acidosis (pH 7.1), HCO₃⁻ low, serum ketones positive, anion gap elevated (>12), K⁺: 5.5 mEq/L (initially high).",
+diagnosis: "Diabetic ketoacidosis (DKA) with high anion gap metabolic acidosis.",
+management: "IV fluids (NS), IV insulin infusion (0.1 U/kg/hr), potassium correction, treat precipitating cause.",
+discussion: "Insulin drives K⁺ into cells → monitor potassium closely."
+},
+
+{
+title: "Hyperosmolar Hyperglycemic State (HHS)",
+presentation: "A 65-year-old male presents with severe dehydration and altered sensorium. No significant ketosis. Glucose >600 mg/dL.",
+history: "Type 2 diabetes, infection trigger.",
+examination: "Severe dehydration, no Kussmaul breathing.",
+investigations: "Serum osmolarity >320 mOsm/kg, minimal ketones, pH normal or mildly low.",
+diagnosis: "HHS.",
+management: "Aggressive IV fluids, insulin, electrolyte correction.",
+discussion: "Higher mortality than DKA due to severe dehydration."
+},
+
+{
+title: "Hypoglycemia",
+presentation: "A 50-year-old diabetic presents with sweating, confusion, and loss of consciousness.",
+history: "Insulin overdose or missed meals.",
+examination: "Altered mental status, tachycardia.",
+investigations: "Blood glucose: 40 mg/dL.",
+diagnosis: "Severe hypoglycemia.",
+management: "IV dextrose (25–50 mL of 50% dextrose), glucagon if no IV access.",
+discussion: "Whipple’s triad: symptoms + low glucose + relief after glucose."
+},
+
+{
+title: "Thyroid Storm",
+presentation: "A 30-year-old female presents with fever, palpitations, agitation, and diarrhea. HR: 160/min, Temp: 40°C.",
+history: "Known hyperthyroidism, non-compliant with meds.",
+examination: "Tremors, delirium, hyperreflexia.",
+investigations: "TSH low, T3/T4 high.",
+diagnosis: "Thyroid storm.",
+management: "Propranolol, PTU, iodine (after PTU), steroids.",
+discussion: "Life-threatening hyperthyroid state."
+},
+
+{
+title: "Myxedema Coma",
+presentation: "A 65-year-old female presents with hypothermia, bradycardia, and altered sensorium.",
+history: "Untreated hypothyroidism.",
+examination: "Dry skin, non-pitting edema.",
+investigations: "TSH high, T4 low.",
+diagnosis: "Myxedema coma.",
+management: "IV levothyroxine, steroids, warming.",
+discussion: "Severe hypothyroidism emergency."
+},
+
+{
+title: "Cushing Syndrome",
+presentation: "A 40-year-old female with weight gain, moon face, purple striae.",
+history: "Long-term steroid use.",
+examination: "Central obesity, hypertension.",
+investigations: "Cortisol elevated, dexamethasone suppression test abnormal.",
+diagnosis: "Cushing syndrome.",
+management: "Treat underlying cause, taper steroids.",
+discussion: "Excess cortisol effects."
+},
+
+{
+title: "Addison’s Disease",
+presentation: "A 35-year-old male presents with fatigue, weight loss, hypotension, and hyperpigmentation.",
+history: "Autoimmune disease.",
+examination: "Hyperpigmented skin folds.",
+investigations: "Low cortisol, high ACTH, hyponatremia, hyperkalemia.",
+diagnosis: "Primary adrenal insufficiency.",
+management: "Hydrocortisone + fludrocortisone.",
+discussion: "Salt craving + hyperpigmentation."
+},
+
+{
+title: "Primary Hyperparathyroidism",
+presentation: "A 50-year-old female with kidney stones and bone pain.",
+history: "Recurrent nephrolithiasis.",
+examination: "Bone tenderness.",
+investigations: "Ca²⁺ high, PTH high, phosphate low.",
+diagnosis: "Primary hyperparathyroidism.",
+management: "Parathyroidectomy.",
+discussion: "Bones, stones, groans, psychiatric overtones."
+},
+
+{
+title: "SIADH",
+presentation: "A 60-year-old male with confusion and seizures.",
+history: "Lung cancer.",
+examination: "Euvolemic.",
+investigations: "Na⁺: 118 mEq/L, serum osm low, urine osm high.",
+diagnosis: "SIADH.",
+management: "Fluid restriction, hypertonic saline if severe.",
+discussion: "Dilutional hyponatremia."
+},
+
+{
+title: "Diabetes Insipidus",
+presentation: "A 30-year-old male with polyuria and polydipsia.",
+history: "Head injury.",
+examination: "Dehydration.",
+investigations: "Serum osm high, urine osm low, water deprivation test abnormal.",
+diagnosis: "Central diabetes insipidus.",
+management: "Desmopressin.",
+discussion: "ADH deficiency → dilute urine."
+},
+    ]
+  },
+  {
+    id: "rheumatology", name: "Rheumatology", icon: "bone", emoji: "🦴",
+    desc: "Musculoskeletal & Autoimmune",
+    cases: [
+      {
+        title: "Systemic Lupus Erythematosus with Lupus Nephritis",
+        presentation: "A 28-year-old female presents with 3 months of joint pain, fatigue, photosensitive rash, oral ulcers, and 2 weeks of facial puffiness with frothy urine. BP: 150/95, Temp: 38.2°C. She had a miscarriage last year.",
+        history: "PMH: Recurrent miscarriage (1 event), Raynaud's phenomenon for 2 years. No medications. Family Hx: Sister has autoimmune thyroiditis.",
+        examination: "General: Pallor, malar (butterfly) rash sparing nasolabial folds, oral ulcers on hard palate, non-scarring alopecia. MSK: Symmetrical polyarthritis (MCPs, PIPs, wrists) — non-erosive, no deformity. Skin: Discoid lesion on forearm. Pedal edema 2+.",
+        investigations: "ANA: Positive (1:640, homogeneous pattern). Anti-dsDNA: Strongly positive (280 IU/mL). Complement: C3 0.35 (low), C4 0.06 (low). CBC: Hb 8.2, WBC 3,200 (lymphopenia), Platelets 110,000. ESR: 85, CRP: 12 (disproportionately low vs ESR — classic SLE). Urine: 3+ protein, RBC casts. 24h Protein: 3.8 g. Creatinine: 1.6. Anti-Smith: Positive. Antiphospholipid antibodies: Positive. RENAL BIOPSY: Class IV diffuse proliferative lupus nephritis (ISN/RPS classification).",
+        diagnosis: "Systemic Lupus Erythematosus (ACR/EULAR criteria met: malar rash, photosensitivity, oral ulcers, arthritis, nephritis, hematologic, ANA, anti-dsDNA, low complement) with Class IV Lupus Nephritis and Antiphospholipid Syndrome.",
+        management: "INDUCTION (Class IV LN): IV Methylprednisolone 500mg × 3 days pulse, then oral Prednisolone 1mg/kg taper. PLUS Mycophenolate Mofetil 2-3g/day (ALMS trial) OR Euro-Lupus IV Cyclophosphamide (500mg q2wk × 6). MAINTENANCE: MMF 1-2g/day + low-dose Pred (≤7.5mg). Add Hydroxychloroquine 200mg BD (ALL lupus patients — reduces flares, improves survival). RENAL: ACEi for proteinuria, BP target <130/80. APS: Lifelong anticoagulation with Warfarin (target INR 2-3) given prior miscarriage + positive aPL. MONITORING: Anti-dsDNA titers, complement levels, renal function, proteinuria q3 months. ADJUNCTIVE: Calcium + Vitamin D, sunscreen SPF50+, vaccinations (avoid live vaccines on immunosuppression). Consider Belimumab (anti-BLyS) or Voclosporin for refractory disease.",
+        discussion: "Teaching points: 1) SLE — the great imitator; high index of suspicion in young women. 2) Anti-dsDNA and low complement correlate with disease activity. 3) Renal biopsy is gold standard for lupus nephritis classification and guides therapy. 4) ESR↑ with normal CRP is characteristic of SLE. 5) HCQ is the anchor drug — never stop it."
+      },
+      
+{
+title: "Rheumatoid Arthritis",
+presentation: "A 42-year-old female presents with 6 months of symmetric joint pain and morning stiffness lasting >1 hour, involving MCP and PIP joints. Fatigue and low-grade fever present.",
+history: "No major comorbidities. Family history of autoimmune disease.",
+examination: "Swelling and tenderness of MCP, PIP joints; ulnar deviation beginning.",
+investigations: "RF positive, Anti-CCP positive (high specificity), ESR/CRP elevated, X-ray: joint space narrowing, marginal erosions.",
+diagnosis: "Seropositive Rheumatoid Arthritis.",
+management: "Methotrexate (first-line DMARD) + folic acid, NSAIDs for symptoms, add biologics (TNF inhibitors) if severe.",
+discussion: "Early DMARDs prevent joint destruction. Anti-CCP predicts severe disease."
+},
+
+{
+title: "Systemic Lupus Erythematosus (SLE)",
+presentation: "A 25-year-old female presents with fatigue, joint pain, photosensitive rash, and oral ulcers.",
+history: "Recurrent miscarriages.",
+examination: "Malar rash, non-erosive arthritis.",
+investigations: "ANA positive, Anti-dsDNA positive, low complement levels, proteinuria.",
+diagnosis: "Systemic lupus erythematosus.",
+management: "Hydroxychloroquine, steroids for flares, immunosuppressants (mycophenolate).",
+discussion: "Multisystem autoimmune disease; anti-dsDNA correlates with activity."
+},
+
+{
+title: "Ankylosing Spondylitis",
+presentation: "A 28-year-old male with chronic low back pain improving with exercise, worse in morning.",
+history: "Gradual onset.",
+examination: "Reduced spinal mobility, positive Schober test.",
+investigations: "HLA-B27 positive, X-ray: bamboo spine.",
+diagnosis: "Ankylosing spondylitis.",
+management: "NSAIDs, physiotherapy, TNF inhibitors.",
+discussion: "Inflammatory back pain in young males."
+},
+
+{
+title: "Gout",
+presentation: "A 50-year-old male presents with sudden severe pain in great toe.",
+history: "Alcohol intake, red meat diet.",
+examination: "Red, swollen, tender 1st MTP joint.",
+investigations: "Synovial fluid: needle-shaped negatively birefringent crystals.",
+diagnosis: "Acute gouty arthritis.",
+management: "NSAIDs, colchicine, allopurinol (chronic).",
+discussion: "Do not start allopurinol during acute attack."
+},
+
+{
+title: "Osteoarthritis",
+presentation: "A 60-year-old female with knee pain worsening with activity.",
+history: "Obesity.",
+examination: "Crepitus, reduced range of motion.",
+investigations: "X-ray: joint space narrowing, osteophytes.",
+diagnosis: "Osteoarthritis.",
+management: "Weight loss, NSAIDs, physiotherapy.",
+discussion: "Degenerative joint disease."
+},
+
+{
+title: "Psoriatic Arthritis",
+presentation: "A 35-year-old male with joint pain and skin plaques.",
+history: "Psoriasis.",
+examination: "Dactylitis, nail pitting.",
+investigations: "RF negative, X-ray: pencil-in-cup deformity.",
+diagnosis: "Psoriatic arthritis.",
+management: "Methotrexate, biologics.",
+discussion: "Seronegative arthritis."
+},
+
+{
+title: "Systemic Sclerosis",
+presentation: "A 45-year-old female with skin tightening and Raynaud phenomenon.",
+history: "Progressive symptoms.",
+examination: "Sclerodactyly, telangiectasia.",
+investigations: "Anti-centromere/anti-Scl-70 positive.",
+diagnosis: "Systemic sclerosis.",
+management: "Symptomatic, immunosuppressants.",
+discussion: "Fibrosis affects multiple organs."
+},
+
+{
+title: "Polymyositis",
+presentation: "A 40-year-old female with proximal muscle weakness.",
+history: "Difficulty climbing stairs.",
+examination: "Symmetric muscle weakness.",
+investigations: "CK elevated, EMG abnormal.",
+diagnosis: "Polymyositis.",
+management: "Steroids, immunosuppressants.",
+discussion: "Muscle inflammation without skin rash."
+},
+
+{
+title: "Reactive Arthritis",
+presentation: "A 30-year-old male with joint pain after diarrhea.",
+history: "Recent GI infection.",
+examination: "Asymmetric arthritis, conjunctivitis.",
+investigations: "HLA-B27 positive.",
+diagnosis: "Reactive arthritis.",
+management: "NSAIDs.",
+discussion: "Reiter syndrome: arthritis + urethritis + conjunctivitis."
+},
+
+{
+title: "Granulomatosis with Polyangiitis (Wegener’s)",
+presentation: "A 50-year-old male with sinusitis, hematuria, and cough.",
+history: "Chronic ENT symptoms.",
+examination: "Nasal ulceration.",
+investigations: "c-ANCA positive.",
+diagnosis: "Granulomatosis with polyangiitis.",
+management: "Steroids + cyclophosphamide.",
+discussion: "Small vessel vasculitis affecting lungs and kidneys."
+},
+    ]
+  },
+  {
+    id: "hematology", name: "Hematology", icon: "activity", emoji: "🩸",
+    desc: "Blood & Lymphatic System",
+    cases: [
+      {
+        title: "Acute Promyelocytic Leukemia (APL) with DIC",
+        presentation: "A 32-year-old male presents with 2 weeks of fatigue, easy bruising, bleeding gums, and epistaxis. Today developed petechiae and hematuria. Temp: 38.5°C, HR: 105, BP: 110/70. Appears pale with diffuse petechiae and ecchymoses.",
+        history: "Previously healthy. No medications, no toxin exposure. No family history of hematological malignancy.",
+        examination: "General: Pallor, petechiae over trunk and limbs, gum hypertrophy with oozing, ecchymoses on arms. No lymphadenopathy. Spleen: Just palpable (1 cm). No hepatomegaly. No focal neurological signs.",
+        investigations: "CBC: Hb 6.8, WBC 2,800 (with 60% blasts on smear), Platelets 18,000. Peripheral Smear: Hypergranular promyelocytes with Auer rods and FAGGOT CELLS (bundles of Auer rods — pathognomonic for APL). Coagulation: PT 22s, aPTT 48s, Fibrinogen 80 mg/dL (low), D-dimer >10,000 (DIC). Bone Marrow: >80% abnormal promyelocytes. Cytogenetics: t(15;17)(q24;q21). Molecular: PML-RARα fusion positive. FISH: Positive for PML-RARα.",
+        diagnosis: "Acute Promyelocytic Leukemia (APL / AML-M3) with Disseminated Intravascular Coagulation (DIC). Confirmed by t(15;17) and PML-RARα fusion.",
+        management: "EMERGENCY: APL is a medical emergency — start ATRA (All-Trans Retinoic Acid) 45 mg/m²/day IMMEDIATELY upon clinical suspicion, do NOT wait for cytogenetics confirmation. DIC MANAGEMENT: Aggressive transfusion — maintain Platelets >30,000 (or >50,000 if bleeding), Fibrinogen >150 (Cryoprecipitate), FFP for coagulopathy. DEFINITIVE: Low-risk (WBC <10,000): ATRA + Arsenic Trioxide (ATO) — no chemotherapy needed (APL0406 trial — 98% CR, >95% cure). High-risk (WBC >10,000): ATRA + ATO + Idarubicin. WATCH FOR: Differentiation Syndrome (fever, dyspnea, weight gain, pulmonary infiltrates) — treat with IV Dexamethasone 10mg BD. MONITORING: Daily coagulation, CBC. Molecular remission (PCR negative for PML-RARα) at end of consolidation. PROGNOSIS: APL is the MOST CURABLE acute leukemia in adults (>90% long-term survival).",
+        discussion: "Key points: 1) APL is the only hematological emergency where a SPECIFIC therapy (ATRA) must start before diagnosis is confirmed. 2) DIC is the leading cause of early death. 3) ATRA + ATO has revolutionized APL — chemotherapy-free cure. 4) Differentiation syndrome occurs in ~25% and can be fatal if untreated. 5) Faggot cells are pathognomonic but not always present."
+      },
+
+{
+title: "Iron Deficiency Anemia",
+presentation: "A 28-year-old female presents with fatigue, weakness, and breathlessness on exertion for 3 months. Also reports pica (craving for मिट्टी/ice). HR: 102/min.",
+history: "Heavy menstrual bleeding (menorrhagia). Vegetarian diet.",
+examination: "Pallor, koilonychia (spoon nails), angular cheilitis.",
+investigations: "Hb: 8 g/dL, MCV: 70 fL (microcytic), serum ferritin low, TIBC high.",
+diagnosis: "Iron deficiency anemia.",
+management: "Oral iron therapy (ferrous sulfate 100–200 mg elemental iron/day), treat underlying cause.",
+discussion: "Low ferritin = most specific marker of iron deficiency."
+},
+
+{
+title: "Megaloblastic Anemia (Vitamin B12 Deficiency)",
+presentation: "A 45-year-old male presents with fatigue and numbness in hands/feet.",
+history: "Strict vegetarian.",
+examination: "Pallor, glossitis, loss of vibration sense.",
+investigations: "Hb low, MCV >100 fL, hypersegmented neutrophils, B12 low.",
+diagnosis: "Vitamin B12 deficiency anemia.",
+management: "IM Vitamin B12 injections.",
+discussion: "Neurological symptoms differentiate B12 from folate deficiency."
+},
+
+{
+title: "Aplastic Anemia",
+presentation: "A 30-year-old male presents with fatigue, recurrent infections, and bleeding gums.",
+history: "Drug exposure (chloramphenicol).",
+examination: "Pallor, petechiae.",
+investigations: "Pancytopenia, bone marrow biopsy: hypocellular marrow.",
+diagnosis: "Aplastic anemia.",
+management: "Immunosuppressive therapy or bone marrow transplant.",
+discussion: "Bone marrow failure → pancytopenia."
+},
+
+{
+title: "Acute Leukemia (ALL)",
+presentation: "A 10-year-old child presents with fever, bone pain, and bleeding.",
+history: "Recent infections.",
+examination: "Lymphadenopathy, hepatosplenomegaly.",
+investigations: "Peripheral smear: blasts, bone marrow biopsy confirms ALL.",
+diagnosis: "Acute lymphoblastic leukemia.",
+management: "Combination chemotherapy.",
+discussion: "Most common childhood cancer."
+},
+
+{
+title: "Chronic Myeloid Leukemia (CML)",
+presentation: "A 45-year-old male with fatigue and abdominal fullness.",
+history: "Gradual onset.",
+examination: "Massive splenomegaly.",
+investigations: "WBC very high, Philadelphia chromosome (BCR-ABL) positive.",
+diagnosis: "CML.",
+management: "Imatinib (tyrosine kinase inhibitor).",
+discussion: "BCR-ABL fusion gene hallmark."
+},
+
+{
+title: "Multiple Myeloma",
+presentation: "A 60-year-old male with bone pain and fatigue.",
+history: "Chronic symptoms.",
+examination: "Bone tenderness.",
+investigations: "Serum protein electrophoresis: M spike, hypercalcemia, anemia, renal dysfunction.",
+diagnosis: "Multiple myeloma.",
+management: "Chemotherapy, bisphosphonates.",
+discussion: "CRAB criteria: Calcium↑, Renal failure, Anemia, Bone lesions."
+},
+
+{
+title: "Immune Thrombocytopenic Purpura (ITP)",
+presentation: "A 25-year-old female with petechiae and easy bruising.",
+history: "Recent viral infection.",
+examination: "No splenomegaly.",
+investigations: "Platelets: 20,000, normal other cell lines.",
+diagnosis: "ITP.",
+management: "Steroids, IVIG if severe.",
+discussion: "Isolated thrombocytopenia."
+},
+
+{
+title: "Hemophilia A",
+presentation: "A 12-year-old boy with recurrent joint bleeding.",
+history: "Family history.",
+examination: "Hemarthrosis.",
+investigations: "aPTT prolonged, factor VIII low.",
+diagnosis: "Hemophilia A.",
+management: "Factor VIII replacement.",
+discussion: "X-linked recessive."
+},
+
+{
+title: "Sickle Cell Disease",
+presentation: "A 18-year-old male with severe bone pain and anemia.",
+history: "Recurrent pain crises.",
+examination: "Pallor, jaundice.",
+investigations: "Peripheral smear: sickled cells, Hb electrophoresis confirms HbS.",
+diagnosis: "Sickle cell disease.",
+management: "Hydration, analgesia, hydroxyurea.",
+discussion: "Vaso-occlusive crises."
+},
+
+{
+title: "Disseminated Intravascular Coagulation (DIC)",
+presentation: "A 50-year-old ICU patient with sepsis develops bleeding from IV sites.",
+history: "Sepsis.",
+examination: "Bleeding, petechiae.",
+investigations: "Platelets low, PT/aPTT prolonged, D-dimer high, fibrinogen low.",
+diagnosis: "DIC.",
+management: "Treat cause, FFP, platelets if needed.",
+discussion: "Consumption coagulopathy."
+},
+    ]
+  },
+  {
+    id: "infectious", name: "Infectious Disease", icon: "bug", emoji: "🦠",
+    desc: "Infections & Tropical Medicine",
+    cases: [
+      {
+        title: "Tuberculous Meningitis",
+        presentation: "A 30-year-old male presents with 3 weeks of low-grade fever, headache, neck stiffness, and progressive confusion. His family reports behavioral changes and one episode of seizure today. GCS: 11 (E3V3M5). Temp: 38.6°C. Known HIV-positive (diagnosed 6 months ago, not on ART, CD4: 85).",
+        history: "PMH: HIV positive, no ART. History of pulmonary TB in childhood (incomplete treatment). Lives in endemic area. Recent weight loss (12 kg in 3 months).",
+        examination: "General: Cachectic, oral candidiasis. Neuro: Neck rigidity positive, Kernig sign positive, left 6th cranial nerve palsy (lateral rectus), bilateral papilledema. Motor: Right-sided subtle weakness. No skin lesions of Kaposi sarcoma.",
+        investigations: "CSF (LP with opening pressure 32 cmH₂O — elevated): Appearance: Clear with cobweb formation. WBC: 280 (lymphocyte predominant 85%). Protein: 380 mg/dL (very high). Glucose: 22 mg/dL (CSF/serum ratio 0.15 — very low). ADA: 18 U/L (elevated). GeneXpert MTB/RIF (CSF): MTB detected, Rifampicin sensitive. AFB smear: Negative (low sensitivity in CSF). MRI Brain: Basal meningeal enhancement, hydrocephalus, tuberculomas in right temporal lobe. Chest X-ray: Miliary pattern. HIV viral load: 450,000 copies/mL.",
+        diagnosis: "Tuberculous Meningitis (TBM) Stage II (GCS 11-14, focal deficits) with hydrocephalus, in setting of advanced HIV/AIDS (WHO Stage 4). Disseminated TB (miliary + CNS).",
+        management: "ANTI-TB: Intensive phase (2 months) — RHZE: Rifampicin 10mg/kg, Isoniazid 5mg/kg (with Pyridoxine), Pyrazinamide 25mg/kg, Ethambutol 15mg/kg. Continuation (7-10 months) — RH. Total duration for TBM: 9-12 months. CORTICOSTEROIDS: IV Dexamethasone 0.4mg/kg/day × 4 weeks, taper over 4-8 weeks (reduces mortality by 30% — Thwaites trial). RAISED ICP: Acetazolamide; if progressive hydrocephalus → VP shunt. SEIZURES: Levetiracetam (avoid enzyme-inducers that interact with Rifampicin). ART: Delay ART by 4-8 weeks to avoid IRIS (Immune Reconstitution Inflammatory Syndrome) — supported by evidence in TBM specifically. Start Dolutegravir-based regimen (adjust dose with Rifampicin). MONITORING: Serial LP if needed, inflammatory markers, LFTs (hepatotoxicity from ATT), vision (Ethambutol toxicity), CD4/viral load.",
+        discussion: "Teaching points: 1) TBM staging: I (GCS 15, no deficits), II (GCS 11-14 or deficits), III (GCS <11). 2) CSF triad: Lymphocytic pleocytosis, high protein, low glucose. 3) GeneXpert CSF sensitivity ~60-80% — treat empirically if high clinical suspicion. 4) Steroids reduce mortality in TBM (NNT=5). 5) IRIS in HIV-TB coinfection is dangerous in CNS — hence delay ART."
+      },
+{
+title: "Cerebral Malaria",
+presentation: "A 24-year-old male presents with 3 days of high-grade fever with chills and rigors, followed by altered sensorium and 2 generalized tonic-clonic seizures. GCS: 9 (E2V2M5). Temp: 40.2°C, HR: 122/min, BP: 90/60 mmHg.",
+history: "Recent travel to Northeast India (malaria-endemic). No chemoprophylaxis. No comorbidities.",
+examination: "General: Pallor, icterus. CNS: Comatose, no focal deficits. Fundus: Malarial retinopathy. Abdomen: Splenomegaly.",
+investigations: "Peripheral smear: Plasmodium falciparum (high parasitemia >5%). Rapid antigen: PfHRP2 positive. Hb: 8.5 g/dL. Platelets: 55,000. Creatinine: 2.1 mg/dL. Lactate elevated.",
+diagnosis: "Severe falciparum malaria (cerebral malaria) with AKI and anemia.",
+management: "IV Artesunate 2.4 mg/kg at 0, 12, 24 hrs then daily → oral ACT. Manage hypoglycemia, IV fluids carefully, anticonvulsants (levetiracetam).",
+discussion: "Severe malaria criteria: CNS involvement, AKI, anemia, hyperparasitemia. Artesunate preferred over quinine."
+},
+
+{
+title: "Dengue Shock Syndrome",
+presentation: "A 19-year-old female with 5 days fever, retro-orbital pain, myalgia. On day 6: severe abdominal pain, vomiting, dizziness. BP: 80/50 mmHg, HR: 130/min.",
+history: "Mosquito exposure.",
+examination: "Cold extremities, delayed capillary refill, petechiae, ascites.",
+investigations: "Platelets: 22,000. Hematocrit: 52% (rising). NS1 positive. LFT elevated.",
+diagnosis: "Dengue shock syndrome (critical phase).",
+management: "Aggressive IV fluids (crystalloids), monitor hematocrit, avoid NSAIDs.",
+discussion: "Plasma leakage → hemoconcentration → shock."
+},
+
+{
+title: "Leptospirosis (Weil’s Disease)",
+presentation: "A 35-year-old farmer presents with fever, calf pain, jaundice, oliguria.",
+history: "Flood water exposure.",
+examination: "Conjunctival suffusion, icterus.",
+investigations: "Bilirubin: 12 mg/dL, Creatinine: 3.5 mg/dL, IgM positive.",
+diagnosis: "Severe leptospirosis.",
+management: "IV Penicillin/Ceftriaxone, dialysis if needed.",
+discussion: "Triad: jaundice + renal failure + hemorrhage."
+},
+
+{
+title: "Scrub Typhus",
+presentation: "A 28-year-old female with 7 days fever, headache, rash.",
+history: "Forest exposure.",
+examination: "Eschar, lymphadenopathy.",
+investigations: "IgM ELISA positive.",
+diagnosis: "Scrub typhus.",
+management: "Doxycycline.",
+discussion: "Eschar = key clue."
+},
+
+{
+title: "Enteric Fever",
+presentation: "A 30-year-old male with step-ladder fever, abdominal pain.",
+history: "Street food intake.",
+examination: "Relative bradycardia, rose spots.",
+investigations: "Blood culture positive.",
+diagnosis: "Typhoid fever.",
+management: "Ceftriaxone/Azithromycin.",
+discussion: "Complication: intestinal perforation."
+},
+
+{
+title: "Rabies",
+presentation: "A 40-year-old male with hydrophobia and agitation.",
+history: "Dog bite, no vaccine.",
+examination: "Hypersalivation.",
+investigations: "Clinical.",
+diagnosis: "Rabies encephalitis.",
+management: "Supportive.",
+discussion: "Almost always fatal."
+},
+
+{
+title: "Tetanus",
+presentation: "Jaw stiffness, spasms.",
+history: "Wound injury.",
+examination: "Opisthotonus.",
+investigations: "Clinical.",
+diagnosis: "Tetanus.",
+management: "TIG + Metronidazole.",
+discussion: "Stimulus-triggered spasms."
+},
+
+{
+title: "Infective Endocarditis",
+presentation: "Fever + murmur.",
+history: "IV drug use.",
+examination: "Janeway lesions.",
+investigations: "Echo vegetations.",
+diagnosis: "IE.",
+management: "IV antibiotics.",
+discussion: "Duke criteria."
+},
+
+{
+title: "Kala-azar",
+presentation: "Fever + weight loss.",
+history: "Endemic area.",
+examination: "Massive spleen.",
+investigations: "rk39 positive.",
+diagnosis: "Visceral leishmaniasis.",
+management: "Amphotericin B.",
+discussion: "Triad: fever + splenomegaly + pancytopenia."
+},
+
+{
+title: "PCP Pneumonia",
+presentation: "Dyspnea + dry cough.",
+history: "HIV, CD4 <200.",
+examination: "Hypoxia.",
+investigations: "CXR ground glass.",
+diagnosis: "PCP.",
+management: "TMP-SMX + steroids.",
+discussion: "Classic HIV OI."
+},
+    ]
+  },
+  {
+    id: "dermatology", name: "Dermatology", icon: "scan", emoji: "🧬",
+    desc: "Skin, Hair & Nails",
+    cases: [
+      {
+        title: "Stevens-Johnson Syndrome (SJS) — Drug-Induced",
+        presentation: "A 35-year-old male on Carbamazepine (started 3 weeks ago for trigeminal neuralgia) presents with 2 days of high fever, malaise, sore throat, followed by widespread painful skin eruption with blistering. Multiple oral, conjunctival, and genital erosions. Unable to eat due to oral pain. BSA involvement: ~12%.",
+        history: "PMH: Trigeminal neuralgia. Started Carbamazepine 200mg BD 3 weeks ago. Ethnicity: Southeast Asian (HLA-B*1502 not tested prior to starting). No drug allergies known previously.",
+        examination: "General: Toxic, febrile (39.5°C), tachycardic. Skin: Widespread erythematous to dusky macules with central necrosis, flaccid bullae, positive Nikolsky sign. Detachment ~12% BSA (SJS: <10% → SJS-TEN overlap: 10-30%). Mucous membranes: Severe oral erosions (hemorrhagic crusting of lips), bilateral conjunctival injection with pseudomembranes, genital erosions. SCORTEN: 3 (predicted mortality ~30%).",
+        investigations: "Biopsy: Full-thickness epidermal necrosis with subepidermal blister, sparse lymphocytic infiltrate at DEJ — consistent with SJS/TEN. HLA-B*1502: Positive (strong association with Carbamazepine-induced SJS in Asian populations). CBC: WBC 3,200 (lymphopenia — poor prognostic). CRP: 180. LFTs: ALT 95 (hepatic involvement). Creatinine: 1.8 (renal involvement). Blood culture: To rule out sepsis.",
+        diagnosis: "Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis overlap (SJS-TEN overlap, 12% BSA detachment) secondary to Carbamazepine. SCORTEN: 3.",
+        management: "IMMEDIATE: STOP Carbamazepine (offending drug identification is the single most important intervention — early withdrawal reduces mortality). TRANSFER: Burns unit or dermatology ICU with experienced multidisciplinary team. SUPPORTIVE (similar to burn care): Temperature-controlled room (30-32°C), non-adherent wound dressings, gentle debridement. Fluid resuscitation (less than burns — 2 mL/kg/% BSA/day). NUTRITION: Nasogastric feeding if oral intake impossible. Caloric needs 25-30 kcal/kg/day. SPECIFIC: Cyclosporine 3-5 mg/kg/day (best available evidence — reduces mortality and progression). IVIG is controversial but may be considered. Systemic corticosteroids: debated — short pulse may help early. EYES: URGENT Ophthalmology — daily exam, preservative-free lubricants, amniotic membrane transplant if corneal involvement. PAIN: Adequate analgesia including opioids. INFECTION: No prophylactic antibiotics; monitor for secondary infection (skin swabs), treat only if confirmed. MONITORING: Daily SCORTEN, wound assessment, electrolytes, renal/hepatic function.",
+        discussion: "Teaching points: 1) Pharmacogenomics: HLA-B*1502 screening is MANDATORY before Carbamazepine in Asian populations (FDA black box warning). 2) SCORTEN score predicts mortality at day 1. 3) Drug withdrawal is more impactful than any treatment. 4) Common culprits: Allopurinol, Carbamazepine, Lamotrigine, Phenytoin, Sulfonamides, NSAIDs. 5) Long-term sequelae: Sicca syndrome, corneal scarring, skin dyspigmentation, strictures."
+      },
+
+{
+title: "Psoriasis Vulgaris",
+presentation: "A 35-year-old male presents with chronic itchy, scaly plaques over elbows and knees for 6 months. Symptoms worsen in winter.",
+history: "Family history of similar lesions.",
+examination: "Well-demarcated erythematous plaques with silvery scales. Auspitz sign positive.",
+investigations: "Clinical diagnosis; biopsy if uncertain.",
+diagnosis: "Chronic plaque psoriasis.",
+management: "Topical steroids, vitamin D analogs, methotrexate for severe disease.",
+discussion: "Auspitz sign = pinpoint bleeding on scale removal."
+},
+
+{
+title: "Atopic Dermatitis",
+presentation: "A 10-year-old child with itchy rash in flexural areas.",
+history: "History of asthma and allergic rhinitis.",
+examination: "Erythematous, lichenified lesions in antecubital fossae.",
+investigations: "Clinical diagnosis.",
+diagnosis: "Atopic dermatitis.",
+management: "Emollients, topical steroids, antihistamines.",
+discussion: "Atopic triad: asthma + eczema + allergic rhinitis."
+},
+
+{
+title: "Pemphigus Vulgaris",
+presentation: "A 45-year-old female with painful oral ulcers and skin blisters.",
+history: "Gradual onset.",
+examination: "Flaccid bullae, positive Nikolsky sign.",
+investigations: "Biopsy: intraepidermal acantholysis, IF: IgG deposits.",
+diagnosis: "Pemphigus vulgaris.",
+management: "Systemic steroids, immunosuppressants.",
+discussion: "Autoantibodies against desmoglein."
+},
+
+{
+title: "Bullous Pemphigoid",
+presentation: "A 70-year-old male with tense blisters and itching.",
+history: "Elderly onset.",
+examination: "Tense bullae, Nikolsky negative.",
+investigations: "Biopsy: subepidermal blister.",
+diagnosis: "Bullous pemphigoid.",
+management: "Topical/systemic steroids.",
+discussion: "Less severe than pemphigus."
+},
+
+{
+title: "Vitiligo",
+presentation: "A 25-year-old female with depigmented patches on face and hands.",
+history: "Autoimmune background.",
+examination: "Well-defined depigmented macules.",
+investigations: "Wood’s lamp enhances lesions.",
+diagnosis: "Vitiligo.",
+management: "Topical steroids, phototherapy.",
+discussion: "Loss of melanocytes."
+},
+
+{
+title: "Tinea Corporis",
+presentation: "A 30-year-old male with itchy ring-shaped lesions.",
+history: "Contact with infected person.",
+examination: "Annular lesions with central clearing.",
+investigations: "KOH mount: fungal hyphae.",
+diagnosis: "Dermatophytosis.",
+management: "Topical antifungals.",
+discussion: "Ringworm appearance."
+},
+
+{
+title: "Herpes Zoster",
+presentation: "A 55-year-old male with painful vesicular rash in dermatomal distribution.",
+history: "Immunosuppression.",
+examination: "Grouped vesicles on erythematous base.",
+investigations: "Clinical diagnosis.",
+diagnosis: "Shingles (VZV reactivation).",
+management: "Acyclovir.",
+discussion: "Post-herpetic neuralgia risk."
+},
+
+{
+title: "Acne Vulgaris",
+presentation: "A 18-year-old with pimples on face.",
+history: "Puberty onset.",
+examination: "Comedones, papules, pustules.",
+investigations: "Clinical.",
+diagnosis: "Acne vulgaris.",
+management: "Topical retinoids, benzoyl peroxide.",
+discussion: "Androgen-driven sebaceous activity."
+},
+
+{
+title: "Stevens-Johnson Syndrome",
+presentation: "A 40-year-old develops rash and mucosal ulcers after drug intake.",
+history: "Recent antibiotic use.",
+examination: "Target lesions, epidermal detachment <10%.",
+investigations: "Clinical.",
+diagnosis: "SJS.",
+management: "Stop drug, supportive care.",
+discussion: "Medical emergency."
+},
+
+{
+title: "Leprosy",
+presentation: "A 35-year-old male with hypopigmented patches and loss of sensation.",
+history: "Endemic area.",
+examination: "Thickened peripheral nerves.",
+investigations: "Skin smear: AFB positive.",
+diagnosis: "Leprosy.",
+management: "Multidrug therapy (rifampicin, dapsone, clofazimine).",
+discussion: "Sensory loss is key feature."
+},
+    ]
+  }
+];
+
+// App State
+let currentView = "home";
+let selectedSystem = null;
+let selectedCase = null;
+let activeTab = "presentation";
+let revealedSections = {};
+
+function getConfig() {
+  return window.elementSdk?.config || defaultConfig;
+}
+
+function renderApp() {
+  const cfg = getConfig();
+  const app = document.getElementById("app");
+  
+  if (currentView === "home") {
+    renderHome(app, cfg);
+  } else if (currentView === "system") {
+    renderSystem(app, cfg);
+  } else if (currentView === "case") {
+    renderCase(app, cfg);
+  }
+  
+  setTimeout(() => lucide.createIcons(), 50);
+}
+
+function renderHome(app, cfg) {
+  const baseSize = cfg.font_size || defaultConfig.font_size;
+  const fontFam = cfg.font_family || defaultConfig.font_family;
+  
+  app.innerHTML = `
+    <div class="w-full min-h-full" style="background: ${cfg.background_color}; font-family: ${fontFam}, 'Source Sans 3', sans-serif;">
+      <header class="hero-pattern w-full py-16 px-6 text-center" style="background: linear-gradient(135deg, ${cfg.primary_action}22, ${cfg.background_color}, ${cfg.secondary_action}15);">
+        <div class="max-w-4xl mx-auto">
+          <div style="font-size: ${baseSize * 0.85}px; color: ${cfg.secondary_action}; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;" class="mb-4">Medical Education Platform</div>
+          <h1 id="mainTitle" class="heading-font" style="font-size: ${baseSize * 3}px; color: ${cfg.text_color}; font-weight: 900; line-height: 1.1;">${cfg.main_title}</h1>
+          <p id="subtitleText" style="font-size: ${baseSize * 1.25}px; color: ${cfg.text_color}88; margin-top: 16px;">${cfg.subtitle_text}</p>
+          <div style="width: 80px; height: 4px; background: ${cfg.primary_action}; margin: 24px auto 0; border-radius: 2px;"></div>
+        </div>
+      </header>
+      
+      <main class="max-w-6xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="systemsGrid">
+          ${systems.map((s, i) => `
+            <div class="system-card rounded-2xl p-6 border" 
+                 style="background: ${cfg.surface_color}; border-color: ${cfg.text_color}15; animation-delay: ${i * 60}ms; animation: fadeIn 0.4s ease ${i * 60}ms both;"
+                 onclick="openSystem('${s.id}')">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: ${cfg.primary_action}20;">
+                  ${s.emoji}
+                </div>
+                <div>
+                  <h3 class="heading-font" style="font-size: ${baseSize * 1.3}px; color: ${cfg.text_color}; font-weight: 700;">${s.name}</h3>
+                  <p style="font-size: ${baseSize * 0.8}px; color: ${cfg.text_color}66;">${s.desc}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2" style="color: ${cfg.secondary_action}; font-size: ${baseSize * 0.85}px; font-weight: 600;">
+                <span>${s.cases.length} Case${s.cases.length > 1 ? 's' : ''}</span>
+                <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </main>
+      
+      <footer class="text-center py-8 px-6" style="color: ${cfg.text_color}44; font-size: ${baseSize * 0.8}px;">
+        For educational purposes • Evidence-based clinical discussions
+      </footer>
+    </div>
+  `;
+}
+
+function renderSystem(app, cfg) {
+  const sys = systems.find(s => s.id === selectedSystem);
+  if (!sys) return;
+  const baseSize = cfg.font_size || defaultConfig.font_size;
+  const fontFam = cfg.font_family || defaultConfig.font_family;
+  
+  app.innerHTML = `
+    <div class="w-full min-h-full" style="background: ${cfg.background_color}; font-family: ${fontFam}, 'Source Sans 3', sans-serif;">
+      <nav class="w-full px-6 py-4 flex items-center gap-3 border-b" style="border-color: ${cfg.text_color}10; background: ${cfg.surface_color};">
+        <button onclick="goHome()" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:opacity-80 transition" style="color: ${cfg.secondary_action}; font-size: ${baseSize * 0.9}px;">
+          <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> All Systems
+        </button>
+      </nav>
+      
+      <div class="max-w-4xl mx-auto px-6 py-10 case-panel">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl" style="background: ${cfg.primary_action}20;">${sys.emoji}</div>
+          <div>
+            <h1 class="heading-font" style="font-size: ${baseSize * 2.2}px; color: ${cfg.text_color}; font-weight: 900;">${sys.name}</h1>
+            <p style="color: ${cfg.text_color}66; font-size: ${baseSize}px;">${sys.desc}</p>
+          </div>
+        </div>
+        
+        <div class="space-y-4">
+          ${sys.cases.map((c, i) => `
+            <div class="system-card rounded-xl p-6 border" style="background: ${cfg.surface_color}; border-color: ${cfg.text_color}12;" onclick="openCase('${sys.id}', ${i})">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <div style="color: ${cfg.secondary_action}; font-size: ${baseSize * 0.75}px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;" class="mb-2">Case ${i + 1}</div>
+                  <h3 class="heading-font" style="font-size: ${baseSize * 1.4}px; color: ${cfg.text_color}; font-weight: 700;">${c.title}</h3>
+                  <p style="color: ${cfg.text_color}77; font-size: ${baseSize * 0.9}px; margin-top: 8px; line-height: 1.6;" class="line-clamp-2">${c.presentation.substring(0, 150)}...</p>
+                </div>
+                <i data-lucide="chevron-right" style="width: 24px; height: 24px; color: ${cfg.text_color}44; flex-shrink: 0; margin-top: 8px;"></i>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCase(app, cfg) {
+  const sys = systems.find(s => s.id === selectedSystem);
+  if (!sys) return;
+  const c = sys.cases[selectedCase];
+  if (!c) return;
+  const baseSize = cfg.font_size || defaultConfig.font_size;
+  const fontFam = cfg.font_family || defaultConfig.font_family;
+  
+  const tabs = [
+    { id: "presentation", label: "Presentation", icon: "user" },
+    { id: "history", label: "History", icon: "clipboard" },
+    { id: "examination", label: "Examination", icon: "stethoscope" },
+    { id: "investigations", label: "Investigations", icon: "flask-conical" },
+    { id: "diagnosis", label: "Diagnosis", icon: "target" },
+    { id: "management", label: "Management", icon: "pill" },
+    { id: "discussion", label: "Discussion", icon: "message-circle" }
+  ];
+  
+  const caseKey = `${selectedSystem}-${selectedCase}`;
+  const isRevealed = (section) => revealedSections[`${caseKey}-${section}`];
+  
+  const content = c[activeTab] || "";
+  const revealed = isRevealed(activeTab);
+  const shouldHide = ["diagnosis", "management", "discussion"].includes(activeTab);
+  
+  app.innerHTML = `
+    <div class="w-full min-h-full" style="background: ${cfg.background_color}; font-family: ${fontFam}, 'Source Sans 3', sans-serif;">
+      <nav class="w-full px-6 py-4 flex items-center gap-3 border-b" style="border-color: ${cfg.text_color}10; background: ${cfg.surface_color};">
+        <button onclick="openSystem('${sys.id}')" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:opacity-80 transition" style="color: ${cfg.secondary_action}; font-size: ${baseSize * 0.9}px;">
+          <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> ${sys.name}
+        </button>
+      </nav>
+      
+      <div class="max-w-4xl mx-auto px-6 py-8 case-panel">
+        <div class="mb-6">
+          <div style="color: ${cfg.secondary_action}; font-size: ${baseSize * 0.75}px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;" class="mb-2">${sys.name} • Case ${selectedCase + 1}</div>
+          <h1 class="heading-font" style="font-size: ${baseSize * 1.8}px; color: ${cfg.text_color}; font-weight: 900; line-height: 1.2;">${c.title}</h1>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="flex gap-1 overflow-x-auto pb-2 mb-8" style="scrollbar-width: none;">
+          ${tabs.map(t => `
+            <button class="tab-btn flex items-center gap-2 px-4 py-3 rounded-t-lg whitespace-nowrap transition ${activeTab === t.id ? 'active' : ''}"
+                    style="font-size: ${baseSize * 0.85}px; font-weight: ${activeTab === t.id ? '700' : '500'}; 
+                           color: ${activeTab === t.id ? cfg.secondary_action : cfg.text_color + '66'};
+                           background: ${activeTab === t.id ? cfg.surface_color : 'transparent'};
+                           border-color: ${cfg.secondary_action};"
+                    onclick="switchTab('${t.id}')">
+              <i data-lucide="${t.icon}" style="width: 16px; height: 16px;"></i>
+              <span class="hidden sm:inline">${t.label}</span>
+            </button>
+          `).join('')}
+        </div>
+        
+        <!-- Content -->
+        <div class="rounded-2xl p-8 border fade-in" style="background: ${cfg.surface_color}; border-color: ${cfg.text_color}10;">
+          <h2 class="heading-font flex items-center gap-3 mb-6" style="font-size: ${baseSize * 1.5}px; color: ${cfg.text_color}; font-weight: 700;">
+            <i data-lucide="${tabs.find(t => t.id === activeTab)?.icon || 'file-text'}" style="width: 24px; height: 24px; color: ${cfg.secondary_action};"></i>
+            ${tabs.find(t => t.id === activeTab)?.label || ''}
+          </h2>
+          
+          ${shouldHide && !revealed ? `
+            <div class="text-center py-12">
+              <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style="background: ${cfg.primary_action}15;">
+                <i data-lucide="eye-off" style="width: 32px; height: 32px; color: ${cfg.primary_action};"></i>
+              </div>
+              <p style="color: ${cfg.text_color}77; font-size: ${baseSize}px; margin-bottom: 20px;">Think about your answer first before revealing</p>
+              <button onclick="revealSection('${activeTab}')" class="reveal-btn px-8 py-3 rounded-xl font-semibold" 
+                      style="background: ${cfg.primary_action}; color: white; font-size: ${baseSize}px;">
+                <span class="flex items-center gap-2"><i data-lucide="eye" style="width: 18px; height: 18px;"></i> Reveal ${tabs.find(t => t.id === activeTab)?.label}</span>
+              </button>
+            </div>
+          ` : `
+            <div style="color: ${cfg.text_color}cc; font-size: ${baseSize}px; line-height: 1.9;">
+              ${formatContent(content, cfg)}
+            </div>
+          `}
+        </div>
+        
+        <!-- Nav buttons -->
+        <div class="flex justify-between mt-8">
+          ${getPrevTab(activeTab, tabs) ? `
+            <button onclick="switchTab('${getPrevTab(activeTab, tabs)}')" class="flex items-center gap-2 px-5 py-3 rounded-xl transition hover:opacity-80" style="background: ${cfg.surface_color}; color: ${cfg.text_color}; font-size: ${baseSize * 0.9}px; border: 1px solid ${cfg.text_color}15;">
+              <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i> Previous
+            </button>
+          ` : '<div></div>'}
+          ${getNextTab(activeTab, tabs) ? `
+            <button onclick="switchTab('${getNextTab(activeTab, tabs)}')" class="flex items-center gap-2 px-5 py-3 rounded-xl transition hover:opacity-80" style="background: ${cfg.primary_action}; color: white; font-size: ${baseSize * 0.9}px;">
+              Next <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+            </button>
+          ` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function formatContent(text, cfg) {
+  // Split on sentence-ending periods followed by space or key labels
+  let formatted = text
+    .replace(/(\d+\))/g, '<br><strong style="color: ' + cfg.secondary_action + '">$1</strong>')
+    .replace(/(IMMEDIATE|REPERFUSION|ADJUNCTIVE|MONITORING|SECONDARY PREVENTION|RESPIRATORY SUPPORT|ANTIBIOTICS|SUPPORTIVE|ICU CARE|ANALGESIA|INTERVENTION|BP CONTROL|GLYCEMIC CONTROL|EDEMA|LIPIDS|MONITOR|PREPARE|HYPERACUTE|STROKE UNIT|ANTICOAGULATION|REHABILITATION|FLUID RESUSCITATION|INSULIN|POTASSIUM|BICARBONATE|TRANSITION|EDUCATION|INDUCTION|MAINTENANCE|RENAL|APS|ADJUNCTIVE|EMERGENCY|DIC MANAGEMENT|DEFINITIVE|WATCH FOR|ANTI-TB|CORTICOSTEROIDS|RAISED ICP|SEIZURES|ART|TRANSFER|NUTRITION|SPECIFIC|EYES|PAIN|INFECTION):/g, '<br><span style="display: inline-block; margin-top: 12px; padding: 2px 10px; border-radius: 6px; background: ' + cfg.primary_action + '25; color: ' + cfg.secondary_action + '; font-weight: 700; font-size: 0.9em;">$1</span>:')
+    .replace(/→/g, ' <span style="color: ' + cfg.secondary_action + '">→</span> ')
+    .replace(/(PMH|Medications|Family Hx|Social|General|CVS|Lungs|Abdomen|Periphery|Neuro|MSK|Skin|Chest|Fundoscopy):/g, '<br><strong style="color: ' + cfg.text_color + '">$1:</strong>')
+    .replace(/(ECG|Troponin|CBC|CRP|ABG|CSF|MRI|CT|NCCT|Chest X-ray|Echo|Urinalysis|Serum|Renal USG|ANA|Complement|Peripheral Smear|Bone Marrow|Cytogenetics|Molecular|FISH|Biopsy|HLA)([^<])/g, '<strong>$1</strong>$2');
+  
+  return formatted;
+}
+
+function getPrevTab(current, tabs) {
+  const idx = tabs.findIndex(t => t.id === current);
+  return idx > 0 ? tabs[idx - 1].id : null;
+}
+
+function getNextTab(current, tabs) {
+  const idx = tabs.findIndex(t => t.id === current);
+  return idx < tabs.length - 1 ? tabs[idx + 1].id : null;
+}
+
+// Navigation functions
+window.openSystem = function(id) {
+  selectedSystem = id;
+  currentView = "system";
+  renderApp();
+  document.getElementById("app").scrollTop = 0;
+};
+
+window.openCase = function(sysId, caseIdx) {
+  selectedSystem = sysId;
+  selectedCase = caseIdx;
+  activeTab = "presentation";
+  currentView = "case";
+  renderApp();
+  document.getElementById("app").scrollTop = 0;
+};
+
+window.goHome = function() {
+  currentView = "home";
+  selectedSystem = null;
+  selectedCase = null;
+  renderApp();
+  document.getElementById("app").scrollTop = 0;
+};
+
+window.switchTab = function(tab) {
+  activeTab = tab;
+  renderApp();
+};
+
+window.revealSection = function(section) {
+  const caseKey = `${selectedSystem}-${selectedCase}`;
+  revealedSections[`${caseKey}-${section}`] = true;
+  renderApp();
+};
+
+renderApp();
+</script>
+</body>
+</html>
