@@ -1,0 +1,1030 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Renal Emergencies | Acute Kidney & Electrolyte Crisis | Deep Medicine</title> <meta name="description" content="Comprehensive guide to renal emergencies including acute kidney injury, electrolyte imbalances, and emergency management strategies."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/renal-emergencies"> <!-- Open Graph --> <meta property="og:title" content="Renal Emergencies | Deep Medicine"> <meta property="og:description" content="Acute kidney injury, electrolyte disturbances, and renal emergency management."> <meta property="og:image" content="https://deepmedicine.in/images/renal-emergencies.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+
+.app-shell { height: 100%; overflow-y: auto; overflow-x: hidden; }
+
+/* Animated kidney pulse */
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(220,50,50,0.3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(220,50,50,0.6)); }
+}
+.kidney-pulse { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* Staggered card entrance */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-enter { animation: slideUp 0.5s ease-out both; }
+.card-enter:nth-child(1) { animation-delay: 0.05s; }
+.card-enter:nth-child(2) { animation-delay: 0.1s; }
+.card-enter:nth-child(3) { animation-delay: 0.15s; }
+.card-enter:nth-child(4) { animation-delay: 0.2s; }
+.card-enter:nth-child(5) { animation-delay: 0.25s; }
+.card-enter:nth-child(6) { animation-delay: 0.3s; }
+.card-enter:nth-child(7) { animation-delay: 0.35s; }
+.card-enter:nth-child(8) { animation-delay: 0.4s; }
+
+/* Section transitions */
+.section-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 1rem; }
+.section-content.open { max-height: 8000px; padding: 1rem; }
+
+/* Custom scrollbar */
+.app-shell::-webkit-scrollbar { width: 6px; }
+.app-shell::-webkit-scrollbar-track { background: #1a1a2e; }
+.app-shell::-webkit-scrollbar-thumb { background: #c0392b; border-radius: 3px; }
+
+/* Tab active indicator */
+.tab-btn { position: relative; transition: all 0.3s ease; }
+.tab-btn::after { content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 2px; background: #e74c3c; transition: all 0.3s ease; transform: translateX(-50%); }
+.tab-btn.active::after { width: 80%; }
+.tab-btn.active { color: #e74c3c; }
+
+/* Severity badges */
+.severity-critical { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+.severity-high { background: linear-gradient(135deg, #d35400, #e67e22); }
+.severity-moderate { background: linear-gradient(135deg, #f39c12, #f1c40f); color: #1a1a2e; }
+
+/* Table styling */
+.clinical-table { border-collapse: separate; border-spacing: 0; }
+.clinical-table th { background: #16213e; position: sticky; top: 0; z-index: 2; }
+.clinical-table tr:hover td { background: rgba(192,57,43,0.08); }
+
+/* Progress ring for GFR */
+@keyframes fillRing { from { stroke-dashoffset: 283; } }
+.gfr-ring { animation: fillRing 1.5s ease-out both; }
+
+/* Floating nav dot */
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; transition: all 0.3s; }
+.nav-dot.active { width: 10px; height: 24px; border-radius: 5px; background: #e74c3c; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="app-shell bg-[#0f0f23] text-gray-200 font-body" id="appShell"><!-- ===================== HERO ===================== -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(160deg, #1a0a0a 0%, #0f0f23 40%, #16213e 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #c0392b 0%, transparent 50%), radial-gradient(circle at 80% 20%, #2c3e50 0%, transparent 50%);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-12 sm:py-16 md:py-20 text-center"><!-- Kidney SVG Icon -->
+     <div class="kidney-pulse mx-auto mb-6 w-20 h-20 sm:w-24 sm:h-24">
+      <svg viewbox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 20C15 20 8 35 10 50C12 65 20 80 35 85C42 87 48 82 50 75C52 82 58 87 65 85C80 80 88 65 90 50C92 35 85 20 70 20C62 20 56 28 50 35C44 28 38 20 30 20Z" fill="#c0392b" opacity="0.85" /> <path d="M50 35C48 40 46 48 47 55C48 62 50 68 50 75" stroke="#fff" stroke-width="2" opacity="0.4" stroke-linecap="round" /> <path d="M35 40C38 45 40 50 38 58" stroke="#fff" stroke-width="1.5" opacity="0.3" stroke-linecap="round" /> <path d="M65 40C62 45 60 50 62 58" stroke="#fff" stroke-width="1.5" opacity="0.3" stroke-linecap="round" />
+      </svg>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-800 text-white mb-3 tracking-tight" style="line-height:1.1;">Renal Emergencies</h1>
+     <p id="subtitle" class="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8">A Comprehensive Clinical Reference for Emergency &amp; Critical Care</p>
+     <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm"><span class="bg-red-900/40 border border-red-800/50 text-red-300 px-3 py-1.5 rounded-full flex items-center gap-1.5"><i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Critical Care</span> <span class="bg-blue-900/40 border border-blue-800/50 text-blue-300 px-3 py-1.5 rounded-full flex items-center gap-1.5"><i data-lucide="activity" style="width:14px;height:14px;"></i> Nephrology</span> <span class="bg-amber-900/40 border border-amber-800/50 text-amber-300 px-3 py-1.5 rounded-full flex items-center gap-1.5"><i data-lucide="zap" style="width:14px;height:14px;"></i> Emergency Medicine</span>
+     </div>
+    </div>
+   </header><!-- ===================== QUICK NAV TABS ===================== -->
+   <nav class="sticky top-0 z-30 bg-[#0f0f23]/95 backdrop-blur border-b border-gray-800/50">
+    <div class="max-w-6xl mx-auto px-2 overflow-x-auto">
+     <div class="flex gap-1 min-w-max py-2" id="navTabs"><button class="tab-btn active text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="overview" onclick="scrollToSection('overview')">Overview</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="aki" onclick="scrollToSection('aki')">AKI</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="hyperkalemia" onclick="scrollToSection('hyperkalemia')">Hyperkalemia</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="pulmonary-edema" onclick="scrollToSection('pulmonary-edema')">Pulmonary Edema</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="acidosis" onclick="scrollToSection('acidosis')">Metabolic Acidosis</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="hus-ttp" onclick="scrollToSection('hus-ttp')">HUS/TTP</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="rrt" onclick="scrollToSection('rrt')">Dialysis</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="drugs" onclick="scrollToSection('drugs')">Drug Dosing</button> <button class="tab-btn text-xs sm:text-sm px-3 py-2 rounded-lg text-gray-400 hover:text-white transition whitespace-nowrap" data-target="calculator" onclick="scrollToSection('calculator')">GFR Calculator</button>
+     </div>
+    </div>
+   </nav><!-- ===================== MAIN CONTENT ===================== -->
+   <main class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-10 space-y-8"><!-- ===== SECTION: OVERVIEW ===== -->
+    <section id="overview" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-red-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="book-open" style="width:20px;height:20px;" class="text-red-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">Overview of Renal Emergencies</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Definition, Classification &amp; Epidemiology</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content open">
+       <div class="space-y-5"><!-- Definition -->
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-red-400 font-semibold text-sm uppercase tracking-wider mb-2 flex items-center gap-2"><i data-lucide="info" style="width:14px;height:14px;"></i> Definition</h3>
+         <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-white">Renal emergencies</strong> are acute, life-threatening conditions arising from sudden impairment of kidney function or acute complications of chronic kidney disease (CKD) that demand <strong class="text-red-300">immediate intervention</strong> within minutes to hours to prevent irreversible organ damage or death.</p>
+        </div><!-- Key Statistics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+         <div class="bg-[#0f0f23]/60 rounded-xl p-3 sm:p-4 border border-gray-800/40 text-center">
+          <div class="text-2xl sm:text-3xl font-heading font-700 text-red-400">
+           10-15%
+          </div>
+          <div class="text-xs text-gray-500 mt-1">
+           ICU admissions with AKI
+          </div>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-3 sm:p-4 border border-gray-800/40 text-center">
+          <div class="text-2xl sm:text-3xl font-heading font-700 text-amber-400">
+           50-80%
+          </div>
+          <div class="text-xs text-gray-500 mt-1">
+           Mortality in severe AKI with MOF
+          </div>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-3 sm:p-4 border border-gray-800/40 text-center">
+          <div class="text-2xl sm:text-3xl font-heading font-700 text-blue-400">
+           13%
+          </div>
+          <div class="text-xs text-gray-500 mt-1">
+           Global CKD prevalence
+          </div>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-3 sm:p-4 border border-gray-800/40 text-center">
+          <div class="text-2xl sm:text-3xl font-heading font-700 text-emerald-400">
+           6-7×
+          </div>
+          <div class="text-xs text-gray-500 mt-1">
+           Higher mortality with AKI in hospitalized
+          </div>
+         </div>
+        </div><!-- Classification -->
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-red-400 font-semibold text-sm uppercase tracking-wider mb-3 flex items-center gap-2"><i data-lucide="layers" style="width:14px;height:14px;"></i> Major Renal Emergencies</h3>
+         <div class="grid sm:grid-cols-2 gap-2">
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-critical text-white text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">CRITICAL</span><span class="text-sm text-gray-300">Acute Kidney Injury (AKI) with anuria</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-critical text-white text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">CRITICAL</span><span class="text-sm text-gray-300">Life-threatening Hyperkalemia (K⁺ &gt; 6.5)</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-critical text-white text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">CRITICAL</span><span class="text-sm text-gray-300">Severe Pulmonary Edema (flash)</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-critical text-white text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">CRITICAL</span><span class="text-sm text-gray-300">Severe Metabolic Acidosis (pH &lt; 7.1)</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-high text-white text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">HIGH</span><span class="text-sm text-gray-300">Uremic Encephalopathy / Pericarditis</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-high text-white text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">HIGH</span><span class="text-sm text-gray-300">HUS / TTP (Thrombotic Microangiopathy)</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-high text-white text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">HIGH</span><span class="text-sm text-gray-300">Rapidly Progressive Glomerulonephritis</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-moderate text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">MODERATE</span><span class="text-sm text-gray-300">Rhabdomyolysis-induced AKI</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-moderate text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">MODERATE</span><span class="text-sm text-gray-300">Acute Urinary Obstruction</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-800/30 transition">
+           <span class="severity-moderate text-xs font-bold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">MODERATE</span><span class="text-sm text-gray-300">Hypertensive Renal Crisis</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: AKI ===== -->
+    <section id="aki" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="alert-triangle" style="width:20px;height:20px;" class="text-orange-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">Acute Kidney Injury (AKI)</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">KDIGO Staging, Etiology &amp; Management</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content">
+       <div class="space-y-5"><!-- KDIGO Definition -->
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-red-900/30">
+         <h3 class="text-orange-400 font-semibold text-sm uppercase tracking-wider mb-2">KDIGO Definition of AKI</h3>
+         <ul class="space-y-1.5 text-sm text-gray-300">
+          <li class="flex items-start gap-2"><span class="text-red-400 font-bold mt-0.5">•</span>Increase in serum creatinine ≥ 0.3 mg/dL within <strong class="text-white">48 hours</strong></li>
+          <li class="flex items-start gap-2"><span class="text-red-400 font-bold mt-0.5">•</span>Increase in serum creatinine ≥ 1.5× baseline within <strong class="text-white">7 days</strong></li>
+          <li class="flex items-start gap-2"><span class="text-red-400 font-bold mt-0.5">•</span>Urine output &lt; 0.5 mL/kg/hr for <strong class="text-white">6 hours</strong></li>
+         </ul>
+        </div><!-- KDIGO Staging Table -->
+        <div class="overflow-x-auto rounded-xl border border-gray-800/40">
+         <table class="clinical-table w-full text-sm">
+          <thead>
+           <tr>
+            <th class="text-left px-4 py-3 text-xs uppercase tracking-wider text-gray-400 font-semibold border-b border-gray-700">Stage</th>
+            <th class="text-left px-4 py-3 text-xs uppercase tracking-wider text-gray-400 font-semibold border-b border-gray-700">Serum Creatinine</th>
+            <th class="text-left px-4 py-3 text-xs uppercase tracking-wider text-gray-400 font-semibold border-b border-gray-700">Urine Output</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="px-4 py-3 border-b border-gray-800/40"><span class="bg-amber-600/20 text-amber-300 font-bold px-2 py-0.5 rounded text-xs">Stage 1</span></td>
+            <td class="px-4 py-3 border-b border-gray-800/40 text-gray-300">1.5–1.9× baseline OR ≥0.3 mg/dL increase</td>
+            <td class="px-4 py-3 border-b border-gray-800/40 text-gray-300">&lt;0.5 mL/kg/hr for 6–12 hr</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3 border-b border-gray-800/40"><span class="bg-orange-600/20 text-orange-300 font-bold px-2 py-0.5 rounded text-xs">Stage 2</span></td>
+            <td class="px-4 py-3 border-b border-gray-800/40 text-gray-300">2.0–2.9× baseline</td>
+            <td class="px-4 py-3 border-b border-gray-800/40 text-gray-300">&lt;0.5 mL/kg/hr for ≥12 hr</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3"><span class="bg-red-600/20 text-red-300 font-bold px-2 py-0.5 rounded text-xs">Stage 3</span></td>
+            <td class="px-4 py-3 text-gray-300">≥3× baseline OR ≥4 mg/dL OR initiation of RRT</td>
+            <td class="px-4 py-3 text-gray-300">&lt;0.3 mL/kg/hr for ≥24 hr OR anuria ≥12 hr</td>
+           </tr>
+          </tbody>
+         </table>
+        </div><!-- Pre-renal / Intrinsic / Post-renal -->
+        <div class="grid md:grid-cols-3 gap-3">
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-blue-900/30">
+          <h4 class="text-blue-400 font-semibold text-sm mb-2 flex items-center gap-1.5"><i data-lucide="droplets" style="width:14px;height:14px;"></i> Pre-Renal (55-60%)</h4>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li>• Hypovolemia (hemorrhage, dehydration, burns)</li>
+           <li>• Decreased cardiac output (CHF, cardiogenic shock)</li>
+           <li>• Systemic vasodilation (sepsis, anaphylaxis)</li>
+           <li>• Renal vasoconstriction (NSAIDs, ACEi/ARBs, hepatorenal)</li>
+           <li><strong class="text-blue-300">FENa &lt; 1%, BUN/Cr &gt; 20:1, UOsm &gt; 500</strong></li>
+          </ul>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-red-900/30">
+          <h4 class="text-red-400 font-semibold text-sm mb-2 flex items-center gap-1.5"><i data-lucide="flame" style="width:14px;height:14px;"></i> Intrinsic Renal (35-40%)</h4>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li>• <strong class="text-red-300">ATN</strong> – ischemic (most common) or nephrotoxic</li>
+           <li>• Acute Interstitial Nephritis (AIN) – drugs, infections</li>
+           <li>• Glomerulonephritis – RPGN, lupus nephritis</li>
+           <li>• Vascular – TMA, renal artery thrombosis, cholesterol emboli</li>
+           <li><strong class="text-red-300">FENa &gt; 2%, Muddy brown casts, UOsm &lt; 350</strong></li>
+          </ul>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-emerald-900/30">
+          <h4 class="text-emerald-400 font-semibold text-sm mb-2 flex items-center gap-1.5"><i data-lucide="git-branch" style="width:14px;height:14px;"></i> Post-Renal (5-10%)</h4>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li>• BPH (most common in elderly males)</li>
+           <li>• Bilateral ureteric stones/tumors</li>
+           <li>• Retroperitoneal fibrosis</li>
+           <li>• Neurogenic bladder</li>
+           <li><strong class="text-emerald-300">Hydronephrosis on USG, bladder distension</strong></li>
+          </ul>
+         </div>
+        </div><!-- Management Algorithm -->
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-orange-400 font-semibold text-sm uppercase tracking-wider mb-3">Emergency Management Algorithm</h3>
+         <div class="space-y-2">
+          <div class="flex items-center gap-2">
+           <div class="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            1
+           </div><span class="text-sm text-gray-300"><strong class="text-white">ABCs</strong> – Secure airway, assess breathing, establish IV access</span>
+          </div>
+          <div class="flex items-center gap-2">
+           <div class="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            2
+           </div><span class="text-sm text-gray-300"><strong class="text-white">Volume status</strong> – JVP, lung auscultation, fluid challenge if hypovolemic</span>
+          </div>
+          <div class="flex items-center gap-2">
+           <div class="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            3
+           </div><span class="text-sm text-gray-300"><strong class="text-white">Urgent labs</strong> – BMP, CBC, ABG, urinalysis, FENa, urine microscopy</span>
+          </div>
+          <div class="flex items-center gap-2">
+           <div class="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            4
+           </div><span class="text-sm text-gray-300"><strong class="text-white">Imaging</strong> – Renal USG (rule out obstruction), bladder scan</span>
+          </div>
+          <div class="flex items-center gap-2">
+           <div class="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            5
+           </div><span class="text-sm text-gray-300"><strong class="text-white">Stop nephrotoxins</strong> – NSAIDs, aminoglycosides, contrast, ACEi/ARBs</span>
+          </div>
+          <div class="flex items-center gap-2">
+           <div class="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            6
+           </div><span class="text-sm text-gray-300"><strong class="text-white">Treat cause</strong> – Fluids for prerenal, relieve obstruction, treat sepsis</span>
+          </div>
+          <div class="flex items-center gap-2">
+           <div class="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            7
+           </div><span class="text-sm text-gray-300"><strong class="text-white">Assess for emergent dialysis</strong> – AEIOU indications (see Dialysis section)</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: HYPERKALEMIA ===== -->
+    <section id="hyperkalemia" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-yellow-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="zap" style="width:20px;height:20px;" class="text-yellow-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">Life-Threatening Hyperkalemia</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">ECG Changes, Emergency Protocol &amp; Treatment Ladder</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content">
+       <div class="space-y-5">
+        <div class="bg-red-950/40 rounded-xl p-4 border border-red-800/40">
+         <p class="text-sm text-red-200 flex items-start gap-2"><i data-lucide="alert-octagon" style="width:18px;height:18px;min-width:18px;" class="text-red-400 mt-0.5"></i><span><strong class="text-white">K⁺ &gt; 6.5 mEq/L or ANY ECG changes = MEDICAL EMERGENCY.</strong> Cardiac arrest from VFib/asystole can occur within minutes. Treat the ECG, not just the number.</span></p>
+        </div><!-- ECG Progression -->
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-yellow-400 font-semibold text-sm uppercase tracking-wider mb-3">ECG Changes – Progressive Sequence</h3>
+         <div class="space-y-2">
+          <div class="flex items-center gap-3 p-2 rounded-lg bg-yellow-900/10 border border-yellow-900/20"><span class="text-yellow-300 font-bold text-xs w-20 flex-shrink-0">5.5-6.0</span>
+           <div class="flex-1 h-1 bg-yellow-600/30 rounded-full">
+            <div class="h-1 bg-yellow-500 rounded-full" style="width:20%"></div>
+           </div><span class="text-xs text-gray-300">Tall, peaked T waves (precordial leads)</span>
+          </div>
+          <div class="flex items-center gap-3 p-2 rounded-lg bg-orange-900/10 border border-orange-900/20"><span class="text-orange-300 font-bold text-xs w-20 flex-shrink-0">6.0-6.5</span>
+           <div class="flex-1 h-1 bg-orange-600/30 rounded-full">
+            <div class="h-1 bg-orange-500 rounded-full" style="width:40%"></div>
+           </div><span class="text-xs text-gray-300">Prolonged PR interval, flattened P waves</span>
+          </div>
+          <div class="flex items-center gap-3 p-2 rounded-lg bg-red-900/10 border border-red-900/20"><span class="text-red-300 font-bold text-xs w-20 flex-shrink-0">6.5-7.0</span>
+           <div class="flex-1 h-1 bg-red-600/30 rounded-full">
+            <div class="h-1 bg-red-500 rounded-full" style="width:60%"></div>
+           </div><span class="text-xs text-gray-300">Loss of P waves, widened QRS complex</span>
+          </div>
+          <div class="flex items-center gap-3 p-2 rounded-lg bg-red-900/20 border border-red-800/30"><span class="text-red-200 font-bold text-xs w-20 flex-shrink-0">7.0-8.0</span>
+           <div class="flex-1 h-1 bg-red-600/30 rounded-full">
+            <div class="h-1 bg-red-600 rounded-full" style="width:80%"></div>
+           </div><span class="text-xs text-gray-300">Sine wave pattern, merging QRS-T</span>
+          </div>
+          <div class="flex items-center gap-3 p-2 rounded-lg bg-red-900/30 border border-red-700/40"><span class="text-red-100 font-bold text-xs w-20 flex-shrink-0">&gt; 8.0</span>
+           <div class="flex-1 h-1 bg-red-600/30 rounded-full">
+            <div class="h-1 bg-red-700 rounded-full" style="width:100%"></div>
+           </div><span class="text-xs text-gray-300 font-semibold">VFib → Asystole → CARDIAC ARREST</span>
+          </div>
+         </div>
+        </div><!-- Treatment Ladder -->
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-yellow-400 font-semibold text-sm uppercase tracking-wider mb-3">Emergency Treatment Protocol (C-BIG-K-D)</h3>
+         <div class="overflow-x-auto rounded-lg border border-gray-800/40">
+          <table class="clinical-table w-full text-sm">
+           <thead>
+            <tr>
+             <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Step</th>
+             <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Drug / Intervention</th>
+             <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Dose</th>
+             <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Onset</th>
+             <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Mechanism</th>
+            </tr>
+           </thead>
+           <tbody class="text-xs">
+            <tr>
+             <td class="px-3 py-2.5 border-b border-gray-800/40"><span class="severity-critical text-white font-bold px-1.5 py-0.5 rounded text-xs">C</span></td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-white font-semibold">Calcium Gluconate 10%</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-300">10-20 mL IV over 2-3 min</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-emerald-400">1-3 min</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-400">Stabilizes cardiac membrane</td>
+            </tr>
+            <tr>
+             <td class="px-3 py-2.5 border-b border-gray-800/40"><span class="severity-high text-white font-bold px-1.5 py-0.5 rounded text-xs">B</span></td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-white font-semibold">NaHCO₃ (if acidotic)</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-300">50-100 mEq IV over 5 min</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-emerald-400">15-30 min</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-400">Shifts K⁺ intracellularly</td>
+            </tr>
+            <tr>
+             <td class="px-3 py-2.5 border-b border-gray-800/40"><span class="severity-high text-white font-bold px-1.5 py-0.5 rounded text-xs">I</span></td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-white font-semibold">Insulin + Glucose</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-300">10U regular insulin + 50mL D50W</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-emerald-400">15-30 min</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-400">Shifts K⁺ intracellularly (↓ 0.5-1.0)</td>
+            </tr>
+            <tr>
+             <td class="px-3 py-2.5 border-b border-gray-800/40"><span class="severity-high text-white font-bold px-1.5 py-0.5 rounded text-xs">G</span></td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-white font-semibold">Nebulized Salbutamol</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-300">10-20 mg nebulized over 15 min</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-emerald-400">15-30 min</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-400">β2-mediated K⁺ shift (↓ 0.5-1.0)</td>
+            </tr>
+            <tr>
+             <td class="px-3 py-2.5 border-b border-gray-800/40"><span class="severity-moderate font-bold px-1.5 py-0.5 rounded text-xs">K</span></td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-white font-semibold">Kayexalate / Patiromer</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-300">SPS 15-30g PO/PR; Patiromer 8.4g</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-amber-400">1-6 hr</td>
+             <td class="px-3 py-2.5 border-b border-gray-800/40 text-gray-400">K⁺ elimination (GI exchange)</td>
+            </tr>
+            <tr>
+             <td class="px-3 py-2.5"><span class="severity-critical text-white font-bold px-1.5 py-0.5 rounded text-xs">D</span></td>
+             <td class="px-3 py-2.5 text-white font-semibold">Dialysis (Hemodialysis)</td>
+             <td class="px-3 py-2.5 text-gray-300">Emergent HD session</td>
+             <td class="px-3 py-2.5 text-emerald-400">Immediate</td>
+             <td class="px-3 py-2.5 text-gray-400">Definitive K⁺ removal</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+        <div class="bg-amber-950/30 rounded-xl p-4 border border-amber-800/30">
+         <p class="text-xs text-amber-200"><strong>Pearl:</strong> Monitor blood glucose q1h for 6 hours after insulin-dextrose to catch late hypoglycemia. Repeat calcium gluconate if ECG changes persist after 5 minutes. Always recheck K⁺ at 1, 2, and 4 hours.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: PULMONARY EDEMA ===== -->
+    <section id="pulmonary-edema" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="wind" style="width:20px;height:20px;" class="text-blue-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">Flash Pulmonary Edema in Renal Failure</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Volume Overload, Presentation &amp; Emergency Treatment</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content">
+       <div class="space-y-5">
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-2">Pathophysiology</h3>
+         <p class="text-sm text-gray-300 leading-relaxed">Oliguric/anuric AKI or ESRD → inability to excrete sodium and water → <strong class="text-white">rapid fluid accumulation</strong> → increased hydrostatic pressure → alveolar flooding. Often exacerbated by concurrent hypertension and reduced oncotic pressure (hypoalbuminemia).</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3">
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+          <h4 class="text-blue-400 font-semibold text-sm mb-2">Clinical Presentation</h4>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li>• Acute-onset severe dyspnea, orthopnea</li>
+           <li>• Pink frothy sputum</li>
+           <li>• Bilateral crackles/rales (base → apex)</li>
+           <li>• SpO₂ &lt; 90%, tachypnea, diaphoresis</li>
+           <li>• ↑ JVP, S3 gallop, peripheral edema</li>
+           <li>• CXR: bilateral alveolar infiltrates, Kerley B lines, pleural effusion</li>
+          </ul>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-red-900/30">
+          <h4 class="text-red-400 font-semibold text-sm mb-2">Emergency Management – "LMNOP"</h4>
+          <ul class="text-xs text-gray-300 space-y-1.5">
+           <li><strong class="text-white">L</strong> – Lasix (Furosemide) 80-200mg IV (if residual function)</li>
+           <li><strong class="text-white">M</strong> – Morphine 2-4mg IV (caution in renal failure)</li>
+           <li><strong class="text-white">N</strong> – Nitrates: GTN infusion 10-200 mcg/min</li>
+           <li><strong class="text-white">O</strong> – Oxygen: High-flow, CPAP/BiPAP, intubation PRN</li>
+           <li><strong class="text-white">P</strong> – Position (upright, legs dependent)</li>
+           <li class="pt-1 border-t border-gray-800/40"><strong class="text-red-300">→ EMERGENT DIALYSIS / ULTRAFILTRATION</strong> if diuretic-resistant (most AKI patients)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: METABOLIC ACIDOSIS ===== -->
+    <section id="acidosis" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="beaker" style="width:20px;height:20px;" class="text-purple-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">Severe Metabolic Acidosis</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Uremic Acidosis, Anion Gap &amp; Bicarbonate Therapy</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content">
+       <div class="space-y-5">
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-purple-400 font-semibold text-sm uppercase tracking-wider mb-2">When Does It Become an Emergency?</h3>
+         <p class="text-sm text-gray-300 leading-relaxed">Renal failure impairs H⁺ excretion and HCO₃⁻ regeneration. <strong class="text-white">pH &lt; 7.1</strong> or <strong class="text-white">HCO₃⁻ &lt; 8 mEq/L</strong> is life-threatening → impaired cardiac contractility, vasodilation, arrhythmias, coma.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3">
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+          <h4 class="text-purple-400 font-semibold text-sm mb-2">High Anion Gap (HAGMA) – "GOLDMARK"</h4>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li><strong class="text-white">G</strong> – Glycols (ethylene, propylene)</li>
+           <li><strong class="text-white">O</strong> – Oxoproline (acetaminophen metabolite)</li>
+           <li><strong class="text-white">L</strong> – L-Lactate (type A: shock, type B: metformin)</li>
+           <li><strong class="text-white">D</strong> – D-Lactate (short bowel syndrome)</li>
+           <li><strong class="text-white">M</strong> – Methanol</li>
+           <li><strong class="text-white">A</strong> – Aspirin (salicylates)</li>
+           <li><strong class="text-white">R</strong> – Renal failure (uremia) ★</li>
+           <li><strong class="text-white">K</strong> – Ketoacidosis (DKA, alcoholic, starvation)</li>
+          </ul>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-red-900/30">
+          <h4 class="text-red-400 font-semibold text-sm mb-2">Emergency Treatment</h4>
+          <ul class="text-xs text-gray-300 space-y-1.5">
+           <li>• <strong class="text-white">NaHCO₃ infusion</strong> – only if pH &lt; 7.1 or HCO₃⁻ &lt; 8</li>
+           <li>• Target pH 7.2 (not normal) to avoid overshoot alkalosis</li>
+           <li>• Dose: HCO₃⁻ deficit = 0.5 × wt × (24 – actual HCO₃⁻); give 50% over 4-8hr</li>
+           <li>• Monitor for: hypocalcemia (ionized Ca²⁺), hypokalemia, volume overload</li>
+           <li>• <strong class="text-red-300">Emergent dialysis</strong> if pH &lt; 7.1 refractory to bicarb, or toxic ingestion</li>
+           <li>• Treat underlying cause simultaneously</li>
+          </ul>
+         </div>
+        </div>
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h4 class="text-purple-400 font-semibold text-sm mb-2">Anion Gap Calculation</h4>
+         <div class="bg-[#1a1a2e] rounded-lg p-3 text-center"><span class="font-heading text-xl text-white">AG = Na⁺ − (Cl⁻ + HCO₃⁻)</span>
+          <p class="text-xs text-gray-500 mt-1">Normal: 8-12 mEq/L | Corrected for albumin: AG + 2.5 × (4 − albumin)</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: HUS/TTP ===== -->
+    <section id="hus-ttp" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-pink-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="droplets" style="width:20px;height:20px;" class="text-pink-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">HUS / TTP (Thrombotic Microangiopathy)</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Diagnosis, Differentiation &amp; Urgent Treatment</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content">
+       <div class="space-y-5">
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+         <h3 class="text-pink-400 font-semibold text-sm uppercase tracking-wider mb-2">The Classic Pentad of TTP</h3>
+         <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-2">
+          <div class="text-center p-2 bg-pink-900/20 rounded-lg border border-pink-800/30">
+           <div class="text-lg">
+            🩸
+           </div>
+           <div class="text-xs text-pink-300 mt-1">
+            MAHA
+           </div>
+          </div>
+          <div class="text-center p-2 bg-pink-900/20 rounded-lg border border-pink-800/30">
+           <div class="text-lg">
+            🔴
+           </div>
+           <div class="text-xs text-pink-300 mt-1">
+            Thrombocytopenia
+           </div>
+          </div>
+          <div class="text-center p-2 bg-pink-900/20 rounded-lg border border-pink-800/30">
+           <div class="text-lg">
+            🧠
+           </div>
+           <div class="text-xs text-pink-300 mt-1">
+            Neuro Symptoms
+           </div>
+          </div>
+          <div class="text-center p-2 bg-pink-900/20 rounded-lg border border-pink-800/30">
+           <div class="text-lg">
+            🫘
+           </div>
+           <div class="text-xs text-pink-300 mt-1">
+            Renal Failure
+           </div>
+          </div>
+          <div class="text-center p-2 bg-pink-900/20 rounded-lg border border-pink-800/30">
+           <div class="text-lg">
+            🌡️
+           </div>
+           <div class="text-xs text-pink-300 mt-1">
+            Fever
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="overflow-x-auto rounded-xl border border-gray-800/40">
+         <table class="clinical-table w-full text-xs sm:text-sm">
+          <thead>
+           <tr>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Feature</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">TTP</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Typical HUS</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Atypical HUS</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Cause</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">ADAMTS13 deficiency</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">STEC (E. coli O157:H7)</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Complement dysregulation</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Predominant</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Neuro (70%)</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Renal (90%)</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Renal (100%)</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Key Lab</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">ADAMTS13 &lt; 10%</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Stool Shiga toxin +</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Low C3, Factor H/I</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 text-gray-400">Treatment</td>
+            <td class="px-3 py-2 text-red-300 font-semibold">PLASMA EXCHANGE (PLEX)</td>
+            <td class="px-3 py-2 text-gray-300">Supportive (NO antibiotics)</td>
+            <td class="px-3 py-2 text-blue-300 font-semibold">Eculizumab (anti-C5)</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+        <div class="bg-red-950/40 rounded-xl p-4 border border-red-800/40">
+         <p class="text-xs text-red-200"><strong>⚠️ TTP is fatal in &gt;90% without plasma exchange.</strong> Do NOT wait for ADAMTS13 results. Start PLEX immediately if clinical suspicion + schistocytes on smear + thrombocytopenia. Mortality drops to ~10-20% with timely PLEX.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: DIALYSIS INDICATIONS ===== -->
+    <section id="rrt" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="refresh-cw" style="width:20px;height:20px;" class="text-cyan-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">Emergency Dialysis Indications</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">AEIOU Mnemonic, Modalities &amp; Vascular Access</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content">
+       <div class="space-y-5"><!-- AEIOU -->
+        <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-red-900/30">
+         <h3 class="text-cyan-400 font-semibold text-sm uppercase tracking-wider mb-3">AEIOU – Indications for Emergent Dialysis</h3>
+         <div class="space-y-3">
+          <div class="flex items-start gap-3 p-3 bg-red-900/15 rounded-lg border border-red-900/20"><span class="text-2xl font-heading font-800 text-red-400 leading-none">A</span>
+           <div>
+            <div class="text-white text-sm font-semibold">
+             Acidosis
+            </div>
+            <div class="text-xs text-gray-400">
+             Severe metabolic acidosis (pH &lt; 7.1) refractory to NaHCO₃
+            </div>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-orange-900/15 rounded-lg border border-orange-900/20"><span class="text-2xl font-heading font-800 text-orange-400 leading-none">E</span>
+           <div>
+            <div class="text-white text-sm font-semibold">
+             Electrolytes
+            </div>
+            <div class="text-xs text-gray-400">
+             Refractory hyperkalemia (K⁺ &gt; 6.5 despite medical therapy), severe hypercalcemia
+            </div>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-yellow-900/15 rounded-lg border border-yellow-900/20"><span class="text-2xl font-heading font-800 text-yellow-400 leading-none">I</span>
+           <div>
+            <div class="text-white text-sm font-semibold">
+             Intoxication
+            </div>
+            <div class="text-xs text-gray-400">
+             Dialyzable toxins: methanol, ethylene glycol, lithium, salicylates, metformin
+            </div>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-blue-900/15 rounded-lg border border-blue-900/20"><span class="text-2xl font-heading font-800 text-blue-400 leading-none">O</span>
+           <div>
+            <div class="text-white text-sm font-semibold">
+             Overload
+            </div>
+            <div class="text-xs text-gray-400">
+             Diuretic-resistant pulmonary edema / volume overload
+            </div>
+           </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-purple-900/15 rounded-lg border border-purple-900/20"><span class="text-2xl font-heading font-800 text-purple-400 leading-none">U</span>
+           <div>
+            <div class="text-white text-sm font-semibold">
+             Uremia
+            </div>
+            <div class="text-xs text-gray-400">
+             Uremic encephalopathy, pericarditis, seizures, bleeding (BUN &gt; 100 mg/dL typically)
+            </div>
+           </div>
+          </div>
+         </div>
+        </div><!-- Modalities -->
+        <div class="grid sm:grid-cols-3 gap-3">
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+          <h4 class="text-cyan-400 font-semibold text-sm mb-2">IHD</h4>
+          <p class="text-xs text-gray-500 mb-2">Intermittent Hemodialysis</p>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li>• 3-5 hr sessions</li>
+           <li>• Rapid solute/fluid removal</li>
+           <li>• Best for: hyperkalemia, intoxication</li>
+           <li>• Risk: hemodynamic instability</li>
+          </ul>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+          <h4 class="text-cyan-400 font-semibold text-sm mb-2">CRRT</h4>
+          <p class="text-xs text-gray-500 mb-2">Continuous RRT (CVVHD/CVVHDF)</p>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li>• 24hr continuous therapy</li>
+           <li>• Gentle, slow fluid removal</li>
+           <li>• Best for: hemodynamically unstable ICU patients</li>
+           <li>• Dose: 20-25 mL/kg/hr effluent</li>
+          </ul>
+         </div>
+         <div class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40">
+          <h4 class="text-cyan-400 font-semibold text-sm mb-2">PD</h4>
+          <p class="text-xs text-gray-500 mb-2">Peritoneal Dialysis (Acute)</p>
+          <ul class="text-xs text-gray-400 space-y-1">
+           <li>• Via Tenckhoff catheter</li>
+           <li>• Resource-limited settings</li>
+           <li>• Hemodynamically stable</li>
+           <li>• Less efficient than HD/CRRT</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: DRUG DOSING ===== -->
+    <section id="drugs" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="pill" style="width:20px;height:20px;" class="text-emerald-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">Critical Drug Dosing in Renal Failure</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Common Adjustments &amp; Nephrotoxins to Avoid</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content">
+       <div class="space-y-5">
+        <div class="overflow-x-auto rounded-xl border border-gray-800/40">
+         <table class="clinical-table w-full text-xs sm:text-sm">
+          <thead>
+           <tr>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Drug</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Normal Dose</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">GFR &lt;30</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">HD Supplement</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-white font-semibold">Vancomycin</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">15-20 mg/kg q8-12h</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-amber-300">15-20 mg/kg LOAD, then trough-guided</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Redose post-HD</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-white font-semibold">Gentamicin</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">5-7 mg/kg/day</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-red-300">AVOID or extend interval (q48-72h)</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Redose post-HD</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-white font-semibold">Enoxaparin</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">1 mg/kg q12h</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-red-300">1 mg/kg q24h (CrCl &lt;30)</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Use UFH instead</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-white font-semibold">Metformin</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">500-2000 mg/day</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-red-300 font-semibold">CONTRAINDICATED</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Dialyzable</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-white font-semibold">Morphine</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">2-10 mg q4h PRN</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-red-300">↓ 50-75%, active metabolite accumulates</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">Some removal</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 text-white font-semibold">Meropenem</td>
+            <td class="px-3 py-2 text-gray-300">1g q8h</td>
+            <td class="px-3 py-2 text-amber-300">1g q12h (GFR 10-25); 500mg q12h (GFR &lt;10)</td>
+            <td class="px-3 py-2 text-gray-300">Supplement post-HD</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+        <div class="bg-red-950/30 rounded-xl p-4 border border-red-800/30">
+         <h4 class="text-red-400 font-semibold text-xs uppercase tracking-wider mb-2">🚫 Nephrotoxins to STOP in AKI</h4>
+         <div class="flex flex-wrap gap-2"><span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">NSAIDs</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">Aminoglycosides</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">ACEi / ARBs</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">IV Contrast</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">Amphotericin B</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">Metformin</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">Cisplatin</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">Lithium</span> <span class="bg-red-900/30 text-red-300 text-xs px-2 py-1 rounded">Calcineurin inhibitors</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== SECTION: GFR CALCULATOR ===== -->
+    <section id="calculator" class="card-enter">
+     <div class="bg-[#16213e] rounded-2xl border border-gray-800/60 overflow-hidden"><button class="section-toggle w-full flex items-center justify-between p-4 sm:p-6 text-left" onclick="toggleSection(this)">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-teal-900/40 flex items-center justify-center flex-shrink-0"><i data-lucide="calculator" style="width:20px;height:20px;" class="text-teal-400"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-700 text-white">eGFR Calculator (CKD-EPI 2021)</h2>
+         <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Interactive Bedside GFR Estimator &amp; CKD Staging</p>
+        </div>
+       </div><i data-lucide="chevron-down" style="width:20px;height:20px;" class="text-gray-500 transition-transform duration-300 chevron-icon flex-shrink-0"></i> </button>
+      <div class="section-content open">
+       <div class="space-y-5">
+        <form id="gfrForm" class="bg-[#0f0f23]/60 rounded-xl p-4 border border-gray-800/40" onsubmit="event.preventDefault(); calculateGFR();">
+         <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div><label for="gfr-age" class="block text-xs text-gray-400 mb-1">Age (years)</label> <input type="number" id="gfr-age" min="18" max="120" value="55" class="w-full bg-[#1a1a2e] border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
+          </div>
+          <div><label for="gfr-creatinine" class="block text-xs text-gray-400 mb-1">Serum Creatinine (mg/dL)</label> <input type="number" id="gfr-creatinine" min="0.1" max="30" step="0.1" value="1.2" class="w-full bg-[#1a1a2e] border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
+          </div>
+          <div><label for="gfr-sex" class="block text-xs text-gray-400 mb-1">Sex</label> <select id="gfr-sex" class="w-full bg-[#1a1a2e] border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"> <option value="male">Male</option> <option value="female">Female</option> </select>
+          </div>
+          <div class="flex items-end"><button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-2.5 rounded-lg transition text-sm flex items-center justify-center gap-2"> <i data-lucide="calculator" style="width:16px;height:16px;"></i> Calculate eGFR </button>
+          </div>
+         </div>
+        </form><!-- Result -->
+        <div id="gfrResult" class="bg-[#0f0f23]/60 rounded-xl p-6 border border-gray-800/40 text-center hidden">
+         <div class="flex items-center justify-center gap-6 flex-wrap">
+          <div>
+           <svg width="120" height="120" viewbox="0 0 120 120" id="gfrRingSvg"><circle cx="60" cy="60" r="45" fill="none" stroke="#1a1a2e" stroke-width="10" /> <circle id="gfrRingCircle" cx="60" cy="60" r="45" fill="none" stroke="#2dd4bf" stroke-width="10" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" transform="rotate(-90 60 60)" class="gfr-ring" /> <text x="60" y="55" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="'Playfair Display', serif" id="gfrValueText">
+             --
+            </text> <text x="60" y="72" text-anchor="middle" fill="#9ca3af" font-size="10" font-family="'DM Sans', sans-serif">
+             mL/min/1.73m²
+            </text>
+           </svg>
+          </div>
+          <div class="text-left">
+           <div id="gfrStageText" class="text-lg font-heading font-700 text-white">
+            --
+           </div>
+           <div id="gfrDescText" class="text-sm text-gray-400 mt-1">
+            Enter values and calculate
+           </div>
+          </div>
+         </div>
+        </div><!-- CKD Staging Reference -->
+        <div class="overflow-x-auto rounded-xl border border-gray-800/40">
+         <table class="clinical-table w-full text-xs sm:text-sm">
+          <thead>
+           <tr>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Stage</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">GFR (mL/min/1.73m²)</th>
+            <th class="text-left px-3 py-2.5 text-xs uppercase text-gray-400 border-b border-gray-700">Description</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40"><span class="text-emerald-400 font-bold">G1</span></td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">≥ 90</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Normal or high</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40"><span class="text-green-400 font-bold">G2</span></td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">60–89</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Mildly decreased</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40"><span class="text-yellow-400 font-bold">G3a</span></td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">45–59</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Mild-moderate decrease</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40"><span class="text-orange-400 font-bold">G3b</span></td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">30–44</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Moderate-severe decrease</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2 border-b border-gray-800/40"><span class="text-red-400 font-bold">G4</span></td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-300">15–29</td>
+            <td class="px-3 py-2 border-b border-gray-800/40 text-gray-400">Severely decreased</td>
+           </tr>
+           <tr>
+            <td class="px-3 py-2"><span class="text-red-300 font-bold">G5</span></td>
+            <td class="px-3 py-2 text-gray-300">&lt; 15</td>
+            <td class="px-3 py-2 text-red-300 font-semibold">Kidney failure (ESRD)</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ===== FOOTER ===== -->
+    <footer class="text-center py-8 px-4 border-t border-gray-800/30 mt-8">
+     <p class="text-xs text-gray-600">Clinical reference for educational purposes. Always correlate with clinical context. Not a substitute for clinical judgment.</p>
+     <p class="text-xs text-gray-700 mt-1">Based on KDIGO 2012/2024, AHA/ACC, NICE, UpToDate &amp; Harrison's Principles of Internal Medicine</p>
+    </footer>
+   </main>
+  </div>
+  <script>
+// ===== SECTION TOGGLE =====
+function toggleSection(btn) {
+  const content = btn.nextElementSibling;
+  const chevron = btn.querySelector('.chevron-icon');
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open');
+  chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+// ===== SCROLL TO SECTION =====
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const section = el.querySelector('.section-content');
+  if (section && !section.classList.contains('open')) {
+    section.classList.add('open');
+    const chevron = el.querySelector('.chevron-icon');
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+  }
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Update active tab
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  const activeTab = document.querySelector(`.tab-btn[data-target="${id}"]`);
+  if (activeTab) activeTab.classList.add('active');
+}
+
+// ===== INTERSECTION OBSERVER FOR TAB HIGHLIGHTING =====
+const sectionIds = ['overview','aki','hyperkalemia','pulmonary-edema','acidosis','hus-ttp','rrt','drugs','calculator'];
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+      const tab = document.querySelector(`.tab-btn[data-target="${entry.target.id}"]`);
+      if (tab) tab.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sectionIds.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+
+// ===== GFR CALCULATOR (CKD-EPI 2021 Race-Free) =====
+function calculateGFR() {
+  const age = parseFloat(document.getElementById('gfr-age').value);
+  const scr = parseFloat(document.getElementById('gfr-creatinine').value);
+  const sex = document.getElementById('gfr-sex').value;
+  if (isNaN(age) || isNaN(scr) || scr <= 0 || age < 18) return;
+
+  let kappa, alpha, sexFactor;
+  if (sex === 'female') { kappa = 0.7; alpha = -0.241; sexFactor = 1.012; }
+  else { kappa = 0.9; alpha = -0.302; sexFactor = 1.0; }
+
+  const scrK = scr / kappa;
+  const term = Math.min(scrK, 1);
+  const term2 = Math.max(scrK, 1);
+  const eGFR = 142 * Math.pow(term, alpha) * Math.pow(term2, -1.200) * Math.pow(0.9938, age) * sexFactor;
+  const gfr = Math.round(eGFR);
+
+  document.getElementById('gfrResult').classList.remove('hidden');
+  document.getElementById('gfrValueText').textContent = gfr;
+
+  // Ring animation
+  const maxGFR = 120;
+  const pct = Math.min(gfr / maxGFR, 1);
+  const offset = 283 - (283 * pct);
+  const ring = document.getElementById('gfrRingCircle');
+
+  let color;
+  if (gfr >= 90) color = '#2dd4bf';
+  else if (gfr >= 60) color = '#22c55e';
+  else if (gfr >= 45) color = '#eab308';
+  else if (gfr >= 30) color = '#f97316';
+  else if (gfr >= 15) color = '#ef4444';
+  else color = '#dc2626';
+
+  ring.style.stroke = color;
+  ring.style.strokeDashoffset = '283';
+  ring.style.animation = 'none';
+  ring.offsetHeight; // reflow
+  ring.style.transition = 'stroke-dashoffset 1s ease-out';
+  ring.style.strokeDashoffset = offset;
+
+  // Stage text
+  let stage, desc;
+  if (gfr >= 90) { stage = 'CKD Stage G1'; desc = 'Normal or high kidney function'; }
+  else if (gfr >= 60) { stage = 'CKD Stage G2'; desc = 'Mildly decreased function'; }
+  else if (gfr >= 45) { stage = 'CKD Stage G3a'; desc = 'Mild-moderately decreased'; }
+  else if (gfr >= 30) { stage = 'CKD Stage G3b'; desc = 'Moderate-severely decreased'; }
+  else if (gfr >= 15) { stage = 'CKD Stage G4'; desc = 'Severely decreased – prepare for RRT'; }
+  else { stage = 'CKD Stage G5 (ESRD)'; desc = 'Kidney failure – dialysis/transplant indicated'; }
+
+  document.getElementById('gfrStageText').textContent = stage;
+  document.getElementById('gfrStageText').style.color = color;
+  document.getElementById('gfrDescText').textContent = desc;
+}
+
+// ===== ELEMENT SDK INIT =====
+const defaultConfig = {
+  main_title: 'Renal Emergencies',
+  subtitle: 'A Comprehensive Clinical Reference for Emergency & Critical Care',
+  background_color: '#0f0f23',
+  surface_color: '#16213e',
+  text_color: '#e5e7eb',
+  primary_action_color: '#c0392b',
+  secondary_action_color: '#2dd4bf',
+  font_family: 'Playfair Display',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const font = c.font_family || defaultConfig.font_family;
+  const baseFontStack = 'Georgia, serif';
+  const bodyFontStack = '"DM Sans", system-ui, sans-serif';
+  const baseSize = c.font_size || defaultConfig.font_size;
+
+  // Titles
+  const mainTitle = document.getElementById('mainTitle');
+  const subtitleEl = document.getElementById('subtitle');
+  if (mainTitle) { mainTitle.textContent = c.main_title; mainTitle.style.fontFamily = `${font}, ${baseFontStack}`; mainTitle.style.fontSize = `${baseSize * 2.5}px`; }
+  if (subtitleEl) { subtitleEl.textContent = c.subtitle; subtitleEl.style.fontFamily = bodyFontStack; subtitleEl.style.fontSize = `${baseSize}px`; }
+
+  // Colors
+  const shell = document.getElementById('appShell');
+  if (shell) { shell.style.backgroundColor = c.background_color; shell.style.color = c.text_color; }
+
+  document.querySelectorAll('.bg-\\[\\#16213e\\]').forEach(el => el.style.backgroundColor = c.surface_color);
+
+  // Headings font
+  document.querySelectorAll('.font-heading').forEach(el => { el.style.fontFamily = `${font}, ${baseFontStack}`; });
+}
+
+// Init icons and calculator
+lucide.createIcons();
+calculateGFR();
+</script>
+</body>
+</html>
