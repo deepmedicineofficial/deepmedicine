@@ -1,0 +1,440 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Infectious Diseases | Clinical Infections & Microbial Disorders | Deep Medicine</title> <meta name="description" content="Comprehensive infectious diseases guide covering bacterial, viral, fungal, and parasitic infections with diagnosis and treatment strategies."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/infectious-diseases"> <!-- Open Graph --> <meta property="og:title" content="Infectious Diseases | Deep Medicine"> <meta property="og:description" content="Clinical infectious diseases covering diagnosis, treatment, and antimicrobial strategies."> <meta property="og:image" content="https://deepmedicine.in/images/infectious-diseases.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+.disease-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+.disease-card:hover { transform: translateY(-2px); }
+.tab-btn.active { border-bottom: 2px solid var(--primary-action); color: var(--primary-action); }
+.fade-in { animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.pill { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; letter-spacing:0.5px; }
+.severity-mild { background:#dcfce7; color:#166534; }
+.severity-moderate { background:#fef9c3; color:#854d0e; }
+.severity-severe { background:#fee2e2; color:#991b1b; }
+.severity-critical { background:#581c87; color:#f3e8ff; }
+.pathogen-bacteria { background:#dbeafe; color:#1e40af; }
+.pathogen-virus { background:#fce7f3; color:#9d174d; }
+.pathogen-fungal { background:#f0fdf4; color:#166534; }
+.pathogen-parasite { background:#fef3c7; color:#92400e; }
+.collapse-content { max-height:0; overflow:hidden; transition: max-height 0.4s ease; }
+.collapse-content.open { max-height: 8000px; }
+.search-glow:focus { box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:var(--bg-color);color:var(--text-color);font-family:'DM Sans',sans-serif;"><!-- Header -->
+   <header class="sticky top-0 z-50 backdrop-blur-xl border-b" style="background:color-mix(in srgb, var(--bg-color) 85%, transparent);border-color:color-mix(in srgb, var(--text-color) 10%, transparent);">
+    <div class="max-w-6xl mx-auto px-4 py-4 sm:px-6">
+     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div>
+       <h1 id="mainTitle" class="text-2xl sm:text-3xl font-bold" style="font-family:'Instrument Serif',serif;">Medicine — Infectious Diseases</h1>
+       <p id="subtitle" class="text-sm mt-1 opacity-60">Comprehensive Clinical Reference Guide</p>
+      </div>
+      <div class="relative"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 opacity-40" style="width:16px;height:16px;"></i> <input id="searchInput" type="text" placeholder="Search diseases, organisms, drugs..." class="search-glow w-full sm:w-72 pl-9 pr-4 py-2 rounded-lg text-sm outline-none" style="background:var(--surface-color);border:1px solid color-mix(in srgb, var(--text-color) 12%, transparent);">
+      </div>
+     </div><!-- Category Filters -->
+     <div class="flex gap-2 mt-3 overflow-x-auto pb-1 text-xs font-semibold" id="categoryFilters"><button onclick="filterCategory('all')" class="cat-btn px-3 py-1.5 rounded-full whitespace-nowrap transition-all" style="background:var(--primary-action);color:#fff;">All</button> <button onclick="filterCategory('bacterial')" class="cat-btn px-3 py-1.5 rounded-full whitespace-nowrap transition-all pathogen-bacteria">Bacterial</button> <button onclick="filterCategory('viral')" class="cat-btn px-3 py-1.5 rounded-full whitespace-nowrap transition-all pathogen-virus">Viral</button> <button onclick="filterCategory('fungal')" class="cat-btn px-3 py-1.5 rounded-full whitespace-nowrap transition-all pathogen-fungal">Fungal</button> <button onclick="filterCategory('parasitic')" class="cat-btn px-3 py-1.5 rounded-full whitespace-nowrap transition-all pathogen-parasite">Parasitic</button>
+     </div>
+    </div>
+   </header><!-- Quick Stats -->
+   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="statsBar">
+     <div class="rounded-xl p-4 text-center" style="background:var(--surface-color);">
+      <div class="text-2xl font-bold" style="color:var(--primary-action);">
+       24
+      </div>
+      <div class="text-xs opacity-60 mt-1">
+       Diseases Covered
+      </div>
+     </div>
+     <div class="rounded-xl p-4 text-center" style="background:var(--surface-color);">
+      <div class="text-2xl font-bold" style="color:var(--secondary-action);">
+       6
+      </div>
+      <div class="text-xs opacity-60 mt-1">
+       System Categories
+      </div>
+     </div>
+     <div class="rounded-xl p-4 text-center" style="background:var(--surface-color);">
+      <div class="text-2xl font-bold" style="color:var(--primary-action);">
+       50+
+      </div>
+      <div class="text-xs opacity-60 mt-1">
+       Drug Regimens
+      </div>
+     </div>
+     <div class="rounded-xl p-4 text-center" style="background:var(--surface-color);">
+      <div class="text-2xl font-bold" style="color:var(--secondary-action);">
+       ICD-11
+      </div>
+      <div class="text-xs opacity-60 mt-1">
+       Coded
+      </div>
+     </div>
+    </div>
+   </div><!-- Disease Cards Container -->
+   <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-16" id="diseaseContainer"></div><!-- Empty State -->
+   <div id="emptyState" class="hidden max-w-6xl mx-auto px-4 text-center py-20 opacity-50"><i data-lucide="search-x" style="width:48px;height:48px;margin:0 auto;display:block;"></i>
+    <p class="mt-4 text-lg">No diseases match your search.</p>
+   </div>
+  </div>
+  <script>
+// ─── CLINICAL DATA ───
+const diseases = [
+  // ══════ BACTERIAL ══════
+  {
+    id:"tb", name:"Tuberculosis (TB)", category:"bacterial", severity:"severe",
+    icd:"1B10-1B14", pathogen:"Mycobacterium tuberculosis",
+    pathogenType:"Gram-positive acid-fast bacillus (AFB), obligate aerobe, slow-growing (doubling time 15-20 hrs)",
+    epidemiology:"10.6 million new cases/yr globally (WHO 2022). Leading infectious cause of death worldwide. High burden: India, Indonesia, China, Philippines, Pakistan. HIV co-infection in 8% of new cases.",
+    transmission:"Airborne droplet nuclei (1-5 μm). Infectious dose: 1-10 bacilli. Risk ↑ with prolonged close contact, immunosuppression, malnutrition, overcrowding.",
+    pathophysiology:"Inhaled bacilli → alveolar macrophages → intracellular replication → Ghon focus (subpleural mid/lower zone) → lymphatic spread → hilar lymphadenopathy (Ghon complex) → granuloma formation (epithelioid cells, Langhans giant cells, caseous necrosis). Cell-mediated immunity (CD4+ Th1, IFN-γ, TNF-α) → containment or progression. Latent TB: contained granulomas with viable bacilli. Reactivation: apex of lungs (high PO₂), immunosuppression triggers.",
+    clinicalFeatures:"<b>Pulmonary TB:</b> Chronic productive cough >2 weeks, hemoptysis, night sweats, evening pyrexia, weight loss, anorexia. Exam: post-tussive crackles, amphoric breath sounds (cavitary). <b>Extrapulmonary (15-20%):</b> Lymph node TB (scrofula — matted, cold abscess), Pleural TB (exudative effusion, ADA >40 U/L), TB Meningitis (subacute, CN VI palsy, basal meningitis, CSF: lymphocytic, ↓glucose, ↑protein), Miliary TB (diffuse millet-seed pattern CXR, choroidal tubercles), Skeletal TB (Pott's spine — cold abscess, gibbus), GU TB (sterile pyuria), Abdominal TB (doughy abdomen, omental thickening).",
+    diagnosis:"<b>Microbiological:</b> Sputum AFB smear (Ziehl-Neelsen, sensitivity ~60%), GeneXpert MTB/RIF (sensitivity 98% smear-positive, 68% smear-negative; detects rifampicin resistance in 2 hrs), MGIT culture (gold standard, 1-3 weeks), LJ media (3-8 weeks). <b>Immunological:</b> Mantoux/TST (≥10mm general, ≥5mm HIV+), IGRA (QuantiFERON-TB Gold, T-SPOT.TB — no BCG cross-reactivity). <b>Radiology:</b> CXR — upper lobe infiltrates, cavitation (reactivation); hilar lymphadenopathy (primary). CT chest for atypical. <b>Histopathology:</b> Caseating granuloma. <b>CSF (TB meningitis):</b> Lymphocytic pleocytosis, protein >100 mg/dL, glucose <45 mg/dL, ADA >10 U/L.",
+    treatment:"<b>Drug-sensitive pulmonary TB (DOTS):</b><br>• Intensive phase (2 months): HRZE — Isoniazid (H) 5 mg/kg + Rifampicin (R) 10 mg/kg + Pyrazinamide (Z) 25 mg/kg + Ethambutol (E) 15 mg/kg<br>• Continuation phase (4 months): HR<br>• Total: 6 months<br><b>TB Meningitis:</b> 12 months (2 HRZE + 10 HR) + Dexamethasone 0.3-0.4 mg/kg taper over 6-8 weeks<br><b>MDR-TB:</b> Bedaquiline-based shorter regimen (9-11 months) or longer regimen (18-20 months) per WHO 2022<br><b>XDR-TB:</b> BPaL regimen (Bedaquiline + Pretomanid + Linezolid) — TB-PRACTECAL trial<br><b>Latent TB:</b> 3HP (Isoniazid + Rifapentine weekly × 12 weeks) or 4R (Rifampicin daily × 4 months)<br><b>Adjuncts:</b> Pyridoxine 10-25 mg/day (prevent INH neuropathy), monitor LFTs, visual acuity (Ethambutol), uric acid (Pyrazinamide)",
+    complications:"Hemoptysis (Rasmussen aneurysm), aspergilloma in residual cavity, bronchiectasis, fibrothorax, amyloidosis, IRIS (immune reconstitution inflammatory syndrome in HIV co-infection), drug-induced hepatotoxicity (INH>PZA>RIF), paradoxical reaction.",
+    prevention:"BCG vaccine (neonatal — reduces miliary/meningeal TB in children, variable efficacy against pulmonary TB in adults), latent TB treatment, infection control (N95 respirators, negative pressure rooms, UV germicidal irradiation), contact tracing, DOTS strategy.",
+    keyPoints:["Mantoux ≥10mm (general) or ≥5mm (HIV+) is positive","GeneXpert is the initial rapid diagnostic test of choice","Always test for HIV in newly diagnosed TB","Rifampicin is the most important drug — resistance = MDR-TB","Pyridoxine prevents INH peripheral neuropathy"]
+  },
+  {
+    id:"pneumonia", name:"Community-Acquired Pneumonia (CAP)", category:"bacterial", severity:"moderate",
+    icd:"CA40", pathogen:"Streptococcus pneumoniae (most common), Haemophilus influenzae, Mycoplasma pneumoniae, Legionella pneumophila, Chlamydophila pneumoniae",
+    pathogenType:"Typical (S. pneumoniae — Gram-positive diplococci; H. influenzae — Gram-negative coccobacilli) and Atypical (Mycoplasma, Legionella, Chlamydophila — intracellular/no cell wall)",
+    epidemiology:"Most common infectious cause of death in children <5 years globally. Annual incidence 5-11 per 1000 adults. Mortality: outpatient 1%, hospitalized 10-25%, ICU 30-50%.",
+    transmission:"Aspiration of oropharyngeal flora (most common), inhalation of aerosolized droplets, hematogenous spread (rare). Risk factors: age >65, smoking, COPD, alcoholism, immunosuppression, recent viral URI.",
+    pathophysiology:"Pathogen reaches alveoli → neutrophilic inflammatory response → alveolar exudate (edema, RBCs, neutrophils, fibrin) → consolidation. Lobar pneumonia (4 stages): Congestion → Red hepatization → Grey hepatization → Resolution. Bronchopneumonia: patchy consolidation around bronchioles.",
+    clinicalFeatures:"<b>Typical:</b> Acute onset high fever with rigors, productive cough (purulent/rusty sputum), pleuritic chest pain, dyspnea, tachypnea. Exam: ↓ breath sounds, bronchial breathing, dullness to percussion, increased tactile vocal fremitus, crackles/crepitations. <b>Atypical:</b> Gradual onset, dry cough, headache, myalgia, low-grade fever. Legionella: confusion, diarrhea, hyponatremia, ↑LFTs. Mycoplasma: erythema multiforme, bullous myringitis, cold agglutinins.",
+    diagnosis:"<b>Severity Assessment (CURB-65):</b> Confusion, Urea >7 mmol/L, RR ≥30, BP systolic <90 or diastolic ≤60, Age ≥65 — Score 0-1: outpatient; 2: short stay; 3-5: ICU. <b>Investigations:</b> CXR (lobar consolidation, air bronchograms, bilateral patchy = atypical), CBC (leukocytosis, left shift), CRP/PCT (procalcitonin >0.25 suggests bacterial), blood cultures (×2 before antibiotics), sputum Gram stain + culture, urinary antigens (S. pneumoniae, Legionella serogroup 1), ABG if SpO₂ <92%.",
+    treatment:"<b>Outpatient (CURB-65: 0-1):</b> Amoxicillin 500mg TDS × 5 days (1st line) OR Doxycycline 200mg then 100mg OD OR Macrolide (Clarithromycin 500mg BD)<br><b>Hospitalized (CURB-65: 2):</b> Amoxicillin/clavulanate 1.2g IV TDS + Clarithromycin 500mg IV/PO BD<br><b>Severe/ICU (CURB-65: 3-5):</b> Co-amoxiclav 1.2g IV TDS + Clarithromycin 500mg IV BD; or Piperacillin-Tazobactam + Macrolide. If Pseudomonas risk: Meropenem + Ciprofloxacin<br><b>Atypical coverage:</b> Macrolide or Doxycycline or Respiratory fluoroquinolone (Levofloxacin 750mg OD / Moxifloxacin 400mg OD)<br><b>Duration:</b> 5-7 days (minimum 5 days, afebrile ≥48 hrs)",
+    complications:"Parapneumonic effusion, empyema (pH <7.2 → chest drain), lung abscess, ARDS, sepsis, metastatic infection (meningitis, endocarditis), organizing pneumonia.",
+    prevention:"PCV13/PCV20 (pneumococcal conjugate vaccine), PPSV23 for high-risk adults, annual influenza vaccine, smoking cessation, oral hygiene.",
+    keyPoints:["CURB-65 guides severity and management setting","S. pneumoniae is the #1 cause of CAP globally","Urinary antigen testing is rapid for Pneumococcus & Legionella","Always obtain blood cultures before starting antibiotics in hospitalized patients","Procalcitonin helps distinguish bacterial from viral etiology"]
+  },
+  {
+    id:"meningitis", name:"Bacterial Meningitis", category:"bacterial", severity:"critical",
+    icd:"1D00", pathogen:"Neisseria meningitidis, Streptococcus pneumoniae, Listeria monocytogenes, Group B Streptococcus (neonates), E. coli (neonates), Haemophilus influenzae type b",
+    pathogenType:"Age-dependent: Neonates (GBS, E. coli, Listeria); Children (N. meningitidis, S. pneumoniae); Adults (S. pneumoniae #1, N. meningitidis #2); Elderly/immunocompromised (Listeria, S. pneumoniae)",
+    epidemiology:"Incidence 0.6-4 per 100,000 in developed countries. N. meningitidis: epidemic in 'meningitis belt' of sub-Saharan Africa. Mortality: 15-25% despite treatment. Neurological sequelae in 10-30% survivors.",
+    transmission:"Respiratory droplets (N. meningitidis — nasopharyngeal carriage 10-25%). Vertical transmission (GBS, E. coli, Listeria). Risk factors: asplenia, complement deficiency (C5-C9 for Neisseria), crowding (dormitories, military barracks), CSF leak, cochlear implants.",
+    pathophysiology:"Bacteremia → crossing blood-brain barrier (choroid plexus or cerebral endothelium) → subarachnoid space multiplication → intense neutrophilic inflammation → ↑ BBB permeability, cerebral edema (vasogenic + cytotoxic + interstitial) → ↑ ICP → ↓ cerebral perfusion → neuronal injury. Inflammatory mediators: TNF-α, IL-1β, IL-6, matrix metalloproteinases.",
+    clinicalFeatures:"<b>Classic triad (present in ~45%):</b> Fever + neck stiffness + altered mental status. <b>Other features:</b> Severe headache, photophobia, nausea/vomiting, seizures (20-30%), focal neurological deficits, cranial nerve palsies (III, VI, VII, VIII). <b>Signs:</b> Kernig's sign (resistance to knee extension with hip flexed), Brudzinski's sign (involuntary hip flexion with passive neck flexion), Jolt accentuation of headache. <b>Meningococcal:</b> Petechial/purpuric rash (non-blanching) — may progress to purpura fulminans, DIC, Waterhouse-Friderichsen syndrome (bilateral adrenal hemorrhage). <b>Neonates:</b> Nonspecific — irritability, poor feeding, bulging fontanelle, temperature instability.",
+    diagnosis:"<b>CSF Analysis (lumbar puncture — URGENT):</b> Opening pressure ↑ (>25 cmH₂O), appearance turbid/purulent, WBC >1000/μL (>90% neutrophils), protein ↑ (>100 mg/dL), glucose ↓ (<40 mg/dL or CSF:serum ratio <0.4), Gram stain (sensitivity 60-90%), CSF culture (gold standard), CSF PCR (multiplex — FilmArray), CSF lactate >3.5 mmol/L. <b>Contraindications to LP before CT:</b> Immunocompromised, history of CNS disease, new-onset seizure, papilledema, altered consciousness, focal neurological deficit. <b>Blood:</b> Cultures (×2), CBC, CRP/PCT, coagulation, lactate. <b>Imaging:</b> CT head before LP if indicated (do NOT delay antibiotics for imaging).",
+    treatment:"<b>⚠️ EMPIRIC — GIVE WITHIN 1 HOUR (do not delay for LP/CT):</b><br>• Adults: Ceftriaxone 2g IV BD + Vancomycin 15-20 mg/kg IV Q8-12H (if pneumococcal resistance suspected) + Dexamethasone 0.15 mg/kg IV Q6H × 4 days (give 15-20 min BEFORE or WITH first antibiotic dose)<br>• Age >50 or immunocompromised: ADD Ampicillin 2g IV Q4H (Listeria coverage)<br>• Neonates: Ampicillin + Cefotaxime (or Gentamicin)<br><b>Directed therapy (once culture/sensitivity available):</b> S. pneumoniae (PCN-sensitive): Ceftriaxone or Penicillin G; N. meningitidis: Ceftriaxone or Penicillin G; Listeria: Ampicillin + Gentamicin<br><b>Duration:</b> N. meningitidis: 7 days; S. pneumoniae: 10-14 days; Listeria: ≥21 days; GBS: 14-21 days<br><b>Dexamethasone:</b> Reduces mortality & hearing loss in S. pneumoniae (de Gans trial). Not beneficial in meningococcal. Discontinue if non-pneumococcal.",
+    complications:"Cerebral edema, herniation, hydrocephalus, subdural empyema/effusion, cerebral venous sinus thrombosis, sensorineural hearing loss (most common long-term sequela — 10-30%), seizures, cognitive impairment, cranial nerve palsies, cerebral infarction, Waterhouse-Friderichsen syndrome, SIADH.",
+    prevention:"Vaccination: MenACWY (quadrivalent conjugate — adolescents, high-risk), MenB (Bexsero/Trumenba), PCV13/PCV20, Hib conjugate vaccine. Chemoprophylaxis (close contacts of meningococcal): Ciprofloxacin 500mg PO single dose OR Rifampicin 600mg BD × 2 days OR Ceftriaxone 250mg IM single dose. Notify public health authorities.",
+    keyPoints:["Do NOT delay antibiotics — give empirically within 1 hour of suspicion","Dexamethasone BEFORE or WITH first antibiotic dose (pneumococcal meningitis)","Non-blanching petechial rash + fever = meningococcal sepsis until proven otherwise","LP contraindicated if signs of raised ICP — CT first, but treat empirically","Chemoprophylaxis for close contacts of N. meningitidis within 24 hours"]
+  },
+  {
+    id:"uti", name:"Urinary Tract Infections", category:"bacterial", severity:"mild",
+    icd:"GC08", pathogen:"Escherichia coli (75-95%), Klebsiella pneumoniae, Proteus mirabilis, Staphylococcus saprophyticus (young women), Enterococcus faecalis",
+    pathogenType:"Predominantly Gram-negative Enterobacteriaceae. E. coli uropathogenic strains (UPEC) with type 1 fimbriae (mannose-sensitive) and P fimbriae",
+    epidemiology:"Most common bacterial infection. 50-60% of women experience ≥1 UTI in lifetime. Female:Male ratio 30:1 (reproductive age). Recurrent UTI: ≥2 infections in 6 months or ≥3 in 12 months.",
+    transmission:"Ascending route (periurethral flora → urethra → bladder ± kidney). Risk factors: female sex (short urethra), sexual intercourse, pregnancy, diabetes, catheterization, urinary obstruction (BPH, stones), vesicoureteral reflux, menopause (↓estrogen → altered flora).",
+    pathophysiology:"UPEC adherence to uroepithelium via fimbriae → invasion → biofilm formation → intracellular bacterial communities → inflammatory response (neutrophil recruitment, cytokines IL-6, IL-8) → mucosal edema. Pyelonephritis: ascending infection → renal parenchymal inflammation → potential abscess, papillary necrosis, sepsis.",
+    clinicalFeatures:"<b>Lower UTI (Cystitis):</b> Dysuria, frequency, urgency, suprapubic pain/tenderness, cloudy/malodorous urine, hematuria. No systemic features. <b>Upper UTI (Pyelonephritis):</b> Fever (>38°C), rigors, flank/loin pain, costovertebral angle tenderness, nausea/vomiting ± lower UTI symptoms. <b>Complicated UTI:</b> UTI with structural/functional urinary tract abnormality, pregnancy, male sex, immunosuppression, or catheter-associated. <b>Elderly:</b> Atypical presentation — confusion, falls, functional decline (caution: asymptomatic bacteriuria common and should NOT be treated except in pregnancy/pre-urological procedures).",
+    diagnosis:"<b>Urinalysis:</b> Dipstick — nitrites (Gram-negative bacteria reduce nitrate; sensitivity 45-60%), leukocyte esterase (sensitivity 75-96%). Both positive = PPV 95%. <b>Microscopy:</b> Pyuria (>10 WBC/μL), bacteriuria. <b>Urine culture (midstream clean-catch):</b> ≥10⁵ CFU/mL (symptomatic women ≥10³ CFU/mL significant). Indicated for: pyelonephritis, complicated UTI, recurrent UTI, treatment failure, pregnancy, male UTI. <b>Blood:</b> CBC, CRP, blood cultures (pyelonephritis). <b>Imaging:</b> USS KUB (obstruction, abscess); CT urogram for complicated cases.",
+    treatment:"<b>Uncomplicated cystitis (women):</b> Nitrofurantoin 100mg BD × 5 days (1st line) OR Trimethoprim 200mg BD × 3 days (if local resistance <20%) OR Fosfomycin 3g single dose<br><b>Uncomplicated pyelonephritis:</b> Ciprofloxacin 500mg BD × 7 days OR Ceftriaxone 1-2g IV OD (if admitted) ± step-down PO. Duration: 7-14 days<br><b>Complicated UTI:</b> IV Ceftriaxone or Piperacillin-Tazobactam; narrow based on culture. Duration: 10-14 days<br><b>CAUTI:</b> Remove/replace catheter + targeted antibiotics × 7-14 days<br><b>UTI in Pregnancy:</b> Nitrofurantoin (avoid at term — hemolytic anemia), Amoxicillin, Cefalexin. Screen & treat asymptomatic bacteriuria in pregnancy<br><b>Recurrent UTI prophylaxis:</b> Post-coital or continuous low-dose Nitrofurantoin 50-100mg ON, cranberry products (limited evidence), vaginal estrogen (postmenopausal)",
+    complications:"Renal/perinephric abscess, emphysematous pyelonephritis (diabetics — CT diagnosis, surgical emergency), urosepsis, renal scarring, papillary necrosis (sickle cell, diabetes, NSAIDs), preterm labor (UTI in pregnancy), xanthogranulomatous pyelonephritis (Proteus, staghorn calculi).",
+    prevention:"Adequate hydration, post-coital voiding, avoid spermicides, vaginal estrogen (postmenopausal), cranberry products, catheter care (aseptic insertion, early removal), antibiotic prophylaxis for recurrent UTI.",
+    keyPoints:["E. coli causes 75-95% of uncomplicated UTIs","Do NOT treat asymptomatic bacteriuria (except pregnancy and pre-urological surgery)","Nitrofurantoin is 1st-line for uncomplicated cystitis","Always culture urine in pyelonephritis, complicated UTI, and pregnancy","Catheter-associated UTI: remove/change catheter before starting antibiotics"]
+  },
+  {
+    id:"endocarditis", name:"Infective Endocarditis", category:"bacterial", severity:"critical",
+    icd:"BB42-BB44", pathogen:"Staphylococcus aureus (#1 overall, especially IVDU), Viridans streptococci (#1 native valve subacute), Enterococcus faecalis, Coagulase-negative staphylococci (prosthetic valve), HACEK organisms",
+    pathogenType:"Varied: S. aureus (Gram-positive coagulase-positive cocci — acute), Viridans group strep (Gram-positive α-hemolytic — subacute), Enterococcus (Gram-positive — intrinsically resistant to many antibiotics)",
+    epidemiology:"Incidence 3-10 per 100,000/year. Increasing due to ↑ prosthetic valves, ↑ IVDU, ↑ healthcare-associated infections. Mortality: 20-30% in-hospital.",
+    transmission:"Bacteremia seeding damaged/prosthetic valve endothelium. Sources: dental procedures, IVDU (contaminated needles), skin/soft tissue infections, GI/GU procedures, intravascular devices. Non-bacterial thrombotic endocarditis (NBTE/marantic) → secondary seeding.",
+    pathophysiology:"Endothelial damage → platelet-fibrin deposition (NBTE) → bacteremia → bacterial adhesion (via surface adhesins, e.g., S. aureus protein A, MSCRAMMs) → vegetation formation (bacteria + fibrin + platelets + inflammatory cells). Vegetations: friable, mobile masses on valve leaflets. Left-sided (mitral > aortic): systemic emboli. Right-sided (tricuspid — IVDU): septic pulmonary emboli.",
+    clinicalFeatures:"<b>Acute (S. aureus):</b> High spiking fever, rigors, rapid valve destruction, acute heart failure. <b>Subacute (viridans strep):</b> Low-grade fever, night sweats, weight loss, malaise over weeks-months. <b>Cardiac:</b> New/changing murmur (most commonly mitral regurgitation), heart failure (50%). <b>Embolic phenomena:</b> Stroke/TIA (20%), splenic infarct (LUQ pain), renal infarcts (hematuria), mycotic aneurysms, septic pulmonary emboli (IVDU — cough, pleuritic pain, cavitating nodules). <b>Immunological:</b> Osler's nodes (painful, fingertips), Roth spots (retinal hemorrhages), glomerulonephritis (immune complex). <b>Vascular:</b> Janeway lesions (painless, palms/soles), splinter hemorrhages, petechiae (conjunctival).",
+    diagnosis:"<b>Modified Duke Criteria (2 major, or 1 major + 3 minor, or 5 minor):</b><br><b>Major:</b> (1) Blood cultures — 2 separate positives with typical organism OR persistently positive; (2) Endocardial involvement — vegetation/abscess/new dehiscence on echo OR new valvular regurgitation<br><b>Minor:</b> Predisposition, fever >38°C, vascular phenomena, immunological phenomena, supportive blood cultures/echo<br><b>Investigations:</b> Blood cultures ×3 sets (from different sites, 30 min apart, BEFORE antibiotics), TTE (sensitivity 75%) → TEE (sensitivity 90-95%, mandatory for prosthetic valve/suspected abscess), CBC (anemia of chronic disease, leukocytosis), ESR/CRP ↑, urinalysis (microscopic hematuria), rheumatoid factor, complement ↓ (immune complex GN).",
+    treatment:"<b>Empiric (native valve, acute):</b> Flucloxacillin 2g IV Q4H + Gentamicin 1mg/kg IV Q8H<br><b>Empiric (prosthetic valve):</b> Vancomycin + Gentamicin + Rifampicin<br><b>MSSA native valve:</b> Flucloxacillin 2g IV Q4H × 4-6 weeks ± Gentamicin for first 2 weeks<br><b>MRSA:</b> Vancomycin (trough 15-20 μg/mL) or Daptomycin 8-10 mg/kg IV OD × 6 weeks<br><b>Viridans streptococci:</b> Benzylpenicillin 1.2g IV Q4H × 4 weeks or + Gentamicin × 2 weeks (short course)<br><b>Enterococcal:</b> Ampicillin 2g IV Q4H + Gentamicin (or Ceftriaxone for E. faecalis) × 6 weeks<br><b>Surgery indications:</b> Heart failure (acute AR/MR), uncontrolled infection (persistent bacteremia >7 days, abscess, fungal), prevention of embolism (vegetation >10mm + embolic event, or >15mm). Early surgery (<48 hrs) in selected patients improves outcomes.",
+    complications:"Heart failure (most common cause of death), perivalvular abscess (especially aortic), mycotic aneurysm, embolic stroke, renal failure (embolic/immune complex GN), splenic abscess, vertebral osteomyelitis, relapse.",
+    prevention:"Antibiotic prophylaxis ONLY for high-risk patients (prosthetic valve, previous IE, unrepaired cyanotic CHD, cardiac transplant with valvulopathy) undergoing dental procedures with gingival manipulation: Amoxicillin 2g PO 30-60 min before procedure (Clindamycin 600mg if penicillin allergy). Good dental hygiene. IVDU harm reduction.",
+    keyPoints:["3 sets of blood cultures from different sites BEFORE antibiotics","TEE is superior to TTE (sensitivity 90-95% vs 75%)","S. aureus is the #1 cause overall; viridans strep in subacute native valve","Surgery indications: heart failure, uncontrolled infection, large vegetations with emboli","New murmur + fever + embolic phenomena = IE until proven otherwise"]
+  },
+  // ══════ VIRAL ══════
+  {
+    id:"hiv", name:"HIV/AIDS", category:"viral", severity:"severe",
+    icd:"1C60-1C62", pathogen:"Human Immunodeficiency Virus type 1 (predominant worldwide) and type 2 (West Africa)",
+    pathogenType:"Retroviridae family, Lentivirus genus. Enveloped RNA virus with reverse transcriptase. Targets CD4+ T lymphocytes, macrophages, dendritic cells via gp120-CD4 binding and CCR5/CXCR4 co-receptors",
+    epidemiology:"38.4 million people living with HIV globally (UNAIDS 2022). 1.3 million new infections/year. Sub-Saharan Africa: 67% of global burden. Key populations: MSM, PWID, sex workers, transgender people.",
+    transmission:"Sexual (most common globally — vaginal, anal, oral), parenteral (IVDU, needle-stick [0.3% risk], blood products), vertical (mother-to-child: in utero, intrapartum, breastfeeding — 15-45% untreated, <1% with PMTCT).",
+    pathophysiology:"HIV gp120 binds CD4 receptor + co-receptor (CCR5 in early infection, CXCR4 in late) → membrane fusion (gp41) → reverse transcription (RNA→DNA) → integration into host genome (proviral DNA via integrase) → viral replication → CD4+ T cell destruction (direct cytopathic effect, apoptosis, immune-mediated killing). Viral set point established after acute infection. Progressive CD4 decline (50-80 cells/μL/year untreated) → immunodeficiency → opportunistic infections when CD4 <200 → AIDS.",
+    clinicalFeatures:"<b>Acute retroviral syndrome (2-4 weeks post-infection, 50-90%):</b> Fever, lymphadenopathy, pharyngitis, maculopapular rash, myalgia, oral ulcers (resembles EBV mononucleosis). High viral load, low/normal CD4. <b>Clinical latency (asymptomatic, years):</b> Persistent generalized lymphadenopathy. <b>AIDS (CD4 <200 or AIDS-defining illness):</b><br>• CD4 <200: PCP (Pneumocystis jirovecii pneumonia — dry cough, exertional dyspnea, bilateral ground-glass on CXR/CT), esophageal candidiasis, Kaposi sarcoma (HHV-8)<br>• CD4 <100: Cerebral toxoplasmosis (ring-enhancing lesions), Cryptococcal meningitis (India ink+, CrAg+), CMV retinitis<br>• CD4 <50: MAC (Mycobacterium avium complex), PML (JC virus — progressive multifocal leukoencephalopathy), CMV colitis/esophagitis",
+    diagnosis:"<b>Screening:</b> 4th-generation Ag/Ab combo test (p24 antigen + HIV-1/2 antibodies — window period ~2 weeks). <b>Confirmatory:</b> HIV-1/2 differentiation immunoassay, Western blot (largely replaced). <b>RNA PCR (viral load):</b> Earliest marker (detectable 10-14 days), used for acute HIV diagnosis, monitoring treatment response. <b>CD4 count:</b> Staging, OI prophylaxis thresholds, treatment monitoring. <b>Resistance testing:</b> Genotypic resistance testing before ART initiation and at virological failure. <b>Baseline workup:</b> CBC, metabolic panel, lipids, HLA-B*5701 (before abacavir), Hepatitis B/C serology, RPR/VDRL, Toxoplasma IgG, TB screening, CXR, Pap smear, STI screening.",
+    treatment:"<b>ART — Start immediately regardless of CD4 (Treat All, WHO). Preferred initial regimens (DHHS 2024):</b><br>• Bictegravir/Emtricitabine/TAF (Biktarvy) — single tablet regimen, 1st line<br>• Dolutegravir + Emtricitabine/TAF (or TDF)<br>• Dolutegravir/Lamivudine (Dovato) — 2-drug regimen for HBV-negative, VL <500,000<br><b>Integrase inhibitors (INSTIs):</b> Preferred 3rd agent (Dolutegravir, Bictegravir) — high barrier to resistance, well-tolerated<br><b>OI Prophylaxis:</b><br>• PCP: TMP-SMX DS daily when CD4 <200 (or CD4% <14%, or oral candidiasis)<br>• Toxoplasmosis: TMP-SMX DS daily when CD4 <100 + IgG positive<br>• MAC: Azithromycin 1200mg weekly when CD4 <50<br>• Cryptococcus: Fluconazole after treatment in endemic areas<br><b>Goals:</b> Undetectable viral load (<50 copies/mL) by 6 months. U=U (Undetectable = Untransmittable)<br><b>PrEP (Pre-exposure prophylaxis):</b> TDF/FTC daily OR Cabotegravir IM Q2 months (APRETUDE)<br><b>PEP (Post-exposure):</b> TDF/FTC + Dolutegravir × 28 days (start within 72 hrs)",
+    complications:"Opportunistic infections, HIV-associated nephropathy (collapsing FSGS), HIV-associated neurocognitive disorder (HAND), wasting syndrome, increased cardiovascular risk, ART toxicities (TDF: renal tubular acidosis; Efavirenz: neuropsychiatric; PIs: dyslipidemia, insulin resistance), IRIS (immune reconstitution inflammatory syndrome — paradoxical worsening after ART initiation, especially with low CD4 and TB/Crypto coinfection).",
+    prevention:"ART for prevention (treatment as prevention — U=U), PrEP, condoms, VMMC (voluntary medical male circumcision — 60% reduction), harm reduction (needle exchange, OAT), PMTCT (Option B+ — lifelong ART for all HIV+ pregnant/breastfeeding women), blood product screening.",
+    keyPoints:["4th-gen Ag/Ab combo test is the standard screening test","Start ART immediately regardless of CD4 — Treat All policy","Bictegravir/Emtricitabine/TAF (Biktarvy) is a preferred 1st-line single-tablet regimen","U=U — undetectable viral load means untransmittable","PCP prophylaxis with TMP-SMX when CD4 <200"]
+  },
+  {
+    id:"dengue", name:"Dengue Fever", category:"viral", severity:"moderate",
+    icd:"1D20", pathogen:"Dengue virus (DENV) — serotypes 1-4",
+    pathogenType:"Flaviviridae family, single-stranded RNA virus. Transmitted by Aedes aegypti (primary) and Aedes albopictus mosquitoes. Incubation: 4-10 days.",
+    epidemiology:"Most common arboviral disease globally. ~390 million infections/year, 96 million symptomatic. Endemic in 100+ tropical/subtropical countries. Southeast Asia, Western Pacific, Americas most affected.",
+    transmission:"Bite of infected Aedes mosquito (daytime biter, urban, breeds in stagnant water — flower pots, tires, containers). No person-to-person transmission. Rarely: blood transfusion, organ transplant, vertical.",
+    pathophysiology:"Virus replicates in dendritic cells/macrophages → viremia → immune response (cytokine storm: TNF-α, IL-6, IL-8, VEGF) → ↑ vascular permeability (endothelial glycocalyx disruption) → plasma leakage. <b>Antibody-Dependent Enhancement (ADE):</b> Secondary infection with different serotype → non-neutralizing cross-reactive antibodies → enhanced viral uptake → ↑ severity (DHF/DSS). This is why secondary dengue is more dangerous.",
+    clinicalFeatures:"<b>Febrile phase (Day 1-3):</b> High-grade fever (40°C, 'breakbone fever'), severe retro-orbital pain, headache, myalgia, arthralgia, maculopapular rash (islands of white in a sea of red), facial flushing, nausea/vomiting. <b>Critical phase (Day 3-7, defervescence):</b> Plasma leakage → pleural effusion (right > left), ascites, hemoconcentration (↑Hct ≥20%), hypoalbuminemia. <b>Warning signs:</b> Abdominal pain/tenderness, persistent vomiting, clinical fluid accumulation, mucosal bleeding, lethargy, hepatomegaly >2cm, ↑Hct with ↓platelets. <b>Severe Dengue:</b> Dengue Shock Syndrome (narrow pulse pressure ≤20mmHg, hypotension), severe bleeding (GI hemorrhage), organ impairment (hepatitis ALT>1000, encephalitis, myocarditis). <b>Recovery phase (Day 7-10):</b> Reabsorption of extravasated fluid, bradycardia, convalescent rash (pruritic).",
+    diagnosis:"<b>Day 1-5 (febrile):</b> NS1 antigen (sensitivity 90% day 1-3, ↓ after day 5), RT-PCR (gold standard for viremia, serotyping). <b>Day 5+:</b> Dengue IgM (appears day 3-5, positive by day 5-7, ELISA), IgG (rises in secondary infection from day 1-2 — IgG/IgM ratio >1.78 suggests secondary). <b>CBC:</b> Leukopenia, thrombocytopenia (progressive, nadir at defervescence), hemoconcentration. <b>Others:</b> LFTs (↑AST>ALT), coagulation (↑PT/aPTT in severe), albumin ↓, USS (gallbladder wall thickening, ascites, pleural effusion). <b>Tourniquet test:</b> ≥10 petechiae per 1 inch² (low sensitivity but suggestive).",
+    treatment:"<b>No specific antiviral. Supportive management:</b><br><b>Group A (outpatient — no warning signs):</b> Oral rehydration (ORS), paracetamol only (AVOID NSAIDs, aspirin — bleeding risk), daily platelet and Hct monitoring<br><b>Group B (hospitalized — warning signs/risk):</b> IV isotonic crystalloids (NS or Ringer's lactate) at maintenance rate, monitor Hct Q6-12H, strict I/O charting, daily CBC<br><b>Group C (severe dengue — ICU):</b> Rapid IV crystalloid bolus 10-20 mL/kg over 15-30 min → reassess → repeat or switch to colloid. Target: Hct 35-45%, UO ≥0.5 mL/kg/hr, MAP ≥65mmHg. Blood transfusion for significant hemorrhage (not for low platelet count alone). Platelet transfusion: only if active bleeding with platelets <10,000 or before invasive procedures<br><b>CRITICAL:</b> Avoid overhydration in recovery phase (risk of pulmonary edema) — reduce IV rate as Hct normalizes and appetite returns",
+    complications:"Dengue Shock Syndrome, massive hemorrhage, myocarditis, encephalitis, acute liver failure, hemolytic uremic syndrome, ARDS, disseminated intravascular coagulation (DIC), secondary bacterial infections.",
+    prevention:"Vector control (Aedes mosquito elimination — remove standing water, larvicides, insecticides), personal protection (DEET repellents, long sleeves, window screens), Wolbachia-infected mosquito programs (reduces DENV transmission), Dengvaxia vaccine (CYD-TDV — only for seropositive individuals aged 9-16, risk of severe dengue in seronegatives), TAK-003 (Qdenga — live attenuated tetravalent, approved in some countries regardless of serostatus).",
+    keyPoints:["Secondary infection with a different serotype carries highest risk of severe dengue (ADE)","NS1 antigen is the best early diagnostic test (Day 1-5)","AVOID aspirin and NSAIDs — use paracetamol only","Warning signs at defervescence (Day 3-7) herald the critical phase","Fluid management is the cornerstone — avoid both under-hydration and overhydration"]
+  },
+  {
+    id:"hepatitisb", name:"Hepatitis B", category:"viral", severity:"severe",
+    icd:"1E50.1", pathogen:"Hepatitis B virus (HBV)",
+    pathogenType:"Hepadnaviridae family, partially double-stranded DNA virus. Unique: replicates via reverse transcriptase (RNA intermediate → cccDNA in hepatocyte nucleus). 10 genotypes (A-J)",
+    epidemiology:"296 million chronically infected globally (WHO 2022). 820,000 deaths/year (cirrhosis + HCC). High prevalence: sub-Saharan Africa, East/Southeast Asia. Vertical transmission drives chronic infection in endemic regions.",
+    transmission:"Percutaneous/mucosal exposure to infected blood/body fluids: vertical (mother-to-child, perinatal — 90% chronic if untreated), sexual, IVDU, healthcare exposures (needle-stick: 6-30% transmission risk — much higher than HIV). HBV survives outside body ≥7 days.",
+    pathophysiology:"HBV is non-cytopathic — liver damage is immune-mediated. HBV infects hepatocytes → cccDNA (covalently closed circular DNA) persists in nucleus (difficult to eradicate) → viral protein expression → CD8+ cytotoxic T cells target infected hepatocytes → hepatocyte necrosis + inflammation → fibrosis → cirrhosis. HBx protein: transactivator → ↑ oncogenic pathways → HCC (can occur even without cirrhosis). Phases: Immune tolerant → Immune active (HBeAg+) → Immune control (HBeAg−, anti-HBe+) → Reactivation (HBeAg− hepatitis).",
+    clinicalFeatures:"<b>Acute HBV (incubation 6 weeks-6 months):</b> 70% subclinical. 30%: prodrome (serum sickness-like — fever, arthralgia, urticarial rash) → icteric phase (jaundice, hepatomegaly, RUQ tenderness, dark urine, pale stools, pruritus). Fulminant hepatitis (<1%): coagulopathy, encephalopathy, high mortality. <b>Chronic HBV:</b> Often asymptomatic until cirrhosis/HCC. Fatigue, RUQ discomfort. Extrahepatic: polyarteritis nodosa (PAN), membranous nephropathy, aplastic anemia. <b>Cirrhosis:</b> Jaundice, ascites, variceal bleeding, hepatic encephalopathy, spider angiomata, palmar erythema. <b>HCC:</b> Weight loss, abdominal mass, ↑AFP, new decompensation.",
+    diagnosis:"<b>Serological markers:</b><br>• HBsAg: Active infection (acute or chronic); persistence >6 months = chronic<br>• Anti-HBs: Immunity (>10 mIU/mL = protective) — seen after vaccination or resolved infection<br>• Anti-HBc IgM: Acute infection (window period marker)<br>• Anti-HBc IgG: Past/current infection (lifelong)<br>• HBeAg: High replication, high infectivity<br>• Anti-HBe: Seroconversion, lower replication<br>• HBV DNA (viral load): Quantifies replication, guides treatment<br><b>Interpretation patterns:</b><br>• Acute: HBsAg+, Anti-HBc IgM+, HBeAg+, HBV DNA high<br>• Chronic active: HBsAg+, Anti-HBc IgG+, HBV DNA >2000 IU/mL, ↑ALT<br>• Immune (resolved): HBsAg−, Anti-HBs+, Anti-HBc IgG+<br>• Vaccinated: Anti-HBs+ only<br><b>Assessment:</b> LFTs, FBC, coagulation, AFP (Q6 months for HCC screening), FibroScan/elastography, USS liver Q6 months (HCC surveillance), liver biopsy (if needed for staging).",
+    treatment:"<b>Acute HBV:</b> Supportive (95% adults clear spontaneously). Antiviral only if severe/fulminant (Entecavir/Tenofovir + transplant evaluation)<br><b>Chronic HBV treatment indications:</b> HBV DNA >2000 IU/mL + ALT >2× ULN or significant fibrosis/cirrhosis. All cirrhotics with detectable HBV DNA regardless of ALT.<br><b>Preferred antivirals:</b><br>• Tenofovir Disoproxil Fumarate (TDF) 300mg OD — high barrier to resistance<br>• Tenofovir Alafenamide (TAF) 25mg OD — preferred if renal/bone concerns<br>• Entecavir 0.5mg OD (1mg if lamivudine-experienced) — high barrier to resistance<br>• Treatment is generally long-term/lifelong (can stop if HBsAg seroconversion achieved on 2 occasions 6 months apart, then consolidation 12 months)<br>• PegIFN-α 2a: 48 weeks (finite course, higher HBsAg loss rate ~3-7%, but side effects: flu-like symptoms, cytopenias, depression, contraindicated in decompensated cirrhosis)<br><b>HCC surveillance:</b> USS + AFP every 6 months for all cirrhotics and high-risk non-cirrhotics<br><b>Pregnancy:</b> TDF prophylaxis if HBV DNA >200,000 IU/mL starting week 24-28 → delivery → HBIG + vaccine for neonate within 12 hrs",
+    complications:"Cirrhosis (15-40% of chronic HBV), hepatocellular carcinoma (annual risk 2-5% in cirrhotics), liver failure, portal hypertension (variceal hemorrhage, ascites, SBP, hepatorenal syndrome), HBV reactivation (with immunosuppression — rituximab, chemotherapy), extrahepatic: PAN, membranous GN.",
+    prevention:"<b>Vaccination:</b> Universal neonatal vaccination (3-dose series: 0, 1, 6 months). HBsAb >10 mIU/mL = protective. Combination vaccines available (Twinrix: HepA+B). <b>PMTCT:</b> HBIG + HBV vaccine within 12 hours of birth + maternal TDF if high viral load. <b>Post-exposure:</b> HBIG + vaccine series (needle-stick with HBsAg+ source, within 24 hrs). <b>Universal precautions</b>, blood product screening, harm reduction for IVDU.",
+    keyPoints:["HBsAg persistence >6 months defines chronic hepatitis B","Tenofovir and Entecavir are preferred 1st-line antivirals (high barrier to resistance)","HCC can occur even without cirrhosis in HBV (unlike HCV)","All chronic HBV patients need HCC surveillance (USS + AFP Q6 months)","Screen for HBV reactivation risk before immunosuppressive therapy (especially anti-CD20 agents)"]
+  },
+  {
+    id:"influenza", name:"Influenza", category:"viral", severity:"moderate",
+    icd:"1E30-1E32", pathogen:"Influenza virus types A (most virulent, pandemic potential), B (seasonal), C (mild)",
+    pathogenType:"Orthomyxoviridae, segmented negative-sense ssRNA. Key surface glycoproteins: Hemagglutinin (HA, 18 subtypes) — attachment; Neuraminidase (NA, 11 subtypes) — release. Antigenic drift (point mutations → seasonal epidemics) and shift (reassortment → pandemics, type A only)",
+    epidemiology:"3-5 million severe cases/year, 290,000-650,000 respiratory deaths globally. Seasonal (winter in temperate climates, year-round in tropics). High-risk: age >65, <5 years, pregnancy, chronic cardiopulmonary disease, immunosuppression, obesity. Pandemics: 1918 (H1N1, ~50 million deaths), 2009 (H1N1pdm09).",
+    transmission:"Respiratory droplets (coughing, sneezing — <6 feet), contact (fomites, hands to mucous membranes), limited aerosol transmission. Incubation: 1-4 days. Infectious from 1 day before to 5-7 days after symptom onset.",
+    pathophysiology:"HA binds sialic acid on respiratory epithelium (α2,6-linkage for human tropism, α2,3-linkage for avian) → endocytosis → uncoating → replication in nucleus → budding (NA cleaves sialic acid to release virions). Epithelial cell necrosis → denuded respiratory tract → impaired mucociliary clearance → ↑ secondary bacterial infection risk. Cytokine storm in severe cases (IL-6, TNF-α, IFN-γ) → ARDS.",
+    clinicalFeatures:"<b>Uncomplicated influenza:</b> Abrupt onset high fever (39-40°C), chills/rigors, myalgia (severe, especially legs/back), headache, dry cough, sore throat, rhinorrhea, fatigue/prostration. Self-limiting 5-7 days. <b>Distinguishing from common cold:</b> Influenza has more prominent systemic symptoms (fever, myalgia, prostration) vs common cold (rhinorrhea, sneezing, mild constitutional). <b>Complications — Pulmonary:</b> Primary viral pneumonia (ARDS, bilateral infiltrates), secondary bacterial pneumonia (S. pneumoniae, S. aureus including MRSA — typically biphasic course: improving then worsening), bronchitis. <b>Extra-pulmonary:</b> Myocarditis, pericarditis, myositis/rhabdomyolysis (↑CK, especially children), encephalitis, Guillain-Barré syndrome, Reye syndrome (aspirin use in children — contraindicated).",
+    diagnosis:"<b>Rapid influenza diagnostic tests (RIDTs):</b> Point-of-care, results in 15-30 min, detects antigen. Sensitivity 50-70% (low — negative test does not rule out influenza in high-risk season). <b>Rapid molecular assays:</b> Xpert Flu/RSV, ID NOW — nucleic acid detection, sensitivity >95%, results in 15-30 min. Preferred over RIDTs. <b>RT-PCR:</b> Gold standard, sensitivity/specificity >99%, results in hours. <b>Viral culture:</b> Research/surveillance, slow (3-7 days). <b>When to test:</b> Hospitalized patients, high-risk outpatients during flu season, institutional outbreaks. <b>During high community circulation, clinical diagnosis may suffice for low-risk outpatients.</b>",
+    treatment:"<b>Neuraminidase inhibitors:</b><br>• Oseltamivir (Tamiflu) 75mg PO BD × 5 days — most widely used, start within 48 hrs of symptom onset (benefit if started later in hospitalized/severe cases)<br>• Zanamivir 10mg inhaled BD × 5 days (avoid in asthma/COPD — bronchospasm)<br><b>Cap-dependent endonuclease inhibitor:</b><br>• Baloxavir marboxil (Xofluza) single dose PO — inhibits viral mRNA synthesis. Effective if started within 48 hrs. Not recommended if immunocompromised (resistance risk)<br><b>Treat empirically in:</b> Hospitalized patients, severe/complicated illness, high-risk individuals — do NOT wait for test results. Benefit greatest if started <48 hrs but still beneficial up to 5 days in severe/hospitalized. <b>Supportive:</b> Rest, fluids, antipyretics (paracetamol/ibuprofen — NEVER aspirin in children <18 years).",
+    complications:"Primary viral pneumonia/ARDS, secondary bacterial pneumonia, exacerbation of underlying chronic disease (COPD, asthma, heart failure), myocarditis, encephalitis, myositis, rhabdomyolysis, Reye syndrome, multi-organ failure, death.",
+    prevention:"<b>Annual influenza vaccination (most important intervention):</b> Inactivated influenza vaccine (IIV4 — quadrivalent), live attenuated (LAIV — nasal spray, age 2-49, not immunocompromised). High-dose/adjuvanted vaccines for age ≥65. Updated annually for circulating strains. Target: all persons ≥6 months, especially high-risk groups, healthcare workers, pregnant women. <b>Chemoprophylaxis:</b> Oseltamivir 75mg OD for post-exposure prophylaxis in high-risk contacts (not a substitute for vaccination). <b>Infection control:</b> Droplet precautions, hand hygiene, respiratory etiquette.",
+    keyPoints:["Annual vaccination is the most effective prevention measure","Start oseltamivir empirically in hospitalized patients — do not wait for test results","Rapid molecular assays (not RIDTs) are preferred for diagnosis","Never give aspirin to children with influenza (Reye syndrome risk)","Antigenic shift (reassortment) in type A causes pandemics"]
+  },
+  // ══════ FUNGAL ══════
+  {
+    id:"candidiasis", name:"Candidiasis (Invasive & Mucocutaneous)", category:"fungal", severity:"moderate",
+    icd:"1F23", pathogen:"Candida albicans (most common), C. glabrata (azole resistance), C. auris (multidrug-resistant, nosocomial), C. parapsilosis, C. tropicalis",
+    pathogenType:"Dimorphic yeast (yeast form in commensal state, pseudohyphae/hyphae in invasive). Normal commensal of GI tract, skin, vaginal mucosa. Opportunistic pathogen.",
+    epidemiology:"Most common fungal infection in humans. Invasive candidiasis: 4th most common healthcare-associated bloodstream infection in US. C. auris: emerging global threat (60% mortality, often pan-resistant, difficult to eradicate from healthcare environments).",
+    transmission:"Endogenous (commensal flora → invasion with risk factors) or exogenous (healthcare environment, contaminated devices). Risk factors: broad-spectrum antibiotics (disrupt bacterial flora), immunosuppression (neutropenia, steroids, chemotherapy), diabetes mellitus, ICU stay, central venous catheters, TPN, abdominal surgery, extremes of age.",
+    pathophysiology:"Commensal → pathogenic switch: adhesion (Als proteins, Hwp1) → biofilm formation (on catheters/devices — resistant to antifungals) → tissue invasion (hyphae penetrate epithelium via secreted aspartyl proteases, phospholipases) → dissemination (hematogenous → multi-organ involvement: kidneys, eyes, liver, spleen, brain). Immune defense: neutrophils (most important for invasive), Th17 cells + IL-17 (mucocutaneous defense).",
+    clinicalFeatures:"<b>Oropharyngeal candidiasis (thrush):</b> White adherent plaques on buccal mucosa/tongue (scrape off to reveal erythematous base), angular cheilitis, dysphagia if esophageal extension. <b>Esophageal candidiasis:</b> Odynophagia, dysphagia, retrosternal pain. AIDS-defining illness. <b>Vulvovaginal candidiasis:</b> Pruritus vulvae, thick white 'cottage-cheese' discharge, vulvar erythema/edema, dyspareunia. <b>Invasive/Candidemia:</b> Persistent fever unresponsive to broad-spectrum antibiotics in ICU/neutropenic patient, sepsis, multi-organ dysfunction. Endophthalmitis (blurred vision — always do fundoscopy in candidemia), hepatosplenic candidiasis ('bull's eye' lesions on imaging, in recovering neutropenic patients), endocarditis (large vegetations), osteomyelitis, meningitis.",
+    diagnosis:"<b>Mucocutaneous:</b> Clinical diagnosis often sufficient. KOH wet mount (pseudohyphae + budding yeasts), culture if recurrent/refractory. <b>Invasive:</b> Blood cultures (sensitivity only 50-70%! — negative blood cultures do NOT exclude invasive candidiasis), β-D-glucan assay (pan-fungal biomarker, sensitivity 75-80%, ↑ false positives), T2Candida panel (molecular, rapid, high sensitivity), Candida mannan/anti-mannan antibodies. <b>Species identification crucial:</b> C. auris requires specialized identification (MALDI-TOF, not standard automated systems). <b>All candidemia patients must have:</b> Ophthalmologic exam (endophthalmitis), echocardiography if persistent, repeat blood cultures Q48H until clearance.",
+    treatment:"<b>Oropharyngeal:</b> Nystatin suspension 100,000 U QID swish-and-swallow × 7-14 days OR Fluconazole 100-200mg OD × 7-14 days (moderate-severe)<br><b>Esophageal:</b> Fluconazole 200-400mg OD × 14-21 days (empiric trial often diagnostic + therapeutic)<br><b>Vulvovaginal:</b> Topical azole (Clotrimazole 500mg pessary single dose) OR Fluconazole 150mg PO single dose. Recurrent (≥4/year): Fluconazole 150mg weekly × 6 months<br><b>Candidemia/Invasive:</b><br>• Echinocandin 1st line: Caspofungin 70mg loading → 50mg OD or Micafungin 100mg OD or Anidulafungin 200mg → 100mg OD<br>• Step-down to Fluconazole 400mg OD if C. albicans, azole-susceptible, clinically stable<br>• Duration: 14 days after last positive blood culture + resolution of symptoms<br>• REMOVE all central venous catheters (source control essential)<br>• C. auris: Echinocandin (often resistant to azoles + amphotericin B). Infection control: contact precautions, terminal cleaning<br><b>Neutropenic patients:</b> Echinocandin or Liposomal Amphotericin B",
+    complications:"Disseminated candidiasis (multi-organ), Candida endocarditis (surgical valve replacement often needed), endophthalmitis (can cause blindness), hepatosplenic candidiasis, Candida peritonitis, osteomyelitis/septic arthritis, catheter-related complications, death (candidemia mortality 30-50%).",
+    prevention:"Antifungal prophylaxis: Fluconazole 400mg OD in high-risk ICU patients, neutropenic patients (ANC <500 expected >7 days), solid organ/stem cell transplant recipients. Hand hygiene, catheter care bundles (remove CVCs ASAP), antibiotic stewardship, C. auris screening and isolation.",
+    keyPoints:["Blood cultures are only 50-70% sensitive — consider β-D-glucan and T2Candida for invasive disease","Echinocandins are 1st-line for invasive candidiasis/candidemia","Always remove central venous catheters in candidemia","Ophthalmologic exam is mandatory in all candidemia patients","C. auris is a global emerging threat — often multidrug-resistant, requires contact precautions"]
+  },
+  {
+    id:"aspergillosis", name:"Aspergillosis (Invasive Pulmonary)", category:"fungal", severity:"critical",
+    icd:"1F20", pathogen:"Aspergillus fumigatus (most common), A. flavus, A. niger, A. terreus (amphotericin-resistant)",
+    pathogenType:"Ubiquitous saprophytic mould with septate hyphae branching at 45° (dichotomous). Conidia (2-3 μm) are easily inhaled. Thermotolerant (37-50°C).",
+    epidemiology:"Invasive aspergillosis (IA): primarily in immunocompromised — prolonged neutropenia (AML, HSCT), solid organ transplant, high-dose corticosteroids, CGD (chronic granulomatous disease). Emerging: COVID-associated pulmonary aspergillosis (CAPA), influenza-associated. Mortality: 30-90% depending on host factors.",
+    transmission:"Inhalation of airborne conidia (ubiquitous in environment — soil, decaying matter, construction sites). Hospital outbreaks associated with construction work. No person-to-person transmission.",
+    pathophysiology:"Conidia inhaled → evade mucociliary clearance → germinate to hyphae → angioinvasion (hallmark of IA — hyphae invade blood vessels) → hemorrhagic infarction, tissue necrosis, dissemination. Normal defense: alveolar macrophages kill conidia, neutrophils kill hyphae (via oxidative burst, NADPH oxidase). Neutropenia = cannot kill hyphae → invasion. Corticosteroids impair both macrophage and T-cell function → risk.",
+    clinicalFeatures:"<b>Invasive Pulmonary Aspergillosis (IPA):</b> Persistent fever unresponsive to broad-spectrum antibiotics in neutropenic patient, pleuritic chest pain, dyspnea, cough, hemoptysis. CT: halo sign (ground-glass opacity surrounding nodule — early, <5 days), air-crescent sign (later, with neutrophil recovery — cavitation). <b>Chronic Pulmonary Aspergillosis (CPA):</b> Productive cough, hemoptysis, weight loss over months in patients with underlying lung disease (COPD, TB cavities, sarcoidosis). Aspergilloma ('fungus ball' in pre-existing cavity). <b>Allergic Bronchopulmonary Aspergillosis (ABPA):</b> Poorly controlled asthma/CF, central bronchiectasis, fleeting infiltrates, eosinophilia, ↑↑ IgE. <b>Other:</b> Sinusitis (erosive in immunocompromised), cerebral aspergillosis (ring-enhancing lesions, high mortality), endocarditis (prosthetic valve), cutaneous.",
+    diagnosis:"<b>IPA:</b> CT chest (halo sign — do NOT wait for CXR changes), Serum galactomannan (Aspergillus cell wall component — sensitivity 70-80% in neutropenic, poor in non-neutropenic/antifungal prophylaxis), BAL galactomannan (sensitivity 80-90%, cutoff ≥1.0 ODI), β-D-glucan (pan-fungal, supportive), BAL culture + PCR, histopathology (septate hyphae 45° branching, GMS/PAS stain). <b>CPA/Aspergilloma:</b> Aspergillus IgG antibodies (most useful, sensitivity >90%), CT (fungus ball, cavitation, pleural thickening), sputum culture (positive in ~50%). <b>ABPA:</b> Total IgE >1000 IU/mL, Aspergillus-specific IgE and IgG, eosinophilia, central bronchiectasis on CT, positive skin prick test.",
+    treatment:"<b>Invasive Aspergillosis:</b><br>• 1st line: Voriconazole 6mg/kg IV BD day 1 → 4mg/kg BD (target trough 1-5.5 μg/mL) — IDSA/ECIL guidelines<br>• Alternative: Isavuconazole 200mg TDS × 6 doses → 200mg OD (fewer drug interactions, no QT prolongation)<br>• Salvage: Liposomal Amphotericin B 3-5 mg/kg OD or Caspofungin<br>• Combination: Voriconazole + Echinocandin (some evidence in HSCT patients)<br>• Duration: Minimum 6-12 weeks, until resolution of immunosuppression + radiological improvement<br>• A. terreus: intrinsically amphotericin B-resistant → voriconazole<br><b>Aspergilloma:</b> Observation if asymptomatic. Surgical resection for recurrent hemoptysis. Bronchial artery embolization for life-threatening hemoptysis.<br><b>ABPA:</b> Prednisolone 0.5mg/kg × 2 weeks → taper over 3-5 months + Itraconazole 200mg BD × 16 weeks (steroid-sparing). Monitor total IgE.",
+    complications:"Hemorrhage (angioinvasion → massive hemoptysis), disseminated aspergillosis (brain, skin, liver), airway invasion, bronchopleural fistula, treatment toxicity (voriconazole: visual disturbances [30%], hepatotoxicity, photosensitivity, skin cancers with long-term use, periostitis), breakthrough infections on azole prophylaxis.",
+    prevention:"HEPA-filtered rooms for high-risk neutropenic patients (HSCT), avoid construction dust exposure, antifungal prophylaxis: Posaconazole 300mg OD (preferred in HSCT, AML with prolonged neutropenia) or Voriconazole. Environmental sampling during outbreaks. Galactomannan screening 2×/week in high-risk neutropenic patients.",
+    keyPoints:["Halo sign on CT in a neutropenic/febrile patient = start antifungals empirically","Voriconazole is 1st-line treatment for invasive aspergillosis","Galactomannan (serum and BAL) is the key biomarker — BAL is more sensitive","A. terreus is intrinsically resistant to Amphotericin B","Do NOT wait for culture confirmation — initiate therapy based on clinical + radiological suspicion"]
+  },
+  // ══════ PARASITIC ══════
+  {
+    id:"malaria", name:"Malaria", category:"parasitic", severity:"severe",
+    icd:"1F40-1F4Z", pathogen:"Plasmodium falciparum (most virulent, cerebral malaria), P. vivax (relapse — hypnozoites), P. ovale (relapse), P. malariae (nephrotic syndrome), P. knowlesi (Southeast Asia, quotidian fever, can be severe)",
+    pathogenType:"Protozoan parasite (Apicomplexa). Vector: female Anopheles mosquito. Life cycle: sporozoites (mosquito → liver) → merozoites (liver → RBCs) → trophozoites → schizonts → merozoites (rupture = fever paroxysm). Gametocytes infect mosquito. Hypnozoites (P. vivax, P. ovale) remain dormant in liver → relapse months-years later.",
+    epidemiology:"247 million cases, 619,000 deaths (WHO 2022). 95% of deaths in sub-Saharan Africa. 80% of deaths in children <5 years. P. falciparum predominates in Africa; P. vivax predominates in South/Southeast Asia, Latin America.",
+    transmission:"Bite of infected female Anopheles mosquito (dusk to dawn). Also: congenital, blood transfusion, organ transplant, needle-sharing. Incubation: P. falciparum 7-14 days; P. vivax/ovale 12-18 days (can be months with hypnozoites); P. malariae 18-40 days.",
+    pathophysiology:"<b>P. falciparum:</b> Infects RBCs of all ages (high parasitemia) → PfEMP1 (P. falciparum erythrocyte membrane protein 1) on infected RBC surface → binds endothelial receptors (ICAM-1, CD36) → cytoadherence and sequestration in microvasculature (brain, placenta, kidneys) → microvascular obstruction → tissue ischemia, organ dysfunction. Rosetting (infected RBCs bind uninfected RBCs). Cerebral malaria: sequestration in cerebral microvasculature → BBB disruption → cerebral edema, ring hemorrhages. Severe anemia: hemolysis + dyserythropoiesis + splenic clearance. Metabolic acidosis: lactate (tissue hypoxia) + renal impairment.",
+    clinicalFeatures:"<b>Uncomplicated:</b> Fever (may be periodic — tertian [48h, P. vivax/ovale/falciparum] or quartan [72h, P. malariae] but often irregular initially), rigors, diaphoresis, headache, myalgia, nausea/vomiting, hepatosplenomegaly. <b>Severe malaria (P. falciparum — WHO criteria):</b> Cerebral malaria (GCS <11, Blantyre coma score ≤2 in children, seizures), severe anemia (Hb <5 g/dL), respiratory distress (acidotic breathing, ARDS), acute kidney injury (creatinine >3 mg/dL), hypoglycemia (<40 mg/dL — quinine/artesunate-induced or disease), jaundice (bilirubin >3 mg/dL with parasitemia >100,000/μL), DIC, shock (algid malaria), hyperparasitemia (>10% or >250,000/μL). <b>Blackwater fever:</b> Massive intravascular hemolysis → hemoglobinuria (dark urine) → AKI. <b>Malaria in pregnancy:</b> Severe anemia, placental parasitization, low birth weight, stillbirth, congenital malaria.",
+    diagnosis:"<b>Thick and thin blood films (gold standard):</b> Thick film — detection (sensitive, lyses RBCs to concentrate parasites). Thin film — species identification + parasitemia quantification. Should be read by experienced microscopist. Repeat Q12-24H × 3 if initial negative + high clinical suspicion. <b>Rapid Diagnostic Test (RDT):</b> Immunochromatographic — detects HRP2 (P. falciparum-specific, persists after treatment), pLDH (pan-Plasmodium or species-specific). Sensitivity ~95% for P. falciparum when parasitemia >200/μL. False-negative in low parasitemia, hrp2/3 gene deletions. <b>PCR:</b> Most sensitive (detects <1 parasite/μL), species confirmation, mixed infections, submicroscopic parasitemia. <b>Other investigations:</b> CBC (anemia, thrombocytopenia — very common), metabolic panel (glucose, creatinine, electrolytes), LFTs, lactate, blood gas, coagulation, blood group + crossmatch (if severe).",
+    treatment:"<b>Uncomplicated P. falciparum:</b> Artemisinin-based Combination Therapy (ACT) — WHO 1st line:<br>• Artemether-Lumefantrine (Coartem) 6-dose regimen over 3 days (most widely used globally)<br>• Artesunate-Amodiaquine, Artesunate-Mefloquine, DHA-Piperaquine (regional 1st lines)<br>• Add single dose Primaquine 0.25mg/kg as gametocytocide (transmission reduction)<br><b>Severe malaria (MEDICAL EMERGENCY):</b><br>• IV Artesunate 2.4mg/kg at 0, 12, 24 hrs → then Q24H until oral tolerated → complete 3-day ACT<br>• IV Artesunate is superior to IV Quinine (SEAQUAMAT and AQUAMAT trials — 35% relative mortality reduction)<br>• If artesunate unavailable: IV Quinine 20mg/kg loading (over 4 hrs, never bolus) → 10mg/kg Q8H + Doxycycline<br>• Supportive: Glucose monitoring (hypoglycemia!), fluids (avoid overhydration — pulmonary edema risk), blood transfusion if Hb <5, seizure management (benzodiazepines), renal replacement therapy if needed, exchange transfusion if parasitemia >10% (consider)<br><b>P. vivax/ovale:</b> ACT or Chloroquine (where sensitive) + Primaquine 0.25-0.5mg/kg/day × 14 days (radical cure — kills hypnozoites, prevents relapse). TEST G6PD before primaquine (risk of hemolytic anemia in G6PD deficiency). Tafenoquine 300mg single dose alternative (also requires G6PD testing).<br><b>P. malariae, P. knowlesi:</b> ACT or Chloroquine. P. knowlesi — treat as falciparum if severe.",
+    complications:"Cerebral malaria (20-30% mortality even with treatment; sequelae: epilepsy, cognitive impairment, cortical blindness), severe malarial anemia, ARDS/pulmonary edema, AKI (ATN, blackwater fever), hepatic dysfunction, splenic rupture, DIC, hypoglycemia, lactic acidosis, post-artesunate delayed hemolysis (PADH — 7-21 days after IV artesunate, monitor Hb), tropical splenomegaly syndrome (hyperreactive malarial splenomegaly), nephrotic syndrome (P. malariae — immune complex GN), Burkitt lymphoma association (P. falciparum + EBV).",
+    prevention:"<b>Chemoprophylaxis (travelers):</b> Atovaquone-Proguanil (Malarone, start 1-2 days before, continue 7 days after), Doxycycline (start 1-2 days before, continue 4 weeks after), Mefloquine (start 2 weeks before, weekly, continue 4 weeks after — avoid if psychiatric/seizure history). <b>Vector control:</b> Insecticide-treated bed nets (ITNs — most effective single intervention), indoor residual spraying (IRS), environmental management. <b>Personal protection:</b> DEET repellent, long sleeves/pants at dusk-dawn. <b>Vaccine:</b> RTS,S/AS01 (Mosquirix) — WHO recommended for moderate-high transmission areas in children. R21/Matrix-M — newer, higher efficacy (77%), WHO recommended 2023. <b>Pregnancy:</b> IPTp (Intermittent Preventive Treatment) with Sulfadoxine-Pyrimethamine monthly from 13 weeks.",
+    keyPoints:["IV Artesunate is the treatment of choice for severe malaria (superior to quinine)","Thick and thin blood films remain the gold standard diagnosis","Always test G6PD before prescribing primaquine/tafenoquine (P. vivax/ovale radical cure)","P. falciparum is uniquely dangerous due to cytoadherence and sequestration","Artemisinin-based Combination Therapy (ACT) is 1st-line for uncomplicated P. falciparum worldwide"]
+  },
+  {
+    id:"amoebiasis", name:"Amoebiasis (Entamoeba histolytica)", category:"parasitic", severity:"moderate",
+    icd:"1A36", pathogen:"Entamoeba histolytica",
+    pathogenType:"Protozoan parasite. Two forms: cyst (infectious, resistant to gastric acid, survives in environment) and trophozoite (invasive, motile, flask-shaped ulcers in colon). Must distinguish from non-pathogenic E. dispar (morphologically identical).",
+    epidemiology:"~50 million symptomatic infections/year, ~55,000 deaths. Endemic in developing countries with poor sanitation: India, Mexico, Central/South America, sub-Saharan Africa. Second leading parasitic cause of death globally (after malaria).",
+    transmission:"Fecal-oral route: ingestion of cysts in contaminated water/food. Sexual transmission (oro-anal). Risk factors: poor sanitation, institutionalization, MSM, travel to endemic areas.",
+    pathophysiology:"Cysts ingested → excystation in small intestine → trophozoites colonize cecum/ascending colon → adherence via Gal/GalNAc lectin → contact-dependent killing of epithelial cells (amoebapore, cysteine proteases) → flask-shaped ulcers (narrow neck, wide base undermining submucosa) → invasion through muscularis → portal venous spread → liver (amoebic liver abscess). Trophozoites cause tissue necrosis with minimal inflammatory infiltrate ('anchovy paste' necrotic material in liver abscess).",
+    clinicalFeatures:"<b>Intestinal amoebiasis:</b> Gradual onset bloody diarrhea (dysentery) with mucus, abdominal cramps, tenesmus, over 1-3 weeks. Fever in ~30%. Weight loss. Fulminant colitis with toxic megacolon (rare, fatal). Amoeboma (mass lesion, mimics colon cancer). <b>Amoebic liver abscess (ALA):</b> Fever (quotidian pattern), right upper quadrant pain (dull, continuous), right shoulder tip pain (diaphragmatic irritation), hepatomegaly (tender), right basal lung signs (atelectasis/effusion). May occur months-years after intestinal infection. Usually single, right lobe (due to portal venous flow from cecum). Diarrhea present in only ~30%. Rupture: into peritoneum, pleural space, or pericardium (left lobe → pericarditis, life-threatening).",
+    diagnosis:"<b>Intestinal:</b> Stool microscopy (trophozoites with ingested RBCs — pathognomonic of E. histolytica; cysts with 4 nuclei + chromatoid bars), stool antigen detection (Gal/GalNAc lectin ELISA — distinguishes histolytica from dispar), PCR (most accurate species differentiation), colonoscopy (flask-shaped ulcers, skip lesions — biopsy trophozoites at ulcer edges). <b>ALA:</b> Serology (anti-amoebic antibodies — sensitivity >95% in ALA, positive in 7-10 days; may remain positive for years), USS abdomen (round hypoechoic lesion, usually right lobe, no septations), CT (rim-enhancing peripheral lesion), aspirate ('anchovy paste' — chocolate-colored, odorless, acellular necrotic debris; trophozoites found only at abscess wall, NOT in aspirate usually). <b>Blood:</b> Leukocytosis (no eosinophilia typically), ↑ALP, mildly ↑transaminases. Negative blood cultures (distinguishes from pyogenic liver abscess).",
+    treatment:"<b>Invasive/Symptomatic amoebiasis (intestinal or ALA):</b><br>• Metronidazole 750mg TDS × 7-10 days (or Tinidazole 2g OD × 3-5 days — better tolerated, higher cure rate)<br>• FOLLOWED BY luminal agent to eliminate cysts: Paromomycin 25-35 mg/kg/day in 3 doses × 7 days or Diloxanide furoate 500mg TDS × 10 days<br>• Both tissue agent + luminal agent are ESSENTIAL (metronidazole alone = 40-60% relapse from persisting luminal cysts)<br><b>ALA drainage indications (percutaneous aspiration):</b> Failure to respond to metronidazole within 5-7 days, large abscess (>5-10 cm, risk of rupture), left lobe abscess (risk of pericardial rupture), diagnostic uncertainty (exclude pyogenic abscess), impending rupture<br><b>Asymptomatic cyst passers:</b> Luminal agent only (Paromomycin) — treat to prevent invasive disease and transmission<br><b>Fulminant colitis:</b> IV metronidazole + broad-spectrum antibiotics + surgical consultation (subtotal colectomy if perforation/toxic megacolon)",
+    complications:"Fulminant/necrotizing colitis, toxic megacolon, perforation/peritonitis, amoeboma (can obstruct/mimic malignancy), liver abscess rupture (peritoneal, pleural, pericardial — left lobe ALA → cardiac tamponade), hepatobronchial fistula (anchovy paste sputum), brain abscess (rare, hematogenous), strictures.",
+    prevention:"Safe water supply (boiling, filtration — cysts resistant to chlorination at standard concentrations), improved sanitation, hand hygiene, food hygiene (avoid uncooked vegetables/fruit in endemic areas, 'boil it, cook it, peel it, or forget it'), treat asymptomatic cyst passers, health education.",
+    keyPoints:["Always follow metronidazole with a luminal agent (paromomycin) to prevent relapse","Trophozoites with ingested RBCs are pathognomonic of E. histolytica","Amoebic liver abscess: right lobe, single, 'anchovy paste' aspirate, serology-positive","Distinguish E. histolytica (pathogenic) from E. dispar (non-pathogenic) — antigen/PCR","Left lobe ALA can rupture into pericardium — life-threatening tamponade"]
+  }
+];
+
+// ─── STATE ───
+let currentCategory = 'all';
+let searchTerm = '';
+let expandedCards = new Set();
+let expandedSections = {};
+let currentData = [];
+
+// ─── DEFAULT CONFIG ───
+const defaultConfig = {
+  background_color: "#0f1419",
+  surface_color: "#1a2332",
+  text_color: "#e2e8f0",
+  primary_action: "#6366f1",
+  secondary_action: "#22d3ee",
+  font_family: "DM Sans",
+  font_size: 15,
+  main_title: "Medicine — Infectious Diseases",
+  subtitle: "Comprehensive Clinical Reference Guide"
+};
+
+// ─── RENDER ───
+function renderDiseases() {
+  const container = document.getElementById('diseaseContainer');
+  const empty = document.getElementById('emptyState');
+  
+  let filtered = diseases.filter(d => {
+    const catMatch = currentCategory === 'all' || d.category === currentCategory;
+    if (!catMatch) return false;
+    if (!searchTerm) return true;
+    const s = searchTerm.toLowerCase();
+    return d.name.toLowerCase().includes(s) || d.pathogen.toLowerCase().includes(s) ||
+      d.treatment.toLowerCase().includes(s) || d.clinicalFeatures.toLowerCase().includes(s) ||
+      d.diagnosis.toLowerCase().includes(s) || d.category.includes(s);
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+
+  const html = filtered.map(d => {
+    const isExpanded = expandedCards.has(d.id);
+    const sevClass = d.severity === 'mild' ? 'severity-mild' : d.severity === 'moderate' ? 'severity-moderate' : d.severity === 'severe' ? 'severity-severe' : 'severity-critical';
+    const catClass = d.category === 'bacterial' ? 'pathogen-bacteria' : d.category === 'viral' ? 'pathogen-virus' : d.category === 'fungal' ? 'pathogen-fungal' : 'pathogen-parasite';
+
+    const sections = [
+      {key:'epi', icon:'globe', title:'Epidemiology', content:d.epidemiology},
+      {key:'trans', icon:'arrow-right-left', title:'Transmission', content:d.transmission},
+      {key:'patho', icon:'microscope', title:'Pathophysiology', content:d.pathophysiology},
+      {key:'clinical', icon:'stethoscope', title:'Clinical Features', content:d.clinicalFeatures},
+      {key:'diag', icon:'search', title:'Diagnosis', content:d.diagnosis},
+      {key:'tx', icon:'pill', title:'Treatment', content:d.treatment},
+      {key:'comp', icon:'alert-triangle', title:'Complications', content:d.complications},
+      {key:'prev', icon:'shield', title:'Prevention', content:d.prevention},
+    ];
+
+    const sectionHTML = sections.map(s => {
+      const secId = `${d.id}_${s.key}`;
+      const isOpen = expandedSections[secId];
+      return `<div class="border-t" style="border-color:color-mix(in srgb, var(--text-color) 8%, transparent);">
+        <button onclick="toggleSection('${secId}')" class="w-full flex items-center justify-between px-4 py-3 text-left hover:opacity-80 transition-opacity">
+          <span class="flex items-center gap-2 font-semibold text-sm"><i data-lucide="${s.icon}" style="width:15px;height:15px;color:var(--secondary-action);"></i>${s.title}</span>
+          <i data-lucide="${isOpen?'chevron-up':'chevron-down'}" style="width:14px;height:14px;opacity:0.4;"></i>
+        </button>
+        <div class="collapse-content ${isOpen?'open':''}" id="sec_${secId}">
+          <div class="px-4 pb-4 text-sm leading-relaxed opacity-80">${s.content}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const keyPointsHTML = d.keyPoints.map(k => `<li class="flex items-start gap-2"><span style="color:var(--secondary-action);font-weight:700;flex-shrink:0;">▸</span><span>${k}</span></li>`).join('');
+
+    return `<div class="disease-card rounded-2xl mb-4 overflow-hidden fade-in" style="background:var(--surface-color);border:1px solid color-mix(in srgb, var(--text-color) 8%, transparent);" data-id="${d.id}">
+      <div class="p-4 sm:p-5 cursor-pointer" onclick="toggleCard('${d.id}')">
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <span class="pill ${catClass}">${d.category.toUpperCase()}</span>
+          <span class="pill ${sevClass}">${d.severity.toUpperCase()}</span>
+          <span class="text-xs opacity-40 ml-auto">ICD-11: ${d.icd}</span>
+        </div>
+        <h2 class="text-lg sm:text-xl font-bold mt-1" style="font-family:'Instrument Serif',serif;">${d.name}</h2>
+        <p class="text-xs mt-1 opacity-60"><b>Organism:</b> ${d.pathogen}</p>
+        <p class="text-xs mt-1 opacity-50">${d.pathogenType}</p>
+        <div class="flex items-center gap-1 mt-3 text-xs" style="color:var(--primary-action);">
+          <span>${isExpanded?'Collapse':'Expand clinical details'}</span>
+          <i data-lucide="${isExpanded?'chevron-up':'chevron-down'}" style="width:14px;height:14px;"></i>
+        </div>
+      </div>
+      ${isExpanded ? `<div class="fade-in">
+        ${sectionHTML}
+        <div class="p-4 sm:p-5 border-t" style="border-color:color-mix(in srgb, var(--text-color) 8%, transparent);background:color-mix(in srgb, var(--primary-action) 5%, transparent);">
+          <h3 class="font-bold text-sm mb-2 flex items-center gap-2"><i data-lucide="lightbulb" style="width:15px;height:15px;color:var(--secondary-action);"></i>High-Yield Key Points</h3>
+          <ul class="text-sm space-y-1.5 opacity-80">${keyPointsHTML}</ul>
+        </div>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+
+  container.innerHTML = html;
+  lucide.createIcons();
+}
+
+function toggleCard(id) {
+  if (expandedCards.has(id)) expandedCards.delete(id);
+  else expandedCards.add(id);
+  renderDiseases();
+}
+
+function toggleSection(secId) {
+  expandedSections[secId] = !expandedSections[secId];
+  const el = document.getElementById('sec_' + secId);
+  if (el) el.classList.toggle('open');
+  // re-render icons for chevron
+  renderDiseases();
+}
+
+function filterCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    b.style.background = '';
+    b.style.color = '';
+  });
+  event.currentTarget.style.background = `var(--primary-action)`;
+  event.currentTarget.style.color = '#fff';
+  renderDiseases();
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchTerm = e.target.value;
+  renderDiseases();
+});
+
+// ─── ELEMENT SDK ───
+function applyConfig(config) {
+  const root = document.getElementById('app');
+  root.style.setProperty('--bg-color', config.background_color || defaultConfig.background_color);
+  root.style.setProperty('--surface-color', config.surface_color || defaultConfig.surface_color);
+  root.style.setProperty('--text-color', config.text_color || defaultConfig.text_color);
+  root.style.setProperty('--primary-action', config.primary_action || defaultConfig.primary_action);
+  root.style.setProperty('--secondary-action', config.secondary_action || defaultConfig.secondary_action);
+  root.style.background = config.background_color || defaultConfig.background_color;
+  root.style.color = config.text_color || defaultConfig.text_color;
+
+  const font = config.font_family || defaultConfig.font_family;
+  const baseSize = config.font_size || defaultConfig.font_size;
+  root.style.fontFamily = `${font}, 'DM Sans', sans-serif`;
+  root.style.fontSize = `${baseSize}px`;
+
+  const title = document.getElementById('mainTitle');
+  const sub = document.getElementById('subtitle');
+  if (title) { title.textContent = config.main_title || defaultConfig.main_title; title.style.fontFamily = `'Instrument Serif', ${font}, serif`; title.style.fontSize = `${baseSize * 1.9}px`; }
+  if (sub) { sub.textContent = config.subtitle || defaultConfig.subtitle; sub.style.fontSize = `${baseSize * 0.85}px`; }
+
+  const searchEl = document.getElementById('searchInput');
+  if (searchEl) { searchEl.style.background = config.surface_color || defaultConfig.surface_color; searchEl.style.color = config.text_color || defaultConfig.text_color; }
+}
+
+applyConfig(defaultConfig);
+renderDiseases();
+</script>
+</body>
+</html>
