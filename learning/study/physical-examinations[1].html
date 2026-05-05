@@ -1,0 +1,1034 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Physical Examination | Clinical Assessment Guide | Deep Medicine</title> <meta name="description" content="Comprehensive guide to physical examination with systematic clinical assessment, examination techniques, and bedside evaluation skills."> <link rel="canonical" href="https://deepmedicine.in/learning/study/physical-examination"> <!-- Open Graph --> <meta property="og:title" content="Physical Examination | Deep Medicine"> <meta property="og:description" content="Systematic approach to clinical physical examination and bedside assessment."> <meta property="og:image" content="https://deepmedicine.in/images/physical-examination.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script> 
+  <style>
+        html, body { height: 100%; margin: 0; }
+        .app-wrapper { height: 100%; overflow-y: auto; }
+        .font-heading { font-family: 'Crimson Pro', Georgia, serif; }
+        .font-body { font-family: 'DM Sans', sans-serif; }
+        .tab-active { border-bottom: 3px solid #1a5632; color: #1a5632; font-weight: 700; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .fade-in { animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .clinical-tip { border-left: 4px solid #d97706; background: #fffbeb; }
+        .pearl { border-left: 4px solid #1a5632; background: #f0fdf4; }
+        details summary { cursor: pointer; list-style: none; }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] .chevron { transform: rotate(180deg); }
+        .chevron { transition: transform 0.2s ease; }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper bg-stone-50 font-body"><!-- Header -->
+   <header class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 text-white px-4 py-8 md:py-12">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex items-center gap-3 mb-2"><i data-lucide="stethoscope" class="w-8 h-8 md:w-10 md:h-10 text-emerald-300"></i> <span class="text-emerald-300 font-body text-sm font-semibold tracking-wider uppercase">Clinical Bedside Reference</span>
+     </div>
+     <h1 id="main-title" class="font-heading text-3xl md:text-5xl font-bold mb-2">General Physical Examination</h1>
+     <p id="subtitle" class="text-emerald-200 text-lg md:text-xl font-body">Comprehensive Clinical Bedside Assessment — From Head to Toe</p>
+     <div class="mt-4 flex flex-wrap gap-3 text-xs md:text-sm"><span class="bg-emerald-700/50 px-3 py-1 rounded-full">MBBS Clinical Medicine</span> <span class="bg-emerald-700/50 px-3 py-1 rounded-full">ICU/Emergency</span> <span class="bg-emerald-700/50 px-3 py-1 rounded-full">Cardiology</span> <span class="bg-emerald-700/50 px-3 py-1 rounded-full">Evidence-Based</span>
+     </div>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-stone-200">
+    <div class="max-w-6xl mx-auto overflow-x-auto">
+     <div class="flex min-w-max"><button onclick="showSection('overview')" id="tab-overview" class="tab-btn tab-active px-4 py-3 text-sm md:text-base font-medium whitespace-nowrap transition-colors">Overview</button> <button onclick="showSection('general')" id="tab-general" class="tab-btn px-4 py-3 text-sm md:text-base font-medium text-stone-500 whitespace-nowrap transition-colors">General Survey</button> <button onclick="showSection('vitals')" id="tab-vitals" class="tab-btn px-4 py-3 text-sm md:text-base font-medium text-stone-500 whitespace-nowrap transition-colors">Vital Signs</button> <button onclick="showSection('hands')" id="tab-hands" class="tab-btn px-4 py-3 text-sm md:text-base font-medium text-stone-500 whitespace-nowrap transition-colors">Hands &amp; Nails</button> <button onclick="showSection('face')" id="tab-face" class="tab-btn px-4 py-3 text-sm md:text-base font-medium text-stone-500 whitespace-nowrap transition-colors">Face &amp; Eyes</button> <button onclick="showSection('neck')" id="tab-neck" class="tab-btn px-4 py-3 text-sm md:text-base font-medium text-stone-500 whitespace-nowrap transition-colors">Neck &amp; Thyroid</button> <button onclick="showSection('skin')" id="tab-skin" class="tab-btn px-4 py-3 text-sm md:text-base font-medium text-stone-500 whitespace-nowrap transition-colors">Skin &amp; Edema</button> <button onclick="showSection('anthropometry')" id="tab-anthropometry" class="tab-btn px-4 py-3 text-sm md:text-base font-medium text-stone-500 whitespace-nowrap transition-colors">Anthropometry</button>
+     </div>
+    </div>
+   </nav><!-- Content Sections -->
+   <main class="max-w-6xl mx-auto px-4 py-6 md:py-10"><!-- OVERVIEW -->
+    <section id="section-overview" class="fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">The Art of General Physical Examination</h2>
+     <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white rounded-xl p-6 shadow-sm card-hover border border-stone-100">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center"><i data-lucide="eye" class="w-5 h-5 text-emerald-700"></i>
+        </div>
+        <h3 class="font-heading text-xl font-bold text-stone-800">Why GPE Matters</h3>
+       </div>
+       <p class="text-stone-600 leading-relaxed">The General Physical Examination begins the <strong>moment the patient walks in</strong>. Before any lab test or imaging, your clinical eye can detect anemia, jaundice, cyanosis, thyroid disease, heart failure, and more — often within 30 seconds of observation.</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-sm card-hover border border-stone-100">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center"><i data-lucide="list-ordered" class="w-5 h-5 text-amber-700"></i>
+        </div>
+        <h3 class="font-heading text-xl font-bold text-stone-800">Systematic Approach</h3>
+       </div>
+       <p class="text-stone-600 leading-relaxed">Always follow a <strong>head-to-toe</strong> systematic approach. This prevents missed findings. In emergency settings, use the <strong>ABCDE</strong> approach first (Airway, Breathing, Circulation, Disability, Exposure), then proceed to complete GPE once stabilized.</p>
+      </div>
+     </div>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-8">
+      <h3 class="font-heading text-xl font-bold text-stone-800 mb-4">Components of GPE — The Clinical Framework</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+       <div class="bg-emerald-50 rounded-lg p-4 text-center">
+        <div class="text-2xl mb-2">
+         🧍
+        </div>
+        <p class="font-semibold text-emerald-800 text-sm">General Survey</p>
+        <p class="text-xs text-stone-500 mt-1">Built, posture, gait, decubitus</p>
+       </div>
+       <div class="bg-blue-50 rounded-lg p-4 text-center">
+        <div class="text-2xl mb-2">
+         🫀
+        </div>
+        <p class="font-semibold text-blue-800 text-sm">Vital Signs</p>
+        <p class="text-xs text-stone-500 mt-1">Pulse, BP, RR, Temp, SpO₂</p>
+       </div>
+       <div class="bg-amber-50 rounded-lg p-4 text-center">
+        <div class="text-2xl mb-2">
+         🖐️
+        </div>
+        <p class="font-semibold text-amber-800 text-sm">Peripheral Signs</p>
+        <p class="text-xs text-stone-500 mt-1">Hands, nails, pallor, cyanosis</p>
+       </div>
+       <div class="bg-rose-50 rounded-lg p-4 text-center">
+        <div class="text-2xl mb-2">
+         👁️
+        </div>
+        <p class="font-semibold text-rose-800 text-sm">Head &amp; Neck</p>
+        <p class="text-xs text-stone-500 mt-1">Eyes, JVP, lymph nodes, thyroid</p>
+       </div>
+      </div>
+     </div>
+     <div class="pearl p-5 rounded-r-lg mb-6">
+      <p class="font-semibold text-emerald-800 mb-1">🎓 Clinical Pearl — From the ICU</p>
+      <p class="text-stone-700 text-sm leading-relaxed">In my experience as an ICU intensivist, I've seen countless cases where a <strong>missed GPE finding</strong> led to delayed diagnosis. A cold, mottled periphery in a "stable" patient with normal BP can signal early distributive shock — the BP is maintained by compensatory tachycardia. Always correlate GPE with hemodynamics.</p>
+     </div>
+    </section><!-- GENERAL SURVEY -->
+    <section id="section-general" class="hidden fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">General Survey &amp; First Impression</h2>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-6">
+      <h3 class="font-heading text-lg font-bold text-stone-800 mb-4">What to Observe in the First 30 Seconds</h3>
+      <div class="space-y-4">
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>1. Level of Consciousness (LOC)</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>AVPU Scale (Quick):</strong> Alert → Voice responsive → Pain responsive → Unresponsive</p>
+         <p><strong>GCS (Glasgow Coma Scale):</strong> E (Eye 1-4) + V (Verbal 1-5) + M (Motor 1-6) = 3-15</p>
+         <div class="clinical-tip p-3 rounded-r-lg">
+          <p class="font-semibold text-amber-800 text-xs">⚡ Emergency Pearl:</p>
+          <p class="text-xs">GCS ≤ 8 → Intubation required (cannot protect airway). In my ER experience, always reassess GCS every 15 minutes in deteriorating patients — a drop of 2 points demands immediate CT brain.</p>
+         </div>
+         <p><strong>Clinical Example:</strong> A 65-year-old male brought to ER after collapse. Found to be E2V3M5 (GCS 10) — localizing pain but confused. This localizing pattern with preserved motor suggests hemispheric lesion rather than brainstem.</p>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>2. Body Built &amp; Habitus</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Ectomorph / Lean</p>
+           <p class="text-xs mt-1">Think: Marfan syndrome (tall, arm span &gt; height, arachnodactyly), Hyperthyroidism, TB, Malignancy</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Endomorph / Obese</p>
+           <p class="text-xs mt-1">Think: Cushing's (central obesity + thin limbs), Hypothyroid, Metabolic syndrome, PCOS</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Short Stature</p>
+           <p class="text-xs mt-1">Think: Turner syndrome (45,XO), Achondroplasia, GH deficiency, Rickets, Chronic childhood disease</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Tall Stature</p>
+           <p class="text-xs mt-1">Think: Marfan, Klinefelter (47,XXY), Gigantism (before epiphyseal closure), Homocystinuria</p>
+          </div>
+         </div>
+         <div class="pearl p-3 rounded-r-lg">
+          <p class="text-xs"><strong>🎓 Cardiology Correlation:</strong> In my cardiology practice, Marfan patients need echocardiography for aortic root dilation (risk of dissection). Any tall patient with chest pain → think aortic dissection until proven otherwise.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>3. Posture &amp; Decubitus</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+           <thead>
+            <tr class="bg-emerald-50">
+             <th class="border border-stone-200 p-2 text-left font-semibold">Position</th>
+             <th class="border border-stone-200 p-2 text-left font-semibold">Clinical Significance</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Orthopnea (propped up)</td>
+             <td class="border border-stone-200 p-2">LVF, Severe asthma, COPD exacerbation, Pericardial effusion</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Left lateral (Trepopnea)</td>
+             <td class="border border-stone-200 p-2">Large right pleural effusion (lies on affected side)</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Knee-chest position</td>
+             <td class="border border-stone-200 p-2">Pericarditis (reduces pain), Tetralogy of Fallot (squatting ↑SVR)</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Opisthotonus</td>
+             <td class="border border-stone-200 p-2">Meningitis, Tetanus, Strychnine poisoning</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Fetal position</td>
+             <td class="border border-stone-200 p-2">Acute pancreatitis, Peritonitis</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg">
+          <p class="text-xs"><strong>⚡ ICU Insight:</strong> A patient who cannot lie flat (PND + orthopnea) with pink frothy sputum = Acute pulmonary edema. Immediate action: Sit up, O₂, IV Furosemide, Nitroglycerine, Morphine (if no hypotension). This is a clinical diagnosis — don't wait for CXR!</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>4. Gait Assessment</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Hemiplegic Gait</p>
+           <p class="text-xs mt-1">Circumduction of affected leg, arm in flexion. <em>Cause:</em> Stroke (UMN lesion)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Parkinsonian Gait</p>
+           <p class="text-xs mt-1">Shuffling, festination, reduced arm swing, stooped. <em>Cause:</em> Parkinson's disease</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Ataxic / Cerebellar</p>
+           <p class="text-xs mt-1">Wide-based, staggering, cannot tandem walk. <em>Cause:</em> Cerebellar lesion, Alcohol</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Waddling Gait</p>
+           <p class="text-xs mt-1">Trunk sways side-to-side. <em>Cause:</em> Proximal myopathy (DMD, Polymyositis)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">High-Stepping (Foot Drop)</p>
+           <p class="text-xs mt-1">Exaggerated hip flexion to clear foot. <em>Cause:</em> Common peroneal nerve palsy, L5 radiculopathy</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Scissor Gait</p>
+           <p class="text-xs mt-1">Legs cross midline, stiff. <em>Cause:</em> Bilateral UMN (Cerebral palsy, Spinal cord compression)</p>
+          </div>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>5. Facies (Facial Appearance)</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Cushinoid</p>
+           <p class="text-xs">Moon face, buffalo hump, plethora, hirsutism</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Acromegalic</p>
+           <p class="text-xs">Coarse features, prognathism, frontal bossing, large hands/feet</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Myxedematous</p>
+           <p class="text-xs">Puffy, periorbital edema, dry skin, loss of outer 1/3 eyebrow</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Hippocratic</p>
+           <p class="text-xs">Sunken eyes, pinched nose, hollow temples — peritonitis, moribund</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Mitral facies</p>
+           <p class="text-xs">Malar flush (rosy cheeks + cyanotic tinge) — Mitral stenosis with low CO</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-stone-700">Leonine</p>
+           <p class="text-xs">Thickened skin folds — Lepromatous leprosy</p>
+          </div>
+         </div>
+         <div class="pearl p-3 rounded-r-lg">
+          <p class="text-xs"><strong>🎓 Cardiology Note:</strong> Mitral facies is pathognomonic — the malar flush results from CO₂ retention due to low cardiac output in severe mitral stenosis. This finding alone warrants echocardiography.</p>
+         </div>
+        </div>
+       </details>
+      </div>
+     </div>
+    </section><!-- VITAL SIGNS -->
+    <section id="section-vitals" class="hidden fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">Vital Signs — The Fifth Pillar</h2>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-6">
+      <h3 class="font-heading text-lg font-bold text-stone-800 mb-4">Pulse Examination</h3>
+      <p class="text-sm text-stone-600 mb-4">The pulse is examined for: <strong>Rate, Rhythm, Volume, Character, Condition of vessel wall, Radio-radial delay, Radio-femoral delay</strong></p>
+      <div class="space-y-4">
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Pulse Rate &amp; Rhythm</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Normal: 60-100 bpm</p>
+           <p class="text-xs mt-1">Athletes: resting 40-60 (physiological sinus bradycardia)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Tachycardia: &gt;100 bpm</p>
+           <p class="text-xs mt-1">Fever (↑10bpm/°F), Pain, Anxiety, Thyrotoxicosis, Anemia, Shock, PE</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Bradycardia: &lt;60 bpm</p>
+           <p class="text-xs mt-1">Heart block, β-blockers, ↑ICP (Cushing reflex), Hypothyroid, Jaundice</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Irregularly Irregular</p>
+           <p class="text-xs mt-1">Atrial Fibrillation (most common) — pulse deficit present</p>
+          </div>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg">
+          <p class="text-xs"><strong>⚡ ER Tip:</strong> Always check <strong>pulse deficit</strong> in AF (apex rate minus radial rate). A large deficit indicates poor cardiac output from ineffective contractions. In my practice, pulse deficit &gt;20 warrants rate control urgency.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Pulse Character (Named Pulses)</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+           <thead>
+            <tr class="bg-emerald-50">
+             <th class="border border-stone-200 p-2 text-left">Pulse Type</th>
+             <th class="border border-stone-200 p-2 text-left">Character</th>
+             <th class="border border-stone-200 p-2 text-left">Condition</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Water-hammer (Corrigan's)</td>
+             <td class="border border-stone-200 p-2">Rapid rise &amp; collapse, bounding</td>
+             <td class="border border-stone-200 p-2">Aortic Regurgitation, PDA, AV fistula</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Slow-rising (Parvus et Tardus)</td>
+             <td class="border border-stone-200 p-2">Gradual upstroke, low amplitude</td>
+             <td class="border border-stone-200 p-2">Aortic Stenosis (severe)</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Bisferiens</td>
+             <td class="border border-stone-200 p-2">Two systolic peaks</td>
+             <td class="border border-stone-200 p-2">Combined AS + AR, HOCM</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Pulsus paradoxus</td>
+             <td class="border border-stone-200 p-2">↓SBP &gt;10mmHg on inspiration</td>
+             <td class="border border-stone-200 p-2">Cardiac tamponade, Severe asthma, Constrictive pericarditis</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Pulsus alternans</td>
+             <td class="border border-stone-200 p-2">Alternating strong/weak beats</td>
+             <td class="border border-stone-200 p-2">Severe LV failure</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Dicrotic</td>
+             <td class="border border-stone-200 p-2">Double beat (systole + diastole)</td>
+             <td class="border border-stone-200 p-2">Low CO states, Dilated cardiomyopathy</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div class="pearl p-3 rounded-r-lg">
+          <p class="text-xs"><strong>🎓 Cardiology Pearl:</strong> To elicit water-hammer pulse → raise the patient's arm above heart level and grip the forearm. The collapsing quality becomes dramatically evident. In severe AR, you'll also find: pistol-shot femorals (Traube's sign), capillary pulsation (Quincke's sign), and head-bobbing (de Musset's sign).</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Blood Pressure — Technique &amp; Interpretation</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Correct Technique:</strong> Patient seated 5 min rest, arm at heart level, appropriate cuff size (bladder encircles 80% of arm), 2 readings 1-2 min apart.</p>
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+           <thead>
+            <tr class="bg-emerald-50">
+             <th class="border border-stone-200 p-2">Category (JNC-8/ACC 2017)</th>
+             <th class="border border-stone-200 p-2">SBP (mmHg)</th>
+             <th class="border border-stone-200 p-2">DBP (mmHg)</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="border border-stone-200 p-2">Normal</td>
+             <td class="border border-stone-200 p-2">&lt;120</td>
+             <td class="border border-stone-200 p-2">&lt;80</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2">Elevated</td>
+             <td class="border border-stone-200 p-2">120-129</td>
+             <td class="border border-stone-200 p-2">&lt;80</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2">Stage 1 HTN</td>
+             <td class="border border-stone-200 p-2">130-139</td>
+             <td class="border border-stone-200 p-2">80-89</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2">Stage 2 HTN</td>
+             <td class="border border-stone-200 p-2">≥140</td>
+             <td class="border border-stone-200 p-2">≥90</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-bold text-red-700">Hypertensive Crisis</td>
+             <td class="border border-stone-200 p-2 font-bold text-red-700">&gt;180</td>
+             <td class="border border-stone-200 p-2 font-bold text-red-700">&gt;120</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg">
+          <p class="text-xs"><strong>⚡ Critical:</strong> Wide pulse pressure (SBP-DBP &gt;60mmHg) → AR, thyrotoxicosis, anemia, PDA, elderly (stiff aorta). Narrow pulse pressure (&lt;25mmHg) → Aortic stenosis, cardiac tamponade, CHF, shock.</p>
+         </div>
+         <p><strong>Postural Hypotension:</strong> ↓SBP ≥20 or ↓DBP ≥10 on standing from supine (after 3 min). Causes: Hypovolemia, autonomic neuropathy (DM), drugs (α-blockers, diuretics), Addison's.</p>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Respiratory Rate &amp; Temperature</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Respiratory Rate (Normal: 12-20/min):</strong></p>
+         <ul class="list-disc ml-5 space-y-1 text-xs">
+          <li><strong>Tachypnea (&gt;20):</strong> Pneumonia, PE, metabolic acidosis (Kussmaul breathing in DKA), anxiety</li>
+          <li><strong>Bradypnea (&lt;12):</strong> Opioid overdose, ↑ICP, brainstem lesion, hypothyroidism</li>
+          <li><strong>Cheyne-Stokes:</strong> Crescendo-decrescendo pattern with apnea → CHF, stroke, ↑ICP</li>
+          <li><strong>Biot's breathing:</strong> Irregular with sudden apnea → Brainstem damage (pontine)</li>
+         </ul>
+         <p class="mt-3"><strong>Temperature (Normal: 36.1–37.2°C / 97–99°F):</strong></p>
+         <ul class="list-disc ml-5 space-y-1 text-xs">
+          <li><strong>Hyperpyrexia (&gt;41.5°C):</strong> Heat stroke, Malignant hyperthermia, NMS, Serotonin syndrome</li>
+          <li><strong>Hypothermia (&lt;35°C):</strong> Sepsis (paradoxical), Myxedema coma, Exposure, Hypothalamic lesion</li>
+         </ul>
+         <div class="pearl p-3 rounded-r-lg">
+          <p class="text-xs"><strong>🎓 ICU Pearl:</strong> RR is the most sensitive early vital sign for clinical deterioration. In my ICU, a rising RR (even from 16→22) often precedes desaturation and hemodynamic collapse by 6-8 hours. It's the "canary in the coal mine."</p>
+         </div>
+        </div>
+       </details>
+      </div>
+     </div>
+    </section><!-- HANDS & NAILS -->
+    <section id="section-hands" class="hidden fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">Hands &amp; Nails Examination</h2>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-6">
+      <p class="text-sm text-stone-600 mb-4">The hands are a <strong>goldmine of clinical information</strong>. A systematic hand examination can reveal cardiac, respiratory, hepatic, endocrine, and rheumatological disease.</p>
+      <div class="space-y-4">
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Nail Changes &amp; Their Significance</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+           <thead>
+            <tr class="bg-emerald-50">
+             <th class="border border-stone-200 p-2 text-left">Finding</th>
+             <th class="border border-stone-200 p-2 text-left">Description</th>
+             <th class="border border-stone-200 p-2 text-left">Conditions</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Clubbing</td>
+             <td class="border border-stone-200 p-2">Loss of nail-bed angle (&gt;180°), fluctuant nail bed, drumstick appearance</td>
+             <td class="border border-stone-200 p-2">Lung Ca, Bronchiectasis, ILD, IE, Cyanotic CHD, Cirrhosis, IBD</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Koilonychia</td>
+             <td class="border border-stone-200 p-2">Spoon-shaped nails (concave)</td>
+             <td class="border border-stone-200 p-2">Iron deficiency anemia (Plummer-Vinson), Hemochromatosis</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Leukonychia</td>
+             <td class="border border-stone-200 p-2">White nails</td>
+             <td class="border border-stone-200 p-2">Hypoalbuminemia (cirrhosis, nephrotic syndrome)</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Splinter hemorrhages</td>
+             <td class="border border-stone-200 p-2">Linear brown-red lines under nail</td>
+             <td class="border border-stone-200 p-2">Infective Endocarditis, Vasculitis, Trauma</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Beau's lines</td>
+             <td class="border border-stone-200 p-2">Transverse grooves</td>
+             <td class="border border-stone-200 p-2">Severe illness, chemotherapy (temporary growth arrest)</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Terry's nails</td>
+             <td class="border border-stone-200 p-2">White proximally, pink distally</td>
+             <td class="border border-stone-200 p-2">Cirrhosis, CHF, DM</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">Half-and-half (Lindsay's)</td>
+             <td class="border border-stone-200 p-2">White proximally, brown distally</td>
+             <td class="border border-stone-200 p-2">Chronic kidney disease / Uremia</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">Nail pitting</td>
+             <td class="border border-stone-200 p-2">Multiple small depressions</td>
+             <td class="border border-stone-200 p-2">Psoriasis, Alopecia areata, Eczema</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg">
+          <p class="text-xs"><strong>⚡ Clubbing Grades (Lovibond):</strong> Grade 1: Fluctuation of nail bed | Grade 2: Loss of angle (obliteration of Lovibond angle) | Grade 3: Drumstick swelling | Grade 4: HPOA (periostitis visible on X-ray). In cardiology, clubbing + cyanosis = cyanotic congenital heart disease until proven otherwise.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Palm &amp; Hand Signs</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Palmar erythema</p>
+           <p class="text-xs mt-1">Redness of thenar/hypothenar eminences. Causes: Chronic liver disease, Pregnancy, RA, Thyrotoxicosis</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Dupuytren's contracture</p>
+           <p class="text-xs mt-1">Thickening of palmar fascia → fixed flexion of 4th/5th finger. Causes: Alcoholic liver disease, DM, Epilepsy (phenytoin)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Osler's nodes</p>
+           <p class="text-xs mt-1">Painful, raised nodules on fingertips (immune complex). Cause: Infective Endocarditis</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Janeway lesions</p>
+           <p class="text-xs mt-1">Painless, flat erythematous lesions on palms/soles. Cause: Infective Endocarditis (septic emboli)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Xanthomata (tendon)</p>
+           <p class="text-xs mt-1">Yellow deposits on tendons (especially Achilles, hand extensors). Cause: Familial hypercholesterolemia</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Arachnodactyly</p>
+           <p class="text-xs mt-1">Long spider-like fingers. +ve Steinberg sign (thumb beyond palm). Cause: Marfan syndrome</p>
+          </div>
+         </div>
+         <div class="pearl p-3 rounded-r-lg">
+          <p class="text-xs"><strong>🎓 Cardiology Pearl:</strong> In suspected IE, always examine BOTH hands carefully. Osler nodes (painful) = immunological, Janeway lesions (painless) = septic emboli. Combined with splinter hemorrhages + new murmur + fever = Modified Duke's criteria → start empirical antibiotics after 3 sets of blood cultures.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Tremor Assessment</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Fine Tremor</p>
+           <p class="text-xs mt-1">Place paper on outstretched hands. Causes: Thyrotoxicosis, Anxiety, β-agonists, Caffeine</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Coarse Flapping (Asterixis)</p>
+           <p class="text-xs mt-1">Wrist dorsiflexion with fingers spread → involuntary "flap." Causes: Hepatic encephalopathy, CO₂ narcosis, Uremia</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Resting Tremor (Pill-rolling)</p>
+           <p class="text-xs mt-1">4-6 Hz, worse at rest, better with movement. Cause: Parkinson's disease</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold">Intention Tremor</p>
+           <p class="text-xs mt-1">Worsens approaching target (finger-nose test). Cause: Cerebellar disease</p>
+          </div>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg">
+          <p class="text-xs"><strong>⚡ ICU Tip:</strong> Asterixis (liver flap) is a NEGATIVE myoclonus (momentary loss of tone). In my ICU, new-onset asterixis in a cirrhotic patient = hepatic encephalopathy → start lactulose immediately. Also check for asterixis in COPD patients (CO₂ retention) and renal failure (uremic encephalopathy).</p>
+         </div>
+        </div>
+       </details>
+      </div>
+     </div>
+    </section><!-- FACE & EYES -->
+    <section id="section-face" class="hidden fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">Face &amp; Eye Examination</h2>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-6">
+      <div class="space-y-4">
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Pallor (Anemia Assessment)</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Sites to check:</strong> Lower palpebral conjunctiva (most reliable), Nail beds, Palmar creases, Tongue, Lips</p>
+         <p><strong>Grading:</strong></p>
+         <ul class="list-disc ml-5 text-xs space-y-1">
+          <li><strong>Mild:</strong> Only conjunctival pallor (Hb 8-10 g/dL)</li>
+          <li><strong>Moderate:</strong> Conjunctival + palmar pallor (Hb 6-8 g/dL)</li>
+          <li><strong>Severe:</strong> Generalized pallor + palmar crease pallor (Hb &lt;6 g/dL)</li>
+         </ul>
+         <div class="clinical-tip p-3 rounded-r-lg">
+          <p class="text-xs"><strong>⚡ ER Pearl:</strong> Pallor in palmar creases (when hand is open and stretched) correlates with Hb &lt;7 g/dL. In my ER experience, if palmar crease pallor + tachycardia + orthostatic symptoms → consider blood transfusion regardless of lab availability. Clinical assessment saves lives when lab results are delayed.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Jaundice (Icterus)</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Definition:</strong> Yellow discoloration due to elevated bilirubin (&gt;2-3 mg/dL clinically visible)</p>
+         <p><strong>Best detected:</strong> Sclera (earliest site — bilirubin has affinity for elastin), sublingual area, skin in natural light</p>
+         <div class="grid sm:grid-cols-3 gap-3 mt-2">
+          <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
+           <p class="font-semibold text-amber-800 text-xs">Lemon Yellow</p>
+           <p class="text-xs mt-1">Hemolytic jaundice (Pre-hepatic). Unconjugated ↑. Think: Hemolysis, Gilbert's</p>
+          </div>
+          <div class="bg-orange-50 p-3 rounded-lg border border-orange-200">
+           <p class="font-semibold text-orange-800 text-xs">Orange-Yellow</p>
+           <p class="text-xs mt-1">Hepatocellular (Hepatic). Mixed. Think: Hepatitis, Cirrhosis</p>
+          </div>
+          <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+           <p class="font-semibold text-green-800 text-xs">Greenish-Yellow</p>
+           <p class="text-xs mt-1">Obstructive (Post-hepatic). Conjugated ↑. Think: CBD stone, Pancreatic head Ca</p>
+          </div>
+         </div>
+         <div class="pearl p-3 rounded-r-lg mt-3">
+          <p class="text-xs"><strong>🎓 Clinical Pearl:</strong> Painless progressive jaundice + palpable gallbladder (Courvoisier's law) = Periampullary carcinoma until proven otherwise. Painful jaundice + fever + rigors = Charcot's triad (Cholangitis) → Urgent ERCP. Add confusion + hypotension = Reynold's pentad → ICU admission.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Cyanosis</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Definition:</strong> Blue discoloration due to &gt;5g/dL of deoxygenated hemoglobin in capillary blood</p>
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+           <p class="font-semibold text-blue-800">Central Cyanosis</p>
+           <p class="text-xs mt-1"><strong>Sites:</strong> Tongue (most reliable), Lips, Oral mucosa</p>
+           <p class="text-xs"><strong>Causes:</strong> Lung disease (COPD, pneumonia, PE), R→L cardiac shunt (Eisenmenger, TOF), High altitude</p>
+          </div>
+          <div class="bg-indigo-50 p-3 rounded-lg border border-indigo-200">
+           <p class="font-semibold text-indigo-800">Peripheral Cyanosis</p>
+           <p class="text-xs mt-1"><strong>Sites:</strong> Fingertips, Nail beds, Ear lobes, Nose tip</p>
+           <p class="text-xs"><strong>Causes:</strong> All causes of central + Cold exposure, Peripheral vasoconstriction, Shock, Raynaud's, PVD</p>
+          </div>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg mt-3">
+          <p class="text-xs"><strong>⚡ Critical Point:</strong> Cyanosis is NOT visible in severe anemia (Hb &lt;5g/dL) because you need &gt;5g/dL of DEOXYHEMOGLOBIN. An anemic patient can be severely hypoxic without appearing cyanotic! Always use pulse oximetry. Also: Methemoglobinemia causes "chocolate-colored" cyanosis that doesn't respond to O₂.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Eye Signs in Systemic Disease</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Xanthelasma</p>
+           <p class="text-xs">Yellow plaques around eyes → Hyperlipidemia (but can be normal)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Arcus senilis (before 40)</p>
+           <p class="text-xs">White ring around cornea → Familial hypercholesterolemia</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Kayser-Fleischer ring</p>
+           <p class="text-xs">Golden-brown ring (Descemet's membrane) → Wilson's disease</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Band keratopathy</p>
+           <p class="text-xs">Calcium deposits in cornea → Hypercalcemia, Sarcoidosis</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Exophthalmos (Proptosis)</p>
+           <p class="text-xs">Protruding eyes → Graves' disease (bilateral), Retro-orbital tumor (unilateral)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Ptosis</p>
+           <p class="text-xs">Drooping eyelid → Myasthenia gravis (fatigable), Horner's, CN III palsy</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Argyll Robertson pupil</p>
+           <p class="text-xs">Accommodates but doesn't react to light → Neurosyphilis ("prostitute's pupil")</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Roth spots (fundoscopy)</p>
+           <p class="text-xs">White-centered retinal hemorrhages → IE, Leukemia, DM</p>
+          </div>
+         </div>
+        </div>
+       </details>
+      </div>
+     </div>
+    </section><!-- NECK & THYROID -->
+    <section id="section-neck" class="hidden fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">Neck Examination — JVP, Lymph Nodes &amp; Thyroid</h2>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-6">
+      <div class="space-y-4">
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>JVP (Jugular Venous Pressure) — The Bedside CVP</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Technique:</strong> Patient at 45°, head turned slightly left. Observe RIGHT internal jugular vein (direct connection to RA). Measure vertical height above sternal angle + 5cm = RA pressure. Normal JVP = &lt;3cm above sternal angle.</p>
+         <p class="font-semibold mt-2">JVP Waveform Components:</p>
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+           <thead>
+            <tr class="bg-emerald-50">
+             <th class="border border-stone-200 p-2">Wave</th>
+             <th class="border border-stone-200 p-2">Event</th>
+             <th class="border border-stone-200 p-2">Abnormality</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">'a' wave</td>
+             <td class="border border-stone-200 p-2">Atrial contraction</td>
+             <td class="border border-stone-200 p-2">Giant 'a': Tricuspid stenosis, Pulmonary HTN, Pulmonary stenosis. Absent in AF. Cannon 'a': Complete heart block, VT</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">'c' wave</td>
+             <td class="border border-stone-200 p-2">Tricuspid closure (isovolumetric contraction)</td>
+             <td class="border border-stone-200 p-2">Rarely clinically significant</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">'v' wave</td>
+             <td class="border border-stone-200 p-2">Venous filling (TV closed)</td>
+             <td class="border border-stone-200 p-2">Giant 'v' (cv wave): Tricuspid Regurgitation</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2 font-medium">'x' descent</td>
+             <td class="border border-stone-200 p-2">Atrial relaxation</td>
+             <td class="border border-stone-200 p-2">Prominent in cardiac tamponade. Absent in TR</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2 font-medium">'y' descent</td>
+             <td class="border border-stone-200 p-2">TV opens, rapid ventricular filling</td>
+             <td class="border border-stone-200 p-2">Steep: Constrictive pericarditis, TR. Slow: Tricuspid stenosis, RA myxoma</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <div class="pearl p-3 rounded-r-lg mt-3">
+          <p class="text-xs"><strong>🎓 Cardiology Pearl:</strong> Kussmaul's sign = JVP RISES on inspiration (paradoxical). Normal JVP falls on inspiration. Causes: Constrictive pericarditis (classic), Restrictive cardiomyopathy, Massive PE, RV infarct. This sign alone in a post-MI patient → suspect RV infarct → give IV fluids (NOT diuretics!).</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Lymph Node Examination</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Palpation order:</strong> Submental → Submandibular → Pre-auricular → Post-auricular → Occipital → Anterior cervical → Posterior cervical → Supraclavicular → Axillary → Epitrochlear → Inguinal</p>
+         <p class="font-semibold mt-2">Characteristics to note: Size, consistency, tenderness, mobility, matting</p>
+         <div class="grid sm:grid-cols-2 gap-3 mt-2">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Tender, soft, mobile</p>
+           <p class="text-xs">→ Reactive / Infective (most common)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Hard, fixed, non-tender</p>
+           <p class="text-xs">→ Malignancy (metastatic)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Rubbery, non-tender, matted</p>
+           <p class="text-xs">→ Lymphoma (Hodgkin's/NHL)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Matted, cold abscess</p>
+           <p class="text-xs">→ Tuberculosis (scrofula)</p>
+          </div>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg mt-3">
+          <p class="text-xs"><strong>⚡ Red Flags:</strong> Left supraclavicular (Virchow's node/Troisier's sign) → GI malignancy (especially gastric Ca). Right supraclavicular → Lung/Esophageal Ca. Any supraclavicular node in an adult = malignancy until proven otherwise → urgent biopsy.</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Thyroid Examination</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Technique:</strong> Stand behind patient. Ask to swallow water — thyroid moves UP with deglutition (attached to pretracheal fascia). Ask to protrude tongue — thyroglossal cyst moves UP (unlike thyroid).</p>
+         <p class="font-semibold mt-2">Assess: Size, shape, consistency, nodularity, tenderness, bruit, retrosternal extension</p>
+         <div class="grid sm:grid-cols-2 gap-3 mt-2">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Diffuse smooth enlargement</p>
+           <p class="text-xs">Graves' disease (with bruit), Simple goiter, Hashimoto's (firm, rubbery)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Multinodular</p>
+           <p class="text-xs">MNG (most common cause of goiter in iodine-sufficient areas)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Solitary nodule</p>
+           <p class="text-xs">Adenoma, Cyst, Ca (hard, irregular, fixed, cervical LN), Dominant nodule in MNG</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Tender thyroid</p>
+           <p class="text-xs">Subacute thyroiditis (de Quervain's — post-viral), Hemorrhage into cyst, Acute suppurative</p>
+          </div>
+         </div>
+         <div class="pearl p-3 rounded-r-lg mt-3">
+          <p class="text-xs"><strong>🎓 Clinical Pearl:</strong> Pemberton's sign — ask patient to raise both arms above head for 1 minute. Facial plethora + distended neck veins + stridor = retrosternal goiter causing thoracic inlet obstruction. This is a surgical emergency if acute.</p>
+         </div>
+        </div>
+       </details>
+      </div>
+     </div>
+    </section><!-- SKIN & EDEMA -->
+    <section id="section-skin" class="hidden fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">Skin, Edema &amp; Nutritional Status</h2>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-6">
+      <div class="space-y-4">
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Edema Assessment &amp; Grading</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>Pitting Edema Grading:</strong> Press firmly over bony prominence (medial malleolus, tibial shaft, sacrum) for 5 seconds:</p>
+         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2">
+          <div class="bg-blue-50 p-2 rounded text-center">
+           <p class="font-bold text-blue-800">+1</p>
+           <p class="text-xs">2mm pit, immediate rebound</p>
+          </div>
+          <div class="bg-blue-100 p-2 rounded text-center">
+           <p class="font-bold text-blue-800">+2</p>
+           <p class="text-xs">4mm pit, rebounds in 15s</p>
+          </div>
+          <div class="bg-blue-200 p-2 rounded text-center">
+           <p class="font-bold text-blue-800">+3</p>
+           <p class="text-xs">6mm pit, rebounds in 30s</p>
+          </div>
+          <div class="bg-blue-300 p-2 rounded text-center">
+           <p class="font-bold text-blue-800">+4</p>
+           <p class="text-xs">8mm pit, rebounds &gt;30s</p>
+          </div>
+         </div>
+         <p class="font-semibold mt-3">Causes by Distribution:</p>
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Bilateral dependent (pedal → sacral)</p>
+           <p class="text-xs">CCF (right-sided), Nephrotic syndrome, Cirrhosis, Drugs (CCB, NSAIDs)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Unilateral</p>
+           <p class="text-xs">DVT, Cellulitis, Lymphedema, Post-surgical, Venous insufficiency</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Facial/periorbital (morning)</p>
+           <p class="text-xs">Nephrotic/Nephritic syndrome, Angioedema, Hypothyroid, SVC obstruction</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Non-pitting (firm)</p>
+           <p class="text-xs">Myxedema (hypothyroid), Lymphedema (chronic), Pretibial myxedema (Graves')</p>
+          </div>
+         </div>
+         <div class="clinical-tip p-3 rounded-r-lg mt-3">
+          <p class="text-xs"><strong>⚡ ICU/Cardiology:</strong> In CCF, edema indicates &gt;3-5L fluid overload. Remember: In bedridden patients, check SACRAL edema (not pedal) as fluid is gravity-dependent. A patient "without edema" on feet examination may have massive sacral edema — always turn them!</p>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Skin Signs in Systemic Disease</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Spider naevi (&gt;5)</p>
+           <p class="text-xs">Distribution: SVC territory. Cause: Chronic liver disease, Pregnancy (↑estrogen)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Purpura (non-blanching)</p>
+           <p class="text-xs">Thrombocytopenia, Vasculitis (HSP, meningococcemia), DIC, Scurvy</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Erythema nodosum</p>
+           <p class="text-xs">Tender red nodules on shins. Causes: Sarcoid, TB, Strep, IBD, Drugs</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Acanthosis nigricans</p>
+           <p class="text-xs">Velvety hyperpigmented skin folds (neck/axillae). Insulin resistance, GI malignancy</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Vitiligo</p>
+           <p class="text-xs">Depigmented patches. Autoimmune: associated with thyroid disease, DM Type 1, Addison's</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Hyperpigmentation (generalized)</p>
+           <p class="text-xs">Addison's disease (palmar creases, buccal, scars), Hemochromatosis ("bronze DM")</p>
+          </div>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Hydration &amp; Nutritional Status</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p class="font-semibold">Dehydration Assessment:</p>
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+           <thead>
+            <tr class="bg-emerald-50">
+             <th class="border border-stone-200 p-2">Sign</th>
+             <th class="border border-stone-200 p-2">Mild (3-5%)</th>
+             <th class="border border-stone-200 p-2">Moderate (6-9%)</th>
+             <th class="border border-stone-200 p-2">Severe (≥10%)</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="border border-stone-200 p-2">Skin turgor</td>
+             <td class="border border-stone-200 p-2">Slightly ↓</td>
+             <td class="border border-stone-200 p-2">↓ (&gt;2s recoil)</td>
+             <td class="border border-stone-200 p-2">Very poor ("tenting")</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2">Mucous membranes</td>
+             <td class="border border-stone-200 p-2">Slightly dry</td>
+             <td class="border border-stone-200 p-2">Dry</td>
+             <td class="border border-stone-200 p-2">Parched/cracked</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2">Eyes</td>
+             <td class="border border-stone-200 p-2">Normal</td>
+             <td class="border border-stone-200 p-2">Sunken</td>
+             <td class="border border-stone-200 p-2">Deeply sunken</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2">Mental status</td>
+             <td class="border border-stone-200 p-2">Alert</td>
+             <td class="border border-stone-200 p-2">Irritable</td>
+             <td class="border border-stone-200 p-2">Lethargic/obtunded</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2">Urine output</td>
+             <td class="border border-stone-200 p-2">Slightly ↓</td>
+             <td class="border border-stone-200 p-2">Oliguria</td>
+             <td class="border border-stone-200 p-2">Anuria</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <p class="font-semibold mt-3">Nutritional Assessment Signs:</p>
+         <ul class="list-disc ml-5 text-xs space-y-1">
+          <li><strong>Protein-energy malnutrition:</strong> Temporal wasting, loss of buccal fat pad, visible ribs, pedal edema (kwashiorkor)</li>
+          <li><strong>Vitamin C deficiency:</strong> Bleeding gums, perifollicular hemorrhages, poor wound healing</li>
+          <li><strong>Vitamin D deficiency:</strong> Bowing of legs (rickets), bone tenderness, proximal myopathy</li>
+          <li><strong>B12/Folate:</strong> Glossitis (smooth red tongue), angular stomatitis, pallor</li>
+          <li><strong>Iron deficiency:</strong> Koilonychia, angular stomatitis, atrophic glossitis, pallor</li>
+         </ul>
+        </div>
+       </details>
+      </div>
+     </div>
+    </section><!-- ANTHROPOMETRY -->
+    <section id="section-anthropometry" class="hidden fade-in">
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-emerald-900 mb-6">Anthropometry &amp; Special Measurements</h2>
+     <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100 mb-6">
+      <div class="space-y-4">
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>BMI &amp; Body Composition</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <p><strong>BMI = Weight (kg) / Height² (m²)</strong></p>
+         <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+           <thead>
+            <tr class="bg-emerald-50">
+             <th class="border border-stone-200 p-2">Category</th>
+             <th class="border border-stone-200 p-2">BMI (WHO)</th>
+             <th class="border border-stone-200 p-2">BMI (Asian)</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr>
+             <td class="border border-stone-200 p-2">Underweight</td>
+             <td class="border border-stone-200 p-2">&lt;18.5</td>
+             <td class="border border-stone-200 p-2">&lt;18.5</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2">Normal</td>
+             <td class="border border-stone-200 p-2">18.5-24.9</td>
+             <td class="border border-stone-200 p-2">18.5-22.9</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2">Overweight</td>
+             <td class="border border-stone-200 p-2">25-29.9</td>
+             <td class="border border-stone-200 p-2">23-24.9</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2">Obese I</td>
+             <td class="border border-stone-200 p-2">30-34.9</td>
+             <td class="border border-stone-200 p-2">25-29.9</td>
+            </tr>
+            <tr>
+             <td class="border border-stone-200 p-2">Obese II</td>
+             <td class="border border-stone-200 p-2">35-39.9</td>
+             <td class="border border-stone-200 p-2">≥30</td>
+            </tr>
+            <tr class="bg-stone-50">
+             <td class="border border-stone-200 p-2">Morbid Obesity</td>
+             <td class="border border-stone-200 p-2">≥40</td>
+             <td class="border border-stone-200 p-2">—</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+         <p class="mt-2"><strong>Waist Circumference</strong> (metabolic syndrome indicator): Men &gt;102cm (&gt;90cm Asian) | Women &gt;88cm (&gt;80cm Asian)</p>
+         <p><strong>Waist-Hip Ratio:</strong> Men &gt;0.9, Women &gt;0.85 = Central obesity (cardiovascular risk)</p>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Special Measurements &amp; Proportions</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Arm Span &gt; Height</p>
+           <p class="text-xs">Normal: Arm span ≈ Height. If span &gt; height by &gt;5cm → Marfan syndrome, Homocystinuria, Eunuchoidism</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Upper:Lower Segment Ratio</p>
+           <p class="text-xs">Normal adult: ~1.0. Reduced (&lt;0.9): Marfan (long legs). Increased: Achondroplasia, Hypothyroidism (short limbs)</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Mid-Arm Circumference (MUAC)</p>
+           <p class="text-xs">Nutritional status in children. &lt;11.5cm (6-59mo) = Severe Acute Malnutrition → Therapeutic feeding</p>
+          </div>
+          <div class="bg-stone-50 p-3 rounded-lg">
+           <p class="font-semibold text-xs">Head Circumference</p>
+           <p class="text-xs">Newborn: 33-35cm. Macrocephaly: Hydrocephalus. Microcephaly: TORCH infections, Genetic</p>
+          </div>
+         </div>
+        </div>
+       </details>
+       <details class="border border-stone-200 rounded-lg overflow-hidden"><summary class="flex items-center justify-between p-4 bg-stone-50 font-medium text-stone-800"> <span>Clinical Documentation Template</span> <i data-lucide="chevron-down" class="w-5 h-5 chevron text-stone-500"></i> </summary>
+        <div class="p-4 border-t border-stone-200 text-sm text-stone-600 space-y-3">
+         <div class="bg-stone-900 text-green-400 p-4 rounded-lg font-mono text-xs overflow-x-auto">
+          <pre>GENERAL PHYSICAL EXAMINATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+General Survey:
+  • Consciousness: Alert &amp; oriented (GCS 15/15)
+  • Built: Medium | Nourishment: Adequate
+  • Posture: Comfortable at rest, propped up on 2 pillows
+  • Decubitus: Prefers sitting (orthopnea +ve)
+
+Vital Signs:
+  • Pulse: 88/min, regular, normal volume
+    Character: Normal | Vessel wall: Not thickened
+    All peripheral pulses palpable, No radio-femoral delay
+  • BP: 134/82 mmHg (Right arm, sitting)
+    Postural drop: Absent
+  • RR: 18/min, regular rhythm, no distress
+  • Temp: 37.0°C (oral) | SpO₂: 97% on RA
+
+Peripheral Examination:
+  • Pallor: Mild (conjunctival) | Icterus: Absent
+  • Cyanosis: Absent (central &amp; peripheral)
+  • Clubbing: Absent | Koilonychia: Absent
+  • Lymphadenopathy: No palpable nodes
+  • Edema: Bilateral pedal pitting edema (+2)
+  • JVP: Elevated (~7 cm above sternal angle)
+
+Skin: No spider naevi, No purpura
+Thyroid: Not visibly enlarged, moves with deglutition
+Nutritional markers: No temporal wasting, BMI 26.2
+
+IMPRESSION: Features suggestive of fluid overload
+(elevated JVP + pedal edema + orthopnea) — 
+likely decompensated heart failure. Proceed to 
+cardiovascular system examination.
+                                </pre>
+         </div>
+        </div>
+       </details>
+      </div>
+     </div>
+     <div class="pearl p-5 rounded-r-lg">
+      <p class="font-semibold text-emerald-800 mb-1">🎓 Final Teaching Point — The Philosophy of GPE</p>
+      <p class="text-stone-700 text-sm leading-relaxed">In 25+ years of clinical practice across cardiology, ICU, and emergency medicine, I've learned that the General Physical Examination is not just a checklist — it's a <strong>clinical conversation with the patient's body</strong>. Every sign tells a story. A cold extremity whispers "shock." A raised JVP shouts "fluid overload." Clubbing warns of hidden malignancy. The best clinician is not the one who orders the most tests, but the one who <strong>sees</strong> the diagnosis at the bedside. Master the GPE, and you master medicine.</p>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-emerald-900 text-emerald-200 py-6 px-4 mt-10">
+    <div class="max-w-6xl mx-auto text-center text-sm">
+     <p class="font-semibold text-white mb-1">Clinical GPE Reference Guide</p>
+     <p class="text-xs text-emerald-400">Based on Harrison's Principles of Internal Medicine, Oxford Handbook of Clinical Medicine &amp; Clinical Experience</p>
+     <p class="text-xs mt-2 text-emerald-500">For educational purposes. Always correlate clinical findings with investigations.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Tab navigation
+    function showSection(name) {
+        document.querySelectorAll('[id^="section-"]').forEach(s => s.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(t => { t.classList.remove('tab-active'); t.classList.add('text-stone-500'); });
+        const section = document.getElementById('section-' + name);
+        const tab = document.getElementById('tab-' + name);
+        if (section) { section.classList.remove('hidden'); section.classList.add('fade-in'); }
+        if (tab) { tab.classList.add('tab-active'); tab.classList.remove('text-stone-500'); }
+    }
+
+    // Element SDK
+    const defaultConfig = {
+        main_title: 'General Physical Examination',
+        subtitle: 'Comprehensive Clinical Bedside Assessment — From Head to Toe',
+        background_color: '#1c4a2e',
+        surface_color: '#ffffff',
+        text_color: '#1c1917',
+        primary_action_color: '#1a5632',
+        secondary_action_color: '#d97706'
+    };
+
+    function applyConfig(config) {
+        const title = document.getElementById('main-title');
+        const sub = document.getElementById('subtitle');
+        if (title) title.textContent = config.main_title || defaultConfig.main_title;
+        if (sub) sub.textContent = config.subtitle || defaultConfig.subtitle;
+    }
+
+    lucide.createIcons();
+</script>
+</body>
+</html>
