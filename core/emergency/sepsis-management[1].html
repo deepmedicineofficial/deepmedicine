@@ -1,0 +1,887 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Sepsis Management | Septic Shock & ICU Care | Deep Medicine</title> <meta name="description" content="Comprehensive sepsis management including early recognition, sepsis bundle, fluid resuscitation, vasopressors, and ICU care."> <link rel="canonical" href="https://deepmedicine.in/core/emergency/sepsis-management"> <!-- Open Graph --> <meta property="og:title" content="Sepsis Management | Deep Medicine"> <meta property="og:description" content="Early recognition and management of sepsis and septic shock with evidence-based protocols."> <meta property="og:image" content="https://deepmedicine.in/images/sepsis-management.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; }
+  .font-display { font-family: 'Playfair Display', serif; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+    50% { box-shadow: 0 0 20px 6px rgba(220, 38, 38, 0.15); }
+  }
+  .anim-fade { animation: fadeUp 0.6s ease both; }
+  .anim-d1 { animation-delay: 0.08s; }
+  .anim-d2 { animation-delay: 0.16s; }
+  .anim-d3 { animation-delay: 0.24s; }
+  .anim-d4 { animation-delay: 0.32s; }
+  .anim-d5 { animation-delay: 0.4s; }
+  .anim-d6 { animation-delay: 0.48s; }
+  .pulse-border { animation: pulseGlow 2.5s ease-in-out infinite; }
+
+  .tab-btn { transition: all 0.25s ease; }
+  .tab-btn.active { border-bottom: 3px solid; }
+
+  .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .accordion-content.open { max-height: 4000px; }
+
+  .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .card-hover:hover { transform: translateY(-2px); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0B1120;"><!-- HERO -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #0B1120 0%, #1a1034 40%, #2d1028 70%, #0B1120 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, rgba(220,38,38,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.2) 0%, transparent 40%);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
+     <div class="flex items-center gap-3 mb-4 anim-fade">
+      <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15); border:1px solid rgba(220,38,38,0.3);"><i data-lucide="activity" style="color:#ef4444; width:22px; height:22px;"></i>
+      </div><span class="text-xs sm:text-sm font-semibold tracking-widest uppercase" style="color:#ef4444;">Critical Care Reference</span>
+     </div>
+     <h1 id="mainTitle" class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 anim-fade anim-d1" style="color:#f1f5f9;">Infections &amp; Sepsis<br>
+      Emergencies</h1>
+     <p id="subtitle" class="text-base sm:text-lg lg:text-xl max-w-2xl mb-8 anim-fade anim-d2" style="color:#94a3b8;">A comprehensive clinical guide covering pathophysiology, diagnosis, management protocols, and critical decision-making in sepsis emergencies.</p>
+     <div class="flex flex-wrap gap-3 anim-fade anim-d3"><span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(220,38,38,0.15); color:#fca5a5; border:1px solid rgba(220,38,38,0.25);"> <i data-lucide="alert-triangle" style="width:12px;height:12px;display:inline;vertical-align:-1px;"></i> Time-Critical </span> <span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.12); color:#93c5fd; border:1px solid rgba(59,130,246,0.25);"> <i data-lucide="stethoscope" style="width:12px;height:12px;display:inline;vertical-align:-1px;"></i> Evidence-Based </span> <span class="px-3 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.12); color:#6ee7b7; border:1px solid rgba(16,185,129,0.25);"> <i data-lucide="shield" style="width:12px;height:12px;display:inline;vertical-align:-1px;"></i> SSC Guidelines 2021 </span>
+     </div>
+    </div>
+   </header><!-- TABS NAV -->
+   <nav class="sticky top-0 z-30 border-b" style="background:rgba(11,17,32,0.95); backdrop-filter:blur(12px); border-color:#1e293b;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex gap-1 overflow-x-auto" id="tabNav"><button onclick="switchTab('overview')" class="tab-btn active px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#ef4444; border-color:#ef4444;" data-tab="overview">Overview</button> <button onclick="switchTab('pathophys')" class="tab-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b;" data-tab="pathophys">Pathophysiology</button> <button onclick="switchTab('diagnosis')" class="tab-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b;" data-tab="diagnosis">Diagnosis</button> <button onclick="switchTab('management')" class="tab-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b;" data-tab="management">Management</button> <button onclick="switchTab('antibiotics')" class="tab-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b;" data-tab="antibiotics">Antibiotics</button> <button onclick="switchTab('special')" class="tab-btn px-3 sm:px-4 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap" style="color:#64748b;" data-tab="special">Special Topics</button>
+    </div>
+   </nav><!-- CONTENT AREA -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12"><!-- === OVERVIEW TAB === -->
+    <section id="tab-overview" class="tab-content"><!-- Quick Stats -->
+     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10 anim-fade">
+      <div class="rounded-xl p-4 sm:p-5 card-hover" style="background:#111827; border:1px solid #1e293b;">
+       <div class="text-2xl sm:text-3xl font-bold mb-1" style="color:#ef4444;">
+        48.9M
+       </div>
+       <div class="text-xs sm:text-sm" style="color:#64748b;">
+        Global cases/year
+       </div>
+      </div>
+      <div class="rounded-xl p-4 sm:p-5 card-hover" style="background:#111827; border:1px solid #1e293b;">
+       <div class="text-2xl sm:text-3xl font-bold mb-1" style="color:#f59e0b;">
+        11M
+       </div>
+       <div class="text-xs sm:text-sm" style="color:#64748b;">
+        Deaths/year worldwide
+       </div>
+      </div>
+      <div class="rounded-xl p-4 sm:p-5 card-hover" style="background:#111827; border:1px solid #1e293b;">
+       <div class="text-2xl sm:text-3xl font-bold mb-1" style="color:#3b82f6;">
+        7.6%
+       </div>
+       <div class="text-xs sm:text-sm" style="color:#64748b;">
+        ↑ Mortality per hour delay
+       </div>
+      </div>
+      <div class="rounded-xl p-4 sm:p-5 card-hover" style="background:#111827; border:1px solid #1e293b;">
+       <div class="text-2xl sm:text-3xl font-bold mb-1" style="color:#10b981;">
+        1 Hour
+       </div>
+       <div class="text-xs sm:text-sm" style="color:#64748b;">
+        Target to first antibiotics
+       </div>
+      </div>
+     </div><!-- SEPSIS-3 Definitions -->
+     <div class="mb-10 anim-fade anim-d1">
+      <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6" style="color:#f1f5f9;">Sepsis-3 Definitions (2016)</h2>
+      <div class="grid md:grid-cols-3 gap-4"><!-- Sepsis -->
+       <div class="rounded-xl p-5 sm:p-6 card-hover" style="background:linear-gradient(180deg,#111827,#0f172a); border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-3">
+         <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(59,130,246,0.15);"><i data-lucide="thermometer" style="color:#3b82f6;width:16px;height:16px;"></i>
+         </div>
+         <h3 class="font-bold text-sm sm:text-base" style="color:#f1f5f9;">SEPSIS</h3>
+        </div>
+        <p class="text-sm leading-relaxed mb-3" style="color:#94a3b8;">Life-threatening organ dysfunction caused by a dysregulated host response to infection.</p>
+        <div class="rounded-lg p-3" style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.15);"><span class="text-xs font-bold block mb-1" style="color:#60a5fa;">Clinical Criteria</span> <span class="text-xs" style="color:#93c5fd;">Suspected infection + SOFA score ≥ 2 points (or acute change of ≥ 2)</span>
+        </div>
+       </div><!-- Septic Shock -->
+       <div class="rounded-xl p-5 sm:p-6 card-hover pulse-border" style="background:linear-gradient(180deg,#1a0a0a,#0f172a); border:1px solid rgba(220,38,38,0.3);">
+        <div class="flex items-center gap-2 mb-3">
+         <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(220,38,38,0.15);"><i data-lucide="heart-pulse" style="color:#ef4444;width:16px;height:16px;"></i>
+         </div>
+         <h3 class="font-bold text-sm sm:text-base" style="color:#fca5a5;">SEPTIC SHOCK</h3>
+        </div>
+        <p class="text-sm leading-relaxed mb-3" style="color:#94a3b8;">Subset of sepsis with profound circulatory, cellular, and metabolic abnormalities.</p>
+        <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.15);"><span class="text-xs font-bold block mb-1" style="color:#f87171;">Clinical Criteria</span> <span class="text-xs" style="color:#fca5a5;">Vasopressors required for MAP ≥ 65 mmHg<br>
+          AND Lactate &gt; 2 mmol/L despite adequate fluid resuscitation</span>
+        </div>
+        <div class="mt-3 px-2 py-1 rounded text-xs font-bold text-center" style="background:rgba(220,38,38,0.2); color:#fca5a5;">
+         Mortality: 40–60%
+        </div>
+       </div><!-- qSOFA -->
+       <div class="rounded-xl p-5 sm:p-6 card-hover" style="background:linear-gradient(180deg,#111827,#0f172a); border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-3">
+         <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,0.15);"><i data-lucide="clipboard-list" style="color:#f59e0b;width:16px;height:16px;"></i>
+         </div>
+         <h3 class="font-bold text-sm sm:text-base" style="color:#f1f5f9;">qSOFA (Bedside)</h3>
+        </div>
+        <p class="text-xs mb-3" style="color:#94a3b8;">Quick screening — ≥ 2 suggests poor outcome:</p>
+        <div class="space-y-2">
+         <div class="flex items-center gap-2 p-2 rounded-lg" style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#f59e0b; color:#0B1120;">1</span> <span class="text-xs" style="color:#fbbf24;">Respiratory Rate ≥ 22/min</span>
+         </div>
+         <div class="flex items-center gap-2 p-2 rounded-lg" style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#f59e0b; color:#0B1120;">1</span> <span class="text-xs" style="color:#fbbf24;">Altered Mentation (GCS &lt; 15)</span>
+         </div>
+         <div class="flex items-center gap-2 p-2 rounded-lg" style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#f59e0b; color:#0B1120;">1</span> <span class="text-xs" style="color:#fbbf24;">Systolic BP ≤ 100 mmHg</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- SOFA Score Table -->
+     <div class="mb-10 anim-fade anim-d2">
+      <h2 class="font-display text-xl sm:text-2xl font-bold mb-4" style="color:#f1f5f9;">SOFA Score — Organ Dysfunction Assessment</h2>
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #1e293b;">
+       <div class="overflow-x-auto">
+        <table class="w-full text-xs sm:text-sm" style="min-width:600px;">
+         <thead>
+          <tr style="background:#1e293b;">
+           <th class="text-left p-3 font-semibold" style="color:#94a3b8;">System</th>
+           <th class="text-center p-3 font-semibold" style="color:#6ee7b7;">0</th>
+           <th class="text-center p-3 font-semibold" style="color:#fbbf24;">1</th>
+           <th class="text-center p-3 font-semibold" style="color:#fb923c;">2</th>
+           <th class="text-center p-3 font-semibold" style="color:#f87171;">3</th>
+           <th class="text-center p-3 font-semibold" style="color:#ef4444;">4</th>
+          </tr>
+         </thead>
+         <tbody>
+          <tr style="background:#111827; border-bottom:1px solid #1e293b;">
+           <td class="p-3 font-semibold" style="color:#93c5fd;">Respiration<br><span class="font-normal" style="color:#64748b;">PaO₂/FiO₂</span></td>
+           <td class="text-center p-3" style="color:#94a3b8;">≥ 400</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 400</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 300</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 200 + vent</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 100 + vent</td>
+          </tr>
+          <tr style="background:#0f172a; border-bottom:1px solid #1e293b;">
+           <td class="p-3 font-semibold" style="color:#c4b5fd;">Coagulation<br><span class="font-normal" style="color:#64748b;">Platelets (×10³/µL)</span></td>
+           <td class="text-center p-3" style="color:#94a3b8;">≥ 150</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 150</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 100</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 50</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 20</td>
+          </tr>
+          <tr style="background:#111827; border-bottom:1px solid #1e293b;">
+           <td class="p-3 font-semibold" style="color:#fbbf24;">Liver<br><span class="font-normal" style="color:#64748b;">Bilirubin (mg/dL)</span></td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 1.2</td>
+           <td class="text-center p-3" style="color:#94a3b8;">1.2–1.9</td>
+           <td class="text-center p-3" style="color:#94a3b8;">2.0–5.9</td>
+           <td class="text-center p-3" style="color:#94a3b8;">6.0–11.9</td>
+           <td class="text-center p-3" style="color:#94a3b8;">≥ 12</td>
+          </tr>
+          <tr style="background:#0f172a; border-bottom:1px solid #1e293b;">
+           <td class="p-3 font-semibold" style="color:#f87171;">Cardiovascular<br><span class="font-normal" style="color:#64748b;">MAP / Vasopressors</span></td>
+           <td class="text-center p-3" style="color:#94a3b8;">MAP ≥70</td>
+           <td class="text-center p-3" style="color:#94a3b8;">MAP &lt;70</td>
+           <td class="text-center p-3" style="color:#94a3b8;">Dopa ≤5</td>
+           <td class="text-center p-3" style="color:#94a3b8;">Dopa &gt;5<br>
+            Epi ≤0.1</td>
+           <td class="text-center p-3" style="color:#94a3b8;">Dopa &gt;15<br>
+            Epi &gt;0.1</td>
+          </tr>
+          <tr style="background:#111827; border-bottom:1px solid #1e293b;">
+           <td class="p-3 font-semibold" style="color:#34d399;">CNS<br><span class="font-normal" style="color:#64748b;">Glasgow Coma Scale</span></td>
+           <td class="text-center p-3" style="color:#94a3b8;">15</td>
+           <td class="text-center p-3" style="color:#94a3b8;">13–14</td>
+           <td class="text-center p-3" style="color:#94a3b8;">10–12</td>
+           <td class="text-center p-3" style="color:#94a3b8;">6–9</td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 6</td>
+          </tr>
+          <tr style="background:#0f172a;">
+           <td class="p-3 font-semibold" style="color:#fb923c;">Renal<br><span class="font-normal" style="color:#64748b;">Creatinine / Urine Output</span></td>
+           <td class="text-center p-3" style="color:#94a3b8;">&lt; 1.2</td>
+           <td class="text-center p-3" style="color:#94a3b8;">1.2–1.9</td>
+           <td class="text-center p-3" style="color:#94a3b8;">2.0–3.4</td>
+           <td class="text-center p-3" style="color:#94a3b8;">3.5–4.9<br>
+            &lt;500mL/d</td>
+           <td class="text-center p-3" style="color:#94a3b8;">≥ 5.0<br>
+            &lt;200mL/d</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </div><!-- Common Infections -->
+     <div class="anim-fade anim-d3">
+      <h2 class="font-display text-xl sm:text-2xl font-bold mb-4" style="color:#f1f5f9;">Common Infection Sources in Sepsis</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+       <div class="rounded-xl p-4 card-hover" style="background:#111827; border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="wind" style="color:#3b82f6;width:18px;height:18px;"></i><span class="font-bold text-sm" style="color:#93c5fd;">Pulmonary (35–50%)</span>
+        </div>
+        <ul class="text-xs space-y-1" style="color:#94a3b8;">
+         <li>• Community-acquired pneumonia (CAP)</li>
+         <li>• Hospital-acquired / Ventilator-associated</li>
+         <li>• Lung abscess, Empyema</li>
+         <li>• COVID-19, Influenza, TB</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4 card-hover" style="background:#111827; border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="droplets" style="color:#f59e0b;width:18px;height:18px;"></i><span class="font-bold text-sm" style="color:#fbbf24;">Urogenital (20–30%)</span>
+        </div>
+        <ul class="text-xs space-y-1" style="color:#94a3b8;">
+         <li>• Complicated UTI / Pyelonephritis</li>
+         <li>• Catheter-associated UTI (CAUTI)</li>
+         <li>• Perinephric abscess</li>
+         <li>• Prostatic abscess</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4 card-hover" style="background:#111827; border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="scan-line" style="color:#ef4444;width:18px;height:18px;"></i><span class="font-bold text-sm" style="color:#fca5a5;">Abdominal (15–25%)</span>
+        </div>
+        <ul class="text-xs space-y-1" style="color:#94a3b8;">
+         <li>• Peritonitis (primary, secondary, tertiary)</li>
+         <li>• Cholangitis / Cholecystitis</li>
+         <li>• Appendicitis with perforation</li>
+         <li>• Intra-abdominal abscess</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4 card-hover" style="background:#111827; border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="layers" style="color:#a78bfa;width:18px;height:18px;"></i><span class="font-bold text-sm" style="color:#c4b5fd;">Skin &amp; Soft Tissue</span>
+        </div>
+        <ul class="text-xs space-y-1" style="color:#94a3b8;">
+         <li>• Necrotizing fasciitis (type I &amp; II)</li>
+         <li>• Cellulitis with bacteremia</li>
+         <li>• Surgical site infections</li>
+         <li>• Diabetic foot infections</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4 card-hover" style="background:#111827; border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="brain" style="color:#ec4899;width:18px;height:18px;"></i><span class="font-bold text-sm" style="color:#f9a8d4;">CNS Infections</span>
+        </div>
+        <ul class="text-xs space-y-1" style="color:#94a3b8;">
+         <li>• Bacterial meningitis</li>
+         <li>• Brain abscess</li>
+         <li>• Epidural abscess</li>
+         <li>• Encephalitis (HSV, viral)</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4 card-hover" style="background:#111827; border:1px solid #1e293b;">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="plug" style="color:#10b981;width:18px;height:18px;"></i><span class="font-bold text-sm" style="color:#6ee7b7;">Intravascular</span>
+        </div>
+        <ul class="text-xs space-y-1" style="color:#94a3b8;">
+         <li>• Central line-associated BSI (CLABSI)</li>
+         <li>• Infective endocarditis</li>
+         <li>• Suppurative thrombophlebitis</li>
+         <li>• Mycotic aneurysm</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- === PATHOPHYSIOLOGY TAB === -->
+    <section id="tab-pathophys" class="tab-content hidden">
+     <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6 anim-fade" style="color:#f1f5f9;">Pathophysiology of Sepsis</h2><!-- Cascade -->
+     <div class="mb-10 anim-fade anim-d1">
+      <h3 class="font-bold text-lg mb-4" style="color:#93c5fd;">The Sepsis Cascade</h3>
+      <div class="space-y-3">
+       <div class="flex gap-3 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#3b82f6; color:#fff;">
+          1
+         </div>
+         <div class="w-0.5 h-8" style="background:#1e293b;"></div>
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="font-bold text-sm mb-1" style="color:#60a5fa;">Infection &amp; PAMP/DAMP Recognition</h4>
+         <p class="text-xs" style="color:#94a3b8;">Pathogen-associated molecular patterns (PAMPs) — e.g., LPS, lipoteichoic acid, peptidoglycan — bind to Toll-like receptors (TLR-2, TLR-4) and NOD-like receptors on innate immune cells. Damage-associated molecular patterns (DAMPs) — HMGB1, histones, mitochondrial DNA — amplify the response from tissue injury.</p>
+        </div>
+       </div>
+       <div class="flex gap-3 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#f59e0b; color:#0B1120;">
+          2
+         </div>
+         <div class="w-0.5 h-8" style="background:#1e293b;"></div>
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="font-bold text-sm mb-1" style="color:#fbbf24;">Cytokine Storm &amp; NF-κB Activation</h4>
+         <p class="text-xs" style="color:#94a3b8;">NF-κB pathway activation triggers massive release of pro-inflammatory cytokines: TNF-α, IL-1β, IL-6, IL-8, IFN-γ. Simultaneously, anti-inflammatory mediators (IL-10, TGF-β) cause immunoparalysis. This imbalance creates a "cytokine storm" with uncontrolled systemic inflammation.</p>
+        </div>
+       </div>
+       <div class="flex gap-3 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#ef4444; color:#fff;">
+          3
+         </div>
+         <div class="w-0.5 h-8" style="background:#1e293b;"></div>
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="font-bold text-sm mb-1" style="color:#f87171;">Endothelial Dysfunction &amp; Coagulopathy</h4>
+         <p class="text-xs" style="color:#94a3b8;">Endothelial glycocalyx degradation → increased vascular permeability → third-spacing → tissue edema. Tissue factor exposure activates extrinsic coagulation cascade. Protein C/S and antithrombin III depletion → microvascular thrombosis (DIC). Loss of autoregulation in multiple vascular beds.</p>
+        </div>
+       </div>
+       <div class="flex gap-3 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#7c3aed; color:#fff;">
+          4
+         </div>
+         <div class="w-0.5 h-8" style="background:#1e293b;"></div>
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="font-bold text-sm mb-1" style="color:#a78bfa;">Mitochondrial Dysfunction &amp; Cellular Injury</h4>
+         <p class="text-xs" style="color:#94a3b8;">Reactive oxygen/nitrogen species (ROS/RNS) damage electron transport chain → cytopathic hypoxia. Cells cannot utilize oxygen despite adequate delivery ("oxygen extraction deficit"). Mitochondrial membrane potential collapse → caspase activation → apoptosis of immune cells, endothelial cells, and parenchymal cells.</p>
+        </div>
+       </div>
+       <div class="flex gap-3 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#dc2626; color:#fff;">
+          5
+         </div>
+        </div>
+        <div class="rounded-xl p-4 flex-1" style="background:linear-gradient(135deg,#1a0a0a,#111827); border:1px solid rgba(220,38,38,0.3);">
+         <h4 class="font-bold text-sm mb-1" style="color:#fca5a5;">Multi-Organ Dysfunction Syndrome (MODS)</h4>
+         <p class="text-xs" style="color:#94a3b8;">Distributive shock (vasodilation + capillary leak) → hypotension. Myocardial depression (septic cardiomyopathy) → reduced EF. ARDS from alveolar-capillary membrane damage. AKI from renal hypoperfusion + direct tubular injury. Hepatic dysfunction, encephalopathy, ileus, and adrenal insufficiency.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Key Mediators -->
+     <div class="anim-fade anim-d2">
+      <h3 class="font-bold text-lg mb-4" style="color:#93c5fd;">Key Inflammatory Mediators</h3>
+      <div class="grid sm:grid-cols-2 gap-3">
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="font-bold text-sm mb-2" style="color:#f87171;">Pro-Inflammatory</h4>
+        <div class="space-y-2 text-xs" style="color:#94a3b8;">
+         <div>
+          <strong style="color:#fca5a5;">TNF-α:</strong> First-wave cytokine; causes fever, vasodilation, endothelial activation, apoptosis
+         </div>
+         <div>
+          <strong style="color:#fca5a5;">IL-1β:</strong> Synergistic with TNF-α; activates inflammasome, pyrogen
+         </div>
+         <div>
+          <strong style="color:#fca5a5;">IL-6:</strong> Acute phase response; CRP induction; B-cell differentiation
+         </div>
+         <div>
+          <strong style="color:#fca5a5;">IL-8 (CXCL8):</strong> Neutrophil chemotaxis and activation
+         </div>
+         <div>
+          <strong style="color:#fca5a5;">HMGB1:</strong> Late mediator; perpetuates inflammation; therapeutic target
+         </div>
+         <div>
+          <strong style="color:#fca5a5;">Complement (C3a, C5a):</strong> Anaphylatoxins, neutrophil activation, mast cell degranulation
+         </div>
+        </div>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="font-bold text-sm mb-2" style="color:#6ee7b7;">Anti-Inflammatory / Immunosuppressive</h4>
+        <div class="space-y-2 text-xs" style="color:#94a3b8;">
+         <div>
+          <strong style="color:#6ee7b7;">IL-10:</strong> Potent immunosuppressant; inhibits macrophage function
+         </div>
+         <div>
+          <strong style="color:#6ee7b7;">TGF-β:</strong> Promotes fibrosis; suppresses T-cell responses
+         </div>
+         <div>
+          <strong style="color:#6ee7b7;">IL-4 / IL-13:</strong> Th2 shift; reduced pathogen clearance
+         </div>
+         <div>
+          <strong style="color:#6ee7b7;">PD-1 / PD-L1:</strong> T-cell exhaustion markers; checkpoint pathway
+         </div>
+         <div>
+          <strong style="color:#6ee7b7;">Myeloid-Derived Suppressor Cells:</strong> Expand in sepsis; suppress adaptive immunity
+         </div>
+         <div>
+          <strong style="color:#6ee7b7;">Lymphocyte Apoptosis:</strong> Massive depletion → immunoparalysis phase
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- === DIAGNOSIS TAB === -->
+    <section id="tab-diagnosis" class="tab-content hidden">
+     <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6 anim-fade" style="color:#f1f5f9;">Diagnostic Approach</h2><!-- Accordion sections -->
+     <div class="space-y-3" id="diagAccordion">
+      <div class="rounded-xl overflow-hidden anim-fade anim-d1" style="border:1px solid #1e293b;"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left" style="background:#111827;">
+        <div class="flex items-center gap-3"><i data-lucide="test-tubes" style="color:#3b82f6;width:20px;height:20px;"></i> <span class="font-bold text-sm sm:text-base" style="color:#f1f5f9;">Laboratory Investigations</span>
+        </div><i data-lucide="chevron-down" class="acc-icon transition-transform" style="color:#64748b;width:18px;height:18px;"></i> </button>
+       <div class="accordion-content" style="background:#0f172a;">
+        <div class="p-4 sm:p-5 grid sm:grid-cols-2 gap-3">
+         <div>
+          <h4 class="text-xs font-bold mb-2" style="color:#60a5fa;">STAT / Immediate</h4>
+          <ul class="text-xs space-y-1" style="color:#94a3b8;">
+           <li>• CBC with differential (left shift, bandemia)</li>
+           <li>• CMP: BUN, Creatinine, Electrolytes, LFTs</li>
+           <li>• Lactate (arterial or venous) — <strong style="color:#fca5a5;">KEY prognostic marker</strong></li>
+           <li>• ABG with co-oximetry</li>
+           <li>• Coagulation: PT/INR, aPTT, Fibrinogen, D-dimer</li>
+           <li>• Blood cultures × 2 sets (before antibiotics!)</li>
+           <li>• Urinalysis + Urine culture</li>
+           <li>• Blood glucose</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-xs font-bold mb-2" style="color:#fbbf24;">Biomarkers</h4>
+          <ul class="text-xs space-y-1" style="color:#94a3b8;">
+           <li>• <strong style="color:#fbbf24;">Procalcitonin (PCT):</strong> &gt;0.5 ng/mL suggests bacterial; guides de-escalation</li>
+           <li>• <strong style="color:#fbbf24;">CRP:</strong> Non-specific; trend useful for monitoring</li>
+           <li>• <strong style="color:#fbbf24;">Presepsin (sCD14-ST):</strong> Rising biomarker for early sepsis</li>
+           <li>• IL-6: Rapid rise, correlates with severity</li>
+           <li>• sTREM-1: Elevated in bacterial infections</li>
+           <li>• ProADM: Predicts organ failure progression</li>
+          </ul>
+         </div>
+         <div class="sm:col-span-2">
+          <h4 class="text-xs font-bold mb-2" style="color:#a78bfa;">Source-Directed</h4>
+          <ul class="text-xs space-y-1" style="color:#94a3b8;">
+           <li>• Sputum Gram stain + culture, respiratory viral panel</li>
+           <li>• CSF analysis if meningitis suspected (cell count, protein, glucose, Gram stain, culture, latex agglutination)</li>
+           <li>• Wound/abscess cultures, joint fluid analysis</li>
+           <li>• Stool studies (C. difficile toxin) if diarrhea present</li>
+           <li>• β-D-glucan, Galactomannan if invasive fungal infection suspected</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="rounded-xl overflow-hidden anim-fade anim-d2" style="border:1px solid #1e293b;"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left" style="background:#111827;">
+        <div class="flex items-center gap-3"><i data-lucide="scan" style="color:#10b981;width:20px;height:20px;"></i> <span class="font-bold text-sm sm:text-base" style="color:#f1f5f9;">Imaging Studies</span>
+        </div><i data-lucide="chevron-down" class="acc-icon transition-transform" style="color:#64748b;width:18px;height:18px;"></i> </button>
+       <div class="accordion-content" style="background:#0f172a;">
+        <div class="p-4 sm:p-5 space-y-3">
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="rounded-lg p-3" style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+           <h4 class="text-xs font-bold mb-1" style="color:#6ee7b7;">Chest X-ray / CT Chest</h4>
+           <p class="text-xs" style="color:#94a3b8;">Pneumonia, pleural effusion, empyema, ARDS pattern. CT for cavitation, abscess, mediastinitis.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+           <h4 class="text-xs font-bold mb-1" style="color:#6ee7b7;">CT Abdomen/Pelvis</h4>
+           <p class="text-xs" style="color:#94a3b8;">Intra-abdominal abscess, perforated viscus, biliary obstruction, appendicitis, diverticular abscess.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+           <h4 class="text-xs font-bold mb-1" style="color:#6ee7b7;">Point-of-Care Ultrasound</h4>
+           <p class="text-xs" style="color:#94a3b8;">IVC collapsibility (volume status), cardiac function (EF, RV), lung B-lines, free fluid (FAST), abscess localization.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+           <h4 class="text-xs font-bold mb-1" style="color:#6ee7b7;">Echocardiography</h4>
+           <p class="text-xs" style="color:#94a3b8;">Septic cardiomyopathy (global hypokinesis), vegetations (endocarditis), fluid responsiveness assessment.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="rounded-xl overflow-hidden anim-fade anim-d3" style="border:1px solid #1e293b;"><button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left" style="background:#111827;">
+        <div class="flex items-center gap-3"><i data-lucide="target" style="color:#ef4444;width:20px;height:20px;"></i> <span class="font-bold text-sm sm:text-base" style="color:#f1f5f9;">Red Flags — Do NOT Miss</span>
+        </div><i data-lucide="chevron-down" class="acc-icon transition-transform" style="color:#64748b;width:18px;height:18px;"></i> </button>
+       <div class="accordion-content" style="background:#0f172a;">
+        <div class="p-4 sm:p-5">
+         <div class="grid sm:grid-cols-2 gap-2">
+          <div class="flex items-start gap-2 p-2 rounded-lg" style="background:rgba(220,38,38,0.06);"><i data-lucide="alert-circle" style="color:#ef4444;width:14px;height:14px;flex-shrink:0;margin-top:2px;"></i> <span class="text-xs" style="color:#fca5a5;">Lactate &gt; 4 mmol/L → aggressive resuscitation</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg" style="background:rgba(220,38,38,0.06);"><i data-lucide="alert-circle" style="color:#ef4444;width:14px;height:14px;flex-shrink:0;margin-top:2px;"></i> <span class="text-xs" style="color:#fca5a5;">New-onset altered mental status</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg" style="background:rgba(220,38,38,0.06);"><i data-lucide="alert-circle" style="color:#ef4444;width:14px;height:14px;flex-shrink:0;margin-top:2px;"></i> <span class="text-xs" style="color:#fca5a5;">Mottled skin / delayed capillary refill &gt; 3 sec</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg" style="background:rgba(220,38,38,0.06);"><i data-lucide="alert-circle" style="color:#ef4444;width:14px;height:14px;flex-shrink:0;margin-top:2px;"></i> <span class="text-xs" style="color:#fca5a5;">Purpura fulminans → DIC + meningococcemia</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg" style="background:rgba(220,38,38,0.06);"><i data-lucide="alert-circle" style="color:#ef4444;width:14px;height:14px;flex-shrink:0;margin-top:2px;"></i> <span class="text-xs" style="color:#fca5a5;">Oliguria &lt; 0.5 mL/kg/hr for ≥ 2 hours</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg" style="background:rgba(220,38,38,0.06);"><i data-lucide="alert-circle" style="color:#ef4444;width:14px;height:14px;flex-shrink:0;margin-top:2px;"></i> <span class="text-xs" style="color:#fca5a5;">Hypothermia (&lt;36°C) — worse prognosis than fever</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- === MANAGEMENT TAB === -->
+    <section id="tab-management" class="tab-content hidden">
+     <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6 anim-fade" style="color:#f1f5f9;">Management Protocol</h2><!-- Hour-1 Bundle -->
+     <div class="rounded-xl p-5 sm:p-6 mb-8 pulse-border anim-fade anim-d1" style="background:linear-gradient(135deg,#1a0a0a,#111827); border:1px solid rgba(220,38,38,0.3);">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#dc2626;"><i data-lucide="clock" style="color:#fff;width:20px;height:20px;"></i>
+       </div>
+       <div>
+        <h3 class="font-display text-xl font-bold" style="color:#fca5a5;">HOUR-1 BUNDLE (SSC 2021)</h3>
+        <p class="text-xs" style="color:#94a3b8;">Initiate ALL elements IMMEDIATELY — do not wait for ICU transfer</p>
+       </div>
+      </div>
+      <div class="space-y-3">
+       <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(220,38,38,0.08);"><span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#dc2626; color:#fff;">1</span>
+        <div>
+         <h4 class="font-bold text-sm" style="color:#fca5a5;">Measure Lactate</h4>
+         <p class="text-xs" style="color:#94a3b8;">If lactate ≥ 2 mmol/L, remeasure within 2–4 hours. Target: lactate normalization. Serial trending guides response to therapy.</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(220,38,38,0.08);"><span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#dc2626; color:#fff;">2</span>
+        <div>
+         <h4 class="font-bold text-sm" style="color:#fca5a5;">Obtain Blood Cultures BEFORE Antibiotics</h4>
+         <p class="text-xs" style="color:#94a3b8;">At least 2 sets (aerobic + anaerobic) from 2 different sites. Do NOT delay antibiotics &gt; 45 minutes for cultures.</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(220,38,38,0.08);"><span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#dc2626; color:#fff;">3</span>
+        <div>
+         <h4 class="font-bold text-sm" style="color:#fca5a5;">Administer Broad-Spectrum Antibiotics</h4>
+         <p class="text-xs" style="color:#94a3b8;">Within 1 hour of recognition. Each hour delay increases mortality ~7.6%. Cover all likely pathogens. IV route. Loading doses independent of renal function.</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(220,38,38,0.08);"><span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#dc2626; color:#fff;">4</span>
+        <div>
+         <h4 class="font-bold text-sm" style="color:#fca5a5;">Rapid IV Fluid Resuscitation</h4>
+         <p class="text-xs" style="color:#94a3b8;">30 mL/kg crystalloid (Ringer's Lactate or NS) for hypotension or lactate ≥ 4. Reassess volume status after each bolus using dynamic parameters (pulse pressure variation, passive leg raise, IVC assessment).</p>
+        </div>
+       </div>
+       <div class="flex items-start gap-3 p-3 rounded-lg" style="background:rgba(220,38,38,0.08);"><span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:#dc2626; color:#fff;">5</span>
+        <div>
+         <h4 class="font-bold text-sm" style="color:#fca5a5;">Vasopressors for Refractory Hypotension</h4>
+         <p class="text-xs" style="color:#94a3b8;">If MAP &lt; 65 mmHg despite fluids → Norepinephrine (first-line, 0.1–2 µg/kg/min). Add Vasopressin 0.03 U/min as second agent. Epinephrine if cardiac dysfunction suspected.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Hemodynamic Management -->
+     <div class="mb-8 anim-fade anim-d2">
+      <h3 class="font-bold text-lg mb-4" style="color:#93c5fd;">Hemodynamic Targets &amp; Monitoring</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#60a5fa;">Targets</h4>
+        <ul class="text-xs space-y-1.5" style="color:#94a3b8;">
+         <li>• MAP ≥ 65 mmHg</li>
+         <li>• Urine output ≥ 0.5 mL/kg/hr</li>
+         <li>• Lactate clearance ≥ 20% in 2 hrs</li>
+         <li>• ScvO₂ ≥ 70% (if available)</li>
+         <li>• Capillary refill &lt; 3 seconds</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#fbbf24;">Fluid Responsiveness Assessment</h4>
+        <ul class="text-xs space-y-1.5" style="color:#94a3b8;">
+         <li>• Passive Leg Raise (+10% CO = responsive)</li>
+         <li>• Pulse Pressure Variation &gt; 13%</li>
+         <li>• IVC collapsibility &gt; 40% (spontaneous)</li>
+         <li>• Mini fluid challenge (100 mL over 1 min)</li>
+         <li>• Avoid fluid overload → ↑ mortality</li>
+        </ul>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#a78bfa;">Vasopressor Ladder</h4>
+        <ul class="text-xs space-y-1.5" style="color:#94a3b8;">
+         <li><strong style="color:#c4b5fd;">1st:</strong> Norepinephrine (NE) — α1 &gt; β1</li>
+         <li><strong style="color:#c4b5fd;">2nd:</strong> Vasopressin 0.03 U/min (NE-sparing)</li>
+         <li><strong style="color:#c4b5fd;">3rd:</strong> Epinephrine (cardiac dysfunction)</li>
+         <li><strong style="color:#c4b5fd;">Rescue:</strong> Angiotensin II (ATHOS-3 trial)</li>
+         <li><strong style="color:#c4b5fd;">Adjunct:</strong> Hydrocortisone 200 mg/day if refractory</li>
+        </ul>
+       </div>
+      </div>
+     </div><!-- Adjunctive Therapies -->
+     <div class="anim-fade anim-d3">
+      <h3 class="font-bold text-lg mb-4" style="color:#93c5fd;">Adjunctive &amp; Supportive Therapies</h3>
+      <div class="grid sm:grid-cols-2 gap-3">
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#f87171;">Corticosteroids</h4>
+        <p class="text-xs" style="color:#94a3b8;">Hydrocortisone 50 mg IV q6h (or 200 mg continuous infusion) if vasopressor-refractory shock (NE ≥ 0.25 µg/kg/min for ≥ 4 hours). ADRENAL &amp; APROCCHSS trials support use. Taper when vasopressors weaned.</p>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#34d399;">Glycemic Control</h4>
+        <p class="text-xs" style="color:#94a3b8;">Target glucose 144–180 mg/dL (insulin infusion protocol). Avoid hypoglycemia (&lt; 70 mg/dL) — associated with increased mortality. Check glucose q1–2h during insulin infusion.</p>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#60a5fa;">Lung-Protective Ventilation</h4>
+        <p class="text-xs" style="color:#94a3b8;">If ARDS: Tidal volume 6 mL/kg IBW, Plateau pressure &lt; 30 cmH₂O, PEEP per FiO₂ table, prone positioning if PaO₂/FiO₂ &lt; 150 for ≥ 12 hours. Conservative fluid strategy once stabilized.</p>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#fbbf24;">Source Control</h4>
+        <p class="text-xs" style="color:#94a3b8;">Identify and intervene within 6–12 hours: abscess drainage, infected device removal, debridement of necrotic tissue, biliary decompression (ERCP/PTC), fasciotomy for necrotizing fasciitis. Choose least invasive effective approach.</p>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#ec4899;">VTE Prophylaxis</h4>
+        <p class="text-xs" style="color:#94a3b8;">LMWH preferred over UFH (unless AKI/high bleeding risk). Enoxaparin 40 mg SC daily or Heparin 5000 U SC q8-12h. Mechanical prophylaxis if pharmacological contraindicated.</p>
+       </div>
+       <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+        <h4 class="text-xs font-bold mb-2" style="color:#fb923c;">Renal Replacement Therapy</h4>
+        <p class="text-xs" style="color:#94a3b8;">Indications: refractory hyperkalemia, severe metabolic acidosis, fluid overload unresponsive to diuretics, uremic complications. CRRT preferred in hemodynamically unstable patients. STARRT-ART trial: no benefit of early initiation.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- === ANTIBIOTICS TAB === -->
+    <section id="tab-antibiotics" class="tab-content hidden">
+     <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6 anim-fade" style="color:#f1f5f9;">Empiric Antibiotic Selection</h2>
+     <div class="rounded-xl p-4 mb-6 anim-fade" style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2);">
+      <div class="flex items-start gap-2"><i data-lucide="info" style="color:#f59e0b;width:16px;height:16px;flex-shrink:0;margin-top:2px;"></i>
+       <p class="text-xs" style="color:#fbbf24;"><strong>Principles:</strong> Administer within 1 hour. Use IV route. Loading doses are NOT adjusted for renal function. Broaden if MRSA/MDR risk factors present. De-escalate based on culture results and procalcitonin.</p>
+      </div>
+     </div>
+     <div class="space-y-4 anim-fade anim-d1"><!-- CAP -->
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #1e293b;">
+       <div class="p-4 flex items-center gap-2" style="background:#111827;"><i data-lucide="wind" style="color:#3b82f6;width:18px;height:18px;"></i>
+        <h3 class="font-bold text-sm" style="color:#93c5fd;">Community-Acquired Pneumonia (CAP)</h3>
+       </div>
+       <div class="p-4 space-y-2" style="background:#0f172a;">
+        <div class="rounded-lg p-3" style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.12);"><span class="text-xs font-bold" style="color:#60a5fa;">Non-severe (ward):</span> <span class="text-xs" style="color:#94a3b8;"> β-Lactam (Ampicillin/Sulbactam or Ceftriaxone) + Macrolide (Azithromycin) OR Respiratory FQ (Levofloxacin/Moxifloxacin)</span>
+        </div>
+        <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.12);"><span class="text-xs font-bold" style="color:#f87171;">Severe/ICU:</span> <span class="text-xs" style="color:#94a3b8;"> Ceftriaxone 2g IV + Azithromycin 500mg IV. Add Vancomycin + Piperacillin-Tazobactam if MRSA/Pseudomonas risk. Consider Oseltamivir if influenza season.</span>
+        </div>
+       </div>
+      </div><!-- HAP/VAP -->
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #1e293b;">
+       <div class="p-4 flex items-center gap-2" style="background:#111827;"><i data-lucide="building" style="color:#a78bfa;width:18px;height:18px;"></i>
+        <h3 class="font-bold text-sm" style="color:#c4b5fd;">Hospital-Acquired / Ventilator-Associated Pneumonia</h3>
+       </div>
+       <div class="p-4 space-y-2" style="background:#0f172a;">
+        <div class="rounded-lg p-3" style="background:rgba(139,92,246,0.06); border:1px solid rgba(139,92,246,0.12);"><span class="text-xs font-bold" style="color:#a78bfa;">Standard:</span> <span class="text-xs" style="color:#94a3b8;"> Piperacillin-Tazobactam 4.5g IV q6h OR Cefepime 2g IV q8h OR Meropenem 1g IV q8h</span>
+        </div>
+        <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.12);"><span class="text-xs font-bold" style="color:#f87171;">High MDR risk:</span> <span class="text-xs" style="color:#94a3b8;"> Two anti-pseudomonal agents + MRSA coverage (Vancomycin 25–30 mg/kg load or Linezolid 600mg IV q12h)</span>
+        </div>
+       </div>
+      </div><!-- UTI -->
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #1e293b;">
+       <div class="p-4 flex items-center gap-2" style="background:#111827;"><i data-lucide="droplets" style="color:#f59e0b;width:18px;height:18px;"></i>
+        <h3 class="font-bold text-sm" style="color:#fbbf24;">Urosepsis / Complicated UTI</h3>
+       </div>
+       <div class="p-4 space-y-2" style="background:#0f172a;">
+        <div class="rounded-lg p-3" style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);"><span class="text-xs font-bold" style="color:#fbbf24;">Community-onset:</span> <span class="text-xs" style="color:#94a3b8;"> Ceftriaxone 2g IV daily OR Piperacillin-Tazobactam. Add Aminoglycoside (Gentamicin) if critically ill.</span>
+        </div>
+        <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.12);"><span class="text-xs font-bold" style="color:#f87171;">ESBL/MDR suspected:</span> <span class="text-xs" style="color:#94a3b8;"> Meropenem 1g IV q8h or Ertapenem 1g IV daily. Consider source control (ureteral stent, nephrostomy) if obstructed.</span>
+        </div>
+       </div>
+      </div><!-- Intra-abdominal -->
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #1e293b;">
+       <div class="p-4 flex items-center gap-2" style="background:#111827;"><i data-lucide="scan-line" style="color:#ef4444;width:18px;height:18px;"></i>
+        <h3 class="font-bold text-sm" style="color:#fca5a5;">Intra-Abdominal Sepsis</h3>
+       </div>
+       <div class="p-4 space-y-2" style="background:#0f172a;">
+        <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.12);"><span class="text-xs" style="color:#94a3b8;"><strong style="color:#fca5a5;">Regimens:</strong> Piperacillin-Tazobactam 4.5g IV q6h <strong>OR</strong> Meropenem 1g IV q8h <strong>OR</strong> Ceftriaxone + Metronidazole. Add Fluconazole/Caspofungin if yeast suspected (tertiary peritonitis). <strong>Source control is paramount</strong> — surgery/IR drainage within 6–12 hours.</span>
+        </div>
+       </div>
+      </div><!-- Meningitis -->
+      <div class="rounded-xl overflow-hidden" style="border:1px solid #1e293b;">
+       <div class="p-4 flex items-center gap-2" style="background:#111827;"><i data-lucide="brain" style="color:#ec4899;width:18px;height:18px;"></i>
+        <h3 class="font-bold text-sm" style="color:#f9a8d4;">Bacterial Meningitis</h3>
+       </div>
+       <div class="p-4 space-y-2" style="background:#0f172a;">
+        <div class="rounded-lg p-3" style="background:rgba(236,72,153,0.06); border:1px solid rgba(236,72,153,0.12);"><span class="text-xs" style="color:#94a3b8;"><strong style="color:#f9a8d4;">Adult empiric:</strong> Ceftriaxone 2g IV q12h + Vancomycin 15–20 mg/kg IV q8–12h + Ampicillin 2g IV q4h (if age &gt;50 or immunocompromised — covers Listeria). <strong style="color:#fbbf24;">Dexamethasone 0.15 mg/kg IV q6h × 4 days</strong> — give BEFORE or WITH first antibiotic dose (reduces mortality in pneumococcal meningitis).</span>
+        </div>
+       </div>
+      </div><!-- Necrotizing Fasciitis -->
+      <div class="rounded-xl overflow-hidden" style="border:1px solid rgba(220,38,38,0.3);">
+       <div class="p-4 flex items-center gap-2" style="background:rgba(26,10,10,0.8);"><i data-lucide="alert-triangle" style="color:#ef4444;width:18px;height:18px;"></i>
+        <h3 class="font-bold text-sm" style="color:#fca5a5;">Necrotizing Soft Tissue Infection</h3>
+       </div>
+       <div class="p-4 space-y-2" style="background:#0f172a;">
+        <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.15);"><span class="text-xs" style="color:#94a3b8;"><strong style="color:#fca5a5;">Triple therapy:</strong> Vancomycin (MRSA) + Piperacillin-Tazobactam or Meropenem (gram-negatives/anaerobes) + Clindamycin 900mg IV q8h (toxin suppression — inhibits protein synthesis, blocks superantigen production). <strong style="color:#fbbf24;">EMERGENT SURGICAL DEBRIDEMENT IS LIFE-SAVING.</strong> Re-explore in 24–48h. LRINEC score ≥ 6 raises suspicion.</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- === SPECIAL TOPICS TAB === -->
+    <section id="tab-special" class="tab-content hidden">
+     <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6 anim-fade" style="color:#f1f5f9;">Special Topics</h2>
+     <div class="space-y-6"><!-- Sepsis in Special Populations -->
+      <div class="anim-fade anim-d1">
+       <h3 class="font-bold text-lg mb-4" style="color:#93c5fd;">Special Populations</h3>
+       <div class="grid sm:grid-cols-2 gap-3">
+        <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="text-sm font-bold mb-2" style="color:#f9a8d4;">Immunocompromised Patients</h4>
+         <ul class="text-xs space-y-1" style="color:#94a3b8;">
+          <li>• Broader empiric coverage — add antifungals early</li>
+          <li>• Consider atypical pathogens: PJP, CMV, Aspergillus</li>
+          <li>• Neutropenic sepsis: anti-pseudomonal β-lactam ± Vancomycin</li>
+          <li>• G-CSF if ANC &lt; 500 with expected prolonged neutropenia</li>
+          <li>• Lower threshold for CT imaging (may lack inflammatory signs)</li>
+         </ul>
+        </div>
+        <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="text-sm font-bold mb-2" style="color:#6ee7b7;">Elderly Patients (&gt;65 years)</h4>
+         <ul class="text-xs space-y-1" style="color:#94a3b8;">
+          <li>• Atypical presentation: confusion may be ONLY sign</li>
+          <li>• Blunted febrile response (hypothermia common)</li>
+          <li>• Lower physiologic reserve → rapid decompensation</li>
+          <li>• Polypharmacy interactions (anticoagulants, antihypertensives)</li>
+          <li>• Discuss goals of care and advance directives early</li>
+         </ul>
+        </div>
+        <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="text-sm font-bold mb-2" style="color:#fbbf24;">Obstetric Sepsis</h4>
+         <ul class="text-xs space-y-1" style="color:#94a3b8;">
+          <li>• Leading cause of maternal mortality worldwide</li>
+          <li>• Sources: chorioamnionitis, endometritis, pyelonephritis</li>
+          <li>• Normal pregnancy hemodynamics mask early shock</li>
+          <li>• Modified SOFA for pregnancy; lower BP thresholds</li>
+          <li>• Fetal monitoring alongside maternal resuscitation</li>
+         </ul>
+        </div>
+        <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="text-sm font-bold mb-2" style="color:#fb923c;">Burns &amp; Trauma Sepsis</h4>
+         <ul class="text-xs space-y-1" style="color:#94a3b8;">
+          <li>• Baseline SIRS from tissue injury confounds diagnosis</li>
+          <li>• Burn wound sepsis: quantitative culture &gt;10⁵ organisms/g</li>
+          <li>• Increased drug clearance → higher antibiotic doses needed</li>
+          <li>• Aggressive wound care + early excision/grafting</li>
+          <li>• Higher metabolic demands → enhanced nutritional support</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- MDR Pathogens -->
+      <div class="anim-fade anim-d2">
+       <h3 class="font-bold text-lg mb-4" style="color:#f87171;">Multidrug-Resistant (MDR) Pathogens</h3>
+       <div class="rounded-xl overflow-hidden" style="border:1px solid #1e293b;">
+        <div class="overflow-x-auto">
+         <table class="w-full text-xs" style="min-width:500px;">
+          <thead>
+           <tr style="background:#1e293b;">
+            <th class="text-left p-3 font-semibold" style="color:#94a3b8;">Pathogen</th>
+            <th class="text-left p-3 font-semibold" style="color:#94a3b8;">Resistance</th>
+            <th class="text-left p-3 font-semibold" style="color:#94a3b8;">Treatment Options</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr style="background:#111827; border-bottom:1px solid #1e293b;">
+            <td class="p-3 font-semibold" style="color:#fca5a5;">MRSA</td>
+            <td class="p-3" style="color:#94a3b8;">mecA gene; all β-lactams</td>
+            <td class="p-3" style="color:#94a3b8;">Vancomycin, Linezolid, Daptomycin, TMP-SMX</td>
+           </tr>
+           <tr style="background:#0f172a; border-bottom:1px solid #1e293b;">
+            <td class="p-3 font-semibold" style="color:#fca5a5;">ESBL-producing Enterobacterales</td>
+            <td class="p-3" style="color:#94a3b8;">Extended-spectrum cephalosporins</td>
+            <td class="p-3" style="color:#94a3b8;">Meropenem, Ertapenem, Ceftazidime-Avibactam</td>
+           </tr>
+           <tr style="background:#111827; border-bottom:1px solid #1e293b;">
+            <td class="p-3 font-semibold" style="color:#fca5a5;">CRE (KPC/NDM)</td>
+            <td class="p-3" style="color:#94a3b8;">Carbapenems</td>
+            <td class="p-3" style="color:#94a3b8;">Ceftazidime-Avibactam, Meropenem-Vaborbactam, Cefiderocol</td>
+           </tr>
+           <tr style="background:#0f172a; border-bottom:1px solid #1e293b;">
+            <td class="p-3 font-semibold" style="color:#fca5a5;">MDR Pseudomonas</td>
+            <td class="p-3" style="color:#94a3b8;">Multiple classes</td>
+            <td class="p-3" style="color:#94a3b8;">Ceftolozane-Tazobactam, Cefiderocol, Colistin (last resort)</td>
+           </tr>
+           <tr style="background:#111827; border-bottom:1px solid #1e293b;">
+            <td class="p-3 font-semibold" style="color:#fca5a5;">VRE</td>
+            <td class="p-3" style="color:#94a3b8;">Vancomycin (vanA/vanB)</td>
+            <td class="p-3" style="color:#94a3b8;">Linezolid, Daptomycin, Tigecycline</td>
+           </tr>
+           <tr style="background:#0f172a;">
+            <td class="p-3 font-semibold" style="color:#fca5a5;">MDR Acinetobacter</td>
+            <td class="p-3" style="color:#94a3b8;">Pan-drug resistance common</td>
+            <td class="p-3" style="color:#94a3b8;">Ampicillin-Sulbactam (high dose), Colistin, Cefiderocol</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div><!-- Sepsis Bundles Compliance -->
+      <div class="anim-fade anim-d3">
+       <h3 class="font-bold text-lg mb-4" style="color:#10b981;">Quality Metrics &amp; Prognosis</h3>
+       <div class="grid sm:grid-cols-2 gap-3">
+        <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="text-sm font-bold mb-2" style="color:#6ee7b7;">Bundle Compliance Impact</h4>
+         <ul class="text-xs space-y-1.5" style="color:#94a3b8;">
+          <li>• 3-hour bundle compliance: ↓ mortality by 15–20%</li>
+          <li>• Each hour delay in antibiotics: ↑ mortality ~7.6%</li>
+          <li>• Complete Hour-1 bundle: NNT = 6 to save one life</li>
+          <li>• Lactate-guided resuscitation: ↓ mortality by 11%</li>
+          <li>• Procalcitonin-guided de-escalation: ↓ antibiotic days by 2–3</li>
+         </ul>
+        </div>
+        <div class="rounded-xl p-4" style="background:#111827; border:1px solid #1e293b;">
+         <h4 class="text-sm font-bold mb-2" style="color:#f87171;">Prognostic Factors (Poor Outcome)</h4>
+         <ul class="text-xs space-y-1.5" style="color:#94a3b8;">
+          <li>• Lactate &gt; 4 mmol/L that fails to clear</li>
+          <li>• Need for ≥ 2 vasopressors</li>
+          <li>• SOFA score &gt; 11</li>
+          <li>• Thrombocytopenia (DIC)</li>
+          <li>• Immunosuppression / Malignancy</li>
+          <li>• Delay in source control &gt; 12 hours</li>
+          <li>• MDR pathogen isolation</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Post-Sepsis Syndrome -->
+      <div class="anim-fade anim-d4">
+       <h3 class="font-bold text-lg mb-4" style="color:#c4b5fd;">Post-Sepsis Syndrome &amp; Long-Term Outcomes</h3>
+       <div class="rounded-xl p-5" style="background:#111827; border:1px solid #1e293b;">
+        <div class="grid sm:grid-cols-3 gap-4">
+         <div>
+          <h4 class="text-xs font-bold mb-2" style="color:#a78bfa;">Physical</h4>
+          <ul class="text-xs space-y-1" style="color:#94a3b8;">
+           <li>• ICU-acquired weakness (CIM/CIP)</li>
+           <li>• Chronic pain and fatigue</li>
+           <li>• Recurrent infections</li>
+           <li>• Organ dysfunction persistence</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-xs font-bold mb-2" style="color:#f9a8d4;">Cognitive &amp; Psychological</h4>
+          <ul class="text-xs space-y-1" style="color:#94a3b8;">
+           <li>• Cognitive impairment (30–50%)</li>
+           <li>• PTSD (up to 44%)</li>
+           <li>• Depression &amp; anxiety</li>
+           <li>• Sleep disturbances</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="text-xs font-bold mb-2" style="color:#fbbf24;">Healthcare Utilization</h4>
+          <ul class="text-xs space-y-1" style="color:#94a3b8;">
+           <li>• 40% rehospitalized within 90 days</li>
+           <li>• 60% mortality within 2 years (elderly)</li>
+           <li>• Higher cardiovascular event risk</li>
+           <li>• Need for rehabilitation services</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="border-t py-6 px-4 sm:px-6" style="background:#0B1120; border-color:#1e293b;">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+     <p class="text-xs" style="color:#475569;">Based on Surviving Sepsis Campaign 2021 Guidelines &amp; Sepsis-3 Definitions</p>
+     <p class="text-xs" style="color:#475569;">For educational purposes • Always follow local protocols &amp; antibiograms</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+  // Config & SDK
+  const defaultConfig = {
+    main_title: 'Infections & Sepsis Emergencies',
+    subtitle: 'A comprehensive clinical guide covering pathophysiology, diagnosis, management protocols, and critical decision-making in sepsis emergencies.',
+    background_color: '#0B1120',
+    surface_color: '#111827',
+    text_color: '#94a3b8',
+    primary_action_color: '#ef4444',
+    secondary_action_color: '#3b82f6',
+    font_family: 'DM Sans',
+    font_size: 14
+  };
+
+  // Tab switching
+  function switchTab(id) {
+    document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+    document.getElementById('tab-' + id).classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.color = '#64748b';
+      b.style.borderColor = 'transparent';
+    });
+    const btn = document.querySelector(`[data-tab="${id}"]`);
+    btn.classList.add('active');
+    btn.style.color = '#ef4444';
+    btn.style.borderColor = '#ef4444';
+    lucide.createIcons();
+  }
+
+  // Accordion
+  function toggleAccordion(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('.acc-icon');
+    content.classList.toggle('open');
+    icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
+  }
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
