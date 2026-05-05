@@ -1,0 +1,763 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Differential Diagnosis | Clinical Reasoning | Deep Medicine</title> <meta name="description" content="Master differential diagnosis with structured clinical reasoning, symptom-based approaches, and step-by-step diagnostic frameworks."> <link rel="canonical" href="https://deepmedicine.in/learning/study/differential-diagnosis"> <!-- Open Graph --> <meta property="og:title" content="Differential Diagnosis | Deep Medicine"> <meta property="og:description" content="Structured approach to differential diagnosis with clinical reasoning and diagnostic strategies."> <meta property="og:image" content="https://deepmedicine.in/images/differential-diagnosis.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; }
+.heading-font { font-family: 'Playfair Display', Georgia, serif; }
+.app-wrapper { height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden; }
+.fade-in { animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-dot { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+.pulse-dot { animation: pulse-dot 1.5s infinite; }
+.tag-scroll::-webkit-scrollbar { height: 4px; }
+.tag-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+.symptom-chip { transition: all 0.15s ease; }
+.symptom-chip:hover { transform: translateY(-1px); }
+.card-hover { transition: all 0.2s ease; }
+.card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper" id="app" style="background: #0f172a;">
+   <!-- Header -->
+   <header style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-bottom: 1px solid #1e293b;">
+    <div class="max-w-6xl mx-auto px-4 py-5 sm:py-6">
+     <div class="flex items-center gap-3 mb-1">
+      <div style="background: #22d3ee; width: 10px; height: 10px; border-radius: 50%;" class="pulse-dot"></div>
+      <h1 id="appTitle" class="heading-font text-2xl sm:text-3xl font-bold" style="color: #f1f5f9;">Differential Diagnosis Explorer</h1>
+     </div>
+     <p id="appSubtitle" class="ml-6 text-sm" style="color: #64748b;">Clinical Decision Support Tool</p>
+    </div>
+   </header><!-- Search & Filter -->
+   <main class="max-w-6xl mx-auto px-4 py-5">
+    <div class="flex flex-col sm:flex-row gap-3 mb-5">
+     <div class="relative flex-1">
+      <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2" style="color: #64748b; width:18px; height:18px;"></i> <input id="searchInput" type="text" placeholder="Search by symptom, disease, or system..." class="w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none focus:ring-2" style="background: #1e293b; color: #f1f5f9; border: 1px solid #334155; --tw-ring-color: #22d3ee;">
+     </div><select id="systemFilter" class="px-4 py-3 rounded-xl text-sm outline-none cursor-pointer" style="background: #1e293b; color: #f1f5f9; border: 1px solid #334155;"> <option value="all">All Systems</option> </select>
+    </div><!-- Selected symptoms -->
+    <div id="selectedSymptoms" class="hidden mb-4">
+     <div class="flex items-center gap-2 mb-2">
+      <span class="text-xs font-semibold uppercase tracking-wider" style="color: #22d3ee;">Active Symptoms</span> <button id="clearSymptoms" class="text-xs px-2 py-0.5 rounded" style="color: #f87171; background: rgba(248,113,113,0.1);">Clear All</button>
+     </div>
+     <div id="symptomTags" class="flex flex-wrap gap-2 tag-scroll"></div>
+    </div><!-- Results count -->
+    <p id="resultCount" class="text-xs mb-4" style="color: #64748b;">Showing all conditions</p><!-- Disease Cards -->
+    <div id="diseaseGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-8"></div><!-- Expanded Disease Detail -->
+    <div id="diseaseDetail" class="hidden pb-8 fade-in"></div>
+   </main><!-- Disclaimer -->
+   <footer class="max-w-6xl mx-auto px-4 pb-6">
+    <div class="rounded-xl p-4" style="background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.2);">
+     <div class="flex gap-2 items-start">
+      <i data-lucide="alert-triangle" style="color: #facc15; width:16px; height:16px; flex-shrink:0; margin-top:2px;"></i>
+      <p class="text-xs" style="color: #facc15;">For educational purposes only. Not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+// ─── DISEASE DATABASE ───
+const diseases = [
+  {
+    id: 1, name: "Acute Myocardial Infarction (STEMI)", system: "Cardiovascular", urgency: "emergency",
+    symptoms: ["Chest pain", "Diaphoresis", "Dyspnea", "Nausea", "Radiating arm pain", "Jaw pain"],
+    keyFindings: "Crushing retrosternal chest pain radiating to left arm/jaw, diaphoresis, ST-elevation ≥2mm in contiguous leads, elevated Troponin-I/T",
+    differentials: ["Unstable Angina", "NSTEMI", "Pulmonary Embolism", "Aortic Dissection", "Pericarditis", "GERD", "Costochondritis"],
+    investigations: ["12-lead ECG (serial)", "Troponin I/T (serial 0, 3, 6h)", "CK-MB", "Myoglobin", "CBC", "BMP", "Chest X-ray", "Echocardiography", "Coronary Angiography"],
+    management: "MONA protocol. Dual antiplatelet (Aspirin 325mg + Clopidogrel 600mg). PCI within 90min. Beta-blockers, ACE inhibitors, high-intensity statins. Oxygen if SpO2 <90%.",
+    redFlags: ["Cardiogenic shock", "Ventricular arrhythmias", "Acute heart failure", "Mechanical complications (VSD, papillary muscle rupture)"]
+  },
+  {
+    id: 26, name: "Non-ST Elevation MI (NSTEMI)", system: "Cardiovascular", urgency: "emergency",
+    symptoms: ["Chest pain", "Diaphoresis", "Dyspnea", "Fatigue", "Nausea", "Back pain"],
+    keyFindings: "Chest pain with T-wave inversion/ST depression or normal ECG, elevated high-sensitivity Troponin, TIMI risk score ≥2",
+    differentials: ["Unstable Angina", "STEMI", "Pulmonary Embolism", "Aortic Dissection", "Acute heart failure"],
+    investigations: ["Serial troponin (0, 3, 6h)", "12-lead ECG", "CBC", "BMP", "LFTs", "Coagulation studies", "Echocardiography", "Coronary angiography"],
+    management: "Dual antiplatelet therapy, anticoagulation (LMWH, UFH, or fondaparinux). Beta-blocker, ACE-I, statin. Invasive strategy within 72h. Ischemia-guided vs routine angiography.",
+    redFlags: ["Hemodynamic instability", "Recurrent chest pain", "Arrhythmias", "Elevated troponin with hemodynamic compromise"]
+  },
+  {
+    id: 27, name: "Unstable Angina", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Chest pain", "Chest pressure", "Dyspnea", "Diaphoresis", "Fatigue"],
+    keyFindings: "Acute coronary syndrome without troponin elevation. T-wave changes or normal ECG. Chest pain at rest or with minimal exertion",
+    differentials: ["NSTEMI", "STEMI", "Aortic dissection", "Pericarditis", "Pulmonary embolism"],
+    investigations: ["Serial ECG", "Serial troponin (normal)", "CBC", "BMP", "Chest X-ray", "Echocardiography", "Coronary angiography"],
+    management: "Aspirin, Clopidogrel, anticoagulation. Beta-blockers, nitrates, calcium channel blockers. Risk stratification. Early catheterization within 24-48h.",
+    redFlags: ["Recurrent symptoms", "Hemodynamic instability", "ST segment changes", "Elevated cardiac biomarkers"]
+  },
+  {
+    id: 28, name: "Aortic Dissection", system: "Cardiovascular", urgency: "emergency",
+    symptoms: ["Sudden severe chest pain", "Tearing pain", "Back pain", "Syncope", "Diaphoresis", "Hypertension"],
+    keyFindings: "Sudden-onset severe tearing chest pain. SBP difference >20mmHg between arms. Pulse deficits. Aortic regurgitation murmur. Type A: ascending aorta (medical emergency). Type B: descending aorta.",
+    differentials: ["AMI", "Pulmonary embolism", "Pericarditis", "Esophageal rupture", "Pneumothorax"],
+    investigations: ["ECG (R/O MI)", "CXR (widened mediastinum)", "CT angiography (gold standard)", "TEE (high sensitivity)", "CBC", "Coagulation", "Troponin"],
+    management: "Type A: emergent surgical repair. Type B uncomplicated: antihypertensive (target SBP 100-120, HR <60), beta-blockers first, then vasodilators (Nitroprusside). Monitor for aortic rupture.",
+    redFlags: ["Type A involvement", "Aortic rupture (hypotension, tamponade)", "MI extension", "Coronary artery involvement"]
+  },
+  {
+    id: 29, name: "Acute Heart Failure Decompensation", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Dyspnea", "Orthopnea", "PND", "Fatigue", "Edema", "Chest pain", "Palpitations"],
+    keyFindings: "Rales, elevated JVP, S3 gallop, peripheral edema. BNP/NT-proBNP >400, LVEF <40% (systolic), normal LVEF (diastolic). Pulmonary edema on CXR.",
+    differentials: ["Pneumonia", "PE", "ACS", "Arrhythmia", "Hypertensive emergency", "Renal disease"],
+    investigations: ["BNP/NT-proBNP", "ECG", "Chest X-ray", "Echocardiography (EF, structure)", "CBC", "BMP", "LFTs", "Troponin", "Lactate"],
+    management: "Diuretics (IV Furosemide), oxygen, nitrates (IV Nitroglycerin if HTN). ACE-I/ARB, beta-blockers, aldosterone antagonists. Inotropes (Dobutamine, Milrinone) if cardiogenic shock. BiPAP/CPAP if respiratory distress.",
+    redFlags: ["Cardiogenic shock", "Acute respiratory failure", "Coronary ischemia", "Arrhythmias", "Renal failure"]
+  },
+  {
+    id: 30, name: "Atrial Fibrillation", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Palpitations", "Dyspnea", "Chest pain", "Dizziness", "Syncope", "Fatigue"],
+    keyFindings: "Irregularly irregular heart rate, absent P waves, variable RR intervals on ECG. Rapid ventricular response (>100bpm). Risk of stroke, heart failure.",
+    differentials: ["SVT", "Atrial flutter", "Sinus tachycardia", "Multifocal atrial tachycardia", "Premature atrial contractions"],
+    investigations: ["12-lead ECG", "Holter/event monitor", "Echocardiography", "TSH", "Troponin", "CBC", "BMP", "Chest X-ray", "CHA2DS2-VASc score"],
+    management: "Rate control: beta-blockers (Metoprolol), calcium channel blockers (Verapamil), digoxin. Rhythm control: Class IC (Flecainide), Class III (Amiodarone). Anticoagulation based on CHA2DS2-VASc. DC cardioversion if unstable.",
+    redFlags: ["Hemodynamic instability", "Rapid ventricular response >150", "Acute heart failure", "ACS", "Sepsis"]
+  },
+  {
+    id: 31, name: "Hypertensive Urgency", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Severe headache", "Chest pain", "Dyspnea", "Nosebleed"],
+    keyFindings: "BP >180/120 mmHg without end-organ damage. No acute complications. Asymptomatic or mild symptoms.",
+    differentials: ["Hypertensive emergency", "Medication non-compliance", "Secondary HTN"],
+    investigations: ["BP measurement (confirm)", "ECG", "Urinalysis", "BMP", "CBC"],
+    management: "Oral antihypertensives: Amlodipine 5-10mg, Captopril 25-50mg, Doxazosin 2-4mg. Reduce BP gradually over 24-48h. Address precipitants. Discharge with close follow-up.",
+    redFlags: ["Signs of end-organ damage", "Severe symptoms", "Conversion to emergency"]
+  },
+  {
+    id: 32, name: "Pericarditis", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Pleuritic chest pain", "Fever", "Dyspnea", "Palpitations", "Referred shoulder pain"],
+    keyFindings: "Sharp pleuritic chest pain, worse supine/with deep breath, relieved by sitting forward. Pericardial friction rub. Diffuse ST elevation (except aVR, V1). PR depression.",
+    differentials: ["AMI", "PE", "Pneumonia", "Spontaneous coronary dissection", "Aortic dissection"],
+    investigations: ["ECG (serial)", "Troponin (mild elevation possible)", "CRP/ESR", "CBC", "Chest X-ray", "Echocardiography (effusion, tamponade)", "Viral serology"],
+    management: "NSAIDs (Indomethacin 50mg TDS) or Colchicine 0.5-1mg daily. Corticosteroids if recurrent (after infection excluded). Avoid anticoagulation. Drainage if tamponade.",
+    redFlags: ["Cardiac tamponade (hypotension, elevated JVP, muffled heart sounds)", "Large effusion", "Constrictive pericarditis", "Hemopericardium"]
+  },
+  {
+    id: 33, name: "Myocarditis", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Chest pain", "Dyspnea", "Palpitations", "Fever", "Fatigue", "Recent viral illness"],
+    keyFindings: "Chest pain, may mimic MI. Widespread ST-T changes on ECG (less localized than MI). Elevated troponin, BNP, inflammatory markers. Echo shows reduced EF, wall motion abnormalities.",
+    differentials: ["AMI", "Pericarditis", "Myocardial infarction", "Pulmonary embolism"],
+    investigations: ["ECG", "Serial troponin", "BNP", "CBC", "CRP/ESR", "Echocardiography", "CMR imaging", "Viral panel"],
+    management: "Supportive care, diuretics if fluid overload. NSAIDs for pain. Avoid strenuous activity. ACE-I, beta-blockers if systolic dysfunction. Immunosuppression if giant cell or fulminant.",
+    redFlags: ["Fulminant myocarditis with cardiogenic shock", "Arrhythmias", "Acute heart failure", "Sudden cardiac death"]
+  },
+  {
+    id: 34, name: "Endocarditis", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Fever", "Chills", "Fatigue", "Malaise", "New heart murmur", "Petechial rash", "Splinter hemorrhages"],
+    keyFindings: "Fever + new/changing murmur. Positive blood cultures. Petechiae, splinter hemorrhages, Osler nodes (fingertips), Janeway lesions (palms). IV drug use history. Modified Duke criteria for diagnosis.",
+    differentials: ["Rheumatic fever", "SLE", "Atrial myxoma", "Septicemia", "Malignancy"],
+    investigations: ["Blood cultures x3 (before antibiotics)", "ECG (conduction abnormalities)", "Echocardiography (TTE/TEE)", "CBC", "CRP/ESR", "LFTs", "Renal function", "HbA1c"],
+    management: "Empiric antibiotics after cultures: Penicillin G + Gentamicin ± Vancomycin (for MRSA risk). Bacteremia-specific therapy based on culture/sensitivity. Duration 4-6 weeks. Surgery if large vegetations, CHF, or prosthetic valve.",
+    redFlags: ["Septic emboli (stroke, renal infarction)", "Valve perforation", "Conduction disturbances", "Prosthetic valve involvement", "Multiple complications"]
+  },
+  {
+    id: 35, name: "Acute Pulmonary Hypertension", system: "Cardiovascular", urgency: "emergency",
+    symptoms: ["Dyspnea", "Syncope", "Chest pain", "Fatigue", "Hemoptysis", "Peripheral edema"],
+    keyFindings: "Elevated JVP, loud P2, right ventricular heave, peripheral edema. RV strain on ECG. Dilated RV on echo, elevated TR jet velocity, elevated RVSP.",
+    differentials: ["PE", "Left heart disease", "Chronic lung disease", "Connective tissue disease", "Chronic thromboembolic PH"],
+    investigations: ["ECG (RV strain)", "BNP", "Chest X-ray (prominent PA)", "Echocardiography", "CTPA (exclude PE)", "PFTs", "Sleep study", "Right heart catheterization"],
+    management: "Diuretics, oxygen, anticoagulation. Specific agents: Phosphodiesterase-5 inhibitors (Sildenafil), endothelin antagonists (Bosentan), prostanoids (Epoprostenol). Treat underlying cause.",
+    redFlags: ["Right heart failure", "Syncope with exertion", "Acute RV dysfunction", "Massive PE"]
+  },
+  {
+    id: 2, name: "Pulmonary Embolism", system: "Respiratory", urgency: "emergency",
+    symptoms: ["Dyspnea", "Pleuritic chest pain", "Tachycardia", "Hemoptysis", "Calf swelling", "Syncope"],
+    keyFindings: "Sudden-onset dyspnea, pleuritic chest pain, tachycardia. Wells score assessment. D-dimer elevated. CT pulmonary angiography shows filling defect.",
+    differentials: ["Pneumothorax", "Acute MI", "Pneumonia", "Pericarditis", "Aortic Dissection", "Musculoskeletal pain"],
+    investigations: ["D-Dimer", "CT Pulmonary Angiography", "Wells Score", "ABG", "ECG (S1Q3T3)", "Chest X-ray", "Lower extremity Doppler US", "Echocardiography"],
+    management: "Anticoagulation with LMWH/UFH bridging to warfarin or direct DOAC. Thrombolytics for massive PE with hemodynamic instability. IVC filter if anticoagulation contraindicated. Surgical embolectomy for refractory cases.",
+    redFlags: ["Massive PE with shock", "Right heart strain", "Cardiac arrest", "Recurrent PE on anticoagulation"]
+  },
+  {
+    id: 36, name: "Pneumothorax (Spontaneous)", system: "Respiratory", urgency: "urgent",
+    symptoms: ["Sudden dyspnea", "Pleuritic chest pain", "Tachycardia", "Tachypnea", "Hypoxia"],
+    keyFindings: "Primary: tall, thin males. Secondary: underlying lung disease (COPD, CF, asthma). Decreased breath sounds, hyperresonance. Hypotension and hypoxia (tension pneumothorax).",
+    differentials: ["PE", "Acute MI", "Pericarditis", "Asthma exacerbation", "Aortic dissection"],
+    investigations: ["Chest X-ray PA (upright if stable)", "Chest X-ray expiration (increases pneumothorax visibility)", "CT chest (confirms diagnosis, evaluates for bullae)", "ABG (if hypoxic)", "Troponin (R/O MI)"],
+    management: "Small (<2cm on CXR): observation, supplemental oxygen, activity restriction. Large: needle aspiration or chest tube (14-16 French). Tension: immediate needle decompression (2nd ICS midclavicular), then chest tube. VATS or pleurodesis if recurrent.",
+    redFlags: ["Tension pneumothorax (hypotension, JVD, deviated trachea)", "Bilateral pneumothorax", "Hemopneumothorax", "Recurrent/persistent air leak"]
+  },
+  {
+    id: 37, name: "Chronic Obstructive Pulmonary Disease (COPD) Exacerbation", system: "Respiratory", urgency: "urgent",
+    symptoms: ["Dyspnea", "Cough", "Increased sputum", "Sputum color change", "Wheezing", "Chest tightness"],
+    keyFindings: "Increased dyspnea, sputum production, purulence. Tachypnea, accessory muscle use, pursed-lip breathing. Reduced PEFR/FEV1, elevated ABGA pCO2, hypoxia.",
+    differentials: ["Asthma exacerbation", "Pneumonia", "PE", "Pneumothorax", "Heart failure", "Coronary ischemia"],
+    investigations: ["PEFR", "ABG", "Chest X-ray (infiltrate? pneumothorax?)", "CBC", "BNP", "ECG", "Sputum culture if purulent", "Spirometry (post-acute)"],
+    management: "Bronchodilators (salbutamol nebulizer), anticholinergics (ipratropium). Corticosteroids (Prednisolone 30-40mg daily x7-14 days). Antibiotics if signs of infection. Oxygen to maintain SpO2 88-92%. Consider BiPAP if respiratory distress.",
+    redFlags: ["Type II respiratory failure (pCO2 >50)", "Severe dyspnea at rest", "Hemodynamic instability", "Confusion/altered mental status"]
+  },
+  {
+    id: 38, name: "Tuberculosis (Active)", system: "Respiratory", urgency: "urgent",
+    symptoms: ["Chronic cough", "Hemoptysis", "Fever", "Night sweats", "Weight loss", "Chest pain", "Fatigue"],
+    keyFindings: "Chronic productive cough >3 weeks, fever, weight loss. Upper lobe infiltrates/cavitation on CXR. Positive Mantoux test, AFB smear positive, positive GeneXpert/NAAT.",
+    differentials: ["Pneumonia", "Lung cancer", "Fungal infection", "Non-tuberculous mycobacteria", "Malignancy"],
+    investigations: ["Chest X-ray (upper lobe predominant, cavitation)", "Sputum AFB x3 (or GeneXpert MTB/RIF)", "Culture & drug sensitivity", "Mantoux test (PPD)", "CBC", "LFTs", "TB serology if HIV+"],
+    management: "Standard regimen: Isoniazid + Rifampicin + Pyrazinamide + Ethambutol for 2m, then INH+RIF for 4m. Directly observed therapy (DOT). Vitamin B6 (prevent INH neuropathy). Monitor for hepatotoxicity. Isolate respiratory cases.",
+    redFlags: ["MDR-TB (resistance to INH & RIF)", "Miliary TB", "TB meningitis", "Poncet's disease (TB arthritis)"]
+  },
+  {
+    id: 39, name: "Acute Bronchitis", system: "Respiratory", urgency: "routine",
+    symptoms: ["Cough", "Sputum production", "Dyspnea", "Fever", "Malaise", "Chest discomfort"],
+    keyFindings: "Productive cough for <3 weeks. Often follows URI. Rhonchi/crackles on exam. CXR normal or nonspecific. Viral etiology in 90%.",
+    differentials: ["Pneumonia", "TB", "Asthma", "GERD", "ACE inhibitor cough", "Post-nasal drip"],
+    investigations: ["Clinical diagnosis usually (no CXR needed if typical)", "Chest X-ray if pneumonia suspected", "CBC (rarely needed)", "Sputum culture if atypical presentation"],
+    management: "Supportive care, hydration, antipyretics. Cough suppressants (Dextromethorphan), expectorants (Guaifenesin). Avoid unnecessary antibiotics unless purulent sputum suggests bacterial infection. Bronchodilators if wheezing.",
+    redFlags: ["High fever with infiltrates (pneumonia)", "Hemoptysis", "Persisting >3 weeks", "Immunocompromised host", "Signs of COPD exacerbation"]
+  },
+  {
+    id: 40, name: "Interstitial Lung Disease (ILD)", system: "Respiratory", urgency: "routine",
+    symptoms: ["Chronic dyspnea", "Dry cough", "Fatigue", "Chest pain", "Clubbing", "Cyanosis"],
+    keyFindings: "Progressive dyspnea, bibasilar inspiratory crackles (late fine crackles). Clubbing, cyanosis. Restrictive pattern on spirometry (FEV1/FVC >0.7, reduced FVC). HRCT shows reticular/nodular infiltrates.",
+    differentials: ["Pulmonary fibrosis", "Sarcoidosis", "Hypersensitivity pneumonitis", "Occupational lung disease", "Lymphangitic carcinomatosis"],
+    investigations: ["HRCT chest (high-resolution CT)", "PFTs (restrictive, reduced DLCO)", "ABG (hypoxia, A-a gradient)", "ANA, ACE level (sarcoidosis)", "BAL/biopsy if diagnosis unclear", "6-minute walk test"],
+    management: "Corticosteroids (Prednisolone 0.5-1mg/kg) ± immunosuppressants (Azathioprine, Mycophenolate). Pirfenidone (IPF). Oxygen therapy for hypoxia. Pulmonary rehabilitation. Lung transplantation if advanced.",
+    redFlags: ["Acute exacerbation of ILD", "Pulmonary hypertension", "Respiratory failure", "Lung cancer development"]
+  },
+  {
+    id: 41, name: "Pulmonary Edema (Acute)", system: "Respiratory", urgency: "emergency",
+    symptoms: ["Dyspnea", "Orthopnea", "PND", "Pink frothy sputum", "Cough", "Crackles"],
+    keyFindings: "Acute onset severe dyspnea, orthopnea. Pink/frothy sputum (\"pulmonary edema\"). Bilateral rales, S3 gallop. Bilateral infiltrates on CXR. Elevated BNP, reduced LVEF on echo.",
+    differentials: ["Pneumonia", "PE", "Pneumothorax", "Hypertensive emergency", "ARDS", "Flash pulmonary edema"],
+    investigations: ["Chest X-ray (bilateral infiltrates, Kerley B lines)", "ECG", "BNP/NT-proBNP", "Troponin", "CBC", "BMP", "Echocardiography (EF, structure)"],
+    management: "Oxygen/CPAP/NIPPV, IV Furosemide (1-2mg/kg), IV Nitroglycerin (if HTN). Morphine if severe anxiety. ACE-I, beta-blockers. Dobutamine/Milrinone if cardiogenic shock. Treat underlying cause.",
+    redFlags: ["Cardiogenic shock", "Severe respiratory failure", "Malignant arrhythmias", "Renal failure", "Disseminated intravascular coagulation"]
+  },
+  {
+    id: 3, name: "Acute Appendicitis", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["Periumbilical pain", "RLQ pain", "Nausea", "Vomiting", "Fever", "Anorexia"],
+    keyFindings: "Migration of pain from periumbilical to RLQ (McBurney's point). Rebound tenderness, Rovsing's sign, Psoas sign, Obturator sign positive. Elevated WBC with left shift.",
+    differentials: ["Mesenteric lymphadenitis", "Meckel's diverticulitis", "Ectopic pregnancy", "Ovarian torsion", "Crohn's disease", "Right ureteric colic"],
+    investigations: ["CBC with differential", "CRP", "Urinalysis", "Beta-hCG (females)", "CT abdomen/pelvis with contrast", "Ultrasound (pediatric/pregnant)", "Alvarado Score"],
+    management: "NPO status, IV fluids, IV antibiotics (cefoxitin or piperacillin-tazobactam). Laparoscopic appendectomy within 24h. Non-operative management with antibiotics alone may be considered in uncomplicated cases.",
+    redFlags: ["Peritonitis signs", "Perforation", "Appendiceal abscess", "Sepsis"]
+  },
+  {
+    id: 42, name: "Small Bowel Obstruction", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["Colicky abdominal pain", "Vomiting", "Abdominal distension", "Constipation", "High-pitched bowel sounds", "Visible peristalsis"],
+    keyFindings: "Colicky pain, bilious vomiting, abdominal distension. Adhesions (post-op) most common. Centralized pain, high-pitched rushes on auscultation. CT shows transition point.",
+    differentials: ["Large bowel obstruction", "Paralytic ileus", "Pseudo-obstruction", "Gastroenteritis", "Inflammatory bowel disease"],
+    investigations: ["Abdominal X-ray upright & supine (air-fluid levels, free air)", "CT abdomen/pelvis with contrast (defines level, etiology)", "CBC", "BMP", "LFTs", "Lipase"],
+    management: "NPO, NG tube to low wall suction, IV fluids with aggressive electrolyte replacement. Ongoing assessment. Surgery if peritonitis, strangulation, or failed conservative management >48-72h.",
+    redFlags: ["Strangulation (fever, peritonitis, elevated lactate)", "Perforation (free air)", "Ischemia", "Septic shock"]
+  },
+  {
+    id: 43, name: "Large Bowel Obstruction", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["Abdominal pain", "Constipation", "Abdominal distension", "Vomiting (late)", "Tenesmus", "Visible peristalsis"],
+    keyFindings: "Painless progressive abdominal distension. Late vomiting (colon as reservoir). Colonic cancer most common (age >50). Marked colonic dilation on imaging.",
+    differentials: ["Small bowel obstruction", "Pseudo-obstruction (Ogilvie syndrome)", "Megacolon (toxic, Chagas)", "Ischemic colitis"],
+    investigations: ["Abdominal X-ray (marked colonic dilation, haustra)", "CT abdomen/pelvis with contrast/rectal contrast", "CBC", "BMP", "LFTs"],
+    management: "Surgery urgent if perforation risk or >10-12cm cecal dilation. Decompression: colonoscopic (may reduce cecal pressure), NG tube, IV fluids. Tumor: oncologic resection ± colostomy.",
+    redFlags: ["Cecal perforation (imminent if >10-12cm)", "Fecal peritonitis", "Toxic megacolon", "Septic shock"]
+  },
+  {
+    id: 44, name: "Inflammatory Bowel Disease (Crohn's/Ulcerative Colitis) Flare", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["Diarrhea", "Abdominal pain", "Blood in stool", "Fever", "Weight loss", "Urgency", "Tenesmus"],
+    keyFindings: "Chronic diarrhea, cramping pain. Crohn's: skip lesions, transmural, fistulas. UC: continuous mucosal inflammation. CRP/ESR elevated, fecal calprotectin high.",
+    differentials: ["Infectious colitis (C diff, Salmonella)", "Irritable bowel syndrome", "Celiac disease", "Behçet's disease", "Malignancy"],
+    investigations: ["CBC (anemia, leukocytosis)", "CRP/ESR", "BMP", "LFTs", "Albumin", "Fecal calprotectin", "Stool culture (C diff, pathogens)", "Colonoscopy + biopsy", "Imaging (CT enterography)"],
+    management: "Mild-Moderate: 5-ASA (Mesalazine, Sulfasalazine), topical corticosteroids. Moderate-Severe: Prednisolone 40-60mg daily, azathioprine, biologic (Anti-TNF: Infliximab).",
+    redFlags: ["Toxic megacolon", "Perforation", "Fulminant colitis", "Severe dehydration/electrolyte imbalance", "GI bleeding"]
+  },
+  {
+    id: 45, name: "Gastroesophageal Reflux Disease (GERD) / Esophagitis", system: "Gastrointestinal", urgency: "routine",
+    symptoms: ["Heartburn", "Chest pain", "Dysphagia", "Odynophagia", "Regurgitation", "Cough"],
+    keyFindings: "Substernal burning pain after meals, worse supine/bending. Relief with antacids/PPIs. Erosive esophagitis on endoscopy. Barrett's esophagus in chronic GERD.",
+    differentials: ["Peptic ulcer", "Acute MI", "Pulmonary embolism", "Pericarditis", "Achalasia"],
+    investigations: ["Clinical diagnosis based on symptoms", "Upper endoscopy (if alarm symptoms: dysphagia, bleeding, weight loss, age >60)", "Biopsy if Barrett's suspected", "Barium swallow (if motility disorder)", "pH monitoring (refractory cases)"],
+    management: "Lifestyle: weight loss, avoid triggers (fatty foods, caffeine, alcohol), elevate head of bed. PPI (Omeprazole 20-40mg daily) for 8-12 weeks. H2-RA (Ranitidine) if mild. Surgery (fundoplication) if refractory.",
+    redFlags: ["Dysphagia (stricture? malignancy?)", "Hematemesis", "Significant weight loss", "Anemia", "Barrett's esophagus progression"]
+  },
+  {
+    id: 46, name: "Hepatitis (Acute)", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["Jaundice", "Abdominal pain", "Nausea", "Fatigue", "Dark urine", "Pale stools", "Fever", "Pruritus"],
+    keyFindings: "Jaundice, hepatomegaly, abdominal tenderness. Markedly elevated transaminases (ALT>AST in viral, AST>ALT in alcohol). Elevated bilirubin, INR, normal/near-normal ALP.",
+    differentials: ["Biliary obstruction", "Cirrhosis", "Autoimmune hepatitis", "Drug-induced", "Alcoholic hepatitis", "Hemolysis"],
+    investigations: ["LFTs (ALT, AST, GGT, ALP, bilirubin)", "INR/PT", "Albumin", "Viral serology (HAV, HBV, HCV, EBV, CMV)", "Autoantibodies (ANA, anti-smooth muscle)", "Ultrasound abdomen", "Acetaminophen level (if overdose suspected)"],
+    management: "Supportive care, adequate nutrition, avoid hepatotoxic drugs/alcohol. Specific therapy: Antivirals (HBV, HCV). Monitor for fulminant failure (INR >1.5, encephalopathy, hypoglycemia). Transplant evaluation if decompensating.",
+    redFlags: ["Fulminant hepatic failure", "Hepatic encephalopathy", "Variceal bleeding", "Spontaneous bacterial peritonitis", "Hepatorenal syndrome"]
+  },
+  {
+    id: 47, name: "Acute Gastroenteritis", system: "Gastrointestinal", urgency: "routine",
+    symptoms: ["Diarrhea", "Vomiting", "Abdominal cramps", "Fever", "Myalgias", "Malaise"],
+    keyFindings: "Acute onset watery/bloody diarrhea with vomiting. Fever, abdominal cramping. Usually self-limited. Signs of dehydration if severe.",
+    differentials: ["IBD flare", "Diverticulitis", "Appendicitis", "Intestinal obstruction", "Cholecystitis"],
+    investigations: ["Clinical diagnosis (most cases)", "Stool studies if bloody stools/immunocompromised", "CBC, BMP (assess dehydration)", "Abdominal imaging if unclear diagnosis"],
+    management: "Hydration (oral rehydration solution preferred, IV if severe). Clear diet as tolerated. Antidiarrheals if no bloody stools (avoid if inflammatory/infectious etiology). Most viral cases resolve in 1-2 days.",
+    redFlags: ["Severe dehydration (orthostatic hypotension, altered mental status)", "Bloody stools with fever (invasive pathogen)", "Immunocompromised host", "Persistent symptoms >7 days"]
+  },
+  {
+    id: 48, name: "Meningitis (Viral)", system: "Neurological", urgency: "urgent",
+    symptoms: ["Fever", "Headache", "Neck stiffness", "Photophobia", "Myalgias", "Rash (enterovirus)"],
+    keyFindings: "Fever, headache, neck stiffness, photophobia. Kernig's/Brudzinski's signs positive. CSF: elevated lymphocytes, normal/mildly elevated protein, NORMAL glucose.",
+    differentials: ["Bacterial meningitis", "Encephalitis", "Subarachnoid hemorrhage", "Migraine", "Partially treated bacterial meningitis"],
+    investigations: ["Lumbar puncture (CSF: cell count, protein, glucose, culture, viral PCR panel)", "Viral PCR (enterovirus, HSV, VZV)", "Blood cultures", "CT head if papilledema/focal signs"],
+    management: "Supportive care, hydration, antipyretics. Bed rest, dark room. NSAIDs/acetaminophen for pain. Antivirals (IV Acyclovir) if HSV/VZV suspected. Most viral cases self-resolve in 1-2 weeks.",
+    redFlags: ["Bacterial co-infection", "Encephalitis signs", "Severe immunosuppression", "Recurrent meningitis", "Neurological complications"]
+  },
+  {
+    id: 49, name: "Encephalitis", system: "Neurological", urgency: "emergency",
+    symptoms: ["Fever", "Headache", "Altered mental status", "Seizures", "Focal neurological deficits", "Confusion", "Behavior change"],
+    keyFindings: "Fever + altered mental status ± focal neurological signs. CSF pleocytosis (lymphocytic). Brain MRI: temporal lobe involvement (HSV), diffuse involvement (VZV). EEG may show periodic sharp wave complexes (PSWC).",
+    differentials: ["Meningitis", "Subarachnoid hemorrhage", "Status epilepticus", "Intracranial mass", "Toxic/metabolic encephalopathy"],
+    investigations: ["Lumbar puncture (CSF PCR for HSV, VZV, enterovirus, parechovirus)", "Blood cultures", "MRI brain (FLAIR/DWI)", "EEG", "Blood PCR if sepsis concern"],
+    management: "IV Acyclovir 10mg/kg q8h (started empirically while awaiting LP). Add Vancomycin/Ceftriaxone if bacterial co-infection suspected. Seizure management (benzodiazepines, anticonvulsants). ICU monitoring. Corticosteroids controversial.",
+    redFlags: ["Severe alterations in consciousness", "Status epilepticus", "Herniation signs", "Severe hyponatremia (SIADH)", "Bilateral temporal lobe involvement"]
+  },
+  {
+    id: 50, name: "Transient Ischemic Attack (TIA)", system: "Neurological", urgency: "urgent",
+    symptoms: ["Sudden weakness", "Facial droop", "Speech difficulty", "Vision loss", "Numbness", "Ataxia"],
+    keyFindings: "Sudden focal neurological deficit lasting <24h (usually minutes to hours). ABCD2 risk score. MRI DWI may show restriction. Resolve completely within 24h.",
+    differentials: ["Acute ischemic stroke", "Hemorrhagic stroke", "Todd's paralysis", "Complex migraine", "Hypoglycemia", "Conversion disorder"],
+    investigations: ["CT head (exclude hemorrhage)", "MRI DWI/FLAIR", "Carotid ultrasound/CTA", "ECG/Holter (AFib)", "Echocardiography (cardioembolic source)", "Blood glucose", "Lipid panel"],
+    management: "Urgent workup (<24h ideally). Antiplatelet: Aspirin 325mg daily. Risk factor modification: control BP, lipids, diabetes. Consider carotid endarterectomy if high-grade stenosis.",
+    redFlags: ["High ABCD2 score (≥4)", "Multiple TIAs", "Unstable plaque on imaging", "Cardioembolic source", "Intracranial stenosis"]
+  },
+  {
+    id: 4, name: "Community-Acquired Pneumonia", system: "Respiratory", urgency: "urgent",
+    symptoms: ["Cough", "Fever", "Dyspnea", "Pleuritic chest pain", "Sputum production", "Fatigue"],
+    keyFindings: "Productive cough with purulent sputum, fever >38°C, tachypnea, crackles/bronchial breathing on auscultation. Consolidation on CXR. CURB-65 for severity.",
+    differentials: ["Acute bronchitis", "Pulmonary embolism", "Lung abscess", "Tuberculosis", "Lung cancer", "Heart failure"],
+    investigations: ["Chest X-ray PA", "CBC", "CRP/Procalcitonin", "Blood cultures x2", "Sputum culture & sensitivity", "ABG if severe", "CURB-65 score", "Legionella/Pneumococcal urinary antigen"],
+    management: "Outpatient: Amoxicillin 500mg TDS or Doxycycline. Inpatient: Co-amoxiclav + Clarithromycin. Severe/ICU: Piperacillin-tazobactam + Clarithromycin. Oxygen therapy, IV fluids, antipyretics.",
+    redFlags: ["CURB-65 ≥3", "Multilobar involvement", "Septic shock", "Empyema", "Respiratory failure"]
+  },
+  {
+    id: 5, name: "Diabetic Ketoacidosis (DKA)", system: "Endocrine", urgency: "emergency",
+    symptoms: ["Polyuria", "Polydipsia", "Nausea", "Vomiting", "Abdominal pain", "Kussmaul breathing", "Altered consciousness"],
+    keyFindings: "Blood glucose >250mg/dL, pH <7.3, bicarbonate <18mEq/L, positive serum/urine ketones, anion gap >12. Fruity breath odor. Kussmaul respiration.",
+    differentials: ["Hyperosmolar Hyperglycemic State", "Lactic acidosis", "Uremic acidosis", "Alcoholic ketoacidosis", "Salicylate poisoning", "Starvation ketosis"],
+    investigations: ["Blood glucose", "ABG", "Serum ketones (beta-hydroxybutyrate)", "BMP (Na, K, Cl, HCO3, BUN, Cr)", "Anion gap", "Serum osmolality", "Urinalysis", "HbA1c", "ECG", "Infection workup"],
+    management: "Aggressive IV normal saline (1-1.5L/hr initially). Insulin drip 0.1-0.14 units/kg/hr. Potassium replacement (if K <5.3). Transition to subQ insulin when gap closes, pH >7.3, bicarb >15. Identify and treat precipitant.",
+    redFlags: ["Cerebral edema", "Severe hypokalemia", "Cardiac arrhythmias", "ARDS", "Coma"]
+  },
+  {
+    id: 51, name: "Hyperosmolar Hyperglycemic State (HHS)", system: "Endocrine", urgency: "emergency",
+    symptoms: ["Polyuria", "Polydipsia", "Altered mental status", "Weakness", "Dehydration", "No fruity breath"],
+    keyFindings: "Glucose >600mg/dL, osmolality >320mOsm/kg, minimal ketosis (pH>7.3, HCO3 >15). Profound dehydration. Altered consciousness, seizures. Older patients, type 2 diabetes.",
+    differentials: ["DKA", "Infection/sepsis", "Stroke", "MI", "Medication effect"],
+    investigations: ["Blood glucose", "ABG", "Serum osmolality", "BMP", "Serum ketones (minimal)", "Urinalysis", "HbA1c", "ECG", "Brain imaging if seizures"],
+    management: "Aggressive IV hydration (0.5-1L/hr normal saline, then half-normal saline). Insulin drip once K >5.5. Slower correction than DKA (reduce serum osmolality <310). Address precipitant (infection, CVA, MI).",
+    redFlags: ["Severe dehydration/shock", "Altered consciousness", "Seizures", "Thromboembolism", "Mortality 5-15%"]
+  },
+  {
+    id: 52, name: "Acute Kidney Injury (AKI)", system: "Renal/Urological", urgency: "urgent",
+    symptoms: ["Oliguria/anuria", "Fatigue", "Nausea", "Confusion", "Edema", "Hypertension", "Palpitations"],
+    keyFindings: "Creatinine rise >0.3mg/dL in 48h or >50% from baseline. Oliguria <0.5mL/kg/hr. RIFLE/AKIN/KDIGO classification. BUN:Cr ratio. Urine osmolality, FENa.",
+    differentials: ["Chronic kidney disease", "Prerenal azotemia", "Intrinsic renal disease", "Postrenal obstruction"],
+    investigations: ["Serum creatinine, BUN", "BMP (K, phosphate)", "Urinalysis (casts, RBC)", "Urine electrolytes (Na, FENa)", "Urine osmolality", "Renal ultrasound (size, echogenicity, obstruction)", "Renal biopsy if unclear"],
+    management: "Treat underlying cause (volume resuscitation if prerenal, remove obstruction if postrenal). Monitor fluid balance, restrict K/phosphate/protein. Dialysis if KDIGO stage 3, K >6.5, severe acidosis, pulmonary edema, uremia.",
+    redFlags: ["Severe hyperkalemia", "Pulmonary edema", "Encephalopathy", "Cardiac arrhythmias", "Need for dialysis"]
+  },
+  {
+    id: 53, name: "Hyperkalemia", system: "Renal/Urological", urgency: "emergency",
+    symptoms: ["Palpitations", "Weakness", "Muscle cramps", "Paresthesias", "Cardiac arrhythmias"],
+    keyFindings: "K >5.5 (mild), >6.5 (moderate), >7 (severe). ECG: peaked T waves, prolonged PR interval, widened QRS, ST depression, loss of P wave.",
+    differentials: ["Renal failure", "ACE inhibitor use", "NSAIDs", "Potassium supplementation", "Rhabdomyolysis", "Tumor lysis", "Hemolysis"],
+    investigations: ["Serum K (repeat to confirm)", "BMP", "Creatinine", "ECG (serial)", "Urine K, osmolality", "ABG"],
+    management: "Cardiac protection: Calcium gluconate IV (stabilizes cardiac membrane). Shift K intracellularly: regular insulin + dextrose, beta-2 agonist (albuterol), sodium bicarbonate. Remove K: diuretics (furosemide), resins (patiromer), dialysis. Treat underlying cause.",
+    redFlags: ["ECG changes (peaked T, widened QRS)", "Cardiac arrhythmias", "Cardiac arrest", "Severe hyperkalemia >7"]
+  },
+  {
+    id: 54, name: "Hypokalemia", system: "Renal/Urological", urgency: "urgent",
+    symptoms: ["Muscle weakness", "Fatigue", "Muscle cramps", "Paresthesias", "Palpitations", "Constipation"],
+    keyFindings: "K <3.5 (mild), <2.5 (severe). ECG: flattened T wave, ST depression, prominent U wave, prolonged QT interval.",
+    differentials: ["Diuretic use", "Vomiting/diarrhea", "Renal tubular acidosis", "Hyperaldosteronism", "Insulin administration", "Beta-agonist use"],
+    investigations: ["Serum K (confirm)", "BMP", "ECG (serial)", "Urine K, osmolality", "Acid-base status", "Magnesium level"],
+    management: "Oral K+ supplementation (KCl 20-40 mEq daily) if mild-moderate. IV K+ (10-20mEq in 500mL over 1-2h if severe/ECG changes). Concurrent correction of associated metabolic alkalosis with saline. Replace magnesium.",
+    redFlags: ["Severe hypokalemia <2.5", "ECG changes (U wave, prolonged QT)", "Cardiac arrhythmias", "Rhabdomyolysis risk"]
+  },
+  {
+    id: 55, name: "Acute Leukemia", system: "Hematological", urgency: "emergency",
+    symptoms: ["Fever", "Bleeding/bruising", "Fatigue", "Infections", "Bone pain", "Hepatosplenomegaly", "Lymphadenopathy"],
+    keyFindings: "Blasts >20% on blood smear or bone marrow. Cytopenias. >30% blasts defines AML. CD34+ blasts. Auer rods (AML). Hyperuricemia, elevated LDH.",
+    differentials: ["Sepsis", "Thrombotic thrombocytopenic purpura (TTP)", "Infectious mononucleosis", "Lymphoma", "Chronic leukemia"],
+    investigations: ["CBC with differential (blasts, cytopenias)", "Peripheral blood smear", "Bone marrow aspirate/biopsy", "Flow cytometry", "Cytochemistry (MPO, PAS)", "Molecular/cytogenetics (FLT3, NPM1, t(15;17))", "LDH, uric acid", "Coagulation (DIC risk)"],
+    management: "Urgent hematology referral. Cytoreductive therapy if hyperuricemia (allopurinol, rasburicase). Tumor lysis syndrome prophylaxis. Chemotherapy (AML: Daunorubicin + Cytarabine; ALL: varies by protocol). Supportive care, transfusions.",
+    redFlags: ["Tumor lysis syndrome", "DIC", "Leukostasis (WBC >200K with symptoms)", "CNS involvement", "Secondary AML"]
+  },
+  {
+    id: 56, name: "Thrombotic Thrombocytopenic Purpura (TTP)", system: "Hematological", urgency: "emergency",
+    symptoms: ["Fever", "Thrombocytopenia", "Hemolytic anemia", "Neurological symptoms", "Renal dysfunction", "Purpura"],
+    keyFindings: "Classic pentad: thrombocytopenia, microangiopathic hemolytic anemia, neurological changes, renal dysfunction, fever. ADAMTS13 deficiency. Schistocytes on smear.",
+    differentials: ["Hemolytic uremic syndrome (HUS)", "DIC", "Pre-eclampsia", "HELLP syndrome", "Sepsis"],
+    investigations: ["CBC (thrombocytopenia, schistocytes)", "Peripheral smear", "LDH, bilirubin, haptoglobin (hemolysis markers)", "Creatinine, BUN", "ADAMTS13 activity/inhibitor", "Coombs test (negative)", "Coagulation studies (normal)"],
+    management: "PLASMA EXCHANGE (most important!). Daily PEX until platelet count normal, LDH normalized, schistocytes resolved. Avoid platelet transfusions. Treat underlying cause (infection, malignancy, drug).",
+    redFlags: ["Neurological progression", "Acute renal failure", "Cardiac arrhythmias/MI", "Refractory TTP", "Mortality without treatment >90%"]
+  },
+  {
+    id: 57, name: "Acute Hemolytic Anemia", system: "Hematological", urgency: "urgent",
+    symptoms: ["Fatigue", "Dyspnea", "Jaundice", "Dark urine", "Back pain", "Pallor", "Tachycardia"],
+    keyFindings: "Anemia with elevated reticulocyte count, elevated indirect bilirubin, low haptoglobin, elevated LDH. Positive Coombs test (autoimmune) or negative (mechanical, cold agglutinin).",
+    differentials: ["Transfusion reaction", "G6PD deficiency", "Microangiopathic hemolytic anemia", "Mechanical hemolysis", "Drug-induced"],
+    investigations: ["CBC (anemia, reticulocytosis)", "Peripheral smear (spherocytes, schistocytes, polychromasia)", "Coombs test (direct antiglobulin)", "Indirect bilirubin, LDH, haptoglobin", "Urinalysis (hemoglobinuria)", "G6PD level (if suspicion)", "Blood culture (if sepsis)"],
+    management: "Identify and treat cause. Transfusion if severe anemia/symptomatic. Corticosteroids (Prednisolone 1mg/kg daily) if autoimmune. IVIG if refractory. Splenectomy if chronic warm AIHA. Folate supplementation.",
+    redFlags: ["Severe anemia (Hb <7)", "Hemoglobinuria with renal dysfunction", "Transfusion reaction", "DIC", "Shock"]
+  },
+  {
+    id: 58, name: "Acute Leukostasis", system: "Hematological", urgency: "emergency",
+    symptoms: ["Dyspnea", "Altered mental status", "Visual changes", "Headache", "Confusion", "Seizures"],
+    keyFindings: "WBC >200,000/μL, hyperleukocytosis with symptoms. Most common in AML and ALL. Symptoms from leukemic cell aggregates in microvasculature.",
+    differentials: ["Sepsis", "Hyperviscosity syndrome", "Stroke", "Pulmonary embolism"],
+    investigations: ["CBC (extreme leukocytosis)", "Blood smear (blast percentage)", "Viscosity measurement", "ABG (hypoxia, hypercapnia)", "CT head (if neuro symptoms)", "Chest X-ray"],
+    management: "Cytoreduction: low-dose chemotherapy (Hydroxyurea, Cytarabine). Avoid diuretics. Exchange transfusion to reduce viscosity. Maintain hydration. Leukopheresis controversial (use if life-threatening symptoms).",
+    redFlags: ["CNS symptoms (stroke, seizures)", "Pulmonary symptoms (respiratory failure)", "DIC", "Intracranial hemorrhage"]
+  },
+  {
+    id: 6, name: "Acute Ischemic Stroke", system: "Neurological", urgency: "emergency",
+    symptoms: ["Sudden weakness", "Facial droop", "Speech difficulty", "Vision loss", "Severe headache", "Ataxia", "Confusion"],
+    keyFindings: "Sudden focal neurological deficit. FAST assessment positive. NIHSS for severity. CT head to exclude hemorrhage. CT angiography for large vessel occlusion.",
+    differentials: ["Hemorrhagic stroke", "TIA", "Todd's paralysis", "Hypoglycemia", "Brain tumor", "Migraine with aura", "Conversion disorder"],
+    investigations: ["Non-contrast CT head (STAT)", "CT Angiography", "MRI DWI/FLAIR", "Blood glucose", "CBC", "Coagulation panel", "ECG", "Echocardiography", "Carotid Doppler"],
+    management: "IV Alteplase (tPA) within 4.5h of onset (0.9mg/kg, max 90mg). Mechanical thrombectomy for large vessel occlusion within 24h. BP management (<185/110 pre-tPA). Aspirin 325mg after 24h. Statin therapy. Address risk factors.",
+    redFlags: ["Hemorrhagic conversion", "Malignant MCA infarction", "Brainstem stroke", "Basilar artery occlusion"]
+  },
+  {
+    id: 7, name: "Acute Pancreatitis", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["Epigastric pain", "Back pain", "Nausea", "Vomiting", "Abdominal distension", "Fever"],
+    keyFindings: "Severe epigastric pain radiating to back, worse supine, relieved by leaning forward. Lipase >3x upper normal. Cullen's/Grey Turner's sign in severe hemorrhagic pancreatitis.",
+    differentials: ["Peptic ulcer perforation", "Acute cholecystitis", "Mesenteric ischemia", "Acute MI (inferior)", "Aortic dissection", "Intestinal obstruction"],
+    investigations: ["Serum lipase (preferred over amylase)", "CBC", "CMP", "LFTs", "Triglycerides", "Calcium", "Lactate", "CT abdomen with contrast (48-72h)", "MRCP", "Ultrasound abdomen", "Ranson's/BISAP score"],
+    management: "Aggressive IV fluid resuscitation (Lactated Ringer's preferred, 250-500mL/hr). NPO initially then early oral feeding as tolerated. Pain control (IV opioids, avoid morphine). No prophylactic antibiotics. ERCP if biliary obstruction. Cholecystectomy for gallstone pancreatitis.",
+    redFlags: ["Necrotizing pancreatitis", "Organ failure", "Infected necrosis", "Pseudocyst", "Hemorrhage"]
+  },
+  {
+    id: 8, name: "Meningitis (Bacterial)", system: "Neurological", urgency: "emergency",
+    symptoms: ["Severe headache", "Fever", "Neck stiffness", "Photophobia", "Altered consciousness", "Nausea", "Vomiting", "Petechial rash"],
+    keyFindings: "Classic triad: fever, neck stiffness, altered mental status. Kernig's and Brudzinski's signs positive. Petechial/purpuric rash (meningococcal). CSF: elevated WBC (neutrophilic), high protein, low glucose.",
+    differentials: ["Viral meningitis", "Encephalitis", "Subarachnoid hemorrhage", "Brain abscess", "Cerebral venous thrombosis", "Migraine"],
+    investigations: ["Blood cultures x2 (BEFORE antibiotics)", "Lumbar puncture (CSF analysis, culture, gram stain, PCR)", "CT head before LP if indicated", "CBC", "CRP/Procalcitonin", "Coagulation", "BMP", "Lactate"],
+    management: "Empiric antibiotics IMMEDIATELY (do not delay for LP): Ceftriaxone 2g IV q12h + Vancomycin + Ampicillin (if >50y or immunocompromised). Dexamethasone 0.15mg/kg before or with first antibiotic dose. ICU monitoring. Chemoprophylaxis for close contacts (meningococcal).",
+    redFlags: ["Septic shock", "Raised ICP", "DIC", "Cerebral herniation", "Waterhouse-Friderichsen syndrome"]
+  },
+  {
+    id: 9, name: "Deep Vein Thrombosis", system: "Cardiovascular", urgency: "urgent",
+    symptoms: ["Calf swelling", "Calf pain", "Warmth", "Erythema", "Pitting edema", "Homan's sign"],
+    keyFindings: "Unilateral leg swelling, pain, warmth. Positive Homan's sign (unreliable). Wells score for pre-test probability. Compression ultrasonography shows non-compressible vein.",
+    differentials: ["Cellulitis", "Ruptured Baker's cyst", "Superficial thrombophlebitis", "Lymphedema", "Chronic venous insufficiency", "Muscle strain"],
+    investigations: ["Wells Score", "D-Dimer", "Compression Ultrasonography", "CBC", "Coagulation panel", "Thrombophilia screen (if unprovoked/recurrent)", "CT venography (if US inconclusive)"],
+    management: "Anticoagulation: DOAC (Rivaroxaban or Apixaban) preferred. Alternative: LMWH bridge to Warfarin (INR 2-3). Duration: 3 months (provoked), 6-12 months or indefinite (unprovoked/recurrent). Compression stockings. Early ambulation.",
+    redFlags: ["Phlegmasia cerulea dolens", "Pulmonary embolism", "Limb ischemia", "Recurrent VTE on anticoagulation"]
+  },
+  {
+    id: 10, name: "Tension-Type Headache", system: "Neurological", urgency: "routine",
+    symptoms: ["Bilateral headache", "Pressing quality", "Mild to moderate intensity", "Neck tension", "Scalp tenderness"],
+    keyFindings: "Bilateral pressing/tightening quality. Mild-moderate intensity. Not aggravated by routine physical activity. No nausea/vomiting. No photophobia AND phonophobia together.",
+    differentials: ["Migraine", "Medication overuse headache", "Cervicogenic headache", "Temporomandibular disorder", "Intracranial mass", "Idiopathic intracranial hypertension"],
+    investigations: ["Clinical diagnosis (no routine investigations)", "Headache diary", "Neuroimaging if red flags present", "ESR/CRP if temporal arteritis suspected"],
+    management: "Acute: Simple analgesics (Paracetamol 1g, Ibuprofen 400mg). Limit analgesic use to <15 days/month. Prophylaxis (if chronic): Amitriptyline 10-75mg at night. Non-pharmacological: Stress management, physiotherapy, cognitive behavioral therapy, regular exercise.",
+    redFlags: ["Thunderclap onset", "Progressive worsening", "New onset >50 years", "Focal neurological signs", "Papilledema"]
+  },
+  {
+    id: 11, name: "Hyperthyroidism (Graves' Disease)", system: "Endocrine", urgency: "routine",
+    symptoms: ["Weight loss", "Tremor", "Palpitations", "Heat intolerance", "Diarrhea", "Anxiety", "Exophthalmos"],
+    keyFindings: "Diffuse goiter, exophthalmos, pretibial myxedema (Graves' triad). Suppressed TSH, elevated free T4/T3. Positive TSH receptor antibodies (TRAb).",
+    differentials: ["Toxic multinodular goiter", "Toxic adenoma", "Thyroiditis (subacute, postpartum)", "Factitious thyrotoxicosis", "Pheochromocytoma", "Anxiety disorder"],
+    investigations: ["TSH (suppressed)", "Free T4, Free T3", "TSH receptor antibodies (TRAb)", "Thyroid peroxidase antibodies", "Radioactive iodine uptake & scan", "Thyroid ultrasound", "CBC", "LFTs"],
+    management: "Antithyroid drugs: Carbimazole/Methimazole (first-line) or Propylthiouracil (first trimester pregnancy). Beta-blockers for symptomatic relief. Radioactive iodine ablation. Thyroidectomy for large goiters or failed medical therapy. Ophthalmology referral for Graves' ophthalmopathy.",
+    redFlags: ["Thyroid storm", "Atrial fibrillation", "Heart failure", "Severe ophthalmopathy", "Agranulocytosis (drug side effect)"]
+  },
+  {
+    id: 12, name: "Urinary Tract Infection", system: "Renal/Urological", urgency: "routine",
+    symptoms: ["Dysuria", "Frequency", "Urgency", "Suprapubic pain", "Hematuria", "Cloudy urine"],
+    keyFindings: "Lower UTI: dysuria, frequency, urgency, suprapubic tenderness. Upper UTI (pyelonephritis): flank pain, fever, costovertebral angle tenderness. Urine dipstick: nitrites, leukocyte esterase positive.",
+    differentials: ["Vaginitis", "Urethritis (STI)", "Interstitial cystitis", "Bladder cancer", "Renal calculi", "Prostatitis"],
+    investigations: ["Urinalysis (dipstick)", "Urine microscopy", "Urine culture & sensitivity", "CBC", "CRP", "Blood cultures (if pyelonephritis)", "Renal ultrasound (if recurrent/complicated)", "CT KUB (if calculi suspected)"],
+    management: "Uncomplicated lower UTI: Nitrofurantoin 100mg BD x5d or Trimethoprim 200mg BD x3d. Pyelonephritis: Ciprofloxacin 500mg BD x7d or IV Co-amoxiclav. Complicated/sepsis: IV Piperacillin-tazobactam + Gentamicin. Increase fluid intake. Treat underlying cause.",
+    redFlags: ["Urosepsis", "Renal abscess", "Obstruction with infection", "Recurrent infections", "Male UTI (always investigate)"]
+  },
+  {
+    id: 13, name: "Iron Deficiency Anemia", system: "Hematological", urgency: "routine",
+    symptoms: ["Fatigue", "Pallor", "Dyspnea on exertion", "Pica", "Koilonychia", "Glossitis", "Angular cheilitis"],
+    keyFindings: "Microcytic hypochromic anemia. Low serum ferritin (<30), low serum iron, high TIBC, low transferrin saturation. Peripheral smear: microcytic hypochromic RBCs, target cells, pencil cells.",
+    differentials: ["Thalassemia trait", "Anemia of chronic disease", "Sideroblastic anemia", "Lead poisoning", "B12/Folate deficiency"],
+    investigations: ["CBC with indices (low MCV, MCH, MCHC)", "Peripheral blood smear", "Serum ferritin", "Serum iron, TIBC, transferrin saturation", "Reticulocyte count", "GI workup (OGD, colonoscopy) in males/>50y females", "Celiac screen", "Stool occult blood"],
+    management: "Oral iron: Ferrous sulfate 200mg TDS (65mg elemental iron). Take on empty stomach with vitamin C. Parenteral iron (IV Ferinject) if oral intolerant or malabsorption. Identify and treat underlying cause (menorrhagia, GI bleeding, celiac, hookworm). Dietary counseling.",
+    redFlags: ["Severe anemia (Hb <7)", "Cardiac decompensation", "Occult GI malignancy", "Non-response to iron therapy"]
+  },
+  {
+    id: 14, name: "Major Depressive Disorder", system: "Psychiatry", urgency: "urgent",
+    symptoms: ["Depressed mood", "Anhedonia", "Sleep disturbance", "Fatigue", "Appetite change", "Poor concentration", "Guilt", "Suicidal ideation"],
+    keyFindings: "≥5 of 9 DSM-5 criteria for ≥2 weeks including depressed mood OR anhedonia. PHQ-9 score ≥10. Functional impairment. Rule out medical causes (hypothyroidism, anemia, substance use).",
+    differentials: ["Bipolar disorder", "Adjustment disorder", "Persistent depressive disorder", "Hypothyroidism", "Anemia", "Substance use disorder", "Grief reaction", "Anxiety disorder"],
+    investigations: ["PHQ-9 screening", "Suicide risk assessment (Columbia Scale)", "TSH", "CBC", "Vitamin B12, Folate", "BMP", "Urine drug screen", "Serum cortisol (if Cushing's suspected)"],
+    management: "Mild: CBT, behavioral activation, exercise, sleep hygiene. Moderate-Severe: SSRI (Sertraline 50mg or Escitalopram 10mg) + psychotherapy. Monitor for 4-6 weeks. Augment with Mirtazapine/Bupropion if partial response. Severe/suicidal: urgent psychiatric referral, consider ECT.",
+    redFlags: ["Active suicidal ideation with plan", "Psychotic features", "Catatonia", "Severe self-neglect", "Bipolar features (screen before SSRI)"]
+  },
+  {
+    id: 15, name: "Osteoarthritis", system: "Musculoskeletal", urgency: "routine",
+    symptoms: ["Joint pain", "Morning stiffness <30min", "Crepitus", "Joint swelling", "Reduced ROM", "Bony enlargement"],
+    keyFindings: "Pain worse with activity, better with rest. Morning stiffness <30 minutes. Crepitus on movement. Heberden's nodes (DIP), Bouchard's nodes (PIP). X-ray: joint space narrowing, osteophytes, subchondral sclerosis, subchondral cysts.",
+    differentials: ["Rheumatoid arthritis", "Gout", "Psoriatic arthritis", "Septic arthritis", "Calcium pyrophosphate deposition", "Avascular necrosis"],
+    investigations: ["X-ray of affected joint (weight-bearing for knee)", "No blood tests diagnostic (ESR/CRP normal)", "Synovial fluid analysis (if effusion, to exclude gout/septic)", "MRI (if surgical planning)", "RF, Anti-CCP (to exclude RA)"],
+    management: "Non-pharmacological: Weight loss, physiotherapy, exercise (strengthening, aerobic), walking aids. Pharmacological: Paracetamol (first-line), topical NSAIDs, oral NSAIDs (short course + PPI), intra-articular corticosteroid injection. Surgical: Total joint replacement for refractory cases.",
+    redFlags: ["Hot swollen joint (exclude septic arthritis)", "Rapid progression", "Night pain (exclude malignancy)", "Locking/giving way"]
+  },
+  {
+    id: 16, name: "Asthma (Acute Exacerbation)", system: "Respiratory", urgency: "urgent",
+    symptoms: ["Wheezing", "Dyspnea", "Cough", "Chest tightness", "Tachypnea", "Use of accessory muscles"],
+    keyFindings: "Widespread expiratory polyphonic wheeze. Tachypnea, prolonged expiration. Reduced PEFR (<75% best). Severe: unable to complete sentences, HR >110, RR >25. Life-threatening: silent chest, bradycardia, altered consciousness.",
+    differentials: ["COPD exacerbation", "Vocal cord dysfunction", "Foreign body aspiration", "Anaphylaxis", "Heart failure", "Pulmonary embolism", "Pneumothorax"],
+    investigations: ["PEFR (serial)", "SpO2", "ABG (if severe)", "Chest X-ray (exclude pneumothorax/pneumonia)", "Spirometry (post-acute: FEV1/FVC <0.7, reversibility >12%)", "CBC", "CRP"],
+    management: "Mild-Moderate: Salbutamol nebulizer 5mg, Ipratropium 500mcg, Prednisolone 40-50mg PO x5-7d. Severe: continuous nebulizers, IV Magnesium sulfate 2g over 20min, consider IV Aminophylline. Life-threatening: ICU, IV Salbutamol, intubation if failing. Step-up maintenance therapy per GINA guidelines.",
+    redFlags: ["Silent chest", "Cyanosis", "Bradycardia", "Exhaustion/confusion", "PaCO2 normal or rising in acute attack"]
+  },
+  {
+    id: 17, name: "Acute Cholecystitis", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["RUQ pain", "Fever", "Nausea", "Vomiting", "Murphy's sign positive", "Referred shoulder pain"],
+    keyFindings: "Severe RUQ pain >6h (unlike biliary colic). Positive Murphy's sign. Fever, leukocytosis. Ultrasound: gallstones, thickened gallbladder wall >3mm, pericholecystic fluid, sonographic Murphy's sign.",
+    differentials: ["Biliary colic", "Choledocholithiasis", "Cholangitis", "Hepatitis", "Peptic ulcer disease", "Right lower lobe pneumonia", "Fitz-Hugh-Curtis syndrome"],
+    investigations: ["Ultrasound abdomen (first-line)", "CBC (leukocytosis)", "CRP", "LFTs (mild elevation)", "Amylase/Lipase", "Blood cultures (if septic)", "HIDA scan (if US inconclusive)", "MRCP (if CBD stone suspected)"],
+    management: "NPO, IV fluids, IV antibiotics (Cefuroxime + Metronidazole or Piperacillin-tazobactam). Analgesia (NSAIDs + opioids). Early laparoscopic cholecystectomy within 72h (gold standard). Percutaneous cholecystostomy if unfit for surgery. ERCP if CBD stones.",
+    redFlags: ["Charcot's triad (cholangitis)", "Reynolds pentad", "Gallbladder perforation", "Emphysematous cholecystitis", "Sepsis"]
+  },
+  {
+    id: 18, name: "Chronic Kidney Disease", system: "Renal/Urological", urgency: "routine",
+    symptoms: ["Fatigue", "Nocturia", "Edema", "Nausea", "Pruritus", "Anorexia", "Dyspnea"],
+    keyFindings: "eGFR <60 mL/min/1.73m² for ≥3 months OR kidney damage markers (albuminuria, structural abnormalities). Stage 1-5 based on eGFR. Uremia symptoms in advanced stages.",
+    differentials: ["Acute kidney injury", "Diabetic nephropathy", "Hypertensive nephrosclerosis", "Glomerulonephritis", "Polycystic kidney disease", "Obstructive uropathy"],
+    investigations: ["Serum creatinine, eGFR", "Urine albumin-to-creatinine ratio (ACR)", "Urinalysis", "BMP (K, Ca, PO4, bicarb)", "CBC (anemia)", "PTH", "Vitamin D", "Lipid profile", "Renal ultrasound", "Renal biopsy (if glomerular cause suspected)"],
+    management: "Treat underlying cause (diabetes, hypertension). ACE inhibitor/ARB (renoprotective, reduce proteinuria). BP target <130/80. SGLT2 inhibitors (Dapagliflozin). Manage complications: anemia (ESA, iron), bone disease (phosphate binders, vitamin D), acidosis (bicarb), hyperkalemia. Renal replacement therapy (dialysis/transplant) for ESKD.",
+    redFlags: ["Rapidly declining eGFR", "Hyperkalemia >6.5", "Pulmonary edema", "Uremic encephalopathy", "Pericarditis"]
+  },
+  {
+    id: 19, name: "Migraine", system: "Neurological", urgency: "routine",
+    symptoms: ["Unilateral headache", "Pulsating quality", "Nausea", "Vomiting", "Photophobia", "Phonophobia", "Aura"],
+    keyFindings: "Recurrent moderate-severe unilateral pulsating headache lasting 4-72h. Aggravated by routine activity. Associated nausea, photophobia, phonophobia. Aura (visual, sensory, or speech) in 25%.",
+    differentials: ["Tension-type headache", "Cluster headache", "Subarachnoid hemorrhage", "Intracranial mass", "Temporal arteritis", "Medication overuse headache", "Sinusitis"],
+    investigations: ["Clinical diagnosis (ICHD-3 criteria)", "Headache diary", "MRI brain (if atypical features/red flags)", "ESR (if >50y, temporal arteritis)", "CT head (if thunderclap onset)"],
+    management: "Acute: Triptans (Sumatriptan 50-100mg PO or 6mg SC), NSAIDs (Ibuprofen, Naproxen), antiemetics (Metoclopramide). Prophylaxis (≥4 attacks/month): Propranolol 80-160mg, Topiramate 50-100mg, Amitriptyline 10-50mg, CGRP monoclonal antibodies (Erenumab). Avoid triggers, regular sleep, hydration.",
+    redFlags: ["Thunderclap onset", "First or worst headache", "Aura >60min", "New onset >50y", "Progressive pattern change", "Fever with headache"]
+  },
+  {
+    id: 20, name: "Cellulitis", system: "Dermatology", urgency: "urgent",
+    symptoms: ["Skin erythema", "Warmth", "Swelling", "Pain", "Fever", "Lymphangitis"],
+    keyFindings: "Unilateral spreading erythema with warmth, tenderness, and edema. Poorly demarcated margins. Common on lower legs. Entry point (wound, tinea pedis, insect bite). Fever, lymphangitis, regional lymphadenopathy.",
+    differentials: ["DVT", "Erysipelas", "Necrotizing fasciitis", "Abscess", "Dermatitis (stasis, contact)", "Gout", "Lipodermatosclerosis"],
+    investigations: ["Clinical diagnosis (no routine cultures needed)", "CBC (leukocytosis)", "CRP", "Blood cultures (if systemic sepsis)", "Ultrasound (if abscess suspected)", "Mark erythema border to track progression", "Duplex US (if DVT suspected)"],
+    management: "Mild: Flucloxacillin 500mg-1g QDS PO x5-7d. Penicillin allergy: Clarithromycin or Doxycycline. Moderate-Severe: IV Flucloxacillin 1-2g QDS. MRSA risk: add Vancomycin/Linezolid. Elevate affected limb. Treat entry point (tinea pedis). Compression stockings for recurrence prevention.",
+    redFlags: ["Necrotizing fasciitis signs (pain out of proportion, crepitus, rapid spread, systemic toxicity)", "Sepsis", "Periorbital cellulitis", "Rapidly progressing despite antibiotics"]
+  },
+  {
+    id: 21, name: "Hypertensive Crisis", system: "Cardiovascular", urgency: "emergency",
+    symptoms: ["Severe headache", "Visual disturbance", "Chest pain", "Dyspnea", "Confusion", "Epistaxis"],
+    keyFindings: "BP >180/120 mmHg. Hypertensive urgency: no end-organ damage. Hypertensive emergency: with end-organ damage (encephalopathy, AKI, aortic dissection, pulmonary edema, retinal hemorrhage/papilledema).",
+    differentials: ["Pheochromocytoma", "Renal artery stenosis", "Pre-eclampsia/eclampsia", "Drug-related (cocaine, amphetamines)", "Cushing syndrome", "Primary hyperaldosteronism"],
+    investigations: ["BP both arms", "Fundoscopy", "ECG", "Troponin", "CBC", "BMP (creatinine, electrolytes)", "Urinalysis (proteinuria, RBC casts)", "Chest X-ray", "CT head (if neurological symptoms)", "CT aorta (if dissection suspected)"],
+    management: "Emergency: IV Labetalol, Nicardipine, or Nitroprusside. Reduce MAP by 25% in first hour, then gradually to 160/100 over 24h. Aortic dissection: target HR <60, SBP <120 (IV Esmolol + Nitroprusside). Urgency: oral agents (Amlodipine, Captopril), reduce over 24-48h.",
+    redFlags: ["Aortic dissection", "Hypertensive encephalopathy", "Acute pulmonary edema", "Eclampsia", "Acute MI/Stroke"]
+  },
+  {
+    id: 22, name: "Rheumatoid Arthritis", system: "Musculoskeletal", urgency: "routine",
+    symptoms: ["Symmetrical joint pain", "Morning stiffness >1hr", "Joint swelling", "Fatigue", "Rheumatoid nodules", "Hand deformity"],
+    keyFindings: "Symmetrical polyarthritis of small joints (MCP, PIP, wrists). Morning stiffness >1 hour. Swan neck, boutonnière deformities, ulnar deviation. RF and Anti-CCP positive. Elevated ESR/CRP.",
+    differentials: ["Osteoarthritis", "Psoriatic arthritis", "SLE", "Gout/Pseudogout", "Viral arthritis", "Reactive arthritis", "Fibromyalgia"],
+    investigations: ["RF (sensitivity 70%)", "Anti-CCP (specificity >95%)", "ESR, CRP", "CBC", "LFTs, Renal function", "X-ray hands & feet (periarticular erosions, osteopenia)", "Ultrasound/MRI joints (synovitis, early erosions)", "Synovial fluid (if mono/oligoarticular)"],
+    management: "Early DMARD therapy: Methotrexate 7.5-25mg weekly (first-line) + Folic acid. Bridging: low-dose Prednisolone. Combination DMARDs (MTX + Hydroxychloroquine + Sulfasalazine). Biologic DMARDs if inadequate response: Anti-TNF (Adalimumab), Tocilizumab, Rituximab, JAK inhibitors. Physiotherapy, occupational therapy.",
+    redFlags: ["Cervical myelopathy (atlantoaxial subluxation)", "Vasculitis", "Interstitial lung disease", "Felty syndrome", "Amyloidosis"]
+  },
+  {
+    id: 23, name: "Peptic Ulcer Disease", system: "Gastrointestinal", urgency: "urgent",
+    symptoms: ["Epigastric pain", "Heartburn", "Nausea", "Bloating", "Early satiety", "Melena", "Hematemesis"],
+    keyFindings: "Gastric ulcer: pain worsened by eating. Duodenal ulcer: pain relieved by eating, worse at night. Epigastric tenderness. H. pylori infection in ~60-80%. NSAID use. Alarm features: weight loss, dysphagia, anemia.",
+    differentials: ["GERD", "Gastric cancer", "Functional dyspepsia", "Pancreatitis", "Biliary colic", "Acute MI (inferior)"],
+    investigations: ["OGD with biopsy (gold standard, especially if alarm features)", "H. pylori testing (urea breath test, stool antigen, CLO test on biopsy)", "CBC (anemia)", "LFTs", "Stool occult blood", "Serum gastrin (if Zollinger-Ellison suspected)"],
+    management: "H. pylori positive: Triple therapy (PPI + Amoxicillin 1g + Clarithromycin 500mg) BD x14d. Confirm eradication after 4 weeks. PPI therapy (Omeprazole 20-40mg) for 4-8 weeks. Stop NSAIDs or add PPI prophylaxis. Bleeding ulcer: endoscopic hemostasis. Perforation: surgical repair.",
+    redFlags: ["Upper GI hemorrhage", "Perforation (acute abdomen)", "Gastric outlet obstruction", "Malignant transformation (gastric ulcers)"]
+  },
+  {
+    id: 24, name: "Hypothyroidism", system: "Endocrine", urgency: "routine",
+    symptoms: ["Fatigue", "Weight gain", "Cold intolerance", "Constipation", "Dry skin", "Hair loss", "Depression", "Bradycardia"],
+    keyFindings: "Elevated TSH with low free T4 (primary). Dry coarse skin, non-pitting edema (myxedema), delayed relaxation of deep tendon reflexes, bradycardia. Hashimoto's: positive TPO antibodies.",
+    differentials: ["Depression", "Anemia", "Chronic fatigue syndrome", "Heart failure", "Nephrotic syndrome", "Central hypothyroidism"],
+    investigations: ["TSH (elevated)", "Free T4 (low)", "Free T3", "Anti-TPO antibodies", "Anti-thyroglobulin antibodies", "Lipid profile (hyperlipidemia)", "CBC", "BMP", "CK (may be elevated)"],
+    management: "Levothyroxine replacement: start 25-50mcg/day (lower if elderly/cardiac disease), titrate by 25mcg every 6-8 weeks. Target TSH in normal range. Take on empty stomach, 30-60min before breakfast. Monitor TSH every 6-8 weeks until stable, then annually. Myxedema coma: IV Levothyroxine + Hydrocortisone, ICU care.",
+    redFlags: ["Myxedema coma (hypothermia, altered consciousness, hypoventilation)", "Pericardial effusion", "Severe hyponatremia", "Rhabdomyolysis"]
+  },
+  {
+    id: 25, name: "Anaphylaxis", system: "Immunology/Allergy", urgency: "emergency",
+    symptoms: ["Urticaria", "Angioedema", "Wheezing", "Dyspnea", "Hypotension", "Tachycardia", "Abdominal pain", "Dizziness"],
+    keyFindings: "Rapid onset (minutes to hours) after allergen exposure. Skin involvement (urticaria, flushing, angioedema) + respiratory compromise OR hypotension. Biphasic reaction in 5-20% within 8-12h.",
+    differentials: ["Severe asthma", "Vasovagal syncope", "Hereditary angioedema", "Carcinoid syndrome", "Panic attack", "Septic shock", "Mastocytosis"],
+    investigations: ["Clinical diagnosis — TREAT FIRST", "Serum tryptase (within 1-2h of onset, repeat at 24h baseline)", "Specific IgE testing (after recovery)", "Skin prick testing (6 weeks post-event)", "CBC", "ABG if respiratory compromise"],
+    management: "IM Adrenaline (Epinephrine) 0.5mg (1:1000) mid-outer thigh — FIRST LINE, repeat every 5 min if needed. High-flow oxygen. IV fluid bolus (1-2L crystalloid). IV Chlorphenamine 10mg + IV Hydrocortisone 200mg (adjuncts, not substitutes for adrenaline). Nebulized Salbutamol for bronchospasm. Observe minimum 6-12h (biphasic risk). Discharge with EpiPen prescription and allergy referral.",
+    redFlags: ["Refractory hypotension", "Airway compromise requiring intubation", "Cardiac arrest", "Biphasic reaction", "Beta-blocker use (resistant to adrenaline)"]
+  }
+];
+
+const systems = [...new Set(diseases.map(d => d.system))].sort();
+const allSymptoms = [...new Set(diseases.flatMap(d => d.symptoms))].sort();
+
+let selectedSymptoms = new Set();
+let filteredDiseases = [...diseases];
+
+// ─── DEFAULT CONFIG ───
+const defaultConfig = {
+  app_title: "Differential Diagnosis Explorer",
+  subtitle_text: "Clinical Decision Support Tool",
+  background_color: "#0f172a",
+  surface_color: "#1e293b",
+  text_color: "#f1f5f9",
+  primary_action_color: "#22d3ee",
+  secondary_action_color: "#64748b",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+// ─── RENDER FUNCTIONS ───
+function getUrgencyStyle(u) {
+  if (u === "emergency") return { bg: "rgba(239,68,68,0.15)", border: "#ef4444", text: "#fca5a5", label: "🔴 EMERGENCY" };
+  if (u === "urgent") return { bg: "rgba(251,191,36,0.15)", border: "#f59e0b", text: "#fcd34d", label: "🟡 URGENT" };
+  return { bg: "rgba(34,197,94,0.15)", border: "#22c55e", text: "#86efac", label: "🟢 ROUTINE" };
+}
+
+function renderSystemFilter() {
+  const sel = document.getElementById("systemFilter");
+  sel.innerHTML = '<option value="all">All Systems</option>' + systems.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
+function renderDiseaseCards() {
+  const grid = document.getElementById("diseaseGrid");
+  const detail = document.getElementById("diseaseDetail");
+  detail.classList.add("hidden");
+  grid.classList.remove("hidden");
+
+  if (filteredDiseases.length === 0) {
+    grid.innerHTML = `<div class="col-span-full text-center py-12"><p style="color: #64748b;" class="text-lg">No conditions match your criteria</p><p style="color: #475569;" class="text-sm mt-2">Try adjusting your search or filters</p></div>`;
+    document.getElementById("resultCount").textContent = "No results found";
+    return;
+  }
+
+  document.getElementById("resultCount").textContent = `Showing ${filteredDiseases.length} condition${filteredDiseases.length > 1 ? 's' : ''}`;
+
+  grid.innerHTML = filteredDiseases.map(d => {
+    const u = getUrgencyStyle(d.urgency);
+    const matchedSymptoms = d.symptoms.filter(s => selectedSymptoms.has(s));
+    const matchPct = selectedSymptoms.size > 0 ? Math.round((matchedSymptoms.length / selectedSymptoms.size) * 100) : 0;
+
+    return `<div class="card-hover rounded-xl p-5 cursor-pointer fade-in" style="background: ${defaultConfig.surface_color}; border: 1px solid #334155;" onclick="showDetail(${d.id})">
+      <div class="flex items-start justify-between mb-3">
+        <div class="flex-1">
+          <span class="text-xs px-2 py-0.5 rounded-full font-medium" style="background: ${u.bg}; color: ${u.text}; border: 1px solid ${u.border};">${u.label}</span>
+          <h3 class="heading-font text-lg font-bold mt-2" style="color: ${defaultConfig.text_color};">${d.name}</h3>
+          <span class="text-xs" style="color: ${defaultConfig.secondary_action_color};">${d.system}</span>
+        </div>
+        ${selectedSymptoms.size > 0 ? `<div class="text-right ml-3"><div class="text-2xl font-bold" style="color: ${defaultConfig.primary_action_color};">${matchPct}%</div><div class="text-xs" style="color: ${defaultConfig.secondary_action_color};">match</div></div>` : ''}
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-3">${d.symptoms.slice(0, 4).map(s => {
+        const isMatch = selectedSymptoms.has(s);
+        return `<span class="text-xs px-2 py-0.5 rounded-full" style="background: ${isMatch ? 'rgba(34,211,238,0.2)' : 'rgba(100,116,139,0.2)'}; color: ${isMatch ? '#22d3ee' : '#94a3b8'};">${s}</span>`;
+      }).join('')}${d.symptoms.length > 4 ? `<span class="text-xs px-2 py-0.5 rounded-full" style="color: #64748b;">+${d.symptoms.length - 4} more</span>` : ''}</div>
+      <div class="flex items-center justify-between mt-4 pt-3" style="border-top: 1px solid #334155;">
+        <span class="text-xs" style="color: ${defaultConfig.secondary_action_color};">${d.differentials.length} differentials</span>
+        <span class="text-xs font-medium flex items-center gap-1" style="color: ${defaultConfig.primary_action_color};">View Details <i data-lucide="chevron-right" style="width:14px;height:14px;"></i></span>
+      </div>
+    </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+window.showDetail = function(id) {
+  const d = diseases.find(x => x.id === id);
+  if (!d) return;
+  const grid = document.getElementById("diseaseGrid");
+  const detail = document.getElementById("diseaseDetail");
+  const u = getUrgencyStyle(d.urgency);
+
+  grid.classList.add("hidden");
+  detail.classList.remove("hidden");
+  detail.innerHTML = `
+    <button onclick="backToList()" class="flex items-center gap-1 text-sm mb-4 hover:underline" style="color: ${defaultConfig.primary_action_color};"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back to all conditions</button>
+    <div class="rounded-xl p-5 sm:p-7 fade-in" style="background: ${defaultConfig.surface_color}; border: 1px solid #334155;">
+      <div class="flex flex-wrap items-center gap-3 mb-1">
+        <span class="text-xs px-2 py-0.5 rounded-full font-medium" style="background: ${u.bg}; color: ${u.text}; border: 1px solid ${u.border};">${u.label}</span>
+        <span class="text-xs" style="color: ${defaultConfig.secondary_action_color};">${d.system}</span>
+      </div>
+      <h2 class="heading-font text-2xl sm:text-3xl font-bold mt-2 mb-6" style="color: ${defaultConfig.text_color};">${d.name}</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        ${section("Presenting Symptoms", "thermometer", d.symptoms.map(s => `<span class="symptom-chip text-xs px-3 py-1.5 rounded-full cursor-pointer inline-block mb-1" style="background: ${selectedSymptoms.has(s) ? 'rgba(34,211,238,0.2)' : 'rgba(100,116,139,0.15)'}; color: ${selectedSymptoms.has(s) ? '#22d3ee' : '#cbd5e1'};" onclick="toggleSymptom('${s.replace(/'/g, "\\'")}')">${s}</span>`).join(' '))}
+        ${section("Key Clinical Findings", "stethoscope", `<p class="text-sm leading-relaxed" style="color: #cbd5e1;">${d.keyFindings}</p>`)}
+        ${section("Differential Diagnoses", "git-branch", `<ol class="space-y-1.5">${d.differentials.map((dd, i) => `<li class="flex items-center gap-2 text-sm" style="color: #cbd5e1;"><span class="w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold flex-shrink-0" style="background: rgba(34,211,238,0.15); color: #22d3ee;">${i + 1}</span>${dd}</li>`).join('')}</ol>`)}
+        ${section("Investigations", "microscope", `<ul class="space-y-1">${d.investigations.map(inv => `<li class="flex items-start gap-2 text-sm" style="color: #cbd5e1;"><span style="color: #22d3ee; margin-top:4px;">•</span>${inv}</li>`).join('')}</ul>`)}
+      </div>
+
+      <div class="mt-5">
+        ${section("Management", "pill", `<p class="text-sm leading-relaxed" style="color: #cbd5e1;">${d.management}</p>`)}
+      </div>
+
+      <div class="mt-5">
+        <div class="rounded-lg p-4" style="background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25);">
+          <h4 class="text-sm font-bold flex items-center gap-2 mb-2" style="color: #fca5a5;"><i data-lucide="alert-circle" style="width:16px;height:16px;"></i> Red Flags</h4>
+          <div class="flex flex-wrap gap-2">${d.redFlags.map(rf => `<span class="text-xs px-2.5 py-1 rounded-full" style="background: rgba(239,68,68,0.15); color: #fca5a5;">⚠ ${rf}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+  lucide.createIcons();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+function section(title, icon, content) {
+  return `<div class="rounded-lg p-4" style="background: rgba(15,23,42,0.5); border: 1px solid #334155;">
+    <h4 class="text-sm font-bold flex items-center gap-2 mb-3" style="color: ${defaultConfig.primary_action_color};"><i data-lucide="${icon}" style="width:16px;height:16px;"></i>${title}</h4>
+    ${content}
+  </div>`;
+}
+
+window.backToList = function() {
+  filterAndRender();
+};
+
+window.toggleSymptom = function(symptom) {
+  if (selectedSymptoms.has(symptom)) selectedSymptoms.delete(symptom); else selectedSymptoms.add(symptom);
+  renderSelectedSymptoms();
+  filterAndRender();
+};
+
+function renderSelectedSymptoms() {
+  const container = document.getElementById("selectedSymptoms");
+  const tags = document.getElementById("symptomTags");
+  if (selectedSymptoms.size === 0) { container.classList.add("hidden"); return; }
+  container.classList.remove("hidden");
+  tags.innerHTML = [...selectedSymptoms].map(s => `<button class="symptom-chip text-xs px-3 py-1.5 rounded-full flex items-center gap-1" style="background: rgba(34,211,238,0.2); color: #22d3ee;" onclick="toggleSymptom('${s.replace(/'/g, "\\'")}')">${s} <i data-lucide="x" style="width:12px;height:12px;"></i></button>`).join('');
+  lucide.createIcons();
+}
+
+function filterAndRender() {
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const system = document.getElementById("systemFilter").value;
+
+  filteredDiseases = diseases.filter(d => {
+    const matchSystem = system === "all" || d.system === system;
+    const matchSearch = !search || d.name.toLowerCase().includes(search) || d.symptoms.some(s => s.toLowerCase().includes(search)) || d.system.toLowerCase().includes(search);
+    const matchSymptoms = selectedSymptoms.size === 0 || d.symptoms.some(s => selectedSymptoms.has(s));
+    return matchSystem && matchSearch && matchSymptoms;
+  });
+
+  if (selectedSymptoms.size > 0) {
+    filteredDiseases.sort((a, b) => {
+      const aMatch = a.symptoms.filter(s => selectedSymptoms.has(s)).length;
+      const bMatch = b.symptoms.filter(s => selectedSymptoms.has(s)).length;
+      return bMatch - aMatch;
+    });
+  }
+
+  renderDiseaseCards();
+}
+
+document.getElementById("searchInput").addEventListener("input", filterAndRender);
+document.getElementById("systemFilter").addEventListener("change", filterAndRender);
+document.getElementById("clearSymptoms").addEventListener("click", () => { selectedSymptoms.clear(); renderSelectedSymptoms(); filterAndRender(); });
+
+// ─── ELEMENT SDK ───
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const title = document.getElementById("appTitle");
+  const subtitle = document.getElementById("appSubtitle");
+  if (title) title.textContent = c.app_title;
+  if (subtitle) subtitle.textContent = c.subtitle_text;
+}
+
+renderSystemFilter();
+filterAndRender();
+lucide.createIcons();
+</script>
+</body>
+</html>
