@@ -1,0 +1,332 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>ICU Protocols | Critical Care Guidelines & Management Pathways | Deep Medicine</title> <meta name="description" content="Comprehensive ICU protocols covering ventilation, sepsis, shock, sedation, fluids, and critical care management pathways."> <link rel="canonical" href="https://deepmedicine.in/clinical/protocols/icu-protocol"> <!-- Open Graph --> <meta property="og:title" content="ICU Protocols | Deep Medicine"> <meta property="og:description" content="Standard ICU protocols for critical care management including ventilation, sepsis, and shock."> <meta property="og:image" content="https://deepmedicine.in/images/icu-protocols.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'DM Sans',sans-serif}
+.app-shell{height:100%;overflow-y:auto;overflow-x:hidden;width:100%}
+.mono{font-family:'JetBrains Mono',monospace}
+.protocol-card{transition:all .25s cubic-bezier(.4,0,.2,1)}
+.protocol-card:hover{transform:translateY(-2px)}
+.step-line{position:relative;padding-left:2rem}
+.step-line::before{content:'';position:absolute;left:.55rem;top:1.8rem;bottom:0;width:2px;background:var(--accent)}
+.step-line:last-child::before{display:none}
+.step-dot{position:absolute;left:0;top:.35rem;width:1.2rem;height:1.2rem;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#fff;font-weight:700}
+.dose-pill{display:inline-block;padding:.15rem .55rem;border-radius:9999px;font-size:.75rem;font-weight:600}
+.fade-in{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tab-btn{transition:all .2s}
+.search-input:focus{outline:none;box-shadow:0 0 0 2px var(--accent)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:#475569;border-radius:3px}
+.severity-critical{border-left:4px solid #ef4444}
+.severity-urgent{border-left:4px solid #f59e0b}
+.severity-standard{border-left:4px solid #22c55e}
+.collapse-content{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.collapse-content.open{max-height:4000px}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="app-shell" style="background:var(--bg);color:var(--text)"><!-- Header -->
+   <header style="background:var(--surface)" class="sticky top-0 z-50 border-b border-white/10 backdrop-blur-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-2">
+     <div>
+      <h1 id="el-title" class="text-xl font-bold flex items-center gap-2"></span>
+      <i data-lucide="activity" style="color:var(--accent)" class="w-5 h-5"></i><span>ICU Protocols &amp; Emergencies</span></h1>
+      <p id="el-subtitle" class="text-xs opacity-60 mt-0.5">Critical Care Quick Reference</p>
+     </div>
+     <div class="relative"><i data-lucide="search" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 opacity-40"></i> <input id="searchBox" type="text" placeholder="Search protocols..." class="search-input text-sm rounded-lg pl-8 pr-3 py-2 w-56" style="background:var(--bg);color:var(--text);border:1px solid rgba(255,255,255,.1)">
+     </div>
+    </div>
+   </header><!-- Category Tabs -->
+   <nav id="tabBar" class="max-w-6xl mx-auto px-4 pt-4 flex gap-2 overflow-x-auto pb-2" role="tablist"></nav><!-- Disclaimer -->
+   <div class="max-w-6xl mx-auto px-4 mt-2">
+    <p id="el-disclaimer" class="text-xs opacity-50 italic">⚠ For educational use only. Always follow institutional guidelines and verify doses before administration.</p>
+   </div><!-- Protocol Grid -->
+   <main id="protocolGrid" class="max-w-6xl mx-auto px-4 py-4 grid gap-4 md:grid-cols-2" role="main"></main><!-- Footer -->
+   <footer class="max-w-6xl mx-auto px-4 py-6 text-center text-xs opacity-40 border-t border-white/5">
+    <p>ICU Protocols &amp; Emergencies — Evidence-Based Critical Care Reference</p>
+   </footer>
+  </div>
+  <script>
+// ─── PROTOCOL DATA ───
+const PROTOCOLS = [
+{
+  id:"cardiac-arrest", cat:"Cardiac", severity:"critical", icon:"heart",
+  title:"Cardiac Arrest (ACLS)",
+  summary:"Systematic approach to pulseless cardiac arrest per AHA guidelines.",
+  steps:[
+    {t:"Confirm Arrest",d:"Check pulse ≤10 sec. Call for help. Activate code blue. Attach defibrillator."},
+    {t:"Begin High-Quality CPR",d:"Rate 100–120/min, depth 5–6 cm, full recoil. 30:2 if no advanced airway. Minimize interruptions <10 sec."},
+    {t:"Identify Rhythm",d:"<b>Shockable (VF/pVT):</b> Defibrillate 200J biphasic → resume CPR 2 min.<br><b>Non-shockable (PEA/Asystole):</b> CPR + identify reversible causes (Hs & Ts)."},
+    {t:"Epinephrine",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>1 mg IV/IO q3–5 min</span> — Give immediately for non-shockable; after 2nd shock for shockable rhythms."},
+    {t:"Amiodarone (VF/pVT)",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>300 mg IV bolus 1st dose → 150 mg 2nd dose</span>"},
+    {t:"Reversible Causes (Hs & Ts)",d:"Hypovolemia, Hypoxia, H⁺ (acidosis), Hypo/Hyperkalemia, Hypothermia, Tension pneumothorax, Tamponade, Toxins, Thrombosis (PE/coronary)."},
+    {t:"Post-ROSC Care",d:"Target SpO₂ 92–98%, MAP ≥65 mmHg, 12-lead ECG, Targeted Temperature Management 32–36°C for 24h if comatose."}
+  ]
+},
+{
+  id:"sepsis", cat:"Infection", severity:"critical", icon:"thermometer",
+  title:"Sepsis & Septic Shock (Hour-1 Bundle)",
+  summary:"Surviving Sepsis Campaign Hour-1 Bundle for early recognition and resuscitation.",
+  steps:[
+    {t:"Recognize Sepsis",d:"Suspected infection + qSOFA ≥2 (RR ≥22, altered mentation, SBP ≤100). Confirm with SOFA score."},
+    {t:"Measure Lactate",d:"If lactate >2 mmol/L → re-measure within 2–4 hours. Target lactate clearance ≥20%."},
+    {t:"Blood Cultures",d:"Obtain ≥2 sets (aerobic + anaerobic) BEFORE antibiotics. Do not delay antibiotics >45 min for cultures."},
+    {t:"Broad-Spectrum Antibiotics",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Within 1 hour of recognition</span><br>Example: Meropenem 1g IV q8h + Vancomycin 25–30 mg/kg IV loading dose. Adjust per local antibiogram."},
+    {t:"Fluid Resuscitation",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>30 mL/kg crystalloid (LR preferred) within 3 hours</span><br>Reassess with dynamic measures (PLR, PPV, IVC variability)."},
+    {t:"Vasopressors if Refractory",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Norepinephrine 0.1–1 mcg/kg/min (1st line)</span> Target MAP ≥65 mmHg.<br>Add <b>Vasopressin 0.04 U/min</b> as 2nd agent. Consider <b>Epinephrine</b> or <b>Dobutamine</b> if cardiac dysfunction."},
+    {t:"Hydrocortisone (Refractory Shock)",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Hydrocortisone 200 mg/day IV (50 mg q6h)</span> if vasopressor-dependent despite adequate resuscitation."}
+  ]
+},
+{
+  id:"ards", cat:"Respiratory", severity:"critical", icon:"wind",
+  title:"ARDS — Lung Protective Ventilation",
+  summary:"Evidence-based ventilator strategy for Acute Respiratory Distress Syndrome.",
+  steps:[
+    {t:"Diagnosis (Berlin Criteria)",d:"Acute onset ≤7 days, bilateral opacities on CXR (not fully explained by effusions/atelectasis), PaO₂/FiO₂ ratio: Mild ≤300, Moderate ≤200, Severe ≤100."},
+    {t:"Low Tidal Volume",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Vt 6 mL/kg IBW (4–8 range)</span><br>IBW (Male)=50+2.3×(height in inches−60). IBW (Female)=45.5+2.3×(height in inches−60)."},
+    {t:"Plateau Pressure",d:"Target <b>Pplat ≤30 cmH₂O</b>. If >30, reduce Vt to 5→4 mL/kg IBW."},
+    {t:"PEEP-FiO₂ Table",d:"Use ARDSNet Low or High PEEP table. Start FiO₂ to target SpO₂ 88–95%, PaO₂ 55–80 mmHg."},
+    {t:"Prone Positioning",d:"<b>For P/F <150:</b> Prone ≥16 hours/day. Shown to reduce mortality (PROSEVA trial)."},
+    {t:"Conservative Fluids",d:"Target CVP <4 or negative fluid balance once resuscitated (FACTT trial). Improves oxygenation and ventilator-free days."},
+    {t:"Rescue Therapies",d:"Neuromuscular blockade (Cisatracurium) for 48h if severe, inhaled pulmonary vasodilators (iNO/epoprostenol), consider VV-ECMO if refractory."}
+  ]
+},
+{
+  id:"rapid-intubation", cat:"Airway", severity:"urgent", icon:"zap",
+  title:"Rapid Sequence Intubation (RSI)",
+  summary:"Structured approach to emergency airway management in ICU setting.",
+  steps:[
+    {t:"Preparation",d:"Suction, BVM, 2 laryngoscopes (video preferred), ETT (7.0–8.0), bougie, supraglottic airway, surgical airway kit. Preoxygenate 3–5 min (NRB or HFNC 60 L/min)."},
+    {t:"Hemodynamic Optimization",d:"Push-dose <b>Phenylephrine 100 mcg</b> or <b>Epinephrine 10–20 mcg</b> IV if SBP <90. Have vasopressor infusion ready."},
+    {t:"Induction",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Ketamine 1.5–2 mg/kg IV</span> (hemodynamically neutral) OR <span class='dose-pill' style='background:var(--accent);color:#fff'>Etomidate 0.3 mg/kg IV</span> (avoid in sepsis/adrenal insufficiency)."},
+    {t:"Paralytic",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Succinylcholine 1.5 mg/kg IV</span> (onset 45–60 sec) OR <span class='dose-pill' style='background:var(--accent);color:#fff'>Rocuronium 1.2 mg/kg IV</span> (onset 60–90 sec, preferred if hyperkalemia risk)."},
+    {t:"Intubation & Confirmation",d:"Direct/video laryngoscopy. Confirm with EtCO₂ waveform (gold standard), bilateral breath sounds, CXR. Secure tube."},
+    {t:"Post-Intubation",d:"Initiate sedation (Propofol 5–50 mcg/kg/min or Midazolam 1–5 mg/h) + analgesia (Fentanyl 25–200 mcg/h). Set vent: AC mode, Vt 6–8 mL/kg IBW, RR 14–18, PEEP 5, FiO₂ 100%→titrate."}
+  ]
+},
+{
+  id:"status-epilepticus", cat:"Neuro", severity:"critical", icon:"brain",
+  title:"Status Epilepticus",
+  summary:"Time-sensitive staged management of convulsive status epilepticus.",
+  steps:[
+    {t:"Stage 1 (0–5 min): Stabilize",d:"ABCs, O₂, check glucose (treat if <60 mg/dL with D50 25–50 mL IV). Place on monitor, IV access ×2."},
+    {t:"Stage 2 (5–20 min): Benzodiazepines",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Lorazepam 0.1 mg/kg IV (max 4 mg/dose) ×2</span> OR <span class='dose-pill' style='background:var(--accent);color:#fff'>Midazolam 10 mg IM</span> if no IV access."},
+    {t:"Stage 3 (20–40 min): 2nd-Line AED",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Levetiracetam 60 mg/kg IV (max 4500 mg) over 15 min</span> OR <span class='dose-pill' style='background:var(--accent);color:#fff'>Fosphenytoin 20 mg PE/kg IV at 150 mg PE/min</span> OR Valproate 40 mg/kg IV over 10 min."},
+    {t:"Stage 4 (>40 min): Refractory SE",d:"Intubate → continuous infusion: <b>Midazolam 0.2 mg/kg bolus then 0.1–2 mg/kg/h</b> OR <b>Propofol 2 mg/kg bolus then 20–65 mcg/kg/min</b>. Titrate to EEG burst suppression."},
+    {t:"Investigate Etiology",d:"CT head, LP if meningitis/encephalitis suspected, metabolic panel, toxicology, AED levels. MRI when stable."}
+  ]
+},
+{
+  id:"dka", cat:"Metabolic", severity:"urgent", icon:"droplets",
+  title:"Diabetic Ketoacidosis (DKA)",
+  summary:"Systematic management of DKA with insulin, fluids, and electrolyte correction.",
+  steps:[
+    {t:"Diagnosis",d:"Glucose >250, pH <7.3, HCO₃ <18, anion gap >12, positive ketones (serum β-hydroxybutyrate >3 mmol/L). Classify: Mild (pH 7.25–7.3), Moderate (7.0–7.24), Severe (<7.0)."},
+    {t:"Aggressive IV Fluids",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>NS 1–1.5 L/h × 1st hour</span> → then 250–500 mL/h. Switch to 0.45% NS when Na normalizes. Add D5 when glucose <200."},
+    {t:"Potassium First!",d:"<b>Check K⁺ BEFORE insulin.</b> If K⁺ <3.3: hold insulin, give 20–40 mEq/h K⁺. If K⁺ 3.3–5.3: give 20–30 mEq/L in each liter of IV fluid. If K⁺ >5.3: recheck in 2h."},
+    {t:"Insulin Infusion",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>Regular Insulin 0.14 U/kg/h IV</span> (no bolus) OR 0.1 U/kg bolus + 0.1 U/kg/h. Target glucose drop 50–70 mg/dL/h."},
+    {t:"Monitor q1–2h",d:"BMP (glucose, K⁺, Na⁺, bicarb), venous blood gas, anion gap. Resolution: pH >7.3, HCO₃ >15, AG <12, glucose <200."},
+    {t:"Transition to SubQ",d:"When DKA resolved AND patient eating → overlap IV insulin with SubQ insulin by 2 hours. Resume home regimen or start 0.5 U/kg/day (50% basal, 50% bolus)."}
+  ]
+},
+{
+  id:"hypertensive-emergency", cat:"Cardiac", severity:"urgent", icon:"gauge",
+  title:"Hypertensive Emergency",
+  summary:"Management of severe hypertension with end-organ damage.",
+  steps:[
+    {t:"Identify End-Organ Damage",d:"Encephalopathy, ACS, aortic dissection, pulmonary edema, eclampsia, AKI, retinal hemorrhage. SBP usually >180 and/or DBP >120."},
+    {t:"IV Antihypertensives — Choose by Etiology",d:"<b>General:</b> <span class='dose-pill' style='background:var(--accent);color:#fff'>Nicardipine 5–15 mg/h IV</span> or <span class='dose-pill' style='background:var(--accent);color:#fff'>Clevidipine 1–21 mg/h IV</span><br><b>Aortic dissection:</b> Esmolol 500 mcg/kg bolus → 50–200 mcg/kg/min (target HR <60).<br><b>Eclampsia:</b> Labetalol 20 mg IV or Hydralazine 5–10 mg IV + MgSO₄ 4–6 g IV load."},
+    {t:"BP Reduction Targets",d:"<b>General:</b> Reduce MAP by ≤25% in first hour → 160/100 over next 2–6h → normal over 24–48h.<br><b>Aortic dissection:</b> SBP <120 within 20 min.<br><b>Ischemic stroke (if not thrombolysing):</b> <220/120 permissive."},
+    {t:"Monitoring",d:"Arterial line for continuous BP. Neuro checks q15 min. Urine output, troponin, renal function, serial imaging as indicated."}
+  ]
+},
+{
+  id:"massive-transfusion", cat:"Hematology", severity:"critical", icon:"droplet",
+  title:"Massive Transfusion Protocol (MTP)",
+  summary:"Structured approach to life-threatening hemorrhage requiring massive transfusion.",
+  steps:[
+    {t:"Activation Criteria",d:"Anticipated need for ≥10 units pRBC/24h, OR ≥4 units pRBC/1h with ongoing bleeding, OR hemodynamic instability from hemorrhage. ABC score ≥2 can guide activation."},
+    {t:"Ratio-Based Transfusion",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>pRBC : FFP : Platelets → 1:1:1 ratio</span> (PROPPR trial). Deliver in cooler packs of 6 pRBC + 6 FFP + 1 apheresis platelet."},
+    {t:"Tranexamic Acid (TXA)",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>1 g IV over 10 min → 1 g over 8 hours</span> Give within 3 hours of injury (CRASH-2 trial)."},
+    {t:"Calcium Replacement",d:"<span class='dose-pill' style='background:var(--accent);color:#fff'>CaCl₂ 1 g IV per 4 units blood products</span> Citrate in blood products chelates calcium → can cause hypocalcemia and worsen coagulopathy."},
+    {t:"Cryoprecipitate / Fibrinogen",d:"If fibrinogen <1.5 g/L → <span class='dose-pill' style='background:var(--accent);color:#fff'>Cryo 10 units IV</span> or Fibrinogen concentrate 2–4 g IV."},
+    {t:"Monitor & Reassess",d:"TEG/ROTEM if available for goal-directed therapy. Check ABG, iCa²⁺, fibrinogen, CBC q30 min. Target: Temp >36°C, pH >7.2, iCa >1.1, fibrinogen >1.5."}
+  ]
+},
+{
+  id:"ventilator-weaning", cat:"Respiratory", severity:"standard", icon:"wind",
+  title:"Ventilator Liberation (Weaning)",
+  summary:"Systematic daily assessment and SBT protocol for extubation readiness.",
+  steps:[
+    {t:"Daily Readiness Screen",d:"✓ FiO₂ ≤40%, PEEP ≤8, adequate cough, minimal secretions<br>✓ Hemodynamically stable (no/low-dose vasopressors)<br>✓ Neurologically appropriate (follows commands, GCS ≥8T)<br>✓ No planned surgery or procedures"},
+    {t:"Spontaneous Breathing Trial (SBT)",d:"<b>Method:</b> PS 5–8/PEEP 5 or T-piece for <b>30–120 minutes</b>.<br>If daily awakening trial (SAT) paired with SBT, do SAT first (ABCDEF bundle)."},
+    {t:"SBT Failure Criteria",d:"RR >35, SpO₂ <88%, HR >140 or Δ>20%, SBP >180 or <90, agitation, diaphoresis, RSBI >105."},
+    {t:"If SBT Passed",d:"Assess cuff leak (if at risk for post-extubation stridor, give Methylprednisolone 20 mg IV q4h × 4 doses before extubation). Extubate to appropriate O₂ delivery (HFNC preferred for high-risk patients — FLORALI trial)."},
+    {t:"Post-Extubation Monitoring",d:"Monitor closely for 24–48h. Signs of failure: RR >30, accessory muscle use, SpO₂ <92%, stridor. Re-intubate if necessary; consider NIV bridge for COPD/CHF."}
+  ]
+},
+{
+  id:"aki", cat:"Renal", severity:"urgent", icon:"filter",
+  title:"Acute Kidney Injury (AKI)",
+  summary:"KDIGO-based staging, evaluation, and management of AKI in the ICU.",
+  steps:[
+    {t:"KDIGO Staging",d:"<b>Stage 1:</b> Cr ↑ 0.3 mg/dL (48h) or 1.5–1.9× baseline, UO <0.5 mL/kg/h ×6h.<br><b>Stage 2:</b> Cr 2.0–2.9× baseline, UO <0.5 ×12h.<br><b>Stage 3:</b> Cr ≥3× or ≥4.0 or RRT initiation, UO <0.3 ×24h or anuria ×12h."},
+    {t:"Identify Etiology",d:"<b>Pre-renal:</b> FeNa <1%, BUN/Cr >20, hypovolemia, low CO. <b>Intrinsic:</b> ATN (muddy brown casts), AIN (eosinophils, WBC casts), GN. <b>Post-renal:</b> Obstruction (US hydronephrosis)."},
+    {t:"Optimize Hemodynamics",d:"Target MAP ≥65 mmHg. Fluid resuscitate if hypovolemic (balanced crystalloids). Avoid nephrotoxins (NSAIDs, aminoglycosides, contrast). Dose-adjust medications."},
+    {t:"Indications for RRT/Dialysis",d:"<b>Urgent:</b> Refractory hyperkalemia, severe metabolic acidosis (pH <7.1), pulmonary edema unresponsive to diuretics, uremic complications (encephalopathy, pericarditis, bleeding).<br>Consider CRRT for hemodynamic instability."},
+    {t:"Electrolyte Management",d:"<b>Hyperkalemia:</b> CaGluconate 1–3 g IV (stabilize), Insulin 10U + D50 (shift), Kayexalate/Patiromer (remove). Bicarb if acidotic. Monitor K⁺ q2–4h."}
+  ]
+}
+];
+
+const CATEGORIES = ["All",...[...new Set(PROTOCOLS.map(p=>p.cat))]];
+
+// ─── STATE ───
+let activeCategory = "All";
+let searchQuery = "";
+let openProtocols = new Set();
+
+// ─── DEFAULT CONFIG ───
+const defaultConfig = {
+  background_color:"#0f172a",
+  surface_color:"#1e293b",
+  text_color:"#e2e8f0",
+  accent_color:"#38bdf8",
+  secondary_color:"#334155",
+  font_family:"DM Sans",
+  font_size:15,
+  site_title:"ICU Protocols & Emergencies",
+  subtitle:"Critical Care Quick Reference",
+  disclaimer_text:"⚠ For educational use only. Always follow institutional guidelines and verify doses before administration."
+};
+
+// ─── RENDER ───
+function renderTabs(){
+  const bar=document.getElementById('tabBar');
+  bar.innerHTML='';
+  CATEGORIES.forEach(c=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap';
+    btn.setAttribute('role','tab');
+    btn.setAttribute('aria-selected', c===activeCategory);
+    btn.textContent=c;
+    const cfg=window.elementSdk?.config||defaultConfig;
+    btn.style.background=c===activeCategory?cfg.accent_color:cfg.secondary_color;
+    btn.style.color=c===activeCategory?'#0f172a':cfg.text_color;
+    btn.onclick=()=>{activeCategory=c;renderTabs();renderGrid()};
+    bar.appendChild(btn);
+  });
+}
+
+function severityLabel(s){
+  return s==='critical'?'🔴 Critical':s==='urgent'?'🟡 Urgent':'🟢 Standard';
+}
+function severityClass(s){
+  return s==='critical'?'severity-critical':s==='urgent'?'severity-urgent':'severity-standard';
+}
+
+function renderGrid(){
+  const grid=document.getElementById('protocolGrid');
+  const cfg=window.elementSdk?.config||defaultConfig;
+  const q=searchQuery.toLowerCase();
+  const filtered=PROTOCOLS.filter(p=>{
+    const catMatch=activeCategory==='All'||p.cat===activeCategory;
+    const searchMatch=!q||p.title.toLowerCase().includes(q)||p.summary.toLowerCase().includes(q)||p.steps.some(s=>s.t.toLowerCase().includes(q)||s.d.toLowerCase().includes(q));
+    return catMatch&&searchMatch;
+  });
+
+  grid.innerHTML='';
+  if(!filtered.length){
+    grid.innerHTML=`<div class="col-span-full text-center py-12 opacity-50"><i data-lucide="search-x" class="w-10 h-10 mx-auto mb-2"></i><p>No protocols found</p></div>`;
+    lucide.createIcons();
+    return;
+  }
+
+  filtered.forEach((p,i)=>{
+    const isOpen=openProtocols.has(p.id);
+    const card=document.createElement('article');
+    card.className=`protocol-card rounded-xl p-4 fade-in ${severityClass(p.severity)}`;
+    card.style.background=cfg.surface_color;
+    card.style.animationDelay=`${i*0.05}s`;
+
+    let stepsHtml=p.steps.map((s,si)=>`
+      <div class="step-line mb-3">
+        <div class="step-dot" style="background:${cfg.accent_color}">${si+1}</div>
+        <h4 class="font-semibold text-sm mb-1">${s.t}</h4>
+        <p class="text-xs opacity-80 leading-relaxed">${s.d}</p>
+      </div>
+    `).join('');
+
+    card.innerHTML=`
+      <button class="w-full text-left flex items-start gap-3" aria-expanded="${isOpen}">
+        <div class="mt-0.5 p-2 rounded-lg" style="background:${cfg.accent_color}20">
+          <i data-lucide="${p.icon}" class="w-5 h-5" style="color:${cfg.accent_color}"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 class="font-bold text-sm">${p.title}</h3>
+            <span class="text-[10px] opacity-60 mono">${severityLabel(p.severity)}</span>
+          </div>
+          <p class="text-xs opacity-60 mt-0.5">${p.summary}</p>
+        </div>
+        <i data-lucide="${isOpen?'chevron-up':'chevron-down'}" class="w-4 h-4 mt-1 opacity-40 flex-shrink-0"></i>
+      </button>
+      <div class="collapse-content ${isOpen?'open':''}" style="margin-top:${isOpen?'1rem':'0'}">
+        <div class="pt-3 border-t border-white/10">${stepsHtml}</div>
+      </div>
+    `;
+
+    card.querySelector('button').onclick=()=>{
+      if(openProtocols.has(p.id)) openProtocols.delete(p.id); else openProtocols.add(p.id);
+      renderGrid();
+    };
+
+    grid.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+function applyConfig(cfg){
+  const r=document.documentElement.style;
+  r.setProperty('--bg',cfg.background_color);
+  r.setProperty('--surface',cfg.surface_color);
+  r.setProperty('--text',cfg.text_color);
+  r.setProperty('--accent',cfg.accent_color);
+  r.setProperty('--secondary',cfg.secondary_color);
+
+  document.getElementById('app').style.background=cfg.background_color;
+  document.getElementById('app').style.color=cfg.text_color;
+  document.querySelector('header').style.background=cfg.surface_color;
+
+  const font=`${cfg.font_family}, DM Sans, sans-serif`;
+  document.body.style.fontFamily=font;
+
+  const base=cfg.font_size||15;
+  document.getElementById('el-title').querySelector('span').style.fontSize=`${base*1.4}px`;
+  document.getElementById('el-subtitle').style.fontSize=`${base*0.8}px`;
+  document.getElementById('el-disclaimer').style.fontSize=`${base*0.75}px`;
+
+  document.getElementById('el-title').querySelector('span').textContent=cfg.site_title||defaultConfig.site_title;
+  document.getElementById('el-subtitle').textContent=cfg.subtitle||defaultConfig.subtitle;
+  document.getElementById('el-disclaimer').textContent=cfg.disclaimer_text||defaultConfig.disclaimer_text;
+
+  const searchInput=document.getElementById('searchBox');
+  searchInput.style.background=cfg.background_color;
+  searchInput.style.color=cfg.text_color;
+
+  renderTabs();
+  renderGrid();
+}
+
+// ─── SEARCH ───
+document.getElementById('searchBox').addEventListener('input',e=>{
+  searchQuery=e.target.value;
+  renderGrid();
+});
+
+applyConfig(defaultConfig);
+lucide.createIcons();
+</script>
+</body>
+</html>
