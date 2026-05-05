@@ -1,0 +1,661 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Lumbar Puncture | Procedure & CSF Analysis | Deep Medicine</title> <meta name="description" content="Step-by-step lumbar puncture procedure including indications, technique, CSF analysis, and complications in clinical practice."> <link rel="canonical" href="https://deepmedicine.in/learning/procedures/lumbar-puncture"> <!-- Open Graph --> <meta property="og:title" content="Lumbar Puncture | Deep Medicine"> <meta property="og:description" content="Learn lumbar puncture technique, indications, CSF analysis, and complications."> <meta property="og:image" content="https://deepmedicine.in/images/lumbar-puncture.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+        body { font-family: 'Source Sans 3', sans-serif; }
+        .heading-font { font-family: 'Playfair Display', serif; }
+        .section-card { transition: all 0.3s ease; }
+        .section-card:hover { transform: translateY(-2px); }
+        .tab-btn.active { border-bottom: 3px solid var(--primary); color: var(--primary); }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        :root {
+            --bg: #0f1729;
+            --surface: #1a2744;
+            --text: #e8edf5;
+            --primary: #4fc3f7;
+            --secondary: #80cbc4;
+        }
+        .step-number {
+            width: 32px; height: 32px; min-width: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-weight: 700; font-size: 14px;
+        }
+        .anatomy-svg { max-width: 100%; height: auto; }
+        details summary { cursor: pointer; list-style: none; }
+        details summary::-webkit-details-marker { display: none; }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full" style="background: var(--bg); color: var(--text);">
+  <div id="app" class="h-full w-full overflow-auto"><!-- Header -->
+   <header class="w-full py-8 px-4 text-center" style="background: linear-gradient(135deg, #1a2744 0%, #0d2137 50%, #1a3a4a 100%);">
+    <div class="max-w-4xl mx-auto">
+     <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full text-xs font-semibold mb-4" style="background: var(--surface); color: var(--secondary); border: 1px solid var(--secondary);"><i data-lucide="activity" style="width:14px;height:14px;"></i> CLINICAL PROCEDURE GUIDE
+     </div>
+     <h1 id="main-title" class="heading-font text-4xl md:text-5xl lg:text-6xl font-bold mb-3" style="color: var(--primary);">Lumbar Puncture</h1>
+     <p id="main-subtitle" class="text-lg md:text-xl opacity-80">Comprehensive Evidence-Based Clinical Reference</p>
+     <div class="flex flex-wrap justify-center gap-4 mt-6 text-sm opacity-70"><span class="flex items-center gap-1"><i data-lucide="shield-check" style="width:14px;height:14px;"></i> ICD-10: 03HU03Z</span> <span class="flex items-center gap-1"><i data-lucide="book-open" style="width:14px;height:14px;"></i> CPT: 62270</span> <span class="flex items-center gap-1"><i data-lucide="alert-circle" style="width:14px;height:14px;"></i> Sterile Procedure</span>
+     </div>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="sticky top-0 z-50 w-full overflow-x-auto" style="background: var(--surface); border-bottom: 1px solid rgba(79,195,247,0.2);">
+    <div class="max-w-5xl mx-auto flex"><button class="tab-btn active px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="overview">Overview</button> <button class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="indications">Indications</button> <button class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="anatomy">Anatomy</button> <button class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="equipment">Equipment</button> <button class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="technique">Technique</button> <button class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="csf">CSF Analysis</button> <button class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="complications">Complications</button> <button class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" data-tab="paediatric">Paediatric</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-5xl mx-auto px-4 py-8"><!-- Overview -->
+    <section id="tab-overview" class="tab-content fade-in">
+     <div class="grid md:grid-cols-2 gap-6">
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+       <h3 class="text-lg font-bold mb-3 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="info" style="width:20px;height:20px;"></i> Definition</h3>
+       <p class="leading-relaxed opacity-90">Lumbar puncture (spinal tap) is the insertion of a hollow needle into the subarachnoid space of the lumbar cistern, typically at the <strong>L3/L4</strong> or <strong>L4/L5</strong> intervertebral space, to obtain cerebrospinal fluid (CSF) for diagnostic or therapeutic purposes.</p>
+      </div>
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+       <h3 class="text-lg font-bold mb-3 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="target" style="width:20px;height:20px;"></i> Key Landmark</h3>
+       <p class="leading-relaxed opacity-90">The <strong>intercristal line</strong> (Tuffier's line) connects the highest points of both iliac crests and passes through the <strong>L4 spinous process</strong> or L4/L5 interspace. In adults, the spinal cord terminates at the conus medullaris (L1-L2), making L3/L4 and below safe for needle entry.</p>
+      </div>
+      <div class="section-card p-6 rounded-xl md:col-span-2" style="background: var(--surface);">
+       <h3 class="text-lg font-bold mb-3 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="layers" style="width:20px;height:20px;"></i> Layers Traversed (Superficial → Deep)</h3>
+       <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+         <div class="font-bold" style="color: var(--secondary);">
+          1
+         </div>Skin &amp; Subcutaneous tissue
+        </div>
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+         <div class="font-bold" style="color: var(--secondary);">
+          2
+         </div>Supraspinous Ligament
+        </div>
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+         <div class="font-bold" style="color: var(--secondary);">
+          3
+         </div>Interspinous Ligament
+        </div>
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+         <div class="font-bold" style="color: var(--secondary);">
+          4
+         </div>Ligamentum Flavum
+        </div>
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+         <div class="font-bold" style="color: var(--secondary);">
+          5
+         </div>Epidural Space
+        </div>
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+         <div class="font-bold" style="color: var(--secondary);">
+          6
+         </div>Dura Mater
+        </div>
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+         <div class="font-bold" style="color: var(--secondary);">
+          7
+         </div>Arachnoid Mater
+        </div>
+        <div class="p-3 rounded-lg text-center text-sm" style="background: rgba(79,195,247,0.15); border: 1px solid var(--primary);">
+         <div class="font-bold" style="color: var(--primary);">
+          8
+         </div><strong>Subarachnoid Space</strong> (CSF)
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Indications -->
+    <section id="tab-indications" class="tab-content hidden fade-in">
+     <div class="grid md:grid-cols-2 gap-6">
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+       <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="check-circle" style="width:20px;height:20px;"></i> Diagnostic Indications</h3>
+       <ul class="space-y-2 text-sm opacity-90">
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Suspected meningitis (bacterial, viral, TB, fungal)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Subarachnoid haemorrhage (xanthochromia after 12h)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> CNS malignancies (leukaemia, lymphoma, carcinomatous meningitis)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Demyelinating diseases (MS — oligoclonal bands)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Guillain-Barré syndrome (albuminocytologic dissociation)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Measurement of CSF opening pressure (idiopathic intracranial hypertension)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Neurosyphilis, Cryptococcal meningitis</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Normal pressure hydrocephalus (tap test)</li>
+       </ul>
+      </div>
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+       <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="syringe" style="width:20px;height:20px;"></i> Therapeutic Indications</h3>
+       <ul class="space-y-2 text-sm opacity-90">
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Intrathecal chemotherapy (methotrexate, cytarabine)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Intrathecal antibiotics (amphotericin B)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Spinal anaesthesia</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> CSF drainage in idiopathic intracranial hypertension</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Myelography (contrast injection)</li>
+       </ul>
+      </div>
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface); border: 1px solid #ef5350;">
+       <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: #ef5350;"><i data-lucide="x-circle" style="width:20px;height:20px;"></i> Absolute Contraindications</h3>
+       <ul class="space-y-2 text-sm opacity-90">
+        <li class="flex items-start gap-2"><span style="color:#ef5350;">✗</span> Raised ICP with mass effect (risk of cerebral herniation)</li>
+        <li class="flex items-start gap-2"><span style="color:#ef5350;">✗</span> Infection at the puncture site (cellulitis, abscess)</li>
+        <li class="flex items-start gap-2"><span style="color:#ef5350;">✗</span> Spinal epidural abscess at LP site</li>
+       </ul>
+      </div>
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface); border: 1px solid #ffa726;">
+       <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: #ffa726;"><i data-lucide="alert-triangle" style="width:20px;height:20px;"></i> Relative Contraindications</h3>
+       <ul class="space-y-2 text-sm opacity-90">
+        <li class="flex items-start gap-2"><span style="color:#ffa726;">⚠</span> Coagulopathy (INR &gt; 1.5, Platelets &lt; 50,000/μL)</li>
+        <li class="flex items-start gap-2"><span style="color:#ffa726;">⚠</span> Therapeutic anticoagulation (hold warfarin/heparin)</li>
+        <li class="flex items-start gap-2"><span style="color:#ffa726;">⚠</span> Spinal deformity or prior lumbar surgery</li>
+        <li class="flex items-start gap-2"><span style="color:#ffa726;">⚠</span> Uncooperative patient (consider sedation)</li>
+       </ul>
+       <div class="mt-4 p-3 rounded-lg text-sm" style="background: rgba(255,167,38,0.1);"><strong>CT Brain before LP</strong> if: focal neurological deficit, GCS &lt; 13, papilloedema, immunocompromised, new seizures, age &gt; 60 with altered sensorium.
+       </div>
+      </div>
+     </div>
+    </section><!-- Anatomy -->
+    <section id="tab-anatomy" class="tab-content hidden fade-in">
+     <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+      <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="compass" style="width:20px;height:20px;"></i> Relevant Anatomy</h3><!-- SVG Anatomy Diagram -->
+      <div class="flex justify-center mb-6">
+       <svg viewbox="0 0 400 300" class="anatomy-svg" style="max-width: 500px;"><!-- Spine outline --> <rect x="170" y="20" width="60" height="260" rx="8" fill="#1a3a4a" stroke="#4fc3f7" stroke-width="1.5" /> <!-- Vertebrae --> <rect x="175" y="30" width="50" height="20" rx="3" fill="#263f5a" stroke="#80cbc4" stroke-width="1" /> <text x="150" y="44" fill="#80cbc4" font-size="10" text-anchor="end">
+         L1
+        </text> <rect x="175" y="60" width="50" height="20" rx="3" fill="#263f5a" stroke="#80cbc4" stroke-width="1" /> <text x="150" y="74" fill="#80cbc4" font-size="10" text-anchor="end">
+         L2
+        </text> <rect x="175" y="90" width="50" height="20" rx="3" fill="#263f5a" stroke="#80cbc4" stroke-width="1" /> <text x="150" y="104" fill="#80cbc4" font-size="10" text-anchor="end">
+         L3
+        </text> <rect x="175" y="120" width="50" height="20" rx="3" fill="#263f5a" stroke="#80cbc4" stroke-width="1" /> <text x="150" y="134" fill="#80cbc4" font-size="10" text-anchor="end">
+         L4
+        </text> <rect x="175" y="150" width="50" height="20" rx="3" fill="#263f5a" stroke="#80cbc4" stroke-width="1" /> <text x="150" y="164" fill="#80cbc4" font-size="10" text-anchor="end">
+         L5
+        </text> <rect x="175" y="180" width="50" height="25" rx="3" fill="#263f5a" stroke="#80cbc4" stroke-width="1" /> <text x="150" y="196" fill="#80cbc4" font-size="10" text-anchor="end">
+         S1
+        </text> <!-- Conus medullaris --> <path d="M200 30 L200 55 L197 60 L203 60 Z" fill="#ef5350" opacity="0.6" /> <text x="250" y="50" fill="#ef5350" font-size="9">
+         Conus Medullaris (L1-L2)
+        </text> <!-- Cauda equina lines --> <line x1="198" y1="60" x2="195" y2="180" stroke="#ffa726" stroke-width="0.8" opacity="0.5" /> <line x1="200" y1="60" x2="200" y2="180" stroke="#ffa726" stroke-width="0.8" opacity="0.5" /> <line x1="202" y1="60" x2="205" y2="180" stroke="#ffa726" stroke-width="0.8" opacity="0.5" /> <text x="250" y="100" fill="#ffa726" font-size="9">
+         Cauda Equina
+        </text> <!-- Needle --> <line x1="290" y1="115" x2="225" y2="132" stroke="#4fc3f7" stroke-width="2.5" stroke-linecap="round" /> <polygon points="225,132 230,128 228,134" fill="#4fc3f7" /> <text x="292" y="112" fill="#4fc3f7" font-size="9" font-weight="bold">
+         Needle Entry
+        </text> <text x="292" y="124" fill="#4fc3f7" font-size="8">
+         L3/L4 or L4/L5
+        </text> <!-- Iliac crest line --> <line x1="80" y1="134" x2="320" y2="134" stroke="#80cbc4" stroke-width="1" stroke-dasharray="4,3" /> <text x="80" y="128" fill="#80cbc4" font-size="8">
+         Intercristal (Tuffier's) Line → L4
+        </text> <!-- Iliac crests --> <ellipse cx="120" cy="145" rx="30" ry="15" fill="none" stroke="#80cbc4" stroke-width="1" opacity="0.5" /> <ellipse cx="280" cy="145" rx="30" ry="15" fill="none" stroke="#80cbc4" stroke-width="1" opacity="0.5" /> <text x="95" y="168" fill="#80cbc4" font-size="8">
+         Iliac Crest
+        </text> <!-- Legend --> <rect x="30" y="220" width="340" height="65" rx="6" fill="#0f1729" stroke="rgba(79,195,247,0.3)" stroke-width="1" /> <text x="45" y="238" fill="#e8edf5" font-size="9" font-weight="bold">
+         Safe Zone for LP:
+        </text> <text x="45" y="255" fill="#e8edf5" font-size="8" opacity="0.8">
+         • Adults: L3/L4 or L4/L5 (cord ends at L1-L2)
+        </text> <text x="45" y="270" fill="#e8edf5" font-size="8" opacity="0.8">
+         • Neonates: L4/L5 or L5/S1 (cord ends at L3)
+        </text>
+       </svg>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4 text-sm">
+       <div class="p-4 rounded-lg" style="background: rgba(79,195,247,0.08);">
+        <h4 class="font-bold mb-2" style="color: var(--secondary);">CSF Characteristics (Normal)</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• Appearance: Clear, colourless (like water)</li>
+         <li>• Opening pressure: 6–20 cm H₂O (lateral decubitus)</li>
+         <li>• Volume: 120–150 mL total (adults)</li>
+         <li>• Production: ~500 mL/day by choroid plexus</li>
+         <li>• Turnover: ~3–4 times/day</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: rgba(79,195,247,0.08);">
+        <h4 class="font-bold mb-2" style="color: var(--secondary);">Normal CSF Values</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• WBC: 0–5 cells/μL (lymphocytes)</li>
+         <li>• RBC: 0 cells/μL</li>
+         <li>• Protein: 15–45 mg/dL</li>
+         <li>• Glucose: 50–80 mg/dL (⅔ serum glucose)</li>
+         <li>• Gram stain: No organisms</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- Equipment -->
+    <section id="tab-equipment" class="tab-content hidden fade-in">
+     <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+      <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="package" style="width:20px;height:20px;"></i> Equipment Required (LP Tray)</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+       <div class="p-4 rounded-lg" style="background: rgba(79,195,247,0.06); border: 1px solid rgba(79,195,247,0.2);">
+        <h4 class="font-semibold mb-2" style="color: var(--secondary);">Sterile Supplies</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• Sterile gloves &amp; gown</li>
+         <li>• Sterile drapes (fenestrated)</li>
+         <li>• Antiseptic (Chlorhexidine 2% or Povidone-iodine)</li>
+         <li>• Gauze swabs</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: rgba(79,195,247,0.06); border: 1px solid rgba(79,195,247,0.2);">
+        <h4 class="font-semibold mb-2" style="color: var(--secondary);">Anaesthesia</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• Lidocaine 1–2% (3–5 mL)</li>
+         <li>• 25G needle (skin wheal)</li>
+         <li>• 22G needle (deeper infiltration)</li>
+         <li>• 5 mL syringe</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: rgba(79,195,247,0.06); border: 1px solid rgba(79,195,247,0.2);">
+        <h4 class="font-semibold mb-2" style="color: var(--secondary);">Spinal Needles</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• 22G Quincke (cutting) — standard</li>
+         <li>• 25G Whitacre (pencil-point) — less PDPH</li>
+         <li>• 22G Sprotte (pencil-point)</li>
+         <li>• Length: 3.5" (adult), 1.5" (paediatric)</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: rgba(79,195,247,0.06); border: 1px solid rgba(79,195,247,0.2);">
+        <h4 class="font-semibold mb-2" style="color: var(--secondary);">Collection</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• Manometer with 3-way stopcock</li>
+         <li>• 4 sterile collection tubes (numbered)</li>
+         <li>• Tube 1: Chemistry/Serology</li>
+         <li>• Tube 2: Microbiology (Gram stain, C&amp;S)</li>
+         <li>• Tube 3: Cell count (least traumatic)</li>
+         <li>• Tube 4: Special (cytology, PCR)</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: rgba(79,195,247,0.06); border: 1px solid rgba(79,195,247,0.2);">
+        <h4 class="font-semibold mb-2" style="color: var(--secondary);">Additional</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• Adhesive bandage (post-procedure)</li>
+         <li>• Sharps container</li>
+         <li>• Pulse oximeter &amp; BP monitor</li>
+         <li>• Resuscitation trolley nearby</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: rgba(239,83,80,0.08); border: 1px solid rgba(239,83,80,0.3);">
+        <h4 class="font-semibold mb-2" style="color: #ef5350;">Pre-Procedure Checks</h4>
+        <ul class="space-y-1 opacity-90">
+         <li>• Informed written consent</li>
+         <li>• Check coagulation (INR, Platelets)</li>
+         <li>• CT Brain if indicated</li>
+         <li>• Baseline vitals</li>
+         <li>• Time-out / WHO checklist</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- Technique -->
+    <section id="tab-technique" class="tab-content hidden fade-in">
+     <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+      <h3 class="text-lg font-bold mb-2 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="list-ordered" style="width:20px;height:20px;"></i> Step-by-Step Technique</h3>
+      <p class="text-sm opacity-70 mb-6">Standard midline approach in lateral decubitus position</p>
+      <div class="space-y-4">
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         1
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">Patient Positioning</h4>
+         <p class="text-sm opacity-90 mt-1"><strong>Lateral decubitus</strong> (preferred for pressure measurement): Patient lies on their side, knees drawn to chest, chin tucked, back at edge of bed, spine perpendicular to bed. Shoulders and hips stacked vertically. OR <strong>Sitting position</strong>: Patient sits on bed edge, leaning forward over a pillow on a table. Useful in obese patients but cannot measure opening pressure accurately.</p>
+        </div>
+       </div>
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         2
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">Identify Landmarks</h4>
+         <p class="text-sm opacity-90 mt-1">Palpate both iliac crests → draw imaginary intercristal line → identifies L4 spinous process. Palpate the interspinous space at L3/L4 or L4/L5. Mark with skin indentation or marker.</p>
+        </div>
+       </div>
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         3
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">Aseptic Preparation</h4>
+         <p class="text-sm opacity-90 mt-1">Hand hygiene → don sterile gown and gloves. Clean skin in concentric circles (centre outward) with Chlorhexidine 2% (preferred) or Povidone-iodine. Allow to dry (minimum 2 minutes). Apply sterile fenestrated drape.</p>
+        </div>
+       </div>
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         4
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">Local Anaesthesia</h4>
+         <p class="text-sm opacity-90 mt-1">Raise skin wheal with 25G needle using 1–2% Lidocaine (1–2 mL). Infiltrate deeper tissues along planned needle path with 22G needle (additional 2–3 mL). Wait 2–3 minutes for full anaesthetic effect.</p>
+        </div>
+       </div>
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         5
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">Needle Insertion</h4>
+         <p class="text-sm opacity-90 mt-1">Insert spinal needle (bevel parallel to dural fibres / pointing cephalad in lateral position) in the midline, directed slightly cephalad (toward umbilicus). Advance slowly through each tissue layer. A distinct "pop" or "give" is felt traversing the ligamentum flavum and dura (~4–5 cm depth in adults).</p>
+        </div>
+       </div>
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         6
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">Confirm Placement &amp; Measure Pressure</h4>
+         <p class="text-sm opacity-90 mt-1">Remove stylet → CSF should flow freely. If bloody, allow few drops to clear (traumatic tap) or check tube 1 vs tube 4 for decreasing RBC. Attach manometer via 3-way stopcock. Measure opening pressure with patient relaxed (legs slightly extended). Normal: 6–20 cm H₂O. Document opening pressure.</p>
+        </div>
+       </div>
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         7
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">CSF Collection</h4>
+         <p class="text-sm opacity-90 mt-1">Collect CSF passively (never aspirate) into 4 numbered sterile tubes. Collect 1–2 mL per tube (total 8–15 mL typical). Send: Tube 1 → Chemistry; Tube 2 → Microbiology; Tube 3 → Cell count; Tube 4 → Cytology/Special. Measure closing pressure if indicated.</p>
+        </div>
+       </div>
+       <div class="flex gap-4 items-start">
+        <div class="step-number" style="background: var(--primary); color: var(--bg);">
+         8
+        </div>
+        <div>
+         <h4 class="font-bold text-sm" style="color: var(--secondary);">Needle Removal &amp; Post-Procedure</h4>
+         <p class="text-sm opacity-90 mt-1">Replace stylet before withdrawing needle (reduces incidence of PDPH). Apply gentle pressure and adhesive bandage. Patient to lie flat for 30–60 minutes (though evidence for this is debated). Encourage hydration. Monitor vitals. Document procedure, volumes collected, opening/closing pressures, and CSF appearance.</p>
+        </div>
+       </div>
+      </div>
+      <div class="mt-6 p-4 rounded-lg" style="background: rgba(128,203,196,0.1); border: 1px solid rgba(128,203,196,0.3);">
+       <h4 class="font-bold text-sm mb-2" style="color: var(--secondary);">💡 Clinical Pearls</h4>
+       <ul class="text-sm space-y-1 opacity-90">
+        <li>• Bevel orientation parallel to longitudinal dural fibres reduces PDPH incidence</li>
+        <li>• Use atraumatic (pencil-point) needles to reduce post-dural puncture headache by 50%</li>
+        <li>• If bone is hit, withdraw to subcutaneous tissue and redirect — do not simply advance deeper</li>
+        <li>• Paramedian approach may be used in elderly patients with calcified interspinous ligaments</li>
+        <li>• In obese patients, use longer needles (5") and consider sitting position or ultrasound guidance</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- CSF Analysis -->
+    <section id="tab-csf" class="tab-content hidden fade-in">
+     <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+      <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="flask-conical" style="width:20px;height:20px;"></i> CSF Analysis &amp; Interpretation</h3>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm border-collapse">
+        <thead>
+         <tr style="border-bottom: 2px solid var(--primary);">
+          <th class="text-left p-3 font-bold" style="color: var(--primary);">Parameter</th>
+          <th class="text-left p-3 font-bold" style="color: var(--secondary);">Normal</th>
+          <th class="text-left p-3 font-bold" style="color: #ef5350;">Bacterial Meningitis</th>
+          <th class="text-left p-3 font-bold" style="color: #ffa726;">Viral Meningitis</th>
+          <th class="text-left p-3 font-bold" style="color: #ab47bc;">TB Meningitis</th>
+         </tr>
+        </thead>
+        <tbody class="opacity-90">
+         <tr style="border-bottom: 1px solid rgba(79,195,247,0.15);">
+          <td class="p-3 font-medium">Appearance</td>
+          <td class="p-3">Clear</td>
+          <td class="p-3">Turbid/Purulent</td>
+          <td class="p-3">Clear/Slightly hazy</td>
+          <td class="p-3">Clear/Fibrin web</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(79,195,247,0.15);">
+          <td class="p-3 font-medium">Opening Pressure</td>
+          <td class="p-3">6–20 cm H₂O</td>
+          <td class="p-3">↑↑ (&gt;30)</td>
+          <td class="p-3">Normal/↑</td>
+          <td class="p-3">↑</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(79,195,247,0.15);">
+          <td class="p-3 font-medium">WBC (/μL)</td>
+          <td class="p-3">0–5</td>
+          <td class="p-3">1000–10,000+</td>
+          <td class="p-3">50–1000</td>
+          <td class="p-3">50–500</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(79,195,247,0.15);">
+          <td class="p-3 font-medium">Cell Type</td>
+          <td class="p-3">Lymphocytes</td>
+          <td class="p-3">Neutrophils (PMNs)</td>
+          <td class="p-3">Lymphocytes</td>
+          <td class="p-3">Lymphocytes</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(79,195,247,0.15);">
+          <td class="p-3 font-medium">Protein (mg/dL)</td>
+          <td class="p-3">15–45</td>
+          <td class="p-3">↑↑ (100–500+)</td>
+          <td class="p-3">↑ (50–100)</td>
+          <td class="p-3">↑↑ (100–500)</td>
+         </tr>
+         <tr style="border-bottom: 1px solid rgba(79,195,247,0.15);">
+          <td class="p-3 font-medium">Glucose (mg/dL)</td>
+          <td class="p-3">50–80 (⅔ serum)</td>
+          <td class="p-3">↓↓ (&lt;40, &lt;⅓ serum)</td>
+          <td class="p-3">Normal</td>
+          <td class="p-3">↓↓ (&lt;45)</td>
+         </tr>
+         <tr>
+          <td class="p-3 font-medium">Gram Stain/Culture</td>
+          <td class="p-3">Negative</td>
+          <td class="p-3">Positive (60–90%)</td>
+          <td class="p-3">Negative</td>
+          <td class="p-3">AFB (10–20%)</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4 mt-6">
+       <div class="p-4 rounded-lg" style="background: rgba(239,83,80,0.08);">
+        <h4 class="font-bold text-sm mb-2" style="color: #ef5350;">Traumatic Tap vs SAH</h4>
+        <ul class="text-xs space-y-1 opacity-90">
+         <li>• <strong>Traumatic:</strong> RBC decrease tube 1→4, clots present, clear supernatant</li>
+         <li>• <strong>SAH:</strong> RBC same all tubes, no clots, xanthochromia (yellow supernatant after centrifugation &gt;12h)</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-lg" style="background: rgba(171,71,188,0.08);">
+        <h4 class="font-bold text-sm mb-2" style="color: #ab47bc;">Special Tests</h4>
+        <ul class="text-xs space-y-1 opacity-90">
+         <li>• <strong>Oligoclonal bands:</strong> Multiple Sclerosis</li>
+         <li>• <strong>India Ink / CrAg:</strong> Cryptococcus</li>
+         <li>• <strong>VDRL:</strong> Neurosyphilis</li>
+         <li>• <strong>ADA levels:</strong> TB meningitis (&gt;10 IU/L)</li>
+         <li>• <strong>PCR:</strong> HSV, Enterovirus, TB</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- Complications -->
+    <section id="tab-complications" class="tab-content hidden fade-in">
+     <div class="grid md:grid-cols-2 gap-6">
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface); border: 1px solid rgba(239,83,80,0.3);">
+       <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: #ef5350;"><i data-lucide="alert-octagon" style="width:20px;height:20px;"></i> Complications</h3>
+       <div class="space-y-4 text-sm">
+        <details class="group"><summary class="font-semibold flex items-center gap-2 p-2 rounded" style="color: var(--secondary);"> <i data-lucide="chevron-right" style="width:14px;height:14px;" class="group-open:rotate-90 transition-transform"></i> Post-Dural Puncture Headache (PDPH) — Most Common (~30% with cutting needles) </summary>
+         <div class="ml-6 mt-2 opacity-90">
+          <p><strong>Mechanism:</strong> CSF leak through dural defect → low CSF pressure → traction on meninges and intracranial vessels</p>
+          <p class="mt-1"><strong>Features:</strong> Bilateral frontal/occipital headache, worse upright, relieved by lying flat. Onset 24–48h post-LP. May have nausea, tinnitus, photophobia.</p>
+          <p class="mt-1"><strong>Management:</strong> Conservative (bed rest, hydration, caffeine 300–500mg, analgesics). If persistent &gt;48h → Epidural blood patch (10–20 mL autologous blood) — 85–95% effective.</p>
+          <p class="mt-1"><strong>Prevention:</strong> Atraumatic needles, smaller gauge, replace stylet before withdrawal, bevel parallel to dural fibres.</p>
+         </div>
+        </details>
+        <details class="group"><summary class="font-semibold flex items-center gap-2 p-2 rounded" style="color: var(--secondary);"> <i data-lucide="chevron-right" style="width:14px;height:14px;" class="group-open:rotate-90 transition-transform"></i> Back Pain (13%) </summary>
+         <div class="ml-6 mt-2 opacity-90">
+          Localized tenderness at puncture site. Usually self-limiting (days). Treat with NSAIDs.
+         </div>
+        </details>
+        <details class="group"><summary class="font-semibold flex items-center gap-2 p-2 rounded" style="color: var(--secondary);"> <i data-lucide="chevron-right" style="width:14px;height:14px;" class="group-open:rotate-90 transition-transform"></i> Cerebral Herniation (Rare but Fatal) </summary>
+         <div class="ml-6 mt-2 opacity-90">
+          Occurs with raised ICP and mass lesion. Rapidly declining consciousness, pupil dilation, posturing. <strong>Prevention:</strong> CT before LP when indicated. Immediate management: Mannitol, neurosurgical consult.
+         </div>
+        </details>
+        <details class="group"><summary class="font-semibold flex items-center gap-2 p-2 rounded" style="color: var(--secondary);"> <i data-lucide="chevron-right" style="width:14px;height:14px;" class="group-open:rotate-90 transition-transform"></i> Epidural/Subdural Haematoma </summary>
+         <div class="ml-6 mt-2 opacity-90">
+          Risk increased with coagulopathy or anticoagulation. Presents with radiculopathy or cauda equina. MRI for diagnosis. Surgical evacuation if compressive.
+         </div>
+        </details>
+        <details class="group"><summary class="font-semibold flex items-center gap-2 p-2 rounded" style="color: var(--secondary);"> <i data-lucide="chevron-right" style="width:14px;height:14px;" class="group-open:rotate-90 transition-transform"></i> Infection (Rare — iatrogenic meningitis) </summary>
+         <div class="ml-6 mt-2 opacity-90">
+          Incidence &lt;0.01%. Caused by break in aseptic technique. Presents 24–72h with fever, neck stiffness. Treat with antibiotics covering skin flora.
+         </div>
+        </details>
+        <details class="group"><summary class="font-semibold flex items-center gap-2 p-2 rounded" style="color: var(--secondary);"> <i data-lucide="chevron-right" style="width:14px;height:14px;" class="group-open:rotate-90 transition-transform"></i> Nerve Root Irritation / Radiculopathy </summary>
+         <div class="ml-6 mt-2 opacity-90">
+          Transient shooting pain down leg during needle insertion (hits nerve root). Withdraw slightly and redirect. Usually resolves immediately.
+         </div>
+        </details>
+       </div>
+      </div>
+      <div class="section-card p-6 rounded-xl" style="background: var(--surface);">
+       <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: var(--primary);"><i data-lucide="clipboard-check" style="width:20px;height:20px;"></i> Post-Procedure Care</h3>
+       <ul class="space-y-3 text-sm opacity-90">
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Monitor vitals q15min × 1 hour</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Encourage oral fluids (&gt;2L in 24h)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Bed rest 1–4 hours (varies by institution)</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Assess for headache, limb weakness, urinary retention</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Check puncture site for CSF leak or haematoma</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Send samples to laboratory promptly</li>
+        <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Document: indication, consent, position, level, needle type/gauge, attempts, opening/closing pressure, CSF appearance, volumes, complications</li>
+       </ul>
+       <div class="mt-6 p-4 rounded-lg" style="background: rgba(79,195,247,0.08);">
+        <h4 class="font-bold text-sm mb-2" style="color: var(--primary);">When to Seek Help</h4>
+        <ul class="text-xs space-y-1 opacity-90">
+         <li>• Severe/worsening headache not relieved by lying flat</li>
+         <li>• New neurological deficits (leg weakness, numbness)</li>
+         <li>• Urinary retention or incontinence (cauda equina)</li>
+         <li>• Fever post-procedure</li>
+         <li>• Persistent CSF leak from puncture site</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section><!-- Paediatric -->
+    <section id="tab-paediatric" class="tab-content hidden fade-in">
+     <div class="section-card p-6 rounded-xl" style="background: var(--surface); border: 1px solid rgba(128,203,196,0.3);">
+      <h3 class="text-lg font-bold mb-4 flex items-center gap-2" style="color: var(--secondary);"><i data-lucide="baby" style="width:20px;height:20px;"></i> Paediatric Considerations</h3>
+      <div class="grid sm:grid-cols-2 gap-6">
+       <div>
+        <h4 class="font-bold text-sm mb-3" style="color: var(--primary);">Key Differences</h4>
+        <ul class="space-y-2 text-sm opacity-90">
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> <strong>Conus ends at L3</strong> in neonates (vs L1-L2 in adults) — perform LP at <strong>L4/L5 or L5/S1</strong></li>
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Position: <strong>Sitting</strong> (held by assistant) or lateral decubitus with assistant maintaining flexion</li>
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Needle: <strong>22G × 1.5"</strong> (neonates) or <strong>22G × 2.5"</strong> (older children)</li>
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Depth: ~1–1.5 cm in neonates, ~2–3 cm in infants</li>
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Do NOT over-flex neck (risk of airway compromise in neonates)</li>
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Volume: 1–2 mL total in neonates (max 1 mL/kg in children)</li>
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Topical anaesthesia: EMLA cream 60 min prior (or subcutaneous lidocaine)</li>
+         <li class="flex items-start gap-2"><span style="color:var(--secondary);">●</span> Monitor SpO₂ continuously during procedure</li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-bold text-sm mb-3" style="color: var(--primary);">Normal Paediatric CSF Values</h4>
+        <div class="overflow-x-auto">
+         <table class="w-full text-xs border-collapse">
+          <thead>
+           <tr style="border-bottom: 1px solid var(--primary);">
+            <th class="text-left p-2">Parameter</th>
+            <th class="text-left p-2">Neonate</th>
+            <th class="text-left p-2">Infant/Child</th>
+           </tr>
+          </thead>
+          <tbody class="opacity-90">
+           <tr style="border-bottom: 1px solid rgba(79,195,247,0.1);">
+            <td class="p-2">WBC</td>
+            <td class="p-2">0–30/μL</td>
+            <td class="p-2">0–5/μL</td>
+           </tr>
+           <tr style="border-bottom: 1px solid rgba(79,195,247,0.1);">
+            <td class="p-2">Protein</td>
+            <td class="p-2">20–170 mg/dL</td>
+            <td class="p-2">15–45 mg/dL</td>
+           </tr>
+           <tr style="border-bottom: 1px solid rgba(79,195,247,0.1);">
+            <td class="p-2">Glucose</td>
+            <td class="p-2">34–119 mg/dL</td>
+            <td class="p-2">40–80 mg/dL</td>
+           </tr>
+           <tr>
+            <td class="p-2">Opening Pressure</td>
+            <td class="p-2">8–11 cm H₂O</td>
+            <td class="p-2">10–20 cm H₂O</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+        <div class="mt-4 p-3 rounded-lg" style="background: rgba(255,167,38,0.08); border: 1px solid rgba(255,167,38,0.3);">
+         <h5 class="font-bold text-xs mb-1" style="color: #ffa726;">⚠ Neonatal Precautions</h5>
+         <ul class="text-xs space-y-1 opacity-90">
+          <li>• Higher RBC tolerance (up to 500/μL may be normal in term neonates)</li>
+          <li>• Higher protein is normal (especially preterm: up to 170 mg/dL)</li>
+          <li>• Septic neonates may have normal CSF — always correlate clinically</li>
+          <li>• Rule of 2's for suspected bacterial meningitis in neonates: WBC &gt;20, Protein &gt;200, Glucose &lt;20</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="mt-6 p-4 rounded-lg" style="background: rgba(128,203,196,0.08);">
+       <h4 class="font-bold text-sm mb-2" style="color: var(--secondary);">Common Paediatric Indications</h4>
+       <div class="grid sm:grid-cols-3 gap-3 text-xs opacity-90">
+        <div><strong>Neonates (0–28 days):</strong>
+         <ul class="mt-1 space-y-0.5">
+          <li>• Rule out neonatal meningitis/sepsis</li>
+          <li>• Fever without source (&lt;28 days)</li>
+          <li>• Seizures with suspected infection</li>
+         </ul>
+        </div>
+        <div><strong>Infants (1–12 months):</strong>
+         <ul class="mt-1 space-y-0.5">
+          <li>• Febrile seizures (complex/atypical)</li>
+          <li>• Irritability with bulging fontanelle</li>
+          <li>• Suspected encephalitis</li>
+         </ul>
+        </div>
+        <div><strong>Older Children:</strong>
+         <ul class="mt-1 space-y-0.5">
+          <li>• Suspected meningitis (headache, neck stiffness, fever)</li>
+          <li>• Intrathecal chemo (ALL)</li>
+          <li>• Idiopathic intracranial hypertension</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="w-full py-6 px-4 text-center text-xs opacity-50" style="border-top: 1px solid rgba(79,195,247,0.1);">
+    <p>Clinical reference for healthcare professionals. Always follow institutional protocols and guidelines.</p>
+    <p class="mt-1">References: Nelson's Textbook of Pediatrics, Harrison's Principles of Internal Medicine, Oxford Handbook of Clinical Medicine, NICE Guidelines</p>
+   </footer>
+  </div>
+  <script>
+    // Tab navigation
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            contents.forEach(c => c.classList.add('hidden'));
+            const target = document.getElementById('tab-' + btn.dataset.tab);
+            if (target) { target.classList.remove('hidden'); target.classList.add('fade-in'); }
+        });
+    });
+
+    // Element SDK
+    const defaultConfig = {
+        page_title: 'Lumbar Puncture',
+        subtitle: 'Comprehensive Evidence-Based Clinical Reference',
+        background_color: '#0f1729',
+        surface_color: '#1a2744',
+        text_color: '#e8edf5',
+        primary_color: '#4fc3f7',
+        secondary_color: '#80cbc4',
+        font_family: 'Source Sans 3',
+        font_size: 16
+    };
+
+    function applyConfig(config) {
+        const c = { ...defaultConfig, ...config };
+        document.documentElement.style.setProperty('--bg', c.background_color);
+        document.documentElement.style.setProperty('--surface', c.surface_color);
+        document.documentElement.style.setProperty('--text', c.text_color);
+        document.documentElement.style.setProperty('--primary', c.primary_color);
+        document.documentElement.style.setProperty('--secondary', c.secondary_color);
+        document.body.style.background = c.background_color;
+        document.body.style.color = c.text_color;
+        document.getElementById('main-title').textContent = c.page_title;
+        document.getElementById('main-subtitle').textContent = c.subtitle;
+        const font = c.font_family + ', sans-serif';
+        document.body.style.fontFamily = font;
+        const baseSize = c.font_size;
+        document.body.style.fontSize = baseSize + 'px';
+        document.getElementById('main-title').style.fontSize = (baseSize * 3) + 'px';
+        document.getElementById('main-subtitle').style.fontSize = (baseSize * 1.25) + 'px';
+    }
+
+    lucide.createIcons();
+</script>
+</body>
+</html>
