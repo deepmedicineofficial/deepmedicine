@@ -1,0 +1,904 @@
+<!doctype html> 
+<html lang="en" class="h-full"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>CPR | Cardiopulmonary Resuscitation Guide | Deep Medicine</title> <meta name="description" content="Learn CPR (cardiopulmonary resuscitation) with step-by-step chest compressions, ventilation, and emergency life-saving techniques."> <link rel="canonical" href="https://deepmedicine.in/learning/study/cpr"> 
+        <!-- Open Graph --> 
+        <meta property="og:title" content="CPR Guide | Deep Medicine"> 
+        <meta property="og:description" content="Step-by-step cardiopulmonary resuscitation with compression and ventilation techniques."> 
+        <meta property="og:image" content="https://deepmedicine.in/images/cpr.jpg"> 
+        <!-- Styles --> 
+        <script src="https://cdn.tailwindcss.com/3.4.17"></script> 
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+        <!-- Icons --> 
+        <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script> 
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; }
+  .font-display { font-family: 'Playfair Display', serif; }
+
+  .nav-btn { transition: all 0.3s ease; position: relative; }
+  .nav-btn::after {
+    content: ''; position: absolute; bottom: -2px; left: 50%; width: 0;
+    height: 3px; border-radius: 2px; transition: all 0.3s ease; transform: translateX(-50%);
+  }
+  .nav-btn.active::after { width: 60%; }
+  .nav-btn:hover { transform: translateY(-1px); }
+
+  .card-enter { animation: cardSlide 0.4s ease forwards; opacity: 0; }
+  @keyframes cardSlide { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+
+  .pulse-ring { animation: pulseRing 1.8s ease-in-out infinite; }
+  @keyframes pulseRing { 0%,100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 0 12px rgba(220,38,38,0); } }
+
+  .step-line { position: relative; }
+  .step-line::before {
+    content: ''; position: absolute; left: 19px; top: 44px; bottom: -8px;
+    width: 2px; border-radius: 1px;
+  }
+  .step-line:last-child::before { display: none; }
+
+  .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+  .accordion-content.open { max-height: 2000px; }
+
+  .rhythm-card { transition: all 0.3s ease; cursor: pointer; }
+  .rhythm-card:hover { transform: translateY(-3px); }
+
+  .tab-section { display: none; }
+  .tab-section.visible { display: block; animation: cardSlide 0.35s ease forwards; }
+
+  .metric-box { transition: transform 0.2s ease; }
+  .metric-box:hover { transform: scale(1.03); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0f1117;"><!-- Header -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #1a0a0a 0%, #2d0e0e 40%, #0f1117 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #dc2626 0%, transparent 50%), radial-gradient(circle at 80% 20%, #991b1b 0%, transparent 40%);"></div>
+    <div class="relative max-w-5xl mx-auto px-5 py-10 md:py-14">
+     <div class="flex items-center gap-3 mb-4">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center pulse-ring" style="background:#dc2626;"><i data-lucide="heart-pulse" style="width:22px;height:22px;color:#fff;"></i>
+      </div><span class="text-xs font-semibold tracking-widest uppercase" style="color:#f87171;">Evidence-Based Protocol</span>
+     </div>
+     <h1 id="mainTitle" class="font-display text-4xl md:text-5xl font-900 leading-tight mb-3" style="color:#f5f5f5;">CPR &amp; Code<br>
+      Management</h1>
+     <p id="subtitle" class="text-lg md:text-xl font-medium" style="color:#a8a8b3;">From Basic Life Support to Advanced Cardiac Life Support — A Complete Guide</p>
+     <div class="flex flex-wrap gap-3 mt-6"><span class="px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:rgba(220,38,38,0.15);color:#f87171;">AHA 2020 Guidelines</span> <span class="px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:rgba(220,38,38,0.15);color:#f87171;">MBBS / MD Level</span> <span class="px-3 py-1.5 rounded-lg text-xs font-semibold" style="background:rgba(220,38,38,0.15);color:#f87171;">BLS + ACLS</span>
+     </div>
+    </div>
+   </header><!-- Navigation -->
+   <nav class="sticky top-0 z-40 border-b" style="background:rgba(15,17,23,0.95);backdrop-filter:blur(12px);border-color:rgba(255,255,255,0.06);">
+    <div class="max-w-5xl mx-auto px-4 flex gap-1 overflow-x-auto py-2" id="navBar"><button class="nav-btn active px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap" style="color:#f87171;" data-tab="overview" onclick="switchTab('overview')"> <i data-lucide="layout-dashboard" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Overview </button> <button class="nav-btn px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap" style="color:#a8a8b3;" data-tab="bls" onclick="switchTab('bls')"> <i data-lucide="heart" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>BLS </button> <button class="nav-btn px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap" style="color:#a8a8b3;" data-tab="acls" onclick="switchTab('acls')"> <i data-lucide="activity" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>ACLS </button> <button class="nav-btn px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap" style="color:#a8a8b3;" data-tab="rhythms" onclick="switchTab('rhythms')"> <i data-lucide="zap" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Rhythms </button> <button class="nav-btn px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap" style="color:#a8a8b3;" data-tab="drugs" onclick="switchTab('drugs')"> <i data-lucide="syringe" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Drugs </button> <button class="nav-btn px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap" style="color:#a8a8b3;" data-tab="post" onclick="switchTab('post')"> <i data-lucide="shield-check" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Post-ROSC </button> <button class="nav-btn px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap" style="color:#a8a8b3;" data-tab="handt" onclick="switchTab('handt')"> <i data-lucide="search" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>H's &amp; T's </button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-5xl mx-auto px-4 py-8 pb-16"><!-- OVERVIEW -->
+    <section id="tab-overview" class="tab-section visible">
+     <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="metric-box rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="text-3xl font-bold font-display" style="color:#dc2626;">
+        100–120
+       </div>
+       <div class="text-sm mt-1" style="color:#a8a8b3;">
+        Compressions / min
+       </div>
+      </div>
+      <div class="metric-box rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="text-3xl font-bold font-display" style="color:#dc2626;">
+        30 : 2
+       </div>
+       <div class="text-sm mt-1" style="color:#a8a8b3;">
+        Compression : Ventilation
+       </div>
+      </div>
+      <div class="metric-box rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="text-3xl font-bold font-display" style="color:#dc2626;">
+        ≥ 5 cm
+       </div>
+       <div class="text-sm mt-1" style="color:#a8a8b3;">
+        Compression Depth (Adult)
+       </div>
+      </div>
+     </div>
+     <div class="rounded-2xl p-6 border mb-6" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+      <h2 class="font-display text-2xl font-bold mb-4" style="color:#f5f5f5;">Chain of Survival — AHA 2020</h2>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+       <div class="text-center p-3 rounded-xl" style="background:rgba(220,38,38,0.08);">
+        <div class="text-2xl mb-1">
+         📞
+        </div>
+        <div class="text-xs font-semibold" style="color:#f87171;">
+         1. Recognition &amp;<br>
+         Activation
+        </div>
+       </div>
+       <div class="text-center p-3 rounded-xl" style="background:rgba(220,38,38,0.08);">
+        <div class="text-2xl mb-1">
+         🫁
+        </div>
+        <div class="text-xs font-semibold" style="color:#f87171;">
+         2. Early<br>
+         CPR
+        </div>
+       </div>
+       <div class="text-center p-3 rounded-xl" style="background:rgba(220,38,38,0.08);">
+        <div class="text-2xl mb-1">
+         ⚡
+        </div>
+        <div class="text-xs font-semibold" style="color:#f87171;">
+         3. Rapid<br>
+         Defibrillation
+        </div>
+       </div>
+       <div class="text-center p-3 rounded-xl" style="background:rgba(220,38,38,0.08);">
+        <div class="text-2xl mb-1">
+         🏥
+        </div>
+        <div class="text-xs font-semibold" style="color:#f87171;">
+         4. Advanced<br>
+         Life Support
+        </div>
+       </div>
+       <div class="text-center p-3 rounded-xl col-span-2 md:col-span-1" style="background:rgba(220,38,38,0.08);">
+        <div class="text-2xl mb-1">
+         🩺
+        </div>
+        <div class="text-xs font-semibold" style="color:#f87171;">
+         5. Post-Cardiac<br>
+         Arrest Care
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="rounded-2xl p-6 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+      <h2 class="font-display text-xl font-bold mb-4" style="color:#f5f5f5;">Key Metrics at a Glance</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm" style="color:#d1d1d6;">
+        <thead>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+          <th class="text-left py-3 pr-4 font-semibold" style="color:#f87171;">Parameter</th>
+          <th class="text-left py-3 pr-4 font-semibold" style="color:#f87171;">Adult</th>
+          <th class="text-left py-3 pr-4 font-semibold" style="color:#f87171;">Child (1–Puberty)</th>
+          <th class="text-left py-3 font-semibold" style="color:#f87171;">Infant (&lt;1 yr)</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 pr-4 font-medium">Compression Depth</td>
+          <td class="py-2 pr-4">≥ 5 cm (2 in)</td>
+          <td class="py-2 pr-4">≥ 5 cm (⅓ AP)</td>
+          <td class="py-2">4 cm (1.5 in / ⅓ AP)</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 pr-4 font-medium">Rate</td>
+          <td class="py-2 pr-4">100–120/min</td>
+          <td class="py-2 pr-4">100–120/min</td>
+          <td class="py-2">100–120/min</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 pr-4 font-medium">C:V Ratio (1 rescuer)</td>
+          <td class="py-2 pr-4">30:2</td>
+          <td class="py-2 pr-4">30:2</td>
+          <td class="py-2">30:2</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 pr-4 font-medium">C:V Ratio (2 rescuer)</td>
+          <td class="py-2 pr-4">30:2</td>
+          <td class="py-2 pr-4">15:2</td>
+          <td class="py-2">15:2</td>
+         </tr>
+         <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+          <td class="py-2 pr-4 font-medium">Hand Position</td>
+          <td class="py-2 pr-4">2 hands, lower ½ sternum</td>
+          <td class="py-2 pr-4">1–2 hands, lower ½ sternum</td>
+          <td class="py-2">2 fingers / 2 thumb-encircling</td>
+         </tr>
+         <tr>
+          <td class="py-2 pr-4 font-medium">AED Shock (Biphasic)</td>
+          <td class="py-2 pr-4">120–200 J</td>
+          <td class="py-2 pr-4">2 J/kg → 4 J/kg</td>
+          <td class="py-2">2 J/kg → 4 J/kg</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- BLS -->
+    <section id="tab-bls" class="tab-section">
+     <h2 class="font-display text-2xl font-bold mb-6" style="color:#f5f5f5;">Basic Life Support — C-A-B Approach</h2>
+     <div class="space-y-1"><!-- Steps -->
+      <div class="step-line" style="--line-color:#dc2626;">
+       <div class="flex gap-4 pb-6">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">
+         1
+        </div>
+        <div class="flex-1 rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h3 class="font-bold text-lg mb-2" style="color:#f5f5f5;">Scene Safety &amp; Response Check</h3>
+         <ul class="space-y-1.5 text-sm" style="color:#a8a8b3;">
+          <li>• Ensure scene is safe for rescuer and victim</li>
+          <li>• <strong style="color:#f87171;">Tap &amp; Shout</strong>: "Are you okay?" — tap shoulders firmly</li>
+          <li>• Check for <strong style="color:#f87171;">normal breathing</strong> (gasping is NOT normal breathing)</li>
+          <li>• If unresponsive + no normal breathing → <strong style="color:#f87171;">Activate EMS + Get AED</strong></li>
+          <li>• Lone rescuer: use phone on speaker, start CPR immediately</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="step-line">
+       <div class="flex gap-4 pb-6">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">
+         2
+        </div>
+        <div class="flex-1 rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h3 class="font-bold text-lg mb-2" style="color:#f5f5f5;">Pulse Check (Healthcare Provider)</h3>
+         <ul class="space-y-1.5 text-sm" style="color:#a8a8b3;">
+          <li>• <strong style="color:#f87171;">Carotid pulse</strong> for adults/children; <strong style="color:#f87171;">Brachial pulse</strong> for infants</li>
+          <li>• Check for <strong style="color:#f87171;">no more than 10 seconds</strong></li>
+          <li>• If no definite pulse within 10 sec → Begin CPR</li>
+          <li>• If pulse present but no breathing → Rescue breathing (1 breath every 6 sec for adults; every 2–3 sec for infants/children)</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="step-line">
+       <div class="flex gap-4 pb-6">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">
+         C
+        </div>
+        <div class="flex-1 rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h3 class="font-bold text-lg mb-2" style="color:#f5f5f5;">Circulation — Chest Compressions</h3>
+         <ul class="space-y-1.5 text-sm" style="color:#a8a8b3;">
+          <li>• <strong style="color:#f87171;">Heel of hand</strong> on lower half of sternum</li>
+          <li>• Rate: <strong style="color:#f87171;">100–120/min</strong> | Depth: <strong style="color:#f87171;">≥ 5 cm but ≤ 6 cm</strong></li>
+          <li>• Allow <strong style="color:#f87171;">complete chest recoil</strong> — don't lean on chest</li>
+          <li>• Minimize interruptions: <strong style="color:#f87171;">&lt; 10 seconds</strong> pauses</li>
+          <li>• Rotate compressors every <strong style="color:#f87171;">2 minutes</strong> (5 cycles of 30:2)</li>
+          <li>• Hard &amp; Fast, Push &amp; Release — "Stayin' Alive" tempo</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="step-line">
+       <div class="flex gap-4 pb-6">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">
+         A
+        </div>
+        <div class="flex-1 rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h3 class="font-bold text-lg mb-2" style="color:#f5f5f5;">Airway — Open the Airway</h3>
+         <ul class="space-y-1.5 text-sm" style="color:#a8a8b3;">
+          <li>• <strong style="color:#f87171;">Head-tilt, Chin-lift</strong> maneuver (primary technique)</li>
+          <li>• <strong style="color:#f87171;">Jaw-thrust</strong> if suspected cervical spine injury</li>
+          <li>• Suction if visible obstruction; consider oropharyngeal/nasopharyngeal airway</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="step-line">
+       <div class="flex gap-4 pb-6">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">
+         B
+        </div>
+        <div class="flex-1 rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h3 class="font-bold text-lg mb-2" style="color:#f5f5f5;">Breathing — Ventilation</h3>
+         <ul class="space-y-1.5 text-sm" style="color:#a8a8b3;">
+          <li>• <strong style="color:#f87171;">30:2 ratio</strong> (compressions:breaths) without advanced airway</li>
+          <li>• Each breath over <strong style="color:#f87171;">1 second</strong>, visible chest rise</li>
+          <li>• Avoid excessive ventilation — causes gastric insufflation, ↑ intrathoracic pressure, ↓ venous return</li>
+          <li>• With <strong style="color:#f87171;">advanced airway</strong>: Continuous compressions + 1 breath every 6 sec (10 breaths/min)</li>
+          <li>• BVM with O₂ reservoir at 15 L/min → delivers ~100% FiO₂</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="step-line">
+       <div class="flex gap-4 pb-6">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">
+         D
+        </div>
+        <div class="flex-1 rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h3 class="font-bold text-lg mb-2" style="color:#f5f5f5;">Defibrillation — AED Use</h3>
+         <ul class="space-y-1.5 text-sm" style="color:#a8a8b3;">
+          <li>• Use AED <strong style="color:#f87171;">as soon as available</strong></li>
+          <li>• Power ON → Attach pads → Analyze → Shock if advised</li>
+          <li>• <strong style="color:#f87171;">Resume CPR immediately</strong> after shock — do NOT recheck rhythm</li>
+          <li>• Reanalyze every <strong style="color:#f87171;">2 minutes</strong></li>
+          <li>• Anterior-lateral pad placement (right infraclavicular + left axillary)</li>
+          <li>• Special: Water → dry chest; Patches → remove; Pacemaker → place pad 1 inch away</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- BLS Quality Box -->
+     <div class="rounded-2xl p-6 border mt-4" style="background:rgba(220,38,38,0.06);border-color:rgba(220,38,38,0.2);">
+      <h3 class="font-bold text-lg mb-3 flex items-center gap-2" style="color:#f87171;"><i data-lucide="alert-triangle" style="width:18px;height:18px;"></i> High-Quality CPR Checklist</h3>
+      <div class="grid md:grid-cols-2 gap-2 text-sm" style="color:#d1d1d6;">
+       <div>
+        ✅ Rate 100–120/min
+       </div>
+       <div>
+        ✅ Depth ≥ 5 cm (adult)
+       </div>
+       <div>
+        ✅ Full chest recoil
+       </div>
+       <div>
+        ✅ Minimize interruptions (&lt;10 sec)
+       </div>
+       <div>
+        ✅ Avoid excessive ventilation
+       </div>
+       <div>
+        ✅ Rotate compressors q 2 min
+       </div>
+       <div>
+        ✅ Chest compression fraction &gt; 60%
+       </div>
+       <div>
+        ✅ EtCO₂ target ≥ 10 mmHg (if monitored)
+       </div>
+      </div>
+     </div>
+    </section><!-- ACLS -->
+    <section id="tab-acls" class="tab-section">
+     <h2 class="font-display text-2xl font-bold mb-6" style="color:#f5f5f5;">ACLS — Advanced Cardiac Life Support</h2><!-- Code Team Roles -->
+     <div class="rounded-2xl p-3 border mb-6" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+      <h3 class="font-bold text-lg mb-3" style="color:#f87171;">Code Team — Role Assignment</h3>
+      <div class="grid md:grid-cols-3 gap-3">
+       <div class="rounded-xl p-2" style="background:rgba(220,38,38,0.08);">
+        <div class="font-bold text-sm mb-1" style="color:#f5f5f5;">
+         🎯 Team Leader
+        </div>
+        <div class="text-xs" style="color:#a8a8b3;">
+         Directs all actions, assigns roles, makes rhythm/drug decisions, maintains situational awareness
+        </div>
+       </div>
+       <div class="rounded-xl p-2" style="background:rgba(220,38,38,0.08);">
+        <div class="font-bold text-sm mb-1" style="color:#f5f5f5;">
+         💪 Compressor
+        </div>
+        <div class="text-xs" style="color:#a8a8b3;">
+         Delivers high-quality compressions, rotates every 2 min, calls out depth/rate
+        </div>
+       </div>
+       <div class="rounded-xl p-2" style="background:rgba(220,38,38,0.08);">
+        <div class="font-bold text-sm mb-1" style="color:#f5f5f5;">
+         🫁 Airway Manager
+        </div>
+        <div class="text-xs" style="color:#a8a8b3;">
+         BVM ventilation → advanced airway (ETT/SGA), monitors EtCO₂, ensures O₂ flow
+        </div>
+       </div>
+       <div class="rounded-xl p-2" style="background:rgba(220,38,38,0.08);">
+        <div class="font-bold text-sm mb-1" style="color:#f5f5f5;">
+         💉 IV/IO &amp; Medications
+        </div>
+        <div class="text-xs" style="color:#a8a8b3;">
+         Establishes IV/IO access, prepares &amp; administers drugs, flushes with 20 mL NS + elevates extremity
+        </div>
+       </div>
+       <div class="rounded-xl p-2" style="background:rgba(220,38,38,0.08);">
+        <div class="font-bold text-sm mb-1" style="color:#f5f5f5;">
+         ⚡ Defibrillator/Monitor
+        </div>
+        <div class="text-xs" style="color:#a8a8b3;">
+         Operates defibrillator, monitors rhythm, charges during compressions, announces shock
+        </div>
+       </div>
+       <div class="rounded-xl p-2" style="background:rgba(220,38,38,0.08);">
+        <div class="font-bold text-sm mb-1" style="color:#f5f5f5;">
+         📋 Recorder/Timer
+        </div>
+        <div class="text-xs" style="color:#a8a8b3;">
+         Documents events, timestamps drugs &amp; shocks, calls 2-min intervals, tracks epinephrine q3–5 min
+        </div>
+       </div>
+      </div>
+     </div><!-- ACLS Algorithms -->
+     <div class="space-y-3"><!-- Shockable -->
+      <div class="rounded-2xl border overflow-hidden" style="background:#161821;border-color:rgba(255,255,255,0.06);"><button onclick="toggleAccordion(this)" class="w-full text-left p-5 flex items-center justify-between">
+        <div class="flex items-center gap-3"><span class="text-xl">⚡</span>
+         <div>
+          <h3 class="font-bold" style="color:#f5f5f5;">Shockable Rhythms — VF / pVT</h3>
+          <p class="text-xs mt-0.5" style="color:#a8a8b3;">Defibrillation is the definitive treatment</p>
+         </div>
+        </div><i data-lucide="chevron-down" style="width:18px;height:18px;color:#a8a8b3;transition:transform 0.3s;"></i> </button>
+       <div class="accordion-content px-5">
+        <div class="pb-5 text-sm space-y-3" style="color:#d1d1d6;">
+         <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.06);">
+          <p class="font-bold mb-2" style="color:#f87171;">Algorithm Flow:</p>
+          <ol class="space-y-2 ml-4 list-decimal">
+           <li><strong>CPR 2 min</strong> → Rhythm check → VF/pVT identified</li>
+           <li><strong>Shock #1</strong>: Biphasic 120–200 J (or manufacturer dose) / Mono 360 J</li>
+           <li><strong>CPR 2 min immediately</strong> → IV/IO access during compressions</li>
+           <li><strong>Rhythm check</strong> → Still VF/pVT → <strong>Shock #2</strong></li>
+           <li><strong>CPR 2 min</strong> + <strong style="color:#f87171;">Epinephrine 1 mg IV/IO</strong> (then q 3–5 min)</li>
+           <li><strong>Rhythm check</strong> → Still VF/pVT → <strong>Shock #3</strong></li>
+           <li><strong>CPR 2 min</strong> + <strong style="color:#f87171;">Amiodarone 300 mg IV/IO</strong> (1st dose)</li>
+           <li>Continue cycle: CPR → Rhythm check → Shock → Drug</li>
+           <li><strong>Amiodarone 150 mg</strong> (2nd dose) can be given</li>
+           <li>Consider <strong>Lidocaine</strong> if Amiodarone unavailable: 1–1.5 mg/kg → 0.5–0.75 mg/kg</li>
+          </ol>
+         </div>
+         <p><strong style="color:#f87171;">Key point:</strong> Epinephrine starts AFTER 2nd shock. Amiodarone starts AFTER 3rd shock. Every shock is followed by IMMEDIATE CPR — never delay compressions to recheck pulse.</p>
+        </div>
+       </div>
+      </div><!-- Non-Shockable -->
+      <div class="rounded-2xl border overflow-hidden" style="background:#161821;border-color:rgba(255,255,255,0.06);"><button onclick="toggleAccordion(this)" class="w-full text-left p-5 flex items-center justify-between">
+        <div class="flex items-center gap-3"><span class="text-xl">📉</span>
+         <div>
+          <h3 class="font-bold" style="color:#f5f5f5;">Non-Shockable Rhythms — Asystole / PEA</h3>
+          <p class="text-xs mt-0.5" style="color:#a8a8b3;">Focus on CPR, epi, and reversible causes</p>
+         </div>
+        </div><i data-lucide="chevron-down" style="width:18px;height:18px;color:#a8a8b3;transition:transform 0.3s;"></i> </button>
+       <div class="accordion-content px-5">
+        <div class="pb-5 text-sm space-y-3" style="color:#d1d1d6;">
+         <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.06);">
+          <p class="font-bold mb-2" style="color:#f87171;">Algorithm Flow:</p>
+          <ol class="space-y-2 ml-4 list-decimal">
+           <li><strong>CPR 2 min</strong> → Rhythm check → Asystole/PEA identified</li>
+           <li><strong style="color:#f87171;">Epinephrine 1 mg IV/IO ASAP</strong> (then q 3–5 min)</li>
+           <li><strong>CPR 2 min</strong> → Rhythm check</li>
+           <li>If rhythm changes to VF/pVT → Switch to shockable algorithm</li>
+           <li>If still asystole/PEA → Continue CPR + Epi q 3–5 min</li>
+           <li><strong style="color:#f87171;">Aggressively search for H's &amp; T's</strong></li>
+          </ol>
+         </div>
+         <p><strong style="color:#f87171;">Key difference:</strong> Epinephrine given ASAP (not after 2nd shock). No antiarrhythmics. No shocks. Treat the CAUSE — PEA often has a reversible etiology.</p>
+         <p><strong>Confirm Asystole:</strong> Check leads, gain/amplitude, check in 2 leads. "Asystole protocol" — confirm it's not fine VF.</p>
+        </div>
+       </div>
+      </div><!-- Monitoring -->
+      <div class="rounded-2xl border overflow-hidden" style="background:#161821;border-color:rgba(255,255,255,0.06);"><button onclick="toggleAccordion(this)" class="w-full text-left p-5 flex items-center justify-between">
+        <div class="flex items-center gap-3"><span class="text-xl">📊</span>
+         <div>
+          <h3 class="font-bold" style="color:#f5f5f5;">CPR Quality Monitoring (ACLS)</h3>
+          <p class="text-xs mt-0.5" style="color:#a8a8b3;">Quantitative waveform capnography &amp; arterial line</p>
+         </div>
+        </div><i data-lucide="chevron-down" style="width:18px;height:18px;color:#a8a8b3;transition:transform 0.3s;"></i> </button>
+       <div class="accordion-content px-5">
+        <div class="pb-5 text-sm space-y-3" style="color:#d1d1d6;">
+         <div class="grid md:grid-cols-2 gap-3">
+          <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.06);">
+           <p class="font-bold mb-1" style="color:#f87171;">EtCO₂ (Capnography)</p>
+           <ul class="space-y-1">
+            <li>• Target: <strong>≥ 10 mmHg</strong> during CPR</li>
+            <li>• If &lt;10 → improve compression quality</li>
+            <li>• <strong>Sudden rise to ≥ 40 mmHg</strong> → suggests ROSC</li>
+            <li>• Best physiologic indicator of CPR quality</li>
+            <li>• Also confirms ETT placement</li>
+           </ul>
+          </div>
+          <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.06);">
+           <p class="font-bold mb-1" style="color:#f87171;">Arterial Line (if placed)</p>
+           <ul class="space-y-1">
+            <li>• Diastolic pressure <strong>≥ 20 mmHg</strong> target</li>
+            <li>• Correlates with coronary perfusion pressure</li>
+            <li>• If &lt;20 → optimize compressions</li>
+            <li>• Consider vasopressors</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- RHYTHMS -->
+    <section id="tab-rhythms" class="tab-section">
+     <h2 class="font-display text-2xl font-bold mb-6" style="color:#f5f5f5;">Cardiac Arrest Rhythms</h2>
+     <div class="grid md:grid-cols-2 gap-4">
+      <div class="rhythm-card rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-bold" style="background:#dc2626;color:#fff;">SHOCKABLE</span>
+        <h3 class="font-bold" style="color:#f5f5f5;">Ventricular Fibrillation (VF)</h3>
+       </div>
+       <svg viewbox="0 0 300 60" class="w-full mb-3" style="height:60px;"><path d="M0,30 L5,10 L10,50 L15,5 L20,55 L25,15 L30,45 L35,8 L40,52 L45,20 L50,40 L55,12 L60,48 L65,18 L70,42 L75,10 L80,50 L85,25 L90,35 L95,15 L100,45 L105,8 L110,52 L115,20 L120,40 L125,12 L130,48 L135,18 L140,42 L145,10 L150,50 L155,5 L160,55 L165,15 L170,45 L175,8 L180,52 L185,20 L190,40 L195,12 L200,48 L205,18 L210,42 L215,10 L220,50 L225,25 L230,35 L235,15 L240,45 L245,8 L250,52 L255,20 L260,40 L265,12 L270,48 L275,18 L280,42 L285,10 L290,50 L295,25 L300,30" fill="none" stroke="#dc2626" stroke-width="1.5" />
+       </svg>
+       <ul class="text-xs space-y-1" style="color:#a8a8b3;">
+        <li>• Chaotic, irregular electrical activity — no organized QRS</li>
+        <li>• No cardiac output — immediate defibrillation needed</li>
+        <li>• Most common initial rhythm in witnessed adult cardiac arrest</li>
+        <li>• Best prognosis of all arrest rhythms when treated early</li>
+       </ul>
+      </div>
+      <div class="rhythm-card rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-bold" style="background:#dc2626;color:#fff;">SHOCKABLE</span>
+        <h3 class="font-bold" style="color:#f5f5f5;">Pulseless V-Tach (pVT)</h3>
+       </div>
+       <svg viewbox="0 0 300 60" class="w-full mb-3" style="height:60px;"><path d="M0,30 L10,5 L20,55 L30,5 L40,55 L50,5 L60,55 L70,5 L80,55 L90,5 L100,55 L110,5 L120,55 L130,5 L140,55 L150,5 L160,55 L170,5 L180,55 L190,5 L200,55 L210,5 L220,55 L230,5 L240,55 L250,5 L260,55 L270,5 L280,55 L290,5 L300,55" fill="none" stroke="#dc2626" stroke-width="1.5" />
+       </svg>
+       <ul class="text-xs space-y-1" style="color:#a8a8b3;">
+        <li>• Wide, regular QRS complexes — rate usually &gt;150 bpm</li>
+        <li>• Monomorphic or polymorphic morphology</li>
+        <li>• No palpable pulse → treat as cardiac arrest</li>
+        <li>• Polymorphic VT (Torsades) → Magnesium 1–2 g IV</li>
+       </ul>
+      </div>
+      <div class="rhythm-card rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-bold" style="background:#6b7280;color:#fff;">NON-SHOCKABLE</span>
+        <h3 class="font-bold" style="color:#f5f5f5;">Asystole</h3>
+       </div>
+       <svg viewbox="0 0 300 60" class="w-full mb-3" style="height:60px;"><line x1="0" y1="30" x2="300" y2="30" stroke="#6b7280" stroke-width="1.5" /> <path d="M80,30 L82,28 L84,32 L86,30" fill="none" stroke="#6b7280" stroke-width="1" /> <path d="M200,30 L202,28 L204,32 L206,30" fill="none" stroke="#6b7280" stroke-width="1" />
+       </svg>
+       <ul class="text-xs space-y-1" style="color:#a8a8b3;">
+        <li>• Flatline — no ventricular electrical activity</li>
+        <li>• Confirm in 2 leads; check connections, gain</li>
+        <li>• <strong>Do NOT defibrillate</strong> — no rhythm to reset</li>
+        <li>• Worst prognosis — focus on reversible causes (H's &amp; T's)</li>
+       </ul>
+      </div>
+      <div class="rhythm-card rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-2 mb-3"><span class="px-2 py-1 rounded text-xs font-bold" style="background:#6b7280;color:#fff;">NON-SHOCKABLE</span>
+        <h3 class="font-bold" style="color:#f5f5f5;">PEA (Pulseless Electrical Activity)</h3>
+       </div>
+       <svg viewbox="0 0 300 60" class="w-full mb-3" style="height:60px;"><path d="M0,30 L20,30 L22,30 L24,28 L26,10 L28,50 L30,30 L50,30 L70,30 L72,28 L74,10 L76,50 L78,30 L98,30 L118,30 L120,28 L122,10 L124,50 L126,30 L146,30 L166,30 L168,28 L170,10 L172,50 L174,30 L194,30 L214,30 L216,28 L218,10 L220,50 L222,30 L242,30 L262,30 L264,28 L266,10 L268,50 L270,30 L300,30" fill="none" stroke="#6b7280" stroke-width="1.5" />
+       </svg>
+       <ul class="text-xs space-y-1" style="color:#a8a8b3;">
+        <li>• Organized electrical activity but <strong>no palpable pulse</strong></li>
+        <li>• Can look like any rhythm — sinus, bradycardia, etc.</li>
+        <li>• Most commonly has a <strong>reversible cause</strong></li>
+        <li>• Aggressively treat H's &amp; T's — often the best chance at ROSC</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- DRUGS -->
+    <section id="tab-drugs" class="tab-section">
+     <h2 class="font-display text-2xl font-bold mb-6" style="color:#f5f5f5;">Code Medications</h2>
+     <div class="space-y-3"><!-- Drug Cards -->
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-start justify-between mb-3">
+        <div>
+         <h3 class="font-bold text-lg" style="color:#f5f5f5;">Epinephrine (Adrenaline)</h3><span class="text-xs px-2 py-0.5 rounded mt-1 inline-block" style="background:rgba(220,38,38,0.15);color:#f87171;">First-Line Vasopressor</span>
+        </div><span class="text-2xl">💉</span>
+       </div>
+       <div class="grid md:grid-cols-2 gap-4 text-sm" style="color:#d1d1d6;">
+        <div>
+         <p class="font-semibold mb-1" style="color:#f87171;">Dose &amp; Route</p>
+         <ul class="space-y-1">
+          <li>• <strong>1 mg IV/IO</strong> every 3–5 minutes</li>
+          <li>• Follow with <strong>20 mL NS flush</strong></li>
+          <li>• Elevate extremity for 10–20 sec</li>
+         </ul>
+        </div>
+        <div>
+         <p class="font-semibold mb-1" style="color:#f87171;">Timing</p>
+         <ul class="space-y-1">
+          <li>• <strong>VF/pVT:</strong> After 2nd shock</li>
+          <li>• <strong>Asystole/PEA:</strong> As soon as possible</li>
+          <li>• α-1 effects → ↑ coronary perfusion pressure</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-start justify-between mb-3">
+        <div>
+         <h3 class="font-bold text-lg" style="color:#f5f5f5;">Amiodarone</h3><span class="text-xs px-2 py-0.5 rounded mt-1 inline-block" style="background:rgba(220,38,38,0.15);color:#f87171;">Antiarrhythmic — Class III</span>
+        </div><span class="text-2xl">⚡</span>
+       </div>
+       <div class="grid md:grid-cols-2 gap-4 text-sm" style="color:#d1d1d6;">
+        <div>
+         <p class="font-semibold mb-1" style="color:#f87171;">Dose</p>
+         <ul class="space-y-1">
+          <li>• <strong>1st dose: 300 mg</strong> IV/IO bolus</li>
+          <li>• <strong>2nd dose: 150 mg</strong> IV/IO</li>
+          <li>• Pediatric: 5 mg/kg IV/IO (max 300 mg)</li>
+         </ul>
+        </div>
+        <div>
+         <p class="font-semibold mb-1" style="color:#f87171;">Indication</p>
+         <ul class="space-y-1">
+          <li>• <strong>Refractory VF/pVT</strong> — after 3rd shock</li>
+          <li>• K⁺/Na⁺/Ca²⁺ channel + β-blocker activity</li>
+          <li>• Prolongs action potential duration</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-start justify-between mb-3">
+        <div>
+         <h3 class="font-bold text-lg" style="color:#f5f5f5;">Lidocaine</h3><span class="text-xs px-2 py-0.5 rounded mt-1 inline-block" style="background:rgba(220,38,38,0.15);color:#f87171;">Antiarrhythmic — Class Ib</span>
+        </div><span class="text-2xl">💊</span>
+       </div>
+       <div class="text-sm" style="color:#d1d1d6;">
+        <ul class="space-y-1">
+         <li>• <strong>Alternative</strong> to amiodarone if unavailable</li>
+         <li>• 1st dose: <strong>1–1.5 mg/kg</strong> IV/IO</li>
+         <li>• 2nd dose: <strong>0.5–0.75 mg/kg</strong> (every 5–10 min; max 3 mg/kg)</li>
+        </ul>
+       </div>
+      </div>
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <div class="flex items-start justify-between mb-3">
+        <div>
+         <h3 class="font-bold text-lg" style="color:#f5f5f5;">Other Code Medications</h3>
+        </div>
+       </div>
+       <div class="grid md:grid-cols-2 gap-4 text-sm" style="color:#d1d1d6;">
+        <div class="rounded-xl p-3" style="background:rgba(220,38,38,0.06);">
+         <p class="font-bold mb-1" style="color:#f87171;">Magnesium Sulfate</p>
+         <p>1–2 g IV/IO diluted in 10 mL D5W</p>
+         <p class="text-xs mt-1">Indication: <strong>Torsades de Pointes</strong></p>
+        </div>
+        <div class="rounded-xl p-3" style="background:rgba(220,38,38,0.06);">
+         <p class="font-bold mb-1" style="color:#f87171;">Sodium Bicarbonate</p>
+         <p>1 mEq/kg IV</p>
+         <p class="text-xs mt-1">Indication: <strong>Hyperkalemia, TCA overdose, metabolic acidosis</strong></p>
+        </div>
+        <div class="rounded-xl p-3" style="background:rgba(220,38,38,0.06);">
+         <p class="font-bold mb-1" style="color:#f87171;">Calcium Chloride 10%</p>
+         <p>20 mg/kg IV (max 2 g) — via central line preferred</p>
+         <p class="text-xs mt-1">Indication: <strong>Hyperkalemia, hypocalcemia, Ca²⁺ blocker OD</strong></p>
+        </div>
+        <div class="rounded-xl p-3" style="background:rgba(220,38,38,0.06);">
+         <p class="font-bold mb-1" style="color:#f87171;">Atropine</p>
+         <p>1 mg IV q 3–5 min (max 3 mg)</p>
+         <p class="text-xs mt-1">Indication: <strong>Symptomatic bradycardia</strong> (NOT routine in arrest)</p>
+        </div>
+       </div>
+      </div><!-- IV/IO Access -->
+      <div class="rounded-2xl p-5 border" style="background:rgba(220,38,38,0.06);border-color:rgba(220,38,38,0.2);">
+       <h3 class="font-bold mb-2 flex items-center gap-2" style="color:#f87171;"><i data-lucide="info" style="width:16px;height:16px;"></i> Vascular Access Priority</h3>
+       <div class="text-sm" style="color:#d1d1d6;">
+        <p><strong>1st:</strong> IV (peripheral — antecubital preferred) → <strong>2nd:</strong> IO (proximal tibia, humeral head) → <strong>3rd:</strong> Central line (if skilled)</p>
+        <p class="mt-1"><strong>All drugs:</strong> Follow with 20 mL NS bolus + elevate extremity. IO doses = IV doses.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- POST-ROSC -->
+    <section id="tab-post" class="tab-section">
+     <h2 class="font-display text-2xl font-bold mb-6" style="color:#f5f5f5;">Post-ROSC Management</h2>
+     <div class="rounded-2xl p-6 border mb-6" style="background:rgba(220,38,38,0.06);border-color:rgba(220,38,38,0.2);">
+      <h3 class="font-bold text-lg mb-2 flex items-center gap-2" style="color:#f87171;"><i data-lucide="alert-circle" style="width:18px;height:18px;"></i> ROSC = Return of Spontaneous Circulation</h3>
+      <p class="text-sm" style="color:#d1d1d6;">Signs: palpable pulse, sudden sustained ↑ EtCO₂ (typically ≥40 mmHg), arterial pressure wave, spontaneous breathing/movement.</p>
+     </div>
+     <div class="space-y-4">
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <h3 class="font-bold text-lg mb-3" style="color:#f5f5f5;">🫁 Ventilation &amp; Oxygenation</h3>
+       <div class="text-sm space-y-2" style="color:#d1d1d6;">
+        <p>• <strong style="color:#f87171;">Titrate FiO₂</strong> to SpO₂ 92–98% — avoid hyperoxia (causes oxidative injury)</p>
+        <p>• Ventilation rate: <strong>10 breaths/min</strong></p>
+        <p>• Target <strong>EtCO₂ 35–45 mmHg</strong> (normocapnia) — or PaCO₂ 35–45</p>
+        <p>• Avoid hypocapnia (↓ cerebral blood flow) and hypercapnia</p>
+        <p>• Secure advanced airway if not already placed; confirm with waveform capnography</p>
+       </div>
+      </div>
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <h3 class="font-bold text-lg mb-3" style="color:#f5f5f5;">❤️ Hemodynamic Optimization</h3>
+       <div class="text-sm space-y-2" style="color:#d1d1d6;">
+        <p>• Target <strong style="color:#f87171;">SBP ≥ 90 mmHg</strong> or <strong>MAP ≥ 65 mmHg</strong></p>
+        <p>• IV fluid bolus (1–2 L NS) for hypotension</p>
+        <p>• Vasopressors if needed: <strong>Norepinephrine</strong> (0.1–0.5 mcg/kg/min) or <strong>Epinephrine infusion</strong> (0.1–0.5 mcg/kg/min)</p>
+        <p>• 12-Lead ECG — if <strong>STEMI → emergent PCI</strong> (even if comatose)</p>
+        <p>• Dopamine: 5–20 mcg/kg/min (alternative vasopressor)</p>
+       </div>
+      </div>
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <h3 class="font-bold text-lg mb-3" style="color:#f5f5f5;">🧠 Targeted Temperature Management (TTM)</h3>
+       <div class="text-sm space-y-2" style="color:#d1d1d6;">
+        <p>• For <strong style="color:#f87171;">comatose patients</strong> (no meaningful response to verbal commands) after ROSC</p>
+        <p>• Target: <strong>32–36°C for ≥ 24 hours</strong> (AHA 2020: select and maintain constant temp)</p>
+        <p>• Methods: IV cold saline, surface cooling devices, endovascular catheters</p>
+        <p>• <strong>Actively prevent fever</strong> (≥37.7°C) for at least 72 hours</p>
+        <p>• Rewarm slowly: <strong>0.25–0.5°C/hour</strong></p>
+        <p>• Prevents secondary neuronal injury from reperfusion</p>
+       </div>
+      </div>
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <h3 class="font-bold text-lg mb-3" style="color:#f5f5f5;">🔬 Investigations Post-ROSC</h3>
+       <div class="grid md:grid-cols-2 gap-3 text-sm" style="color:#d1d1d6;">
+        <div>
+         <p class="font-semibold mb-1" style="color:#f87171;">Immediate</p>
+         <ul class="space-y-1">
+          <li>• 12-Lead ECG</li>
+          <li>• ABG (pH, lactate, electrolytes)</li>
+          <li>• CBC, BMP, Troponin</li>
+          <li>• Coagulation profile</li>
+          <li>• Chest X-ray</li>
+          <li>• Glucose — treat hypoglycemia</li>
+         </ul>
+        </div>
+        <div>
+         <p class="font-semibold mb-1" style="color:#f87171;">Consider</p>
+         <ul class="space-y-1">
+          <li>• CT Head (if no clear cardiac cause)</li>
+          <li>• CT Pulmonary Angiography (suspected PE)</li>
+          <li>• Echocardiography</li>
+          <li>• Coronary angiography (STEMI/high suspicion ACS)</li>
+          <li>• EEG monitoring (seizure detection)</li>
+          <li>• Toxicology screen</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="rounded-2xl p-5 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+       <h3 class="font-bold text-lg mb-3" style="color:#f5f5f5;">🧪 Neuroprognostication</h3>
+       <div class="text-sm space-y-2" style="color:#d1d1d6;">
+        <p>• <strong style="color:#f87171;">Wait ≥ 72 hours</strong> after ROSC (or after rewarming from TTM) before prognostication</p>
+        <p>• Multimodal approach: clinical exam (pupillary/corneal reflexes, motor response), EEG, SSEP, MRI, NSE biomarkers</p>
+        <p>• No single test should be used alone to predict poor outcome</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- H's and T's -->
+    <section id="tab-handt" class="tab-section">
+     <h2 class="font-display text-2xl font-bold mb-2" style="color:#f5f5f5;">Reversible Causes — The H's &amp; T's</h2>
+     <p class="text-sm mb-6" style="color:#a8a8b3;">Systematically consider these during every cardiac arrest — especially PEA and asystole. Identifying and treating the cause is often the only path to ROSC.</p>
+     <div class="grid md:grid-cols-2 gap-6"><!-- H's -->
+      <div>
+       <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color:#f87171;"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">H</span> The H's</h3>
+       <div class="space-y-3">
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Hypovolemia</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Hx of bleeding/trauma, flat neck veins, narrow pulse pressure on monitor</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> IV crystalloid bolus, blood products (PRBCs), stop hemorrhage source, massive transfusion protocol</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Hypoxia</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Cyanosis, airway obstruction, Hx of respiratory disease</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Effective ventilation with 100% O₂, confirm advanced airway placement, waveform capnography</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Hydrogen Ion (Acidosis)</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> DKA, renal failure, prolonged arrest, sepsis, diarrhea</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Sodium Bicarbonate 1 mEq/kg IV; ventilation (respiratory compensation); treat underlying cause</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Hyper/Hypokalemia</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Renal failure, dialysis patient, medications (ACEi, K-sparing diuretics), ECG changes</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx Hyperkalemia:</strong> Calcium Chloride/Gluconate, NaHCO₃, Insulin + Glucose, Kayexalate, emergent dialysis</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx Hypokalemia:</strong> IV KCl replacement (10–20 mEq/hr peripherally; faster via central line)</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Hypothermia</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Exposure history, cold skin, core temp &lt;35°C</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Active rewarming (warm IV fluids 40°C, warm blankets, body cavity lavage in severe cases). May need prolonged resuscitation — "not dead until warm and dead"</p>
+        </div>
+       </div>
+      </div><!-- T's -->
+      <div>
+       <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color:#f87171;"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style="background:#dc2626;color:#fff;">T</span> The T's</h3>
+       <div class="space-y-3">
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Tension Pneumothorax</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Unilateral absent breath sounds, tracheal deviation, distended neck veins, trauma/ventilated patient</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Needle decompression (2nd ICS, midclavicular or 4th/5th ICS, anterior axillary) → chest tube</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Tamponade (Cardiac)</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Beck's triad (muffled heart sounds, JVD, hypotension), PEA with narrow QRS, pericardial effusion on echo</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Pericardiocentesis (needle or surgical) → definitive surgical repair. Bedside echo is diagnostic gold standard</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Toxins / Overdose</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Pill bottles, medication Hx, toxidromes, young patient, unknown cause arrest</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Specific antidotes — Narcan (opioids), NaHCO₃ (TCA/Na-channel blockers), Intralipid (local anesthetic toxicity), Flumazenil (benzos — use with caution), Digibind (digoxin). Prolonged CPR may be warranted</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Thrombosis — Pulmonary (PE)</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Recent surgery/immobilization, DVT Hx, RV dilation on echo, sudden PEA arrest</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Systemic thrombolytics (tPA 50 mg IV bolus during CPR or alteplase); consider surgical/catheter-directed embolectomy. Continue CPR for 60–90 min after lytic administration</p>
+        </div>
+        <div class="rounded-xl p-4 border" style="background:#161821;border-color:rgba(255,255,255,0.06);">
+         <h4 class="font-bold" style="color:#f5f5f5;">Thrombosis — Coronary (MI)</h4>
+         <p class="text-xs mt-1" style="color:#a8a8b3;"><strong>Clues:</strong> Hx of CAD/chest pain, STEMI on monitor, age/risk factors</p>
+         <p class="text-xs mt-1" style="color:#f87171;"><strong>Tx:</strong> Emergent coronary angiography + PCI (even during ongoing CPR in select cases — cath lab CPR). Consider fibrinolytics if PCI unavailable</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Memory Aid -->
+     <div class="rounded-2xl p-5 border mt-6" style="background:rgba(220,38,38,0.06);border-color:rgba(220,38,38,0.2);">
+      <h3 class="font-bold mb-2" style="color:#f87171;">💡 Quick Memory Aid</h3>
+      <div class="grid md:grid-cols-2 gap-4 text-sm" style="color:#d1d1d6;">
+       <div>
+        <p class="font-semibold" style="color:#f87171;">5 H's:</p>
+        <p>Hypovolemia, Hypoxia, Hydrogen ion, Hyper/Hypokalemia, Hypothermia</p>
+       </div>
+       <div>
+        <p class="font-semibold" style="color:#f87171;">5 T's:</p>
+        <p>Tension pneumothorax, Tamponade, Toxins, Thrombosis (pulmonary), Thrombosis (coronary)</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="text-center py-6 border-t" style="border-color:rgba(255,255,255,0.06);">
+    <p class="text-xs" style="color:#4a4a56;">Based on AHA 2020 Guidelines for CPR &amp; ECC | For educational purposes</p>
+   </footer>
+  </div>
+  <script>
+  // Default config
+  const defaultConfig = {
+    main_title: 'CPR & Code\nManagement',
+    subtitle: 'From Basic Life Support to Advanced Cardiac Life Support — A Complete Guide',
+    background_color: '#0f1117',
+    surface_color: '#161821',
+    text_color: '#f5f5f5',
+    primary_action_color: '#dc2626',
+    secondary_text_color: '#a8a8b3'
+  };
+
+  let currentTab = 'overview';
+
+  function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('visible'));
+    const target = document.getElementById('tab-' + tab);
+    if (target) target.classList.add('visible');
+
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      const isActive = b.dataset.tab === tab;
+      b.classList.toggle('active', isActive);
+      b.style.color = isActive ? (window.elementSdk?.config?.primary_action_color || defaultConfig.primary_action_color) : (window.elementSdk?.config?.secondary_text_color || defaultConfig.secondary_text_color);
+    });
+    lucide.createIcons();
+  }
+
+  function toggleAccordion(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('[data-lucide="chevron-down"]');
+    const isOpen = content.classList.contains('open');
+    content.classList.toggle('open');
+    if (icon) icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+  }
+
+  function applyConfig(config) {
+    const bg = config.background_color || defaultConfig.background_color;
+    const surface = config.surface_color || defaultConfig.surface_color;
+    const text = config.text_color || defaultConfig.text_color;
+    const primary = config.primary_action_color || defaultConfig.primary_action_color;
+    const secondary = config.secondary_text_color || defaultConfig.secondary_text_color;
+    const fontFamily = config.font_family || 'DM Sans, sans-serif';
+    const fontSize = config.font_size || 16;
+
+    const app = document.getElementById('app');
+    app.style.background = bg;
+    app.style.fontFamily = fontFamily;
+
+    // Title
+    const titleEl = document.getElementById('mainTitle');
+    const titleText = config.main_title || defaultConfig.main_title;
+    titleEl.innerHTML = titleText.replace(/\n/g, '<br>');
+    titleEl.style.color = text;
+    titleEl.style.fontSize = (fontSize * 2.8) + 'px';
+
+    const subEl = document.getElementById('subtitle');
+    subEl.textContent = config.subtitle || defaultConfig.subtitle;
+    subEl.style.color = secondary;
+    subEl.style.fontSize = (fontSize * 1.15) + 'px';
+
+    // Recolor surfaces, text, primary accents
+    document.querySelectorAll('[style*="background:#161821"]').forEach(el => el.style.background = surface);
+    document.querySelectorAll('[style*="color:#f5f5f5"]').forEach(el => el.style.color = text);
+    document.querySelectorAll('[style*="color:#a8a8b3"]').forEach(el => el.style.color = secondary);
+    document.querySelectorAll('[style*="color:#f87171"]').forEach(el => el.style.color = primary);
+    document.querySelectorAll('[style*="background:#dc2626"]').forEach(el => el.style.background = primary);
+
+    // Nav active states
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      b.style.color = b.classList.contains('active') ? primary : secondary;
+    });
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      b.style.setProperty('--after-bg', primary);
+    });
+
+    // Metric boxes
+    document.querySelectorAll('.metric-box .font-display').forEach(el => el.style.color = primary);
+
+    // Body font size
+    document.querySelectorAll('.tab-section .text-sm').forEach(el => el.style.fontSize = (fontSize * 0.875) + 'px');
+    document.querySelectorAll('.tab-section .text-xs').forEach(el => el.style.fontSize = (fontSize * 0.75) + 'px');
+    document.querySelectorAll('.tab-section h2').forEach(el => el.style.fontSize = (fontSize * 1.5) + 'px');
+    document.querySelectorAll('.tab-section h3').forEach(el => el.style.fontSize = (fontSize * 1.1) + 'px');
+  }
+
+  // Init icons
+  lucide.createIcons();
+</script>
+</body>
+</html>
