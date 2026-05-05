@@ -1,0 +1,1486 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Lab Values | Normal Ranges & Clinical Interpretation | Deep Medicine</title> <meta name="description" content="Comprehensive guide to lab values including normal ranges, abnormal patterns, and clinical interpretation for diagnosis and critical care."> <link rel="canonical" href="https://deepmedicine.in/clinical/diagnostics/lab-values"> <!-- Open Graph --> <meta property="og:title" content="Lab Values | Deep Medicine"> <meta property="og:description" content="Normal laboratory ranges and clinical interpretation for diagnostic decision-making."> <meta property="og:image" content="https://deepmedicine.in/images/lab-values.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['Fraunces', 'Georgia', 'serif'],
+        body: ['DM Sans', 'system-ui', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  .app-shell { height: 100%; overflow: auto; }
+  .fade-in { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .card-hover { transition: all 0.25s ease; }
+  .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+  .range-bar { height: 6px; border-radius: 3px; position: relative; }
+  .range-marker { width: 3px; height: 14px; border-radius: 2px; position: absolute; top: -4px; }
+  details summary::-webkit-details-marker { display: none; }
+  details summary { list-style: none; }
+  details[open] .chevron-icon { transform: rotate(180deg); }
+  .chevron-icon { transition: transform 0.2s ease; }
+  .tab-btn { transition: all 0.2s ease; }
+  .search-highlight { background: #fef08a; border-radius: 2px; padding: 0 1px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-shell w-full font-body" id="app" style="background:#0f172a;"><!-- Header -->
+   <header class="sticky top-0 z-30" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-bottom:1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-6xl mx-auto px-4 py-4 sm:py-5">
+     <div class="flex items-center gap-3 mb-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#22d3ee;"><i data-lucide="microscope" style="width:22px;height:22px;color:#0f172a;"></i>
+      </div>
+      <div>
+       <h1 id="appTitle" class="font-heading text-xl sm:text-2xl font-bold" style="color:#f1f5f9;">Laboratory Value Interpreter</h1>
+       <p id="appSubtitle" class="text-xs sm:text-sm" style="color:#94a3b8;">Clinical Reference Guide</p>
+      </div>
+     </div><!-- Search -->
+     <div class="relative"><i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2" style="width:16px;height:16px;color:#64748b;"></i> <input id="searchInput" type="text" placeholder="Search any test (e.g., HbA1c, TSH, Creatinine...)" class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2" style="background:#1e293b;color:#f1f5f9;border:1px solid rgba(255,255,255,0.08);--tw-ring-color:#22d3ee;">
+     </div>
+    </div><!-- Category Tabs -->
+    <div id="tabBar" class="max-w-6xl mx-auto px-4 pb-2 flex gap-2 overflow-x-auto" style="scrollbar-width:none;"></div>
+   </header><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-4 py-5">
+    <div id="content" class="space-y-3"></div>
+    <div id="noResults" class="hidden text-center py-16 fade-in"><i data-lucide="search-x" style="width:48px;height:48px;color:#475569;margin:0 auto 12px;display:block;"></i>
+     <p class="text-lg font-semibold" style="color:#94a3b8;">No tests found</p>
+     <p class="text-sm" style="color:#64748b;">Try a different search term</p>
+    </div>
+   </main><!-- Footer -->
+   <footer class="max-w-6xl mx-auto px-4 py-6 text-center" style="border-top:1px solid rgba(255,255,255,0.06);">
+    <p class="text-xs" style="color:#475569;">⚕️ For educational &amp; clinical reference only. Always correlate with clinical findings. Reference ranges may vary by lab methodology.</p>
+   </footer>
+  </div>
+  <script>
+// ============== LAB DATA ==============
+const labData = [
+  // ---- CBC ----
+  {
+    category: "Complete Blood Count",
+    catIcon: "droplets",
+    tests: [
+      {
+        name: "Hemoglobin (Hb)",
+        unit: "g/dL",
+        male: "13.5–17.5",
+        female: "12.0–16.0",
+        child: "11.0–16.0",
+        critical_low: "< 7.0",
+        critical_high: "> 20.0",
+        high: [
+          "Polycythemia vera — clonal myeloproliferative neoplasm with JAK2 mutation",
+          "Chronic hypoxia (COPD, high altitude, cyanotic heart disease)",
+          "Dehydration (relative polycythemia)",
+          "Erythropoietin-secreting tumors (renal cell carcinoma, hepatoma)"
+        ],
+        low: [
+          "Iron deficiency anemia — most common cause worldwide; microcytic hypochromic",
+          "Vitamin B12/Folate deficiency — megaloblastic anemia, macrocytic",
+          "Chronic disease (CKD, malignancy, chronic infections)",
+          "Bone marrow failure (aplastic anemia, leukemia infiltration)",
+          "Acute or chronic hemorrhage",
+          "Hemolytic anemias (autoimmune, hereditary spherocytosis, G6PD deficiency)"
+        ],
+        pearls: "Always evaluate with MCV, MCH, MCHC, reticulocyte count, and peripheral smear. A low Hb with low MCV suggests iron deficiency or thalassemia; with high MCV think B12/folate deficiency or myelodysplasia."
+      },
+      {
+        name: "White Blood Cell Count (WBC)",
+        unit: "×10³/µL",
+        male: "4.5–11.0",
+        female: "4.5–11.0",
+        child: "5.0–13.0",
+        critical_low: "< 2.0",
+        critical_high: "> 30.0",
+        high: [
+          "Bacterial infections — neutrophilic leukocytosis with left shift",
+          "Leukemia (CML: markedly elevated with basophilia; ALL/AML: blasts on smear)",
+          "Inflammatory states (tissue necrosis, burns, MI)",
+          "Corticosteroid use — demargination of neutrophils",
+          "Physiologic leukocytosis (stress, exercise, pregnancy)"
+        ],
+        low: [
+          "Viral infections (HIV, hepatitis, EBV)",
+          "Bone marrow suppression (chemotherapy, radiation, aplastic anemia)",
+          "Autoimmune neutropenia (SLE)",
+          "Overwhelming sepsis (marrow exhaustion)",
+          "Megaloblastic anemia (B12/folate deficiency)",
+          "Hypersplenism"
+        ],
+        pearls: "Always request a differential count. Neutrophilia with bands (left shift) suggests acute bacterial infection. Lymphocytosis in children is physiologic. Eosinophilia points to parasites, allergy, or Hodgkin lymphoma."
+      },
+      {
+        name: "Platelet Count",
+        unit: "×10³/µL",
+        male: "150–400",
+        female: "150–400",
+        child: "150–450",
+        critical_low: "< 50",
+        critical_high: "> 1000",
+        high: [
+          "Reactive thrombocytosis (iron deficiency, infection, post-splenectomy, malignancy)",
+          "Essential thrombocythemia — JAK2/CALR mutation positive",
+          "Chronic myeloid leukemia",
+          "Post-hemorrhage rebound"
+        ],
+        low: [
+          "Immune thrombocytopenic purpura (ITP) — isolated thrombocytopenia, anti-platelet Ab",
+          "Thrombotic thrombocytopenic purpura (TTP) — ADAMTS13 deficiency, pentad",
+          "Disseminated intravascular coagulation (DIC)",
+          "Heparin-induced thrombocytopenia (HIT) — typically >50% drop, 5–10 days post-heparin",
+          "Bone marrow failure/infiltration",
+          "Hypersplenism",
+          "HELLP syndrome in pregnancy"
+        ],
+        pearls: "Always rule out pseudothrombocytopenia (EDTA artifact) by checking a citrated sample. Platelet count <20,000 → risk of spontaneous bleeding. In TTP: schistocytes on smear, elevated LDH, low haptoglobin."
+      },
+      {
+        name: "Mean Corpuscular Volume (MCV)",
+        unit: "fL",
+        male: "80–100",
+        female: "80–100",
+        child: "70–86",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Vitamin B12 or folate deficiency (megaloblastic anemia)",
+          "Myelodysplastic syndrome",
+          "Liver disease and alcoholism",
+          "Hypothyroidism",
+          "Reticulocytosis (reticulocytes are larger than mature RBCs)",
+          "Drug-induced (methotrexate, hydroxyurea, AZT)"
+        ],
+        low: [
+          "Iron deficiency anemia — most common microcytic anemia",
+          "Thalassemia trait — disproportionately low MCV relative to mild anemia",
+          "Anemia of chronic disease (can be normocytic or microcytic)",
+          "Sideroblastic anemia (lead poisoning, pyridoxine deficiency)",
+          "Hemoglobin E disease"
+        ],
+        pearls: "Mentzer index (MCV/RBC count): >13 favors iron deficiency; <13 favors thalassemia trait. RDW is elevated in iron deficiency but normal in thalassemia trait."
+      },
+      {
+        name: "Erythrocyte Sedimentation Rate (ESR)",
+        unit: "mm/hr",
+        male: "0–15",
+        female: "0–20",
+        child: "0–10",
+        critical_low: "",
+        critical_high: "> 100",
+        high: [
+          "Infections (especially chronic: TB, osteomyelitis, endocarditis)",
+          "Autoimmune diseases (SLE, rheumatoid arthritis, polymyalgia rheumatica)",
+          "Malignancy (multiple myeloma — characteristically very high ESR >100)",
+          "Temporal (giant cell) arteritis — ESR >50 is a diagnostic criterion",
+          "Pregnancy (physiologic rise)",
+          "Anemia, renal disease"
+        ],
+        low: [
+          "Polycythemia vera",
+          "Sickle cell disease (altered RBC shape)",
+          "Congestive heart failure",
+          "Extreme leukocytosis",
+          "Hypofibrinogenemia"
+        ],
+        pearls: "ESR >100 mm/hr — consider multiple myeloma, lymphoma, metastatic cancer, severe infection, or giant cell arteritis. ESR is nonspecific; always correlate with CRP for acute-phase response."
+      },
+      {
+        name: "Reticulocyte Count",
+        unit: "%",
+        male: "0.5–1.5",
+        female: "0.5–1.5",
+        child: "0.5–2.0",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Hemolytic anemias (appropriate marrow response to RBC destruction)",
+          "Acute hemorrhage recovery (3–5 days post-bleed)",
+          "Response to iron/B12/folate therapy",
+          "Post-erythropoietin administration"
+        ],
+        low: [
+          "Aplastic anemia — pancytopenia with hypocellular marrow",
+          "Pure red cell aplasia (parvovirus B19, thymoma)",
+          "Nutritional deficiency (iron, B12, folate) — before treatment",
+          "Myelodysplastic syndrome",
+          "Bone marrow infiltration (leukemia, myelofibrosis)"
+        ],
+        pearls: "Corrected reticulocyte count = Retic % × (Patient Hct/45). Reticulocyte Production Index (RPI) >2 = adequate marrow response; <2 = inadequate. Essential for classifying anemia as hyperproliferative vs hypoproliferative."
+      }
+    ]
+  },
+  // ---- METABOLIC PANEL ----
+  {
+    category: "Metabolic Panel",
+    catIcon: "flask-conical",
+    tests: [
+      {
+        name: "Blood Glucose (Fasting)",
+        unit: "mg/dL",
+        male: "70–100",
+        female: "70–100",
+        child: "60–100",
+        critical_low: "< 40",
+        critical_high: "> 500",
+        high: [
+          "Diabetes mellitus (Type 1: autoimmune β-cell destruction; Type 2: insulin resistance)",
+          "Gestational diabetes",
+          "Cushing syndrome (cortisol excess → gluconeogenesis)",
+          "Acromegaly (GH excess → insulin resistance)",
+          "Pheochromocytoma (catecholamine surge)",
+          "Stress hyperglycemia (acute illness, trauma, surgery)",
+          "Drug-induced (corticosteroids, thiazides, atypical antipsychotics)"
+        ],
+        low: [
+          "Insulin overdose/sulfonylurea excess — most common cause in diabetics",
+          "Insulinoma — Whipple's triad: symptoms + low glucose + relief with glucose",
+          "Adrenal insufficiency (cortisol deficiency → impaired gluconeogenesis)",
+          "Severe liver disease (impaired glycogenolysis/gluconeogenesis)",
+          "Sepsis (increased peripheral glucose utilization)",
+          "Alcohol intoxication (inhibits gluconeogenesis)",
+          "Malnutrition/prolonged fasting"
+        ],
+        pearls: "Diagnostic criteria: FPG ≥126 mg/dL, 2-hr OGTT ≥200 mg/dL, HbA1c ≥6.5%, or random glucose ≥200 + symptoms. Impaired fasting glucose: 100–125 mg/dL. Hypoglycemia triad: low glucose + symptoms + relief with treatment."
+      },
+      {
+        name: "HbA1c (Glycated Hemoglobin)",
+        unit: "%",
+        male: "4.0–5.6",
+        female: "4.0–5.6",
+        child: "4.0–5.6",
+        critical_low: "",
+        critical_high: "> 14.0",
+        high: [
+          "Diabetes mellitus — reflects average glucose over 2–3 months",
+          "Pre-diabetes: 5.7–6.4%",
+          "Iron deficiency anemia (prolonged RBC lifespan → more glycation)",
+          "Splenectomy (prolonged RBC lifespan)",
+          "Chronic kidney disease"
+        ],
+        low: [
+          "Hemolytic anemias (shortened RBC lifespan → less glycation time)",
+          "Acute or chronic blood loss",
+          "Hemoglobin variants (HbS, HbC, HbF — may interfere with assay)",
+          "Recent transfusion (dilution with donor RBCs)",
+          "Erythropoietin therapy (younger RBC population)",
+          "Pregnancy (hemodilution + increased RBC turnover)"
+        ],
+        pearls: "ADA target for most adults: <7.0%. HbA1c may be unreliable in conditions altering RBC lifespan. Estimated average glucose (eAG) = 28.7 × HbA1c − 46.7. For elderly/comorbid patients, targets may be relaxed to <8.0%."
+      },
+      {
+        name: "Blood Urea Nitrogen (BUN)",
+        unit: "mg/dL",
+        male: "7–20",
+        female: "7–20",
+        child: "5–18",
+        critical_low: "",
+        critical_high: "> 100",
+        high: [
+          "Pre-renal azotemia (dehydration, CHF, shock) — BUN:Cr ratio >20:1",
+          "Renal failure (acute/chronic kidney disease) — BUN:Cr ~10–15:1",
+          "Post-renal obstruction (BPH, renal calculi, tumors)",
+          "GI bleeding (digested blood → increased urea production)",
+          "High protein diet or catabolic states",
+          "Corticosteroid or tetracycline use"
+        ],
+        low: [
+          "Severe liver disease (decreased urea synthesis)",
+          "Malnutrition/low protein intake",
+          "Overhydration (dilutional)",
+          "Pregnancy (increased GFR + hemodilution)",
+          "SIADH (dilutional)"
+        ],
+        pearls: "BUN:Creatinine ratio is key. >20:1 → pre-renal cause (dehydration, GI bleed). 10–20:1 → intrinsic renal disease. <10:1 → liver disease or malnutrition. Always interpret with serum creatinine and GFR."
+      },
+      {
+        name: "Serum Creatinine",
+        unit: "mg/dL",
+        male: "0.7–1.3",
+        female: "0.6–1.1",
+        child: "0.3–0.7",
+        critical_low: "",
+        critical_high: "> 10.0",
+        high: [
+          "Acute kidney injury (pre-renal, intrinsic, post-renal)",
+          "Chronic kidney disease — correlates with nephron loss",
+          "Rhabdomyolysis (massive muscle breakdown → myoglobin + creatinine release)",
+          "High muscle mass (bodybuilders — physiologic)",
+          "Drug interference (trimethoprim, cimetidine block tubular secretion)",
+          "Dehydration"
+        ],
+        low: [
+          "Low muscle mass (elderly, cachectic patients, amputees)",
+          "Pregnancy (increased GFR)",
+          "Severe liver disease (decreased creatine synthesis)",
+          "Overhydration"
+        ],
+        pearls: "eGFR (CKD-EPI equation) is preferred over serum creatinine alone for assessing kidney function. CKD stages: G1 (≥90), G2 (60–89), G3a (45–59), G3b (30–44), G4 (15–29), G5 (<15 or dialysis). Creatinine is a lagging indicator — 50% nephron loss before significant rise."
+      },
+      {
+        name: "Serum Sodium (Na⁺)",
+        unit: "mEq/L",
+        male: "136–145",
+        female: "136–145",
+        child: "136–145",
+        critical_low: "< 120",
+        critical_high: "> 160",
+        high: [
+          "Diabetes insipidus (central: ADH deficiency; nephrogenic: ADH resistance)",
+          "Dehydration (inadequate water intake, excessive sweating)",
+          "Osmotic diuresis (hyperglycemia, mannitol)",
+          "Cushing syndrome (mineralocorticoid effect of cortisol)",
+          "Hyperaldosteronism (Conn syndrome)"
+        ],
+        low: [
+          "SIADH — euvolemic hyponatremia, concentrated urine, dilute serum",
+          "Congestive heart failure (hypervolemic hyponatremia)",
+          "Cirrhosis with ascites",
+          "Thiazide diuretics — most common drug cause",
+          "Adrenal insufficiency (cortisol + aldosterone deficiency)",
+          "Psychogenic polydipsia",
+          "Hypothyroidism (severe)"
+        ],
+        pearls: "Classify by volume status: hypovolemic, euvolemic, hypervolemic. Check urine Na and osmolality. SIADH: urine Na >40, urine osm >100, serum osm <280. Correct chronic hyponatremia slowly (<8 mEq/L/24hr) to prevent osmotic demyelination syndrome (central pontine myelinolysis)."
+      },
+      {
+        name: "Serum Potassium (K⁺)",
+        unit: "mEq/L",
+        male: "3.5–5.0",
+        female: "3.5–5.0",
+        child: "3.5–5.0",
+        critical_low: "< 2.5",
+        critical_high: "> 6.5",
+        high: [
+          "Acute/chronic kidney disease (decreased excretion)",
+          "Addison disease (aldosterone deficiency → decreased K excretion)",
+          "Type IV RTA (hypoaldosteronism)",
+          "ACE inhibitors, ARBs, K-sparing diuretics, spironolactone",
+          "Rhabdomyolysis, tumor lysis syndrome, hemolysis (K release from cells)",
+          "Metabolic acidosis (H⁺/K⁺ exchange — intracellular K shifts out)",
+          "Pseudohyperkalemia (hemolyzed sample, extreme leukocytosis/thrombocytosis)"
+        ],
+        low: [
+          "Diuretics (loop + thiazide) — most common drug cause",
+          "Vomiting/NG suction (metabolic alkalosis → renal K wasting)",
+          "Diarrhea (direct GI loss)",
+          "Hyperaldosteronism (Conn syndrome)",
+          "Renal tubular acidosis type I and II",
+          "Insulin administration (drives K intracellularly)",
+          "β-agonist use (albuterol → intracellular K shift)"
+        ],
+        pearls: "ECG changes: Hyperkalemia → peaked T waves → widened QRS → sine wave → arrest. Hypokalemia → flattened T, U waves, ST depression. Always check Mg²⁺ — hypomagnesemia causes refractory hypokalemia. K >6.5 or ECG changes → emergency treatment."
+      },
+      {
+        name: "Serum Calcium (Total)",
+        unit: "mg/dL",
+        male: "8.5–10.5",
+        female: "8.5–10.5",
+        child: "8.8–10.8",
+        critical_low: "< 6.0",
+        critical_high: "> 13.0",
+        high: [
+          "Primary hyperparathyroidism — #1 outpatient cause; high PTH + high Ca",
+          "Malignancy — #1 inpatient cause; PTHrP (squamous cell), osteolytic mets, 1,25-D (lymphoma)",
+          "Vitamin D toxicity",
+          "Sarcoidosis/granulomatous disease (macrophage 1-α hydroxylase activity)",
+          "Thiazide diuretics (decreased renal excretion)",
+          "Milk-alkali syndrome",
+          "Immobilization (increased bone resorption)"
+        ],
+        low: [
+          "Hypoparathyroidism (post-surgical, autoimmune, DiGeorge syndrome)",
+          "Vitamin D deficiency (rickets/osteomalacia)",
+          "Chronic kidney disease (decreased 1,25-dihydroxyvitamin D production)",
+          "Hypomagnesemia (impairs PTH secretion and action)",
+          "Acute pancreatitis (saponification of fat with calcium)",
+          "Massive blood transfusion (citrate chelation)",
+          "Pseudohypoparathyroidism (PTH resistance)"
+        ],
+        pearls: "Always correct for albumin: Corrected Ca = Total Ca + 0.8 × (4.0 − albumin). Ionized calcium is the gold standard. Hypercalcemia workup: PTH + PTHrP + 25-OH Vitamin D + 1,25-D. Stones, bones, groans, psychiatric moans = hypercalcemia symptoms."
+      }
+    ]
+  },
+  // ---- LIVER PANEL ----
+  {
+    category: "Liver Function Tests",
+    catIcon: "heart-pulse",
+    tests: [
+      {
+        name: "ALT (Alanine Aminotransferase)",
+        unit: "U/L",
+        male: "7–56",
+        female: "7–45",
+        child: "5–45",
+        critical_low: "",
+        critical_high: "> 1000",
+        high: [
+          "Acute viral hepatitis (A, B, C, D, E) — ALT often >1000",
+          "Drug/toxin-induced hepatitis (acetaminophen toxicity — ALT can exceed 10,000)",
+          "Ischemic hepatitis (shock liver) — massive rise with rapid fall",
+          "Autoimmune hepatitis",
+          "Non-alcoholic fatty liver disease (NAFLD/NASH) — mildly elevated",
+          "Wilson disease, hemochromatosis",
+          "Alcoholic hepatitis (AST:ALT ratio typically >2:1)"
+        ],
+        low: [
+          "Vitamin B6 (pyridoxine) deficiency — ALT requires B6 as cofactor",
+          "Chronic kidney disease on dialysis"
+        ],
+        pearls: "ALT is more liver-specific than AST. AST:ALT ratio >2:1 → alcoholic liver disease. ALT >1000 → acute viral hepatitis, acetaminophen toxicity, or ischemic hepatitis. In NAFLD, ALT is typically mildly elevated (1–3× ULN). ALT may be normal in advanced cirrhosis (burnt-out liver)."
+      },
+      {
+        name: "AST (Aspartate Aminotransferase)",
+        unit: "U/L",
+        male: "10–40",
+        female: "9–32",
+        child: "10–40",
+        critical_low: "",
+        critical_high: "> 1000",
+        high: [
+          "All causes of ALT elevation (hepatic source)",
+          "Myocardial infarction (AST rises 6–12 hrs, peaks 24–48 hrs)",
+          "Skeletal muscle damage/rhabdomyolysis",
+          "Hemolysis (AST present in RBCs)",
+          "Alcoholic hepatitis — classic AST:ALT >2:1 (B6 depletion reduces ALT)"
+        ],
+        low: [
+          "Uremia/chronic kidney disease",
+          "Vitamin B6 deficiency"
+        ],
+        pearls: "AST is found in liver, heart, muscle, kidney, brain, and RBCs — less liver-specific than ALT. De Ritis ratio (AST/ALT): >2 in alcoholic hepatitis, >1 in cirrhosis, <1 in viral hepatitis and NAFLD. Isolated AST elevation → consider cardiac or skeletal muscle source."
+      },
+      {
+        name: "Alkaline Phosphatase (ALP)",
+        unit: "U/L",
+        male: "44–147",
+        female: "44–147",
+        child: "100–400",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Cholestatic liver disease (obstructive jaundice, primary biliary cholangitis, PSC)",
+          "Bone disease — Paget's disease (markedly elevated), osteomalacia, bone metastases",
+          "Pregnancy (placental ALP — physiologic, third trimester)",
+          "Growing children (bone isoform — physiologic)",
+          "Hyperparathyroidism (increased osteoblastic activity)",
+          "Hepatic infiltration (granulomas, amyloidosis, lymphoma)"
+        ],
+        low: [
+          "Hypophosphatasia (rare genetic disorder)",
+          "Hypothyroidism",
+          "Zinc deficiency (ALP is zinc-dependent)",
+          "Pernicious anemia",
+          "Celiac disease (due to zinc/magnesium malabsorption)"
+        ],
+        pearls: "Elevated ALP: determine source with GGT (liver) or 5'-nucleotidase. If GGT also elevated → hepatic source. If GGT normal → bone source. ALP isoforms: liver, bone, intestinal, placental. In children, elevated ALP is physiologic (growth plates)."
+      },
+      {
+        name: "GGT (Gamma-Glutamyl Transferase)",
+        unit: "U/L",
+        male: "9–48",
+        female: "9–32",
+        child: "5–32",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Alcohol abuse — most sensitive marker for chronic alcohol intake",
+          "Cholestatic liver disease (bile duct obstruction, PBC, PSC)",
+          "Enzyme-inducing drugs (phenytoin, carbamazepine, barbiturates, rifampin)",
+          "NAFLD/NASH",
+          "Pancreatic disease",
+          "Congestive heart failure (hepatic congestion)"
+        ],
+        low: [
+          "Generally not clinically significant"
+        ],
+        pearls: "GGT is the most sensitive marker for biliary disease and alcohol use. Used to differentiate hepatic vs bone source of elevated ALP. GGT elevated + ALP elevated = hepatic origin. GGT elevated alone in an otherwise healthy person → consider alcohol use."
+      },
+      {
+        name: "Total Bilirubin",
+        unit: "mg/dL",
+        male: "0.1–1.2",
+        female: "0.1–1.2",
+        child: "0.1–1.0",
+        critical_low: "",
+        critical_high: "> 15.0 (neonates)",
+        high: [
+          "Pre-hepatic (unconjugated): Hemolytic anemias, Gilbert syndrome, ineffective erythropoiesis",
+          "Hepatic: Viral hepatitis, alcoholic/drug-induced hepatitis, cirrhosis",
+          "Post-hepatic (conjugated): Bile duct obstruction (gallstones, pancreatic head tumor, cholangiocarcinoma)",
+          "Neonatal jaundice — physiologic (days 2–5) vs pathologic (within 24 hrs)",
+          "Crigler-Najjar syndrome (absent/deficient UGT1A1)",
+          "Dubin-Johnson syndrome (conjugated, benign — dark liver pigment)"
+        ],
+        low: [
+          "Not clinically significant"
+        ],
+        pearls: "Direct (conjugated) >50% total → cholestatic/obstructive. Indirect (unconjugated) predominant → hemolysis or Gilbert syndrome. Gilbert's: mild unconjugated hyperbilirubinemia exacerbated by fasting/stress, benign. Kernicterus: neonatal bilirubin toxicity → basal ganglia damage."
+      },
+      {
+        name: "Serum Albumin",
+        unit: "g/dL",
+        male: "3.5–5.5",
+        female: "3.5–5.5",
+        child: "3.5–5.5",
+        critical_low: "< 1.5",
+        critical_high: "",
+        high: [
+          "Dehydration (hemoconcentration — relative increase)",
+          "Exogenous albumin infusion"
+        ],
+        low: [
+          "Chronic liver disease/cirrhosis — decreased synthesis (half-life ~21 days)",
+          "Nephrotic syndrome — urinary protein loss >3.5 g/day",
+          "Malnutrition/protein-calorie malnutrition (kwashiorkor)",
+          "Protein-losing enteropathy",
+          "Chronic inflammatory states (negative acute-phase reactant)",
+          "Burns (capillary leak + catabolism)",
+          "Pregnancy (hemodilution)"
+        ],
+        pearls: "Albumin is the best marker of synthetic liver function (along with PT/INR). Hypoalbuminemia <2.5 g/dL causes edema (reduced oncotic pressure). Always correct calcium for albumin level. Albumin <3.0 in hospitalized patients = poor prognostic indicator."
+      },
+      {
+        name: "Prothrombin Time / INR",
+        unit: "seconds / ratio",
+        male: "11–13.5 / 0.8–1.1",
+        female: "11–13.5 / 0.8–1.1",
+        child: "11–14 / 0.8–1.2",
+        critical_low: "",
+        critical_high: "INR > 4.0",
+        high: [
+          "Warfarin therapy — therapeutic INR 2.0–3.0 for most indications",
+          "Liver disease/cirrhosis (decreased factor synthesis: I, II, V, VII, IX, X)",
+          "Vitamin K deficiency (malabsorption, antibiotics, cholestasis)",
+          "DIC (consumption of clotting factors)",
+          "Factor VII deficiency (shortest half-life, first to decline in liver disease)",
+          "Massive transfusion (dilutional coagulopathy)"
+        ],
+        low: [
+          "Hypercoagulable states (rarely cause shortened PT)",
+          "Vitamin K supplementation (in deficient patients)"
+        ],
+        pearls: "PT measures extrinsic pathway (Factor VII) + common pathway (X, V, II, fibrinogen). INR standardizes PT across labs. In liver disease, PT/INR is the most sensitive early indicator of synthetic function. In DIC: prolonged PT + PTT + low fibrinogen + elevated D-dimer + thrombocytopenia."
+      }
+    ]
+  },
+  // ---- LIPID PANEL ----
+  {
+    category: "Lipid Panel",
+    catIcon: "activity",
+    tests: [
+      {
+        name: "Total Cholesterol",
+        unit: "mg/dL",
+        male: "< 200 desirable",
+        female: "< 200 desirable",
+        child: "< 170 desirable",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Primary hyperlipidemia (familial hypercholesterolemia — LDL receptor mutation)",
+          "Hypothyroidism (decreased LDL receptor expression)",
+          "Nephrotic syndrome (increased hepatic lipoprotein synthesis)",
+          "Cholestasis/obstructive liver disease",
+          "Diet high in saturated fats",
+          "Cushing syndrome, diabetes mellitus"
+        ],
+        low: [
+          "Hyperthyroidism (increased LDL receptor activity)",
+          "Liver failure (decreased synthesis)",
+          "Malnutrition/malabsorption",
+          "Abetalipoproteinemia (rare)",
+          "Chronic illness/critical illness"
+        ],
+        pearls: "Classification: Desirable <200, Borderline 200–239, High ≥240. Total cholesterol alone is insufficient — always evaluate LDL, HDL, triglycerides, and non-HDL cholesterol. 10-year ASCVD risk calculator guides treatment decisions."
+      },
+      {
+        name: "LDL Cholesterol",
+        unit: "mg/dL",
+        male: "< 100 optimal",
+        female: "< 100 optimal",
+        child: "< 110 optimal",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Familial hypercholesterolemia (heterozygous: LDL 200–400; homozygous: >500)",
+          "Diet high in saturated/trans fats",
+          "Hypothyroidism",
+          "Nephrotic syndrome",
+          "Diabetes mellitus (small dense LDL — more atherogenic)",
+          "Obesity, sedentary lifestyle",
+          "Drugs (thiazides, anabolic steroids, progestins)"
+        ],
+        low: [
+          "Hyperthyroidism",
+          "Statin therapy (therapeutic)",
+          "Malabsorption, malnutrition",
+          "Severe liver disease"
+        ],
+        pearls: "ACC/AHA targets: Very high risk (prior ASCVD) <70 or >50% reduction. High risk <100. LDL is calculated (Friedewald): LDL = TC − HDL − TG/5 (invalid if TG >400). Direct LDL measurement when TG elevated. Consider Lp(a) in patients with premature ASCVD."
+      },
+      {
+        name: "HDL Cholesterol",
+        unit: "mg/dL",
+        male: "> 40",
+        female: "> 50",
+        child: "> 45",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Regular aerobic exercise (most effective lifestyle modifier)",
+          "Moderate alcohol consumption",
+          "Estrogen therapy",
+          "Genetic factors (familial hyperalphalipoproteinemia)",
+          "Niacin therapy"
+        ],
+        low: [
+          "Metabolic syndrome (low HDL + high TG + central obesity + hyperglycemia + HTN)",
+          "Smoking (reduces HDL 5–10%)",
+          "Physical inactivity",
+          "Type 2 diabetes",
+          "Obesity",
+          "Androgen or anabolic steroid use",
+          "Hypertriglyceridemia (inverse relationship with TG)"
+        ],
+        pearls: "HDL performs reverse cholesterol transport — cardioprotective. Every 1 mg/dL increase in HDL → 2–3% decrease in CVD risk. TC/HDL ratio: <5 desirable, <3.5 ideal. Very high HDL (>100) may not confer additional benefit — consider CETP deficiency."
+      },
+      {
+        name: "Triglycerides",
+        unit: "mg/dL",
+        male: "< 150 normal",
+        female: "< 150 normal",
+        child: "< 130 normal",
+        critical_low: "",
+        critical_high: "> 500",
+        high: [
+          "Metabolic syndrome / obesity",
+          "Poorly controlled diabetes mellitus (insulin drives lipoprotein lipase)",
+          "Alcohol excess",
+          "Hypothyroidism",
+          "Nephrotic syndrome",
+          "Diet high in refined carbohydrates and sugars",
+          "Drugs (thiazides, β-blockers, estrogens, retinoids, protease inhibitors)",
+          "Familial hypertriglyceridemia"
+        ],
+        low: [
+          "Hyperthyroidism",
+          "Malnutrition/malabsorption",
+          "Abetalipoproteinemia"
+        ],
+        pearls: "TG >500 mg/dL → risk of acute pancreatitis (especially >1000). Classify: Normal <150, Borderline 150–199, High 200–499, Very high ≥500. Must fast 9–12 hrs for accurate level. Non-HDL cholesterol (TC − HDL) is a better predictor of CVD risk when TG elevated."
+      }
+    ]
+  },
+  // ---- THYROID ----
+  {
+    category: "Thyroid Function",
+    catIcon: "shield",
+    tests: [
+      {
+        name: "TSH (Thyroid-Stimulating Hormone)",
+        unit: "mIU/L",
+        male: "0.4–4.0",
+        female: "0.4–4.0",
+        child: "0.7–6.4",
+        critical_low: "< 0.01",
+        critical_high: "> 50",
+        high: [
+          "Primary hypothyroidism — Hashimoto's thyroiditis (most common cause, anti-TPO/anti-Tg Ab)",
+          "Iodine deficiency (globally most common cause)",
+          "Post-radioiodine ablation or thyroidectomy",
+          "Drug-induced: lithium, amiodarone (type 1 hypothyroidism), interferon",
+          "Subclinical hypothyroidism (elevated TSH, normal T4)",
+          "TSH-secreting pituitary adenoma (rare — elevated TSH + elevated T4)",
+          "Recovery phase of non-thyroidal illness"
+        ],
+        low: [
+          "Hyperthyroidism — Graves' disease (TSI/TRAb positive, diffuse goiter, ophthalmopathy)",
+          "Toxic multinodular goiter, toxic adenoma",
+          "Subacute thyroiditis (de Quervain's — painful, viral, triphasic course)",
+          "Exogenous thyroid hormone excess (factitious or iatrogenic)",
+          "Central hypothyroidism (pituitary/hypothalamic — low TSH + low T4)",
+          "First trimester pregnancy (hCG cross-reacts with TSH receptor)",
+          "Amiodarone-induced thyrotoxicosis (type 2)",
+          "Non-thyroidal illness (sick euthyroid — low T3, low/normal TSH)"
+        ],
+        pearls: "TSH is the BEST screening test for thyroid disorders. High TSH + low FT4 = primary hypothyroidism. Low TSH + high FT4 = hyperthyroidism. Low TSH + low FT4 = central hypothyroidism. In pregnancy: TSH normally lower in 1st trimester (hCG effect)."
+      },
+      {
+        name: "Free T4 (Thyroxine)",
+        unit: "ng/dL",
+        male: "0.8–1.8",
+        female: "0.8–1.8",
+        child: "0.8–2.0",
+        critical_low: "< 0.5",
+        critical_high: "> 5.0",
+        high: [
+          "Graves' disease — most common cause of hyperthyroidism",
+          "Toxic multinodular goiter",
+          "Subacute/silent thyroiditis (thyroid destruction → hormone release)",
+          "Exogenous T4 administration (factitious thyrotoxicosis)",
+          "TSH-secreting pituitary adenoma (elevated FT4 + inappropriately normal/high TSH)",
+          "Thyroid storm (clinical emergency: FT4 markedly elevated + tachycardia, fever, AMS)"
+        ],
+        low: [
+          "Primary hypothyroidism (Hashimoto's) — most common",
+          "Central hypothyroidism (pituitary failure, Sheehan syndrome, pituitary tumor)",
+          "Severe non-thyroidal illness (sick euthyroid)",
+          "Drug-induced: lithium, amiodarone"
+        ],
+        pearls: "Free T4 (not total T4) reflects biologically active hormone. Total T4 is affected by TBG levels (elevated in pregnancy, OCP, hepatitis; decreased in nephrotic syndrome). T4 is a prohormone — converted to active T3 peripherally by deiodinases."
+      },
+      {
+        name: "Free T3 (Triiodothyronine)",
+        unit: "pg/mL",
+        male: "2.0–4.4",
+        female: "2.0–4.4",
+        child: "2.0–5.0",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "T3 thyrotoxicosis — elevated T3 with normal T4 (early Graves', toxic adenoma)",
+          "Graves' disease",
+          "Exogenous T3 (liothyronine) use",
+          "Subacute thyroiditis (early phase)"
+        ],
+        low: [
+          "Sick euthyroid syndrome (low T3 syndrome) — impaired peripheral conversion",
+          "Severe illness, starvation, post-surgical state",
+          "Drug-induced: amiodarone, propranolol, corticosteroids (inhibit 5'-deiodinase)",
+          "Hypothyroidism (advanced)"
+        ],
+        pearls: "T3 is the most metabolically active thyroid hormone (3–5× potency of T4). T3 thyrotoxicosis: check T3 when TSH is suppressed but FT4 is normal. In sick euthyroid: low T3 is an adaptive response — generally do not treat. Amiodarone blocks T4→T3 conversion."
+      }
+    ]
+  },
+  // ---- RENAL ----
+  {
+    category: "Renal Function",
+    catIcon: "droplet",
+    tests: [
+      {
+        name: "eGFR (Estimated Glomerular Filtration Rate)",
+        unit: "mL/min/1.73m²",
+        male: "> 90 normal",
+        female: "> 90 normal",
+        child: "> 90 normal",
+        critical_low: "< 15",
+        critical_high: "",
+        high: [
+          "Hyperfiltration (early diabetic nephropathy, pregnancy)",
+          "High protein intake (transient GFR increase)",
+          "Low muscle mass (creatinine-based eGFR may overestimate)"
+        ],
+        low: [
+          "Chronic kidney disease — staged by eGFR: G1(≥90), G2(60–89), G3a(45–59), G3b(30–44), G4(15–29), G5(<15)",
+          "Acute kidney injury",
+          "Diabetic nephropathy (#1 cause of ESRD)",
+          "Hypertensive nephrosclerosis (#2 cause of ESRD)",
+          "Glomerulonephritis (IgA nephropathy, membranous, FSGS)",
+          "Polycystic kidney disease",
+          "Obstructive uropathy"
+        ],
+        pearls: "CKD-EPI 2021 equation (creatinine-based) is recommended. Cystatin C-based eGFR is more accurate when muscle mass is atypical. CKD requires eGFR <60 or kidney damage markers for >3 months. Refer to nephrology at eGFR <30. Dialysis typically initiated at eGFR <10–15 with symptoms."
+      },
+      {
+        name: "Uric Acid",
+        unit: "mg/dL",
+        male: "3.5–7.2",
+        female: "2.6–6.0",
+        child: "2.0–5.5",
+        critical_low: "",
+        critical_high: "> 12.0",
+        high: [
+          "Gout — monosodium urate crystal deposition (podagra = 1st MTP joint)",
+          "Tumor lysis syndrome (massive cell turnover → purine release)",
+          "Chronic kidney disease (decreased excretion)",
+          "Myeloproliferative/lymphoproliferative disorders",
+          "Thiazide and loop diuretics",
+          "Lead nephropathy (saturnine gout)",
+          "High purine diet (organ meats, shellfish, beer)",
+          "Metabolic syndrome, obesity"
+        ],
+        low: [
+          "Allopurinol/febuxostat therapy (xanthine oxidase inhibitors)",
+          "SIADH (uricosuric effect of volume expansion)",
+          "Fanconi syndrome (proximal tubular dysfunction → uric acid wasting)",
+          "Wilson disease",
+          "Xanthine oxidase deficiency (rare)"
+        ],
+        pearls: "Gout diagnosis: negatively birefringent needle-shaped crystals under polarized microscopy of joint aspirate. Pseudogout (CPPD): rhomboid, positively birefringent. Asymptomatic hyperuricemia generally not treated. Tumor lysis: allopurinol (prevention) or rasburicase (treatment)."
+      },
+      {
+        name: "Urinalysis — Protein",
+        unit: "qualitative",
+        male: "Negative",
+        female: "Negative",
+        child: "Negative",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Diabetic nephropathy (microalbuminuria → macroalbuminuria → nephrotic range)",
+          "Nephrotic syndrome (>3.5 g/day): minimal change, membranous, FSGS, diabetic",
+          "Nephritic syndrome: IgA nephropathy, post-streptococcal GN, lupus nephritis",
+          "Hypertensive nephropathy",
+          "Preeclampsia (proteinuria + hypertension after 20 weeks gestation)",
+          "Orthostatic proteinuria (benign, adolescents — absent in morning sample)",
+          "Transient proteinuria (fever, exercise, stress — resolves)"
+        ],
+        low: [
+          "Not applicable — absence of proteinuria is normal"
+        ],
+        pearls: "Dipstick detects albumin only (misses Bence Jones/light chains). Confirm with spot urine protein:creatinine ratio (UPCR) or 24-hr urine protein. UPCR >3.5 g/g = nephrotic range. Microalbuminuria (30–300 mg/day) is earliest sign of diabetic nephropathy — screen annually in DM."
+      }
+    ]
+  },
+  // ---- IRON STUDIES ----
+  {
+    category: "Iron Studies & Hematinics",
+    catIcon: "magnet",
+    tests: [
+      {
+        name: "Serum Iron",
+        unit: "µg/dL",
+        male: "60–170",
+        female: "50–170",
+        child: "50–120",
+        critical_low: "",
+        critical_high: "> 300",
+        high: [
+          "Hemochromatosis (hereditary — HFE gene C282Y mutation)",
+          "Iron overdose/poisoning",
+          "Hemolytic anemias (iron released from destroyed RBCs)",
+          "Sideroblastic anemia (defective iron utilization)",
+          "Multiple blood transfusions (transfusional iron overload)",
+          "Megaloblastic anemia (ineffective erythropoiesis)"
+        ],
+        low: [
+          "Iron deficiency anemia (most common cause of anemia worldwide)",
+          "Chronic disease/inflammation (hepcidin-mediated iron sequestration)",
+          "Chronic blood loss (menorrhagia, GI bleeding)",
+          "Malabsorption (celiac disease, post-gastrectomy)",
+          "Pregnancy (increased demand)"
+        ],
+        pearls: "Serum iron alone is insufficient — always order complete iron studies (iron, TIBC, ferritin, transferrin saturation). Iron has diurnal variation (higher AM) and is affected by recent meals. In iron deficiency: low iron, high TIBC, low ferritin, low TSAT."
+      },
+      {
+        name: "Ferritin",
+        unit: "ng/mL",
+        male: "20–250",
+        female: "10–120",
+        child: "10–140",
+        critical_low: "< 10",
+        critical_high: "> 1000",
+        high: [
+          "Iron overload (hemochromatosis, transfusional siderosis)",
+          "Acute/chronic inflammation — ferritin is an acute-phase reactant",
+          "Liver disease (hepatocyte damage releases stored ferritin)",
+          "Malignancy (especially hepatocellular carcinoma)",
+          "Hemophagocytic lymphohistiocytosis (HLH) — markedly elevated (>10,000)",
+          "Adult-onset Still's disease (very high ferritin, >1000)",
+          "Renal failure"
+        ],
+        low: [
+          "Iron deficiency anemia — ferritin <15 is virtually diagnostic",
+          "Chronic blood loss (GI, menstrual)",
+          "Malnutrition",
+          "Celiac disease (malabsorption)"
+        ],
+        pearls: "Ferritin is the BEST single test for iron deficiency (most sensitive and specific). BUT ferritin is also an acute-phase reactant — can be elevated in inflammation even with concurrent iron deficiency. In inflammatory states, ferritin <100 may still indicate iron deficiency. Ferritin >1000 → investigate hemochromatosis, malignancy, HLH, or Still's."
+      },
+      {
+        name: "TIBC (Total Iron-Binding Capacity)",
+        unit: "µg/dL",
+        male: "250–370",
+        female: "250–370",
+        child: "250–400",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Iron deficiency anemia — liver produces more transferrin to capture iron",
+          "Pregnancy",
+          "Oral contraceptive use",
+          "Acute hepatitis"
+        ],
+        low: [
+          "Anemia of chronic disease (inflammation suppresses transferrin synthesis)",
+          "Iron overload/hemochromatosis",
+          "Chronic liver disease/cirrhosis (decreased transferrin synthesis)",
+          "Nephrotic syndrome (urinary transferrin loss)",
+          "Malnutrition"
+        ],
+        pearls: "TIBC reflects transferrin availability. Iron deficiency: high TIBC (body tries to absorb more iron). Chronic disease: low TIBC (inflammation). Transferrin saturation (TSAT) = serum iron/TIBC × 100. TSAT <20% = iron deficiency. TSAT >45% = iron overload. Key differentiator between IDA and ACD."
+      },
+      {
+        name: "Vitamin B12 (Cobalamin)",
+        unit: "pg/mL",
+        male: "200–900",
+        female: "200–900",
+        child: "200–900",
+        critical_low: "< 150",
+        critical_high: "",
+        high: [
+          "Myeloproliferative disorders (CML — increased transcobalamin)",
+          "Hepatocellular disease (release from hepatocytes)",
+          "Renal failure",
+          "B12 supplementation excess"
+        ],
+        low: [
+          "Pernicious anemia — autoimmune destruction of parietal cells (anti-IF antibodies)",
+          "Strict veganism (B12 exclusively from animal sources)",
+          "Malabsorption: celiac, Crohn's (terminal ileum), post-gastrectomy, post-ileal resection",
+          "Metformin use (long-term, decreased ileal absorption)",
+          "Fish tapeworm (Diphyllobothrium latum — competes for B12)",
+          "Chronic alcohol use",
+          "Pancreatic insufficiency (impaired IF-B12 absorption)"
+        ],
+        pearls: "B12 deficiency causes megaloblastic anemia (macrocytic) AND neurological damage (subacute combined degeneration — posterior columns + lateral corticospinal tracts). Neuro symptoms may precede hematologic changes. Methylmalonic acid (MMA) and homocysteine are elevated in B12 deficiency. MMA distinguishes B12 from folate deficiency."
+      },
+      {
+        name: "Folate (Folic Acid)",
+        unit: "ng/mL",
+        male: "2.0–20.0",
+        female: "2.0–20.0",
+        child: "2.0–20.0",
+        critical_low: "< 2.0",
+        critical_high: "",
+        high: [
+          "Supplementation excess (generally non-toxic)",
+          "Blind loop syndrome (bacterial folate production)"
+        ],
+        low: [
+          "Dietary deficiency (alcoholism — most common cause in developed countries)",
+          "Malabsorption (celiac disease — proximal jejunum, tropical sprue)",
+          "Increased demand: pregnancy, hemolytic anemias, rapid cell turnover",
+          "Drugs: methotrexate (DHFR inhibitor), trimethoprim, phenytoin, sulfasalazine",
+          "Dialysis (folate loss)"
+        ],
+        pearls: "Folate deficiency causes megaloblastic anemia identical to B12 deficiency BUT without neurological damage. Homocysteine elevated in both B12 and folate deficiency. MMA elevated ONLY in B12 deficiency (key differentiator). Correct B12 before folate to avoid masking B12 deficiency and worsening neuropathy."
+      }
+    ]
+  },
+  // ---- CARDIAC ----
+  {
+    category: "Cardiac Markers",
+    catIcon: "heart",
+    tests: [
+      {
+        name: "Troponin I / T (High-Sensitivity)",
+        unit: "ng/L",
+        male: "< 14 (hs-TnI) / < 22 (hs-TnT)",
+        female: "< 14 (hs-TnI) / < 22 (hs-TnT)",
+        child: "Lab-specific",
+        critical_low: "",
+        critical_high: "Rising pattern",
+        high: [
+          "Acute myocardial infarction — Type 1 (plaque rupture) and Type 2 (demand ischemia)",
+          "Acute heart failure / cardiogenic shock",
+          "Myocarditis (viral, autoimmune)",
+          "Pulmonary embolism (right heart strain)",
+          "Cardiac contusion (blunt chest trauma)",
+          "Tachyarrhythmias (demand ischemia)",
+          "Chronic kidney disease (impaired clearance — chronically mildly elevated)",
+          "Sepsis / critical illness (demand ischemia, direct myocardial toxicity)",
+          "Takotsubo cardiomyopathy (stress cardiomyopathy)"
+        ],
+        low: [
+          "Normal finding — indicates no myocardial injury"
+        ],
+        pearls: "4th Universal Definition of MI: rise and/or fall with at least one value above 99th percentile + clinical evidence of ischemia. Serial troponins (0, 3, 6 hrs) detect the delta (rise/fall pattern). hs-Troponin detects smaller amounts earlier. In CKD, chronically elevated baseline — look for acute delta (>20% change). Troponin I is more cardiac-specific than troponin T."
+      },
+      {
+        name: "BNP / NT-proBNP",
+        unit: "pg/mL",
+        male: "BNP < 100 / NT-proBNP < 125 (age <75)",
+        female: "BNP < 100 / NT-proBNP < 125",
+        child: "Age-dependent",
+        critical_low: "",
+        critical_high: "BNP > 400 / NT > 450–1800 (age-dependent)",
+        high: [
+          "Heart failure (systolic and diastolic) — correlates with severity (NYHA class)",
+          "Acute coronary syndrome",
+          "Pulmonary embolism (RV strain)",
+          "Pulmonary hypertension",
+          "Atrial fibrillation",
+          "Renal failure (decreased clearance, especially NT-proBNP)",
+          "Sepsis/critical illness",
+          "Advanced age (physiologic increase)"
+        ],
+        low: [
+          "Obesity (BNP inversely related to BMI — adipose tissue clearance)",
+          "Flash pulmonary edema (may not have risen yet)",
+          "Constrictive pericarditis (may be normal despite heart failure symptoms)"
+        ],
+        pearls: "BNP/NT-proBNP best used to RULE OUT heart failure (high negative predictive value). BNP <100 or NT-proBNP <300 → HF unlikely. NT-proBNP age-adjusted cutoffs: <450 (age <50), <900 (50–75), <1800 (>75). In obesity, lower BNP despite HF — use lower thresholds. Serial monitoring guides HF therapy."
+      },
+      {
+        name: "CK-MB (Creatine Kinase-MB)",
+        unit: "ng/mL",
+        male: "< 5.0",
+        female: "< 5.0",
+        child: "< 5.0",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Acute myocardial infarction (rises 3–6 hrs, peaks 12–24 hrs, normalizes 48–72 hrs)",
+          "Myocarditis",
+          "Cardiac surgery / procedures",
+          "Rhabdomyolysis (CK-MB <5% of total CK → skeletal source)",
+          "Muscular dystrophy (chronic skeletal muscle source)"
+        ],
+        low: [
+          "Normal finding"
+        ],
+        pearls: "Largely replaced by troponin for MI diagnosis. CK-MB still useful for detecting reinfarction (normalizes faster than troponin, so re-elevation indicates new MI). CK-MB/Total CK ratio: >5% suggests cardiac source; <5% suggests skeletal muscle. CK-MB index = (CK-MB/Total CK) × 100."
+      },
+      {
+        name: "D-Dimer",
+        unit: "ng/mL FEU",
+        male: "< 500",
+        female: "< 500",
+        child: "< 500",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Pulmonary embolism",
+          "Deep vein thrombosis",
+          "DIC (disseminated intravascular coagulation)",
+          "Post-surgery, trauma",
+          "Pregnancy (physiologic rise)",
+          "Malignancy",
+          "Sepsis, pneumonia, any acute illness",
+          "Advanced age (use age-adjusted cutoff: age × 10 for patients >50)"
+        ],
+        low: [
+          "Normal — high negative predictive value for VTE"
+        ],
+        pearls: "D-dimer is a RULE-OUT test for DVT/PE in low-to-moderate pretest probability. High sensitivity, low specificity. Negative D-dimer + low Wells score → VTE effectively excluded. Age-adjusted D-dimer (age × 10 for age >50) improves specificity in elderly. In DIC: elevated D-dimer + low fibrinogen + prolonged PT/PTT + thrombocytopenia + schistocytes."
+      }
+    ]
+  },
+  // ---- INFLAMMATORY ----
+  {
+    category: "Inflammatory Markers",
+    catIcon: "flame",
+    tests: [
+      {
+        name: "C-Reactive Protein (CRP)",
+        unit: "mg/L",
+        male: "< 3.0",
+        female: "< 3.0",
+        child: "< 3.0",
+        critical_low: "",
+        critical_high: "> 100",
+        high: [
+          "Bacterial infections — CRP rises rapidly (6–8 hrs), peaks at 48 hrs",
+          "Autoimmune flares (RA, SLE, vasculitis)",
+          "Tissue necrosis (MI, pancreatitis, burns)",
+          "Malignancy",
+          "Post-surgical inflammation",
+          "Obesity (chronic low-grade inflammation, CRP 3–10)"
+        ],
+        low: [
+          "Generally normal — low CRP helps exclude significant bacterial infection"
+        ],
+        pearls: "CRP responds faster than ESR (rises within 6 hrs) and normalizes faster (useful for monitoring treatment response). hs-CRP for cardiovascular risk: <1 low, 1–3 moderate, >3 high risk. CRP >100 → strongly suggests bacterial infection or major tissue damage. CRP is not elevated in SLE flares (unlike ESR) — useful to differentiate infection vs lupus flare."
+      },
+      {
+        name: "Procalcitonin (PCT)",
+        unit: "ng/mL",
+        male: "< 0.05",
+        female: "< 0.05",
+        child: "< 0.05",
+        critical_low: "",
+        critical_high: "> 2.0",
+        high: [
+          "Bacterial infections — PCT rises 2–4 hrs, peaks 6–24 hrs",
+          "Sepsis (PCT >2.0 ng/mL has high specificity for systemic bacterial infection)",
+          "Bacterial pneumonia vs viral (PCT >0.25 favors bacterial)",
+          "Post-major surgery (transient rise, normalizes quickly if no infection)",
+          "Severe burns, trauma, pancreatitis (non-infectious causes — usually <2.0)"
+        ],
+        low: [
+          "Viral infections (PCT remains low — key differentiator)",
+          "Autoimmune conditions (not typically elevated)",
+          "Localized infections (may not elevate significantly)"
+        ],
+        pearls: "PCT is superior to CRP for differentiating bacterial from viral infection. PCT <0.1 → bacterial infection unlikely. PCT 0.1–0.25 → bacterial possible. PCT >0.5 → bacterial likely. PCT >2.0 → high probability of sepsis. Serial PCT guides antibiotic stewardship — safe to stop antibiotics when PCT drops >80% from peak or <0.25."
+      },
+      {
+        name: "Lactate Dehydrogenase (LDH)",
+        unit: "U/L",
+        male: "140–280",
+        female: "140–280",
+        child: "150–300",
+        critical_low: "",
+        critical_high: "",
+        high: [
+          "Hemolytic anemias (RBC destruction — LDH1 isoform)",
+          "Megaloblastic anemia (ineffective erythropoiesis — can be markedly elevated)",
+          "Myocardial infarction (LDH1 > LDH2 = flipped ratio)",
+          "Liver disease/hepatitis (LDH5 isoform)",
+          "Malignancy — lymphoma, leukemia, germ cell tumors (tumor marker for testicular cancer)",
+          "Pulmonary embolism",
+          "Muscle disease/rhabdomyolysis",
+          "Pneumocystis jirovecii pneumonia (PJP — characteristically elevated LDH)"
+        ],
+        low: [
+          "Generally not clinically significant"
+        ],
+        pearls: "LDH is ubiquitous (every tissue) — very nonspecific. Most useful in: hemolysis workup (elevated LDH + low haptoglobin + elevated indirect bilirubin + reticulocytosis = hemolysis). Tumor lysis syndrome: elevated LDH + uric acid + K + phosphate + low Ca. LDH is a prognostic marker in lymphoma (part of IPI score)."
+      }
+    ]
+  },
+  // ---- COAGULATION ----
+  {
+    category: "Coagulation Studies",
+    catIcon: "clock",
+    tests: [
+      {
+        name: "aPTT (Activated Partial Thromboplastin Time)",
+        unit: "seconds",
+        male: "25–35",
+        female: "25–35",
+        child: "25–35",
+        critical_low: "",
+        critical_high: "> 70",
+        high: [
+          "Heparin therapy (unfractionated) — monitor with aPTT (target 1.5–2.5× control)",
+          "Hemophilia A (Factor VIII deficiency) — X-linked, spontaneous hemarthroses",
+          "Hemophilia B (Factor IX deficiency) — X-linked, clinically similar to A",
+          "Von Willebrand disease (vWF stabilizes Factor VIII → low VIII → prolonged aPTT)",
+          "DIC (consumption of factors)",
+          "Lupus anticoagulant (paradoxical: prolongs aPTT in vitro but causes thrombosis in vivo)",
+          "Factor XI, XII deficiency",
+          "Liver disease (severe — affects multiple factors)"
+        ],
+        low: [
+          "Elevated Factor VIII (acute-phase reactant — stress, inflammation)",
+          "Hypercoagulable states (rarely significant)"
+        ],
+        pearls: "aPTT measures intrinsic pathway (XII, XI, IX, VIII) + common pathway (X, V, II, fibrinogen). Mixing study: if aPTT corrects with normal plasma → factor deficiency. If doesn't correct → inhibitor (lupus anticoagulant or specific factor inhibitor). Heparin monitoring: aPTT target 60–80 seconds (1.5–2.5× baseline)."
+      },
+      {
+        name: "Fibrinogen",
+        unit: "mg/dL",
+        male: "200–400",
+        female: "200–400",
+        child: "200–400",
+        critical_low: "< 100",
+        critical_high: "",
+        high: [
+          "Acute-phase response (infection, inflammation, trauma)",
+          "Pregnancy (physiologic increase, up to 600)",
+          "Malignancy",
+          "Post-operative state",
+          "Smoking",
+          "Nephrotic syndrome"
+        ],
+        low: [
+          "DIC — consumption coagulopathy (low fibrinogen + elevated D-dimer + prolonged PT/aPTT)",
+          "Severe liver disease (decreased synthesis)",
+          "Massive transfusion (dilutional)",
+          "Primary fibrinolysis",
+          "Congenital afibrinogenemia/hypofibrinogenemia (rare)",
+          "L-asparaginase therapy (decreased hepatic synthesis)"
+        ],
+        pearls: "Fibrinogen <100 mg/dL → increased bleeding risk, consider cryoprecipitate transfusion. In DIC: fibrinogen is consumed → low. Fibrinogen is also an acute-phase reactant → can be falsely normal in early DIC despite consumption. Thrombin time is prolonged in hypofibrinogenemia."
+      }
+    ]
+  },
+  // ---- PANCREATIC ----
+  {
+    category: "Pancreatic Enzymes",
+    catIcon: "flame",
+    tests: [
+      {
+        name: "Serum Amylase",
+        unit: "U/L",
+        male: "28–100",
+        female: "28–100",
+        child: "25–125",
+        critical_low: "",
+        critical_high: "> 300",
+        high: [
+          "Acute pancreatitis — rises within 6–12 hrs, peaks 24–72 hrs, normalizes 3–5 days",
+          "Pancreatic pseudocyst",
+          "Salivary gland disease (parotitis/mumps — salivary amylase isoform)",
+          "Intestinal obstruction/perforation (peritoneal absorption)",
+          "Ectopic pregnancy (ruptured — peritoneal irritation)",
+          "Macroamylasemia (amylase-immunoglobulin complex, benign)",
+          "Renal failure (decreased clearance)",
+          "Diabetic ketoacidosis"
+        ],
+        low: [
+          "Chronic pancreatitis (burnt-out pancreas — insufficient acinar cells)",
+          "Cystic fibrosis (pancreatic insufficiency)",
+          "Extensive pancreatic necrosis"
+        ],
+        pearls: "Amylase >3× upper limit of normal is diagnostic criterion for acute pancreatitis (with compatible pain and/or imaging). Lipase is more sensitive and specific than amylase. Normal amylase does not rule out pancreatitis (especially chronic or hypertriglyceridemia-induced). Macroamylasemia: elevated amylase with normal lipase and low urine amylase."
+      },
+      {
+        name: "Serum Lipase",
+        unit: "U/L",
+        male: "0–160",
+        female: "0–160",
+        child: "0–160",
+        critical_low: "",
+        critical_high: "> 480",
+        high: [
+          "Acute pancreatitis — rises within 4–8 hrs, peaks 24 hrs, remains elevated 8–14 days",
+          "Pancreatic duct obstruction",
+          "Pancreatic carcinoma",
+          "Renal failure (decreased clearance)",
+          "Cholecystitis (mild elevation)",
+          "Intestinal obstruction"
+        ],
+        low: [
+          "Chronic pancreatitis (pancreatic insufficiency — late finding)",
+          "Cystic fibrosis"
+        ],
+        pearls: "Lipase is PREFERRED over amylase for acute pancreatitis: more sensitive, more specific, stays elevated longer (useful in delayed presentation). Lipase >3× ULN = diagnostic for acute pancreatitis (Atlanta criteria). Both amylase and lipase can be normal in chronic pancreatitis. Lipase level does NOT correlate with disease severity — use APACHE II, Ranson's criteria, or CT severity index."
+      }
+    ]
+  },
+  // ---- ENDOCRINE ----
+  {
+    category: "Endocrine & Metabolic",
+    catIcon: "zap",
+    tests: [
+      {
+        name: "Cortisol (Morning, 8 AM)",
+        unit: "µg/dL",
+        male: "6–18",
+        female: "6–18",
+        child: "3–21",
+        critical_low: "< 3",
+        critical_high: "> 25",
+        high: [
+          "Cushing syndrome: pituitary (Cushing disease, 70%), adrenal adenoma/carcinoma, ectopic ACTH (small cell lung cancer)",
+          "Stress response (acute illness, surgery, trauma, pain)",
+          "Exogenous glucocorticoid use (most common cause of Cushing features)",
+          "Ectopic ACTH syndrome (small cell lung cancer, carcinoid)",
+          "Depression, alcoholism (pseudo-Cushing)"
+        ],
+        low: [
+          "Primary adrenal insufficiency (Addison disease) — autoimmune, TB, adrenal hemorrhage",
+          "Secondary adrenal insufficiency (pituitary failure, chronic steroid withdrawal)",
+          "Adrenal crisis (hypotension, hyperkalemia, hyponatremia — emergency)",
+          "Congenital adrenal hyperplasia (21-hydroxylase deficiency — most common)"
+        ],
+        pearls: "Screening: 1 mg overnight dexamethasone suppression test (DST), 24-hr urine free cortisol, or late-night salivary cortisol. Normal DST (cortisol <1.8 µg/dL) excludes Cushing's. Addison's: confirm with ACTH stimulation test (cosyntropin test) — cortisol <18 after stimulation = adrenal insufficiency."
+      },
+      {
+        name: "Serum Phosphate",
+        unit: "mg/dL",
+        male: "2.5–4.5",
+        female: "2.5–4.5",
+        child: "4.0–7.0",
+        critical_low: "< 1.0",
+        critical_high: "> 8.0",
+        high: [
+          "Chronic kidney disease (decreased excretion — major cause)",
+          "Hypoparathyroidism (PTH normally promotes phosphate excretion)",
+          "Tumor lysis syndrome (massive cell breakdown → phosphate release)",
+          "Rhabdomyolysis",
+          "Vitamin D toxicity (increased intestinal phosphate absorption)",
+          "Phosphate-containing enemas/laxatives (Fleet enema)",
+          "Acromegaly"
+        ],
+        low: [
+          "Hyperparathyroidism (PTH increases renal phosphate excretion — phosphaturic)",
+          "Vitamin D deficiency (decreased intestinal phosphate absorption)",
+          "Refeeding syndrome — critically important; phosphate shifts intracellularly with insulin",
+          "Diabetic ketoacidosis (treatment: insulin drives phosphate into cells)",
+          "Respiratory alkalosis (intracellular shift)",
+          "Fanconi syndrome (proximal tubular phosphate wasting)",
+          "X-linked hypophosphatemia (FGF23-mediated phosphate wasting)"
+        ],
+        pearls: "Ca × PO4 product >55 mg²/dL² → risk of metastatic calcification. In CKD: phosphate retention → secondary hyperparathyroidism → renal osteodystrophy. Refeeding syndrome: starved patients given carbohydrates → insulin release → phosphate crashes → cardiac arrest, respiratory failure. Always check phosphate before refeeding."
+      },
+      {
+        name: "Serum Magnesium",
+        unit: "mg/dL",
+        male: "1.7–2.2",
+        female: "1.7–2.2",
+        child: "1.7–2.2",
+        critical_low: "< 1.0",
+        critical_high: "> 4.0",
+        high: [
+          "Renal failure (decreased excretion)",
+          "Iatrogenic (IV magnesium therapy — eclampsia treatment, torsades)",
+          "Mg-containing antacids/laxatives in renal impairment",
+          "Addison disease",
+          "Hypothyroidism",
+          "Lithium therapy"
+        ],
+        low: [
+          "Alcoholism — most common cause (poor intake + renal wasting)",
+          "Diuretics (loop and thiazide — renal Mg wasting)",
+          "Diarrhea/malabsorption (GI loss)",
+          "Proton pump inhibitors (long-term use → impaired GI absorption)",
+          "Diabetic ketoacidosis (osmotic diuresis → Mg wasting)",
+          "Refeeding syndrome",
+          "Drugs: aminoglycosides, cisplatin, amphotericin B (renal tubular damage)"
+        ],
+        pearls: "Hypomagnesemia causes refractory hypokalemia (Mg required for ROMK channel function) and refractory hypocalcemia (Mg required for PTH secretion/action). Always check Mg in patients with resistant hypokalemia or hypocalcemia. Mg <1.0 → torsades de pointes risk → IV magnesium sulfate. Eclampsia treatment: IV MgSO₄ (also used for torsades)."
+      }
+    ]
+  }
+];
+
+// ============== APP LOGIC ==============
+let activeCategory = "All";
+let searchQuery = "";
+
+const defaultConfig = {
+  app_title: "Laboratory Value Interpreter",
+  subtitle: "Clinical Reference Guide",
+  background_color: "#0f172a",
+  surface_color: "#1e293b",
+  text_color: "#f1f5f9",
+  accent_color: "#22d3ee",
+  muted_color: "#94a3b8",
+  font_family: "DM Sans",
+  font_size: 14
+};
+
+function getCategories() {
+  return ["All", ...labData.map(c => c.category)];
+}
+
+function renderTabs() {
+  const bar = document.getElementById("tabBar");
+  bar.innerHTML = "";
+  const cfg = window.elementSdk?.config || defaultConfig;
+  getCategories().forEach(cat => {
+    const btn = document.createElement("button");
+    btn.className = "tab-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-medium flex-shrink-0";
+    const isActive = activeCategory === cat;
+    btn.style.background = isActive ? cfg.accent_color || defaultConfig.accent_color : "rgba(255,255,255,0.05)";
+    btn.style.color = isActive ? cfg.background_color || defaultConfig.background_color : cfg.muted_color || defaultConfig.muted_color;
+    btn.textContent = cat === "All" ? "📋 All" : cat;
+    btn.onclick = () => { activeCategory = cat; renderTabs(); renderContent(); };
+    bar.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const container = document.getElementById("content");
+  const noResults = document.getElementById("noResults");
+  const cfg = window.elementSdk?.config || defaultConfig;
+  const q = searchQuery.toLowerCase().trim();
+  let html = "";
+  let count = 0;
+
+  labData.forEach(cat => {
+    if (activeCategory !== "All" && activeCategory !== cat.category) return;
+    const filteredTests = cat.tests.filter(t =>
+      !q || t.name.toLowerCase().includes(q) || cat.category.toLowerCase().includes(q) ||
+      t.pearls.toLowerCase().includes(q)
+    );
+    if (filteredTests.length === 0) return;
+    count += filteredTests.length;
+
+    html += `<div class="mb-4 fade-in">
+      <div class="flex items-center gap-2 mb-2 px-1">
+        <i data-lucide="${cat.catIcon}" style="width:16px;height:16px;color:${cfg.accent_color || defaultConfig.accent_color};"></i>
+        <h2 class="font-heading text-sm font-bold" style="color:${cfg.accent_color || defaultConfig.accent_color};">${cat.category}</h2>
+        <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(255,255,255,0.05);color:${cfg.muted_color || defaultConfig.muted_color};">${filteredTests.length} test${filteredTests.length>1?'s':''}</span>
+      </div>`;
+
+    filteredTests.forEach(test => {
+      html += buildTestCard(test, cfg);
+    });
+
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+  noResults.classList.toggle("hidden", count > 0);
+  lucide.createIcons();
+}
+
+function buildTestCard(t, cfg) {
+  const bg = cfg.surface_color || defaultConfig.surface_color;
+  const txt = cfg.text_color || defaultConfig.text_color;
+  const acc = cfg.accent_color || defaultConfig.accent_color;
+  const mut = cfg.muted_color || defaultConfig.muted_color;
+
+  return `<details class="card-hover rounded-xl mb-2 overflow-hidden" style="background:${bg};border:1px solid rgba(255,255,255,0.06);">
+    <summary class="cursor-pointer p-3 sm:p-4 flex items-center justify-between gap-2">
+      <div class="flex-1 min-w-0">
+        <h3 class="font-semibold text-sm sm:text-base truncate" style="color:${txt};">${t.name}</h3>
+        <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs" style="color:${mut};">
+          <span>♂ ${t.male}</span><span>♀ ${t.female}</span><span>🧒 ${t.child}</span>
+          <span style="color:${acc};">${t.unit}</span>
+        </div>
+      </div>
+      <i data-lucide="chevron-down" class="chevron-icon flex-shrink-0" style="width:18px;height:18px;color:${mut};"></i>
+    </summary>
+    <div class="px-3 sm:px-4 pb-4 space-y-3">
+      ${t.critical_low || t.critical_high ? `<div class="flex flex-wrap gap-2 text-xs">
+        ${t.critical_low ? `<span class="px-2 py-1 rounded-md" style="background:rgba(239,68,68,0.15);color:#fca5a5;">⚠ Critical Low: ${t.critical_low}</span>` : ''}
+        ${t.critical_high ? `<span class="px-2 py-1 rounded-md" style="background:rgba(239,68,68,0.15);color:#fca5a5;">⚠ Critical High: ${t.critical_high}</span>` : ''}
+      </div>` : ''}
+      <div class="grid sm:grid-cols-2 gap-3">
+        <div class="rounded-lg p-3" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);">
+          <div class="flex items-center gap-1.5 mb-2"><i data-lucide="arrow-up" style="width:14px;height:14px;color:#f87171;"></i><span class="text-xs font-bold" style="color:#f87171;">ELEVATED — Causes</span></div>
+          <ul class="space-y-1.5">${t.high.map(h => `<li class="text-xs leading-relaxed" style="color:${mut};"><span style="color:#fca5a5;">•</span> ${h}</li>`).join('')}</ul>
+        </div>
+        <div class="rounded-lg p-3" style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);">
+          <div class="flex items-center gap-1.5 mb-2"><i data-lucide="arrow-down" style="width:14px;height:14px;color:#60a5fa;"></i><span class="text-xs font-bold" style="color:#60a5fa;">LOW — Causes</span></div>
+          <ul class="space-y-1.5">${t.low.map(l => `<li class="text-xs leading-relaxed" style="color:${mut};"><span style="color:#93c5fd;">•</span> ${l}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="rounded-lg p-3" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.12);">
+        <div class="flex items-center gap-1.5 mb-1.5"><i data-lucide="lightbulb" style="width:14px;height:14px;color:${acc};"></i><span class="text-xs font-bold" style="color:${acc};">Clinical Pearls</span></div>
+        <p class="text-xs leading-relaxed" style="color:${mut};">${t.pearls}</p>
+      </div>
+    </div>
+  </details>`;
+}
+
+function applyConfig(cfg) {
+  const app = document.getElementById("app");
+  app.style.background = cfg.background_color || defaultConfig.background_color;
+  app.style.fontFamily = `${cfg.font_family || defaultConfig.font_family}, DM Sans, system-ui, sans-serif`;
+
+  const title = document.getElementById("appTitle");
+  const sub = document.getElementById("appSubtitle");
+  if (title) {
+    title.textContent = cfg.app_title || defaultConfig.app_title;
+    title.style.color = cfg.text_color || defaultConfig.text_color;
+    title.style.fontFamily = `${cfg.font_family || defaultConfig.font_family}, Fraunces, Georgia, serif`;
+    title.style.fontSize = `${(cfg.font_size || defaultConfig.font_size) * 1.7}px`;
+  }
+  if (sub) {
+    sub.textContent = cfg.subtitle || defaultConfig.subtitle;
+    sub.style.color = cfg.muted_color || defaultConfig.muted_color;
+    sub.style.fontSize = `${(cfg.font_size || defaultConfig.font_size) * 0.85}px`;
+  }
+
+  const header = document.querySelector("header");
+  if (header) header.style.background = `linear-gradient(135deg,${cfg.background_color || defaultConfig.background_color} 0%,${cfg.surface_color || defaultConfig.surface_color} 100%)`;
+
+  renderTabs();
+  renderContent();
+}
+
+// Search
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  searchQuery = e.target.value;
+  renderContent();
+});
+
+// Initial render
+renderTabs();
+renderContent();
+</script>
+</body>
+</html>
