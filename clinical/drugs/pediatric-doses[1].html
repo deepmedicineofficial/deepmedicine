@@ -1,0 +1,472 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Pediatrics Doses | Pediatric Drug Dosage Guide | Deep Medicine</title> <meta name="description" content="Comprehensive pediatric dosing guide including weight-based drug calculations, emergency pediatric doses, and ICU medication adjustments."> <link rel="canonical" href="https://deepmedicine.in/clinical/drugs/pediatric-doses"> <!-- Open Graph --> <meta property="og:title" content="Pediatrics Doses | Deep Medicine"> <meta property="og:description" content="Weight-based pediatric drug dosing and emergency medication guidelines."> <meta property="og:image" content="https://deepmedicine.in/images/pediatrics-doses.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+  <style>
+        html, body { height: 100%; margin: 0; }
+        .drug-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .drug-card:hover { transform: translateY(-2px); }
+        .category-btn.active { border-bottom: 3px solid currentColor; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .search-glow:focus { box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.2); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0f9ff 100%);"><!-- Header -->
+   <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-teal-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6">
+     <div class="flex items-center justify-between flex-wrap gap-3">
+      <div>
+       <h1 id="main-title" class="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-teal-900">Pediatric Drug Dosing Guide</h1>
+       <p id="subtitle" class="text-xs sm:text-sm text-teal-600 mt-0.5">Clinical Reference for Healthcare Professionals</p>
+      </div>
+      <div class="flex items-center gap-2 text-xs text-slate-500 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#d97706;"></i> <span>Verify doses before prescribing</span>
+      </div>
+     </div><!-- Search -->
+     <div class="mt-3 relative"><i data-lucide="search" style="width:18px;height:18px;" class="absolute left-3 top-1/2 -translate-y-1/2 text-teal-400"></i> <input id="search-input" type="text" placeholder="Search drug name, indication, or class..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-teal-200 bg-white text-sm focus:outline-none search-glow">
+     </div><!-- Category Tabs -->
+     <div class="mt-3 flex gap-1 overflow-x-auto pb-1 -mx-1 px-1"><button class="category-btn active whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-teal-700 font-medium" data-cat="all">All Drugs</button> <button class="category-btn whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-slate-500 font-medium" data-cat="antibiotics">Antibiotics</button> <button class="category-btn whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-slate-500 font-medium" data-cat="analgesics">Analgesics</button> <button class="category-btn whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-slate-500 font-medium" data-cat="respiratory">Respiratory</button> <button class="category-btn whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-slate-500 font-medium" data-cat="gi">GI</button> <button class="category-btn whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-slate-500 font-medium" data-cat="emergency">Emergency</button> <button class="category-btn whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-slate-500 font-medium" data-cat="anticonvulsants">Anticonvulsants</button> <button class="category-btn whitespace-nowrap text-xs sm:text-sm px-3 py-1.5 rounded-t-lg text-slate-500 font-medium" data-cat="vitamins">Vitamins</button>
+     </div>
+    </div>
+   </header><!-- Weight Calculator -->
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-4">
+    <div class="bg-white rounded-xl border border-teal-100 p-4 shadow-sm">
+     <div class="flex flex-wrap items-end gap-4">
+      <div><label class="text-xs font-medium text-slate-600 block mb-1">Patient Weight (kg)</label> <input id="weight-input" type="number" min="0.5" max="80" step="0.5" value="10" class="w-28 px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-300">
+      </div>
+      <div><label class="text-xs font-medium text-slate-600 block mb-1">Age</label>
+       <div class="flex gap-2"><input id="age-years" type="number" min="0" max="18" value="1" class="w-16 px-2 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-300"> <span class="text-xs self-center text-slate-500">yrs</span> <input id="age-months" type="number" min="0" max="11" value="0" class="w-16 px-2 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-300"> <span class="text-xs self-center text-slate-500">mo</span>
+       </div>
+      </div><button id="calc-btn" class="px-4 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors flex items-center gap-1.5"> <i data-lucide="calculator" style="width:14px;height:14px;"></i> Calculate Doses </button>
+     </div>
+    </div>
+   </div><!-- Drug Cards Grid -->
+   <div id="drugs-container" class="max-w-7xl mx-auto px-4 sm:px-6 py-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 pb-8">
+   </div><!-- Footer -->
+   <footer class="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-800">
+     <p class="font-semibold flex items-center gap-1"><i data-lucide="shield-alert" style="width:14px;height:14px;"></i> Disclaimer</p>
+     <p class="mt-1">This reference is for educational and clinical decision support only. Always verify doses with current formulary (BNFc, Nelson's, Harriet Lane). Adjust for renal/hepatic impairment, drug interactions, and individual patient factors. Not a substitute for clinical judgment.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+const drugDatabase = [
+    {
+        name: "Amoxicillin",
+        class: "Aminopenicillin",
+        category: "antibiotics",
+        indication: "URTI, LRTI, UTI, Otitis Media, Sinusitis",
+        dose: "25-50 mg/kg/day",
+        highDose: "80-90 mg/kg/day (for resistant AOM)",
+        frequency: "Divided TDS (q8h) or BD (high dose)",
+        route: "Oral",
+        maxDose: "3 g/day",
+        formulations: "Syrup 125mg/5ml, 250mg/5ml; Caps 250mg, 500mg",
+        duration: "5-10 days (AOM: 10 days if <2yr)",
+        contraindications: "Penicillin hypersensitivity, EBV infection (rash risk)",
+        sideEffects: "Diarrhea, rash, nausea, candidiasis",
+        notes: "First-line for AOM & community-acquired pneumonia. No dose adjustment in mild renal impairment. Give with/without food.",
+        dosePerKg: 40
+    },
+    {
+        name: "Azithromycin",
+        class: "Macrolide",
+        category: "antibiotics",
+        indication: "Atypical pneumonia, Pertussis, Strep pharyngitis (PCN allergy)",
+        dose: "10 mg/kg Day 1, then 5 mg/kg Days 2-5",
+        frequency: "Once daily",
+        route: "Oral",
+        maxDose: "500mg Day 1, 250mg Days 2-5",
+        formulations: "Syrup 200mg/5ml; Tabs 250mg, 500mg",
+        duration: "3-5 days",
+        contraindications: "Macrolide allergy, hepatic impairment, QT prolongation",
+        sideEffects: "Abdominal pain, diarrhea, nausea, hepatotoxicity (rare)",
+        notes: "Excellent tissue penetration. Long half-life allows short courses. Take 1hr before or 2hr after meals (suspension can be with food).",
+        dosePerKg: 10
+    },
+    {
+        name: "Ceftriaxone",
+        class: "3rd Gen Cephalosporin",
+        category: "antibiotics",
+        indication: "Meningitis, Sepsis, Severe pneumonia, Complicated UTI",
+        dose: "50-100 mg/kg/day",
+        highDose: "100 mg/kg/day for meningitis",
+        frequency: "Once daily or divided BD",
+        route: "IV / IM",
+        maxDose: "4 g/day",
+        formulations: "Vial 250mg, 500mg, 1g, 2g",
+        duration: "Meningitis: 10-14 days; Sepsis: 7-10 days",
+        contraindications: "Neonates with jaundice/hypoalbuminemia (displaces bilirubin), Ceph allergy, concurrent IV calcium in neonates",
+        sideEffects: "Biliary sludge, diarrhea, injection site pain, rash",
+        notes: "AVOID in neonates <28 days if receiving calcium-containing IV fluids (fatal precipitation). Gold standard for bacterial meningitis.",
+        dosePerKg: 75
+    },
+    {
+        name: "Paracetamol (Acetaminophen)",
+        class: "Non-opioid Analgesic/Antipyretic",
+        category: "analgesics",
+        indication: "Fever, Mild-moderate pain, Post-immunization pyrexia",
+        dose: "15 mg/kg/dose",
+        frequency: "Every 4-6 hours (max 4 doses/day)",
+        route: "Oral / Rectal / IV",
+        maxDose: "75 mg/kg/day or 4 g/day (whichever is less)",
+        formulations: "Syrup 120mg/5ml, 250mg/5ml; Supp 60mg, 125mg, 250mg; Tab 500mg",
+        duration: "PRN; avoid >5 days without review",
+        contraindications: "Severe hepatic impairment, G6PD deficiency (relative)",
+        sideEffects: "Hepatotoxicity (overdose), rare skin reactions",
+        notes: "First-line antipyretic. Neonatal dose: 10mg/kg q6-8h. IV dose in <10kg: 7.5mg/kg. Rectal absorption variable—use 20mg/kg loading.",
+        dosePerKg: 15
+    },
+    {
+        name: "Ibuprofen",
+        class: "NSAID",
+        category: "analgesics",
+        indication: "Fever, Pain, Inflammation, JIA",
+        dose: "5-10 mg/kg/dose",
+        frequency: "Every 6-8 hours",
+        route: "Oral",
+        maxDose: "40 mg/kg/day (max 2.4 g/day)",
+        formulations: "Syrup 100mg/5ml; Tab 200mg, 400mg",
+        duration: "PRN; short-term for fever",
+        contraindications: "Age <3 months, renal impairment, GI bleeding, dehydration, varicella/dengue, aspirin-sensitive asthma",
+        sideEffects: "GI upset, renal impairment, bronchospasm, platelet dysfunction",
+        notes: "NOT in dehydrated children (nephrotoxicity risk). Avoid in dengue (bleeding risk). Can alternate with paracetamol. Give with food.",
+        dosePerKg: 10
+    },
+    {
+        name: "Salbutamol (Albuterol)",
+        class: "Short-acting β2-agonist (SABA)",
+        category: "respiratory",
+        indication: "Acute asthma, Bronchospasm, Wheeze-associated LRTI",
+        dose: "Nebulizer: 2.5mg (<5yr), 5mg (>5yr); MDI: 2-6 puffs via spacer",
+        frequency: "q20min x3 (acute), then q4-6h",
+        route: "Inhaled (nebulizer/MDI+spacer)",
+        maxDose: "Continuous nebulization in severe acute asthma",
+        formulations: "Nebules 2.5mg/2.5ml, 5mg/2.5ml; MDI 100mcg/puff",
+        duration: "Acute: until resolution; Maintenance: PRN",
+        contraindications: "Hypersensitivity (rare)",
+        sideEffects: "Tachycardia, tremor, hypokalemia, hyperglycemia",
+        notes: "MDI+spacer as effective as nebulizer for mild-moderate exacerbations. 6 puffs via spacer ≈ 1 nebule. Monitor HR & K+ in frequent dosing.",
+        dosePerKg: null
+    },
+    {
+        name: "Prednisolone",
+        class: "Corticosteroid",
+        category: "respiratory",
+        indication: "Acute asthma, Croup, Nephrotic syndrome, Allergic reactions",
+        dose: "Asthma: 1-2 mg/kg/day; Croup: 1 mg/kg stat; Nephrotic: 2 mg/kg/day",
+        frequency: "Once daily (morning) or divided BD",
+        route: "Oral",
+        maxDose: "60 mg/day",
+        formulations: "Tab 5mg, 20mg; Soln 5mg/5ml, 15mg/5ml",
+        duration: "Asthma: 3-5 days; Croup: 1 dose; Nephrotic: per protocol",
+        contraindications: "Systemic fungal infections, live vaccines during high-dose",
+        sideEffects: "Hyperglycemia, mood changes, GI upset, growth suppression (chronic), adrenal suppression",
+        notes: "No taper needed for ≤5 days. Dexamethasone 0.6mg/kg single dose is alternative for croup. Give with food. Morning dosing mimics physiology.",
+        dosePerKg: 1.5
+    },
+    {
+        name: "Ondansetron",
+        class: "5-HT3 Receptor Antagonist",
+        category: "gi",
+        indication: "Acute vomiting, Gastroenteritis (to facilitate ORS), Chemotherapy-induced N/V",
+        dose: "0.15 mg/kg/dose",
+        frequency: "Every 8 hours (max 3 doses for gastroenteritis)",
+        route: "Oral / IV",
+        maxDose: "4mg (<12yr), 8mg (>12yr) per dose",
+        formulations: "ODT 4mg, 8mg; Syrup 4mg/5ml; Inj 2mg/ml",
+        duration: "Single dose often sufficient for gastroenteritis",
+        contraindications: "Congenital long QT syndrome, concurrent QT-prolonging drugs",
+        sideEffects: "Headache, constipation, QT prolongation (IV bolus)",
+        notes: "Single oral dose reduces vomiting & ED revisits in gastroenteritis. Wait 15-30min after dose before offering ORS. ODT dissolves on tongue—useful when vomiting.",
+        dosePerKg: 0.15
+    },
+    {
+        name: "ORS (Oral Rehydration Solution)",
+        class: "Electrolyte Solution",
+        category: "gi",
+        indication: "Mild-moderate dehydration, Gastroenteritis, Ongoing losses",
+        dose: "Mild: 50ml/kg over 4h; Moderate: 100ml/kg over 4h",
+        frequency: "Small frequent sips (5-10ml every 1-2 min)",
+        route: "Oral / NG tube",
+        maxDose: "Replace ongoing losses: 10ml/kg per stool",
+        formulations: "WHO-ORS sachets (Na 75, Glucose 75, Osmolarity 245)",
+        duration: "Until rehydration achieved, then maintenance",
+        contraindications: "Severe dehydration (use IV), ileus, shock",
+        sideEffects: "Vomiting if given too fast",
+        notes: "Gold standard for dehydration management. Continue breastfeeding. Reduced osmolarity ORS preferred (245 mOsm/L). NG if refusing oral. Zinc supplementation recommended with ORS in diarrhea.",
+        dosePerKg: 75
+    },
+    {
+        name: "Adrenaline (Epinephrine)",
+        class: "Catecholamine",
+        category: "emergency",
+        indication: "Anaphylaxis, Cardiac arrest, Severe croup (nebulized)",
+        dose: "Anaphylaxis IM: 0.01 mg/kg (1:1000); Cardiac arrest IV: 0.01 mg/kg (1:10,000); Croup neb: 0.5ml/kg of 1:1000 (max 5ml)",
+        frequency: "Anaphylaxis: repeat q5-15min; Arrest: q3-5min",
+        route: "IM (anaphylaxis) / IV (arrest) / Nebulized (croup)",
+        maxDose: "IM: 0.5mg (adult), 0.3mg (child), 0.15mg (infant)",
+        formulations: "Ampoule 1:1000 (1mg/ml), 1:10000 (0.1mg/ml); Auto-injector 0.15mg, 0.3mg",
+        duration: "As needed per emergency protocol",
+        contraindications: "None in true emergency (relative: narrow-angle glaucoma)",
+        sideEffects: "Tachycardia, hypertension, tremor, pallor, arrhythmias",
+        notes: "ALWAYS IM anterolateral thigh for anaphylaxis (NOT SC, NOT deltoid). Auto-injector through clothing if needed. 1:1000 for IM, 1:10,000 for IV—NEVER give 1:1000 IV.",
+        dosePerKg: 0.01
+    },
+    {
+        name: "Diazepam",
+        class: "Benzodiazepine",
+        category: "anticonvulsants",
+        indication: "Status epilepticus, Febrile seizures (prolonged), Acute seizures",
+        dose: "Rectal: 0.5 mg/kg; IV: 0.2-0.3 mg/kg (slow push)",
+        frequency: "May repeat once after 10 min",
+        route: "Rectal / IV",
+        maxDose: "Rectal: 10mg (<5yr), 20mg (>5yr); IV: 10mg",
+        formulations: "Rectal tube 5mg, 10mg; Inj 5mg/ml",
+        duration: "Single dose (or x2); status protocol if ongoing",
+        contraindications: "Respiratory depression, acute narrow-angle glaucoma, myasthenia gravis",
+        sideEffects: "Respiratory depression, sedation, hypotension",
+        notes: "Buccal midazolam (0.5mg/kg, max 10mg) now preferred first-line in many protocols. IV diazepam: push over 2-5 min. Have bag-mask ready. Avoid if already heavily sedated.",
+        dosePerKg: 0.5
+    },
+    {
+        name: "Midazolam",
+        class: "Benzodiazepine",
+        category: "anticonvulsants",
+        indication: "Status epilepticus (buccal/IN), Procedural sedation, Pre-medication",
+        dose: "Buccal/IN: 0.5 mg/kg; IV: 0.1-0.2 mg/kg",
+        frequency: "Seizure: single dose, repeat x1 after 10 min",
+        route: "Buccal / Intranasal / IV / IM",
+        maxDose: "Buccal: 10mg; IV: 5mg",
+        formulations: "Buccal soln 10mg/ml; Inj 1mg/ml, 5mg/ml; IN atomizer",
+        duration: "Per seizure protocol or sedation need",
+        contraindications: "Severe respiratory insufficiency, acute narrow-angle glaucoma",
+        sideEffects: "Respiratory depression, paradoxical agitation (children), sedation",
+        notes: "Preferred over rectal diazepam (social acceptability, ease of use). Buccal: place between cheek and gum. IN: use MAD device, split dose between nostrils. Flumazenil is reversal agent.",
+        dosePerKg: 0.5
+    },
+    {
+        name: "Phenobarbitone",
+        class: "Barbiturate Anticonvulsant",
+        category: "anticonvulsants",
+        indication: "Neonatal seizures, Status epilepticus (2nd/3rd line), Maintenance epilepsy",
+        dose: "Loading: 20 mg/kg IV; Maintenance: 3-5 mg/kg/day",
+        frequency: "Loading: single dose; Maintenance: OD-BD",
+        route: "IV (loading) / Oral (maintenance)",
+        maxDose: "Loading: additional 10mg/kg x2 if needed (total 40mg/kg)",
+        formulations: "Inj 200mg/ml; Tab 30mg, 60mg; Elixir 15mg/5ml",
+        duration: "Neonatal: review at 2 weeks; Chronic: as indicated",
+        contraindications: "Porphyria, severe respiratory depression",
+        sideEffects: "Sedation, respiratory depression, cognitive impairment, paradoxical hyperactivity, vitamin D/K depletion",
+        notes: "First-line for neonatal seizures. IV loading: infuse over 15-20 min (max rate 1mg/kg/min). Monitor respiratory status. Enzyme inducer—multiple drug interactions.",
+        dosePerKg: 20
+    },
+    {
+        name: "Vitamin D3 (Cholecalciferol)",
+        class: "Fat-soluble Vitamin",
+        category: "vitamins",
+        indication: "Rickets prevention/treatment, Vitamin D deficiency, Supplementation",
+        dose: "Prevention: 400 IU/day (0-12mo), 600 IU/day (1-18yr); Treatment: 1000-5000 IU/day based on age",
+        frequency: "Once daily",
+        route: "Oral",
+        maxDose: "Infants: 1000 IU/day; Children: 4000 IU/day (supplementation)",
+        formulations: "Drops 400 IU/drop; Sachets 60,000 IU; Cap 1000 IU",
+        duration: "Prevention: ongoing; Treatment: 8-12 weeks then maintenance",
+        contraindications: "Hypercalcemia, Williams syndrome (use with caution)",
+        sideEffects: "Hypercalcemia (overdose), hypercalciuria, nephrocalcinosis",
+        notes: "All breastfed infants need 400 IU/day. Stoss therapy: 60,000 IU weekly x6 for severe deficiency. Check 25(OH)D levels. Give with fatty meal for absorption.",
+        dosePerKg: null
+    },
+    {
+        name: "Iron (Ferrous Sulfate)",
+        class: "Hematologic / Mineral",
+        category: "vitamins",
+        indication: "Iron deficiency anemia, Prophylaxis in prematurity/low birth weight",
+        dose: "Treatment: 3-6 mg/kg/day elemental iron; Prophylaxis: 2 mg/kg/day",
+        frequency: "Divided BD-TDS (treatment); OD (prophylaxis)",
+        route: "Oral",
+        maxDose: "6 mg/kg/day elemental iron",
+        formulations: "Drops 25mg Fe/ml; Syrup 30mg Fe/5ml; Tab 65mg elemental Fe",
+        duration: "Treatment: 3 months after Hb normalizes; Preterm prophylaxis: until 12 months",
+        contraindications: "Hemochromatosis, hemolytic anemias, concurrent IV iron",
+        sideEffects: "Constipation, black stools, nausea, teeth staining (liquid), GI upset",
+        notes: "Give between meals with vitamin C (enhances absorption). Avoid with milk/tea/antacids. Reticulocyte response in 5-7 days. Use straw for liquid forms (teeth staining). Ferrous fumarate has better tolerance.",
+        dosePerKg: 4
+    },
+    {
+        name: "Montelukast",
+        class: "Leukotriene Receptor Antagonist",
+        category: "respiratory",
+        indication: "Asthma (add-on therapy), Exercise-induced bronchospasm, Allergic rhinitis",
+        dose: "6mo-5yr: 4mg; 6-14yr: 5mg; >14yr: 10mg",
+        frequency: "Once daily (evening)",
+        route: "Oral",
+        maxDose: "10mg/day",
+        formulations: "Granules 4mg; Chewable tabs 4mg, 5mg; Tab 10mg",
+        duration: "Ongoing as maintenance; trial period 4-8 weeks",
+        contraindications: "Hypersensitivity, phenylketonuria (chewable contains aspartame)",
+        sideEffects: "Neuropsychiatric events (agitation, nightmares, depression—FDA boxed warning), headache, abdominal pain",
+        notes: "FDA black box warning for neuropsychiatric effects—counsel parents. Not for acute attacks. Give in evening. Granules can be mixed with soft food. Step 3 add-on in GINA guidelines.",
+        dosePerKg: null
+    },
+    {
+        name: "Zinc Sulfate",
+        class: "Trace Element",
+        category: "gi",
+        indication: "Acute diarrhea (adjunct to ORS), Zinc deficiency, Wilson's disease",
+        dose: "<6mo: 10mg/day; >6mo: 20mg/day",
+        frequency: "Once daily",
+        route: "Oral",
+        maxDose: "20mg/day (for diarrhea protocol)",
+        formulations: "Dispersible tab 20mg; Syrup 10mg/5ml",
+        duration: "10-14 days for diarrhea (continue even after resolution)",
+        contraindications: "None significant at therapeutic doses",
+        sideEffects: "Nausea, metallic taste, vomiting (if taken on empty stomach)",
+        notes: "WHO/UNICEF recommendation: Zinc with ORS reduces duration and severity of diarrhea and prevents recurrence for 2-3 months. Dissolve tablet in breast milk or water. Give 30min before feeds.",
+        dosePerKg: null
+    },
+    {
+        name: "Phenytoin",
+        class: "Hydantoin Anticonvulsant",
+        category: "anticonvulsants",
+        indication: "Status epilepticus (2nd line), Tonic-clonic seizures",
+        dose: "Loading: 20 mg/kg IV; Maintenance: 5-8 mg/kg/day",
+        frequency: "Loading: single infusion; Maintenance: BD",
+        route: "IV (loading) / Oral (maintenance)",
+        maxDose: "Loading: 1500mg; Infusion rate: 1mg/kg/min (max 50mg/min)",
+        formulations: "Inj 50mg/ml; Caps 25mg, 50mg, 100mg; Susp 30mg/5ml",
+        duration: "Per epilepsy management protocol",
+        contraindications: "Sinus bradycardia, SA block, 2nd/3rd degree AV block, Adams-Stokes syndrome",
+        sideEffects: "Purple glove syndrome (IV), gingival hyperplasia, hirsutism, cerebellar ataxia, SJS/TEN, lymphadenopathy",
+        notes: "IV loading ONLY in normal saline (precipitates in dextrose). Monitor ECG during infusion. Highly protein-bound—non-linear kinetics. Fosphenytoin preferred (fewer infusion reactions). Therapeutic level: 10-20 mcg/ml.",
+        dosePerKg: 20
+    }
+];
+
+let currentWeight = 10;
+let currentCategory = 'all';
+let searchTerm = '';
+
+function calculateDose(drug, weight) {
+    if (!drug.dosePerKg) return null;
+    return (drug.dosePerKg * weight).toFixed(1);
+}
+
+function getCategoryColor(cat) {
+    const colors = {
+        antibiotics: { bg: 'bg-blue-50', border: 'border-blue-200', badge: 'bg-blue-100 text-blue-700' },
+        analgesics: { bg: 'bg-rose-50', border: 'border-rose-200', badge: 'bg-rose-100 text-rose-700' },
+        respiratory: { bg: 'bg-violet-50', border: 'border-violet-200', badge: 'bg-violet-100 text-violet-700' },
+        gi: { bg: 'bg-amber-50', border: 'border-amber-200', badge: 'bg-amber-100 text-amber-700' },
+        emergency: { bg: 'bg-red-50', border: 'border-red-200', badge: 'bg-red-100 text-red-700' },
+        anticonvulsants: { bg: 'bg-indigo-50', border: 'border-indigo-200', badge: 'bg-indigo-100 text-indigo-700' },
+        vitamins: { bg: 'bg-green-50', border: 'border-green-200', badge: 'bg-green-100 text-green-700' },
+    };
+    return colors[cat] || { bg: 'bg-slate-50', border: 'border-slate-200', badge: 'bg-slate-100 text-slate-700' };
+}
+
+function renderDrugs() {
+    const container = document.getElementById('drugs-container');
+    let filtered = drugDatabase;
+    if (currentCategory !== 'all') filtered = filtered.filter(d => d.category === currentCategory);
+    if (searchTerm) {
+        const s = searchTerm.toLowerCase();
+        filtered = filtered.filter(d => d.name.toLowerCase().includes(s) || d.indication.toLowerCase().includes(s) || d.class.toLowerCase().includes(s));
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400"><i data-lucide="search-x" style="width:48px;height:48px;margin:0 auto;display:block;"></i><p class="mt-3 text-lg">No drugs found</p></div>`;
+        lucide.createIcons();
+        return;
+    }
+
+    container.innerHTML = filtered.map(drug => {
+        const colors = getCategoryColor(drug.category);
+        const calcDose = calculateDose(drug, currentWeight);
+        return `
+        <div class="drug-card fade-in ${colors.bg} ${colors.border} border rounded-xl p-4 shadow-sm">
+            <div class="flex items-start justify-between gap-2">
+                <div>
+                    <h3 class="font-heading text-lg font-bold text-slate-800">${drug.name}</h3>
+                    <p class="text-xs text-slate-500">${drug.class}</p>
+                </div>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full ${colors.badge} whitespace-nowrap">${drug.category.toUpperCase()}</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-2"><span class="font-semibold">Indication:</span> ${drug.indication}</p>
+            
+            <div class="mt-3 bg-white/70 rounded-lg p-3 space-y-1.5 text-xs">
+                <div class="flex justify-between"><span class="text-slate-500 font-medium">Dose:</span><span class="text-slate-800 font-semibold text-right max-w-[60%]">${drug.dose}</span></div>
+                ${drug.highDose ? `<div class="flex justify-between"><span class="text-orange-500 font-medium">High Dose:</span><span class="text-orange-700 font-semibold text-right max-w-[60%]">${drug.highDose}</span></div>` : ''}
+                <div class="flex justify-between"><span class="text-slate-500 font-medium">Frequency:</span><span class="text-slate-700">${drug.frequency}</span></div>
+                <div class="flex justify-between"><span class="text-slate-500 font-medium">Route:</span><span class="text-slate-700">${drug.route}</span></div>
+                <div class="flex justify-between"><span class="text-slate-500 font-medium">Max Dose:</span><span class="text-red-600 font-semibold">${drug.maxDose}</span></div>
+                <div class="flex justify-between"><span class="text-slate-500 font-medium">Duration:</span><span class="text-slate-700">${drug.duration}</span></div>
+            </div>
+
+            ${calcDose ? `
+            <div class="mt-2 bg-teal-600 text-white rounded-lg p-2.5 text-center">
+                <p class="text-[10px] opacity-80">Calculated for ${currentWeight} kg</p>
+                <p class="text-lg font-bold">${calcDose} mg${drug.frequency.includes('OD') || drug.frequency.includes('Once') ? '' : '/day'}</p>
+            </div>` : ''}
+
+            <details class="mt-3 text-xs">
+                <summary class="cursor-pointer text-teal-700 font-semibold hover:text-teal-900">More Details</summary>
+                <div class="mt-2 space-y-2 text-slate-600">
+                    <p><span class="font-semibold text-slate-700">Formulations:</span> ${drug.formulations}</p>
+                    <p><span class="font-semibold text-red-600">Contraindications:</span> ${drug.contraindications}</p>
+                    <p><span class="font-semibold text-amber-600">Side Effects:</span> ${drug.sideEffects}</p>
+                    <p class="bg-yellow-50 border border-yellow-200 rounded p-2"><span class="font-semibold text-yellow-700">📝 Clinical Notes:</span> ${drug.notes}</p>
+                </div>
+            </details>
+        </div>`;
+    }).join('');
+    lucide.createIcons();
+}
+
+// Event listeners
+document.getElementById('search-input').addEventListener('input', (e) => { searchTerm = e.target.value; renderDrugs(); });
+document.getElementById('calc-btn').addEventListener('click', () => { currentWeight = parseFloat(document.getElementById('weight-input').value) || 10; renderDrugs(); });
+document.getElementById('weight-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('calc-btn').click(); } });
+
+document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.category-btn').forEach(b => { b.classList.remove('active'); b.classList.replace('text-teal-700','text-slate-500'); });
+        btn.classList.add('active');
+        btn.classList.replace('text-slate-500','text-teal-700');
+        currentCategory = btn.dataset.cat;
+        renderDrugs();
+    });
+});
+
+// Element SDK
+const defaultConfig = {
+    main_title: "Pediatric Drug Dosing Guide",
+    subtitle: "Clinical Reference for Healthcare Professionals",
+    background_color: "#f0fdfa",
+    surface_color: "#ffffff",
+    text_color: "#1e293b",
+    primary_action_color: "#0d9488",
+    secondary_action_color: "#0e7490",
+    font_family: "DM Sans",
+    font_size: 14
+};
+
+renderDrugs();
+lucide.createIcons();
+</script>
+</body>
+</html>
