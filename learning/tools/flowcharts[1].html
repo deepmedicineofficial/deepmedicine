@@ -1,0 +1,254 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Flowcharts | Clinical Algorithms & Decision Pathways | Deep Medicine</title> <meta name="description" content="Clinical flowcharts and algorithms for structured decision-making, emergency protocols, and step-by-step medical management."> <link rel="canonical" href="https://deepmedicine.in/learning/tools/flowcharts"> <!-- Open Graph --> <meta property="og:title" content="Flowcharts | Deep Medicine"> <meta property="og:description" content="Visual clinical algorithms and decision pathways for faster and structured medical thinking."> <meta property="og:image" content="https://deepmedicine.in/images/flowcharts.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { font-family: 'DM Sans', sans-serif; }
+    .heading-font { font-family: 'Playfair Display', serif; }
+    .flow-node { transition: all 0.3s ease; }
+    .flow-node:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .connector { position: relative; }
+    .connector::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: -12px;
+      width: 2px;
+      height: 12px;
+      background: currentColor;
+    }
+    .tab-active { border-bottom: 3px solid; font-weight: 600; }
+    .fade-in { animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .arrow-down { display: flex; justify-content: center; padding: 4px 0; }
+    .arrow-down::after { content: '▼'; font-size: 12px; }
+    .branch-container { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    @media (max-width: 640px) { .branch-container { flex-direction: column; align-items: center; } }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full overflow-auto bg-slate-900 text-slate-100">
+  <div id="app" class="w-full h-full flex flex-col"><!-- Header -->
+   <header class="bg-slate-800 border-b border-slate-700 px-4 py-5 text-center">
+    <h1 id="mainTitle" class="heading-font text-2xl md:text-3xl text-amber-400">Medical Flowcharts</h1>
+    <p class="text-slate-400 text-sm mt-1">Clinically Accurate Decision Trees for MBBS/MD</p>
+   </header><!-- Topic Tabs -->
+   <nav class="bg-slate-800 border-b border-slate-700 overflow-x-auto">
+    <div class="flex min-w-max px-2" id="tabBar"><button onclick="showTopic('chest_pain')" class="tab-btn px-4 py-3 text-sm whitespace-nowrap text-amber-400 tab-active border-amber-400" data-tab="chest_pain">Chest Pain</button> <button onclick="showTopic('dyspnea')" class="tab-btn px-4 py-3 text-sm whitespace-nowrap text-slate-400 hover:text-slate-200" data-tab="dyspnea">Dyspnea</button> <button onclick="showTopic('hypertension')" class="tab-btn px-4 py-3 text-sm whitespace-nowrap text-slate-400 hover:text-slate-200" data-tab="hypertension">Hypertension</button> <button onclick="showTopic('diabetes')" class="tab-btn px-4 py-3 text-sm whitespace-nowrap text-slate-400 hover:text-slate-200" data-tab="diabetes">DKA</button> <button onclick="showTopic('shock')" class="tab-btn px-4 py-3 text-sm whitespace-nowrap text-slate-400 hover:text-slate-200" data-tab="shock">Shock</button> <button onclick="showTopic('stroke')" class="tab-btn px-4 py-3 text-sm whitespace-nowrap text-slate-400 hover:text-slate-200" data-tab="stroke">Stroke</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="flex-1 overflow-auto p-4 md:p-6" id="content"></main>
+  </div>
+  <script>
+    const topics = {
+      chest_pain: {
+        title: "Chest Pain – Clinical Approach",
+        subtitle: "Emergency Medicine / Cardiology",
+        nodes: [
+          { type: "start", text: "Patient presents with Chest Pain", color: "bg-red-600" },
+          { type: "decision", text: "Hemodynamically Stable?", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "NO – Unstable", items: [
+              "Secure Airway, IV Access, O₂",
+              "12-lead ECG STAT",
+              "Troponin, CBC, BMP",
+              "If STEMI → Cath Lab / PCI",
+              "If Tension Pneumothorax → Needle Decompression",
+              "If Cardiac Tamponade → Pericardiocentesis",
+              "If Aortic Dissection → BP control + CT Angio + Surgery"
+            ], color: "bg-red-700" },
+            { label: "YES – Stable", items: [
+              "Focused H&P: OPQRST, risk factors",
+              "ECG + Troponin (serial q3h)",
+              "CXR, D-dimer if PE suspected"
+            ], color: "bg-emerald-700" }
+          ]},
+          { type: "decision", text: "ECG Findings?", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "ST Elevation", items: ["STEMI Protocol", "Aspirin 325mg", "Heparin", "P2Y12 inhibitor", "Emergent PCI < 90 min", "If no PCI available → Fibrinolysis < 30 min"], color: "bg-red-700" },
+            { label: "ST Depression / T-wave Δ", items: ["NSTEMI / UA", "Aspirin + Heparin", "Risk stratify (TIMI/GRACE)", "High risk → Early invasive (24-72h)", "Low risk → Stress test"], color: "bg-orange-700" },
+            { label: "Normal ECG", items: ["Serial Troponins", "Consider: GERD, MSK, PE, Anxiety", "HEART Score for disposition", "0-3: Discharge with follow-up", "4-6: Observe, repeat troponin", "7+: Admit, cardiology consult"], color: "bg-blue-700" }
+          ]},
+          { type: "info", text: "Key DDx: ACS, PE, Aortic Dissection, Tension Pneumothorax, Cardiac Tamponade, Esophageal Rupture (Boerhaave)", color: "bg-slate-700" }
+        ]
+      },
+      dyspnea: {
+        title: "Acute Dyspnea – Systematic Approach",
+        subtitle: "Pulmonology / Emergency Medicine",
+        nodes: [
+          { type: "start", text: "Patient presents with Acute Dyspnea", color: "bg-red-600" },
+          { type: "decision", text: "Assess ABCs – SpO₂, RR, Work of Breathing", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "Respiratory Failure", items: [
+              "Type 1 (Hypoxemic): PaO₂ < 60",
+              "Type 2 (Hypercapnic): PaCO₂ > 50",
+              "High-flow O₂ / NIV / Intubation",
+              "ABG STAT"
+            ], color: "bg-red-700" },
+            { label: "Stable – Workup", items: [
+              "CXR, ECG, ABG/VBG",
+              "BNP/NT-proBNP",
+              "D-dimer (Wells score)",
+              "CBC, BMP"
+            ], color: "bg-emerald-700" }
+          ]},
+          { type: "decision", text: "CXR Findings?", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "White-out / Infiltrates", items: ["Pneumonia → Abx (CAP/HAP guidelines)", "ARDS → Lung-protective ventilation (6ml/kg IBW)", "Pulmonary Edema → Diuretics, NIV, Vasodilators"], color: "bg-purple-700" },
+            { label: "Hyperinflation", items: ["COPD Exacerbation", "Bronchodilators (SABA + SAMA)", "Systemic steroids", "Abx if infectious trigger", "NIV if pH < 7.35"], color: "bg-teal-700" },
+            { label: "Clear CXR", items: ["PE → CTPA if Wells > 4", "Asthma → Peak flow, bronchodilators", "Metabolic acidosis → Check AG", "Anxiety/Hyperventilation (diagnosis of exclusion)"], color: "bg-blue-700" }
+          ]},
+          { type: "info", text: "Critical: Always consider PE, Tension Pneumothorax, Anaphylaxis, Foreign Body in acute-onset dyspnea", color: "bg-slate-700" }
+        ]
+      },
+      hypertension: {
+        title: "Hypertensive Crisis – Management",
+        subtitle: "Cardiology / Internal Medicine",
+        nodes: [
+          { type: "start", text: "BP > 180/120 mmHg", color: "bg-red-600" },
+          { type: "decision", text: "End-Organ Damage Present?", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "YES → Hypertensive Emergency", items: [
+              "Target: ↓ MAP by 25% in 1st hour",
+              "Then to 160/100 over 2-6 hours",
+              "IV agents: Nicardipine, Labetalol, Nitroprusside",
+              "ICU admission, arterial line"
+            ], color: "bg-red-700" },
+            { label: "NO → Hypertensive Urgency", items: [
+              "Oral agents: Captopril, Clonidine, Amlodipine",
+              "Reduce BP over 24-48 hours",
+              "Outpatient follow-up in 1 week",
+              "Reassess medication compliance"
+            ], color: "bg-emerald-700" }
+          ]},
+          { type: "decision", text: "Specific End-Organ Involvement?", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "Neuro (Encephalopathy/Stroke)", items: ["CT Head STAT", "Nicardipine or Labetalol", "If ischemic stroke & tPA candidate: BP < 185/110", "If hemorrhagic: target SBP < 140"], color: "bg-purple-700" },
+            { label: "Cardiac (ACS/Pulm Edema)", items: ["Nitroglycerin IV", "Esmolol (if no HF)", "Furosemide if volume overload", "Avoid Nitroprusside in ACS"], color: "bg-orange-700" },
+            { label: "Renal / Eclampsia", items: ["Renal: Fenoldopam or Nicardipine", "Check Cr, UA, proteinuria", "Eclampsia: MgSO₄ + Delivery", "Hydralazine or Labetalol for pregnancy"], color: "bg-teal-700" }
+          ]},
+          { type: "info", text: "Avoid: Sublingual Nifedipine (unpredictable drops), rapid correction (risk of watershed infarcts)", color: "bg-slate-700" }
+        ]
+      },
+      diabetes: {
+        title: "Diabetic Ketoacidosis (DKA) – Protocol",
+        subtitle: "Endocrinology / Critical Care",
+        nodes: [
+          { type: "start", text: "DKA Criteria: Glucose > 250, pH < 7.3, HCO₃ < 18, Ketones +", color: "bg-red-600" },
+          { type: "decision", text: "Severity Assessment", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "Mild (pH 7.25-7.3)", items: ["Alert, oriented", "HCO₃ 15-18", "Can manage on ward", "SC insulin possible if eating"], color: "bg-emerald-700" },
+            { label: "Moderate (pH 7.0-7.24)", items: ["Drowsy but arousable", "HCO₃ 10-15", "ICU consideration", "IV insulin drip"], color: "bg-orange-700" },
+            { label: "Severe (pH < 7.0)", items: ["Stupor/Coma", "HCO₃ < 10", "ICU mandatory", "Consider bicarb if pH < 6.9"], color: "bg-red-700" }
+          ]},
+          { type: "start", text: "Management Protocol (Simultaneous)", color: "bg-indigo-600" },
+          { type: "branch", branches: [
+            { label: "1. Fluids", items: ["NS 1-1.5 L/hr × 1st hour", "Then 250-500 ml/hr NS", "Switch to D5 ½NS when glucose < 200", "Total deficit: 5-9L"], color: "bg-blue-700" },
+            { label: "2. Insulin", items: ["Regular insulin 0.1 U/kg bolus", "Then 0.1 U/kg/hr drip", "Target: ↓ glucose 50-70 mg/dL/hr", "Don't stop until AG closes"], color: "bg-purple-700" },
+            { label: "3. Potassium", items: ["If K < 3.3: Hold insulin, replace K first", "If K 3.3-5.3: Add 20-40 mEq/L to IVF", "If K > 5.3: Recheck in 2h", "Monitor q1-2h"], color: "bg-teal-700" }
+          ]},
+          { type: "info", text: "Resolution: pH > 7.3, HCO₃ > 18, AG < 12, patient eating → Overlap SC insulin 2h before stopping drip. Always find the precipitant (5 I's: Infection, Infarction, Infant, Indiscretion, Insulin missed)", color: "bg-slate-700" }
+        ]
+      },
+      shock: {
+        title: "Shock – Classification & Management",
+        subtitle: "Critical Care / Emergency Medicine",
+        nodes: [
+          { type: "start", text: "Shock: SBP < 90 or MAP < 65 + End-organ hypoperfusion", color: "bg-red-600" },
+          { type: "decision", text: "Clinical Assessment + Bedside Echo (RUSH exam)", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "Hypovolemic", items: ["Hemorrhagic: Trauma, GI bleed, AAA", "Non-hemorrhagic: Dehydration, burns", "Tx: Crystalloid bolus → Blood products", "Flat IVC, hyperdynamic heart"], color: "bg-red-700" },
+            { label: "Cardiogenic", items: ["MI, Arrhythmia, Valvular, Myocarditis", "Distended IVC, poor squeeze", "Tx: Inotropes (Dobutamine)", "Avoid volume overload", "Emergent cath if STEMI"], color: "bg-purple-700" },
+            { label: "Distributive", items: ["Septic (most common), Anaphylactic, Neurogenic", "Warm shock → Cold shock", "Tx: Volume + Norepinephrine", "Sepsis: Abx within 1 hour, cultures ×2", "Anaphylaxis: IM Epinephrine 0.3-0.5mg"], color: "bg-orange-700" },
+            { label: "Obstructive", items: ["PE, Tamponade, Tension PTX", "Distended IVC, RV strain", "PE: tPA if massive", "Tamponade: Pericardiocentesis", "Tension PTX: Needle → Chest tube"], color: "bg-teal-700" }
+          ]},
+          { type: "info", text: "RUSH Protocol: Pump (cardiac), Tank (volume status – IVC, FAST, lung), Pipes (aorta, DVT). Lactate > 4 = severe tissue hypoperfusion.", color: "bg-slate-700" }
+        ]
+      },
+      stroke: {
+        title: "Acute Stroke – Time-Critical Protocol",
+        subtitle: "Neurology / Emergency Medicine",
+        nodes: [
+          { type: "start", text: "Suspected Stroke: Sudden focal neuro deficit (FAST: Face, Arms, Speech, Time)", color: "bg-red-600" },
+          { type: "decision", text: "Non-contrast CT Head (Door-to-CT < 25 min)", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "Hemorrhage on CT", items: [
+              "Hemorrhagic Stroke (ICH/SAH)",
+              "Reverse anticoagulation (Vit K, PCC, Idarucizumab)",
+              "BP target: SBP < 140 (INTERACT2)",
+              "Neurosurgery consult",
+              "If SAH → CTA, secure aneurysm, Nimodipine"
+            ], color: "bg-red-700" },
+            { label: "No Hemorrhage (Ischemic)", items: [
+              "Check: Onset time, NIHSS, glucose, BP",
+              "tPA window: < 4.5 hours from onset",
+              "Criteria met → Alteplase 0.9 mg/kg (max 90mg)",
+              "10% bolus, 90% over 60 min",
+              "BP must be < 185/110 before tPA"
+            ], color: "bg-emerald-700" }
+          ]},
+          { type: "decision", text: "Large Vessel Occlusion (LVO)?", color: "bg-yellow-600" },
+          { type: "branch", branches: [
+            { label: "LVO Confirmed (CTA)", items: ["Mechanical Thrombectomy", "Window: up to 24h (DAWN/DEFUSE-3 criteria)", "ICA, M1, basilar most common", "NIHSS ≥ 6 + mismatch on perfusion imaging", "Door-to-groin < 90 min goal"], color: "bg-indigo-700" },
+            { label: "No LVO / Minor Stroke", items: ["Admit to Stroke Unit", "Dual antiplatelet × 21 days (POINT trial)", "Statin high-intensity", "Workup: Echo, Holter, carotid US", "Identify etiology (TOAST classification)"], color: "bg-blue-700" }
+          ]},
+          { type: "info", text: "Time is Brain: 1.9 million neurons lost per minute. Door-to-needle < 60 min. Stroke mimics: Hypoglycemia, Todd's paralysis, Migraine with aura, Conversion disorder", color: "bg-slate-700" }
+        ]
+      }
+    };
+
+    let currentTopic = 'chest_pain';
+
+    function showTopic(id) {
+      currentTopic = id;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('tab-active', 'border-amber-400', 'text-amber-400');
+        btn.classList.add('text-slate-400');
+      });
+      const activeBtn = document.querySelector(`[data-tab="${id}"]`);
+      activeBtn.classList.add('tab-active', 'border-amber-400', 'text-amber-400');
+      activeBtn.classList.remove('text-slate-400');
+      renderTopic(topics[id]);
+    }
+
+    function renderTopic(topic) {
+      const content = document.getElementById('content');
+      let html = `<div class="fade-in max-w-5xl mx-auto">
+        <div class="text-center mb-6">
+          <h2 class="heading-font text-xl md:text-2xl text-amber-300">${topic.title}</h2>
+          <p class="text-slate-400 text-sm">${topic.subtitle}</p>
+        </div>
+        <div class="flex flex-col items-center gap-1">`;
+
+      topic.nodes.forEach(node => {
+        if (node.type === 'start') {
+          html += `<div class="flow-node ${node.color} text-white px-5 py-3 rounded-lg text-center text-sm md:text-base font-semibold max-w-lg w-full shadow-lg">${node.text}</div>
+          <div class="arrow-down text-slate-500"></div>`;
+        } else if (node.type === 'decision') {
+          html += `<div class="flow-node ${node.color} text-white px-5 py-3 rounded-full text-center text-sm font-medium max-w-md w-full shadow-lg" style="clip-path: none; border: 2px dashed rgba(255,255,255,0.3);">⟐ ${node.text}</div>
+          <div class="arrow-down text-slate-500"></div>`;
+        } else if (node.type === 'branch') {
+          html += `<div class="branch-container w-full">`;
+          node.branches.forEach(branch => {
+            html += `<div class="flow-node ${branch.color} rounded-lg p-4 flex-1 min-w-[220px] max-w-sm shadow-lg">
+              <div class="font-bold text-sm text-amber-200 mb-2 border-b border-white/20 pb-1">${branch.label}</div>
+              <ul class="text-xs md:text-sm space-y-1 text-slate-100">`;
+            branch.items.forEach(item => {
+              html += `<li class="flex items-start gap-1"><span class="text-amber-400 mt-0.5">•</span><span>${item}</span></li>`;
+            });
+            html += `</ul></div>`;
+          });
+          html += `</div><div class="arrow-down text-slate-500"></div>`;
+        } else if (node.type === 'info') {
+          html += `<div class="flow-node ${node.color} border border-amber-500/30 text-slate-200 px-5 py-3 rounded-lg text-xs md:text-sm max-w-2xl w-full mt-2">
+            <span class="text-amber-400 font-bold">⚠ Clinical Pearl:</span> ${node.text}</div>`;
+        }
+      });
+
+      html += `</div></div>`;
+      content.innerHTML = html;
+    }
+
+    showTopic('chest_pain');
+    lucide.createIcons();
+  </script>
+ </body>
+</html>
