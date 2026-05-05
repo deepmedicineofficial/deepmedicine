@@ -1,0 +1,953 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Stroke & Seizures | Neurological Emergency Management | Deep Medicine</title> <meta name="description" content="Comprehensive guide to stroke and seizures including acute management, thrombolysis, status epilepticus, and emergency neurological care."> <link rel="canonical" href="https://deepmedicine.in/core/icu/stroke-seizures"> <!-- Open Graph --> <meta property="og:title" content="Stroke & Seizures | Deep Medicine"> <meta property="og:description" content="Emergency management of stroke and seizures with rapid diagnosis and treatment protocols."> <meta property="og:image" content="https://deepmedicine.in/images/stroke-seizures.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['"Source Sans 3"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+
+.app-shell { height: 100%; overflow-y: auto; overflow-x: hidden; }
+
+/* Animated gradient mesh background */
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(30,58,95,0.9) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(120,30,30,0.7) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(20,40,70,0.8) 0%, transparent 50%);
+}
+
+/* Section cards */
+.clinical-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+.clinical-card:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); }
+
+/* Tab system */
+.tab-btn { transition: all 0.25s ease; position: relative; }
+.tab-btn.active { color: #fff; }
+.tab-btn.active::after {
+  content: ''; position: absolute; bottom: -2px; left: 10%; right: 10%; height: 3px;
+  border-radius: 2px;
+}
+
+/* Accordion */
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.accordion-content.open { max-height: 8000px; }
+.accordion-chevron { transition: transform 0.3s ease; }
+.accordion-chevron.rotated { transform: rotate(180deg); }
+
+/* Pulse dot */
+@keyframes pulse-dot { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.5; transform:scale(1.6); } }
+.pulse-dot { animation: pulse-dot 2s infinite; }
+
+/* Stagger fade-in */
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation: fadeUp 0.5s ease forwards; opacity: 0; }
+
+/* Timeline */
+.timeline-line { position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; }
+
+/* Scrollbar */
+.app-shell::-webkit-scrollbar { width: 6px; }
+.app-shell::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+.app-shell::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+/* Pearl badge */
+.pearl { display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; }
+
+/* Table styling */
+.cl-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.cl-table th { text-align: left; padding: 10px 14px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.cl-table td { padding: 10px 14px; font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.06); }
+.cl-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+/* Quick-reference sidebar highlight */
+.qr-box { border-left: 3px solid; padding: 12px 16px; border-radius: 0 8px 8px 0; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-slate-950 text-gray-200 font-body">
+  <div class="app-shell w-full" id="appShell">
+   <!-- ===== HERO ===== -->
+   <header class="hero-mesh relative overflow-hidden" id="heroSection">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 sm:pb-20 relative z-10">
+     <!-- Floating medical cross SVG -->
+     <svg class="absolute top-6 right-6 opacity-10" width="80" height="80" viewbox="0 0 80 80"><rect x="30" y="5" width="20" height="70" rx="4" fill="#fff" /><rect x="5" y="30" width="70" height="20" rx="4" fill="#fff" />
+     </svg>
+     <div class="flex items-center gap-3 mb-6">
+      <span class="pulse-dot w-3 h-3 rounded-full bg-red-500 inline-block"></span> <span class="text-red-400 font-mono text-xs tracking-widest uppercase">Critical Care Reference</span>
+     </div>
+     <h1 class="font-heading font-800 text-4xl sm:text-5xl lg:text-6xl leading-tight mb-4" id="mainTitle">Stroke <span class="text-red-400">&amp;</span> Seizures</h1>
+     <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mb-3" id="subtitle">A Clinician's Definitive Guide — From Bedside to ICU</p>
+     <p class="text-sm text-gray-500 font-mono" id="authorLine">MBBS, MD, DM Cardiology · Professor of Medicine · ICU Intensivist · Emergency Medicine</p>
+     <div class="flex flex-wrap gap-3 mt-8">
+      <span class="pearl bg-red-500/20 text-red-300 border border-red-500/30"><i data-lucide="zap" style="width:14px;height:14px"></i> Emergency</span> <span class="pearl bg-blue-500/20 text-blue-300 border border-blue-500/30"><i data-lucide="brain" style="width:14px;height:14px"></i> Neurology</span> <span class="pearl bg-amber-500/20 text-amber-300 border border-amber-500/30"><i data-lucide="heart-pulse" style="width:14px;height:14px"></i> Cardiology</span> <span class="pearl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"><i data-lucide="activity" style="width:14px;height:14px"></i> ICU</span>
+     </div>
+    </div>
+   </header><!-- ===== MAIN TAB NAVIGATION ===== -->
+   <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-white/5" id="mainNav">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-1 overflow-x-auto py-1 scrollbar-hide">
+     <button class="tab-btn active px-4 py-3 text-sm font-semibold text-gray-400 whitespace-nowrap rounded-t-lg" data-tab="stroke" onclick="switchTab('stroke')"> <i data-lucide="brain" style="width:16px;height:16px;display:inline;vertical-align:-3px;margin-right:4px"></i> Stroke </button> <button class="tab-btn px-4 py-3 text-sm font-semibold text-gray-400 whitespace-nowrap rounded-t-lg" data-tab="seizures" onclick="switchTab('seizures')"> <i data-lucide="zap" style="width:16px;height:16px;display:inline;vertical-align:-3px;margin-right:4px"></i> Seizures </button> <button class="tab-btn px-4 py-3 text-sm font-semibold text-gray-400 whitespace-nowrap rounded-t-lg" data-tab="overlap" onclick="switchTab('overlap')"> <i data-lucide="git-merge" style="width:16px;height:16px;display:inline;vertical-align:-3px;margin-right:4px"></i> Stroke–Seizure Nexus </button> <button class="tab-btn px-4 py-3 text-sm font-semibold text-gray-400 whitespace-nowrap rounded-t-lg" data-tab="protocols" onclick="switchTab('protocols')"> <i data-lucide="clipboard-list" style="width:16px;height:16px;display:inline;vertical-align:-3px;margin-right:4px"></i> Protocols </button> <button class="tab-btn px-4 py-3 text-sm font-semibold text-gray-400 whitespace-nowrap rounded-t-lg" data-tab="pearls" onclick="switchTab('pearls')"> <i data-lucide="star" style="width:16px;height:16px;display:inline;vertical-align:-3px;margin-right:4px"></i> Clinical Pearls </button>
+    </div>
+   </nav><!-- ===== CONTENT AREA ===== -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <!-- ==================== STROKE TAB ==================== -->
+    <div id="tab-stroke" class="tab-content">
+     <!-- Definition & Epidemiology -->
+     <section class="mb-10 fade-up" style="animation-delay:0.1s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-red-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="book-open" style="width:22px;height:22px;color:#f87171"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Definition &amp; Epidemiology</h2>
+         <p class="text-gray-400 text-sm">WHO &amp; AHA/ASA Clinical Criteria</p>
+        </div>
+       </div>
+       <div class="space-y-4 text-gray-300 leading-relaxed">
+        <p><strong class="text-white">Stroke (Cerebrovascular Accident)</strong> is defined as an acute neurological deficit attributable to a focal vascular cause, persisting ≥24 hours or resulting in death. With modern imaging, any acute infarct on DWI-MRI qualifies regardless of symptom duration — effectively rendering the "24-hour rule" a clinical relic.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+         <div class="bg-slate-800/60 rounded-xl p-5 text-center">
+          <div class="text-3xl font-heading font-700 text-red-400">
+           13.7M
+          </div>
+          <div class="text-xs text-gray-500 mt-1">
+           New strokes/year globally
+          </div>
+         </div>
+         <div class="bg-slate-800/60 rounded-xl p-5 text-center">
+          <div class="text-3xl font-heading font-700 text-amber-400">
+           5.5M
+          </div>
+          <div class="text-xs text-gray-500 mt-1">
+           Deaths/year (2nd leading COD)
+          </div>
+         </div>
+         <div class="bg-slate-800/60 rounded-xl p-5 text-center">
+          <div class="text-3xl font-heading font-700 text-blue-400">
+           80%
+          </div>
+          <div class="text-xs text-gray-500 mt-1">
+           Are ischemic strokes
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Classification -->
+     <section class="mb-10 fade-up" style="animation-delay:0.2s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="layers" style="width:22px;height:22px;color:#60a5fa"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Classification (TOAST &amp; Bamford)</h2>
+         <p class="text-gray-400 text-sm">Etiologic subtypes with clinical bedside differentiation</p>
+        </div>
+       </div><!-- Ischemic Accordion -->
+       <div class="space-y-3">
+        <div class="rounded-xl border border-white/8 overflow-hidden">
+         <button class="w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)">
+          <div class="flex items-center gap-3">
+           <span class="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 text-sm font-bold">I</span> <span class="font-semibold text-white">Ischemic Stroke (80–87%)</span>
+          </div><i data-lucide="chevron-down" class="accordion-chevron" style="width:18px;height:18px;color:#9ca3af"></i> </button>
+         <div class="accordion-content">
+          <div class="px-5 pb-5 space-y-4">
+           <div class="overflow-x-auto scrollbar-hide">
+            <table class="cl-table min-w-max">
+             <thead>
+              <tr class="text-gray-500">
+               <th style="min-width:160px">Subtype (TOAST)</th>
+               <th style="min-width:280px">Mechanism</th>
+               <th style="min-width:300px">Key Features</th>
+              </tr>
+             </thead>
+             <tbody class="text-gray-300">
+              <tr>
+               <td class="font-semibold text-white">Large-Artery Atherosclerosis</td>
+               <td>Artery-to-artery embolism or in-situ thrombosis of ICA/MCA/Vertebrobasilar</td>
+               <td>Cortical signs, ≥50% stenosis on CTA/MRA, often stuttering onset</td>
+              </tr>
+              <tr>
+               <td class="font-semibold text-white">Cardioembolism</td>
+               <td>AF (most common), valvular disease, LV thrombus post-MI, PFO with DVT</td>
+               <td>Sudden maximal deficit, hemorrhagic transformation common, multiterritorial infarcts</td>
+              </tr>
+              <tr>
+               <td class="font-semibold text-white">Small-Vessel (Lacunar)</td>
+               <td>Lipohyalinosis of perforating arteries (lenticulostriates, pontine perforators)</td>
+               <td>Pure motor, pure sensory, ataxic hemiparesis, dysarthria–clumsy hand. Infarct &lt;1.5 cm. Normal cortex.</td>
+              </tr>
+              <tr>
+               <td class="font-semibold text-white">Other Determined</td>
+               <td>Dissection, vasculitis, hypercoagulable states, moyamoya, sickle cell</td>
+               <td>Young patients, no traditional risk factors — always investigate</td>
+              </tr>
+              <tr>
+               <td class="font-semibold text-white">Cryptogenic / ESUS</td>
+               <td>No identified cause despite comprehensive workup. Embolic Stroke of Undetermined Source.</td>
+               <td>~25% of ischemic strokes. Prolonged cardiac monitoring often reveals occult AF.</td>
+              </tr>
+             </tbody>
+            </table>
+           </div>
+           <div class="qr-box border-blue-400/60 bg-blue-500/5 text-sm">
+            <strong class="text-blue-300">🫀 Cardiology Pearl:</strong> In ESUS, implantable loop recorders (ILR) detect AF in ~30% of patients over 3 years (CRYSTAL-AF trial). Always push for prolonged monitoring before labeling cryptogenic.
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="rounded-xl border border-white/8 overflow-hidden">
+         <button class="w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)">
+          <div class="flex items-center gap-3">
+           <span class="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center text-red-400 text-sm font-bold">H</span> <span class="font-semibold text-white">Hemorrhagic Stroke (13–20%)</span>
+          </div><i data-lucide="chevron-down" class="accordion-chevron" style="width:18px;height:18px;color:#9ca3af"></i> </button>
+         <div class="accordion-content">
+          <div class="px-5 pb-5 space-y-4">
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-800/40 rounded-xl p-5">
+             <h4 class="font-semibold text-red-300 mb-3">Intracerebral Hemorrhage (ICH)</h4>
+             <ul class="space-y-2 text-sm text-gray-300">
+              <li>• <strong class="text-white">Hypertensive:</strong> Basal ganglia (putamen 35%), thalamus (20%), pons (5%), cerebellum (10%)</li>
+              <li>• <strong class="text-white">Amyloid Angiopathy:</strong> Lobar, elderly, recurrent — MRI shows cortical superficial siderosis &amp; microbleeds</li>
+              <li>• <strong class="text-white">Others:</strong> Coagulopathy (warfarin ICH — reverse with 4-factor PCC + Vit K), AVM, tumor bleed, hemorrhagic transformation</li>
+              <li>• <strong class="text-white">ICH Score:</strong> GCS, volume (ABC/2), IVH, infratentorial, age ≥80 → predicts 30-day mortality</li>
+             </ul>
+            </div>
+            <div class="bg-slate-800/40 rounded-xl p-5">
+             <h4 class="font-semibold text-amber-300 mb-3">Subarachnoid Hemorrhage (SAH)</h4>
+             <ul class="space-y-2 text-sm text-gray-300">
+              <li>• <strong class="text-white">Cause:</strong> Ruptured berry aneurysm (85%), AVM, perimesencephalic</li>
+              <li>• <strong class="text-white">Presentation:</strong> "Thunderclap headache" — worst headache of life, often during exertion. Neck stiffness develops over hours.</li>
+              <li>• <strong class="text-white">Sentinel headache:</strong> Warning leak in ~30–50% cases, days to weeks prior — frequently missed!</li>
+              <li>• <strong class="text-white">Grading:</strong> Hunt &amp; Hess (I–V), Fisher (CT blood pattern predicts vasospasm)</li>
+              <li>• <strong class="text-white">Vasospasm:</strong> Days 4–14 post-SAH. Nimodipine 60mg q4h × 21 days. Monitor with TCD (MCA velocity &gt;120 cm/s).</li>
+             </ul>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="rounded-xl border border-white/8 overflow-hidden">
+         <button class="w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)">
+          <div class="flex items-center gap-3">
+           <span class="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-400 text-sm font-bold">T</span> <span class="font-semibold text-white">TIA — Transient Ischemic Attack</span>
+          </div><i data-lucide="chevron-down" class="accordion-chevron" style="width:18px;height:18px;color:#9ca3af"></i> </button>
+         <div class="accordion-content">
+          <div class="px-5 pb-5 space-y-3 text-sm text-gray-300">
+           <p>Modern definition: <strong class="text-white">Transient episode of neurological dysfunction caused by focal brain, spinal cord, or retinal ischemia WITHOUT acute infarction</strong> (tissue-based, not time-based).</p>
+           <div class="qr-box border-amber-400/60 bg-amber-500/5">
+            <strong class="text-amber-300">⚡ Emergency Pearl:</strong> The <strong>ABCD² score</strong> (Age, BP, Clinical features, Duration, Diabetes) stratifies 2-day stroke risk post-TIA: Score ≥4 = high risk (8% at 2 days). But from ICU experience — <em>admit all TIAs for urgent workup</em>. The score misses embolic sources.
+           </div>
+           <p><strong class="text-white">Dual antiplatelet</strong> (aspirin + clopidogrel) for 21 days post-TIA reduces 90-day stroke risk by 32% (CHANCE/POINT trials). Start within 24 hours.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Clinical Presentation by Vascular Territory -->
+     <section class="mb-10 fade-up" style="animation-delay:0.3s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="map-pin" style="width:22px;height:22px;color:#34d399"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Vascular Territory Syndromes</h2>
+         <p class="text-gray-400 text-sm">Bedside localization — the art of clinical neurology</p>
+        </div>
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-slate-800/40 rounded-xl p-5 border-l-4 border-red-400/60">
+         <h4 class="font-semibold text-white mb-2">MCA (Most Common)</h4>
+         <ul class="text-sm text-gray-300 space-y-1">
+          <li>• Contralateral hemiparesis (face &amp; arm &gt; leg)</li>
+          <li>• Contralateral hemianesthesia</li>
+          <li>• Homonymous hemianopia</li>
+          <li>• Dominant: Broca's (frontal) / Wernicke's (temporal) aphasia</li>
+          <li>• Non-dominant: Hemispatial neglect, anosognosia</li>
+          <li>• Gaze preference TOWARD the lesion</li>
+         </ul>
+        </div>
+        <div class="bg-slate-800/40 rounded-xl p-5 border-l-4 border-blue-400/60">
+         <h4 class="font-semibold text-white mb-2">ACA</h4>
+         <ul class="text-sm text-gray-300 space-y-1">
+          <li>• Contralateral leg &gt; arm weakness</li>
+          <li>• Abulia (bilateral), akinetic mutism</li>
+          <li>• Urinary incontinence</li>
+          <li>• Grasp reflex, alien hand syndrome</li>
+         </ul>
+        </div>
+        <div class="bg-slate-800/40 rounded-xl p-5 border-l-4 border-amber-400/60">
+         <h4 class="font-semibold text-white mb-2">PCA</h4>
+         <ul class="text-sm text-gray-300 space-y-1">
+          <li>• Contralateral homonymous hemianopia with MACULAR SPARING</li>
+          <li>• Visual agnosia, prosopagnosia</li>
+          <li>• Alexia without agraphia (dominant)</li>
+          <li>• Thalamic pain syndrome (Déjerine–Roussy)</li>
+         </ul>
+        </div>
+        <div class="bg-slate-800/40 rounded-xl p-5 border-l-4 border-purple-400/60">
+         <h4 class="font-semibold text-white mb-2">Vertebrobasilar / Posterior Fossa</h4>
+         <ul class="text-sm text-gray-300 space-y-1">
+          <li>• <strong>Wallenberg (PICA):</strong> Ipsi facial pain/temp loss + contra body pain/temp loss, dysphagia, vertigo, Horner's, ipsi cerebellar ataxia</li>
+          <li>• <strong>Basilar Tip:</strong> Decreased LOC, bilateral motor signs, "top of the basilar" — coma, pupillary abnormalities</li>
+          <li>• <strong>Locked-in (Ventral Pons):</strong> Quadriplegia + anarthria. CONSCIOUSNESS PRESERVED. Communicate via vertical eye movements.</li>
+          <li>• <strong>Cerebellar:</strong> Ataxia, vertigo, headache — can herniate rapidly! Surgical emergency if hydrocephalus develops.</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </section><!-- Acute Management Timeline -->
+     <section class="mb-10 fade-up" style="animation-delay:0.35s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-red-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="clock" style="width:22px;height:22px;color:#f87171"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Acute Ischemic Stroke — Time-Critical Management</h2>
+         <p class="text-gray-400 text-sm">"Time is Brain" — 1.9 million neurons lost per minute of ischemia</p>
+        </div>
+       </div><!-- Timeline -->
+       <div class="relative pl-10 space-y-6">
+        <div class="timeline-line bg-gradient-to-b from-red-500 via-amber-500 to-emerald-500"></div>
+        <div class="relative">
+         <div class="absolute -left-10 w-8 h-8 rounded-full bg-red-500/30 border-2 border-red-400 flex items-center justify-center"><span class="text-xs font-bold text-red-300">0</span>
+         </div>
+         <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-4">
+          <h4 class="font-semibold text-red-300">Minutes 0–10: Door to Assessment</h4>
+          <ul class="text-sm text-gray-300 mt-2 space-y-1">
+           <li>• ABC stabilization, IV access × 2 large-bore</li>
+           <li>• NIHSS scoring (baseline), glucose check (MUST rule out hypoglycemia!)</li>
+           <li>• STAT NCCT head — hemorrhage exclusion (door-to-CT &lt;25 min target)</li>
+           <li>• Labs: CBC, coag, renal, troponin, HbA1c — but <strong class="text-white">do NOT wait for labs to give tPA</strong> (except glucose &amp; known coagulopathy)</li>
+          </ul>
+         </div>
+        </div>
+        <div class="relative">
+         <div class="absolute -left-10 w-8 h-8 rounded-full bg-amber-500/30 border-2 border-amber-400 flex items-center justify-center"><span class="text-xs font-bold text-amber-300">≤60</span>
+         </div>
+         <div class="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
+          <h4 class="font-semibold text-amber-300">Door-to-Needle ≤60 min: IV Alteplase (tPA)</h4>
+          <ul class="text-sm text-gray-300 mt-2 space-y-1">
+           <li>• <strong class="text-white">0.9 mg/kg (max 90 mg):</strong> 10% bolus over 1 min, remainder infused over 60 min</li>
+           <li>• Window: <strong class="text-white">≤4.5 hours</strong> from last known well (ECASS-III extended window criteria)</li>
+           <li>• BP must be &lt;185/110 before, &lt;180/105 for 24h after thrombolysis</li>
+           <li>• Tenecteplase (TNK) 0.25 mg/kg emerging as single-bolus alternative — easier in field/smaller EDs</li>
+          </ul>
+          <div class="qr-box border-red-400/60 bg-red-500/5 text-sm mt-3">
+           <strong class="text-red-300">🚨 Key Contraindications:</strong> Active bleeding, plt &lt;100k, INR &gt;1.7, recent surgery (14d), GI bleed (21d), prior ICH, BP uncontrolled &gt;185/110, glucose &lt;50.
+          </div>
+         </div>
+        </div>
+        <div class="relative">
+         <div class="absolute -left-10 w-8 h-8 rounded-full bg-blue-500/30 border-2 border-blue-400 flex items-center justify-center"><span class="text-xs font-bold text-blue-300">≤24h</span>
+         </div>
+         <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4">
+          <h4 class="font-semibold text-blue-300">Mechanical Thrombectomy — Large Vessel Occlusion (LVO)</h4>
+          <ul class="text-sm text-gray-300 mt-2 space-y-1">
+           <li>• <strong class="text-white">≤6 hours:</strong> All LVO with NIHSS ≥6, ASPECTS ≥6 (MR CLEAN, EXTEND-IA, ESCAPE, SWIFT PRIME, REVASCAT)</li>
+           <li>• <strong class="text-white">6–24 hours:</strong> Selected patients with perfusion mismatch (DAWN, DEFUSE-3 criteria)</li>
+           <li>• <strong class="text-white">Target:</strong> ICA, M1-MCA, basilar artery occlusions. M2 and anterior vertebral emerging.</li>
+           <li>• <strong>NNT = 2.6</strong> for good outcome — one of the most powerful interventions in medicine</li>
+          </ul>
+         </div>
+        </div>
+        <div class="relative">
+         <div class="absolute -left-10 w-8 h-8 rounded-full bg-emerald-500/30 border-2 border-emerald-400 flex items-center justify-center"><span class="text-xs font-bold text-emerald-300">ICU</span>
+         </div>
+         <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4">
+          <h4 class="font-semibold text-emerald-300">Post-Acute / ICU Management</h4>
+          <ul class="text-sm text-gray-300 mt-2 space-y-1">
+           <li>• BP: Permissive hypertension (up to 220/120) if no thrombolysis. Post-tPA: &lt;180/105 × 24h</li>
+           <li>• Glucose: Target 140–180 mg/dL. Hypoglycemia is more dangerous than mild hyperglycemia</li>
+           <li>• Swallow screen before ANY oral intake (aspiration pneumonia kills more than the stroke itself)</li>
+           <li>• DVT prophylaxis: SCDs immediately, enoxaparin at 24–48h post-imaging stability</li>
+           <li>• Malignant MCA: Age &lt;60 with &gt;50% territory infarct → decompressive hemicraniectomy (DECIMAL, DESTINY, HAMLET — NNT 2)</li>
+           <li>• Temperature: Treat fever aggressively (each 1°C rise = 2× worse outcome)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Secondary Prevention -->
+     <section class="mb-10 fade-up" style="animation-delay:0.4s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="shield" style="width:22px;height:22px;color:#34d399"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Secondary Prevention</h2>
+         <p class="text-gray-400 text-sm">Evidence-based long-term risk reduction</p>
+        </div>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="bg-slate-800/40 rounded-xl p-5">
+         <h4 class="text-white font-semibold mb-2">Antithrombotics</h4>
+         <ul class="text-gray-300 space-y-1">
+          <li>• <strong>Non-cardioembolic:</strong> Aspirin 75–325mg OR clopidogrel 75mg. DAPT × 21d for minor stroke/TIA.</li>
+          <li>• <strong>Cardioembolic (AF):</strong> DOACs preferred over warfarin (NOAC trials). Start at 4–14 days post-stroke based on infarct size (1-3-6-12 day rule).</li>
+         </ul>
+        </div>
+        <div class="bg-slate-800/40 rounded-xl p-5">
+         <h4 class="text-white font-semibold mb-2">Risk Factor Control</h4>
+         <ul class="text-gray-300 space-y-1">
+          <li>• <strong>BP:</strong> Target &lt;130/80 (SPRINT). Start/resume at 24–72h post-stroke.</li>
+          <li>• <strong>LDL:</strong> &lt;70 mg/dL (high-intensity statin ± ezetimibe). TST trial: &lt;70 superior to 90–110.</li>
+          <li>• <strong>Carotid stenosis ≥70%:</strong> CEA within 2 weeks (NASCET benefit lost if delayed).</li>
+          <li>• <strong>PFO closure:</strong> Age &lt;60 with cryptogenic stroke + high-risk PFO features (CLOSE, RESPECT, REDUCE trials).</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div><!-- ==================== SEIZURES TAB ==================== -->
+    <div id="tab-seizures" class="tab-content hidden">
+     <!-- Definition & Classification -->
+     <section class="mb-10 fade-up" style="animation-delay:0.1s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-yellow-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="zap" style="width:22px;height:22px;color:#fbbf24"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Seizures — Definition &amp; ILAE Classification</h2>
+         <p class="text-gray-400 text-sm">2017 ILAE Operational Classification</p>
+        </div>
+       </div>
+       <div class="space-y-4 text-gray-300 leading-relaxed">
+        <p>A <strong class="text-white">seizure</strong> is a transient occurrence of signs and/or symptoms due to abnormal excessive or synchronous neuronal activity in the brain. <strong class="text-white">Epilepsy</strong> requires: ≥2 unprovoked seizures &gt;24h apart, OR 1 unprovoked seizure + ≥60% recurrence risk over 10 years, OR an epilepsy syndrome diagnosis.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+         <div class="bg-yellow-500/5 border border-yellow-500/20 rounded-xl p-5">
+          <h4 class="font-semibold text-yellow-300 mb-3">Focal Onset</h4>
+          <ul class="text-sm space-y-1">
+           <li>• <strong class="text-white">Aware</strong> (old: simple partial) — consciousness preserved</li>
+           <li>• <strong class="text-white">Impaired awareness</strong> (old: complex partial) — temporal lobe most common; automatisms (lip smacking, fumbling)</li>
+           <li>• <strong class="text-white">Focal to bilateral tonic-clonic</strong> (old: secondary generalized) — Jacksonian march pattern</li>
+           <li>• Motor vs Non-motor onset subclassification</li>
+          </ul>
+         </div>
+         <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-5">
+          <h4 class="font-semibold text-blue-300 mb-3">Generalized Onset</h4>
+          <ul class="text-sm space-y-1">
+           <li>• <strong class="text-white">Tonic-clonic (GTC):</strong> Tonic phase (10–30s) → clonic phase (30–60s) → postictal state</li>
+           <li>• <strong class="text-white">Absence:</strong> Typical (3Hz spike-wave, childhood) vs Atypical (slower, refractory)</li>
+           <li>• <strong class="text-white">Myoclonic:</strong> Brief shock-like jerks. JME — morning myoclonus + GTC + absences</li>
+           <li>• <strong class="text-white">Atonic:</strong> "Drop attacks" — sudden loss of postural tone</li>
+          </ul>
+         </div>
+         <div class="bg-purple-500/5 border border-purple-500/20 rounded-xl p-5">
+          <h4 class="font-semibold text-purple-300 mb-3">Unknown Onset</h4>
+          <ul class="text-sm space-y-1">
+           <li>• Unwitnessed seizures</li>
+           <li>• Epileptic spasms</li>
+           <li>• Behavior arrest (insufficient information)</li>
+           <li>• Reclassify when more data available</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Etiology by Age -->
+     <section class="mb-10 fade-up" style="animation-delay:0.2s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="users" style="width:22px;height:22px;color:#34d399"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Etiology — Think Age-Stratified</h2>
+         <p class="text-gray-400 text-sm">From ICU/ER clinical experience — the differential changes with age</p>
+        </div>
+       </div>
+       <table class="cl-table">
+        <thead>
+         <tr class="text-gray-500">
+          <th>Age Group</th>
+          <th>Common Etiologies</th>
+         </tr>
+        </thead>
+        <tbody class="text-gray-300 text-sm">
+         <tr>
+          <td class="text-white font-semibold">Neonates</td>
+          <td>HIE, intracranial hemorrhage, pyridoxine deficiency, inborn errors of metabolism, cortical dysplasia</td>
+         </tr>
+         <tr>
+          <td class="text-white font-semibold">Infants &amp; Children</td>
+          <td>Febrile seizures (most common 6mo–5yr), genetic epilepsies (Dravet, West syndrome), CNS infections, birth injury</td>
+         </tr>
+         <tr>
+          <td class="text-white font-semibold">Adolescents/Young Adults</td>
+          <td>JME, idiopathic generalized epilepsy, trauma, substance abuse, brain tumors (low-grade gliomas)</td>
+         </tr>
+         <tr>
+          <td class="text-white font-semibold">Adults 40–60</td>
+          <td>Tumors (primary &amp; metastatic), alcohol withdrawal, metabolic (uremia, hepatic encephalopathy, hyponatremia), vascular</td>
+         </tr>
+         <tr>
+          <td class="text-white font-semibold">Elderly &gt;60</td>
+          <td><strong class="text-red-300">STROKE is #1 cause</strong>, neurodegeneration (Alzheimer's), subdural hematoma, metabolic, medication-induced</td>
+         </tr>
+        </tbody>
+       </table>
+       <div class="qr-box border-red-400/60 bg-red-500/5 text-sm mt-4">
+        <strong class="text-red-300">🧠 ER Pearl:</strong> Always check: Glucose, Na⁺, Ca²⁺, Mg²⁺, BUN/Cr, ammonia, toxicology screen, and pregnancy test. Seizure workup is incomplete without metabolic screening.
+       </div>
+      </div>
+     </section><!-- Status Epilepticus -->
+     <section class="mb-10 fade-up" style="animation-delay:0.3s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-red-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="alert-triangle" style="width:22px;height:22px;color:#f87171"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Status Epilepticus — ICU Emergency</h2>
+         <p class="text-gray-400 text-sm">Defined: ≥5 min continuous seizure activity OR ≥2 seizures without recovery between. Mortality 20%.</p>
+        </div>
+       </div>
+       <div class="relative pl-10 space-y-5">
+        <div class="timeline-line bg-gradient-to-b from-red-500 via-amber-500 to-purple-500"></div>
+        <div class="relative">
+         <div class="absolute -left-10 w-8 h-8 rounded-full bg-red-500/30 border-2 border-red-400 flex items-center justify-center"><span class="text-[10px] font-bold text-red-300">0–5m</span>
+         </div>
+         <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-4">
+          <h4 class="font-semibold text-red-300">Phase 1 — Stabilization</h4>
+          <ul class="text-sm text-gray-300 mt-1 space-y-1">
+           <li>• ABC, O₂, monitor, IV access, check glucose</li>
+           <li>• <strong class="text-white">Benzodiazepine:</strong> IV lorazepam 0.1 mg/kg (max 4mg, repeat ×1) OR IM midazolam 10mg if no IV</li>
+           <li>• Terminates SE in ~65% of cases (VA Cooperative Study)</li>
+          </ul>
+         </div>
+        </div>
+        <div class="relative">
+         <div class="absolute -left-10 w-8 h-8 rounded-full bg-amber-500/30 border-2 border-amber-400 flex items-center justify-center"><span class="text-[10px] font-bold text-amber-300">5–20m</span>
+         </div>
+         <div class="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
+          <h4 class="font-semibold text-amber-300">Phase 2 — Established SE (Urgent AED)</h4>
+          <ul class="text-sm text-gray-300 mt-1 space-y-1">
+           <li>• <strong class="text-white">Fosphenytoin 20 mg PE/kg IV</strong> (max 150 mg PE/min) — cardiac monitor mandatory (QT prolongation, bradycardia risk)</li>
+           <li>• OR <strong class="text-white">Levetiracetam 60 mg/kg IV</strong> (max 4500mg, infused over 15 min) — fewer drug interactions, safer cardiac profile</li>
+           <li>• OR <strong class="text-white">Valproate 40 mg/kg IV</strong> (max 3000mg) — avoid in hepatic disease, pregnancy, mitochondrial disease</li>
+           <li>• ESETT trial: All three equally effective (~47% success in established SE)</li>
+          </ul>
+         </div>
+        </div>
+        <div class="relative">
+         <div class="absolute -left-10 w-8 h-8 rounded-full bg-purple-500/30 border-2 border-purple-400 flex items-center justify-center"><span class="text-[10px] font-bold text-purple-300">&gt;30m</span>
+         </div>
+         <div class="bg-purple-500/5 border border-purple-500/20 rounded-xl p-4">
+          <h4 class="font-semibold text-purple-300">Phase 3 — Refractory SE → ICU Intubation</h4>
+          <ul class="text-sm text-gray-300 mt-1 space-y-1">
+           <li>• <strong class="text-white">Intubate + continuous IV anesthetic:</strong> Midazolam drip (0.2 mg/kg/h) OR Propofol (2–5 mg/kg load, 30–200 µg/kg/min)</li>
+           <li>• Continuous EEG monitoring — target burst suppression for 24–48h</li>
+           <li>• Pentobarbital for super-refractory SE (hemodynamic instability expected — vasopressors ready)</li>
+           <li>• Investigate underlying cause aggressively: MRI brain, LP (autoimmune encephalitis!), toxicology</li>
+          </ul>
+          <div class="qr-box border-purple-400/60 bg-purple-500/5 text-sm mt-3">
+           <strong class="text-purple-300">🏥 ICU Pearl:</strong> Always consider <strong>autoimmune encephalitis</strong> (anti-NMDA receptor, anti-LGI1) in refractory SE — young women with psychiatric symptoms → ovarian teratoma screen. Early IVIG/plasma exchange can be life-saving.
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- AED Selection -->
+     <section class="mb-10 fade-up" style="animation-delay:0.35s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-teal-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="pill" style="width:22px;height:22px;color:#2dd4bf"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Anti-Seizure Medication Selection</h2>
+         <p class="text-gray-400 text-sm">Pragmatic approach based on seizure type, comorbidities, and interactions</p>
+        </div>
+       </div>
+       <div class="overflow-x-auto">
+        <table class="cl-table min-w-[600px]">
+         <thead>
+          <tr class="text-gray-500">
+           <th>Seizure Type</th>
+           <th>First Line</th>
+           <th>Alternatives</th>
+           <th>Avoid</th>
+          </tr>
+         </thead>
+         <tbody class="text-gray-300 text-sm">
+          <tr>
+           <td class="text-white font-semibold">Focal ± bilateral GTC</td>
+           <td>Levetiracetam, Lamotrigine</td>
+           <td>Oxcarbazepine, Lacosamide, Zonisamide</td>
+           <td class="text-red-300">—</td>
+          </tr>
+          <tr>
+           <td class="text-white font-semibold">Generalized TC</td>
+           <td>Valproate (M), Lamotrigine (F)</td>
+           <td>Levetiracetam, Perampanel</td>
+           <td class="text-red-300">Carbamazepine, Phenytoin (may worsen)</td>
+          </tr>
+          <tr>
+           <td class="text-white font-semibold">Absence</td>
+           <td>Ethosuximide, Valproate</td>
+           <td>Lamotrigine</td>
+           <td class="text-red-300">Carbamazepine, Phenytoin, Gabapentin</td>
+          </tr>
+          <tr>
+           <td class="text-white font-semibold">JME</td>
+           <td>Valproate (M), Levetiracetam</td>
+           <td>Lamotrigine (caution — may worsen myoclonus)</td>
+           <td class="text-red-300">Carbamazepine, Phenytoin</td>
+          </tr>
+          <tr>
+           <td class="text-white font-semibold">Post-stroke seizures</td>
+           <td>Levetiracetam, Lacosamide</td>
+           <td>Lamotrigine, Zonisamide</td>
+           <td class="text-red-300">Enzyme inducers (phenytoin, carbamazepine — interact with anticoagulants)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="qr-box border-amber-400/60 bg-amber-500/5 text-sm mt-4">
+        <strong class="text-amber-300">⚕️ Prescribing Pearl:</strong> In women of childbearing age — <strong>avoid valproate</strong> (teratogenicity NTD risk 5–10%, neurodevelopmental harm). Lamotrigine and levetiracetam are safer. Always discuss contraception.
+       </div>
+      </div>
+     </section>
+    </div><!-- ==================== STROKE–SEIZURE NEXUS TAB ==================== -->
+    <div id="tab-overlap" class="tab-content hidden">
+     <section class="mb-10 fade-up" style="animation-delay:0.1s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="git-merge" style="width:22px;height:22px;color:#c084fc"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">The Stroke–Seizure Nexus</h2>
+         <p class="text-gray-400 text-sm">When two emergencies collide — the clinical overlap that demands attention</p>
+        </div>
+       </div>
+       <div class="space-y-6 text-gray-300 leading-relaxed">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div class="bg-slate-800/40 rounded-xl p-5">
+          <h4 class="text-amber-300 font-semibold mb-3">Post-Stroke Seizures</h4>
+          <ul class="text-sm space-y-2">
+           <li>• <strong class="text-white">Early (&lt;7 days):</strong> 2–6% of ischemic, up to 16% of hemorrhagic strokes. Due to acute metabolic disruption, glutamate excitotoxicity, blood–brain barrier breakdown.</li>
+           <li>• <strong class="text-white">Late (&gt;7 days):</strong> 3–5% over 5 years. Gliotic scarring creates epileptogenic focus. This defines <strong>post-stroke epilepsy</strong>.</li>
+           <li>• <strong class="text-white">Risk factors:</strong> Cortical involvement (strongest predictor), hemorrhagic stroke, large infarct volume, severe initial NIHSS</li>
+           <li>• <strong class="text-white">Management:</strong> Early seizures — treat acutely, no long-term AED unless recurrent. Late seizures — start AED (levetiracetam preferred — minimal drug interactions with antithrombotics)</li>
+          </ul>
+         </div>
+         <div class="bg-slate-800/40 rounded-xl p-5">
+          <h4 class="text-red-300 font-semibold mb-3">Seizures Mimicking Stroke</h4>
+          <ul class="text-sm space-y-2">
+           <li>• <strong class="text-white">Todd's Paralysis:</strong> Postictal focal deficit lasting minutes to 72 hours. Can perfectly mimic acute stroke — imaging is critical!</li>
+           <li>• <strong class="text-white">Incidence:</strong> ~13% of focal seizures have postictal motor deficits</li>
+           <li>• <strong class="text-white">Key differentiators:</strong> Witnessed seizure activity, gradual resolution (stroke is sudden onset), no acute infarct on DWI-MRI</li>
+           <li>• <strong class="text-white">Danger:</strong> Unnecessary tPA given for Todd's paralysis → hemorrhagic complication. When in doubt — MRI DWI is the gold standard.</li>
+          </ul>
+         </div>
+        </div>
+        <div class="bg-purple-500/5 border border-purple-500/20 rounded-xl p-5">
+         <h4 class="text-purple-300 font-semibold mb-3">Stroke Causing Seizures Causing More Stroke — The Vicious Cycle</h4>
+         <ul class="text-sm space-y-2">
+          <li>• Seizures increase cerebral metabolic demand by 200–300% during ictal activity</li>
+          <li>• In penumbral tissue post-stroke, this metabolic surge can convert salvageable tissue to infarction</li>
+          <li>• Seizures can cause transient hypertension → risk of hemorrhagic transformation</li>
+          <li>• Prolonged seizures → lactic acidosis → further neuronal injury</li>
+          <li>• <strong class="text-white">Clinical implication:</strong> Aggressive seizure control in acute stroke is neuroprotective. Consider continuous EEG monitoring in obtunded stroke patients — up to 20% have non-convulsive seizures.</li>
+         </ul>
+        </div>
+        <div class="qr-box border-purple-400/60 bg-purple-500/5 text-sm">
+         <strong class="text-purple-300">🫀 Cardiology Intersection:</strong> Both stroke and seizures can cause troponin elevation (neurogenic stunned myocardium / Takotsubo cardiomyopathy). Don't automatically blame the heart — check echo before catheterization. SAH + seizures → inverted T-waves + QT prolongation mimicking STEMI. I've seen cath labs activated unnecessarily.
+        </div>
+       </div>
+      </div>
+     </section><!-- Diagnostic Dilemma -->
+     <section class="mb-10 fade-up" style="animation-delay:0.2s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <h2 class="font-heading text-2xl font-700 text-white mb-6">The ER Diagnostic Dilemma — A Decision Framework</h2>
+       <div class="overflow-x-auto">
+        <table class="cl-table min-w-[500px]">
+         <thead>
+          <tr class="text-gray-500">
+           <th>Feature</th>
+           <th>Stroke</th>
+           <th>Seizure + Todd's</th>
+          </tr>
+         </thead>
+         <tbody class="text-sm text-gray-300">
+          <tr>
+           <td class="text-white">Onset</td>
+           <td>Sudden, maximal at onset</td>
+           <td>May have witnessed ictal activity, gradual onset of deficit</td>
+          </tr>
+          <tr>
+           <td class="text-white">Consciousness</td>
+           <td>Usually preserved (unless basilar/large territory)</td>
+           <td>Often impaired ictal/postictal</td>
+          </tr>
+          <tr>
+           <td class="text-white">Positive phenomena</td>
+           <td>Rare (some hemorrhagic)</td>
+           <td>Common — jerking, twitching, automatisms</td>
+          </tr>
+          <tr>
+           <td class="text-white">Progression of deficit</td>
+           <td>Stable or stepwise worsening</td>
+           <td>Resolving over minutes to hours</td>
+          </tr>
+          <tr>
+           <td class="text-white">Tongue bite</td>
+           <td>Absent</td>
+           <td>Lateral tongue bite highly specific for GTC</td>
+          </tr>
+          <tr>
+           <td class="text-white">Incontinence</td>
+           <td>Uncommon acutely</td>
+           <td>Common with GTC</td>
+          </tr>
+          <tr>
+           <td class="text-white">DWI-MRI</td>
+           <td>Restricted diffusion (acute infarct)</td>
+           <td>Normal or reversible changes</td>
+          </tr>
+          <tr>
+           <td class="text-white">EEG</td>
+           <td>Focal slowing</td>
+           <td>Epileptiform discharges, postictal slowing</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </section>
+    </div><!-- ==================== PROTOCOLS TAB ==================== -->
+    <div id="tab-protocols" class="tab-content hidden">
+     <!-- Stroke Protocol -->
+     <section class="mb-10 fade-up" style="animation-delay:0.1s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-red-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="clipboard-list" style="width:22px;height:22px;color:#f87171"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Acute Stroke Code Protocol</h2>
+         <p class="text-gray-400 text-sm">Step-by-step ER to ICU workflow — as practiced</p>
+        </div>
+       </div>
+       <ol class="space-y-3 text-sm text-gray-300">
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-red-500/20 flex items-center justify-center text-red-300 font-bold text-xs flex-shrink-0">1</span>
+         <div><strong class="text-white">Activate Stroke Code</strong> — Triage nurse identifies FAST/BE-FAST positive → page stroke team + radiology + neurointerventionalist
+         </div></li>
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-red-500/20 flex items-center justify-center text-red-300 font-bold text-xs flex-shrink-0">2</span>
+         <div><strong class="text-white">Establish Last Known Well (LKW)</strong> — Exact time from patient/family/bystanders. "Wake-up stroke" → use MRI DWI-FLAIR mismatch to estimate onset.
+         </div></li>
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-red-500/20 flex items-center justify-center text-red-300 font-bold text-xs flex-shrink-0">3</span>
+         <div><strong class="text-white">NIHSS + Vitals + IV Access</strong> — Two large-bore IVs. Fingerstick glucose (treat &lt;60 immediately). Baseline NIHSS documented.
+         </div></li>
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300 font-bold text-xs flex-shrink-0">4</span>
+         <div><strong class="text-white">STAT NCCT (±CTA)</strong> — Rule out hemorrhage. CTA if LVO suspected (NIHSS ≥6). Door-to-CT &lt;25 min.
+         </div></li>
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300 font-bold text-xs flex-shrink-0">5</span>
+         <div><strong class="text-white">tPA Decision</strong> — If eligible (&lt;4.5h, no contraindications): 0.9mg/kg IV alteplase. Door-to-needle &lt;60 min.
+         </div></li>
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-300 font-bold text-xs flex-shrink-0">6</span>
+         <div><strong class="text-white">Thrombectomy Decision</strong> — LVO on CTA + eligible → transfer to angio suite. Bridging tPA → thrombectomy. Don't delay transfer for tPA completion.
+         </div></li>
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-300 font-bold text-xs flex-shrink-0">7</span>
+         <div><strong class="text-white">ICU/Stroke Unit Admission</strong> — Neuro checks q1h × 24h, BP targets per protocol, NPO + swallow screen, DVT prophylaxis, statin loading dose, repeat imaging at 24h.
+         </div></li>
+        <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-300 font-bold text-xs flex-shrink-0">8</span>
+         <div><strong class="text-white">Etiologic Workup</strong> — Echo (TTE ± TEE), telemetry/Holter (consider ILR for cryptogenic), lipid panel, HbA1c, carotid duplex, hypercoagulable panel if young/cryptogenic.
+         </div></li>
+       </ol>
+      </div>
+     </section><!-- Seizure Protocol -->
+     <section class="mb-10 fade-up" style="animation-delay:0.2s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-yellow-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="clipboard-list" style="width:22px;height:22px;color:#fbbf24"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">First Seizure / Status Epilepticus Protocol</h2>
+         <p class="text-gray-400 text-sm">Pragmatic ER &amp; ICU approach</p>
+        </div>
+       </div>
+       <div class="space-y-6">
+        <div class="bg-yellow-500/5 border border-yellow-500/20 rounded-xl p-5">
+         <h4 class="text-yellow-300 font-semibold mb-3">First Unprovoked Seizure Workup</h4>
+         <ol class="text-sm text-gray-300 space-y-2">
+          <li>1. <strong class="text-white">Stabilize + history:</strong> Witnessed vs unwitnessed, semiology, duration, tongue bite, incontinence, prior events, medications, substances</li>
+          <li>2. <strong class="text-white">Labs:</strong> CBC, CMP (glucose, Na⁺, Ca²⁺, Mg²⁺), LFTs, ammonia, tox screen, prolactin (if drawn &lt;20 min post-event, elevation supports GTC vs PNES)</li>
+          <li>3. <strong class="text-white">Imaging:</strong> CT head (ER acutely), MRI brain with epilepsy protocol (gadolinium + coronal FLAIR through hippocampi) — outpatient if stable</li>
+          <li>4. <strong class="text-white">EEG:</strong> Routine ± sleep-deprived within 24h. Yield highest when done early.</li>
+          <li>5. <strong class="text-white">Treat or not?</strong> Single unprovoked seizure with normal EEG + MRI → can observe (35% recurrence risk). Abnormal EEG or lesion on MRI → treat (65%+ recurrence risk).</li>
+         </ol>
+        </div>
+        <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-5">
+         <h4 class="text-red-300 font-semibold mb-3">Non-Convulsive Status Epilepticus (NCSE) — The Hidden Killer</h4>
+         <ul class="text-sm text-gray-300 space-y-2">
+          <li>• <strong class="text-white">Suspect when:</strong> Altered mental status without clear cause, especially post-stroke, post-cardiac arrest, TBI, CNS infection</li>
+          <li>• <strong class="text-white">Diagnosis:</strong> Continuous EEG — only way to diagnose. Clinical exam alone misses ~90% of NCSE in ICU patients.</li>
+          <li>• <strong class="text-white">Prevalence:</strong> Up to 20% of ICU patients with unexplained AMS have NCSE on cEEG</li>
+          <li>• <strong class="text-white">Treatment:</strong> Same stepwise approach as convulsive SE, but threshold for anesthetic coma is lower</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div><!-- ==================== CLINICAL PEARLS TAB ==================== -->
+    <div id="tab-pearls" class="tab-content hidden">
+     <section class="mb-10 fade-up" style="animation-delay:0.1s">
+      <div class="clinical-card rounded-2xl p-6 sm:p-8">
+       <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/15 flex items-center justify-center flex-shrink-0">
+         <i data-lucide="star" style="width:22px;height:22px;color:#fbbf24"></i>
+        </div>
+        <div>
+         <h2 class="font-heading text-2xl font-700 text-white mb-1">Clinical Pearls from the Bedside</h2>
+         <p class="text-gray-400 text-sm">Hard-won lessons from years at the frontline — ER, ICU, and Cardiology</p>
+        </div>
+       </div>
+       <div class="space-y-4">
+        <div class="bg-gradient-to-r from-red-500/5 to-transparent border-l-4 border-red-400 rounded-r-xl p-5">
+         <h4 class="text-red-300 font-semibold text-sm mb-2">🚨 The "Stroke Chameleon"</h4>
+         <p class="text-sm text-gray-300">Posterior circulation strokes are missed ~40% of the time on first visit. Dizziness, nausea, ataxia — written off as "vertigo" or "inner ear." HINTS exam (Head Impulse, Nystagmus, Test of Skew) has &gt;96% sensitivity for central vs peripheral vertigo. Learn it. Use it. It's better than early MRI.</p>
+        </div>
+        <div class="bg-gradient-to-r from-blue-500/5 to-transparent border-l-4 border-blue-400 rounded-r-xl p-5">
+         <h4 class="text-blue-300 font-semibold text-sm mb-2">🫀 AF and the "One Missed Beat"</h4>
+         <p class="text-sm text-gray-300">A single 30-second episode of AF detected on implantable monitor is enough to start anticoagulation in a stroke patient. Don't wait for "sustained AF." The ASSERT trial showed even subclinical AT/AF episodes tripled stroke risk. As a cardiologist, I've diagnosed occult AF in patients with "cryptogenic" strokes who had multiple normal Holters — the ILR caught it months later.</p>
+        </div>
+        <div class="bg-gradient-to-r from-yellow-500/5 to-transparent border-l-4 border-yellow-400 rounded-r-xl p-5">
+         <h4 class="text-yellow-300 font-semibold text-sm mb-2">⚡ The Seizure That Wasn't</h4>
+         <p class="text-sm text-gray-300">Psychogenic non-epileptic spells (PNES) account for 20–30% of cases referred to epilepsy monitoring units. Clues: Eyes CLOSED during event (real seizures → eyes open/deviated), irregular asynchronous movements, pelvic thrusting, very prolonged events (&gt;5 min) without hemodynamic changes, crying during the event. Normal prolactin at 15–20 min. Video-EEG is diagnostic. Don't label these patients as "faking" — this is a real neuropsychiatric disorder.</p>
+        </div>
+        <div class="bg-gradient-to-r from-emerald-500/5 to-transparent border-l-4 border-emerald-400 rounded-r-xl p-5">
+         <h4 class="text-emerald-300 font-semibold text-sm mb-2">🏥 The ICU Troponin Trap</h4>
+         <p class="text-sm text-gray-300">Elevated troponin post-stroke or post-seizure does NOT always mean acute MI. Neurogenic myocardial stunning (Takotsubo pattern) occurs in ~25% of SAH patients and can mimic STEMI on ECG. Always get an echo before activating the cath lab. I've personally prevented unnecessary cardiac catheterizations by recognizing apical ballooning on bedside echo in post-SAH patients.</p>
+        </div>
+        <div class="bg-gradient-to-r from-purple-500/5 to-transparent border-l-4 border-purple-400 rounded-r-xl p-5">
+         <h4 class="text-purple-300 font-semibold text-sm mb-2">🧠 The 4.5-Hour Myth</h4>
+         <p class="text-sm text-gray-300">The thrombolysis window isn't a hard cutoff anymore. EXTEND and WAKE-UP trials showed that patients with DWI-FLAIR mismatch on MRI can benefit from tPA up to 9 hours or in wake-up strokes. And for thrombectomy — DAWN/DEFUSE-3 pushed the window to 24 hours with perfusion imaging selection. The key is tissue status, not the clock alone. "Time is brain" but "physiology is brain" too.</p>
+        </div>
+        <div class="bg-gradient-to-r from-teal-500/5 to-transparent border-l-4 border-teal-400 rounded-r-xl p-5">
+         <h4 class="text-teal-300 font-semibold text-sm mb-2">💊 Phenytoin in the ER — A Dying Practice</h4>
+         <p class="text-sm text-gray-300">I've shifted almost entirely away from phenytoin/fosphenytoin as a first-line urgent AED. Levetiracetam is equally effective (ESETT trial), has no cardiac monitoring requirement, no drug interactions with DOACs/statins/warfarin, no "purple glove syndrome," no hepatic enzyme induction, and can be pushed faster. The only advantage of phenytoin is that it's cheap. In the ICU, that's not a good enough reason.</p>
+        </div>
+        <div class="bg-gradient-to-r from-pink-500/5 to-transparent border-l-4 border-pink-400 rounded-r-xl p-5">
+         <h4 class="text-pink-300 font-semibold text-sm mb-2">🩺 The Forgotten Swallow Screen</h4>
+         <p class="text-sm text-gray-300">Aspiration pneumonia kills more stroke patients than the stroke itself. Yet I still see patients given oral medications before a formal swallow assessment. The rule is simple: NPO until swallow screen passed. No exceptions. No "just a sip of water." Modified barium swallow or FEES if bedside screen is equivocal. This one intervention prevents more harm than most medications we give.</p>
+        </div>
+       </div>
+      </div>
+     </section><!-- Disclaimer -->
+     <section class="mb-10 fade-up" style="animation-delay:0.2s">
+      <div class="bg-slate-900/60 border border-white/5 rounded-2xl p-6 text-center">
+       <p class="text-xs text-gray-500 leading-relaxed max-w-2xl mx-auto"><strong class="text-gray-400">Clinical Disclaimer:</strong> This guide is intended for medical professionals as a clinical reference tool. It does not replace clinical judgment, institutional protocols, or individualized patient care. All treatment decisions must account for patient-specific factors. Guidelines referenced include AHA/ASA 2019, ESO 2024, ILAE 2017, NCS 2012 Status Epilepticus guidelines, and landmark trials cited herein.</p>
+      </div>
+     </section>
+    </div>
+   </main><!-- Footer -->
+   <footer class="border-t border-white/5 py-8 text-center">
+    <p class="text-xs text-gray-600 font-mono">Stroke &amp; Seizures Clinical Guide · Built with clinical precision</p>
+   </footer>
+  </div>
+  <script>
+// === Config & SDK ===
+const defaultConfig = {
+  main_title: 'Stroke & Seizures',
+  author_name: 'MBBS, MD, DM Cardiology · Professor of Medicine · ICU Intensivist · Emergency Medicine',
+  background_color: '#0f172a',
+  surface_color: '#1e293b',
+  text_color: '#e2e8f0',
+  primary_action_color: '#f87171',
+  secondary_action_color: '#60a5fa',
+  font_family: 'Playfair Display',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const el = (id) => document.getElementById(id);
+
+  // Text
+  const titleEl = el('mainTitle');
+  if (titleEl) titleEl.innerHTML = `${c.main_title.replace('&','<span style="color:'+c.primary_action_color+'">&</span>')}`;
+  const authorEl = el('authorLine');
+  if (authorEl) authorEl.textContent = c.author_name;
+
+  // Colors
+  const shell = el('appShell');
+  if (shell) shell.style.backgroundColor = c.background_color;
+
+  document.querySelectorAll('.clinical-card').forEach(card => {
+    card.style.borderColor = c.surface_color;
+  });
+
+  // Font
+  const fontStack = `${c.font_family}, Georgia, serif`;
+  document.querySelectorAll('.font-heading, h1, h2').forEach(h => h.style.fontFamily = fontStack);
+
+  // Font size
+  const base = c.font_size || 16;
+  document.querySelectorAll('p, li, td').forEach(e => e.style.fontSize = `${base}px`);
+  document.querySelectorAll('h2').forEach(e => e.style.fontSize = `${base * 1.5}px`);
+  document.querySelectorAll('h1').forEach(e => e.style.fontSize = `${base * 2.5}px`);
+  document.querySelectorAll('.text-sm, th').forEach(e => e.style.fontSize = `${base * 0.875}px`);
+  document.querySelectorAll('.text-xs').forEach(e => e.style.fontSize = `${base * 0.75}px`);
+}
+
+// === Tab switching ===
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.querySelector('.accordion-chevron')
+  });
+  const target = document.getElementById('tab-' + tabId);
+  if (target) { target.classList.remove('hidden'); }
+  const btn = document.querySelector(`[data-tab="${tabId}"]`);
+  if (btn) btn.classList.add('active');
+  // Re-trigger animations
+  target.querySelectorAll('.fade-up').forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = '';
+  });
+}
+
+// === Accordion ===
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const chevron = btn.querySelector('.accordion-chevron');
+  content.classList.toggle('open');
+  chevron.classList.toggle('rotated');
+}
+
+// Set active tab indicator color
+const style = document.createElement('style');
+style.textContent = `.tab-btn.active::after { background: #f87171; }`;
+document.head.appendChild(style);
+
+lucide.createIcons();
+</script>
+</body>
+</html>
