@@ -1,0 +1,407 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Gastroenterology | GI Diseases & Clinical Management | Deep Medicine</title> <meta name="description" content="Comprehensive gastroenterology guide including GI disorders, liver diseases, bleeding, infections, and clinical management strategies."> <link rel="canonical" href="https://deepmedicine.in/core/internal-medicine/gastroenterology"> <!-- Open Graph --> <meta property="og:title" content="Gastroenterology | Deep Medicine"> <meta property="og:description" content="Clinical gastroenterology covering GI diseases, liver disorders, and emergency GI care."> <meta property="og:image" content="https://deepmedicine.in/images/gastroenterology.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['Playfair Display', 'Georgia', 'serif'],
+        body: ['DM Sans', 'system-ui', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  .app-shell { height: 100%; overflow: auto; }
+  .disease-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+  .disease-card:hover { transform: translateY(-2px); }
+  .tab-btn.active { border-bottom: 3px solid; }
+  .fade-in { animation: fadeIn 0.4s ease-out; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .tag { display:inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .severity-mild { background: #d1fae5; color: #065f46; }
+  .severity-moderate { background: #fef3c7; color: #92400e; }
+  .severity-severe { background: #fee2e2; color: #991b1b; }
+  .severity-variable { background: #e0e7ff; color: #3730a3; }
+  details summary { cursor: pointer; list-style: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .chevron-icon { transform: rotate(180deg); }
+  .chevron-icon { transition: transform 0.2s ease; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-shell bg-slate-950 text-slate-200 font-body" id="app"><!-- Hero -->
+   <header class="relative overflow-hidden" id="hero-section">
+    <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-slate-950 to-cyan-900/30"></div>
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #10b981 1px, transparent 1px), radial-gradient(circle at 80% 20%, #06b6d4 1px, transparent 1px); background-size: 60px 60px, 80px 80px;"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+     <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-6"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span class="text-emerald-300 text-xs font-semibold tracking-widest uppercase">MBBS MD Clinical Reference</span>
+     </div>
+     <h1 id="main-title" class="font-heading text-3xl sm:text-5xl lg:text-6xl font-800 text-white mb-4 leading-tight">Gastroenterology<br><span class="text-emerald-400">Disease Reference</span></h1>
+     <p id="subtitle" class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-8">Clinical Guide for Medical Professionals — Evidence-based pathophysiology, diagnostics, and management protocols</p>
+     <div class="flex flex-wrap justify-center gap-3 text-xs text-slate-400"><span class="flex items-center gap-1.5 bg-slate-800/60 rounded-full px-3 py-1.5"><i data-lucide="book-open" style="width:14px;height:14px;"></i> 12 Major Conditions</span> <span class="flex items-center gap-1.5 bg-slate-800/60 rounded-full px-3 py-1.5"><i data-lucide="stethoscope" style="width:14px;height:14px;"></i> ICD-10 Coded</span> <span class="flex items-center gap-1.5 bg-slate-800/60 rounded-full px-3 py-1.5"><i data-lucide="flask-conical" style="width:14px;height:14px;"></i> Lab Panels Included</span>
+     </div>
+    </div>
+   </header><!-- Search & Filter -->
+   <div class="sticky top-0 z-30 bg-slate-900/95 backdrop-blur border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3">
+     <div class="flex flex-col sm:flex-row gap-3">
+      <div class="relative flex-1"><i data-lucide="search" style="width:16px;height:16px;" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"></i> <input type="text" id="searchInput" placeholder="Search diseases, symptoms, investigations..." class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30" aria-label="Search diseases">
+      </div>
+      <div class="flex gap-2 overflow-x-auto pb-1 sm:pb-0" id="categoryFilters"><button onclick="filterCategory('all')" class="cat-btn active whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 transition-all" data-cat="all">All</button> <button onclick="filterCategory('upper')" class="cat-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-600 transition-all" data-cat="upper">Upper GI</button> <button onclick="filterCategory('lower')" class="cat-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-600 transition-all" data-cat="lower">Lower GI</button> <button onclick="filterCategory('hepatobiliary')" class="cat-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-600 transition-all" data-cat="hepatobiliary">Hepatobiliary</button> <button onclick="filterCategory('pancreatic')" class="cat-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-600 transition-all" data-cat="pancreatic">Pancreatic</button> <button onclick="filterCategory('functional')" class="cat-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-600 transition-all" data-cat="functional">Functional</button>
+      </div>
+     </div>
+    </div>
+   </div><!-- Disease Cards Container -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <div id="diseaseContainer" class="grid gap-5"></div>
+    <p id="noResults" class="hidden text-center text-slate-500 py-16 text-sm">No diseases match your search.</p>
+   </main><!-- Footer -->
+   <footer class="border-t border-slate-800 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-center">
+     <p class="text-slate-500 text-xs">⚕️ This reference is for educational purposes. Clinical decisions should incorporate patient-specific factors, local guidelines, and specialist consultation.</p>
+     <p class="text-slate-600 text-xs mt-2">Sources: Harrison's Principles of Internal Medicine, Sabiston Textbook of Surgery, ACG/AGA/EASL/AASLD Clinical Guidelines</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+const diseases = [
+  {
+    id: 1, name: "Gastroesophageal Reflux Disease (GERD)", icd10: "K21", category: "upper", severity: "variable",
+    emoji: "🔥",
+    definition: "Chronic condition where gastric acid and bile reflux into the esophagus due to transient lower esophageal sphincter (LES) relaxation or anatomical incompetence, causing mucosal injury and symptoms.",
+    epidemiology: "Prevalence 10–30% in Western countries; rising in Asia. Peak 40–60 yrs. Risk factors: obesity (OR 1.7), hiatal hernia, pregnancy, smoking, certain medications (CCBs, nitrates, anticholinergics).",
+    pathophysiology: "Transient LES relaxations (most common mechanism) → reflux of HCl, pepsin, bile acids → esophageal mucosal damage. Impaired esophageal clearance and reduced salivary bicarbonate buffering worsen injury. Hiatal hernia disrupts the crural diaphragm–LES barrier.",
+    symptoms: ["Heartburn (retrosternal burning, postprandial, worse supine)", "Regurgitation of sour/bitter material", "Dysphagia (suggests stricture or motility disorder)", "Chronic cough, laryngitis, dental erosion (extra-esophageal)", "Chest pain (must rule out cardiac cause)", "Water brash, globus sensation"],
+    diagnosis: ["Clinical diagnosis if typical symptoms respond to PPI trial", "Upper GI Endoscopy (EGD): Los Angeles classification of esophagitis (Grade A–D)", "24-hr ambulatory pH monitoring: Gold standard; DeMeester score >14.7 abnormal", "Esophageal manometry: Assess LES pressure, rule out motility disorders", "Barium swallow: Hiatal hernia, strictures"],
+    labs: ["Generally not indicated for uncomplicated GERD", "CBC (anemia if erosive esophagitis)", "H. pylori testing (controversial; test-and-treat before long-term PPI)"],
+    treatment: {
+      lifestyle: "Weight loss (5–10% body weight), elevate head of bed 15–20 cm, avoid meals 3h before bed, reduce trigger foods (fat, caffeine, alcohol, chocolate, citrus, spicy), smoking cessation.",
+      medical: "Step-up: Antacids → H2RAs (famotidine 20mg BID) → PPIs (omeprazole 20mg, esomeprazole 40mg OD before breakfast × 8 wks). Maintenance: lowest effective PPI dose. Refractory: BID PPI + baclofen for TLESRs.",
+      surgical: "Nissen fundoplication (360° wrap) or Toupet (270° posterior) for refractory GERD or large hiatal hernia. LINX magnetic sphincter augmentation. Stretta radiofrequency."
+    },
+    complications: ["Barrett's esophagus (intestinal metaplasia → 0.5% annual risk of esophageal adenocarcinoma)", "Peptic stricture", "Esophageal ulceration/hemorrhage", "Aspiration pneumonia", "Laryngeal/dental complications"],
+    keyPearls: ["Los Angeles Grade C/D → 8 weeks PPI then repeat EGD to confirm healing", "Barrett's: Surveillance EGD every 3–5 yrs (no dysplasia); refer for RFA if dysplasia", "Long-term PPI risks: C. difficile, hypomagnesemia, osteoporosis, CKD — re-evaluate periodically"]
+  },
+  {
+    id: 2, name: "Peptic Ulcer Disease (PUD)", icd10: "K25–K27", category: "upper", severity: "moderate",
+    emoji: "🩸",
+    definition: "Mucosal defects ≥5mm extending through the muscularis mucosae of the stomach (gastric ulcer, GU) or duodenum (duodenal ulcer, DU), resulting from an imbalance between aggressive (acid, pepsin, H. pylori, NSAIDs) and defensive (mucus, bicarbonate, prostaglandins, blood flow) factors.",
+    epidemiology: "Lifetime prevalence 5–10%. DU:GU ratio ~4:1. H. pylori responsible for ~60% DU, ~40% GU. NSAIDs cause ~20–25%. Declining incidence with H. pylori eradication programs.",
+    pathophysiology: "H. pylori: Urease → ammonium → mucosal inflammation; CagA/VacA virulence → epithelial disruption. NSAIDs: COX-1 inhibition → reduced prostaglandin E2/I2 → decreased mucus/bicarbonate secretion and mucosal blood flow. Zollinger-Ellison (gastrinoma): Excess gastrin → massive acid hypersecretion.",
+    symptoms: ["Epigastric pain: DU — 'hunger pain', relieved by food, nocturnal; GU — worsened by food", "Nausea, early satiety, bloating", "Hematemesis/melena (hemorrhagic ulcer)", "Acute abdomen with rigidity (perforation)", "Weight loss (GU, must exclude malignancy)"],
+    diagnosis: ["Upper GI Endoscopy (EGD): Gold standard — biopsy GU edges (rule out malignancy) + CLO test for H. pylori", "H. pylori testing: Urea breath test (UBT), stool antigen (non-invasive); rapid urease test, histology (endoscopic)", "Fasting serum gastrin: If refractory/multiple ulcers → rule out Zollinger-Ellison (>1000 pg/mL diagnostic)", "CT abdomen: Free air under diaphragm (perforation)"],
+    labs: ["CBC: Anemia (chronic blood loss)", "Serum iron, ferritin, TIBC: Iron-deficiency pattern", "BUN/Creatinine: Elevated BUN in upper GI bleed", "H. pylori serology (IgG): Indicates exposure but cannot confirm active infection", "Serum gastrin, chromogranin A (if ZES suspected)"],
+    treatment: {
+      lifestyle: "Stop NSAIDs/aspirin if possible. Smoking cessation (impairs healing). Moderate alcohol. Stress reduction.",
+      medical: "PPI therapy: Omeprazole 20mg BID or equivalent × 4 wks (DU) / 8 wks (GU). H. pylori eradication: Triple therapy (PPI + clarithromycin 500mg + amoxicillin 1g BID × 14 days) OR bismuth quadruple therapy (PPI + bismuth + metronidazole + tetracycline). Confirm eradication: UBT ≥4 wks post-treatment.",
+      surgical: "Emergent: Perforated ulcer — Graham patch (omental plug). Hemorrhage uncontrolled by endoscopy — ligation of gastroduodenal artery. Elective (rare now): Vagotomy + pyloroplasty, Billroth I/II for refractory disease."
+    },
+    complications: ["Hemorrhage (most common, 15–20%): Forrest classification guides endoscopic therapy", "Perforation (5%): Anterior DU → free perforation; posterior DU → penetrates pancreas", "Gastric outlet obstruction (2%): Chronic scarring → pyloric stenosis", "Malignancy: GU — biopsy mandatory; DU — rarely malignant"],
+    keyPearls: ["All gastric ulcers require biopsy (6–8 biopsies from ulcer margins)", "Repeat EGD at 8–12 wks to document GU healing", "Forrest Ia/Ib (active bleeding) → endoscopic therapy + IV PPI infusion 80mg bolus then 8mg/hr × 72h", "NSAID ulcer prophylaxis: Misoprostol 200μg QID or PPI co-prescription"]
+  },
+  {
+    id: 3, name: "Inflammatory Bowel Disease — Crohn's Disease", icd10: "K50", category: "lower", severity: "severe",
+    emoji: "🔬",
+    definition: "Chronic, relapsing-remitting, transmural granulomatous inflammation that can affect any segment of the GI tract from mouth to anus, with a predilection for the terminal ileum and colon. Characterized by skip lesions, non-caseating granulomas, and full-thickness bowel wall involvement.",
+    epidemiology: "Incidence 3–20/100,000. Bimodal onset: 15–30 yrs and 50–70 yrs. Higher in Northern Europe, North America. Smoking increases risk 2-fold. Family history (NOD2/CARD15 gene mutations). Ashkenazi Jewish descent.",
+    pathophysiology: "Genetically susceptible host + environmental triggers (smoking, diet, dysbiosis) → aberrant Th1/Th17 immune response against commensal gut flora → TNF-α, IL-12, IL-23 overproduction → transmural inflammation, granuloma formation, fibrosis.",
+    symptoms: ["Chronic diarrhea (often non-bloody)", "Right lower quadrant pain (ileocecal involvement)", "Weight loss, malnutrition, fatigue", "Perianal disease: Fistulae, abscesses, skin tags (30%)", "Oral aphthous ulcers", "Fever, growth retardation in children"],
+    diagnosis: ["Ileocolonoscopy + biopsies: Skip lesions, cobblestoning, deep serpentine ulcers, non-caseating granulomas (30–60%)", "MR Enterography: Small bowel assessment — wall thickening, strictures, fistulae, abscesses (preferred over CT for radiation concerns)", "CT Abdomen/Pelvis: Acute flares — abscess, obstruction, free perforation", "Capsule endoscopy: Suspected small bowel Crohn's (after excluding stricture with patency capsule)", "Montreal Classification: Age at diagnosis (A), Location (L), Behavior (B)"],
+    labs: ["CRP, ESR: Active inflammation markers", "CBC: Anemia (iron/B12/folate deficiency), leukocytosis, thrombocytosis", "Albumin: Low in malnutrition/active disease", "Fecal calprotectin: >250 μg/g suggests active inflammation; useful for monitoring", "ASCA+/pANCA−: Supports Crohn's over UC (sensitivity ~60%)", "Vitamin B12, folate, iron, vitamin D: Nutritional deficiencies", "LFTs: Primary sclerosing cholangitis screen"],
+    treatment: {
+      lifestyle: "Smoking cessation (single most important modifiable factor). Nutritional support — exclusive enteral nutrition (EEN) effective in pediatric Crohn's. Monitor micronutrient deficiencies.",
+      medical: "Induction: Corticosteroids (prednisolone 40mg tapering / budesonide 9mg for ileocecal). Moderate-severe: Anti-TNF (infliximab 5mg/kg IV wks 0,2,6 then q8wk; adalimumab SC). Vedolizumab (anti-integrin) for TNF failures. Ustekinumab (anti-IL-12/23). Maintenance: Azathioprine 2–2.5mg/kg or 6-MP; methotrexate 25mg/wk IM. Perianal: Antibiotics (ciprofloxacin + metronidazole) + anti-TNF + seton placement.",
+      surgical: "60–80% require surgery within lifetime. Strictureplasty (short strictures). Ileocecal resection (localized disease). Abscess drainage. Fistula repair. Principle: Bowel-conserving surgery to prevent short bowel syndrome."
+    },
+    complications: ["Strictures → small bowel obstruction", "Fistulae (entero-enteric, entero-vesical, entero-cutaneous, perianal)", "Abscess formation (intra-abdominal, perianal)", "Colorectal carcinoma (increased risk with colonic involvement >8 yrs)", "Extraintestinal: Erythema nodosum, pyoderma gangrenosum, uveitis, sacroiliitis, ankylosing spondylitis, primary sclerosing cholangitis", "Short bowel syndrome (post-surgical)", "Oxalate kidney stones, gallstones (ileal disease)"],
+    keyPearls: ["String sign on barium — terminal ileum stricture (classic but CT/MR enterography preferred now)", "Creeping fat: Mesenteric adipose wrapping around bowel — pathognomonic", "CDAI (Crohn's Disease Activity Index) guides therapy: <150 remission, 150–450 active, >450 severe", "Thiopurine methyltransferase (TPMT) testing before azathioprine to avoid myelosuppression"]
+  },
+  {
+    id: 4, name: "Inflammatory Bowel Disease — Ulcerative Colitis", icd10: "K51", category: "lower", severity: "severe",
+    emoji: "🩺",
+    definition: "Chronic idiopathic inflammatory disease limited to the colonic mucosa and submucosa, extending proximally from the rectum in a continuous circumferential pattern. Unlike Crohn's, it does not involve the small bowel (except backwash ileitis) and lacks transmural inflammation.",
+    epidemiology: "Incidence 5–25/100,000. Peak onset 15–40 yrs. Smoking is protective (unlike Crohn's). Ex-smokers at highest risk. Family history. HLA-B27 association with extraintestinal manifestations.",
+    pathophysiology: "Genetic susceptibility + mucosal barrier defect → Th2-predominant immune response → IL-5, IL-13 overproduction → mucosal inflammation confined to the colon. Continuous inflammation from rectum proximally. Crypt abscesses with neutrophilic infiltration. Goblet cell depletion.",
+    symptoms: ["Bloody diarrhea (hallmark — mucus and blood)", "Urgency, tenesmus", "Left lower quadrant cramping pain", "Nocturnal diarrhea", "Fever, weight loss in severe flares", "Extraintestinal manifestations (15–20%)"],
+    diagnosis: ["Colonoscopy + biopsies: Continuous mucosal inflammation from rectum, granular erythematous mucosa, pseudopolyps, loss of vascular pattern. Biopsy: crypt distortion, crypt abscesses, goblet cell depletion", "Plain abdominal X-ray: Thumbprinting, toxic megacolon (transverse colon >6cm)", "Montreal Classification: Extent — E1 (proctitis), E2 (left-sided), E3 (pancolitis)", "Truelove and Witts criteria: Severity grading for acute flares"],
+    labs: ["CRP, ESR: Elevated in flares", "CBC: Anemia, leukocytosis, thrombocytosis", "Albumin: Hypoalbuminemia in severe disease", "Fecal calprotectin: Correlates with endoscopic disease activity", "pANCA+/ASCA−: Supports UC over Crohn's (sensitivity ~65%)", "Stool microscopy and C&S: Exclude infective colitis (C. difficile toxin assay mandatory)", "LFTs: PSC screening"],
+    treatment: {
+      lifestyle: "Dietary modification during flares (low-residue). Probiotics (VSL#3 — some evidence for maintenance in pouchitis). Psychosocial support.",
+      medical: "Mild-moderate: 5-ASA (mesalazine/mesalamine) — oral + topical rectal (suppository for proctitis, enema for left-sided). Moderate: Add oral corticosteroids (prednisolone 40mg taper). Steroid-dependent: Azathioprine 2–2.5mg/kg or 6-MP. Severe/refractory: Anti-TNF (infliximab), vedolizumab, tofacitinib (JAK inhibitor). Acute severe colitis: IV hydrocortisone 100mg QID → if no response 72h → IV cyclosporine or infliximab rescue.",
+      surgical: "Curative: Proctocolectomy + ileal pouch-anal anastomosis (IPAA / J-pouch). Indications: Refractory to medical therapy, dysplasia/carcinoma, toxic megacolon, perforation, massive hemorrhage. Emergency: Subtotal colectomy + end ileostomy."
+    },
+    complications: ["Toxic megacolon (medical emergency: transverse colon >6cm + systemic toxicity)", "Colorectal carcinoma (risk increases after 8–10 yrs of pancolitis; surveillance colonoscopy every 1–2 yrs)", "Massive hemorrhage", "Perforation", "Stricture (uncommon — suspect dysplasia)", "Primary sclerosing cholangitis (PSC) — 5% of UC patients; independently increases CRC risk", "Extraintestinal: Same as Crohn's but PSC more strongly associated with UC"],
+    keyPearls: ["Lead-pipe colon on barium enema — loss of haustra due to chronic inflammation", "Acute severe UC: Use Travis criteria (stool frequency >8/day OR CRP >45 + stool >3) at day 3 to predict colectomy need", "5-ASA is cornerstone of mild-moderate UC therapy and maintenance — unlike Crohn's where it has limited role", "Surveillance: Chromoendoscopy with targeted biopsies preferred over random biopsies for dysplasia detection"]
+  },
+  {
+    id: 5, name: "Cirrhosis of the Liver", icd10: "K74", category: "hepatobiliary", severity: "severe",
+    emoji: "🫀",
+    definition: "End-stage of chronic liver disease characterized by diffuse hepatic fibrosis, nodular regeneration, and distortion of hepatic architecture, leading to portal hypertension and progressive hepatocellular failure.",
+    epidemiology: "Global prevalence ~1–2%. Leading causes: Alcohol-related liver disease (ALD) ~30%, chronic hepatitis C ~25%, NAFLD/NASH ~25%, chronic hepatitis B ~15%. Mortality 1.2 million/year worldwide.",
+    pathophysiology: "Chronic hepatocyte injury → activation of hepatic stellate cells → collagen deposition in space of Disse → sinusoidal fibrosis → increased intrahepatic resistance → portal hypertension (HVPG >5mmHg, clinically significant >10mmHg). Reduced functional hepatocyte mass → synthetic failure (albumin, clotting factors), impaired detoxification (ammonia, bilirubin).",
+    symptoms: ["Compensated: Often asymptomatic, fatigue, anorexia", "Jaundice (conjugated hyperbilirubinemia)", "Spider angiomata (arterial, blanch with pressure, SVC distribution)", "Palmar erythema (hyperestrogenism)", "Ascites (most common decompensating event)", "Hepatic encephalopathy (confusion, asterixis, fetor hepaticus)", "Variceal hemorrhage (esophageal/gastric)", "Caput medusae, gynecomastia, testicular atrophy", "Muscle wasting, easy bruising"],
+    diagnosis: ["Liver biopsy: Gold standard (Metavir F4, Ishak 5–6) but invasive", "Transient elastography (FibroScan): >12.5 kPa suggests cirrhosis; non-invasive", "Serum fibrosis markers: FIB-4 index, APRI, ELF test", "Abdominal ultrasound + Doppler: Nodular liver, splenomegaly, ascites, portal vein flow reversal", "Upper GI Endoscopy: Screen for esophageal/gastric varices", "Child-Pugh Score (A/B/C): Prognostic grading using bilirubin, albumin, INR, ascites, encephalopathy", "MELD Score: Predicts 90-day mortality; used for transplant listing"],
+    labs: ["LFTs: AST, ALT (often AST>ALT in alcoholic), elevated bilirubin, elevated ALP/GGT", "Synthetic function: Low albumin (<3.5), prolonged PT/INR", "CBC: Thrombocytopenia (hypersplenism), anemia, leukopenia", "Hepatitis serology: HBsAg, anti-HCV, HBV DNA, HCV RNA", "Autoimmune markers: ANA, ASMA (AIH), AMA (PBC)", "Iron studies: Ferritin, transferrin saturation (hemochromatosis)", "Ceruloplasmin (Wilson's), alpha-1 antitrypsin levels", "AFP: Hepatocellular carcinoma screening (q6 months with US)", "Serum ammonia: Hepatic encephalopathy"],
+    treatment: {
+      lifestyle: "Absolute alcohol abstinence. Sodium restriction <2g/day (ascites). Adequate protein intake 1.2–1.5 g/kg (avoid restriction even with encephalopathy). Hepatitis A and B vaccination.",
+      medical: "Ascites: Spironolactone 100mg + furosemide 40mg (100:40 ratio, titrate). Refractory: Large-volume paracentesis + albumin 8g/L removed. TIPS. SBP prophylaxis: Norfloxacin 400mg OD. Varices: Primary prophylaxis — non-selective beta-blockers (propranolol/carvedilol) or endoscopic band ligation. Acute variceal bleed: Octreotide + EBL + antibiotics (ceftriaxone). HE: Lactulose (titrate to 2–3 soft stools/day) + rifaximin 550mg BID.",
+      surgical: "Liver transplantation: Definitive treatment. Indications: MELD ≥15, decompensated cirrhosis, HCC within Milan criteria (single ≤5cm or up to 3 nodules ≤3cm). TIPS: Refractory ascites, recurrent variceal bleeding."
+    },
+    complications: ["Portal hypertension → variceal hemorrhage, ascites, hepatorenal syndrome, splenomegaly", "Spontaneous bacterial peritonitis (SBP): Ascitic fluid PMN >250/mm³ → empiric ceftriaxone/cefotaxime", "Hepatocellular carcinoma: Screen q6mo with US + AFP", "Hepatorenal syndrome (HRS): Type 1 (rapid, Cr doubles in <2 wks) — albumin + terlipressin; Type 2 (gradual)", "Hepatic encephalopathy", "Hepatopulmonary syndrome, portopulmonary hypertension", "Coagulopathy and thrombocytopenia"],
+    keyPearls: ["MELD = 3.78×ln(bilirubin) + 11.2×ln(INR) + 9.57×ln(creatinine) + 6.43", "Diagnostic paracentesis: Perform on ALL patients with new ascites — SAAG ≥1.1 g/dL = portal hypertension", "SBP: Treat even if culture-negative if PMN >250. 20% in-hospital mortality", "Hepatorenal syndrome: Exclude other causes of AKI, stop diuretics, albumin challenge 1g/kg × 2 days"]
+  },
+  {
+    id: 6, name: "Acute Pancreatitis", icd10: "K85", category: "pancreatic", severity: "variable",
+    emoji: "⚡",
+    definition: "Acute inflammatory process of the pancreas with variable involvement of peripancreatic tissues and distant organs. Defined by ≥2 of 3: characteristic abdominal pain, serum lipase/amylase ≥3× ULN, and/or imaging findings.",
+    epidemiology: "Incidence 13–45/100,000. Gallstones (40%) and alcohol (30%) account for 70% of cases. Other causes: Hypertriglyceridemia (>1000 mg/dL), ERCP-related, drugs (azathioprine, valproic acid), autoimmune, idiopathic (15–25%).",
+    pathophysiology: "Premature intrapancreatic activation of trypsinogen → trypsin → autodigestion of pancreatic parenchyma → local inflammation → SIRS → multiorgan dysfunction in severe cases. Gallstone impaction at ampulla of Vater → pancreatic duct obstruction → ductal hypertension. Alcohol → direct toxic effect + ductal plugging.",
+    symptoms: ["Severe epigastric pain radiating to the back (bandlike, 'boring')", "Nausea, vomiting (does not relieve pain)", "Abdominal tenderness, guarding", "Fever, tachycardia", "Cullen's sign (periumbilical ecchymosis) — hemorrhagic pancreatitis", "Grey Turner's sign (flank ecchymosis) — hemorrhagic pancreatitis"],
+    diagnosis: ["Diagnosis requires ≥2 of 3: (1) characteristic pain, (2) lipase or amylase ≥3× ULN, (3) imaging findings", "CT Abdomen with contrast: Peripancreatic fat stranding, necrosis (delayed enhancement loss), fluid collections. Best at 72–96h for necrosis assessment", "MRCP: Evaluate for choledocholithiasis without radiation", "Abdominal ultrasound: First-line to assess for gallstones", "Revised Atlanta Classification: Mild (no organ failure, no local complications), Moderately severe (transient organ failure <48h or local complications), Severe (persistent organ failure >48h)"],
+    labs: ["Serum lipase: Preferred over amylase (more sensitive and specific, remains elevated longer)", "Serum amylase: Elevated early, normalizes in 3–5 days", "CBC: Leukocytosis, hemoconcentration (Hct >44 = poor prognosis)", "CRP at 48h: >150 mg/L predicts severe disease", "BMP: BUN elevation (predictor of mortality), calcium (hypocalcemia = saponification, severity marker)", "LFTs: ALT >150 IU/L suggests gallstone etiology (PPV 85%)", "Triglycerides: If >1000 mg/dL → hypertriglyceridemic pancreatitis", "ABG: Hypoxemia, metabolic acidosis in severe cases", "Scoring: BISAP, APACHE-II, Ranson's criteria, CTSI"],
+    treatment: {
+      lifestyle: "Absolute alcohol abstinence. Cholecystectomy (same admission if mild gallstone pancreatitis, or within 6 weeks). Low-fat diet on recovery.",
+      medical: "Aggressive IV fluid resuscitation: Lactated Ringer's preferred — goal-directed (5–10 mL/kg/hr initially, titrate to urine output ≥0.5 mL/kg/hr). Analgesics: Multimodal — IV paracetamol, NSAIDs, opioids if needed (no evidence that morphine worsens). Early oral feeding: Low-fat solid diet as tolerated within 24h (superior to NPO). Antibiotics: NOT indicated for prophylaxis; only for infected necrosis (carbapenems: meropenem/imipenem). Hypertriglyceridemic: Insulin infusion ± plasmapheresis.",
+      surgical: "Infected pancreatic necrosis: Step-up approach — percutaneous/endoscopic transgastric drainage → if fails → video-assisted retroperitoneal debridement (VARD) or minimally invasive necrosectomy. Cholecystectomy for gallstone pancreatitis. ERCP: Urgent (<24h) only if concurrent cholangitis or persistent biliary obstruction."
+    },
+    complications: ["Early (<2 wks): SIRS, organ failure (pulmonary, renal, cardiovascular), ARDS, DIC", "Late (>2 wks): Pancreatic necrosis (sterile → infected), walled-off necrosis (WON), pseudocyst, pancreatic abscess", "Pseudocyst: Encapsulated fluid collection lacking epithelial lining; >6 wks, >6cm → symptomatic → endoscopic drainage", "Splenic vein thrombosis → left-sided portal hypertension → gastric varices", "Pancreatic duct disruption → pancreatic fistula"],
+    keyPearls: ["BISAP score ≥3 at admission predicts severe pancreatitis and mortality", "Do NOT give prophylactic antibiotics — no mortality benefit, increases fungal infections", "Early feeding within 24h (oral or nasojejunal) reduces infection and mortality vs prolonged NPO", "Gallstone pancreatitis: Cholecystectomy during SAME admission for mild disease reduces recurrence from 30% to <5%"]
+  },
+  {
+    id: 7, name: "Irritable Bowel Syndrome (IBS)", icd10: "K58", category: "functional", severity: "mild",
+    emoji: "🧠",
+    definition: "Chronic functional gastrointestinal disorder characterized by recurrent abdominal pain associated with altered bowel habits, in the absence of structural or biochemical abnormalities. Diagnosed using Rome IV criteria.",
+    epidemiology: "Global prevalence 10–15%. Female:Male ratio 2:1. Peak 20–40 yrs. Biopsychosocial model: psychological stress, visceral hypersensitivity, gut-brain axis dysfunction, post-infectious (PI-IBS in 10% after enteric infection), altered gut microbiome.",
+    pathophysiology: "Multifactorial: (1) Visceral hypersensitivity — lowered threshold for pain perception in GI tract. (2) Gut-brain axis dysregulation — altered CNS processing of visceral afferents. (3) Altered GI motility — accelerated (diarrhea) or decelerated (constipation) transit. (4) Intestinal dysbiosis and low-grade mucosal inflammation. (5) Increased intestinal permeability. (6) Serotonin dysregulation (5-HT₃, 5-HT₄ pathways).",
+    symptoms: ["Recurrent abdominal pain ≥1 day/week (last 3 months) — related to defecation (Rome IV)", "Altered stool frequency and/or form", "IBS-D (diarrhea-predominant): Loose/watery stools, urgency", "IBS-C (constipation-predominant): Hard/lumpy stools, straining", "IBS-M (mixed): Alternating patterns", "Bloating, abdominal distension", "Mucus in stools", "Symptoms often worsened by stress, certain foods"],
+    diagnosis: ["Rome IV Criteria: Recurrent abdominal pain ≥1 day/week in last 3 months, associated with ≥2 of: (1) related to defecation, (2) change in stool frequency, (3) change in stool form. Onset ≥6 months before diagnosis", "Diagnosis of exclusion — but minimize unnecessary testing if criteria met without alarm features", "Alarm features requiring investigation: Age >50, rectal bleeding, nocturnal symptoms, unintentional weight loss, family history CRC/IBD, anemia, fever", "Colonoscopy: If alarm features or age-appropriate CRC screening due", "Bristol Stool Scale: Classify stool form for subtyping"],
+    labs: ["CBC: Exclude anemia", "CRP/ESR: Normal in IBS (elevated → consider IBD)", "Fecal calprotectin: <50 μg/g effectively excludes IBD", "Celiac serology: Anti-tTG IgA (mandatory in IBS-D — celiac prevalence 4× higher)", "Thyroid function: Exclude hyper/hypothyroidism", "Stool studies: If diarrhea-predominant — ova/parasites, C. difficile, consider bile acid malabsorption testing (SeHCAT scan)"],
+    treatment: {
+      lifestyle: "Dietary: Low FODMAP diet (supervised by dietitian, 2–6 wk elimination then reintroduction — effective in 50–80%). Regular meals, adequate hydration, limit caffeine, alcohol, artificial sweeteners. Exercise: 30min moderate activity 3–5×/wk. Stress management: CBT, gut-directed hypnotherapy (NNT=4), mindfulness.",
+      medical: "IBS-C: Soluble fiber (psyllium), osmotic laxatives (PEG), linaclotide 290μg OD (guanylate cyclase-C agonist), lubiprostone, prucalopride (5-HT₄ agonist). IBS-D: Loperamide (symptom control, not pain), eluxadoline, rifaximin 550mg TID × 14 days (modulates microbiome), bile acid sequestrants (cholestyramine) if BAM suspected. Pain: Antispasmodics (hyoscine, mebeverine, peppermint oil). Neuromodulators: Low-dose TCA (amitriptyline 10–25mg nocte) for IBS-D/pain; SSRI (citalopram/fluoxetine) for IBS-C/comorbid anxiety.",
+      surgical: "No surgical role in IBS."
+    },
+    complications: ["No structural complications or increased mortality", "Significant impact on quality of life, work productivity, healthcare utilization", "Comorbid anxiety and depression (40–60%)", "Unnecessary surgical interventions (cholecystectomy, appendectomy, hysterectomy) — higher rates in IBS patients"],
+    keyPearls: ["IBS is a positive diagnosis using Rome IV criteria — not merely exclusion of everything else", "Low FODMAP diet is first-line dietary intervention with strongest evidence", "Fecal calprotectin <50 has >95% NPV for excluding IBD — very useful to avoid unnecessary colonoscopy in young patients", "Brain-gut axis therapies (CBT, hypnotherapy) have durable benefits — consider early referral"]
+  },
+  {
+    id: 8, name: "Cholelithiasis & Cholecystitis", icd10: "K80–K81", category: "hepatobiliary", severity: "moderate",
+    emoji: "💎",
+    definition: "Cholelithiasis: Formation of gallstones (cholesterol 80%, pigment 20%) in the gallbladder. Cholecystitis: Acute inflammation of the gallbladder, usually from cystic duct obstruction by a gallstone, leading to distension, ischemia, and secondary infection.",
+    epidemiology: "Gallstones: 10–20% of adults in Western countries. Risk factors (the '6 Fs'): Fat (obesity), Female, Forty, Fertile (multiparity), Family history, Fair (though prevalence high across ethnicities). Native American/Hispanic populations highest risk.",
+    pathophysiology: "Cholesterol stones: Hepatic cholesterol hypersecretion → bile supersaturation → nucleation → stone growth. Gallbladder hypomotility (progesterone, vagotomy, TPN). Pigment stones: Black (chronic hemolysis, cirrhosis) — form in gallbladder; Brown (biliary infection, stasis) — form in ducts. Acute cholecystitis: Stone impaction in cystic duct → gallbladder distension → mucosal ischemia → secondary bacterial infection (E. coli, Klebsiella, Enterococcus).",
+    symptoms: ["Biliary colic: Episodic RUQ/epigastric pain, postprandial (fatty meals), 30min–6h duration, radiates to right scapula", "Acute cholecystitis: Persistent RUQ pain >6h, fever, Murphy's sign positive (inspiratory arrest on RUQ palpation)", "Nausea, vomiting", "Jaundice suggests choledocholithiasis (CBD stone)", "Charcot's triad: RUQ pain + fever + jaundice = cholangitis", "Reynolds' pentad: Charcot's + hypotension + altered mental status = suppurative cholangitis"],
+    diagnosis: ["Abdominal Ultrasound: First-line — gallstones (echogenic foci with posterior acoustic shadowing), gallbladder wall thickening >3mm, pericholecystic fluid, sonographic Murphy's sign", "HIDA scan (cholescintigraphy): Non-visualization of gallbladder at 4h = cystic duct obstruction (sensitivity 97% for acute cholecystitis)", "MRCP: CBD stones, biliary anatomy", "ERCP: Therapeutic — CBD stone extraction, sphincterotomy", "CT: Complications — emphysematous cholecystitis, perforation, abscess", "Tokyo Guidelines (TG18): Severity grading — Grade I (mild), II (moderate), III (severe with organ dysfunction)"],
+    labs: ["CBC: Leukocytosis with left shift", "CRP: Elevated in acute cholecystitis", "LFTs: ALP and GGT elevated (cholestatic pattern) if CBD obstruction; AST/ALT elevated if transient stone passage", "Bilirubin: Elevated in choledocholithiasis", "Lipase: Mildly elevated if gallstone passes ampulla (gallstone pancreatitis if >3× ULN)", "Blood cultures: If cholangitis suspected"],
+    treatment: {
+      lifestyle: "Weight management (avoid rapid weight loss — increases stone formation). Low-fat diet for symptomatic relief. Ursodeoxycholic acid 10mg/kg/day for dissolution of small cholesterol stones in non-surgical candidates (slow, 6–24 months).",
+      medical: "Acute cholecystitis: NPO, IV fluids, IV antibiotics (piperacillin-tazobactam or ceftriaxone + metronidazole), analgesics (NSAIDs — ketorolac, opioids). Choledocholithiasis: ERCP + sphincterotomy for CBD stone extraction.",
+      surgical: "Laparoscopic cholecystectomy: Gold standard. Early cholecystectomy (<72h of symptom onset) preferred over delayed (lower complications, shorter total hospital stay). Tokyo Grade III: Percutaneous cholecystostomy for decompression if unfit for surgery. Intraoperative cholangiogram: If suspected CBD stones."
+    },
+    complications: ["Gangrenous cholecystitis → perforation → biliary peritonitis", "Empyema (pus-filled gallbladder)", "Emphysematous cholecystitis (gas-forming organisms — diabetics, immunocompromised) — emergency cholecystectomy", "Mirizzi syndrome: Extrinsic compression of common hepatic duct by impacted cystic duct/neck stone", "Gallstone ileus: Fistula between gallbladder and duodenum → stone in terminal ileum → mechanical SBO (Rigler's triad on X-ray)", "Choledocholithiasis → cholangitis → sepsis → death", "Gallbladder carcinoma (porcelain gallbladder → prophylactic cholecystectomy)"],
+    keyPearls: ["Early cholecystectomy (<72h) is now standard — reduces total hospital stay and complications", "Murphy's sign: Sensitivity 65%, specificity 87% for acute cholecystitis", "Gallstone pancreatitis: MRCP or EUS to evaluate CBD before cholecystectomy", "Porcelain gallbladder (calcified wall on imaging) → 25% risk of gallbladder carcinoma → cholecystectomy indicated"]
+  },
+  {
+    id: 9, name: "Celiac Disease", icd10: "K90.0", category: "lower", severity: "moderate",
+    emoji: "🌾",
+    definition: "Immune-mediated systemic disorder triggered by dietary gluten (wheat, barley, rye) in genetically susceptible individuals (HLA-DQ2/DQ8), causing villous atrophy and crypt hyperplasia in the small intestinal mucosa.",
+    epidemiology: "Prevalence ~1% globally (clinical iceberg — most undiagnosed). HLA-DQ2 in 90–95%, HLA-DQ8 in 5–10%. Associated with type 1 diabetes (5–10%), autoimmune thyroiditis, Down/Turner/Williams syndrome, IgA deficiency.",
+    pathophysiology: "Gluten → gliadin peptides resist full digestion → cross intestinal epithelium (via zonulin-mediated increased permeability) → tissue transglutaminase (tTG) deamidates gliadin → enhanced binding to HLA-DQ2/DQ8 on antigen-presenting cells → adaptive Th1 immune response → CD8+ intraepithelial lymphocyte-mediated enterocyte destruction → villous atrophy + crypt hyperplasia → malabsorption.",
+    symptoms: ["Classical: Chronic diarrhea, steatorrhea, weight loss, abdominal bloating", "Non-classical (more common in adults): Iron-deficiency anemia (refractory to oral iron), osteoporosis, fatigue", "Dermatitis herpetiformis (pathognomonic skin manifestation — pruritic vesicles on elbows, knees, buttocks)", "Short stature/delayed puberty in children", "Recurrent aphthous ulcers, dental enamel defects", "Elevated transaminases (unexplained — 'celiac hepatitis')", "Infertility, recurrent miscarriages", "Peripheral neuropathy, ataxia (neurological celiac)"],
+    diagnosis: ["Serology (while on gluten-containing diet): Anti-tTG IgA (sensitivity 93%, specificity 98%) — first-line screening. Total serum IgA (2–3% celiac patients are IgA-deficient → false-negative tTG IgA). If IgA-deficient: Anti-tTG IgG or anti-deamidated gliadin peptide (DGP) IgG", "Upper GI Endoscopy + duodenal biopsies (≥4 from D2, 1–2 from duodenal bulb): Marsh classification — Marsh 3 (villous atrophy + crypt hyperplasia + increased IELs) confirms diagnosis", "HLA-DQ2/DQ8 typing: High NPV — if absent, celiac essentially excluded. Useful when diagnosis uncertain", "Response to gluten-free diet: Clinical and serological improvement within weeks-months"],
+    labs: ["Anti-tTG IgA: Primary screening test", "Anti-endomysial antibody (EMA) IgA: Confirmatory (specificity ~99%, observer-dependent)", "Anti-DGP IgG: Useful in IgA deficiency and children <2 yrs", "Total serum IgA: To exclude IgA deficiency", "CBC: Microcytic anemia (iron), macrocytic (B12/folate)", "Iron studies, B12, folate, vitamin D, calcium: Malabsorption panel", "LFTs: Unexplained transaminase elevation", "Bone densitometry (DEXA): Osteoporosis screening at diagnosis"],
+    treatment: {
+      lifestyle: "Strict lifelong gluten-free diet (GFD): Avoid wheat, barley, rye, and contaminated oats. Pure oats tolerated by most. Dietitian referral essential. Read food labels meticulously. Gluten contamination <20 ppm (Codex Alimentarius standard). Join celiac support groups.",
+      medical: "Nutritional supplementation: Iron, calcium, vitamin D, B12, folate, zinc as needed. Dapsone 50–150mg/day for dermatitis herpetiformis (in addition to GFD). Refractory celiac disease (persistent symptoms despite strict GFD >12 months): Exclude dietary non-compliance first → Type I (normal IEL phenotype) — immunosuppressants (budesonide, azathioprine). Type II (aberrant IEL phenotype) — consider cladribine, autologous stem cell transplant; high risk of enteropathy-associated T-cell lymphoma (EATL).",
+      surgical: "No primary surgical role. Surgery for complications (lymphoma, strictures)."
+    },
+    complications: ["Osteoporosis/osteopenia (calcium + vitamin D malabsorption)", "Refractory celiac disease (Type I and II)", "Enteropathy-associated T-cell lymphoma (EATL) — rare but serious", "Small bowel adenocarcinoma", "Hyposplenism → increased susceptibility to encapsulated organisms → pneumococcal/meningococcal vaccination", "Ulcerative jejunitis", "Secondary lactose intolerance (villous atrophy → brush border enzyme loss)"],
+    keyPearls: ["Never start GFD before diagnostic workup — gluten challenge required if already gluten-free", "Anti-tTG >10× ULN + positive EMA + HLA-DQ2/DQ8 → biopsy may be avoided in children (ESPGHAN criteria)", "Screen first-degree relatives — 10% prevalence", "Monitor adherence: Serial anti-tTG levels (should normalize in 6–12 months on GFD)"]
+  },
+  {
+    id: 10, name: "Hepatitis B & C", icd10: "B16–B18", category: "hepatobiliary", severity: "severe",
+    emoji: "🦠",
+    definition: "Hepatitis B (HBV): DNA hepadnavirus; transmitted via blood, sexual contact, vertical. Can cause acute hepatitis, chronic infection (5% adults, 90% neonates), cirrhosis, and HCC. Hepatitis C (HCV): RNA flavivirus; primarily bloodborne. Chronic in 55–85%; leading cause of liver transplant; now curable with DAAs.",
+    epidemiology: "HBV: 296 million chronic carriers globally. Endemic in Sub-Saharan Africa, East Asia. Vaccination has dramatically reduced incidence. HCV: 58 million chronic infections. Genotype 1 most common globally. Risk: IVDU (primary in developed countries), blood transfusion (pre-1992), healthcare exposure.",
+    pathophysiology: "HBV: Non-cytopathic virus — liver damage is immune-mediated (CD8+ T-cell response against infected hepatocytes). cccDNA persists in hepatocyte nuclei (functional cure ≠ eradication). HBV DNA integration → HCC risk even without cirrhosis. HCV: Direct cytopathic + immune-mediated damage. Chronic inflammation → fibrosis → cirrhosis (20–30% over 20–30 yrs). No integration into host genome, but persistent inflammation drives carcinogenesis.",
+    symptoms: ["Acute: Often asymptomatic (70% subclinical), malaise, anorexia, nausea, RUQ discomfort, jaundice (30%), dark urine, pale stools", "Chronic HBV: Phases — immune tolerant → immune active → inactive carrier → reactivation. Often asymptomatic until cirrhosis/decompensation", "Chronic HCV: Fatigue (most common), arthralgia, cognitive dysfunction ('brain fog'). Extrahepatic: Mixed cryoglobulinemia (vasculitis, membranoproliferative GN, purpura), porphyria cutanea tarda, lichen planus, lymphoma"],
+    diagnosis: ["HBV Serology: HBsAg (current infection), anti-HBs (immunity), anti-HBc IgM (acute), anti-HBc IgG (past/chronic exposure), HBeAg (high replicative state), HBV DNA (viral load)", "HCV: Anti-HCV antibody (screening) → if positive → HCV RNA (confirms active infection) → HCV genotype (guides treatment duration)", "Liver fibrosis assessment: FibroScan (TE), FIB-4, APRI, liver biopsy", "Abdominal US + AFP q6mo: HCC surveillance in chronic HBV (regardless of cirrhosis) and HCV with cirrhosis"],
+    labs: ["LFTs: ALT elevation (immune active phase HBV; persistent in HCV)", "HBV: HBV DNA quantitative (guide treatment), HBeAg/anti-HBe seroconversion monitoring", "HCV: HCV RNA quantitative (baseline and SVR12 — undetectable = cure)", "CBC, INR, albumin, bilirubin: Assess liver synthetic function", "Cryoglobulins, complement C3/C4, RF: If HCV extrahepatic suspected", "HBV/HCV coinfection screening, HIV testing (shared risk factors)"],
+    treatment: {
+      lifestyle: "Alcohol cessation. HBV vaccination for all non-immune contacts and populations. Safe sex practices. No sharing needles or personal items. Harm reduction programs for IVDU.",
+      medical: "HBV Treatment (chronic, immune active): Nucleos(t)ide analogues — tenofovir (TDF or TAF) or entecavir (indefinite treatment in most). PEGylated interferon-α (48 wks) — finite course, higher HBsAg loss rate but more side effects. Goals: HBV DNA suppression, ALT normalization, HBeAg seroconversion, ideally HBsAg loss (functional cure). HCV Treatment (ALL chronic HCV should be treated): Direct-acting antivirals (DAAs) — pangenotypic regimens: Sofosbuvir/velpatasvir (Epclusa) 12 wks; Glecaprevir/pibrentasvir (Mavyret) 8–12 wks. SVR12 rates >95%. Decompensated cirrhosis: Sofosbuvir-based (avoid protease inhibitors). Check for drug interactions.",
+      surgical: "Liver transplantation for decompensated cirrhosis or HCC. HBV: HBIG + antivirals post-transplant prevent recurrence. HCV: Treat with DAAs pre- or post-transplant (recurrence previously universal, now preventable/curable)."
+    },
+    complications: ["Cirrhosis: HBV 15–40% over lifetime; HCV 20–30% over 20–30 yrs", "Hepatocellular carcinoma: HBV — risk even without cirrhosis (DNA integration); HCV — primarily in cirrhotic patients", "HBV-related: Acute liver failure (0.5–1%), polyarteritis nodosa, membranous nephropathy, aplastic anemia", "HCV-related: Mixed cryoglobulinemia, MPGN, porphyria cutanea tarda, B-cell non-Hodgkin lymphoma, insulin resistance/diabetes", "HBV reactivation: Immunosuppression (rituximab, chemotherapy, anti-TNF) → screen HBsAg and anti-HBc before immunosuppression → prophylactic antivirals"],
+    keyPearls: ["HBV: cccDNA persistence means 'functional cure' (HBsAg loss) ≠ complete eradication — lifelong HCC surveillance in those with prior significant disease", "HCV: SVR12 = cure (>99% durability). All chronic HCV should be treated regardless of fibrosis stage", "Screen all pregnant women for HBsAg — neonatal HBIG + vaccine within 12h of birth prevents 95% of vertical transmission", "HBV reactivation risk: Check HBsAg + anti-HBc before ANY immunosuppressive therapy"]
+  },
+  {
+    id: 11, name: "Colorectal Carcinoma", icd10: "C18–C20", category: "lower", severity: "severe",
+    emoji: "🎗️",
+    definition: "Malignant neoplasm arising from the colonic or rectal epithelium, typically progressing through the adenoma-carcinoma sequence over 10–15 years. Third most common cancer worldwide and second leading cause of cancer death.",
+    epidemiology: "Incidence ~1.9 million/year globally. Lifetime risk ~4.5%. Rising incidence in adults <50 (early-onset CRC). Risk factors: Age >45, family history (first-degree relative → 2–3× risk), FAP, Lynch syndrome (HNPCC), IBD (>8 yrs), obesity, processed/red meat, smoking, alcohol, diabetes.",
+    pathophysiology: "Adenoma-carcinoma sequence (70%): Normal epithelium → aberrant crypt foci → adenomatous polyp → carcinoma. Driven by sequential mutations: APC (initiation) → KRAS (promotion) → TP53 (progression) → metastasis. Microsatellite instability (MSI-H) pathway (15%): Defective DNA mismatch repair (MLH1, MSH2, MSH6, PMS2) → Lynch syndrome (hereditary) or sporadic (MLH1 promoter methylation). Serrated pathway: Sessile serrated lesions → BRAF mutation → CpG island methylation.",
+    symptoms: ["Right colon (ascending, cecum): Occult bleeding → iron-deficiency anemia, fatigue, palpable RIF mass. Late obstruction (larger lumen)", "Left colon (descending, sigmoid): Change in bowel habits (alternating constipation/diarrhea), rectal bleeding, colicky pain. Earlier obstruction (smaller lumen)", "Rectal: Hematochezia, tenesmus, mucus per rectum, sensation of incomplete evacuation", "Advanced: Weight loss, anorexia, abdominal distension (obstruction), hepatomegaly (liver metastases)", "Emergent: Large bowel obstruction (15%), perforation (2–3%)"],
+    diagnosis: ["Colonoscopy + biopsy: Gold standard — visualize, biopsy, and polypectomy", "CT Colonography (virtual colonoscopy): Alternative if colonoscopy incomplete or contraindicated", "Staging CT chest/abdomen/pelvis: Metastatic workup", "Rectal cancer: Pelvic MRI (T and N staging, mesorectal fascia involvement) + endorectal US", "PET-CT: Equivocal lesions, restaging", "CEA: Not for screening; baseline before surgery, post-operative surveillance (rising CEA → recurrence)", "TNM staging (AJCC 8th edition): Determines prognosis and treatment"],
+    labs: ["CBC: Iron-deficiency anemia (microcytic, low ferritin)", "Iron studies: Ferritin, serum iron, TIBC", "LFTs: Liver metastases", "CEA: Baseline pre-op (prognostic, not diagnostic). Post-op surveillance q3–6 months × 5 yrs", "Fecal immunochemical test (FIT): Screening — detects human hemoglobin (more specific than gFOBT)", "Tumor molecular profiling: MSI/MMR status (immunotherapy eligibility, Lynch screening), KRAS/NRAS/BRAF mutations (anti-EGFR eligibility), HER2 amplification"],
+    treatment: {
+      lifestyle: "Screening and prevention: Average risk — colonoscopy every 10 yrs or annual FIT from age 45 (ACS) or 50 (USPSTF updated to 45). High-risk: Earlier and more frequent. Protective: Physical activity, fiber, aspirin (under study), healthy weight.",
+      medical: "Adjuvant chemotherapy (Stage III): FOLFOX (5-FU + leucovorin + oxaliplatin) or CAPOX (capecitabine + oxaliplatin) × 3–6 months. Stage II: Consider if high-risk features (T4, LVI, perineural invasion, <12 LN sampled, poorly differentiated, MSS). Metastatic (Stage IV): FOLFOX/FOLFIRI ± bevacizumab (anti-VEGF) or cetuximab/panitumumab (anti-EGFR, only if RAS wild-type and left-sided). MSI-H/dMMR: Pembrolizumab/nivolumab (checkpoint immunotherapy — remarkable responses). Rectal: Neoadjuvant chemoradiation (5-FU + 50.4 Gy) for locally advanced (T3/T4 or N+) → total mesorectal excision (TME) → adjuvant chemo. Total neoadjuvant therapy (TNT) emerging as standard.",
+      surgical: "Colectomy with adequate margins + regional lymphadenectomy (≥12 lymph nodes). Right hemicolectomy (cecal, ascending, hepatic flexure tumors). Left hemicolectomy/sigmoid colectomy (descending, sigmoid tumors). Low anterior resection (upper rectal) or abdominoperineal resection (APR, low rectal with permanent colostomy). Liver metastases: Resection if ≤4 lesions, technically resectable → 5-yr survival 40–50%."
+    },
+    complications: ["Large bowel obstruction (surgical emergency — stenting as bridge to surgery or emergency colostomy)", "Perforation → peritonitis", "Liver metastases (most common site — portal venous drainage)", "Lung metastases", "Local recurrence (especially rectal — TME reduces from 30% to <5%)", "Anastomotic leak (3–6% post-colectomy)", "Post-operative: Ileus, wound infection, urinary/sexual dysfunction (rectal surgery)"],
+    keyPearls: ["All CRC should be tested for MSI/MMR status — guides immunotherapy eligibility AND Lynch syndrome screening", "Lynch syndrome (HNPCC): Amsterdam II/Bethesda criteria → germline MLH1/MSH2/MSH6/PMS2 testing. Lifetime CRC risk 40–80%", "Left-sided CRC responds better to anti-EGFR therapy than right-sided (primary tumor sidedness matters)", "Screen first-degree relatives of CRC patients: Colonoscopy at age 40 or 10 yrs before index case diagnosis, whichever is earlier"]
+  },
+  {
+    id: 12, name: "Chronic Pancreatitis", icd10: "K86.1", category: "pancreatic", severity: "moderate",
+    emoji: "🔄",
+    definition: "Progressive inflammatory disease causing irreversible morphological changes (fibrosis, calcifications, ductal strictures) and functional deterioration (exocrine insufficiency → malabsorption; endocrine insufficiency → diabetes mellitus type 3c) of the pancreas.",
+    epidemiology: "Prevalence 50/100,000. Alcohol most common cause in adults (60–70%, typically >5 yrs heavy drinking >80g/day). Idiopathic (20–30%). Genetic: PRSS1 (hereditary), SPINK1, CFTR, CTRC mutations. Other: Autoimmune (type 1: IgG4-related; type 2: IDCP), tropical (fibrocalculous), obstructive.",
+    pathophysiology: "Sentinel Acute Pancreatitis Event (SAPE) hypothesis: Recurrent acute pancreatic injury → necrosis-fibrosis sequence → stellate cell activation → progressive parenchymal fibrosis → ductal obstruction → acinar cell loss → exocrine then endocrine failure. Alcohol: Direct toxic metabolite (fatty acid ethyl esters) + oxidative stress + stellate cell activation. PRSS1 mutation: Gain-of-function trypsinogen → premature trypsin activation resistant to autolysis.",
+    symptoms: ["Chronic/recurrent epigastric pain radiating to back (hallmark — often debilitating, 'burnout' may reduce pain after years)", "Steatorrhea (foul-smelling, oily, bulky stools — when >90% exocrine function lost)", "Weight loss, malnutrition", "Diabetes mellitus type 3c (brittle, prone to hypoglycemia due to glucagon deficiency also)", "Nausea, bloating", "Jaundice (CBD stricture from fibrotic head)"],
+    diagnosis: ["CT Abdomen: Pancreatic calcifications (pathognomonic), ductal dilation, parenchymal atrophy", "MRCP/Secretin-enhanced MRCP: Ductal anatomy — strictures, chain-of-lakes pattern, side branch ectasia", "Endoscopic Ultrasound (EUS): Most sensitive for early changes — Rosemont criteria (parenchymal + ductal features)", "Pancreatic function tests: Fecal elastase-1 (<200 μg/g = exocrine insufficiency, <100 = severe). 72-hr fecal fat (>7g/day = steatorrhea)", "ERCP: Therapeutic only (stricture dilation, stone extraction, stenting) — Cambridge classification"],
+    labs: ["Fecal elastase-1: <200 μg/g diagnostic of exocrine insufficiency", "HbA1c, fasting glucose: Diabetes screening", "Fat-soluble vitamins: A, D, E, K (malabsorption)", "Serum IgG4: >2× ULN suggests autoimmune pancreatitis type 1", "Nutritional markers: Albumin, prealbumin, magnesium, zinc", "CA 19-9: If mass lesion — exclude pancreatic carcinoma (difficult to distinguish from chronic pancreatitis)", "Genetic testing: PRSS1, SPINK1, CFTR (if early-onset, family history, no alcohol)"],
+    treatment: {
+      lifestyle: "Absolute alcohol and smoking cessation (both independently drive progression). Small, frequent, low-fat meals. Supplementation of fat-soluble vitamins (A, D, E, K).",
+      medical: "Pain management: WHO stepladder — paracetamol → NSAIDs → tramadol → low-dose opioids. Pregabalin as adjunct (proven in RCT). Pancreatic enzyme replacement therapy (PERT): Lipase 40,000–50,000 IU with meals, 25,000 with snacks (enteric-coated microspheres). Titrate by steatorrhea response. Add PPI if suboptimal response (acid degrades enzymes). Diabetes: Insulin (metformin may be used initially if residual function). Autoimmune pancreatitis: Prednisolone 40mg × 4 wks then taper; relapse — azathioprine maintenance.",
+      surgical: "Pain refractory to medical therapy: Frey procedure (local head resection + lateral pancreaticojejunostomy) for large duct disease with head mass. Beger procedure (duodenum-preserving head resection). Whipple (pancreaticoduodenectomy) if malignancy cannot be excluded. Total pancreatectomy with islet autotransplantation (TPIAT) — for small duct disease, intractable pain. Endoscopic: ESWL + ERCP for pancreatic duct stones. Celiac plexus block (EUS-guided) for pain."
+    },
+    complications: ["Pancreatic exocrine insufficiency → steatorrhea, fat-soluble vitamin deficiency, osteoporosis", "Diabetes mellitus type 3c (brittle, hypoglycemia-prone — reduced glucagon AND insulin)", "Pseudocyst formation", "Pancreatic duct stones", "Common bile duct stricture → obstructive jaundice", "Duodenal stenosis", "Splenic vein thrombosis → left-sided portal hypertension → gastric varices", "Pancreatic cancer: 5–15× increased risk; surveillance in hereditary pancreatitis (PRSS1) — annual MRI/EUS from age 40"],
+    keyPearls: ["Triad of chronic pancreatitis: Pancreatic calcifications + steatorrhea + diabetes", "Fecal elastase-1 <100 μg/g = severe exocrine insufficiency — initiate PERT immediately", "PERT dosing: Lipase units, not total enzyme — 40,000–50,000 IU lipase per main meal", "Autoimmune pancreatitis type 1 (IgG4-related): 'Sausage-shaped pancreas' on imaging, dramatic steroid response, associated with IgG4-related sclerosing cholangitis"]
+  }
+];
+
+// Render logic
+const container = document.getElementById('diseaseContainer');
+const searchInput = document.getElementById('searchInput');
+const noResults = document.getElementById('noResults');
+let currentCategory = 'all';
+
+function renderDiseases(filter = '', category = 'all') {
+  const filtered = diseases.filter(d => {
+    const catMatch = category === 'all' || d.category === category;
+    if (!filter) return catMatch;
+    const q = filter.toLowerCase();
+    const searchable = [d.name, d.definition, d.category, d.icd10, ...d.symptoms, ...(d.keyPearls||[])].join(' ').toLowerCase();
+    return catMatch && searchable.includes(q);
+  });
+
+  container.innerHTML = '';
+  noResults.classList.toggle('hidden', filtered.length > 0);
+
+  filtered.forEach((d, i) => {
+    const card = document.createElement('div');
+    card.className = 'disease-card fade-in bg-slate-900 border border-slate-800 rounded-xl overflow-hidden';
+    card.style.animationDelay = `${i * 0.05}s`;
+
+    const severityClass = `severity-${d.severity}`;
+    const categoryLabels = { upper: 'Upper GI', lower: 'Lower GI', hepatobiliary: 'Hepatobiliary', pancreatic: 'Pancreatic', functional: 'Functional' };
+
+    card.innerHTML = `
+      <div class="p-4 sm:p-6">
+        <div class="flex flex-wrap items-start gap-3 mb-3">
+          <span class="text-2xl">${d.emoji}</span>
+          <div class="flex-1 min-w-0">
+            <h2 class="font-heading text-lg sm:text-xl font-700 text-white leading-snug">${d.name}</h2>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="tag bg-slate-800 text-slate-300">${d.icd10}</span>
+              <span class="tag bg-cyan-900/40 text-cyan-300">${categoryLabels[d.category]}</span>
+              <span class="tag ${severityClass}">${d.severity}</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">${d.definition}</p>
+
+        ${buildSection('Epidemiology', 'activity', d.epidemiology)}
+        ${buildSection('Pathophysiology', 'flask-conical', d.pathophysiology)}
+        ${buildListSection('Clinical Features', 'stethoscope', d.symptoms)}
+        ${buildListSection('Diagnosis & Imaging', 'scan', d.diagnosis)}
+        ${buildListSection('Laboratory Investigations', 'test-tubes', d.labs)}
+        ${buildTreatmentSection(d.treatment)}
+        ${buildListSection('Complications', 'alert-triangle', d.complications)}
+        ${buildListSection('Clinical Pearls 💡', 'lightbulb', d.keyPearls)}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+function buildSection(title, icon, text) {
+  if (!text) return '';
+  return `<details class="mb-2 border border-slate-800 rounded-lg">
+    <summary class="flex items-center gap-2 p-3 text-sm font-semibold text-emerald-300 hover:bg-slate-800/50 rounded-lg transition-colors">
+      <i data-lucide="${icon}" style="width:16px;height:16px;" class="text-emerald-400 shrink-0"></i>
+      <span class="flex-1">${title}</span>
+      <i data-lucide="chevron-down" style="width:14px;height:14px;" class="chevron-icon text-slate-500 shrink-0"></i>
+    </summary>
+    <div class="px-3 pb-3 text-slate-400 text-sm leading-relaxed">${text}</div>
+  </details>`;
+}
+
+function buildListSection(title, icon, items) {
+  if (!items || !items.length) return '';
+  return `<details class="mb-2 border border-slate-800 rounded-lg">
+    <summary class="flex items-center gap-2 p-3 text-sm font-semibold text-emerald-300 hover:bg-slate-800/50 rounded-lg transition-colors">
+      <i data-lucide="${icon}" style="width:16px;height:16px;" class="text-emerald-400 shrink-0"></i>
+      <span class="flex-1">${title}</span>
+      <span class="text-xs text-slate-500 font-normal">${items.length} items</span>
+      <i data-lucide="chevron-down" style="width:14px;height:14px;" class="chevron-icon text-slate-500 shrink-0"></i>
+    </summary>
+    <ul class="px-3 pb-3 space-y-1.5">
+      ${items.map(item => `<li class="text-slate-400 text-sm leading-relaxed flex gap-2"><span class="text-emerald-500 mt-1 shrink-0">•</span><span>${item}</span></li>`).join('')}
+    </ul>
+  </details>`;
+}
+
+function buildTreatmentSection(tx) {
+  if (!tx) return '';
+  return `<details class="mb-2 border border-slate-800 rounded-lg">
+    <summary class="flex items-center gap-2 p-3 text-sm font-semibold text-emerald-300 hover:bg-slate-800/50 rounded-lg transition-colors">
+      <i data-lucide="pill" style="width:16px;height:16px;" class="text-emerald-400 shrink-0"></i>
+      <span class="flex-1">Management & Treatment</span>
+      <i data-lucide="chevron-down" style="width:14px;height:14px;" class="chevron-icon text-slate-500 shrink-0"></i>
+    </summary>
+    <div class="px-3 pb-3 space-y-3">
+      ${tx.lifestyle ? `<div><h4 class="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-1">Lifestyle & Conservative</h4><p class="text-slate-400 text-sm leading-relaxed">${tx.lifestyle}</p></div>` : ''}
+      ${tx.medical ? `<div><h4 class="text-xs font-bold text-amber-300 uppercase tracking-wider mb-1">Medical / Pharmacological</h4><p class="text-slate-400 text-sm leading-relaxed">${tx.medical}</p></div>` : ''}
+      ${tx.surgical ? `<div><h4 class="text-xs font-bold text-rose-300 uppercase tracking-wider mb-1">Surgical / Interventional</h4><p class="text-slate-400 text-sm leading-relaxed">${tx.surgical}</p></div>` : ''}
+    </div>
+  </details>`;
+}
+
+function filterCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    const isActive = btn.dataset.cat === cat;
+    btn.className = `cat-btn whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold border transition-all ${isActive ? 'active bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-slate-800 text-slate-400 border-slate-700 hover:border-slate-600'}`;
+  });
+  renderDiseases(searchInput.value, cat);
+}
+
+searchInput.addEventListener('input', (e) => {
+  renderDiseases(e.target.value, currentCategory);
+});
+
+// Init
+renderDiseases();
+
+// Element SDK
+const defaultConfig = {
+  main_title: 'Gastroenterology Disease Reference',
+  subtitle: 'Clinical Guide for Medical Professionals — Evidence-based pathophysiology, diagnostics, and management protocols',
+  background_color: '#0f172a',
+  surface_color: '#0f172a',
+  text_color: '#e2e8f0',
+  accent_color: '#34d399',
+  secondary_accent: '#22d3ee'
+};
+
+</script>
+</body>
+</html>
