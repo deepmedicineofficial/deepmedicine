@@ -1,0 +1,530 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Suturing | Wound Closure Techniques | Deep Medicine</title> <meta name="description" content="Guide to suturing including wound closure techniques, suture types, knot tying, indications, and complications."> <link rel="canonical" href="https://deepmedicine.in/learning/procedures/suturing"> <!-- Open Graph --> <meta property="og:title" content="Suturing | Deep Medicine"> <meta property="og:description" content="Wound closure techniques with suture types, knot tying, and clinical applications."> <meta property="og:image" content="https://deepmedicine.in/images/suturing.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
+  .font-heading { font-family: 'DM Serif Display', serif; }
+  .font-body { font-family: 'Outfit', sans-serif; }
+
+  .tab-active { border-bottom: 3px solid; }
+
+  .card-enter { animation: cardIn 0.5s ease both; }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-bg {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  }
+
+  .suture-svg { transition: all 0.3s ease; }
+  .suture-svg:hover { transform: scale(1.05); filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
+
+  .step-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+
+  details summary { cursor: pointer; list-style: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .chevron-icon { transform: rotate(180deg); }
+  .chevron-icon { transition: transform 0.3s ease; }
+
+  .needle-types-grid svg { max-width: 100%; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: #4a6670; border-radius: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body">
+  <div id="app" class="h-full w-full overflow-auto" style="background:#0f1a20; color:#e0eaef;"><!-- Hero -->
+   <header class="hero-bg py-16 px-6 text-center relative overflow-hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 80%, rgba(78,205,196,0.12) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,107,0.08) 0%, transparent 50%);"></div>
+    <div class="relative z-10 max-w-3xl mx-auto">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium mb-6" style="background:rgba(78,205,196,0.15);color:#4ecdc4;"><i data-lucide="stethoscope" style="width:14px;height:14px;"></i> MBBS / MD Clinical Reference
+     </div>
+     <h1 id="mainTitle" class="font-heading text-4xl md:text-5xl lg:text-6xl mb-4" style="color:#f0f6f8;">Surgical Suturing</h1>
+     <p id="subtitle" class="text-lg md:text-xl font-light max-w-2xl mx-auto" style="color:#8ba8b5;">A Comprehensive Clinical Reference for Medical Students, Residents &amp; Surgeons</p>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="sticky top-0 z-30 border-b" style="background:#12222a;border-color:#1e3a45;">
+    <div class="max-w-6xl mx-auto flex overflow-x-auto gap-1 px-4" id="tabBar"><button onclick="showTab('overview')" data-tab="overview" class="tab-btn tab-active px-4 py-3 text-sm font-medium whitespace-nowrap" style="border-color:#4ecdc4;color:#4ecdc4;">Overview</button> <button onclick="showTab('types')" data-tab="types" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="color:#6b8e9b;">Suture Types</button> <button onclick="showTab('techniques')" data-tab="techniques" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="color:#6b8e9b;">Techniques</button> <button onclick="showTab('needles')" data-tab="needles" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="color:#6b8e9b;">Needles</button> <button onclick="showTab('knots')" data-tab="knots" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="color:#6b8e9b;">Knots</button> <button onclick="showTab('clinical')" data-tab="clinical" class="tab-btn px-4 py-3 text-sm font-medium whitespace-nowrap" style="color:#6b8e9b;">Clinical Pearls</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-6xl mx-auto px-4 py-8" id="content"><!-- OVERVIEW TAB -->
+    <section id="tab-overview" class="tab-content space-y-8">
+     <div class="grid md:grid-cols-2 gap-6">
+      <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+       <h2 class="font-heading text-2xl mb-4" style="color:#4ecdc4;">What is Suturing?</h2>
+       <p class="leading-relaxed" style="color:#8ba8b5;">Suturing is the art and science of <strong style="color:#e0eaef;">approximating wound edges</strong> using needle and thread to facilitate healing by primary intention. It is the most common method of wound closure in surgery.</p>
+       <div class="mt-4 p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm font-medium mb-2" style="color:#e0eaef;">Key Objectives:</p>
+        <ul class="space-y-2 text-sm" style="color:#8ba8b5;">
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:#4ecdc4;flex-shrink:0;margin-top:2px;"></i> Hemostasis — stop bleeding</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:#4ecdc4;flex-shrink:0;margin-top:2px;"></i> Wound edge eversion &amp; approximation</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:#4ecdc4;flex-shrink:0;margin-top:2px;"></i> Minimize dead space</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:#4ecdc4;flex-shrink:0;margin-top:2px;"></i> Support tissue during healing</li>
+         <li class="flex items-start gap-2"><i data-lucide="check-circle" style="width:16px;height:16px;color:#4ecdc4;flex-shrink:0;margin-top:2px;"></i> Optimal cosmetic outcome</li>
+        </ul>
+       </div>
+      </div>
+      <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:0.1s;">
+       <h2 class="font-heading text-2xl mb-4" style="color:#4ecdc4;">Wound Healing Phases</h2>
+       <div class="space-y-4">
+        <div class="flex gap-4 items-start">
+         <div class="step-dot" style="background:#4ecdc4;color:#0f1a20;">
+          1
+         </div>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">Hemostasis (0–48 hrs)</p>
+          <p class="text-sm" style="color:#8ba8b5;">Platelet plug → fibrin clot → vasoconstriction</p>
+         </div>
+        </div>
+        <div class="flex gap-4 items-start">
+         <div class="step-dot" style="background:#ff6b6b;color:#fff;">
+          2
+         </div>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">Inflammation (1–6 days)</p>
+          <p class="text-sm" style="color:#8ba8b5;">Neutrophils → Macrophages → debridement &amp; cytokine release</p>
+         </div>
+        </div>
+        <div class="flex gap-4 items-start">
+         <div class="step-dot" style="background:#ffd93d;color:#0f1a20;">
+          3
+         </div>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">Proliferation (4–21 days)</p>
+          <p class="text-sm" style="color:#8ba8b5;">Fibroblasts → Collagen deposition → Angiogenesis → Granulation tissue</p>
+         </div>
+        </div>
+        <div class="flex gap-4 items-start">
+         <div class="step-dot" style="background:#6c5ce7;color:#fff;">
+          4
+         </div>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">Remodeling (21 days – 1 year)</p>
+          <p class="text-sm" style="color:#8ba8b5;">Type III → Type I collagen. Max tensile strength ~80% of original at ~12 weeks</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Principles -->
+     <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:0.2s;">
+      <h2 class="font-heading text-2xl mb-4" style="color:#4ecdc4;">Halsted's Principles of Surgery</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+       <div class="p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">1.</strong> Gentle handling of tissues</p>
+       </div>
+       <div class="p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">2.</strong> Meticulous hemostasis</p>
+       </div>
+       <div class="p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">3.</strong> Preservation of blood supply</p>
+       </div>
+       <div class="p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">4.</strong> Aseptic technique</p>
+       </div>
+       <div class="p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">5.</strong> No tension on tissues</p>
+       </div>
+       <div class="p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">6.</strong> Accurate tissue apposition</p>
+       </div>
+       <div class="p-4 rounded-xl" style="background:#0f1a20;">
+        <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">7.</strong> Obliteration of dead space</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- SUTURE TYPES TAB -->
+    <section id="tab-types" class="tab-content hidden space-y-8">
+     <div class="grid md:grid-cols-2 gap-6"><!-- Absorbable -->
+      <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#4ecdc4;">
+         <i data-lucide="clock" style="width:20px;height:20px;color:#0f1a20;"></i>
+        </div>
+        <h2 class="font-heading text-2xl" style="color:#4ecdc4;">Absorbable Sutures</h2>
+       </div>
+       <p class="text-sm mb-4" style="color:#8ba8b5;">Broken down by enzymatic degradation (natural) or hydrolysis (synthetic). No removal needed.</p>
+       <div class="space-y-3" id="absorbableList"><!-- Filled by JS -->
+       </div>
+      </div><!-- Non-Absorbable -->
+      <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:0.1s;">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#ff6b6b;">
+         <i data-lucide="shield" style="width:20px;height:20px;color:#fff;"></i>
+        </div>
+        <h2 class="font-heading text-2xl" style="color:#ff6b6b;">Non-Absorbable Sutures</h2>
+       </div>
+       <p class="text-sm mb-4" style="color:#8ba8b5;">Permanent. Must be removed or remain indefinitely (e.g., deep fascial closure).</p>
+       <div class="space-y-3" id="nonAbsorbableList"><!-- Filled by JS -->
+       </div>
+      </div>
+     </div><!-- Size Chart -->
+     <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:0.2s;">
+      <h2 class="font-heading text-2xl mb-4" style="color:#4ecdc4;">Suture Size Guide (USP)</h2>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm" style="color:#8ba8b5;">
+        <thead>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <th class="text-left py-3 px-3 font-semibold" style="color:#e0eaef;">Size</th>
+          <th class="text-left py-3 px-3 font-semibold" style="color:#e0eaef;">Diameter (mm)</th>
+          <th class="text-left py-3 px-3 font-semibold" style="color:#e0eaef;">Common Use</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2.5 px-3 font-mono" style="color:#4ecdc4;">6-0</td>
+          <td class="py-2.5 px-3">0.07</td>
+          <td class="py-2.5 px-3">Face, eyelids, microsurgery</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2.5 px-3 font-mono" style="color:#4ecdc4;">5-0</td>
+          <td class="py-2.5 px-3">0.1</td>
+          <td class="py-2.5 px-3">Face, hand, pediatric</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2.5 px-3 font-mono" style="color:#4ecdc4;">4-0</td>
+          <td class="py-2.5 px-3">0.15</td>
+          <td class="py-2.5 px-3">Skin (extremities), subcuticular</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2.5 px-3 font-mono" style="color:#4ecdc4;">3-0</td>
+          <td class="py-2.5 px-3">0.2</td>
+          <td class="py-2.5 px-3">Skin, scalp, trunk</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2.5 px-3 font-mono" style="color:#4ecdc4;">2-0</td>
+          <td class="py-2.5 px-3">0.3</td>
+          <td class="py-2.5 px-3">Deep tissue, fascia</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2.5 px-3 font-mono" style="color:#4ecdc4;">0</td>
+          <td class="py-2.5 px-3">0.35</td>
+          <td class="py-2.5 px-3">Fascia, abdominal wall</td>
+         </tr>
+         <tr>
+          <td class="py-2.5 px-3 font-mono" style="color:#4ecdc4;">1, 2</td>
+          <td class="py-2.5 px-3">0.4–0.5</td>
+          <td class="py-2.5 px-3">Ortho, large vessel, sternum</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <p class="text-xs mt-3 italic" style="color:#5a7a87;">Rule: More zeros = thinner suture. "5-0" is thinner than "3-0".</p>
+     </div>
+    </section><!-- TECHNIQUES TAB -->
+    <section id="tab-techniques" class="tab-content hidden space-y-6">
+     <div id="techniqueCards"></div>
+    </section><!-- NEEDLES TAB -->
+    <section id="tab-needles" class="tab-content hidden space-y-8">
+     <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+      <h2 class="font-heading text-2xl mb-2" style="color:#4ecdc4;">Needle Anatomy</h2>
+      <p class="text-sm mb-5" style="color:#8ba8b5;">Every surgical needle has three parts: <strong style="color:#e0eaef;">Point</strong>, <strong style="color:#e0eaef;">Body</strong>, and <strong style="color:#e0eaef;">Swage</strong> (where suture attaches).</p><!-- Visual needle SVG -->
+      <div class="flex justify-center mb-6">
+       <svg viewbox="0 0 400 120" width="400" class="suture-svg" style="max-width:100%;"><path d="M50,60 Q100,10 200,30 Q300,50 350,60" fill="none" stroke="#4ecdc4" stroke-width="3" /> <circle cx="50" cy="60" r="6" fill="#ff6b6b" /> <text x="30" y="90" fill="#ff6b6b" font-size="12" font-family="Outfit">
+         Point
+        </text> <rect x="170" y="25" width="60" height="12" rx="3" fill="none" stroke="#ffd93d" stroke-width="1.5" stroke-dasharray="4" /> <text x="175" y="55" fill="#ffd93d" font-size="12" font-family="Outfit">
+         Body
+        </text> <circle cx="350" cy="60" r="6" fill="#6c5ce7" /> <text x="330" y="90" fill="#6c5ce7" font-size="12" font-family="Outfit">
+         Swage
+        </text>
+       </svg>
+      </div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-6"><!-- Point Types -->
+      <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+       <h3 class="font-heading text-xl mb-4" style="color:#ffd93d;">Needle Point Types</h3>
+       <div class="space-y-4">
+        <div class="p-4 rounded-xl" style="background:#0f1a20;">
+         <p class="font-semibold mb-1" style="color:#e0eaef;">🔺 Cutting Needle</p>
+         <p class="text-sm" style="color:#8ba8b5;">Triangular cross-section with cutting edge on <strong>inner concavity</strong>. Use: skin, tough tissue.</p>
+        </div>
+        <div class="p-4 rounded-xl" style="background:#0f1a20;">
+         <p class="font-semibold mb-1" style="color:#e0eaef;">🔻 Reverse Cutting</p>
+         <p class="text-sm" style="color:#8ba8b5;">Cutting edge on <strong>outer convexity</strong>. Reduces risk of suture pulling through. <em>Most commonly used for skin.</em></p>
+        </div>
+        <div class="p-4 rounded-xl" style="background:#0f1a20;">
+         <p class="font-semibold mb-1" style="color:#e0eaef;">⚫ Round Body (Taper)</p>
+         <p class="text-sm" style="color:#8ba8b5;">Pierces &amp; spreads tissue without cutting. Use: bowel, peritoneum, fascia, muscle, vessels.</p>
+        </div>
+        <div class="p-4 rounded-xl" style="background:#0f1a20;">
+         <p class="font-semibold mb-1" style="color:#e0eaef;">💠 Blunt Point</p>
+         <p class="text-sm" style="color:#8ba8b5;">Dissects friable tissue. Reduces needle-stick injuries. Use: liver, kidney, fascia closure.</p>
+        </div>
+       </div>
+      </div><!-- Curvature -->
+      <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:0.1s;">
+       <h3 class="font-heading text-xl mb-4" style="color:#ffd93d;">Needle Curvature</h3>
+       <div class="space-y-4">
+        <div class="p-4 rounded-xl flex items-center gap-4" style="background:#0f1a20;">
+         <svg viewbox="0 0 60 60" width="48" height="48">
+          <path d="M10,50 Q10,10 50,10" fill="none" stroke="#4ecdc4" stroke-width="3" stroke-linecap="round" />
+         </svg>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">¼ Circle</p>
+          <p class="text-sm" style="color:#8ba8b5;">Ophthalmic, microsurgery</p>
+         </div>
+        </div>
+        <div class="p-4 rounded-xl flex items-center gap-4" style="background:#0f1a20;">
+         <svg viewbox="0 0 60 60" width="48" height="48">
+          <path d="M5,55 Q5,5 55,5" fill="none" stroke="#4ecdc4" stroke-width="3" stroke-linecap="round" />
+         </svg>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">⅜ Circle</p>
+          <p class="text-sm" style="color:#8ba8b5;">Most common. Skin, subcutaneous, muscle</p>
+         </div>
+        </div>
+        <div class="p-4 rounded-xl flex items-center gap-4" style="background:#0f1a20;">
+         <svg viewbox="0 0 60 60" width="48" height="48">
+          <path d="M5,50 A30,30 0 0,1 55,50" fill="none" stroke="#4ecdc4" stroke-width="3" stroke-linecap="round" />
+         </svg>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">½ Circle</p>
+          <p class="text-sm" style="color:#8ba8b5;">Deep cavities (pelvis, abdomen), oral cavity</p>
+         </div>
+        </div>
+        <div class="p-4 rounded-xl flex items-center gap-4" style="background:#0f1a20;">
+         <svg viewbox="0 0 60 60" width="48" height="48">
+          <line x1="5" y1="30" x2="55" y2="30" stroke="#4ecdc4" stroke-width="3" stroke-linecap="round" />
+         </svg>
+         <div>
+          <p class="font-semibold" style="color:#e0eaef;">Straight (Keith)</p>
+          <p class="text-sm" style="color:#8ba8b5;">Skin (hand-held), GI tract</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- KNOTS TAB -->
+    <section id="tab-knots" class="tab-content hidden space-y-6">
+     <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+      <h2 class="font-heading text-2xl mb-2" style="color:#4ecdc4;">Surgical Knot Tying</h2>
+      <p class="text-sm mb-5" style="color:#8ba8b5;">A good knot is secure, flat (low profile), and uses the minimum throws necessary. An insecure knot is the #1 cause of wound dehiscence from suturing error.</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-5">
+      <div class="rounded-2xl p-5 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+       <h3 class="font-heading text-lg mb-3" style="color:#ff6b6b;">Square Knot</h3>
+       <div class="flex justify-center mb-3">
+        <svg viewbox="0 0 120 80" width="120" class="suture-svg"><path d="M10,40 C30,10 50,10 60,40 C70,70 90,70 110,40" fill="none" stroke="#ff6b6b" stroke-width="3" /> <path d="M10,40 C30,70 50,70 60,40 C70,10 90,10 110,40" fill="none" stroke="#4ecdc4" stroke-width="3" />
+        </svg>
+       </div>
+       <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">Most reliable.</strong> Two throws in opposite directions (right-over-left, then left-over-right). Minimum 3 throws for synthetics.</p>
+      </div>
+      <div class="rounded-2xl p-5 card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:0.1s;">
+       <h3 class="font-heading text-lg mb-3" style="color:#ffd93d;">Surgeon's Knot</h3>
+       <div class="flex justify-center mb-3">
+        <svg viewbox="0 0 120 80" width="120" class="suture-svg"><path d="M10,40 C25,5 45,5 55,35 C58,45 62,45 65,35 C75,5 95,5 110,40" fill="none" stroke="#ffd93d" stroke-width="3" /> <path d="M10,40 C25,75 45,75 60,40 C75,5 95,75 110,40" fill="none" stroke="#4ecdc4" stroke-width="3" />
+        </svg>
+       </div>
+       <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#e0eaef;">Double throw first.</strong> Extra friction in first throw prevents slippage while second throw secures. Ideal for vessel ligation &amp; under-tension closures.</p>
+      </div>
+      <div class="rounded-2xl p-5 card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:0.2s;">
+       <h3 class="font-heading text-lg mb-3" style="color:#6c5ce7;">Granny Knot ⚠️</h3>
+       <div class="flex justify-center mb-3">
+        <svg viewbox="0 0 120 80" width="120" class="suture-svg"><path d="M10,40 C30,10 50,10 60,40 C70,70 90,70 110,40" fill="none" stroke="#6c5ce7" stroke-width="3" /> <path d="M10,45 C30,15 50,15 60,45 C70,75 90,75 110,45" fill="none" stroke="#6c5ce7" stroke-width="3" stroke-dasharray="4" />
+        </svg>
+       </div>
+       <p class="text-sm" style="color:#8ba8b5;"><strong style="color:#ff6b6b;">AVOID!</strong> Throws in the same direction. Slips easily and unties. This is the most common beginner mistake.</p>
+      </div>
+     </div>
+     <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+      <h3 class="font-heading text-xl mb-4" style="color:#4ecdc4;">Throws Required by Material</h3>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm" style="color:#8ba8b5;">
+        <thead>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <th class="text-left py-2 px-3 font-semibold" style="color:#e0eaef;">Material</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color:#e0eaef;">Min Throws</th>
+          <th class="text-left py-2 px-3 font-semibold" style="color:#e0eaef;">Reason</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2 px-3">Silk</td>
+          <td class="py-2 px-3" style="color:#4ecdc4;">3</td>
+          <td class="py-2 px-3">High friction coefficient</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2 px-3">Nylon (Ethilon)</td>
+          <td class="py-2 px-3" style="color:#ffd93d;">4–5</td>
+          <td class="py-2 px-3">Memory, low friction</td>
+         </tr>
+         <tr style="border-bottom:1px solid #1e3a45;">
+          <td class="py-2 px-3">Polypropylene (Prolene)</td>
+          <td class="py-2 px-3" style="color:#ff6b6b;">5–6</td>
+          <td class="py-2 px-3">Very low friction, high memory</td>
+         </tr>
+         <tr>
+          <td class="py-2 px-3">PDS / Monocryl</td>
+          <td class="py-2 px-3" style="color:#ffd93d;">4</td>
+          <td class="py-2 px-3">Monofilament, moderate friction</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- CLINICAL PEARLS TAB -->
+    <section id="tab-clinical" class="tab-content hidden space-y-6">
+     <div class="rounded-2xl p-6 card-enter" style="background:#162a33;border:1px solid #1e3a45;">
+      <h2 class="font-heading text-2xl mb-2" style="color:#4ecdc4;">Clinical Pearls &amp; High-Yield Points</h2>
+      <p class="text-sm" style="color:#8ba8b5;">Essential knowledge for exams and clinical practice.</p>
+     </div>
+     <div id="clinicalAccordion" class="space-y-3"></div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="text-center py-8 px-4 border-t" style="border-color:#1e3a45;color:#5a7a87;">
+    <p class="text-sm">Surgical Suturing — Comprehensive Clinical Reference</p>
+    <p class="text-xs mt-1">For educational purposes. Always follow institutional protocols.</p>
+   </footer>
+  </div>
+  <script>
+// === DATA ===
+const absorbableSutures = [
+  { name: "Plain Catgut", origin: "Natural (bovine/ovine intestine)", absorption: "70 days", strength: "7–10 days", use: "Rarely used now. GI mucosa, episiotomy", color: "#ff6b6b" },
+  { name: "Chromic Catgut", origin: "Natural (chromium salt treated)", absorption: "90 days", strength: "10–21 days", use: "Oral mucosa, cervical cerclage", color: "#ff8e6b" },
+  { name: "Vicryl (Polyglactin 910)", origin: "Synthetic, braided", absorption: "56–70 days", strength: "21 days (65%)", use: "Most versatile. Subcutaneous, peritoneum, bowel serosa", color: "#6c5ce7" },
+  { name: "Vicryl Rapide", origin: "Synthetic, irradiated", absorption: "42 days", strength: "10 days", use: "Skin (face, peds) — no removal needed", color: "#a855f7" },
+  { name: "Monocryl (Poliglecaprone)", origin: "Synthetic, monofilament", absorption: "90–120 days", strength: "7–14 days", use: "Subcuticular skin closure, peds", color: "#4ecdc4" },
+  { name: "PDS II (Polydioxanone)", origin: "Synthetic, monofilament", absorption: "180–210 days", strength: "42 days (70%)", use: "Fascia (mass closure), slow-healing tissues, tendon", color: "#3b82f6" },
+];
+
+const nonAbsorbableSutures = [
+  { name: "Silk", type: "Natural, braided", pros: "Excellent handling, easy tying", cons: "Intense tissue reaction, wicks bacteria", use: "Vessel ligation, bowel (temporary)", color: "#e0eaef" },
+  { name: "Nylon (Ethilon)", type: "Synthetic, monofilament", pros: "Low tissue reaction, elastic", cons: "Memory, needs more throws", use: "Skin closure (most common), microsurgery", color: "#3b82f6" },
+  { name: "Prolene (Polypropylene)", type: "Synthetic, monofilament", pros: "Inert, slides through tissue, no infection risk", cons: "Very high memory, difficult handling", use: "Vascular anastomosis, running subcuticular, hernia mesh fixation", color: "#4ecdc4" },
+  { name: "Ethibond (Polyester)", type: "Synthetic, braided", pros: "High tensile strength, minimal stretch", cons: "Wicking potential", use: "Cardiac valve surgery, tendon repair", color: "#ffd93d" },
+  { name: "Steel Wire", type: "Metal, monofilament", pros: "Strongest, inert", cons: "Difficult handling, tissue cutting", use: "Sternotomy, ortho cerclage", color: "#8ba8b5" },
+];
+
+const techniques = [
+  { name: "Simple Interrupted", difficulty: "Beginner", desc: "Most basic and versatile. Each stitch is independent — if one fails, others hold.", steps: ["Enter 3–5mm from wound edge at 90°", "Pass needle through dermis following curvature", "Exit equidistant on opposite side", "Tie square knot with 3–5 throws", "Cut tails to 3–5mm"], indications: "Universal — skin, mucosa, fascia. Ideal when wound tension varies.", pearls: "Evert wound edges by entering deep and exiting superficial (bottle-shaped bite).", color: "#4ecdc4" },
+  { name: "Simple Continuous (Running)", difficulty: "Beginner", desc: "Fast closure with evenly distributed tension. Single thread runs the entire wound length.", steps: ["Place first simple interrupted stitch, don't cut", "Continue same-direction bites along wound", "Each bite mirrors the first (same depth, spacing)", "Lock final loop, tie to last loop"], indications: "Long, low-tension wounds. Peritoneum, fascia, subcuticular.", pearls: "Do NOT use in contaminated wounds — if suture breaks, entire line opens.", color: "#3b82f6" },
+  { name: "Vertical Mattress", difficulty: "Intermediate", desc: "Excellent eversion. A 'far-far, near-near' bite pattern that apposes all tissue layers.", steps: ["Far bite: Enter 8–10mm from edge, pass deep", "Exit 8–10mm on other side", "Near bite: Backhand 2–3mm from edge, shallow", "Exit 2–3mm on starting side", "Tie knot"], indications: "Thick skin (back, scalp), areas prone to inversion, high-tension wounds.", pearls: "Produces best eversion of all suture techniques. Use when wound edges want to invert.", color: "#ff6b6b" },
+  { name: "Horizontal Mattress", difficulty: "Intermediate", desc: "Distributes tension over a wider area. Two parallel bites across the wound.", steps: ["Enter 8–10mm from edge, exit other side", "Move 8mm along wound", "Re-enter and cross back to starting side", "Tie knot (bolster optional)"], indications: "High-tension areas (joints, fascia), friable skin (elderly), calcaneal/plantar wounds.", pearls: "Can cause ischemia if too tight. Use bolsters (rubber tubing) to prevent tissue necrosis.", color: "#ffd93d" },
+  { name: "Subcuticular (Intradermal)", difficulty: "Advanced", desc: "Running horizontal bites within the dermis. No suture marks visible — best cosmesis.", steps: ["Anchor at one end (buried knot or adhesive)", "Horizontal dermal bites alternating sides", "Bites parallel to skin surface, within dermis", "Maintain equal depth and spacing", "Anchor at far end, remove in 10–14 days or use absorbable"], indications: "Face, neck, anywhere cosmesis is priority.", pearls: "Use Monocryl 4-0 or 5-0 for absorbable version (no removal needed).", color: "#6c5ce7" },
+  { name: "Figure-of-Eight", difficulty: "Intermediate", desc: "Creates an '8' pattern. Provides excellent hemostasis and tissue approximation in a single stitch.", steps: ["Enter one side, pass deep across wound", "Exit and cross back at an angle", "Creates an X pattern over the wound", "Tie knot securely"], indications: "Fascial closure, bleeding vessel ligation, chest tube site, bone tendon attachment.", pearls: "Essentially two half-hitches combined. Very hemostatic.", color: "#f97316" },
+  { name: "Purse-String Suture", difficulty: "Advanced", desc: "A circular running stitch that cinches closed like a drawstring bag.", steps: ["Start with buried knot at 12 o'clock", "Place running bites circumferentially", "Return to starting point", "Pull to cinch closed, tie knot"], indications: "Appendiceal stump inversion, stoma creation, round defects, catheter sites.", pearls: "Commonly used for burying the appendiceal stump into the cecum.", color: "#ec4899" },
+];
+
+const clinicalPearls = [
+  { q: "When should sutures be removed?", a: "<strong>Face:</strong> 3–5 days<br><strong>Scalp:</strong> 7–10 days<br><strong>Trunk/Extremity:</strong> 7–10 days<br><strong>Joints (over):</strong> 10–14 days<br><strong>Foot/Sole:</strong> 10–14 days<br><br>Early removal on face prevents suture marks (railroad tracks)." },
+  { q: "What is the 'rule of halves' for suture placement?", a: "Place the first suture at the midpoint of the wound. Then bisect each half. This ensures even spacing and optimal tension distribution. Used in all wound closures." },
+  { q: "Absorbable vs Non-absorbable: When to choose?", a: "<strong>Absorbable:</strong> Internal structures (fascia, peritoneum, subcutaneous), mucosal surfaces, pediatric skin (avoids removal trauma).<br><br><strong>Non-absorbable:</strong> Skin (external, for removal), vascular anastomosis (permanent), tendon/ligament repair, mesh fixation." },
+  { q: "Monofilament vs Braided: Key differences?", a: "<strong>Monofilament:</strong> Single strand. Less tissue drag, less infection risk (no interstices for bacteria), more memory, harder to handle.<br><em>Examples: Prolene, Ethilon, PDS, Monocryl</em><br><br><strong>Braided:</strong> Multiple strands woven. Excellent handling, less memory, BUT higher infection risk (wicking effect).<br><em>Examples: Vicryl, Silk, Ethibond</em><br><br><strong>Rule:</strong> Never use braided sutures in contaminated wounds." },
+  { q: "What is mass closure technique?", a: "Closing all layers of the abdominal wall (except skin) in a single layer using a <strong>continuous PDS loop (size 1)</strong>.<br><br><strong>Jenkins Rule:</strong> Suture length to wound length ratio ≥ 4:1.<br>Bites: 1cm from edge, 1cm apart.<br><br>This is the current gold standard for abdominal fascial closure (midline laparotomy)." },
+  { q: "High-yield exam facts", a: "• <strong>Strongest natural suture:</strong> Silk<br>• <strong>Strongest synthetic absorbable:</strong> PDS<br>• <strong>Least tissue reaction:</strong> Polypropylene (Prolene)<br>• <strong>Most tissue reaction:</strong> Plain Catgut<br>• <strong>Best suture for vascular:</strong> Prolene (inert, smooth, permanent)<br>• <strong>Suture that degrades by hydrolysis:</strong> All synthetic absorbables<br>• <strong>Suture that degrades by enzymatic action:</strong> Catgut (natural)<br>• <strong>Suture with highest memory:</strong> Polypropylene<br>• <strong>Best handling suture:</strong> Silk" },
+  { q: "Complications of suturing", a: "• <strong>Infection:</strong> More common with braided sutures<br>• <strong>Dehiscence:</strong> Wound opening (poor knot, tension, infection)<br>• <strong>Hematoma/Seroma:</strong> Dead space not obliterated<br>• <strong>Suture marks (railroad):</strong> Sutures left too long or too tight<br>• <strong>Granuloma:</strong> Foreign body reaction (especially catgut/silk)<br>• <strong>Needle-stick injury:</strong> Use blunt needles when possible<br>• <strong>Tissue necrosis:</strong> Sutures too tight, strangulating tissue" },
+];
+
+// === RENDER FUNCTIONS ===
+function renderSutureCard(s, isAbsorbable) {
+  return `<div class="p-4 rounded-xl" style="background:#0f1a20;border-left:3px solid ${s.color};">
+    <p class="font-semibold mb-1" style="color:${s.color};">${s.name}</p>
+    <p class="text-xs mb-2" style="color:#5a7a87;">${isAbsorbable ? s.origin : s.type}</p>
+    ${isAbsorbable ? `<div class="flex flex-wrap gap-3 text-xs mb-2">
+      <span style="color:#8ba8b5;">⏱ Absorption: <strong style="color:#e0eaef;">${s.absorption}</strong></span>
+      <span style="color:#8ba8b5;">💪 Strength: <strong style="color:#e0eaef;">${s.strength}</strong></span>
+    </div>` : `<p class="text-xs mb-2" style="color:#8ba8b5;">✅ ${s.pros}<br>⚠️ ${s.cons}</p>`}
+    <p class="text-sm" style="color:#8ba8b5;">📌 ${s.use}</p>
+  </div>`;
+}
+
+function renderTechniques() {
+  const container = document.getElementById('techniqueCards');
+  container.innerHTML = techniques.map((t, i) => `
+    <div class="rounded-2xl p-6 card-enter mb-5" style="background:#162a33;border:1px solid #1e3a45;border-left:4px solid ${t.color};animation-delay:${i*0.08}s;">
+      <div class="flex flex-wrap items-center gap-3 mb-3">
+        <h3 class="font-heading text-xl" style="color:${t.color};">${t.name}</h3>
+        <span class="text-xs px-2 py-0.5 rounded-full" style="background:${t.color}22;color:${t.color};">${t.difficulty}</span>
+      </div>
+      <p class="text-sm mb-4" style="color:#8ba8b5;">${t.desc}</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <p class="text-xs font-semibold mb-2" style="color:#e0eaef;">STEPS:</p>
+          <ol class="space-y-1.5">
+            ${t.steps.map((s, j) => `<li class="flex items-start gap-2 text-sm" style="color:#8ba8b5;"><span class="font-mono text-xs font-bold" style="color:${t.color};">${j+1}</span>${s}</li>`).join('')}
+          </ol>
+        </div>
+        <div>
+          <p class="text-xs font-semibold mb-2" style="color:#e0eaef;">INDICATIONS:</p>
+          <p class="text-sm mb-3" style="color:#8ba8b5;">${t.indications}</p>
+          <p class="text-xs font-semibold mb-2" style="color:#ffd93d;">💡 PEARL:</p>
+          <p class="text-sm" style="color:#8ba8b5;">${t.pearls}</p>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderClinicalPearls() {
+  const container = document.getElementById('clinicalAccordion');
+  container.innerHTML = clinicalPearls.map((p, i) => `
+    <details class="rounded-2xl card-enter" style="background:#162a33;border:1px solid #1e3a45;animation-delay:${i*0.06}s;">
+      <summary class="flex items-center justify-between p-5 font-medium" style="color:#e0eaef;">
+        <span>${p.q}</span>
+        <i data-lucide="chevron-down" class="chevron-icon" style="width:18px;height:18px;color:#4ecdc4;flex-shrink:0;"></i>
+      </summary>
+      <div class="px-5 pb-5 text-sm leading-relaxed" style="color:#8ba8b5;">${p.a}</div>
+    </details>
+  `).join('');
+  lucide.createIcons();
+}
+
+// === TAB LOGIC ===
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+  document.getElementById('tab-' + id).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.dataset.tab === id) {
+      b.classList.add('tab-active');
+      b.style.color = '#4ecdc4';
+      b.style.borderColor = '#4ecdc4';
+    } else {
+      b.classList.remove('tab-active');
+      b.style.color = '#6b8e9b';
+    }
+  });
+}
+
+// === INIT ===
+document.getElementById('absorbableList').innerHTML = absorbableSutures.map(s => renderSutureCard(s, true)).join('');
+document.getElementById('nonAbsorbableList').innerHTML = nonAbsorbableSutures.map(s => renderSutureCard(s, false)).join('');
+renderTechniques();
+renderClinicalPearls();
+lucide.createIcons();
+
+// === ELEMENT SDK ===
+const defaultConfig = {
+  main_title: "Surgical Suturing",
+  subtitle: "A Comprehensive Clinical Reference for Medical Students, Residents & Surgeons",
+  background_color: "#0f1a20",
+  surface_color: "#162a33",
+  text_color: "#e0eaef",
+  accent_color: "#4ecdc4",
+  secondary_accent: "#ff6b6b",
+  font_family: "DM Serif Display",
+  font_size: 16,
+};
+
+function applyConfig(config) {
+  const t = (k) => config[k] || defaultConfig[k];
+  document.getElementById('mainTitle').textContent = t('main_title');
+  document.getElementById('subtitle').textContent = t('subtitle');
+
+  const app = document.getElementById('app');
+  app.style.background = t('background_color');
+  app.style.color = t('text_color');
+
+  const font = t('font_family');
+  document.querySelectorAll('.font-heading').forEach(el => el.style.fontFamily = `${font}, serif`);
+
+  const size = t('font_size');
+  document.getElementById('mainTitle').style.fontSize = `${size * 3}px`;
+  document.getElementById('subtitle').style.fontSize = `${size * 1.2}px`;
+}
+
+</script>
+</body>
+</html>
