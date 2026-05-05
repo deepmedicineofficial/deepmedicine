@@ -1,0 +1,980 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Biomarkers & Cardiac Enzymes | Cardiac Injury Markers | Deep Medicine</title> <meta name="description" content="Comprehensive guide to cardiac biomarkers including troponin, CK-MB, BNP, and their role in diagnosing myocardial infarction and cardiac disease."> <link rel="canonical" href="https://deepmedicine.in/clinical/diagnostics/cardiac-biomarkers"> <!-- Open Graph --> <meta property="og:title" content="Biomarkers & Cardiac Enzymes | Deep Medicine"> <meta property="og:description" content="Cardiac biomarkers for diagnosis of myocardial infarction and heart failure."> <meta property="og:image" content="https://deepmedicine.in/images/cardiac-biomarkers.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['DM Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .biomarker-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .biomarker-card:hover { transform: translateY(-2px); }
+    .tab-active { background: #1e293b; color: #f8fafc; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .interpretation-table th { position: sticky; top: 0; z-index: 2; }
+    details summary { cursor: pointer; }
+    details[open] summary .chevron { transform: rotate(180deg); }
+    .chevron { transition: transform 0.2s; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body">
+  <div id="app" class="h-full w-full overflow-auto bg-slate-950 text-slate-200"><!-- Header -->
+   <header class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-slate-700/50 px-4 py-6 md:px-8">
+    <div class="max-w-7xl mx-auto">
+     <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center"><i data-lucide="activity" class="w-5 h-5 text-emerald-400"></i>
+      </div><span class="text-xs font-medium text-emerald-400 uppercase tracking-wider">Clinical Reference</span>
+     </div>
+     <h1 id="pageTitle" class="font-heading text-2xl md:text-4xl text-white mb-2">🧬 Biomarkers &amp; Cardiac Enzymes</h1>
+     <p class="text-slate-400 text-sm md:text-base max-w-2xl">Comprehensive clinical guide — When to order, how to interpret, and critical decision-making in ICU/Emergency settings.</p>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="sticky top-0 z-10 bg-slate-900/95 backdrop-blur border-b border-slate-700/50 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex gap-1 overflow-x-auto py-2" id="tabNav"><button onclick="showSection('troponin')" class="tab-btn tab-active px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap transition-all">Troponin</button> <button onclick="showSection('bnp')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">BNP/NT-proBNP</button> <button onclick="showSection('ddimer')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">D-Dimer</button> <button onclick="showSection('procalcitonin')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">Procalcitonin</button> <button onclick="showSection('ck')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">CK/CK-MB</button> <button onclick="showSection('lactate')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">Lactate</button> <button onclick="showSection('crp')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">CRP/hs-CRP</button> <button onclick="showSection('ldh')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">LDH</button> <button onclick="showSection('ferritin')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">Ferritin</button> <button onclick="showSection('myoglobin')" class="tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap text-slate-400 hover:text-white transition-all">Myoglobin</button>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-7xl mx-auto px-4 md:px-8 py-6 space-y-6"><!-- TROPONIN -->
+    <section id="sec-troponin" class="fade-in space-y-4">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-red-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="heart" class="w-6 h-6 text-red-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">Cardiac Troponin (cTnI / cTnT)</h2>
+        <p class="text-slate-400 text-sm mt-1">Gold standard biomarker for myocardial injury</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 What It Is</h3>
+        <p class="text-slate-300 text-sm leading-relaxed">Structural proteins (Troponin I &amp; T) of the cardiac sarcomere. Released into blood when cardiomyocytes are damaged/necrosed. High-sensitivity assays (hs-cTn) detect levels at nanogram/Liter (ng/L) concentrations.</p>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">⏱️ Kinetics</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• <strong>Rise:</strong> 2–4 hrs post-injury (hs-cTn: 1–3 hrs)</li>
+         <li>• <strong>Peak:</strong> 12–24 hrs (cTnI), 12–48 hrs (cTnT)</li>
+         <li>• <strong>Duration:</strong> cTnI: 5–10 days; cTnT: 10–14 days</li>
+         <li>• <strong>Serial testing:</strong> 0/1hr or 0/3hr protocol (ESC)</li>
+        </ul>
+       </div>
+      </div><!-- When to Order -->
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3"><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>🔬 When to Order</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 text-sm text-slate-300 space-y-2">
+        <p><strong class="text-amber-400">Absolute Indications:</strong></p>
+        <ul class="list-disc ml-5 space-y-1">
+         <li>Suspected ACS (chest pain, dyspnea, diaphoresis)</li>
+         <li>ECG changes — ST elevation/depression, new LBBB, T-wave inversions</li>
+         <li>Hemodynamic instability with suspected cardiac etiology</li>
+         <li>Post-cardiac arrest / ROSC</li>
+         <li>Acute heart failure (to differentiate ACS from decompensation)</li>
+         <li>Post-PCI or CABG (periprocedural MI detection)</li>
+         <li>Pulmonary embolism (risk stratification)</li>
+         <li>Myocarditis / Takotsubo suspicion</li>
+        </ul>
+        <p class="mt-3"><strong class="text-amber-400">ICU Indications:</strong></p>
+        <ul class="list-disc ml-5 space-y-1">
+         <li>Type 2 MI (demand ischemia in sepsis, anemia, tachycardia)</li>
+         <li>Septic cardiomyopathy assessment</li>
+         <li>Prognostication in critically ill patients</li>
+         <li>Cardiotoxicity monitoring (chemotherapy)</li>
+        </ul>
+       </div>
+      </details><!-- Interpretation -->
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3" open><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>📊 Interpretation &amp; Reference Values</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 overflow-x-auto">
+        <table class="interpretation-table w-full text-xs md:text-sm">
+         <thead>
+          <tr class="bg-slate-800 text-left">
+           <th class="p-2 rounded-tl-lg text-emerald-400 font-medium">Level (hs-cTnI)</th>
+           <th class="p-2 text-emerald-400 font-medium">Interpretation</th>
+           <th class="p-2 rounded-tr-lg text-emerald-400 font-medium">Clinical Action</th>
+          </tr>
+         </thead>
+         <tbody class="text-slate-300">
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-green-400">&lt;5 ng/L</td>
+           <td class="p-2">Normal — MI essentially ruled out</td>
+           <td class="p-2">NPV &gt;99%. Consider discharge (if low HEART score)</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-yellow-400">5–99th %ile</td>
+           <td class="p-2">Mildly elevated — observe trend</td>
+           <td class="p-2">Repeat at 1–3 hrs. Rising/falling pattern key</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-orange-400">&gt;99th %ile</td>
+           <td class="p-2">Elevated — myocardial injury confirmed</td>
+           <td class="p-2">Determine Type 1 vs Type 2 MI vs non-ischemic</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-red-400">&gt;5× ULN + Δ&gt;20%</td>
+           <td class="p-2">Acute MI (with rise/fall pattern)</td>
+           <td class="p-2">Urgent cardiology consult, cath lab activation</td>
+          </tr>
+         </tbody>
+        </table>
+        <div class="mt-4 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+         <p class="text-amber-300 text-xs font-semibold mb-1">⚠️ Critical Points:</p>
+         <ul class="text-xs text-slate-300 space-y-1">
+          <li>• <strong>Delta (Δ) change</strong> is more important than absolute value — a rise/fall pattern &gt;20% suggests acute injury</li>
+          <li>• 99th percentile URL is sex-specific (Female: ~16 ng/L, Male: ~34 ng/L for hs-cTnI)</li>
+          <li>• CKD patients have chronically elevated troponin — look for delta change</li>
+          <li>• hs-cTnT may be falsely elevated in skeletal myopathy, CKD (cross-reactivity)</li>
+         </ul>
+        </div>
+       </div>
+      </details><!-- False Positives -->
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3"><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>⚡ Non-ACS Causes of Elevated Troponin</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4">
+        <div class="grid md:grid-cols-2 gap-3 text-xs text-slate-300">
+         <div class="space-y-1">
+          <p class="text-rose-400 font-semibold">Cardiac:</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+           <li>Heart failure (acute/chronic)</li>
+           <li>Myocarditis, Pericarditis</li>
+           <li>Takotsubo cardiomyopathy</li>
+           <li>Cardiac contusion</li>
+           <li>Cardioversion / Ablation</li>
+           <li>Aortic dissection</li>
+           <li>Hypertrophic cardiomyopathy</li>
+          </ul>
+         </div>
+         <div class="space-y-1">
+          <p class="text-rose-400 font-semibold">Non-Cardiac:</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+           <li>Pulmonary embolism</li>
+           <li>Sepsis / Septic shock</li>
+           <li>Renal failure (CKD Stage 4–5)</li>
+           <li>Stroke (SAH, ischemic)</li>
+           <li>Burns (&gt;30% BSA)</li>
+           <li>Rhabdomyolysis (cross-reactivity)</li>
+           <li>Extreme exertion (marathon runners)</li>
+           <li>Cardiotoxic drugs (doxorubicin, 5-FU)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </details><!-- Clinical Pearls -->
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls — ICU/ED</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>0/1hr Algorithm (ESC 2020):</strong> hs-cTnI &lt;5 at 0hr → Rule-out. ≥52 at 0hr or Δ≥6 at 1hr → Rule-in. Others = Observe zone.</li>
+        <li>• <strong>Type 1 vs Type 2 MI:</strong> Type 1 = plaque rupture. Type 2 = supply/demand mismatch (tachycardia, hypotension, anemia). Treatment differs drastically.</li>
+        <li>• <strong>Chronic elevation:</strong> Stable elevated troponin (no delta) in CKD/HF = chronic myocardial injury, NOT indication for catheterization.</li>
+        <li>• <strong>Prognostic value:</strong> Any detectable hs-cTn predicts higher mortality in ICU patients even without ACS.</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- BNP / NT-proBNP -->
+    <section id="sec-bnp" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="droplets" class="w-6 h-6 text-blue-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">BNP / NT-proBNP</h2>
+        <p class="text-slate-400 text-sm mt-1">Natriuretic peptides — Heart failure biomarkers</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Physiology</h3>
+        <p class="text-slate-300 text-sm leading-relaxed">BNP (32 aa) &amp; NT-proBNP (76 aa) are released from ventricular cardiomyocytes in response to <strong>myocardial wall stress</strong> (volume/pressure overload). proBNP (108 aa) is cleaved into active BNP + inactive NT-proBNP.</p>
+        <ul class="text-xs text-slate-400 mt-2 space-y-0.5">
+         <li>• BNP half-life: ~20 min (cleared by NPR-C receptors &amp; neprilysin)</li>
+         <li>• NT-proBNP half-life: ~120 min (renally cleared)</li>
+         <li>• NT-proBNP NOT affected by sacubitril (neprilysin inhibitor)</li>
+        </ul>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 When to Order</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• Acute dyspnea — cardiac vs pulmonary etiology</li>
+         <li>• Suspected acute decompensated heart failure</li>
+         <li>• Monitoring HF treatment response (target &gt;30% reduction)</li>
+         <li>• Prognostication in ACS &amp; PE</li>
+         <li>• Pre-op risk stratification (non-cardiac surgery)</li>
+         <li>• Screening in high-risk populations (Stage B HF)</li>
+        </ul>
+       </div>
+      </div>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3" open><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>📊 Interpretation</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 overflow-x-auto">
+        <table class="interpretation-table w-full text-xs md:text-sm">
+         <thead>
+          <tr class="bg-slate-800 text-left">
+           <th class="p-2 text-blue-400 font-medium">Marker</th>
+           <th class="p-2 text-blue-400 font-medium">HF Unlikely</th>
+           <th class="p-2 text-blue-400 font-medium">Grey Zone</th>
+           <th class="p-2 text-blue-400 font-medium">HF Likely</th>
+          </tr>
+         </thead>
+         <tbody class="text-slate-300">
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-semibold">BNP</td>
+           <td class="p-2 text-green-400">&lt;100 pg/mL</td>
+           <td class="p-2 text-yellow-400">100–400 pg/mL</td>
+           <td class="p-2 text-red-400">&gt;400 pg/mL</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-semibold">NT-proBNP</td>
+           <td class="p-2 text-green-400">&lt;300 pg/mL</td>
+           <td class="p-2 text-yellow-400">300–age cutoff</td>
+           <td class="p-2 text-red-400">Age-based (see below)</td>
+          </tr>
+         </tbody>
+        </table>
+        <div class="mt-3 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+         <p class="text-blue-300 text-xs font-semibold mb-1">NT-proBNP Age-Stratified Cut-offs (Rule-In):</p>
+         <ul class="text-xs text-slate-300 space-y-0.5">
+          <li>• Age &lt;50: &gt;450 pg/mL</li>
+          <li>• Age 50–75: &gt;900 pg/mL</li>
+          <li>• Age &gt;75: &gt;1800 pg/mL</li>
+         </ul>
+        </div>
+       </div>
+      </details>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3"><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>⚠️ Confounders &amp; Pitfalls</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 text-xs text-slate-300">
+        <div class="grid md:grid-cols-2 gap-3">
+         <div>
+          <p class="text-red-400 font-semibold mb-1">↑ False Elevations:</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+           <li>Renal failure (especially NT-proBNP)</li>
+           <li>Atrial fibrillation</li>
+           <li>Pulmonary embolism / PHT</li>
+           <li>Sepsis</li>
+           <li>Advanced age</li>
+           <li>Anemia</li>
+          </ul>
+         </div>
+         <div>
+          <p class="text-green-400 font-semibold mb-1">↓ Falsely Low (Caution!):</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+           <li><strong>Obesity</strong> (BMI &gt;35 — use lower thresholds)</li>
+           <li>Flash pulmonary edema (&lt;2hr onset)</li>
+           <li>Constrictive pericarditis</li>
+           <li>Mitral stenosis (no ventricular stretch)</li>
+           <li>Sacubitril affects BNP (NOT NT-proBNP)</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </details>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>Negative predictive value &gt;98%</strong> — A normal BNP essentially rules out HF</li>
+        <li>• In obese patients: use cut-off of BNP &gt;54 pg/mL or NT-proBNP at 50% of age-adjusted cut-off</li>
+        <li>• On ARNI (sacubitril/valsartan): Monitor NT-proBNP, NOT BNP (sacubitril inhibits BNP degradation)</li>
+        <li>• &gt;30% decline from admission = adequate treatment response (target-guided therapy)</li>
+        <li>• Persistently elevated despite treatment = poor prognosis, consider advanced HF therapies</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- D-DIMER -->
+    <section id="sec-ddimer" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="git-branch" class="w-6 h-6 text-purple-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">D-Dimer</h2>
+        <p class="text-slate-400 text-sm mt-1">Fibrin degradation product — Exclusion marker for VTE</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Physiology</h3>
+        <p class="text-slate-300 text-sm leading-relaxed">D-dimer is a cross-linked fibrin degradation product released when plasmin cleaves fibrin clot. Indicates <strong>activation of both coagulation and fibrinolysis</strong>.</p>
+        <p class="text-xs text-slate-400 mt-2">Half-life: ~8 hrs. Normal: &lt;500 ng/mL (FEU).</p>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 When to Order</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• Suspected PE (after Wells/Geneva score)</li>
+         <li>• Suspected DVT (after Wells criteria)</li>
+         <li>• DIC screening (with PT, aPTT, fibrinogen, platelets)</li>
+         <li>• Aortic dissection (high sensitivity)</li>
+         <li>• Age-adjusted in elderly patients</li>
+        </ul>
+       </div>
+      </div>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3" open><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>📊 Interpretation</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 overflow-x-auto">
+        <table class="interpretation-table w-full text-xs md:text-sm">
+         <thead>
+          <tr class="bg-slate-800 text-left">
+           <th class="p-2 text-purple-400 font-medium">D-Dimer Value</th>
+           <th class="p-2 text-purple-400 font-medium">Interpretation</th>
+           <th class="p-2 text-purple-400 font-medium">Action</th>
+          </tr>
+         </thead>
+         <tbody class="text-slate-300">
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 text-green-400 font-mono">&lt;500 ng/mL (FEU)</td>
+           <td class="p-2">Negative — VTE excluded if low/moderate PTP</td>
+           <td class="p-2">No imaging needed. Sensitivity ~97%</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 text-yellow-400 font-mono">Age-adjusted: Age × 10</td>
+           <td class="p-2">For patients &gt;50 yrs</td>
+           <td class="p-2">Use cut-off = age × 10 ng/mL (e.g., 70yo → 700)</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 text-red-400 font-mono">&gt;500 ng/mL</td>
+           <td class="p-2">Positive — does NOT confirm VTE</td>
+           <td class="p-2">Requires imaging (CTPA for PE, US for DVT)</td>
+          </tr>
+         </tbody>
+        </table>
+        <div class="mt-3 bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+         <p class="text-red-300 text-xs font-semibold">🚨 NEVER use D-dimer to rule out PE/DVT in HIGH pre-test probability patients. Go directly to imaging.</p>
+        </div>
+       </div>
+      </details>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3"><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>⚡ Causes of Elevated D-Dimer (Non-VTE)</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 text-xs text-slate-300">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2"><span class="bg-slate-800 rounded px-2 py-1">Post-surgery</span> <span class="bg-slate-800 rounded px-2 py-1">Pregnancy</span> <span class="bg-slate-800 rounded px-2 py-1">Malignancy</span> <span class="bg-slate-800 rounded px-2 py-1">Sepsis/Infection</span> <span class="bg-slate-800 rounded px-2 py-1">Trauma</span> <span class="bg-slate-800 rounded px-2 py-1">DIC</span> <span class="bg-slate-800 rounded px-2 py-1">Liver disease</span> <span class="bg-slate-800 rounded px-2 py-1">Atrial fibrillation</span> <span class="bg-slate-800 rounded px-2 py-1">Age &gt;50</span> <span class="bg-slate-800 rounded px-2 py-1">Hospitalization</span> <span class="bg-slate-800 rounded px-2 py-1">Aortic dissection</span> <span class="bg-slate-800 rounded px-2 py-1">COVID-19</span>
+        </div>
+       </div>
+      </details>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>Rule-out only:</strong> High sensitivity (~97%), low specificity (~40%). A negative D-dimer rules OUT VTE; a positive one does NOT rule IN.</li>
+        <li>• <strong>Age-adjusted cut-off</strong> (&gt;50 yrs): Age × 10 ng/mL FEU — reduces unnecessary CT scans by ~30%</li>
+        <li>• <strong>YEARS algorithm:</strong> If no YEARS items + D-dimer &lt;1000 → PE excluded (even more conservative approach)</li>
+        <li>• <strong>DIC score (ISTH):</strong> D-dimer is one of 4 components (with platelets, PT, fibrinogen). Moderate increase = 2 points, strong increase = 3 points.</li>
+        <li>• <strong>Aortic dissection:</strong> D-dimer &gt;500 has 97% sensitivity for acute dissection — useful as a rule-out tool (ADD-RS score)</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- PROCALCITONIN -->
+    <section id="sec-procalcitonin" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="thermometer" class="w-6 h-6 text-orange-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">Procalcitonin (PCT)</h2>
+        <p class="text-slate-400 text-sm mt-1">Bacterial infection biomarker — Antibiotic stewardship tool</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Physiology</h3>
+        <p class="text-slate-300 text-sm leading-relaxed">Precursor of calcitonin, normally produced by thyroid C-cells. In bacterial infection, <strong>extra-thyroidal production</strong> (liver, lung, kidney, fat, muscle) is induced by TNF-α, IL-6, and bacterial endotoxins (LPS).</p>
+        <ul class="text-xs text-slate-400 mt-2 space-y-0.5">
+         <li>• Rise: 2–4 hrs after infection onset</li>
+         <li>• Peak: 12–24 hrs</li>
+         <li>• Half-life: 24–30 hrs</li>
+         <li>• Normal: &lt;0.05 ng/mL</li>
+        </ul>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 When to Order</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• Differentiating bacterial vs viral infection</li>
+         <li>• Sepsis diagnosis &amp; severity assessment</li>
+         <li>• Guiding antibiotic initiation (LRTI)</li>
+         <li>• <strong>Antibiotic de-escalation/discontinuation</strong> in ICU</li>
+         <li>• Monitoring treatment response in sepsis</li>
+         <li>• CAP — initiate vs withhold antibiotics</li>
+        </ul>
+       </div>
+      </div>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3" open><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>📊 Interpretation &amp; Antibiotic Guidance</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 overflow-x-auto">
+        <table class="interpretation-table w-full text-xs md:text-sm">
+         <thead>
+          <tr class="bg-slate-800 text-left">
+           <th class="p-2 text-orange-400 font-medium">PCT Level</th>
+           <th class="p-2 text-orange-400 font-medium">Interpretation</th>
+           <th class="p-2 text-orange-400 font-medium">Antibiotic Decision</th>
+          </tr>
+         </thead>
+         <tbody class="text-slate-300">
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-green-400">&lt;0.1 ng/mL</td>
+           <td class="p-2">Bacterial infection very unlikely</td>
+           <td class="p-2"><strong>Strongly discourage</strong> antibiotics</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-yellow-400">0.1–0.25 ng/mL</td>
+           <td class="p-2">Bacterial infection unlikely</td>
+           <td class="p-2"><strong>Discourage</strong> antibiotics (re-evaluate)</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-orange-400">0.25–0.5 ng/mL</td>
+           <td class="p-2">Possible bacterial infection</td>
+           <td class="p-2"><strong>Consider</strong> antibiotics (clinical correlation)</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-red-400">0.5–2.0 ng/mL</td>
+           <td class="p-2">Likely bacterial — possible sepsis</td>
+           <td class="p-2"><strong>Strongly encourage</strong> antibiotics</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-red-500">&gt;2.0 ng/mL</td>
+           <td class="p-2">Severe bacterial infection / sepsis</td>
+           <td class="p-2"><strong>Mandatory</strong> antibiotics + source control</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 font-mono text-red-600">&gt;10 ng/mL</td>
+           <td class="p-2">Septic shock / overwhelming infection</td>
+           <td class="p-2">Aggressive resuscitation + broad-spectrum</td>
+          </tr>
+         </tbody>
+        </table>
+        <div class="mt-3 bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
+         <p class="text-orange-300 text-xs font-semibold mb-1">📉 De-escalation Rule (ICU):</p>
+         <p class="text-xs text-slate-300">Stop antibiotics when PCT drops &gt;80% from peak OR falls below 0.25–0.5 ng/mL + clinical improvement. This reduces antibiotic duration by 2–3 days without increasing mortality (ProRATA, SAPS trials).</p>
+        </div>
+       </div>
+      </details>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3"><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>⚠️ Limitations &amp; False Elevations</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 text-xs text-slate-300 space-y-2">
+        <p><strong class="text-red-400">Non-infectious causes of elevated PCT:</strong></p>
+        <ul class="list-disc ml-4 space-y-0.5">
+         <li>Major surgery / Trauma / Burns (transient, peaks day 1–2)</li>
+         <li>Cardiogenic shock / Post-cardiac arrest</li>
+         <li>Medullary thyroid carcinoma</li>
+         <li>Severe pancreatitis</li>
+         <li>Neonates (first 48 hrs of life — physiologically elevated)</li>
+         <li>Medications: OKT3, anti-thymocyte globulin, IL-2</li>
+        </ul>
+        <p class="mt-2"><strong class="text-green-400">PCT may be LOW despite true infection:</strong></p>
+        <ul class="list-disc ml-4 space-y-0.5">
+         <li>Localized infections (abscess, empyema) — no systemic response</li>
+         <li>Early infection (&lt;6 hrs from onset)</li>
+         <li>Atypical/intracellular organisms (Mycoplasma, Chlamydia, TB)</li>
+         <li>Subacute bacterial endocarditis</li>
+        </ul>
+       </div>
+      </details>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>PCT &gt; CRP</strong> for bacterial vs viral differentiation (viral infections rarely elevate PCT above 0.5)</li>
+        <li>• <strong>Serial monitoring q48–72h</strong> in ICU is more valuable than single measurement</li>
+        <li>• PCT-guided antibiotic therapy in ICU reduces antibiotic exposure by ~2 days with no mortality difference</li>
+        <li>• In neutropenic fever: PCT &gt;0.5 suggests bacteremia with 80% sensitivity</li>
+        <li>• <strong>NOT reliable for fungal infections</strong> — PCT typically stays low in invasive candidiasis/aspergillosis</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- CK / CK-MB -->
+    <section id="sec-ck" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-yellow-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="zap" class="w-6 h-6 text-yellow-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">CK / CK-MB</h2>
+        <p class="text-slate-400 text-sm mt-1">Creatine Kinase — Muscle damage &amp; reinfarction marker</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Isoforms</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• <strong>CK-MM</strong> (~95%): Skeletal muscle</li>
+         <li>• <strong>CK-MB</strong> (~5%): Cardiac muscle (also some in skeletal)</li>
+         <li>• <strong>CK-BB</strong>: Brain, smooth muscle</li>
+        </ul>
+        <p class="text-xs text-slate-400 mt-2">CK-MB rises 3–8 hrs, peaks 12–24 hrs, normalizes 48–72 hrs. Shorter window than troponin makes it useful for detecting <strong>reinfarction</strong>.</p>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 Clinical Use Today</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• <strong>Reinfarction detection</strong> (within 2 weeks of first MI, when troponin still elevated)</li>
+         <li>• Periprocedural MI (post-PCI/CABG)</li>
+         <li>• Rhabdomyolysis (total CK)</li>
+         <li>• Myositis / Muscular dystrophies</li>
+         <li>• Malignant hyperthermia</li>
+         <li>• Statin-induced myopathy monitoring</li>
+        </ul>
+       </div>
+      </div>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3" open><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>📊 Reference Values</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 overflow-x-auto">
+        <table class="interpretation-table w-full text-xs md:text-sm">
+         <thead>
+          <tr class="bg-slate-800 text-left">
+           <th class="p-2 text-yellow-400 font-medium">Marker</th>
+           <th class="p-2 text-yellow-400 font-medium">Normal</th>
+           <th class="p-2 text-yellow-400 font-medium">Significance</th>
+          </tr>
+         </thead>
+         <tbody class="text-slate-300">
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2">Total CK</td>
+           <td class="p-2">M: 39–308 U/L; F: 26–192 U/L</td>
+           <td class="p-2">Non-specific muscle damage</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2">CK-MB</td>
+           <td class="p-2">&lt;25 U/L (or &lt;5% of total CK)</td>
+           <td class="p-2">Cardiac specificity if CK-MB/CK ratio &gt;5%</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2">CK-MB index</td>
+           <td class="p-2">(CK-MB/Total CK) × 100</td>
+           <td class="p-2">&gt;5% suggests cardiac origin; &lt;5% = skeletal</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2">Rhabdomyolysis</td>
+           <td class="p-2">CK &gt;5× ULN (~1000 U/L)</td>
+           <td class="p-2">AKI risk if CK &gt;5000; dialysis risk &gt;15000</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </details>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>CK-MB is largely obsolete for primary MI diagnosis</strong> — hs-Troponin is superior. But CK-MB retains value for reinfarction timing.</li>
+        <li>• <strong>Rhabdomyolysis:</strong> Aggressive IVF (200–300 mL/hr NS) targeting UOP 200–300 mL/hr. Monitor CK q6–12h until trending down.</li>
+        <li>• Post-PCI: CK-MB &gt;3× ULN = Type 4a MI; Post-CABG: &gt;10× ULN = Type 5 MI</li>
+        <li>• Hypothyroidism can chronically elevate CK (up to 10× normal)</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- LACTATE -->
+    <section id="sec-lactate" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-rose-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="flame" class="w-6 h-6 text-rose-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">Lactate</h2>
+        <p class="text-slate-400 text-sm mt-1">Tissue hypoperfusion marker — Sepsis severity &amp; resuscitation endpoint</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Physiology</h3>
+        <p class="text-slate-300 text-sm leading-relaxed">Product of anaerobic glycolysis. Produced when oxygen delivery is inadequate (Type A) or due to metabolic dysfunction (Type B). Cleared primarily by liver (60%) and kidneys (30%).</p>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 When to Order</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• Sepsis / Septic shock (SSC guidelines q2–4h)</li>
+         <li>• Any shock state assessment</li>
+         <li>• Mesenteric ischemia</li>
+         <li>• Resuscitation adequacy monitoring</li>
+         <li>• DKA (metformin-associated lactic acidosis)</li>
+         <li>• Post-cardiac arrest prognostication</li>
+        </ul>
+       </div>
+      </div>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3" open><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>📊 Interpretation</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 overflow-x-auto">
+        <table class="interpretation-table w-full text-xs md:text-sm">
+         <thead>
+          <tr class="bg-slate-800 text-left">
+           <th class="p-2 text-rose-400 font-medium">Lactate</th>
+           <th class="p-2 text-rose-400 font-medium">Interpretation</th>
+           <th class="p-2 text-rose-400 font-medium">Action</th>
+          </tr>
+         </thead>
+         <tbody class="text-slate-300">
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 text-green-400 font-mono">&lt;2 mmol/L</td>
+           <td class="p-2">Normal</td>
+           <td class="p-2">Adequate perfusion</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 text-yellow-400 font-mono">2–4 mmol/L</td>
+           <td class="p-2">Mild hyperlactatemia — occult hypoperfusion</td>
+           <td class="p-2">Initiate fluid resuscitation. Re-check q2–4h.</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 text-red-400 font-mono">&gt;4 mmol/L</td>
+           <td class="p-2">Severe — defines septic shock (with vasopressors)</td>
+           <td class="p-2">Aggressive resuscitation. Target clearance &gt;20%/2h</td>
+          </tr>
+          <tr class="border-t border-slate-700/30">
+           <td class="p-2 text-red-600 font-mono">&gt;10 mmol/L</td>
+           <td class="p-2">Critical — very high mortality (~80%)</td>
+           <td class="p-2">ICU, consider mesenteric ischemia, ECMO evaluation</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </details>
+      <details class="bg-slate-900/50 rounded-lg border border-slate-700/30 mb-3"><summary class="flex items-center justify-between p-4 font-medium text-sm text-white"> <span>⚡ Type A vs Type B Lactic Acidosis</span> <i data-lucide="chevron-down" class="w-4 h-4 chevron text-slate-400"></i> </summary>
+       <div class="px-4 pb-4 text-xs text-slate-300">
+        <div class="grid md:grid-cols-2 gap-3">
+         <div>
+          <p class="text-red-400 font-semibold mb-1">Type A (Tissue Hypoxia):</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+           <li>Cardiogenic shock</li>
+           <li>Septic shock</li>
+           <li>Hemorrhagic shock</li>
+           <li>Mesenteric ischemia</li>
+           <li>Severe anemia / CO poisoning</li>
+           <li>Cardiac arrest</li>
+          </ul>
+         </div>
+         <div>
+          <p class="text-yellow-400 font-semibold mb-1">Type B (No Hypoxia):</p>
+          <ul class="list-disc ml-4 space-y-0.5">
+           <li>Metformin toxicity</li>
+           <li>Liver failure (impaired clearance)</li>
+           <li>Seizures / Extreme exertion</li>
+           <li>Malignancy (Warburg effect)</li>
+           <li>Thiamine deficiency</li>
+           <li>Epinephrine infusion / β2 agonists</li>
+           <li>Linezolid, NRTIs</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </details>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>Lactate clearance &gt;20% in 2 hrs</strong> = adequate resuscitation (equal to ScvO2 targeting per ANDROMEDA-SHOCK)</li>
+        <li>• <strong>Sepsis-3 definition:</strong> Septic shock = sepsis + vasopressor need + lactate &gt;2 mmol/L despite adequate fluid resuscitation</li>
+        <li>• <strong>Venous vs Arterial:</strong> Venous lactate is acceptable for screening/trending (±0.2–0.3 mmol/L difference)</li>
+        <li>• Tourniquet/fist-clenching during blood draw can falsely elevate lactate — use free-flowing sample</li>
+        <li>• <strong>Lactate-to-albumin ratio &gt;2.96</strong> predicts 28-day mortality in sepsis better than lactate alone</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- CRP / hs-CRP -->
+    <section id="sec-crp" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-cyan-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="shield" class="w-6 h-6 text-cyan-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">CRP / hs-CRP</h2>
+        <p class="text-slate-400 text-sm mt-1">Acute phase reactant — Inflammation &amp; Cardiovascular risk</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Physiology</h3>
+        <p class="text-slate-300 text-sm">Pentraxin produced by hepatocytes in response to IL-6. Non-specific marker of inflammation. Half-life ~19 hrs. Rises within 6–8 hrs of stimulus, peaks at 48 hrs.</p>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📊 Levels</h3>
+        <table class="w-full text-xs text-slate-300">
+         <tbody>
+          <tr>
+           <td class="py-1 text-green-400 font-mono">&lt;3 mg/L</td>
+           <td>Normal (hs-CRP: CV risk low)</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-yellow-400 font-mono">3–10 mg/L</td>
+           <td>Mild inflammation / moderate CV risk</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-orange-400 font-mono">10–100 mg/L</td>
+           <td>Active inflammation / infection</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-red-400 font-mono">&gt;100 mg/L</td>
+           <td>Severe bacterial infection / Sepsis</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-red-600 font-mono">&gt;200 mg/L</td>
+           <td>Burns, severe sepsis, major trauma</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>hs-CRP &lt;1 / 1–3 / &gt;3 mg/L</strong> = low/moderate/high cardiovascular risk (JUPITER trial)</li>
+        <li>• CRP &gt;100 mg/L in bacterial infection has ~80% PPV for bacteremia</li>
+        <li>• CRP rises slower than PCT but stays elevated longer — useful for monitoring treatment response over days</li>
+        <li>• <strong>CRP doesn't rise in SLE flares</strong> (unless serositis/infection) — a rising CRP in SLE patient suggests infection</li>
+        <li>• Obesity, smoking, and HRT chronically elevate hs-CRP by 1–2 mg/L</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- LDH -->
+    <section id="sec-ldh" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-indigo-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="layers" class="w-6 h-6 text-indigo-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">LDH (Lactate Dehydrogenase)</h2>
+        <p class="text-slate-400 text-sm mt-1">Non-specific tissue damage marker — hemolysis, malignancy, PCP</p>
+       </div>
+      </div>
+      <div class="bg-slate-900/60 rounded-lg p-4 mb-4">
+       <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Isoenzymes</h3>
+       <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs text-slate-300">
+        <div class="bg-slate-800 rounded p-2 text-center">
+         <strong>LDH-1</strong><br>
+         Heart, RBC
+        </div>
+        <div class="bg-slate-800 rounded p-2 text-center">
+         <strong>LDH-2</strong><br>
+         RES
+        </div>
+        <div class="bg-slate-800 rounded p-2 text-center">
+         <strong>LDH-3</strong><br>
+         Lung
+        </div>
+        <div class="bg-slate-800 rounded p-2 text-center">
+         <strong>LDH-4</strong><br>
+         Kidney, Pancreas
+        </div>
+        <div class="bg-slate-800 rounded p-2 text-center">
+         <strong>LDH-5</strong><br>
+         Liver, Muscle
+        </div>
+       </div>
+       <p class="text-xs text-slate-400 mt-2">Normal: 140–280 U/L. Non-specific — found in virtually all tissues.</p>
+      </div>
+      <div class="bg-slate-900/60 rounded-lg p-4 mb-4">
+       <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 Key Clinical Uses</h3>
+       <ul class="text-xs text-slate-300 space-y-1">
+        <li>• <strong>Hemolysis:</strong> Elevated LDH + low haptoglobin + elevated indirect bilirubin + reticulocytosis = hemolytic anemia</li>
+        <li>• <strong>TTP/HUS:</strong> LDH markedly elevated (often &gt;1000) + schistocytes + thrombocytopenia</li>
+        <li>• <strong>PJP (Pneumocystis pneumonia):</strong> LDH &gt;500 with bilateral GGO in immunocompromised → suspect PJP</li>
+        <li>• <strong>Lymphoma:</strong> Elevated LDH = high tumor burden, poor prognosis (IPI score component)</li>
+        <li>• <strong>Pleural fluid:</strong> LDH &gt;2/3 upper normal serum = exudate (Light's criteria)</li>
+        <li>• <strong>Testicular cancer:</strong> Tumor marker (with AFP, β-hCG)</li>
+       </ul>
+      </div>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>COVID-19:</strong> LDH &gt;365 U/L associated with 6× higher odds of severe disease and death</li>
+        <li>• <strong>"Flipped" LDH ratio</strong> (LDH-1 &gt; LDH-2): Seen in acute MI and hemolysis</li>
+        <li>• In PJP: LDH elevation correlates with disease severity and predicts treatment response</li>
+        <li>• Hemolyzed blood sample will falsely elevate LDH — always check specimen quality</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- FERRITIN -->
+    <section id="sec-ferritin" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-amber-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="database" class="w-6 h-6 text-amber-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">Ferritin</h2>
+        <p class="text-slate-400 text-sm mt-1">Iron storage protein &amp; acute phase reactant — HLH, Still's, iron overload</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📊 Reference &amp; Thresholds</h3>
+        <table class="w-full text-xs text-slate-300">
+         <tbody>
+          <tr>
+           <td class="py-1 text-red-400 font-mono">&lt;12 ng/mL</td>
+           <td>Iron deficiency (absolute)</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-yellow-400 font-mono">&lt;30 ng/mL</td>
+           <td>Iron deficiency likely (esp. if CKD/HF)</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-green-400 font-mono">30–300 ng/mL</td>
+           <td>Normal range</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-orange-400 font-mono">&gt;500 ng/mL</td>
+           <td>Elevated — iron overload or inflammation</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-red-400 font-mono">&gt;1000 ng/mL</td>
+           <td>Consider HLH, Still's, severe sepsis</td>
+          </tr>
+          <tr>
+           <td class="py-1 text-red-600 font-mono">&gt;10,000 ng/mL</td>
+           <td>HLH highly likely (H-score)</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 Key Uses</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• Iron deficiency anemia diagnosis</li>
+         <li>• HLH / Macrophage activation syndrome</li>
+         <li>• Adult-onset Still's disease (&gt;10,000)</li>
+         <li>• Hemochromatosis monitoring</li>
+         <li>• COVID-19 cytokine storm marker</li>
+         <li>• Iron overload in transfusion-dependent patients</li>
+        </ul>
+       </div>
+      </div>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>Ferritin is an acute phase reactant</strong> — can be normal/elevated even in iron deficiency if inflammation is present. Check TSAT (transferrin saturation) and reticulocyte Hb.</li>
+        <li>• <strong>HLH diagnosis:</strong> Ferritin &gt;10,000 has 90% sensitivity &amp; 96% specificity for HLH in febrile patients</li>
+        <li>• <strong>Iron deficiency in HF:</strong> Ferritin &lt;100 OR Ferritin 100–299 + TSAT &lt;20% = IV iron indicated (FAIR-HF, AFFIRM-AHF)</li>
+        <li>• <strong>Glycosylated ferritin &lt;20%</strong> = pathognomonic for Adult-onset Still's disease</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- MYOGLOBIN -->
+    <section id="sec-myoglobin" class="fade-in space-y-4 hidden">
+     <div class="biomarker-card bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+      <div class="flex items-start gap-4 mb-5">
+       <div class="w-12 h-12 rounded-xl bg-pink-500/15 flex items-center justify-center flex-shrink-0"><i data-lucide="target" class="w-6 h-6 text-pink-400"></i>
+       </div>
+       <div>
+        <h2 class="font-heading text-xl md:text-2xl text-white">Myoglobin</h2>
+        <p class="text-slate-400 text-sm mt-1">Earliest muscle damage marker — Rhabdomyolysis &amp; early MI (historical)</p>
+       </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">📌 Characteristics</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• Small heme protein (17 kDa) — rapidly released</li>
+         <li>• Found in skeletal AND cardiac muscle</li>
+         <li>• Rise: 1–3 hrs post-injury (earliest cardiac marker)</li>
+         <li>• Peak: 6–9 hrs</li>
+         <li>• Normalized: 24–36 hrs (rapid renal clearance)</li>
+         <li>• Normal: &lt;85 ng/mL</li>
+        </ul>
+       </div>
+       <div class="bg-slate-900/60 rounded-lg p-4">
+        <h3 class="text-emerald-400 font-semibold text-sm mb-2">🔬 Clinical Relevance</h3>
+        <ul class="text-slate-300 text-sm space-y-1">
+         <li>• <strong>Rhabdomyolysis:</strong> Causes dark brown urine, nephrotoxic (myoglobin cast nephropathy)</li>
+         <li>• Myoglobin &gt;1000 ng/mL → significant AKI risk</li>
+         <li>• Historical early MI rule-out (replaced by hs-Troponin)</li>
+         <li>• Poor cardiac specificity limits modern use for ACS</li>
+        </ul>
+       </div>
+      </div>
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+       <h4 class="text-emerald-400 font-semibold text-sm mb-2">💎 Clinical Pearls</h4>
+       <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>Largely obsolete for cardiac diagnosis</strong> — hs-Troponin now detects MI within 1 hr</li>
+        <li>• Main use today: <strong>Rhabdomyolysis monitoring</strong> — correlates with AKI risk better than CK for renal toxicity</li>
+        <li>• <strong>Urine myoglobin:</strong> Positive urine "blood" on dipstick with NO RBCs on microscopy = myoglobinuria</li>
+        <li>• Alkalinize urine (target pH &gt;6.5) when myoglobin &gt;1000 to prevent cast formation (controversial but still practiced)</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- Quick Reference Card -->
+    <div class="mt-8 bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 md:p-7">
+     <h3 class="font-heading text-lg text-white mb-4">📋 Quick Comparison — Cardiac Biomarker Kinetics</h3>
+     <div class="overflow-x-auto">
+      <table class="w-full text-xs md:text-sm">
+       <thead>
+        <tr class="bg-slate-900 text-left">
+         <th class="p-2 text-emerald-400">Marker</th>
+         <th class="p-2 text-emerald-400">Rise</th>
+         <th class="p-2 text-emerald-400">Peak</th>
+         <th class="p-2 text-emerald-400">Normal</th>
+         <th class="p-2 text-emerald-400">Best For</th>
+        </tr>
+       </thead>
+       <tbody class="text-slate-300">
+        <tr class="border-t border-slate-700/30">
+         <td class="p-2 font-semibold">hs-Troponin</td>
+         <td class="p-2">1–3 hr</td>
+         <td class="p-2">12–24 hr</td>
+         <td class="p-2">5–14 days</td>
+         <td class="p-2">MI diagnosis (gold standard)</td>
+        </tr>
+        <tr class="border-t border-slate-700/30">
+         <td class="p-2 font-semibold">CK-MB</td>
+         <td class="p-2">3–8 hr</td>
+         <td class="p-2">12–24 hr</td>
+         <td class="p-2">48–72 hr</td>
+         <td class="p-2">Reinfarction detection</td>
+        </tr>
+        <tr class="border-t border-slate-700/30">
+         <td class="p-2 font-semibold">Myoglobin</td>
+         <td class="p-2">1–3 hr</td>
+         <td class="p-2">6–9 hr</td>
+         <td class="p-2">24–36 hr</td>
+         <td class="p-2">Rhabdomyolysis</td>
+        </tr>
+        <tr class="border-t border-slate-700/30">
+         <td class="p-2 font-semibold">BNP</td>
+         <td class="p-2">Hours</td>
+         <td class="p-2">Variable</td>
+         <td class="p-2">With treatment</td>
+         <td class="p-2">Heart failure diagnosis</td>
+        </tr>
+        <tr class="border-t border-slate-700/30">
+         <td class="p-2 font-semibold">D-Dimer</td>
+         <td class="p-2">Immediate</td>
+         <td class="p-2">Variable</td>
+         <td class="p-2">Days</td>
+         <td class="p-2">VTE exclusion</td>
+        </tr>
+        <tr class="border-t border-slate-700/30">
+         <td class="p-2 font-semibold">Procalcitonin</td>
+         <td class="p-2">2–4 hr</td>
+         <td class="p-2">12–24 hr</td>
+         <td class="p-2">T½ 24–30h</td>
+         <td class="p-2">Bacterial sepsis / ABx guidance</td>
+        </tr>
+        <tr class="border-t border-slate-700/30">
+         <td class="p-2 font-semibold">Lactate</td>
+         <td class="p-2">Minutes</td>
+         <td class="p-2">Variable</td>
+         <td class="p-2">With perfusion</td>
+         <td class="p-2">Shock / Resuscitation</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <footer class="text-center py-6 text-xs text-slate-500">
+     <p>📚 References: ESC Guidelines 2023 | Surviving Sepsis Campaign 2021 | Harrison's Principles of Internal Medicine 21st Ed | Braunwald's Heart Disease 12th Ed</p>
+     <p class="mt-1">For clinical decision-making only. Always correlate with clinical context.</p>
+    </footer>
+   </main>
+  </div>
+  <script>
+  // Tab Navigation
+  function showSection(id) {
+    document.querySelectorAll('[id^="sec-"]').forEach(s => s.classList.add('hidden'));
+    document.getElementById('sec-' + id).classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('tab-active');
+      b.classList.add('text-slate-400');
+    });
+    event.currentTarget.classList.add('tab-active');
+    event.currentTarget.classList.remove('text-slate-400');
+  }
+
+  // Element SDK
+  const defaultConfig = {
+    page_title: '🧬 Biomarkers & Cardiac Enzymes',
+    background_color: '#0f172a',
+    surface_color: '#1e293b',
+    text_color: '#e2e8f0',
+    primary_action: '#10b981',
+    secondary_action: '#94a3b8'
+  };
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
