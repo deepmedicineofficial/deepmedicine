@@ -1,0 +1,1067 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Gastrointestinal Bleed | Upper & Lower GI Bleeding Management | Deep Medicine</title> <meta name="description" content="Comprehensive guide to gastrointestinal bleeding including upper and lower GI bleed, resuscitation, diagnosis, and emergency management."> <link rel="canonical" href="https://deepmedicine.in/core/icu/gastrointestinal-bleed"> <!-- Open Graph --> <meta property="og:title" content="Gastrointestinal Bleed | Deep Medicine"> <meta property="og:description" content="Emergency management of upper and lower GI bleeding with stabilization and treatment strategies."> <meta property="og:image" content="https://deepmedicine.in/images/gi-bleed.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['"Source Sans 3"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      }
+    }
+  }
+}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; }
+.app-root { height: 100%; overflow-y: auto; overflow-x: hidden; }
+.section-card { backdrop-filter: blur(12px); }
+.tab-btn.active { background: var(--primary-action); color: #fff; }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.accordion-content.open { max-height: 8000px; }
+.fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
+.pulse-dot { animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.score-highlight { background: linear-gradient(135deg, rgba(220,38,38,0.1), rgba(220,38,38,0.05)); border-left: 3px solid #dc2626; }
+.gradient-border { position: relative; }
+.gradient-border::before { content:''; position:absolute; inset:0; border-radius:inherit; padding:1px; background:linear-gradient(135deg, var(--primary-action), var(--secondary-action)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.3); border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-root" id="appRoot" style="background:#0a0f1a; color:#e2e8f0;"><!-- Hero -->
+   <header id="heroSection" class="relative overflow-hidden" style="background: linear-gradient(170deg, #0a0f1a 0%, #1a1025 40%, #10172a 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #dc2626 0%, transparent 50%), radial-gradient(circle at 80% 20%, #7c3aed 0%, transparent 40%);"></div>
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 fade-in">
+     <div class="flex items-center gap-2 mb-4"><span class="pulse-dot inline-block w-2.5 h-2.5 rounded-full bg-red-500"></span> <span class="font-mono text-xs tracking-widest uppercase" style="color:#dc2626;">Clinical Emergency Reference</span>
+     </div>
+     <h1 id="mainTitle" class="font-heading text-3xl sm:text-5xl lg:text-6xl font-800 leading-tight mb-4" style="color:#f1f5f9;">Gastrointestinal Bleed<br><span style="color:#dc2626;">Diagnosis &amp; Management</span></h1>
+     <p class="font-body text-base sm:text-lg max-w-2xl" style="color:#94a3b8;">A comprehensive, clinically accurate guide from the perspective of a Consultant Nephrologist, Professor of Medicine, ICU Intensivist &amp; Emergency Medicine specialist.</p>
+     <p id="authorLine" class="font-mono text-xs mt-4" style="color:#64748b;">Compiled from Clinical Experience — Evidence-Based Practice</p>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="sticky top-0 z-50" style="background:rgba(10,15,26,0.95); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 overflow-x-auto">
+     <div class="flex gap-1 py-2 min-w-max" id="tabBar"><button class="tab-btn active font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="overview" style="--primary-action:#dc2626;">Overview</button> <button class="tab-btn font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="upper" style="color:#94a3b8;">Upper GI</button> <button class="tab-btn font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="lower" style="color:#94a3b8;">Lower GI</button> <button class="tab-btn font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="scoring" style="color:#94a3b8;">Risk Scores</button> <button class="tab-btn font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="resuscitation" style="color:#94a3b8;">Resuscitation</button> <button class="tab-btn font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="medications" style="color:#94a3b8;">Medications</button> <button class="tab-btn font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="icu" style="color:#94a3b8;">ICU &amp; Renal</button> <button class="tab-btn font-body text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg transition-all" data-tab="algorithm" style="color:#94a3b8;">Algorithm</button>
+     </div>
+    </div>
+   </nav><!-- Content Panels -->
+   <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6"><!-- OVERVIEW -->
+    <section class="tab-content" id="tab-overview">
+     <div class="space-y-6">
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="activity" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Definition &amp; Classification</h2>
+       </div>
+       <p class="font-body leading-relaxed mb-5" style="color:#cbd5e1;">GI bleeding refers to any hemorrhage originating from the gastrointestinal tract, from the oropharynx to the rectum. It is classified anatomically based on the <strong style="color:#f1f5f9;">Ligament of Treitz</strong> — the suspensory ligament of the duodenum at the duodenojejunal junction.</p>
+       <div class="grid sm:grid-cols-2 gap-4">
+        <div class="rounded-xl p-5" style="background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.15);">
+         <h3 class="font-body font-700 text-sm uppercase tracking-wider mb-3" style="color:#dc2626;">Upper GI Bleed (UGIB)</h3>
+         <p class="font-body text-sm" style="color:#cbd5e1;">Proximal to the Ligament of Treitz. Accounts for <strong style="color:#f1f5f9;">~80%</strong> of all GI bleeds. Mortality: 6–10%.</p>
+         <ul class="mt-3 space-y-1.5 font-body text-sm" style="color:#94a3b8;">
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Peptic Ulcer Disease (35–50%)</li>
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Variceal Bleeding (10–20%)</li>
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Mallory-Weiss Tear (5–10%)</li>
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Erosive Gastritis / Esophagitis</li>
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Dieulafoy Lesion</li>
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Angiodysplasia / AVM</li>
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Aortoenteric Fistula (rare, catastrophic)</li>
+          <li class="flex items-start gap-2"><span style="color:#dc2626;">▸</span> Upper GI Malignancy</li>
+         </ul>
+        </div>
+        <div class="rounded-xl p-5" style="background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.15);">
+         <h3 class="font-body font-700 text-sm uppercase tracking-wider mb-3" style="color:#7c3aed;">Lower GI Bleed (LGIB)</h3>
+         <p class="font-body text-sm" style="color:#cbd5e1;">Distal to the Ligament of Treitz. Accounts for <strong style="color:#f1f5f9;">~20%</strong>. Generally lower mortality but can be massive.</p>
+         <ul class="mt-3 space-y-1.5 font-body text-sm" style="color:#94a3b8;">
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Diverticular Bleed (30–40%)</li>
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Angiodysplasia (5–20%)</li>
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Colorectal Neoplasm / Polyps</li>
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Hemorrhoids (most common overall)</li>
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Inflammatory Bowel Disease</li>
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Ischemic Colitis</li>
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Meckel's Diverticulum (young)</li>
+          <li class="flex items-start gap-2"><span style="color:#7c3aed;">▸</span> Rectal Ulcer / Radiation Proctitis</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Clinical Presentation -->
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="stethoscope" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Clinical Presentation — What You See at the Bedside</h2>
+       </div>
+       <div class="overflow-x-auto">
+        <table class="w-full font-body text-sm" style="min-width:500px;">
+         <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+           <th class="text-left py-3 px-3 font-600 uppercase tracking-wider text-xs" style="color:#dc2626;">Feature</th>
+           <th class="text-left py-3 px-3 font-600 uppercase tracking-wider text-xs" style="color:#dc2626;">UGIB</th>
+           <th class="text-left py-3 px-3 font-600 uppercase tracking-wider text-xs" style="color:#7c3aed;">LGIB</th>
+          </tr>
+         </thead>
+         <tbody style="color:#cbd5e1;">
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-3 px-3 font-600" style="color:#f1f5f9;">Hematemesis</td>
+           <td class="py-3 px-3">Present (coffee-ground or frank blood)</td>
+           <td class="py-3 px-3">Absent</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-3 px-3 font-600" style="color:#f1f5f9;">Melena</td>
+           <td class="py-3 px-3">Very common (black tarry stool)</td>
+           <td class="py-3 px-3">Rare (proximal colon only)</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-3 px-3 font-600" style="color:#f1f5f9;">Hematochezia</td>
+           <td class="py-3 px-3">Massive UGIB only (10–15%)</td>
+           <td class="py-3 px-3">Classic presentation</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-3 px-3 font-600" style="color:#f1f5f9;">BUN:Creatinine</td>
+           <td class="py-3 px-3">&gt;30:1 (blood protein absorbed)</td>
+           <td class="py-3 px-3">Normal</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-3 px-3 font-600" style="color:#f1f5f9;">NG Aspirate</td>
+           <td class="py-3 px-3">Bloody or coffee-ground</td>
+           <td class="py-3 px-3">Clear / bilious</td>
+          </tr>
+          <tr>
+           <td class="py-3 px-3 font-600" style="color:#f1f5f9;">Hemodynamics</td>
+           <td class="py-3 px-3">Often unstable early</td>
+           <td class="py-3 px-3">Usually stable initially</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="mt-5 rounded-xl p-4" style="background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.2);">
+        <p class="font-body text-sm font-600" style="color:#eab308;">⚡ Clinical Pearl from ICU Experience</p>
+        <p class="font-body text-sm mt-1" style="color:#cbd5e1;">A patient with <strong>hematochezia + hemodynamic instability</strong> — always rule out massive UGIB first. Up to 15% of apparent LGIB is actually a brisk upper source. Start with upper endoscopy (EGD) before colonoscopy in such cases.</p>
+       </div>
+      </div><!-- Initial Assessment -->
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="clipboard-list" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Initial Assessment — The First 15 Minutes</h2>
+       </div>
+       <div class="space-y-4">
+        <div class="flex gap-3">
+         <div class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-mono font-700 text-sm" style="background:rgba(220,38,38,0.2); color:#dc2626;">
+          A
+         </div>
+         <div>
+          <p class="font-body font-600" style="color:#f1f5f9;">Airway</p>
+          <p class="font-body text-sm" style="color:#94a3b8;">Massive hematemesis → consider intubation for airway protection, especially in encephalopathic cirrhotics. GCS &lt; 8 = intubate.</p>
+         </div>
+        </div>
+        <div class="flex gap-3">
+         <div class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-mono font-700 text-sm" style="background:rgba(220,38,38,0.2); color:#dc2626;">
+          B
+         </div>
+         <div>
+          <p class="font-body font-600" style="color:#f1f5f9;">Breathing</p>
+          <p class="font-body text-sm" style="color:#94a3b8;">High-flow O₂. Watch for aspiration. SpO₂ monitoring. Tachypnea may indicate acidosis from hemorrhagic shock.</p>
+         </div>
+        </div>
+        <div class="flex gap-3">
+         <div class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-mono font-700 text-sm" style="background:rgba(220,38,38,0.2); color:#dc2626;">
+          C
+         </div>
+         <div>
+          <p class="font-body font-600" style="color:#f1f5f9;">Circulation — This Is Where You Save Lives</p>
+          <p class="font-body text-sm" style="color:#94a3b8;"><strong style="color:#f1f5f9;">Two large-bore IV access (16G or 18G) antecubital.</strong> Immediate type &amp; crossmatch. NS/RL bolus. Activate massive transfusion protocol if hemodynamically unstable. Target MAP ≥ 65 mmHg. In variceal bleed, aim for conservative resuscitation — SBP ~90–100 mmHg to avoid rebleed.</p>
+         </div>
+        </div>
+        <div class="flex gap-3">
+         <div class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-mono font-700 text-sm" style="background:rgba(220,38,38,0.2); color:#dc2626;">
+          D
+         </div>
+         <div>
+          <p class="font-body font-600" style="color:#f1f5f9;">Disability</p>
+          <p class="font-body text-sm" style="color:#94a3b8;">Assess GCS. Hepatic encephalopathy in cirrhotics. Syncope and confusion suggest significant hypovolemia (&gt;30% blood volume loss).</p>
+         </div>
+        </div>
+        <div class="flex gap-3">
+         <div class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-mono font-700 text-sm" style="background:rgba(220,38,38,0.2); color:#dc2626;">
+          E
+         </div>
+         <div>
+          <p class="font-body font-600" style="color:#f1f5f9;">Exposure &amp; Examination</p>
+          <p class="font-body text-sm" style="color:#94a3b8;">Stigmata of chronic liver disease (spider nevi, caput medusae, palmar erythema). DRE — melena vs. fresh blood. Abdominal exam for tenderness, distension, peritonism. Skin: pallor, capillary refill &gt;3s, cool peripheries.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Labs -->
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="flask-conical" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Urgent Investigations — Order Immediately</h2>
+       </div>
+       <div class="grid sm:grid-cols-2 gap-3">
+        <div class="rounded-lg p-4" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-xs font-500 mb-2" style="color:#dc2626;">HEMATOLOGY</p>
+         <ul class="font-body text-sm space-y-1" style="color:#cbd5e1;">
+          <li>• CBC with differential (Hb may be <strong>normal</strong> acutely — hemodilution takes 24–72h)</li>
+          <li>• Blood group, Type &amp; Crossmatch (at least 4 units PRBC)</li>
+          <li>• PT/INR, aPTT (coagulopathy workup)</li>
+          <li>• Platelet count</li>
+          <li>• Reticulocyte count</li>
+         </ul>
+        </div>
+        <div class="rounded-lg p-4" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-xs font-500 mb-2" style="color:#dc2626;">BIOCHEMISTRY</p>
+         <ul class="font-body text-sm space-y-1" style="color:#cbd5e1;">
+          <li>• BUN/Creatinine (BUN:Cr &gt;30 = UGIB)</li>
+          <li>• LFT (albumin, bilirubin — liver disease?)</li>
+          <li>• Serum Lactate (perfusion marker)</li>
+          <li>• Electrolytes (K⁺ shifts in renal failure)</li>
+          <li>• ABG / VBG (acidosis, base deficit)</li>
+         </ul>
+        </div>
+        <div class="rounded-lg p-4" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-xs font-500 mb-2" style="color:#7c3aed;">SPECIAL</p>
+         <ul class="font-body text-sm space-y-1" style="color:#cbd5e1;">
+          <li>• ECG (demand ischemia in elderly)</li>
+          <li>• CXR (aspiration, perforation)</li>
+          <li>• Fibrinogen (DIC screen)</li>
+          <li>• Ammonia (if hepatic encephalopathy)</li>
+         </ul>
+        </div>
+        <div class="rounded-lg p-4" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-xs font-500 mb-2" style="color:#7c3aed;">BEDSIDE</p>
+         <ul class="font-body text-sm space-y-1" style="color:#cbd5e1;">
+          <li>• Nasogastric aspirate (if doubt about source)</li>
+          <li>• Digital rectal exam</li>
+          <li>• Point-of-care ultrasound (IVC collapsibility)</li>
+          <li>• Shock Index (HR/SBP) — &gt;1.0 = significant bleed</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- UPPER GI -->
+    <section class="tab-content hidden" id="tab-upper">
+     <div class="space-y-6">
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="arrow-up-circle" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Upper GI Bleed — Detailed Etiology &amp; Management</h2>
+       </div><!-- Accordions for each cause -->
+       <div class="space-y-3" id="upperAccordions">
+        <div class="accordion-item rounded-xl" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between p-4 text-left" onclick="toggleAccordion(this)"> <span class="font-body font-600" style="color:#f1f5f9;">1. Peptic Ulcer Disease (PUD) — Most Common Cause</span> <i data-lucide="chevron-down" style="color:#94a3b8; width:18px; height:18px; transition:transform 0.3s;"></i> </button>
+         <div class="accordion-content px-4 pb-4">
+          <div class="space-y-3 font-body text-sm" style="color:#cbd5e1;">
+           <p><strong style="color:#f1f5f9;">Pathophysiology:</strong> Mucosal erosion through muscularis mucosae, exposing submucosal vessels. H. pylori (60–70%) and NSAIDs (20–25%) are the two dominant etiologies. Dual antiplatelet therapy, corticosteroids, SSRIs, and physiological stress (Curling's/Cushing's ulcers) contribute.</p>
+           <p><strong style="color:#f1f5f9;">Forrest Classification (endoscopic — dictates management):</strong></p>
+           <div class="overflow-x-auto">
+            <table class="w-full text-sm" style="min-width:400px;">
+             <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+               <th class="text-left py-2 px-2" style="color:#dc2626;">Class</th>
+               <th class="text-left py-2 px-2" style="color:#dc2626;">Description</th>
+               <th class="text-left py-2 px-2" style="color:#dc2626;">Rebleed Risk</th>
+              </tr>
+             </thead>
+             <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+               <td class="py-2 px-2 font-600">Ia</td>
+               <td class="py-2 px-2">Spurting hemorrhage</td>
+               <td class="py-2 px-2" style="color:#dc2626;">90%</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+               <td class="py-2 px-2 font-600">Ib</td>
+               <td class="py-2 px-2">Oozing hemorrhage</td>
+               <td class="py-2 px-2" style="color:#dc2626;">50%</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+               <td class="py-2 px-2 font-600">IIa</td>
+               <td class="py-2 px-2">Visible vessel (non-bleeding)</td>
+               <td class="py-2 px-2" style="color:#eab308;">43%</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+               <td class="py-2 px-2 font-600">IIb</td>
+               <td class="py-2 px-2">Adherent clot</td>
+               <td class="py-2 px-2" style="color:#eab308;">22%</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+               <td class="py-2 px-2 font-600">IIc</td>
+               <td class="py-2 px-2">Flat pigmented spot</td>
+               <td class="py-2 px-2" style="color:#22c55e;">10%</td>
+              </tr>
+              <tr>
+               <td class="py-2 px-2 font-600">III</td>
+               <td class="py-2 px-2">Clean base ulcer</td>
+               <td class="py-2 px-2" style="color:#22c55e;">5%</td>
+              </tr>
+             </tbody>
+            </table>
+           </div>
+           <p><strong style="color:#f1f5f9;">Endoscopic Therapy (Forrest Ia, Ib, IIa):</strong></p>
+           <ul class="space-y-1 ml-3">
+            <li>• <strong>Dual therapy recommended:</strong> Epinephrine injection (1:10,000) + thermal coagulation (bipolar/heater probe) or hemoclips</li>
+            <li>• Epinephrine monotherapy is insufficient — always combine with a second modality</li>
+            <li>• Hemospray (TC-325) for diffuse oozing or as a bridge</li>
+            <li>• Over-the-scope clips (OTSC) for large/deep ulcers with refractory bleeding</li>
+           </ul>
+           <p><strong style="color:#f1f5f9;">Post-Endoscopic Care:</strong></p>
+           <ul class="space-y-1 ml-3">
+            <li>• IV PPI: <span class="font-mono" style="color:#7c3aed;">Pantoprazole 80mg bolus → 8mg/hr infusion × 72h</span> (high-risk stigmata)</li>
+            <li>• H. pylori testing (CLO test, histology, stool antigen) — eradicate with triple/quadruple therapy</li>
+            <li>• Repeat endoscopy at 6–8 weeks for gastric ulcers (malignancy rule-out)</li>
+            <li>• Discontinue offending agents (NSAIDs, anticoagulants if safe)</li>
+           </ul>
+           <div class="mt-3 rounded-lg p-3" style="background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.15);">
+            <p class="text-xs font-600" style="color:#eab308;">🩺 Clinical Experience Note</p>
+            <p class="text-xs mt-1">In CKD patients on hemodialysis, PUD is extremely common due to uremic gastropathy + heparin use during dialysis. I routinely maintain PPI prophylaxis and use citrate-based anticoagulation when possible. Platelet dysfunction in uremia compounds the bleeding risk — DDAVP 0.3μg/kg can improve platelet function acutely.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="accordion-item rounded-xl" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between p-4 text-left" onclick="toggleAccordion(this)"> <span class="font-body font-600" style="color:#f1f5f9;">2. Variceal Hemorrhage — The Cirrhotic Emergency</span> <i data-lucide="chevron-down" style="color:#94a3b8; width:18px; height:18px; transition:transform 0.3s;"></i> </button>
+         <div class="accordion-content px-4 pb-4">
+          <div class="space-y-3 font-body text-sm" style="color:#cbd5e1;">
+           <p><strong style="color:#f1f5f9;">Pathophysiology:</strong> Portal hypertension (HVPG &gt;12 mmHg) → portosystemic collaterals → esophageal/gastric varices. Risk of bleed is proportional to variceal size, HVPG, and Child-Pugh score. 6-week mortality: 15–20%.</p>
+           <p><strong style="color:#f1f5f9;">Immediate Management — The Golden Hour:</strong></p>
+           <div class="space-y-2">
+            <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06);">
+             <p class="font-600" style="color:#dc2626;">Step 1: Resuscitation (Conservative)</p>
+             <p class="mt-1">Target Hb 7–8 g/dL. Over-transfusion increases portal pressure and rebleeding risk. Use PRBC with restrictive strategy. Correct INR with FFP only if actively bleeding and INR &gt;1.5. Platelet transfusion if &lt;50,000/μL.</p>
+            </div>
+            <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06);">
+             <p class="font-600" style="color:#dc2626;">Step 2: Vasoactive Drugs — Start BEFORE Endoscopy</p>
+             <p class="mt-1"><span class="font-mono" style="color:#7c3aed;">Octreotide 50μg IV bolus → 50μg/hr infusion × 3–5 days</span><br>
+               OR <span class="font-mono" style="color:#7c3aed;">Terlipressin 2mg IV q4h → taper to 1mg q4h after bleeding controlled</span><br>
+               These reduce splanchnic blood flow and portal pressure. Start immediately on suspicion — do not wait for endoscopy.</p>
+            </div>
+            <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06);">
+             <p class="font-600" style="color:#dc2626;">Step 3: Antibiotic Prophylaxis — Mandatory</p>
+             <p class="mt-1"><span class="font-mono" style="color:#7c3aed;">Ceftriaxone 1g IV daily × 7 days</span> (preferred in advanced cirrhosis)<br>
+               OR Norfloxacin 400mg PO BID. Reduces bacterial translocation, SBP, and mortality by 20%.</p>
+            </div>
+            <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06);">
+             <p class="font-600" style="color:#dc2626;">Step 4: Emergency Endoscopy (within 12h)</p>
+             <p class="mt-1"><strong>Esophageal varices:</strong> Endoscopic Variceal Ligation (EVL/banding) — first-line. 6 bands per session.<br><strong>Gastric varices (GOV2, IGV1):</strong> Cyanoacrylate (glue) injection — EVL is ineffective for fundal varices.<br><strong>If endoscopy fails:</strong> Balloon tamponade (Sengstaken-Blakemore tube) as bridge to TIPS — max 24h, high complication rate.</p>
+            </div>
+            <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06);">
+             <p class="font-600" style="color:#dc2626;">Step 5: Salvage — TIPS</p>
+             <p class="mt-1">Transjugular Intrahepatic Portosystemic Shunt. For refractory/recurrent variceal bleeding despite optimal endoscopic + medical therapy. <strong>Early TIPS</strong> (within 72h) recommended in Child-Pugh C (10–13) or Child-Pugh B with active bleeding at endoscopy.</p>
+            </div>
+           </div>
+           <p><strong style="color:#f1f5f9;">Secondary Prophylaxis:</strong> EVL q2–4 weeks until obliteration + Non-selective beta-blocker (Propranolol 20–40mg BID or Carvedilol 6.25–12.5mg daily). Target HR reduction 25% or resting HR 55–60 bpm.</p>
+           <div class="mt-3 rounded-lg p-3" style="background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.15);">
+            <p class="text-xs font-600" style="color:#eab308;">🩺 Nephrology Crossover — Hepatorenal Syndrome</p>
+            <p class="text-xs mt-1">Always watch for HRS in variceal bleeders. The combination of hypovolemia + splanchnic vasodilation triggers AKI. Terlipressin + albumin is the treatment of choice for HRS-AKI. In my practice, I've seen patients on HD with cirrhosis where timing of dialysis around variceal banding is critical — we delay HD 24h post-banding to avoid heparin-related rebleed.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="accordion-item rounded-xl" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between p-4 text-left" onclick="toggleAccordion(this)"> <span class="font-body font-600" style="color:#f1f5f9;">3. Mallory-Weiss Tear / Esophagitis / Dieulafoy / AVM</span> <i data-lucide="chevron-down" style="color:#94a3b8; width:18px; height:18px; transition:transform 0.3s;"></i> </button>
+         <div class="accordion-content px-4 pb-4">
+          <div class="space-y-3 font-body text-sm" style="color:#cbd5e1;">
+           <p><strong style="color:#f1f5f9;">Mallory-Weiss Tear:</strong> Longitudinal mucosal laceration at GEJ from forceful retching/vomiting. Common in alcoholics, bulimia, severe coughing. 90% stop spontaneously. Endoscopic treatment (clips, epinephrine) for persistent bleeding.</p>
+           <p><strong style="color:#f1f5f9;">Erosive Esophagitis:</strong> Severe GERD, pill esophagitis (bisphosphonates, doxycycline, KCl, iron), infectious (CMV, HSV, Candida in immunocompromised). PPI therapy. Endoscopic hemostasis if actively bleeding.</p>
+           <p><strong style="color:#f1f5f9;">Dieulafoy Lesion:</strong> Aberrant large-caliber submucosal artery (1–3mm) that erodes through mucosa without surrounding ulceration. Can cause massive, intermittent bleeding. Often missed on first endoscopy. Hemoclips or thermal therapy. Can occur anywhere in GI tract — most common in proximal stomach along lesser curvature.</p>
+           <p><strong style="color:#f1f5f9;">Angiodysplasia (AVM):</strong> Dilated, tortuous submucosal vessels. More common in elderly, CKD patients (especially on dialysis), aortic stenosis (Heyde syndrome), and von Willebrand disease. Argon plasma coagulation (APC) is treatment of choice. Recurrence is high.</p>
+           <div class="mt-3 rounded-lg p-3" style="background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.15);">
+            <p class="text-xs font-600" style="color:#eab308;">🩺 Nephrology Note — Angiodysplasia in CKD</p>
+            <p class="text-xs mt-1">GI angiodysplasia is disproportionately common in my dialysis population. Uremic platelet dysfunction (qualitative) + heparin use + angiodysplasia = recurrent GI bleeds. Management: DDAVP, conjugated estrogens (0.6mg/kg/day IV × 5 days for chronic recurrent AVM bleeds), optimized dialysis adequacy, and iron replacement for chronic iron deficiency.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- LOWER GI -->
+    <section class="tab-content hidden" id="tab-lower">
+     <div class="space-y-6">
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(124,58,237,0.15);">
+         <i data-lucide="arrow-down-circle" style="color:#7c3aed; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Lower GI Bleed — Etiology &amp; Approach</h2>
+       </div>
+       <div class="space-y-3" id="lowerAccordions">
+        <div class="accordion-item rounded-xl" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between p-4 text-left" onclick="toggleAccordion(this)"> <span class="font-body font-600" style="color:#f1f5f9;">Diverticular Bleed</span> <i data-lucide="chevron-down" style="color:#94a3b8; width:18px; height:18px; transition:transform 0.3s;"></i> </button>
+         <div class="accordion-content px-4 pb-4">
+          <div class="font-body text-sm" style="color:#cbd5e1;">
+           <p>Most common cause of significant LGIB in adults &gt;60. Arterial bleed from vasa recta eroding into diverticular dome. Typically painless, large-volume, bright red or maroon. Right-sided diverticula bleed more commonly than left (despite left-sided disease being more prevalent). <strong style="color:#f1f5f9;">80% stop spontaneously.</strong> Colonoscopy after rapid prep (4–6L PEG within 4–6h) for diagnosis and hemostasis (epinephrine, clips, APC). CT angiography if ongoing bleeding and colonoscopy not feasible. Angiographic embolization for persistent hemorrhage. Surgery (segmental colectomy) for recurrent/massive bleed failing other modalities.</p>
+          </div>
+         </div>
+        </div>
+        <div class="accordion-item rounded-xl" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between p-4 text-left" onclick="toggleAccordion(this)"> <span class="font-body font-600" style="color:#f1f5f9;">Ischemic Colitis</span> <i data-lucide="chevron-down" style="color:#94a3b8; width:18px; height:18px; transition:transform 0.3s;"></i> </button>
+         <div class="accordion-content px-4 pb-4">
+          <div class="font-body text-sm" style="color:#cbd5e1;">
+           <p>Transient reduction in mesenteric blood flow → mucosal ischemia → bloody diarrhea + crampy abdominal pain (typically left-sided — splenic flexure "watershed" area). Risk factors: elderly, atherosclerosis, AF, hypotension, vasoconstrictors (cocaine, triptans), CKD. CT shows bowel wall thickening and thumbprinting. Colonoscopy shows pale, edematous mucosa with petechial hemorrhage and longitudinal ulcerations. <strong style="color:#f1f5f9;">Most cases are self-limiting</strong> — supportive care with IV fluids, bowel rest, and antibiotics if secondary infection. Surgery for gangrenous colitis (peritoneal signs, pneumatosis, portal venous gas).</p>
+          </div>
+         </div>
+        </div>
+        <div class="accordion-item rounded-xl" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between p-4 text-left" onclick="toggleAccordion(this)"> <span class="font-body font-600" style="color:#f1f5f9;">IBD, Hemorrhoids, Neoplasia &amp; Others</span> <i data-lucide="chevron-down" style="color:#94a3b8; width:18px; height:18px; transition:transform 0.3s;"></i> </button>
+         <div class="accordion-content px-4 pb-4">
+          <div class="font-body text-sm space-y-3" style="color:#cbd5e1;">
+           <p><strong style="color:#f1f5f9;">IBD (Ulcerative Colitis / Crohn's):</strong> Bloody diarrhea + mucus + tenesmus. Chronic but can present with acute severe colitis requiring ICU. IV steroids (Hydrocortisone 100mg QID), rescue therapy (Infliximab/Cyclosporine), and surgical consultation if toxic megacolon.</p>
+           <p><strong style="color:#f1f5f9;">Hemorrhoids:</strong> Most common cause of rectal bleeding overall but rarely significant. Bright red blood on tissue/toilet bowl. Banding, sclerotherapy, or surgical hemorrhoidectomy for refractory cases.</p>
+           <p><strong style="color:#f1f5f9;">Colorectal Cancer:</strong> Occult or overt bleeding, iron deficiency anemia, change in bowel habits, weight loss. Urgent colonoscopy. Any patient &gt;45 with unexplained iron deficiency anemia must have both EGD and colonoscopy.</p>
+           <p><strong style="color:#f1f5f9;">Meckel's Diverticulum:</strong> Painless rectal bleeding in children/young adults. Contains ectopic gastric mucosa → peptic ulceration. Technetium-99m pertechnetate scan (Meckel's scan). Surgical resection.</p>
+          </div>
+         </div>
+        </div>
+        <div class="accordion-item rounded-xl" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);"><button class="accordion-toggle w-full flex items-center justify-between p-4 text-left" onclick="toggleAccordion(this)"> <span class="font-body font-600" style="color:#f1f5f9;">LGIB Diagnostic Algorithm</span> <i data-lucide="chevron-down" style="color:#94a3b8; width:18px; height:18px; transition:transform 0.3s;"></i> </button>
+         <div class="accordion-content px-4 pb-4">
+          <div class="font-body text-sm space-y-2" style="color:#cbd5e1;">
+           <p class="font-600" style="color:#f1f5f9;">Step-wise approach:</p>
+           <ol class="space-y-2 ml-4 list-decimal">
+            <li><strong>Hemodynamically unstable + hematochezia → EGD first</strong> (rule out massive UGIB)</li>
+            <li>Stable patient → Rapid bowel prep → <strong>Colonoscopy within 24h</strong> (urgent colonoscopy)</li>
+            <li>If colonoscopy non-diagnostic + ongoing bleeding → <strong>CT Angiography</strong> (detects &gt;0.3–0.5 mL/min)</li>
+            <li>If CTA positive → <strong>Angiographic embolization</strong> (super-selective)</li>
+            <li>If CTA negative + recurrent → <strong>Tagged RBC scan</strong> (detects &gt;0.1 mL/min, localizes)</li>
+            <li>Obscure bleeding → <strong>Capsule endoscopy</strong> → followed by device-assisted enteroscopy (DAE)</li>
+            <li>Last resort → <strong>Surgical exploration</strong> with intraoperative enteroscopy</li>
+           </ol>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- RISK SCORES -->
+    <section class="tab-content hidden" id="tab-scoring">
+     <div class="space-y-6"><!-- Glasgow-Blatchford -->
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="calculator" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Glasgow-Blatchford Score (GBS)</h2>
+       </div>
+       <p class="font-body text-sm mb-4" style="color:#94a3b8;">Pre-endoscopic risk stratification for UGIB. Used to identify patients who need intervention vs. safe for outpatient management. <strong style="color:#f1f5f9;">GBS = 0 → safe for outpatient management</strong> (can avoid admission). GBS ≥ 6 = high risk.</p>
+       <div id="gbsCalculator" class="space-y-3">
+        <div class="grid sm:grid-cols-2 gap-3">
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;">BUN (mg/dL)</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()"> <option value="0">&lt; 18.2</option><option value="2">18.2 – 22.3</option><option value="3">22.4 – 27.9</option><option value="4">28.0 – 69.9</option><option value="6">≥ 70</option> </select>
+         </div>
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;" id="hbLabel">Hemoglobin (g/dL) — Male</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()" id="hbSelect"> <option value="0">≥ 13.0 (M) / ≥ 12.0 (F)</option><option value="1">12.0–12.9 (M) / 10.0–11.9 (F)</option><option value="3">10.0–11.9 (M)</option><option value="6">&lt; 10.0 (either)</option> </select>
+         </div>
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;">Systolic BP (mmHg)</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()"> <option value="0">≥ 110</option><option value="1">100 – 109</option><option value="2">90 – 99</option><option value="3">&lt; 90</option> </select>
+         </div>
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;">Heart Rate</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()"> <option value="0">&lt; 100</option><option value="1">≥ 100</option> </select>
+         </div>
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;">Melena</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()"> <option value="0">No</option><option value="1">Yes</option> </select>
+         </div>
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;">Syncope</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()"> <option value="0">No</option><option value="2">Yes</option> </select>
+         </div>
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;">Hepatic Disease</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()"> <option value="0">No</option><option value="2">Yes</option> </select>
+         </div>
+         <div><label class="font-body text-xs font-600 block mb-1" style="color:#94a3b8;">Heart Failure</label> <select class="w-full rounded-lg p-2.5 font-body text-sm" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f1f5f9;" onchange="calcGBS()"> <option value="0">No</option><option value="2">Yes</option> </select>
+         </div>
+        </div>
+        <div class="rounded-xl p-4 flex items-center justify-between" id="gbsResult" style="background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2);">
+         <div>
+          <p class="font-mono text-xs uppercase tracking-wider" style="color:#94a3b8;">Glasgow-Blatchford Score</p>
+          <p class="font-heading text-3xl font-700 mt-1" id="gbsScore" style="color:#22c55e;">0</p>
+         </div>
+         <div class="text-right">
+          <p class="font-body text-sm font-600" id="gbsRisk" style="color:#22c55e;">Low Risk</p>
+          <p class="font-body text-xs mt-1" id="gbsAction" style="color:#94a3b8;">Consider outpatient management</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Rockall -->
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(124,58,237,0.15);">
+         <i data-lucide="bar-chart-3" style="color:#7c3aed; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Rockall Score (Post-Endoscopy)</h2>
+       </div>
+       <p class="font-body text-sm mb-4" style="color:#94a3b8;">Post-endoscopic mortality risk. Combines clinical + endoscopic data. Score ≤ 2: excellent prognosis. Score ≥ 8: high mortality (&gt;40%).</p>
+       <div class="overflow-x-auto">
+        <table class="w-full font-body text-sm" style="min-width:500px;">
+         <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+           <th class="text-left py-2 px-2" style="color:#7c3aed;">Variable</th>
+           <th class="text-center py-2 px-2" style="color:#7c3aed;">0</th>
+           <th class="text-center py-2 px-2" style="color:#7c3aed;">1</th>
+           <th class="text-center py-2 px-2" style="color:#7c3aed;">2</th>
+           <th class="text-center py-2 px-2" style="color:#7c3aed;">3</th>
+          </tr>
+         </thead>
+         <tbody style="color:#cbd5e1;">
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Age</td>
+           <td class="text-center py-2">&lt;60</td>
+           <td class="text-center py-2">60–79</td>
+           <td class="text-center py-2">≥80</td>
+           <td class="text-center py-2">—</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Shock</td>
+           <td class="text-center py-2">None</td>
+           <td class="text-center py-2">HR&gt;100</td>
+           <td class="text-center py-2">SBP&lt;100</td>
+           <td class="text-center py-2">—</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Comorbidity</td>
+           <td class="text-center py-2">None</td>
+           <td class="text-center py-2">—</td>
+           <td class="text-center py-2">CCF, IHD, major</td>
+           <td class="text-center py-2">Renal/liver failure, malignancy</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Diagnosis</td>
+           <td class="text-center py-2">MW, no lesion</td>
+           <td class="text-center py-2">All other</td>
+           <td class="text-center py-2">GI malignancy</td>
+           <td class="text-center py-2">—</td>
+          </tr>
+          <tr>
+           <td class="py-2 px-2 font-600">Stigmata of hemorrhage</td>
+           <td class="text-center py-2">None / dark spot</td>
+           <td class="text-center py-2">—</td>
+           <td class="text-center py-2">Blood, adherent clot, visible vessel</td>
+           <td class="text-center py-2">—</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div><!-- AIMS65 -->
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="list-checks" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">AIMS65 Score</h2>
+       </div>
+       <p class="font-body text-sm mb-4" style="color:#94a3b8;">Predicts inpatient mortality in UGIB. Simple, bedside. Score ≥ 2 = high risk.</p>
+       <div class="grid sm:grid-cols-5 gap-2">
+        <div class="rounded-lg p-3 text-center" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-lg font-700" style="color:#dc2626;">A</p>
+         <p class="font-body text-xs mt-1" style="color:#94a3b8;">Albumin &lt;3.0</p>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-lg font-700" style="color:#dc2626;">I</p>
+         <p class="font-body text-xs mt-1" style="color:#94a3b8;">INR &gt;1.5</p>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-lg font-700" style="color:#dc2626;">M</p>
+         <p class="font-body text-xs mt-1" style="color:#94a3b8;">Mental status altered</p>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-lg font-700" style="color:#dc2626;">S</p>
+         <p class="font-body text-xs mt-1" style="color:#94a3b8;">SBP ≤90</p>
+        </div>
+        <div class="rounded-lg p-3 text-center" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+         <p class="font-mono text-lg font-700" style="color:#dc2626;">65</p>
+         <p class="font-body text-xs mt-1" style="color:#94a3b8;">Age ≥65</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- RESUSCITATION -->
+    <section class="tab-content hidden" id="tab-resuscitation">
+     <div class="space-y-6">
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="heart-pulse" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Resuscitation &amp; Transfusion Strategy</h2>
+       </div><!-- Shock Classification -->
+       <h3 class="font-body font-700 text-sm uppercase tracking-wider mb-3" style="color:#dc2626;">Hemorrhagic Shock Classification (ATLS)</h3>
+       <div class="overflow-x-auto mb-6">
+        <table class="w-full font-body text-sm" style="min-width:550px;">
+         <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+           <th class="text-left py-2 px-2" style="color:#dc2626;">Parameter</th>
+           <th class="text-center py-2 px-2" style="color:#22c55e;">Class I</th>
+           <th class="text-center py-2 px-2" style="color:#eab308;">Class II</th>
+           <th class="text-center py-2 px-2" style="color:#f97316;">Class III</th>
+           <th class="text-center py-2 px-2" style="color:#dc2626;">Class IV</th>
+          </tr>
+         </thead>
+         <tbody style="color:#cbd5e1;">
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Blood Loss</td>
+           <td class="text-center py-2">&lt;750 mL (&lt;15%)</td>
+           <td class="text-center py-2">750–1500 (15–30%)</td>
+           <td class="text-center py-2">1500–2000 (30–40%)</td>
+           <td class="text-center py-2">&gt;2000 (&gt;40%)</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Heart Rate</td>
+           <td class="text-center py-2">&lt;100</td>
+           <td class="text-center py-2">100–120</td>
+           <td class="text-center py-2">120–140</td>
+           <td class="text-center py-2">&gt;140</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Blood Pressure</td>
+           <td class="text-center py-2">Normal</td>
+           <td class="text-center py-2">Normal</td>
+           <td class="text-center py-2">Decreased</td>
+           <td class="text-center py-2">Very low</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+           <td class="py-2 px-2 font-600">Urine Output</td>
+           <td class="text-center py-2">&gt;30 mL/h</td>
+           <td class="text-center py-2">20–30</td>
+           <td class="text-center py-2">5–15</td>
+           <td class="text-center py-2">Negligible</td>
+          </tr>
+          <tr>
+           <td class="py-2 px-2 font-600">Mental Status</td>
+           <td class="text-center py-2">Normal</td>
+           <td class="text-center py-2">Anxious</td>
+           <td class="text-center py-2">Confused</td>
+           <td class="text-center py-2">Lethargic</td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Transfusion Targets -->
+       <h3 class="font-body font-700 text-sm uppercase tracking-wider mb-3" style="color:#dc2626;">Transfusion Targets</h3>
+       <div class="grid sm:grid-cols-2 gap-3 mb-5">
+        <div class="rounded-xl p-4" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.12);">
+         <p class="font-body font-700 text-sm" style="color:#f1f5f9;">Restrictive Strategy (Preferred)</p>
+         <ul class="mt-2 space-y-1 font-body text-sm" style="color:#cbd5e1;">
+          <li>• <strong>PRBC:</strong> Transfuse when Hb &lt;7 g/dL (target 7–9)</li>
+          <li>• Variceal bleed: Hb target 7–8 g/dL (strict)</li>
+          <li>• IHD / ACS: Hb target 8–10 g/dL (liberal)</li>
+          <li>• Over-transfusion in cirrhotics increases portal pressure and rebleeding</li>
+         </ul>
+        </div>
+        <div class="rounded-xl p-4" style="background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.12);">
+         <p class="font-body font-700 text-sm" style="color:#f1f5f9;">Component Therapy</p>
+         <ul class="mt-2 space-y-1 font-body text-sm" style="color:#cbd5e1;">
+          <li>• <strong>FFP:</strong> INR &gt;1.5 with active bleeding</li>
+          <li>• <strong>Platelets:</strong> &lt;50,000/μL with active bleed</li>
+          <li>• <strong>Cryoprecipitate:</strong> Fibrinogen &lt;100 mg/dL</li>
+          <li>• <strong>Massive Transfusion Protocol:</strong> PRBC:FFP:Platelets = 1:1:1</li>
+         </ul>
+        </div>
+       </div>
+       <div class="rounded-xl p-4" style="background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.15);">
+        <p class="font-body text-sm font-600" style="color:#eab308;">🩺 ICU Experience: Fluid Resuscitation in GI Bleed + AKI</p>
+        <p class="font-body text-sm mt-1" style="color:#cbd5e1;">As a nephrologist-intensivist, I frequently manage GI bleed in CKD/ESRD patients. Key considerations: (1) These patients are often fluid-overloaded at baseline — <strong>avoid NS boluses</strong> unless truly hypovolemic; use PRBC as the volume expander. (2) Uremic coagulopathy: DDAVP 0.3μg/kg IV pre-procedure, conjugated estrogens for recurrent bleeds. (3) If patient is on dialysis, coordinate timing — avoid heparin; use citrate anticoagulation. (4) Metabolic acidosis + hyperkalemia can be severe in hemorrhagic shock + CKD — may need emergency dialysis. (5) Monitor lactate clearance as resuscitation endpoint.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- MEDICATIONS -->
+    <section class="tab-content hidden" id="tab-medications">
+     <div class="space-y-6">
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="pill" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Pharmacological Management — Complete Drug Reference</h2>
+       </div>
+       <div class="space-y-4"><!-- PPI -->
+        <div class="rounded-xl p-5" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+         <h3 class="font-body font-700 mb-2" style="color:#dc2626;">Proton Pump Inhibitors (PPI)</h3>
+         <div class="font-body text-sm space-y-2" style="color:#cbd5e1;">
+          <p><strong style="color:#f1f5f9;">Pantoprazole / Esomeprazole:</strong></p>
+          <p class="font-mono text-xs p-2 rounded" style="background:rgba(124,58,237,0.1); color:#c4b5fd;">HIGH RISK (Forrest Ia–IIb): 80mg IV bolus → 8mg/hr continuous infusion × 72 hours → then 40mg PO BID</p>
+          <p class="font-mono text-xs p-2 rounded" style="background:rgba(124,58,237,0.1); color:#c4b5fd;">LOW RISK (Forrest IIc–III): 40mg IV BID → 40mg PO daily</p>
+          <p>Mechanism: Raises intragastric pH &gt;6 → stabilizes clot. Continuous infusion is superior to intermittent bolus for high-risk stigmata.</p>
+          <p><strong style="color:#f1f5f9;">CKD adjustment:</strong> No dose adjustment needed. PPI-associated AIN is a concern in nephrology — monitor Cr in long-term users.</p>
+         </div>
+        </div><!-- Vasoactive -->
+        <div class="rounded-xl p-5" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+         <h3 class="font-body font-700 mb-2" style="color:#dc2626;">Vasoactive Agents (Variceal Bleed)</h3>
+         <div class="font-body text-sm space-y-2" style="color:#cbd5e1;">
+          <div class="grid sm:grid-cols-2 gap-3">
+           <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.05);">
+            <p class="font-600" style="color:#f1f5f9;">Octreotide (Somatostatin analog)</p>
+            <p class="font-mono text-xs mt-1" style="color:#c4b5fd;">50μg IV bolus → 50μg/hr infusion × 3–5 days</p>
+            <p class="mt-1">Reduces splanchnic blood flow. Fewer side effects than vasopressin. Can be used in CKD without adjustment.</p>
+           </div>
+           <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.05);">
+            <p class="font-600" style="color:#f1f5f9;">Terlipressin (V1 agonist)</p>
+            <p class="font-mono text-xs mt-1" style="color:#c4b5fd;">2mg IV q4h → taper 1mg q4h after control</p>
+            <p class="mt-1">Most effective vasoactive agent. Also used for HRS. <strong style="color:#eab308;">Caution:</strong> coronary/mesenteric vasoconstriction — avoid in IHD. Preferred in HRS-AKI.</p>
+           </div>
+          </div>
+         </div>
+        </div><!-- Antibiotics -->
+        <div class="rounded-xl p-5" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+         <h3 class="font-body font-700 mb-2" style="color:#dc2626;">Antibiotic Prophylaxis (Variceal Bleed)</h3>
+         <div class="font-body text-sm" style="color:#cbd5e1;">
+          <p class="font-mono text-xs p-2 rounded mb-2" style="background:rgba(124,58,237,0.1); color:#c4b5fd;">Ceftriaxone 1g IV daily × 7 days (preferred in Child-Pugh B/C)<br>
+           Alternative: Norfloxacin 400mg PO BID × 7 days</p>
+          <p>Reduces bacterial translocation, SBP, rebleeding, and mortality. This is one of the most impactful interventions in variceal bleed — <strong style="color:#f1f5f9;">NNT = 4 to prevent one infection.</strong></p>
+         </div>
+        </div><!-- Prokinetics & Others -->
+        <div class="rounded-xl p-5" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+         <h3 class="font-body font-700 mb-2" style="color:#dc2626;">Other Important Agents</h3>
+         <div class="font-body text-sm space-y-2" style="color:#cbd5e1;">
+          <p><strong style="color:#f1f5f9;">Erythromycin (prokinetic):</strong> <span class="font-mono text-xs" style="color:#c4b5fd;">250mg IV 30–90 min before endoscopy</span>. Promotes gastric emptying, improves endoscopic visualization, reduces need for repeat EGD. Evidence-based; recommended by ACG.</p>
+          <p><strong style="color:#f1f5f9;">Tranexamic Acid (TXA):</strong> <span class="font-mono text-xs" style="color:#c4b5fd;">1g IV over 10 min</span>. The HALT-IT trial (2020) showed <strong style="color:#dc2626;">NO benefit and increased VTE risk</strong> in GI bleed. Not recommended routinely. Consider only in massive hemorrhage with documented hyperfibrinolysis.</p>
+          <p><strong style="color:#f1f5f9;">DDAVP (Desmopressin):</strong> <span class="font-mono text-xs" style="color:#c4b5fd;">0.3μg/kg IV over 30 min</span>. For uremic platelet dysfunction in CKD/ESRD. Releases vWF multimers from endothelium. Effect lasts ~6h. Tachyphylaxis after 2–3 doses.</p>
+          <p><strong style="color:#f1f5f9;">Conjugated Estrogens:</strong> <span class="font-mono text-xs" style="color:#c4b5fd;">0.6mg/kg/day IV × 5 days</span>. For chronic/recurrent GI bleeding in CKD, especially angiodysplasia. Effect lasts 2 weeks. Mechanism: reduces bleeding time by improving platelet-endothelial interaction.</p>
+          <p><strong style="color:#f1f5f9;">Vitamin K:</strong> <span class="font-mono text-xs" style="color:#c4b5fd;">10mg IV slow push</span>. For warfarin reversal. Takes 6–12h for full effect. Use FFP/4-factor PCC for urgent reversal.</p>
+         </div>
+        </div><!-- Anticoagulant Reversal -->
+        <div class="rounded-xl p-5" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+         <h3 class="font-body font-700 mb-2" style="color:#dc2626;">Anticoagulant / Antiplatelet Reversal</h3>
+         <div class="overflow-x-auto">
+          <table class="w-full font-body text-sm" style="min-width:450px;">
+           <thead>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+             <th class="text-left py-2 px-2" style="color:#dc2626;">Drug</th>
+             <th class="text-left py-2 px-2" style="color:#dc2626;">Reversal Agent</th>
+             <th class="text-left py-2 px-2" style="color:#dc2626;">Notes</th>
+            </tr>
+           </thead>
+           <tbody style="color:#cbd5e1;">
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-2 font-600">Warfarin</td>
+             <td class="py-2 px-2">Vitamin K + 4F-PCC (Kcentra) or FFP</td>
+             <td class="py-2 px-2 text-xs">PCC preferred (rapid, lower volume)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-2 font-600">Dabigatran</td>
+             <td class="py-2 px-2">Idarucizumab (Praxbind) 5g IV</td>
+             <td class="py-2 px-2 text-xs">Specific reversal. HD can remove dabigatran</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-2 font-600">Rivaroxaban/Apixaban</td>
+             <td class="py-2 px-2">Andexanet alfa or 4F-PCC</td>
+             <td class="py-2 px-2 text-xs">NOT dialyzable (highly protein bound)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+             <td class="py-2 px-2 font-600">Heparin (UFH)</td>
+             <td class="py-2 px-2">Protamine sulfate</td>
+             <td class="py-2 px-2 text-xs">1mg per 100 units heparin (last 2–3h)</td>
+            </tr>
+            <tr>
+             <td class="py-2 px-2 font-600">Aspirin / Clopidogrel</td>
+             <td class="py-2 px-2">Platelet transfusion (if life-threatening)</td>
+             <td class="py-2 px-2 text-xs">Hold clopidogrel. Aspirin: consider continuing if cardiac stent &lt;30d</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ICU & RENAL -->
+    <section class="tab-content hidden" id="tab-icu">
+     <div class="space-y-6">
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="monitor" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">ICU Management &amp; Nephrology Considerations</h2>
+       </div>
+       <div class="space-y-4">
+        <div class="rounded-xl p-5" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+         <h3 class="font-body font-700 mb-3" style="color:#dc2626;">ICU Admission Criteria</h3>
+         <div class="grid sm:grid-cols-2 gap-3 font-body text-sm" style="color:#cbd5e1;">
+          <ul class="space-y-1.5">
+           <li>• Hemodynamic instability (Shock Index &gt;1.0)</li>
+           <li>• Ongoing active hemorrhage</li>
+           <li>• Need for &gt;2 units PRBC in 24h</li>
+           <li>• GBS ≥ 8 or Rockall ≥ 5</li>
+          </ul>
+          <ul class="space-y-1.5">
+           <li>• Variceal bleed (all patients initially)</li>
+           <li>• Airway compromise / need for intubation</li>
+           <li>• Acute organ failure (AKI, encephalopathy)</li>
+           <li>• Anticoagulant-associated bleed with ongoing ooze</li>
+          </ul>
+         </div>
+        </div>
+        <div class="rounded-xl p-5" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+         <h3 class="font-body font-700 mb-3" style="color:#dc2626;">Monitoring Parameters in ICU</h3>
+         <div class="font-body text-sm space-y-2" style="color:#cbd5e1;">
+          <p>• <strong style="color:#f1f5f9;">Hourly vitals</strong> (HR, BP, MAP, SpO₂, RR) + continuous telemetry</p>
+          <p>• <strong style="color:#f1f5f9;">Urine output</strong> — most sensitive indicator of renal perfusion. Target ≥ 0.5 mL/kg/hr. Foley catheter mandatory.</p>
+          <p>• <strong style="color:#f1f5f9;">Serial Hb</strong> q4–6h during active bleed (remember: may be falsely normal acutely)</p>
+          <p>• <strong style="color:#f1f5f9;">Lactate clearance</strong> — check q2–4h. Target &gt;20% clearance per 2h. Persistent elevation = ongoing tissue hypoperfusion</p>
+          <p>• <strong style="color:#f1f5f9;">Central venous access</strong> — consider triple-lumen CVC for vasopressors, blood products, and CVP monitoring</p>
+          <p>• <strong style="color:#f1f5f9;">Arterial line</strong> for beat-to-beat BP monitoring in massive hemorrhage</p>
+          <p>• <strong style="color:#f1f5f9;">IVC ultrasound</strong> for volume assessment (IVC collapsibility &gt;50% = volume responsive)</p>
+         </div>
+        </div>
+        <div class="rounded-xl p-5" style="background:rgba(124,58,237,0.05); border:1px solid rgba(124,58,237,0.12);">
+         <h3 class="font-body font-700 mb-3" style="color:#7c3aed;">Nephrology-Specific Considerations in GI Bleed</h3>
+         <div class="font-body text-sm space-y-3" style="color:#cbd5e1;">
+          <div class="rounded-lg p-3" style="background:rgba(124,58,237,0.08);">
+           <p class="font-600" style="color:#f1f5f9;">1. GI Bleed in CKD / ESRD Patients</p>
+           <p class="mt-1">GI bleeding is 2–10× more common in CKD/ESRD. Causes: uremic gastropathy, angiodysplasia, NSAID use (often undisclosed), uremic platelet dysfunction (↓ vWF binding, ↓ ADP/TXA₂ release), heparin during dialysis, and amyloidosis in long-term dialysis.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(124,58,237,0.08);">
+           <p class="font-600" style="color:#f1f5f9;">2. Uremic Coagulopathy Management</p>
+           <ul class="mt-1 space-y-1 ml-3">
+            <li>• DDAVP 0.3μg/kg IV (onset 1h, lasts 6h) — first-line acute</li>
+            <li>• Conjugated estrogens 0.6mg/kg/day IV × 5d — for recurrent bleeds (effect 2 weeks)</li>
+            <li>• Cryoprecipitate 10 units (provides vWF, fibrinogen)</li>
+            <li>• Optimize dialysis adequacy (Kt/V &gt;1.4)</li>
+            <li>• Correct anemia (Hb ≥ 10 improves platelet margination)</li>
+           </ul>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(124,58,237,0.08);">
+           <p class="font-600" style="color:#f1f5f9;">3. AKI Secondary to GI Bleed (Pre-Renal → ATN)</p>
+           <p class="mt-1">Hypovolemia from hemorrhage → renal hypoperfusion → pre-renal AKI. If prolonged → ATN. BUN:Cr &gt;20:1 initially (pre-renal). FENa &lt;1% (pre-renal) vs. &gt;2% (ATN). Management: aggressive volume resuscitation + PRBC. Avoid nephrotoxins (NSAIDs, contrast if possible). If anuric with hyperkalemia/acidosis → emergent dialysis.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(124,58,237,0.08);">
+           <p class="font-600" style="color:#f1f5f9;">4. Dialysis Timing Around GI Procedures</p>
+           <ul class="mt-1 space-y-1 ml-3">
+            <li>• Pre-endoscopy: Dialyze 4–6h before if possible. Use citrate or saline flush (avoid heparin)</li>
+            <li>• Post-EVL/banding: Delay dialysis 24h. Use heparin-free dialysis for next 48h</li>
+            <li>• Active bleeding: CRRT with regional citrate anticoagulation if dialysis mandatory</li>
+            <li>• K⁺ management: Hemorrhage → rhabdomyolysis risk + cellular lysis → hyperkalemia. ECG monitoring essential</li>
+           </ul>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(124,58,237,0.08);">
+           <p class="font-600" style="color:#f1f5f9;">5. Hepatorenal Syndrome (HRS) in Variceal Bleed</p>
+           <p class="mt-1">Splanchnic vasodilation + hypovolemia → intense renal vasoconstriction → functional AKI. Diagnostic criteria: Cr &gt;1.5 or &gt;50% rise, no improvement with volume expansion (1g/kg albumin × 2d), no nephrotoxins, no parenchymal disease. Treatment: <strong>Terlipressin 1mg IV q4–6h + Albumin 20–40g/day</strong>. Norepinephrine + albumin is alternative. TIPS for refractory cases. Liver transplant is definitive cure.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ALGORITHM -->
+    <section class="tab-content hidden" id="tab-algorithm">
+     <div class="space-y-6">
+      <div class="section-card rounded-2xl p-5 sm:p-8" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+       <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(220,38,38,0.15);">
+         <i data-lucide="git-branch" style="color:#dc2626; width:20px; height:20px;"></i>
+        </div>
+        <h2 class="font-heading text-xl sm:text-2xl font-700" style="color:#f1f5f9;">Master Algorithm — GI Bleed Management Flowchart</h2>
+       </div><!-- Visual Flowchart -->
+       <div class="space-y-3">
+        <div class="rounded-xl p-4 text-center" style="background:rgba(220,38,38,0.15); border:2px solid rgba(220,38,38,0.3);">
+         <p class="font-body font-700 text-lg" style="color:#dc2626;">🚨 PATIENT PRESENTS WITH GI BLEED</p>
+         <p class="font-body text-xs mt-1" style="color:#94a3b8;">Hematemesis / Melena / Hematochezia</p>
+        </div>
+        <div class="flex justify-center">
+         <div class="w-0.5 h-6" style="background:rgba(255,255,255,0.2);"></div>
+        </div>
+        <div class="rounded-xl p-4" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);">
+         <p class="font-body font-700 text-center" style="color:#f1f5f9;">STEP 1: ABCDE Assessment + Resuscitation</p>
+         <div class="grid sm:grid-cols-3 gap-2 mt-3 text-center font-body text-xs" style="color:#cbd5e1;">
+          <div class="rounded-lg p-2" style="background:rgba(220,38,38,0.08);">
+           2 × large-bore IV (16–18G)
+          </div>
+          <div class="rounded-lg p-2" style="background:rgba(220,38,38,0.08);">
+           Type &amp; Crossmatch 4U PRBC
+          </div>
+          <div class="rounded-lg p-2" style="background:rgba(220,38,38,0.08);">
+           NS/RL bolus if hypotensive
+          </div>
+         </div>
+        </div>
+        <div class="flex justify-center">
+         <div class="w-0.5 h-6" style="background:rgba(255,255,255,0.2);"></div>
+        </div>
+        <div class="rounded-xl p-4" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);">
+         <p class="font-body font-700 text-center" style="color:#f1f5f9;">STEP 2: Risk Stratify</p>
+         <div class="grid sm:grid-cols-2 gap-2 mt-3 text-center font-body text-xs" style="color:#cbd5e1;">
+          <div class="rounded-lg p-2" style="background:rgba(22,163,74,0.1); border:1px solid rgba(22,163,74,0.2);">
+           <p class="font-600" style="color:#22c55e;">GBS = 0 → Low Risk</p>
+           <p class="mt-1">Consider outpatient EGD</p>
+          </div>
+          <div class="rounded-lg p-2" style="background:rgba(220,38,38,0.1); border:1px solid rgba(220,38,38,0.2);">
+           <p class="font-600" style="color:#dc2626;">GBS ≥ 1 → Admit</p>
+           <p class="mt-1">EGD within 24h (12h if variceal)</p>
+          </div>
+         </div>
+        </div>
+        <div class="flex justify-center">
+         <div class="w-0.5 h-6" style="background:rgba(255,255,255,0.2);"></div>
+        </div>
+        <div class="rounded-xl p-4" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);">
+         <p class="font-body font-700 text-center mb-3" style="color:#f1f5f9;">STEP 3: Determine Source &amp; Treat</p>
+         <div class="grid sm:grid-cols-2 gap-3">
+          <div class="rounded-lg p-3" style="background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.12);">
+           <p class="font-body font-700 text-sm text-center" style="color:#dc2626;">UGIB Pathway</p>
+           <ol class="mt-2 space-y-1 font-body text-xs list-decimal ml-4" style="color:#cbd5e1;">
+            <li>IV PPI 80mg bolus → 8mg/hr</li>
+            <li>If variceal suspected → Octreotide + Ceftriaxone</li>
+            <li>Erythromycin 250mg IV (pre-EGD)</li>
+            <li>EGD → Endoscopic hemostasis</li>
+            <li>Post-EGD: PPI infusion × 72h (high risk)</li>
+            <li>H. pylori test &amp; treat</li>
+            <li>Rebleeding → Repeat EGD → IR embolization → Surgery</li>
+           </ol>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.12);">
+           <p class="font-body font-700 text-sm text-center" style="color:#7c3aed;">LGIB Pathway</p>
+           <ol class="mt-2 space-y-1 font-body text-xs list-decimal ml-4" style="color:#cbd5e1;">
+            <li>If unstable + hematochezia → EGD first</li>
+            <li>Rapid prep → Colonoscopy within 24h</li>
+            <li>Hemostasis: clips, APC, epinephrine</li>
+            <li>Non-diagnostic → CT Angiography</li>
+            <li>CTA positive → Angiographic embolization</li>
+            <li>CTA negative → Tagged RBC scan</li>
+            <li>Recurrent/obscure → Capsule → DAE → Surgery</li>
+           </ol>
+          </div>
+         </div>
+        </div>
+        <div class="flex justify-center">
+         <div class="w-0.5 h-6" style="background:rgba(255,255,255,0.2);"></div>
+        </div>
+        <div class="rounded-xl p-4" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);">
+         <p class="font-body font-700 text-center" style="color:#f1f5f9;">STEP 4: Post-Bleed Care &amp; Prevention</p>
+         <div class="grid sm:grid-cols-3 gap-2 mt-3 font-body text-xs" style="color:#cbd5e1;">
+          <div class="rounded-lg p-3" style="background:rgba(255,255,255,0.03);">
+           <p class="font-600 mb-1" style="color:#f1f5f9;">Medications</p>
+           <p>Long-term PPI if PUD. NSBB for varices. Stop offending drugs. Iron replacement.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(255,255,255,0.03);">
+           <p class="font-600 mb-1" style="color:#f1f5f9;">Follow-Up</p>
+           <p>Repeat EGD 6–8 wks (gastric ulcer). EVL q2–4 wks until obliteration. Colonoscopy surveillance.</p>
+          </div>
+          <div class="rounded-lg p-3" style="background:rgba(255,255,255,0.03);">
+           <p class="font-600 mb-1" style="color:#f1f5f9;">Renal Protection</p>
+           <p>Monitor Cr. Avoid nephrotoxins. Optimize dialysis. Treat HRS early. DDAVP prophylaxis pre-procedure in CKD.</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Key Pearls -->
+       <div class="mt-8 rounded-xl p-5" style="background:linear-gradient(135deg, rgba(220,38,38,0.08), rgba(124,58,237,0.08)); border:1px solid rgba(255,255,255,0.08);">
+        <h3 class="font-heading text-lg font-700 mb-4" style="color:#f1f5f9;">🏥 Clinical Pearls from the Bedside</h3>
+        <div class="space-y-3 font-body text-sm" style="color:#cbd5e1;">
+         <p>• <strong style="color:#eab308;">Never wait for Hb to drop</strong> before transfusing in active bleed — hemoglobin takes 24–72h to equilibrate. Clinical assessment (vitals, shock index, lactate) is more reliable than labs acutely.</p>
+         <p>• <strong style="color:#eab308;">Rectal exam is non-negotiable</strong> — you cannot manage GI bleed without looking at the stool. Black tarry vs. maroon vs. bright red changes your entire approach.</p>
+         <p>• <strong style="color:#eab308;">In cirrhotics, assume variceal until proven otherwise.</strong> Start octreotide + ceftriaxone empirically. You lose nothing by starting early, you lose the patient by starting late.</p>
+         <p>• <strong style="color:#eab308;">BUN:Creatinine ratio</strong> is your friend. &gt;30:1 strongly suggests UGIB (absorbed blood protein). But in CKD patients, baseline BUN is elevated — context matters.</p>
+         <p>• <strong style="color:#eab308;">The sickest patients look the calmest.</strong> Young patients compensate incredibly well until they crash. A normal BP with HR 120 = Class II–III hemorrhagic shock. Don't be falsely reassured.</p>
+         <p>• <strong style="color:#eab308;">Aspirin in ACS patients with GI bleed</strong> — this is the most common dilemma. If drug-eluting stent &lt;6 months, the cardiology risk of stopping usually outweighs the GI risk. Discuss with cardiology. PPI + endoscopic hemostasis + continue aspirin is often the right call.</p>
+         <p>• <strong style="color:#eab308;">In my nephrology practice,</strong> I see GI bleed as a nephrologist's problem too — AKI from hypovolemia, hyperkalemia from blood transfusion and tissue destruction, metabolic acidosis, and the challenge of dialyzing an actively bleeding patient. The intersection of nephrology and gastroenterology at the ICU bedside is where clinical experience truly matters.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="max-w-5xl mx-auto px-4 sm:px-6 py-8 text-center" style="border-top:1px solid rgba(255,255,255,0.06);">
+    <p class="font-body text-xs" style="color:#475569;">This clinical reference guide is for educational purposes. Always apply clinical judgment based on individual patient circumstances.</p>
+    <p class="font-body text-xs mt-1" style="color:#334155;">© GI Bleed Clinical Guide — Compiled from Evidence-Based Medicine &amp; ICU/Nephrology Experience</p>
+   </footer>
+  </div>
+  <script>
+// Default config
+const defaultConfig = {
+  main_title: 'Gastrointestinal Bleed',
+  author_name: 'Compiled from Clinical Experience — Evidence-Based Practice',
+  bg_color: '#0a0f1a',
+  surface_color: '#131a2b',
+  text_color: '#e2e8f0',
+  primary_action: '#dc2626',
+  secondary_action: '#7c3aed',
+  font_family: 'Playfair Display',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  const root = document.getElementById('appRoot');
+  const title = document.getElementById('mainTitle');
+  const author = document.getElementById('authorLine');
+
+  if (title) title.innerHTML = `${c.main_title}<br><span style="color:${c.primary_action};">Diagnosis & Management</span>`;
+  if (author) author.textContent = c.author_name;
+
+  root.style.background = c.bg_color;
+  root.style.color = c.text_color;
+
+  document.querySelectorAll('.font-heading').forEach(el => {
+    el.style.fontFamily = `"${c.font_family}", Georgia, serif`;
+  });
+
+  const base = c.font_size || 16;
+  document.querySelectorAll('.font-body').forEach(el => {
+    const computed = window.getComputedStyle(el);
+    const current = parseFloat(computed.fontSize);
+    // Scale relative to 16px base
+    if (current <= 11) el.style.fontSize = `${base * 0.7}px`;
+    else if (current <= 13) el.style.fontSize = `${base * 0.8}px`;
+    else if (current <= 15) el.style.fontSize = `${base * 0.9}px`;
+    else if (current <= 17) el.style.fontSize = `${base}px`;
+    else el.style.fontSize = `${base * 1.125}px`;
+  });
+}
+
+// Tab navigation
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.color = '#94a3b8';
+      b.style.background = 'transparent';
+    });
+    btn.classList.add('active');
+    btn.style.background = '#dc2626';
+    btn.style.color = '#fff';
+
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-content').forEach(s => s.classList.add('hidden'));
+    const target = document.getElementById('tab-' + tab);
+    if (target) {
+      target.classList.remove('hidden');
+      target.classList.add('fade-in');
+    }
+  });
+});
+
+// Accordion
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const icon = btn.querySelector('[data-lucide]');
+  content.classList.toggle('open');
+  if (icon) icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+}
+
+// GBS Calculator
+function calcGBS() {
+  const selects = document.querySelectorAll('#gbsCalculator select');
+  let total = 0;
+  selects.forEach(s => total += parseInt(s.value));
+  const scoreEl = document.getElementById('gbsScore');
+  const riskEl = document.getElementById('gbsRisk');
+  const actionEl = document.getElementById('gbsAction');
+  const resultEl = document.getElementById('gbsResult');
+
+  scoreEl.textContent = total;
+  if (total === 0) {
+    riskEl.textContent = 'Low Risk'; riskEl.style.color = '#22c55e'; scoreEl.style.color = '#22c55e';
+    actionEl.textContent = 'Consider outpatient management';
+    resultEl.style.background = 'rgba(34,197,94,0.1)'; resultEl.style.borderColor = 'rgba(34,197,94,0.2)';
+  } else if (total <= 5) {
+    riskEl.textContent = 'Moderate Risk'; riskEl.style.color = '#eab308'; scoreEl.style.color = '#eab308';
+    actionEl.textContent = 'Admit — EGD within 24 hours';
+    resultEl.style.background = 'rgba(234,179,8,0.1)'; resultEl.style.borderColor = 'rgba(234,179,8,0.2)';
+  } else {
+    riskEl.textContent = 'High Risk'; riskEl.style.color = '#dc2626'; scoreEl.style.color = '#dc2626';
+    actionEl.textContent = 'Urgent intervention — ICU admission likely';
+    resultEl.style.background = 'rgba(220,38,38,0.1)'; resultEl.style.borderColor = 'rgba(220,38,38,0.2)';
+  }
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>
