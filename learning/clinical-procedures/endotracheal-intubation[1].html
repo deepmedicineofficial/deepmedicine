@@ -1,0 +1,614 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Endotracheal Intubation | Airway Management Procedure | Deep Medicine</title> <meta name="description" content="Step-by-step endotracheal intubation including indications, preparation, technique, confirmation, and complications in emergency and ICU settings."> <link rel="canonical" href="https://deepmedicine.in/learning/procedures/endotracheal-intubation"> <!-- Open Graph --> <meta property="og:title" content="Endotracheal Intubation | Deep Medicine"> <meta property="og:description" content="Airway management with endotracheal intubation technique, indications, and complications."> <meta property="og:image" content="https://deepmedicine.in/images/endotracheal-intubation.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #0a0f1a;
+  --surface: #111827;
+  --text: #e2e8f0;
+  --accent: #22d3ee;
+  --accent2: #6366f1;
+}
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.font-heading { font-family: 'Playfair Display', serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+.hero-gradient {
+  background: linear-gradient(135deg, #0a0f1a 0%, #1a1040 40%, #0f2027 70%, #0a0f1a 100%);
+}
+
+.card-glass {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.glow-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+}
+
+.step-number {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 1px solid transparent;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.tab-btn.active {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.tab-btn:not(.active) {
+  background: rgba(255,255,255,0.03);
+  color: #94a3b8;
+}
+.tab-btn:not(.active):hover {
+  background: rgba(255,255,255,0.07);
+  color: #e2e8f0;
+}
+
+.tab-content { display: none; animation: fadeUp 0.4s ease; }
+.tab-content.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(34,211,238,0.3); }
+  50% { box-shadow: 0 0 20px rgba(34,211,238,0.6); }
+}
+
+.timeline-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse-glow 2.5s infinite;
+}
+.timeline-line {
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+  flex-shrink: 0;
+}
+
+.svg-airway { max-width: 100%; height: auto; }
+
+/* Mallampati grid */
+.mall-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 640px) { .mall-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.accordion-body.open { max-height: 2000px; }
+
+.checklist-item input:checked + span { text-decoration: line-through; opacity: 0.5; }
+
+/* Scroll */
+.scroll-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="scroll-wrapper" id="app"><!-- HERO -->
+   <header class="hero-gradient relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, rgba(34,211,238,0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(99,102,241,0.2) 0%, transparent 50%);"></div>
+    <div class="relative max-w-5xl mx-auto px-4 py-16 sm:py-24 text-center">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wider mb-6" style="background:rgba(34,211,238,0.1);color:var(--accent);border:1px solid rgba(34,211,238,0.2);"><i data-lucide="activity" style="width:14px;height:14px;"></i> CLINICAL EXPERIENCE GUIDE
+     </div>
+     <h1 id="mainTitle" class="font-heading text-4xl sm:text-5xl md:text-6xl font-800 leading-tight mb-4" style="background:linear-gradient(135deg,#e2e8f0,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Endotracheal Intubation</h1>
+     <p id="subtitle" class="text-lg sm:text-xl max-w-2xl mx-auto mb-6" style="color:#94a3b8;">A Comprehensive Clinical Experience Guide for Emergency, ICU &amp; Operative Settings</p>
+     <p id="authorName" class="font-mono text-sm" style="color:var(--accent2);">MBBS, MD Medicine, DM Cardiology — Professor of Medicine / ICU Intensivist</p>
+     <div class="glow-line w-48 mx-auto mt-8"></div>
+    </div>
+   </header><!-- AIRWAY ANATOMY SVG -->
+   <section class="max-w-5xl mx-auto px-4 py-12">
+    <h2 class="font-heading text-2xl sm:text-3xl font-700 mb-2 text-center" style="color:var(--accent);">Airway Anatomy — Sagittal View</h2>
+    <p class="text-center text-sm mb-8" style="color:#64748b;">Understanding the anatomy is the foundation of safe intubation</p>
+    <div class="card-glass rounded-2xl p-4 sm:p-8">
+     <svg viewbox="0 0 600 400" class="svg-airway" xmlns="http://www.w3.org/2000/svg"><!-- Head outline --> <ellipse cx="300" cy="120" rx="130" ry="110" fill="none" stroke="#334155" stroke-width="2" /> <!-- Nasal cavity --> <path d="M260 80 Q270 60 290 65 Q300 55 310 65 Q330 60 340 80 L340 110 Q300 115 260 110 Z" fill="#1e293b" stroke="#475569" stroke-width="1.5" /> <text x="300" y="95" text-anchor="middle" fill="#22d3ee" font-size="10" font-family="JetBrains Mono">
+       Nasal Cavity
+      </text> <!-- Oral cavity --> <path d="M250 120 Q250 105 300 105 Q350 105 350 120 L355 170 Q300 180 245 170 Z" fill="#1e293b" stroke="#475569" stroke-width="1.5" /> <text x="300" y="148" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="JetBrains Mono">
+       Oral Cavity
+      </text> <!-- Tongue --> <path d="M265 155 Q280 165 300 167 Q320 165 335 155 Q330 170 300 173 Q270 170 265 155 Z" fill="#6366f1" fill-opacity="0.3" stroke="#6366f1" stroke-width="1" /> <text x="300" y="165" text-anchor="middle" fill="#a5b4fc" font-size="8" font-family="JetBrains Mono">
+       Tongue
+      </text> <!-- Epiglottis --> <path d="M295 185 Q300 175 305 185 L308 200 Q300 205 292 200 Z" fill="#22d3ee" fill-opacity="0.4" stroke="#22d3ee" stroke-width="1.5" /> <line x1="290" y1="192" x2="230" y2="185" stroke="#22d3ee" stroke-width="0.5" stroke-dasharray="3,3" /> <text x="195" y="185" fill="#22d3ee" font-size="9" font-family="JetBrains Mono">
+       Epiglottis
+      </text> <!-- Vallecula --> <circle cx="300" cy="180" r="4" fill="#f59e0b" fill-opacity="0.5" stroke="#f59e0b" stroke-width="1" /> <line x1="296" y1="178" x2="225" y2="165" stroke="#f59e0b" stroke-width="0.5" stroke-dasharray="3,3" /> <text x="180" y="165" fill="#f59e0b" font-size="9" font-family="JetBrains Mono">
+       Vallecula
+      </text> <!-- Vocal cords --> <ellipse cx="300" cy="218" rx="10" ry="4" fill="none" stroke="#f43f5e" stroke-width="2" /> <line x1="312" y1="218" x2="380" y2="210" stroke="#f43f5e" stroke-width="0.5" stroke-dasharray="3,3" /> <text x="385" y="213" fill="#f43f5e" font-size="9" font-family="JetBrains Mono">
+       Vocal Cords
+      </text> <!-- Larynx outline --> <path d="M288 205 L285 240 Q300 248 315 240 L312 205" fill="none" stroke="#a78bfa" stroke-width="1.5" /> <line x1="316" y1="230" x2="385" y2="235" stroke="#a78bfa" stroke-width="0.5" stroke-dasharray="3,3" /> <text x="390" y="238" fill="#a78bfa" font-size="9" font-family="JetBrains Mono">
+       Larynx
+      </text> <!-- Trachea --> <path d="M288 240 L285 360 Q300 365 315 360 L312 240" fill="#0f172a" stroke="#22d3ee" stroke-width="2" /> <line x1="294" y1="270" x2="294" y2="280" stroke="#334155" stroke-width="6" stroke-linecap="round" /> <line x1="294" y1="295" x2="294" y2="305" stroke="#334155" stroke-width="6" stroke-linecap="round" /> <line x1="294" y1="320" x2="294" y2="330" stroke="#334155" stroke-width="6" stroke-linecap="round" /> <text x="300" y="350" text-anchor="middle" fill="#22d3ee" font-size="10" font-family="JetBrains Mono">
+       Trachea
+      </text> <!-- ET Tube path --> <path d="M220 100 Q240 130 270 160 Q285 180 290 200 L292 310" fill="none" stroke="#10b981" stroke-width="3" stroke-dasharray="8,4" opacity="0.7" /> <text x="210" y="92" fill="#10b981" font-size="10" font-weight="bold" font-family="JetBrains Mono">
+       ET Tube Path →
+      </text> <!-- Cuff --> <ellipse cx="300" cy="290" rx="16" ry="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5" /> <line x1="318" y1="290" x2="380" y2="280" stroke="#10b981" stroke-width="0.5" stroke-dasharray="3,3" /> <text x="385" y="283" fill="#10b981" font-size="9" font-family="JetBrains Mono">
+       Cuff (20-30 cmH₂O)
+      </text> <!-- Esophagus --> <path d="M320 240 Q330 260 328 360" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4,3" /> <text x="340" y="320" fill="#f97316" font-size="9" font-family="JetBrains Mono">
+       Esophagus
+      </text> <!-- Thyroid cartilage --> <path d="M278 210 L272 225 Q300 235 328 225 L322 210" fill="none" stroke="#facc15" stroke-width="1" stroke-dasharray="2,2" /> <line x1="272" y1="218" x2="210" y2="225" stroke="#facc15" stroke-width="0.5" stroke-dasharray="3,3" /> <text x="148" y="228" fill="#facc15" font-size="9" font-family="JetBrains Mono">
+       Thyroid Cart.
+      </text> <!-- Cricoid --> <ellipse cx="300" cy="243" rx="18" ry="5" fill="none" stroke="#fb923c" stroke-width="1.5" /> <line x1="280" y1="243" x2="210" y2="250" stroke="#fb923c" stroke-width="0.5" stroke-dasharray="3,3" /> <text x="148" y="253" fill="#fb923c" font-size="9" font-family="JetBrains Mono">
+       Cricoid Ring
+      </text>
+     </svg>
+    </div>
+   </section><!-- TABS -->
+   <section class="max-w-5xl mx-auto px-4 py-8">
+    <div id="tabBar" class="flex gap-2 overflow-x-auto pb-3 mb-8 scrollbar-hide" style="-webkit-overflow-scrolling:touch;"><button class="tab-btn active" data-tab="indications">Indications</button> <button class="tab-btn" data-tab="assessment">Assessment</button> <button class="tab-btn" data-tab="equipment">Equipment</button> <button class="tab-btn" data-tab="procedure">Procedure</button> <button class="tab-btn" data-tab="drugs">RSI Drugs</button> <button class="tab-btn" data-tab="complications">Complications</button> <button class="tab-btn" data-tab="tips">Clinical Pearls</button>
+    </div><!-- INDICATIONS -->
+    <div id="tab-indications" class="tab-content active">
+     <div class="card-glass rounded-2xl p-6 sm:p-8">
+      <h3 class="font-heading text-xl sm:text-2xl font-700 mb-6" style="color:var(--accent);">Indications for Endotracheal Intubation</h3>
+      <div class="grid sm:grid-cols-2 gap-4">
+       <div class="p-4 rounded-xl" style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.1);">
+        <h4 class="font-600 mb-3 flex items-center gap-2" style="color:#22d3ee;"><i data-lucide="alert-triangle" style="width:18px;height:18px;"></i> Absolute Indications</h4>
+        <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+         <li>• <strong>Cardiac Arrest</strong> — Secure airway for CPR ventilation</li>
+         <li>• <strong>GCS ≤ 8</strong> — Loss of protective airway reflexes</li>
+         <li>• <strong>Respiratory Failure</strong> — PaO₂ &lt; 60 mmHg despite O₂, PaCO₂ &gt; 50 with acidosis</li>
+         <li>• <strong>Airway Obstruction</strong> — Angioedema, epiglottitis, foreign body</li>
+         <li>• <strong>Impending Airway Loss</strong> — Inhalation burns, expanding neck hematoma</li>
+         <li>• <strong>Status Epilepticus</strong> — Refractory to initial pharmacotherapy</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-xl" style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.1);">
+        <h4 class="font-600 mb-3 flex items-center gap-2" style="color:#a5b4fc;"><i data-lucide="clipboard-list" style="width:18px;height:18px;"></i> Relative Indications</h4>
+        <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+         <li>• <strong>Hemodynamic Instability</strong> — Severe shock requiring airway control</li>
+         <li>• <strong>Anticipated Clinical Course</strong> — OR procedures, transport of critical patient</li>
+         <li>• <strong>Pulmonary Toilet</strong> — Inability to clear secretions</li>
+         <li>• <strong>Severe Metabolic Acidosis</strong> — Fatigue of respiratory compensation</li>
+         <li>• <strong>Massive Hemoptysis / GI Bleed</strong> — Airway protection</li>
+         <li>• <strong>Severe Facial/Neck Trauma</strong> — Prophylactic before swelling worsens</li>
+        </ul>
+       </div>
+      </div>
+      <div class="mt-6 p-4 rounded-xl" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15);">
+       <p class="text-sm font-600 flex items-center gap-2" style="color:#f59e0b;"><i data-lucide="zap" style="width:16px;height:16px;"></i> Clinical Pearl</p>
+       <p class="text-sm mt-1" style="color:#cbd5e1;">"If you're thinking about intubating the patient, you probably should." The decision to intubate is often clinical gestalt — don't wait for blood gas confirmation in a crashing patient.</p>
+      </div>
+     </div>
+    </div><!-- ASSESSMENT -->
+    <div id="tab-assessment" class="tab-content">
+     <div class="card-glass rounded-2xl p-6 sm:p-8">
+      <h3 class="font-heading text-xl sm:text-2xl font-700 mb-6" style="color:var(--accent);">Pre-Intubation Airway Assessment</h3><!-- LEMON -->
+      <div class="mb-8">
+       <h4 class="font-600 text-lg mb-4 flex items-center gap-2" style="color:#a5b4fc;"><i data-lucide="search" style="width:18px;height:18px;"></i> LEMON Assessment for Difficult Airway</h4>
+       <div class="grid gap-3">
+        <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.03);"><span class="step-number font-mono" style="background:var(--accent);color:#0a0f1a;">L</span>
+         <div>
+          <strong class="text-sm" style="color:#22d3ee;">Look Externally</strong>
+          <p class="text-sm mt-1" style="color:#94a3b8;">Facial trauma, large incisors, beard/mustache, obesity, short thick neck, large tongue, micrognathia</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.03);"><span class="step-number font-mono" style="background:var(--accent);color:#0a0f1a;">E</span>
+         <div>
+          <strong class="text-sm" style="color:#22d3ee;">Evaluate 3-3-2 Rule</strong>
+          <p class="text-sm mt-1" style="color:#94a3b8;">3 fingers mouth opening (inter-incisor distance), 3 fingers hyomental distance, 2 fingers thyro-hyoid distance</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.03);"><span class="step-number font-mono" style="background:var(--accent);color:#0a0f1a;">M</span>
+         <div>
+          <strong class="text-sm" style="color:#22d3ee;">Mallampati Score</strong>
+          <p class="text-sm mt-1 mb-3" style="color:#94a3b8;">Patient sitting upright, mouth wide open, tongue protruded without phonation</p>
+          <div class="mall-grid">
+           <div class="text-center p-3 rounded-lg" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);">
+            <svg viewbox="0 0 80 80" class="mx-auto mb-2" style="width:60px;"><ellipse cx="40" cy="40" rx="30" ry="35" fill="#1e293b" stroke="#475569" stroke-width="1.5" /> <path d="M20 55 Q40 70 60 55" fill="#dc2626" opacity="0.3" /> <rect x="32" y="22" width="16" height="20" rx="2" fill="#f43f5e" opacity="0.4" /> <circle cx="40" cy="18" r="3" fill="#94a3b8" opacity="0.5" />
+            </svg>
+            <p class="text-xs font-600" style="color:#10b981;">Class I</p>
+            <p class="text-xs" style="color:#64748b;">Soft palate, fauces, uvula, pillars visible</p>
+           </div>
+           <div class="text-center p-3 rounded-lg" style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.2);">
+            <svg viewbox="0 0 80 80" class="mx-auto mb-2" style="width:60px;"><ellipse cx="40" cy="40" rx="30" ry="35" fill="#1e293b" stroke="#475569" stroke-width="1.5" /> <path d="M20 55 Q40 65 60 55" fill="#dc2626" opacity="0.3" /> <rect x="34" y="25" width="12" height="15" rx="2" fill="#f43f5e" opacity="0.4" />
+            </svg>
+            <p class="text-xs font-600" style="color:#22d3ee;">Class II</p>
+            <p class="text-xs" style="color:#64748b;">Soft palate, fauces, uvula visible</p>
+           </div>
+           <div class="text-center p-3 rounded-lg" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);">
+            <svg viewbox="0 0 80 80" class="mx-auto mb-2" style="width:60px;"><ellipse cx="40" cy="40" rx="30" ry="35" fill="#1e293b" stroke="#475569" stroke-width="1.5" /> <path d="M25 55 Q40 60 55 55" fill="#dc2626" opacity="0.3" /> <rect x="36" y="30" width="8" height="8" rx="2" fill="#f43f5e" opacity="0.3" />
+            </svg>
+            <p class="text-xs font-600" style="color:#f59e0b;">Class III</p>
+            <p class="text-xs" style="color:#64748b;">Soft palate, base of uvula only</p>
+           </div>
+           <div class="text-center p-3 rounded-lg" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);">
+            <svg viewbox="0 0 80 80" class="mx-auto mb-2" style="width:60px;"><ellipse cx="40" cy="40" rx="30" ry="35" fill="#1e293b" stroke="#475569" stroke-width="1.5" /> <path d="M28 50 Q40 55 52 50" fill="#dc2626" opacity="0.2" />
+            </svg>
+            <p class="text-xs font-600" style="color:#f43f5e;">Class IV</p>
+            <p class="text-xs" style="color:#64748b;">Hard palate only — Difficult airway</p>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.03);"><span class="step-number font-mono" style="background:var(--accent);color:#0a0f1a;">O</span>
+         <div>
+          <strong class="text-sm" style="color:#22d3ee;">Obstruction / Obesity</strong>
+          <p class="text-sm mt-1" style="color:#94a3b8;">Supraglottic masses, peritonsillar abscess, epiglottitis. BMI &gt;30 significantly increases difficulty. Neck circumference &gt;40cm predicts difficult intubation.</p>
+         </div>
+        </div>
+        <div class="flex gap-3 items-start p-3 rounded-lg" style="background:rgba(255,255,255,0.03);"><span class="step-number font-mono" style="background:var(--accent);color:#0a0f1a;">N</span>
+         <div>
+          <strong class="text-sm" style="color:#22d3ee;">Neck Mobility</strong>
+          <p class="text-sm mt-1" style="color:#94a3b8;">C-spine immobilization, ankylosing spondylitis, rheumatoid arthritis, prior cervical fusion. Assess atlanto-occipital extension.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Cormack-Lehane -->
+      <h4 class="font-600 text-lg mb-4 flex items-center gap-2" style="color:#a5b4fc;"><i data-lucide="eye" style="width:18px;height:18px;"></i> Cormack-Lehane Grading (Laryngoscopic View)</h4>
+      <div class="grid sm:grid-cols-2 gap-3">
+       <div class="p-4 rounded-xl flex items-center gap-4" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);">
+        <svg viewbox="0 0 80 60" style="width:70px;flex-shrink:0;"><ellipse cx="40" cy="30" rx="35" ry="25" fill="#1e293b" stroke="#475569" stroke-width="1" /> <path d="M25 30 L40 20 L55 30" fill="none" stroke="#f43f5e" stroke-width="2" /> <ellipse cx="40" cy="28" rx="8" ry="4" fill="none" stroke="#10b981" stroke-width="1.5" />
+        </svg>
+        <div>
+         <p class="text-sm font-600" style="color:#10b981;">Grade I — Full view</p>
+         <p class="text-xs" style="color:#94a3b8;">Entire glottic opening visible</p>
+        </div>
+       </div>
+       <div class="p-4 rounded-xl flex items-center gap-4" style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.15);">
+        <svg viewbox="0 0 80 60" style="width:70px;flex-shrink:0;"><ellipse cx="40" cy="30" rx="35" ry="25" fill="#1e293b" stroke="#475569" stroke-width="1" /> <path d="M25 32 L40 24 L55 32" fill="none" stroke="#f43f5e" stroke-width="2" /> <rect x="20" y="18" width="40" height="10" fill="#1e293b" />
+        </svg>
+        <div>
+         <p class="text-sm font-600" style="color:#22d3ee;">Grade II — Partial view</p>
+         <p class="text-xs" style="color:#94a3b8;">Posterior commissure / arytenoids visible</p>
+        </div>
+       </div>
+       <div class="p-4 rounded-xl flex items-center gap-4" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15);">
+        <svg viewbox="0 0 80 60" style="width:70px;flex-shrink:0;"><ellipse cx="40" cy="30" rx="35" ry="25" fill="#1e293b" stroke="#475569" stroke-width="1" /> <path d="M30 40 Q40 35 50 40" fill="none" stroke="#f59e0b" stroke-width="2" /> <rect x="20" y="18" width="40" height="18" fill="#1e293b" />
+        </svg>
+        <div>
+         <p class="text-sm font-600" style="color:#f59e0b;">Grade III — Epiglottis only</p>
+         <p class="text-xs" style="color:#94a3b8;">No glottic structure seen — use bougie</p>
+        </div>
+       </div>
+       <div class="p-4 rounded-xl flex items-center gap-4" style="background:rgba(244,63,94,0.08);border:1px solid rgba(244,63,94,0.15);">
+        <svg viewbox="0 0 80 60" style="width:70px;flex-shrink:0;"><ellipse cx="40" cy="30" rx="35" ry="25" fill="#1e293b" stroke="#475569" stroke-width="1" /> <rect x="15" y="15" width="50" height="25" rx="3" fill="#1e293b" />
+        </svg>
+        <div>
+         <p class="text-sm font-600" style="color:#f43f5e;">Grade IV — No structures</p>
+         <p class="text-xs" style="color:#94a3b8;">Neither glottis nor epiglottis — surgical airway</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- EQUIPMENT -->
+    <div id="tab-equipment" class="tab-content">
+     <div class="card-glass rounded-2xl p-6 sm:p-8">
+      <h3 class="font-heading text-xl sm:text-2xl font-700 mb-2" style="color:var(--accent);">Equipment Checklist</h3>
+      <p class="text-sm mb-6" style="color:#64748b;">Tick items as you prepare — never intubate without confirming every item</p>
+      <div class="grid sm:grid-cols-2 gap-x-8 gap-y-1" id="checklistContainer">
+      </div>
+      <div class="mt-6 flex items-center justify-between">
+       <p id="checkProgress" class="font-mono text-sm" style="color:var(--accent);">0 / 0 ready</p><button id="resetChecklist" class="text-xs px-3 py-1.5 rounded-lg" style="background:rgba(244,63,94,0.1);color:#f43f5e;border:1px solid rgba(244,63,94,0.15);">Reset All</button>
+      </div>
+     </div>
+    </div><!-- PROCEDURE -->
+    <div id="tab-procedure" class="tab-content">
+     <div class="card-glass rounded-2xl p-6 sm:p-8">
+      <h3 class="font-heading text-xl sm:text-2xl font-700 mb-6" style="color:var(--accent);">Step-by-Step Intubation Procedure</h3>
+      <div id="procedureTimeline" class="space-y-0"></div>
+     </div>
+    </div><!-- RSI DRUGS -->
+    <div id="tab-drugs" class="tab-content">
+     <div class="card-glass rounded-2xl p-6 sm:p-8">
+      <h3 class="font-heading text-xl sm:text-2xl font-700 mb-4" style="color:var(--accent);">Rapid Sequence Intubation (RSI) — Pharmacology</h3>
+      <p class="text-sm mb-6" style="color:#64748b;">Weight-based dosing. Adjust for hemodynamic status, head injury, and comorbidities.</p><!-- Weight calculator -->
+      <div class="mb-8 p-4 rounded-xl" style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.1);"><label class="text-sm font-600 block mb-2" style="color:#22d3ee;">Patient Weight (kg)</label>
+       <div class="flex items-center gap-3"><input id="weightInput" type="number" value="70" min="1" max="300" class="px-3 py-2 rounded-lg text-sm font-mono w-28" style="background:#1e293b;border:1px solid #334155;color:#e2e8f0;outline:none;"> <span class="text-sm" style="color:#94a3b8;">kg — doses auto-calculate below</span>
+       </div>
+      </div><!-- Drug accordion -->
+      <div id="drugAccordion" class="space-y-3"></div>
+     </div>
+    </div><!-- COMPLICATIONS -->
+    <div id="tab-complications" class="tab-content">
+     <div class="card-glass rounded-2xl p-6 sm:p-8">
+      <h3 class="font-heading text-xl sm:text-2xl font-700 mb-6" style="color:var(--accent);">Complications &amp; Troubleshooting</h3>
+      <div class="space-y-4">
+       <div class="p-4 rounded-xl" style="background:rgba(244,63,94,0.06);border:1px solid rgba(244,63,94,0.12);">
+        <h4 class="font-600 mb-3 flex items-center gap-2" style="color:#f43f5e;"><i data-lucide="alert-circle" style="width:18px;height:18px;"></i> Immediate Complications</h4>
+        <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+         <li>• <strong>Esophageal Intubation</strong> — #1 feared complication. Confirm with ETCO₂ waveform (gold standard), bilateral auscultation, chest rise, SpO₂ trend. If any doubt — remove tube and re-oxygenate.</li>
+         <li>• <strong>Right Mainstem Intubation</strong> — Tube advanced too far. Absent left breath sounds. Withdraw 2cm and re-auscultate. CXR confirmation.</li>
+         <li>• <strong>Aspiration</strong> — Cricoid pressure (Sellick's) during RSI. Suction immediately. Ramped/head-up positioning pre-intubation.</li>
+         <li>• <strong>Dental / Soft Tissue Trauma</strong> — Avoid using teeth as fulcrum. Lift, don't lever the laryngoscope.</li>
+         <li>• <strong>Hypoxemia</strong> — Pre-oxygenate adequately. Limit attempts to 30 seconds max. BVM between attempts.</li>
+         <li>• <strong>Cardiovascular Collapse</strong> — Sympathetic surge → hypertension/tachycardia OR vasovagal/sedation-induced hypotension. Have push-dose epinephrine ready (10 mcg/mL).</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-xl" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.12);">
+        <h4 class="font-600 mb-3 flex items-center gap-2" style="color:#f59e0b;"><i data-lucide="clock" style="width:18px;height:18px;"></i> Delayed Complications</h4>
+        <ul class="space-y-2 text-sm" style="color:#cbd5e1;">
+         <li>• <strong>Ventilator-Associated Pneumonia (VAP)</strong> — Head of bed 30-45°, oral chlorhexidine, daily sedation vacation, SBT protocols</li>
+         <li>• <strong>Subglottic Stenosis</strong> — Prolonged intubation &gt;14 days. Consider tracheostomy timing.</li>
+         <li>• <strong>Tracheomalacia</strong> — Cuff pressure monitoring q8h (maintain 20-30 cmH₂O)</li>
+         <li>• <strong>Vocal Cord Paralysis</strong> — Recurrent laryngeal nerve injury. Hoarseness post-extubation. ENT evaluation.</li>
+         <li>• <strong>Post-Extubation Stridor</strong> — Cuff leak test before extubation. Dexamethasone 8mg IV q8h × 3 doses if high risk.</li>
+        </ul>
+       </div>
+       <div class="p-4 rounded-xl" style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.12);">
+        <h4 class="font-600 mb-3 flex items-center gap-2" style="color:#a5b4fc;"><i data-lucide="git-branch" style="width:18px;height:18px;"></i> Failed Airway Algorithm (CICV — Can't Intubate, Can't Ventilate)</h4>
+        <ol class="space-y-2 text-sm" style="color:#cbd5e1;">
+         <li>1. <strong>Call for help</strong> — Anesthesia, ENT, senior colleague</li>
+         <li>2. <strong>Supraglottic device</strong> — LMA / i-gel as rescue</li>
+         <li>3. <strong>Cricothyrotomy</strong> — Scalpel-bougie-tube technique. Palpate cricothyroid membrane. Vertical skin incision → horizontal stab through membrane → bougie → 6.0 ETT</li>
+         <li>4. <strong>Needle cricothyrotomy</strong> (pediatric) — 14G angiocath through CTM → jet ventilation</li>
+        </ol>
+       </div>
+      </div>
+     </div>
+    </div><!-- CLINICAL PEARLS -->
+    <div id="tab-tips" class="tab-content">
+     <div class="card-glass rounded-2xl p-6 sm:p-8">
+      <h3 class="font-heading text-xl sm:text-2xl font-700 mb-6" style="color:var(--accent);">Clinical Pearls from the Bedside</h3>
+      <div class="space-y-4" id="pearlsList"></div>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="max-w-5xl mx-auto px-4 py-10 text-center">
+    <div class="glow-line w-32 mx-auto mb-6"></div>
+    <p class="text-xs" style="color:#475569;">Clinical reference guide — Always follow institutional protocols and evidence-based guidelines.<br>
+     Information is for educational purposes by a practicing Cardiologist, Intensivist &amp; Emergency Medicine specialist.</p>
+   </footer>
+  </div><!-- end scroll-wrapper -->
+  <script>
+// ==================== DATA ====================
+const checklistItems = [
+  "Laryngoscope (Mac 3/4 or Miller 2) — tested light",
+  "ET Tubes — primary size + 0.5 above/below",
+  "10mL syringe for cuff inflation",
+  "Stylet / Bougie (gum elastic)",
+  "BVM + Mask connected to O₂ at 15L/min",
+  "Suction — Yankauer + catheter, tested",
+  "ETCO₂ detector / capnography",
+  "Stethoscope at bedside",
+  "Tape / tube holder for securing",
+  "IV access confirmed & running",
+  "RSI medications drawn up & labeled",
+  "Push-dose pressor ready (epinephrine/phenylephrine)",
+  "Backup airway: LMA / i-gel available",
+  "Cricothyrotomy kit at bedside",
+  "Monitors: SpO₂, ECG, BP — visible",
+  "Pre-oxygenation ≥ 3 min or 8 vital capacity breaths"
+];
+
+const procedureSteps = [
+  { title: "Preparation & Positioning", detail: "Sniffing position: neck flexed on thorax, head extended at atlanto-occipital joint. Place folded towels/blanket under occiput (shoulder roll in obese patients). Align oral, pharyngeal, and tracheal axes. Remove dentures. Ensure full monitoring." },
+  { title: "Pre-oxygenation", detail: "Non-rebreather mask at 15L/min or BVM with tight seal for ≥3 minutes (target EtO₂ >85%). In obese/pregnant patients: ramp to 25-30° head-up. Apneic oxygenation via nasal cannula at 15L/min throughout the procedure. This provides 3-8 minutes of safe apnea time." },
+  { title: "Induction — Push RSI Drugs", detail: "Administer induction agent IV push (Ketamine 1.5mg/kg OR Etomidate 0.3mg/kg OR Propofol 1.5mg/kg — choose based on hemodynamics). Immediately follow with paralytic: Succinylcholine 1.5mg/kg OR Rocuronium 1.2mg/kg. Time from induction to laryngoscopy: 45-60 seconds." },
+  { title: "Laryngoscopy", detail: "Left hand holds laryngoscope. Insert blade into right side of mouth, sweep tongue left. Mac blade: advance to vallecula, lift anteriorly at 45°. Miller blade: directly lift epiglottis. LIFT — never lever against teeth. Identify landmarks: epiglottis → arytenoids → vocal cords (white, V-shaped)." },
+  { title: "Tube Passage", detail: "Right hand passes ET tube through vocal cords under direct vision. Advance until cuff passes 2cm beyond cords. Typical depth: 21cm at teeth (women), 23cm at teeth (men). Remove stylet immediately after tube passes cords. Inflate cuff with 5-10mL air." },
+  { title: "Confirmation — 5 Point Check", detail: "1) ETCO₂ waveform present (GOLD STANDARD — sustained rectangular waveform × 6 breaths). 2) Bilateral chest rise. 3) Auscultate: both axillae + epigastrium (should be silent). 4) SpO₂ maintained/improving. 5) Tube misting with expiration. If ANY doubt → remove and ventilate with BVM." },
+  { title: "Secure & Post-Intubation Care", detail: "Secure tube with commercial holder or tape at noted depth. Order CXR (tip should be 3-5cm above carina, ~T2-T4 level). Set ventilator: start lung-protective (TV 6-8 mL/kg IBW, PEEP 5, FiO₂ 100% then wean). Cuff pressure 20-30 cmH₂O. Sedation + analgesia infusion. NG/OG tube. Document time, tube size, depth, Cormack-Lehane grade, number of attempts." }
+];
+
+const drugs = [
+  { name: "Ketamine", category: "Induction Agent", dose: "1.5 mg/kg IV", onset: "30-60 sec", duration: "10-15 min", notes: "Hemodynamically stable — preferred in sepsis, asthma, hypotension. Dissociative anesthesia. Contraindicated: active psychosis. Minor salivation increase — have suction ready.", color: "#10b981" },
+  { name: "Etomidate", category: "Induction Agent", dose: "0.3 mg/kg IV", onset: "15-30 sec", duration: "5-10 min", notes: "Most hemodynamically neutral. Suppresses adrenal axis (single dose clinically insignificant per recent evidence). Preferred when cardiac output must be preserved. May cause myoclonus.", color: "#22d3ee" },
+  { name: "Propofol", category: "Induction Agent", dose: "1.5-2.5 mg/kg IV", onset: "15-30 sec", duration: "5-10 min", notes: "AVOID in hypotension — potent vasodilator & myocardial depressant. Best for elevated ICP (reduces cerebral metabolic demand). Reduce dose by 50% in hemodynamically compromised patients.", color: "#a5b4fc" },
+  { name: "Midazolam", category: "Induction Agent", dose: "0.1-0.3 mg/kg IV", onset: "1-2 min", duration: "15-30 min", notes: "Slow onset — suboptimal for RSI. Use only if others unavailable. Good amnesia. Hypotension in elderly/hypovolemic. Reversible with flumazenil.", color: "#c084fc" },
+  { name: "Fentanyl", category: "Pre-treatment", dose: "1-3 mcg/kg IV", onset: "2-3 min", duration: "30-60 min", notes: "Given 3 minutes before induction to blunt sympathetic response. Essential in: aortic dissection, elevated ICP, cardiac ischemia. Chest wall rigidity at high doses (>5 mcg/kg rapid push).", color: "#f472b6" },
+  { name: "Succinylcholine", category: "Paralytic (Depolarizing)", dose: "1.5 mg/kg IV", onset: "30-45 sec", duration: "6-10 min", notes: "Fastest onset — gold standard RSI paralytic. Fasciculations precede paralysis. CONTRAINDICATED: hyperkalemia, burns >48h, crush injuries >48h, denervation injuries, malignant hyperthermia history, myopathies. Raises K⁺ by 0.5-1.0 mEq/L.", color: "#f59e0b" },
+  { name: "Rocuronium", category: "Paralytic (Non-depolarizing)", dose: "1.2 mg/kg IV (RSI dose)", onset: "45-60 sec", duration: "40-60 min", notes: "Alternative to succinylcholine when contraindicated. Higher dose (1.2mg/kg) for RSI conditions. Reversible with sugammadex (16mg/kg for immediate reversal). Preferred in hyperkalemia, burn patients.", color: "#f97316" },
+  { name: "Lidocaine", category: "Pre-treatment", dose: "1.5 mg/kg IV", onset: "1-2 min", duration: "10-20 min", notes: "Given 3 minutes before laryngoscopy to blunt ICP rise and cough reflex. Indicated in: elevated ICP, reactive airway disease. Evidence is debated but remains standard practice in neuro-emergencies.", color: "#6ee7b7" }
+];
+
+const pearls = [
+  { icon: "lightbulb", title: "The Most Important Equipment is Between Your Ears", text: "Always have a Plan A, B, and C before pushing drugs. Verbalize your failed-airway plan to the team. Mental rehearsal reduces cognitive load in crisis." },
+  { icon: "shield", title: "Pre-oxygenation Saves Lives", text: "The 3-minute pre-oxygenation creates a 3-8 minute oxygen reservoir in FRC. In obese patients, this may shrink to 90 seconds. Apneic oxygenation via 15L/min nasal cannula during laryngoscopy extends safe apnea time by 3-6 minutes. This is non-negotiable." },
+  { icon: "heart", title: "Hemodynamics Kill Before Hypoxia", text: "Post-intubation cardiovascular collapse is common. Causes: loss of sympathetic drive (sedation), positive-pressure ventilation reducing preload, auto-PEEP. Have a vasopressor syringe in hand. Pre-load with 500mL crystalloid in hypotensive patients." },
+  { icon: "target", title: "The Bougie is Your Best Friend", text: "In Cormack-Lehane Grade III (epiglottis only), the bougie has a >95% first-pass success rate. Advance with the coude tip anteriorly — you should feel tracheal clicks as it passes over cartilaginous rings. Loss of clicks = esophageal placement." },
+  { icon: "monitor", title: "ETCO₂ is the ONLY Reliable Confirmation", text: "Auscultation alone has a 10-15% error rate for detecting esophageal intubation. Capnography with sustained waveform × 6 breaths is the gold standard. If no ETCO₂ waveform → tube is in esophagus until proven otherwise. Remove and bag." },
+  { icon: "trending-up", title: "Video Laryngoscopy Has Changed the Game", text: "First-pass success rates with video laryngoscopy (C-MAC, GlideScope, McGrath) approach 95-98%. It should be considered first-line in predicted difficult airways, C-spine immobilization, and as a teaching tool. Always have a direct laryngoscope as backup." },
+  { icon: "users", title: "Intubation is a Team Sport", text: "Assign roles before induction: airway operator, medication pusher, cricoid pressure, BVM assistant, monitor watcher. Use closed-loop communication. Debrief after every intubation — especially the difficult ones." },
+  { icon: "alert-triangle", title: "Know When NOT to Paralyze", text: "In anticipated difficult airway where BVM ventilation may also fail (MOANS criteria positive), consider awake intubation with topical anesthesia + light sedation. Paralyzing a patient you cannot ventilate or intubate is the path to CICV (Can't Intubate, Can't Ventilate)." }
+];
+
+// ==================== TABS ====================
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    lucide.createIcons();
+  });
+});
+
+// ==================== CHECKLIST ====================
+function buildChecklist() {
+  const c = document.getElementById('checklistContainer');
+  c.innerHTML = '';
+  checklistItems.forEach((item, i) => {
+    const label = document.createElement('label');
+    label.className = 'checklist-item flex items-start gap-2 py-2 cursor-pointer';
+    label.innerHTML = `<input type="checkbox" data-idx="${i}" class="mt-1 accent-cyan-400 flex-shrink-0"><span class="text-sm" style="color:#cbd5e1;">${item}</span>`;
+    c.appendChild(label);
+  });
+  c.querySelectorAll('input').forEach(inp => inp.addEventListener('change', updateProgress));
+  updateProgress();
+}
+function updateProgress() {
+  const all = document.querySelectorAll('#checklistContainer input');
+  const checked = document.querySelectorAll('#checklistContainer input:checked');
+  document.getElementById('checkProgress').textContent = `${checked.length} / ${all.length} ready`;
+}
+document.getElementById('resetChecklist').addEventListener('click', () => {
+  document.querySelectorAll('#checklistContainer input').forEach(i => i.checked = false);
+  updateProgress();
+});
+buildChecklist();
+
+// ==================== PROCEDURE TIMELINE ====================
+function buildTimeline() {
+  const container = document.getElementById('procedureTimeline');
+  container.innerHTML = '';
+  procedureSteps.forEach((step, i) => {
+    const isLast = i === procedureSteps.length - 1;
+    const div = document.createElement('div');
+    div.className = 'flex gap-4';
+    div.innerHTML = `
+      <div class="flex flex-col items-center">
+        <div class="timeline-dot"></div>
+        ${!isLast ? '<div class="timeline-line flex-1 my-1"></div>' : ''}
+      </div>
+      <div class="pb-8 flex-1">
+        <h4 class="font-600 text-sm mb-1" style="color:#22d3ee;">Step ${i + 1}: ${step.title}</h4>
+        <p class="text-sm leading-relaxed" style="color:#cbd5e1;">${step.detail}</p>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+buildTimeline();
+
+// ==================== DRUG ACCORDION ====================
+function buildDrugs() {
+  const container = document.getElementById('drugAccordion');
+  container.innerHTML = '';
+  const weight = parseInt(document.getElementById('weightInput').value) || 70;
+  drugs.forEach((drug, i) => {
+    const doseCalc = calculateDose(drug, weight);
+    const div = document.createElement('div');
+    div.className = 'rounded-xl overflow-hidden';
+    div.style.cssText = `background:rgba(255,255,255,0.02);border:1px solid ${drug.color}22;`;
+    div.innerHTML = `
+      <button class="acc-toggle w-full flex items-center justify-between p-4 text-left" data-idx="${i}">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${drug.color};"></span>
+          <div>
+            <span class="font-600 text-sm" style="color:${drug.color};">${drug.name}</span>
+            <span class="text-xs ml-2" style="color:#64748b;">${drug.category}</span>
+          </div>
+        </div>
+        <i data-lucide="chevron-down" style="width:16px;height:16px;color:#64748b;transition:transform 0.3s;" class="acc-chevron"></i>
+      </button>
+      <div class="accordion-body">
+        <div class="px-4 pb-4 space-y-2">
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div class="p-2 rounded-lg" style="background:rgba(255,255,255,0.03);"><p class="text-xs" style="color:#64748b;">Dose</p><p class="text-sm font-mono font-600" style="color:#e2e8f0;">${drug.dose}</p></div>
+            <div class="p-2 rounded-lg" style="background:rgba(255,255,255,0.03);"><p class="text-xs" style="color:#64748b;">Onset</p><p class="text-sm font-mono font-600" style="color:#e2e8f0;">${drug.onset}</p></div>
+            <div class="p-2 rounded-lg" style="background:rgba(255,255,255,0.03);"><p class="text-xs" style="color:#64748b;">Duration</p><p class="text-sm font-mono font-600" style="color:#e2e8f0;">${drug.duration}</p></div>
+          </div>
+          <div class="p-3 rounded-lg" style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.1);">
+            <p class="text-xs font-600 mb-1" style="color:#22d3ee;">Calculated for ${weight} kg:</p>
+            <p class="font-mono text-sm font-600" style="color:#e2e8f0;">${doseCalc}</p>
+          </div>
+          <p class="text-sm leading-relaxed" style="color:#94a3b8;">${drug.notes}</p>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+  container.querySelectorAll('.acc-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const chevron = btn.querySelector('.acc-chevron');
+      const isOpen = body.classList.contains('open');
+      container.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+      container.querySelectorAll('.acc-chevron').forEach(c => c.style.transform = 'rotate(0deg)');
+      if (!isOpen) { body.classList.add('open'); chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+  lucide.createIcons();
+}
+
+function calculateDose(drug, w) {
+  const map = {
+    'Ketamine': () => `${(1.5 * w).toFixed(0)} mg (1.5 mg/kg × ${w}kg)`,
+    'Etomidate': () => `${(0.3 * w).toFixed(0)} mg (0.3 mg/kg × ${w}kg)`,
+    'Propofol': () => `${(1.5 * w).toFixed(0)}–${(2.5 * w).toFixed(0)} mg (1.5–2.5 mg/kg)`,
+    'Midazolam': () => `${(0.1 * w).toFixed(0)}–${(0.3 * w).toFixed(0)} mg (0.1–0.3 mg/kg)`,
+    'Fentanyl': () => `${(1 * w).toFixed(0)}–${(3 * w).toFixed(0)} mcg (1–3 mcg/kg)`,
+    'Succinylcholine': () => `${(1.5 * w).toFixed(0)} mg (1.5 mg/kg × ${w}kg)`,
+    'Rocuronium': () => `${(1.2 * w).toFixed(0)} mg (1.2 mg/kg RSI dose × ${w}kg)`,
+    'Lidocaine': () => `${(1.5 * w).toFixed(0)} mg (1.5 mg/kg × ${w}kg)`
+  };
+  return (map[drug.name] || (() => drug.dose))();
+}
+
+document.getElementById('weightInput').addEventListener('input', buildDrugs);
+buildDrugs();
+
+// ==================== PEARLS ====================
+function buildPearls() {
+  const c = document.getElementById('pearlsList');
+  c.innerHTML = '';
+  pearls.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'p-4 rounded-xl';
+    div.style.cssText = 'background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);';
+    div.innerHTML = `<h4 class="font-600 text-sm mb-2 flex items-center gap-2" style="color:#f59e0b;"><i data-lucide="${p.icon}" style="width:16px;height:16px;"></i>${p.title}</h4><p class="text-sm leading-relaxed" style="color:#cbd5e1;">${p.text}</p>`;
+    c.appendChild(div);
+  });
+  lucide.createIcons();
+}
+buildPearls();
+
+// ==================== ELEMENT SDK ====================
+const defaultConfig = {
+  main_title: "Endotracheal Intubation",
+  subtitle: "A Comprehensive Clinical Experience Guide for Emergency, ICU & Operative Settings",
+  author_name: "MBBS, MD Medicine, DM Cardiology — Professor of Medicine / ICU Intensivist",
+  background_color: "#0a0f1a",
+  surface_color: "#111827",
+  text_color: "#e2e8f0",
+  accent_color: "#22d3ee",
+  accent2_color: "#6366f1",
+  font_family: "Playfair Display",
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const el = (id) => document.getElementById(id);
+  el('mainTitle').textContent = config.main_title || defaultConfig.main_title;
+  el('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+  el('authorName').textContent = config.author_name || defaultConfig.author_name;
+
+  const bg = config.background_color || defaultConfig.background_color;
+  const sf = config.surface_color || defaultConfig.surface_color;
+  const tx = config.text_color || defaultConfig.text_color;
+  const ac = config.accent_color || defaultConfig.accent_color;
+  const ac2 = config.accent2_color || defaultConfig.accent2_color;
+
+  document.documentElement.style.setProperty('--bg', bg);
+  document.documentElement.style.setProperty('--surface', sf);
+  document.documentElement.style.setProperty('--text', tx);
+  document.documentElement.style.setProperty('--accent', ac);
+  document.documentElement.style.setProperty('--accent2', ac2);
+
+  const font = config.font_family || defaultConfig.font_family;
+  const baseSize = config.font_size || defaultConfig.font_size;
+  document.querySelectorAll('.font-heading, h1, h2, h3').forEach(e => {
+    e.style.fontFamily = `${font}, serif`;
+  });
+  document.body.style.fontSize = `${baseSize}px`;
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>
