@@ -1,0 +1,269 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Visual Hacks | Medical Visual Learning Tricks | Deep Medicine</title> <meta name="description" content="Visual hacks to simplify complex medical concepts using diagrams, patterns, and visual memory techniques for faster understanding."> <link rel="canonical" href="https://deepmedicine.in/learning/tools/visual-hacks"> <!-- Open Graph --> <meta property="og:title" content="Visual Hacks | Deep Medicine"> <meta property="og:description" content="Visual learning tricks and diagrams to simplify and remember medical concepts."> <meta property="og:image" content="https://deepmedicine.in/images/visual-hacks.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+html,body{margin:0;padding:0;height:100%;font-family:'DM Sans',sans-serif}
+.font-display{font-family:'Playfair Display',serif}
+.card-hover{transition:transform .3s,box-shadow .3s}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.12)}
+.tab-active{background:var(--primary);color:#fff;box-shadow:0 4px 15px rgba(0,0,0,.15)}
+.fade-in{animation:fadeIn .5s ease forwards;opacity:0}
+@keyframes fadeIn{to{opacity:1}}
+.stagger-1{animation-delay:.1s}.stagger-2{animation-delay:.2s}.stagger-3{animation-delay:.3s}.stagger-4{animation-delay:.4s}.stagger-5{animation-delay:.5s}.stagger-6{animation-delay:.6s}
+:root{--bg:#0f1117;--surface:#1a1d27;--text:#e8e6e3;--primary:#c084fc;--secondary:#6366f1}
+.mnemonic-letter{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;font-weight:700;font-size:18px;margin:2px;flex-shrink:0}
+.expand-content{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.expand-content.open{max-height:2000px}
+.pulse-dot{width:8px;height:8px;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+*::-webkit-scrollbar{width:6px}*::-webkit-scrollbar-track{background:var(--bg)}*::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full" style="background:var(--bg);color:var(--text)">
+  <div id="app" class="h-full w-full overflow-auto"><!-- Hero -->
+   <header class="relative overflow-hidden" style="background:linear-gradient(135deg,#0f1117 0%,#1e1533 50%,#0f1117 100%)">
+    <div class="absolute inset-0" style="background:radial-gradient(circle at 20% 50%,rgba(192,132,252,.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(99,102,241,.08) 0%,transparent 50%)"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+     <div class="fade-in stagger-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium mb-6" style="background:rgba(192,132,252,.12);color:var(--primary)">
+      <div class="pulse-dot" style="background:var(--primary)"></div> MBBS / MD Study Companion
+     </div>
+     <h1 id="pageTitle" class="fade-in stagger-2 font-display text-3xl sm:text-5xl lg:text-6xl font-800 leading-tight mb-4" style="color:var(--text)">Visual Memory Hacks</h1>
+     <p id="pageSubtitle" class="fade-in stagger-3 text-base sm:text-xl max-w-2xl mx-auto" style="color:rgba(232,230,227,.6)">Master Medicine Through Visual Mnemonics</p>
+     <div class="fade-in stagger-4 flex flex-wrap justify-center gap-4 mt-8 text-sm" style="color:rgba(232,230,227,.5)"><span class="flex items-center gap-1.5"><i data-lucide="brain" style="width:16px;height:16px;color:var(--primary)"></i> 50+ Mnemonics</span> <span class="flex items-center gap-1.5"><i data-lucide="layers" style="width:16px;height:16px;color:var(--secondary)"></i> 8 Categories</span> <span class="flex items-center gap-1.5"><i data-lucide="zap" style="width:16px;height:16px;color:#facc15"></i> Exam Ready</span>
+     </div>
+    </div>
+   </header><!-- Tabs -->
+   <nav class="sticky top-0 z-30" style="background:rgba(15,17,23,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)">
+    <div class="max-w-6xl mx-auto px-4 overflow-x-auto">
+     <div id="tabBar" class="flex gap-1 py-2 min-w-max">
+     </div>
+    </div>
+   </nav><!-- Content -->
+   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div id="contentArea"></div>
+   </main><!-- Footer -->
+   <footer class="text-center py-8 text-xs" style="color:rgba(232,230,227,.3);border-top:1px solid rgba(255,255,255,.04)">
+    <p>📚 For educational purposes — always consult standard textbooks &amp; faculty guidance</p>
+   </footer>
+  </div>
+  <script>
+const DATA = [
+  {
+    id:"anatomy",icon:"bone",label:"Anatomy",
+    cards:[
+      {title:"Cranial Nerves (I–XII)",mnemonic:"Oh Oh Oh To Touch And Feel Very Good Velvet — AH!",letters:["O","O","O","T","T","A","F","V","G","V","A","H"],meanings:["Olfactory","Optic","Oculomotor","Trochlear","Trigeminal","Abducens","Facial","Vestibulocochlear","Glossopharyngeal","Vagus","Accessory","Hypoglossal"],tip:"Visualize walking through a velvet curtain — each fold reveals a nerve.",color:"#c084fc"},
+      {title:"Sensory / Motor / Both",mnemonic:"Some Say Marry Money But My Brother Says Big Brains Matter Most",letters:["S","S","M","M","B","M","B","S","B","B","M","M"],meanings:["Sensory","Sensory","Motor","Motor","Both","Motor","Both","Sensory","Both","Both","Motor","Motor"],tip:"Pair each word with its cranial nerve number for dual encoding.",color:"#818cf8"},
+      {title:"Brachial Plexus Roots",mnemonic:"Robert Taylor Drinks Cold Beer",letters:["R","T","D","C","B"],meanings:["Roots","Trunks","Divisions","Cords","Branches"],tip:"Picture a tree: roots at bottom → branches at top.",color:"#c084fc"},
+      {title:"Carpal Bones",mnemonic:"Some Lovers Try Positions That They Can't Handle",letters:["S","L","T","P","T","T","C","H"],meanings:["Scaphoid","Lunate","Triquetrum","Pisiform","Trapezium","Trapezoid","Capitate","Hamate"],tip:"Trace a U‑shape on your own wrist starting from the thumb side.",color:"#818cf8"},
+      {title:"Tarsal Bones",mnemonic:"Tiger Cubs Need MILC",letters:["T","C","N","M","I","L","C"],meanings:["Talus","Calcaneus","Navicular","Medial cuneiform","Intermediate cuneiform","Lateral cuneiform","Cuboid"],tip:"Imagine a tiger family drinking milk — feet on the ground.",color:"#c084fc"},
+      {title:"Layers of the Scalp",mnemonic:"S-C-A-L-P",letters:["S","C","A","L","P"],meanings:["Skin","Connective tissue","Aponeurosis","Loose areolar tissue","Pericranium"],tip:"Literally spell SCALP — each letter IS the layer.",color:"#818cf8"}
+    ]
+  },
+  {
+    id:"physio",icon:"heart-pulse",label:"Physiology",
+    cards:[
+      {title:"Heart Valve Auscultation",mnemonic:"All Patients Take Medicine",letters:["A","P","T","M"],meanings:["Aortic","Pulmonic","Tricuspid","Mitral"],tip:"From right 2nd intercostal → down to apex. Picture a stethoscope zigzag.",color:"#f472b6"},
+      {title:"ECG Lead Placement (Limbs)",mnemonic:"Ride Your Green Bicycle",letters:["R","Y","G","B"],meanings:["Right arm – Red","Left arm – Yellow","Left leg – Green","Right leg – Black"],tip:"Think of traffic lights starting from right arm clockwise.",color:"#fb923c"},
+      {title:"Adrenal Cortex Layers",mnemonic:"GFR — Salt Sugar Sex",letters:["G","F","R"],meanings:["Glomerulosa → Mineralocorticoids (Salt)","Fasciculata → Glucocorticoids (Sugar)","Reticularis → Androgens (Sex)"],tip:"'The deeper you go, the sweeter it gets' — GFR inward.",color:"#f472b6"},
+      {title:"Insulin Effects",mnemonic:"Insulin is the KEY that opens the DOOR for glucose",letters:["K","E","Y"],meanings:["Kinase activation","Entry of glucose into cells","Yields glycogen storage"],tip:"Visualize a golden key unlocking cell membrane doors.",color:"#fb923c"},
+      {title:"Coagulation Cascade",mnemonic:"1, 2, 3… 5, 7, 10, 13 — Unlucky for Clots",letters:["I","II","III","V","VII","X","XIII"],meanings:["Fibrinogen","Prothrombin","Tissue Factor","Proaccelerin","Proconvertin","Stuart Factor","Fibrin Stabilizing"],tip:"Odd numbers dominate — think 'odd clotting cascade'.",color:"#f472b6"}
+    ]
+  },
+  {
+    id:"biochem",icon:"flask-conical",label:"Biochemistry",
+    cards:[
+      {title:"Essential Amino Acids",mnemonic:"PVT TIM HALL",letters:["P","V","T","T","I","M","H","A","L","L"],meanings:["Phenylalanine","Valine","Threonine","Tryptophan","Isoleucine","Methionine","Histidine","Arginine","Leucine","Lysine"],tip:"Picture a private named Tim standing in a hall — he's essential!",color:"#34d399"},
+      {title:"Krebs Cycle Intermediates",mnemonic:"Can I Keep Selling Sex For Money, Officer?",letters:["C","I","K","S","S","F","M","O"],meanings:["Citrate","Isocitrate","α-Ketoglutarate","Succinyl-CoA","Succinate","Fumarate","Malate","Oxaloacetate"],tip:"Draw a circle — place each at clock positions 12→9.",color:"#2dd4bf"},
+      {title:"Glycogen Storage Diseases",mnemonic:"Very Poor Carbohydrate Metabolism",letters:["V","P","C","M"],meanings:["Von Gierke (Type I)","Pompe (Type II)","Cori (Type III)","McArdle (Type V)"],tip:"Link each with the enzyme defect for deeper recall.",color:"#34d399"},
+      {title:"B Vitamins in Order",mnemonic:"The Rhythm Never Pauses, People Become Friendly Creatures",letters:["T","R","N","P","P","B","F","C"],meanings:["Thiamine B1","Riboflavin B2","Niacin B3","Pantothenic B5","Pyridoxine B6","Biotin B7","Folate B9","Cobalamin B12"],tip:"Snap a rhythm — each beat is a B vitamin.",color:"#2dd4bf"}
+    ]
+  },
+  {
+    id:"pharma",icon:"pill",label:"Pharmacology",
+    cards:[
+      {title:"Cholinergic Effects (Muscarinic)",mnemonic:"DUMBBELSS",letters:["D","U","M","B","B","E","L","S","S"],meanings:["Diarrhea","Urination","Miosis","Bradycardia","Bronchospasm","Emesis","Lacrimation","Salivation","Sweating"],tip:"Picture someone lifting DUMBBELs while sweating profusely.",color:"#f97316"},
+      {title:"Atropine Side Effects",mnemonic:"Hot as a hare, Blind as a bat, Dry as a bone, Red as a beet, Mad as a hatter",letters:["H","B","D","R","M"],meanings:["Hyperthermia","Blurred vision / Mydriasis","Dry mouth & skin","Flushing","Delirium / Hallucinations"],tip:"Each simile paints a vivid clinical picture — use the imagery.",color:"#fb923c"},
+      {title:"Zero-Order Kinetics Drugs",mnemonic:"PEAW",letters:["P","E","A","W"],meanings:["Phenytoin","Ethanol","Aspirin (high dose)","Warfarin (loading)"],tip:"'Zero order = rate stays constant regardless of concentration.'",color:"#f97316"},
+      {title:"Drugs Causing Lupus",mnemonic:"HIPPE",letters:["H","I","P","P","E"],meanings:["Hydralazine","INH","Procainamide","Phenytoin","Etanercept"],tip:"Imagine a hippie with a butterfly rash at Woodstock.",color:"#fb923c"},
+      {title:"CYP450 Inducers",mnemonic:"Crab PCS Brings Rapid Grief",letters:["C","P","C","S","B","R","G"],meanings:["Carbamazepine","Phenytoin","Cyclophosphamide","St John's Wort","Barbiturates","Rifampin","Griseofulvin"],tip:"Rifampin is the KING inducer — always think of it first.",color:"#f97316"}
+    ]
+  },
+  {
+    id:"micro",icon:"bug",label:"Microbiology",
+    cards:[
+      {title:"Encapsulated Organisms",mnemonic:"SHiNE SKiS",letters:["S","H","N","E","S","K","S"],meanings:["Strep pneumo","H. influenzae","Neisseria meningitidis","E. coli","Salmonella","Klebsiella","Group B Strep"],tip:"Capsules SHINE — they evade phagocytosis. Asplenic patients beware!",color:"#38bdf8"},
+      {title:"Obligate Aerobes",mnemonic:"Nagging Pests Must Breathe",letters:["N","P","M","B"],meanings:["Nocardia","Pseudomonas","Mycobacterium TB","Bacillus cereus"],tip:"They MUST breathe O₂ — picture them gasping at altitude.",color:"#22d3ee"},
+      {title:"Obligate Anaerobes",mnemonic:"Anaerobes Can't Breathe Air",letters:["A","C","B","A"],meanings:["Actinomyces","Clostridium","Bacteroides","(no Air)"],tip:"They die in O₂ — imagine vampires in sunlight.",color:"#38bdf8"},
+      {title:"Gram-Positive Cocci Clusters",mnemonic:"STAPHYLO = GRAPES",letters:["S","T","A","P","H"],meanings:["S. aureus","Toxic Shock","Abscess","Pneumonia","Hospital infections"],tip:"Staph = Staff holding grapes. Strep = Strip in chains.",color:"#22d3ee"},
+      {title:"DNA Viruses",mnemonic:"HHAPPPy",letters:["H","H","A","P","P","P","y"],meanings:["Herpes","Hepadna","Adeno","Papilloma","Parvo","Pox","(all DNA)"],tip:"All DNA except Parvo are double-stranded. HHAPPPy = happy DNA.",color:"#38bdf8"}
+    ]
+  },
+  {
+    id:"patho",icon:"microscope",label:"Pathology",
+    cards:[
+      {title:"Nephrotic Syndrome Features",mnemonic:"Protein FAME",letters:["P","F","A","M","E"],meanings:["Proteinuria (>3.5g)","Fat bodies (oval)","Albumin low","Membranous (#1 adult)","Edema"],tip:"Celebrity kidneys leak protein — they're FAMOUS for it.",color:"#e879f9"},
+      {title:"Nephritic Syndrome",mnemonic:"PHAROH",letters:["P","H","A","R","O","H"],meanings:["Proteinuria (<3.5g)","Hematuria","Azotemia","RBC casts","Oliguria","Hypertension"],tip:"Think Egyptian pharaoh with red (bloody) urine — nephrITIC = inflammaTIC.",color:"#d946ef"},
+      {title:"Tumor Markers",mnemonic:"AFP for Liver, CEA for Colon, CA-125 for Ovary, PSA for Prostate",letters:["A","C","C","P"],meanings:["AFP → Hepatocellular / Germ cell","CEA → Colorectal","CA-125 → Ovarian","PSA → Prostate"],tip:"Link each marker to its organ with a body map visual.",color:"#e879f9"},
+      {title:"Apoptosis vs Necrosis",mnemonic:"Apoptosis = Neat suicide, Necrosis = Messy murder",letters:["A","N"],meanings:["Apoptosis: cell shrinkage, no inflammation","Necrosis: cell swelling, inflammation"],tip:"A = Alone (quiet death). N = Noisy (inflammatory chaos).",color:"#d946ef"}
+    ]
+  },
+  {
+    id:"medicine",icon:"stethoscope",label:"Int. Medicine",
+    cards:[
+      {title:"Causes of Pancreatitis",mnemonic:"I GET SMASHED",letters:["I","G","E","T","S","M","A","S","H","E","D"],meanings:["Idiopathic","Gallstones","Ethanol","Trauma","Steroids","Mumps","Autoimmune","Scorpion sting","Hyperlipidemia","ERCP","Drugs"],tip:"Most common: Gallstones (#1) then Alcohol (#2). The rest follow.",color:"#a78bfa"},
+      {title:"Heart Failure Signs",mnemonic:"FACES",letters:["F","A","C","E","S"],meanings:["Fatigue","Activities limited","Congestion","Edema","Shortness of breath"],tip:"Heart failure shows its FACES — look at the patient's face.",color:"#8b5cf6"},
+      {title:"Hypercalcemia Symptoms",mnemonic:"Stones, Bones, Groans, Thrones, Psych Overtones",letters:["S","B","G","T","P"],meanings:["Renal stones","Bone pain","Abdominal groans","Polyuria (throne)","Psychiatric symptoms"],tip:"Imagine a king on a THRONE with kidney stones — groaning.",color:"#a78bfa"},
+      {title:"Metabolic Acidosis (High AG)",mnemonic:"MUDPILES",letters:["M","U","D","P","I","L","E","S"],meanings:["Methanol","Uremia","DKA","Propylene glycol","INH/Iron","Lactic acidosis","Ethylene glycol","Salicylates"],tip:"Imagine falling into MUD PILES of acid — high anion gap.",color:"#8b5cf6"}
+    ]
+  },
+  {
+    id:"surgery",icon:"scissors",label:"Surgery",
+    cards:[
+      {title:"Surgical Wound Classification",mnemonic:"Clean → Clean-Contaminated → Contaminated → Dirty",letters:["1","2","3","4"],meanings:["Clean: elective, closed, no inflammation","Clean-Contaminated: GI/GU tract entered","Contaminated: open trauma, spillage","Dirty: pus, perforated viscus"],tip:"Infection risk increases 1→4. Class 1 = <2% infection rate.",color:"#fbbf24"},
+      {title:"Abdominal Incisions",mnemonic:"MKP-R → Midline, Kocher, Paramedian, Rooftop",letters:["M","K","P","R"],meanings:["Midline → General access","Kocher → Right subcostal (gallbladder)","Paramedian → Kidney","Rooftop → Bilateral subcostal (liver/pancreas)"],tip:"Draw on your own abdomen to remember locations.",color:"#f59e0b"},
+      {title:"Glasgow Coma Scale",mnemonic:"Eye 4, Verbal 5, Motor 6 — Total 15",letters:["E","V","M"],meanings:["Eye: 4 (spontaneous→none)","Verbal: 5 (oriented→none)","Motor: 6 (obeys→none)"],tip:"456 — ascending order. ≤8 = intubate!",color:"#fbbf24"},
+      {title:"Burns Rule of 9s (Adult)",mnemonic:"Head 9, Arms 9×2, Legs 18×2, Trunk 36, Perineum 1",letters:["H","A","L","T","P"],meanings:["Head 9%","Each Arm 9%","Each Leg 18%","Trunk 36% (front 18 + back 18)","Perineum 1%"],tip:"Use your palm = 1% for irregular burns.",color:"#f59e0b"}
+    ]
+  }
+];
+
+let activeTab = DATA[0].id;
+let expandedCards = new Set();
+
+const defaultConfig = {
+  page_title: "Visual Memory Hacks",
+  subtitle: "Master Medicine Through Visual Mnemonics",
+  background_color: "#0f1117",
+  surface_color: "#1a1d27",
+  text_color: "#e8e6e3",
+  primary_color: "#c084fc",
+  secondary_color: "#6366f1",
+  font_family: "Playfair Display",
+  font_size: 16
+};
+
+function renderTabs() {
+  const bar = document.getElementById('tabBar');
+  bar.innerHTML = '';
+  DATA.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = `flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${activeTab===cat.id?'tab-active':''}`;
+    if(activeTab!==cat.id) btn.style.cssText = 'color:rgba(232,230,227,.5)';
+    btn.innerHTML = `<i data-lucide="${cat.icon}" style="width:14px;height:14px"></i>${cat.label}`;
+    btn.onclick = () => { activeTab=cat.id; expandedCards.clear(); renderTabs(); renderContent(); };
+    bar.appendChild(btn);
+  });
+  lucide.createIcons();
+}
+
+function renderContent() {
+  const area = document.getElementById('contentArea');
+  const cat = DATA.find(c=>c.id===activeTab);
+  area.innerHTML = `
+    <div class="mb-6">
+      <h2 class="font-display text-xl sm:text-2xl font-700 mb-1" style="color:var(--text)">${cat.label} Mnemonics</h2>
+      <p class="text-sm" style="color:rgba(232,230,227,.4)">${cat.cards.length} visual memory aids</p>
+    </div>
+    <div class="grid gap-4 sm:gap-5">
+      ${cat.cards.map((c,i) => renderCard(c,i,cat.id)).join('')}
+    </div>
+  `;
+  lucide.createIcons();
+  // re-open expanded
+  expandedCards.forEach(key => {
+    const el = document.getElementById('expand-'+key);
+    if(el) el.classList.add('open');
+  });
+}
+
+function renderCard(c, i, catId) {
+  const key = catId+'-'+i;
+  const isOpen = expandedCards.has(key);
+  return `
+  <div class="fade-in stagger-${Math.min(i+1,6)} rounded-2xl p-5 sm:p-6 card-hover" style="background:var(--surface);border:1px solid rgba(255,255,255,.06)">
+    <div class="flex items-start justify-between gap-3 cursor-pointer" onclick="toggleCard('${key}')">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${c.color}"></span>
+          <span class="text-xs font-medium uppercase tracking-wider" style="color:${c.color}">Card ${i+1}</span>
+        </div>
+        <h3 class="font-display text-lg sm:text-xl font-700" style="color:var(--text)">${c.title}</h3>
+      </div>
+      <div class="mt-1 flex-shrink-0 transition-transform ${isOpen?'rotate-180':''}" style="color:rgba(232,230,227,.3)">
+        <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+      </div>
+    </div>
+
+    <div class="mt-4 rounded-xl px-4 py-3" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.04)">
+      <p class="text-xs uppercase tracking-wider mb-2 font-semibold" style="color:${c.color}">Mnemonic</p>
+      <p class="text-sm sm:text-base font-semibold leading-relaxed" style="color:var(--text)">"${c.mnemonic}"</p>
+    </div>
+
+    <div class="mt-3 flex flex-wrap gap-1">
+      ${c.letters.map(l => `<span class="mnemonic-letter text-xs" style="background:${c.color}22;color:${c.color};border:1px solid ${c.color}33">${l}</span>`).join('')}
+    </div>
+
+    <div id="expand-${key}" class="expand-content ${isOpen?'open':''}">
+      <div class="mt-4 space-y-1.5">
+        ${c.letters.map((l,j) => `
+          <div class="flex items-start gap-2 text-sm">
+            <span class="font-bold flex-shrink-0" style="color:${c.color};min-width:20px">${l}</span>
+            <span style="color:rgba(232,230,227,.7)">— ${c.meanings[j]||''}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="mt-4 flex items-start gap-2 rounded-lg p-3" style="background:rgba(192,132,252,.06);border:1px solid rgba(192,132,252,.1)">
+        <i data-lucide="lightbulb" style="width:16px;height:16px;color:#facc15;flex-shrink:0;margin-top:2px"></i>
+        <p class="text-xs sm:text-sm leading-relaxed" style="color:rgba(232,230,227,.6)"><strong style="color:var(--primary)">Visual Tip:</strong> ${c.tip}</p>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleCard(key) {
+  if(expandedCards.has(key)) expandedCards.delete(key); else expandedCards.add(key);
+  const el = document.getElementById('expand-'+key);
+  if(el) { el.classList.toggle('open'); lucide.createIcons(); }
+}
+
+onConfigChange: async (config) => {
+  const bg = config.background_color || defaultConfig.background_color;
+  const sf = config.surface_color || defaultConfig.surface_color;
+  const tx = config.text_color || defaultConfig.text_color;
+  const pr = config.accent_color || defaultConfig.accent_color;
+  const sc = config.muted_color || defaultConfig.muted_color;
+  const ff = config.font_family || defaultConfig.font_family;
+  const fs = config.font_size || defaultConfig.font_size;
+
+  document.documentElement.style.setProperty('--bg', bg);
+  document.documentElement.style.setProperty('--surface', sf);
+  document.documentElement.style.setProperty('--text', tx);
+  document.documentElement.style.setProperty('--primary', pr);
+  document.documentElement.style.setProperty('--secondary', sc);
+
+  document.body.style.background = bg;
+  document.body.style.fontFamily = `${ff}, sans-serif`;
+
+  const title = document.getElementById('pageTitle');
+  const sub = document.getElementById('pageSubtitle');
+
+  if (title) {
+    title.textContent = config.app_title || defaultConfig.app_title;
+    title.style.fontFamily = ff;
+    title.style.fontSize = `${fs * 2.5}px`;
+  }
+
+  if (sub) {
+    sub.textContent = config.subtitle_text || defaultConfig.subtitle_text;
+    sub.style.fontSize = `${fs}px`;
+  }
+
+  document.querySelectorAll('.font-display').forEach(el => {
+    el.style.fontFamily = ff;
+  });
+}
+
+renderTabs();
+renderContent();
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f2a6cf3e77d0789',t:'MTc3NzI1NzI0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
