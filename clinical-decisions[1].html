@@ -1,0 +1,934 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Clinical Decisions | Diagnostic & Treatment Decision-Making Guide | Deep Medicine</title> <meta name="description" content="Structured clinical decision-making guide including diagnostic reasoning, treatment pathways, and emergency clinical algorithms for real-world practice."> <link rel="canonical" href="https://deepmedicine.in/clinical/quick-reference/clinical-decisions"> <!-- Open Graph --> <meta property="og:title" content="Clinical Decisions | Deep Medicine"> <meta property="og:description" content="Evidence-based clinical decision-making frameworks for diagnosis and treatment planning."> <meta property="og:image" content="https://deepmedicine.in/images/clinical-decisions.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .tab-active { background: linear-gradient(135deg, #0f766e, #115e59); color: white; }
+    .card-hover { transition: all 0.2s; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .flowchart-step { position: relative; padding-left: 2.5rem; }
+    .flowchart-step::before { content: ''; position: absolute; left: 0.75rem; top: 2rem; bottom: -0.5rem; width: 2px; background: #99f6e4; }
+    .flowchart-step:last-child::before { display: none; }
+    .flowchart-step::after { content: ''; position: absolute; left: 0.45rem; top: 0.6rem; width: 14px; height: 14px; border-radius: 50%; background: #0d9488; border: 3px solid #ccfbf1; }
+    .pulse-dot { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .section-fade { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f0fdfa; }
+    ::-webkit-scrollbar-thumb { background: #99f6e4; border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-outfit bg-slate-50">
+  <div id="app" class="h-full w-full flex flex-col overflow-auto" style="background: linear-gradient(180deg, #f0fdfa 0%, #ecfdf5 50%, #f8fafc 100%);">
+   <!-- Header -->
+   <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/95 border-b border-teal-100 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-teal-600 to-emerald-700 flex items-center justify-center">
+       <i data-lucide="activity" class="w-5 h-5 text-white"></i>
+      </div>
+      <h1 id="main-title" class="text-lg md:text-xl font-bold text-slate-800">Quick Decision Tools</h1>
+     </div><span class="text-xs font-mono text-teal-600 bg-teal-50 px-2 py-1 rounded hidden sm:block">ICU / ER / Critical Care</span>
+    </div>
+   </header><!-- Tab Navigation -->
+   <nav class="fixed top-14 left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-teal-50 px-2 py-2 overflow-x-auto">
+    <div class="max-w-6xl mx-auto flex gap-1 min-w-max md:min-w-0 md:flex-wrap">
+     <button onclick="switchTab('icu')" id="tab-icu" class="tab-btn tab-active text-xs md:text-sm px-3 py-2 rounded-lg font-medium whitespace-nowrap flex items-center gap-1.5 transition-all"> <i data-lucide="clipboard-list" class="w-3.5 h-3.5"></i> ICU Cheat Sheets </button> <button onclick="switchTab('emergency')" id="tab-emergency" class="tab-btn text-xs md:text-sm px-3 py-2 rounded-lg font-medium whitespace-nowrap flex items-center gap-1.5 text-slate-600 hover:bg-teal-50 transition-all"> <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Emergency Flowcharts </button> <button onclick="switchTab('algorithms')" id="tab-algorithms" class="tab-btn text-xs md:text-sm px-3 py-2 rounded-lg font-medium whitespace-nowrap flex items-center gap-1.5 text-slate-600 hover:bg-teal-50 transition-all"> <i data-lucide="cpu" class="w-3.5 h-3.5"></i> High-Yield Algorithms </button> <button onclick="switchTab('redflags')" id="tab-redflags" class="tab-btn text-xs md:text-sm px-3 py-2 rounded-lg font-medium whitespace-nowrap flex items-center gap-1.5 text-slate-600 hover:bg-teal-50 transition-all"> <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> Red Flag Signs </button> <button onclick="switchTab('dos')" id="tab-dos" class="tab-btn text-xs md:text-sm px-3 py-2 rounded-lg font-medium whitespace-nowrap flex items-center gap-1.5 text-slate-600 hover:bg-teal-50 transition-all"> <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Do's &amp; Don'ts </button>
+    </div>
+   </nav><!-- Content -->
+   <main class="flex-1 px-4 py-6 mt-32 max-w-6xl mx-auto w-full">
+    <!-- ICU CHEAT SHEETS -->
+    <section id="section-icu" class="section-fade">
+     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Ventilator Settings -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center"><i data-lucide="wind" class="w-4 h-4 text-teal-700"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Ventilator Initial Settings</h3>
+       </div>
+       <table class="w-full text-xs">
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-1.5 text-slate-500">Mode</td>
+          <td class="py-1.5 font-mono text-right text-teal-700">AC/VC or PC</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Tidal Volume</td>
+          <td class="py-1.5 font-mono text-right text-teal-700">6-8 mL/kg IBW</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">RR</td>
+          <td class="py-1.5 font-mono text-right text-teal-700">12-20 /min</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">FiO₂</td>
+          <td class="py-1.5 font-mono text-right text-teal-700">Start 100% → wean</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">PEEP</td>
+          <td class="py-1.5 font-mono text-right text-teal-700">5-8 cmH₂O</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">I:E Ratio</td>
+          <td class="py-1.5 font-mono text-right text-teal-700">1:2</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Plateau P</td>
+          <td class="py-1.5 font-mono text-right text-teal-700">&lt;30 cmH₂O</td>
+         </tr>
+        </tbody>
+       </table>
+       <div class="mt-3 text-xs bg-amber-50 border border-amber-200 rounded-lg p-2 text-amber-800">
+        <strong>ARDS:</strong> TV 4-6 mL/kg, PEEP per ARDSNet table, Pplat ≤30
+       </div>
+      </div><!-- Vasopressors -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center"><i data-lucide="heart" class="w-4 h-4 text-rose-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Vasopressors &amp; Inotropes</h3>
+       </div>
+       <table class="w-full text-xs">
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-1.5 text-slate-500">Norepinephrine</td>
+          <td class="py-1.5 font-mono text-right text-rose-600">0.01-3 µg/kg/min</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Vasopressin</td>
+          <td class="py-1.5 font-mono text-right text-rose-600">0.03-0.04 U/min</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Epinephrine</td>
+          <td class="py-1.5 font-mono text-right text-rose-600">0.01-0.5 µg/kg/min</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Dobutamine</td>
+          <td class="py-1.5 font-mono text-right text-rose-600">2.5-20 µg/kg/min</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Dopamine</td>
+          <td class="py-1.5 font-mono text-right text-rose-600">2-20 µg/kg/min</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Phenylephrine</td>
+          <td class="py-1.5 font-mono text-right text-rose-600">0.5-9 µg/kg/min</td>
+         </tr>
+        </tbody>
+       </table>
+       <div class="mt-3 text-xs bg-blue-50 border border-blue-200 rounded-lg p-2 text-blue-800">
+        <strong>1st line septic shock:</strong> Norepinephrine. Add Vasopressin at NE &gt;0.25 µg/kg/min
+       </div>
+      </div><!-- Sedation -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center"><i data-lucide="moon" class="w-4 h-4 text-indigo-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Sedation &amp; Analgesia</h3>
+       </div>
+       <table class="w-full text-xs">
+        <tbody class="divide-y divide-slate-100">
+         <tr>
+          <td class="py-1.5 text-slate-500">Propofol</td>
+          <td class="py-1.5 font-mono text-right text-indigo-600">5-80 µg/kg/min</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Dexmedetomidine</td>
+          <td class="py-1.5 font-mono text-right text-indigo-600">0.2-1.5 µg/kg/hr</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Midazolam</td>
+          <td class="py-1.5 font-mono text-right text-indigo-600">0.02-0.1 mg/kg/hr</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Fentanyl</td>
+          <td class="py-1.5 font-mono text-right text-indigo-600">25-200 µg/hr</td>
+         </tr>
+         <tr>
+          <td class="py-1.5 text-slate-500">Morphine</td>
+          <td class="py-1.5 font-mono text-right text-indigo-600">2-30 mg/hr</td>
+         </tr>
+        </tbody>
+       </table>
+       <div class="mt-3 text-xs bg-indigo-50 border border-indigo-200 rounded-lg p-2 text-indigo-800">
+        <strong>Target RASS:</strong> -2 to 0. Analgesia first (A1) strategy. Daily SAT+SBT.
+       </div>
+      </div><!-- Electrolytes -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center"><i data-lucide="zap" class="w-4 h-4 text-amber-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Electrolyte Correction</h3>
+       </div>
+       <div class="space-y-2 text-xs">
+        <div class="bg-slate-50 rounded-lg p-2">
+         <span class="font-semibold text-slate-700">K⁺ &lt;3.5:</span> <span class="text-slate-600"> 10 mEq KCl raises K⁺ by ~0.1. Max 20 mEq/hr peripheral, 40 mEq/hr central.</span>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2">
+         <span class="font-semibold text-slate-700">Mg²⁺ &lt;1.6:</span> <span class="text-slate-600"> 2g MgSO₄ IV over 1hr. Correct Mg before K.</span>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2">
+         <span class="font-semibold text-slate-700">Na⁺ correction:</span> <span class="text-slate-600"> Max 8 mEq/L per 24hrs (risk ODS). 3% NaCl for severe (&lt;120).</span>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2">
+         <span class="font-semibold text-slate-700">PO₄³⁻ &lt;2.0:</span> <span class="text-slate-600"> K-Phos or Na-Phos 15-30 mmol IV over 4-6hrs.</span>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2">
+         <span class="font-semibold text-slate-700">Ca²⁺ &lt;7.0:</span> <span class="text-slate-600"> 1-2g Ca gluconate IV over 10-20 min. Monitor QTc.</span>
+        </div>
+       </div>
+      </div><!-- ABG Interpretation -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center"><i data-lucide="droplet" class="w-4 h-4 text-emerald-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">ABG Quick Interpretation</h3>
+       </div>
+       <div class="space-y-1.5 text-xs">
+        <div class="flex justify-between bg-slate-50 rounded p-1.5"><span class="text-slate-600">pH</span><span class="font-mono text-emerald-700">7.35 - 7.45</span>
+        </div>
+        <div class="flex justify-between bg-slate-50 rounded p-1.5"><span class="text-slate-600">PaCO₂</span><span class="font-mono text-emerald-700">35 - 45 mmHg</span>
+        </div>
+        <div class="flex justify-between bg-slate-50 rounded p-1.5"><span class="text-slate-600">HCO₃⁻</span><span class="font-mono text-emerald-700">22 - 26 mEq/L</span>
+        </div>
+        <div class="flex justify-between bg-slate-50 rounded p-1.5"><span class="text-slate-600">PaO₂</span><span class="font-mono text-emerald-700">80 - 100 mmHg</span>
+        </div>
+        <div class="flex justify-between bg-slate-50 rounded p-1.5"><span class="text-slate-600">AG</span><span class="font-mono text-emerald-700">8 - 12 mEq/L</span>
+        </div>
+       </div>
+       <div class="mt-3 text-xs bg-emerald-50 border border-emerald-200 rounded-lg p-2 text-emerald-800">
+        <strong>Steps:</strong> 1) Acidemia/Alkalemia? 2) Respiratory or Metabolic? 3) Compensation? 4) AG? 5) Delta-Delta
+       </div>
+      </div><!-- Rapid Sequence Intubation -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center"><i data-lucide="shield" class="w-4 h-4 text-purple-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">RSI Checklist</h3>
+       </div>
+       <div class="space-y-1.5 text-xs">
+        <div class="flex items-start gap-2"><span class="w-5 h-5 rounded bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">P</span><span class="text-slate-600">Preparation (equipment, team, plan A/B/C)</span>
+        </div>
+        <div class="flex items-start gap-2"><span class="w-5 h-5 rounded bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">P</span><span class="text-slate-600">Preoxygenation (3 min NRB / HFNC 60L / NIV)</span>
+        </div>
+        <div class="flex items-start gap-2"><span class="w-5 h-5 rounded bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">P</span><span class="text-slate-600">Pretreatment (Fentanyl 1-3µg/kg if ↑ICP)</span>
+        </div>
+        <div class="flex items-start gap-2"><span class="w-5 h-5 rounded bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">P</span><span class="text-slate-600">Paralysis + Induction (Ketamine 1-2mg/kg + Roc 1.2mg/kg)</span>
+        </div>
+        <div class="flex items-start gap-2"><span class="w-5 h-5 rounded bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">P</span><span class="text-slate-600">Placement (confirm EtCO₂ waveform)</span>
+        </div>
+        <div class="flex items-start gap-2"><span class="w-5 h-5 rounded bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">P</span><span class="text-slate-600">Post-intubation (CXR, set vent, sedation)</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- EMERGENCY FLOWCHARTS -->
+    <section id="section-emergency" class="section-fade hidden">
+     <div class="grid gap-4 md:grid-cols-2">
+      <!-- Cardiac Arrest -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center"><i data-lucide="heart-off" class="w-4 h-4 text-red-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Cardiac Arrest (ACLS)</h3>
+       </div>
+       <div class="space-y-3">
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Confirm Cardiac Arrest
+         </div>
+         <div class="text-xs text-slate-500">
+          Unresponsive + No pulse (10 sec max check)
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Start CPR + Attach Defibrillator
+         </div>
+         <div class="text-xs text-slate-500">
+          30:2 or continuous if advanced airway. Rate 100-120/min, depth 5-6cm
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Shockable? (VF/pVT)
+         </div>
+         <div class="text-xs text-slate-500">
+          YES → Shock 200J biphasic → CPR 2min
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Non-Shockable? (PEA/Asystole)
+         </div>
+         <div class="text-xs text-slate-500">
+          Epinephrine 1mg IV q3-5min immediately. Identify reversible cause (Hs &amp; Ts)
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          After 2nd Shock (if VF/pVT)
+         </div>
+         <div class="text-xs text-slate-500">
+          Epinephrine 1mg + Amiodarone 300mg IV push
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          ROSC?
+         </div>
+         <div class="text-xs text-slate-500">
+          12-lead ECG, targeted temp management 32-36°C, PCI if STEMI
+         </div>
+        </div>
+       </div>
+       <div class="mt-4 bg-red-50 border border-red-200 rounded-lg p-2 text-xs text-red-800">
+        <strong>Hs:</strong> Hypovolemia, Hypoxia, H⁺, Hypo/Hyperkalemia, Hypothermia<br><strong>Ts:</strong> Tension pneumo, Tamponade, Toxins, Thrombosis (PE/MI)
+       </div>
+      </div><!-- Anaphylaxis -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center"><i data-lucide="alert-circle" class="w-4 h-4 text-orange-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Anaphylaxis</h3>
+       </div>
+       <div class="space-y-3">
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Recognize
+         </div>
+         <div class="text-xs text-slate-500">
+          Urticaria + Hypotension + Bronchospasm + Angioedema (any 2 systems)
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Epinephrine IM (Anterolateral Thigh)
+         </div>
+         <div class="text-xs text-slate-500 font-mono">
+          Adult: 0.3-0.5 mg (1:1000) IM. Repeat q5-15min
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Position + Access
+         </div>
+         <div class="text-xs text-slate-500">
+          Supine with legs elevated. 2 large bore IVs. NS bolus 1-2L
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Adjuncts
+         </div>
+         <div class="text-xs text-slate-500">
+          Albuterol nebulizer, Diphenhydramine 50mg IV, Methylpred 125mg IV
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Refractory?
+         </div>
+         <div class="text-xs text-slate-500">
+          Epinephrine IV infusion 0.1-1 µg/kg/min. Glucagon if on β-blockers (1-5mg IV)
+         </div>
+        </div>
+       </div>
+      </div><!-- Sepsis -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center"><i data-lucide="thermometer" class="w-4 h-4 text-yellow-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Sepsis / Septic Shock (Hour-1 Bundle)</h3>
+       </div>
+       <div class="space-y-3">
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          qSOFA ≥2 or Suspected Infection
+         </div>
+         <div class="text-xs text-slate-500">
+          RR ≥22, Altered mentation, SBP ≤100
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Measure Lactate
+         </div>
+         <div class="text-xs text-slate-500">
+          If &gt;2 mmol/L → remeasure within 2-4 hrs
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Blood Cultures × 2 Before Antibiotics
+         </div>
+         <div class="text-xs text-slate-500">
+          Do NOT delay antibiotics &gt;1 hour for cultures
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Broad-Spectrum Antibiotics Within 1 Hour
+         </div>
+         <div class="text-xs text-slate-500">
+          Cover gram +/-, consider MRSA, pseudomonas, fungal per risk
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          30 mL/kg Crystalloid for Hypotension or Lactate ≥4
+         </div>
+         <div class="text-xs text-slate-500">
+          Reassess volume status with dynamic parameters (PLR, PPV)
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-slate-800">
+          Vasopressors if MAP &lt;65 Despite Fluids
+         </div>
+         <div class="text-xs text-slate-500">
+          Norepinephrine 1st line. Target MAP ≥65. Add Vasopressin 2nd.
+         </div>
+        </div>
+       </div>
+      </div><!-- Status Epilepticus -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center"><i data-lucide="zap" class="w-4 h-4 text-violet-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Status Epilepticus</h3>
+       </div>
+       <div class="space-y-3">
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-red-600">
+          0-5 min: Stabilize
+         </div>
+         <div class="text-xs text-slate-500">
+          ABCs, O₂, glucose check, IV access, vitals
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-orange-600">
+          5-20 min: 1st Line Benzodiazepine
+         </div>
+         <div class="text-xs text-slate-500">
+          Lorazepam 0.1 mg/kg IV (max 4mg/dose) OR Midazolam 10mg IM
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-yellow-600">
+          20-40 min: 2nd Line AED
+         </div>
+         <div class="text-xs text-slate-500">
+          Levetiracetam 60mg/kg (max 4500mg) IV OR Fosphenytoin 20mg PE/kg OR Valproate 40mg/kg
+         </div>
+        </div>
+        <div class="flowchart-step">
+         <div class="text-xs font-semibold text-purple-600">
+          &gt;40 min: Refractory → RSI + Infusion
+         </div>
+         <div class="text-xs text-slate-500">
+          Midazolam / Propofol / Pentobarbital infusion. Continuous EEG. ICU.
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- HIGH-YIELD ALGORITHMS -->
+    <section id="section-algorithms" class="section-fade hidden">
+     <div class="grid gap-4 md:grid-cols-2">
+      <!-- DKA -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center"><i data-lucide="droplet" class="w-4 h-4 text-orange-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">DKA Management Algorithm</h3>
+       </div>
+       <div class="space-y-2 text-xs">
+        <div class="bg-orange-50 rounded-lg p-2 border-l-4 border-orange-400">
+         <strong>Diagnosis:</strong> pH &lt;7.3, HCO₃ &lt;18, Glucose &gt;250, Ketones +, AG &gt;12
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          1. Fluids
+         </div>
+         <div class="text-slate-600">
+          NS 1-1.5 L/hr × 1hr → 250-500 mL/hr. Switch to D5½NS when glucose &lt;200
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          2. Insulin
+         </div>
+         <div class="text-slate-600">
+          Regular insulin 0.1-0.14 U/kg/hr IV. Target glucose drop 50-70 mg/dL/hr
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          3. Potassium
+         </div>
+         <div class="text-slate-600">
+          K⁺ &lt;3.3 → hold insulin, replace 20-40 mEq/hr. K⁺ 3.3-5.3 → add 20-30 mEq/L. K⁺ &gt;5.3 → recheck q2h
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          4. Bicarb (only if pH &lt;6.9)
+         </div>
+         <div class="text-slate-600">
+          NaHCO₃ 100 mEq in 400 mL over 2hrs
+         </div>
+        </div>
+        <div class="bg-green-50 rounded-lg p-2 border-l-4 border-green-400">
+         <strong>Resolution:</strong> AG &lt;12, pH &gt;7.3, HCO₃ ≥15, glucose &lt;200. Overlap SC insulin 2hr before stopping drip.
+        </div>
+       </div>
+      </div><!-- Acute MI -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center"><i data-lucide="heart" class="w-4 h-4 text-red-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">STEMI Algorithm</h3>
+       </div>
+       <div class="space-y-2 text-xs">
+        <div class="bg-red-50 rounded-lg p-2 border-l-4 border-red-400">
+         <strong>STEMI Criteria:</strong> ≥1mm ST↑ in 2 contiguous leads (≥2mm in V1-V3 men, ≥1.5mm women) OR new LBBB
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Immediate (MONA-B)
+         </div>
+         <div class="text-slate-600">
+          Morphine (if pain), O₂ (if SpO₂ &lt;90%), Nitro SL (not in RV infarct), Aspirin 325mg, β-blocker (if no CI)
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Anticoagulation
+         </div>
+         <div class="text-slate-600">
+          Heparin 60U/kg bolus (max 4000U) + 12U/kg/hr. P2Y12 inhibitor (Ticagrelor 180mg or Clopidogrel 600mg)
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Reperfusion (Door-to-Balloon &lt;90 min)
+         </div>
+         <div class="text-slate-600">
+          Primary PCI preferred. If &gt;120 min to PCI → Fibrinolysis (tPA/TNK) within 30 min door-to-needle
+         </div>
+        </div>
+       </div>
+      </div><!-- Acute Stroke -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center"><i data-lucide="brain" class="w-4 h-4 text-blue-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Acute Ischemic Stroke</h3>
+       </div>
+       <div class="space-y-2 text-xs">
+        <div class="bg-blue-50 rounded-lg p-2 border-l-4 border-blue-400">
+         <strong>Time is Brain:</strong> Last known well time is KEY. CT head STAT to r/o hemorrhage.
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          IV tPA (Alteplase) — within 4.5 hrs
+         </div>
+         <div class="text-slate-600">
+          0.9 mg/kg (max 90mg). 10% bolus, 90% infusion over 60 min. BP &lt;185/110 before, &lt;180/105 after.
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Thrombectomy — within 24 hrs (select patients)
+         </div>
+         <div class="text-slate-600">
+          LVO (ICA/M1/M2), NIHSS ≥6, ASPECTS ≥6, favorable perfusion mismatch
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Exclusions for tPA
+         </div>
+         <div class="text-slate-600">
+          Active bleed, platelets &lt;100K, INR &gt;1.7, recent surgery &lt;14d, BP uncontrolled
+         </div>
+        </div>
+       </div>
+      </div><!-- Acute GI Bleed -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center"><i data-lucide="droplets" class="w-4 h-4 text-rose-600"></i>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">Upper GI Bleed Algorithm</h3>
+       </div>
+       <div class="space-y-2 text-xs">
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Resuscitate
+         </div>
+         <div class="text-slate-600">
+          2 large bore IVs, crystalloid, type &amp; crossmatch. Transfuse if Hb &lt;7 (threshold 8 if cardiac). Correct coagulopathy.
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Risk Stratify (Glasgow-Blatchford)
+         </div>
+         <div class="text-slate-600">
+          Score 0 = safe for outpatient. Score ≥6 = high risk → ICU.
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Pharmacotherapy
+         </div>
+         <div class="text-slate-600">
+          PPI 80mg IV bolus + 8mg/hr infusion. Erythromycin 250mg IV (prokinetic pre-scope). Octreotide if variceal.
+         </div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-2.5">
+         <div class="font-semibold text-slate-700 mb-1">
+          Endoscopy within 24 hrs (12 hrs if high risk)
+         </div>
+         <div class="text-slate-600">
+          Forrest Ia/Ib → dual therapy (epi + clip/thermal). Variceal → band ligation + Terlipressin/Octreotide.
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- RED FLAG SIGNS -->
+    <section id="section-redflags" class="section-fade hidden">
+     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div class="card-hover bg-white rounded-xl border border-red-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <span class="pulse-dot w-3 h-3 rounded-full bg-red-500"></span>
+        <h3 class="font-semibold text-red-800 text-sm">Chest Pain Red Flags</h3>
+       </div>
+       <ul class="space-y-1.5 text-xs text-slate-700">
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Tearing/ripping pain radiating to back (Aortic Dissection)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>New ST elevation or dynamic ECG changes</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Hypotension + JVD + muffled heart sounds (Beck's Triad → Tamponade)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Unilateral absent breath sounds + tracheal deviation (Tension Pneumo)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Pleuritic pain + hemoptysis + recent immobilization (PE)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Subcutaneous emphysema (Boerhaave/Esophageal rupture)</li>
+       </ul>
+      </div>
+      <div class="card-hover bg-white rounded-xl border border-red-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <span class="pulse-dot w-3 h-3 rounded-full bg-red-500"></span>
+        <h3 class="font-semibold text-red-800 text-sm">Headache Red Flags (SNOOP)</h3>
+       </div>
+       <ul class="space-y-1.5 text-xs text-slate-700">
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i><strong>S</strong>ystemic symptoms (fever, weight loss, HIV, cancer)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i><strong>N</strong>eurological signs (focal deficit, papilledema, seizure)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i><strong>O</strong>nset sudden "thunderclap" (SAH until proven otherwise)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i><strong>O</strong>lder age new onset (&gt;50 → GCA, malignancy)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i><strong>P</strong>ositional / Progressive / Precipitated by Valsalva</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>"Worst headache of my life" → CT head + LP</li>
+       </ul>
+      </div>
+      <div class="card-hover bg-white rounded-xl border border-red-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <span class="pulse-dot w-3 h-3 rounded-full bg-red-500"></span>
+        <h3 class="font-semibold text-red-800 text-sm">Abdominal Pain Red Flags</h3>
+       </div>
+       <ul class="space-y-1.5 text-xs text-slate-700">
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Peritoneal signs (rigidity, guarding, rebound)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Hemodynamic instability with abdominal pain (ruptured AAA/ectopic)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Pain out of proportion to exam (Mesenteric ischemia)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Free air under diaphragm (Hollow viscus perforation)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Obstructive pattern + bilious vomiting + no flatus</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Grey Turner/Cullen sign (retroperitoneal hemorrhage)</li>
+       </ul>
+      </div>
+      <div class="card-hover bg-white rounded-xl border border-red-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <span class="pulse-dot w-3 h-3 rounded-full bg-red-500"></span>
+        <h3 class="font-semibold text-red-800 text-sm">Back Pain Red Flags</h3>
+       </div>
+       <ul class="space-y-1.5 text-xs text-slate-700">
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Saddle anesthesia + urinary retention (Cauda Equina → MRI STAT)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Progressive bilateral leg weakness</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>History of cancer + new back pain (spinal mets)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Fever + IVDU + back pain (Epidural abscess)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Age &gt;50 + new onset + unexplained weight loss</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Pulsatile abdominal mass + back pain (AAA rupture)</li>
+       </ul>
+      </div>
+      <div class="card-hover bg-white rounded-xl border border-red-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <span class="pulse-dot w-3 h-3 rounded-full bg-red-500"></span>
+        <h3 class="font-semibold text-red-800 text-sm">Dyspnea Red Flags</h3>
+       </div>
+       <ul class="space-y-1.5 text-xs text-slate-700">
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Stridor (impending airway obstruction → prepare RSI)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Silent chest in asthma (near-fatal, exhausted patient)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>SpO₂ &lt;90% despite high-flow O₂</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Tripod position + accessory muscle use + inability to speak</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Acute onset + unilateral pleuritic pain + tachycardia (PE)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Frothy pink sputum (Flash pulmonary edema)</li>
+       </ul>
+      </div>
+      <div class="card-hover bg-white rounded-xl border border-red-100 p-5 shadow-sm">
+       <div class="flex items-center gap-2 mb-3">
+        <span class="pulse-dot w-3 h-3 rounded-full bg-red-500"></span>
+        <h3 class="font-semibold text-red-800 text-sm">Altered Mental Status Red Flags</h3>
+       </div>
+       <ul class="space-y-1.5 text-xs text-slate-700">
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Unequal pupils + GCS drop (herniation → mannitol + neurosurg)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Fever + nuchal rigidity + AMS (Meningitis → empiric abx STAT)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Focal neuro deficit + acute AMS (Stroke → CT STAT)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Hypoglycemia (&lt;60 mg/dL) → Dextrose 50% IV push</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>Pinpoint pupils + respiratory depression (Opioid OD → Naloxone)</li>
+        <li class="flex items-start gap-2"><i data-lucide="alert-triangle" class="w-3 h-3 text-red-500 mt-0.5 shrink-0"></i>GCS ≤8 → Secure airway (intubate)</li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- DO'S & DON'TS -->
+    <section id="section-dos" class="section-fade hidden">
+     <div class="grid gap-4 md:grid-cols-2">
+      <!-- Sepsis -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <h3 class="font-semibold text-slate-800 text-sm mb-3 flex items-center gap-2"><i data-lucide="thermometer" class="w-4 h-4 text-teal-600"></i> Sepsis &amp; Septic Shock</h3>
+       <div class="grid grid-cols-2 gap-3">
+        <div>
+         <div class="text-xs font-semibold text-green-700 mb-1.5 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> DO
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Antibiotics within 1 hour</li>
+          <li>• Lactate q2-4h to guide therapy</li>
+          <li>• 30 mL/kg bolus early</li>
+          <li>• Norepinephrine as 1st vasopressor</li>
+          <li>• Daily assess for de-escalation</li>
+          <li>• Source control within 6-12 hrs</li>
+         </ul>
+        </div>
+        <div>
+         <div class="text-xs font-semibold text-red-700 mb-1.5 flex items-center gap-1"><i data-lucide="x-circle" class="w-3 h-3"></i> DON'T
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Delay antibiotics for cultures</li>
+          <li>• Use Dopamine 1st line (↑arrhythmia)</li>
+          <li>• Overshoot fluids (lung edema)</li>
+          <li>• Ignore lactate clearance</li>
+          <li>• Steroids unless refractory shock</li>
+          <li>• Forget to reassess volume status</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Ventilation -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <h3 class="font-semibold text-slate-800 text-sm mb-3 flex items-center gap-2"><i data-lucide="wind" class="w-4 h-4 text-teal-600"></i> Mechanical Ventilation</h3>
+       <div class="grid grid-cols-2 gap-3">
+        <div>
+         <div class="text-xs font-semibold text-green-700 mb-1.5 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> DO
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Use IBW for tidal volume</li>
+          <li>• Keep Pplat ≤30 cmH₂O</li>
+          <li>• Head of bed 30-45°</li>
+          <li>• Daily SAT + SBT</li>
+          <li>• Lung-protective ventilation in ARDS</li>
+          <li>• Prone if P/F &lt;150</li>
+         </ul>
+        </div>
+        <div>
+         <div class="text-xs font-semibold text-red-700 mb-1.5 flex items-center gap-1"><i data-lucide="x-circle" class="w-3 h-3"></i> DON'T
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Use actual BW for TV (obesity)</li>
+          <li>• Hyperventilate (↓cerebral perfusion)</li>
+          <li>• Allow auto-PEEP in COPD</li>
+          <li>• Deep sedation without reason</li>
+          <li>• Ignore ventilator asynchrony</li>
+          <li>• Forget cuff pressure check (20-30)</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Intubation -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <h3 class="font-semibold text-slate-800 text-sm mb-3 flex items-center gap-2"><i data-lucide="shield" class="w-4 h-4 text-teal-600"></i> Airway Management</h3>
+       <div class="grid grid-cols-2 gap-3">
+        <div>
+         <div class="text-xs font-semibold text-green-700 mb-1.5 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> DO
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Preoxygenate 3+ min (apneic oxygenation HFNC)</li>
+          <li>• Have Plan B/C ready</li>
+          <li>• Confirm placement by EtCO₂</li>
+          <li>• Ramped/sniffing position</li>
+          <li>• Post-intubation CXR</li>
+          <li>• Ketamine if hemodynamically unstable</li>
+         </ul>
+        </div>
+        <div>
+         <div class="text-xs font-semibold text-red-700 mb-1.5 flex items-center gap-1"><i data-lucide="x-circle" class="w-3 h-3"></i> DON'T
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Rush without equipment check</li>
+          <li>• Thiopental/Propofol in shock</li>
+          <li>• Forget post-intubation sedation</li>
+          <li>• Rely solely on auscultation</li>
+          <li>• Multiple attempts without rescue plan</li>
+          <li>• Succinylcholine in hyperkalemia/burns</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Fluids -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <h3 class="font-semibold text-slate-800 text-sm mb-3 flex items-center gap-2"><i data-lucide="droplet" class="w-4 h-4 text-teal-600"></i> IV Fluids &amp; Resuscitation</h3>
+       <div class="grid grid-cols-2 gap-3">
+        <div>
+         <div class="text-xs font-semibold text-green-700 mb-1.5 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> DO
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Balanced crystalloids (LR/Plasmalyte)</li>
+          <li>• Reassess after each bolus</li>
+          <li>• Use dynamic parameters (PLR, IVC, SVV)</li>
+          <li>• Blood products in hemorrhagic shock (1:1:1)</li>
+          <li>• Consider albumin in cirrhosis</li>
+          <li>• Stop fluids when no longer responsive</li>
+         </ul>
+        </div>
+        <div>
+         <div class="text-xs font-semibold text-red-700 mb-1.5 flex items-center gap-1"><i data-lucide="x-circle" class="w-3 h-3"></i> DON'T
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• NS in large volumes (HCMA risk)</li>
+          <li>• Colloids (HES) → renal injury</li>
+          <li>• Fluids in cardiogenic shock</li>
+          <li>• Ignore fluid overload signs</li>
+          <li>• LR in hyperkalemia</li>
+          <li>• Rely on CVP alone for volume</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Cardiac Arrest -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <h3 class="font-semibold text-slate-800 text-sm mb-3 flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-teal-600"></i> Cardiac Arrest &amp; CPR</h3>
+       <div class="grid grid-cols-2 gap-3">
+        <div>
+         <div class="text-xs font-semibold text-green-700 mb-1.5 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> DO
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• High-quality CPR (rate 100-120, depth 5-6cm)</li>
+          <li>• Minimize interruptions (&lt;10 sec)</li>
+          <li>• Epi q3-5 min in non-shockable</li>
+          <li>• Defibrillate immediately when indicated</li>
+          <li>• EtCO₂ monitoring (quality marker)</li>
+          <li>• Targeted temperature management post-ROSC</li>
+         </ul>
+        </div>
+        <div>
+         <div class="text-xs font-semibold text-red-700 mb-1.5 flex items-center gap-1"><i data-lucide="x-circle" class="w-3 h-3"></i> DON'T
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Pause CPR for intubation &gt;10 sec</li>
+          <li>• Lean on chest between compressions</li>
+          <li>• Shock asystole/PEA</li>
+          <li>• Skip reversible causes (Hs &amp; Ts)</li>
+          <li>• Hyperventilate (↓venous return)</li>
+          <li>• Give Epi before 2nd shock in VF/pVT</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Medications -->
+      <div class="card-hover bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+       <h3 class="font-semibold text-slate-800 text-sm mb-3 flex items-center gap-2"><i data-lucide="pill" class="w-4 h-4 text-teal-600"></i> ICU Medication Safety</h3>
+       <div class="grid grid-cols-2 gap-3">
+        <div>
+         <div class="text-xs font-semibold text-green-700 mb-1.5 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> DO
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Renal-dose adjust (Vanc, Aminoglycosides)</li>
+          <li>• DVT prophylaxis daily</li>
+          <li>• Stress ulcer ppx if indicated</li>
+          <li>• Glycemic control (140-180 target)</li>
+          <li>• Review all infusions q shift</li>
+          <li>• Taper sedation before stopping</li>
+         </ul>
+        </div>
+        <div>
+         <div class="text-xs font-semibold text-red-700 mb-1.5 flex items-center gap-1"><i data-lucide="x-circle" class="w-3 h-3"></i> DON'T
+         </div>
+         <ul class="space-y-1 text-xs text-slate-600">
+          <li>• Push KCl undiluted (cardiac arrest)</li>
+          <li>• Mix insulin with other infusions</li>
+          <li>• Propofol &gt;5 mg/kg/hr &gt;48h (PRIS)</li>
+          <li>• Nephrotoxics without monitoring</li>
+          <li>• Forget to adjust for hepatic failure</li>
+          <li>• IV push phenytoin in dextrose (precipitates)</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="border-t border-teal-100 bg-white/60 px-4 py-3 text-center">
+    <p class="text-xs text-slate-400">For educational reference only. Always follow institutional protocols and clinical judgment.</p>
+   </footer>
+  </div>
+  <script>
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('[id^="section-"]').forEach(s => s.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('tab-active');
+      b.classList.add('text-slate-600');
+    });
+    document.getElementById('section-' + tab).classList.remove('hidden');
+    document.getElementById('tab-' + tab).classList.add('tab-active');
+    document.getElementById('tab-' + tab).classList.remove('text-slate-600');
+  }
+
+  // Element SDK
+  const defaultConfig = {
+    app_title: 'Quick Decision Tools',
+    background_color: '#f0fdfa',
+    surface_color: '#ffffff',
+    text_color: '#1e293b',
+    primary_color: '#0d9488',
+    accent_color: '#dc2626',
+    font_family: 'Outfit',
+    font_size: 14
+  };
+
+  function applyConfig(config) {
+    const title = document.getElementById('main-title');
+    if (title) title.textContent = config.app_title || defaultConfig.app_title;
+
+    const app = document.getElementById('app');
+    if (app) app.style.background = `linear-gradient(180deg, ${config.background_color || defaultConfig.background_color} 0%, #ecfdf5 50%, #f8fafc 100%)`;
+
+    document.querySelectorAll('.card-hover').forEach(c => {
+      c.style.backgroundColor = config.surface_color || defaultConfig.surface_color;
+    });
+
+    const font = config.font_family || defaultConfig.font_family;
+    document.body.style.fontFamily = `${font}, sans-serif`;
+
+    const size = config.font_size || defaultConfig.font_size;
+    document.body.style.fontSize = size + 'px';
+  }
+
+  lucide.createIcons();
+</script>
+</body>
+</html>
