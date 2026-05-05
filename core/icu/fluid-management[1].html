@@ -1,0 +1,812 @@
+<!doctype html> <html lang="en" class="h-full"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Fluid Management | IV Fluids & Resuscitation Therapy | Deep Medicine</title> <meta name="description" content="Comprehensive fluid management guide including resuscitation, maintenance fluids, shock management, and electrolyte balance in ICU and emergency care."> <link rel="canonical" href="https://deepmedicine.in/core/icu/fluid-management"> <!-- Open Graph --> <meta property="og:title" content="Fluid Management | Deep Medicine"> <meta property="og:description" content="IV fluids, resuscitation strategies, and critical care fluid management protocols."> <meta property="og:image" content="https://deepmedicine.in/images/fluid-management.jpg"> <!-- Styles --> <script src="https://cdn.tailwindcss.com/3.4.17"></script> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Icons --> <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+  html, body { height: 100%; margin: 0; }
+  * { font-family: 'DM Sans', sans-serif; }
+  .font-display { font-family: 'Playfair Display', serif; }
+
+  .glass-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+  }
+  .glass-card-active {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .scenario-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .scenario-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(96, 165, 250, 0.15);
+  }
+  .scenario-btn.active {
+    background: linear-gradient(135deg, rgba(96,165,250,0.2), rgba(167,139,250,0.2));
+    border-color: rgba(96,165,250,0.5);
+  }
+
+  .fluid-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .phase-indicator {
+    width: 8px; height: 8px; border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .tab-active {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+  }
+
+  .decision-tree-line {
+    position: relative;
+  }
+  .decision-tree-line::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(96,165,250,0.4), rgba(167,139,250,0.4));
+  }
+
+  .node-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid #60a5fa;
+    background: #0f172a;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  .pearl-card {
+    background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(251,191,36,0.02));
+    border: 1px solid rgba(251,191,36,0.2);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .scroll-area { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.15) transparent; }
+  .scroll-area::-webkit-scrollbar { width: 5px; }
+  .scroll-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-in { animation: fadeIn 0.4s ease-out forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .delay-3 { animation-delay: 0.3s; opacity: 0; }
+  .delay-4 { animation-delay: 0.4s; opacity: 0; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full" style="background: linear-gradient(145deg, #0a0e1a 0%, #0f172a 40%, #131b2e 70%, #0d1321 100%);">
+  <div id="app" class="h-full w-full overflow-auto scroll-area"><!-- Header -->
+   <header class="sticky top-0 z-50 px-4 py-3" style="background: rgba(10,14,26,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);"><i data-lucide="activity" style="width:20px;height:20px;color:white;"></i>
+      </div>
+      <div>
+       <h1 id="mainTitle" class="font-display text-lg font-bold text-white leading-tight">Fluid Management Decision Tool</h1>
+       <p id="subtitle" class="text-xs text-slate-400">Clinical Experience-Based Approach</p>
+      </div>
+     </div>
+     <div class="hidden sm:flex items-center gap-2"><span class="text-xs text-slate-500">MBBS • MD • ICU/EM</span>
+      <div class="w-2 h-2 rounded-full bg-emerald-400 phase-indicator"></div>
+     </div>
+    </div>
+   </header>
+   <main class="max-w-7xl mx-auto px-4 py-6 space-y-6"><!-- Nav Tabs -->
+    <nav class="flex gap-2 overflow-x-auto pb-1" id="mainTabs"><button onclick="switchTab('scenarios')" data-tab="scenarios" class="tab-active whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-all"> <span class="flex items-center gap-2"><i data-lucide="git-branch" style="width:14px;height:14px;"></i> Clinical Scenarios</span> </button> <button onclick="switchTab('fluids')" data-tab="fluids" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all" style="background:rgba(255,255,255,0.05);"> <span class="flex items-center gap-2"><i data-lucide="droplets" style="width:14px;height:14px;"></i> Fluid Compendium</span> </button> <button onclick="switchTab('algorithm')" data-tab="algorithm" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all" style="background:rgba(255,255,255,0.05);"> <span class="flex items-center gap-2"><i data-lucide="workflow" style="width:14px;height:14px;"></i> Decision Algorithm</span> </button> <button onclick="switchTab('pearls')" data-tab="pearls" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all" style="background:rgba(255,255,255,0.05);"> <span class="flex items-center gap-2"><i data-lucide="gem" style="width:14px;height:14px;"></i> Clinical Pearls</span> </button> <button onclick="switchTab('calculator')" data-tab="calculator" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all" style="background:rgba(255,255,255,0.05);"> <span class="flex items-center gap-2"><i data-lucide="calculator" style="width:14px;height:14px;"></i> Calculator</span> </button>
+    </nav><!-- TAB: Clinical Scenarios -->
+    <section id="tab-scenarios" class="space-y-5">
+     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="scenarioGrid"></div>
+     <div id="scenarioDetail" class="glass-card rounded-2xl p-5 hidden animate-in"></div>
+    </section><!-- TAB: Fluid Compendium -->
+    <section id="tab-fluids" class="hidden space-y-4">
+     <div id="fluidCards" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section><!-- TAB: Decision Algorithm -->
+    <section id="tab-algorithm" class="hidden">
+     <div class="glass-card rounded-2xl p-5 space-y-5" id="algorithmContent"></div>
+    </section><!-- TAB: Clinical Pearls -->
+    <section id="tab-pearls" class="hidden">
+     <div class="space-y-4" id="pearlsContent"></div>
+    </section><!-- TAB: Calculator -->
+    <section id="tab-calculator" class="hidden">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="glass-card rounded-2xl p-5 space-y-4" id="calcPanel"></div>
+      <div class="glass-card rounded-2xl p-5 space-y-4" id="calcResult"></div>
+     </div>
+    </section>
+   </main>
+   <footer class="text-center py-6 px-4 text-xs text-slate-600 border-t border-slate-800/50 mt-8">
+    For educational purposes. Always correlate with clinical context, labs, and hemodynamic assessment.
+   </footer>
+  </div>
+  <script>
+// ===================== DATA =====================
+
+const SCENARIOS = [
+  {
+    id: 'septic_shock',
+    icon: 'flame',
+    title: 'Septic Shock',
+    color: '#ef4444',
+    brief: 'Distributive shock with vasodilation, capillary leak, and relative hypovolemia',
+    phases: [
+      { name: 'Rescue (0–1h)', fluid: 'Ringer Lactate / PlasmaLyte', dose: '30 mL/kg bolus in first 1 hour', rationale: 'Surviving Sepsis Campaign: early aggressive crystalloid resuscitation. RL preferred over NS to avoid hyperchloremic acidosis. Reassess after each 500 mL aliquot.' },
+      { name: 'Optimization (1–24h)', fluid: 'Balanced crystalloid ± Albumin 4%', dose: 'Guided by dynamic parameters (PLR, PPV, SVV)', rationale: 'Transition from empiric boluses to goal-directed. ALBIOS trial supports albumin if Alb <2 g/dL. Use bedside echo (IVC collapsibility, LVOT VTI) for fluid responsiveness.' },
+      { name: 'Stabilization (24–72h)', fluid: 'Maintenance crystalloid only', dose: '1–1.5 mL/kg/h', rationale: 'Avoid fluid overload (FACTT trial). Target even to negative balance. Third-spacing peaks. Monitor lung water, edema, urine output.' },
+      { name: 'De-escalation (>72h)', fluid: 'Restrict & Deresuscitate', dose: 'Diuretics if hemodynamically stable', rationale: 'ROSE conceptual model. Aim negative fluid balance. Every 1L positive balance increases mortality 1–2%. Albumin + furosemide synergy.' }
+    ],
+    avoid: 'Avoid NS >2L (hyperchloremic acidosis, AKI risk — SMART trial). Avoid HES (VISEP, 6S, CHEST trials — increased RRT & mortality). Avoid gelatin (no proven benefit, anaphylaxis risk).',
+    keyDecision: 'If MAP <65 despite 30 mL/kg crystalloid → start vasopressors (norepinephrine) BEFORE completing all fluid. Fluid alone is not the answer in refractory shock.'
+  },
+  {
+    id: 'dka',
+    icon: 'beaker',
+    title: 'DKA / HHS',
+    color: '#f59e0b',
+    brief: 'Osmotic diuresis → massive fluid deficit (5-9L). Electrolyte chaos.',
+    phases: [
+      { name: 'Hour 0–1', fluid: '0.9% Normal Saline', dose: '1–1.5 L/h (15–20 mL/kg/h)', rationale: 'Initial NS regardless of Na+ because the primary goal is volume expansion. NS is isotonic and restores intravascular volume rapidly. Do NOT use RL here — lactate may confuse gap monitoring.' },
+      { name: 'Hour 1–4', fluid: 'NS or 0.45% NaCl', dose: '250–500 mL/h based on corrected Na+', rationale: 'If corrected Na+ is high/normal → switch to 0.45% NaCl (half-normal). If low → continue NS. The goal is gradual osmolality correction to prevent cerebral edema.' },
+      { name: 'Glucose <250 mg/dL', fluid: 'D5 0.45% NaCl', dose: '150–250 mL/h', rationale: 'Add dextrose to prevent hypoglycemia while continuing insulin to close the anion gap. This is the most commonly missed step by junior residents. Never stop insulin just because glucose drops — the gap matters more.' },
+      { name: 'Ongoing', fluid: 'Potassium replacement in ALL bags', dose: '20–40 mEq/L KCl in each liter', rationale: 'Total body K+ is always depleted even if serum K+ appears normal/high (due to acidosis shift). If K+ <3.3 → replace BEFORE insulin. If K+ 3.3–5.3 → add 20-40 mEq/L to each bag.' }
+    ],
+    avoid: 'Avoid Ringer Lactate in DKA (lactate confounds anion gap). Avoid rapid Na+ correction (>10 mEq/24h risk of osmotic demyelination). Avoid stopping insulin when glucose normalizes — continue until gap closes.',
+    keyDecision: 'The most dangerous moment in DKA is K+ <3.3 with insulin running. Always check K+ before starting insulin. Hypokalemic cardiac arrest in DKA is preventable.'
+  },
+  {
+    id: 'hemorrhagic',
+    icon: 'droplets',
+    title: 'Hemorrhagic Shock',
+    color: '#dc2626',
+    brief: 'Acute blood loss → oxygen delivery crisis. Goal: stop bleeding + restore O₂ carrying capacity.',
+    phases: [
+      { name: 'Immediate (Class III-IV)', fluid: 'Packed RBCs + MTP activation', dose: '1:1:1 ratio (RBC:FFP:Platelets)', rationale: 'Massive Transfusion Protocol. PROPPR trial showed 1:1:1 achieves better hemostasis. Crystalloid is a BRIDGE, not the treatment. Damage control resuscitation: permissive hypotension (MAP 50–60) until surgical control.' },
+      { name: 'Bridge (while awaiting blood)', fluid: 'Ringer Lactate (NOT NS)', dose: 'Max 1–2L while awaiting products', rationale: 'Limit crystalloid to avoid dilutional coagulopathy, hypothermia, and acidosis (lethal triad). RL is preferred because the liver converts lactate to bicarbonate, buffering the acidosis of shock.' },
+      { name: 'Adjuncts', fluid: 'Tranexamic Acid (TXA)', dose: '1g IV over 10 min within 3 hours', rationale: 'CRASH-2 trial: TXA within 3h reduces mortality. After 3h it may INCREASE mortality. Also give calcium (1g CaCl₂ per 4 units blood) to counteract citrate toxicity from stored blood.' },
+      { name: 'Post-control', fluid: 'Guided by labs + hemodynamics', dose: 'Target Hb 7–9, Plt >50K, Fibrinogen >1.5', rationale: 'Once bleeding controlled, switch to restrictive strategy. TRICC trial: Hb 7 threshold is safe in most. Monitor TEG/ROTEM if available for targeted component therapy.' }
+    ],
+    avoid: 'Avoid large-volume crystalloid (>2L before blood). Avoid NS (worsens acidosis in hemorrhage). ABSOLUTELY avoid HES/colloids. Avoid targeting normal BP in uncontrolled hemorrhage.',
+    keyDecision: 'Permissive hypotension (SBP 80–90) is KEY until surgical hemostasis in penetrating trauma. Aggressive fluid resuscitation before source control = "popping the clot" and worsening hemorrhage.'
+  },
+  {
+    id: 'heart_failure',
+    icon: 'heart',
+    title: 'Acute Heart Failure / Cardiogenic Shock',
+    color: '#8b5cf6',
+    brief: 'The one scenario where fluids can KILL. Pump failure → fluid overload → pulmonary edema.',
+    phases: [
+      { name: 'Assessment First', fluid: 'STOP and THINK before any fluid', dose: 'Bedside echo + lung ultrasound', rationale: 'The biggest mistake in EM/ICU: giving fluid to every hypotensive patient. If B-lines on lung US + poor LVEF + elevated JVP → this is NOT a fluid problem. Fluids will push them into frank pulmonary edema.' },
+      { name: 'Wet + Warm (most common)', fluid: 'NO fluid. Diuresis + vasodilators.', dose: 'Furosemide 40–80mg IV + NTG infusion', rationale: 'Nohria-Stevenson classification. Wet-warm = congested but adequate perfusion. Aggressive diuresis is the treatment. Target 1–2L negative per day.' },
+      { name: 'Wet + Cold (cardiogenic shock)', fluid: 'Very cautious 250mL crystalloid challenge', dose: 'Only if LVEDP not elevated on echo', rationale: 'Some cardiogenic shock patients are relatively hypovolemic (RV infarct, post-diuresis). A SMALL fluid challenge (250 mL over 15 min) with continuous monitoring may help. But most need inotropes (dobutamine/milrinone) ± mechanical support.' },
+      { name: 'RV Infarct (special case)', fluid: 'Judicious RL 250–500mL boluses', dose: 'Up to 1–2L with careful monitoring', rationale: 'RV infarct is the ONE cardiac scenario where fluids help. The RV is preload-dependent. But even here, overshoot causes RV distension → LV compression (ventricular interdependence) → worse output.' }
+    ],
+    avoid: 'Avoid empiric fluid boluses in undifferentiated hypotension without echo. Avoid NS in heart failure (sodium load worsens congestion). Avoid rapid volume in cardiogenic shock without invasive monitoring.',
+    keyDecision: 'EVERY hypotensive patient deserves a 60-second bedside echo before fluid. IVC plethora + B-lines + poor squeeze = DO NOT give fluid. This single decision saves lives.'
+  },
+  {
+    id: 'aki',
+    icon: 'filter',
+    title: 'Acute Kidney Injury',
+    color: '#06b6d4',
+    brief: 'Pre-renal vs intrinsic vs post-renal determines fluid strategy entirely.',
+    phases: [
+      { name: 'Pre-renal AKI', fluid: 'Balanced crystalloid (RL/PlasmaLyte)', dose: 'Restore euvolemia guided by clinical assessment', rationale: 'FENa <1%, bland sediment, BUN:Cr >20:1. Volume depletion is the cause. RL preferred over NS — SMART trial showed NS increases AKI risk by 10% via chloride-mediated afferent arteriolar vasoconstriction.' },
+      { name: 'Intrinsic AKI (ATN)', fluid: 'Euvolemia only — do not fluid-load', dose: 'Match ins and outs', rationale: 'The kidney is damaged. More fluid does not fix dead tubules. FENa >2%, muddy brown casts. Maintain euvolemia, avoid nephrotoxins, and wait for recovery. Excessive fluid causes edema and delays recovery.' },
+      { name: 'Post-renal AKI', fluid: 'Relieve obstruction FIRST', dose: 'Then replace post-obstructive diuresis', rationale: 'Foley catheter or nephrostomy. After relief, post-obstructive diuresis can be massive (5–10 L/day). Replace 50–75% of urine output with 0.45% NaCl + KCl to prevent dehydration and electrolyte crashes.' },
+      { name: 'Contrast-associated AKI prevention', fluid: 'Isotonic NaHCO₃ or NS', dose: '1 mL/kg/h for 6–12h pre and post', rationale: 'PRESERVE trial suggests NaHCO₃ ≈ NS. Volume expansion is the key, not the specific fluid. Hold metformin. Use lowest contrast volume possible. The most important intervention is adequate pre-hydration.' }
+    ],
+    avoid: 'Avoid NS in large volumes (SMART trial). Avoid HES (6S, VISEP — increases RRT need). Avoid aggressive fluid loading in established ATN. Avoid nephrotoxins (NSAIDs, aminoglycosides, contrast).',
+    keyDecision: 'A "dry" creatinine rise with concentrated urine (>500 mOsm) needs fluid. A "wet" creatinine rise with dilute urine (<350 mOsm) and edema needs LESS fluid, not more. Urinary indices guide this.'
+  },
+  {
+    id: 'burns',
+    icon: 'zap',
+    title: 'Major Burns',
+    color: '#f97316',
+    brief: 'Capillary leak → massive third-spacing. Parkland formula guides resuscitation.',
+    phases: [
+      { name: 'First 24 hours', fluid: 'Ringer Lactate ONLY', dose: '4 mL × kg × %TBSA (Parkland)', rationale: 'Half in first 8h from time of burn (not arrival). Second half over next 16h. RL is the gold standard — NS causes hyperchloremic acidosis with these volumes. Colloids are avoided in first 24h due to capillary leak (they extravasate).' },
+      { name: 'Titration target', fluid: 'Adjust rate to UOP', dose: 'Adults: 0.5–1 mL/kg/h | Children: 1 mL/kg/h', rationale: 'Parkland is a STARTING point, not a prescription. "Fluid creep" (over-resuscitation) causes abdominal compartment syndrome, extremity compartment syndrome, and ARDS. Titrate to urine output, not to formula.' },
+      { name: 'After 24 hours', fluid: 'Colloid (Albumin 5%) + D5W', dose: 'Colloid: 0.3–0.5 mL × kg × %TBSA', rationale: 'Capillary integrity restores by 24h. Now colloids stay intravascular. Albumin reduces total volume needed. Switch maintenance to D5W for free water (insensible losses through burned skin are massive).' },
+      { name: 'Monitoring', fluid: 'Adjust by clinical response', dose: 'Lactate, UOP, base deficit, abdominal pressure', rationale: 'If UOP drops despite high rates → suspect abdominal compartment syndrome (measure bladder pressure). If lactate rising → reassess adequacy. Avoid >6 mL/kg/%TBSA in 24h (fluid creep threshold).' }
+    ],
+    avoid: 'Avoid colloids in first 24h (leak through damaged capillaries). Avoid NS (acidosis with massive volumes). Avoid over-resuscitation (fluid creep → compartment syndromes, ARDS). Avoid oral route alone for >20% TBSA.',
+    keyDecision: 'Parkland formula is the START, not the ANSWER. The resident who blindly follows the formula without titrating to urine output will either under- or over-resuscitate. Clinical judgment > formula.'
+  }
+];
+
+const FLUIDS = [
+  {
+    name: '0.9% Normal Saline (NS)',
+    type: 'Crystalloid',
+    typeColor: '#3b82f6',
+    osmolality: '308 mOsm/L',
+    pH: '5.0',
+    composition: { Na: 154, Cl: 154, K: 0, Ca: 0, Lactate: 0, Acetate: 0 },
+    distribution: '25% intravascular after 1h',
+    pros: ['Universally available', 'Compatible with blood products', 'Safe with hyperkalemia', 'Drug compatibility'],
+    cons: ['Hyperchloremic metabolic acidosis', 'Supraphysiologic Cl⁻ (154 vs plasma 100)', 'AKI risk (SMART trial)', 'Interstitial edema'],
+    bestFor: 'DKA (initial), hyperkalemia, brain injury (avoids hypotonicity), blood product co-infusion',
+    avoid: 'Sepsis (>2L), AKI risk, liver disease, large volume resuscitation'
+  },
+  {
+    name: 'Ringer Lactate (RL / Hartmann)',
+    type: 'Crystalloid',
+    typeColor: '#3b82f6',
+    osmolality: '273 mOsm/L',
+    pH: '6.5',
+    composition: { Na: 130, Cl: 109, K: 4, Ca: 1.5, Lactate: 28, Acetate: 0 },
+    distribution: '25% intravascular after 1h',
+    pros: ['Balanced electrolytes', 'Lactate → bicarbonate (liver)', 'Less AKI than NS (SMART)', 'Lower hyperchloremic acidosis risk'],
+    cons: ['Slightly hypotonic (cerebral edema risk in TBI)', 'K+ content (caution in renal failure)', 'Ca²+ may clot blood products in same line', 'Lactate confounds DKA gap monitoring'],
+    bestFor: 'Sepsis, hemorrhage, burns (Parkland), surgical resuscitation, first-line for most scenarios',
+    avoid: 'DKA (lactate monitoring), severe hyperkalemia, TBI (use NS/hypertonic), same line as citrated blood'
+  },
+  {
+    name: 'PlasmaLyte 148',
+    type: 'Crystalloid',
+    typeColor: '#3b82f6',
+    osmolality: '294 mOsm/L',
+    pH: '7.4',
+    composition: { Na: 140, Cl: 98, K: 5, Ca: 0, Lactate: 0, Acetate: 27 },
+    distribution: '25% intravascular after 1h',
+    pros: ['Most physiologic crystalloid', 'No lactate (safe in liver failure & DKA monitoring)', 'Isotonic', 'No calcium (blood product compatible)'],
+    cons: ['Expensive', 'Limited availability', 'K+ content', 'Acetate may accumulate in severe liver disease'],
+    bestFor: 'Liver failure, DKA (after initial NS), any setting where RL is contraindicated, intraoperative',
+    avoid: 'Severe hyperkalemia (contains K+), budget constraints'
+  },
+  {
+    name: 'Albumin 4–5%',
+    type: 'Colloid',
+    typeColor: '#a855f7',
+    osmolality: '300 mOsm/L',
+    pH: '7.0',
+    composition: { Na: 148, Cl: 128, K: 0, Ca: 0, Lactate: 0, Acetate: 0 },
+    distribution: '80% intravascular at 1h',
+    pros: ['Superior intravascular retention', 'Less total volume needed', 'SAFE trial: equivalent to NS in general ICU', 'Beneficial in cirrhosis (SBP, HRS)'],
+    cons: ['Expensive', 'Limited availability', 'Harmful in TBI (SAFE subgroup: increased mortality)', 'No O₂ carrying capacity'],
+    bestFor: 'Cirrhosis (SBP, LVP, HRS), sepsis with albumin <2 g/dL (ALBIOS), burns after 24h, nephrotic syndrome',
+    avoid: 'TBI (SAFE trial subgroup), first 24h burns, routine resuscitation where crystalloid suffices'
+  },
+  {
+    name: 'Hypertonic Saline (3%)',
+    type: 'Specialty',
+    typeColor: '#ec4899',
+    osmolality: '1026 mOsm/L',
+    pH: '5.0',
+    composition: { Na: 513, Cl: 513, K: 0, Ca: 0, Lactate: 0, Acetate: 0 },
+    distribution: 'Pulls water intravascularly',
+    pros: ['Rapidly raises serum Na+', 'Reduces cerebral edema', 'Small volume = large osmotic effect', 'Alternative to mannitol in raised ICP'],
+    cons: ['Central line preferred (phlebitis risk)', 'Osmotic demyelination if too rapid', 'Requires frequent Na+ monitoring', 'Volume overload risk'],
+    bestFor: 'Symptomatic hyponatremia (seizures, obtunded), raised ICP/TBI, transtentorial herniation',
+    avoid: 'Hypernatremia, unmonitored settings, chronic hyponatremia (>10 mEq/24h correction = ODS risk)'
+  },
+  {
+    name: 'D5W / D10W',
+    type: 'Specialty',
+    typeColor: '#ec4899',
+    osmolality: '252–505 mOsm/L',
+    pH: '4.0',
+    composition: { Na: 0, Cl: 0, K: 0, Ca: 0, Lactate: 0, Acetate: 0 },
+    distribution: 'Distributes as free water after glucose metabolized',
+    pros: ['Free water replacement', 'Hypoglycemia treatment', 'Drug diluent', 'Hypernatremia correction'],
+    bestFor: 'Hypernatremia (free water deficit), hypoglycemia, DKA (D5 0.45% when glucose <250), drug dilution',
+    cons: ['Effectively hypotonic after glucose cleared', 'Worsens hyponatremia', 'Worsens cerebral edema', 'Hyperglycemia risk in stressed patients'],
+    avoid: 'Hyponatremia, cerebral edema, volume resuscitation (provides no effective volume expansion)'
+  }
+];
+
+const PEARLS = [
+  { category: 'Resuscitation Philosophy', icon: 'brain', items: [
+    'Think in PHASES, not in liters. The fluid that saves at hour 1 kills at hour 72.',
+    'The ROSE model: Resuscitation → Optimization → Stabilization → Evacuation. Each phase has a different fluid strategy.',
+    '"Fluid responsiveness" ≠ "Fluid need." A patient can be fluid-responsive but not fluid-depleted. Always ask: will this fluid HELP or just INCREASE preload?',
+    'The best fluid bolus is the one you DON\'T give when it\'s not needed. Iatrogenic fluid overload is a disease we create.'
+  ]},
+  { category: 'Bedside Assessment', icon: 'stethoscope', items: [
+    'IVC ultrasound: >2.1cm with <50% collapse = likely fluid-overloaded. <1cm with >50% collapse = likely needs fluid. But ALWAYS correlate clinically.',
+    'Passive Leg Raise (PLR) is the BEST bedside test for fluid responsiveness: 10% increase in cardiac output = fluid responsive. It\'s a reversible auto-bolus.',
+    'Lung ultrasound B-lines: 3+ B-lines per zone bilaterally = pulmonary edema. This changes your fluid decision in 30 seconds.',
+    'Capillary refill time (CRT) <3 seconds at the fingertip correlates with adequate perfusion. ANDROMEDA-SHOCK trial validated CRT-guided resuscitation.'
+  ]},
+  { category: 'Electrolyte Fluid Interactions', icon: 'flask-conical', items: [
+    'Every liter of NS gives 154 mEq of Cl⁻ above plasma. After 3L, you\'ve created a hyperchloremic non-anion-gap metabolic acidosis that mimics clinical deterioration.',
+    'Potassium in RL (4 mEq/L) is clinically insignificant for most patients. The K+ in RL does NOT preclude its use in mild hyperkalemia — this is a pervasive myth.',
+    'Corrected Na+ in DKA: Add 1.6 mEq to measured Na+ for every 100 mg/dL glucose above 100. This determines whether you use NS vs half-normal.',
+    'Post-obstructive diuresis after catheterization can exceed 500 mL/h. If you don\'t replace it, the patient will crash. Replace 50-75% of output with 0.45% NaCl + KCl.'
+  ]},
+  { category: 'Common Mistakes I\'ve Seen', icon: 'alert-triangle', items: [
+    'Bolusing 2L NS into an oliguric patient without checking echo → finding out they have EF 15% and now they\'re intubated for flash pulmonary edema.',
+    'Running DKA protocol with NS for 12 hours without switching to half-normal → Na+ jumps 18 mEq → patient develops osmotic demyelination.',
+    'Starting insulin in DKA before checking K+ → K+ was 2.8 → ventricular fibrillation. ALWAYS check K+ first.',
+    'Giving 6L of crystalloid in hemorrhagic shock while waiting for blood → dilutional coagulopathy → lethal triad → patient bled out. Crystalloid is a bridge, not a substitute for blood.',
+    'Continuing aggressive fluids on Day 3 of sepsis "because they were hypotensive on Day 1" → positive balance of +12L → abdominal compartment syndrome.'
+  ]}
+];
+
+const ALGORITHM_STEPS = [
+  { question: 'Is the patient hemodynamically unstable?', yes: 'Proceed to rapid assessment', no: 'Maintenance fluids if needed. Reassess regularly.' },
+  { question: 'Bedside echo: What\'s the cardiac function?', options: [
+    { label: 'Good LV + Collapsible IVC', action: 'Likely volume-depleted → Fluid challenge with balanced crystalloid 500mL over 15 min' },
+    { label: 'Poor LV + Plethoric IVC', action: 'Likely cardiogenic → NO fluid. Start inotropes/vasopressors. Consider diuresis.' },
+    { label: 'Good LV + Plethoric IVC', action: 'Consider RV failure, PE, tamponade. Specific treatment, not fluids.' },
+    { label: 'Hyperdynamic + Collapsible IVC', action: 'Likely distributive (sepsis) → Bolus RL 500mL, reassess after each aliquot.' }
+  ]},
+  { question: 'After initial bolus: Reassess with PLR or repeat echo', options: [
+    { label: 'Fluid-responsive (↑CO >10% with PLR)', action: 'Continue measured boluses. Reassess every 500mL. Do NOT autopilot.' },
+    { label: 'Non-responsive', action: 'STOP fluids. Start vasopressors (Norepi for sepsis, Dobutamine for cardiogenic). More fluid = harm.' }
+  ]},
+  { question: 'Which crystalloid?', options: [
+    { label: 'Default', action: 'Ringer Lactate or PlasmaLyte for most situations' },
+    { label: 'DKA', action: 'NS initially → switch to 0.45% NaCl based on corrected Na+' },
+    { label: 'TBI / Raised ICP', action: 'NS or 3% NaCl (avoid hypotonic fluids)' },
+    { label: 'Hyperkalemia', action: 'NS (no K+ content)' },
+    { label: 'Liver failure', action: 'PlasmaLyte (no lactate metabolism needed)' }
+  ]}
+];
+
+// ===================== STATE =====================
+let activeTab = 'scenarios';
+let activeScenario = null;
+
+// ===================== RENDER =====================
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('[id^="tab-"]').forEach(el => el.classList.add('hidden'));
+  document.getElementById(`tab-${tab}`).classList.remove('hidden');
+  document.querySelectorAll('#mainTabs button').forEach(btn => {
+    if (btn.dataset.tab === tab) {
+      btn.className = 'tab-active whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-all';
+    } else {
+      btn.className = 'whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all';
+      btn.style.background = 'rgba(255,255,255,0.05)';
+    }
+  });
+  lucide.createIcons();
+}
+
+function renderScenarios() {
+  const grid = document.getElementById('scenarioGrid');
+  grid.innerHTML = SCENARIOS.map((s, i) => `
+    <button onclick="selectScenario('${s.id}')" data-scenario="${s.id}" class="scenario-btn glass-card rounded-xl p-4 text-left transition-all animate-in delay-${Math.min(i+1,4)}">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:${s.color}20;">
+          <i data-lucide="${s.icon}" style="width:18px;height:18px;color:${s.color};"></i>
+        </div>
+        <h3 class="text-white font-semibold text-sm">${s.title}</h3>
+      </div>
+      <p class="text-slate-400 text-xs leading-relaxed">${s.brief}</p>
+    </button>
+  `).join('');
+  lucide.createIcons();
+}
+
+function selectScenario(id) {
+  activeScenario = SCENARIOS.find(s => s.id === id);
+  document.querySelectorAll('[data-scenario]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.scenario === id);
+  });
+  renderScenarioDetail();
+}
+
+function renderScenarioDetail() {
+  const s = activeScenario;
+  if (!s) return;
+  const detail = document.getElementById('scenarioDetail');
+  detail.classList.remove('hidden');
+  detail.innerHTML = `
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${s.color}25;">
+        <i data-lucide="${s.icon}" style="width:22px;height:22px;color:${s.color};"></i>
+      </div>
+      <div>
+        <h2 class="text-white font-display text-xl font-bold">${s.title}</h2>
+        <p class="text-slate-400 text-xs">${s.brief}</p>
+      </div>
+    </div>
+
+    <div class="space-y-4 mb-5">
+      <h3 class="text-slate-300 font-semibold text-sm flex items-center gap-2">
+        <i data-lucide="clock" style="width:14px;height:14px;color:#60a5fa;"></i> Phase-Based Fluid Strategy
+      </h3>
+      <div class="decision-tree-line space-y-4 pl-8 relative">
+        ${s.phases.map((p, i) => `
+          <div class="relative flex gap-3 animate-in delay-${Math.min(i+1,4)}">
+            <div class="node-dot absolute -left-8 top-1" style="border-color:${s.color};"></div>
+            <div class="glass-card-active rounded-xl p-4 flex-1">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="phase-indicator" style="background:${s.color};"></span>
+                <span class="text-white font-semibold text-sm">${p.name}</span>
+                <span class="fluid-tag" style="background:${s.color}15; color:${s.color};">${p.fluid}</span>
+              </div>
+              <p class="text-slate-300 text-xs font-mono mb-2">${p.dose}</p>
+              <p class="text-slate-400 text-xs leading-relaxed">${p.rationale}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="rounded-xl p-4" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2);">
+        <h4 class="text-red-400 font-semibold text-xs flex items-center gap-2 mb-2">
+          <i data-lucide="alert-triangle" style="width:13px;height:13px;"></i> AVOID
+        </h4>
+        <p class="text-slate-300 text-xs leading-relaxed">${s.avoid}</p>
+      </div>
+      <div class="rounded-xl p-4" style="background:rgba(96,165,250,0.08); border:1px solid rgba(96,165,250,0.2);">
+        <h4 class="text-blue-400 font-semibold text-xs flex items-center gap-2 mb-2">
+          <i data-lucide="key" style="width:13px;height:13px;"></i> KEY DECISION
+        </h4>
+        <p class="text-slate-300 text-xs leading-relaxed">${s.keyDecision}</p>
+      </div>
+    </div>
+  `;
+  lucide.createIcons();
+  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function renderFluids() {
+  const container = document.getElementById('fluidCards');
+  container.innerHTML = FLUIDS.map((f, i) => `
+    <div class="glass-card rounded-2xl p-5 space-y-4 animate-in delay-${Math.min(i+1,4)}">
+      <div class="flex items-center justify-between">
+        <h3 class="text-white font-semibold text-sm flex-1">${f.name}</h3>
+        <span class="fluid-tag" style="background:${f.typeColor}20; color:${f.typeColor};">${f.type}</span>
+      </div>
+      <div class="grid grid-cols-3 gap-2 text-center">
+        <div class="rounded-lg p-2" style="background:rgba(255,255,255,0.04);">
+          <p class="text-slate-500 text-[10px]">Osmolality</p>
+          <p class="text-white text-xs font-mono">${f.osmolality}</p>
+        </div>
+        <div class="rounded-lg p-2" style="background:rgba(255,255,255,0.04);">
+          <p class="text-slate-500 text-[10px]">pH</p>
+          <p class="text-white text-xs font-mono">${f.pH}</p>
+        </div>
+        <div class="rounded-lg p-2" style="background:rgba(255,255,255,0.04);">
+          <p class="text-slate-500 text-[10px]">Distribution</p>
+          <p class="text-white text-xs font-mono text-[10px]">${f.distribution}</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-slate-500 text-[10px] mb-1">COMPOSITION (mEq/L)</p>
+        <div class="flex flex-wrap gap-1">
+          ${Object.entries(f.composition).map(([k,v]) => `<span class="text-[10px] px-2 py-0.5 rounded" style="background:rgba(255,255,255,0.06); color:${v > 0 ? '#e2e8f0' : '#475569'};">
+            ${k}: ${v}
+          </span>`).join('')}
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <p class="text-emerald-400 text-[10px] font-semibold mb-1">✓ PROS</p>
+          <ul class="space-y-0.5">${f.pros.map(p => `<li class="text-slate-400 text-[10px]">• ${p}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <p class="text-red-400 text-[10px] font-semibold mb-1">✗ CONS</p>
+          <ul class="space-y-0.5">${f.cons.map(c => `<li class="text-slate-400 text-[10px]">• ${c}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="rounded-lg p-3" style="background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.12);">
+        <p class="text-blue-300 text-[10px] font-semibold">BEST FOR:</p>
+        <p class="text-slate-300 text-[10px]">${f.bestFor}</p>
+      </div>
+      ${f.avoid ? `<div class="rounded-lg p-3" style="background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12);">
+        <p class="text-red-300 text-[10px] font-semibold">AVOID IN:</p>
+        <p class="text-slate-300 text-[10px]">${f.avoid}</p>
+      </div>` : ''}
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function renderAlgorithm() {
+  const container = document.getElementById('algorithmContent');
+  container.innerHTML = `
+    <h2 class="text-white font-display text-lg font-bold flex items-center gap-2">
+      <i data-lucide="workflow" style="width:20px;height:20px;color:#60a5fa;"></i>
+      Fluid Resuscitation Decision Algorithm
+    </h2>
+    <p class="text-slate-400 text-xs">Step-by-step clinical reasoning from bedside to fluid order</p>
+    <div class="decision-tree-line space-y-5 pl-8 relative">
+      ${ALGORITHM_STEPS.map((step, i) => `
+        <div class="relative animate-in delay-${Math.min(i+1,4)}">
+          <div class="node-dot absolute -left-8 top-1" style="border-color:#a78bfa;"></div>
+          <div class="glass-card-active rounded-xl p-4">
+            <h4 class="text-white font-semibold text-sm mb-3 flex items-center gap-2">
+              <span class="text-xs text-slate-500 font-mono">STEP ${i+1}</span>
+              ${step.question}
+            </h4>
+            ${step.yes ? `
+              <div class="grid grid-cols-2 gap-2">
+                <div class="rounded-lg p-2" style="background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.15);">
+                  <span class="text-emerald-400 text-[10px] font-bold">YES →</span>
+                  <p class="text-slate-300 text-xs">${step.yes}</p>
+                </div>
+                <div class="rounded-lg p-2" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.15);">
+                  <span class="text-red-400 text-[10px] font-bold">NO →</span>
+                  <p class="text-slate-300 text-xs">${step.no}</p>
+                </div>
+              </div>
+            ` : ''}
+            ${step.options ? `
+              <div class="space-y-2">
+                ${step.options.map(o => `
+                  <div class="flex gap-2 rounded-lg p-2" style="background:rgba(255,255,255,0.03);">
+                    <span class="text-blue-400 text-xs font-semibold whitespace-nowrap">→</span>
+                    <div>
+                      <p class="text-slate-200 text-xs font-medium">${o.label}</p>
+                      <p class="text-slate-400 text-[11px]">${o.action}</p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  lucide.createIcons();
+}
+
+function renderPearls() {
+  const container = document.getElementById('pearlsContent');
+  container.innerHTML = PEARLS.map((section, i) => `
+    <div class="pearl-card animate-in delay-${Math.min(i+1,4)}">
+      <h3 class="text-amber-300 font-semibold text-sm flex items-center gap-2 mb-3">
+        <i data-lucide="${section.icon}" style="width:16px;height:16px;"></i>
+        ${section.category}
+      </h3>
+      <div class="space-y-3">
+        ${section.items.map(item => `
+          <div class="flex gap-2">
+            <span class="text-amber-500 mt-0.5 flex-shrink-0">💡</span>
+            <p class="text-slate-300 text-xs leading-relaxed">${item}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function renderCalculator() {
+  const calc = document.getElementById('calcPanel');
+  const result = document.getElementById('calcResult');
+
+  calc.innerHTML = `
+    <h3 class="text-white font-semibold text-sm flex items-center gap-2">
+      <i data-lucide="calculator" style="width:16px;height:16px;color:#60a5fa;"></i>
+      Fluid Calculator
+    </h3>
+    <form id="calcForm" class="space-y-3">
+      <div>
+        <label for="calcWeight" class="text-slate-400 text-xs block mb-1">Weight (kg)</label>
+        <input type="number" id="calcWeight" value="70" min="1" max="300" class="w-full rounded-lg px-3 py-2 text-sm text-white border border-slate-700 focus:border-blue-500 focus:outline-none" style="background:rgba(255,255,255,0.06);">
+      </div>
+      <div>
+        <label for="calcType" class="text-slate-400 text-xs block mb-1">Calculation Type</label>
+        <select id="calcType" class="w-full rounded-lg px-3 py-2 text-sm text-white border border-slate-700 focus:border-blue-500 focus:outline-none" style="background:rgba(15,23,42,0.9);">
+          <option value="maintenance">Maintenance (4-2-1 Rule)</option>
+          <option value="sepsis">Sepsis Bolus (30 mL/kg)</option>
+          <option value="burns">Burns (Parkland)</option>
+          <option value="freewater">Free Water Deficit</option>
+        </select>
+      </div>
+      <div id="extraFields"></div>
+      <button type="submit" class="w-full py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);">
+        Calculate
+      </button>
+    </form>
+  `;
+
+  result.innerHTML = `
+    <h3 class="text-white font-semibold text-sm flex items-center gap-2">
+      <i data-lucide="clipboard-list" style="width:16px;height:16px;color:#a78bfa;"></i> Result
+    </h3>
+    <div id="calcOutput" class="text-slate-400 text-xs">Select parameters and calculate.</div>
+  `;
+
+  const typeSelect = document.getElementById('calcType');
+  typeSelect.addEventListener('change', updateExtraFields);
+  updateExtraFields();
+
+  document.getElementById('calcForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    calculate();
+  });
+
+  lucide.createIcons();
+}
+
+function updateExtraFields() {
+  const type = document.getElementById('calcType').value;
+  const container = document.getElementById('extraFields');
+  if (type === 'burns') {
+    container.innerHTML = `
+      <div>
+        <label for="tbsa" class="text-slate-400 text-xs block mb-1">%TBSA Burned</label>
+        <input type="number" id="tbsa" value="30" min="1" max="100" class="w-full rounded-lg px-3 py-2 text-sm text-white border border-slate-700 focus:border-blue-500 focus:outline-none" style="background:rgba(255,255,255,0.06);">
+      </div>
+    `;
+  } else if (type === 'freewater') {
+    container.innerHTML = `
+      <div>
+        <label for="currentNa" class="text-slate-400 text-xs block mb-1">Current Na+ (mEq/L)</label>
+        <input type="number" id="currentNa" value="160" min="100" max="200" class="w-full rounded-lg px-3 py-2 text-sm text-white border border-slate-700 focus:border-blue-500 focus:outline-none" style="background:rgba(255,255,255,0.06);">
+      </div>
+      <div>
+        <label for="targetNa" class="text-slate-400 text-xs block mb-1">Target Na+ (mEq/L)</label>
+        <input type="number" id="targetNa" value="145" min="100" max="200" class="w-full rounded-lg px-3 py-2 text-sm text-white border border-slate-700 focus:border-blue-500 focus:outline-none" style="background:rgba(255,255,255,0.06);">
+      </div>
+      <div>
+        <label class="text-slate-400 text-xs block mb-1">Sex</label>
+        <select id="sex" class="w-full rounded-lg px-3 py-2 text-sm text-white border border-slate-700 focus:border-blue-500 focus:outline-none" style="background:rgba(15,23,42,0.9);">
+          <option value="male">Male (TBW factor 0.6)</option>
+          <option value="female">Female (TBW factor 0.5)</option>
+        </select>
+      </div>
+    `;
+  } else {
+    container.innerHTML = '';
+  }
+}
+
+function calculate() {
+  const wt = parseFloat(document.getElementById('calcWeight').value);
+  const type = document.getElementById('calcType').value;
+  const output = document.getElementById('calcOutput');
+  let html = '';
+
+  if (type === 'maintenance') {
+    const first10 = Math.min(wt, 10) * 4;
+    const next10 = Math.min(Math.max(wt - 10, 0), 10) * 2;
+    const rest = Math.max(wt - 20, 0) * 1;
+    const total = first10 + next10 + rest;
+    html = `
+      <div class="space-y-3">
+        <div class="rounded-lg p-3" style="background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.2);">
+          <p class="text-blue-300 font-semibold text-lg">${total} mL/h</p>
+          <p class="text-slate-400 text-xs">= ${(total*24/1000).toFixed(1)} L/day</p>
+        </div>
+        <p class="text-slate-300 text-xs"><strong>4-2-1 Rule:</strong></p>
+        <ul class="text-slate-400 text-xs space-y-1">
+          <li>First 10 kg: ${first10} mL/h (10 × 4)</li>
+          <li>Next 10 kg: ${next10} mL/h (${Math.min(Math.max(wt-10,0),10).toFixed(0)} × 2)</li>
+          <li>Remaining: ${rest} mL/h (${Math.max(wt-20,0).toFixed(0)} × 1)</li>
+        </ul>
+        <p class="text-slate-500 text-[10px]">Use balanced crystalloid. Adjust for fever (+10%/°C), third-spacing, and ongoing losses.</p>
+      </div>`;
+  } else if (type === 'sepsis') {
+    const bolus = wt * 30;
+    html = `
+      <div class="space-y-3">
+        <div class="rounded-lg p-3" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2);">
+          <p class="text-red-300 font-semibold text-lg">${bolus} mL</p>
+          <p class="text-slate-400 text-xs">= ${(bolus/1000).toFixed(1)} L initial bolus</p>
+        </div>
+        <p class="text-slate-300 text-xs"><strong>30 mL/kg in first 1 hour</strong> (SSC 2021)</p>
+        <ul class="text-slate-400 text-xs space-y-1">
+          <li>Give as 500 mL aliquots of Ringer Lactate</li>
+          <li>Reassess after EACH aliquot (vitals, UOP, echo)</li>
+          <li>If MAP <65 after ${(bolus/1000).toFixed(1)}L → start norepinephrine</li>
+          <li>Do NOT wait to complete all fluid before pressors</li>
+        </ul>
+      </div>`;
+  } else if (type === 'burns') {
+    const tbsa = parseFloat(document.getElementById('tbsa').value);
+    const parkland = 4 * wt * tbsa;
+    const first8 = parkland / 2;
+    const next16 = parkland / 2;
+    html = `
+      <div class="space-y-3">
+        <div class="rounded-lg p-3" style="background:rgba(249,115,22,0.1); border:1px solid rgba(249,115,22,0.2);">
+          <p class="text-orange-300 font-semibold text-lg">${(parkland/1000).toFixed(1)} L total in 24h</p>
+          <p class="text-slate-400 text-xs">Parkland: 4 × ${wt}kg × ${tbsa}% = ${parkland} mL</p>
+        </div>
+        <ul class="text-slate-400 text-xs space-y-1">
+          <li><strong>First 8h:</strong> ${(first8/1000).toFixed(1)} L (${Math.round(first8/8)} mL/h) — from TIME OF BURN</li>
+          <li><strong>Next 16h:</strong> ${(next16/1000).toFixed(1)} L (${Math.round(next16/16)} mL/h)</li>
+          <li><strong>Fluid:</strong> Ringer Lactate ONLY for first 24h</li>
+          <li><strong>Target UOP:</strong> 0.5–1 mL/kg/h (${(wt*0.5).toFixed(0)}–${wt} mL/h)</li>
+        </ul>
+        <p class="text-amber-400 text-[10px]">⚠️ Formula is a STARTING point. Titrate to UOP. If >6 mL/kg/%TBSA → fluid creep risk.</p>
+      </div>`;
+  } else if (type === 'freewater') {
+    const currentNa = parseFloat(document.getElementById('currentNa').value);
+    const targetNa = parseFloat(document.getElementById('targetNa').value);
+    const sex = document.getElementById('sex').value;
+    const tbwFactor = sex === 'male' ? 0.6 : 0.5;
+    const tbw = wt * tbwFactor;
+    const deficit = tbw * ((currentNa / targetNa) - 1);
+    html = `
+      <div class="space-y-3">
+        <div class="rounded-lg p-3" style="background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2);">
+          <p class="text-cyan-300 font-semibold text-lg">${deficit.toFixed(1)} L free water deficit</p>
+          <p class="text-slate-400 text-xs">TBW: ${wt} × ${tbwFactor} = ${tbw} L</p>
+        </div>
+        <p class="text-slate-300 text-xs"><strong>Formula:</strong> TBW × [(Current Na / Target Na) − 1]</p>
+        <ul class="text-slate-400 text-xs space-y-1">
+          <li>Replace with D5W or oral free water</li>
+          <li>Correct Na+ by max 10–12 mEq/24h</li>
+          <li>Replace 50% of deficit in first 24h</li>
+          <li>Remaining 50% over next 24–48h</li>
+          <li>Monitor Na+ every 4–6 hours</li>
+        </ul>
+        <p class="text-red-400 text-[10px]">⚠️ Overly rapid correction → cerebral edema. Underly rapid → persistent hypernatremia.</p>
+      </div>`;
+  }
+  output.innerHTML = html;
+}
+
+// ===================== INIT =====================
+function initAll() {
+  renderScenarios();
+  renderFluids();
+  renderAlgorithm();
+  renderPearls();
+  renderCalculator();
+  lucide.createIcons();
+}
+
+const defaultConfig = {
+  main_title: 'Fluid Management Decision Tool',
+  subtitle: 'Clinical Experience-Based Approach',
+  background_color: '#0a0e1a',
+  surface_color: '#151d2e',
+  text_color: '#e2e8f0',
+  primary_action: '#3b82f6',
+  secondary_action: '#a78bfa',
+  font_family: 'DM Sans',
+  font_size: 14
+};
+
+function applyConfig(config) {
+  const t = document.getElementById('mainTitle');
+  const s = document.getElementById('subtitle');
+  if (t) t.textContent = config.main_title || defaultConfig.main_title;
+  if (s) s.textContent = config.subtitle || defaultConfig.subtitle;
+
+  const bg = config.background_color || defaultConfig.background_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const primary = config.primary_action || defaultConfig.primary_action;
+  const secondary = config.secondary_action || defaultConfig.secondary_action;
+  const font = config.font_family || defaultConfig.font_family;
+  const size = config.font_size || defaultConfig.font_size;
+
+  document.body.style.background = `linear-gradient(145deg, ${bg} 0%, ${surface} 50%, ${bg} 100%)`;
+  document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+  document.body.style.fontSize = `${size}px`;
+  document.body.style.color = text;
+}
+
+initAll();
+</script>
+</body>
+</html>
